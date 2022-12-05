@@ -122,7 +122,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	/**
 	 * @since 2.9
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({"removal","deprecation"})
 	public void configureIXtext2EcorePostProcessor(Binder binder) {
 		try {
 			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
