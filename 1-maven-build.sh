@@ -41,7 +41,7 @@ while [ "$1" != "" ]; do
       MVN_ARGS+=(-DskipTests=true)
       ;;
     --local-repository)
-      MVN_ARGS+=(-Dmaven.repo.local='$VALUE')
+      MVN_ARGS+=(-Dmaven.repo.local="$VALUE")
       ;;
     *)
       # append any additionally passed arg
