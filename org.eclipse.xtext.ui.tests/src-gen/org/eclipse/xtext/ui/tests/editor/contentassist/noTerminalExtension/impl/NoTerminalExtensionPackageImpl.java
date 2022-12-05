@@ -61,7 +61,6 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
   {
     super(eNS_URI, NoTerminalExtensionFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

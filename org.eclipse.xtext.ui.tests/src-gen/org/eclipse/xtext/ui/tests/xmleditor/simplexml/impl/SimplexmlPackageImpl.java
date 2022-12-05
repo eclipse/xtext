@@ -77,7 +77,6 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
   {
     super(eNS_URI, SimplexmlFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

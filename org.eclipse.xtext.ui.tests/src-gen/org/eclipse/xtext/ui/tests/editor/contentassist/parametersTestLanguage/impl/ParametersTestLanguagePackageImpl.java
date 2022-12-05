@@ -61,7 +61,6 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
   {
     super(eNS_URI, ParametersTestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

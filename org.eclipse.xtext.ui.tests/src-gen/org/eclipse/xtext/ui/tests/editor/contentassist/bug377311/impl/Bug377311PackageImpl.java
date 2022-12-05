@@ -61,7 +61,6 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
   {
     super(eNS_URI, Bug377311Factory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

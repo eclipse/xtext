@@ -77,7 +77,6 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
   {
     super(eNS_URI, RefactoringFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

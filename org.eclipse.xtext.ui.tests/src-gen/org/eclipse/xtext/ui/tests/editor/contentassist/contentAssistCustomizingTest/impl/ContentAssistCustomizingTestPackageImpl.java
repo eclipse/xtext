@@ -69,7 +69,6 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
   {
     super(eNS_URI, ContentAssistCustomizingTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

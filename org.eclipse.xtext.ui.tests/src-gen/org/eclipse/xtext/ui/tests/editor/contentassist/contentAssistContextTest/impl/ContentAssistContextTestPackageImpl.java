@@ -101,7 +101,6 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
   {
     super(eNS_URI, ContentAssistContextTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

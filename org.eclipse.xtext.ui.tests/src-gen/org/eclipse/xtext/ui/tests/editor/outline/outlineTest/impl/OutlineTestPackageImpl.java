@@ -61,7 +61,6 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
   {
     super(eNS_URI, OutlineTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

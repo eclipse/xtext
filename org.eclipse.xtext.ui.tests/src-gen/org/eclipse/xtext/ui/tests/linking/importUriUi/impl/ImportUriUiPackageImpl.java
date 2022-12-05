@@ -69,7 +69,6 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
   {
     super(eNS_URI, ImportUriUiFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

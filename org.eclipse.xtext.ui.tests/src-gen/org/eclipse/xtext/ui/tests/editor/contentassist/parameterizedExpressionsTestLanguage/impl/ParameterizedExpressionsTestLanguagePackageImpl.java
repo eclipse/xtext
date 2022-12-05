@@ -157,7 +157,6 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
   {
     super(eNS_URI, ParameterizedExpressionsTestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

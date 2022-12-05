@@ -125,7 +125,6 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
   {
     super(eNS_URI, UnorderedGroupsTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

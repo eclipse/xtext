@@ -101,7 +101,6 @@ public class ReferenceGrammarUiPackageImpl extends EPackageImpl implements Refer
   {
     super(eNS_URI, ReferenceGrammarUiFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

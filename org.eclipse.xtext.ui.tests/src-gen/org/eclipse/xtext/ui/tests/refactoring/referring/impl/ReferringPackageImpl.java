@@ -85,7 +85,6 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
   {
     super(eNS_URI, ReferringFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
