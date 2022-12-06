@@ -8,7 +8,7 @@ Fragment-Host: org.eclipse.xtext.common.types.shared
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext.xbase.ui,
  org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional,
- org.eclipse.jdt.ui;bundle-version="3.13.100";resolution:=optional
+ org.eclipse.jdt.ui;bundle-version="3.26.0";resolution:=optional
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j;version="1.2.19",
  org.eclipse.ui.ide
