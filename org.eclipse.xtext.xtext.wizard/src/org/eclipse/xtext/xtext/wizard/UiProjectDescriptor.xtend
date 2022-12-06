@@ -54,13 +54,13 @@ class UiProjectDescriptor extends TestedProjectDescriptor {
 		deps += new ExternalDependency => [
 			p2 [
 				bundleId = "org.eclipse.ui.editors"
-				version = "3.5.0"
+				version = "3.14.300"
 			]
 		]
 		deps += new ExternalDependency => [
 			p2 [
 				bundleId = "org.eclipse.ui.ide"
-				version = "3.5.0"
+				version = "3.18.500"
 			]
 		]
 		if (!config.ideProject.enabled) {
