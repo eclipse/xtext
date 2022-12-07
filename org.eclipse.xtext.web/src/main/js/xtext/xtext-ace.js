@@ -179,7 +179,7 @@ define([
 		}
 		var occurrenceMarkers = editorContext._occurrenceMarkers;
 		if (occurrenceMarkers) {
-			for (var i = 0; i < occurrenceMarkers.length; i++)  {
+			for (var i = 0; i < occurrenceMarkers.length; i++) {
 				session.removeMarker(occurrenceMarkers[i]);
 			}
 		}
@@ -347,7 +347,7 @@ define([
 				services.occurrencesService.invoke(editorContext, params).always(function() {
 					var occurrenceMarkers = editorContext._occurrenceMarkers;
 					if (occurrenceMarkers) {
-						for (var i = 0; i < occurrenceMarkers.length; i++)  {
+						for (var i = 0; i < occurrenceMarkers.length; i++) {
 							var marker = occurrenceMarkers[i];
 							session.removeMarker(marker);
 						}
