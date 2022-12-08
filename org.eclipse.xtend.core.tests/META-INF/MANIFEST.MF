@@ -29,12 +29,12 @@ Require-Bundle: org.eclipse.xtend.core,
 Import-Package: javax.inject;version="1.0.0",
  org.apache.log4j;version="1.2.19",
  org.apache.log4j.spi;version="1.2.19",
- org.junit;version="4.12.0",
- org.junit.internal;version="4.12.0",
- org.junit.internal.builders;version="4.12.0",
- org.junit.rules;version="4.12.0";resolution:=optional,
- org.junit.runner;version="4.12.0",
- org.junit.runners;version="4.12.0"
+ org.junit;version="4.13.2",
+ org.junit.internal;version="4.13.2",
+ org.junit.internal.builders;version="4.13.2",
+ org.junit.rules;version="4.13.2";resolution:=optional,
+ org.junit.runner;version="4.13.2",
+ org.junit.runners;version="4.13.2"
 Bundle-ClassPath: .
 Export-Package: .;x-internal:=true,
  bug380058;x-internal:=true,
