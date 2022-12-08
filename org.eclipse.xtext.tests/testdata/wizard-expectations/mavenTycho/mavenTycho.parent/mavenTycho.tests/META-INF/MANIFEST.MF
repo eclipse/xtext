@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: mavenTycho.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: mavenTycho,
- org.junit;bundle-version="4.12.0",
+ org.junit;bundle-version="4.13.2",
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-11

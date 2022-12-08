@@ -52,7 +52,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		if (config.junitVersion == JUnitVersion.JUNIT_4) {
 			deps += new ExternalDependency()=>[
 				p2.bundleId = "org.junit"
-				p2.version = "4.12.0"
+				p2.version = "4.13.2"
 				maven.groupId = "junit"
 				maven.artifactId = "junit"
 				maven.scope = Scope.TESTCOMPILE

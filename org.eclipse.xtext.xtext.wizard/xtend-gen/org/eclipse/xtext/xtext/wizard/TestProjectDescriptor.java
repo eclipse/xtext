@@ -82,7 +82,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         ExternalDependency.P2Coordinates _p2 = it.getP2();
         _p2.setBundleId("org.junit");
         ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-        _p2_1.setVersion("4.12.0");
+        _p2_1.setVersion("4.13.2");
         ExternalDependency.MavenCoordinates _maven = it.getMaven();
         _maven.setGroupId("junit");
         ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
