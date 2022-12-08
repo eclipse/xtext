@@ -29,4 +29,4 @@ Export-Package: .,
  testdata.a,
  testdata.b,
  testdata.ordersensitivity
-Import-Package: org.junit;version="4.12.0"
+Import-Package: org.junit;version="4.13.2"
