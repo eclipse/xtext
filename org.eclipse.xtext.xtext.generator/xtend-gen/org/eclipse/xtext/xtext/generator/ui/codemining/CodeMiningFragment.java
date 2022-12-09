@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -62,48 +62,31 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("try {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("Class.forName(\"org.eclipse.jface.text.codemining.ICodeMiningProvider\");");
-          _builder.newLine();
-          _builder.append("\t");
           _builder.append("binder.bind(");
           TypeReference _typeRef = TypeReference.typeRef("org.eclipse.jface.text.codemining.ICodeMiningProvider");
-          _builder.append(_typeRef, "\t");
+          _builder.append(_typeRef);
           _builder.append(".class)");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append(".to(");
           TypeReference _codeMiningProviderClass = CodeMiningFragment.this.getCodeMiningProviderClass();
-          _builder.append(_codeMiningProviderClass, "\t\t");
+          _builder.append(_codeMiningProviderClass, "\t");
           _builder.append(".class);");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t");
           _builder.append("binder.bind(");
           TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory");
-          _builder.append(_typeRef_1, "\t");
+          _builder.append(_typeRef_1);
           _builder.append(".class).annotatedWith(");
           TypeReference _typeRef_2 = TypeReference.typeRef(Names.class);
-          _builder.append(_typeRef_2, "\t");
+          _builder.append(_typeRef_2);
           _builder.append(".named(\"codeMinding\"))");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append(".to(");
           TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy");
-          _builder.append(_typeRef_3, "\t\t");
+          _builder.append(_typeRef_3, "\t");
           _builder.append(".Factory.class);");
           _builder.newLineIfNotEmpty();
-          _builder.append("} catch(");
-          TypeReference _typeRef_4 = TypeReference.typeRef(ClassNotFoundException.class);
-          _builder.append(_typeRef_4);
-          _builder.append(" ignore) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("// no bindings if code mining is not available at runtime");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
         }
       };
       it.addConfiguredBinding("CodeMinding", _client);
