@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -40,15 +40,10 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 		}
 		new GuiceModuleAccess.BindingFactory => [
 			addConfiguredBinding("CodeMinding", '''
-				try {
-					Class.forName("org.eclipse.jface.text.codemining.ICodeMiningProvider");
-					binder.bind(«'org.eclipse.jface.text.codemining.ICodeMiningProvider'.typeRef».class)
-						.to(«codeMiningProviderClass».class);
-					binder.bind(«'org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory'.typeRef».class).annotatedWith(«Names.typeRef».named("codeMinding"))
-						.to(«"org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy".typeRef».Factory.class);
-				} catch(«ClassNotFoundException.typeRef» ignore) {
-					// no bindings if code mining is not available at runtime
-				}
+				binder.bind(«'org.eclipse.jface.text.codemining.ICodeMiningProvider'.typeRef».class)
+					.to(«codeMiningProviderClass».class);
+				binder.bind(«'org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory'.typeRef».class).annotatedWith(«Names.typeRef».named("codeMinding"))
+					.to(«"org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy".typeRef».Factory.class);
 			''')
 			contributeTo(language.eclipsePluginGenModule)
 		]
