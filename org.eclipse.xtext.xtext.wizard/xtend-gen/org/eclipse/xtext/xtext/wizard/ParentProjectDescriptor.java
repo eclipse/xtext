@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -105,6 +106,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
 
   public String getTychoVersion() {
+    return "3.0.1";
+  }
+
+  public String getTychoVersionJ11() {
     return "2.7.5";
   }
 
@@ -558,8 +563,16 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("<tycho-version>");
-          String _tychoVersion = this.getTychoVersion();
-          _builder.append(_tychoVersion, "\t");
+          {
+            boolean _isAtLeast = this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA17);
+            if (_isAtLeast) {
+              String _tychoVersion = this.getTychoVersion();
+              _builder.append(_tychoVersion, "\t");
+            } else {
+              String _tychoVersionJ11 = this.getTychoVersionJ11();
+              _builder.append(_tychoVersionJ11, "\t");
+            }
+          }
           _builder.append("</tycho-version>");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
