@@ -81,7 +81,7 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
       final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
         final Procedure1<ExternalDependency.P2Coordinates> _function_1 = (ExternalDependency.P2Coordinates it_1) -> {
           it_1.setBundleId("org.eclipse.ui.editors");
-          it_1.setVersion("3.5.0");
+          it_1.setVersion("3.14.300");
         };
         it.p2(_function_1);
       };
@@ -91,7 +91,7 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
       final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
         final Procedure1<ExternalDependency.P2Coordinates> _function_2 = (ExternalDependency.P2Coordinates it_1) -> {
           it_1.setBundleId("org.eclipse.ui.ide");
-          it_1.setVersion("3.5.0");
+          it_1.setVersion("3.18.500");
         };
         it.p2(_function_2);
       };
