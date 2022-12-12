@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,18 +19,9 @@ import org.eclipse.jdt.core.ICompilationUnit;
  */
 public class StubUtilityProxy {
 	
-	
 	public static String getCompilationUnitContent(ICompilationUnit cu, String packDecl, String fileComment, String typeComment, String typeContent, String lineDelimiter) throws CoreException {
-		Class<?> utilityClass = null;
-		try {
-			utilityClass = Class.forName("org.eclipse.jdt.internal.corext.codemanipulation.StubUtility");
-		} catch (ClassNotFoundException e) {
-			try {
-				utilityClass = Class.forName("org.eclipse.jdt.internal.core.manipulation.StubUtility");
-			} catch (ClassNotFoundException e1) {
-				throw new IllegalStateException("could not find StubUtility class");
-			}
-		}
+		@SuppressWarnings("restriction")
+		Class<?> utilityClass = org.eclipse.jdt.internal.core.manipulation.StubUtility.class;
 		try {
 			Method declaredMethod = utilityClass.getDeclaredMethod("getCompilationUnitContent", ICompilationUnit.class, String.class, String.class, String.class, String.class, String.class);
 			Object result = declaredMethod.invoke(null, cu, packDecl, fileComment, typeComment, typeContent, lineDelimiter);
