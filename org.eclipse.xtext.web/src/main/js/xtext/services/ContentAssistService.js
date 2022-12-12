@@ -42,7 +42,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
 			httpMethod = 'POST';
-		} else {
+		} else {
 			serverData.requiredStateId = knownServerState.stateId;
 			if (this._updateService) {
 				if (knownServerState.text === undefined || knownServerState.updateInProgress) {

@@ -38,7 +38,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			var end = result.replaceRegion.offset + result.replaceRegion.length;
 			editorContext.setText(result.formattedText, start, end);
 			newText = fullText.substring(0, start) + result.formattedText + fullText.substring(end);
-		} else {
+		} else {
 			editorContext.setText(result.formattedText);
 			newText = result.formattedText;
 		}

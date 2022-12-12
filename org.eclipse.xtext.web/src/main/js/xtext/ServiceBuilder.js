@@ -79,7 +79,7 @@ define([
 		if (this.setupSyntaxHighlighting) {
 			this.setupSyntaxHighlighting();
 		}
-		if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
+		if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
 			services.highlightingService = new HighlightingService(options.serviceUrl, options.resourceId);
 			services.computeHighlighting = function(addParams) {
 				return services.highlightingService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
