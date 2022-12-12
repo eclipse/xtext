@@ -68,9 +68,9 @@ Export-Package: org.eclipse.xtext.common.types.access,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.common.types.tests.Activator
 Import-Package: org.apache.log4j,
- org.junit;version="4.12.0",
- org.junit.rules;version="4.12.0",
- org.junit.runner;version="4.12.0",
- org.junit.runners;version="4.12.0",
- org.junit.runners.model;version="4.12.0"
+ org.junit;version="4.13.2",
+ org.junit.rules;version="4.13.2",
+ org.junit.runner;version="4.13.2",
+ org.junit.runners;version="4.13.2",
+ org.junit.runners.model;version="4.13.2"
 Automatic-Module-Name: org.eclipse.xtext.common.types.eclipse.tests

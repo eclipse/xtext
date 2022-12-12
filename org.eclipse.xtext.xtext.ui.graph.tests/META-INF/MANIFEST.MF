@@ -11,6 +11,6 @@ Require-Bundle: org.eclipse.xtext.xtext.ui.graph,
  org.eclipse.xtext,
  org.eclipse.draw2d;bundle-version="3.10.100",
  org.eclipse.xtext.xtext.ui
-Import-Package: org.junit;version="4.12.0",
- org.junit.runner;version="4.12.0"
+Import-Package: org.junit;version="4.13.2",
+ org.junit.runner;version="4.13.2"
 Automatic-Module-Name: org.eclipse.xtext.xtext.ui.graph.tests
