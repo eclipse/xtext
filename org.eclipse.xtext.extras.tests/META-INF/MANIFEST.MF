@@ -37,10 +37,10 @@ Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib
 Import-Package: org.apache.log4j,
- org.junit;version="4.12.0",
- org.junit.rules;version="4.12.0",
- org.junit.runner;version="4.12.0",
- org.junit.runners;version="4.12.0",
- org.junit.runners.model;version="4.12.0"
+ org.junit;version="4.13.2",
+ org.junit.rules;version="4.13.2",
+ org.junit.runner;version="4.13.2",
+ org.junit.runners;version="4.13.2",
+ org.junit.runners.model;version="4.13.2"
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.extras.tests
