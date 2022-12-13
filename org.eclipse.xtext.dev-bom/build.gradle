@@ -24,7 +24,7 @@ dependencies {
         api "javax.annotation:javax.annotation-api:1.3.2"
         api "junit:junit:4.13.2"
         api "org.hamcrest:hamcrest-core:1.3"
-        api "ch.qos.reload4j:reload4j:1.2.19"
+        api "ch.qos.reload4j:reload4j:1.2.24"
         api "org.antlr:antlr-runtime:3.2"
         api "org.eclipse.emf:org.eclipse.emf.codegen.ecore:2.29.0"
         api "org.eclipse.emf:org.eclipse.emf.codegen:2.22.0"
