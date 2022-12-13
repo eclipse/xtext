@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -81,7 +81,6 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-					<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
 					<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
 					<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 					<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
@@ -102,6 +101,10 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 					<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
 					<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
+					<repository location="https://download.eclipse.org/tools/orbit/downloads/2023-03"/>
+				</location>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
 					<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
 				</location>
 			</locations>
