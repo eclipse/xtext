@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Xtext Domainmodel Example - Eclipse Photon" sequenceNumber="1526501985">
+<target name="Xtext Domainmodel Example - Eclipse 2023-03" sequenceNumber="1526501985">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
