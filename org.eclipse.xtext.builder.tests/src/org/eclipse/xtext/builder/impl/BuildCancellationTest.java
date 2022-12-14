@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Before;
 import org.junit.Test;
-import org.osgi.framework.Version;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -94,31 +93,10 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		ResourcesPlugin.getWorkspace().build(
 				IncrementalProjectBuilder.AUTO_BUILD, monitor());
 		assertEquals(1, getInvocationCount());
-		if (isCoreResources_3_7_orLater()) {
-			assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
-		} else {
-			assertSame(BuildType.FULL, getContext().getBuildType());
-		}
+		assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
 		reset();
 	}
 	
-	/**
-	 * The same as with JdtBasedTypeFactory.isJdtGreaterOrEqual(new Version(3.6.0))
-	 * 
-	 */
-	protected boolean isCoreResources_3_7_orLater() {
-		Version installed = org.eclipse.core.resources.ResourcesPlugin.getPlugin().getBundle().getVersion();
-		int minMajor = 3;
-		int minMinor = 7;
-		if (installed.getMajor() < minMajor) {
-			return false;
-		}
-		if (installed.getMajor() == minMajor && installed.getMinor() < minMinor) {
-			return false;
-		}
-		return true;
-	}
-
 	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		super.build(context, monitor);

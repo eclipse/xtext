@@ -92,10 +92,6 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 	@Test
 	public void testBug574908() throws Exception {
 		IJavaProject p = newModularProject("p0");
-		if (p == null) {
-			// Oxygen: No JRE11 available
-			return;
-		}
 		assertTrue(p.findType("java.lang.Module").exists());
 		storage2UriMapperJava = createFreshStorage2UriMapper();
 		storage2UriMapperJava.initializeCache();
@@ -197,11 +193,6 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 				JavaProjectSetupUtil.addJreClasspathEntry(javaProject, JavaVersion.JAVA11.getBree());
 				
 				IClasspathEntry defaultEntry = JavaProjectSetupUtil.getJreContainerClasspathEntry(javaProject);
-				if (defaultEntry == null) {
-					// Oxygen: No JRE11 available
-					result.set(null);
-					return;
-				}
 				if (isModular(defaultEntry)) {
 					return;
 				}

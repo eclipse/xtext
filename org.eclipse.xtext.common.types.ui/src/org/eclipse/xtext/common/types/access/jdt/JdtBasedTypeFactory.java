@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -92,7 +92,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
 
@@ -112,115 +111,6 @@ import com.google.common.collect.Lists;
 public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<IType, JvmDeclaredType>, ITypeFactory.OptionsAware<IType, JvmDeclaredType> {
 
 	private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.class);
-
-	private static JdtCompliance getComplianceLevel() {
-		if (isJdtGreaterOrEqual(new Version(3,7,0))) {
-			if (isJdtGreaterOrEqual(new Version(3,10,0))) {
-				return JdtCompliance.LunaOrBetter;
-			}
-			return JdtCompliance.Other;
-		}
-		return JdtCompliance.Galileo;
-	}
-	
-	/**
-	 * TODO (dennis) consider to make it accessible from other (e.g. o.e.x.common.types.tests) bundles.
-	 * 
-	 * Checks if JDT's (Major,Minor) Version is higher or equals the given one.<br>
-	 * Service and qualifier Part will not be checked.
-	 * @return <code>true</code> if the avaiable JDT's Version (Major,Minor)  is higher or equals the given one.
-	 * 
-	 */
-	private static boolean isJdtGreaterOrEqual(Version version) {
-		Version installed = JavaCore.getPlugin().getBundle().getVersion();
-		int minMajor = version.getMajor();
-		int minMinor = version.getMinor();
-		if (installed.getMajor() < minMajor) {
-			return false;
-		}
-		if (installed.getMajor() == minMajor && installed.getMinor() < minMinor) {
-			return false;
-		}
-		return true;
-	}
-	
-
-	enum JdtCompliance {
-		Galileo {
-			@Override
-			ParameterNameInitializer createParameterNameInitializer(
-					IMethodBinding method,
-					WorkingCopyOwner workingCopyOwner,
-					JvmExecutable result,
-					String handleIdentifier,
-					String[] path,
-					String name,
-					SegmentSequence signaturex) {
-				if (method.isConstructor()) {
-					ITypeBinding declarator = method.getDeclaringClass();
-					if (declarator.isEnum()) {
-						return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-					}
-					if (declarator.isMember()) {
-						return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex) {
-							@Override
-							protected void setParameterNames(IMethod javaMethod, java.util.List<JvmFormalParameter> parameters) throws JavaModelException {
-								String[] parameterNames = javaMethod.getParameterNames();
-								int size = parameters.size();
-								if (size == parameterNames.length) {
-									super.setParameterNames(javaMethod, parameters);
-								} else if (size == parameterNames.length - 1) {
-									for (int i = 1; i < parameterNames.length; i++) {
-										String string = parameterNames[i];
-										parameters.get(i - 1).setName(string);
-									}
-								} else {
-									throw new IllegalStateException("unmatching arity for java method "+javaMethod.toString()+" and "+getExecutable().getIdentifier());
-								}
-							}
-						};
-					}
-				}
-				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-			}
-		},
-		LunaOrBetter {
-			@Override
-			ParameterNameInitializer createParameterNameInitializer(
-					IMethodBinding method,
-					WorkingCopyOwner workingCopyOwner,
-					JvmExecutable result,
-					String handleIdentifier,
-					String[] path,
-					String name,
-					SegmentSequence signaturex) {
-				if (method.isConstructor() && method.getDeclaringClass().isEnum()) {
-					String syntheticParams = "Ljava/lang/String;I";
-					String withoutSyntheticArgs = signaturex.toString();
-					// sometimes (don't really know when... JDT bug?) an enum constructor comes without synthetic arguments
-					// this solution might wrongly strip off a (String,int) signature, but I don't see how this can be done differently here.
-					if (withoutSyntheticArgs.startsWith(syntheticParams)) {
-						withoutSyntheticArgs = withoutSyntheticArgs.substring(syntheticParams.length());
-					}
-					return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, withoutSyntheticArgs);
-				}
-				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-			}
-		},
-		Other {
-		};
-		ParameterNameInitializer createParameterNameInitializer(IMethodBinding method, WorkingCopyOwner workingCopyOwner,
-				JvmExecutable result, String handleIdentifier, String[] path, String name, SegmentSequence signaturex) {
-			if (method.isConstructor() && method.getDeclaringClass().isEnum()) {
-				return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-			} else {
-				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-			}
-		}
-	}
-	
-	private static final JdtCompliance jdtCompliance = getComplianceLevel(); 
-	
 
 	private final TypeURIHelper uriHelper;
 	private final WorkingCopyOwner workingCopyOwner;
@@ -1284,7 +1174,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 				// Use the key to determine the signature for the method.
 				//
 				SegmentSequence signaturex = getSignatureAsSegmentSequence(method);
-				ParameterNameInitializer initializer = jdtCompliance.createParameterNameInitializer(method, workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+				ParameterNameInitializer initializer = createParameterNameInitializer(method, workingCopyOwner, result, handleIdentifier, path, name, signaturex);
 				((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
 			}
 
@@ -1298,6 +1188,30 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 				exceptions.addUnique(createTypeReference(exceptionType));
 			}
 		}
+	}
+	
+	/**
+	 * @since 2.30
+	 */
+	protected ParameterNameInitializer createParameterNameInitializer(
+			IMethodBinding method,
+			WorkingCopyOwner workingCopyOwner,
+			JvmExecutable result,
+			String handleIdentifier,
+			String[] path,
+			String name,
+			SegmentSequence signaturex) {
+		if (method.isConstructor() && method.getDeclaringClass().isEnum()) {
+			String syntheticParams = "Ljava/lang/String;I";
+			String withoutSyntheticArgs = signaturex.toString();
+			// sometimes (don't really know when... JDT bug?) an enum constructor comes without synthetic arguments
+			// this solution might wrongly strip off a (String,int) signature, but I don't see how this can be done differently here.
+			if (withoutSyntheticArgs.startsWith(syntheticParams)) {
+				withoutSyntheticArgs = withoutSyntheticArgs.substring(syntheticParams.length());
+			}
+			return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, withoutSyntheticArgs);
+		}
+		return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
 	}
 
 	private void setParameterNamesAndAnnotations(IMethodBinding method, ITypeBinding[] parameterTypes,
