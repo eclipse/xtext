@@ -62,6 +62,8 @@ public class Main {
 				compiler.setUseCurrentClassLoaderAsParent(true);
 			} else if ("-writeTraceFiles".equals(argument)) {
 				compiler.setWriteTraceFiles(true);
+			}  else if ("-verbose".equals(argument)) {
+				compiler.setVerbose(true);
 			} else {
 				List<String> existingDirs = new ArrayList<String>(compiler.getSourcePathDirectories());
 				existingDirs.add(argument);
@@ -93,6 +95,7 @@ public class Main {
 		out.println("-generateAnnotationComment <string> If -generateGeneratedAnnotation is used, add a comment.");
 		out.println("-useCurrentClassLoader              Use current classloader as parent classloader");
 		out.println("-writeTraceFiles                    Write Trace-Files");
+		out.println("-verbose                            Run compiler in verbose mode");
 	}
 
 }
