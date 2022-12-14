@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,32 +13,19 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.After;
-import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.Version;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactoringTest {
-
-	@Before
-	public void doNotRunOnOxygen() {
-		//FIXME workaround for https://github.com/eclipse/xtext-xtend/issues/767
-		Version version = FrameworkUtil.getBundle(Platform.class).getVersion();
-		// in case it was not obvious: 3.13 == Oxygen
-		Assume.assumeFalse(version.getMajor() == 3 && version.getMinor() == 13);
-	}
 
 	@After
 	public void deleteFilesCreatedByTest() throws Exception {

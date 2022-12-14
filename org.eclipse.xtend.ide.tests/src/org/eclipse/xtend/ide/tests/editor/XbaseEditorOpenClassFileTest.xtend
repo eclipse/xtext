@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -48,10 +48,6 @@ import org.junit.Before
 	}
 
 	@Test def void testOpenFileFromSmapJarWithIncludedSource() {
-		
-		if(!supportsEditorOverride)
-			return
-		
 		val jp = JavaCore.create(project)
 		val root = jp.addJarToClassPath('smap-all.jar', null)
 		assertNotNull(root)
@@ -62,9 +58,6 @@ import org.junit.Before
 	}
 
 	@Test def void testOpenFileFromSmapJarWithAttachedSource() {
-		
-		if(!supportsEditorOverride)
-			return
 		val project = createPluginProject("my.example.project")
 		val jp = JavaCore.create(project)
 		val root = jp.addJarToClassPath('smap-binary.jar', 'smap-sources.jar')
@@ -86,8 +79,6 @@ import org.junit.Before
 	}
 
 	@Test def void testOpenFileFromJarWithNameConflictingLocalFile() {
-		if(!supportsEditorOverride)
-			return
 		val jp = JavaCore.create(project)
 		createFile("foo/HelloXtend.xtend",'''
 			package foo
@@ -104,8 +95,6 @@ import org.junit.Before
 	}
 	
 	@Test def void testOpenEditor_NameConflict() {
-		if(!supportsEditorOverride)
-			return
 		val jp = JavaCore.create(project)
 		project.addJarToProject(createJar(
 			'myPackage/Foo.xtend' -> '''
@@ -127,8 +116,6 @@ import org.junit.Before
 	}
 	
 	@Test def void testOpenEditor_NameConflict02() {
-		if(!supportsEditorOverride)
-			return
 		val jp = JavaCore.create(project)
 		project.addJarToProject(createJar(
 			'myPackage/Foo.xtend' -> '''
@@ -151,8 +138,6 @@ import org.junit.Before
 	}
 	
 	@Test def void testOpenEditor_NameConflict03() {
-		if(!supportsEditorOverride)
-			return
 		val jp = JavaCore.create(project)
 		project.addJarToProject(createJar(
 			'myPackage/Foo.xtend' -> '''
@@ -179,8 +164,6 @@ import org.junit.Before
 	}
 	
 	@Test def void testOpenEditor4NestedType_NameConflict() {
-		if(!supportsEditorOverride)
-			return
 		val jp = JavaCore.create(project)
 		project.addJarToProject(createJar(
 			'myPackage/Foo.xtend' -> '''
@@ -214,8 +197,6 @@ import org.junit.Before
 	}
 	
 	@Test def void testOpenEditor4NestedType_NoNameConflict() {
-		if(!supportsEditorOverride)
-			return
 		val jp = JavaCore.create(project)
 		project.addJarToProject(createJar(
 			'myPackage/Foo.xtend' -> '''
@@ -316,17 +297,6 @@ import org.junit.Before
 		val text = (adapter as IRewriteTarget).document.get
 		editor.closeEditor(false)
 		return text
-	}
-
-	def supportsEditorOverride() {
-		try {
-			if (Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride") !== null) {
-				return true;
-			}
-		} catch (ClassNotFoundException e) {
-		}
-		LOG.warn("Ignoring "+Thread.currentThread.stackTrace.get(1).methodName+" , since editor everride is not supported.")
-		return false
 	}
 
 }

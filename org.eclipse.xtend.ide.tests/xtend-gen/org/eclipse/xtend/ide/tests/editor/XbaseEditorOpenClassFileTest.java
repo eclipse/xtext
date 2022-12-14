@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -84,11 +84,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenFileFromSmapJarWithIncludedSource() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       final IPackageFragmentRoot root = this.addJarToClassPath(jp, "smap-all.jar", null);
       Assert.assertNotNull(root);
@@ -104,11 +99,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenFileFromSmapJarWithAttachedSource() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IProject project = WorkbenchTestHelper.createPluginProject("my.example.project");
       final IJavaProject jp = JavaCore.create(project);
       final IPackageFragmentRoot root = this.addJarToClassPath(jp, "smap-binary.jar", "smap-sources.jar");
@@ -140,11 +130,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenFileFromJarWithNameConflictingLocalFile() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package foo");
@@ -171,11 +156,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenEditor_NameConflict() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("// Xtend");
@@ -208,11 +188,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenEditor_NameConflict02() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("// Xtend");
@@ -245,11 +220,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenEditor_NameConflict03() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("// Xtend");
@@ -289,11 +259,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenEditor4NestedType_NameConflict() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("// Xtend");
@@ -352,11 +317,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Test
   public void testOpenEditor4NestedType_NoNameConflict() {
     try {
-      boolean _supportsEditorOverride = this.supportsEditorOverride();
-      boolean _not = (!_supportsEditorOverride);
-      if (_not) {
-        return;
-      }
       final IJavaProject jp = JavaCore.create(this.project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("// Xtend");
@@ -533,26 +493,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-
-  public boolean supportsEditorOverride() {
-    try {
-      Class<?> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
-      boolean _tripleNotEquals = (_forName != null);
-      if (_tripleNotEquals) {
-        return true;
-      }
-    } catch (final Throwable _t) {
-      if (_t instanceof ClassNotFoundException) {
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
-    String _methodName = (Thread.currentThread().getStackTrace()[1]).getMethodName();
-    String _plus = ("Ignoring " + _methodName);
-    String _plus_1 = (_plus + " , since editor everride is not supported.");
-    XbaseEditorOpenClassFileTest.LOG.warn(_plus_1);
-    return false;
   }
 
   private static final Logger LOG = Logger.getLogger(XbaseEditorOpenClassFileTest.class);

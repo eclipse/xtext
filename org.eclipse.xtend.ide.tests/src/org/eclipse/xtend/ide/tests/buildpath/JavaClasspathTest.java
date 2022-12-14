@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
-import org.osgi.framework.Version;
 
 import com.google.inject.Inject;
 
@@ -45,10 +44,6 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 
 	@Test
 	public void testNoJavaInClasspath() throws Exception {
-		Version version = JavaCore.getJavaCore().getBundle().getVersion();
-		Version v3_18 = Version.parseVersion("3.18.0");
-		boolean isSilent = version.compareTo(v3_18) >= 0;
-		
 		LogCapture capturedLogging = LoggingTester.captureLogging(Level.ERROR, AbstractClassMirror.class, new Runnable() {
 
 			@Override
@@ -80,10 +75,10 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 						}
 					}
 				});
-				assertEquals(isSilent, capturedLogging.getLogEntries().isEmpty());
+				assertEquals(true, capturedLogging.getLogEntries().isEmpty());
 			}
 		});
-		assertEquals(isSilent, capturedLogging.getLogEntries().isEmpty());
+		assertEquals(true, capturedLogging.getLogEntries().isEmpty());
 	}
 
 	@Test
