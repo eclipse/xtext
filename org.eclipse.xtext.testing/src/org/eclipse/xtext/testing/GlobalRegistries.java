@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,10 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAnnotationValidator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -121,14 +121,7 @@ public class GlobalRegistries {
 	 * @return the map of annotation validators.
 	 */
 	private static Map<String, Object> getAnnotationValidatorMap() {
-		try {
-			Class<?> registry = Class.forName("org.eclipse.emf.ecore.EAnnotationValidator$Registry");
-			@SuppressWarnings("unchecked")
-			Map<String, Object> result = (Map<String, Object>) registry.getField("INSTANCE").get(null);
-			return result;
-		} catch (Exception ignore) {
-			return Collections.emptyMap();
-		}
+		return EAnnotationValidator.Registry.INSTANCE;
 	}
 	
 }
