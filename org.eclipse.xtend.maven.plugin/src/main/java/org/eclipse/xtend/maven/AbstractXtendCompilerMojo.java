@@ -145,9 +145,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		compiler.setDeleteTempDirectory(false);
 		log.debug("Set classpath: " + classPath);
 		compiler.setClassPath(classPath);
-		String bootClassPath = ""; // bootClasspath is not supported on Java 9 and later
-		log.debug("Set bootClasspath: " + bootClassPath);
-		compiler.setBootClassPath(bootClassPath);
 		log.debug("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
 		compiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
 		log.debug("Set output path: " + outputPath);
