@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,6 +13,7 @@ import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IBuildConfiguration;
@@ -323,15 +324,20 @@ public class IntegrationTest extends AbstractBuilderTest {
 
 		org.eclipse.core.internal.resources.Workspace workspace =
 				(org.eclipse.core.internal.resources.Workspace) ResourcesPlugin.getWorkspace();
-		IBuildConfiguration[] buildOrder = workspace.getBuildOrder();
+		IBuildConfiguration[] buildOrder = getBuildOrderWithoutHiddenProjects(workspace);
 		assertEquals(bar_project.getProject(), buildOrder[0].getProject());
 		assertEquals(foo_project.getProject(), buildOrder[1].getProject());
 		// add a classpath entry and a project reference
 		addProjectReference(bar_project, foo_project);
 		
-		buildOrder = workspace.getBuildOrder();
+		buildOrder = getBuildOrderWithoutHiddenProjects(workspace);
 		assertEquals(foo_project.getProject(), buildOrder[0].getProject());
 		assertEquals(bar_project.getProject(), buildOrder[1].getProject());
+	}
+
+	@SuppressWarnings("restriction")
+	private IBuildConfiguration[] getBuildOrderWithoutHiddenProjects(org.eclipse.core.internal.resources.Workspace workspace) {
+		return Arrays.stream(workspace.getBuildOrder()).filter(c -> !c.getProject().isHidden()).toArray(IBuildConfiguration[]::new);
 	}
 	
 	@SuppressWarnings("restriction")
@@ -341,13 +347,13 @@ public class IntegrationTest extends AbstractBuilderTest {
 
 		org.eclipse.core.internal.resources.Workspace workspace =
 				(org.eclipse.core.internal.resources.Workspace) ResourcesPlugin.getWorkspace();
-		IBuildConfiguration[] buildOrder = workspace.getBuildOrder();
+		IBuildConfiguration[] buildOrder = getBuildOrderWithoutHiddenProjects(workspace);
 		assertEquals(bar_project.getProject(), buildOrder[0].getProject());
 		assertEquals(foo_project.getProject(), buildOrder[1].getProject());
 		// here we do only add a classpath entry and no core.resources project reference
 		JavaProjectSetupUtil.addProjectReference(bar_project, foo_project);
 		
-		buildOrder = workspace.getBuildOrder();
+		buildOrder = getBuildOrderWithoutHiddenProjects(workspace);
 		assertEquals(bar_project.getProject(), buildOrder[0].getProject());
 		assertEquals(foo_project.getProject(), buildOrder[1].getProject());
 	}
