@@ -139,7 +139,6 @@ public class XtextUiModule extends AbstractXtextUiModule {
 				.to(FilterTerminalRulesContribution.class);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Deprecated(forRemoval = true)
 	public void configureIXtext2EcorePostProcessor(Binder binder) {
 		try {

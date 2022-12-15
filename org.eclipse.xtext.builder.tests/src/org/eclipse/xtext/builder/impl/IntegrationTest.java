@@ -610,14 +610,13 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertTrue(serviceProvider.canHandle(fromRootURI));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testModelWithSyntaxErrorInDerivedSrcFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IProject project = javaProject.getProject();
 		IFolder sourceFolder = project.getFolder("src");
-		sourceFolder.setDerived(true);
+		sourceFolder.setDerived(true, new NullProgressMonitor());
 		IFile file = createFile("foo/src/foo" + F_EXT, "objekt Foo ");
-		file.setDerived(true);
+		file.setDerived(true, new NullProgressMonitor());
 		build();
 		assertEquals(1, countMarkers(file));
 		file.setContents(new StringInputStream("object Foo"), true, true, monitor());
@@ -626,15 +625,14 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(file));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testModelWithSyntaxErrorInDerivedFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IProject project = javaProject.getProject();
 		IFolder folder = project.getFolder("non-src");
 		folder.create(true, true, monitor());
-		folder.setDerived(true);
+		folder.setDerived(true, new NullProgressMonitor());
 		IFile file = createFile("foo/non-src/foo" + F_EXT, "objekt Foo ");
-		file.setDerived(true);
+		file.setDerived(true, new NullProgressMonitor());
 		build();
 		assertEquals(1, countMarkers(file));
 		file.setContents(new StringInputStream("object Foo"), true, true, monitor());
