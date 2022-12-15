@@ -62,7 +62,7 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 				}
 				for (ILocationInResource location : trace.getAllAssociatedLocations()) {
 					String name = location.getAbsoluteResourceURI().getURI().lastSegment();
-					IEditorDescriptor editorDescriptor = IDE.getEditorDescriptor(name);
+					IEditorDescriptor editorDescriptor = IDE.getEditorDescriptor(name, true, false);
 					acceptor.accept(createEditorOpener(editor.getEditorInput(), editorDescriptor.getId()));
 					return true;
 				}
