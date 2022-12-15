@@ -60,7 +60,6 @@ public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	 *            the path
 	 * @return the image descriptor
 	 */
-	@SuppressWarnings("deprecation")
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}

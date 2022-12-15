@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -604,14 +604,13 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertTrue(serviceProvider.canHandle(fromRootURI));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testModelWithSyntaxErrorInDerivedSrcFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IProject project = javaProject.getProject();
 		IFolder sourceFolder = project.getFolder("src");
-		sourceFolder.setDerived(true);
+		sourceFolder.setDerived(true, new NullProgressMonitor());
 		IFile file = createFile("foo/src/foo" + F_EXT, "objekt Foo ");
-		file.setDerived(true);
+		file.setDerived(true, new NullProgressMonitor());
 		build();
 		assertEquals(1, countMarkers(file));
 		file.setContents(new StringInputStream("object Foo"), true, true, monitor());
@@ -620,15 +619,14 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(file));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testModelWithSyntaxErrorInDerivedFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IProject project = javaProject.getProject();
 		IFolder folder = project.getFolder("non-src");
 		folder.create(true, true, monitor());
-		folder.setDerived(true);
+		folder.setDerived(true, new NullProgressMonitor());
 		IFile file = createFile("foo/non-src/foo" + F_EXT, "objekt Foo ");
-		file.setDerived(true);
+		file.setDerived(true, new NullProgressMonitor());
 		build();
 		assertEquals(1, countMarkers(file));
 		file.setContents(new StringInputStream("object Foo"), true, true, monitor());
