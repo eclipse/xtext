@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,14 +9,14 @@
 package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ReferenceSearchViewSorter extends ViewerSorter {
+public class ReferenceSearchViewSorter extends ViewerComparator {
 
 	private PolymorphicDispatcher<Integer> comparator = PolymorphicDispatcher.createForSingleTarget("_compare", 2,2,this);
 	
