@@ -148,7 +148,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.webtools"
-      value="https://download.eclipse.org/webtools/repository/oxygen/">
+      value="https://download.eclipse.org/webtools/repository/">
     <description>required by m2e</description>
   </setupTask>
   <setupTask
@@ -487,6 +487,226 @@
         locateNestedProjects="true"/>
     <description>Import projects from umbrella repository</description>
   </setupTask>
+  <setupTask
+      xsi:type="setup.targlets:TargletTask">
+    <targlet
+        name="Common Target Platform Repositories"
+        activeRepositoryList="${eclipse.target.platform}">
+      <requirement
+          name="org.eclipse.cbi.p2repo.analyzers"
+          optional="true"/>
+      <requirement
+          name="org.eclipse.cbi.p2repo.analyzers.common"
+          optional="true"/>
+      <requirement
+          name="org.eclipse.emf.sdk.feature.group"/>
+      <requirement
+          name="com.google.guava"
+          versionRange="[30.1.0,31.0.0)"/>
+      <requirement
+          name="com.google.inject"
+          versionRange="[5.0.1,6.0.0)"/>
+      <requirement
+          name="org.eclipse.platform.feature.group"/>
+      <requirement
+          name="org.eclipse.jdt.feature.group"/>
+      <requirement
+          name="org.eclipse.pde.feature.group"/>
+      <requirement
+          name="org.eclipse.xtend"/>
+      <requirement
+          name="org.eclipse.xtend.typesystem.emf"/>
+      <requirement
+          name="org.eclipse.xpand"
+          filter=""/>
+      <requirement
+          name="org.eclipse.lsp4j.sdk.feature.group"/>
+      <requirement
+          name="org.objectweb.asm"
+          versionRange="[9.4.0,9.5.0)"/>
+      <requirement
+          name="io.github.classgraph"
+          versionRange="[4.8.149,4.9.0)"/>
+      <requirement
+          name="org.apache.log4j"
+          versionRange="1.2.19"/>
+      <requirement
+          name="org.antlr.runtime"
+          versionRange="[3.2.0,3.2.1)"/>
+      <requirement
+          name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.mwe2.launcher.feature.group"/>
+      <repositoryList
+          name="2022-03">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/1.20.1"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.draw2d}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-03"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-06">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/1.20.1"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.draw2d}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-06"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-09">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.0.5"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-09"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-12">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.1.2"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-12"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2023-03">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.1.2"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="https://download.eclipse.org/eclipse/updates/4.27-I-builds"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-12"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+    </targlet>
+    <description>Target platform</description>
+  </setupTask>
   <project name="core"
       label="Xtext Core">
     <setupTask
@@ -733,18 +953,6 @@
           name="Xtext Target Platform"
           activeRepositoryList="${eclipse.target.platform}">
         <requirement
-            name="org.eclipse.platform.feature.group"/>
-        <requirement
-            name="org.eclipse.jdt.feature.group"/>
-        <requirement
-            name="org.eclipse.pde.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
-        <requirement
             name="org.junit"
             versionRange="[4.13.2,4.14.0)"/>
         <requirement
@@ -772,12 +980,6 @@
             name="org.opentest4j"
             versionRange="[1.0.0,2.0.0)"/>
         <requirement
-            name="com.google.guava"
-            versionRange="[30.1.0,31.0.0)"/>
-        <requirement
-            name="com.google.inject"
-            versionRange="[5.0.1,6.0.0)"/>
-        <requirement
             name="org.eclipse.jdt.java8patch.feature.group"
             optional="true"/>
         <requirement
@@ -785,15 +987,6 @@
             optional="true"/>
         <requirement
             name="org.eclipse.draw2d.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.xtend"/>
-        <requirement
-            name="org.eclipse.xtend.typesystem.emf"/>
-        <requirement
-            name="org.eclipse.xpand"
-            filter=""/>
-        <requirement
-            name="org.eclipse.lsp4j.sdk.feature.group"/>
         <requirement
             name="org.eclipse.m2e.feature.feature.group"/>
         <requirement
@@ -807,190 +1000,11 @@
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
-            name="org.objectweb.asm"
-            versionRange="[9.4.0,9.5.0)"/>
-        <requirement
-            name="io.github.classgraph"
-            versionRange="[4.8.149,4.9.0)"/>
-        <requirement
             name="org.eclipse.egit.feature.group"/>
-        <requirement
-            name="org.eclipse.cbi.p2repo.analyzers"
-            optional="true"/>
-        <requirement
-            name="org.eclipse.cbi.p2repo.analyzers.common"
-            optional="true"/>
         <requirement
             name="org.eclipse.license.feature.group"/>
         <requirement
             name="*"/>
-        <repositoryList
-            name="2022-03">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/1.20.1"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2022-06">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/1.20.1"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2022-09">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/2.0.5"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.gef-classic}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2022-12">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/2.1.2"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.gef-classic}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2023-03">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/2.1.2"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.gef-classic}"/>
-          <repository
-              url="https://download.eclipse.org/eclipse/updates/4.27-I-builds"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
       </targlet>
       <description>Target platform</description>
     </setupTask>
@@ -1061,10 +1075,10 @@
           pattern="&lt;classpathentry kind=&quot;src&quot; path=&quot;(emf-gen/)&quot;(/>)">
         <substitution>emf-gen</substitution>
         <substitution>>
-		&lt;attributes>
-			&lt;attribute name=&quot;ignore_optional_problems&quot; value=&quot;true&quot;/>
-		&lt;/attributes>
-	&lt;/classpathentry></substitution>
+    &lt;attributes>
+      &lt;attribute name=&quot;ignore_optional_problems&quot; value=&quot;true&quot;/>
+    &lt;/attributes>
+  &lt;/classpathentry></substitution>
       </modification>
       <modification
           pattern="path=&quot;(target/classes)&quot;">
@@ -1358,29 +1372,10 @@
             name="org.eclipse.swtbot.ide.feature.group"/>
         <requirement
             name="org.eclipse.swtbot.generator.feature.feature.group"/>
-        <repositoryList
-            name="SWTBot">
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-        </repositoryList>
       </targlet>
       <targlet
           name="Xtend Target Platform"
           activeRepositoryList="${eclipse.target.platform}">
-        <requirement
-            name="org.eclipse.platform.feature.group"/>
-        <requirement
-            name="org.eclipse.jdt.feature.group"/>
-        <requirement
-            name="org.eclipse.pde.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
         <requirement
             name="org.junit"
             versionRange="[4.13.2,4.14.0)"/>
@@ -1397,56 +1392,8 @@
             name="org.eclipse.xtext.xbase.testing"/>
         <requirement
             name="org.eclipse.xtext.ui.testing"/>
-        <repositoryList
-            name="Photon">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
-        <repositoryList
-            name="Oxygen">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.m2e}/1.12"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
+        <requirement
+            name="org.eclipse.xtext.xtext.generator"/>
       </targlet>
     </setupTask>
     <stream
