@@ -1,6 +1,7 @@
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 ext.title = 'Pure Xbase Runtime'
+description = 'Pure Xbase Runtime.'
 
 dependencies {
 	api project(':org.eclipse.xtext.xbase')
