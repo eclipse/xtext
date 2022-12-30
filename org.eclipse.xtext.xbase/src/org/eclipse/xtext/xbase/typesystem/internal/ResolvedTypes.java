@@ -8,11 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -74,9 +76,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -159,11 +158,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		final IFeatureScopeTracker featureScopeTracker;
 		final IssueSeverities issueSeverities;
 		
-		final Set<JvmIdentifiableElement> allTypes = Sets.newHashSet();
-		final Set<JvmIdentifiableElement> allReassignedTypes = Sets.newHashSet();
-		final Set<XExpression> allExpressionTypes = Sets.newHashSet();
-		final Set<XExpression> allLinking = Sets.newHashSet();
-		final Set<Object> allResolvedTypeParameters = Sets.newHashSet();
+		final Set<JvmIdentifiableElement> allTypes = new HashSet<>();
+		final Set<JvmIdentifiableElement> allReassignedTypes = new HashSet<>();
+		final Set<XExpression> allExpressionTypes = new HashSet<>();
+		final Set<XExpression> allLinking = new HashSet<>();
+		final Set<Object> allResolvedTypeParameters = new HashSet<>();
+		
+		/**
+		 * Linking information for sub-expressions that do not depend on the overload resolution in their
+		 * enclosing context expression. The resolution information can be kept around without repeated attempts
+		 * to resolve the same expression in all contexts again and again.
+		 */
+		final Map<XAbstractFeatureCall, AbstractPendingLinkingCandidate<?>> forwardLinking = new HashMap<>();
 		
 		ResolvedTypes root;
 		
@@ -262,7 +268,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		if (diagnostics == null) {
-			diagnostics = Sets.newLinkedHashSet();
+			diagnostics = new LinkedHashSet<>();
 		}
 		if (!diagnostics.add(diagnostic)) {
 			throw new IllegalStateException("Duplicate diagnostic: " + diagnostic);
@@ -271,7 +277,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	protected void addDeferredLogic(IAcceptor<? super IResolvedTypes> code) {
 		if (deferredLogic == null) {
-			deferredLogic = Sets.newLinkedHashSet();
+			deferredLogic = new LinkedHashSet<>();
 		}
 		if (!deferredLogic.add(code)) {
 			throw new IllegalStateException("Duplicate runnable: " + code);
@@ -281,6 +287,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	@Override
 	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
 		return getServices().getEarlyExitComputer().getThrownExceptions(obj, this, this.getReferenceOwner());
+	}
+	
+	public Map<XAbstractFeatureCall, AbstractPendingLinkingCandidate<?>> forwardLinking() {
+		return shared.forwardLinking;
+	}
+	
+	public AbstractPendingLinkingCandidate<?> forwardLinking(XAbstractFeatureCall featureCall) {
+		return shared.forwardLinking.get(featureCall);
 	}
 	
 	/* @Nullable */
@@ -362,7 +376,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	private static class MergeData {
-		List<LightweightTypeReference> references = Lists.newArrayList();
+		List<LightweightTypeReference> references = new ArrayList<>();
 		boolean voidSeen = false;
 		ITypeExpectation expectation = null;
 		boolean allNoImplicitReturn = true;
@@ -532,7 +546,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		for(int i = 0, size = allValues.size(); i < size; i++) {
 			TypeData value = allValues.get(i);
 			if (returnType != value.isReturnType()) {
-				List<TypeData> result = Lists.newArrayListWithCapacity(allValues.size());
+				List<TypeData> result = new ArrayList<>(allValues.size());
 				if (i != 0) {
 					result.addAll(allValues.subList(0, i));
 				}
@@ -635,7 +649,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		List<JvmTypeReference> executablesExceptions = exceptionDeclarator.getExceptions();
 		if (executablesExceptions.isEmpty())
 			return this;
-		List<LightweightTypeReference> exceptions = Lists.newArrayListWithCapacity(executablesExceptions.size());
+		List<LightweightTypeReference> exceptions = new ArrayList<>(executablesExceptions.size());
 		for(JvmTypeReference exception: executablesExceptions) {
 			exceptions.add(getReferenceOwner().toLightweightTypeReference(exception));
 		}
@@ -881,7 +895,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected void refineExpectedType(XExpression receiver, ITypeExpectation refinedExpectation) {
 		Collection<TypeData> typeData = ensureExpressionTypesMapExists().get(receiver);
-		List<TypeData> replaced = Lists.newArrayListWithCapacity(typeData.size());
+		List<TypeData> replaced = new ArrayList<>(typeData.size());
 		for(TypeData existing: typeData) {
 			TypeData newTypeData = new TypeData(receiver, refinedExpectation, existing.getActualType(), existing.getConformanceFlags(), existing.isReturnType());
 			replaced.add(newTypeData);
@@ -895,7 +909,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	private Map<Object, List<LightweightBoundTypeArgument>> ensureTypeParameterHintsMapExists() {
 		if (typeParameterHints == null) {
-			typeParameterHints = Maps.newHashMap();
+			typeParameterHints = new HashMap<>();
 		}
 		return typeParameterHints;
 	}
@@ -1092,7 +1106,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	private Map<Object, UnboundTypeReference> ensureTypeParameterMapExists() {
 		if (unboundTypeParameters == null) {
-			unboundTypeParameters = Maps.newLinkedHashMap();
+			unboundTypeParameters = new LinkedHashMap<>();
 		}
 		return unboundTypeParameters;
 	}
@@ -1203,7 +1217,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected LightweightBoundTypeArgument removeRecursiveTypeArguments(final Object handle,
 			LightweightBoundTypeArgument boundTypeArgument) {
-		final Set<Object> handles = Sets.newHashSet(handle);
+		final Set<Object> handles = newHashSet(handle);
 		LightweightTypeReference boundArgumentWithoutRecursion = new CustomTypeParameterSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), boundTypeArgument.getTypeReference().getOwner()) {
 
 			@Override
@@ -1352,26 +1366,32 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	protected void setPropagatedType(XExpression expression) {
 		if (propagatedTypes == null) {
-			propagatedTypes = Sets.newHashSet(expression);
+			propagatedTypes = newHashSet(expression);
 		} else {
 			propagatedTypes.add(expression);
 		}
 	}
-	
+
 	protected void setRefinedType(XExpression expression) {
 		if (refinedTypes == null) {
-			refinedTypes = Sets.newHashSet(expression);
+			refinedTypes = newHashSet(expression);
 		} else {
 			refinedTypes.add(expression);
 		}
 	}
 	
+	private static <T> Set<T> newHashSet(T seed) {
+		HashSet<T> result = new HashSet<>();
+		result.add(seed);
+		return result;
+	}
+	
 	protected Set<XExpression> basicGetPropagatedTypes() {
-		return propagatedTypes != null ? propagatedTypes : Collections.<XExpression>emptySet();
+		return propagatedTypes != null ? propagatedTypes : Collections.emptySet();
 	}
 	
 	protected Set<XExpression> basicGetRefinedTypes() {
-		return refinedTypes != null ? refinedTypes : Collections.<XExpression>emptySet();
+		return refinedTypes != null ? refinedTypes : Collections.emptySet();
 	}
 	
 	/* @Nullable */
@@ -1380,19 +1400,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
-		return declaredTypeParameters != null ? declaredTypeParameters : Collections.<JvmTypeParameter>emptyList();
+		return declaredTypeParameters != null ? declaredTypeParameters : Collections.emptyList();
 	}
 	
 	public void addDeclaredTypeParameters(List<JvmTypeParameter> typeParameters) {
 		if (declaredTypeParameters == null) {
-			declaredTypeParameters = Lists.newArrayList(typeParameters);
+			declaredTypeParameters = new ArrayList<>(typeParameters);
 		} else {
 			declaredTypeParameters.addAll(typeParameters);
 		}
 	}
 	
 	protected List<LightweightTypeReference> getExpectedExceptions() {
-		return Collections.<LightweightTypeReference>emptyList();
+		return Collections.emptyList();
 	}
 
 	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
@@ -1407,8 +1427,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		if (i >= actualHints.size())
 			return actualHints;
-		List<LightweightBoundTypeArgument> transitivity = Lists.newArrayList();
-		Set<Object> seenHandles = Sets.newHashSet(handle); 
+		List<LightweightBoundTypeArgument> transitivity = new ArrayList<>();
+		Set<Object> seenHandles = newHashSet(handle); 
 		transitivity.addAll(actualHints.subList(0, i));
 		List<LightweightBoundTypeArgument> allRemaining = actualHints.subList(i, actualHints.size());
 		addNonRecursiveHints(allRemaining, seenHandles, transitivity);

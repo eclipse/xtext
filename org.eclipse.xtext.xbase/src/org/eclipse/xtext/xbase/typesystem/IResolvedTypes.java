@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -39,12 +39,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 public interface IResolvedTypes {
 
-	/* 
-	 * TODO find a suitable abstraction to represent diagnostics
-	 * It's cumbersome to use Issues since they only know about URIs 
-	 * so we probably want to use Diagnostics?
-	 * 
-	 * TODO do we	 really need this on the resolved types API? probably not
+	/**
+	 * Provides access to all diagnostics that have been added during the type computation so far.
 	 */
 	Collection<AbstractDiagnostic> getQueuedDiagnostics();
 	

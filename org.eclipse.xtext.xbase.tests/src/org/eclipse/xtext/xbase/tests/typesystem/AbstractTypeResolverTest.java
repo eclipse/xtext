@@ -756,10 +756,9 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 		resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + i2 ]", "BigInteger");
 	}
 
-	@Ignore("i1 and i2 should become T -> Object thus + maps to String + Object")
 	@Test
 	public void testOverloadedOperators_11() throws Exception {
-		resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2 | i1.toString + i2 ]", "String");
+		resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2 | i1.toString + i2 ]", "Comparable<?> & Serializable");
 	}
 
 	@Test
@@ -772,10 +771,9 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 				"}", "String");
 	}
 
-	@Ignore("i1 and i2 should become T -> Object thus + maps to Object + String")
 	@Test
 	public void testOverloadedOperators_13() throws Exception {
-		resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + String::valueOf(i2) ]", "String");
+		resolvesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + String::valueOf(i2) ]", "Comparable<?> & Serializable");
 	}
 
 	@Test
@@ -2842,7 +2840,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 				"Integer");
 	}
 
-	@Ignore("slightly too slow")
+	@IgnoredBySmokeTest("Pointless since the scenario is pretty much the same as above")
 	@Test
 	public void testFeatureCall_15_n() throws Exception {
 		resolvesTo(
@@ -2892,7 +2890,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 				"Integer");
 	}
 
-	@Ignore("too slow")
 	@Test
 	public void testFeatureCall_15_n_1() throws Exception {
 		resolvesTo(
@@ -2942,7 +2939,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 				"Integer");
 	}
 
-	@Ignore("way too slow")
 	@Test
 	public void testFeatureCall_15_n_2() throws Exception {
 		resolvesTo(
@@ -3269,6 +3265,79 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 		resolvesTo("new testdata.ArrayClient().toStringArray('a', 'b').head", "String");
 	}
 
+	@Test
+	public void testFeatureCall_43_a() throws Exception {
+		resolvesTo(
+				"{\n"
+				+ "  var a = 0\n"
+				+ "  var b = 0\n"
+				+ "  var c = 0\n"
+				+ "  a - (c*(Double.valueOf(10**(b-1)).intValue))\n"
+				+ "}",
+				"int");
+	}
+	
+	@IgnoredBySmokeTest("Almost the same as testFeatureCall_43_a")
+	@Test
+	public void testFeatureCall_43_b() throws Exception {
+		resolvesTo(
+				"{\n"
+				+ "  var a = 0\n"
+				+ "  var b = 0\n"
+				+ "  var c = 0\n"
+				+ "  a - ((c*(Double.valueOf(10**(b-1)).intValue)) + (a - (c*(Double.valueOf(10**(b-1)).intValue))))\n"
+				+ "}",
+				"int");
+	}
+	
+	@IgnoredBySmokeTest("Almost the same as testFeatureCall_43_a")
+	@Test
+	public void testFeatureCall_43_c() throws Exception {
+		resolvesTo(
+				"{\n"
+				+ "  var a = 0\n"
+				+ "  var b = 0\n"
+				+ "  var c = 0\n"
+				+ "  a - (((c*(Double.valueOf(10**(b-1)).intValue)) + (a - (c*(Double.valueOf(10**(b-1)).intValue)))) + (a - ((c*(Double.valueOf(10**(b-1)).intValue)) + (a - (c*(Double.valueOf(10**(b-1)).intValue))))))\n"
+				+ "}",
+				"int");
+	}
+	
+	@Test
+	public void testFeatureCall_44_a() throws Exception {
+		resolvesTo(
+				"{\n"
+				+ "    val mu = 0.0\n"
+				+ "    val beta = 0.0\n"
+				+ "    val double L = 0.0\n"
+				+ "    val int a = 0\n"
+				+ "    val int b = 0\n"
+				+ "    val double lambda = 0.0\n"
+				+ "    val double sa = 0.0\n"
+				+ "    val double sb = 0.0\n"
+				+ "    mu * (sa + lambda * (sb - sa) - 0.5 * mu * (a + lambda * (b - a)))\n"
+				+ "}",
+				"double");
+	}
+	
+	@IgnoredBySmokeTest("Almost the same as testFeatureCall_44_a")
+	@Test
+	public void testFeatureCall_44_b() throws Exception {
+		resolvesTo(
+				"{\n"
+				+ "    val mu = 0.0\n"
+				+ "    val beta = 0.0\n"
+				+ "    val double L = 0.0\n"
+				+ "    val int a = 0\n"
+				+ "    val int b = 0\n"
+				+ "    val double lambda = 0.0\n"
+				+ "    val double sa = 0.0\n"
+				+ "    val double sb = 0.0\n"
+				+ "    mu * ((sa + lambda * (sb - sa) - 0.5 * mu * (a + lambda * (b - a))) + (mu * (sa + lambda * (sb - sa) - 0.5 * mu * (a + lambda * (b - a)))))\n"
+				+ "}",
+				"double");
+	}
+	
 	@Test
 	public void testToList_01() throws Exception {
 		resolvesTo(

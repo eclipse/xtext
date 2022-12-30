@@ -56,10 +56,10 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
- * @author Moritz Eysholdt
+ * Base implementation of {@link ITypeComputationState}.
  * 
- * TODO JavaDoc
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Moritz Eysholdt - Validation for checked exceptions
  */
 public abstract class AbstractTypeComputationState implements ITypeComputationState {
 	protected final ResolvedTypes resolvedTypes;
@@ -67,7 +67,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
 	private List<AbstractTypeExpectation> expectations;
 	
-	// is this field actually used?
 	private List<AbstractTypeExpectation> returnExpectations;
 	
 	protected AbstractTypeComputationState(ResolvedTypes resolvedTypes,
@@ -137,10 +136,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, this, expression);
 	}
 	
-	/*
-	 * Clients who override this method have to be careful with AbstractPendingLinkingCandidate#computeArgumentTypes where
-	 * a subtype of TypeComputationStateWithExpectation is used.
-	 */
 	@Override
 	public TypeComputationStateWithExpectation withExpectation(/* @Nullable */ LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, expectation);
@@ -326,7 +321,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return expectations;
 	}
 	
-	//TODO not referenced
 	protected final List<? extends ITypeExpectation> getReturnExpectations() {
 		if (returnExpectations == null)
 			returnExpectations = getReturnExpectations(this, false);
@@ -410,15 +404,59 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		Iterable<IEObjectDescription> descriptions = reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
 				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved, featureScopeSession, demandResolvedTypes);
 		List<IFeatureLinkingCandidate> resultList = Lists.newArrayList();
+		AbstractPendingLinkingCandidate<?> previouslyResolved = resolvedTypes.forwardLinking(featureCall);
 		for(IEObjectDescription description: descriptions) {
-			resultList.add(createCandidate(featureCall, demandComputedTypes, toIdentifiableDescription(description)));
+			IFeatureLinkingCandidate candidate = createCandidate(featureCall, demandComputedTypes, toIdentifiableDescription(description));
+			// TODO apply to constructors, too
+			if (matches(previouslyResolved, candidate)) {
+				return Collections.singletonList(candidate);
+			}
+			resultList.add(candidate);
 		}
 		if (resultList.isEmpty()) {
 			resultList.add(new NullFeatureLinkingCandidate(featureCall, this));
 		}
 		return resultList;
 	}
+
+	private boolean matches(AbstractPendingLinkingCandidate<?> previouslyResolved, IFeatureLinkingCandidate candidate) {
+		if (previouslyResolved == null) {
+			return false;
+		}
+		if (!previouslyResolved.getClass().equals(candidate.getClass())) {
+			return false;
+		}
+		AbstractPendingLinkingCandidate<?> casted = (AbstractPendingLinkingCandidate<?>)candidate;
+		IIdentifiableElementDescription prevDescription = previouslyResolved.description;
+		IIdentifiableElementDescription description = casted.description;
+		if (!prevDescription.getShadowingKey().equals(description.getShadowingKey())) {
+			return false;
+		}
+		if (!prevDescription.getElementOrProxy().equals(description.getElementOrProxy())) {
+			return false;
+		}
+		if (!equalTypes(prevDescription.getSyntacticReceiverType(), description.getSyntacticReceiverType())) {
+			return false;
+		}
+		if (!equalTypes(prevDescription.getImplicitReceiverType(), description.getImplicitReceiverType())) {
+			return false;
+		}
+		if (!equalTypes(prevDescription.getImplicitFirstArgumentType(), description.getImplicitFirstArgumentType())) {
+			return false;
+		}
+		return true;
+	}
 	
+	private boolean equalTypes(LightweightTypeReference left, LightweightTypeReference right) {
+		if (left == right) {
+			return true;
+		}
+		if (right == null) {
+			return false;
+		}
+		return left.getUniqueIdentifier().equals(right.getUniqueIdentifier());
+	}
+
 	protected IFeatureLinkingCandidate createResolvedLink(XAbstractFeatureCall featureCall, JvmIdentifiableElement resolvedTo) {
 		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
