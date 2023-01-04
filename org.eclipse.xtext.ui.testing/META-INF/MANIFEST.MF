@@ -7,7 +7,7 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.ui.testing.util
-Import-Package: org.apache.log4j;version="1.2.19";resolution:=optional,
+Import-Package: org.apache.log4j;version="1.2.24";resolution:=optional,
  org.junit;version="4.13.2",
  org.junit.internal;version="4.13.2",
  org.junit.internal.builders;version="4.13.2",

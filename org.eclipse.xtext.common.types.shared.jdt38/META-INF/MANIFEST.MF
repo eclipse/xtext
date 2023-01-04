@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.xtext.xbase.ui,
  org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional,
  org.eclipse.jdt.ui;bundle-version="3.26.0";resolution:=optional
 Bundle-Vendor: %providerName
-Import-Package: org.apache.log4j;version="1.2.19",
+Import-Package: org.apache.log4j;version="1.2.24",
  org.eclipse.ui.ide
 Export-Package: org.eclipse.xtext.common.types.shared.jdt38;x-internal:=true
 Automatic-Module-Name: org.eclipse.xtext.common.types.shared.jdt38

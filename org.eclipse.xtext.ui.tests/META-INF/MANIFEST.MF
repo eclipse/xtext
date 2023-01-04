@@ -32,7 +32,7 @@ Require-Bundle: org.eclipse.xtext.ui,
 Bundle-Activator: org.eclipse.xtext.ui.tests.internal.TestsActivator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse Xtext
-Import-Package: org.apache.log4j;version="1.2.19",
+Import-Package: org.apache.log4j;version="1.2.24",
  org.junit;version="4.13.2"
 Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.bracketmatching,
