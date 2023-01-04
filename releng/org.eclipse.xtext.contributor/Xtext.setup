@@ -529,7 +529,7 @@
           versionRange="[4.8.149,4.9.0)"/>
       <requirement
           name="org.apache.log4j"
-          versionRange="1.2.19"/>
+          versionRange="1.2.24"/>
       <requirement
           name="org.antlr.runtime"
           versionRange="[3.2.0,3.2.1)"/>

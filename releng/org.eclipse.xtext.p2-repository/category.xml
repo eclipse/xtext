@@ -19,8 +19,8 @@
    <bundle id="org.eclipse.xtext.junit4.source" version="2.30.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.testing" version="2.30.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.testing.source" version="2.30.0.qualifier"><category name="Xtext"/></bundle>
-   <bundle id="org.eclipse.xtext.logging" version="1.2.19.qualifier"><category name="Xtext"/></bundle>
-   <bundle id="org.eclipse.xtext.logging.source" version="1.2.19.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.logging" version="1.2.24.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.logging.source" version="1.2.24.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.m2e" version="2.30.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.m2e.source" version="2.30.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.purexbase.ui" version="2.30.0.qualifier"><category name="Xtext"/></bundle>

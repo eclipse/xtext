@@ -68,6 +68,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.ui.console;bundle-version="3.11.100",
  org.eclipse.xtext.smap
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.log4j;version="1.2.19"
+Import-Package: org.apache.log4j;version="1.2.24"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator
 Automatic-Module-Name: org.eclipse.xtext.builder
