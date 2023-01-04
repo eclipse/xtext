@@ -28,7 +28,7 @@ SPDX-License-Identifier: EPL-2.0
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.apache.log4j" version="1.2.19" match="equivalent"/>
+      <import plugin="org.apache.log4j" version="1.2.24" match="equivalent"/>
       <import plugin="org.eclipse.xpand" version="2.2.0" match="equivalent"/>
       <import plugin="org.eclipse.xtend" version="2.2.0" match="equivalent"/>
       <import plugin="org.eclipse.xtend.typesystem.emf" version="2.2.0" match="equivalent"/>
