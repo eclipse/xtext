@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase.lib;bundle-version="2.30.0",
  org.eclipse.xtend.lib,
  org.eclipse.xtext.testing
-Import-Package: org.apache.log4j;version="1.2.19",
+Import-Package: org.apache.log4j;version="1.2.24",
  org.hamcrest.core,
  org.junit;version="4.13.2",
  org.junit.runner;version="4.13.2",
