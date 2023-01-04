@@ -18,5 +18,5 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.lsp4j.jsonrpc;bundle-version="[0.19.0,0.20.0)";resolution:=optional,
  org.eclipse.xtext.testlanguages,
  org.eclipse.xtext.testlanguages.ide
-Import-Package: org.apache.log4j;version="1.2.19"
+Import-Package: org.apache.log4j;version="1.2.24"
 Automatic-Module-Name: org.eclipse.xtext.ide.tests

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -325,7 +325,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 											<requirement>
 												<type>eclipse-plugin</type>
 												<id>org.eclipse.xtext.logging</id>
-												<versionRange>1.2.19</versionRange>
+												<versionRange>1.2.24</versionRange>
 											</requirement>
 											<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
 												platform is Luna or later. (backward compatible with kepler and previous
