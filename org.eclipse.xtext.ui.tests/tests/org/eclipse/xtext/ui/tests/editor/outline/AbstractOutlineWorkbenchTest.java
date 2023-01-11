@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -59,11 +59,10 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	protected IPreferenceStore preferenceStore;
 	protected IOutlineNodeComparer comparer;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		preferenceStore = new ScopedPreferenceStore(new InstanceScope(), getEditorId());
+		preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, getEditorId());
 		comparer = new IOutlineNodeComparer.Default();
 		modelAsText = "one { two {} three {} } four {}";
 		file = IResourcesSetupUtil.createFile("test/test.outlinetestlanguage", modelAsText);
