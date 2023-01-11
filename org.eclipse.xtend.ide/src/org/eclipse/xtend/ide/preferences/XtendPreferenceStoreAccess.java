@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,14 +25,13 @@ import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
  */
 public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 
-	@SuppressWarnings("all")
 	@Override
 	public IPreferenceStore getPreferenceStore() {
 		IPreferenceStore store = super.getPreferenceStore();
-		FixedScopedPreferenceStore jdtStore = new FixedScopedPreferenceStore(new InstanceScope(), JavaCore.PLUGIN_ID);
+		FixedScopedPreferenceStore jdtStore = new FixedScopedPreferenceStore(InstanceScope.INSTANCE, JavaCore.PLUGIN_ID);
 		jdtStore.setSearchContexts(new IScopeContext[] {
-				new InstanceScope(),
-				new ConfigurationScope()
+				InstanceScope.INSTANCE,
+				ConfigurationScope.INSTANCE
 		});
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 			store,
@@ -41,7 +40,6 @@ public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		});
 	}
 	
-	@SuppressWarnings("all")
 	@Override
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		IProject project = getProject(context);
@@ -51,8 +49,8 @@ public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		FixedScopedPreferenceStore jdtStore = new FixedScopedPreferenceStore(projectScope, JavaCore.PLUGIN_ID);
 		jdtStore.setSearchContexts(new IScopeContext[] {
 				projectScope,
-				new InstanceScope(),
-				new ConfigurationScope()
+				InstanceScope.INSTANCE,
+				ConfigurationScope.INSTANCE
 		});
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 			store,

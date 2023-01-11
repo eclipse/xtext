@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2008 IBM Corporation and others.
+ * Copyright (c) 2000, 2023 IBM Corporation and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -183,14 +183,13 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	/*
 	 * Suppress deprecation warning which is not present in 3.5
 	 */
-	@SuppressWarnings("all")
 	@Override
 	protected String getSelectedProfileId(IScopeContext instanceScope) {
 		if (fProfileKey != null) {
 			String profileId = instanceScope.getNode(getNodeId()).get(fProfileKey, null);
 			if (profileId == null) {
 				// request from bug 129427
-				profileId = new DefaultScope().getNode(getNodeId()).get(fProfileKey, null);
+				profileId = DefaultScope.INSTANCE.getNode(getNodeId()).get(fProfileKey, null);
 			}
 			return profileId;
 		}
