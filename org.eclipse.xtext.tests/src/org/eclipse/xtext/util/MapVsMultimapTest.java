@@ -22,7 +22,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MapVsMultimap extends Assert {
+public class MapVsMultimapTest extends Assert {
 
 	private int valuesPerBatch = 0;
 	private int batches = 500000;

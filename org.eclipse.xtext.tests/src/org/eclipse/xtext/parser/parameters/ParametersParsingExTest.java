@@ -11,7 +11,7 @@ package org.eclipse.xtext.parser.parameters;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParametersParsingTestEx extends AbstractParametersParsingTest {
+public class ParametersParsingExTest extends AbstractParametersParsingTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
