@@ -21,6 +21,6 @@ import org.junit.runner.RunWith;
 @UseTechnicalNames
 @SelectPackages("org.eclipse.xtext.validation.junit5")
 @SuppressWarnings("deprecation")
-public class RunSuiteJUnit5 {
+public class RunSuiteJUnit5Suite {
 
 }
