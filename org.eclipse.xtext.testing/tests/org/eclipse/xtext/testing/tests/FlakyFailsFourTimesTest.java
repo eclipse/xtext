@@ -19,7 +19,7 @@ import org.junit.runners.model.Statement;
 /**
  * @author Sebastian Zarnekow
  */
-public class FlakyFailsFourTimes {
+public class FlakyFailsFourTimesTest {
 	@Rule 
 	public Flaky.Rule rule = new Flaky.Rule();
 	
