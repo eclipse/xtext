@@ -36,8 +36,10 @@ public class LineRegion extends TextSegment implements ILineRegion {
 		int start = getEndOffset() + 1;
 		String text = access.regionForDocument().getText();
 		while (true) {
-			if (start >= text.length())
+			if (start > text.length())
 				return null;
+			if (start == text.length())
+				return new LineRegion(access, start, 0);
 			char c = text.charAt(start);
 			if (c == '\n' || c == '\r')
 				start++;
