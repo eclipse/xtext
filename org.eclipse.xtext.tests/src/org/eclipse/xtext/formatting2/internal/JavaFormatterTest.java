@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 itemis AG (http://www.itemis.com) and others.
+ * Copyright (c) 2020, 2023 itemis AG (http://www.itemis.com) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -29,6 +29,17 @@ public class JavaFormatterTest {
 	@Test
 	public void javaFormatterWorks() {
 		helper.assertFormatted(" idlist  a  b   c", "idlist a b c");
+	}
+
+	@Test
+	public void testAllowUnformattedWhitespace() {
+		helper
+		.assertFormatted(r -> {
+			r.setToBeFormatted("idlist a b c");
+			r.setExpectation("idlist a b c");
+			r.setUseSerializer(false);
+			r.setAllowUnformattedWhitespace(false);
+		});
 	}
 
 }
