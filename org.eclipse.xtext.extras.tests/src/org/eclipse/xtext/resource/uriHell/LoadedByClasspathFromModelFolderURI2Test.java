@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LoadedByClasspathFromModelFolderURITest2 extends LoadedByClasspathFromModelFolderURITest {
+public class LoadedByClasspathFromModelFolderURI2Test extends LoadedByClasspathFromModelFolderURITest {
 	@Override
 	public URI getResourceURI() {
 		return URI.createURI(
