@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClosureTypeTest3 extends AbstractClosureTypeTest2 {
+public class ClosureType3Test extends AbstractClosureTypeTest2 {
 	@Test
 	public void testScenario_1_1_a_01() throws Exception {
 		// @formatter:off

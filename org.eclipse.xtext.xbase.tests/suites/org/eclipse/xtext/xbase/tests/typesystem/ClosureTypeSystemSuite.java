@@ -19,9 +19,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	BatchClosureTypeTest.class,
 	ClosureTypeComputerUnitTest.class,
-	ClosureTypeTest1.class,
-	ClosureTypeTest2.class,
-	ClosureTypeTest3.class,
+	ClosureType1Test.class,
+	ClosureType2Test.class,
+	ClosureType3Test.class,
 	BatchTypeArgumentTest.class,
 })
 public class ClosureTypeSystemSuite {}

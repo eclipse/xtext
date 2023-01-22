@@ -20,7 +20,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	CompilerTest.class,
-	CompilerTests2.class,
+	Compiler2Tests.class,
 	EvaluationCompilerTest.class,
 	NewLanguageFeaturesCompilerTest.class,
 	ErrorSafeExtensionsTest.class,

@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
-public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
+public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 
 	@Override
 	protected FakeTreeAppendable createAppendable() {
