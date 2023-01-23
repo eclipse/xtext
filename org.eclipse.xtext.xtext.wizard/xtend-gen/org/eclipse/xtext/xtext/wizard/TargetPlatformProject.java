@@ -175,7 +175,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"com.google.gson\" version=\"2.10.0.v20221207-1049\"/>");
+    _builder.append("<unit id=\"com.google.gson\" version=\"2.10.1.v20230109-0753\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20221112-0806\"/>");

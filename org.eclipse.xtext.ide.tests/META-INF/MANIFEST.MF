@@ -20,6 +20,6 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.testlanguages.ide,
  org.eclipse.emf.mwe2.lib;bundle-version="2.14.0",
  org.aopalliance;bundle-version="1.0.0",
- com.google.gson;bundle-version="2.10.0"
+ com.google.gson;bundle-version="2.10.1"
 Import-Package: org.apache.log4j;version="1.2.24"
 Automatic-Module-Name: org.eclipse.xtext.ide.tests
