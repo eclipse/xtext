@@ -39,7 +39,7 @@ import com.google.inject.Provider;
  */
 @RunWith(XtextSmokeTestRunner.class)
 @ProcessedBy(FormatterSmokeSuite.FormatterSmokeTester.class)
-@SuiteClasses(SmokeTestCases.class)
+@SuiteClasses(SmokeTestCase.class)
 public class FormatterSmokeSuite {
 
 	public static class FormatterSmokeTester extends ScenarioProcessor {

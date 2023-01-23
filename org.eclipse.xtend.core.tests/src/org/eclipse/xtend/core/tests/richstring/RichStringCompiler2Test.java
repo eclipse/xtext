@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichStringCompilerTest2 extends RichStringCompilerTest {
+public class RichStringCompiler2Test extends RichStringCompilerTest {
 	
 	@Override
 	public void assertOutput(String expectedOutput, String richString) throws Exception {

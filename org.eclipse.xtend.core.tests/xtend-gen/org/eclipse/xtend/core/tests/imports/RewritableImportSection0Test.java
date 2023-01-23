@@ -11,7 +11,7 @@ package org.eclipse.xtend.core.tests.imports;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class RewritableImportSectionTest0 extends AbstractRewritableImportSectionTest {
+public class RewritableImportSection0Test extends AbstractRewritableImportSectionTest {
   @Override
   protected CharSequence getModel(final boolean isStatic, final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();

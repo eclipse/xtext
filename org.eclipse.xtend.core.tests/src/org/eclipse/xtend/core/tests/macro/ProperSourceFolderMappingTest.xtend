@@ -18,7 +18,7 @@ import org.junit.Test
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class TestProperSourceFolderMapping extends AbstractActiveAnnotationTest {
+class ProperSourceFolderMappingTest extends AbstractActiveAnnotationTest {
 	
 	/**
 	 * checks that the configured target folder matches what is used by the generator.

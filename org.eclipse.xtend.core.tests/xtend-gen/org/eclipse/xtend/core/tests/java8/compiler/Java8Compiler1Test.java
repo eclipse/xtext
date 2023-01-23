@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class Java8CompilerTest1 extends CompilerTest {
+public class Java8Compiler1Test extends CompilerTest {
   @Test
   public void testJava8Reduce() {
     try {

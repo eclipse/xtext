@@ -15,7 +15,7 @@ import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SmokeTestCases extends AbstractXtendTestCase {
+class SmokeTestCase extends AbstractXtendTestCase {
 	
 	@Test def void test_00() {
 		file('''

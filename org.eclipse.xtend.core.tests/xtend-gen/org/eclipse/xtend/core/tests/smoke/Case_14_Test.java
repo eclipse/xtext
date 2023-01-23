@@ -37,7 +37,7 @@ import org.junit.Test;
 
 @Ignore
 @SuppressWarnings("all")
-public class Case_14 extends AbstractXtendTestCase {
+public class Case_14_Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private JvmTypesBuilder _jvmTypesBuilder;

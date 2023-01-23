@@ -9,7 +9,7 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.annotations.AnnotationsCompilerTest;
-import org.eclipse.xtend.core.tests.compiler.batch.TestBatchCompiler;
+import org.eclipse.xtend.core.tests.compiler.batch.BatchCompilerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -121,7 +121,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ParameterizedInnerTypesCompilerTest.class,
 	PostfixOperatorCompilerTest.class,
 	PropertyCompilerTest.class,
-	TestBatchCompiler.class,
+	BatchCompilerTest.class,
 	XtendCompilerTest.class,
 	XtendCompilerErrorHandlingTest.class,
 	XbaseIntegrationTest.class
