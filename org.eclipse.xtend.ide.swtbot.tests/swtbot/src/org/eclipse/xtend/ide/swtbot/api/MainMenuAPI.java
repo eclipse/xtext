@@ -8,17 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.swtbot.api;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.jface.preference.PreferenceDialog;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.eclipse.xtend.ide.swtbot.api.preferences.PreferencesDialogAPI;
 import org.eclipse.xtend.ide.swtbot.lowlevel.XtextSWTWorkbenchBot;
 
@@ -45,23 +38,12 @@ public class MainMenuAPI {
 		// see https://www.eclipse.org/forums/index.php/t/854280/
 		if (Platform.getOS().equals(Platform.OS_MACOSX)) {
 			// On Mac, the Preferences menu is under the system menu
-			final IWorkbench workbench = PlatformUI.getWorkbench();
-			workbench.getDisplay().asyncExec(() -> {
-				IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
-				if (window != null) {
-					Menu appMenu = workbench.getDisplay().getSystemMenu();
-					Optional<MenuItem> item = Arrays.stream(appMenu.getItems())
-							.filter(i -> i.getText().startsWith("Preferences") || i.getText().startsWith("Einstellungen")).findFirst();
-					if (item.isPresent()) {
-						MenuItem menuItem = item.get();
-						Event event = new Event();
-						event.time = (int) System.currentTimeMillis();
-						event.widget = menuItem;
-						event.display = workbench.getDisplay();
-						menuItem.setSelection(true);
-						menuItem.notifyListeners(SWT.Selection, event);
-					}
-				}
+			// so we must open it programmatically
+			UIThreadRunnable.asyncExec(() -> {
+				PreferenceDialog dialog = PreferencesUtil
+					.createPreferenceDialogOn
+						(bot.activeShell().widget, null, null, null);
+				dialog.open();
 			});
 		} else {
 			bot.menu("Window").menu("Preferences").click();
