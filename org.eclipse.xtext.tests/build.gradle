@@ -19,6 +19,7 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 	testImplementation 'org.junit.platform:junit-platform-suite-api'
 	testImplementation 'org.junit.platform:junit-platform-runner'
+	testImplementation 'org.junit.vintage:junit-vintage-engine'
 }
 
 sourceSets.test {
@@ -41,4 +42,5 @@ task generateTestLanguages(type: XtextGeneratorTask) {
 test {
 	exclude 'org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest.class'
 	exclude '**/*Suite.class'
+	useJUnitPlatform()
 }
