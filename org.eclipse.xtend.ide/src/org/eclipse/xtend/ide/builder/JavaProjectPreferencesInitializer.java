@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -37,8 +37,7 @@ public class JavaProjectPreferencesInitializer {
 	@SuppressWarnings("restriction")
 	@Inject
 	public void addOwnFileExtensionsToJavaBuildResourceCopyFilter(FileExtensionProvider extensionProvider) {
-		@SuppressWarnings("deprecation")
-		IScopeContext defaultScope = new DefaultScope();
+		IScopeContext defaultScope = DefaultScope.INSTANCE;
 
 		// The class org.eclipse.jdt.internal.launching.LaunchingPreferenceInitializer has this very nasty habit 
 		// of replacing all RESOURCE_COPY_FILTERs with its own filter. Calling getNode(LaunchingPlugin.ID_PLUGIN) 
