@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -102,13 +102,17 @@ public class FormatterTestHelper {
 				request.setExceptionHandler(ExceptionAcceptor.THROWING);
 			}
 		}
+		if (!req.isAllowUnformattedWhitespace()) {
+			request.setAllowIdentityEdits(true);
+		}
 		request.setTextRegionAccess(createRegionAccess(parsed, req));
 		if (request.getPreferences() == null)
 			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
 		List<ITextReplacement> replacements = createFormatter(req).format(request);
 		assertReplacementsAreInRegion(replacements, request.getRegions(), document);
-		if (!req.isAllowUnformattedWhitespace())
+		if (!req.isAllowUnformattedWhitespace()) {
 			assertAllWhitespaceIsFormatted(request.getTextRegionAccess(), replacements);
+		}
 		String formatted = request.getTextRegionAccess().getRewriter().renderToString(replacements);
 
 		Assert.assertEquals(req.getExpectationOrToBeFormatted().toString(), formatted);
