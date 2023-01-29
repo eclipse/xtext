@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -29,8 +29,12 @@ import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 import org.eclipse.xtext.util.JavaVersion
+import org.eclipse.xtext.testing.Flaky
 
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
+	
+	@Rule
+	public Flaky.Rule flakyRule = new Flaky.Rule();
 
 	@Inject 
 	WorkbenchTestHelper workbenchTestHelper;
@@ -297,7 +301,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}
 	
-	@Test
+	@Test @Flaky(trials=3)
 	def void testChangeJavaClassLookedUpInAnnotationProcessor() {
 		val macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-macro").registerForCleanUp)
 		macroProject.createFile('src/anno/Anno.xtend', '''

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,6 +24,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.JavaVersion;
@@ -41,6 +42,9 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
+  @Rule
+  public Flaky.Rule flakyRule = new Flaky.Rule();
+
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
 
@@ -501,6 +505,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   }
 
   @Test
+  @Flaky(trials = 3)
   public void testChangeJavaClassLookedUpInAnnotationProcessor() {
     try {
       final IJavaProject macroProject = JavaCore.create(this.<IProject>registerForCleanUp(WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-macro"))));
