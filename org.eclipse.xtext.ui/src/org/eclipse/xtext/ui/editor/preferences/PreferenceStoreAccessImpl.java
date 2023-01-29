@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -60,19 +60,17 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(new InstanceScope(), getQualifier());
+		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(InstanceScope.INSTANCE, getQualifier());
 		result.setSearchContexts(new IScopeContext[] {
-			new InstanceScope(),
-			new ConfigurationScope()
+			InstanceScope.INSTANCE,
+			ConfigurationScope.INSTANCE
 		});
 		return result;
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore(Object context) {
 		lazyInitialize();
 		IProject project = getProject(context);
@@ -83,8 +81,8 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(projectScope, getQualifier());
 		result.setSearchContexts(new IScopeContext[] {
 			projectScope,
-			new InstanceScope(),
-			new ConfigurationScope()
+			InstanceScope.INSTANCE,
+			ConfigurationScope.INSTANCE
 		});
 		return result;
 	}
