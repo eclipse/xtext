@@ -111,13 +111,13 @@ spec:
             '''
           }
         }
-        dir ('deploy-xtend-git-repo') {
-          sshagent(['git.eclipse.org-bot-ssh']) { // 
-            sh '''
-              git push origin master
-            '''
-          }
-        }
+        // dir ('deploy-xtend-git-repo') {
+        //   sshagent(['git.eclipse.org-bot-ssh']) { // 
+        //     sh '''
+        //       git push origin master
+        //     '''
+        //   }
+        // }
       }
     }
   }
