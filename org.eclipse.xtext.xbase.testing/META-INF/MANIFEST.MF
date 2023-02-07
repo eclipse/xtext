@@ -14,9 +14,9 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.core.runtime;bundle-version="3.24.100"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.xbase.testing,
- org.eclipse.xtext.xbase.testing.evaluation;x-internal:=true,
+ org.eclipse.xtext.xbase.testing.evaluation;x-friends:="org.eclipse.xtext.xbase.tests,org.eclipse.xtext.purexbase.tests",
  org.eclipse.xtext.xbase.testing.typesystem;x-internal:=true,
- testdata;x-internal:=true,
+ testdata;x-friends:="org.eclipse.xtext.xbase.tests",
  testdata.a;x-internal:=true,
  testdata.b;x-internal:=true
 Import-Package: org.apache.log4j;version="1.2.24"
