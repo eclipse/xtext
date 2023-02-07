@@ -12,16 +12,10 @@ Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.jdt.core;bundle-version="3.29.0",
  org.objectweb.asm;bundle-version="[9.4.0,9.5.0)";resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.30.0",
- org.eclipse.xtext.xbase.testing
+ org.eclipse.xtext.xbase.testing,
+ org.junit;bundle-version="4.13.2"
 Import-Package: org.apache.commons.logging,
- org.apache.log4j;version="1.2.24",
- org.hamcrest.core;version="1.1.0",
- org.junit;version="4.13.2",
- org.junit.runner;version="4.13.2",
- org.junit.runner.manipulation;version="4.13.2",
- org.junit.runner.notification;version="4.13.2",
- org.junit.runners;version="4.13.2",
- org.junit.runners.model;version="4.13.2"
+ org.apache.log4j;version="1.2.24"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.purexbase.tests;x-internal=true,
  org.eclipse.xtext.purexbase.tests.data
