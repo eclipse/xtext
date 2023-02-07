@@ -30,7 +30,9 @@ Import-Package: org.apache.log4j;version="1.2.24",
  org.apache.log4j.spi;version="1.2.24",
  org.junit.jupiter.api;version="[5.0.0,6.0.0)";resolution:=optional,
  org.junit.jupiter.api.extension;version="[5.0.0,6.0.0)";resolution:=optional,
- org.junit.platform.commons.support;version="[1.0.0,2.0.0)";resolution:=optional
+ org.junit.platform.commons.support;version="[1.0.0,2.0.0)";resolution:=optional,
+ org.junit.platform.runner;version="[1.0.0,2.0.0)",
+ org.junit.platform.suite.api;version="[1.0.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: org.eclipse.xtext.testing
 Eclipse-SourceReferences: eclipseSourceReferences
