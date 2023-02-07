@@ -16,10 +16,8 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.30.0",
  org.eclipse.emf.ecore,
  org.eclipse.core.runtime,
  org.eclipse.equinox.common
-Export-Package: org.eclipse.xtext.builder.standalone;x-friends:="org.eclipse.xtext.builder.standalone.tests,
-  org.eclipse.xtext.builder.tests",
- org.eclipse.xtext.builder.standalone.compiler;x-friends:="org.eclipse.xtext.builder.standalone.tests,
-   org.eclipse.xtext.builder.tests",
- org.eclipse.xtext.builder.standalone.incremental;x-friends:="org.eclipse.xtext.builder.tests"
+Export-Package: org.eclipse.xtext.builder.standalone;x-friends:="org.eclipse.xtext.builder.standalone.tests,org.eclipse.xtext.builder.tests",
+ org.eclipse.xtext.builder.standalone.compiler;x-friends:="org.eclipse.xtext.builder.standalone.tests,org.eclipse.xtext.builder.tests",
+ org.eclipse.xtext.builder.standalone.incremental;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.builder.standalone.tests"
 Automatic-Module-Name: org.eclipse.xtext.builder.standalone
 Eclipse-SourceReferences: eclipseSourceReferences
