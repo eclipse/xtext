@@ -13,7 +13,9 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xbase.testlanguages
+ org.eclipse.xtext.xbase.testlanguages,
+ org.eclipse.xtext.xtext.generator;bundle-version="2.30.0",
+ org.aopalliance;bundle-version="1.0.0"
 Export-Package: org.eclipse.xtext.builder.standalone,
  org.eclipse.xtext.builder.standalone.incremental;x-internal:=true,
  org.eclipse.xtext.builder.tests,
