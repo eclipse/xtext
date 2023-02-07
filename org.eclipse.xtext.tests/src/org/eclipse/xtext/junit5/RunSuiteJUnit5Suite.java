@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2020 Sebastian Zarnekow and others.
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.testing.tests.junit5;
+package org.eclipse.xtext.junit5;
 
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectPackages;
@@ -19,8 +19,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(JUnitPlatform.class)
 @UseTechnicalNames
-@SelectPackages("org.eclipse.xtext.testing.tests.junit5")
+@SelectPackages("org.eclipse.xtext.validation.junit5")
 @SuppressWarnings("deprecation")
-public class RunJUnit5Suite {
+public class RunSuiteJUnit5Suite {
 
 }

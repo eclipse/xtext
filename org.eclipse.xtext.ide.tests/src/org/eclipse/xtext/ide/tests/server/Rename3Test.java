@@ -28,8 +28,8 @@ import org.junit.Test;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class RenameTest3 extends AbstractLanguageServerTest {
-	public RenameTest3() {
+public class Rename3Test extends AbstractLanguageServerTest {
+	public Rename3Test() {
 		super("renametl");
 	}
 

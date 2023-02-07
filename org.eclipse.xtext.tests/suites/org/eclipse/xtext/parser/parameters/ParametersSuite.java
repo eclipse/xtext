@@ -20,7 +20,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	NoParametersParsingTest.class,
 	ParametersParsingTest.class,
 	TwoParametersParsingTest.class,
-	ParametersParsingTestEx.class,
+	ParametersParsingExTest.class,
 })
 public class ParametersSuite {
 }

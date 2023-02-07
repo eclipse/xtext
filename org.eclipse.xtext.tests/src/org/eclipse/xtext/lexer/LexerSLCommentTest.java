@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class LexerSLComment extends Assert {
+public class LexerSLCommentTest extends Assert {
 	@Test public void testSlComment() {
 		String model = "//sl comment\na";
 		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer();

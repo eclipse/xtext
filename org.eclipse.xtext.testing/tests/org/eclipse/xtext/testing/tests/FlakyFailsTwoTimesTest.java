@@ -16,7 +16,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow
  */
-public class FlakyFailsTwoTimes {
+public class FlakyFailsTwoTimesTest {
 	@Rule 
 	public Flaky.Rule rule = new Flaky.Rule();
 	

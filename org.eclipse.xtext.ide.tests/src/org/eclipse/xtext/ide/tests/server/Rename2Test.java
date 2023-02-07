@@ -28,8 +28,8 @@ import org.junit.Test;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class RenameTest2 extends AbstractLanguageServerTest {
-	public RenameTest2() {
+public class Rename2Test extends AbstractLanguageServerTest {
+	public Rename2Test() {
 		super("fileawaretestlanguage");
 	}
 

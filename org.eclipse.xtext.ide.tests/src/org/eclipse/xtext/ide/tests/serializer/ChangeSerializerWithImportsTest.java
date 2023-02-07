@@ -32,7 +32,7 @@ import com.google.inject.Provider;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(PartialSerializationTestLanguageInjectorProvider.class)
-public class ChangeSerializerWithImports {
+public class ChangeSerializerWithImportsTest {
 	@Inject
 	private Provider<ChangeSerializer> serializerProvider;
 

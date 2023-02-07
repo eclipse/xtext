@@ -16,8 +16,8 @@ import org.junit.Test;
  * Class for testing the highlighting of reference that refer to the object in
  * which they are embedded.
  */
-public class DocumentHighlightTest2 extends AbstractLanguageServerTest {
-	public DocumentHighlightTest2() {
+public class DocumentHighlight2Test extends AbstractLanguageServerTest {
+	public DocumentHighlight2Test() {
 		super("nestedRefs");
 	}
 
