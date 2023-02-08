@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
-<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Xtext Domainmodel Example - Eclipse 2023-03" sequenceNumber="1526501985">
+<target name="domainmodel" sequenceNumber="1">
   <locations>
-    <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
@@ -11,32 +10,20 @@
       <unit id="org.apache.commons.jxpath" version="0.0.0"/>
       <repository location="https://download.eclipse.org/releases/2023-03"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
       <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
       <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly"/>
     </location>
-    <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.google.guava" version="30.1.0.v20221112-0806"/>
-      <unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
-      <unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-      <unit id="org.apache.commons.cli" version="1.4.0.v20221112-0806"/>
-      <unit id="org.apache.commons.io" version="2.8.0.v20210415-0900"/>
-      <unit id="org.apache.commons.logging" version="1.2.0.v20180409-1502"/>
-      <unit id="org.apache.log4j" version="1.2.24.v20221221-2012"/>
-      <unit id="org.apache.log4j.source" version="1.2.24.v20221221-2012"/>
-      <unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
-      <unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
+    <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <!--
+        Just mention the p2 repo so that additional requirements with ranges specified in
+        features and bundles are taken from Orbit (e.g., objectweb.asm)
+      -->
       <repository location="https://download.eclipse.org/tools/orbit/downloads/2023-03"/>
-    </location>
-    <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.draw2d.feature.group" version="3.14.0.202206170857"/>
-      <repository location="https://download.eclipse.org/tools/gef/classic/releases/3.14.0/"/>
     </location>
   </locations>
 </target>
