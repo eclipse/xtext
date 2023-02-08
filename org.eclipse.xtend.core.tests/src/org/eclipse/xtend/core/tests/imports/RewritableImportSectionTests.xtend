@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.junit.Test
 
-class RewritableImportSectionTest0 extends AbstractRewritableImportSectionTest {
+class RewritableImportSection0Test extends AbstractRewritableImportSectionTest {
 
 	override protected getModel(boolean isStatic, Class<? extends Object>[] types) '''
 		package foo
@@ -46,7 +46,7 @@ class RewritableImportSectionTest0 extends AbstractRewritableImportSectionTest {
 	'''
 }
 
-class RewritableImportSectionTest1 extends AbstractRewritableImportSectionTest {
+class RewritableImportSection1Test extends AbstractRewritableImportSectionTest {
 
 	override protected getModel(boolean isStatic, Class<? extends Object>[] types) '''
 		«IF types.size > 0»
@@ -69,7 +69,7 @@ class RewritableImportSectionTest1 extends AbstractRewritableImportSectionTest {
 	'''
 }
 
-class RewritableImportSectionTest2 extends AbstractRewritableImportSectionTest {
+class RewritableImportSection2Test extends AbstractRewritableImportSectionTest {
 
 	override protected isIgnoreLinebreaks() {
 		// The RIS will insert newlines before and after the section depending on added / removed imports.

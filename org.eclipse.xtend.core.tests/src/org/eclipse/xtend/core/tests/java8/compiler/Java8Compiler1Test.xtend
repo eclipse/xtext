@@ -17,7 +17,7 @@ import org.junit.Test
  * @author Miro Spoenemann - Initial contribution and API
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class Java8CompilerTest1 extends CompilerTest {
+class Java8Compiler1Test extends CompilerTest {
 	
 	@Test def testJava8Reduce() {
 		invokeAndExpect2(36, '''

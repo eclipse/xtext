@@ -38,7 +38,7 @@ import static org.junit.Assert.*
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
 @IgnoredBySmokeTest
-class TestBatchCompiler {
+class BatchCompilerTest {
 
 	@Inject
 	XtendBatchCompiler batchCompiler

@@ -17,7 +17,7 @@ import org.junit.Test
  * @author Miro Spoenemann - Initial contribution and API
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class Java8CompilerTest2 extends XtendCompilerTest {
+class Java8Compiler2Test extends XtendCompilerTest {
 	
 	@Test def void testStaticMethodInInterface() {
 		'''

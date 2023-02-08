@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class Java8CompilerTest2 extends XtendCompilerTest {
+public class Java8Compiler2Test extends XtendCompilerTest {
   @Test
   public void testStaticMethodInInterface() {
     StringConcatenation _builder = new StringConcatenation();

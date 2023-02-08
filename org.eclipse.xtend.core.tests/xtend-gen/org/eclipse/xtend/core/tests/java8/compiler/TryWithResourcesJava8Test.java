@@ -27,7 +27,7 @@ import org.junit.Test;
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
+public class TryWithResourcesJava8Test extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;

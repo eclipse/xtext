@@ -52,7 +52,7 @@ import org.junit.runner.RunWith;
 @InjectWith(RuntimeInjectorProvider.class)
 @IgnoredBySmokeTest
 @SuppressWarnings("all")
-public class TestBatchCompiler {
+public class BatchCompilerTest {
   @Inject
   private XtendBatchCompiler batchCompiler;
 
@@ -83,16 +83,16 @@ public class TestBatchCompiler {
   @Before
   public void onSetup() {
     try {
-      this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-      this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY);
+      this.batchCompiler.setSourcePath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
+      this.batchCompiler.setOutputPath(BatchCompilerTest.OUTPUT_DIRECTORY);
       this.batchCompiler.setDeleteTempDirectory(true);
       this.batchCompiler.setUseCurrentClassLoaderAsParent(true);
       this.batchCompiler.setCurrentClassLoader(this.getClass().getClassLoader());
-      new File(TestBatchCompiler.OUTPUT_DIRECTORY).mkdir();
-      File _file = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
+      new File(BatchCompilerTest.OUTPUT_DIRECTORY).mkdir();
+      File _file = new File(BatchCompilerTest.OUTPUT_DIRECTORY);
       Files.cleanFolder(_file, null, true, false);
-      new File(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES).mkdir();
-      File _file_1 = new File(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
+      new File(BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES).mkdir();
+      File _file_1 = new File(BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES);
       Files.cleanFolder(_file_1, null, true, false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -102,18 +102,18 @@ public class TestBatchCompiler {
   @After
   public void onTearDown() {
     try {
-      File _file = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
+      File _file = new File(BatchCompilerTest.OUTPUT_DIRECTORY);
       Files.cleanFolder(_file, null, true, true);
-      File _file_1 = new File(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
+      File _file_1 = new File(BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES);
       Files.cleanFolder(_file_1, null, true, true);
-      boolean _exists = new File(TestBatchCompiler.TEMP_DIRECTORY).exists();
+      boolean _exists = new File(BatchCompilerTest.TEMP_DIRECTORY).exists();
       if (_exists) {
-        File _file_2 = new File(TestBatchCompiler.TEMP_DIRECTORY);
+        File _file_2 = new File(BatchCompilerTest.TEMP_DIRECTORY);
         Files.cleanFolder(_file_2, null, true, true);
       }
-      boolean _exists_1 = new File(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES).exists();
+      boolean _exists_1 = new File(BatchCompilerTest.TEMP_DIRECTORY_WITH_SPACES).exists();
       if (_exists_1) {
-        File _file_3 = new File(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
+        File _file_3 = new File(BatchCompilerTest.TEMP_DIRECTORY_WITH_SPACES);
         Files.cleanFolder(_file_3, null, true, true);
       }
     } catch (Throwable _e) {
@@ -130,22 +130,22 @@ public class TestBatchCompiler {
           it.delete();
         }
       };
-      TestBatchCompiler.abfalleimer.forEach(_function);
+      BatchCompilerTest.abfalleimer.forEach(_function);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
     } finally {
-      TestBatchCompiler.abfalleimer.clear();
+      BatchCompilerTest.abfalleimer.clear();
     }
   }
 
   @Test
   public void testInvalidConfiguration() {
     final Runnable _function = () -> {
-      this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-      this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
+      this.batchCompiler.setSourcePath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
+      this.batchCompiler.setOutputPath((BatchCompilerTest.XTEND_SRC_DIRECTORY + "/xtend-gen"));
       this.batchCompiler.compile();
     };
     final LoggingTester.LogCapture log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
@@ -157,8 +157,8 @@ public class TestBatchCompiler {
     boolean _startsWith = System.getProperty("os.name").startsWith("Windows");
     if (_startsWith) {
       final Runnable _function = () -> {
-        this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-        String _upperCase = TestBatchCompiler.XTEND_SRC_DIRECTORY.toUpperCase();
+        this.batchCompiler.setSourcePath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
+        String _upperCase = BatchCompilerTest.XTEND_SRC_DIRECTORY.toUpperCase();
         String _plus = (_upperCase + "/xtend-gen");
         this.batchCompiler.setOutputPath(_plus);
         this.batchCompiler.compile();
@@ -170,8 +170,8 @@ public class TestBatchCompiler {
 
   @Test
   public void testBug462723() {
-    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-    this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "-gen"));
+    this.batchCompiler.setSourcePath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath((BatchCompilerTest.XTEND_SRC_DIRECTORY + "-gen"));
     Assert.assertTrue(this.batchCompiler.compile());
   }
 
@@ -455,56 +455,56 @@ public class TestBatchCompiler {
 
   @Test
   public void bug368551() {
-    this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
-    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-    this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
+    this.batchCompiler.setTempDirectory(BatchCompilerTest.TEMP_DIRECTORY_WITH_SPACES);
+    this.batchCompiler.setSourcePath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath(BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES);
     this.batchCompiler.compile();
-    Assert.assertEquals(14, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test")).list())).size());
+    Assert.assertEquals(14, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES + "/test")).list())).size());
   }
 
   @Test
   public void bug387829() {
-    this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
-    this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-    this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
-    this.batchCompiler.setClassPath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setTempDirectory(BatchCompilerTest.TEMP_DIRECTORY_WITH_SPACES);
+    this.batchCompiler.setSourcePath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
+    this.batchCompiler.setOutputPath(BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES);
+    this.batchCompiler.setClassPath(BatchCompilerTest.XTEND_SRC_DIRECTORY);
     this.batchCompiler.compile();
-    final File compilerOutputDir = new File((TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test"));
+    final File compilerOutputDir = new File((BatchCompilerTest.OUTPUT_DIRECTORY_WITH_SPACES + "/test"));
     Assert.assertTrue("Compiler output exists", compilerOutputDir.exists());
     Assert.assertEquals(14, ((List<String>)Conversions.doWrapArray(compilerOutputDir.list())).size());
   }
 
   @Test
   public void bug396747() {
-    this.batchCompiler.setSourcePath(TestBatchCompiler.BUG396747_SRC_DIRECTORY);
+    this.batchCompiler.setSourcePath(BatchCompilerTest.BUG396747_SRC_DIRECTORY);
     Assert.assertTrue("Compiling empty file pass", this.batchCompiler.compile());
   }
 
   @Test
   public void bug410594() {
-    this.batchCompiler.setSourcePath(TestBatchCompiler.BUG410594_SRC_DIRECTORY);
+    this.batchCompiler.setSourcePath(BatchCompilerTest.BUG410594_SRC_DIRECTORY);
     Assert.assertTrue("Compiling empty file pass", this.batchCompiler.compile());
   }
 
   @Test
   @Ignore
   public void bug416262() {
-    this.batchCompiler.setSourcePath(TestBatchCompiler.BUG416262_SRC_DIRECTORY);
+    this.batchCompiler.setSourcePath(BatchCompilerTest.BUG416262_SRC_DIRECTORY);
     Assert.assertTrue("Compiling funny file pass", this.batchCompiler.compile());
   }
 
   @Test
   public void bug417177() {
-    final File outputDir = new File(TestBatchCompiler.BUG417177_OUTPUT_DIRECTORY);
+    final File outputDir = new File(BatchCompilerTest.BUG417177_OUTPUT_DIRECTORY);
     outputDir.mkdirs();
     new File(outputDir, "mypackage/Bug417177_1.java").delete();
     new File(outputDir, "mypackage/Bug417177_2.java").delete();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_1);
+    _builder.append(BatchCompilerTest.BUG417177_SRC_DIRECTORY_1);
     _builder.append(File.pathSeparator);
-    _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_2);
+    _builder.append(BatchCompilerTest.BUG417177_SRC_DIRECTORY_2);
     this.batchCompiler.setSourcePath(_builder.toString());
-    this.batchCompiler.setOutputPath(TestBatchCompiler.BUG417177_OUTPUT_DIRECTORY);
+    this.batchCompiler.setOutputPath(BatchCompilerTest.BUG417177_OUTPUT_DIRECTORY);
     Assert.assertTrue("Compiling files from multiple source directories", this.batchCompiler.compile());
     Assert.assertTrue(new File(outputDir, "mypackage/Bug417177_1.java").exists());
     Assert.assertTrue(new File(outputDir, "mypackage/Bug417177_2.java").exists());
@@ -527,9 +527,9 @@ public class TestBatchCompiler {
     final FilenameFilter _function = (File dir, String name) -> {
       return name.endsWith(".java");
     };
-    final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage")).list(_function))), ",");
+    final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/mypackage")).list(_function))), ",");
     Assert.assertEquals("Client.java", javaFiles);
-    final File txtFile = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/Test.txt"));
+    final File txtFile = new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/Test.txt"));
     Assert.assertTrue(txtFile.exists());
   }
 
@@ -540,7 +540,7 @@ public class TestBatchCompiler {
     final FilenameFilter _function = (File dir, String name) -> {
       return name.endsWith(".java");
     };
-    final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/")).list(_function))), ",");
+    final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/")).list(_function))), ",");
     Assert.assertEquals("Bug443800.java", javaFiles);
   }
 
@@ -558,11 +558,11 @@ public class TestBatchCompiler {
     final FilenameFilter _function = (File dir, String name) -> {
       return name.endsWith(".java");
     };
-    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
+    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
     final FilenameFilter _function_1 = (File dir, String name) -> {
       return name.endsWith("._trace");
     };
-    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
+    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
   }
 
   @Test
@@ -572,11 +572,11 @@ public class TestBatchCompiler {
     final FilenameFilter _function = (File dir, String name) -> {
       return name.endsWith(".java");
     };
-    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
+    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
     final FilenameFilter _function_1 = (File dir, String name) -> {
       return name.endsWith("._trace");
     };
-    Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
+    Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
   }
 
   @Test
@@ -586,11 +586,11 @@ public class TestBatchCompiler {
     final FilenameFilter _function = (File dir, String name) -> {
       return name.endsWith(".java");
     };
-    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
+    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
     final FilenameFilter _function_1 = (File dir, String name) -> {
       return name.endsWith(".xtendbin");
     };
-    Assert.assertEquals(5, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
+    Assert.assertEquals(5, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
   }
 
   @Test
@@ -600,11 +600,11 @@ public class TestBatchCompiler {
     final FilenameFilter _function = (File dir, String name) -> {
       return name.endsWith(".java");
     };
-    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
+    Assert.assertEquals(7, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function))).size());
     final FilenameFilter _function_1 = (File dir, String name) -> {
       return name.endsWith(".xtendbin");
     };
-    Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
+    Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(new File((BatchCompilerTest.OUTPUT_DIRECTORY + "/test")).list(_function_1))).size());
   }
 
   @Test
@@ -646,7 +646,7 @@ public class TestBatchCompiler {
   private boolean createSymLink(final String linkTarget, final String link) {
     try {
       File linkFile = new File(link);
-      TestBatchCompiler.abfalleimer.add(linkFile);
+      BatchCompilerTest.abfalleimer.add(linkFile);
       if ((linkFile.exists() && this.isSymlink(linkFile))) {
         return true;
       }
@@ -703,7 +703,7 @@ public class TestBatchCompiler {
   @Test
   public void tempDirectory() {
     this.batchCompiler.setDeleteTempDirectory(false);
-    this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY);
+    this.batchCompiler.setTempDirectory(BatchCompilerTest.TEMP_DIRECTORY);
     Assert.assertTrue(this.batchCompiler.compile());
     String _tempDirectory = this.batchCompiler.getTempDirectory();
     Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(new File(_tempDirectory).list())).size());
@@ -715,9 +715,9 @@ public class TestBatchCompiler {
   @Test
   public void deleteTempDirectory() {
     this.batchCompiler.setDeleteTempDirectory(true);
-    this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY);
+    this.batchCompiler.setTempDirectory(BatchCompilerTest.TEMP_DIRECTORY);
     Assert.assertTrue(this.batchCompiler.compile());
-    Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(new File(TestBatchCompiler.TEMP_DIRECTORY).list())).size());
+    Assert.assertEquals(0, ((List<String>)Conversions.doWrapArray(new File(BatchCompilerTest.TEMP_DIRECTORY).list())).size());
   }
 
   @Test
@@ -725,7 +725,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setGenerateSyntheticSuppressWarnings(false);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
     Assert.assertTrue(this.batchCompiler.compile());
-    Assert.assertFalse(this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@SuppressWarnings"));
+    Assert.assertFalse(this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@SuppressWarnings"));
   }
 
   @Test
@@ -733,7 +733,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setJavaSourceVersion("1.5");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
     Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
     Assert.assertFalse(generated.contains("@Override"));
     Assert.assertTrue(generated.contains("new Function1<Integer, String>"));
   }
@@ -743,7 +743,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setJavaSourceVersion("1.6");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
     Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
     Assert.assertTrue(generated.contains("@Override"));
     Assert.assertTrue(generated.contains("new Function1<Integer, String>"));
   }
@@ -753,7 +753,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setJavaSourceVersion("1.7");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
     Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
     Assert.assertTrue(generated.contains("@Override"));
     Assert.assertTrue(generated.contains("new Function1<Integer, String>"));
   }
@@ -763,7 +763,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setJavaSourceVersion("1.8");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
     Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
     Assert.assertTrue(generated.contains("@Override"));
     Assert.assertTrue(generated.contains("(Integer it) ->"));
   }

@@ -17,7 +17,7 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class TestProperSourceFolderMapping extends AbstractActiveAnnotationTest {
+public class ProperSourceFolderMappingTest extends AbstractActiveAnnotationTest {
   /**
    * checks that the configured target folder matches what is used by the generator.
    * I.e. in case of xtend it is xtend-gen

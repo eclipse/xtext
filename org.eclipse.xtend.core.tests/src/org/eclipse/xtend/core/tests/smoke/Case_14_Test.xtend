@@ -23,7 +23,7 @@ import org.junit.Test
 import org.junit.Ignore
 
 @Ignore
-class Case_14 extends AbstractXtendTestCase {
+class Case_14_Test extends AbstractXtendTestCase {
 
        @Inject extension JvmTypesBuilder
        @Inject JvmModelAssociator assoc

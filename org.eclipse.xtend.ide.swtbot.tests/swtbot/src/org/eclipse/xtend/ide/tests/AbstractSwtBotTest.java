@@ -8,10 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests;
 
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.intro.IIntroManager;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.junit.Assert;
@@ -26,6 +28,7 @@ public class AbstractSwtBotTest {
 
 	@BeforeClass
 	public static void initialize() throws Exception {
+		closeWelcomePage();
 		TargetPlatformUtil.setTargetPlatform(AbstractSwtBotTest.class);
 		IResourcesSetupUtil.cleanWorkspace();
 		UIThreadRunnable.syncExec(new VoidResult() {
@@ -42,5 +45,17 @@ public class AbstractSwtBotTest {
 		if (workbench.getDisplay().getThread() == Thread.currentThread()) {
 			Assert.fail("This test MUST NOT RUN in SWT's UI thread. Please check the 'Run in UI thread' option of your launch config or build configuration!");
 		}
+	}
+
+	protected static void closeWelcomePage() throws InterruptedException {
+		Display.getDefault().syncExec(new Runnable() {
+			@Override
+			public void run() {
+				IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
+				if (introManager.getIntro() != null) {
+					introManager.closeIntro(introManager.getIntro());
+				}
+			}
+		});
 	}
 }

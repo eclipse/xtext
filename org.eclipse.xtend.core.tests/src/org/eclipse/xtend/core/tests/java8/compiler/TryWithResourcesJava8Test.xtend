@@ -23,7 +23,7 @@ import org.junit.Test
  * @author Eva Poell - Initial contribution and API
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
+class TryWithResourcesJava8Test extends AbstractXtendCompilerTest {
 
 	@Inject extension ValidationTestHelper
 	@Inject extension ParseHelper<XtendFile>

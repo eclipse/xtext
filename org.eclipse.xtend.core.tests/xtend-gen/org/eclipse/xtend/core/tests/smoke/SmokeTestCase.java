@@ -18,7 +18,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SmokeTestCases extends AbstractXtendTestCase {
+public class SmokeTestCase extends AbstractXtendTestCase {
   @Test
   public void test_00() {
     try {
