@@ -507,6 +507,8 @@
           name="com.google.inject"
           versionRange="[5.0.1,6.0.0)"/>
       <requirement
+          name="org.kohsuke.args4j"/>
+      <requirement
           name="org.eclipse.platform.feature.group"/>
       <requirement
           name="org.eclipse.jdt.feature.group"/>
