@@ -364,10 +364,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1418:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalReferenceGrammarUiTestLanguage.g:1418:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalReferenceGrammarUiTestLanguage.g:1423:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalReferenceGrammarUiTestLanguage.g:1423:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalReferenceGrammarUiTestLanguage.g:1418:11: ( '^' )?
+            // InternalReferenceGrammarUiTestLanguage.g:1423:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -376,7 +376,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalReferenceGrammarUiTestLanguage.g:1418:11: '^'
+                    // InternalReferenceGrammarUiTestLanguage.g:1423:11: '^'
                     {
                     match('^'); 
 
@@ -394,7 +394,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalReferenceGrammarUiTestLanguage.g:1418:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalReferenceGrammarUiTestLanguage.g:1423:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -443,10 +443,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1420:10: ( ( '0' .. '9' )+ )
-            // InternalReferenceGrammarUiTestLanguage.g:1420:12: ( '0' .. '9' )+
+            // InternalReferenceGrammarUiTestLanguage.g:1425:10: ( ( '0' .. '9' )+ )
+            // InternalReferenceGrammarUiTestLanguage.g:1425:12: ( '0' .. '9' )+
             {
-            // InternalReferenceGrammarUiTestLanguage.g:1420:12: ( '0' .. '9' )+
+            // InternalReferenceGrammarUiTestLanguage.g:1425:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -460,7 +460,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalReferenceGrammarUiTestLanguage.g:1420:13: '0' .. '9'
+            	    // InternalReferenceGrammarUiTestLanguage.g:1425:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -492,10 +492,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1422:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalReferenceGrammarUiTestLanguage.g:1422:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalReferenceGrammarUiTestLanguage.g:1427:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalReferenceGrammarUiTestLanguage.g:1427:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalReferenceGrammarUiTestLanguage.g:1422:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalReferenceGrammarUiTestLanguage.g:1427:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -513,10 +513,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalReferenceGrammarUiTestLanguage.g:1422:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalReferenceGrammarUiTestLanguage.g:1427:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalReferenceGrammarUiTestLanguage.g:1422:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalReferenceGrammarUiTestLanguage.g:1427:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -532,7 +532,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalReferenceGrammarUiTestLanguage.g:1422:21: '\\\\' .
+                    	    // InternalReferenceGrammarUiTestLanguage.g:1427:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -540,7 +540,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalReferenceGrammarUiTestLanguage.g:1422:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalReferenceGrammarUiTestLanguage.g:1427:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -565,10 +565,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalReferenceGrammarUiTestLanguage.g:1422:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalReferenceGrammarUiTestLanguage.g:1427:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalReferenceGrammarUiTestLanguage.g:1422:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalReferenceGrammarUiTestLanguage.g:1427:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -584,7 +584,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalReferenceGrammarUiTestLanguage.g:1422:54: '\\\\' .
+                    	    // InternalReferenceGrammarUiTestLanguage.g:1427:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -592,7 +592,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalReferenceGrammarUiTestLanguage.g:1422:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalReferenceGrammarUiTestLanguage.g:1427:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -635,12 +635,12 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1424:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalReferenceGrammarUiTestLanguage.g:1424:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalReferenceGrammarUiTestLanguage.g:1429:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalReferenceGrammarUiTestLanguage.g:1429:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalReferenceGrammarUiTestLanguage.g:1424:24: ( options {greedy=false; } : . )*
+            // InternalReferenceGrammarUiTestLanguage.g:1429:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -665,7 +665,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalReferenceGrammarUiTestLanguage.g:1424:52: .
+            	    // InternalReferenceGrammarUiTestLanguage.g:1429:52: .
             	    {
             	    matchAny(); 
 
@@ -695,12 +695,12 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1426:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalReferenceGrammarUiTestLanguage.g:1426:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalReferenceGrammarUiTestLanguage.g:1431:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalReferenceGrammarUiTestLanguage.g:1431:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalReferenceGrammarUiTestLanguage.g:1426:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalReferenceGrammarUiTestLanguage.g:1431:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -713,7 +713,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalReferenceGrammarUiTestLanguage.g:1426:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalReferenceGrammarUiTestLanguage.g:1431:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -733,7 +733,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalReferenceGrammarUiTestLanguage.g:1426:40: ( ( '\\r' )? '\\n' )?
+            // InternalReferenceGrammarUiTestLanguage.g:1431:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -742,9 +742,9 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalReferenceGrammarUiTestLanguage.g:1426:41: ( '\\r' )? '\\n'
+                    // InternalReferenceGrammarUiTestLanguage.g:1431:41: ( '\\r' )? '\\n'
                     {
-                    // InternalReferenceGrammarUiTestLanguage.g:1426:41: ( '\\r' )?
+                    // InternalReferenceGrammarUiTestLanguage.g:1431:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -753,7 +753,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalReferenceGrammarUiTestLanguage.g:1426:41: '\\r'
+                            // InternalReferenceGrammarUiTestLanguage.g:1431:41: '\\r'
                             {
                             match('\r'); 
 
@@ -785,10 +785,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1428:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalReferenceGrammarUiTestLanguage.g:1428:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalReferenceGrammarUiTestLanguage.g:1433:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalReferenceGrammarUiTestLanguage.g:1433:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalReferenceGrammarUiTestLanguage.g:1428:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalReferenceGrammarUiTestLanguage.g:1433:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -842,8 +842,8 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarUiTestLanguage.g:1430:16: ( . )
-            // InternalReferenceGrammarUiTestLanguage.g:1430:18: .
+            // InternalReferenceGrammarUiTestLanguage.g:1435:16: ( . )
+            // InternalReferenceGrammarUiTestLanguage.g:1435:18: .
             {
             matchAny(); 
 

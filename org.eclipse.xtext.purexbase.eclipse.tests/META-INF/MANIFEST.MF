@@ -2,33 +2,32 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pure Xbase Plugin Tests
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.30.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.eclipse.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.xtext.purexbase.ui,
- org.eclipse.core.runtime;bundle-version="3.13.0",
+ org.eclipse.core.runtime;bundle-version="3.24.100",
  org.eclipse.xtext,
- org.eclipse.ui.workbench;bundle-version="3.110.1";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.xbase.junit,
+ org.eclipse.ui.workbench;bundle-version="3.125.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder,
- org.eclipse.jdt.core;bundle-version="3.13.102",
- org.objectweb.asm;bundle-version="[9.2.0,9.3.0)";resolution:=optional,
+ org.eclipse.jdt.core;bundle-version="3.29.0",
+ org.objectweb.asm;bundle-version="[9.4.0,9.5.0)";resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.ui.testing,
- org.eclipse.xtext.junit4
+ org.eclipse.xtext.xbase.ui.testing
 Import-Package: org.apache.commons.logging,
- org.apache.log4j;version="1.2.15",
+ org.apache.log4j;version="1.2.24",
  org.hamcrest.core;version="1.1.0",
- org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+ org.junit;version="4.13.2",
+ org.junit.runner;version="4.13.2",
+ org.junit.runner.manipulation;version="4.13.2",
+ org.junit.runner.notification;version="4.13.2",
+ org.junit.runners;version="4.13.2",
+ org.junit.runners.model;version="4.13.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.purexbase.test;x-internal:=true,
  org.eclipse.xtext.purexbase.ui.tests;x-internal=true
 Automatic-Module-Name: org.eclipse.xtext.purexbase.eclipse.tests

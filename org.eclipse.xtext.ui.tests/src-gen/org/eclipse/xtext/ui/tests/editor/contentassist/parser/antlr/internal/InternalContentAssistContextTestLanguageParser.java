@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalContentAssistContextTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -76,7 +84,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleFirstLevel"
-    // InternalContentAssistContextTestLanguage.g:64:1: entryRuleFirstLevel returns [EObject current=null] : iv_ruleFirstLevel= ruleFirstLevel EOF ;
+    // InternalContentAssistContextTestLanguage.g:69:1: entryRuleFirstLevel returns [EObject current=null] : iv_ruleFirstLevel= ruleFirstLevel EOF ;
     public final EObject entryRuleFirstLevel() throws RecognitionException {
         EObject current = null;
 
@@ -84,8 +92,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:64:51: (iv_ruleFirstLevel= ruleFirstLevel EOF )
-            // InternalContentAssistContextTestLanguage.g:65:2: iv_ruleFirstLevel= ruleFirstLevel EOF
+            // InternalContentAssistContextTestLanguage.g:69:51: (iv_ruleFirstLevel= ruleFirstLevel EOF )
+            // InternalContentAssistContextTestLanguage.g:70:2: iv_ruleFirstLevel= ruleFirstLevel EOF
             {
              newCompositeNode(grammarAccess.getFirstLevelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -112,7 +120,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleFirstLevel"
-    // InternalContentAssistContextTestLanguage.g:71:1: ruleFirstLevel returns [EObject current=null] : ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* ) ;
+    // InternalContentAssistContextTestLanguage.g:76:1: ruleFirstLevel returns [EObject current=null] : ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* ) ;
     public final EObject ruleFirstLevel() throws RecognitionException {
         EObject current = null;
 
@@ -125,13 +133,13 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:77:2: ( ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* ) )
-            // InternalContentAssistContextTestLanguage.g:78:2: ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* )
+            // InternalContentAssistContextTestLanguage.g:82:2: ( ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* ) )
+            // InternalContentAssistContextTestLanguage.g:83:2: ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* )
             {
-            // InternalContentAssistContextTestLanguage.g:78:2: ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* )
-            // InternalContentAssistContextTestLanguage.g:79:3: ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )*
+            // InternalContentAssistContextTestLanguage.g:83:2: ( ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )* )
+            // InternalContentAssistContextTestLanguage.g:84:3: ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )* ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )*
             {
-            // InternalContentAssistContextTestLanguage.g:79:3: ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )*
+            // InternalContentAssistContextTestLanguage.g:84:3: ( (lv_secondLevelA_0_0= ruleSecondLevelA ) )*
             loop1:
             do {
                 int alt1=2;
@@ -144,10 +152,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalContentAssistContextTestLanguage.g:80:4: (lv_secondLevelA_0_0= ruleSecondLevelA )
+            	    // InternalContentAssistContextTestLanguage.g:85:4: (lv_secondLevelA_0_0= ruleSecondLevelA )
             	    {
-            	    // InternalContentAssistContextTestLanguage.g:80:4: (lv_secondLevelA_0_0= ruleSecondLevelA )
-            	    // InternalContentAssistContextTestLanguage.g:81:5: lv_secondLevelA_0_0= ruleSecondLevelA
+            	    // InternalContentAssistContextTestLanguage.g:85:4: (lv_secondLevelA_0_0= ruleSecondLevelA )
+            	    // InternalContentAssistContextTestLanguage.g:86:5: lv_secondLevelA_0_0= ruleSecondLevelA
             	    {
 
             	    					newCompositeNode(grammarAccess.getFirstLevelAccess().getSecondLevelASecondLevelAParserRuleCall_0_0());
@@ -180,7 +188,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 }
             } while (true);
 
-            // InternalContentAssistContextTestLanguage.g:98:3: ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )*
+            // InternalContentAssistContextTestLanguage.g:103:3: ( (lv_secondLevelB_1_0= ruleSecondLevelB ) )*
             loop2:
             do {
                 int alt2=2;
@@ -193,10 +201,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalContentAssistContextTestLanguage.g:99:4: (lv_secondLevelB_1_0= ruleSecondLevelB )
+            	    // InternalContentAssistContextTestLanguage.g:104:4: (lv_secondLevelB_1_0= ruleSecondLevelB )
             	    {
-            	    // InternalContentAssistContextTestLanguage.g:99:4: (lv_secondLevelB_1_0= ruleSecondLevelB )
-            	    // InternalContentAssistContextTestLanguage.g:100:5: lv_secondLevelB_1_0= ruleSecondLevelB
+            	    // InternalContentAssistContextTestLanguage.g:104:4: (lv_secondLevelB_1_0= ruleSecondLevelB )
+            	    // InternalContentAssistContextTestLanguage.g:105:5: lv_secondLevelB_1_0= ruleSecondLevelB
             	    {
 
             	    					newCompositeNode(grammarAccess.getFirstLevelAccess().getSecondLevelBSecondLevelBParserRuleCall_1_0());
@@ -252,7 +260,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleSecondLevelA"
-    // InternalContentAssistContextTestLanguage.g:121:1: entryRuleSecondLevelA returns [EObject current=null] : iv_ruleSecondLevelA= ruleSecondLevelA EOF ;
+    // InternalContentAssistContextTestLanguage.g:126:1: entryRuleSecondLevelA returns [EObject current=null] : iv_ruleSecondLevelA= ruleSecondLevelA EOF ;
     public final EObject entryRuleSecondLevelA() throws RecognitionException {
         EObject current = null;
 
@@ -260,8 +268,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:121:53: (iv_ruleSecondLevelA= ruleSecondLevelA EOF )
-            // InternalContentAssistContextTestLanguage.g:122:2: iv_ruleSecondLevelA= ruleSecondLevelA EOF
+            // InternalContentAssistContextTestLanguage.g:126:53: (iv_ruleSecondLevelA= ruleSecondLevelA EOF )
+            // InternalContentAssistContextTestLanguage.g:127:2: iv_ruleSecondLevelA= ruleSecondLevelA EOF
             {
              newCompositeNode(grammarAccess.getSecondLevelARule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -288,7 +296,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleSecondLevelA"
-    // InternalContentAssistContextTestLanguage.g:128:1: ruleSecondLevelA returns [EObject current=null] : ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ ) ;
+    // InternalContentAssistContextTestLanguage.g:133:1: ruleSecondLevelA returns [EObject current=null] : ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ ) ;
     public final EObject ruleSecondLevelA() throws RecognitionException {
         EObject current = null;
 
@@ -301,13 +309,13 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:134:2: ( ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ ) )
-            // InternalContentAssistContextTestLanguage.g:135:2: ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ )
+            // InternalContentAssistContextTestLanguage.g:139:2: ( ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ ) )
+            // InternalContentAssistContextTestLanguage.g:140:2: ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ )
             {
-            // InternalContentAssistContextTestLanguage.g:135:2: ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ )
-            // InternalContentAssistContextTestLanguage.g:136:3: ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+
+            // InternalContentAssistContextTestLanguage.g:140:2: ( ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+ )
+            // InternalContentAssistContextTestLanguage.g:141:3: ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+ ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+
             {
-            // InternalContentAssistContextTestLanguage.g:136:3: ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+
+            // InternalContentAssistContextTestLanguage.g:141:3: ( (lv_thirdLevelA1_0_0= ruleThirdLevelA1 ) )+
             int cnt3=0;
             loop3:
             do {
@@ -321,10 +329,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalContentAssistContextTestLanguage.g:137:4: (lv_thirdLevelA1_0_0= ruleThirdLevelA1 )
+            	    // InternalContentAssistContextTestLanguage.g:142:4: (lv_thirdLevelA1_0_0= ruleThirdLevelA1 )
             	    {
-            	    // InternalContentAssistContextTestLanguage.g:137:4: (lv_thirdLevelA1_0_0= ruleThirdLevelA1 )
-            	    // InternalContentAssistContextTestLanguage.g:138:5: lv_thirdLevelA1_0_0= ruleThirdLevelA1
+            	    // InternalContentAssistContextTestLanguage.g:142:4: (lv_thirdLevelA1_0_0= ruleThirdLevelA1 )
+            	    // InternalContentAssistContextTestLanguage.g:143:5: lv_thirdLevelA1_0_0= ruleThirdLevelA1
             	    {
 
             	    					newCompositeNode(grammarAccess.getSecondLevelAAccess().getThirdLevelA1ThirdLevelA1ParserRuleCall_0_0());
@@ -361,7 +369,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 cnt3++;
             } while (true);
 
-            // InternalContentAssistContextTestLanguage.g:155:3: ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+
+            // InternalContentAssistContextTestLanguage.g:160:3: ( (lv_thirdLevelA2_1_0= ruleThirdLevelA2 ) )+
             int cnt4=0;
             loop4:
             do {
@@ -375,10 +383,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalContentAssistContextTestLanguage.g:156:4: (lv_thirdLevelA2_1_0= ruleThirdLevelA2 )
+            	    // InternalContentAssistContextTestLanguage.g:161:4: (lv_thirdLevelA2_1_0= ruleThirdLevelA2 )
             	    {
-            	    // InternalContentAssistContextTestLanguage.g:156:4: (lv_thirdLevelA2_1_0= ruleThirdLevelA2 )
-            	    // InternalContentAssistContextTestLanguage.g:157:5: lv_thirdLevelA2_1_0= ruleThirdLevelA2
+            	    // InternalContentAssistContextTestLanguage.g:161:4: (lv_thirdLevelA2_1_0= ruleThirdLevelA2 )
+            	    // InternalContentAssistContextTestLanguage.g:162:5: lv_thirdLevelA2_1_0= ruleThirdLevelA2
             	    {
 
             	    					newCompositeNode(grammarAccess.getSecondLevelAAccess().getThirdLevelA2ThirdLevelA2ParserRuleCall_1_0());
@@ -438,7 +446,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleSecondLevelB"
-    // InternalContentAssistContextTestLanguage.g:178:1: entryRuleSecondLevelB returns [EObject current=null] : iv_ruleSecondLevelB= ruleSecondLevelB EOF ;
+    // InternalContentAssistContextTestLanguage.g:183:1: entryRuleSecondLevelB returns [EObject current=null] : iv_ruleSecondLevelB= ruleSecondLevelB EOF ;
     public final EObject entryRuleSecondLevelB() throws RecognitionException {
         EObject current = null;
 
@@ -446,8 +454,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:178:53: (iv_ruleSecondLevelB= ruleSecondLevelB EOF )
-            // InternalContentAssistContextTestLanguage.g:179:2: iv_ruleSecondLevelB= ruleSecondLevelB EOF
+            // InternalContentAssistContextTestLanguage.g:183:53: (iv_ruleSecondLevelB= ruleSecondLevelB EOF )
+            // InternalContentAssistContextTestLanguage.g:184:2: iv_ruleSecondLevelB= ruleSecondLevelB EOF
             {
              newCompositeNode(grammarAccess.getSecondLevelBRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -474,7 +482,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleSecondLevelB"
-    // InternalContentAssistContextTestLanguage.g:185:1: ruleSecondLevelB returns [EObject current=null] : ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ ) ;
+    // InternalContentAssistContextTestLanguage.g:190:1: ruleSecondLevelB returns [EObject current=null] : ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ ) ;
     public final EObject ruleSecondLevelB() throws RecognitionException {
         EObject current = null;
 
@@ -487,13 +495,13 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:191:2: ( ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ ) )
-            // InternalContentAssistContextTestLanguage.g:192:2: ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ )
+            // InternalContentAssistContextTestLanguage.g:196:2: ( ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ ) )
+            // InternalContentAssistContextTestLanguage.g:197:2: ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ )
             {
-            // InternalContentAssistContextTestLanguage.g:192:2: ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ )
-            // InternalContentAssistContextTestLanguage.g:193:3: ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+
+            // InternalContentAssistContextTestLanguage.g:197:2: ( ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+ )
+            // InternalContentAssistContextTestLanguage.g:198:3: ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+ ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+
             {
-            // InternalContentAssistContextTestLanguage.g:193:3: ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+
+            // InternalContentAssistContextTestLanguage.g:198:3: ( (lv_thirdLevelB1_0_0= ruleThirdLevelB1 ) )+
             int cnt5=0;
             loop5:
             do {
@@ -507,10 +515,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalContentAssistContextTestLanguage.g:194:4: (lv_thirdLevelB1_0_0= ruleThirdLevelB1 )
+            	    // InternalContentAssistContextTestLanguage.g:199:4: (lv_thirdLevelB1_0_0= ruleThirdLevelB1 )
             	    {
-            	    // InternalContentAssistContextTestLanguage.g:194:4: (lv_thirdLevelB1_0_0= ruleThirdLevelB1 )
-            	    // InternalContentAssistContextTestLanguage.g:195:5: lv_thirdLevelB1_0_0= ruleThirdLevelB1
+            	    // InternalContentAssistContextTestLanguage.g:199:4: (lv_thirdLevelB1_0_0= ruleThirdLevelB1 )
+            	    // InternalContentAssistContextTestLanguage.g:200:5: lv_thirdLevelB1_0_0= ruleThirdLevelB1
             	    {
 
             	    					newCompositeNode(grammarAccess.getSecondLevelBAccess().getThirdLevelB1ThirdLevelB1ParserRuleCall_0_0());
@@ -547,7 +555,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 cnt5++;
             } while (true);
 
-            // InternalContentAssistContextTestLanguage.g:212:3: ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+
+            // InternalContentAssistContextTestLanguage.g:217:3: ( (lv_thirdLevelB2_1_0= ruleThirdLevelB2 ) )+
             int cnt6=0;
             loop6:
             do {
@@ -561,10 +569,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalContentAssistContextTestLanguage.g:213:4: (lv_thirdLevelB2_1_0= ruleThirdLevelB2 )
+            	    // InternalContentAssistContextTestLanguage.g:218:4: (lv_thirdLevelB2_1_0= ruleThirdLevelB2 )
             	    {
-            	    // InternalContentAssistContextTestLanguage.g:213:4: (lv_thirdLevelB2_1_0= ruleThirdLevelB2 )
-            	    // InternalContentAssistContextTestLanguage.g:214:5: lv_thirdLevelB2_1_0= ruleThirdLevelB2
+            	    // InternalContentAssistContextTestLanguage.g:218:4: (lv_thirdLevelB2_1_0= ruleThirdLevelB2 )
+            	    // InternalContentAssistContextTestLanguage.g:219:5: lv_thirdLevelB2_1_0= ruleThirdLevelB2
             	    {
 
             	    					newCompositeNode(grammarAccess.getSecondLevelBAccess().getThirdLevelB2ThirdLevelB2ParserRuleCall_1_0());
@@ -624,7 +632,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleThirdLevelA1"
-    // InternalContentAssistContextTestLanguage.g:235:1: entryRuleThirdLevelA1 returns [EObject current=null] : iv_ruleThirdLevelA1= ruleThirdLevelA1 EOF ;
+    // InternalContentAssistContextTestLanguage.g:240:1: entryRuleThirdLevelA1 returns [EObject current=null] : iv_ruleThirdLevelA1= ruleThirdLevelA1 EOF ;
     public final EObject entryRuleThirdLevelA1() throws RecognitionException {
         EObject current = null;
 
@@ -632,8 +640,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:235:53: (iv_ruleThirdLevelA1= ruleThirdLevelA1 EOF )
-            // InternalContentAssistContextTestLanguage.g:236:2: iv_ruleThirdLevelA1= ruleThirdLevelA1 EOF
+            // InternalContentAssistContextTestLanguage.g:240:53: (iv_ruleThirdLevelA1= ruleThirdLevelA1 EOF )
+            // InternalContentAssistContextTestLanguage.g:241:2: iv_ruleThirdLevelA1= ruleThirdLevelA1 EOF
             {
              newCompositeNode(grammarAccess.getThirdLevelA1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -660,7 +668,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleThirdLevelA1"
-    // InternalContentAssistContextTestLanguage.g:242:1: ruleThirdLevelA1 returns [EObject current=null] : (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? ) ;
+    // InternalContentAssistContextTestLanguage.g:247:1: ruleThirdLevelA1 returns [EObject current=null] : (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? ) ;
     public final EObject ruleThirdLevelA1() throws RecognitionException {
         EObject current = null;
 
@@ -671,18 +679,18 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:248:2: ( (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? ) )
-            // InternalContentAssistContextTestLanguage.g:249:2: (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:253:2: ( (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? ) )
+            // InternalContentAssistContextTestLanguage.g:254:2: (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? )
             {
-            // InternalContentAssistContextTestLanguage.g:249:2: (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? )
-            // InternalContentAssistContextTestLanguage.g:250:3: otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:254:2: (otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:255:3: otherlv_0= 'A1' () ( (lv_name_2_0= RULE_ID ) )?
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_9); 
 
             			newLeafNode(otherlv_0, grammarAccess.getThirdLevelA1Access().getA1Keyword_0());
             		
-            // InternalContentAssistContextTestLanguage.g:254:3: ()
-            // InternalContentAssistContextTestLanguage.g:255:4: 
+            // InternalContentAssistContextTestLanguage.g:259:3: ()
+            // InternalContentAssistContextTestLanguage.g:260:4: 
             {
 
             				current = forceCreateModelElement(
@@ -692,7 +700,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalContentAssistContextTestLanguage.g:261:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:266:3: ( (lv_name_2_0= RULE_ID ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -701,10 +709,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt7) {
                 case 1 :
-                    // InternalContentAssistContextTestLanguage.g:262:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:267:4: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalContentAssistContextTestLanguage.g:262:4: (lv_name_2_0= RULE_ID )
-                    // InternalContentAssistContextTestLanguage.g:263:5: lv_name_2_0= RULE_ID
+                    // InternalContentAssistContextTestLanguage.g:267:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:268:5: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -752,7 +760,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleThirdLevelA2"
-    // InternalContentAssistContextTestLanguage.g:283:1: entryRuleThirdLevelA2 returns [EObject current=null] : iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF ;
+    // InternalContentAssistContextTestLanguage.g:288:1: entryRuleThirdLevelA2 returns [EObject current=null] : iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF ;
     public final EObject entryRuleThirdLevelA2() throws RecognitionException {
         EObject current = null;
 
@@ -760,8 +768,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:283:53: (iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF )
-            // InternalContentAssistContextTestLanguage.g:284:2: iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF
+            // InternalContentAssistContextTestLanguage.g:288:53: (iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF )
+            // InternalContentAssistContextTestLanguage.g:289:2: iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF
             {
              newCompositeNode(grammarAccess.getThirdLevelA2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -788,7 +796,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleThirdLevelA2"
-    // InternalContentAssistContextTestLanguage.g:290:1: ruleThirdLevelA2 returns [EObject current=null] : (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? ) ;
+    // InternalContentAssistContextTestLanguage.g:295:1: ruleThirdLevelA2 returns [EObject current=null] : (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? ) ;
     public final EObject ruleThirdLevelA2() throws RecognitionException {
         EObject current = null;
 
@@ -799,18 +807,18 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:296:2: ( (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? ) )
-            // InternalContentAssistContextTestLanguage.g:297:2: (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:301:2: ( (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? ) )
+            // InternalContentAssistContextTestLanguage.g:302:2: (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? )
             {
-            // InternalContentAssistContextTestLanguage.g:297:2: (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? )
-            // InternalContentAssistContextTestLanguage.g:298:3: otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:302:2: (otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:303:3: otherlv_0= 'A2' () ( (lv_name_2_0= RULE_ID ) )?
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_9); 
 
             			newLeafNode(otherlv_0, grammarAccess.getThirdLevelA2Access().getA2Keyword_0());
             		
-            // InternalContentAssistContextTestLanguage.g:302:3: ()
-            // InternalContentAssistContextTestLanguage.g:303:4: 
+            // InternalContentAssistContextTestLanguage.g:307:3: ()
+            // InternalContentAssistContextTestLanguage.g:308:4: 
             {
 
             				current = forceCreateModelElement(
@@ -820,7 +828,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalContentAssistContextTestLanguage.g:309:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:314:3: ( (lv_name_2_0= RULE_ID ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -829,10 +837,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt8) {
                 case 1 :
-                    // InternalContentAssistContextTestLanguage.g:310:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:315:4: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalContentAssistContextTestLanguage.g:310:4: (lv_name_2_0= RULE_ID )
-                    // InternalContentAssistContextTestLanguage.g:311:5: lv_name_2_0= RULE_ID
+                    // InternalContentAssistContextTestLanguage.g:315:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:316:5: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -880,7 +888,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleThirdLevelB1"
-    // InternalContentAssistContextTestLanguage.g:331:1: entryRuleThirdLevelB1 returns [EObject current=null] : iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF ;
+    // InternalContentAssistContextTestLanguage.g:336:1: entryRuleThirdLevelB1 returns [EObject current=null] : iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF ;
     public final EObject entryRuleThirdLevelB1() throws RecognitionException {
         EObject current = null;
 
@@ -888,8 +896,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:331:53: (iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF )
-            // InternalContentAssistContextTestLanguage.g:332:2: iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF
+            // InternalContentAssistContextTestLanguage.g:336:53: (iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF )
+            // InternalContentAssistContextTestLanguage.g:337:2: iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF
             {
              newCompositeNode(grammarAccess.getThirdLevelB1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -916,7 +924,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleThirdLevelB1"
-    // InternalContentAssistContextTestLanguage.g:338:1: ruleThirdLevelB1 returns [EObject current=null] : (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? ) ;
+    // InternalContentAssistContextTestLanguage.g:343:1: ruleThirdLevelB1 returns [EObject current=null] : (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? ) ;
     public final EObject ruleThirdLevelB1() throws RecognitionException {
         EObject current = null;
 
@@ -927,18 +935,18 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:344:2: ( (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? ) )
-            // InternalContentAssistContextTestLanguage.g:345:2: (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:349:2: ( (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? ) )
+            // InternalContentAssistContextTestLanguage.g:350:2: (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? )
             {
-            // InternalContentAssistContextTestLanguage.g:345:2: (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? )
-            // InternalContentAssistContextTestLanguage.g:346:3: otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:350:2: (otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:351:3: otherlv_0= 'B1' () ( (lv_name_2_0= RULE_ID ) )?
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_9); 
 
             			newLeafNode(otherlv_0, grammarAccess.getThirdLevelB1Access().getB1Keyword_0());
             		
-            // InternalContentAssistContextTestLanguage.g:350:3: ()
-            // InternalContentAssistContextTestLanguage.g:351:4: 
+            // InternalContentAssistContextTestLanguage.g:355:3: ()
+            // InternalContentAssistContextTestLanguage.g:356:4: 
             {
 
             				current = forceCreateModelElement(
@@ -948,7 +956,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalContentAssistContextTestLanguage.g:357:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:362:3: ( (lv_name_2_0= RULE_ID ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -957,10 +965,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt9) {
                 case 1 :
-                    // InternalContentAssistContextTestLanguage.g:358:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:363:4: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalContentAssistContextTestLanguage.g:358:4: (lv_name_2_0= RULE_ID )
-                    // InternalContentAssistContextTestLanguage.g:359:5: lv_name_2_0= RULE_ID
+                    // InternalContentAssistContextTestLanguage.g:363:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:364:5: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1008,7 +1016,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleThirdLevelB2"
-    // InternalContentAssistContextTestLanguage.g:379:1: entryRuleThirdLevelB2 returns [EObject current=null] : iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF ;
+    // InternalContentAssistContextTestLanguage.g:384:1: entryRuleThirdLevelB2 returns [EObject current=null] : iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF ;
     public final EObject entryRuleThirdLevelB2() throws RecognitionException {
         EObject current = null;
 
@@ -1016,8 +1024,8 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalContentAssistContextTestLanguage.g:379:53: (iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF )
-            // InternalContentAssistContextTestLanguage.g:380:2: iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF
+            // InternalContentAssistContextTestLanguage.g:384:53: (iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF )
+            // InternalContentAssistContextTestLanguage.g:385:2: iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF
             {
              newCompositeNode(grammarAccess.getThirdLevelB2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1044,7 +1052,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleThirdLevelB2"
-    // InternalContentAssistContextTestLanguage.g:386:1: ruleThirdLevelB2 returns [EObject current=null] : (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? ) ;
+    // InternalContentAssistContextTestLanguage.g:391:1: ruleThirdLevelB2 returns [EObject current=null] : (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? ) ;
     public final EObject ruleThirdLevelB2() throws RecognitionException {
         EObject current = null;
 
@@ -1055,18 +1063,18 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalContentAssistContextTestLanguage.g:392:2: ( (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? ) )
-            // InternalContentAssistContextTestLanguage.g:393:2: (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:397:2: ( (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? ) )
+            // InternalContentAssistContextTestLanguage.g:398:2: (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? )
             {
-            // InternalContentAssistContextTestLanguage.g:393:2: (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? )
-            // InternalContentAssistContextTestLanguage.g:394:3: otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:398:2: (otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalContentAssistContextTestLanguage.g:399:3: otherlv_0= 'B2' () ( (lv_name_2_0= RULE_ID ) )?
             {
             otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_9); 
 
             			newLeafNode(otherlv_0, grammarAccess.getThirdLevelB2Access().getB2Keyword_0());
             		
-            // InternalContentAssistContextTestLanguage.g:398:3: ()
-            // InternalContentAssistContextTestLanguage.g:399:4: 
+            // InternalContentAssistContextTestLanguage.g:403:3: ()
+            // InternalContentAssistContextTestLanguage.g:404:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1076,7 +1084,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalContentAssistContextTestLanguage.g:405:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalContentAssistContextTestLanguage.g:410:3: ( (lv_name_2_0= RULE_ID ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1085,10 +1093,10 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt10) {
                 case 1 :
-                    // InternalContentAssistContextTestLanguage.g:406:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:411:4: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalContentAssistContextTestLanguage.g:406:4: (lv_name_2_0= RULE_ID )
-                    // InternalContentAssistContextTestLanguage.g:407:5: lv_name_2_0= RULE_ID
+                    // InternalContentAssistContextTestLanguage.g:411:4: (lv_name_2_0= RULE_ID )
+                    // InternalContentAssistContextTestLanguage.g:412:5: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 

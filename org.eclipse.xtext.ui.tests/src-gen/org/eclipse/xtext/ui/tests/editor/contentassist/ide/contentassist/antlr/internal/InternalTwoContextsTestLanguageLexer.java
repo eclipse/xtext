@@ -82,10 +82,10 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:286:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalTwoContextsTestLanguage.g:286:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTwoContextsTestLanguage.g:291:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalTwoContextsTestLanguage.g:291:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalTwoContextsTestLanguage.g:286:11: ( '^' )?
+            // InternalTwoContextsTestLanguage.g:291:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -94,7 +94,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalTwoContextsTestLanguage.g:286:11: '^'
+                    // InternalTwoContextsTestLanguage.g:291:11: '^'
                     {
                     match('^'); 
 
@@ -112,7 +112,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalTwoContextsTestLanguage.g:286:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTwoContextsTestLanguage.g:291:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -161,10 +161,10 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:288:10: ( ( '0' .. '9' )+ )
-            // InternalTwoContextsTestLanguage.g:288:12: ( '0' .. '9' )+
+            // InternalTwoContextsTestLanguage.g:293:10: ( ( '0' .. '9' )+ )
+            // InternalTwoContextsTestLanguage.g:293:12: ( '0' .. '9' )+
             {
-            // InternalTwoContextsTestLanguage.g:288:12: ( '0' .. '9' )+
+            // InternalTwoContextsTestLanguage.g:293:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -178,7 +178,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalTwoContextsTestLanguage.g:288:13: '0' .. '9'
+            	    // InternalTwoContextsTestLanguage.g:293:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -210,10 +210,10 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:290:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalTwoContextsTestLanguage.g:290:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTwoContextsTestLanguage.g:295:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalTwoContextsTestLanguage.g:295:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalTwoContextsTestLanguage.g:290:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTwoContextsTestLanguage.g:295:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -231,10 +231,10 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalTwoContextsTestLanguage.g:290:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalTwoContextsTestLanguage.g:295:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalTwoContextsTestLanguage.g:290:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalTwoContextsTestLanguage.g:295:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -250,7 +250,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalTwoContextsTestLanguage.g:290:21: '\\\\' .
+                    	    // InternalTwoContextsTestLanguage.g:295:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -258,7 +258,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTwoContextsTestLanguage.g:290:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalTwoContextsTestLanguage.g:295:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -283,10 +283,10 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTwoContextsTestLanguage.g:290:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalTwoContextsTestLanguage.g:295:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalTwoContextsTestLanguage.g:290:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalTwoContextsTestLanguage.g:295:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -302,7 +302,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalTwoContextsTestLanguage.g:290:54: '\\\\' .
+                    	    // InternalTwoContextsTestLanguage.g:295:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -310,7 +310,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTwoContextsTestLanguage.g:290:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalTwoContextsTestLanguage.g:295:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -353,12 +353,12 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:292:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalTwoContextsTestLanguage.g:292:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalTwoContextsTestLanguage.g:297:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalTwoContextsTestLanguage.g:297:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalTwoContextsTestLanguage.g:292:24: ( options {greedy=false; } : . )*
+            // InternalTwoContextsTestLanguage.g:297:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -383,7 +383,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalTwoContextsTestLanguage.g:292:52: .
+            	    // InternalTwoContextsTestLanguage.g:297:52: .
             	    {
             	    matchAny(); 
 
@@ -413,12 +413,12 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:294:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalTwoContextsTestLanguage.g:294:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalTwoContextsTestLanguage.g:299:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalTwoContextsTestLanguage.g:299:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalTwoContextsTestLanguage.g:294:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalTwoContextsTestLanguage.g:299:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -431,7 +431,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalTwoContextsTestLanguage.g:294:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalTwoContextsTestLanguage.g:299:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -451,7 +451,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalTwoContextsTestLanguage.g:294:40: ( ( '\\r' )? '\\n' )?
+            // InternalTwoContextsTestLanguage.g:299:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -460,9 +460,9 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalTwoContextsTestLanguage.g:294:41: ( '\\r' )? '\\n'
+                    // InternalTwoContextsTestLanguage.g:299:41: ( '\\r' )? '\\n'
                     {
-                    // InternalTwoContextsTestLanguage.g:294:41: ( '\\r' )?
+                    // InternalTwoContextsTestLanguage.g:299:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -471,7 +471,7 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalTwoContextsTestLanguage.g:294:41: '\\r'
+                            // InternalTwoContextsTestLanguage.g:299:41: '\\r'
                             {
                             match('\r'); 
 
@@ -503,10 +503,10 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:296:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalTwoContextsTestLanguage.g:296:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTwoContextsTestLanguage.g:301:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalTwoContextsTestLanguage.g:301:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalTwoContextsTestLanguage.g:296:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTwoContextsTestLanguage.g:301:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -560,8 +560,8 @@ public class InternalTwoContextsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTwoContextsTestLanguage.g:298:16: ( . )
-            // InternalTwoContextsTestLanguage.g:298:18: .
+            // InternalTwoContextsTestLanguage.g:303:16: ( . )
+            // InternalTwoContextsTestLanguage.g:303:18: .
             {
             matchAny(); 
 

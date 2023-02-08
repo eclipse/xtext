@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
@@ -22,8 +21,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 
@@ -34,7 +33,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractBug326948Test extends AbstractXtextTests implements ResourceLoadHelper {
+public abstract class AbstractBug326948Test extends AbstractXtextTests {
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		with(getSetup());

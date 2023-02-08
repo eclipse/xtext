@@ -20,6 +20,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -105,7 +113,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug304681TestLanguage.g:71:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug304681TestLanguage.g:76:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -113,8 +121,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug304681TestLanguage.g:71:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug304681TestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // InternalBug304681TestLanguage.g:76:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug304681TestLanguage.g:77:2: iv_ruleModel= ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getModelRule()); 
@@ -145,7 +153,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug304681TestLanguage.g:78:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:83:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -160,10 +168,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug304681TestLanguage.g:84:2: ( ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) ) )
-            // InternalBug304681TestLanguage.g:85:2: ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) )
+            // InternalBug304681TestLanguage.g:89:2: ( ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:90:2: ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:85:2: ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) )
+            // InternalBug304681TestLanguage.g:90:2: ( (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -182,10 +190,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:86:3: (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) )
+                    // InternalBug304681TestLanguage.g:91:3: (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:86:3: (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) )
-                    // InternalBug304681TestLanguage.g:87:4: otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) )
+                    // InternalBug304681TestLanguage.g:91:3: (otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) ) )
+                    // InternalBug304681TestLanguage.g:92:4: otherlv_0= '1' ( (lv_definition_1_0= rulePackageDefinition ) )
                     {
                     otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -193,11 +201,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getDigitOneKeyword_0_0());
                       			
                     }
-                    // InternalBug304681TestLanguage.g:91:4: ( (lv_definition_1_0= rulePackageDefinition ) )
-                    // InternalBug304681TestLanguage.g:92:5: (lv_definition_1_0= rulePackageDefinition )
+                    // InternalBug304681TestLanguage.g:96:4: ( (lv_definition_1_0= rulePackageDefinition ) )
+                    // InternalBug304681TestLanguage.g:97:5: (lv_definition_1_0= rulePackageDefinition )
                     {
-                    // InternalBug304681TestLanguage.g:92:5: (lv_definition_1_0= rulePackageDefinition )
-                    // InternalBug304681TestLanguage.g:93:6: lv_definition_1_0= rulePackageDefinition
+                    // InternalBug304681TestLanguage.g:97:5: (lv_definition_1_0= rulePackageDefinition )
+                    // InternalBug304681TestLanguage.g:98:6: lv_definition_1_0= rulePackageDefinition
                     {
                     if ( state.backtracking==0 ) {
 
@@ -235,10 +243,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:112:3: (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) )
+                    // InternalBug304681TestLanguage.g:117:3: (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:112:3: (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) )
-                    // InternalBug304681TestLanguage.g:113:4: otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) )
+                    // InternalBug304681TestLanguage.g:117:3: (otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) )
+                    // InternalBug304681TestLanguage.g:118:4: otherlv_2= '2' ( (lv_definition_3_0= rulePackageDefinition2 ) )
                     {
                     otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -246,11 +254,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDigitTwoKeyword_1_0());
                       			
                     }
-                    // InternalBug304681TestLanguage.g:117:4: ( (lv_definition_3_0= rulePackageDefinition2 ) )
-                    // InternalBug304681TestLanguage.g:118:5: (lv_definition_3_0= rulePackageDefinition2 )
+                    // InternalBug304681TestLanguage.g:122:4: ( (lv_definition_3_0= rulePackageDefinition2 ) )
+                    // InternalBug304681TestLanguage.g:123:5: (lv_definition_3_0= rulePackageDefinition2 )
                     {
-                    // InternalBug304681TestLanguage.g:118:5: (lv_definition_3_0= rulePackageDefinition2 )
-                    // InternalBug304681TestLanguage.g:119:6: lv_definition_3_0= rulePackageDefinition2
+                    // InternalBug304681TestLanguage.g:123:5: (lv_definition_3_0= rulePackageDefinition2 )
+                    // InternalBug304681TestLanguage.g:124:6: lv_definition_3_0= rulePackageDefinition2
                     {
                     if ( state.backtracking==0 ) {
 
@@ -312,7 +320,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRulePackageDefinition"
-    // InternalBug304681TestLanguage.g:141:1: entryRulePackageDefinition returns [EObject current=null] : iv_rulePackageDefinition= rulePackageDefinition EOF ;
+    // InternalBug304681TestLanguage.g:146:1: entryRulePackageDefinition returns [EObject current=null] : iv_rulePackageDefinition= rulePackageDefinition EOF ;
     public final EObject entryRulePackageDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -320,8 +328,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug304681TestLanguage.g:141:58: (iv_rulePackageDefinition= rulePackageDefinition EOF )
-            // InternalBug304681TestLanguage.g:142:2: iv_rulePackageDefinition= rulePackageDefinition EOF
+            // InternalBug304681TestLanguage.g:146:58: (iv_rulePackageDefinition= rulePackageDefinition EOF )
+            // InternalBug304681TestLanguage.g:147:2: iv_rulePackageDefinition= rulePackageDefinition EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPackageDefinitionRule()); 
@@ -352,7 +360,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "rulePackageDefinition"
-    // InternalBug304681TestLanguage.g:148:1: rulePackageDefinition returns [EObject current=null] : ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* ) ;
+    // InternalBug304681TestLanguage.g:153:1: rulePackageDefinition returns [EObject current=null] : ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* ) ;
     public final EObject rulePackageDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -366,14 +374,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug304681TestLanguage.g:154:2: ( ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* ) )
-            // InternalBug304681TestLanguage.g:155:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* )
+            // InternalBug304681TestLanguage.g:159:2: ( ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* ) )
+            // InternalBug304681TestLanguage.g:160:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* )
             {
-            // InternalBug304681TestLanguage.g:155:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* )
-            // InternalBug304681TestLanguage.g:156:3: () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )*
+            // InternalBug304681TestLanguage.g:160:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )* )
+            // InternalBug304681TestLanguage.g:161:3: () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject ) )*
             {
-            // InternalBug304681TestLanguage.g:156:3: ()
-            // InternalBug304681TestLanguage.g:157:4: 
+            // InternalBug304681TestLanguage.g:161:3: ()
+            // InternalBug304681TestLanguage.g:162:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -396,11 +404,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_1, grammarAccess.getPackageDefinitionAccess().getPackageKeyword_1());
               		
             }
-            // InternalBug304681TestLanguage.g:170:3: ( (lv_namespace_2_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:171:4: (lv_namespace_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:175:3: ( (lv_namespace_2_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:176:4: (lv_namespace_2_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:171:4: (lv_namespace_2_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:172:5: lv_namespace_2_0= RULE_ID
+            // InternalBug304681TestLanguage.g:176:4: (lv_namespace_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:177:5: lv_namespace_2_0= RULE_ID
             {
             lv_namespace_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -432,7 +440,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_3, grammarAccess.getPackageDefinitionAccess().getSemicolonKeyword_3());
               		
             }
-            // InternalBug304681TestLanguage.g:192:3: ( (lv_contents_4_0= ruleObject ) )*
+            // InternalBug304681TestLanguage.g:197:3: ( (lv_contents_4_0= ruleObject ) )*
             loop2:
             do {
                 int alt2=2;
@@ -445,10 +453,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:193:4: (lv_contents_4_0= ruleObject )
+            	    // InternalBug304681TestLanguage.g:198:4: (lv_contents_4_0= ruleObject )
             	    {
-            	    // InternalBug304681TestLanguage.g:193:4: (lv_contents_4_0= ruleObject )
-            	    // InternalBug304681TestLanguage.g:194:5: lv_contents_4_0= ruleObject
+            	    // InternalBug304681TestLanguage.g:198:4: (lv_contents_4_0= ruleObject )
+            	    // InternalBug304681TestLanguage.g:199:5: lv_contents_4_0= ruleObject
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -510,7 +518,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleObject"
-    // InternalBug304681TestLanguage.g:215:1: entryRuleObject returns [EObject current=null] : iv_ruleObject= ruleObject EOF ;
+    // InternalBug304681TestLanguage.g:220:1: entryRuleObject returns [EObject current=null] : iv_ruleObject= ruleObject EOF ;
     public final EObject entryRuleObject() throws RecognitionException {
         EObject current = null;
 
@@ -523,8 +531,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:219:2: (iv_ruleObject= ruleObject EOF )
-            // InternalBug304681TestLanguage.g:220:2: iv_ruleObject= ruleObject EOF
+            // InternalBug304681TestLanguage.g:224:2: (iv_ruleObject= ruleObject EOF )
+            // InternalBug304681TestLanguage.g:225:2: iv_ruleObject= ruleObject EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getObjectRule()); 
@@ -558,7 +566,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleObject"
-    // InternalBug304681TestLanguage.g:229:1: ruleObject returns [EObject current=null] : ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' ) ;
+    // InternalBug304681TestLanguage.g:234:1: ruleObject returns [EObject current=null] : ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' ) ;
     public final EObject ruleObject() throws RecognitionException {
         EObject current = null;
 
@@ -601,13 +609,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:238:2: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' ) )
-            // InternalBug304681TestLanguage.g:239:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' )
+            // InternalBug304681TestLanguage.g:243:2: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' ) )
+            // InternalBug304681TestLanguage.g:244:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' )
             {
-            // InternalBug304681TestLanguage.g:239:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' )
-            // InternalBug304681TestLanguage.g:240:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}'
+            // InternalBug304681TestLanguage.g:244:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}' )
+            // InternalBug304681TestLanguage.g:245:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) ) otherlv_27= '}'
             {
-            // InternalBug304681TestLanguage.g:240:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )?
+            // InternalBug304681TestLanguage.g:245:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )?
             int alt3=3;
             int LA3_0 = input.LA(1);
 
@@ -619,13 +627,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:241:4: ( (lv_enabled_0_0= 'enabled' ) )
+                    // InternalBug304681TestLanguage.g:246:4: ( (lv_enabled_0_0= 'enabled' ) )
                     {
-                    // InternalBug304681TestLanguage.g:241:4: ( (lv_enabled_0_0= 'enabled' ) )
-                    // InternalBug304681TestLanguage.g:242:5: (lv_enabled_0_0= 'enabled' )
+                    // InternalBug304681TestLanguage.g:246:4: ( (lv_enabled_0_0= 'enabled' ) )
+                    // InternalBug304681TestLanguage.g:247:5: (lv_enabled_0_0= 'enabled' )
                     {
-                    // InternalBug304681TestLanguage.g:242:5: (lv_enabled_0_0= 'enabled' )
-                    // InternalBug304681TestLanguage.g:243:6: lv_enabled_0_0= 'enabled'
+                    // InternalBug304681TestLanguage.g:247:5: (lv_enabled_0_0= 'enabled' )
+                    // InternalBug304681TestLanguage.g:248:6: lv_enabled_0_0= 'enabled'
                     {
                     lv_enabled_0_0=(Token)match(input,15,FollowSets000.FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -651,13 +659,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:256:4: ( (lv_abstract_1_0= 'abstract' ) )
+                    // InternalBug304681TestLanguage.g:261:4: ( (lv_abstract_1_0= 'abstract' ) )
                     {
-                    // InternalBug304681TestLanguage.g:256:4: ( (lv_abstract_1_0= 'abstract' ) )
-                    // InternalBug304681TestLanguage.g:257:5: (lv_abstract_1_0= 'abstract' )
+                    // InternalBug304681TestLanguage.g:261:4: ( (lv_abstract_1_0= 'abstract' ) )
+                    // InternalBug304681TestLanguage.g:262:5: (lv_abstract_1_0= 'abstract' )
                     {
-                    // InternalBug304681TestLanguage.g:257:5: (lv_abstract_1_0= 'abstract' )
-                    // InternalBug304681TestLanguage.g:258:6: lv_abstract_1_0= 'abstract'
+                    // InternalBug304681TestLanguage.g:262:5: (lv_abstract_1_0= 'abstract' )
+                    // InternalBug304681TestLanguage.g:263:6: lv_abstract_1_0= 'abstract'
                     {
                     lv_abstract_1_0=(Token)match(input,16,FollowSets000.FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -691,11 +699,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_2, grammarAccess.getObjectAccess().getObjectKeyword_1());
               		
             }
-            // InternalBug304681TestLanguage.g:275:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:276:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:280:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:281:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:276:4: (lv_name_3_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:277:5: lv_name_3_0= RULE_ID
+            // InternalBug304681TestLanguage.g:281:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:282:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -721,7 +729,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:293:3: (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )?
+            // InternalBug304681TestLanguage.g:298:3: (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -730,7 +738,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:294:4: otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) )
+                    // InternalBug304681TestLanguage.g:299:4: otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) )
                     {
                     otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -738,11 +746,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       				newLeafNode(otherlv_4, grammarAccess.getObjectAccess().getExtendsKeyword_3_0());
                       			
                     }
-                    // InternalBug304681TestLanguage.g:298:4: ( (otherlv_5= RULE_ID ) )
-                    // InternalBug304681TestLanguage.g:299:5: (otherlv_5= RULE_ID )
+                    // InternalBug304681TestLanguage.g:303:4: ( (otherlv_5= RULE_ID ) )
+                    // InternalBug304681TestLanguage.g:304:5: (otherlv_5= RULE_ID )
                     {
-                    // InternalBug304681TestLanguage.g:299:5: (otherlv_5= RULE_ID )
-                    // InternalBug304681TestLanguage.g:300:6: otherlv_5= RULE_ID
+                    // InternalBug304681TestLanguage.g:304:5: (otherlv_5= RULE_ID )
+                    // InternalBug304681TestLanguage.g:305:6: otherlv_5= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -780,45 +788,45 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_6, grammarAccess.getObjectAccess().getLeftCurlyBracketKeyword_4());
               		
             }
-            // InternalBug304681TestLanguage.g:319:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) )
-            // InternalBug304681TestLanguage.g:320:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) )
+            // InternalBug304681TestLanguage.g:324:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) ) )
+            // InternalBug304681TestLanguage.g:325:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) )
             {
-            // InternalBug304681TestLanguage.g:320:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) )
-            // InternalBug304681TestLanguage.g:321:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* )
+            // InternalBug304681TestLanguage.g:325:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* ) )
+            // InternalBug304681TestLanguage.g:326:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getObjectAccess().getUnorderedGroup_5());
-            // InternalBug304681TestLanguage.g:324:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* )
-            // InternalBug304681TestLanguage.g:325:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )*
+            // InternalBug304681TestLanguage.g:329:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )* )
+            // InternalBug304681TestLanguage.g:330:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )*
             {
-            // InternalBug304681TestLanguage.g:325:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )*
+            // InternalBug304681TestLanguage.g:330:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )*
             loop9:
             do {
                 int alt9=9;
                 alt9 = dfa9.predict(input);
                 switch (alt9) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:326:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:326:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:327:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:332:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)");
             	    }
-            	    // InternalBug304681TestLanguage.g:327:103: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:328:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+            	    // InternalBug304681TestLanguage.g:332:103: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:333:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0);
-            	    // InternalBug304681TestLanguage.g:331:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
-            	    // InternalBug304681TestLanguage.g:331:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+            	    // InternalBug304681TestLanguage.g:336:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+            	    // InternalBug304681TestLanguage.g:336:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:331:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
-            	    // InternalBug304681TestLanguage.g:331:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
+            	    // InternalBug304681TestLanguage.g:336:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+            	    // InternalBug304681TestLanguage.g:336:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
             	    {
             	    otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -826,11 +834,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_8, grammarAccess.getObjectAccess().getShortDescriptionKeyword_5_0_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:335:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
-            	    // InternalBug304681TestLanguage.g:336:10: (lv_shortDescription_9_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:340:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
+            	    // InternalBug304681TestLanguage.g:341:10: (lv_shortDescription_9_0= RULE_STRING )
             	    {
-            	    // InternalBug304681TestLanguage.g:336:10: (lv_shortDescription_9_0= RULE_STRING )
-            	    // InternalBug304681TestLanguage.g:337:11: lv_shortDescription_9_0= RULE_STRING
+            	    // InternalBug304681TestLanguage.g:341:10: (lv_shortDescription_9_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:342:11: lv_shortDescription_9_0= RULE_STRING
             	    {
             	    lv_shortDescription_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -879,28 +887,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // InternalBug304681TestLanguage.g:363:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:368:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:363:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:364:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:368:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:369:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)");
             	    }
-            	    // InternalBug304681TestLanguage.g:364:103: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:365:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+            	    // InternalBug304681TestLanguage.g:369:103: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:370:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1);
-            	    // InternalBug304681TestLanguage.g:368:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
-            	    // InternalBug304681TestLanguage.g:368:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+            	    // InternalBug304681TestLanguage.g:373:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+            	    // InternalBug304681TestLanguage.g:373:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:368:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
-            	    // InternalBug304681TestLanguage.g:368:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
+            	    // InternalBug304681TestLanguage.g:373:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+            	    // InternalBug304681TestLanguage.g:373:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
             	    {
             	    otherlv_11=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -908,11 +916,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_11, grammarAccess.getObjectAccess().getLongDescriptionKeyword_5_1_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:372:9: ( (lv_longDescription_12_0= RULE_STRING ) )
-            	    // InternalBug304681TestLanguage.g:373:10: (lv_longDescription_12_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:377:9: ( (lv_longDescription_12_0= RULE_STRING ) )
+            	    // InternalBug304681TestLanguage.g:378:10: (lv_longDescription_12_0= RULE_STRING )
             	    {
-            	    // InternalBug304681TestLanguage.g:373:10: (lv_longDescription_12_0= RULE_STRING )
-            	    // InternalBug304681TestLanguage.g:374:11: lv_longDescription_12_0= RULE_STRING
+            	    // InternalBug304681TestLanguage.g:378:10: (lv_longDescription_12_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:379:11: lv_longDescription_12_0= RULE_STRING
             	    {
             	    lv_longDescription_12_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -961,28 +969,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 3 :
-            	    // InternalBug304681TestLanguage.g:400:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:405:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:400:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:401:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:405:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:406:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)");
             	    }
-            	    // InternalBug304681TestLanguage.g:401:103: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:402:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+            	    // InternalBug304681TestLanguage.g:406:103: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:407:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2);
-            	    // InternalBug304681TestLanguage.g:405:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
-            	    // InternalBug304681TestLanguage.g:405:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+            	    // InternalBug304681TestLanguage.g:410:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+            	    // InternalBug304681TestLanguage.g:410:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:405:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
-            	    // InternalBug304681TestLanguage.g:405:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
+            	    // InternalBug304681TestLanguage.g:410:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+            	    // InternalBug304681TestLanguage.g:410:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
             	    {
             	    otherlv_14=(Token)match(input,22,FollowSets000.FOLLOW_12); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -990,11 +998,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_14, grammarAccess.getObjectAccess().getSerialUIDKeyword_5_2_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:409:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
-            	    // InternalBug304681TestLanguage.g:410:10: (lv_serialVersionUID_15_0= RULE_INT )
+            	    // InternalBug304681TestLanguage.g:414:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
+            	    // InternalBug304681TestLanguage.g:415:10: (lv_serialVersionUID_15_0= RULE_INT )
             	    {
-            	    // InternalBug304681TestLanguage.g:410:10: (lv_serialVersionUID_15_0= RULE_INT )
-            	    // InternalBug304681TestLanguage.g:411:11: lv_serialVersionUID_15_0= RULE_INT
+            	    // InternalBug304681TestLanguage.g:415:10: (lv_serialVersionUID_15_0= RULE_INT )
+            	    // InternalBug304681TestLanguage.g:416:11: lv_serialVersionUID_15_0= RULE_INT
             	    {
             	    lv_serialVersionUID_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1043,34 +1051,34 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 4 :
-            	    // InternalBug304681TestLanguage.g:437:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:442:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:437:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:438:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:442:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:443:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)");
             	    }
-            	    // InternalBug304681TestLanguage.g:438:103: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:439:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+            	    // InternalBug304681TestLanguage.g:443:103: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:444:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3);
-            	    // InternalBug304681TestLanguage.g:442:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
-            	    // InternalBug304681TestLanguage.g:442:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+            	    // InternalBug304681TestLanguage.g:447:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+            	    // InternalBug304681TestLanguage.g:447:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:442:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
-            	    // InternalBug304681TestLanguage.g:442:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
+            	    // InternalBug304681TestLanguage.g:447:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+            	    // InternalBug304681TestLanguage.g:447:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
             	    {
-            	    // InternalBug304681TestLanguage.g:442:20: ( (lv_cloneable_17_0= 'cloneable' ) )
-            	    // InternalBug304681TestLanguage.g:443:10: (lv_cloneable_17_0= 'cloneable' )
+            	    // InternalBug304681TestLanguage.g:447:20: ( (lv_cloneable_17_0= 'cloneable' ) )
+            	    // InternalBug304681TestLanguage.g:448:10: (lv_cloneable_17_0= 'cloneable' )
             	    {
-            	    // InternalBug304681TestLanguage.g:443:10: (lv_cloneable_17_0= 'cloneable' )
-            	    // InternalBug304681TestLanguage.g:444:11: lv_cloneable_17_0= 'cloneable'
+            	    // InternalBug304681TestLanguage.g:448:10: (lv_cloneable_17_0= 'cloneable' )
+            	    // InternalBug304681TestLanguage.g:449:11: lv_cloneable_17_0= 'cloneable'
             	    {
             	    lv_cloneable_17_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1115,20 +1123,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 5 :
-            	    // InternalBug304681TestLanguage.g:466:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
+            	    // InternalBug304681TestLanguage.g:471:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:466:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
-            	    // InternalBug304681TestLanguage.g:467:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
+            	    // InternalBug304681TestLanguage.g:471:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
+            	    // InternalBug304681TestLanguage.g:472:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
             	    }
-            	    // InternalBug304681TestLanguage.g:467:103: ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
-            	    // InternalBug304681TestLanguage.g:468:6: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
+            	    // InternalBug304681TestLanguage.g:472:103: ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
+            	    // InternalBug304681TestLanguage.g:473:6: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
-            	    // InternalBug304681TestLanguage.g:471:9: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
+            	    // InternalBug304681TestLanguage.g:476:9: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
             	    int cnt5=0;
             	    loop5:
             	    do {
@@ -1157,17 +1165,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt5) {
             	    	case 1 :
-            	    	    // InternalBug304681TestLanguage.g:471:10: {...}? => ( (lv_features_19_0= ruleFeature ) )
+            	    	    // InternalBug304681TestLanguage.g:476:10: {...}? => ( (lv_features_19_0= ruleFeature ) )
             	    	    {
             	    	    if ( !((true)) ) {
             	    	        if (state.backtracking>0) {state.failed=true; return current;}
             	    	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    	    }
-            	    	    // InternalBug304681TestLanguage.g:471:19: ( (lv_features_19_0= ruleFeature ) )
-            	    	    // InternalBug304681TestLanguage.g:471:20: (lv_features_19_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:476:19: ( (lv_features_19_0= ruleFeature ) )
+            	    	    // InternalBug304681TestLanguage.g:476:20: (lv_features_19_0= ruleFeature )
             	    	    {
-            	    	    // InternalBug304681TestLanguage.g:471:20: (lv_features_19_0= ruleFeature )
-            	    	    // InternalBug304681TestLanguage.g:472:10: lv_features_19_0= ruleFeature
+            	    	    // InternalBug304681TestLanguage.g:476:20: (lv_features_19_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:477:10: lv_features_19_0= ruleFeature
             	    	    {
             	    	    if ( state.backtracking==0 ) {
 
@@ -1223,28 +1231,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 6 :
-            	    // InternalBug304681TestLanguage.g:494:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:499:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:494:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:495:5: {...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
+            	    // InternalBug304681TestLanguage.g:499:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:500:5: {...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)");
             	    }
-            	    // InternalBug304681TestLanguage.g:495:103: ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
-            	    // InternalBug304681TestLanguage.g:496:6: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
+            	    // InternalBug304681TestLanguage.g:500:103: ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
+            	    // InternalBug304681TestLanguage.g:501:6: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5);
-            	    // InternalBug304681TestLanguage.g:499:9: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
-            	    // InternalBug304681TestLanguage.g:499:10: {...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
+            	    // InternalBug304681TestLanguage.g:504:9: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
+            	    // InternalBug304681TestLanguage.g:504:10: {...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:499:19: (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
-            	    // InternalBug304681TestLanguage.g:499:20: otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after'
+            	    // InternalBug304681TestLanguage.g:504:19: (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
+            	    // InternalBug304681TestLanguage.g:504:20: otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after'
             	    {
             	    otherlv_20=(Token)match(input,24,FollowSets000.FOLLOW_13); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1252,7 +1260,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_20, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:503:9: ( (lv_features_21_0= ruleFeature ) )*
+            	    // InternalBug304681TestLanguage.g:508:9: ( (lv_features_21_0= ruleFeature ) )*
             	    loop6:
             	    do {
             	        int alt6=2;
@@ -1265,10 +1273,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt6) {
             	    	case 1 :
-            	    	    // InternalBug304681TestLanguage.g:504:10: (lv_features_21_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:509:10: (lv_features_21_0= ruleFeature )
             	    	    {
-            	    	    // InternalBug304681TestLanguage.g:504:10: (lv_features_21_0= ruleFeature )
-            	    	    // InternalBug304681TestLanguage.g:505:11: lv_features_21_0= ruleFeature
+            	    	    // InternalBug304681TestLanguage.g:509:10: (lv_features_21_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:510:11: lv_features_21_0= ruleFeature
             	    	    {
             	    	    if ( state.backtracking==0 ) {
 
@@ -1328,28 +1336,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 7 :
-            	    // InternalBug304681TestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
+            	    // InternalBug304681TestLanguage.g:537:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
-            	    // InternalBug304681TestLanguage.g:533:5: {...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
+            	    // InternalBug304681TestLanguage.g:537:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
+            	    // InternalBug304681TestLanguage.g:538:5: {...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)");
             	    }
-            	    // InternalBug304681TestLanguage.g:533:103: ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
-            	    // InternalBug304681TestLanguage.g:534:6: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
+            	    // InternalBug304681TestLanguage.g:538:103: ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
+            	    // InternalBug304681TestLanguage.g:539:6: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6);
-            	    // InternalBug304681TestLanguage.g:537:9: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
-            	    // InternalBug304681TestLanguage.g:537:10: {...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
+            	    // InternalBug304681TestLanguage.g:542:9: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
+            	    // InternalBug304681TestLanguage.g:542:10: {...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:537:19: (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
-            	    // InternalBug304681TestLanguage.g:537:20: otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )*
+            	    // InternalBug304681TestLanguage.g:542:19: (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
+            	    // InternalBug304681TestLanguage.g:542:20: otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )*
             	    {
             	    otherlv_23=(Token)match(input,26,FollowSets000.FOLLOW_10); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1357,17 +1365,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_23, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:541:9: ( (lv_features_24_0= ruleFeature ) )*
+            	    // InternalBug304681TestLanguage.g:546:9: ( (lv_features_24_0= ruleFeature ) )*
             	    loop7:
             	    do {
             	        int alt7=2;
             	        alt7 = dfa7.predict(input);
             	        switch (alt7) {
             	    	case 1 :
-            	    	    // InternalBug304681TestLanguage.g:542:10: (lv_features_24_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:547:10: (lv_features_24_0= ruleFeature )
             	    	    {
-            	    	    // InternalBug304681TestLanguage.g:542:10: (lv_features_24_0= ruleFeature )
-            	    	    // InternalBug304681TestLanguage.g:543:11: lv_features_24_0= ruleFeature
+            	    	    // InternalBug304681TestLanguage.g:547:10: (lv_features_24_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:548:11: lv_features_24_0= ruleFeature
             	    	    {
             	    	    if ( state.backtracking==0 ) {
 
@@ -1421,28 +1429,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 8 :
-            	    // InternalBug304681TestLanguage.g:566:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
+            	    // InternalBug304681TestLanguage.g:571:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:566:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
-            	    // InternalBug304681TestLanguage.g:567:5: {...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
+            	    // InternalBug304681TestLanguage.g:571:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
+            	    // InternalBug304681TestLanguage.g:572:5: {...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)");
             	    }
-            	    // InternalBug304681TestLanguage.g:567:103: ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
-            	    // InternalBug304681TestLanguage.g:568:6: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
+            	    // InternalBug304681TestLanguage.g:572:103: ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
+            	    // InternalBug304681TestLanguage.g:573:6: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7);
-            	    // InternalBug304681TestLanguage.g:571:9: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
-            	    // InternalBug304681TestLanguage.g:571:10: {...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
+            	    // InternalBug304681TestLanguage.g:576:9: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
+            	    // InternalBug304681TestLanguage.g:576:10: {...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:571:19: (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
-            	    // InternalBug304681TestLanguage.g:571:20: otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+
+            	    // InternalBug304681TestLanguage.g:576:19: (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
+            	    // InternalBug304681TestLanguage.g:576:20: otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+
             	    {
             	    otherlv_25=(Token)match(input,27,FollowSets000.FOLLOW_14); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -1450,7 +1458,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_25, grammarAccess.getObjectAccess().getMandatoryLoopKeyword_5_7_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:575:9: ( (lv_features_26_0= ruleFeature ) )+
+            	    // InternalBug304681TestLanguage.g:580:9: ( (lv_features_26_0= ruleFeature ) )+
             	    int cnt8=0;
             	    loop8:
             	    do {
@@ -1458,10 +1466,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	        alt8 = dfa8.predict(input);
             	        switch (alt8) {
             	    	case 1 :
-            	    	    // InternalBug304681TestLanguage.g:576:10: (lv_features_26_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:581:10: (lv_features_26_0= ruleFeature )
             	    	    {
-            	    	    // InternalBug304681TestLanguage.g:576:10: (lv_features_26_0= ruleFeature )
-            	    	    // InternalBug304681TestLanguage.g:577:11: lv_features_26_0= ruleFeature
+            	    	    // InternalBug304681TestLanguage.g:581:10: (lv_features_26_0= ruleFeature )
+            	    	    // InternalBug304681TestLanguage.g:582:11: lv_features_26_0= ruleFeature
             	    	    {
             	    	    if ( state.backtracking==0 ) {
 
@@ -1569,7 +1577,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFeature"
-    // InternalBug304681TestLanguage.g:618:1: entryRuleFeature returns [EObject current=null] : iv_ruleFeature= ruleFeature EOF ;
+    // InternalBug304681TestLanguage.g:623:1: entryRuleFeature returns [EObject current=null] : iv_ruleFeature= ruleFeature EOF ;
     public final EObject entryRuleFeature() throws RecognitionException {
         EObject current = null;
 
@@ -1577,8 +1585,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug304681TestLanguage.g:618:48: (iv_ruleFeature= ruleFeature EOF )
-            // InternalBug304681TestLanguage.g:619:2: iv_ruleFeature= ruleFeature EOF
+            // InternalBug304681TestLanguage.g:623:48: (iv_ruleFeature= ruleFeature EOF )
+            // InternalBug304681TestLanguage.g:624:2: iv_ruleFeature= ruleFeature EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFeatureRule()); 
@@ -1609,7 +1617,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFeature"
-    // InternalBug304681TestLanguage.g:625:1: ruleFeature returns [EObject current=null] : (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) ;
+    // InternalBug304681TestLanguage.g:630:1: ruleFeature returns [EObject current=null] : (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) ;
     public final EObject ruleFeature() throws RecognitionException {
         EObject current = null;
 
@@ -1622,10 +1630,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug304681TestLanguage.g:631:2: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
-            // InternalBug304681TestLanguage.g:632:2: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
+            // InternalBug304681TestLanguage.g:636:2: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
+            // InternalBug304681TestLanguage.g:637:2: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
             {
-            // InternalBug304681TestLanguage.g:632:2: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
+            // InternalBug304681TestLanguage.g:637:2: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1644,7 +1652,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt10) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:633:3: this_Attribute_0= ruleAttribute
+                    // InternalBug304681TestLanguage.g:638:3: this_Attribute_0= ruleAttribute
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1671,7 +1679,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:645:3: this_Reference_1= ruleReference
+                    // InternalBug304681TestLanguage.g:650:3: this_Reference_1= ruleReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1722,7 +1730,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAttribute"
-    // InternalBug304681TestLanguage.g:660:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
+    // InternalBug304681TestLanguage.g:665:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
     public final EObject entryRuleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1730,8 +1738,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug304681TestLanguage.g:660:50: (iv_ruleAttribute= ruleAttribute EOF )
-            // InternalBug304681TestLanguage.g:661:2: iv_ruleAttribute= ruleAttribute EOF
+            // InternalBug304681TestLanguage.g:665:50: (iv_ruleAttribute= ruleAttribute EOF )
+            // InternalBug304681TestLanguage.g:666:2: iv_ruleAttribute= ruleAttribute EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getAttributeRule()); 
@@ -1762,7 +1770,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAttribute"
-    // InternalBug304681TestLanguage.g:667:1: ruleAttribute returns [EObject current=null] : (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) ;
+    // InternalBug304681TestLanguage.g:672:1: ruleAttribute returns [EObject current=null] : (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) ;
     public final EObject ruleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1775,11 +1783,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug304681TestLanguage.g:673:2: ( (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) )
-            // InternalBug304681TestLanguage.g:674:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
+            // InternalBug304681TestLanguage.g:678:2: ( (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) )
+            // InternalBug304681TestLanguage.g:679:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
             {
-            // InternalBug304681TestLanguage.g:674:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
-            // InternalBug304681TestLanguage.g:675:3: otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';'
+            // InternalBug304681TestLanguage.g:679:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
+            // InternalBug304681TestLanguage.g:680:3: otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';'
             {
             otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1787,11 +1795,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_0, grammarAccess.getAttributeAccess().getAttributeKeyword_0());
               		
             }
-            // InternalBug304681TestLanguage.g:679:3: ( (lv_type_1_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:680:4: (lv_type_1_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:684:3: ( (lv_type_1_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:685:4: (lv_type_1_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:680:4: (lv_type_1_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:681:5: lv_type_1_0= RULE_ID
+            // InternalBug304681TestLanguage.g:685:4: (lv_type_1_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:686:5: lv_type_1_0= RULE_ID
             {
             lv_type_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1817,11 +1825,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:697:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:698:4: (lv_name_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:702:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:703:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:698:4: (lv_name_2_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:699:5: lv_name_2_0= RULE_ID
+            // InternalBug304681TestLanguage.g:703:4: (lv_name_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:704:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1878,7 +1886,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleReference"
-    // InternalBug304681TestLanguage.g:723:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // InternalBug304681TestLanguage.g:728:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1891,8 +1899,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:727:2: (iv_ruleReference= ruleReference EOF )
-            // InternalBug304681TestLanguage.g:728:2: iv_ruleReference= ruleReference EOF
+            // InternalBug304681TestLanguage.g:732:2: (iv_ruleReference= ruleReference EOF )
+            // InternalBug304681TestLanguage.g:733:2: iv_ruleReference= ruleReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getReferenceRule()); 
@@ -1926,7 +1934,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleReference"
-    // InternalBug304681TestLanguage.g:737:1: ruleReference returns [EObject current=null] : (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) ;
+    // InternalBug304681TestLanguage.g:742:1: ruleReference returns [EObject current=null] : (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1951,11 +1959,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:746:2: ( (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) )
-            // InternalBug304681TestLanguage.g:747:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
+            // InternalBug304681TestLanguage.g:751:2: ( (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) )
+            // InternalBug304681TestLanguage.g:752:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
             {
-            // InternalBug304681TestLanguage.g:747:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
-            // InternalBug304681TestLanguage.g:748:3: otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
+            // InternalBug304681TestLanguage.g:752:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
+            // InternalBug304681TestLanguage.g:753:3: otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
             {
             otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1963,11 +1971,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getReferenceKeyword_0());
               		
             }
-            // InternalBug304681TestLanguage.g:752:3: ( (otherlv_1= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:753:4: (otherlv_1= RULE_ID )
+            // InternalBug304681TestLanguage.g:757:3: ( (otherlv_1= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:758:4: (otherlv_1= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:753:4: (otherlv_1= RULE_ID )
-            // InternalBug304681TestLanguage.g:754:5: otherlv_1= RULE_ID
+            // InternalBug304681TestLanguage.g:758:4: (otherlv_1= RULE_ID )
+            // InternalBug304681TestLanguage.g:759:5: otherlv_1= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1993,7 +2001,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:768:3: ( (lv_many_2_0= '*' ) )?
+            // InternalBug304681TestLanguage.g:773:3: ( (lv_many_2_0= '*' ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2002,10 +2010,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt11) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:769:4: (lv_many_2_0= '*' )
+                    // InternalBug304681TestLanguage.g:774:4: (lv_many_2_0= '*' )
                     {
-                    // InternalBug304681TestLanguage.g:769:4: (lv_many_2_0= '*' )
-                    // InternalBug304681TestLanguage.g:770:5: lv_many_2_0= '*'
+                    // InternalBug304681TestLanguage.g:774:4: (lv_many_2_0= '*' )
+                    // InternalBug304681TestLanguage.g:775:5: lv_many_2_0= '*'
                     {
                     lv_many_2_0=(Token)match(input,31,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2030,11 +2038,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:782:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:783:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:787:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:788:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:783:4: (lv_name_3_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:784:5: lv_name_3_0= RULE_ID
+            // InternalBug304681TestLanguage.g:788:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:789:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_16); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2060,7 +2068,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:800:3: ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
+            // InternalBug304681TestLanguage.g:805:3: ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2079,10 +2087,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt13) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:801:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
+                    // InternalBug304681TestLanguage.g:806:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
                     {
-                    // InternalBug304681TestLanguage.g:801:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
-                    // InternalBug304681TestLanguage.g:802:5: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}'
+                    // InternalBug304681TestLanguage.g:806:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
+                    // InternalBug304681TestLanguage.g:807:5: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}'
                     {
                     otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_17); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2090,17 +2098,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       					newLeafNode(otherlv_4, grammarAccess.getReferenceAccess().getLeftCurlyBracketKeyword_4_0_0());
                       				
                     }
-                    // InternalBug304681TestLanguage.g:806:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) )
-                    // InternalBug304681TestLanguage.g:807:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
+                    // InternalBug304681TestLanguage.g:811:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) )
+                    // InternalBug304681TestLanguage.g:812:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
                     {
-                    // InternalBug304681TestLanguage.g:807:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
-                    // InternalBug304681TestLanguage.g:808:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
+                    // InternalBug304681TestLanguage.g:812:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
+                    // InternalBug304681TestLanguage.g:813:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
                     {
                     getUnorderedGroupHelper().enter(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1());
-                    // InternalBug304681TestLanguage.g:811:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
-                    // InternalBug304681TestLanguage.g:812:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
+                    // InternalBug304681TestLanguage.g:816:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
+                    // InternalBug304681TestLanguage.g:817:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
                     {
-                    // InternalBug304681TestLanguage.g:812:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
+                    // InternalBug304681TestLanguage.g:817:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
                     loop12:
                     do {
                         int alt12=3;
@@ -2116,28 +2124,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt12) {
                     	case 1 :
-                    	    // InternalBug304681TestLanguage.g:813:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:818:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:813:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:814:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:818:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:819:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:814:112: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:815:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:819:112: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:820:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0);
-                    	    // InternalBug304681TestLanguage.g:818:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:818:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+                    	    // InternalBug304681TestLanguage.g:823:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:823:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:818:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
-                    	    // InternalBug304681TestLanguage.g:818:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
+                    	    // InternalBug304681TestLanguage.g:823:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+                    	    // InternalBug304681TestLanguage.g:823:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
                     	    {
                     	    otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2145,11 +2153,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      											newLeafNode(otherlv_6, grammarAccess.getReferenceAccess().getShortDescriptionKeyword_4_0_1_0_0());
                     	      										
                     	    }
-                    	    // InternalBug304681TestLanguage.g:822:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
-                    	    // InternalBug304681TestLanguage.g:823:12: (lv_shortDescription_7_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:827:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
+                    	    // InternalBug304681TestLanguage.g:828:12: (lv_shortDescription_7_0= RULE_STRING )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:823:12: (lv_shortDescription_7_0= RULE_STRING )
-                    	    // InternalBug304681TestLanguage.g:824:13: lv_shortDescription_7_0= RULE_STRING
+                    	    // InternalBug304681TestLanguage.g:828:12: (lv_shortDescription_7_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:829:13: lv_shortDescription_7_0= RULE_STRING
                     	    {
                     	    lv_shortDescription_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2198,28 +2206,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBug304681TestLanguage.g:850:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:855:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:850:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:851:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:855:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:856:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:851:112: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:852:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:856:112: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:857:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1);
-                    	    // InternalBug304681TestLanguage.g:855:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:855:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+                    	    // InternalBug304681TestLanguage.g:860:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:860:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:855:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
-                    	    // InternalBug304681TestLanguage.g:855:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
+                    	    // InternalBug304681TestLanguage.g:860:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+                    	    // InternalBug304681TestLanguage.g:860:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
                     	    {
                     	    otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2227,11 +2235,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      											newLeafNode(otherlv_9, grammarAccess.getReferenceAccess().getLongDescriptionKeyword_4_0_1_1_0());
                     	      										
                     	    }
-                    	    // InternalBug304681TestLanguage.g:859:11: ( (lv_longDescription_10_0= RULE_STRING ) )
-                    	    // InternalBug304681TestLanguage.g:860:12: (lv_longDescription_10_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:864:11: ( (lv_longDescription_10_0= RULE_STRING ) )
+                    	    // InternalBug304681TestLanguage.g:865:12: (lv_longDescription_10_0= RULE_STRING )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:860:12: (lv_longDescription_10_0= RULE_STRING )
-                    	    // InternalBug304681TestLanguage.g:861:13: lv_longDescription_10_0= RULE_STRING
+                    	    // InternalBug304681TestLanguage.g:865:12: (lv_longDescription_10_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:866:13: lv_longDescription_10_0= RULE_STRING
                     	    {
                     	    lv_longDescription_10_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2308,7 +2316,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:900:4: otherlv_13= ';'
+                    // InternalBug304681TestLanguage.g:905:4: otherlv_13= ';'
                     {
                     otherlv_13=(Token)match(input,14,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2350,7 +2358,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRulePackageDefinition2"
-    // InternalBug304681TestLanguage.g:912:1: entryRulePackageDefinition2 returns [EObject current=null] : iv_rulePackageDefinition2= rulePackageDefinition2 EOF ;
+    // InternalBug304681TestLanguage.g:917:1: entryRulePackageDefinition2 returns [EObject current=null] : iv_rulePackageDefinition2= rulePackageDefinition2 EOF ;
     public final EObject entryRulePackageDefinition2() throws RecognitionException {
         EObject current = null;
 
@@ -2358,8 +2366,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug304681TestLanguage.g:912:59: (iv_rulePackageDefinition2= rulePackageDefinition2 EOF )
-            // InternalBug304681TestLanguage.g:913:2: iv_rulePackageDefinition2= rulePackageDefinition2 EOF
+            // InternalBug304681TestLanguage.g:917:59: (iv_rulePackageDefinition2= rulePackageDefinition2 EOF )
+            // InternalBug304681TestLanguage.g:918:2: iv_rulePackageDefinition2= rulePackageDefinition2 EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPackageDefinition2Rule()); 
@@ -2390,7 +2398,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "rulePackageDefinition2"
-    // InternalBug304681TestLanguage.g:919:1: rulePackageDefinition2 returns [EObject current=null] : ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* ) ;
+    // InternalBug304681TestLanguage.g:924:1: rulePackageDefinition2 returns [EObject current=null] : ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* ) ;
     public final EObject rulePackageDefinition2() throws RecognitionException {
         EObject current = null;
 
@@ -2404,14 +2412,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug304681TestLanguage.g:925:2: ( ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* ) )
-            // InternalBug304681TestLanguage.g:926:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* )
+            // InternalBug304681TestLanguage.g:930:2: ( ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* ) )
+            // InternalBug304681TestLanguage.g:931:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* )
             {
-            // InternalBug304681TestLanguage.g:926:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* )
-            // InternalBug304681TestLanguage.g:927:3: () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )*
+            // InternalBug304681TestLanguage.g:931:2: ( () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )* )
+            // InternalBug304681TestLanguage.g:932:3: () otherlv_1= 'package' ( (lv_namespace_2_0= RULE_ID ) ) otherlv_3= ';' ( (lv_contents_4_0= ruleObject2 ) )*
             {
-            // InternalBug304681TestLanguage.g:927:3: ()
-            // InternalBug304681TestLanguage.g:928:4: 
+            // InternalBug304681TestLanguage.g:932:3: ()
+            // InternalBug304681TestLanguage.g:933:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -2434,11 +2442,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_1, grammarAccess.getPackageDefinition2Access().getPackageKeyword_1());
               		
             }
-            // InternalBug304681TestLanguage.g:941:3: ( (lv_namespace_2_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:942:4: (lv_namespace_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:946:3: ( (lv_namespace_2_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:947:4: (lv_namespace_2_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:942:4: (lv_namespace_2_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:943:5: lv_namespace_2_0= RULE_ID
+            // InternalBug304681TestLanguage.g:947:4: (lv_namespace_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:948:5: lv_namespace_2_0= RULE_ID
             {
             lv_namespace_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2470,7 +2478,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_3, grammarAccess.getPackageDefinition2Access().getSemicolonKeyword_3());
               		
             }
-            // InternalBug304681TestLanguage.g:963:3: ( (lv_contents_4_0= ruleObject2 ) )*
+            // InternalBug304681TestLanguage.g:968:3: ( (lv_contents_4_0= ruleObject2 ) )*
             loop14:
             do {
                 int alt14=2;
@@ -2483,10 +2491,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:964:4: (lv_contents_4_0= ruleObject2 )
+            	    // InternalBug304681TestLanguage.g:969:4: (lv_contents_4_0= ruleObject2 )
             	    {
-            	    // InternalBug304681TestLanguage.g:964:4: (lv_contents_4_0= ruleObject2 )
-            	    // InternalBug304681TestLanguage.g:965:5: lv_contents_4_0= ruleObject2
+            	    // InternalBug304681TestLanguage.g:969:4: (lv_contents_4_0= ruleObject2 )
+            	    // InternalBug304681TestLanguage.g:970:5: lv_contents_4_0= ruleObject2
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2548,7 +2556,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleObject2"
-    // InternalBug304681TestLanguage.g:986:1: entryRuleObject2 returns [EObject current=null] : iv_ruleObject2= ruleObject2 EOF ;
+    // InternalBug304681TestLanguage.g:991:1: entryRuleObject2 returns [EObject current=null] : iv_ruleObject2= ruleObject2 EOF ;
     public final EObject entryRuleObject2() throws RecognitionException {
         EObject current = null;
 
@@ -2561,8 +2569,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:990:2: (iv_ruleObject2= ruleObject2 EOF )
-            // InternalBug304681TestLanguage.g:991:2: iv_ruleObject2= ruleObject2 EOF
+            // InternalBug304681TestLanguage.g:995:2: (iv_ruleObject2= ruleObject2 EOF )
+            // InternalBug304681TestLanguage.g:996:2: iv_ruleObject2= ruleObject2 EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getObject2Rule()); 
@@ -2596,7 +2604,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleObject2"
-    // InternalBug304681TestLanguage.g:1000:1: ruleObject2 returns [EObject current=null] : ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' ) ;
+    // InternalBug304681TestLanguage.g:1005:1: ruleObject2 returns [EObject current=null] : ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' ) ;
     public final EObject ruleObject2() throws RecognitionException {
         EObject current = null;
 
@@ -2629,13 +2637,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1009:2: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' ) )
-            // InternalBug304681TestLanguage.g:1010:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' )
+            // InternalBug304681TestLanguage.g:1014:2: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' ) )
+            // InternalBug304681TestLanguage.g:1015:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' )
             {
-            // InternalBug304681TestLanguage.g:1010:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' )
-            // InternalBug304681TestLanguage.g:1011:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}'
+            // InternalBug304681TestLanguage.g:1015:2: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}' )
+            // InternalBug304681TestLanguage.g:1016:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? otherlv_2= 'object' ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )? otherlv_6= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) ) otherlv_20= '}'
             {
-            // InternalBug304681TestLanguage.g:1011:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )?
+            // InternalBug304681TestLanguage.g:1016:3: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )?
             int alt15=3;
             int LA15_0 = input.LA(1);
 
@@ -2647,13 +2655,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt15) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1012:4: ( (lv_enabled_0_0= 'enabled' ) )
+                    // InternalBug304681TestLanguage.g:1017:4: ( (lv_enabled_0_0= 'enabled' ) )
                     {
-                    // InternalBug304681TestLanguage.g:1012:4: ( (lv_enabled_0_0= 'enabled' ) )
-                    // InternalBug304681TestLanguage.g:1013:5: (lv_enabled_0_0= 'enabled' )
+                    // InternalBug304681TestLanguage.g:1017:4: ( (lv_enabled_0_0= 'enabled' ) )
+                    // InternalBug304681TestLanguage.g:1018:5: (lv_enabled_0_0= 'enabled' )
                     {
-                    // InternalBug304681TestLanguage.g:1013:5: (lv_enabled_0_0= 'enabled' )
-                    // InternalBug304681TestLanguage.g:1014:6: lv_enabled_0_0= 'enabled'
+                    // InternalBug304681TestLanguage.g:1018:5: (lv_enabled_0_0= 'enabled' )
+                    // InternalBug304681TestLanguage.g:1019:6: lv_enabled_0_0= 'enabled'
                     {
                     lv_enabled_0_0=(Token)match(input,15,FollowSets000.FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2679,13 +2687,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:1027:4: ( (lv_abstract_1_0= 'abstract' ) )
+                    // InternalBug304681TestLanguage.g:1032:4: ( (lv_abstract_1_0= 'abstract' ) )
                     {
-                    // InternalBug304681TestLanguage.g:1027:4: ( (lv_abstract_1_0= 'abstract' ) )
-                    // InternalBug304681TestLanguage.g:1028:5: (lv_abstract_1_0= 'abstract' )
+                    // InternalBug304681TestLanguage.g:1032:4: ( (lv_abstract_1_0= 'abstract' ) )
+                    // InternalBug304681TestLanguage.g:1033:5: (lv_abstract_1_0= 'abstract' )
                     {
-                    // InternalBug304681TestLanguage.g:1028:5: (lv_abstract_1_0= 'abstract' )
-                    // InternalBug304681TestLanguage.g:1029:6: lv_abstract_1_0= 'abstract'
+                    // InternalBug304681TestLanguage.g:1033:5: (lv_abstract_1_0= 'abstract' )
+                    // InternalBug304681TestLanguage.g:1034:6: lv_abstract_1_0= 'abstract'
                     {
                     lv_abstract_1_0=(Token)match(input,16,FollowSets000.FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2719,11 +2727,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_2, grammarAccess.getObject2Access().getObjectKeyword_1());
               		
             }
-            // InternalBug304681TestLanguage.g:1046:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:1047:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1051:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:1052:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:1047:4: (lv_name_3_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:1048:5: lv_name_3_0= RULE_ID
+            // InternalBug304681TestLanguage.g:1052:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1053:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2749,7 +2757,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:1064:3: (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )?
+            // InternalBug304681TestLanguage.g:1069:3: (otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2758,7 +2766,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt16) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1065:4: otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) )
+                    // InternalBug304681TestLanguage.g:1070:4: otherlv_4= 'extends' ( (otherlv_5= RULE_ID ) )
                     {
                     otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2766,11 +2774,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       				newLeafNode(otherlv_4, grammarAccess.getObject2Access().getExtendsKeyword_3_0());
                       			
                     }
-                    // InternalBug304681TestLanguage.g:1069:4: ( (otherlv_5= RULE_ID ) )
-                    // InternalBug304681TestLanguage.g:1070:5: (otherlv_5= RULE_ID )
+                    // InternalBug304681TestLanguage.g:1074:4: ( (otherlv_5= RULE_ID ) )
+                    // InternalBug304681TestLanguage.g:1075:5: (otherlv_5= RULE_ID )
                     {
-                    // InternalBug304681TestLanguage.g:1070:5: (otherlv_5= RULE_ID )
-                    // InternalBug304681TestLanguage.g:1071:6: otherlv_5= RULE_ID
+                    // InternalBug304681TestLanguage.g:1075:5: (otherlv_5= RULE_ID )
+                    // InternalBug304681TestLanguage.g:1076:6: otherlv_5= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2808,17 +2816,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_6, grammarAccess.getObject2Access().getLeftCurlyBracketKeyword_4());
               		
             }
-            // InternalBug304681TestLanguage.g:1090:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) )
-            // InternalBug304681TestLanguage.g:1091:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) )
+            // InternalBug304681TestLanguage.g:1095:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) ) )
+            // InternalBug304681TestLanguage.g:1096:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) )
             {
-            // InternalBug304681TestLanguage.g:1091:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) )
-            // InternalBug304681TestLanguage.g:1092:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* )
+            // InternalBug304681TestLanguage.g:1096:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* ) )
+            // InternalBug304681TestLanguage.g:1097:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getObject2Access().getUnorderedGroup_5());
-            // InternalBug304681TestLanguage.g:1095:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* )
-            // InternalBug304681TestLanguage.g:1096:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )*
+            // InternalBug304681TestLanguage.g:1100:5: ( ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )* )
+            // InternalBug304681TestLanguage.g:1101:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )*
             {
-            // InternalBug304681TestLanguage.g:1096:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )*
+            // InternalBug304681TestLanguage.g:1101:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )*
             loop18:
             do {
                 int alt18=6;
@@ -2846,28 +2854,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:1097:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1102:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1097:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:1098:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1102:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1103:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1098:104: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:1099:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1103:104: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1104:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0);
-            	    // InternalBug304681TestLanguage.g:1102:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
-            	    // InternalBug304681TestLanguage.g:1102:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+            	    // InternalBug304681TestLanguage.g:1107:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1107:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:1102:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
-            	    // InternalBug304681TestLanguage.g:1102:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
+            	    // InternalBug304681TestLanguage.g:1107:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+            	    // InternalBug304681TestLanguage.g:1107:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
             	    {
             	    otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -2875,11 +2883,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_8, grammarAccess.getObject2Access().getShortDescriptionKeyword_5_0_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:1106:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
-            	    // InternalBug304681TestLanguage.g:1107:10: (lv_shortDescription_9_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:1111:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
+            	    // InternalBug304681TestLanguage.g:1112:10: (lv_shortDescription_9_0= RULE_STRING )
             	    {
-            	    // InternalBug304681TestLanguage.g:1107:10: (lv_shortDescription_9_0= RULE_STRING )
-            	    // InternalBug304681TestLanguage.g:1108:11: lv_shortDescription_9_0= RULE_STRING
+            	    // InternalBug304681TestLanguage.g:1112:10: (lv_shortDescription_9_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:1113:11: lv_shortDescription_9_0= RULE_STRING
             	    {
             	    lv_shortDescription_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -2928,28 +2936,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // InternalBug304681TestLanguage.g:1134:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1139:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1134:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:1135:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1139:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1140:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1135:104: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:1136:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1140:104: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1141:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1);
-            	    // InternalBug304681TestLanguage.g:1139:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
-            	    // InternalBug304681TestLanguage.g:1139:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+            	    // InternalBug304681TestLanguage.g:1144:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1144:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:1139:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
-            	    // InternalBug304681TestLanguage.g:1139:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
+            	    // InternalBug304681TestLanguage.g:1144:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+            	    // InternalBug304681TestLanguage.g:1144:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
             	    {
             	    otherlv_11=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -2957,11 +2965,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_11, grammarAccess.getObject2Access().getLongDescriptionKeyword_5_1_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:1143:9: ( (lv_longDescription_12_0= RULE_STRING ) )
-            	    // InternalBug304681TestLanguage.g:1144:10: (lv_longDescription_12_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:1148:9: ( (lv_longDescription_12_0= RULE_STRING ) )
+            	    // InternalBug304681TestLanguage.g:1149:10: (lv_longDescription_12_0= RULE_STRING )
             	    {
-            	    // InternalBug304681TestLanguage.g:1144:10: (lv_longDescription_12_0= RULE_STRING )
-            	    // InternalBug304681TestLanguage.g:1145:11: lv_longDescription_12_0= RULE_STRING
+            	    // InternalBug304681TestLanguage.g:1149:10: (lv_longDescription_12_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:1150:11: lv_longDescription_12_0= RULE_STRING
             	    {
             	    lv_longDescription_12_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -3010,28 +3018,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 3 :
-            	    // InternalBug304681TestLanguage.g:1171:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1176:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1171:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:1172:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1176:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1177:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1172:104: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:1173:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1177:104: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1178:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2);
-            	    // InternalBug304681TestLanguage.g:1176:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
-            	    // InternalBug304681TestLanguage.g:1176:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+            	    // InternalBug304681TestLanguage.g:1181:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1181:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:1176:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
-            	    // InternalBug304681TestLanguage.g:1176:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
+            	    // InternalBug304681TestLanguage.g:1181:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+            	    // InternalBug304681TestLanguage.g:1181:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
             	    {
             	    otherlv_14=(Token)match(input,22,FollowSets000.FOLLOW_12); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -3039,11 +3047,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_14, grammarAccess.getObject2Access().getSerialUIDKeyword_5_2_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:1180:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
-            	    // InternalBug304681TestLanguage.g:1181:10: (lv_serialVersionUID_15_0= RULE_INT )
+            	    // InternalBug304681TestLanguage.g:1185:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
+            	    // InternalBug304681TestLanguage.g:1186:10: (lv_serialVersionUID_15_0= RULE_INT )
             	    {
-            	    // InternalBug304681TestLanguage.g:1181:10: (lv_serialVersionUID_15_0= RULE_INT )
-            	    // InternalBug304681TestLanguage.g:1182:11: lv_serialVersionUID_15_0= RULE_INT
+            	    // InternalBug304681TestLanguage.g:1186:10: (lv_serialVersionUID_15_0= RULE_INT )
+            	    // InternalBug304681TestLanguage.g:1187:11: lv_serialVersionUID_15_0= RULE_INT
             	    {
             	    lv_serialVersionUID_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -3092,34 +3100,34 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 4 :
-            	    // InternalBug304681TestLanguage.g:1208:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1213:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1208:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:1209:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1213:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1214:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1209:104: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:1210:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1214:104: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1215:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3);
-            	    // InternalBug304681TestLanguage.g:1213:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
-            	    // InternalBug304681TestLanguage.g:1213:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+            	    // InternalBug304681TestLanguage.g:1218:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1218:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:1213:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
-            	    // InternalBug304681TestLanguage.g:1213:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
+            	    // InternalBug304681TestLanguage.g:1218:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+            	    // InternalBug304681TestLanguage.g:1218:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
             	    {
-            	    // InternalBug304681TestLanguage.g:1213:20: ( (lv_cloneable_17_0= 'cloneable' ) )
-            	    // InternalBug304681TestLanguage.g:1214:10: (lv_cloneable_17_0= 'cloneable' )
+            	    // InternalBug304681TestLanguage.g:1218:20: ( (lv_cloneable_17_0= 'cloneable' ) )
+            	    // InternalBug304681TestLanguage.g:1219:10: (lv_cloneable_17_0= 'cloneable' )
             	    {
-            	    // InternalBug304681TestLanguage.g:1214:10: (lv_cloneable_17_0= 'cloneable' )
-            	    // InternalBug304681TestLanguage.g:1215:11: lv_cloneable_17_0= 'cloneable'
+            	    // InternalBug304681TestLanguage.g:1219:10: (lv_cloneable_17_0= 'cloneable' )
+            	    // InternalBug304681TestLanguage.g:1220:11: lv_cloneable_17_0= 'cloneable'
             	    {
             	    lv_cloneable_17_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -3164,20 +3172,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 5 :
-            	    // InternalBug304681TestLanguage.g:1237:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
+            	    // InternalBug304681TestLanguage.g:1242:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1237:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
-            	    // InternalBug304681TestLanguage.g:1238:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
+            	    // InternalBug304681TestLanguage.g:1242:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
+            	    // InternalBug304681TestLanguage.g:1243:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1238:104: ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
-            	    // InternalBug304681TestLanguage.g:1239:6: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
+            	    // InternalBug304681TestLanguage.g:1243:104: ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
+            	    // InternalBug304681TestLanguage.g:1244:6: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4);
-            	    // InternalBug304681TestLanguage.g:1242:9: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
+            	    // InternalBug304681TestLanguage.g:1247:9: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
             	    int cnt17=0;
             	    loop17:
             	    do {
@@ -3206,17 +3214,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt17) {
             	    	case 1 :
-            	    	    // InternalBug304681TestLanguage.g:1242:10: {...}? => ( (lv_features_19_0= ruleFeature2 ) )
+            	    	    // InternalBug304681TestLanguage.g:1247:10: {...}? => ( (lv_features_19_0= ruleFeature2 ) )
             	    	    {
             	    	    if ( !((true)) ) {
             	    	        if (state.backtracking>0) {state.failed=true; return current;}
             	    	        throw new FailedPredicateException(input, "ruleObject2", "true");
             	    	    }
-            	    	    // InternalBug304681TestLanguage.g:1242:19: ( (lv_features_19_0= ruleFeature2 ) )
-            	    	    // InternalBug304681TestLanguage.g:1242:20: (lv_features_19_0= ruleFeature2 )
+            	    	    // InternalBug304681TestLanguage.g:1247:19: ( (lv_features_19_0= ruleFeature2 ) )
+            	    	    // InternalBug304681TestLanguage.g:1247:20: (lv_features_19_0= ruleFeature2 )
             	    	    {
-            	    	    // InternalBug304681TestLanguage.g:1242:20: (lv_features_19_0= ruleFeature2 )
-            	    	    // InternalBug304681TestLanguage.g:1243:10: lv_features_19_0= ruleFeature2
+            	    	    // InternalBug304681TestLanguage.g:1247:20: (lv_features_19_0= ruleFeature2 )
+            	    	    // InternalBug304681TestLanguage.g:1248:10: lv_features_19_0= ruleFeature2
             	    	    {
             	    	    if ( state.backtracking==0 ) {
 
@@ -3321,7 +3329,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFeature2"
-    // InternalBug304681TestLanguage.g:1283:1: entryRuleFeature2 returns [EObject current=null] : iv_ruleFeature2= ruleFeature2 EOF ;
+    // InternalBug304681TestLanguage.g:1288:1: entryRuleFeature2 returns [EObject current=null] : iv_ruleFeature2= ruleFeature2 EOF ;
     public final EObject entryRuleFeature2() throws RecognitionException {
         EObject current = null;
 
@@ -3329,8 +3337,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug304681TestLanguage.g:1283:49: (iv_ruleFeature2= ruleFeature2 EOF )
-            // InternalBug304681TestLanguage.g:1284:2: iv_ruleFeature2= ruleFeature2 EOF
+            // InternalBug304681TestLanguage.g:1288:49: (iv_ruleFeature2= ruleFeature2 EOF )
+            // InternalBug304681TestLanguage.g:1289:2: iv_ruleFeature2= ruleFeature2 EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFeature2Rule()); 
@@ -3361,7 +3369,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFeature2"
-    // InternalBug304681TestLanguage.g:1290:1: ruleFeature2 returns [EObject current=null] : (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 ) ;
+    // InternalBug304681TestLanguage.g:1295:1: ruleFeature2 returns [EObject current=null] : (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 ) ;
     public final EObject ruleFeature2() throws RecognitionException {
         EObject current = null;
 
@@ -3374,10 +3382,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug304681TestLanguage.g:1296:2: ( (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 ) )
-            // InternalBug304681TestLanguage.g:1297:2: (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 )
+            // InternalBug304681TestLanguage.g:1301:2: ( (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 ) )
+            // InternalBug304681TestLanguage.g:1302:2: (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 )
             {
-            // InternalBug304681TestLanguage.g:1297:2: (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 )
+            // InternalBug304681TestLanguage.g:1302:2: (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -3396,7 +3404,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt19) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1298:3: this_Attribute2_0= ruleAttribute2
+                    // InternalBug304681TestLanguage.g:1303:3: this_Attribute2_0= ruleAttribute2
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3423,7 +3431,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:1310:3: this_Reference2_1= ruleReference2
+                    // InternalBug304681TestLanguage.g:1315:3: this_Reference2_1= ruleReference2
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3474,7 +3482,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAttribute2"
-    // InternalBug304681TestLanguage.g:1325:1: entryRuleAttribute2 returns [EObject current=null] : iv_ruleAttribute2= ruleAttribute2 EOF ;
+    // InternalBug304681TestLanguage.g:1330:1: entryRuleAttribute2 returns [EObject current=null] : iv_ruleAttribute2= ruleAttribute2 EOF ;
     public final EObject entryRuleAttribute2() throws RecognitionException {
         EObject current = null;
 
@@ -3487,8 +3495,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1329:2: (iv_ruleAttribute2= ruleAttribute2 EOF )
-            // InternalBug304681TestLanguage.g:1330:2: iv_ruleAttribute2= ruleAttribute2 EOF
+            // InternalBug304681TestLanguage.g:1334:2: (iv_ruleAttribute2= ruleAttribute2 EOF )
+            // InternalBug304681TestLanguage.g:1335:2: iv_ruleAttribute2= ruleAttribute2 EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getAttribute2Rule()); 
@@ -3522,7 +3530,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAttribute2"
-    // InternalBug304681TestLanguage.g:1339:1: ruleAttribute2 returns [EObject current=null] : (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) ) ;
+    // InternalBug304681TestLanguage.g:1344:1: ruleAttribute2 returns [EObject current=null] : (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) ) ;
     public final EObject ruleAttribute2() throws RecognitionException {
         EObject current = null;
 
@@ -3552,11 +3560,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1348:2: ( (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) ) )
-            // InternalBug304681TestLanguage.g:1349:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) )
+            // InternalBug304681TestLanguage.g:1353:2: ( (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) ) )
+            // InternalBug304681TestLanguage.g:1354:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) )
             {
-            // InternalBug304681TestLanguage.g:1349:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) )
-            // InternalBug304681TestLanguage.g:1350:3: otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' )
+            // InternalBug304681TestLanguage.g:1354:2: (otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' ) )
+            // InternalBug304681TestLanguage.g:1355:3: otherlv_0= 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' )
             {
             otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3564,11 +3572,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_0, grammarAccess.getAttribute2Access().getAttributeKeyword_0());
               		
             }
-            // InternalBug304681TestLanguage.g:1354:3: ( (lv_type_1_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:1355:4: (lv_type_1_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1359:3: ( (lv_type_1_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:1360:4: (lv_type_1_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:1355:4: (lv_type_1_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:1356:5: lv_type_1_0= RULE_ID
+            // InternalBug304681TestLanguage.g:1360:4: (lv_type_1_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1361:5: lv_type_1_0= RULE_ID
             {
             lv_type_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3594,11 +3602,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:1372:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:1373:4: (lv_name_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1377:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:1378:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:1373:4: (lv_name_2_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:1374:5: lv_name_2_0= RULE_ID
+            // InternalBug304681TestLanguage.g:1378:4: (lv_name_2_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1379:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_16); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3624,7 +3632,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:1390:3: ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' )
+            // InternalBug304681TestLanguage.g:1395:3: ( (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' ) | otherlv_17= ';' )
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -3643,10 +3651,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt22) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1391:4: (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' )
+                    // InternalBug304681TestLanguage.g:1396:4: (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' )
                     {
-                    // InternalBug304681TestLanguage.g:1391:4: (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' )
-                    // InternalBug304681TestLanguage.g:1392:5: otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}'
+                    // InternalBug304681TestLanguage.g:1396:4: (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}' )
+                    // InternalBug304681TestLanguage.g:1397:5: otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) ) otherlv_16= '}'
                     {
                     otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_19); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3654,17 +3662,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       					newLeafNode(otherlv_3, grammarAccess.getAttribute2Access().getLeftCurlyBracketKeyword_3_0_0());
                       				
                     }
-                    // InternalBug304681TestLanguage.g:1396:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) )
-                    // InternalBug304681TestLanguage.g:1397:6: ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) )
+                    // InternalBug304681TestLanguage.g:1401:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) ) )
+                    // InternalBug304681TestLanguage.g:1402:6: ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) )
                     {
-                    // InternalBug304681TestLanguage.g:1397:6: ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) )
-                    // InternalBug304681TestLanguage.g:1398:7: ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* )
+                    // InternalBug304681TestLanguage.g:1402:6: ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* ) )
+                    // InternalBug304681TestLanguage.g:1403:7: ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* )
                     {
                     getUnorderedGroupHelper().enter(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1());
-                    // InternalBug304681TestLanguage.g:1401:7: ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* )
-                    // InternalBug304681TestLanguage.g:1402:8: ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )*
+                    // InternalBug304681TestLanguage.g:1406:7: ( ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )* )
+                    // InternalBug304681TestLanguage.g:1407:8: ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )*
                     {
-                    // InternalBug304681TestLanguage.g:1402:8: ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )*
+                    // InternalBug304681TestLanguage.g:1407:8: ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) | ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )*
                     loop21:
                     do {
                         int alt21=6;
@@ -3689,28 +3697,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt21) {
                     	case 1 :
-                    	    // InternalBug304681TestLanguage.g:1403:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1408:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1403:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:1404:7: {...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1408:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1409:7: {...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1404:113: ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:1405:8: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1409:113: ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1410:8: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0);
-                    	    // InternalBug304681TestLanguage.g:1408:11: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:1408:12: {...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
+                    	    // InternalBug304681TestLanguage.g:1413:11: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1413:12: {...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1408:21: (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
-                    	    // InternalBug304681TestLanguage.g:1408:22: otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';'
+                    	    // InternalBug304681TestLanguage.g:1413:21: (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
+                    	    // InternalBug304681TestLanguage.g:1413:22: otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';'
                     	    {
                     	    otherlv_5=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -3718,11 +3726,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      											newLeafNode(otherlv_5, grammarAccess.getAttribute2Access().getShortDescriptionKeyword_3_0_1_0_0());
                     	      										
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1412:11: ( (lv_shortDescription_6_0= RULE_STRING ) )
-                    	    // InternalBug304681TestLanguage.g:1413:12: (lv_shortDescription_6_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1417:11: ( (lv_shortDescription_6_0= RULE_STRING ) )
+                    	    // InternalBug304681TestLanguage.g:1418:12: (lv_shortDescription_6_0= RULE_STRING )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1413:12: (lv_shortDescription_6_0= RULE_STRING )
-                    	    // InternalBug304681TestLanguage.g:1414:13: lv_shortDescription_6_0= RULE_STRING
+                    	    // InternalBug304681TestLanguage.g:1418:12: (lv_shortDescription_6_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1419:13: lv_shortDescription_6_0= RULE_STRING
                     	    {
                     	    lv_shortDescription_6_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -3771,28 +3779,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBug304681TestLanguage.g:1440:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1445:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1440:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:1441:7: {...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1445:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1446:7: {...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1441:113: ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:1442:8: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1446:113: ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1447:8: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1);
-                    	    // InternalBug304681TestLanguage.g:1445:11: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:1445:12: {...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+                    	    // InternalBug304681TestLanguage.g:1450:11: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1450:12: {...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1445:21: (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
-                    	    // InternalBug304681TestLanguage.g:1445:22: otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
+                    	    // InternalBug304681TestLanguage.g:1450:21: (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+                    	    // InternalBug304681TestLanguage.g:1450:22: otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
                     	    {
                     	    otherlv_8=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -3800,11 +3808,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      											newLeafNode(otherlv_8, grammarAccess.getAttribute2Access().getLongDescriptionKeyword_3_0_1_1_0());
                     	      										
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1449:11: ( (lv_longDescription_9_0= RULE_STRING ) )
-                    	    // InternalBug304681TestLanguage.g:1450:12: (lv_longDescription_9_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1454:11: ( (lv_longDescription_9_0= RULE_STRING ) )
+                    	    // InternalBug304681TestLanguage.g:1455:12: (lv_longDescription_9_0= RULE_STRING )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1450:12: (lv_longDescription_9_0= RULE_STRING )
-                    	    // InternalBug304681TestLanguage.g:1451:13: lv_longDescription_9_0= RULE_STRING
+                    	    // InternalBug304681TestLanguage.g:1455:12: (lv_longDescription_9_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1456:13: lv_longDescription_9_0= RULE_STRING
                     	    {
                     	    lv_longDescription_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -3853,20 +3861,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 3 :
-                    	    // InternalBug304681TestLanguage.g:1477:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
+                    	    // InternalBug304681TestLanguage.g:1482:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1477:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
-                    	    // InternalBug304681TestLanguage.g:1478:7: {...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
+                    	    // InternalBug304681TestLanguage.g:1482:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
+                    	    // InternalBug304681TestLanguage.g:1483:7: {...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1478:113: ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
-                    	    // InternalBug304681TestLanguage.g:1479:8: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
+                    	    // InternalBug304681TestLanguage.g:1483:113: ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
+                    	    // InternalBug304681TestLanguage.g:1484:8: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2);
-                    	    // InternalBug304681TestLanguage.g:1482:11: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
+                    	    // InternalBug304681TestLanguage.g:1487:11: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
                     	    int cnt20=0;
                     	    loop20:
                     	    do {
@@ -3886,17 +3894,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt20) {
                     	    	case 1 :
-                    	    	    // InternalBug304681TestLanguage.g:1482:12: {...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
+                    	    	    // InternalBug304681TestLanguage.g:1487:12: {...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
                     	    	    {
                     	    	    if ( !((true)) ) {
                     	    	        if (state.backtracking>0) {state.failed=true; return current;}
                     	    	        throw new FailedPredicateException(input, "ruleAttribute2", "true");
                     	    	    }
-                    	    	    // InternalBug304681TestLanguage.g:1482:21: ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
-                    	    	    // InternalBug304681TestLanguage.g:1482:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
+                    	    	    // InternalBug304681TestLanguage.g:1487:21: ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
+                    	    	    // InternalBug304681TestLanguage.g:1487:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
                     	    	    {
-                    	    	    // InternalBug304681TestLanguage.g:1482:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
-                    	    	    // InternalBug304681TestLanguage.g:1483:12: lv_constraintDefinitions_11_0= ruleConstraintDefinition
+                    	    	    // InternalBug304681TestLanguage.g:1487:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
+                    	    	    // InternalBug304681TestLanguage.g:1488:12: lv_constraintDefinitions_11_0= ruleConstraintDefinition
                     	    	    {
                     	    	    if ( state.backtracking==0 ) {
 
@@ -3952,34 +3960,34 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 4 :
-                    	    // InternalBug304681TestLanguage.g:1505:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1510:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1505:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:1506:7: {...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1510:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1511:7: {...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1506:113: ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:1507:8: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1511:113: ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1512:8: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3);
-                    	    // InternalBug304681TestLanguage.g:1510:11: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:1510:12: {...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
+                    	    // InternalBug304681TestLanguage.g:1515:11: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1515:12: {...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1510:21: ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
-                    	    // InternalBug304681TestLanguage.g:1510:22: ( (lv_required_12_0= 'required' ) ) otherlv_13= ';'
+                    	    // InternalBug304681TestLanguage.g:1515:21: ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
+                    	    // InternalBug304681TestLanguage.g:1515:22: ( (lv_required_12_0= 'required' ) ) otherlv_13= ';'
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1510:22: ( (lv_required_12_0= 'required' ) )
-                    	    // InternalBug304681TestLanguage.g:1511:12: (lv_required_12_0= 'required' )
+                    	    // InternalBug304681TestLanguage.g:1515:22: ( (lv_required_12_0= 'required' ) )
+                    	    // InternalBug304681TestLanguage.g:1516:12: (lv_required_12_0= 'required' )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1511:12: (lv_required_12_0= 'required' )
-                    	    // InternalBug304681TestLanguage.g:1512:13: lv_required_12_0= 'required'
+                    	    // InternalBug304681TestLanguage.g:1516:12: (lv_required_12_0= 'required' )
+                    	    // InternalBug304681TestLanguage.g:1517:13: lv_required_12_0= 'required'
                     	    {
                     	    lv_required_12_0=(Token)match(input,32,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4024,34 +4032,34 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 5 :
-                    	    // InternalBug304681TestLanguage.g:1534:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1539:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1534:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:1535:7: {...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1539:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1540:7: {...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1535:113: ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:1536:8: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1540:113: ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1541:8: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4);
-                    	    // InternalBug304681TestLanguage.g:1539:11: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:1539:12: {...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
+                    	    // InternalBug304681TestLanguage.g:1544:11: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1544:12: {...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1539:21: ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
-                    	    // InternalBug304681TestLanguage.g:1539:22: ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';'
+                    	    // InternalBug304681TestLanguage.g:1544:21: ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
+                    	    // InternalBug304681TestLanguage.g:1544:22: ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';'
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1539:22: ( (lv_technical_14_0= 'technical' ) )
-                    	    // InternalBug304681TestLanguage.g:1540:12: (lv_technical_14_0= 'technical' )
+                    	    // InternalBug304681TestLanguage.g:1544:22: ( (lv_technical_14_0= 'technical' ) )
+                    	    // InternalBug304681TestLanguage.g:1545:12: (lv_technical_14_0= 'technical' )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1540:12: (lv_technical_14_0= 'technical' )
-                    	    // InternalBug304681TestLanguage.g:1541:13: lv_technical_14_0= 'technical'
+                    	    // InternalBug304681TestLanguage.g:1545:12: (lv_technical_14_0= 'technical' )
+                    	    // InternalBug304681TestLanguage.g:1546:13: lv_technical_14_0= 'technical'
                     	    {
                     	    lv_technical_14_0=(Token)match(input,33,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4124,7 +4132,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:1576:4: otherlv_17= ';'
+                    // InternalBug304681TestLanguage.g:1581:4: otherlv_17= ';'
                     {
                     otherlv_17=(Token)match(input,14,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4166,7 +4174,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleReference2"
-    // InternalBug304681TestLanguage.g:1588:1: entryRuleReference2 returns [EObject current=null] : iv_ruleReference2= ruleReference2 EOF ;
+    // InternalBug304681TestLanguage.g:1593:1: entryRuleReference2 returns [EObject current=null] : iv_ruleReference2= ruleReference2 EOF ;
     public final EObject entryRuleReference2() throws RecognitionException {
         EObject current = null;
 
@@ -4179,8 +4187,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1592:2: (iv_ruleReference2= ruleReference2 EOF )
-            // InternalBug304681TestLanguage.g:1593:2: iv_ruleReference2= ruleReference2 EOF
+            // InternalBug304681TestLanguage.g:1597:2: (iv_ruleReference2= ruleReference2 EOF )
+            // InternalBug304681TestLanguage.g:1598:2: iv_ruleReference2= ruleReference2 EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getReference2Rule()); 
@@ -4214,7 +4222,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleReference2"
-    // InternalBug304681TestLanguage.g:1602:1: ruleReference2 returns [EObject current=null] : (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) ;
+    // InternalBug304681TestLanguage.g:1607:1: ruleReference2 returns [EObject current=null] : (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) ;
     public final EObject ruleReference2() throws RecognitionException {
         EObject current = null;
 
@@ -4239,11 +4247,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1611:2: ( (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) )
-            // InternalBug304681TestLanguage.g:1612:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
+            // InternalBug304681TestLanguage.g:1616:2: ( (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) ) )
+            // InternalBug304681TestLanguage.g:1617:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
             {
-            // InternalBug304681TestLanguage.g:1612:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
-            // InternalBug304681TestLanguage.g:1613:3: otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
+            // InternalBug304681TestLanguage.g:1617:2: (otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' ) )
+            // InternalBug304681TestLanguage.g:1618:3: otherlv_0= 'Reference' ( (otherlv_1= RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
             {
             otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -4251,11 +4259,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_0, grammarAccess.getReference2Access().getReferenceKeyword_0());
               		
             }
-            // InternalBug304681TestLanguage.g:1617:3: ( (otherlv_1= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:1618:4: (otherlv_1= RULE_ID )
+            // InternalBug304681TestLanguage.g:1622:3: ( (otherlv_1= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:1623:4: (otherlv_1= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:1618:4: (otherlv_1= RULE_ID )
-            // InternalBug304681TestLanguage.g:1619:5: otherlv_1= RULE_ID
+            // InternalBug304681TestLanguage.g:1623:4: (otherlv_1= RULE_ID )
+            // InternalBug304681TestLanguage.g:1624:5: otherlv_1= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -4281,7 +4289,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:1633:3: ( (lv_many_2_0= '*' ) )?
+            // InternalBug304681TestLanguage.g:1638:3: ( (lv_many_2_0= '*' ) )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -4290,10 +4298,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt23) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1634:4: (lv_many_2_0= '*' )
+                    // InternalBug304681TestLanguage.g:1639:4: (lv_many_2_0= '*' )
                     {
-                    // InternalBug304681TestLanguage.g:1634:4: (lv_many_2_0= '*' )
-                    // InternalBug304681TestLanguage.g:1635:5: lv_many_2_0= '*'
+                    // InternalBug304681TestLanguage.g:1639:4: (lv_many_2_0= '*' )
+                    // InternalBug304681TestLanguage.g:1640:5: lv_many_2_0= '*'
                     {
                     lv_many_2_0=(Token)match(input,31,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4318,11 +4326,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:1647:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:1648:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1652:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:1653:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:1648:4: (lv_name_3_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:1649:5: lv_name_3_0= RULE_ID
+            // InternalBug304681TestLanguage.g:1653:4: (lv_name_3_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1654:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_16); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -4348,7 +4356,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug304681TestLanguage.g:1665:3: ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
+            // InternalBug304681TestLanguage.g:1670:3: ( (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' ) | otherlv_13= ';' )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -4367,10 +4375,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt25) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1666:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
+                    // InternalBug304681TestLanguage.g:1671:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
                     {
-                    // InternalBug304681TestLanguage.g:1666:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
-                    // InternalBug304681TestLanguage.g:1667:5: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}'
+                    // InternalBug304681TestLanguage.g:1671:4: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}' )
+                    // InternalBug304681TestLanguage.g:1672:5: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) ) otherlv_12= '}'
                     {
                     otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_17); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4378,17 +4386,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       					newLeafNode(otherlv_4, grammarAccess.getReference2Access().getLeftCurlyBracketKeyword_4_0_0());
                       				
                     }
-                    // InternalBug304681TestLanguage.g:1671:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) )
-                    // InternalBug304681TestLanguage.g:1672:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
+                    // InternalBug304681TestLanguage.g:1676:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) ) )
+                    // InternalBug304681TestLanguage.g:1677:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
                     {
-                    // InternalBug304681TestLanguage.g:1672:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
-                    // InternalBug304681TestLanguage.g:1673:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
+                    // InternalBug304681TestLanguage.g:1677:6: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* ) )
+                    // InternalBug304681TestLanguage.g:1678:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
                     {
                     getUnorderedGroupHelper().enter(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1());
-                    // InternalBug304681TestLanguage.g:1676:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
-                    // InternalBug304681TestLanguage.g:1677:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
+                    // InternalBug304681TestLanguage.g:1681:7: ( ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )* )
+                    // InternalBug304681TestLanguage.g:1682:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
                     {
-                    // InternalBug304681TestLanguage.g:1677:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
+                    // InternalBug304681TestLanguage.g:1682:8: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )*
                     loop24:
                     do {
                         int alt24=3;
@@ -4404,28 +4412,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt24) {
                     	case 1 :
-                    	    // InternalBug304681TestLanguage.g:1678:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1683:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1678:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:1679:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1683:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1684:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference2", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1679:113: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:1680:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1684:113: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1685:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0);
-                    	    // InternalBug304681TestLanguage.g:1683:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:1683:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+                    	    // InternalBug304681TestLanguage.g:1688:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1688:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference2", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1683:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
-                    	    // InternalBug304681TestLanguage.g:1683:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
+                    	    // InternalBug304681TestLanguage.g:1688:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+                    	    // InternalBug304681TestLanguage.g:1688:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
                     	    {
                     	    otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4433,11 +4441,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      											newLeafNode(otherlv_6, grammarAccess.getReference2Access().getShortDescriptionKeyword_4_0_1_0_0());
                     	      										
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1687:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
-                    	    // InternalBug304681TestLanguage.g:1688:12: (lv_shortDescription_7_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1692:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
+                    	    // InternalBug304681TestLanguage.g:1693:12: (lv_shortDescription_7_0= RULE_STRING )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1688:12: (lv_shortDescription_7_0= RULE_STRING )
-                    	    // InternalBug304681TestLanguage.g:1689:13: lv_shortDescription_7_0= RULE_STRING
+                    	    // InternalBug304681TestLanguage.g:1693:12: (lv_shortDescription_7_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1694:13: lv_shortDescription_7_0= RULE_STRING
                     	    {
                     	    lv_shortDescription_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4486,28 +4494,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBug304681TestLanguage.g:1715:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1720:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1715:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
-                    	    // InternalBug304681TestLanguage.g:1716:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1720:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+                    	    // InternalBug304681TestLanguage.g:1721:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference2", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1)");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1716:113: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
-                    	    // InternalBug304681TestLanguage.g:1717:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1721:113: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+                    	    // InternalBug304681TestLanguage.g:1722:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1);
-                    	    // InternalBug304681TestLanguage.g:1720:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
-                    	    // InternalBug304681TestLanguage.g:1720:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+                    	    // InternalBug304681TestLanguage.g:1725:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+                    	    // InternalBug304681TestLanguage.g:1725:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
                     	    {
                     	    if ( !((true)) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleReference2", "true");
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1720:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
-                    	    // InternalBug304681TestLanguage.g:1720:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
+                    	    // InternalBug304681TestLanguage.g:1725:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+                    	    // InternalBug304681TestLanguage.g:1725:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
                     	    {
                     	    otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4515,11 +4523,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      											newLeafNode(otherlv_9, grammarAccess.getReference2Access().getLongDescriptionKeyword_4_0_1_1_0());
                     	      										
                     	    }
-                    	    // InternalBug304681TestLanguage.g:1724:11: ( (lv_longDescription_10_0= RULE_STRING ) )
-                    	    // InternalBug304681TestLanguage.g:1725:12: (lv_longDescription_10_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1729:11: ( (lv_longDescription_10_0= RULE_STRING ) )
+                    	    // InternalBug304681TestLanguage.g:1730:12: (lv_longDescription_10_0= RULE_STRING )
                     	    {
-                    	    // InternalBug304681TestLanguage.g:1725:12: (lv_longDescription_10_0= RULE_STRING )
-                    	    // InternalBug304681TestLanguage.g:1726:13: lv_longDescription_10_0= RULE_STRING
+                    	    // InternalBug304681TestLanguage.g:1730:12: (lv_longDescription_10_0= RULE_STRING )
+                    	    // InternalBug304681TestLanguage.g:1731:13: lv_longDescription_10_0= RULE_STRING
                     	    {
                     	    lv_longDescription_10_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4596,7 +4604,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:1765:4: otherlv_13= ';'
+                    // InternalBug304681TestLanguage.g:1770:4: otherlv_13= ';'
                     {
                     otherlv_13=(Token)match(input,14,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4638,7 +4646,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleConstraintDefinition"
-    // InternalBug304681TestLanguage.g:1777:1: entryRuleConstraintDefinition returns [EObject current=null] : iv_ruleConstraintDefinition= ruleConstraintDefinition EOF ;
+    // InternalBug304681TestLanguage.g:1782:1: entryRuleConstraintDefinition returns [EObject current=null] : iv_ruleConstraintDefinition= ruleConstraintDefinition EOF ;
     public final EObject entryRuleConstraintDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -4651,8 +4659,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1781:2: (iv_ruleConstraintDefinition= ruleConstraintDefinition EOF )
-            // InternalBug304681TestLanguage.g:1782:2: iv_ruleConstraintDefinition= ruleConstraintDefinition EOF
+            // InternalBug304681TestLanguage.g:1786:2: (iv_ruleConstraintDefinition= ruleConstraintDefinition EOF )
+            // InternalBug304681TestLanguage.g:1787:2: iv_ruleConstraintDefinition= ruleConstraintDefinition EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getConstraintDefinitionRule()); 
@@ -4686,7 +4694,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleConstraintDefinition"
-    // InternalBug304681TestLanguage.g:1791:1: ruleConstraintDefinition returns [EObject current=null] : (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' ) ;
+    // InternalBug304681TestLanguage.g:1796:1: ruleConstraintDefinition returns [EObject current=null] : (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' ) ;
     public final EObject ruleConstraintDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -4708,11 +4716,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	);
 
         try {
-            // InternalBug304681TestLanguage.g:1800:2: ( (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' ) )
-            // InternalBug304681TestLanguage.g:1801:2: (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' )
+            // InternalBug304681TestLanguage.g:1805:2: ( (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' ) )
+            // InternalBug304681TestLanguage.g:1806:2: (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' )
             {
-            // InternalBug304681TestLanguage.g:1801:2: (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' )
-            // InternalBug304681TestLanguage.g:1802:3: otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}'
+            // InternalBug304681TestLanguage.g:1806:2: (otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}' )
+            // InternalBug304681TestLanguage.g:1807:3: otherlv_0= 'constraint' ( (lv_type_1_0= RULE_ID ) ) otherlv_2= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) ) otherlv_10= '}'
             {
             otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -4720,11 +4728,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_0, grammarAccess.getConstraintDefinitionAccess().getConstraintKeyword_0());
               		
             }
-            // InternalBug304681TestLanguage.g:1806:3: ( (lv_type_1_0= RULE_ID ) )
-            // InternalBug304681TestLanguage.g:1807:4: (lv_type_1_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1811:3: ( (lv_type_1_0= RULE_ID ) )
+            // InternalBug304681TestLanguage.g:1812:4: (lv_type_1_0= RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:1807:4: (lv_type_1_0= RULE_ID )
-            // InternalBug304681TestLanguage.g:1808:5: lv_type_1_0= RULE_ID
+            // InternalBug304681TestLanguage.g:1812:4: (lv_type_1_0= RULE_ID )
+            // InternalBug304681TestLanguage.g:1813:5: lv_type_1_0= RULE_ID
             {
             lv_type_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -4756,17 +4764,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
               			newLeafNode(otherlv_2, grammarAccess.getConstraintDefinitionAccess().getLeftCurlyBracketKeyword_2());
               		
             }
-            // InternalBug304681TestLanguage.g:1828:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) )
-            // InternalBug304681TestLanguage.g:1829:4: ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) )
+            // InternalBug304681TestLanguage.g:1833:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) ) )
+            // InternalBug304681TestLanguage.g:1834:4: ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) )
             {
-            // InternalBug304681TestLanguage.g:1829:4: ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) )
-            // InternalBug304681TestLanguage.g:1830:5: ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?)
+            // InternalBug304681TestLanguage.g:1834:4: ( ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?) )
+            // InternalBug304681TestLanguage.g:1835:5: ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?)
             {
             getUnorderedGroupHelper().enter(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3());
-            // InternalBug304681TestLanguage.g:1833:5: ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?)
-            // InternalBug304681TestLanguage.g:1834:6: ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?
+            // InternalBug304681TestLanguage.g:1838:5: ( ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?)
+            // InternalBug304681TestLanguage.g:1839:6: ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+ {...}?
             {
-            // InternalBug304681TestLanguage.g:1834:6: ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+
+            // InternalBug304681TestLanguage.g:1839:6: ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )+
             int cnt27=0;
             loop27:
             do {
@@ -4783,28 +4791,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt27) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:1835:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1840:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1835:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:1836:5: {...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1840:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1841:5: {...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleConstraintDefinition", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1836:117: ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:1837:6: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1841:117: ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1842:6: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0);
-            	    // InternalBug304681TestLanguage.g:1840:9: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
-            	    // InternalBug304681TestLanguage.g:1840:10: {...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
+            	    // InternalBug304681TestLanguage.g:1845:9: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1845:10: {...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleConstraintDefinition", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:1840:19: (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
-            	    // InternalBug304681TestLanguage.g:1840:20: otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';'
+            	    // InternalBug304681TestLanguage.g:1845:19: (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
+            	    // InternalBug304681TestLanguage.g:1845:20: otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';'
             	    {
             	    otherlv_4=(Token)match(input,35,FollowSets000.FOLLOW_21); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -4812,7 +4820,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_4, grammarAccess.getConstraintDefinitionAccess().getParametersKeyword_3_0_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:1844:9: ( (lv_parameters_5_0= RULE_STRING ) )*
+            	    // InternalBug304681TestLanguage.g:1849:9: ( (lv_parameters_5_0= RULE_STRING ) )*
             	    loop26:
             	    do {
             	        int alt26=2;
@@ -4825,10 +4833,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt26) {
             	    	case 1 :
-            	    	    // InternalBug304681TestLanguage.g:1845:10: (lv_parameters_5_0= RULE_STRING )
+            	    	    // InternalBug304681TestLanguage.g:1850:10: (lv_parameters_5_0= RULE_STRING )
             	    	    {
-            	    	    // InternalBug304681TestLanguage.g:1845:10: (lv_parameters_5_0= RULE_STRING )
-            	    	    // InternalBug304681TestLanguage.g:1846:11: lv_parameters_5_0= RULE_STRING
+            	    	    // InternalBug304681TestLanguage.g:1850:10: (lv_parameters_5_0= RULE_STRING )
+            	    	    // InternalBug304681TestLanguage.g:1851:11: lv_parameters_5_0= RULE_STRING
             	    	    {
             	    	    lv_parameters_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_21); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
@@ -4883,28 +4891,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // InternalBug304681TestLanguage.g:1872:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1877:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
             	    {
-            	    // InternalBug304681TestLanguage.g:1872:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
-            	    // InternalBug304681TestLanguage.g:1873:5: {...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1877:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
+            	    // InternalBug304681TestLanguage.g:1878:5: {...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleConstraintDefinition", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1)");
             	    }
-            	    // InternalBug304681TestLanguage.g:1873:117: ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
-            	    // InternalBug304681TestLanguage.g:1874:6: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1878:117: ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
+            	    // InternalBug304681TestLanguage.g:1879:6: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1);
-            	    // InternalBug304681TestLanguage.g:1877:9: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
-            	    // InternalBug304681TestLanguage.g:1877:10: {...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
+            	    // InternalBug304681TestLanguage.g:1882:9: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
+            	    // InternalBug304681TestLanguage.g:1882:10: {...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleConstraintDefinition", "true");
             	    }
-            	    // InternalBug304681TestLanguage.g:1877:19: (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
-            	    // InternalBug304681TestLanguage.g:1877:20: otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';'
+            	    // InternalBug304681TestLanguage.g:1882:19: (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
+            	    // InternalBug304681TestLanguage.g:1882:20: otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';'
             	    {
             	    otherlv_7=(Token)match(input,36,FollowSets000.FOLLOW_11); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -4912,11 +4920,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      									newLeafNode(otherlv_7, grammarAccess.getConstraintDefinitionAccess().getMessageKeyword_3_1_0());
             	      								
             	    }
-            	    // InternalBug304681TestLanguage.g:1881:9: ( (lv_message_8_0= RULE_STRING ) )
-            	    // InternalBug304681TestLanguage.g:1882:10: (lv_message_8_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:1886:9: ( (lv_message_8_0= RULE_STRING ) )
+            	    // InternalBug304681TestLanguage.g:1887:10: (lv_message_8_0= RULE_STRING )
             	    {
-            	    // InternalBug304681TestLanguage.g:1882:10: (lv_message_8_0= RULE_STRING )
-            	    // InternalBug304681TestLanguage.g:1883:11: lv_message_8_0= RULE_STRING
+            	    // InternalBug304681TestLanguage.g:1887:10: (lv_message_8_0= RULE_STRING )
+            	    // InternalBug304681TestLanguage.g:1888:11: lv_message_8_0= RULE_STRING
             	    {
             	    lv_message_8_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -5027,36 +5035,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_9_0=null;
         Token otherlv_10=null;
 
-        // InternalBug304681TestLanguage.g:326:4: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:326:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:331:4: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:326:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:327:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+        // InternalBug304681TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:332:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred6_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)");
         }
-        // InternalBug304681TestLanguage.g:327:103: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
-        // InternalBug304681TestLanguage.g:328:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+        // InternalBug304681TestLanguage.g:332:103: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+        // InternalBug304681TestLanguage.g:333:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0);
-        // InternalBug304681TestLanguage.g:331:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
-        // InternalBug304681TestLanguage.g:331:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+        // InternalBug304681TestLanguage.g:336:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+        // InternalBug304681TestLanguage.g:336:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred6_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:331:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
-        // InternalBug304681TestLanguage.g:331:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
+        // InternalBug304681TestLanguage.g:336:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+        // InternalBug304681TestLanguage.g:336:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
         {
         otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:335:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:336:10: (lv_shortDescription_9_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:340:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:341:10: (lv_shortDescription_9_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:336:10: (lv_shortDescription_9_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:337:11: lv_shortDescription_9_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:341:10: (lv_shortDescription_9_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:342:11: lv_shortDescription_9_0= RULE_STRING
         {
         lv_shortDescription_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5089,36 +5097,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_longDescription_12_0=null;
         Token otherlv_13=null;
 
-        // InternalBug304681TestLanguage.g:363:4: ( ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:363:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:368:4: ( ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:368:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:363:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:364:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+        // InternalBug304681TestLanguage.g:368:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:369:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred7_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)");
         }
-        // InternalBug304681TestLanguage.g:364:103: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
-        // InternalBug304681TestLanguage.g:365:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+        // InternalBug304681TestLanguage.g:369:103: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+        // InternalBug304681TestLanguage.g:370:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1);
-        // InternalBug304681TestLanguage.g:368:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
-        // InternalBug304681TestLanguage.g:368:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+        // InternalBug304681TestLanguage.g:373:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+        // InternalBug304681TestLanguage.g:373:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred7_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:368:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
-        // InternalBug304681TestLanguage.g:368:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
+        // InternalBug304681TestLanguage.g:373:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+        // InternalBug304681TestLanguage.g:373:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
         {
         otherlv_11=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:372:9: ( (lv_longDescription_12_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:373:10: (lv_longDescription_12_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:377:9: ( (lv_longDescription_12_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:378:10: (lv_longDescription_12_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:373:10: (lv_longDescription_12_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:374:11: lv_longDescription_12_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:378:10: (lv_longDescription_12_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:379:11: lv_longDescription_12_0= RULE_STRING
         {
         lv_longDescription_12_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5151,36 +5159,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_serialVersionUID_15_0=null;
         Token otherlv_16=null;
 
-        // InternalBug304681TestLanguage.g:400:4: ( ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:400:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:405:4: ( ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:405:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:400:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:401:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+        // InternalBug304681TestLanguage.g:405:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:406:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred8_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)");
         }
-        // InternalBug304681TestLanguage.g:401:103: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
-        // InternalBug304681TestLanguage.g:402:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+        // InternalBug304681TestLanguage.g:406:103: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+        // InternalBug304681TestLanguage.g:407:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2);
-        // InternalBug304681TestLanguage.g:405:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
-        // InternalBug304681TestLanguage.g:405:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+        // InternalBug304681TestLanguage.g:410:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+        // InternalBug304681TestLanguage.g:410:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred8_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:405:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
-        // InternalBug304681TestLanguage.g:405:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
+        // InternalBug304681TestLanguage.g:410:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+        // InternalBug304681TestLanguage.g:410:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
         {
         otherlv_14=(Token)match(input,22,FollowSets000.FOLLOW_12); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:409:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
-        // InternalBug304681TestLanguage.g:410:10: (lv_serialVersionUID_15_0= RULE_INT )
+        // InternalBug304681TestLanguage.g:414:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
+        // InternalBug304681TestLanguage.g:415:10: (lv_serialVersionUID_15_0= RULE_INT )
         {
-        // InternalBug304681TestLanguage.g:410:10: (lv_serialVersionUID_15_0= RULE_INT )
-        // InternalBug304681TestLanguage.g:411:11: lv_serialVersionUID_15_0= RULE_INT
+        // InternalBug304681TestLanguage.g:415:10: (lv_serialVersionUID_15_0= RULE_INT )
+        // InternalBug304681TestLanguage.g:416:11: lv_serialVersionUID_15_0= RULE_INT
         {
         lv_serialVersionUID_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5212,35 +5220,35 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_cloneable_17_0=null;
         Token otherlv_18=null;
 
-        // InternalBug304681TestLanguage.g:437:4: ( ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:437:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:442:4: ( ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:442:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:437:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:438:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+        // InternalBug304681TestLanguage.g:442:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:443:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)");
         }
-        // InternalBug304681TestLanguage.g:438:103: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
-        // InternalBug304681TestLanguage.g:439:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+        // InternalBug304681TestLanguage.g:443:103: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+        // InternalBug304681TestLanguage.g:444:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3);
-        // InternalBug304681TestLanguage.g:442:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
-        // InternalBug304681TestLanguage.g:442:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+        // InternalBug304681TestLanguage.g:447:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+        // InternalBug304681TestLanguage.g:447:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:442:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
-        // InternalBug304681TestLanguage.g:442:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
+        // InternalBug304681TestLanguage.g:447:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+        // InternalBug304681TestLanguage.g:447:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
         {
-        // InternalBug304681TestLanguage.g:442:20: ( (lv_cloneable_17_0= 'cloneable' ) )
-        // InternalBug304681TestLanguage.g:443:10: (lv_cloneable_17_0= 'cloneable' )
+        // InternalBug304681TestLanguage.g:447:20: ( (lv_cloneable_17_0= 'cloneable' ) )
+        // InternalBug304681TestLanguage.g:448:10: (lv_cloneable_17_0= 'cloneable' )
         {
-        // InternalBug304681TestLanguage.g:443:10: (lv_cloneable_17_0= 'cloneable' )
-        // InternalBug304681TestLanguage.g:444:11: lv_cloneable_17_0= 'cloneable'
+        // InternalBug304681TestLanguage.g:448:10: (lv_cloneable_17_0= 'cloneable' )
+        // InternalBug304681TestLanguage.g:449:11: lv_cloneable_17_0= 'cloneable'
         {
         lv_cloneable_17_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5272,18 +5280,18 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_19_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:471:10: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )
-        // InternalBug304681TestLanguage.g:471:10: {...}? => ( (lv_features_19_0= ruleFeature ) )
+        // InternalBug304681TestLanguage.g:476:10: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )
+        // InternalBug304681TestLanguage.g:476:10: {...}? => ( (lv_features_19_0= ruleFeature ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:471:19: ( (lv_features_19_0= ruleFeature ) )
-        // InternalBug304681TestLanguage.g:471:20: (lv_features_19_0= ruleFeature )
+        // InternalBug304681TestLanguage.g:476:19: ( (lv_features_19_0= ruleFeature ) )
+        // InternalBug304681TestLanguage.g:476:20: (lv_features_19_0= ruleFeature )
         {
-        // InternalBug304681TestLanguage.g:471:20: (lv_features_19_0= ruleFeature )
-        // InternalBug304681TestLanguage.g:472:10: lv_features_19_0= ruleFeature
+        // InternalBug304681TestLanguage.g:476:20: (lv_features_19_0= ruleFeature )
+        // InternalBug304681TestLanguage.g:477:10: lv_features_19_0= ruleFeature
         {
         if ( state.backtracking==0 ) {
 
@@ -5311,21 +5319,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_19_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:466:4: ( ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) )
-        // InternalBug304681TestLanguage.g:466:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
+        // InternalBug304681TestLanguage.g:471:4: ( ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) )
+        // InternalBug304681TestLanguage.g:471:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
         {
-        // InternalBug304681TestLanguage.g:466:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
-        // InternalBug304681TestLanguage.g:467:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
+        // InternalBug304681TestLanguage.g:471:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) )
+        // InternalBug304681TestLanguage.g:472:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred11_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
         }
-        // InternalBug304681TestLanguage.g:467:103: ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
-        // InternalBug304681TestLanguage.g:468:6: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
+        // InternalBug304681TestLanguage.g:472:103: ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ )
+        // InternalBug304681TestLanguage.g:473:6: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
-        // InternalBug304681TestLanguage.g:471:9: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
+        // InternalBug304681TestLanguage.g:476:9: ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+
         int cnt28=0;
         loop28:
         do {
@@ -5342,17 +5350,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt28) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:471:10: {...}? => ( (lv_features_19_0= ruleFeature ) )
+        	    // InternalBug304681TestLanguage.g:476:10: {...}? => ( (lv_features_19_0= ruleFeature ) )
         	    {
         	    if ( !((true)) ) {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        throw new FailedPredicateException(input, "synpred11_InternalBug304681TestLanguage", "true");
         	    }
-        	    // InternalBug304681TestLanguage.g:471:19: ( (lv_features_19_0= ruleFeature ) )
-        	    // InternalBug304681TestLanguage.g:471:20: (lv_features_19_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:476:19: ( (lv_features_19_0= ruleFeature ) )
+        	    // InternalBug304681TestLanguage.g:476:20: (lv_features_19_0= ruleFeature )
         	    {
-        	    // InternalBug304681TestLanguage.g:471:20: (lv_features_19_0= ruleFeature )
-        	    // InternalBug304681TestLanguage.g:472:10: lv_features_19_0= ruleFeature
+        	    // InternalBug304681TestLanguage.g:476:20: (lv_features_19_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:477:10: lv_features_19_0= ruleFeature
         	    {
         	    if ( state.backtracking==0 ) {
 
@@ -5402,32 +5410,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_21_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:494:4: ( ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:494:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
+        // InternalBug304681TestLanguage.g:499:4: ( ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:499:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:494:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
-        // InternalBug304681TestLanguage.g:495:5: {...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
+        // InternalBug304681TestLanguage.g:499:4: ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) )
+        // InternalBug304681TestLanguage.g:500:5: {...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred13_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)");
         }
-        // InternalBug304681TestLanguage.g:495:103: ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
-        // InternalBug304681TestLanguage.g:496:6: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
+        // InternalBug304681TestLanguage.g:500:103: ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) )
+        // InternalBug304681TestLanguage.g:501:6: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5);
-        // InternalBug304681TestLanguage.g:499:9: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
-        // InternalBug304681TestLanguage.g:499:10: {...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
+        // InternalBug304681TestLanguage.g:504:9: ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) )
+        // InternalBug304681TestLanguage.g:504:10: {...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred13_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:499:19: (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
-        // InternalBug304681TestLanguage.g:499:20: otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after'
+        // InternalBug304681TestLanguage.g:504:19: (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' )
+        // InternalBug304681TestLanguage.g:504:20: otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after'
         {
         otherlv_20=(Token)match(input,24,FollowSets000.FOLLOW_13); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:503:9: ( (lv_features_21_0= ruleFeature ) )*
+        // InternalBug304681TestLanguage.g:508:9: ( (lv_features_21_0= ruleFeature ) )*
         loop29:
         do {
             int alt29=2;
@@ -5440,10 +5448,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt29) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:504:10: (lv_features_21_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:509:10: (lv_features_21_0= ruleFeature )
         	    {
-        	    // InternalBug304681TestLanguage.g:504:10: (lv_features_21_0= ruleFeature )
-        	    // InternalBug304681TestLanguage.g:505:11: lv_features_21_0= ruleFeature
+        	    // InternalBug304681TestLanguage.g:509:10: (lv_features_21_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:510:11: lv_features_21_0= ruleFeature
         	    {
         	    if ( state.backtracking==0 ) {
 
@@ -5490,11 +5498,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_24_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:542:10: ( (lv_features_24_0= ruleFeature ) )
-        // InternalBug304681TestLanguage.g:542:10: (lv_features_24_0= ruleFeature )
+        // InternalBug304681TestLanguage.g:547:10: ( (lv_features_24_0= ruleFeature ) )
+        // InternalBug304681TestLanguage.g:547:10: (lv_features_24_0= ruleFeature )
         {
-        // InternalBug304681TestLanguage.g:542:10: (lv_features_24_0= ruleFeature )
-        // InternalBug304681TestLanguage.g:543:11: lv_features_24_0= ruleFeature
+        // InternalBug304681TestLanguage.g:547:10: (lv_features_24_0= ruleFeature )
+        // InternalBug304681TestLanguage.g:548:11: lv_features_24_0= ruleFeature
         {
         if ( state.backtracking==0 ) {
 
@@ -5520,32 +5528,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_24_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:532:4: ( ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) )
-        // InternalBug304681TestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
+        // InternalBug304681TestLanguage.g:537:4: ( ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) )
+        // InternalBug304681TestLanguage.g:537:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
-        // InternalBug304681TestLanguage.g:533:5: {...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
+        // InternalBug304681TestLanguage.g:537:4: ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) )
+        // InternalBug304681TestLanguage.g:538:5: {...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred15_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)");
         }
-        // InternalBug304681TestLanguage.g:533:103: ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
-        // InternalBug304681TestLanguage.g:534:6: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
+        // InternalBug304681TestLanguage.g:538:103: ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
+        // InternalBug304681TestLanguage.g:539:6: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6);
-        // InternalBug304681TestLanguage.g:537:9: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
-        // InternalBug304681TestLanguage.g:537:10: {...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
+        // InternalBug304681TestLanguage.g:542:9: ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
+        // InternalBug304681TestLanguage.g:542:10: {...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred15_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:537:19: (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
-        // InternalBug304681TestLanguage.g:537:20: otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )*
+        // InternalBug304681TestLanguage.g:542:19: (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
+        // InternalBug304681TestLanguage.g:542:20: otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )*
         {
         otherlv_23=(Token)match(input,26,FollowSets000.FOLLOW_23); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:541:9: ( (lv_features_24_0= ruleFeature ) )*
+        // InternalBug304681TestLanguage.g:546:9: ( (lv_features_24_0= ruleFeature ) )*
         loop30:
         do {
             int alt30=2;
@@ -5558,10 +5566,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt30) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:542:10: (lv_features_24_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:547:10: (lv_features_24_0= ruleFeature )
         	    {
-        	    // InternalBug304681TestLanguage.g:542:10: (lv_features_24_0= ruleFeature )
-        	    // InternalBug304681TestLanguage.g:543:11: lv_features_24_0= ruleFeature
+        	    // InternalBug304681TestLanguage.g:547:10: (lv_features_24_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:548:11: lv_features_24_0= ruleFeature
         	    {
         	    if ( state.backtracking==0 ) {
 
@@ -5607,11 +5615,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_26_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:576:10: ( (lv_features_26_0= ruleFeature ) )
-        // InternalBug304681TestLanguage.g:576:10: (lv_features_26_0= ruleFeature )
+        // InternalBug304681TestLanguage.g:581:10: ( (lv_features_26_0= ruleFeature ) )
+        // InternalBug304681TestLanguage.g:581:10: (lv_features_26_0= ruleFeature )
         {
-        // InternalBug304681TestLanguage.g:576:10: (lv_features_26_0= ruleFeature )
-        // InternalBug304681TestLanguage.g:577:11: lv_features_26_0= ruleFeature
+        // InternalBug304681TestLanguage.g:581:10: (lv_features_26_0= ruleFeature )
+        // InternalBug304681TestLanguage.g:582:11: lv_features_26_0= ruleFeature
         {
         if ( state.backtracking==0 ) {
 
@@ -5637,32 +5645,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_26_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:566:4: ( ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )
-        // InternalBug304681TestLanguage.g:566:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
+        // InternalBug304681TestLanguage.g:571:4: ( ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )
+        // InternalBug304681TestLanguage.g:571:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:566:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
-        // InternalBug304681TestLanguage.g:567:5: {...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
+        // InternalBug304681TestLanguage.g:571:4: ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )
+        // InternalBug304681TestLanguage.g:572:5: {...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred17_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)");
         }
-        // InternalBug304681TestLanguage.g:567:103: ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
-        // InternalBug304681TestLanguage.g:568:6: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
+        // InternalBug304681TestLanguage.g:572:103: ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
+        // InternalBug304681TestLanguage.g:573:6: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7);
-        // InternalBug304681TestLanguage.g:571:9: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
-        // InternalBug304681TestLanguage.g:571:10: {...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
+        // InternalBug304681TestLanguage.g:576:9: ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
+        // InternalBug304681TestLanguage.g:576:10: {...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred17_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:571:19: (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
-        // InternalBug304681TestLanguage.g:571:20: otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+
+        // InternalBug304681TestLanguage.g:576:19: (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
+        // InternalBug304681TestLanguage.g:576:20: otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+
         {
         otherlv_25=(Token)match(input,27,FollowSets000.FOLLOW_14); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:575:9: ( (lv_features_26_0= ruleFeature ) )+
+        // InternalBug304681TestLanguage.g:580:9: ( (lv_features_26_0= ruleFeature ) )+
         int cnt31=0;
         loop31:
         do {
@@ -5676,10 +5684,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt31) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:576:10: (lv_features_26_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:581:10: (lv_features_26_0= ruleFeature )
         	    {
-        	    // InternalBug304681TestLanguage.g:576:10: (lv_features_26_0= ruleFeature )
-        	    // InternalBug304681TestLanguage.g:577:11: lv_features_26_0= ruleFeature
+        	    // InternalBug304681TestLanguage.g:581:10: (lv_features_26_0= ruleFeature )
+        	    // InternalBug304681TestLanguage.g:582:11: lv_features_26_0= ruleFeature
         	    {
         	    if ( state.backtracking==0 ) {
 
@@ -5731,36 +5739,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_7_0=null;
         Token otherlv_8=null;
 
-        // InternalBug304681TestLanguage.g:813:6: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:813:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:818:6: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:818:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:813:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:814:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+        // InternalBug304681TestLanguage.g:818:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:819:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred20_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)");
         }
-        // InternalBug304681TestLanguage.g:814:112: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
-        // InternalBug304681TestLanguage.g:815:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+        // InternalBug304681TestLanguage.g:819:112: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+        // InternalBug304681TestLanguage.g:820:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0);
-        // InternalBug304681TestLanguage.g:818:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
-        // InternalBug304681TestLanguage.g:818:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+        // InternalBug304681TestLanguage.g:823:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+        // InternalBug304681TestLanguage.g:823:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred20_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:818:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
-        // InternalBug304681TestLanguage.g:818:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
+        // InternalBug304681TestLanguage.g:823:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+        // InternalBug304681TestLanguage.g:823:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
         {
         otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:822:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:823:12: (lv_shortDescription_7_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:827:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:828:12: (lv_shortDescription_7_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:823:12: (lv_shortDescription_7_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:824:13: lv_shortDescription_7_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:828:12: (lv_shortDescription_7_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:829:13: lv_shortDescription_7_0= RULE_STRING
         {
         lv_shortDescription_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5793,36 +5801,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_longDescription_10_0=null;
         Token otherlv_11=null;
 
-        // InternalBug304681TestLanguage.g:850:6: ( ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:850:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:855:6: ( ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:855:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:850:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:851:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+        // InternalBug304681TestLanguage.g:855:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:856:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred21_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)");
         }
-        // InternalBug304681TestLanguage.g:851:112: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
-        // InternalBug304681TestLanguage.g:852:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+        // InternalBug304681TestLanguage.g:856:112: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+        // InternalBug304681TestLanguage.g:857:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1);
-        // InternalBug304681TestLanguage.g:855:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
-        // InternalBug304681TestLanguage.g:855:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+        // InternalBug304681TestLanguage.g:860:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+        // InternalBug304681TestLanguage.g:860:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred21_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:855:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
-        // InternalBug304681TestLanguage.g:855:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
+        // InternalBug304681TestLanguage.g:860:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+        // InternalBug304681TestLanguage.g:860:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
         {
         otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:859:11: ( (lv_longDescription_10_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:860:12: (lv_longDescription_10_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:864:11: ( (lv_longDescription_10_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:865:12: (lv_longDescription_10_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:860:12: (lv_longDescription_10_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:861:13: lv_longDescription_10_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:865:12: (lv_longDescription_10_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:866:13: lv_longDescription_10_0= RULE_STRING
         {
         lv_longDescription_10_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5855,36 +5863,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_9_0=null;
         Token otherlv_10=null;
 
-        // InternalBug304681TestLanguage.g:1097:4: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1097:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1102:4: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1102:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1097:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1098:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1102:4: ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1103:5: {...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred27_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0)");
         }
-        // InternalBug304681TestLanguage.g:1098:104: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1099:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+        // InternalBug304681TestLanguage.g:1103:104: ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1104:6: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0);
-        // InternalBug304681TestLanguage.g:1102:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
-        // InternalBug304681TestLanguage.g:1102:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+        // InternalBug304681TestLanguage.g:1107:9: ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+        // InternalBug304681TestLanguage.g:1107:10: {...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred27_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1102:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
-        // InternalBug304681TestLanguage.g:1102:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
+        // InternalBug304681TestLanguage.g:1107:19: (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+        // InternalBug304681TestLanguage.g:1107:20: otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
         {
         otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1106:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1107:10: (lv_shortDescription_9_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1111:9: ( (lv_shortDescription_9_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1112:10: (lv_shortDescription_9_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1107:10: (lv_shortDescription_9_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1108:11: lv_shortDescription_9_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1112:10: (lv_shortDescription_9_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1113:11: lv_shortDescription_9_0= RULE_STRING
         {
         lv_shortDescription_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5917,36 +5925,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_longDescription_12_0=null;
         Token otherlv_13=null;
 
-        // InternalBug304681TestLanguage.g:1134:4: ( ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1134:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1139:4: ( ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1139:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1134:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1135:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1139:4: ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1140:5: {...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred28_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1)");
         }
-        // InternalBug304681TestLanguage.g:1135:104: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1136:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+        // InternalBug304681TestLanguage.g:1140:104: ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1141:6: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1);
-        // InternalBug304681TestLanguage.g:1139:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
-        // InternalBug304681TestLanguage.g:1139:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+        // InternalBug304681TestLanguage.g:1144:9: ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) )
+        // InternalBug304681TestLanguage.g:1144:10: {...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred28_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1139:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
-        // InternalBug304681TestLanguage.g:1139:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
+        // InternalBug304681TestLanguage.g:1144:19: (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' )
+        // InternalBug304681TestLanguage.g:1144:20: otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';'
         {
         otherlv_11=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1143:9: ( (lv_longDescription_12_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1144:10: (lv_longDescription_12_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1148:9: ( (lv_longDescription_12_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1149:10: (lv_longDescription_12_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1144:10: (lv_longDescription_12_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1145:11: lv_longDescription_12_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1149:10: (lv_longDescription_12_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1150:11: lv_longDescription_12_0= RULE_STRING
         {
         lv_longDescription_12_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -5979,36 +5987,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_serialVersionUID_15_0=null;
         Token otherlv_16=null;
 
-        // InternalBug304681TestLanguage.g:1171:4: ( ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1171:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1176:4: ( ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1176:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1171:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1172:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1176:4: ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1177:5: {...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred29_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2)");
         }
-        // InternalBug304681TestLanguage.g:1172:104: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1173:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+        // InternalBug304681TestLanguage.g:1177:104: ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1178:6: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2);
-        // InternalBug304681TestLanguage.g:1176:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
-        // InternalBug304681TestLanguage.g:1176:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+        // InternalBug304681TestLanguage.g:1181:9: ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+        // InternalBug304681TestLanguage.g:1181:10: {...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred29_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1176:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
-        // InternalBug304681TestLanguage.g:1176:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
+        // InternalBug304681TestLanguage.g:1181:19: (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' )
+        // InternalBug304681TestLanguage.g:1181:20: otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';'
         {
         otherlv_14=(Token)match(input,22,FollowSets000.FOLLOW_12); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1180:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
-        // InternalBug304681TestLanguage.g:1181:10: (lv_serialVersionUID_15_0= RULE_INT )
+        // InternalBug304681TestLanguage.g:1185:9: ( (lv_serialVersionUID_15_0= RULE_INT ) )
+        // InternalBug304681TestLanguage.g:1186:10: (lv_serialVersionUID_15_0= RULE_INT )
         {
-        // InternalBug304681TestLanguage.g:1181:10: (lv_serialVersionUID_15_0= RULE_INT )
-        // InternalBug304681TestLanguage.g:1182:11: lv_serialVersionUID_15_0= RULE_INT
+        // InternalBug304681TestLanguage.g:1186:10: (lv_serialVersionUID_15_0= RULE_INT )
+        // InternalBug304681TestLanguage.g:1187:11: lv_serialVersionUID_15_0= RULE_INT
         {
         lv_serialVersionUID_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6040,35 +6048,35 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_cloneable_17_0=null;
         Token otherlv_18=null;
 
-        // InternalBug304681TestLanguage.g:1208:4: ( ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1208:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1213:4: ( ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1213:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1208:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1209:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1213:4: ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1214:5: {...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred30_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3)");
         }
-        // InternalBug304681TestLanguage.g:1209:104: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1210:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+        // InternalBug304681TestLanguage.g:1214:104: ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1215:6: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3);
-        // InternalBug304681TestLanguage.g:1213:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
-        // InternalBug304681TestLanguage.g:1213:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+        // InternalBug304681TestLanguage.g:1218:9: ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) )
+        // InternalBug304681TestLanguage.g:1218:10: {...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred30_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1213:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
-        // InternalBug304681TestLanguage.g:1213:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
+        // InternalBug304681TestLanguage.g:1218:19: ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' )
+        // InternalBug304681TestLanguage.g:1218:20: ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';'
         {
-        // InternalBug304681TestLanguage.g:1213:20: ( (lv_cloneable_17_0= 'cloneable' ) )
-        // InternalBug304681TestLanguage.g:1214:10: (lv_cloneable_17_0= 'cloneable' )
+        // InternalBug304681TestLanguage.g:1218:20: ( (lv_cloneable_17_0= 'cloneable' ) )
+        // InternalBug304681TestLanguage.g:1219:10: (lv_cloneable_17_0= 'cloneable' )
         {
-        // InternalBug304681TestLanguage.g:1214:10: (lv_cloneable_17_0= 'cloneable' )
-        // InternalBug304681TestLanguage.g:1215:11: lv_cloneable_17_0= 'cloneable'
+        // InternalBug304681TestLanguage.g:1219:10: (lv_cloneable_17_0= 'cloneable' )
+        // InternalBug304681TestLanguage.g:1220:11: lv_cloneable_17_0= 'cloneable'
         {
         lv_cloneable_17_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6100,18 +6108,18 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_19_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:1242:10: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )
-        // InternalBug304681TestLanguage.g:1242:10: {...}? => ( (lv_features_19_0= ruleFeature2 ) )
+        // InternalBug304681TestLanguage.g:1247:10: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )
+        // InternalBug304681TestLanguage.g:1247:10: {...}? => ( (lv_features_19_0= ruleFeature2 ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred31_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1242:19: ( (lv_features_19_0= ruleFeature2 ) )
-        // InternalBug304681TestLanguage.g:1242:20: (lv_features_19_0= ruleFeature2 )
+        // InternalBug304681TestLanguage.g:1247:19: ( (lv_features_19_0= ruleFeature2 ) )
+        // InternalBug304681TestLanguage.g:1247:20: (lv_features_19_0= ruleFeature2 )
         {
-        // InternalBug304681TestLanguage.g:1242:20: (lv_features_19_0= ruleFeature2 )
-        // InternalBug304681TestLanguage.g:1243:10: lv_features_19_0= ruleFeature2
+        // InternalBug304681TestLanguage.g:1247:20: (lv_features_19_0= ruleFeature2 )
+        // InternalBug304681TestLanguage.g:1248:10: lv_features_19_0= ruleFeature2
         {
         if ( state.backtracking==0 ) {
 
@@ -6139,21 +6147,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_19_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:1237:4: ( ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )
-        // InternalBug304681TestLanguage.g:1237:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
+        // InternalBug304681TestLanguage.g:1242:4: ( ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) ) )
+        // InternalBug304681TestLanguage.g:1242:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
         {
-        // InternalBug304681TestLanguage.g:1237:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
-        // InternalBug304681TestLanguage.g:1238:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
+        // InternalBug304681TestLanguage.g:1242:4: ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ ) )
+        // InternalBug304681TestLanguage.g:1243:5: {...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred32_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4)");
         }
-        // InternalBug304681TestLanguage.g:1238:104: ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
-        // InternalBug304681TestLanguage.g:1239:6: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
+        // InternalBug304681TestLanguage.g:1243:104: ( ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+ )
+        // InternalBug304681TestLanguage.g:1244:6: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4);
-        // InternalBug304681TestLanguage.g:1242:9: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
+        // InternalBug304681TestLanguage.g:1247:9: ({...}? => ( (lv_features_19_0= ruleFeature2 ) ) )+
         int cnt33=0;
         loop33:
         do {
@@ -6170,17 +6178,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt33) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:1242:10: {...}? => ( (lv_features_19_0= ruleFeature2 ) )
+        	    // InternalBug304681TestLanguage.g:1247:10: {...}? => ( (lv_features_19_0= ruleFeature2 ) )
         	    {
         	    if ( !((true)) ) {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        throw new FailedPredicateException(input, "synpred32_InternalBug304681TestLanguage", "true");
         	    }
-        	    // InternalBug304681TestLanguage.g:1242:19: ( (lv_features_19_0= ruleFeature2 ) )
-        	    // InternalBug304681TestLanguage.g:1242:20: (lv_features_19_0= ruleFeature2 )
+        	    // InternalBug304681TestLanguage.g:1247:19: ( (lv_features_19_0= ruleFeature2 ) )
+        	    // InternalBug304681TestLanguage.g:1247:20: (lv_features_19_0= ruleFeature2 )
         	    {
-        	    // InternalBug304681TestLanguage.g:1242:20: (lv_features_19_0= ruleFeature2 )
-        	    // InternalBug304681TestLanguage.g:1243:10: lv_features_19_0= ruleFeature2
+        	    // InternalBug304681TestLanguage.g:1247:20: (lv_features_19_0= ruleFeature2 )
+        	    // InternalBug304681TestLanguage.g:1248:10: lv_features_19_0= ruleFeature2
         	    {
         	    if ( state.backtracking==0 ) {
 
@@ -6229,36 +6237,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_6_0=null;
         Token otherlv_7=null;
 
-        // InternalBug304681TestLanguage.g:1403:6: ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1403:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1408:6: ( ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1408:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1403:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1404:7: {...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1408:6: ({...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1409:7: {...}? => ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred34_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0)");
         }
-        // InternalBug304681TestLanguage.g:1404:113: ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1405:8: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
+        // InternalBug304681TestLanguage.g:1409:113: ( ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1410:8: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0);
-        // InternalBug304681TestLanguage.g:1408:11: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
-        // InternalBug304681TestLanguage.g:1408:12: {...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
+        // InternalBug304681TestLanguage.g:1413:11: ({...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' ) )
+        // InternalBug304681TestLanguage.g:1413:12: {...}? => (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred34_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1408:21: (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
-        // InternalBug304681TestLanguage.g:1408:22: otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';'
+        // InternalBug304681TestLanguage.g:1413:21: (otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';' )
+        // InternalBug304681TestLanguage.g:1413:22: otherlv_5= 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) otherlv_7= ';'
         {
         otherlv_5=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1412:11: ( (lv_shortDescription_6_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1413:12: (lv_shortDescription_6_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1417:11: ( (lv_shortDescription_6_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1418:12: (lv_shortDescription_6_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1413:12: (lv_shortDescription_6_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1414:13: lv_shortDescription_6_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1418:12: (lv_shortDescription_6_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1419:13: lv_shortDescription_6_0= RULE_STRING
         {
         lv_shortDescription_6_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6291,36 +6299,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_longDescription_9_0=null;
         Token otherlv_10=null;
 
-        // InternalBug304681TestLanguage.g:1440:6: ( ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1440:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1445:6: ( ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1445:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1440:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1441:7: {...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1445:6: ({...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1446:7: {...}? => ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred35_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1)");
         }
-        // InternalBug304681TestLanguage.g:1441:113: ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1442:8: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+        // InternalBug304681TestLanguage.g:1446:113: ( ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1447:8: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1);
-        // InternalBug304681TestLanguage.g:1445:11: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
-        // InternalBug304681TestLanguage.g:1445:12: {...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+        // InternalBug304681TestLanguage.g:1450:11: ({...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) )
+        // InternalBug304681TestLanguage.g:1450:12: {...}? => (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred35_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1445:21: (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
-        // InternalBug304681TestLanguage.g:1445:22: otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
+        // InternalBug304681TestLanguage.g:1450:21: (otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';' )
+        // InternalBug304681TestLanguage.g:1450:22: otherlv_8= 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) otherlv_10= ';'
         {
         otherlv_8=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1449:11: ( (lv_longDescription_9_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1450:12: (lv_longDescription_9_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1454:11: ( (lv_longDescription_9_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1455:12: (lv_longDescription_9_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1450:12: (lv_longDescription_9_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1451:13: lv_longDescription_9_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1455:12: (lv_longDescription_9_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1456:13: lv_longDescription_9_0= RULE_STRING
         {
         lv_longDescription_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6352,18 +6360,18 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_constraintDefinitions_11_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:1482:12: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )
-        // InternalBug304681TestLanguage.g:1482:12: {...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
+        // InternalBug304681TestLanguage.g:1487:12: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )
+        // InternalBug304681TestLanguage.g:1487:12: {...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred36_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1482:21: ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
-        // InternalBug304681TestLanguage.g:1482:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
+        // InternalBug304681TestLanguage.g:1487:21: ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
+        // InternalBug304681TestLanguage.g:1487:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
         {
-        // InternalBug304681TestLanguage.g:1482:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
-        // InternalBug304681TestLanguage.g:1483:12: lv_constraintDefinitions_11_0= ruleConstraintDefinition
+        // InternalBug304681TestLanguage.g:1487:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
+        // InternalBug304681TestLanguage.g:1488:12: lv_constraintDefinitions_11_0= ruleConstraintDefinition
         {
         if ( state.backtracking==0 ) {
 
@@ -6391,21 +6399,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_constraintDefinitions_11_0 = null;
 
 
-        // InternalBug304681TestLanguage.g:1477:6: ( ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) )
-        // InternalBug304681TestLanguage.g:1477:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
+        // InternalBug304681TestLanguage.g:1482:6: ( ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) ) )
+        // InternalBug304681TestLanguage.g:1482:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
         {
-        // InternalBug304681TestLanguage.g:1477:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
-        // InternalBug304681TestLanguage.g:1478:7: {...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
+        // InternalBug304681TestLanguage.g:1482:6: ({...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ ) )
+        // InternalBug304681TestLanguage.g:1483:7: {...}? => ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred37_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
         }
-        // InternalBug304681TestLanguage.g:1478:113: ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
-        // InternalBug304681TestLanguage.g:1479:8: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
+        // InternalBug304681TestLanguage.g:1483:113: ( ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+ )
+        // InternalBug304681TestLanguage.g:1484:8: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2);
-        // InternalBug304681TestLanguage.g:1482:11: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
+        // InternalBug304681TestLanguage.g:1487:11: ({...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) ) )+
         int cnt34=0;
         loop34:
         do {
@@ -6419,17 +6427,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt34) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:1482:12: {...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
+        	    // InternalBug304681TestLanguage.g:1487:12: {...}? => ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
         	    {
         	    if ( !((true)) ) {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        throw new FailedPredicateException(input, "synpred37_InternalBug304681TestLanguage", "true");
         	    }
-        	    // InternalBug304681TestLanguage.g:1482:21: ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
-        	    // InternalBug304681TestLanguage.g:1482:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
+        	    // InternalBug304681TestLanguage.g:1487:21: ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )
+        	    // InternalBug304681TestLanguage.g:1487:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
         	    {
-        	    // InternalBug304681TestLanguage.g:1482:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
-        	    // InternalBug304681TestLanguage.g:1483:12: lv_constraintDefinitions_11_0= ruleConstraintDefinition
+        	    // InternalBug304681TestLanguage.g:1487:22: (lv_constraintDefinitions_11_0= ruleConstraintDefinition )
+        	    // InternalBug304681TestLanguage.g:1488:12: lv_constraintDefinitions_11_0= ruleConstraintDefinition
         	    {
         	    if ( state.backtracking==0 ) {
 
@@ -6477,35 +6485,35 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_required_12_0=null;
         Token otherlv_13=null;
 
-        // InternalBug304681TestLanguage.g:1505:6: ( ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1505:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1510:6: ( ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1510:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1505:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1506:7: {...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1510:6: ({...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1511:7: {...}? => ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred38_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3)");
         }
-        // InternalBug304681TestLanguage.g:1506:113: ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1507:8: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
+        // InternalBug304681TestLanguage.g:1511:113: ( ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1512:8: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3);
-        // InternalBug304681TestLanguage.g:1510:11: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
-        // InternalBug304681TestLanguage.g:1510:12: {...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
+        // InternalBug304681TestLanguage.g:1515:11: ({...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' ) )
+        // InternalBug304681TestLanguage.g:1515:12: {...}? => ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred38_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1510:21: ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
-        // InternalBug304681TestLanguage.g:1510:22: ( (lv_required_12_0= 'required' ) ) otherlv_13= ';'
+        // InternalBug304681TestLanguage.g:1515:21: ( ( (lv_required_12_0= 'required' ) ) otherlv_13= ';' )
+        // InternalBug304681TestLanguage.g:1515:22: ( (lv_required_12_0= 'required' ) ) otherlv_13= ';'
         {
-        // InternalBug304681TestLanguage.g:1510:22: ( (lv_required_12_0= 'required' ) )
-        // InternalBug304681TestLanguage.g:1511:12: (lv_required_12_0= 'required' )
+        // InternalBug304681TestLanguage.g:1515:22: ( (lv_required_12_0= 'required' ) )
+        // InternalBug304681TestLanguage.g:1516:12: (lv_required_12_0= 'required' )
         {
-        // InternalBug304681TestLanguage.g:1511:12: (lv_required_12_0= 'required' )
-        // InternalBug304681TestLanguage.g:1512:13: lv_required_12_0= 'required'
+        // InternalBug304681TestLanguage.g:1516:12: (lv_required_12_0= 'required' )
+        // InternalBug304681TestLanguage.g:1517:13: lv_required_12_0= 'required'
         {
         lv_required_12_0=(Token)match(input,32,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6537,35 +6545,35 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_technical_14_0=null;
         Token otherlv_15=null;
 
-        // InternalBug304681TestLanguage.g:1534:6: ( ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1534:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1539:6: ( ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1539:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1534:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1535:7: {...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1539:6: ({...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1540:7: {...}? => ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred39_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4)");
         }
-        // InternalBug304681TestLanguage.g:1535:113: ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1536:8: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
+        // InternalBug304681TestLanguage.g:1540:113: ( ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1541:8: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4);
-        // InternalBug304681TestLanguage.g:1539:11: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
-        // InternalBug304681TestLanguage.g:1539:12: {...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
+        // InternalBug304681TestLanguage.g:1544:11: ({...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' ) )
+        // InternalBug304681TestLanguage.g:1544:12: {...}? => ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred39_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1539:21: ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
-        // InternalBug304681TestLanguage.g:1539:22: ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';'
+        // InternalBug304681TestLanguage.g:1544:21: ( ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';' )
+        // InternalBug304681TestLanguage.g:1544:22: ( (lv_technical_14_0= 'technical' ) ) otherlv_15= ';'
         {
-        // InternalBug304681TestLanguage.g:1539:22: ( (lv_technical_14_0= 'technical' ) )
-        // InternalBug304681TestLanguage.g:1540:12: (lv_technical_14_0= 'technical' )
+        // InternalBug304681TestLanguage.g:1544:22: ( (lv_technical_14_0= 'technical' ) )
+        // InternalBug304681TestLanguage.g:1545:12: (lv_technical_14_0= 'technical' )
         {
-        // InternalBug304681TestLanguage.g:1540:12: (lv_technical_14_0= 'technical' )
-        // InternalBug304681TestLanguage.g:1541:13: lv_technical_14_0= 'technical'
+        // InternalBug304681TestLanguage.g:1545:12: (lv_technical_14_0= 'technical' )
+        // InternalBug304681TestLanguage.g:1546:13: lv_technical_14_0= 'technical'
         {
         lv_technical_14_0=(Token)match(input,33,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6598,36 +6606,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_7_0=null;
         Token otherlv_8=null;
 
-        // InternalBug304681TestLanguage.g:1678:6: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1678:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1683:6: ( ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1683:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1678:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1679:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1683:6: ({...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1684:7: {...}? => ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred42_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0)");
         }
-        // InternalBug304681TestLanguage.g:1679:113: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1680:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+        // InternalBug304681TestLanguage.g:1684:113: ( ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1685:8: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0);
-        // InternalBug304681TestLanguage.g:1683:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
-        // InternalBug304681TestLanguage.g:1683:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+        // InternalBug304681TestLanguage.g:1688:11: ({...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' ) )
+        // InternalBug304681TestLanguage.g:1688:12: {...}? => (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred42_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1683:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
-        // InternalBug304681TestLanguage.g:1683:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
+        // InternalBug304681TestLanguage.g:1688:21: (otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';' )
+        // InternalBug304681TestLanguage.g:1688:22: otherlv_6= 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) otherlv_8= ';'
         {
         otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1687:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1688:12: (lv_shortDescription_7_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1692:11: ( (lv_shortDescription_7_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1693:12: (lv_shortDescription_7_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1688:12: (lv_shortDescription_7_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1689:13: lv_shortDescription_7_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1693:12: (lv_shortDescription_7_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1694:13: lv_shortDescription_7_0= RULE_STRING
         {
         lv_shortDescription_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6660,36 +6668,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_longDescription_10_0=null;
         Token otherlv_11=null;
 
-        // InternalBug304681TestLanguage.g:1715:6: ( ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1715:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1720:6: ( ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1720:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1715:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1716:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1720:6: ({...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1721:7: {...}? => ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred43_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1)");
         }
-        // InternalBug304681TestLanguage.g:1716:113: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1717:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+        // InternalBug304681TestLanguage.g:1721:113: ( ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1722:8: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1);
-        // InternalBug304681TestLanguage.g:1720:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
-        // InternalBug304681TestLanguage.g:1720:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+        // InternalBug304681TestLanguage.g:1725:11: ({...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' ) )
+        // InternalBug304681TestLanguage.g:1725:12: {...}? => (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred43_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1720:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
-        // InternalBug304681TestLanguage.g:1720:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
+        // InternalBug304681TestLanguage.g:1725:21: (otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';' )
+        // InternalBug304681TestLanguage.g:1725:22: otherlv_9= 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) otherlv_11= ';'
         {
         otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1724:11: ( (lv_longDescription_10_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1725:12: (lv_longDescription_10_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1729:11: ( (lv_longDescription_10_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1730:12: (lv_longDescription_10_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1725:12: (lv_longDescription_10_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1726:13: lv_longDescription_10_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1730:12: (lv_longDescription_10_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1731:13: lv_longDescription_10_0= RULE_STRING
         {
         lv_longDescription_10_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -6722,32 +6730,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_parameters_5_0=null;
         Token otherlv_6=null;
 
-        // InternalBug304681TestLanguage.g:1835:4: ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1835:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1840:4: ( ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1840:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1835:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1836:5: {...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1840:4: ({...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1841:5: {...}? => ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred46_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0)");
         }
-        // InternalBug304681TestLanguage.g:1836:117: ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1837:6: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
+        // InternalBug304681TestLanguage.g:1841:117: ( ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1842:6: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0);
-        // InternalBug304681TestLanguage.g:1840:9: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
-        // InternalBug304681TestLanguage.g:1840:10: {...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
+        // InternalBug304681TestLanguage.g:1845:9: ({...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' ) )
+        // InternalBug304681TestLanguage.g:1845:10: {...}? => (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred46_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1840:19: (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
-        // InternalBug304681TestLanguage.g:1840:20: otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';'
+        // InternalBug304681TestLanguage.g:1845:19: (otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';' )
+        // InternalBug304681TestLanguage.g:1845:20: otherlv_4= 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* otherlv_6= ';'
         {
         otherlv_4=(Token)match(input,35,FollowSets000.FOLLOW_21); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1844:9: ( (lv_parameters_5_0= RULE_STRING ) )*
+        // InternalBug304681TestLanguage.g:1849:9: ( (lv_parameters_5_0= RULE_STRING ) )*
         loop38:
         do {
             int alt38=2;
@@ -6760,10 +6768,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt38) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:1845:10: (lv_parameters_5_0= RULE_STRING )
+        	    // InternalBug304681TestLanguage.g:1850:10: (lv_parameters_5_0= RULE_STRING )
         	    {
-        	    // InternalBug304681TestLanguage.g:1845:10: (lv_parameters_5_0= RULE_STRING )
-        	    // InternalBug304681TestLanguage.g:1846:11: lv_parameters_5_0= RULE_STRING
+        	    // InternalBug304681TestLanguage.g:1850:10: (lv_parameters_5_0= RULE_STRING )
+        	    // InternalBug304681TestLanguage.g:1851:11: lv_parameters_5_0= RULE_STRING
         	    {
         	    lv_parameters_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_21); if (state.failed) return ;
 
@@ -6802,36 +6810,36 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_message_8_0=null;
         Token otherlv_9=null;
 
-        // InternalBug304681TestLanguage.g:1872:4: ( ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )
-        // InternalBug304681TestLanguage.g:1872:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1877:4: ( ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) ) )
+        // InternalBug304681TestLanguage.g:1877:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:1872:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
-        // InternalBug304681TestLanguage.g:1873:5: {...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1877:4: ({...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) ) )
+        // InternalBug304681TestLanguage.g:1878:5: {...}? => ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred47_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1)");
         }
-        // InternalBug304681TestLanguage.g:1873:117: ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
-        // InternalBug304681TestLanguage.g:1874:6: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
+        // InternalBug304681TestLanguage.g:1878:117: ( ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) ) )
+        // InternalBug304681TestLanguage.g:1879:6: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1);
-        // InternalBug304681TestLanguage.g:1877:9: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
-        // InternalBug304681TestLanguage.g:1877:10: {...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
+        // InternalBug304681TestLanguage.g:1882:9: ({...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' ) )
+        // InternalBug304681TestLanguage.g:1882:10: {...}? => (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred47_InternalBug304681TestLanguage", "true");
         }
-        // InternalBug304681TestLanguage.g:1877:19: (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
-        // InternalBug304681TestLanguage.g:1877:20: otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';'
+        // InternalBug304681TestLanguage.g:1882:19: (otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';' )
+        // InternalBug304681TestLanguage.g:1882:20: otherlv_7= 'message' ( (lv_message_8_0= RULE_STRING ) ) otherlv_9= ';'
         {
         otherlv_7=(Token)match(input,36,FollowSets000.FOLLOW_11); if (state.failed) return ;
-        // InternalBug304681TestLanguage.g:1881:9: ( (lv_message_8_0= RULE_STRING ) )
-        // InternalBug304681TestLanguage.g:1882:10: (lv_message_8_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1886:9: ( (lv_message_8_0= RULE_STRING ) )
+        // InternalBug304681TestLanguage.g:1887:10: (lv_message_8_0= RULE_STRING )
         {
-        // InternalBug304681TestLanguage.g:1882:10: (lv_message_8_0= RULE_STRING )
-        // InternalBug304681TestLanguage.g:1883:11: lv_message_8_0= RULE_STRING
+        // InternalBug304681TestLanguage.g:1887:10: (lv_message_8_0= RULE_STRING )
+        // InternalBug304681TestLanguage.g:1888:11: lv_message_8_0= RULE_STRING
         {
         lv_message_8_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); if (state.failed) return ;
 
@@ -7311,7 +7319,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "()* loopback of 325:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )*";
+            return "()* loopback of 330:6: ( ({...}? => ( ({...}? => (otherlv_8= 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) otherlv_13= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_cloneable_17_0= 'cloneable' ) ) otherlv_18= ';' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_features_19_0= ruleFeature ) ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_20= 'before' ( (lv_features_21_0= ruleFeature ) )* otherlv_22= 'after' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_23= 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_25= 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -7405,7 +7413,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             this.transition = dfa_12;
         }
         public String getDescription() {
-            return "()* loopback of 541:9: ( (lv_features_24_0= ruleFeature ) )*";
+            return "()* loopback of 546:9: ( (lv_features_24_0= ruleFeature ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -7479,7 +7487,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             this.transition = dfa_12;
         }
         public String getDescription() {
-            return "()+ loopback of 575:9: ( (lv_features_26_0= ruleFeature ) )+";
+            return "()+ loopback of 580:9: ( (lv_features_26_0= ruleFeature ) )+";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,12 +12,18 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
+import org.osgi.framework.Version;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.Sets;
 
 /**
@@ -28,6 +34,12 @@ import com.google.common.collect.Sets;
  */
 public class JavaProjectClasspathChangeAnalyzer {
 	
+	private static final Logger logger = Logger.getLogger(JavaProjectClasspathChangeAnalyzer.class);
+	
+	private static final Version VERSION_3_33_0 = new Version(3,33,0);
+	
+	private ReflectExtensions reflectExtensions = new ReflectExtensions();
+
 	/**
 	 * retrieves all Java Projects whose classpath was effected by the given delta
 	 * 
@@ -71,9 +83,15 @@ public class JavaProjectClasspathChangeAnalyzer {
 	 * Determines if a given change is a attachment change only
 	 */
 	public boolean isAttachmentChangeOnly(IJavaElementDelta delta) {
-		// there must be at least one child delta
-		if (delta.getAffectedChildren().length == 0) {
-			return false;
+		if (!isJdtCoreGreaterOrEqual(VERSION_3_33_0)) {			
+			if (delta.getAffectedChildren().length == 0) {
+				return true;
+			}
+		} else {
+			// there must be at least one child delta
+			if (delta.getAffectedChildren().length == 0) {
+				return false;
+			}
 		}
 		// all child deltas have to be attachment changes only
 		for (IJavaElementDelta child : delta.getAffectedChildren()) {
@@ -82,6 +100,55 @@ public class JavaProjectClasspathChangeAnalyzer {
 			}
 		}
 		return true;
+	}
+	
+	private static Version installedJdtCoreVersion;
+	
+	private static boolean isJdtCoreGreaterOrEqual(Version version) {
+		if (installedJdtCoreVersion == null) {
+			installedJdtCoreVersion = JavaCore.getPlugin().getBundle().getVersion();
+		}
+		return installedJdtCoreVersion.compareTo(version) >= 0;
+	}
+
+	/**
+	 * this method checks if the change is a source or javadoc (de)attachment change only.
+	 * @since 2.30
+	 */
+	@Beta
+	protected boolean isAttachmentChangeFlagOnly(IJavaElementDelta child) {
+		int flags = child.getFlags();
+		if (flags == 0) {
+			return false;
+		}
+		int F_CLASSPATH_ATTRIBUTES = 0x800000; // TODO use IJavaElementDelta.F_CLASSPATH_ATTRIBUTES
+		int allOtherFlags = flags & ~(IJavaElementDelta.F_SOURCEATTACHED | IJavaElementDelta.F_SOURCEDETACHED | F_CLASSPATH_ATTRIBUTES); 
+		if (allOtherFlags != 0) {
+			// there are other flags present
+			return false;
+		}
+		if ((flags & F_CLASSPATH_ATTRIBUTES) != 0) {
+			// this is also an attribute change
+			// analyze child.getAttributeDeltas()
+			try {
+				// TODO dont use reflection when minimal target is 2023-03
+				Object[] attributeDeltas = (Object[]) reflectExtensions.invoke(child, "getClasspathAttributeDeltas");
+				for (Object attributeDelta : attributeDeltas) {
+					String name = (String) reflectExtensions.invoke(attributeDelta, "getAttributeName");
+					if (!IClasspathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME.equals(name)) {
+						return false;
+					}
+				}
+			} catch (ReflectiveOperationException e) {
+				logger.error("Something went wrong with the reflection code to read classpath attribute deltas", e);
+				return false;
+			}
+			// the only attribute change was a javadoc change
+			return true;
+		} else {
+			// source attachment change only
+			return true;
+		}
 	}
 	
 	/**
@@ -108,13 +175,6 @@ public class JavaProjectClasspathChangeAnalyzer {
 							(IJavaElementDelta.F_CONTENT | IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED)
 						) == delta.getFlags()
 				);
-	}
-
-	private boolean isAttachmentChangeFlagOnly(IJavaElementDelta child) {
-		// change is sourceattached or sourcedetached or sourceattached and sourcedetached at the same time
-		return child.getFlags() == IJavaElementDelta.F_SOURCEATTACHED
-				 || child.getFlags() == IJavaElementDelta.F_SOURCEDETACHED
-				|| child.getFlags() == IJavaElementDelta.F_SOURCEDETACHED + IJavaElementDelta.F_SOURCEATTACHED;
 	}
 
 	private Set<IJavaProject> getJavaProjectsWithClasspathChange(IJavaElementDelta[] affectedChildren) {

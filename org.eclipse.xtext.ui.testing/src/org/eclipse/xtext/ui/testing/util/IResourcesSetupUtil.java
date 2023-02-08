@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
@@ -250,7 +251,7 @@ public class IResourcesSetupUtil {
 
 	public static File createTempFile(String fileName, String suffix, String content)
 			throws Exception {
-		File file = File.createTempFile(fileName, suffix);
+		File file = Files.createTempFile(fileName, suffix).toFile();
 		try (FileWriter writer = new FileWriter(file)) {
 			writer.write(content);
 		}
@@ -370,7 +371,9 @@ public class IResourcesSetupUtil {
 		try {
 			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
 		} catch (CoreException e) {
-			throw new OperationCanceledException(e.getMessage());
+			OperationCanceledException operationCanceledException = new OperationCanceledException(e.getMessage());
+			operationCanceledException.addSuppressed(e);
+			throw operationCanceledException;
 		}
 	}
 

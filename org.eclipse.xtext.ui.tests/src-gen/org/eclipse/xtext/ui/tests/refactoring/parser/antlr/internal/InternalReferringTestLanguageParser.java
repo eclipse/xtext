@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalReferringTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -75,7 +83,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleMain"
-    // InternalReferringTestLanguage.g:64:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    // InternalReferringTestLanguage.g:69:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
     public final EObject entryRuleMain() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +91,8 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalReferringTestLanguage.g:64:45: (iv_ruleMain= ruleMain EOF )
-            // InternalReferringTestLanguage.g:65:2: iv_ruleMain= ruleMain EOF
+            // InternalReferringTestLanguage.g:69:45: (iv_ruleMain= ruleMain EOF )
+            // InternalReferringTestLanguage.g:70:2: iv_ruleMain= ruleMain EOF
             {
              newCompositeNode(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -111,7 +119,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleMain"
-    // InternalReferringTestLanguage.g:71:1: ruleMain returns [EObject current=null] : ( (lv_referenced_0_0= ruleAbstractReference ) )* ;
+    // InternalReferringTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_referenced_0_0= ruleAbstractReference ) )* ;
     public final EObject ruleMain() throws RecognitionException {
         EObject current = null;
 
@@ -122,10 +130,10 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalReferringTestLanguage.g:77:2: ( ( (lv_referenced_0_0= ruleAbstractReference ) )* )
-            // InternalReferringTestLanguage.g:78:2: ( (lv_referenced_0_0= ruleAbstractReference ) )*
+            // InternalReferringTestLanguage.g:82:2: ( ( (lv_referenced_0_0= ruleAbstractReference ) )* )
+            // InternalReferringTestLanguage.g:83:2: ( (lv_referenced_0_0= ruleAbstractReference ) )*
             {
-            // InternalReferringTestLanguage.g:78:2: ( (lv_referenced_0_0= ruleAbstractReference ) )*
+            // InternalReferringTestLanguage.g:83:2: ( (lv_referenced_0_0= ruleAbstractReference ) )*
             loop1:
             do {
                 int alt1=2;
@@ -138,10 +146,10 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:79:3: (lv_referenced_0_0= ruleAbstractReference )
+            	    // InternalReferringTestLanguage.g:84:3: (lv_referenced_0_0= ruleAbstractReference )
             	    {
-            	    // InternalReferringTestLanguage.g:79:3: (lv_referenced_0_0= ruleAbstractReference )
-            	    // InternalReferringTestLanguage.g:80:4: lv_referenced_0_0= ruleAbstractReference
+            	    // InternalReferringTestLanguage.g:84:3: (lv_referenced_0_0= ruleAbstractReference )
+            	    // InternalReferringTestLanguage.g:85:4: lv_referenced_0_0= ruleAbstractReference
             	    {
 
             	    				newCompositeNode(grammarAccess.getMainAccess().getReferencedAbstractReferenceParserRuleCall_0());
@@ -194,7 +202,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAbstractReference"
-    // InternalReferringTestLanguage.g:100:1: entryRuleAbstractReference returns [EObject current=null] : iv_ruleAbstractReference= ruleAbstractReference EOF ;
+    // InternalReferringTestLanguage.g:105:1: entryRuleAbstractReference returns [EObject current=null] : iv_ruleAbstractReference= ruleAbstractReference EOF ;
     public final EObject entryRuleAbstractReference() throws RecognitionException {
         EObject current = null;
 
@@ -202,8 +210,8 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalReferringTestLanguage.g:100:58: (iv_ruleAbstractReference= ruleAbstractReference EOF )
-            // InternalReferringTestLanguage.g:101:2: iv_ruleAbstractReference= ruleAbstractReference EOF
+            // InternalReferringTestLanguage.g:105:58: (iv_ruleAbstractReference= ruleAbstractReference EOF )
+            // InternalReferringTestLanguage.g:106:2: iv_ruleAbstractReference= ruleAbstractReference EOF
             {
              newCompositeNode(grammarAccess.getAbstractReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -230,7 +238,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAbstractReference"
-    // InternalReferringTestLanguage.g:107:1: ruleAbstractReference returns [EObject current=null] : (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 ) ;
+    // InternalReferringTestLanguage.g:112:1: ruleAbstractReference returns [EObject current=null] : (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 ) ;
     public final EObject ruleAbstractReference() throws RecognitionException {
         EObject current = null;
 
@@ -243,10 +251,10 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalReferringTestLanguage.g:113:2: ( (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 ) )
-            // InternalReferringTestLanguage.g:114:2: (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 )
+            // InternalReferringTestLanguage.g:118:2: ( (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 ) )
+            // InternalReferringTestLanguage.g:119:2: (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 )
             {
-            // InternalReferringTestLanguage.g:114:2: (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 )
+            // InternalReferringTestLanguage.g:119:2: (this_Reference_0= ruleReference | this_Reference2_1= ruleReference2 )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -264,7 +272,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // InternalReferringTestLanguage.g:115:3: this_Reference_0= ruleReference
+                    // InternalReferringTestLanguage.g:120:3: this_Reference_0= ruleReference
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractReferenceAccess().getReferenceParserRuleCall_0());
@@ -282,7 +290,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalReferringTestLanguage.g:124:3: this_Reference2_1= ruleReference2
+                    // InternalReferringTestLanguage.g:129:3: this_Reference2_1= ruleReference2
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractReferenceAccess().getReference2ParserRuleCall_1());
@@ -322,7 +330,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleReference"
-    // InternalReferringTestLanguage.g:136:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // InternalReferringTestLanguage.g:141:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -330,8 +338,8 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalReferringTestLanguage.g:136:50: (iv_ruleReference= ruleReference EOF )
-            // InternalReferringTestLanguage.g:137:2: iv_ruleReference= ruleReference EOF
+            // InternalReferringTestLanguage.g:141:50: (iv_ruleReference= ruleReference EOF )
+            // InternalReferringTestLanguage.g:142:2: iv_ruleReference= ruleReference EOF
             {
              newCompositeNode(grammarAccess.getReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -358,7 +366,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleReference"
-    // InternalReferringTestLanguage.g:143:1: ruleReference returns [EObject current=null] : (otherlv_0= 'ref' ( ( ruleFQN ) ) ) ;
+    // InternalReferringTestLanguage.g:148:1: ruleReference returns [EObject current=null] : (otherlv_0= 'ref' ( ( ruleFQN ) ) ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
@@ -368,21 +376,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalReferringTestLanguage.g:149:2: ( (otherlv_0= 'ref' ( ( ruleFQN ) ) ) )
-            // InternalReferringTestLanguage.g:150:2: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:154:2: ( (otherlv_0= 'ref' ( ( ruleFQN ) ) ) )
+            // InternalReferringTestLanguage.g:155:2: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
             {
-            // InternalReferringTestLanguage.g:150:2: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
-            // InternalReferringTestLanguage.g:151:3: otherlv_0= 'ref' ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:155:2: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:156:3: otherlv_0= 'ref' ( ( ruleFQN ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getRefKeyword_0());
             		
-            // InternalReferringTestLanguage.g:155:3: ( ( ruleFQN ) )
-            // InternalReferringTestLanguage.g:156:4: ( ruleFQN )
+            // InternalReferringTestLanguage.g:160:3: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:161:4: ( ruleFQN )
             {
-            // InternalReferringTestLanguage.g:156:4: ( ruleFQN )
-            // InternalReferringTestLanguage.g:157:5: ruleFQN
+            // InternalReferringTestLanguage.g:161:4: ( ruleFQN )
+            // InternalReferringTestLanguage.g:162:5: ruleFQN
             {
 
             					if (current==null) {
@@ -429,7 +437,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleReference2"
-    // InternalReferringTestLanguage.g:175:1: entryRuleReference2 returns [EObject current=null] : iv_ruleReference2= ruleReference2 EOF ;
+    // InternalReferringTestLanguage.g:180:1: entryRuleReference2 returns [EObject current=null] : iv_ruleReference2= ruleReference2 EOF ;
     public final EObject entryRuleReference2() throws RecognitionException {
         EObject current = null;
 
@@ -437,8 +445,8 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalReferringTestLanguage.g:175:51: (iv_ruleReference2= ruleReference2 EOF )
-            // InternalReferringTestLanguage.g:176:2: iv_ruleReference2= ruleReference2 EOF
+            // InternalReferringTestLanguage.g:180:51: (iv_ruleReference2= ruleReference2 EOF )
+            // InternalReferringTestLanguage.g:181:2: iv_ruleReference2= ruleReference2 EOF
             {
              newCompositeNode(grammarAccess.getReference2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -465,7 +473,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleReference2"
-    // InternalReferringTestLanguage.g:182:1: ruleReference2 returns [EObject current=null] : (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) ) ;
+    // InternalReferringTestLanguage.g:187:1: ruleReference2 returns [EObject current=null] : (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) ) ;
     public final EObject ruleReference2() throws RecognitionException {
         EObject current = null;
 
@@ -477,11 +485,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalReferringTestLanguage.g:188:2: ( (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) ) )
-            // InternalReferringTestLanguage.g:189:2: (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:193:2: ( (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) ) )
+            // InternalReferringTestLanguage.g:194:2: (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) )
             {
-            // InternalReferringTestLanguage.g:189:2: (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) )
-            // InternalReferringTestLanguage.g:190:3: this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:194:2: (this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:195:3: this_Named_0= ruleNamed otherlv_1= '=' ( ( ruleFQN ) )
             {
 
             			newCompositeNode(grammarAccess.getReference2Access().getNamedParserRuleCall_0());
@@ -499,11 +507,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
             			newLeafNode(otherlv_1, grammarAccess.getReference2Access().getEqualsSignKeyword_1());
             		
-            // InternalReferringTestLanguage.g:202:3: ( ( ruleFQN ) )
-            // InternalReferringTestLanguage.g:203:4: ( ruleFQN )
+            // InternalReferringTestLanguage.g:207:3: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:208:4: ( ruleFQN )
             {
-            // InternalReferringTestLanguage.g:203:4: ( ruleFQN )
-            // InternalReferringTestLanguage.g:204:5: ruleFQN
+            // InternalReferringTestLanguage.g:208:4: ( ruleFQN )
+            // InternalReferringTestLanguage.g:209:5: ruleFQN
             {
 
             					if (current==null) {
@@ -550,7 +558,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleNamed"
-    // InternalReferringTestLanguage.g:222:1: entryRuleNamed returns [EObject current=null] : iv_ruleNamed= ruleNamed EOF ;
+    // InternalReferringTestLanguage.g:227:1: entryRuleNamed returns [EObject current=null] : iv_ruleNamed= ruleNamed EOF ;
     public final EObject entryRuleNamed() throws RecognitionException {
         EObject current = null;
 
@@ -558,8 +566,8 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalReferringTestLanguage.g:222:46: (iv_ruleNamed= ruleNamed EOF )
-            // InternalReferringTestLanguage.g:223:2: iv_ruleNamed= ruleNamed EOF
+            // InternalReferringTestLanguage.g:227:46: (iv_ruleNamed= ruleNamed EOF )
+            // InternalReferringTestLanguage.g:228:2: iv_ruleNamed= ruleNamed EOF
             {
              newCompositeNode(grammarAccess.getNamedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -586,7 +594,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleNamed"
-    // InternalReferringTestLanguage.g:229:1: ruleNamed returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalReferringTestLanguage.g:234:1: ruleNamed returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleNamed() throws RecognitionException {
         EObject current = null;
 
@@ -596,14 +604,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalReferringTestLanguage.g:235:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalReferringTestLanguage.g:236:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalReferringTestLanguage.g:240:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalReferringTestLanguage.g:241:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalReferringTestLanguage.g:236:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalReferringTestLanguage.g:237:3: (lv_name_0_0= RULE_ID )
+            // InternalReferringTestLanguage.g:241:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalReferringTestLanguage.g:242:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalReferringTestLanguage.g:237:3: (lv_name_0_0= RULE_ID )
-            // InternalReferringTestLanguage.g:238:4: lv_name_0_0= RULE_ID
+            // InternalReferringTestLanguage.g:242:3: (lv_name_0_0= RULE_ID )
+            // InternalReferringTestLanguage.g:243:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -645,7 +653,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalReferringTestLanguage.g:257:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalReferringTestLanguage.g:262:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -653,8 +661,8 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalReferringTestLanguage.g:257:43: (iv_ruleFQN= ruleFQN EOF )
-            // InternalReferringTestLanguage.g:258:2: iv_ruleFQN= ruleFQN EOF
+            // InternalReferringTestLanguage.g:262:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalReferringTestLanguage.g:263:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -681,7 +689,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFQN"
-    // InternalReferringTestLanguage.g:264:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalReferringTestLanguage.g:269:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -693,11 +701,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalReferringTestLanguage.g:270:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalReferringTestLanguage.g:271:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalReferringTestLanguage.g:275:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalReferringTestLanguage.g:276:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalReferringTestLanguage.g:271:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalReferringTestLanguage.g:272:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalReferringTestLanguage.g:276:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalReferringTestLanguage.g:277:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
@@ -706,7 +714,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
             			newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
             		
-            // InternalReferringTestLanguage.g:279:3: (kw= '.' this_ID_2= RULE_ID )*
+            // InternalReferringTestLanguage.g:284:3: (kw= '.' this_ID_2= RULE_ID )*
             loop3:
             do {
                 int alt3=2;
@@ -719,7 +727,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:280:4: kw= '.' this_ID_2= RULE_ID
+            	    // InternalReferringTestLanguage.g:285:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 

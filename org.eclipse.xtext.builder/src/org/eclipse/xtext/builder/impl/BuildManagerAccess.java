@@ -99,5 +99,20 @@ public class BuildManagerAccess {
 			throw new RuntimeException("Unexpected workspace implementation");
 		}
 	}
+	
+	/**
+	 * Schedule an auto build to be run.
+	 * 
+	 * @since 2.26
+	 */
+	public static void scheduleAutoBuild() {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		if (workspace instanceof Workspace) {
+			BuildManager buildManager = ((Workspace) workspace).getBuildManager();
+			buildManager.endTopLevel(true);
+		} else {
+			throw new RuntimeException("Unexpected workspace implementation");
+		}
+	}
 
 }

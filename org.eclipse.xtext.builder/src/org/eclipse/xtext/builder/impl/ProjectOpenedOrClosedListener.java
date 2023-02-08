@@ -214,11 +214,18 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 	}
 
 	protected void scheduleRemoveProjectJob(final IProject project) {
-		final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject(project, new NullProgressMonitor());
-		if (toBeBuilt.getToBeDeleted().isEmpty() && toBeBuilt.getToBeUpdated().isEmpty()) {
-			return;
+		try {
+			final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject(project, new NullProgressMonitor());
+			if (toBeBuilt.getToBeDeleted().isEmpty() && toBeBuilt.getToBeUpdated().isEmpty()) {
+				return;
+			}
+			scheduleJob(project.getName(), toBeBuilt);
+		} finally {
+			XtextBuilder builder = BuildManagerAccess.findBuilder(project);
+			if (builder != null) {
+				builder.forgetLastBuiltState();
+			}
 		}
-		scheduleJob(project.getName(), toBeBuilt);
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Sebastian Zarnekow (szarnekow) and others.
+ * Copyright (c) 2019, 2021 Sebastian Zarnekow (szarnekow) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,11 +10,9 @@ package org.eclipse.xtext.buildship;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.log4j.Logger;
 import org.eclipse.buildship.core.GradleBuild;
 import org.eclipse.buildship.core.GradleCore;
 import org.eclipse.buildship.core.InitializationContext;
@@ -28,6 +26,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
@@ -41,12 +40,12 @@ import org.gradle.tooling.model.GradleProject;
 public class IgnoreBuildDirContribution
 		implements IToBeBuiltComputerContribution, IStorage2UriMapperContribution, ProjectConfigurator {
 
-	private Set<IFolder> buildDirs;
-	private Map<IProject, IFolder> buildDirsPerProject;
+	private final static QualifiedName BUILDSHIP_BUILD_DIR_KEY = new QualifiedName("org.eclipse.xtext.buildship",
+			"builddir");
+
+	private final static Logger LOGGER = Logger.getLogger(IgnoreBuildDirContribution.class);
 
 	public IgnoreBuildDirContribution() {
-		this.buildDirs = Collections.newSetFromMap(new ConcurrentHashMap<>());
-		this.buildDirsPerProject = new ConcurrentHashMap<>();
 	}
 
 	@Override
@@ -66,19 +65,20 @@ public class IgnoreBuildDirContribution
 		 * builder runs.
 		 */
 		IProject project = context.getProject();
-		Optional<GradleBuild> gradleBuild = GradleCore.getWorkspace().getBuild(project);
-		if (gradleBuild.isPresent()) {
-			try {
-				GradleProject gradleProject = gradleBuild.get().withConnection(
-						connection -> connection.getModel(GradleProject.class), new NullProgressMonitor());
-				File buildDirectory = gradleProject.getBuildDirectory();
-				File projectDirectory = gradleProject.getProjectDirectory();
-				IPath relativePath = Path.fromOSString(projectDirectory.toPath().relativize(buildDirectory.toPath()).toString());
-				IFolder buildDirAsFolder = project.getFolder(relativePath);
-				buildDirs.add(buildDirAsFolder);
-				buildDirsPerProject.put(project, buildDirAsFolder);
-			} catch (Exception e) {
-				e.printStackTrace();
+		if (project.isAccessible()) {
+			Optional<GradleBuild> gradleBuild = GradleCore.getWorkspace().getBuild(project);
+			if (gradleBuild.isPresent()) {
+				try {
+					GradleProject gradleProject = gradleBuild.get().withConnection(
+							connection -> connection.getModel(GradleProject.class), new NullProgressMonitor());
+					File buildDirectory = gradleProject.getBuildDirectory();
+					File projectDirectory = gradleProject.getProjectDirectory();
+					IPath relativePath = Path
+							.fromOSString(projectDirectory.toPath().relativize(buildDirectory.toPath()).toString());
+					project.setPersistentProperty(BUILDSHIP_BUILD_DIR_KEY, relativePath.toString());
+				} catch (Exception e) {
+					LOGGER.error(e);
+				}
 			}
 		}
 	}
@@ -88,16 +88,33 @@ public class IgnoreBuildDirContribution
 	 */
 	@Override
 	public void unconfigure(ProjectContext context, IProgressMonitor monitor) {
-		IFolder buildDir = buildDirsPerProject.remove(context.getProject());
-		// paranoid: if this project was never configured, avoid NPE
-		if (buildDir != null) {
-			buildDirs.remove(buildDir);	
+		IProject project = context.getProject();
+		if (project.isAccessible()) {
+			try {
+				project.setPersistentProperty(BUILDSHIP_BUILD_DIR_KEY, null);
+			} catch (CoreException e) {
+				LOGGER.error(e);
+			}
 		}
 	}
 
 	@Override
 	public boolean isRejected(IFolder folder) {
-		return buildDirs.contains(folder);
+		IProject project = folder.getProject();
+		String persistedPath;
+		if (project.isAccessible()) {
+			try {
+				persistedPath = project.getPersistentProperty(BUILDSHIP_BUILD_DIR_KEY);
+				if (persistedPath != null) {
+					String path = folder.getProjectRelativePath().toString();
+					boolean result = persistedPath.equals(path);
+					return result;
+				}
+			} catch (CoreException e) {
+				LOGGER.error(e);
+			}
+		}
+		return false;
 	}
 
 	@Override

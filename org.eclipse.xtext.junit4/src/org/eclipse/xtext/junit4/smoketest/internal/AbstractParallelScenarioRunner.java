@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
-import org.junit.internal.AssumptionViolatedException;
+import org.junit.AssumptionViolatedException;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -36,7 +36,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true, since = "2.30")
 public abstract class AbstractParallelScenarioRunner extends AbstractScenarioRunner {
 
 	private final Map<FrameworkMethod, String> testData;

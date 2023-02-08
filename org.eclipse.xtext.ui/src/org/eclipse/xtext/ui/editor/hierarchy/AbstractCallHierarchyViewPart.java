@@ -8,9 +8,10 @@
  */
 package org.eclipse.xtext.ui.editor.hierarchy;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -134,17 +135,26 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
 		locationViewer.getTable().setLayout(layout);
 		locationViewer.getTable().setHeaderVisible(true);
 
-		Pair<String, ColumnLayoutData>[] locationColumnDescriptions = getLocationColumnDescriptions();
-		IntStream.range(0, locationColumnDescriptions.length).forEach(index -> {
-			layout.addColumnData(locationColumnDescriptions[index].getValue());
-			createColumn(locationViewer.getTable(), locationColumnDescriptions[index], index);
-		});
+		List<Pair<String, ColumnLayoutData>> locationColumnDescriptions = getLocationColumnDescriptionList();
+		int index = 0;
+		for(Pair<String, ColumnLayoutData> e : locationColumnDescriptions) {
+			layout.addColumnData(e.getValue());
+			createColumn(locationViewer.getTable(), e, index);
+			index++;
+		}
 
 		return locationViewer;
 	}
+	
+	protected List<Pair<String, ColumnLayoutData>> getLocationColumnDescriptionList() {
+		return Arrays.asList(getLocationColumnDescriptions());
+	}
 
+	@Deprecated(since = "2.30", forRemoval = true) @SuppressWarnings("unchecked")
 	protected Pair<String, ColumnLayoutData>[] getLocationColumnDescriptions() {
-		return new Pair[] { Pair.of("Line", new ColumnWeightData(60)), Pair.of("Call", new ColumnWeightData(300)) };
+		@SuppressWarnings("rawtypes")
+		Pair[] result = new Pair[] { Pair.of("Line", new ColumnWeightData(60)), Pair.of("Call", new ColumnWeightData(300)) };
+		return result;
 	}
 
 	protected void createColumn(Table table, Pair<String, ColumnLayoutData> columnDescription, int index) {

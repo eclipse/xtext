@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tasks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -26,13 +29,16 @@ public class TaskMarkerCreator {
 	}
 
 	protected void setMarkerAttributes(Task task, IResource resource, IMarker marker) throws CoreException {
-		marker.setAttribute(IMarker.LOCATION, "line " + task.getLineNumber());
-		marker.setAttribute(IMarker.PRIORITY, getPriority(task.getTag().getPriority()));
-		marker.setAttribute(IMarker.MESSAGE, task.getFullText());
-		marker.setAttribute(IMarker.LINE_NUMBER, task.getLineNumber());
-		marker.setAttribute(IMarker.CHAR_START, task.getOffset());
-		marker.setAttribute(IMarker.CHAR_END, task.getOffset() + task.getTotalLength());
-		marker.setAttribute(IMarker.USER_EDITABLE, false);
+		// Do this in one single setAttributes() call, as each set of an attribute is a workspace operation
+		Map<String, Object> attributes = new HashMap<>(8);
+		attributes.put(IMarker.LOCATION, "line " + task.getLineNumber());
+		attributes.put(IMarker.PRIORITY, getPriority(task.getTag().getPriority()));
+		attributes.put(IMarker.MESSAGE, task.getFullText());
+		attributes.put(IMarker.LINE_NUMBER, task.getLineNumber());
+		attributes.put(IMarker.CHAR_START, task.getOffset());
+		attributes.put(IMarker.CHAR_END, task.getOffset() + task.getTotalLength());
+		attributes.put(IMarker.USER_EDITABLE, false);
+		marker.setAttributes(attributes);
 	}
 
 	private int getPriority(Priority priority) {

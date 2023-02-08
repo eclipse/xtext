@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +22,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -47,6 +51,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.osgi.framework.Version;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
@@ -61,6 +66,8 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - BuildData as blackboard for scheduled data
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
+
+	private static final Version VERSION_3_17_0 = new Version(3,17,0);
 
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
@@ -158,6 +165,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		 * all projects with Xtext nature in the workspace, extended by JDTs External Folder Project
 		 * @see org.eclipse.jdt.internal.core.ExternalFoldersManager
 		 * */
+		@SuppressWarnings("restriction")
 		ALL_XTEXT_PROJECTS_AND_JDTEXTFOLDER,
 		/** the currently building project */
 		PROJECT,
@@ -165,18 +173,141 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		NULL;
 	}
 	
+	/**
+	 * Used to reflectively set the flag that will instruct the Eclipse infrastructure to also
+	 * consider this builder if the delta is empty. An XtextBuilder might need to run a build even
+	 * if no resource changes have been recorded, e.g. if the index wasn't deserialized successfully
+	 * but the workspace state is still consistent from Eclipse's POV.
+	 * 
+	 * @since 2.26
+	 */
+	private static final Field callOnEmptyData;
+	static {
+		try {
+			@SuppressWarnings("restriction")
+			Field fld = org.eclipse.core.internal.events.InternalBuilder.class.getDeclaredField("callOnEmptyDelta");
+			fld.setAccessible(true);
+			callOnEmptyData = fld;
+		} catch (ReflectiveOperationException e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
+	
+	/**
+	 * True if the next regular build (not a clean build) that will be executed, will be treated as a full build request.
+	 * 
+	 * @since 2.26
+	 */
+	private boolean nextBuildIsFullBuild = false;
+	
+	/**
+	 * True if a regular request for a full build from an external service is allowed.
+	 * 
+	 * @since 2.26
+	 */
+	private boolean allowRequestFullBuild = true;
+	
+	/**
+	 * The lock protects against concurrent access to the boolean flags {@link #nextBuildIsFullBuild} and {@link #allowRequestFullBuild}.
+	 * 
+	 * @since 2.26
+	 */
+	private final Object requestFullBuildLock = new Object();
+	
+	/**
+	 * An external (to this builder and the Eclipse BuildManager) service may want to trigger an initial
+	 * full build for this project if it was detected that the project state is not in sync with the builder
+	 * state. This can be done once in the life-cycle of an XtextBuilder which is bound to an IProject or, if {@code force} 
+	 * is set to true, when a configuration change to the project happened that warrants a full build.
+	 * 
+	 * @since 2.26
+	 */
+	protected void requestFullBuild(boolean force) {
+		/*
+		 * Synchronize here to avoid a build being triggered while a build was running and completed successfully.
+		 * Maintaining the flags must be coherent.
+		 */
+		synchronized (requestFullBuildLock) {
+			if (allowRequestFullBuild || force) {
+				allowRequestFullBuild = false;
+				nextBuildIsFullBuild = true;
+				try {
+					callOnEmptyData.set(this, true);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					log.error(e.getMessage(), e);
+				}
+				BuildManagerAccess.scheduleAutoBuild();
+			}
+		}
+	}
+	
+	/**
+	 * Answer if a full build was already requested externally and not yet done.
+	 * 
+	 * @since 2.26
+	 */
+	protected boolean wasFullBuildRequested() {
+		synchronized (requestFullBuildLock) {
+			return nextBuildIsFullBuild;
+		}
+	}
+	
+	/**
+	 * After a full build was run, reset the externally requested full build.
+	 * Don't reset, if the current build was an incremental build but a full build was requested
+	 * in the meantime.
+	 * 
+	 * @since 2.26
+	 */
+	protected void unsetWasFullBuildRequested(boolean wasFullBuildRequested) {
+		synchronized (requestFullBuildLock) {
+			if (nextBuildIsFullBuild && !wasFullBuildRequested) {
+				// an intermediate operation requested an enforced full build, e.g. due to a class-path change
+				// make the next build a full build
+				return;
+			}
+			allowRequestFullBuild = false;
+			nextBuildIsFullBuild = false;
+			try {
+				callOnEmptyData.set(this, false);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	/**
+	 * Attempt to access the builder state. If it wasn't loaded yet, an attempt to load it is made.
+	 * This may trigger the {@link BuilderStateDiscarder#forgetLastBuildState(Iterable, Map)} if there
+	 * is no build state available.
+	 * Since we are currently building this project, we turn the current build into a full build if it
+	 * was an auto build or an incremental build instead. 
+	 * 
+	 * @since 2.26
+	 */
+	protected void ensureBuilderStateLoaded() {
+		// ensure the state was loaded or load it now or wait until it was successfully loaded
+		builderState.isEmpty();
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected IProject[] build(final int kind, Map args, IProgressMonitor monitor) throws CoreException {
-		if (IBuildFlag.FORGET_BUILD_STATE_ONLY.isSet(args)) {
+	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+		ensureBuilderStateLoaded();
+		
+		boolean wasFullBuildRequested = wasFullBuildRequested();
+		if (!wasFullBuildRequested && IBuildFlag.FORGET_BUILD_STATE_ONLY.isSet(args)) {
 			forgetLastBuiltState();
 			return getReferencedProjects();
 		}
+		int effectiveKind = wasFullBuildRequested ? FULL_BUILD : kind;
+		
 		long startTime = System.currentTimeMillis();
-		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
+		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(effectiveKind)));
 		try {
 			queuedBuildData.createCheckpoint();
-			if(shouldCancelBuild(kind)) {
+			if(shouldCancelBuild(effectiveKind)) {
+				buildLogger.log("interrupted");
 				throw new OperationCanceledException("Build has been interrupted");
 			}
 			task.start();
@@ -190,7 +321,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					
 					@Override
 					public boolean isCanceled() {
-						boolean shouldCancelBuild = shouldCancelBuild(kind);
+						boolean shouldCancelBuild = shouldCancelBuild(effectiveKind);
 						if (shouldCancelBuild)
 							buildLogger.log("interrupted");
 						return shouldCancelBuild || super.isCanceled();
@@ -198,8 +329,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				};
 			}
 			SubMonitor progress = SubMonitor.convert(monitor, 1);
-			if (kind == FULL_BUILD) {
-				fullBuild(progress.split(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
+			if (effectiveKind == FULL_BUILD) {
+				fullBuild(progress.split(1), !wasFullBuildRequested && IBuildFlag.RECOVERY_BUILD.isSet(args));
 			} else {
 				IResourceDelta delta = getDelta(getProject());
 				if (delta == null || isOpened(delta)) {
@@ -208,6 +339,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					incrementalBuild(delta, progress.split(1));
 				}
 			}
+			// If no exceptions have been thrown, fix the information about the requested full builds
+			unsetWasFullBuildRequested(wasFullBuildRequested);
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 			throw e;
@@ -251,7 +384,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	}
 
 	private void handleCanceled(Throwable t) {
-		// If the cancelation happens due to an external interruption, don't pass an 
+		// If the cancellation happens due to an external interruption, don't pass an 
 		// OperationCanceledException on to the BuildManager as it would force a full 
 		// build in the next round. Instead, save the resource deltas to be reprocessed 
 		// next time.
@@ -376,15 +509,15 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	protected void doBuild(ToBeBuilt toBeBuilt, Set<String> removedProjects, IProgressMonitor monitor, BuildType type) throws CoreException {
 		buildLogger.log("Building " + getProject().getName());
 		// return early if there's nothing to do.
-		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
+		// we reuse the isEmpty() implementation from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
 		boolean indexingOnly = type == BuildType.RECOVERY;
-		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, removedProjects).isEmpty())
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::triggerRequestProjectRebuild, removedProjects).isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, removedProjects);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::triggerRequestProjectRebuild, removedProjects);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.split(1));
 		if (participant != null && !indexingOnly) {
 			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
@@ -488,6 +621,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				task.reschedule();
 				throw e;
 			}
+			unsetWasFullBuildRequested(true);
 		} finally {
 			if (monitor != null)
 				monitor.done();
@@ -498,6 +632,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private static Boolean mustCallDeprecatedDoClean = null;
 	@Deprecated
 	private static boolean wasDeprecationWarningLoggedForClean = false;
+
+	private Method requestProjectRebuildMethod;
+	private Method requestProjectsRebuildMethod;
+
+	private static Version installedCoreResourcesVersion;
 	
 	protected void addInfosFromTaskAndClean(ToBeBuilt toBeBuilt, Task task, IProgressMonitor monitor) throws CoreException {
 		addInfosFromTask(task, toBeBuilt);
@@ -523,19 +662,15 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 * @since 2.19
 	 */
 	protected void pollQueuedBuildData() {
-		boolean needRebuild = false;
 		if (pollQueuedBuildData(getProject())) {
-			needRebuild = true;
+			triggerRequestProjectRebuild();
 		}
 		for(IProject project: interestingProjects) {
 			if (!XtextProjectHelper.hasNature(project)) {
 				if (pollQueuedBuildData(project)) {
-					needRebuild = true;
+					triggerRequestProjectsRebuild(project);
 				}	
 			}
-		}
-		if(needRebuild) {
-			needRebuild();
 		}
 	}
 	
@@ -626,6 +761,51 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					.toArray(ISchedulingRule[]::new));
 			default: throw new IllegalArgumentException();
 		}
+	}
+	
+	/**
+	 * @since 2.27
+	 */
+	public void triggerRequestProjectRebuild() {
+		if (requestProjectRebuildMethod != null || isCoreResourceGreaterOrEqual(VERSION_3_17_0)) {
+			try {
+				if (requestProjectRebuildMethod == null) {
+					requestProjectRebuildMethod = getClass().getMethod("requestProjectRebuild", Boolean.TYPE);
+				}
+				requestProjectRebuildMethod.invoke(this, true);
+			} catch (Exception e) {
+				log.error("something went wrong in triggerRequestProjectRebuild", e);
+				needRebuild();
+			}
+		} else {
+			needRebuild();
+		}
+	}
+	
+	/**
+	 * @since 2.27
+	 */
+	public void triggerRequestProjectsRebuild(IProject project) {
+		if (requestProjectsRebuildMethod != null || isCoreResourceGreaterOrEqual(VERSION_3_17_0)) {
+			try {
+				if (requestProjectsRebuildMethod == null) {
+					requestProjectsRebuildMethod = getClass().getMethod("requestProjectsRebuild", Collection.class);
+				}
+				requestProjectsRebuildMethod.invoke(this, Collections.singletonList(project));
+			} catch (Exception e) {
+				log.error("something went wrong in triggerRequestProjectRebuild", e);
+				needRebuild();
+			}
+		} else {
+			needRebuild();
+		}
+	}
+	
+	private static boolean isCoreResourceGreaterOrEqual(Version version) {
+		if (installedCoreResourcesVersion == null) {
+			installedCoreResourcesVersion = ResourcesPlugin.getPlugin().getBundle().getVersion();
+		}
+		return installedCoreResourcesVersion.compareTo(version) >= 0;
 	}
 
 }

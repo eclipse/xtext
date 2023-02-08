@@ -52,7 +52,7 @@ public class OutlineTest extends AbstractOutlineTest {
     _builder_1.newLine();
     this.assertAllLabels(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOutlineWithPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -92,7 +92,7 @@ public class OutlineTest extends AbstractOutlineTest {
     _builder_1.newLine();
     this.assertAllLabels(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOutlineWithInheritance() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

@@ -4,14 +4,14 @@
 	<parent>
 		<groupId>org.eclipse.xtext.example.domainmodel</groupId>
 		<artifactId>org.eclipse.xtext.example.domainmodel.parent</artifactId>
-		<version>2.26.0-SNAPSHOT</version>
+		<version>2.30.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtext.example.domainmodel.releng</relativePath>
 	</parent>
 	<artifactId>org.eclipse.xtext.example.domainmodel</artifactId>
 	<packaging>eclipse-plugin</packaging>
 	
 	<properties>
-		<mwe2Version>2.12.2.M1</mwe2Version>
+		<mwe2Version>2.14.0</mwe2Version>
 	</properties>
 
 	<build>

@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing;
 
-import org.eclipse.jface.text.IAutoIndentStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IEventConsumer;
 import org.eclipse.jface.text.IFindReplaceTarget;
@@ -32,7 +31,6 @@ import org.eclipse.swt.graphics.Point;
  * 
  * @since 2.12
  */
-@SuppressWarnings("deprecation")
 public class MockableTextViewer implements ITextViewer {
 
 	@Override
@@ -165,8 +163,8 @@ public class MockableTextViewer implements ITextViewer {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public void setAutoIndentStrategy(IAutoIndentStrategy strategy, String contentType) {
+	@Override @SuppressWarnings("deprecation")
+	public void setAutoIndentStrategy(org.eclipse.jface.text.IAutoIndentStrategy strategy, String contentType) {
 		throw new UnsupportedOperationException();
 	}
 

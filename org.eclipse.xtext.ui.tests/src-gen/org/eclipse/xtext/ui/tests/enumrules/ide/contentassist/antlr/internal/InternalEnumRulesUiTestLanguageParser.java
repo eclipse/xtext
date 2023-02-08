@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -74,11 +82,11 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalEnumRulesUiTestLanguage.g:53:1: entryRuleModel : ruleModel EOF ;
+    // InternalEnumRulesUiTestLanguage.g:58:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalEnumRulesUiTestLanguage.g:54:1: ( ruleModel EOF )
-            // InternalEnumRulesUiTestLanguage.g:55:1: ruleModel EOF
+            // InternalEnumRulesUiTestLanguage.g:59:1: ( ruleModel EOF )
+            // InternalEnumRulesUiTestLanguage.g:60:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -104,21 +112,21 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleModel"
-    // InternalEnumRulesUiTestLanguage.g:62:1: ruleModel : ( ( rule__Model__Alternatives ) ) ;
+    // InternalEnumRulesUiTestLanguage.g:67:1: ruleModel : ( ( rule__Model__Alternatives ) ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:66:2: ( ( ( rule__Model__Alternatives ) ) )
-            // InternalEnumRulesUiTestLanguage.g:67:2: ( ( rule__Model__Alternatives ) )
+            // InternalEnumRulesUiTestLanguage.g:71:2: ( ( ( rule__Model__Alternatives ) ) )
+            // InternalEnumRulesUiTestLanguage.g:72:2: ( ( rule__Model__Alternatives ) )
             {
-            // InternalEnumRulesUiTestLanguage.g:67:2: ( ( rule__Model__Alternatives ) )
-            // InternalEnumRulesUiTestLanguage.g:68:3: ( rule__Model__Alternatives )
+            // InternalEnumRulesUiTestLanguage.g:72:2: ( ( rule__Model__Alternatives ) )
+            // InternalEnumRulesUiTestLanguage.g:73:3: ( rule__Model__Alternatives )
             {
              before(grammarAccess.getModelAccess().getAlternatives()); 
-            // InternalEnumRulesUiTestLanguage.g:69:3: ( rule__Model__Alternatives )
-            // InternalEnumRulesUiTestLanguage.g:69:4: rule__Model__Alternatives
+            // InternalEnumRulesUiTestLanguage.g:74:3: ( rule__Model__Alternatives )
+            // InternalEnumRulesUiTestLanguage.g:74:4: rule__Model__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Alternatives();
@@ -151,21 +159,21 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleExistingEnum"
-    // InternalEnumRulesUiTestLanguage.g:78:1: ruleExistingEnum : ( ( rule__ExistingEnum__Alternatives ) ) ;
+    // InternalEnumRulesUiTestLanguage.g:83:1: ruleExistingEnum : ( ( rule__ExistingEnum__Alternatives ) ) ;
     public final void ruleExistingEnum() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:82:1: ( ( ( rule__ExistingEnum__Alternatives ) ) )
-            // InternalEnumRulesUiTestLanguage.g:83:2: ( ( rule__ExistingEnum__Alternatives ) )
+            // InternalEnumRulesUiTestLanguage.g:87:1: ( ( ( rule__ExistingEnum__Alternatives ) ) )
+            // InternalEnumRulesUiTestLanguage.g:88:2: ( ( rule__ExistingEnum__Alternatives ) )
             {
-            // InternalEnumRulesUiTestLanguage.g:83:2: ( ( rule__ExistingEnum__Alternatives ) )
-            // InternalEnumRulesUiTestLanguage.g:84:3: ( rule__ExistingEnum__Alternatives )
+            // InternalEnumRulesUiTestLanguage.g:88:2: ( ( rule__ExistingEnum__Alternatives ) )
+            // InternalEnumRulesUiTestLanguage.g:89:3: ( rule__ExistingEnum__Alternatives )
             {
              before(grammarAccess.getExistingEnumAccess().getAlternatives()); 
-            // InternalEnumRulesUiTestLanguage.g:85:3: ( rule__ExistingEnum__Alternatives )
-            // InternalEnumRulesUiTestLanguage.g:85:4: rule__ExistingEnum__Alternatives
+            // InternalEnumRulesUiTestLanguage.g:90:3: ( rule__ExistingEnum__Alternatives )
+            // InternalEnumRulesUiTestLanguage.g:90:4: rule__ExistingEnum__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ExistingEnum__Alternatives();
@@ -198,21 +206,21 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleGeneratedEnum"
-    // InternalEnumRulesUiTestLanguage.g:94:1: ruleGeneratedEnum : ( ( rule__GeneratedEnum__Alternatives ) ) ;
+    // InternalEnumRulesUiTestLanguage.g:99:1: ruleGeneratedEnum : ( ( rule__GeneratedEnum__Alternatives ) ) ;
     public final void ruleGeneratedEnum() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:98:1: ( ( ( rule__GeneratedEnum__Alternatives ) ) )
-            // InternalEnumRulesUiTestLanguage.g:99:2: ( ( rule__GeneratedEnum__Alternatives ) )
+            // InternalEnumRulesUiTestLanguage.g:103:1: ( ( ( rule__GeneratedEnum__Alternatives ) ) )
+            // InternalEnumRulesUiTestLanguage.g:104:2: ( ( rule__GeneratedEnum__Alternatives ) )
             {
-            // InternalEnumRulesUiTestLanguage.g:99:2: ( ( rule__GeneratedEnum__Alternatives ) )
-            // InternalEnumRulesUiTestLanguage.g:100:3: ( rule__GeneratedEnum__Alternatives )
+            // InternalEnumRulesUiTestLanguage.g:104:2: ( ( rule__GeneratedEnum__Alternatives ) )
+            // InternalEnumRulesUiTestLanguage.g:105:3: ( rule__GeneratedEnum__Alternatives )
             {
              before(grammarAccess.getGeneratedEnumAccess().getAlternatives()); 
-            // InternalEnumRulesUiTestLanguage.g:101:3: ( rule__GeneratedEnum__Alternatives )
-            // InternalEnumRulesUiTestLanguage.g:101:4: rule__GeneratedEnum__Alternatives
+            // InternalEnumRulesUiTestLanguage.g:106:3: ( rule__GeneratedEnum__Alternatives )
+            // InternalEnumRulesUiTestLanguage.g:106:4: rule__GeneratedEnum__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__GeneratedEnum__Alternatives();
@@ -245,13 +253,13 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Alternatives"
-    // InternalEnumRulesUiTestLanguage.g:109:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) );
+    // InternalEnumRulesUiTestLanguage.g:114:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:113:1: ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) )
+            // InternalEnumRulesUiTestLanguage.g:118:1: ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -269,14 +277,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             }
             switch (alt1) {
                 case 1 :
-                    // InternalEnumRulesUiTestLanguage.g:114:2: ( ( rule__Model__Group_0__0 ) )
+                    // InternalEnumRulesUiTestLanguage.g:119:2: ( ( rule__Model__Group_0__0 ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:114:2: ( ( rule__Model__Group_0__0 ) )
-                    // InternalEnumRulesUiTestLanguage.g:115:3: ( rule__Model__Group_0__0 )
+                    // InternalEnumRulesUiTestLanguage.g:119:2: ( ( rule__Model__Group_0__0 ) )
+                    // InternalEnumRulesUiTestLanguage.g:120:3: ( rule__Model__Group_0__0 )
                     {
                      before(grammarAccess.getModelAccess().getGroup_0()); 
-                    // InternalEnumRulesUiTestLanguage.g:116:3: ( rule__Model__Group_0__0 )
-                    // InternalEnumRulesUiTestLanguage.g:116:4: rule__Model__Group_0__0
+                    // InternalEnumRulesUiTestLanguage.g:121:3: ( rule__Model__Group_0__0 )
+                    // InternalEnumRulesUiTestLanguage.g:121:4: rule__Model__Group_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Model__Group_0__0();
@@ -294,14 +302,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalEnumRulesUiTestLanguage.g:120:2: ( ( rule__Model__Group_1__0 ) )
+                    // InternalEnumRulesUiTestLanguage.g:125:2: ( ( rule__Model__Group_1__0 ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:120:2: ( ( rule__Model__Group_1__0 ) )
-                    // InternalEnumRulesUiTestLanguage.g:121:3: ( rule__Model__Group_1__0 )
+                    // InternalEnumRulesUiTestLanguage.g:125:2: ( ( rule__Model__Group_1__0 ) )
+                    // InternalEnumRulesUiTestLanguage.g:126:3: ( rule__Model__Group_1__0 )
                     {
                      before(grammarAccess.getModelAccess().getGroup_1()); 
-                    // InternalEnumRulesUiTestLanguage.g:122:3: ( rule__Model__Group_1__0 )
-                    // InternalEnumRulesUiTestLanguage.g:122:4: rule__Model__Group_1__0
+                    // InternalEnumRulesUiTestLanguage.g:127:3: ( rule__Model__Group_1__0 )
+                    // InternalEnumRulesUiTestLanguage.g:127:4: rule__Model__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Model__Group_1__0();
@@ -336,13 +344,13 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ExistingEnum__Alternatives"
-    // InternalEnumRulesUiTestLanguage.g:130:1: rule__ExistingEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) );
+    // InternalEnumRulesUiTestLanguage.g:135:1: rule__ExistingEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) );
     public final void rule__ExistingEnum__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:134:1: ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) )
+            // InternalEnumRulesUiTestLanguage.g:139:1: ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 11:
@@ -369,14 +377,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
             switch (alt2) {
                 case 1 :
-                    // InternalEnumRulesUiTestLanguage.g:135:2: ( ( 'SameName' ) )
+                    // InternalEnumRulesUiTestLanguage.g:140:2: ( ( 'SameName' ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:135:2: ( ( 'SameName' ) )
-                    // InternalEnumRulesUiTestLanguage.g:136:3: ( 'SameName' )
+                    // InternalEnumRulesUiTestLanguage.g:140:2: ( ( 'SameName' ) )
+                    // InternalEnumRulesUiTestLanguage.g:141:3: ( 'SameName' )
                     {
                      before(grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
-                    // InternalEnumRulesUiTestLanguage.g:137:3: ( 'SameName' )
-                    // InternalEnumRulesUiTestLanguage.g:137:4: 'SameName'
+                    // InternalEnumRulesUiTestLanguage.g:142:3: ( 'SameName' )
+                    // InternalEnumRulesUiTestLanguage.g:142:4: 'SameName'
                     {
                     match(input,11,FollowSets000.FOLLOW_2); 
 
@@ -390,14 +398,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalEnumRulesUiTestLanguage.g:141:2: ( ( 'overridden' ) )
+                    // InternalEnumRulesUiTestLanguage.g:146:2: ( ( 'overridden' ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:141:2: ( ( 'overridden' ) )
-                    // InternalEnumRulesUiTestLanguage.g:142:3: ( 'overridden' )
+                    // InternalEnumRulesUiTestLanguage.g:146:2: ( ( 'overridden' ) )
+                    // InternalEnumRulesUiTestLanguage.g:147:3: ( 'overridden' )
                     {
                      before(grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1()); 
-                    // InternalEnumRulesUiTestLanguage.g:143:3: ( 'overridden' )
-                    // InternalEnumRulesUiTestLanguage.g:143:4: 'overridden'
+                    // InternalEnumRulesUiTestLanguage.g:148:3: ( 'overridden' )
+                    // InternalEnumRulesUiTestLanguage.g:148:4: 'overridden'
                     {
                     match(input,12,FollowSets000.FOLLOW_2); 
 
@@ -411,14 +419,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 3 :
-                    // InternalEnumRulesUiTestLanguage.g:147:2: ( ( 'DifferentLiteral' ) )
+                    // InternalEnumRulesUiTestLanguage.g:152:2: ( ( 'DifferentLiteral' ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:147:2: ( ( 'DifferentLiteral' ) )
-                    // InternalEnumRulesUiTestLanguage.g:148:3: ( 'DifferentLiteral' )
+                    // InternalEnumRulesUiTestLanguage.g:152:2: ( ( 'DifferentLiteral' ) )
+                    // InternalEnumRulesUiTestLanguage.g:153:3: ( 'DifferentLiteral' )
                     {
                      before(grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2()); 
-                    // InternalEnumRulesUiTestLanguage.g:149:3: ( 'DifferentLiteral' )
-                    // InternalEnumRulesUiTestLanguage.g:149:4: 'DifferentLiteral'
+                    // InternalEnumRulesUiTestLanguage.g:154:3: ( 'DifferentLiteral' )
+                    // InternalEnumRulesUiTestLanguage.g:154:4: 'DifferentLiteral'
                     {
                     match(input,13,FollowSets000.FOLLOW_2); 
 
@@ -449,13 +457,13 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__GeneratedEnum__Alternatives"
-    // InternalEnumRulesUiTestLanguage.g:157:1: rule__GeneratedEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) );
+    // InternalEnumRulesUiTestLanguage.g:162:1: rule__GeneratedEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) );
     public final void rule__GeneratedEnum__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:161:1: ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) )
+            // InternalEnumRulesUiTestLanguage.g:166:1: ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -473,14 +481,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             }
             switch (alt3) {
                 case 1 :
-                    // InternalEnumRulesUiTestLanguage.g:162:2: ( ( 'SameName' ) )
+                    // InternalEnumRulesUiTestLanguage.g:167:2: ( ( 'SameName' ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:162:2: ( ( 'SameName' ) )
-                    // InternalEnumRulesUiTestLanguage.g:163:3: ( 'SameName' )
+                    // InternalEnumRulesUiTestLanguage.g:167:2: ( ( 'SameName' ) )
+                    // InternalEnumRulesUiTestLanguage.g:168:3: ( 'SameName' )
                     {
                      before(grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
-                    // InternalEnumRulesUiTestLanguage.g:164:3: ( 'SameName' )
-                    // InternalEnumRulesUiTestLanguage.g:164:4: 'SameName'
+                    // InternalEnumRulesUiTestLanguage.g:169:3: ( 'SameName' )
+                    // InternalEnumRulesUiTestLanguage.g:169:4: 'SameName'
                     {
                     match(input,11,FollowSets000.FOLLOW_2); 
 
@@ -494,14 +502,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalEnumRulesUiTestLanguage.g:168:2: ( ( 'DifferentLiteral' ) )
+                    // InternalEnumRulesUiTestLanguage.g:173:2: ( ( 'DifferentLiteral' ) )
                     {
-                    // InternalEnumRulesUiTestLanguage.g:168:2: ( ( 'DifferentLiteral' ) )
-                    // InternalEnumRulesUiTestLanguage.g:169:3: ( 'DifferentLiteral' )
+                    // InternalEnumRulesUiTestLanguage.g:173:2: ( ( 'DifferentLiteral' ) )
+                    // InternalEnumRulesUiTestLanguage.g:174:3: ( 'DifferentLiteral' )
                     {
                      before(grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1()); 
-                    // InternalEnumRulesUiTestLanguage.g:170:3: ( 'DifferentLiteral' )
-                    // InternalEnumRulesUiTestLanguage.g:170:4: 'DifferentLiteral'
+                    // InternalEnumRulesUiTestLanguage.g:175:3: ( 'DifferentLiteral' )
+                    // InternalEnumRulesUiTestLanguage.g:175:4: 'DifferentLiteral'
                     {
                     match(input,13,FollowSets000.FOLLOW_2); 
 
@@ -532,14 +540,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0__0"
-    // InternalEnumRulesUiTestLanguage.g:178:1: rule__Model__Group_0__0 : rule__Model__Group_0__0__Impl rule__Model__Group_0__1 ;
+    // InternalEnumRulesUiTestLanguage.g:183:1: rule__Model__Group_0__0 : rule__Model__Group_0__0__Impl rule__Model__Group_0__1 ;
     public final void rule__Model__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:182:1: ( rule__Model__Group_0__0__Impl rule__Model__Group_0__1 )
-            // InternalEnumRulesUiTestLanguage.g:183:2: rule__Model__Group_0__0__Impl rule__Model__Group_0__1
+            // InternalEnumRulesUiTestLanguage.g:187:1: ( rule__Model__Group_0__0__Impl rule__Model__Group_0__1 )
+            // InternalEnumRulesUiTestLanguage.g:188:2: rule__Model__Group_0__0__Impl rule__Model__Group_0__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__Model__Group_0__0__Impl();
@@ -570,17 +578,17 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0__0__Impl"
-    // InternalEnumRulesUiTestLanguage.g:190:1: rule__Model__Group_0__0__Impl : ( 'existing' ) ;
+    // InternalEnumRulesUiTestLanguage.g:195:1: rule__Model__Group_0__0__Impl : ( 'existing' ) ;
     public final void rule__Model__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:194:1: ( ( 'existing' ) )
-            // InternalEnumRulesUiTestLanguage.g:195:1: ( 'existing' )
+            // InternalEnumRulesUiTestLanguage.g:199:1: ( ( 'existing' ) )
+            // InternalEnumRulesUiTestLanguage.g:200:1: ( 'existing' )
             {
-            // InternalEnumRulesUiTestLanguage.g:195:1: ( 'existing' )
-            // InternalEnumRulesUiTestLanguage.g:196:2: 'existing'
+            // InternalEnumRulesUiTestLanguage.g:200:1: ( 'existing' )
+            // InternalEnumRulesUiTestLanguage.g:201:2: 'existing'
             {
              before(grammarAccess.getModelAccess().getExistingKeyword_0_0()); 
             match(input,14,FollowSets000.FOLLOW_2); 
@@ -607,14 +615,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0__1"
-    // InternalEnumRulesUiTestLanguage.g:205:1: rule__Model__Group_0__1 : rule__Model__Group_0__1__Impl rule__Model__Group_0__2 ;
+    // InternalEnumRulesUiTestLanguage.g:210:1: rule__Model__Group_0__1 : rule__Model__Group_0__1__Impl rule__Model__Group_0__2 ;
     public final void rule__Model__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:209:1: ( rule__Model__Group_0__1__Impl rule__Model__Group_0__2 )
-            // InternalEnumRulesUiTestLanguage.g:210:2: rule__Model__Group_0__1__Impl rule__Model__Group_0__2
+            // InternalEnumRulesUiTestLanguage.g:214:1: ( rule__Model__Group_0__1__Impl rule__Model__Group_0__2 )
+            // InternalEnumRulesUiTestLanguage.g:215:2: rule__Model__Group_0__1__Impl rule__Model__Group_0__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Model__Group_0__1__Impl();
@@ -645,21 +653,21 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0__1__Impl"
-    // InternalEnumRulesUiTestLanguage.g:217:1: rule__Model__Group_0__1__Impl : ( ( rule__Model__ExistingAssignment_0_1 ) ) ;
+    // InternalEnumRulesUiTestLanguage.g:222:1: rule__Model__Group_0__1__Impl : ( ( rule__Model__ExistingAssignment_0_1 ) ) ;
     public final void rule__Model__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:221:1: ( ( ( rule__Model__ExistingAssignment_0_1 ) ) )
-            // InternalEnumRulesUiTestLanguage.g:222:1: ( ( rule__Model__ExistingAssignment_0_1 ) )
+            // InternalEnumRulesUiTestLanguage.g:226:1: ( ( ( rule__Model__ExistingAssignment_0_1 ) ) )
+            // InternalEnumRulesUiTestLanguage.g:227:1: ( ( rule__Model__ExistingAssignment_0_1 ) )
             {
-            // InternalEnumRulesUiTestLanguage.g:222:1: ( ( rule__Model__ExistingAssignment_0_1 ) )
-            // InternalEnumRulesUiTestLanguage.g:223:2: ( rule__Model__ExistingAssignment_0_1 )
+            // InternalEnumRulesUiTestLanguage.g:227:1: ( ( rule__Model__ExistingAssignment_0_1 ) )
+            // InternalEnumRulesUiTestLanguage.g:228:2: ( rule__Model__ExistingAssignment_0_1 )
             {
              before(grammarAccess.getModelAccess().getExistingAssignment_0_1()); 
-            // InternalEnumRulesUiTestLanguage.g:224:2: ( rule__Model__ExistingAssignment_0_1 )
-            // InternalEnumRulesUiTestLanguage.g:224:3: rule__Model__ExistingAssignment_0_1
+            // InternalEnumRulesUiTestLanguage.g:229:2: ( rule__Model__ExistingAssignment_0_1 )
+            // InternalEnumRulesUiTestLanguage.g:229:3: rule__Model__ExistingAssignment_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__ExistingAssignment_0_1();
@@ -692,14 +700,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0__2"
-    // InternalEnumRulesUiTestLanguage.g:232:1: rule__Model__Group_0__2 : rule__Model__Group_0__2__Impl ;
+    // InternalEnumRulesUiTestLanguage.g:237:1: rule__Model__Group_0__2 : rule__Model__Group_0__2__Impl ;
     public final void rule__Model__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:236:1: ( rule__Model__Group_0__2__Impl )
-            // InternalEnumRulesUiTestLanguage.g:237:2: rule__Model__Group_0__2__Impl
+            // InternalEnumRulesUiTestLanguage.g:241:1: ( rule__Model__Group_0__2__Impl )
+            // InternalEnumRulesUiTestLanguage.g:242:2: rule__Model__Group_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group_0__2__Impl();
@@ -725,20 +733,20 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0__2__Impl"
-    // InternalEnumRulesUiTestLanguage.g:243:1: rule__Model__Group_0__2__Impl : ( ( rule__Model__Group_0_2__0 )? ) ;
+    // InternalEnumRulesUiTestLanguage.g:248:1: rule__Model__Group_0__2__Impl : ( ( rule__Model__Group_0_2__0 )? ) ;
     public final void rule__Model__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:247:1: ( ( ( rule__Model__Group_0_2__0 )? ) )
-            // InternalEnumRulesUiTestLanguage.g:248:1: ( ( rule__Model__Group_0_2__0 )? )
+            // InternalEnumRulesUiTestLanguage.g:252:1: ( ( ( rule__Model__Group_0_2__0 )? ) )
+            // InternalEnumRulesUiTestLanguage.g:253:1: ( ( rule__Model__Group_0_2__0 )? )
             {
-            // InternalEnumRulesUiTestLanguage.g:248:1: ( ( rule__Model__Group_0_2__0 )? )
-            // InternalEnumRulesUiTestLanguage.g:249:2: ( rule__Model__Group_0_2__0 )?
+            // InternalEnumRulesUiTestLanguage.g:253:1: ( ( rule__Model__Group_0_2__0 )? )
+            // InternalEnumRulesUiTestLanguage.g:254:2: ( rule__Model__Group_0_2__0 )?
             {
              before(grammarAccess.getModelAccess().getGroup_0_2()); 
-            // InternalEnumRulesUiTestLanguage.g:250:2: ( rule__Model__Group_0_2__0 )?
+            // InternalEnumRulesUiTestLanguage.g:255:2: ( rule__Model__Group_0_2__0 )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -747,7 +755,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             }
             switch (alt4) {
                 case 1 :
-                    // InternalEnumRulesUiTestLanguage.g:250:3: rule__Model__Group_0_2__0
+                    // InternalEnumRulesUiTestLanguage.g:255:3: rule__Model__Group_0_2__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Model__Group_0_2__0();
@@ -783,14 +791,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0_2__0"
-    // InternalEnumRulesUiTestLanguage.g:259:1: rule__Model__Group_0_2__0 : rule__Model__Group_0_2__0__Impl rule__Model__Group_0_2__1 ;
+    // InternalEnumRulesUiTestLanguage.g:264:1: rule__Model__Group_0_2__0 : rule__Model__Group_0_2__0__Impl rule__Model__Group_0_2__1 ;
     public final void rule__Model__Group_0_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:263:1: ( rule__Model__Group_0_2__0__Impl rule__Model__Group_0_2__1 )
-            // InternalEnumRulesUiTestLanguage.g:264:2: rule__Model__Group_0_2__0__Impl rule__Model__Group_0_2__1
+            // InternalEnumRulesUiTestLanguage.g:268:1: ( rule__Model__Group_0_2__0__Impl rule__Model__Group_0_2__1 )
+            // InternalEnumRulesUiTestLanguage.g:269:2: rule__Model__Group_0_2__0__Impl rule__Model__Group_0_2__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Model__Group_0_2__0__Impl();
@@ -821,17 +829,17 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0_2__0__Impl"
-    // InternalEnumRulesUiTestLanguage.g:271:1: rule__Model__Group_0_2__0__Impl : ( 'generated' ) ;
+    // InternalEnumRulesUiTestLanguage.g:276:1: rule__Model__Group_0_2__0__Impl : ( 'generated' ) ;
     public final void rule__Model__Group_0_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:275:1: ( ( 'generated' ) )
-            // InternalEnumRulesUiTestLanguage.g:276:1: ( 'generated' )
+            // InternalEnumRulesUiTestLanguage.g:280:1: ( ( 'generated' ) )
+            // InternalEnumRulesUiTestLanguage.g:281:1: ( 'generated' )
             {
-            // InternalEnumRulesUiTestLanguage.g:276:1: ( 'generated' )
-            // InternalEnumRulesUiTestLanguage.g:277:2: 'generated'
+            // InternalEnumRulesUiTestLanguage.g:281:1: ( 'generated' )
+            // InternalEnumRulesUiTestLanguage.g:282:2: 'generated'
             {
              before(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0()); 
             match(input,15,FollowSets000.FOLLOW_2); 
@@ -858,14 +866,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0_2__1"
-    // InternalEnumRulesUiTestLanguage.g:286:1: rule__Model__Group_0_2__1 : rule__Model__Group_0_2__1__Impl ;
+    // InternalEnumRulesUiTestLanguage.g:291:1: rule__Model__Group_0_2__1 : rule__Model__Group_0_2__1__Impl ;
     public final void rule__Model__Group_0_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:290:1: ( rule__Model__Group_0_2__1__Impl )
-            // InternalEnumRulesUiTestLanguage.g:291:2: rule__Model__Group_0_2__1__Impl
+            // InternalEnumRulesUiTestLanguage.g:295:1: ( rule__Model__Group_0_2__1__Impl )
+            // InternalEnumRulesUiTestLanguage.g:296:2: rule__Model__Group_0_2__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group_0_2__1__Impl();
@@ -891,21 +899,21 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_0_2__1__Impl"
-    // InternalEnumRulesUiTestLanguage.g:297:1: rule__Model__Group_0_2__1__Impl : ( ( rule__Model__GeneratedAssignment_0_2_1 ) ) ;
+    // InternalEnumRulesUiTestLanguage.g:302:1: rule__Model__Group_0_2__1__Impl : ( ( rule__Model__GeneratedAssignment_0_2_1 ) ) ;
     public final void rule__Model__Group_0_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:301:1: ( ( ( rule__Model__GeneratedAssignment_0_2_1 ) ) )
-            // InternalEnumRulesUiTestLanguage.g:302:1: ( ( rule__Model__GeneratedAssignment_0_2_1 ) )
+            // InternalEnumRulesUiTestLanguage.g:306:1: ( ( ( rule__Model__GeneratedAssignment_0_2_1 ) ) )
+            // InternalEnumRulesUiTestLanguage.g:307:1: ( ( rule__Model__GeneratedAssignment_0_2_1 ) )
             {
-            // InternalEnumRulesUiTestLanguage.g:302:1: ( ( rule__Model__GeneratedAssignment_0_2_1 ) )
-            // InternalEnumRulesUiTestLanguage.g:303:2: ( rule__Model__GeneratedAssignment_0_2_1 )
+            // InternalEnumRulesUiTestLanguage.g:307:1: ( ( rule__Model__GeneratedAssignment_0_2_1 ) )
+            // InternalEnumRulesUiTestLanguage.g:308:2: ( rule__Model__GeneratedAssignment_0_2_1 )
             {
              before(grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1()); 
-            // InternalEnumRulesUiTestLanguage.g:304:2: ( rule__Model__GeneratedAssignment_0_2_1 )
-            // InternalEnumRulesUiTestLanguage.g:304:3: rule__Model__GeneratedAssignment_0_2_1
+            // InternalEnumRulesUiTestLanguage.g:309:2: ( rule__Model__GeneratedAssignment_0_2_1 )
+            // InternalEnumRulesUiTestLanguage.g:309:3: rule__Model__GeneratedAssignment_0_2_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__GeneratedAssignment_0_2_1();
@@ -938,14 +946,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_1__0"
-    // InternalEnumRulesUiTestLanguage.g:313:1: rule__Model__Group_1__0 : rule__Model__Group_1__0__Impl rule__Model__Group_1__1 ;
+    // InternalEnumRulesUiTestLanguage.g:318:1: rule__Model__Group_1__0 : rule__Model__Group_1__0__Impl rule__Model__Group_1__1 ;
     public final void rule__Model__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:317:1: ( rule__Model__Group_1__0__Impl rule__Model__Group_1__1 )
-            // InternalEnumRulesUiTestLanguage.g:318:2: rule__Model__Group_1__0__Impl rule__Model__Group_1__1
+            // InternalEnumRulesUiTestLanguage.g:322:1: ( rule__Model__Group_1__0__Impl rule__Model__Group_1__1 )
+            // InternalEnumRulesUiTestLanguage.g:323:2: rule__Model__Group_1__0__Impl rule__Model__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Model__Group_1__0__Impl();
@@ -976,17 +984,17 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_1__0__Impl"
-    // InternalEnumRulesUiTestLanguage.g:325:1: rule__Model__Group_1__0__Impl : ( 'generated' ) ;
+    // InternalEnumRulesUiTestLanguage.g:330:1: rule__Model__Group_1__0__Impl : ( 'generated' ) ;
     public final void rule__Model__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:329:1: ( ( 'generated' ) )
-            // InternalEnumRulesUiTestLanguage.g:330:1: ( 'generated' )
+            // InternalEnumRulesUiTestLanguage.g:334:1: ( ( 'generated' ) )
+            // InternalEnumRulesUiTestLanguage.g:335:1: ( 'generated' )
             {
-            // InternalEnumRulesUiTestLanguage.g:330:1: ( 'generated' )
-            // InternalEnumRulesUiTestLanguage.g:331:2: 'generated'
+            // InternalEnumRulesUiTestLanguage.g:335:1: ( 'generated' )
+            // InternalEnumRulesUiTestLanguage.g:336:2: 'generated'
             {
              before(grammarAccess.getModelAccess().getGeneratedKeyword_1_0()); 
             match(input,15,FollowSets000.FOLLOW_2); 
@@ -1013,14 +1021,14 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_1__1"
-    // InternalEnumRulesUiTestLanguage.g:340:1: rule__Model__Group_1__1 : rule__Model__Group_1__1__Impl ;
+    // InternalEnumRulesUiTestLanguage.g:345:1: rule__Model__Group_1__1 : rule__Model__Group_1__1__Impl ;
     public final void rule__Model__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:344:1: ( rule__Model__Group_1__1__Impl )
-            // InternalEnumRulesUiTestLanguage.g:345:2: rule__Model__Group_1__1__Impl
+            // InternalEnumRulesUiTestLanguage.g:349:1: ( rule__Model__Group_1__1__Impl )
+            // InternalEnumRulesUiTestLanguage.g:350:2: rule__Model__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group_1__1__Impl();
@@ -1046,21 +1054,21 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group_1__1__Impl"
-    // InternalEnumRulesUiTestLanguage.g:351:1: rule__Model__Group_1__1__Impl : ( ( rule__Model__GeneratedAssignment_1_1 ) ) ;
+    // InternalEnumRulesUiTestLanguage.g:356:1: rule__Model__Group_1__1__Impl : ( ( rule__Model__GeneratedAssignment_1_1 ) ) ;
     public final void rule__Model__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:355:1: ( ( ( rule__Model__GeneratedAssignment_1_1 ) ) )
-            // InternalEnumRulesUiTestLanguage.g:356:1: ( ( rule__Model__GeneratedAssignment_1_1 ) )
+            // InternalEnumRulesUiTestLanguage.g:360:1: ( ( ( rule__Model__GeneratedAssignment_1_1 ) ) )
+            // InternalEnumRulesUiTestLanguage.g:361:1: ( ( rule__Model__GeneratedAssignment_1_1 ) )
             {
-            // InternalEnumRulesUiTestLanguage.g:356:1: ( ( rule__Model__GeneratedAssignment_1_1 ) )
-            // InternalEnumRulesUiTestLanguage.g:357:2: ( rule__Model__GeneratedAssignment_1_1 )
+            // InternalEnumRulesUiTestLanguage.g:361:1: ( ( rule__Model__GeneratedAssignment_1_1 ) )
+            // InternalEnumRulesUiTestLanguage.g:362:2: ( rule__Model__GeneratedAssignment_1_1 )
             {
              before(grammarAccess.getModelAccess().getGeneratedAssignment_1_1()); 
-            // InternalEnumRulesUiTestLanguage.g:358:2: ( rule__Model__GeneratedAssignment_1_1 )
-            // InternalEnumRulesUiTestLanguage.g:358:3: rule__Model__GeneratedAssignment_1_1
+            // InternalEnumRulesUiTestLanguage.g:363:2: ( rule__Model__GeneratedAssignment_1_1 )
+            // InternalEnumRulesUiTestLanguage.g:363:3: rule__Model__GeneratedAssignment_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__GeneratedAssignment_1_1();
@@ -1093,17 +1101,17 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__ExistingAssignment_0_1"
-    // InternalEnumRulesUiTestLanguage.g:367:1: rule__Model__ExistingAssignment_0_1 : ( ruleExistingEnum ) ;
+    // InternalEnumRulesUiTestLanguage.g:372:1: rule__Model__ExistingAssignment_0_1 : ( ruleExistingEnum ) ;
     public final void rule__Model__ExistingAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:371:1: ( ( ruleExistingEnum ) )
-            // InternalEnumRulesUiTestLanguage.g:372:2: ( ruleExistingEnum )
+            // InternalEnumRulesUiTestLanguage.g:376:1: ( ( ruleExistingEnum ) )
+            // InternalEnumRulesUiTestLanguage.g:377:2: ( ruleExistingEnum )
             {
-            // InternalEnumRulesUiTestLanguage.g:372:2: ( ruleExistingEnum )
-            // InternalEnumRulesUiTestLanguage.g:373:3: ruleExistingEnum
+            // InternalEnumRulesUiTestLanguage.g:377:2: ( ruleExistingEnum )
+            // InternalEnumRulesUiTestLanguage.g:378:3: ruleExistingEnum
             {
              before(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1134,17 +1142,17 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__GeneratedAssignment_0_2_1"
-    // InternalEnumRulesUiTestLanguage.g:382:1: rule__Model__GeneratedAssignment_0_2_1 : ( ruleGeneratedEnum ) ;
+    // InternalEnumRulesUiTestLanguage.g:387:1: rule__Model__GeneratedAssignment_0_2_1 : ( ruleGeneratedEnum ) ;
     public final void rule__Model__GeneratedAssignment_0_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:386:1: ( ( ruleGeneratedEnum ) )
-            // InternalEnumRulesUiTestLanguage.g:387:2: ( ruleGeneratedEnum )
+            // InternalEnumRulesUiTestLanguage.g:391:1: ( ( ruleGeneratedEnum ) )
+            // InternalEnumRulesUiTestLanguage.g:392:2: ( ruleGeneratedEnum )
             {
-            // InternalEnumRulesUiTestLanguage.g:387:2: ( ruleGeneratedEnum )
-            // InternalEnumRulesUiTestLanguage.g:388:3: ruleGeneratedEnum
+            // InternalEnumRulesUiTestLanguage.g:392:2: ( ruleGeneratedEnum )
+            // InternalEnumRulesUiTestLanguage.g:393:3: ruleGeneratedEnum
             {
              before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1175,17 +1183,17 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__GeneratedAssignment_1_1"
-    // InternalEnumRulesUiTestLanguage.g:397:1: rule__Model__GeneratedAssignment_1_1 : ( ruleGeneratedEnum ) ;
+    // InternalEnumRulesUiTestLanguage.g:402:1: rule__Model__GeneratedAssignment_1_1 : ( ruleGeneratedEnum ) ;
     public final void rule__Model__GeneratedAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEnumRulesUiTestLanguage.g:401:1: ( ( ruleGeneratedEnum ) )
-            // InternalEnumRulesUiTestLanguage.g:402:2: ( ruleGeneratedEnum )
+            // InternalEnumRulesUiTestLanguage.g:406:1: ( ( ruleGeneratedEnum ) )
+            // InternalEnumRulesUiTestLanguage.g:407:2: ( ruleGeneratedEnum )
             {
-            // InternalEnumRulesUiTestLanguage.g:402:2: ( ruleGeneratedEnum )
-            // InternalEnumRulesUiTestLanguage.g:403:3: ruleGeneratedEnum
+            // InternalEnumRulesUiTestLanguage.g:407:2: ( ruleGeneratedEnum )
+            // InternalEnumRulesUiTestLanguage.g:408:3: ruleGeneratedEnum
             {
              before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);

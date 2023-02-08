@@ -322,7 +322,11 @@
 			</topic>
 		</topic>
 		<topic href="contents/340_lsp_support.html" label="LSP Support">
-			<topic href="contents/340_lsp_support.html#getting-started" label="Getting Started">
+			<topic href="contents/340_lsp_support.html#getting-started-eclipse" label="Getting Started in Eclipse">
+			</topic>
+			<topic href="contents/340_lsp_support.html#getting-started-intellij" label="Getting Started in IntelliJ IDEA">
+			</topic>
+			<topic href="contents/340_lsp_support.html#further-lsp-clients" label="Further LSP Clients">
 			</topic>
 			<topic href="contents/340_lsp_support.html#language-features" label="Language Features">
 			</topic>

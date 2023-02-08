@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -32,6 +35,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 import com.google.common.collect.ImmutableList;
 
@@ -43,7 +47,9 @@ public class Bug486584Test extends AbstractBuilderTest {
 	private static final String PROJECT_NAME = "foo";
 	private static final String XTEND_EXAMPLE_JAR = "XtendExample.jar";
 	private static final String SRC_FOLDER = "src";
+	private static final String SRC2_FOLDER = "src2";
 	private static int projectCounter = 0;
+	private final static IAccessRule[] NO_ACCESS_RULES = {};
 
 	@Before
 	public void addListener() throws Exception {
@@ -97,6 +103,71 @@ public class Bug486584Test extends AbstractBuilderTest {
 		}
 		build();
 		assertEquals(0, getEvents().size());
+	}
+	
+	@Test
+	public void testNoFullBuildIfJavadocChangeOnly() throws CoreException, InterruptedException {
+		IJavaProject project = setupProject();
+		assertFalse(getEvents().isEmpty());
+		getEvents().clear();
+		IFile libaryFile = copyAndGetXtendExampleJar(project);
+		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(libaryFile.getFullPath(), null, null, NO_ACCESS_RULES, new IClasspathAttribute[0], false);
+		addToClasspath(project, libraryEntry);
+		build();
+		assertEquals(1, getEvents().size());
+		Event singleEvent = getEvents().get(0);
+		ImmutableList<Delta> deltas = singleEvent.getDeltas();
+		assertEquals(1, deltas.size());
+		getEvents().clear();
+		IClasspathEntry[] classpath = project.getRawClasspath();
+		for (int i = 0; i < classpath.length; ++i) {
+			IPath entryPath = classpath[i].getPath();
+			if (libraryEntry.getPath().equals(entryPath)) {
+				IClasspathAttribute[] attr = new IClasspathAttribute[1];
+				attr[0] = JavaCore.newClasspathAttribute(IClasspathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME, libaryFile.getFullPath().toString());
+				classpath[i] = JavaCore.newLibraryEntry(libaryFile.getFullPath(), null, null, NO_ACCESS_RULES, attr , false);
+				project.setRawClasspath(classpath, null);
+				
+			}
+		}
+		build();
+		assertEquals(0, getEvents().size());
+	}
+	
+	@Test
+	public void testFullBuildWhenTestAttributeChanges() throws Exception {
+		assumeTrue(JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,33,0)) >= 0);
+		IJavaProject project = setupProject();
+		// create src2 folder and give it a separate output folder
+		addSourceFolder(project, SRC2_FOLDER);
+		IClasspathEntry[] classpath = project.getRawClasspath();
+		for (int i = 0; i < classpath.length; ++i) {
+			IPath entryPath = classpath[i].getPath();
+			if (entryPath != null && entryPath.toString().endsWith(SRC2_FOLDER)) {
+				classpath[i] = JavaCore.newSourceEntry(entryPath, new IPath[] {}, new IPath[] {}, project.getPath().append("bin-test"));
+			}
+		}
+		project.setRawClasspath(classpath, null);
+		build();
+		assertFalse(getEvents().isEmpty());
+		getEvents().clear();
+		build();
+		// toggle thee test flag for src2 folder
+		classpath = project.getRawClasspath();
+		for (int i = 0; i < classpath.length; ++i) {
+			IPath entryPath = classpath[i].getPath();
+			if (entryPath != null && entryPath.toString().endsWith(SRC2_FOLDER)) {
+				IClasspathAttribute[] attr = new IClasspathAttribute[1];
+				attr[0] = JavaCore.newClasspathAttribute(IClasspathAttribute.TEST, "true");
+				classpath[i] = JavaCore.newSourceEntry(entryPath, new IPath[] {}, new IPath[] {}, project.getPath().append("bin-test"), attr);
+			}
+		}
+		project.setRawClasspath(classpath, null);
+		build();
+		assertEquals(1, getEvents().size());
+		Event singleEvent = getEvents().get(0);
+		ImmutableList<Delta> deltas = singleEvent.getDeltas();
+		assertEquals(1, deltas.size());
 	}
 
 	@Test

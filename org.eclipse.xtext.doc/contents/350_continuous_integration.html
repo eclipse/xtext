@@ -116,7 +116,7 @@
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.emf&lt;/groupId&gt;
       &lt;artifactId&gt;org.eclipse.emf.mwe2.launch&lt;/artifactId&gt;
-      &lt;version&gt;2.12.1&lt;/version&gt;
+      &lt;version&gt;2.13.0&lt;/version&gt;
     &lt;/dependency&gt;
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
@@ -222,6 +222,7 @@
 				&lt;/outputConfigurations&gt;
 			&lt;/language&gt;
 		&lt;/languages&gt;
+		&lt;incrementalXtextBuild&gt;true&lt;/incrementalXtextBuild&gt; &lt;!-- default value: false --&gt;
 	&lt;/configuration&gt;
 	&lt;dependencies&gt;
 		&lt;dependency&gt;
@@ -233,7 +234,65 @@
 &lt;/plugin&gt;
 </code></pre>
 
-<p>You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.</p>
+<p>You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences. The xtext-maven-plugin can work incrementally avoiding the need for an invocation of the <code>clean</code> target before running the code generator. Incremental builds are disabled by default for backwards compatibility reasons. It is safe to enable for all languages that use the regular code generation API for Xtext and do not write into a single file from multiple source files.</p>
+
+<p>If your language uses an <code>IJvmModelInferrer</code> (for example by using Xbase), the plug-in can create trace files for debugging purposes,<br />
+by using the specialized maven goals <code>install-debug-info</code> and <code>test-install-debug-info</code>.</p>
+
+<pre><code class="language-xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
+	&lt;artifactId&gt;xtext-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;${xtext-version}&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+      &lt;id&gt;generate&lt;/id&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;generate&lt;/goal&gt;
+        &lt;goal&gt;testGenerate&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+    &lt;execution&gt;
+      &lt;id&gt;trace&lt;/id&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;install-debug-info&lt;/goal&gt;
+        &lt;goal&gt;test-install-debug-info&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;configuration&gt;
+    &lt;addOutputDirectoriesToCompileSourceRoots&gt;true&lt;/addOutputDirectoriesToCompileSourceRoots&gt;
+		&lt;languages&gt;
+			&lt;language&gt;
+				&lt;setup&gt;my.javalang.JavaLanguageStandaloneSetup&lt;/setup&gt;
+				&lt;outputConfigurations&gt;
+				&lt;outputConfigurations&gt;
+          &lt;outputConfiguration&gt;
+            &lt;installDslAsPrimarySource&gt;true&lt;/installDslAsPrimarySource&gt;
+            &lt;outputDirectory&gt;src-gen&lt;/outputDirectory&gt;
+            &lt;sourceMappings&gt;
+              &lt;sourceMapping&gt;
+                &lt;outputDirectory&gt;src-gen&lt;/outputDirectory&gt;
+                &lt;sourceFolder&gt;src&lt;/sourceFolder&gt;
+              &lt;/sourceMapping&gt;
+            &lt;/sourceMappings&gt;
+          &lt;/outputConfiguration&gt;
+        &lt;/outputConfigurations&gt;
+			&lt;/language&gt;
+		&lt;/languages&gt;
+	&lt;/configuration&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;my.javalang&lt;/groupId&gt;
+			&lt;artifactId&gt;my.javalanguage&lt;/artifactId&gt;
+			&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>In this example, the option <code>installDslAsPrimarySource</code> is used to create traces that hide the underlying Java source and map the source file lines to the lines in the byte code.<br />
+At least one source mapping is needed for the trace functionality to work as the plug-in has to map input to output folder locations.<br />
+If you add the optional property <code>addOutputDirectoriesToCompileSourceRoots</code>, the output directories specified in <code>sourceMappings</code> will be appended as (test)compile roots of the current Maven project, which means the <code>maven-compiler-plugin</code> will recognize them as Java source folders. Set to <code>false</code> to opt out, as <code>true</code> is the default.</p>
 
 <h2 id="maven-tycho-hints">Maven Tycho Hints</h2>
 
@@ -255,12 +314,36 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0/">2.26.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.26">2.26.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.1/">2.12.1</a> (2.9.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.29.0/">2.29.0</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.32">2.32.0</a> (2.20.0)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
       <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2021-03">4.20.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2021-06">2021-06</a></td>
+      <td><a href="http://download.eclipse.org/releases/2022-12">4.26.0</a> (4.23)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-12">2022-12</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.28.0/">2.28.0</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.31">2.31.0</a> (2.20.0)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/">2.13.0</a> (2.9.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-09">4.25.0</a> (4.7.3)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-09">2022-09</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0/">2.27.0</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.30">2.30.0</a> (2.20.0)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/">2.13.0</a> (2.9.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-06">4.24.0</a> (4.7.3)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-06">2022-06</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0/">2.26.0</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.29">2.29.0</a> (2.20.0)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.2/">2.12.2</a> (2.9.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-03">4.23.0</a> (4.7.3)</td>
+      <td><a href="http://download.eclipse.org/releases/2022-03">2022-03</a></td>
     </tr>
     <tr>
       <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/">2.25.0</a></td>
@@ -425,7 +508,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
   </tbody>
 </table>
 
-<p>The following is an example target platform definition for Xtext 2.26.0 and Eclipse 4.20 alias 2021-06.</p>
+<p>The following is an example target platform definition for Xtext 2.29.0 and Eclipse 4.26 alias 2022-12.</p>
 
 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
 &lt;?pde version="3.8"?&gt;
@@ -433,7 +516,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
 &lt;locations&gt;
   &lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
     &lt;unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/&gt;
-    &lt;repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0/"/&gt;
+    &lt;repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.29.0/"/&gt;
   &lt;/location&gt;
   &lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
     &lt;unit id="org.eclipse.jdt.feature.group" version="0.0.0"/&gt;
@@ -441,11 +524,8 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
     &lt;unit id="org.eclipse.pde.feature.group" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/&gt;
-    &lt;unit id="org.eclipse.xpand" version="0.0.0"/&gt;
-    &lt;unit id="org.eclipse.xtend" version="0.0.0"/&gt;
-    &lt;unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/&gt;
-    &lt;repository location="http://download.eclipse.org/releases/2021-06/"/&gt;
+    &lt;repository location="http://download.eclipse.org/releases/2022-12/"/&gt;
   &lt;/location&gt;
 &lt;/locations&gt;
 &lt;/target&gt;

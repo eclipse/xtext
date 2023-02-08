@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -82,7 +90,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRoot"
-    // InternalEcore2XtextTest.g:64:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalEcore2XtextTest.g:69:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -90,8 +98,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:64:45: (iv_ruleRoot= ruleRoot EOF )
-            // InternalEcore2XtextTest.g:65:2: iv_ruleRoot= ruleRoot EOF
+            // InternalEcore2XtextTest.g:69:45: (iv_ruleRoot= ruleRoot EOF )
+            // InternalEcore2XtextTest.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -118,7 +126,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRoot"
-    // InternalEcore2XtextTest.g:71:1: ruleRoot returns [EObject current=null] : ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' ) ;
+    // InternalEcore2XtextTest.g:76:1: ruleRoot returns [EObject current=null] : ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -143,14 +151,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:77:2: ( ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' ) )
-            // InternalEcore2XtextTest.g:78:2: ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' )
+            // InternalEcore2XtextTest.g:82:2: ( ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' ) )
+            // InternalEcore2XtextTest.g:83:2: ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' )
             {
-            // InternalEcore2XtextTest.g:78:2: ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' )
-            // InternalEcore2XtextTest.g:79:3: () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}'
+            // InternalEcore2XtextTest.g:83:2: ( () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}' )
+            // InternalEcore2XtextTest.g:84:3: () otherlv_1= 'Root' ( (lv_name_2_0= ruleINT0 ) ) otherlv_3= '{' (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )? (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )? otherlv_12= '}'
             {
-            // InternalEcore2XtextTest.g:79:3: ()
-            // InternalEcore2XtextTest.g:80:4: 
+            // InternalEcore2XtextTest.g:84:3: ()
+            // InternalEcore2XtextTest.g:85:4: 
             {
 
             				current = forceCreateModelElement(
@@ -164,11 +172,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getRootAccess().getRootKeyword_1());
             		
-            // InternalEcore2XtextTest.g:90:3: ( (lv_name_2_0= ruleINT0 ) )
-            // InternalEcore2XtextTest.g:91:4: (lv_name_2_0= ruleINT0 )
+            // InternalEcore2XtextTest.g:95:3: ( (lv_name_2_0= ruleINT0 ) )
+            // InternalEcore2XtextTest.g:96:4: (lv_name_2_0= ruleINT0 )
             {
-            // InternalEcore2XtextTest.g:91:4: (lv_name_2_0= ruleINT0 )
-            // InternalEcore2XtextTest.g:92:5: lv_name_2_0= ruleINT0
+            // InternalEcore2XtextTest.g:96:4: (lv_name_2_0= ruleINT0 )
+            // InternalEcore2XtextTest.g:97:5: lv_name_2_0= ruleINT0
             {
 
             					newCompositeNode(grammarAccess.getRootAccess().getNameINT0ParserRuleCall_2_0());
@@ -199,7 +207,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_3, grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3());
             		
-            // InternalEcore2XtextTest.g:113:3: (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )?
+            // InternalEcore2XtextTest.g:118:3: (otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -208,7 +216,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:114:4: otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}'
+                    // InternalEcore2XtextTest.g:119:4: otherlv_4= 'classes' otherlv_5= '{' ( (lv_classes_6_0= ruleAbstract ) ) (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )* otherlv_9= '}'
                     {
                     otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
@@ -218,11 +226,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_5, grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1());
                     			
-                    // InternalEcore2XtextTest.g:122:4: ( (lv_classes_6_0= ruleAbstract ) )
-                    // InternalEcore2XtextTest.g:123:5: (lv_classes_6_0= ruleAbstract )
+                    // InternalEcore2XtextTest.g:127:4: ( (lv_classes_6_0= ruleAbstract ) )
+                    // InternalEcore2XtextTest.g:128:5: (lv_classes_6_0= ruleAbstract )
                     {
-                    // InternalEcore2XtextTest.g:123:5: (lv_classes_6_0= ruleAbstract )
-                    // InternalEcore2XtextTest.g:124:6: lv_classes_6_0= ruleAbstract
+                    // InternalEcore2XtextTest.g:128:5: (lv_classes_6_0= ruleAbstract )
+                    // InternalEcore2XtextTest.g:129:6: lv_classes_6_0= ruleAbstract
                     {
 
                     						newCompositeNode(grammarAccess.getRootAccess().getClassesAbstractParserRuleCall_4_2_0());
@@ -249,7 +257,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalEcore2XtextTest.g:141:4: (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )*
+                    // InternalEcore2XtextTest.g:146:4: (otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -262,17 +270,17 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // InternalEcore2XtextTest.g:142:5: otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) )
+                    	    // InternalEcore2XtextTest.g:147:5: otherlv_7= ',' ( (lv_classes_8_0= ruleAbstract ) )
                     	    {
                     	    otherlv_7=(Token)match(input,14,FollowSets000.FOLLOW_6); 
 
                     	    					newLeafNode(otherlv_7, grammarAccess.getRootAccess().getCommaKeyword_4_3_0());
                     	    				
-                    	    // InternalEcore2XtextTest.g:146:5: ( (lv_classes_8_0= ruleAbstract ) )
-                    	    // InternalEcore2XtextTest.g:147:6: (lv_classes_8_0= ruleAbstract )
+                    	    // InternalEcore2XtextTest.g:151:5: ( (lv_classes_8_0= ruleAbstract ) )
+                    	    // InternalEcore2XtextTest.g:152:6: (lv_classes_8_0= ruleAbstract )
                     	    {
-                    	    // InternalEcore2XtextTest.g:147:6: (lv_classes_8_0= ruleAbstract )
-                    	    // InternalEcore2XtextTest.g:148:7: lv_classes_8_0= ruleAbstract
+                    	    // InternalEcore2XtextTest.g:152:6: (lv_classes_8_0= ruleAbstract )
+                    	    // InternalEcore2XtextTest.g:153:7: lv_classes_8_0= ruleAbstract
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getRootAccess().getClassesAbstractParserRuleCall_4_3_1_0());
@@ -318,7 +326,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalEcore2XtextTest.g:171:3: (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )?
+            // InternalEcore2XtextTest.g:176:3: (otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -327,17 +335,17 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:172:4: otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) )
+                    // InternalEcore2XtextTest.g:177:4: otherlv_10= 'concrete0' ( (lv_concrete0_11_0= ruleConcrete0 ) )
                     {
                     otherlv_10=(Token)match(input,16,FollowSets000.FOLLOW_6); 
 
                     				newLeafNode(otherlv_10, grammarAccess.getRootAccess().getConcrete0Keyword_5_0());
                     			
-                    // InternalEcore2XtextTest.g:176:4: ( (lv_concrete0_11_0= ruleConcrete0 ) )
-                    // InternalEcore2XtextTest.g:177:5: (lv_concrete0_11_0= ruleConcrete0 )
+                    // InternalEcore2XtextTest.g:181:4: ( (lv_concrete0_11_0= ruleConcrete0 ) )
+                    // InternalEcore2XtextTest.g:182:5: (lv_concrete0_11_0= ruleConcrete0 )
                     {
-                    // InternalEcore2XtextTest.g:177:5: (lv_concrete0_11_0= ruleConcrete0 )
-                    // InternalEcore2XtextTest.g:178:6: lv_concrete0_11_0= ruleConcrete0
+                    // InternalEcore2XtextTest.g:182:5: (lv_concrete0_11_0= ruleConcrete0 )
+                    // InternalEcore2XtextTest.g:183:6: lv_concrete0_11_0= ruleConcrete0
                     {
 
                     						newCompositeNode(grammarAccess.getRootAccess().getConcrete0Concrete0ParserRuleCall_5_1_0());
@@ -397,7 +405,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAbstract"
-    // InternalEcore2XtextTest.g:204:1: entryRuleAbstract returns [EObject current=null] : iv_ruleAbstract= ruleAbstract EOF ;
+    // InternalEcore2XtextTest.g:209:1: entryRuleAbstract returns [EObject current=null] : iv_ruleAbstract= ruleAbstract EOF ;
     public final EObject entryRuleAbstract() throws RecognitionException {
         EObject current = null;
 
@@ -405,8 +413,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:204:49: (iv_ruleAbstract= ruleAbstract EOF )
-            // InternalEcore2XtextTest.g:205:2: iv_ruleAbstract= ruleAbstract EOF
+            // InternalEcore2XtextTest.g:209:49: (iv_ruleAbstract= ruleAbstract EOF )
+            // InternalEcore2XtextTest.g:210:2: iv_ruleAbstract= ruleAbstract EOF
             {
              newCompositeNode(grammarAccess.getAbstractRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -433,7 +441,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAbstract"
-    // InternalEcore2XtextTest.g:211:1: ruleAbstract returns [EObject current=null] : (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance ) ;
+    // InternalEcore2XtextTest.g:216:1: ruleAbstract returns [EObject current=null] : (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance ) ;
     public final EObject ruleAbstract() throws RecognitionException {
         EObject current = null;
 
@@ -448,10 +456,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:217:2: ( (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance ) )
-            // InternalEcore2XtextTest.g:218:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance )
+            // InternalEcore2XtextTest.g:222:2: ( (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance ) )
+            // InternalEcore2XtextTest.g:223:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance )
             {
-            // InternalEcore2XtextTest.g:218:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance )
+            // InternalEcore2XtextTest.g:223:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_Concrete1_Impl_1= ruleConcrete1_Impl | this_DiamondInheritance_2= ruleDiamondInheritance )
             int alt4=3;
             switch ( input.LA(1) ) {
             case 18:
@@ -478,7 +486,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             switch (alt4) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:219:3: this_Concrete0_Impl_0= ruleConcrete0_Impl
+                    // InternalEcore2XtextTest.g:224:3: this_Concrete0_Impl_0= ruleConcrete0_Impl
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractAccess().getConcrete0_ImplParserRuleCall_0());
@@ -496,7 +504,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalEcore2XtextTest.g:228:3: this_Concrete1_Impl_1= ruleConcrete1_Impl
+                    // InternalEcore2XtextTest.g:233:3: this_Concrete1_Impl_1= ruleConcrete1_Impl
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractAccess().getConcrete1_ImplParserRuleCall_1());
@@ -514,7 +522,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalEcore2XtextTest.g:237:3: this_DiamondInheritance_2= ruleDiamondInheritance
+                    // InternalEcore2XtextTest.g:242:3: this_DiamondInheritance_2= ruleDiamondInheritance
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractAccess().getDiamondInheritanceParserRuleCall_2());
@@ -554,7 +562,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleConcrete0"
-    // InternalEcore2XtextTest.g:249:1: entryRuleConcrete0 returns [EObject current=null] : iv_ruleConcrete0= ruleConcrete0 EOF ;
+    // InternalEcore2XtextTest.g:254:1: entryRuleConcrete0 returns [EObject current=null] : iv_ruleConcrete0= ruleConcrete0 EOF ;
     public final EObject entryRuleConcrete0() throws RecognitionException {
         EObject current = null;
 
@@ -562,8 +570,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:249:50: (iv_ruleConcrete0= ruleConcrete0 EOF )
-            // InternalEcore2XtextTest.g:250:2: iv_ruleConcrete0= ruleConcrete0 EOF
+            // InternalEcore2XtextTest.g:254:50: (iv_ruleConcrete0= ruleConcrete0 EOF )
+            // InternalEcore2XtextTest.g:255:2: iv_ruleConcrete0= ruleConcrete0 EOF
             {
              newCompositeNode(grammarAccess.getConcrete0Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -590,7 +598,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConcrete0"
-    // InternalEcore2XtextTest.g:256:1: ruleConcrete0 returns [EObject current=null] : (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance ) ;
+    // InternalEcore2XtextTest.g:261:1: ruleConcrete0 returns [EObject current=null] : (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance ) ;
     public final EObject ruleConcrete0() throws RecognitionException {
         EObject current = null;
 
@@ -603,10 +611,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:262:2: ( (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance ) )
-            // InternalEcore2XtextTest.g:263:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance )
+            // InternalEcore2XtextTest.g:267:2: ( (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance ) )
+            // InternalEcore2XtextTest.g:268:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance )
             {
-            // InternalEcore2XtextTest.g:263:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance )
+            // InternalEcore2XtextTest.g:268:2: (this_Concrete0_Impl_0= ruleConcrete0_Impl | this_DiamondInheritance_1= ruleDiamondInheritance )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -624,7 +632,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:264:3: this_Concrete0_Impl_0= ruleConcrete0_Impl
+                    // InternalEcore2XtextTest.g:269:3: this_Concrete0_Impl_0= ruleConcrete0_Impl
                     {
 
                     			newCompositeNode(grammarAccess.getConcrete0Access().getConcrete0_ImplParserRuleCall_0());
@@ -642,7 +650,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalEcore2XtextTest.g:273:3: this_DiamondInheritance_1= ruleDiamondInheritance
+                    // InternalEcore2XtextTest.g:278:3: this_DiamondInheritance_1= ruleDiamondInheritance
                     {
 
                     			newCompositeNode(grammarAccess.getConcrete0Access().getDiamondInheritanceParserRuleCall_1());
@@ -682,7 +690,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleINT0"
-    // InternalEcore2XtextTest.g:285:1: entryRuleINT0 returns [String current=null] : iv_ruleINT0= ruleINT0 EOF ;
+    // InternalEcore2XtextTest.g:290:1: entryRuleINT0 returns [String current=null] : iv_ruleINT0= ruleINT0 EOF ;
     public final String entryRuleINT0() throws RecognitionException {
         String current = null;
 
@@ -690,8 +698,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:285:44: (iv_ruleINT0= ruleINT0 EOF )
-            // InternalEcore2XtextTest.g:286:2: iv_ruleINT0= ruleINT0 EOF
+            // InternalEcore2XtextTest.g:290:44: (iv_ruleINT0= ruleINT0 EOF )
+            // InternalEcore2XtextTest.g:291:2: iv_ruleINT0= ruleINT0 EOF
             {
              newCompositeNode(grammarAccess.getINT0Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -718,7 +726,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleINT0"
-    // InternalEcore2XtextTest.g:292:1: ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'INT' ;
+    // InternalEcore2XtextTest.g:297:1: ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'INT' ;
     public final AntlrDatatypeRuleToken ruleINT0() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -728,8 +736,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:298:2: (kw= 'INT' )
-            // InternalEcore2XtextTest.g:299:2: kw= 'INT'
+            // InternalEcore2XtextTest.g:303:2: (kw= 'INT' )
+            // InternalEcore2XtextTest.g:304:2: kw= 'INT'
             {
             kw=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
@@ -756,7 +764,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleConcrete0_Impl"
-    // InternalEcore2XtextTest.g:307:1: entryRuleConcrete0_Impl returns [EObject current=null] : iv_ruleConcrete0_Impl= ruleConcrete0_Impl EOF ;
+    // InternalEcore2XtextTest.g:312:1: entryRuleConcrete0_Impl returns [EObject current=null] : iv_ruleConcrete0_Impl= ruleConcrete0_Impl EOF ;
     public final EObject entryRuleConcrete0_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -764,8 +772,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:307:55: (iv_ruleConcrete0_Impl= ruleConcrete0_Impl EOF )
-            // InternalEcore2XtextTest.g:308:2: iv_ruleConcrete0_Impl= ruleConcrete0_Impl EOF
+            // InternalEcore2XtextTest.g:312:55: (iv_ruleConcrete0_Impl= ruleConcrete0_Impl EOF )
+            // InternalEcore2XtextTest.g:313:2: iv_ruleConcrete0_Impl= ruleConcrete0_Impl EOF
             {
              newCompositeNode(grammarAccess.getConcrete0_ImplRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -792,7 +800,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConcrete0_Impl"
-    // InternalEcore2XtextTest.g:314:1: ruleConcrete0_Impl returns [EObject current=null] : ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) ;
+    // InternalEcore2XtextTest.g:319:1: ruleConcrete0_Impl returns [EObject current=null] : ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) ;
     public final EObject ruleConcrete0_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -804,14 +812,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:320:2: ( ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) )
-            // InternalEcore2XtextTest.g:321:2: ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
+            // InternalEcore2XtextTest.g:325:2: ( ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) )
+            // InternalEcore2XtextTest.g:326:2: ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
             {
-            // InternalEcore2XtextTest.g:321:2: ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
-            // InternalEcore2XtextTest.g:322:3: () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) )
+            // InternalEcore2XtextTest.g:326:2: ( () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
+            // InternalEcore2XtextTest.g:327:3: () otherlv_1= 'Concrete0' ( (lv_name_2_0= ruleEString ) )
             {
-            // InternalEcore2XtextTest.g:322:3: ()
-            // InternalEcore2XtextTest.g:323:4: 
+            // InternalEcore2XtextTest.g:327:3: ()
+            // InternalEcore2XtextTest.g:328:4: 
             {
 
             				current = forceCreateModelElement(
@@ -825,11 +833,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getConcrete0_ImplAccess().getConcrete0Keyword_1());
             		
-            // InternalEcore2XtextTest.g:333:3: ( (lv_name_2_0= ruleEString ) )
-            // InternalEcore2XtextTest.g:334:4: (lv_name_2_0= ruleEString )
+            // InternalEcore2XtextTest.g:338:3: ( (lv_name_2_0= ruleEString ) )
+            // InternalEcore2XtextTest.g:339:4: (lv_name_2_0= ruleEString )
             {
-            // InternalEcore2XtextTest.g:334:4: (lv_name_2_0= ruleEString )
-            // InternalEcore2XtextTest.g:335:5: lv_name_2_0= ruleEString
+            // InternalEcore2XtextTest.g:339:4: (lv_name_2_0= ruleEString )
+            // InternalEcore2XtextTest.g:340:5: lv_name_2_0= ruleEString
             {
 
             					newCompositeNode(grammarAccess.getConcrete0_ImplAccess().getNameEStringParserRuleCall_2_0());
@@ -879,7 +887,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEString"
-    // InternalEcore2XtextTest.g:356:1: entryRuleEString returns [String current=null] : iv_ruleEString= ruleEString EOF ;
+    // InternalEcore2XtextTest.g:361:1: entryRuleEString returns [String current=null] : iv_ruleEString= ruleEString EOF ;
     public final String entryRuleEString() throws RecognitionException {
         String current = null;
 
@@ -887,8 +895,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:356:47: (iv_ruleEString= ruleEString EOF )
-            // InternalEcore2XtextTest.g:357:2: iv_ruleEString= ruleEString EOF
+            // InternalEcore2XtextTest.g:361:47: (iv_ruleEString= ruleEString EOF )
+            // InternalEcore2XtextTest.g:362:2: iv_ruleEString= ruleEString EOF
             {
              newCompositeNode(grammarAccess.getEStringRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -915,7 +923,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEString"
-    // InternalEcore2XtextTest.g:363:1: ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) ;
+    // InternalEcore2XtextTest.g:368:1: ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleEString() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -926,10 +934,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:369:2: ( (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) )
-            // InternalEcore2XtextTest.g:370:2: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
+            // InternalEcore2XtextTest.g:374:2: ( (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) )
+            // InternalEcore2XtextTest.g:375:2: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
             {
-            // InternalEcore2XtextTest.g:370:2: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
+            // InternalEcore2XtextTest.g:375:2: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -947,7 +955,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:371:3: this_STRING_0= RULE_STRING
+                    // InternalEcore2XtextTest.g:376:3: this_STRING_0= RULE_STRING
                     {
                     this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -960,7 +968,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalEcore2XtextTest.g:379:3: this_ID_1= RULE_ID
+                    // InternalEcore2XtextTest.g:384:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -995,7 +1003,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleConcrete1_Impl"
-    // InternalEcore2XtextTest.g:390:1: entryRuleConcrete1_Impl returns [EObject current=null] : iv_ruleConcrete1_Impl= ruleConcrete1_Impl EOF ;
+    // InternalEcore2XtextTest.g:395:1: entryRuleConcrete1_Impl returns [EObject current=null] : iv_ruleConcrete1_Impl= ruleConcrete1_Impl EOF ;
     public final EObject entryRuleConcrete1_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -1003,8 +1011,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:390:55: (iv_ruleConcrete1_Impl= ruleConcrete1_Impl EOF )
-            // InternalEcore2XtextTest.g:391:2: iv_ruleConcrete1_Impl= ruleConcrete1_Impl EOF
+            // InternalEcore2XtextTest.g:395:55: (iv_ruleConcrete1_Impl= ruleConcrete1_Impl EOF )
+            // InternalEcore2XtextTest.g:396:2: iv_ruleConcrete1_Impl= ruleConcrete1_Impl EOF
             {
              newCompositeNode(grammarAccess.getConcrete1_ImplRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1031,7 +1039,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConcrete1_Impl"
-    // InternalEcore2XtextTest.g:397:1: ruleConcrete1_Impl returns [EObject current=null] : ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) ;
+    // InternalEcore2XtextTest.g:402:1: ruleConcrete1_Impl returns [EObject current=null] : ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) ;
     public final EObject ruleConcrete1_Impl() throws RecognitionException {
         EObject current = null;
 
@@ -1043,14 +1051,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:403:2: ( ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) )
-            // InternalEcore2XtextTest.g:404:2: ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
+            // InternalEcore2XtextTest.g:408:2: ( ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) )
+            // InternalEcore2XtextTest.g:409:2: ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
             {
-            // InternalEcore2XtextTest.g:404:2: ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
-            // InternalEcore2XtextTest.g:405:3: () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) )
+            // InternalEcore2XtextTest.g:409:2: ( () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
+            // InternalEcore2XtextTest.g:410:3: () otherlv_1= 'Concrete1' ( (lv_name_2_0= ruleEString ) )
             {
-            // InternalEcore2XtextTest.g:405:3: ()
-            // InternalEcore2XtextTest.g:406:4: 
+            // InternalEcore2XtextTest.g:410:3: ()
+            // InternalEcore2XtextTest.g:411:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1064,11 +1072,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getConcrete1_ImplAccess().getConcrete1Keyword_1());
             		
-            // InternalEcore2XtextTest.g:416:3: ( (lv_name_2_0= ruleEString ) )
-            // InternalEcore2XtextTest.g:417:4: (lv_name_2_0= ruleEString )
+            // InternalEcore2XtextTest.g:421:3: ( (lv_name_2_0= ruleEString ) )
+            // InternalEcore2XtextTest.g:422:4: (lv_name_2_0= ruleEString )
             {
-            // InternalEcore2XtextTest.g:417:4: (lv_name_2_0= ruleEString )
-            // InternalEcore2XtextTest.g:418:5: lv_name_2_0= ruleEString
+            // InternalEcore2XtextTest.g:422:4: (lv_name_2_0= ruleEString )
+            // InternalEcore2XtextTest.g:423:5: lv_name_2_0= ruleEString
             {
 
             					newCompositeNode(grammarAccess.getConcrete1_ImplAccess().getNameEStringParserRuleCall_2_0());
@@ -1118,7 +1126,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDiamondInheritance"
-    // InternalEcore2XtextTest.g:439:1: entryRuleDiamondInheritance returns [EObject current=null] : iv_ruleDiamondInheritance= ruleDiamondInheritance EOF ;
+    // InternalEcore2XtextTest.g:444:1: entryRuleDiamondInheritance returns [EObject current=null] : iv_ruleDiamondInheritance= ruleDiamondInheritance EOF ;
     public final EObject entryRuleDiamondInheritance() throws RecognitionException {
         EObject current = null;
 
@@ -1126,8 +1134,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalEcore2XtextTest.g:439:59: (iv_ruleDiamondInheritance= ruleDiamondInheritance EOF )
-            // InternalEcore2XtextTest.g:440:2: iv_ruleDiamondInheritance= ruleDiamondInheritance EOF
+            // InternalEcore2XtextTest.g:444:59: (iv_ruleDiamondInheritance= ruleDiamondInheritance EOF )
+            // InternalEcore2XtextTest.g:445:2: iv_ruleDiamondInheritance= ruleDiamondInheritance EOF
             {
              newCompositeNode(grammarAccess.getDiamondInheritanceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1154,7 +1162,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDiamondInheritance"
-    // InternalEcore2XtextTest.g:446:1: ruleDiamondInheritance returns [EObject current=null] : ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) ;
+    // InternalEcore2XtextTest.g:451:1: ruleDiamondInheritance returns [EObject current=null] : ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) ;
     public final EObject ruleDiamondInheritance() throws RecognitionException {
         EObject current = null;
 
@@ -1166,14 +1174,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalEcore2XtextTest.g:452:2: ( ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) )
-            // InternalEcore2XtextTest.g:453:2: ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
+            // InternalEcore2XtextTest.g:457:2: ( ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) )
+            // InternalEcore2XtextTest.g:458:2: ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
             {
-            // InternalEcore2XtextTest.g:453:2: ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
-            // InternalEcore2XtextTest.g:454:3: () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) )
+            // InternalEcore2XtextTest.g:458:2: ( () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
+            // InternalEcore2XtextTest.g:459:3: () otherlv_1= 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) )
             {
-            // InternalEcore2XtextTest.g:454:3: ()
-            // InternalEcore2XtextTest.g:455:4: 
+            // InternalEcore2XtextTest.g:459:3: ()
+            // InternalEcore2XtextTest.g:460:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1187,11 +1195,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1());
             		
-            // InternalEcore2XtextTest.g:465:3: ( (lv_name_2_0= ruleEString ) )
-            // InternalEcore2XtextTest.g:466:4: (lv_name_2_0= ruleEString )
+            // InternalEcore2XtextTest.g:470:3: ( (lv_name_2_0= ruleEString ) )
+            // InternalEcore2XtextTest.g:471:4: (lv_name_2_0= ruleEString )
             {
-            // InternalEcore2XtextTest.g:466:4: (lv_name_2_0= ruleEString )
-            // InternalEcore2XtextTest.g:467:5: lv_name_2_0= ruleEString
+            // InternalEcore2XtextTest.g:471:4: (lv_name_2_0= ruleEString )
+            // InternalEcore2XtextTest.g:472:5: lv_name_2_0= ruleEString
             {
 
             					newCompositeNode(grammarAccess.getDiamondInheritanceAccess().getNameEStringParserRuleCall_2_0());

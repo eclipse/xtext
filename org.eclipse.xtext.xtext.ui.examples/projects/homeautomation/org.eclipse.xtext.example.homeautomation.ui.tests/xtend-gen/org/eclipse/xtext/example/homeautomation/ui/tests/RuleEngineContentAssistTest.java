@@ -35,7 +35,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
       return _builder.toString();
     }
   }.apply();
-  
+
   @Test
   public void empty() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -47,7 +47,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Device", "Rule")), "Device", _builder_1.toString());
   }
-  
+
   @Test
   public void rule_device_state() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -70,7 +70,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Window.open", "Window.closed", "Heater.on", "Heater.off", "Heater.error")), "Window.open", _builder_1.toString());
   }
-  
+
   @Test
   public void rule_device_state_with_prefix() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Window.open", "Window.closed")), "Window.open", _builder_1.toString());
   }
-  
+
   @Test
   public void rule_then_part() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -121,7 +121,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("do", "false", "for", "if", "new", "null", "return", "switch", "synchronized", "throw", "true", "try", "typeof", "val", "var", "while")), "switch", _builder_1.toString());
   }
-  
+
   @Test
   public void rule_then_part_with_prefix() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -151,7 +151,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("on", "off")), "off", _builder_1.toString());
   }
-  
+
   private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
     final int cursorPosition = text.toString().indexOf(this.c);
     final String content = text.toString().replace(this.c, "");

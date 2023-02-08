@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,31 +24,18 @@ public class JavaVersionExtendedTest {
 		assertEquals(ClassFileConstants.JDK1_5, JavaVersion.JAVA5.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK1_6, JavaVersion.JAVA6.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK1_7, JavaVersion.JAVA7.toJdtClassFileConstant());
-		try {
-			long value = ClassFileConstants.class.getField("JDK1_8").getLong(null);
-			assertEquals(value, JavaVersion.JAVA8.toJdtClassFileConstant());
-		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
-			// ok
-		}
-		try {
-			long value = ClassFileConstants.class.getField("JDK9").getLong(null);
-			assertEquals(value, JavaVersion.JAVA9.toJdtClassFileConstant());
-		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
-			// ok
-		}
-		try {
-			long value = ClassFileConstants.class.getField("JDK10").getLong(null);
-			assertEquals(value, JavaVersion.JAVA10.toJdtClassFileConstant());
-		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
-			// ok
-		}
-		try {
-			long value = ClassFileConstants.class.getField("JDK11").getLong(null);
-			assertEquals(value, JavaVersion.JAVA11.toJdtClassFileConstant());
-		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
-			System.err.println("ooops");
-			// ok
-		}
+		assertEquals(ClassFileConstants.JDK1_8, JavaVersion.JAVA8.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK9, JavaVersion.JAVA9.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK10, JavaVersion.JAVA10.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK11, JavaVersion.JAVA11.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK17, JavaVersion.JAVA17.toJdtClassFileConstant());
+//		try {
+//			long value = ClassFileConstants.class.getField("JDK17").getLong(null);
+//			assertEquals(value, JavaVersion.JAVA17.toJdtClassFileConstant());
+//		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
+//			System.err.println("ooops");
+//			// ok
+//		}
 	}
 
 }

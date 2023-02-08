@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalTwoContextsTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -71,11 +79,11 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleMainModel"
-    // InternalTwoContextsTestLanguage.g:53:1: entryRuleMainModel : ruleMainModel EOF ;
+    // InternalTwoContextsTestLanguage.g:58:1: entryRuleMainModel : ruleMainModel EOF ;
     public final void entryRuleMainModel() throws RecognitionException {
         try {
-            // InternalTwoContextsTestLanguage.g:54:1: ( ruleMainModel EOF )
-            // InternalTwoContextsTestLanguage.g:55:1: ruleMainModel EOF
+            // InternalTwoContextsTestLanguage.g:59:1: ( ruleMainModel EOF )
+            // InternalTwoContextsTestLanguage.g:60:1: ruleMainModel EOF
             {
              before(grammarAccess.getMainModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -101,20 +109,20 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleMainModel"
-    // InternalTwoContextsTestLanguage.g:62:1: ruleMainModel : ( ( rule__MainModel__ElementsAssignment )* ) ;
+    // InternalTwoContextsTestLanguage.g:67:1: ruleMainModel : ( ( rule__MainModel__ElementsAssignment )* ) ;
     public final void ruleMainModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:66:2: ( ( ( rule__MainModel__ElementsAssignment )* ) )
-            // InternalTwoContextsTestLanguage.g:67:2: ( ( rule__MainModel__ElementsAssignment )* )
+            // InternalTwoContextsTestLanguage.g:71:2: ( ( ( rule__MainModel__ElementsAssignment )* ) )
+            // InternalTwoContextsTestLanguage.g:72:2: ( ( rule__MainModel__ElementsAssignment )* )
             {
-            // InternalTwoContextsTestLanguage.g:67:2: ( ( rule__MainModel__ElementsAssignment )* )
-            // InternalTwoContextsTestLanguage.g:68:3: ( rule__MainModel__ElementsAssignment )*
+            // InternalTwoContextsTestLanguage.g:72:2: ( ( rule__MainModel__ElementsAssignment )* )
+            // InternalTwoContextsTestLanguage.g:73:3: ( rule__MainModel__ElementsAssignment )*
             {
              before(grammarAccess.getMainModelAccess().getElementsAssignment()); 
-            // InternalTwoContextsTestLanguage.g:69:3: ( rule__MainModel__ElementsAssignment )*
+            // InternalTwoContextsTestLanguage.g:74:3: ( rule__MainModel__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -127,7 +135,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalTwoContextsTestLanguage.g:69:4: rule__MainModel__ElementsAssignment
+            	    // InternalTwoContextsTestLanguage.g:74:4: rule__MainModel__ElementsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__MainModel__ElementsAssignment();
@@ -166,11 +174,11 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleAnElement"
-    // InternalTwoContextsTestLanguage.g:78:1: entryRuleAnElement : ruleAnElement EOF ;
+    // InternalTwoContextsTestLanguage.g:83:1: entryRuleAnElement : ruleAnElement EOF ;
     public final void entryRuleAnElement() throws RecognitionException {
         try {
-            // InternalTwoContextsTestLanguage.g:79:1: ( ruleAnElement EOF )
-            // InternalTwoContextsTestLanguage.g:80:1: ruleAnElement EOF
+            // InternalTwoContextsTestLanguage.g:84:1: ( ruleAnElement EOF )
+            // InternalTwoContextsTestLanguage.g:85:1: ruleAnElement EOF
             {
              before(grammarAccess.getAnElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -196,21 +204,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleAnElement"
-    // InternalTwoContextsTestLanguage.g:87:1: ruleAnElement : ( ( rule__AnElement__Group__0 ) ) ;
+    // InternalTwoContextsTestLanguage.g:92:1: ruleAnElement : ( ( rule__AnElement__Group__0 ) ) ;
     public final void ruleAnElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:91:2: ( ( ( rule__AnElement__Group__0 ) ) )
-            // InternalTwoContextsTestLanguage.g:92:2: ( ( rule__AnElement__Group__0 ) )
+            // InternalTwoContextsTestLanguage.g:96:2: ( ( ( rule__AnElement__Group__0 ) ) )
+            // InternalTwoContextsTestLanguage.g:97:2: ( ( rule__AnElement__Group__0 ) )
             {
-            // InternalTwoContextsTestLanguage.g:92:2: ( ( rule__AnElement__Group__0 ) )
-            // InternalTwoContextsTestLanguage.g:93:3: ( rule__AnElement__Group__0 )
+            // InternalTwoContextsTestLanguage.g:97:2: ( ( rule__AnElement__Group__0 ) )
+            // InternalTwoContextsTestLanguage.g:98:3: ( rule__AnElement__Group__0 )
             {
              before(grammarAccess.getAnElementAccess().getGroup()); 
-            // InternalTwoContextsTestLanguage.g:94:3: ( rule__AnElement__Group__0 )
-            // InternalTwoContextsTestLanguage.g:94:4: rule__AnElement__Group__0
+            // InternalTwoContextsTestLanguage.g:99:3: ( rule__AnElement__Group__0 )
+            // InternalTwoContextsTestLanguage.g:99:4: rule__AnElement__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AnElement__Group__0();
@@ -243,14 +251,14 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group__0"
-    // InternalTwoContextsTestLanguage.g:102:1: rule__AnElement__Group__0 : rule__AnElement__Group__0__Impl rule__AnElement__Group__1 ;
+    // InternalTwoContextsTestLanguage.g:107:1: rule__AnElement__Group__0 : rule__AnElement__Group__0__Impl rule__AnElement__Group__1 ;
     public final void rule__AnElement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:106:1: ( rule__AnElement__Group__0__Impl rule__AnElement__Group__1 )
-            // InternalTwoContextsTestLanguage.g:107:2: rule__AnElement__Group__0__Impl rule__AnElement__Group__1
+            // InternalTwoContextsTestLanguage.g:111:1: ( rule__AnElement__Group__0__Impl rule__AnElement__Group__1 )
+            // InternalTwoContextsTestLanguage.g:112:2: rule__AnElement__Group__0__Impl rule__AnElement__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__AnElement__Group__0__Impl();
@@ -281,21 +289,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group__0__Impl"
-    // InternalTwoContextsTestLanguage.g:114:1: rule__AnElement__Group__0__Impl : ( ( rule__AnElement__NameAssignment_0 ) ) ;
+    // InternalTwoContextsTestLanguage.g:119:1: rule__AnElement__Group__0__Impl : ( ( rule__AnElement__NameAssignment_0 ) ) ;
     public final void rule__AnElement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:118:1: ( ( ( rule__AnElement__NameAssignment_0 ) ) )
-            // InternalTwoContextsTestLanguage.g:119:1: ( ( rule__AnElement__NameAssignment_0 ) )
+            // InternalTwoContextsTestLanguage.g:123:1: ( ( ( rule__AnElement__NameAssignment_0 ) ) )
+            // InternalTwoContextsTestLanguage.g:124:1: ( ( rule__AnElement__NameAssignment_0 ) )
             {
-            // InternalTwoContextsTestLanguage.g:119:1: ( ( rule__AnElement__NameAssignment_0 ) )
-            // InternalTwoContextsTestLanguage.g:120:2: ( rule__AnElement__NameAssignment_0 )
+            // InternalTwoContextsTestLanguage.g:124:1: ( ( rule__AnElement__NameAssignment_0 ) )
+            // InternalTwoContextsTestLanguage.g:125:2: ( rule__AnElement__NameAssignment_0 )
             {
              before(grammarAccess.getAnElementAccess().getNameAssignment_0()); 
-            // InternalTwoContextsTestLanguage.g:121:2: ( rule__AnElement__NameAssignment_0 )
-            // InternalTwoContextsTestLanguage.g:121:3: rule__AnElement__NameAssignment_0
+            // InternalTwoContextsTestLanguage.g:126:2: ( rule__AnElement__NameAssignment_0 )
+            // InternalTwoContextsTestLanguage.g:126:3: rule__AnElement__NameAssignment_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AnElement__NameAssignment_0();
@@ -328,14 +336,14 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group__1"
-    // InternalTwoContextsTestLanguage.g:129:1: rule__AnElement__Group__1 : rule__AnElement__Group__1__Impl rule__AnElement__Group__2 ;
+    // InternalTwoContextsTestLanguage.g:134:1: rule__AnElement__Group__1 : rule__AnElement__Group__1__Impl rule__AnElement__Group__2 ;
     public final void rule__AnElement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:133:1: ( rule__AnElement__Group__1__Impl rule__AnElement__Group__2 )
-            // InternalTwoContextsTestLanguage.g:134:2: rule__AnElement__Group__1__Impl rule__AnElement__Group__2
+            // InternalTwoContextsTestLanguage.g:138:1: ( rule__AnElement__Group__1__Impl rule__AnElement__Group__2 )
+            // InternalTwoContextsTestLanguage.g:139:2: rule__AnElement__Group__1__Impl rule__AnElement__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__AnElement__Group__1__Impl();
@@ -366,20 +374,20 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group__1__Impl"
-    // InternalTwoContextsTestLanguage.g:141:1: rule__AnElement__Group__1__Impl : ( ( rule__AnElement__Group_1__0 )? ) ;
+    // InternalTwoContextsTestLanguage.g:146:1: rule__AnElement__Group__1__Impl : ( ( rule__AnElement__Group_1__0 )? ) ;
     public final void rule__AnElement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:145:1: ( ( ( rule__AnElement__Group_1__0 )? ) )
-            // InternalTwoContextsTestLanguage.g:146:1: ( ( rule__AnElement__Group_1__0 )? )
+            // InternalTwoContextsTestLanguage.g:150:1: ( ( ( rule__AnElement__Group_1__0 )? ) )
+            // InternalTwoContextsTestLanguage.g:151:1: ( ( rule__AnElement__Group_1__0 )? )
             {
-            // InternalTwoContextsTestLanguage.g:146:1: ( ( rule__AnElement__Group_1__0 )? )
-            // InternalTwoContextsTestLanguage.g:147:2: ( rule__AnElement__Group_1__0 )?
+            // InternalTwoContextsTestLanguage.g:151:1: ( ( rule__AnElement__Group_1__0 )? )
+            // InternalTwoContextsTestLanguage.g:152:2: ( rule__AnElement__Group_1__0 )?
             {
              before(grammarAccess.getAnElementAccess().getGroup_1()); 
-            // InternalTwoContextsTestLanguage.g:148:2: ( rule__AnElement__Group_1__0 )?
+            // InternalTwoContextsTestLanguage.g:153:2: ( rule__AnElement__Group_1__0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -388,7 +396,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             }
             switch (alt2) {
                 case 1 :
-                    // InternalTwoContextsTestLanguage.g:148:3: rule__AnElement__Group_1__0
+                    // InternalTwoContextsTestLanguage.g:153:3: rule__AnElement__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__AnElement__Group_1__0();
@@ -424,14 +432,14 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group__2"
-    // InternalTwoContextsTestLanguage.g:156:1: rule__AnElement__Group__2 : rule__AnElement__Group__2__Impl ;
+    // InternalTwoContextsTestLanguage.g:161:1: rule__AnElement__Group__2 : rule__AnElement__Group__2__Impl ;
     public final void rule__AnElement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:160:1: ( rule__AnElement__Group__2__Impl )
-            // InternalTwoContextsTestLanguage.g:161:2: rule__AnElement__Group__2__Impl
+            // InternalTwoContextsTestLanguage.g:165:1: ( rule__AnElement__Group__2__Impl )
+            // InternalTwoContextsTestLanguage.g:166:2: rule__AnElement__Group__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AnElement__Group__2__Impl();
@@ -457,17 +465,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group__2__Impl"
-    // InternalTwoContextsTestLanguage.g:167:1: rule__AnElement__Group__2__Impl : ( ';' ) ;
+    // InternalTwoContextsTestLanguage.g:172:1: rule__AnElement__Group__2__Impl : ( ';' ) ;
     public final void rule__AnElement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:171:1: ( ( ';' ) )
-            // InternalTwoContextsTestLanguage.g:172:1: ( ';' )
+            // InternalTwoContextsTestLanguage.g:176:1: ( ( ';' ) )
+            // InternalTwoContextsTestLanguage.g:177:1: ( ';' )
             {
-            // InternalTwoContextsTestLanguage.g:172:1: ( ';' )
-            // InternalTwoContextsTestLanguage.g:173:2: ';'
+            // InternalTwoContextsTestLanguage.g:177:1: ( ';' )
+            // InternalTwoContextsTestLanguage.g:178:2: ';'
             {
              before(grammarAccess.getAnElementAccess().getSemicolonKeyword_2()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -494,14 +502,14 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group_1__0"
-    // InternalTwoContextsTestLanguage.g:183:1: rule__AnElement__Group_1__0 : rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1 ;
+    // InternalTwoContextsTestLanguage.g:188:1: rule__AnElement__Group_1__0 : rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1 ;
     public final void rule__AnElement__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:187:1: ( rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1 )
-            // InternalTwoContextsTestLanguage.g:188:2: rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1
+            // InternalTwoContextsTestLanguage.g:192:1: ( rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1 )
+            // InternalTwoContextsTestLanguage.g:193:2: rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__AnElement__Group_1__0__Impl();
@@ -532,17 +540,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group_1__0__Impl"
-    // InternalTwoContextsTestLanguage.g:195:1: rule__AnElement__Group_1__0__Impl : ( 'refersTo' ) ;
+    // InternalTwoContextsTestLanguage.g:200:1: rule__AnElement__Group_1__0__Impl : ( 'refersTo' ) ;
     public final void rule__AnElement__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:199:1: ( ( 'refersTo' ) )
-            // InternalTwoContextsTestLanguage.g:200:1: ( 'refersTo' )
+            // InternalTwoContextsTestLanguage.g:204:1: ( ( 'refersTo' ) )
+            // InternalTwoContextsTestLanguage.g:205:1: ( 'refersTo' )
             {
-            // InternalTwoContextsTestLanguage.g:200:1: ( 'refersTo' )
-            // InternalTwoContextsTestLanguage.g:201:2: 'refersTo'
+            // InternalTwoContextsTestLanguage.g:205:1: ( 'refersTo' )
+            // InternalTwoContextsTestLanguage.g:206:2: 'refersTo'
             {
              before(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -569,14 +577,14 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group_1__1"
-    // InternalTwoContextsTestLanguage.g:210:1: rule__AnElement__Group_1__1 : rule__AnElement__Group_1__1__Impl ;
+    // InternalTwoContextsTestLanguage.g:215:1: rule__AnElement__Group_1__1 : rule__AnElement__Group_1__1__Impl ;
     public final void rule__AnElement__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:214:1: ( rule__AnElement__Group_1__1__Impl )
-            // InternalTwoContextsTestLanguage.g:215:2: rule__AnElement__Group_1__1__Impl
+            // InternalTwoContextsTestLanguage.g:219:1: ( rule__AnElement__Group_1__1__Impl )
+            // InternalTwoContextsTestLanguage.g:220:2: rule__AnElement__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AnElement__Group_1__1__Impl();
@@ -602,21 +610,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__Group_1__1__Impl"
-    // InternalTwoContextsTestLanguage.g:221:1: rule__AnElement__Group_1__1__Impl : ( ( rule__AnElement__ReferredAssignment_1_1 ) ) ;
+    // InternalTwoContextsTestLanguage.g:226:1: rule__AnElement__Group_1__1__Impl : ( ( rule__AnElement__ReferredAssignment_1_1 ) ) ;
     public final void rule__AnElement__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:225:1: ( ( ( rule__AnElement__ReferredAssignment_1_1 ) ) )
-            // InternalTwoContextsTestLanguage.g:226:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
+            // InternalTwoContextsTestLanguage.g:230:1: ( ( ( rule__AnElement__ReferredAssignment_1_1 ) ) )
+            // InternalTwoContextsTestLanguage.g:231:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
             {
-            // InternalTwoContextsTestLanguage.g:226:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
-            // InternalTwoContextsTestLanguage.g:227:2: ( rule__AnElement__ReferredAssignment_1_1 )
+            // InternalTwoContextsTestLanguage.g:231:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
+            // InternalTwoContextsTestLanguage.g:232:2: ( rule__AnElement__ReferredAssignment_1_1 )
             {
              before(grammarAccess.getAnElementAccess().getReferredAssignment_1_1()); 
-            // InternalTwoContextsTestLanguage.g:228:2: ( rule__AnElement__ReferredAssignment_1_1 )
-            // InternalTwoContextsTestLanguage.g:228:3: rule__AnElement__ReferredAssignment_1_1
+            // InternalTwoContextsTestLanguage.g:233:2: ( rule__AnElement__ReferredAssignment_1_1 )
+            // InternalTwoContextsTestLanguage.g:233:3: rule__AnElement__ReferredAssignment_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AnElement__ReferredAssignment_1_1();
@@ -649,17 +657,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__MainModel__ElementsAssignment"
-    // InternalTwoContextsTestLanguage.g:237:1: rule__MainModel__ElementsAssignment : ( ruleAnElement ) ;
+    // InternalTwoContextsTestLanguage.g:242:1: rule__MainModel__ElementsAssignment : ( ruleAnElement ) ;
     public final void rule__MainModel__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:241:1: ( ( ruleAnElement ) )
-            // InternalTwoContextsTestLanguage.g:242:2: ( ruleAnElement )
+            // InternalTwoContextsTestLanguage.g:246:1: ( ( ruleAnElement ) )
+            // InternalTwoContextsTestLanguage.g:247:2: ( ruleAnElement )
             {
-            // InternalTwoContextsTestLanguage.g:242:2: ( ruleAnElement )
-            // InternalTwoContextsTestLanguage.g:243:3: ruleAnElement
+            // InternalTwoContextsTestLanguage.g:247:2: ( ruleAnElement )
+            // InternalTwoContextsTestLanguage.g:248:3: ruleAnElement
             {
              before(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -690,17 +698,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__NameAssignment_0"
-    // InternalTwoContextsTestLanguage.g:252:1: rule__AnElement__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalTwoContextsTestLanguage.g:257:1: rule__AnElement__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__AnElement__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:256:1: ( ( RULE_ID ) )
-            // InternalTwoContextsTestLanguage.g:257:2: ( RULE_ID )
+            // InternalTwoContextsTestLanguage.g:261:1: ( ( RULE_ID ) )
+            // InternalTwoContextsTestLanguage.g:262:2: ( RULE_ID )
             {
-            // InternalTwoContextsTestLanguage.g:257:2: ( RULE_ID )
-            // InternalTwoContextsTestLanguage.g:258:3: RULE_ID
+            // InternalTwoContextsTestLanguage.g:262:2: ( RULE_ID )
+            // InternalTwoContextsTestLanguage.g:263:3: RULE_ID
             {
              before(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -727,21 +735,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AnElement__ReferredAssignment_1_1"
-    // InternalTwoContextsTestLanguage.g:267:1: rule__AnElement__ReferredAssignment_1_1 : ( ( RULE_ID ) ) ;
+    // InternalTwoContextsTestLanguage.g:272:1: rule__AnElement__ReferredAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__AnElement__ReferredAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTwoContextsTestLanguage.g:271:1: ( ( ( RULE_ID ) ) )
-            // InternalTwoContextsTestLanguage.g:272:2: ( ( RULE_ID ) )
+            // InternalTwoContextsTestLanguage.g:276:1: ( ( ( RULE_ID ) ) )
+            // InternalTwoContextsTestLanguage.g:277:2: ( ( RULE_ID ) )
             {
-            // InternalTwoContextsTestLanguage.g:272:2: ( ( RULE_ID ) )
-            // InternalTwoContextsTestLanguage.g:273:3: ( RULE_ID )
+            // InternalTwoContextsTestLanguage.g:277:2: ( ( RULE_ID ) )
+            // InternalTwoContextsTestLanguage.g:278:3: ( RULE_ID )
             {
              before(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0()); 
-            // InternalTwoContextsTestLanguage.g:274:3: ( RULE_ID )
-            // InternalTwoContextsTestLanguage.g:275:4: RULE_ID
+            // InternalTwoContextsTestLanguage.g:279:3: ( RULE_ID )
+            // InternalTwoContextsTestLanguage.g:280:4: RULE_ID
             {
              before(grammarAccess.getAnElementAccess().getReferredAnElementIDTerminalRuleCall_1_1_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 

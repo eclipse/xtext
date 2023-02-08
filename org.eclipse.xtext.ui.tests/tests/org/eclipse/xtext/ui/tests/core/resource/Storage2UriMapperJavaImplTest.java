@@ -8,18 +8,27 @@
  */
 package org.eclipse.xtext.ui.tests.core.resource;
 
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IClasspathAttribute;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
@@ -29,12 +38,16 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
+import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.util.Pair;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -56,27 +69,6 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 
-	private boolean isExpectedJRESize(int size) {
-		switch (size) {
-			case 1:
-				/* java8 */ return true;
-			case 63:
-				/* java9 */ return true;
-			case 49:
-				/* java10 + java11 + java13 */ return true;
-			case 50:
-				/* java11.0.9+ */ return true;
-			case 51:
-				/* java14 + java 15 */ return true;
-			default:
-				return false;
-		}
-	}
-
-	private boolean isExpectedJRESize(int size, int multiplier) {
-		return isExpectedJRESize(size / multiplier) && size / multiplier * multiplier == size;
-	}
-
 	protected Storage2UriMapperJavaImpl createFreshStorage2UriMapper() {
 		Storage2UriMapperJavaImpl mapper = new Storage2UriMapperJavaImpl();
 		mapper.setUriValidator(new UriValidator() {
@@ -96,22 +88,155 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 		mapper.setJavaProjectClasspathChangeAnalyzer(new JavaProjectClasspathChangeAnalyzer());
 		return mapper;
 	}
+	
+	@Test
+	public void testBug574908() throws Exception {
+		IJavaProject p = newModularProject("p0");
+		assertTrue(p.findType("java.lang.Module").exists());
+		storage2UriMapperJava = createFreshStorage2UriMapper();
+		storage2UriMapperJava.initializeCache();
+		Map<String, PackageFragmentRootData> data = getCachedPackageFragmentRootData();
+		assertNotNull(data);
+		assertTrue(data.isEmpty());
+	}
+	
+	@Test
+	public void testBug574908_Performance() throws Exception {
+		AtomicLong createProjectTimeMs = new AtomicLong();
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+				Stopwatch sw = Stopwatch.createStarted();		
+				for(int i = 0; i < 25; i++) {
+					newModularProject("p" + i);
+				}
+				createProjectTimeMs.set(sw.elapsed(TimeUnit.MILLISECONDS));
+			}
+		}.run(null);
+		
+		Stopwatch sw = Stopwatch.createStarted();
+		storage2UriMapperJava = createFreshStorage2UriMapper();
+		storage2UriMapperJava.syncInitializeCache();
+		long mapperTime = sw.elapsed(TimeUnit.MILLISECONDS);
+		assertTrue("Creationg took: " + createProjectTimeMs.get()+ "ms; cacheInit took: " + mapperTime, mapperTime < 250);
+	}
+	
+	@Ignore("Can be enabled for performance test purposes")
+	@Test
+	public void testBug574908_Performance_500() throws Exception {
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+				Stopwatch sw = Stopwatch.createStarted();		
+				for(int i = 0; i < 500; i++) {
+					newModularProject("p" + i);
+				}
+				System.err.println(sw.elapsed(TimeUnit.MILLISECONDS));
+			}
+		}.run(null);
+		
+		for(int i = 0; i < 50; i++) {
+			Stopwatch sw = Stopwatch.createStarted();
+			storage2UriMapperJava = createFreshStorage2UriMapper();
+			storage2UriMapperJava.syncInitializeCache();
+			System.err.println(sw.elapsed(TimeUnit.MILLISECONDS));
+		}
+	}
+	
+	@Test
+	public void testGetStorages_Performance() throws Exception {
+		AtomicLong createProjectTimeMs = new AtomicLong();
+		
+		int projects = 50; // 200
+		int jarsPerProject = 20;
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+				Stopwatch sw = Stopwatch.createStarted();		
+				for(int i = 0; i < projects; i++) {
+					IJavaProject p = JavaProjectSetupUtil.createJavaProject("p" + i, false);
+					for(int j = 0; j < jarsPerProject; j++) {
+						JavaProjectSetupUtil.addJarToClasspath(p, createJar(p, "lib" + j), false);
+					}
+				}
+				createProjectTimeMs.set(sw.elapsed(TimeUnit.MILLISECONDS));
+			}
+		}.run(null);
+		
+		URI uri = URI.createPlatformPluginURI("doesntExist/some.file", false);
+		Stopwatch sw = Stopwatch.createStarted();
+		// simulate ToBeBuiltComputer.updateProject -> removeProject
+		for(int k = 0; k < projects * jarsPerProject; k++) {
+			Iterable<Pair<IStorage, IProject>> storages = storage2UriMapperJava.getStorages(uri);
+			for(Pair<IStorage, IProject> p: storages) {
+				assertNotNull(p.getFirst());
+				assertNotNull(p.getSecond());
+			}
+		}
+		long getStoragesTime = sw.elapsed(TimeUnit.MILLISECONDS);
+		assertTrue("Creationg took: " + createProjectTimeMs.get()+ "ms; getStorages took: " + getStoragesTime, getStoragesTime < 150);
+	}
+
+	private IJavaProject newModularProject(String projectName) throws CoreException, JavaModelException, InvocationTargetException, InterruptedException {
+		AtomicReference<IJavaProject> result = new AtomicReference<IJavaProject>();
+		new WorkspaceModifyOperation() {
+
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+				IProject project = JavaProjectSetupUtil.createSimpleProject(projectName);
+				JavaCore.initializeAfterLoad(monitor());
+				IJavaProject javaProject = JavaCore.create(project);
+				javaProject.save(null, true);
+				result.set(javaProject);
+				addNature(project, JavaCore.NATURE_ID);
+				JavaProjectSetupUtil.addSourceFolder(javaProject, "src", false);
+				JavaProjectSetupUtil.addJreClasspathEntry(javaProject, JavaVersion.JAVA11.getBree());
+				
+				IClasspathEntry defaultEntry = JavaProjectSetupUtil.getJreContainerClasspathEntry(javaProject);
+				if (isModular(defaultEntry)) {
+					return;
+				}
+				
+				IClasspathEntry newEntry = JavaCore.newContainerEntry(defaultEntry.getPath(), defaultEntry.getAccessRules(), new IClasspathAttribute[] { JavaCore.newClasspathAttribute(IClasspathAttribute.MODULE, "true") }, defaultEntry.isExported());
+				IClasspathEntry[] array = javaProject.getRawClasspath();
+				for(int i = 0; i < array.length; i++) {
+					if (array[i] == defaultEntry) {
+						array[i] = newEntry;
+						break;
+					}
+				}
+				javaProject.setRawClasspath(array, null);
+				assertTrue(isModular(JavaProjectSetupUtil.getJreContainerClasspathEntry(javaProject)));
+			}
+			
+		}.run(null);
+		return result.get();
+	}
+	
+	private boolean isModular(IClasspathEntry entry) {
+		IClasspathAttribute[] attributes = entry.getExtraAttributes();
+		for (int i = 0, length = attributes.length; i < length; i++) {
+			IClasspathAttribute attribute = attributes[i];
+			if (IClasspathAttribute.MODULE.equals(attribute.getName()) && "true".equals(attribute.getValue())) //$NON-NLS-1$
+				return true;
+		}
+		return false;
+	}
 
 	@Test
 	public void testOnClasspathChange() throws Exception {
 		Assert.assertEquals("" + getCachedPackageFragmentRootData(), 0, getCachedPackageFragmentRootData().size());
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject("testProject");
-		int sizeBefore = getCachedPackageFragmentRootData().size();
-		// it should contain all the jars from JDK now
-		Assert.assertTrue(sizeBefore > 0);
+		Map<String, PackageFragmentRootData> map = getCachedPackageFragmentRootData();
+		int sizeBefore = map.size();
+		Assert.assertEquals("JRE is not cached", 0, sizeBefore);
 		Assert.assertFalse(getCachedPackageFragmentRootData().keySet().stream().filter(it -> it.contains("foo.jar")).findFirst().isPresent());
 		IFile file = createJar(project);
 		JavaProjectSetupUtil.addJarToClasspath(project, file);
 		Assert.assertEquals("" + getCachedPackageFragmentRootData(), sizeBefore + 1, getCachedPackageFragmentRootData().size());
 		Assert.assertNotNull(getCachedPackageFragmentRootData().keySet().stream().filter(it -> it.contains("foo.jar")).findFirst().get());
 		getCachedPackageFragmentRootData().entrySet().forEach((Map.Entry<String, PackageFragmentRootData> it) -> {
-			Assert.assertTrue(it.getValue().associatedRoots.size() + " / " + it.getKey(),
-					isExpectedJRESize(it.getValue().associatedRoots.size()));
+			Assert.assertEquals(it.getValue().associatedRoots.size() + " / " + it.getKey(), 1, it.getValue().associatedRoots.size());
 			String head = Iterables.getFirst(it.getValue().associatedRoots.keySet(), null);
 			Assert.assertTrue(head, head.startsWith("=testProject/"));
 		});
@@ -120,8 +245,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 		Assert.assertEquals("" + getCachedPackageFragmentRootData(), (sizeBefore + 1), getCachedPackageFragmentRootData().size());
 		Assert.assertNotNull(getCachedPackageFragmentRootData().keySet().stream().filter(it -> it.contains("foo.jar")).findFirst().get());
 		getCachedPackageFragmentRootData().entrySet().forEach((Map.Entry<String, PackageFragmentRootData> it) -> {
-			Assert.assertTrue(it.getValue().associatedRoots.size() + " / " + it.getKey(),
-					isExpectedJRESize(it.getValue().associatedRoots.size(), 2));
+			Assert.assertEquals(it.getValue().associatedRoots.size() + " / " + it.getKey(), 2, it.getValue().associatedRoots.size());
 			String msg = Joiner.on("\n").join(it.getValue().associatedRoots.keySet());
 			Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject/")));
 			Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject2/")));
@@ -135,8 +259,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 				String head = Iterables.getFirst(it.getValue().associatedRoots.keySet(), null);
 				Assert.assertTrue(head, head.startsWith("=testProject2/"));
 			} else {
-				Assert.assertTrue(it.getValue().associatedRoots.size() + "/" + it.getKey(),
-						isExpectedJRESize(it.getValue().associatedRoots.size(), 2));
+				Assert.assertEquals(it.getValue().associatedRoots.size() + " / " + it.getKey(), 2, it.getValue().associatedRoots.size());
 				String msg = Joiner.on("\n").join(it.getValue().associatedRoots.keySet());
 				Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject/")));
 				Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject2/")));
@@ -146,8 +269,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 		Assert.assertEquals("" + getCachedPackageFragmentRootData(), sizeBefore, getCachedPackageFragmentRootData().size());
 		Assert.assertFalse(getCachedPackageFragmentRootData().keySet().stream().filter(it -> it.contains("foo.jar")).findFirst().isPresent());
 		getCachedPackageFragmentRootData().entrySet().forEach((Map.Entry<String, PackageFragmentRootData> it) -> {
-			Assert.assertTrue(it.getValue().associatedRoots.size() + "/" + it.getKey(),
-					isExpectedJRESize(it.getValue().associatedRoots.size(), 2));
+			Assert.assertEquals(it.getValue().associatedRoots.size() + " / " + it.getKey(), 2, it.getValue().associatedRoots.size());
 			String msg = Joiner.on("\n").join(it.getValue().associatedRoots.keySet());
 			Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject/")));
 			Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject2/")));
@@ -224,16 +346,19 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 		Assert.assertEquals("" + getCachedPackageFragmentRootData(), sizeBefore + 1, getCachedPackageFragmentRootData().size());
 		Assert.assertNotNull(getCachedPackageFragmentRootData().keySet().stream().filter(it -> it.contains("foo.jar")).findFirst().get());
 		getCachedPackageFragmentRootData().entrySet().forEach((Map.Entry<String, PackageFragmentRootData> it) -> {
-			Assert.assertTrue(it.getValue().associatedRoots.size() + "/" + it.getKey(),
-					isExpectedJRESize(it.getValue().associatedRoots.size(), 2));
+			Assert.assertEquals(it.getValue().associatedRoots.size() + "/" + it.getKey(), 2, it.getValue().associatedRoots.size());
 			String msg = Joiner.on("\n").join(it.getValue().associatedRoots.keySet());
 			Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject/")));
 			Assert.assertTrue(msg, Iterables.any(it.getValue().associatedRoots.keySet(), r -> r.startsWith("=testProject2/")));
 		});
 	}
 
-	public IFile createJar(IJavaProject project) throws Exception {
-		IFile file = project.getProject().getFile("foo.jar");
+	public IFile createJar(IJavaProject project) throws CoreException {
+		return createJar(project, "foo");
+	}
+	
+	public IFile createJar(IJavaProject project, String name) throws CoreException {
+		IFile file = project.getProject().getFile(name + ".jar");
 		file.create(JavaProjectSetupUtil.jarInputStream(new JavaProjectSetupUtil.TextFile("foo/bar.indexed", "//empty"),
 				new JavaProjectSetupUtil.TextFile("META-INF/MANIFEST.MF", "Manifest-Version: 1.0\nBundle-SymbolicName: hubba.bubba\n")),
 				true, IResourcesSetupUtil.monitor());

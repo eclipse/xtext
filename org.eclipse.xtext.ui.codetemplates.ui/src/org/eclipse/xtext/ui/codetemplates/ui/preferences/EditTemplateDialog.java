@@ -19,7 +19,6 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.StatusDialog;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.TemplateException;
@@ -38,6 +37,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
@@ -77,7 +77,7 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 	private final IEditedResourceProvider resourceProvider;
 
 	public EditTemplateDialog(Shell parent, Template template, boolean edit, boolean isNameModifiable, 
-			ContextTypeRegistry registry, TemplatesLanguageConfiguration configuration, 
+			org.eclipse.jface.text.templates.ContextTypeRegistry registry, TemplatesLanguageConfiguration configuration, 
 			IEditedResourceProvider resourceProvider, String languageName) {
 		super(parent);
 		this.configuration = configuration;
@@ -93,7 +93,7 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 		fIsNameModifiable= isNameModifiable;
 
 		List<String[]> contexts= Lists.newArrayList();
-		for (Iterator<TemplateContextType> it= Iterators.filter(registry.contextTypes(), TemplateContextType.class); it.hasNext();) {
+		for (Iterator<TemplateContextType> it= Iterators.filter(((ContextTypeRegistry)registry).contextTypes(), TemplateContextType.class); it.hasNext();) {
 			TemplateContextType type= it.next();
 			contexts.add(new String[] { type.getId(), type.getName() });
 		}

@@ -36,7 +36,7 @@ public class RuleEngineFoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void rules() {
     StringConcatenation _builder = new StringConcatenation();

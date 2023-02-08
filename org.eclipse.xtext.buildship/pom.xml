@@ -5,47 +5,9 @@
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.tycho.plugin.parent</artifactId>
-		<version>2.26.0-SNAPSHOT</version>
+		<version>2.30.0-SNAPSHOT</version>
 		<relativePath>../releng/org.eclipse.xtext.tycho.plugin.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtext.buildship</artifactId>
-
-	<!-- This bundle can only be build with Eclipse Buildship 3.0 (or later) -->
-	<!-- Activate 2018-12 (or later) target only for this bundle, other plugins might use older profiles -->
-	<profiles>
-		<profile>
-			<id>oxygen</id>
-			<properties>
-				<target-platform-classifier>org.eclipse.xtext.target-r201812</target-platform-classifier>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-		<profile>
-			<id>photon</id>
-			<properties>
-				<target-platform-classifier>org.eclipse.xtext.target-r201812</target-platform-classifier>
-			</properties>
-		</profile>
-		<profile>
-			<id>r201809</id>
-			<properties>
-				<target-platform-classifier>org.eclipse.xtext.target-r201812</target-platform-classifier>
-			</properties>
-		</profile>
-		<profile><id>r201812</id></profile>
-		<profile><id>r201903</id></profile>
-		<profile><id>r201906</id></profile>
-		<profile><id>r201909</id></profile>
-		<profile><id>r201912</id></profile>
-		<profile><id>r202003</id></profile>
-		<profile><id>r202006</id></profile>
-		<profile><id>r202009</id></profile>
-		<profile><id>r202012</id></profile>
-		<profile><id>r202103</id></profile>
-		<profile><id>r202106</id></profile>
-		<profile><id>latest</id></profile>
-	</profiles>
 </project>

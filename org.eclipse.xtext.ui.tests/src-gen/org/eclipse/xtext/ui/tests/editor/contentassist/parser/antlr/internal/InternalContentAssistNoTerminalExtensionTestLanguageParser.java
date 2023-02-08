@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -87,7 +95,7 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
 
 
     // $ANTLR start "entryRulePolygonBasedShape"
-    // InternalContentAssistNoTerminalExtensionTestLanguage.g:65:1: entryRulePolygonBasedShape returns [EObject current=null] : iv_rulePolygonBasedShape= rulePolygonBasedShape EOF ;
+    // InternalContentAssistNoTerminalExtensionTestLanguage.g:70:1: entryRulePolygonBasedShape returns [EObject current=null] : iv_rulePolygonBasedShape= rulePolygonBasedShape EOF ;
     public final EObject entryRulePolygonBasedShape() throws RecognitionException {
         EObject current = null;
 
@@ -95,8 +103,8 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
 
 
         try {
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:65:58: (iv_rulePolygonBasedShape= rulePolygonBasedShape EOF )
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:66:2: iv_rulePolygonBasedShape= rulePolygonBasedShape EOF
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:70:58: (iv_rulePolygonBasedShape= rulePolygonBasedShape EOF )
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:71:2: iv_rulePolygonBasedShape= rulePolygonBasedShape EOF
             {
              newCompositeNode(grammarAccess.getPolygonBasedShapeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -123,7 +131,7 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
 
 
     // $ANTLR start "rulePolygonBasedShape"
-    // InternalContentAssistNoTerminalExtensionTestLanguage.g:72:1: rulePolygonBasedShape returns [EObject current=null] : ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+ ;
+    // InternalContentAssistNoTerminalExtensionTestLanguage.g:77:1: rulePolygonBasedShape returns [EObject current=null] : ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+ ;
     public final EObject rulePolygonBasedShape() throws RecognitionException {
         EObject current = null;
 
@@ -134,10 +142,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
         	enterRule();
 
         try {
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:78:2: ( ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+ )
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:79:2: ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:83:2: ( ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+ )
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:84:2: ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+
             {
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:79:2: ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:84:2: ( (lv_shape_0_0= rulePolygonBasedNodeShape ) )+
             int cnt1=0;
             loop1:
             do {
@@ -151,10 +159,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:80:3: (lv_shape_0_0= rulePolygonBasedNodeShape )
+            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:85:3: (lv_shape_0_0= rulePolygonBasedNodeShape )
             	    {
-            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:80:3: (lv_shape_0_0= rulePolygonBasedNodeShape )
-            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:81:4: lv_shape_0_0= rulePolygonBasedNodeShape
+            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:85:3: (lv_shape_0_0= rulePolygonBasedNodeShape )
+            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:86:4: lv_shape_0_0= rulePolygonBasedNodeShape
             	    {
 
             	    				newCompositeNode(grammarAccess.getPolygonBasedShapeAccess().getShapePolygonBasedNodeShapeEnumRuleCall_0());
@@ -211,7 +219,7 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
 
 
     // $ANTLR start "rulePolygonBasedNodeShape"
-    // InternalContentAssistNoTerminalExtensionTestLanguage.g:101:1: rulePolygonBasedNodeShape returns [Enumerator current=null] : ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) ) ;
+    // InternalContentAssistNoTerminalExtensionTestLanguage.g:106:1: rulePolygonBasedNodeShape returns [Enumerator current=null] : ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) ) ;
     public final Enumerator rulePolygonBasedNodeShape() throws RecognitionException {
         Enumerator current = null;
 
@@ -240,10 +248,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
         	enterRule();
 
         try {
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:107:2: ( ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) ) )
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:108:2: ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) )
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:112:2: ( ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) ) )
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:113:2: ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) )
             {
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:108:2: ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) )
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:113:2: ( (enumLiteral_0= 'octagon' ) | (enumLiteral_1= 'oval' ) | (enumLiteral_2= 'parallelogram' ) | (enumLiteral_3= 'pentagon' ) | (enumLiteral_4= 'plain' ) | (enumLiteral_5= 'plaintext' ) | (enumLiteral_6= 'point' ) | (enumLiteral_7= 'polygon' ) | (enumLiteral_8= 'primersite' ) | (enumLiteral_9= 'promoter' ) | (enumLiteral_10= 'proteasesite' ) | (enumLiteral_11= 'proteinstab' ) | (enumLiteral_12= 'rarrow' ) | (enumLiteral_13= 'record' ) | (enumLiteral_14= 'rect' ) | (enumLiteral_15= 'rectangle' ) | (enumLiteral_16= 'restrictionsite' ) | (enumLiteral_17= 'ribosite' ) | (enumLiteral_18= 'rnastab' ) | (enumLiteral_19= 'rpromoter' ) )
             int alt2=20;
             switch ( input.LA(1) ) {
             case 5:
@@ -355,10 +363,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
 
             switch (alt2) {
                 case 1 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:109:3: (enumLiteral_0= 'octagon' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:114:3: (enumLiteral_0= 'octagon' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:109:3: (enumLiteral_0= 'octagon' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:110:4: enumLiteral_0= 'octagon'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:114:3: (enumLiteral_0= 'octagon' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:115:4: enumLiteral_0= 'octagon'
                     {
                     enumLiteral_0=(Token)match(input,5,FollowSets000.FOLLOW_2); 
 
@@ -372,10 +380,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:117:3: (enumLiteral_1= 'oval' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:122:3: (enumLiteral_1= 'oval' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:117:3: (enumLiteral_1= 'oval' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:118:4: enumLiteral_1= 'oval'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:122:3: (enumLiteral_1= 'oval' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:123:4: enumLiteral_1= 'oval'
                     {
                     enumLiteral_1=(Token)match(input,6,FollowSets000.FOLLOW_2); 
 
@@ -389,10 +397,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:125:3: (enumLiteral_2= 'parallelogram' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:130:3: (enumLiteral_2= 'parallelogram' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:125:3: (enumLiteral_2= 'parallelogram' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:126:4: enumLiteral_2= 'parallelogram'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:130:3: (enumLiteral_2= 'parallelogram' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:131:4: enumLiteral_2= 'parallelogram'
                     {
                     enumLiteral_2=(Token)match(input,7,FollowSets000.FOLLOW_2); 
 
@@ -406,10 +414,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:133:3: (enumLiteral_3= 'pentagon' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:138:3: (enumLiteral_3= 'pentagon' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:133:3: (enumLiteral_3= 'pentagon' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:134:4: enumLiteral_3= 'pentagon'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:138:3: (enumLiteral_3= 'pentagon' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:139:4: enumLiteral_3= 'pentagon'
                     {
                     enumLiteral_3=(Token)match(input,8,FollowSets000.FOLLOW_2); 
 
@@ -423,10 +431,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 5 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:141:3: (enumLiteral_4= 'plain' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:146:3: (enumLiteral_4= 'plain' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:141:3: (enumLiteral_4= 'plain' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:142:4: enumLiteral_4= 'plain'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:146:3: (enumLiteral_4= 'plain' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:147:4: enumLiteral_4= 'plain'
                     {
                     enumLiteral_4=(Token)match(input,9,FollowSets000.FOLLOW_2); 
 
@@ -440,10 +448,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 6 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:149:3: (enumLiteral_5= 'plaintext' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:154:3: (enumLiteral_5= 'plaintext' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:149:3: (enumLiteral_5= 'plaintext' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:150:4: enumLiteral_5= 'plaintext'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:154:3: (enumLiteral_5= 'plaintext' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:155:4: enumLiteral_5= 'plaintext'
                     {
                     enumLiteral_5=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -457,10 +465,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 7 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:157:3: (enumLiteral_6= 'point' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:162:3: (enumLiteral_6= 'point' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:157:3: (enumLiteral_6= 'point' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:158:4: enumLiteral_6= 'point'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:162:3: (enumLiteral_6= 'point' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:163:4: enumLiteral_6= 'point'
                     {
                     enumLiteral_6=(Token)match(input,11,FollowSets000.FOLLOW_2); 
 
@@ -474,10 +482,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 8 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:165:3: (enumLiteral_7= 'polygon' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:170:3: (enumLiteral_7= 'polygon' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:165:3: (enumLiteral_7= 'polygon' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:166:4: enumLiteral_7= 'polygon'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:170:3: (enumLiteral_7= 'polygon' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:171:4: enumLiteral_7= 'polygon'
                     {
                     enumLiteral_7=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
@@ -491,10 +499,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 9 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:173:3: (enumLiteral_8= 'primersite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:178:3: (enumLiteral_8= 'primersite' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:173:3: (enumLiteral_8= 'primersite' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:174:4: enumLiteral_8= 'primersite'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:178:3: (enumLiteral_8= 'primersite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:179:4: enumLiteral_8= 'primersite'
                     {
                     enumLiteral_8=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
@@ -508,10 +516,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 10 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:181:3: (enumLiteral_9= 'promoter' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:186:3: (enumLiteral_9= 'promoter' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:181:3: (enumLiteral_9= 'promoter' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:182:4: enumLiteral_9= 'promoter'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:186:3: (enumLiteral_9= 'promoter' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:187:4: enumLiteral_9= 'promoter'
                     {
                     enumLiteral_9=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
@@ -525,10 +533,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 11 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:189:3: (enumLiteral_10= 'proteasesite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:194:3: (enumLiteral_10= 'proteasesite' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:189:3: (enumLiteral_10= 'proteasesite' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:190:4: enumLiteral_10= 'proteasesite'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:194:3: (enumLiteral_10= 'proteasesite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:195:4: enumLiteral_10= 'proteasesite'
                     {
                     enumLiteral_10=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
@@ -542,10 +550,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 12 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:197:3: (enumLiteral_11= 'proteinstab' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:202:3: (enumLiteral_11= 'proteinstab' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:197:3: (enumLiteral_11= 'proteinstab' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:198:4: enumLiteral_11= 'proteinstab'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:202:3: (enumLiteral_11= 'proteinstab' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:203:4: enumLiteral_11= 'proteinstab'
                     {
                     enumLiteral_11=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
@@ -559,10 +567,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 13 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:205:3: (enumLiteral_12= 'rarrow' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:210:3: (enumLiteral_12= 'rarrow' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:205:3: (enumLiteral_12= 'rarrow' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:206:4: enumLiteral_12= 'rarrow'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:210:3: (enumLiteral_12= 'rarrow' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:211:4: enumLiteral_12= 'rarrow'
                     {
                     enumLiteral_12=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
@@ -576,10 +584,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 14 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:213:3: (enumLiteral_13= 'record' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:218:3: (enumLiteral_13= 'record' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:213:3: (enumLiteral_13= 'record' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:214:4: enumLiteral_13= 'record'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:218:3: (enumLiteral_13= 'record' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:219:4: enumLiteral_13= 'record'
                     {
                     enumLiteral_13=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
@@ -593,10 +601,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 15 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:221:3: (enumLiteral_14= 'rect' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:226:3: (enumLiteral_14= 'rect' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:221:3: (enumLiteral_14= 'rect' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:222:4: enumLiteral_14= 'rect'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:226:3: (enumLiteral_14= 'rect' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:227:4: enumLiteral_14= 'rect'
                     {
                     enumLiteral_14=(Token)match(input,19,FollowSets000.FOLLOW_2); 
 
@@ -610,10 +618,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 16 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:229:3: (enumLiteral_15= 'rectangle' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:234:3: (enumLiteral_15= 'rectangle' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:229:3: (enumLiteral_15= 'rectangle' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:230:4: enumLiteral_15= 'rectangle'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:234:3: (enumLiteral_15= 'rectangle' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:235:4: enumLiteral_15= 'rectangle'
                     {
                     enumLiteral_15=(Token)match(input,20,FollowSets000.FOLLOW_2); 
 
@@ -627,10 +635,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 17 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:237:3: (enumLiteral_16= 'restrictionsite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:242:3: (enumLiteral_16= 'restrictionsite' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:237:3: (enumLiteral_16= 'restrictionsite' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:238:4: enumLiteral_16= 'restrictionsite'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:242:3: (enumLiteral_16= 'restrictionsite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:243:4: enumLiteral_16= 'restrictionsite'
                     {
                     enumLiteral_16=(Token)match(input,21,FollowSets000.FOLLOW_2); 
 
@@ -644,10 +652,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 18 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:245:3: (enumLiteral_17= 'ribosite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:250:3: (enumLiteral_17= 'ribosite' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:245:3: (enumLiteral_17= 'ribosite' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:246:4: enumLiteral_17= 'ribosite'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:250:3: (enumLiteral_17= 'ribosite' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:251:4: enumLiteral_17= 'ribosite'
                     {
                     enumLiteral_17=(Token)match(input,22,FollowSets000.FOLLOW_2); 
 
@@ -661,10 +669,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 19 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:253:3: (enumLiteral_18= 'rnastab' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:258:3: (enumLiteral_18= 'rnastab' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:253:3: (enumLiteral_18= 'rnastab' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:254:4: enumLiteral_18= 'rnastab'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:258:3: (enumLiteral_18= 'rnastab' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:259:4: enumLiteral_18= 'rnastab'
                     {
                     enumLiteral_18=(Token)match(input,23,FollowSets000.FOLLOW_2); 
 
@@ -678,10 +686,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageParser extends 
                     }
                     break;
                 case 20 :
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:261:3: (enumLiteral_19= 'rpromoter' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:266:3: (enumLiteral_19= 'rpromoter' )
                     {
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:261:3: (enumLiteral_19= 'rpromoter' )
-                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:262:4: enumLiteral_19= 'rpromoter'
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:266:3: (enumLiteral_19= 'rpromoter' )
+                    // InternalContentAssistNoTerminalExtensionTestLanguage.g:267:4: enumLiteral_19= 'rpromoter'
                     {
                     enumLiteral_19=(Token)match(input,24,FollowSets000.FOLLOW_2); 
 

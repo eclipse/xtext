@@ -50,7 +50,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
-  
+
   protected void _infer(final Model element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     final String className = StringExtensions.toFirstUpper(element.eResource().getURI().trimFileExtension().lastSegment());
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
@@ -266,7 +266,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
       acceptor.<JvmEnumerationType>accept(this._jvmTypesBuilder.toEnumerationType(device, device.getName(), _function_1), _function_2);
     }
   }
-  
+
   private String getQualifiedJavaName(final State state) {
     EObject _eContainer = state.eContainer();
     String _name = ((Device) _eContainer).getName();
@@ -274,7 +274,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
     String _name_1 = state.getName();
     return (_plus + _name_1);
   }
-  
+
   public static String getRuleMethodName(final Rule rule) {
     String _description = rule.getDescription();
     String _replaceAll = null;
@@ -283,7 +283,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
     }
     return ("execute" + _replaceAll);
   }
-  
+
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     if (element instanceof Model) {
       _infer((Model)element, acceptor, isPreIndexingPhase);

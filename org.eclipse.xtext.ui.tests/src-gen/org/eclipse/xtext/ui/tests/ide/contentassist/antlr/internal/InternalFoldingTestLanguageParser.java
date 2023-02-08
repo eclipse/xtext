@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalFoldingTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -71,11 +79,11 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "entryRuleFoldingModel"
-    // InternalFoldingTestLanguage.g:53:1: entryRuleFoldingModel : ruleFoldingModel EOF ;
+    // InternalFoldingTestLanguage.g:58:1: entryRuleFoldingModel : ruleFoldingModel EOF ;
     public final void entryRuleFoldingModel() throws RecognitionException {
         try {
-            // InternalFoldingTestLanguage.g:54:1: ( ruleFoldingModel EOF )
-            // InternalFoldingTestLanguage.g:55:1: ruleFoldingModel EOF
+            // InternalFoldingTestLanguage.g:59:1: ( ruleFoldingModel EOF )
+            // InternalFoldingTestLanguage.g:60:1: ruleFoldingModel EOF
             {
              before(grammarAccess.getFoldingModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -101,20 +109,20 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "ruleFoldingModel"
-    // InternalFoldingTestLanguage.g:62:1: ruleFoldingModel : ( ( rule__FoldingModel__ElementsAssignment )* ) ;
+    // InternalFoldingTestLanguage.g:67:1: ruleFoldingModel : ( ( rule__FoldingModel__ElementsAssignment )* ) ;
     public final void ruleFoldingModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:66:2: ( ( ( rule__FoldingModel__ElementsAssignment )* ) )
-            // InternalFoldingTestLanguage.g:67:2: ( ( rule__FoldingModel__ElementsAssignment )* )
+            // InternalFoldingTestLanguage.g:71:2: ( ( ( rule__FoldingModel__ElementsAssignment )* ) )
+            // InternalFoldingTestLanguage.g:72:2: ( ( rule__FoldingModel__ElementsAssignment )* )
             {
-            // InternalFoldingTestLanguage.g:67:2: ( ( rule__FoldingModel__ElementsAssignment )* )
-            // InternalFoldingTestLanguage.g:68:3: ( rule__FoldingModel__ElementsAssignment )*
+            // InternalFoldingTestLanguage.g:72:2: ( ( rule__FoldingModel__ElementsAssignment )* )
+            // InternalFoldingTestLanguage.g:73:3: ( rule__FoldingModel__ElementsAssignment )*
             {
              before(grammarAccess.getFoldingModelAccess().getElementsAssignment()); 
-            // InternalFoldingTestLanguage.g:69:3: ( rule__FoldingModel__ElementsAssignment )*
+            // InternalFoldingTestLanguage.g:74:3: ( rule__FoldingModel__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -127,7 +135,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:69:4: rule__FoldingModel__ElementsAssignment
+            	    // InternalFoldingTestLanguage.g:74:4: rule__FoldingModel__ElementsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__FoldingModel__ElementsAssignment();
@@ -166,11 +174,11 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalFoldingTestLanguage.g:78:1: entryRuleElement : ruleElement EOF ;
+    // InternalFoldingTestLanguage.g:83:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // InternalFoldingTestLanguage.g:79:1: ( ruleElement EOF )
-            // InternalFoldingTestLanguage.g:80:1: ruleElement EOF
+            // InternalFoldingTestLanguage.g:84:1: ( ruleElement EOF )
+            // InternalFoldingTestLanguage.g:85:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -196,21 +204,21 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "ruleElement"
-    // InternalFoldingTestLanguage.g:87:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // InternalFoldingTestLanguage.g:92:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:91:2: ( ( ( rule__Element__Group__0 ) ) )
-            // InternalFoldingTestLanguage.g:92:2: ( ( rule__Element__Group__0 ) )
+            // InternalFoldingTestLanguage.g:96:2: ( ( ( rule__Element__Group__0 ) ) )
+            // InternalFoldingTestLanguage.g:97:2: ( ( rule__Element__Group__0 ) )
             {
-            // InternalFoldingTestLanguage.g:92:2: ( ( rule__Element__Group__0 ) )
-            // InternalFoldingTestLanguage.g:93:3: ( rule__Element__Group__0 )
+            // InternalFoldingTestLanguage.g:97:2: ( ( rule__Element__Group__0 ) )
+            // InternalFoldingTestLanguage.g:98:3: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // InternalFoldingTestLanguage.g:94:3: ( rule__Element__Group__0 )
-            // InternalFoldingTestLanguage.g:94:4: rule__Element__Group__0
+            // InternalFoldingTestLanguage.g:99:3: ( rule__Element__Group__0 )
+            // InternalFoldingTestLanguage.g:99:4: rule__Element__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__0();
@@ -243,14 +251,14 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // InternalFoldingTestLanguage.g:102:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // InternalFoldingTestLanguage.g:107:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:106:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // InternalFoldingTestLanguage.g:107:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // InternalFoldingTestLanguage.g:111:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // InternalFoldingTestLanguage.g:112:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group__0__Impl();
@@ -281,17 +289,17 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // InternalFoldingTestLanguage.g:114:1: rule__Element__Group__0__Impl : ( 'element' ) ;
+    // InternalFoldingTestLanguage.g:119:1: rule__Element__Group__0__Impl : ( 'element' ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:118:1: ( ( 'element' ) )
-            // InternalFoldingTestLanguage.g:119:1: ( 'element' )
+            // InternalFoldingTestLanguage.g:123:1: ( ( 'element' ) )
+            // InternalFoldingTestLanguage.g:124:1: ( 'element' )
             {
-            // InternalFoldingTestLanguage.g:119:1: ( 'element' )
-            // InternalFoldingTestLanguage.g:120:2: 'element'
+            // InternalFoldingTestLanguage.g:124:1: ( 'element' )
+            // InternalFoldingTestLanguage.g:125:2: 'element'
             {
              before(grammarAccess.getElementAccess().getElementKeyword_0()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -318,14 +326,14 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // InternalFoldingTestLanguage.g:129:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
+    // InternalFoldingTestLanguage.g:134:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:133:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
-            // InternalFoldingTestLanguage.g:134:2: rule__Element__Group__1__Impl rule__Element__Group__2
+            // InternalFoldingTestLanguage.g:138:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
+            // InternalFoldingTestLanguage.g:139:2: rule__Element__Group__1__Impl rule__Element__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__1__Impl();
@@ -356,21 +364,21 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // InternalFoldingTestLanguage.g:141:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
+    // InternalFoldingTestLanguage.g:146:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:145:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
-            // InternalFoldingTestLanguage.g:146:1: ( ( rule__Element__NameAssignment_1 ) )
+            // InternalFoldingTestLanguage.g:150:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
+            // InternalFoldingTestLanguage.g:151:1: ( ( rule__Element__NameAssignment_1 ) )
             {
-            // InternalFoldingTestLanguage.g:146:1: ( ( rule__Element__NameAssignment_1 ) )
-            // InternalFoldingTestLanguage.g:147:2: ( rule__Element__NameAssignment_1 )
+            // InternalFoldingTestLanguage.g:151:1: ( ( rule__Element__NameAssignment_1 ) )
+            // InternalFoldingTestLanguage.g:152:2: ( rule__Element__NameAssignment_1 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_1()); 
-            // InternalFoldingTestLanguage.g:148:2: ( rule__Element__NameAssignment_1 )
-            // InternalFoldingTestLanguage.g:148:3: rule__Element__NameAssignment_1
+            // InternalFoldingTestLanguage.g:153:2: ( rule__Element__NameAssignment_1 )
+            // InternalFoldingTestLanguage.g:153:3: rule__Element__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__NameAssignment_1();
@@ -403,14 +411,14 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__2"
-    // InternalFoldingTestLanguage.g:156:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
+    // InternalFoldingTestLanguage.g:161:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:160:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
-            // InternalFoldingTestLanguage.g:161:2: rule__Element__Group__2__Impl rule__Element__Group__3
+            // InternalFoldingTestLanguage.g:165:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
+            // InternalFoldingTestLanguage.g:166:2: rule__Element__Group__2__Impl rule__Element__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__2__Impl();
@@ -441,20 +449,20 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__2__Impl"
-    // InternalFoldingTestLanguage.g:168:1: rule__Element__Group__2__Impl : ( ( rule__Element__SubelementsAssignment_2 )* ) ;
+    // InternalFoldingTestLanguage.g:173:1: rule__Element__Group__2__Impl : ( ( rule__Element__SubelementsAssignment_2 )* ) ;
     public final void rule__Element__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:172:1: ( ( ( rule__Element__SubelementsAssignment_2 )* ) )
-            // InternalFoldingTestLanguage.g:173:1: ( ( rule__Element__SubelementsAssignment_2 )* )
+            // InternalFoldingTestLanguage.g:177:1: ( ( ( rule__Element__SubelementsAssignment_2 )* ) )
+            // InternalFoldingTestLanguage.g:178:1: ( ( rule__Element__SubelementsAssignment_2 )* )
             {
-            // InternalFoldingTestLanguage.g:173:1: ( ( rule__Element__SubelementsAssignment_2 )* )
-            // InternalFoldingTestLanguage.g:174:2: ( rule__Element__SubelementsAssignment_2 )*
+            // InternalFoldingTestLanguage.g:178:1: ( ( rule__Element__SubelementsAssignment_2 )* )
+            // InternalFoldingTestLanguage.g:179:2: ( rule__Element__SubelementsAssignment_2 )*
             {
              before(grammarAccess.getElementAccess().getSubelementsAssignment_2()); 
-            // InternalFoldingTestLanguage.g:175:2: ( rule__Element__SubelementsAssignment_2 )*
+            // InternalFoldingTestLanguage.g:180:2: ( rule__Element__SubelementsAssignment_2 )*
             loop2:
             do {
                 int alt2=2;
@@ -467,7 +475,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:175:3: rule__Element__SubelementsAssignment_2
+            	    // InternalFoldingTestLanguage.g:180:3: rule__Element__SubelementsAssignment_2
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Element__SubelementsAssignment_2();
@@ -506,14 +514,14 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__3"
-    // InternalFoldingTestLanguage.g:183:1: rule__Element__Group__3 : rule__Element__Group__3__Impl ;
+    // InternalFoldingTestLanguage.g:188:1: rule__Element__Group__3 : rule__Element__Group__3__Impl ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:187:1: ( rule__Element__Group__3__Impl )
-            // InternalFoldingTestLanguage.g:188:2: rule__Element__Group__3__Impl
+            // InternalFoldingTestLanguage.g:192:1: ( rule__Element__Group__3__Impl )
+            // InternalFoldingTestLanguage.g:193:2: rule__Element__Group__3__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__3__Impl();
@@ -539,17 +547,17 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__3__Impl"
-    // InternalFoldingTestLanguage.g:194:1: rule__Element__Group__3__Impl : ( 'end' ) ;
+    // InternalFoldingTestLanguage.g:199:1: rule__Element__Group__3__Impl : ( 'end' ) ;
     public final void rule__Element__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:198:1: ( ( 'end' ) )
-            // InternalFoldingTestLanguage.g:199:1: ( 'end' )
+            // InternalFoldingTestLanguage.g:203:1: ( ( 'end' ) )
+            // InternalFoldingTestLanguage.g:204:1: ( 'end' )
             {
-            // InternalFoldingTestLanguage.g:199:1: ( 'end' )
-            // InternalFoldingTestLanguage.g:200:2: 'end'
+            // InternalFoldingTestLanguage.g:204:1: ( 'end' )
+            // InternalFoldingTestLanguage.g:205:2: 'end'
             {
              before(grammarAccess.getElementAccess().getEndKeyword_3()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -576,17 +584,17 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__FoldingModel__ElementsAssignment"
-    // InternalFoldingTestLanguage.g:210:1: rule__FoldingModel__ElementsAssignment : ( ruleElement ) ;
+    // InternalFoldingTestLanguage.g:215:1: rule__FoldingModel__ElementsAssignment : ( ruleElement ) ;
     public final void rule__FoldingModel__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:214:1: ( ( ruleElement ) )
-            // InternalFoldingTestLanguage.g:215:2: ( ruleElement )
+            // InternalFoldingTestLanguage.g:219:1: ( ( ruleElement ) )
+            // InternalFoldingTestLanguage.g:220:2: ( ruleElement )
             {
-            // InternalFoldingTestLanguage.g:215:2: ( ruleElement )
-            // InternalFoldingTestLanguage.g:216:3: ruleElement
+            // InternalFoldingTestLanguage.g:220:2: ( ruleElement )
+            // InternalFoldingTestLanguage.g:221:3: ruleElement
             {
              before(grammarAccess.getFoldingModelAccess().getElementsElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -617,17 +625,17 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__NameAssignment_1"
-    // InternalFoldingTestLanguage.g:225:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalFoldingTestLanguage.g:230:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:229:1: ( ( RULE_ID ) )
-            // InternalFoldingTestLanguage.g:230:2: ( RULE_ID )
+            // InternalFoldingTestLanguage.g:234:1: ( ( RULE_ID ) )
+            // InternalFoldingTestLanguage.g:235:2: ( RULE_ID )
             {
-            // InternalFoldingTestLanguage.g:230:2: ( RULE_ID )
-            // InternalFoldingTestLanguage.g:231:3: RULE_ID
+            // InternalFoldingTestLanguage.g:235:2: ( RULE_ID )
+            // InternalFoldingTestLanguage.g:236:3: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -654,17 +662,17 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__SubelementsAssignment_2"
-    // InternalFoldingTestLanguage.g:240:1: rule__Element__SubelementsAssignment_2 : ( ruleElement ) ;
+    // InternalFoldingTestLanguage.g:245:1: rule__Element__SubelementsAssignment_2 : ( ruleElement ) ;
     public final void rule__Element__SubelementsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFoldingTestLanguage.g:244:1: ( ( ruleElement ) )
-            // InternalFoldingTestLanguage.g:245:2: ( ruleElement )
+            // InternalFoldingTestLanguage.g:249:1: ( ( ruleElement ) )
+            // InternalFoldingTestLanguage.g:250:2: ( ruleElement )
             {
-            // InternalFoldingTestLanguage.g:245:2: ( ruleElement )
-            // InternalFoldingTestLanguage.g:246:3: ruleElement
+            // InternalFoldingTestLanguage.g:250:2: ( ruleElement )
+            // InternalFoldingTestLanguage.g:251:3: ruleElement
             {
              before(grammarAccess.getElementAccess().getSubelementsElementParserRuleCall_2_0()); 
             pushFollow(FollowSets000.FOLLOW_2);

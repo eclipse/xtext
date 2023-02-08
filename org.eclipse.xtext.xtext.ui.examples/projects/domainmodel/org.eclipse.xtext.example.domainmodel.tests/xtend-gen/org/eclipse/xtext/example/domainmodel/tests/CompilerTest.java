@@ -32,15 +32,15 @@ public class CompilerTest {
   @Rule
   @Inject
   public TemporaryFolder temporaryFolder;
-  
+
   @Inject
   @Extension
   private CompilationTestHelper _compilationTestHelper;
-  
+
   @Inject
   @Extension
   private ReflectExtensions _reflectExtensions;
-  
+
   @Test
   public void testGeneratedJava() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -71,7 +71,7 @@ public class CompilerTest {
     };
     this._compilationTestHelper.compile(_builder, _function);
   }
-  
+
   @Test
   public void testGeneratedJavaFromSeveralInputs() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -112,7 +112,7 @@ public class CompilerTest {
     };
     this._compilationTestHelper.compile(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_builder.toString(), _builder_1.toString())), _function);
   }
-  
+
   @Test
   public void compareGeneratedJava() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -140,7 +140,6 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -151,12 +150,10 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("private String name;");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public String getName() {");
@@ -167,7 +164,6 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void setName(final String name) {");
@@ -178,7 +174,6 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("@Override");
@@ -201,7 +196,7 @@ public class CompilerTest {
     };
     this._compilationTestHelper.compile(_builder, _function);
   }
-  
+
   @Test
   public void testGeneratedJavaWithOverloadedMethods() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -238,7 +233,7 @@ public class CompilerTest {
     };
     this._compilationTestHelper.compile(_builder, _function);
   }
-  
+
   @Test
   public void testExplicitGetterReplacesGeneratedOne() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -281,7 +276,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -292,12 +286,10 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("private String name;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public void setName(final String name) {");
@@ -308,7 +300,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -328,7 +319,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("@Override");
@@ -357,7 +347,7 @@ public class CompilerTest {
     };
     this._compilationTestHelper.compile(_builder, _function);
   }
-  
+
   @Test
   public void testExplicitSetterReplacesGeneratedOne() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -403,7 +393,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -414,12 +403,10 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("private String name;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public String getName() {");
@@ -430,7 +417,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -453,7 +439,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("@Override");
@@ -482,7 +467,7 @@ public class CompilerTest {
     };
     this._compilationTestHelper.compile(_builder, _function);
   }
-  
+
   @Test
   public void testExplicitGetterSetterReplaceGeneratedOnes() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -540,7 +525,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -551,12 +535,10 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("private String name;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -576,7 +558,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -599,7 +580,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("@Override");

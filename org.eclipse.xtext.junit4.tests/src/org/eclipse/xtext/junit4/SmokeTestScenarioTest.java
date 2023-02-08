@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow
  */
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true)
 public class SmokeTestScenarioTest {
 
 	@Test public void testSkipLastCharacters_01() throws Exception {

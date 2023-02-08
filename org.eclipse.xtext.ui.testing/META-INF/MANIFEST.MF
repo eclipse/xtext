@@ -2,32 +2,32 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext UI Testing Infrastructure
 Bundle-SymbolicName: org.eclipse.xtext.ui.testing
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.30.0.qualifier
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.ui.testing.util
-Import-Package: org.junit;version="4.5.0",
- org.junit.internal;version="4.10.0",
- org.junit.internal.builders;version="4.10.0",
+Import-Package: org.apache.log4j;version="1.2.24";resolution:=optional,
+ org.junit;version="4.13.2",
+ org.junit.internal;version="4.13.2",
+ org.junit.internal.builders;version="4.13.2",
  org.junit.jupiter.api;version="[5.0.0,6.0.0)";resolution:=optional,
- org.junit.rules;version="4.7.0";resolution:=optional,
- org.junit.runner;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0"
+ org.junit.rules;version="4.13.2";resolution:=optional,
+ org.junit.runner;version="4.13.2",
+ org.junit.runner.manipulation;version="4.13.2",
+ org.junit.runner.notification;version="4.13.2",
+ org.junit.runners;version="4.13.2",
+ org.junit.runners.model;version="4.13.2"
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.ui;resolution:=optional;visibility:=reexport;x-installation:=greedy,
- org.eclipse.core.runtime;bundle-version="3.13.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.core.runtime;bundle-version="3.24.100";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.core;bundle-version="3.13.102";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.ui;bundle-version="3.13.100";resolution:=optional,
- org.eclipse.jdt.launching;bundle-version="3.9.100";resolution:=optional;x-installation:=greedy,
- org.apache.log4j;bundle-version="1.2.15";resolution:=optional,
+ org.eclipse.jdt.core;bundle-version="3.29.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.ui;bundle-version="3.26.0";resolution:=optional,
+ org.eclipse.jdt.launching;bundle-version="3.19.500";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder.standalone,
- org.eclipse.emf.codegen.ecore;bundle-version="2.20.0";resolution:=optional,
- org.eclipse.pde.core;bundle-version="3.11.100";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.29.0";resolution:=optional,
+ org.eclipse.pde.core;bundle-version="3.15.100";resolution:=optional,
  org.eclipse.xtext.common.types.ui;resolution:=optional,
  org.eclipse.core.filesystem,
  org.eclipse.xtext.builder;resolution:=optional,

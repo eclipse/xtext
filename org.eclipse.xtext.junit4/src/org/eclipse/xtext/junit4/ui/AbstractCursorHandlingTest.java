@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @deprecated Use org.eclipse.xtext.ui.testing.AbstractCursorHandlingTest instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractCursorHandlingTest extends AbstractEditorTest {
 
 	private List<IFile> files = Lists.newArrayList();

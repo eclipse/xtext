@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalRefactoringTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -75,11 +83,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleMain"
-    // InternalRefactoringTestLanguage.g:53:1: entryRuleMain : ruleMain EOF ;
+    // InternalRefactoringTestLanguage.g:58:1: entryRuleMain : ruleMain EOF ;
     public final void entryRuleMain() throws RecognitionException {
         try {
-            // InternalRefactoringTestLanguage.g:54:1: ( ruleMain EOF )
-            // InternalRefactoringTestLanguage.g:55:1: ruleMain EOF
+            // InternalRefactoringTestLanguage.g:59:1: ( ruleMain EOF )
+            // InternalRefactoringTestLanguage.g:60:1: ruleMain EOF
             {
              before(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -105,20 +113,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleMain"
-    // InternalRefactoringTestLanguage.g:62:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
+    // InternalRefactoringTestLanguage.g:67:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
     public final void ruleMain() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:66:2: ( ( ( rule__Main__ElementsAssignment )* ) )
-            // InternalRefactoringTestLanguage.g:67:2: ( ( rule__Main__ElementsAssignment )* )
+            // InternalRefactoringTestLanguage.g:71:2: ( ( ( rule__Main__ElementsAssignment )* ) )
+            // InternalRefactoringTestLanguage.g:72:2: ( ( rule__Main__ElementsAssignment )* )
             {
-            // InternalRefactoringTestLanguage.g:67:2: ( ( rule__Main__ElementsAssignment )* )
-            // InternalRefactoringTestLanguage.g:68:3: ( rule__Main__ElementsAssignment )*
+            // InternalRefactoringTestLanguage.g:72:2: ( ( rule__Main__ElementsAssignment )* )
+            // InternalRefactoringTestLanguage.g:73:3: ( rule__Main__ElementsAssignment )*
             {
              before(grammarAccess.getMainAccess().getElementsAssignment()); 
-            // InternalRefactoringTestLanguage.g:69:3: ( rule__Main__ElementsAssignment )*
+            // InternalRefactoringTestLanguage.g:74:3: ( rule__Main__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -131,7 +139,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:69:4: rule__Main__ElementsAssignment
+            	    // InternalRefactoringTestLanguage.g:74:4: rule__Main__ElementsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Main__ElementsAssignment();
@@ -170,11 +178,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleAbstractElement"
-    // InternalRefactoringTestLanguage.g:78:1: entryRuleAbstractElement : ruleAbstractElement EOF ;
+    // InternalRefactoringTestLanguage.g:83:1: entryRuleAbstractElement : ruleAbstractElement EOF ;
     public final void entryRuleAbstractElement() throws RecognitionException {
         try {
-            // InternalRefactoringTestLanguage.g:79:1: ( ruleAbstractElement EOF )
-            // InternalRefactoringTestLanguage.g:80:1: ruleAbstractElement EOF
+            // InternalRefactoringTestLanguage.g:84:1: ( ruleAbstractElement EOF )
+            // InternalRefactoringTestLanguage.g:85:1: ruleAbstractElement EOF
             {
              before(grammarAccess.getAbstractElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -200,21 +208,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleAbstractElement"
-    // InternalRefactoringTestLanguage.g:87:1: ruleAbstractElement : ( ( rule__AbstractElement__Alternatives ) ) ;
+    // InternalRefactoringTestLanguage.g:92:1: ruleAbstractElement : ( ( rule__AbstractElement__Alternatives ) ) ;
     public final void ruleAbstractElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:91:2: ( ( ( rule__AbstractElement__Alternatives ) ) )
-            // InternalRefactoringTestLanguage.g:92:2: ( ( rule__AbstractElement__Alternatives ) )
+            // InternalRefactoringTestLanguage.g:96:2: ( ( ( rule__AbstractElement__Alternatives ) ) )
+            // InternalRefactoringTestLanguage.g:97:2: ( ( rule__AbstractElement__Alternatives ) )
             {
-            // InternalRefactoringTestLanguage.g:92:2: ( ( rule__AbstractElement__Alternatives ) )
-            // InternalRefactoringTestLanguage.g:93:3: ( rule__AbstractElement__Alternatives )
+            // InternalRefactoringTestLanguage.g:97:2: ( ( rule__AbstractElement__Alternatives ) )
+            // InternalRefactoringTestLanguage.g:98:3: ( rule__AbstractElement__Alternatives )
             {
              before(grammarAccess.getAbstractElementAccess().getAlternatives()); 
-            // InternalRefactoringTestLanguage.g:94:3: ( rule__AbstractElement__Alternatives )
-            // InternalRefactoringTestLanguage.g:94:4: rule__AbstractElement__Alternatives
+            // InternalRefactoringTestLanguage.g:99:3: ( rule__AbstractElement__Alternatives )
+            // InternalRefactoringTestLanguage.g:99:4: rule__AbstractElement__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AbstractElement__Alternatives();
@@ -247,11 +255,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalRefactoringTestLanguage.g:103:1: entryRuleImport : ruleImport EOF ;
+    // InternalRefactoringTestLanguage.g:108:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // InternalRefactoringTestLanguage.g:104:1: ( ruleImport EOF )
-            // InternalRefactoringTestLanguage.g:105:1: ruleImport EOF
+            // InternalRefactoringTestLanguage.g:109:1: ( ruleImport EOF )
+            // InternalRefactoringTestLanguage.g:110:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -277,21 +285,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleImport"
-    // InternalRefactoringTestLanguage.g:112:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // InternalRefactoringTestLanguage.g:117:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:116:2: ( ( ( rule__Import__Group__0 ) ) )
-            // InternalRefactoringTestLanguage.g:117:2: ( ( rule__Import__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:121:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalRefactoringTestLanguage.g:122:2: ( ( rule__Import__Group__0 ) )
             {
-            // InternalRefactoringTestLanguage.g:117:2: ( ( rule__Import__Group__0 ) )
-            // InternalRefactoringTestLanguage.g:118:3: ( rule__Import__Group__0 )
+            // InternalRefactoringTestLanguage.g:122:2: ( ( rule__Import__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:123:3: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // InternalRefactoringTestLanguage.g:119:3: ( rule__Import__Group__0 )
-            // InternalRefactoringTestLanguage.g:119:4: rule__Import__Group__0
+            // InternalRefactoringTestLanguage.g:124:3: ( rule__Import__Group__0 )
+            // InternalRefactoringTestLanguage.g:124:4: rule__Import__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__0();
@@ -324,11 +332,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalRefactoringTestLanguage.g:128:1: entryRuleElement : ruleElement EOF ;
+    // InternalRefactoringTestLanguage.g:133:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // InternalRefactoringTestLanguage.g:129:1: ( ruleElement EOF )
-            // InternalRefactoringTestLanguage.g:130:1: ruleElement EOF
+            // InternalRefactoringTestLanguage.g:134:1: ( ruleElement EOF )
+            // InternalRefactoringTestLanguage.g:135:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -354,21 +362,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleElement"
-    // InternalRefactoringTestLanguage.g:137:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // InternalRefactoringTestLanguage.g:142:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:141:2: ( ( ( rule__Element__Group__0 ) ) )
-            // InternalRefactoringTestLanguage.g:142:2: ( ( rule__Element__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:146:2: ( ( ( rule__Element__Group__0 ) ) )
+            // InternalRefactoringTestLanguage.g:147:2: ( ( rule__Element__Group__0 ) )
             {
-            // InternalRefactoringTestLanguage.g:142:2: ( ( rule__Element__Group__0 ) )
-            // InternalRefactoringTestLanguage.g:143:3: ( rule__Element__Group__0 )
+            // InternalRefactoringTestLanguage.g:147:2: ( ( rule__Element__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:148:3: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // InternalRefactoringTestLanguage.g:144:3: ( rule__Element__Group__0 )
-            // InternalRefactoringTestLanguage.g:144:4: rule__Element__Group__0
+            // InternalRefactoringTestLanguage.g:149:3: ( rule__Element__Group__0 )
+            // InternalRefactoringTestLanguage.g:149:4: rule__Element__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__0();
@@ -401,11 +409,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalRefactoringTestLanguage.g:153:1: entryRuleFQN : ruleFQN EOF ;
+    // InternalRefactoringTestLanguage.g:158:1: entryRuleFQN : ruleFQN EOF ;
     public final void entryRuleFQN() throws RecognitionException {
         try {
-            // InternalRefactoringTestLanguage.g:154:1: ( ruleFQN EOF )
-            // InternalRefactoringTestLanguage.g:155:1: ruleFQN EOF
+            // InternalRefactoringTestLanguage.g:159:1: ( ruleFQN EOF )
+            // InternalRefactoringTestLanguage.g:160:1: ruleFQN EOF
             {
              before(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -431,21 +439,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleFQN"
-    // InternalRefactoringTestLanguage.g:162:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
+    // InternalRefactoringTestLanguage.g:167:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
     public final void ruleFQN() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:166:2: ( ( ( rule__FQN__Group__0 ) ) )
-            // InternalRefactoringTestLanguage.g:167:2: ( ( rule__FQN__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:171:2: ( ( ( rule__FQN__Group__0 ) ) )
+            // InternalRefactoringTestLanguage.g:172:2: ( ( rule__FQN__Group__0 ) )
             {
-            // InternalRefactoringTestLanguage.g:167:2: ( ( rule__FQN__Group__0 ) )
-            // InternalRefactoringTestLanguage.g:168:3: ( rule__FQN__Group__0 )
+            // InternalRefactoringTestLanguage.g:172:2: ( ( rule__FQN__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:173:3: ( rule__FQN__Group__0 )
             {
              before(grammarAccess.getFQNAccess().getGroup()); 
-            // InternalRefactoringTestLanguage.g:169:3: ( rule__FQN__Group__0 )
-            // InternalRefactoringTestLanguage.g:169:4: rule__FQN__Group__0
+            // InternalRefactoringTestLanguage.g:174:3: ( rule__FQN__Group__0 )
+            // InternalRefactoringTestLanguage.g:174:4: rule__FQN__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group__0();
@@ -478,11 +486,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleFQNWithWC"
-    // InternalRefactoringTestLanguage.g:178:1: entryRuleFQNWithWC : ruleFQNWithWC EOF ;
+    // InternalRefactoringTestLanguage.g:183:1: entryRuleFQNWithWC : ruleFQNWithWC EOF ;
     public final void entryRuleFQNWithWC() throws RecognitionException {
         try {
-            // InternalRefactoringTestLanguage.g:179:1: ( ruleFQNWithWC EOF )
-            // InternalRefactoringTestLanguage.g:180:1: ruleFQNWithWC EOF
+            // InternalRefactoringTestLanguage.g:184:1: ( ruleFQNWithWC EOF )
+            // InternalRefactoringTestLanguage.g:185:1: ruleFQNWithWC EOF
             {
              before(grammarAccess.getFQNWithWCRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -508,21 +516,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleFQNWithWC"
-    // InternalRefactoringTestLanguage.g:187:1: ruleFQNWithWC : ( ( rule__FQNWithWC__Group__0 ) ) ;
+    // InternalRefactoringTestLanguage.g:192:1: ruleFQNWithWC : ( ( rule__FQNWithWC__Group__0 ) ) ;
     public final void ruleFQNWithWC() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:191:2: ( ( ( rule__FQNWithWC__Group__0 ) ) )
-            // InternalRefactoringTestLanguage.g:192:2: ( ( rule__FQNWithWC__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:196:2: ( ( ( rule__FQNWithWC__Group__0 ) ) )
+            // InternalRefactoringTestLanguage.g:197:2: ( ( rule__FQNWithWC__Group__0 ) )
             {
-            // InternalRefactoringTestLanguage.g:192:2: ( ( rule__FQNWithWC__Group__0 ) )
-            // InternalRefactoringTestLanguage.g:193:3: ( rule__FQNWithWC__Group__0 )
+            // InternalRefactoringTestLanguage.g:197:2: ( ( rule__FQNWithWC__Group__0 ) )
+            // InternalRefactoringTestLanguage.g:198:3: ( rule__FQNWithWC__Group__0 )
             {
              before(grammarAccess.getFQNWithWCAccess().getGroup()); 
-            // InternalRefactoringTestLanguage.g:194:3: ( rule__FQNWithWC__Group__0 )
-            // InternalRefactoringTestLanguage.g:194:4: rule__FQNWithWC__Group__0
+            // InternalRefactoringTestLanguage.g:199:3: ( rule__FQNWithWC__Group__0 )
+            // InternalRefactoringTestLanguage.g:199:4: rule__FQNWithWC__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQNWithWC__Group__0();
@@ -555,13 +563,13 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AbstractElement__Alternatives"
-    // InternalRefactoringTestLanguage.g:202:1: rule__AbstractElement__Alternatives : ( ( ruleElement ) | ( ruleImport ) );
+    // InternalRefactoringTestLanguage.g:207:1: rule__AbstractElement__Alternatives : ( ( ruleElement ) | ( ruleImport ) );
     public final void rule__AbstractElement__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:206:1: ( ( ruleElement ) | ( ruleImport ) )
+            // InternalRefactoringTestLanguage.g:211:1: ( ( ruleElement ) | ( ruleImport ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -579,10 +587,10 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt2) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:207:2: ( ruleElement )
+                    // InternalRefactoringTestLanguage.g:212:2: ( ruleElement )
                     {
-                    // InternalRefactoringTestLanguage.g:207:2: ( ruleElement )
-                    // InternalRefactoringTestLanguage.g:208:3: ruleElement
+                    // InternalRefactoringTestLanguage.g:212:2: ( ruleElement )
+                    // InternalRefactoringTestLanguage.g:213:3: ruleElement
                     {
                      before(grammarAccess.getAbstractElementAccess().getElementParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -598,10 +606,10 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalRefactoringTestLanguage.g:213:2: ( ruleImport )
+                    // InternalRefactoringTestLanguage.g:218:2: ( ruleImport )
                     {
-                    // InternalRefactoringTestLanguage.g:213:2: ( ruleImport )
-                    // InternalRefactoringTestLanguage.g:214:3: ruleImport
+                    // InternalRefactoringTestLanguage.g:218:2: ( ruleImport )
+                    // InternalRefactoringTestLanguage.g:219:3: ruleImport
                     {
                      before(grammarAccess.getAbstractElementAccess().getImportParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -634,13 +642,13 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Alternatives_1_1"
-    // InternalRefactoringTestLanguage.g:223:1: rule__Element__Alternatives_1_1 : ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) );
+    // InternalRefactoringTestLanguage.g:228:1: rule__Element__Alternatives_1_1 : ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) );
     public final void rule__Element__Alternatives_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:227:1: ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) )
+            // InternalRefactoringTestLanguage.g:232:1: ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -658,14 +666,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt3) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:228:2: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
+                    // InternalRefactoringTestLanguage.g:233:2: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
                     {
-                    // InternalRefactoringTestLanguage.g:228:2: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
-                    // InternalRefactoringTestLanguage.g:229:3: ( rule__Element__ContainedAssignment_1_1_0 )
+                    // InternalRefactoringTestLanguage.g:233:2: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
+                    // InternalRefactoringTestLanguage.g:234:3: ( rule__Element__ContainedAssignment_1_1_0 )
                     {
                      before(grammarAccess.getElementAccess().getContainedAssignment_1_1_0()); 
-                    // InternalRefactoringTestLanguage.g:230:3: ( rule__Element__ContainedAssignment_1_1_0 )
-                    // InternalRefactoringTestLanguage.g:230:4: rule__Element__ContainedAssignment_1_1_0
+                    // InternalRefactoringTestLanguage.g:235:3: ( rule__Element__ContainedAssignment_1_1_0 )
+                    // InternalRefactoringTestLanguage.g:235:4: rule__Element__ContainedAssignment_1_1_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Element__ContainedAssignment_1_1_0();
@@ -683,14 +691,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalRefactoringTestLanguage.g:234:2: ( ( rule__Element__Group_1_1_1__0 ) )
+                    // InternalRefactoringTestLanguage.g:239:2: ( ( rule__Element__Group_1_1_1__0 ) )
                     {
-                    // InternalRefactoringTestLanguage.g:234:2: ( ( rule__Element__Group_1_1_1__0 ) )
-                    // InternalRefactoringTestLanguage.g:235:3: ( rule__Element__Group_1_1_1__0 )
+                    // InternalRefactoringTestLanguage.g:239:2: ( ( rule__Element__Group_1_1_1__0 ) )
+                    // InternalRefactoringTestLanguage.g:240:3: ( rule__Element__Group_1_1_1__0 )
                     {
                      before(grammarAccess.getElementAccess().getGroup_1_1_1()); 
-                    // InternalRefactoringTestLanguage.g:236:3: ( rule__Element__Group_1_1_1__0 )
-                    // InternalRefactoringTestLanguage.g:236:4: rule__Element__Group_1_1_1__0
+                    // InternalRefactoringTestLanguage.g:241:3: ( rule__Element__Group_1_1_1__0 )
+                    // InternalRefactoringTestLanguage.g:241:4: rule__Element__Group_1_1_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Element__Group_1_1_1__0();
@@ -725,14 +733,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // InternalRefactoringTestLanguage.g:244:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalRefactoringTestLanguage.g:249:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:248:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // InternalRefactoringTestLanguage.g:249:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalRefactoringTestLanguage.g:253:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalRefactoringTestLanguage.g:254:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Import__Group__0__Impl();
@@ -763,17 +771,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // InternalRefactoringTestLanguage.g:256:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalRefactoringTestLanguage.g:261:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:260:1: ( ( 'import' ) )
-            // InternalRefactoringTestLanguage.g:261:1: ( 'import' )
+            // InternalRefactoringTestLanguage.g:265:1: ( ( 'import' ) )
+            // InternalRefactoringTestLanguage.g:266:1: ( 'import' )
             {
-            // InternalRefactoringTestLanguage.g:261:1: ( 'import' )
-            // InternalRefactoringTestLanguage.g:262:2: 'import'
+            // InternalRefactoringTestLanguage.g:266:1: ( 'import' )
+            // InternalRefactoringTestLanguage.g:267:2: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -800,14 +808,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // InternalRefactoringTestLanguage.g:271:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // InternalRefactoringTestLanguage.g:276:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:275:1: ( rule__Import__Group__1__Impl )
-            // InternalRefactoringTestLanguage.g:276:2: rule__Import__Group__1__Impl
+            // InternalRefactoringTestLanguage.g:280:1: ( rule__Import__Group__1__Impl )
+            // InternalRefactoringTestLanguage.g:281:2: rule__Import__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__1__Impl();
@@ -833,21 +841,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // InternalRefactoringTestLanguage.g:282:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
+    // InternalRefactoringTestLanguage.g:287:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:286:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
-            // InternalRefactoringTestLanguage.g:287:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // InternalRefactoringTestLanguage.g:291:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
+            // InternalRefactoringTestLanguage.g:292:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
             {
-            // InternalRefactoringTestLanguage.g:287:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
-            // InternalRefactoringTestLanguage.g:288:2: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // InternalRefactoringTestLanguage.g:292:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // InternalRefactoringTestLanguage.g:293:2: ( rule__Import__ImportedNamespaceAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1()); 
-            // InternalRefactoringTestLanguage.g:289:2: ( rule__Import__ImportedNamespaceAssignment_1 )
-            // InternalRefactoringTestLanguage.g:289:3: rule__Import__ImportedNamespaceAssignment_1
+            // InternalRefactoringTestLanguage.g:294:2: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // InternalRefactoringTestLanguage.g:294:3: rule__Import__ImportedNamespaceAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__ImportedNamespaceAssignment_1();
@@ -880,14 +888,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // InternalRefactoringTestLanguage.g:298:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // InternalRefactoringTestLanguage.g:303:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:302:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // InternalRefactoringTestLanguage.g:303:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // InternalRefactoringTestLanguage.g:307:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // InternalRefactoringTestLanguage.g:308:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__0__Impl();
@@ -918,21 +926,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // InternalRefactoringTestLanguage.g:310:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
+    // InternalRefactoringTestLanguage.g:315:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:314:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
-            // InternalRefactoringTestLanguage.g:315:1: ( ( rule__Element__NameAssignment_0 ) )
+            // InternalRefactoringTestLanguage.g:319:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
+            // InternalRefactoringTestLanguage.g:320:1: ( ( rule__Element__NameAssignment_0 ) )
             {
-            // InternalRefactoringTestLanguage.g:315:1: ( ( rule__Element__NameAssignment_0 ) )
-            // InternalRefactoringTestLanguage.g:316:2: ( rule__Element__NameAssignment_0 )
+            // InternalRefactoringTestLanguage.g:320:1: ( ( rule__Element__NameAssignment_0 ) )
+            // InternalRefactoringTestLanguage.g:321:2: ( rule__Element__NameAssignment_0 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_0()); 
-            // InternalRefactoringTestLanguage.g:317:2: ( rule__Element__NameAssignment_0 )
-            // InternalRefactoringTestLanguage.g:317:3: rule__Element__NameAssignment_0
+            // InternalRefactoringTestLanguage.g:322:2: ( rule__Element__NameAssignment_0 )
+            // InternalRefactoringTestLanguage.g:322:3: rule__Element__NameAssignment_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__NameAssignment_0();
@@ -965,14 +973,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // InternalRefactoringTestLanguage.g:325:1: rule__Element__Group__1 : rule__Element__Group__1__Impl ;
+    // InternalRefactoringTestLanguage.g:330:1: rule__Element__Group__1 : rule__Element__Group__1__Impl ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:329:1: ( rule__Element__Group__1__Impl )
-            // InternalRefactoringTestLanguage.g:330:2: rule__Element__Group__1__Impl
+            // InternalRefactoringTestLanguage.g:334:1: ( rule__Element__Group__1__Impl )
+            // InternalRefactoringTestLanguage.g:335:2: rule__Element__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__1__Impl();
@@ -998,20 +1006,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // InternalRefactoringTestLanguage.g:336:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
+    // InternalRefactoringTestLanguage.g:341:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:340:1: ( ( ( rule__Element__Group_1__0 )? ) )
-            // InternalRefactoringTestLanguage.g:341:1: ( ( rule__Element__Group_1__0 )? )
+            // InternalRefactoringTestLanguage.g:345:1: ( ( ( rule__Element__Group_1__0 )? ) )
+            // InternalRefactoringTestLanguage.g:346:1: ( ( rule__Element__Group_1__0 )? )
             {
-            // InternalRefactoringTestLanguage.g:341:1: ( ( rule__Element__Group_1__0 )? )
-            // InternalRefactoringTestLanguage.g:342:2: ( rule__Element__Group_1__0 )?
+            // InternalRefactoringTestLanguage.g:346:1: ( ( rule__Element__Group_1__0 )? )
+            // InternalRefactoringTestLanguage.g:347:2: ( rule__Element__Group_1__0 )?
             {
              before(grammarAccess.getElementAccess().getGroup_1()); 
-            // InternalRefactoringTestLanguage.g:343:2: ( rule__Element__Group_1__0 )?
+            // InternalRefactoringTestLanguage.g:348:2: ( rule__Element__Group_1__0 )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1020,7 +1028,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt4) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:343:3: rule__Element__Group_1__0
+                    // InternalRefactoringTestLanguage.g:348:3: rule__Element__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Element__Group_1__0();
@@ -1056,14 +1064,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__0"
-    // InternalRefactoringTestLanguage.g:352:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
+    // InternalRefactoringTestLanguage.g:357:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
     public final void rule__Element__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:356:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
-            // InternalRefactoringTestLanguage.g:357:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
+            // InternalRefactoringTestLanguage.g:361:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
+            // InternalRefactoringTestLanguage.g:362:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group_1__0__Impl();
@@ -1094,17 +1102,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__0__Impl"
-    // InternalRefactoringTestLanguage.g:364:1: rule__Element__Group_1__0__Impl : ( '{' ) ;
+    // InternalRefactoringTestLanguage.g:369:1: rule__Element__Group_1__0__Impl : ( '{' ) ;
     public final void rule__Element__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:368:1: ( ( '{' ) )
-            // InternalRefactoringTestLanguage.g:369:1: ( '{' )
+            // InternalRefactoringTestLanguage.g:373:1: ( ( '{' ) )
+            // InternalRefactoringTestLanguage.g:374:1: ( '{' )
             {
-            // InternalRefactoringTestLanguage.g:369:1: ( '{' )
-            // InternalRefactoringTestLanguage.g:370:2: '{'
+            // InternalRefactoringTestLanguage.g:374:1: ( '{' )
+            // InternalRefactoringTestLanguage.g:375:2: '{'
             {
              before(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_1_0()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -1131,14 +1139,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__1"
-    // InternalRefactoringTestLanguage.g:379:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
+    // InternalRefactoringTestLanguage.g:384:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
     public final void rule__Element__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:383:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
-            // InternalRefactoringTestLanguage.g:384:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
+            // InternalRefactoringTestLanguage.g:388:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
+            // InternalRefactoringTestLanguage.g:389:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group_1__1__Impl();
@@ -1169,20 +1177,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__1__Impl"
-    // InternalRefactoringTestLanguage.g:391:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__Alternatives_1_1 )* ) ;
+    // InternalRefactoringTestLanguage.g:396:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__Alternatives_1_1 )* ) ;
     public final void rule__Element__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:395:1: ( ( ( rule__Element__Alternatives_1_1 )* ) )
-            // InternalRefactoringTestLanguage.g:396:1: ( ( rule__Element__Alternatives_1_1 )* )
+            // InternalRefactoringTestLanguage.g:400:1: ( ( ( rule__Element__Alternatives_1_1 )* ) )
+            // InternalRefactoringTestLanguage.g:401:1: ( ( rule__Element__Alternatives_1_1 )* )
             {
-            // InternalRefactoringTestLanguage.g:396:1: ( ( rule__Element__Alternatives_1_1 )* )
-            // InternalRefactoringTestLanguage.g:397:2: ( rule__Element__Alternatives_1_1 )*
+            // InternalRefactoringTestLanguage.g:401:1: ( ( rule__Element__Alternatives_1_1 )* )
+            // InternalRefactoringTestLanguage.g:402:2: ( rule__Element__Alternatives_1_1 )*
             {
              before(grammarAccess.getElementAccess().getAlternatives_1_1()); 
-            // InternalRefactoringTestLanguage.g:398:2: ( rule__Element__Alternatives_1_1 )*
+            // InternalRefactoringTestLanguage.g:403:2: ( rule__Element__Alternatives_1_1 )*
             loop5:
             do {
                 int alt5=2;
@@ -1195,7 +1203,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:398:3: rule__Element__Alternatives_1_1
+            	    // InternalRefactoringTestLanguage.g:403:3: rule__Element__Alternatives_1_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_7);
             	    rule__Element__Alternatives_1_1();
@@ -1234,14 +1242,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__2"
-    // InternalRefactoringTestLanguage.g:406:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
+    // InternalRefactoringTestLanguage.g:411:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
     public final void rule__Element__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:410:1: ( rule__Element__Group_1__2__Impl )
-            // InternalRefactoringTestLanguage.g:411:2: rule__Element__Group_1__2__Impl
+            // InternalRefactoringTestLanguage.g:415:1: ( rule__Element__Group_1__2__Impl )
+            // InternalRefactoringTestLanguage.g:416:2: rule__Element__Group_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_1__2__Impl();
@@ -1267,17 +1275,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__2__Impl"
-    // InternalRefactoringTestLanguage.g:417:1: rule__Element__Group_1__2__Impl : ( '}' ) ;
+    // InternalRefactoringTestLanguage.g:422:1: rule__Element__Group_1__2__Impl : ( '}' ) ;
     public final void rule__Element__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:421:1: ( ( '}' ) )
-            // InternalRefactoringTestLanguage.g:422:1: ( '}' )
+            // InternalRefactoringTestLanguage.g:426:1: ( ( '}' ) )
+            // InternalRefactoringTestLanguage.g:427:1: ( '}' )
             {
-            // InternalRefactoringTestLanguage.g:422:1: ( '}' )
-            // InternalRefactoringTestLanguage.g:423:2: '}'
+            // InternalRefactoringTestLanguage.g:427:1: ( '}' )
+            // InternalRefactoringTestLanguage.g:428:2: '}'
             {
              before(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_1_2()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -1304,14 +1312,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__0"
-    // InternalRefactoringTestLanguage.g:433:1: rule__Element__Group_1_1_1__0 : rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 ;
+    // InternalRefactoringTestLanguage.g:438:1: rule__Element__Group_1_1_1__0 : rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 ;
     public final void rule__Element__Group_1_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:437:1: ( rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 )
-            // InternalRefactoringTestLanguage.g:438:2: rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1
+            // InternalRefactoringTestLanguage.g:442:1: ( rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 )
+            // InternalRefactoringTestLanguage.g:443:2: rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group_1_1_1__0__Impl();
@@ -1342,17 +1350,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__0__Impl"
-    // InternalRefactoringTestLanguage.g:445:1: rule__Element__Group_1_1_1__0__Impl : ( 'ref' ) ;
+    // InternalRefactoringTestLanguage.g:450:1: rule__Element__Group_1_1_1__0__Impl : ( 'ref' ) ;
     public final void rule__Element__Group_1_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:449:1: ( ( 'ref' ) )
-            // InternalRefactoringTestLanguage.g:450:1: ( 'ref' )
+            // InternalRefactoringTestLanguage.g:454:1: ( ( 'ref' ) )
+            // InternalRefactoringTestLanguage.g:455:1: ( 'ref' )
             {
-            // InternalRefactoringTestLanguage.g:450:1: ( 'ref' )
-            // InternalRefactoringTestLanguage.g:451:2: 'ref'
+            // InternalRefactoringTestLanguage.g:455:1: ( 'ref' )
+            // InternalRefactoringTestLanguage.g:456:2: 'ref'
             {
              before(grammarAccess.getElementAccess().getRefKeyword_1_1_1_0()); 
             match(input,14,FollowSets000.FOLLOW_2); 
@@ -1379,14 +1387,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__1"
-    // InternalRefactoringTestLanguage.g:460:1: rule__Element__Group_1_1_1__1 : rule__Element__Group_1_1_1__1__Impl ;
+    // InternalRefactoringTestLanguage.g:465:1: rule__Element__Group_1_1_1__1 : rule__Element__Group_1_1_1__1__Impl ;
     public final void rule__Element__Group_1_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:464:1: ( rule__Element__Group_1_1_1__1__Impl )
-            // InternalRefactoringTestLanguage.g:465:2: rule__Element__Group_1_1_1__1__Impl
+            // InternalRefactoringTestLanguage.g:469:1: ( rule__Element__Group_1_1_1__1__Impl )
+            // InternalRefactoringTestLanguage.g:470:2: rule__Element__Group_1_1_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_1_1_1__1__Impl();
@@ -1412,21 +1420,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__1__Impl"
-    // InternalRefactoringTestLanguage.g:471:1: rule__Element__Group_1_1_1__1__Impl : ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) ;
+    // InternalRefactoringTestLanguage.g:476:1: rule__Element__Group_1_1_1__1__Impl : ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) ;
     public final void rule__Element__Group_1_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:475:1: ( ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) )
-            // InternalRefactoringTestLanguage.g:476:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
+            // InternalRefactoringTestLanguage.g:480:1: ( ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) )
+            // InternalRefactoringTestLanguage.g:481:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
             {
-            // InternalRefactoringTestLanguage.g:476:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
-            // InternalRefactoringTestLanguage.g:477:2: ( rule__Element__ReferencedAssignment_1_1_1_1 )
+            // InternalRefactoringTestLanguage.g:481:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
+            // InternalRefactoringTestLanguage.g:482:2: ( rule__Element__ReferencedAssignment_1_1_1_1 )
             {
              before(grammarAccess.getElementAccess().getReferencedAssignment_1_1_1_1()); 
-            // InternalRefactoringTestLanguage.g:478:2: ( rule__Element__ReferencedAssignment_1_1_1_1 )
-            // InternalRefactoringTestLanguage.g:478:3: rule__Element__ReferencedAssignment_1_1_1_1
+            // InternalRefactoringTestLanguage.g:483:2: ( rule__Element__ReferencedAssignment_1_1_1_1 )
+            // InternalRefactoringTestLanguage.g:483:3: rule__Element__ReferencedAssignment_1_1_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__ReferencedAssignment_1_1_1_1();
@@ -1459,14 +1467,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // InternalRefactoringTestLanguage.g:487:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // InternalRefactoringTestLanguage.g:492:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:491:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // InternalRefactoringTestLanguage.g:492:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // InternalRefactoringTestLanguage.g:496:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // InternalRefactoringTestLanguage.g:497:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__FQN__Group__0__Impl();
@@ -1497,17 +1505,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // InternalRefactoringTestLanguage.g:499:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    // InternalRefactoringTestLanguage.g:504:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:503:1: ( ( RULE_ID ) )
-            // InternalRefactoringTestLanguage.g:504:1: ( RULE_ID )
+            // InternalRefactoringTestLanguage.g:508:1: ( ( RULE_ID ) )
+            // InternalRefactoringTestLanguage.g:509:1: ( RULE_ID )
             {
-            // InternalRefactoringTestLanguage.g:504:1: ( RULE_ID )
-            // InternalRefactoringTestLanguage.g:505:2: RULE_ID
+            // InternalRefactoringTestLanguage.g:509:1: ( RULE_ID )
+            // InternalRefactoringTestLanguage.g:510:2: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1534,14 +1542,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // InternalRefactoringTestLanguage.g:514:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // InternalRefactoringTestLanguage.g:519:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:518:1: ( rule__FQN__Group__1__Impl )
-            // InternalRefactoringTestLanguage.g:519:2: rule__FQN__Group__1__Impl
+            // InternalRefactoringTestLanguage.g:523:1: ( rule__FQN__Group__1__Impl )
+            // InternalRefactoringTestLanguage.g:524:2: rule__FQN__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group__1__Impl();
@@ -1567,20 +1575,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // InternalRefactoringTestLanguage.g:525:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // InternalRefactoringTestLanguage.g:530:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:529:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // InternalRefactoringTestLanguage.g:530:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalRefactoringTestLanguage.g:534:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // InternalRefactoringTestLanguage.g:535:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // InternalRefactoringTestLanguage.g:530:1: ( ( rule__FQN__Group_1__0 )* )
-            // InternalRefactoringTestLanguage.g:531:2: ( rule__FQN__Group_1__0 )*
+            // InternalRefactoringTestLanguage.g:535:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalRefactoringTestLanguage.g:536:2: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // InternalRefactoringTestLanguage.g:532:2: ( rule__FQN__Group_1__0 )*
+            // InternalRefactoringTestLanguage.g:537:2: ( rule__FQN__Group_1__0 )*
             loop6:
             do {
                 int alt6=2;
@@ -1593,7 +1601,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:532:3: rule__FQN__Group_1__0
+            	    // InternalRefactoringTestLanguage.g:537:3: rule__FQN__Group_1__0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_9);
             	    rule__FQN__Group_1__0();
@@ -1632,14 +1640,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // InternalRefactoringTestLanguage.g:541:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // InternalRefactoringTestLanguage.g:546:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:545:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // InternalRefactoringTestLanguage.g:546:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // InternalRefactoringTestLanguage.g:550:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // InternalRefactoringTestLanguage.g:551:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__FQN__Group_1__0__Impl();
@@ -1670,17 +1678,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // InternalRefactoringTestLanguage.g:553:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    // InternalRefactoringTestLanguage.g:558:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:557:1: ( ( '.' ) )
-            // InternalRefactoringTestLanguage.g:558:1: ( '.' )
+            // InternalRefactoringTestLanguage.g:562:1: ( ( '.' ) )
+            // InternalRefactoringTestLanguage.g:563:1: ( '.' )
             {
-            // InternalRefactoringTestLanguage.g:558:1: ( '.' )
-            // InternalRefactoringTestLanguage.g:559:2: '.'
+            // InternalRefactoringTestLanguage.g:563:1: ( '.' )
+            // InternalRefactoringTestLanguage.g:564:2: '.'
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             match(input,15,FollowSets000.FOLLOW_2); 
@@ -1707,14 +1715,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // InternalRefactoringTestLanguage.g:568:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // InternalRefactoringTestLanguage.g:573:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:572:1: ( rule__FQN__Group_1__1__Impl )
-            // InternalRefactoringTestLanguage.g:573:2: rule__FQN__Group_1__1__Impl
+            // InternalRefactoringTestLanguage.g:577:1: ( rule__FQN__Group_1__1__Impl )
+            // InternalRefactoringTestLanguage.g:578:2: rule__FQN__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group_1__1__Impl();
@@ -1740,17 +1748,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // InternalRefactoringTestLanguage.g:579:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    // InternalRefactoringTestLanguage.g:584:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:583:1: ( ( RULE_ID ) )
-            // InternalRefactoringTestLanguage.g:584:1: ( RULE_ID )
+            // InternalRefactoringTestLanguage.g:588:1: ( ( RULE_ID ) )
+            // InternalRefactoringTestLanguage.g:589:1: ( RULE_ID )
             {
-            // InternalRefactoringTestLanguage.g:584:1: ( RULE_ID )
-            // InternalRefactoringTestLanguage.g:585:2: RULE_ID
+            // InternalRefactoringTestLanguage.g:589:1: ( RULE_ID )
+            // InternalRefactoringTestLanguage.g:590:2: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1777,14 +1785,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__0"
-    // InternalRefactoringTestLanguage.g:595:1: rule__FQNWithWC__Group__0 : rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 ;
+    // InternalRefactoringTestLanguage.g:600:1: rule__FQNWithWC__Group__0 : rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 ;
     public final void rule__FQNWithWC__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:599:1: ( rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 )
-            // InternalRefactoringTestLanguage.g:600:2: rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1
+            // InternalRefactoringTestLanguage.g:604:1: ( rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 )
+            // InternalRefactoringTestLanguage.g:605:2: rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__FQNWithWC__Group__0__Impl();
@@ -1815,17 +1823,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__0__Impl"
-    // InternalRefactoringTestLanguage.g:607:1: rule__FQNWithWC__Group__0__Impl : ( ruleFQN ) ;
+    // InternalRefactoringTestLanguage.g:612:1: rule__FQNWithWC__Group__0__Impl : ( ruleFQN ) ;
     public final void rule__FQNWithWC__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:611:1: ( ( ruleFQN ) )
-            // InternalRefactoringTestLanguage.g:612:1: ( ruleFQN )
+            // InternalRefactoringTestLanguage.g:616:1: ( ( ruleFQN ) )
+            // InternalRefactoringTestLanguage.g:617:1: ( ruleFQN )
             {
-            // InternalRefactoringTestLanguage.g:612:1: ( ruleFQN )
-            // InternalRefactoringTestLanguage.g:613:2: ruleFQN
+            // InternalRefactoringTestLanguage.g:617:1: ( ruleFQN )
+            // InternalRefactoringTestLanguage.g:618:2: ruleFQN
             {
              before(grammarAccess.getFQNWithWCAccess().getFQNParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1856,14 +1864,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__1"
-    // InternalRefactoringTestLanguage.g:622:1: rule__FQNWithWC__Group__1 : rule__FQNWithWC__Group__1__Impl ;
+    // InternalRefactoringTestLanguage.g:627:1: rule__FQNWithWC__Group__1 : rule__FQNWithWC__Group__1__Impl ;
     public final void rule__FQNWithWC__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:626:1: ( rule__FQNWithWC__Group__1__Impl )
-            // InternalRefactoringTestLanguage.g:627:2: rule__FQNWithWC__Group__1__Impl
+            // InternalRefactoringTestLanguage.g:631:1: ( rule__FQNWithWC__Group__1__Impl )
+            // InternalRefactoringTestLanguage.g:632:2: rule__FQNWithWC__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQNWithWC__Group__1__Impl();
@@ -1889,20 +1897,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__1__Impl"
-    // InternalRefactoringTestLanguage.g:633:1: rule__FQNWithWC__Group__1__Impl : ( ( '.*' )? ) ;
+    // InternalRefactoringTestLanguage.g:638:1: rule__FQNWithWC__Group__1__Impl : ( ( '.*' )? ) ;
     public final void rule__FQNWithWC__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:637:1: ( ( ( '.*' )? ) )
-            // InternalRefactoringTestLanguage.g:638:1: ( ( '.*' )? )
+            // InternalRefactoringTestLanguage.g:642:1: ( ( ( '.*' )? ) )
+            // InternalRefactoringTestLanguage.g:643:1: ( ( '.*' )? )
             {
-            // InternalRefactoringTestLanguage.g:638:1: ( ( '.*' )? )
-            // InternalRefactoringTestLanguage.g:639:2: ( '.*' )?
+            // InternalRefactoringTestLanguage.g:643:1: ( ( '.*' )? )
+            // InternalRefactoringTestLanguage.g:644:2: ( '.*' )?
             {
              before(grammarAccess.getFQNWithWCAccess().getFullStopAsteriskKeyword_1()); 
-            // InternalRefactoringTestLanguage.g:640:2: ( '.*' )?
+            // InternalRefactoringTestLanguage.g:645:2: ( '.*' )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1911,7 +1919,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt7) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:640:3: '.*'
+                    // InternalRefactoringTestLanguage.g:645:3: '.*'
                     {
                     match(input,16,FollowSets000.FOLLOW_2); 
 
@@ -1943,17 +1951,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__ElementsAssignment"
-    // InternalRefactoringTestLanguage.g:649:1: rule__Main__ElementsAssignment : ( ruleAbstractElement ) ;
+    // InternalRefactoringTestLanguage.g:654:1: rule__Main__ElementsAssignment : ( ruleAbstractElement ) ;
     public final void rule__Main__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:653:1: ( ( ruleAbstractElement ) )
-            // InternalRefactoringTestLanguage.g:654:2: ( ruleAbstractElement )
+            // InternalRefactoringTestLanguage.g:658:1: ( ( ruleAbstractElement ) )
+            // InternalRefactoringTestLanguage.g:659:2: ( ruleAbstractElement )
             {
-            // InternalRefactoringTestLanguage.g:654:2: ( ruleAbstractElement )
-            // InternalRefactoringTestLanguage.g:655:3: ruleAbstractElement
+            // InternalRefactoringTestLanguage.g:659:2: ( ruleAbstractElement )
+            // InternalRefactoringTestLanguage.g:660:3: ruleAbstractElement
             {
              before(grammarAccess.getMainAccess().getElementsAbstractElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1984,17 +1992,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1"
-    // InternalRefactoringTestLanguage.g:664:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleFQNWithWC ) ;
+    // InternalRefactoringTestLanguage.g:669:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleFQNWithWC ) ;
     public final void rule__Import__ImportedNamespaceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:668:1: ( ( ruleFQNWithWC ) )
-            // InternalRefactoringTestLanguage.g:669:2: ( ruleFQNWithWC )
+            // InternalRefactoringTestLanguage.g:673:1: ( ( ruleFQNWithWC ) )
+            // InternalRefactoringTestLanguage.g:674:2: ( ruleFQNWithWC )
             {
-            // InternalRefactoringTestLanguage.g:669:2: ( ruleFQNWithWC )
-            // InternalRefactoringTestLanguage.g:670:3: ruleFQNWithWC
+            // InternalRefactoringTestLanguage.g:674:2: ( ruleFQNWithWC )
+            // InternalRefactoringTestLanguage.g:675:3: ruleFQNWithWC
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceFQNWithWCParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -2025,17 +2033,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__NameAssignment_0"
-    // InternalRefactoringTestLanguage.g:679:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalRefactoringTestLanguage.g:684:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:683:1: ( ( RULE_ID ) )
-            // InternalRefactoringTestLanguage.g:684:2: ( RULE_ID )
+            // InternalRefactoringTestLanguage.g:688:1: ( ( RULE_ID ) )
+            // InternalRefactoringTestLanguage.g:689:2: ( RULE_ID )
             {
-            // InternalRefactoringTestLanguage.g:684:2: ( RULE_ID )
-            // InternalRefactoringTestLanguage.g:685:3: RULE_ID
+            // InternalRefactoringTestLanguage.g:689:2: ( RULE_ID )
+            // InternalRefactoringTestLanguage.g:690:3: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -2062,17 +2070,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__ContainedAssignment_1_1_0"
-    // InternalRefactoringTestLanguage.g:694:1: rule__Element__ContainedAssignment_1_1_0 : ( ruleElement ) ;
+    // InternalRefactoringTestLanguage.g:699:1: rule__Element__ContainedAssignment_1_1_0 : ( ruleElement ) ;
     public final void rule__Element__ContainedAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:698:1: ( ( ruleElement ) )
-            // InternalRefactoringTestLanguage.g:699:2: ( ruleElement )
+            // InternalRefactoringTestLanguage.g:703:1: ( ( ruleElement ) )
+            // InternalRefactoringTestLanguage.g:704:2: ( ruleElement )
             {
-            // InternalRefactoringTestLanguage.g:699:2: ( ruleElement )
-            // InternalRefactoringTestLanguage.g:700:3: ruleElement
+            // InternalRefactoringTestLanguage.g:704:2: ( ruleElement )
+            // InternalRefactoringTestLanguage.g:705:3: ruleElement
             {
              before(grammarAccess.getElementAccess().getContainedElementParserRuleCall_1_1_0_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -2103,21 +2111,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__ReferencedAssignment_1_1_1_1"
-    // InternalRefactoringTestLanguage.g:709:1: rule__Element__ReferencedAssignment_1_1_1_1 : ( ( ruleFQN ) ) ;
+    // InternalRefactoringTestLanguage.g:714:1: rule__Element__ReferencedAssignment_1_1_1_1 : ( ( ruleFQN ) ) ;
     public final void rule__Element__ReferencedAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRefactoringTestLanguage.g:713:1: ( ( ( ruleFQN ) ) )
-            // InternalRefactoringTestLanguage.g:714:2: ( ( ruleFQN ) )
+            // InternalRefactoringTestLanguage.g:718:1: ( ( ( ruleFQN ) ) )
+            // InternalRefactoringTestLanguage.g:719:2: ( ( ruleFQN ) )
             {
-            // InternalRefactoringTestLanguage.g:714:2: ( ( ruleFQN ) )
-            // InternalRefactoringTestLanguage.g:715:3: ( ruleFQN )
+            // InternalRefactoringTestLanguage.g:719:2: ( ( ruleFQN ) )
+            // InternalRefactoringTestLanguage.g:720:3: ( ruleFQN )
             {
              before(grammarAccess.getElementAccess().getReferencedElementCrossReference_1_1_1_1_0()); 
-            // InternalRefactoringTestLanguage.g:716:3: ( ruleFQN )
-            // InternalRefactoringTestLanguage.g:717:4: ruleFQN
+            // InternalRefactoringTestLanguage.g:721:3: ( ruleFQN )
+            // InternalRefactoringTestLanguage.g:722:4: ruleFQN
             {
              before(grammarAccess.getElementAccess().getReferencedElementFQNParserRuleCall_1_1_1_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_2);

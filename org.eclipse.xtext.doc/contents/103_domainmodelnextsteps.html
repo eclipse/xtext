@@ -37,7 +37,7 @@ public class HasAuthor {
 
 <ol>
   <li>
-    <p>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method <code>getAllContents()</code>. To use the resulting <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">TreeIterator</a> in a <code>for</code> loop, we use the extension method <code>toIterable()</code> from the built-in library class <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">IteratorExtensions</a>.</p>
+    <p>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method <code>getAllContents()</code>. To use the resulting <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">TreeIterator</a> in a <code>for</code> loop, we use the extension method <code>toIterable()</code> from the built-in library class <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">IteratorExtensions</a>.</p>
 
     <pre><code class="language-xtend">class DomainmodelGenerator extends AbstractGenerator {
 
@@ -50,7 +50,7 @@ public class HasAuthor {
 </code></pre>
   </li>
   <li>
-    <p>Now let’s answer the question how we determine the file name of the Java class that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.</p>
+    <p>Now let’s answer the question how we determine the file name of the Java class that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> as a field into the generator.</p>
 
     <pre><code class="language-xtend">  @Inject extension IQualifiedNameProvider
 </code></pre>

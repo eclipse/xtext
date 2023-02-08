@@ -28,7 +28,7 @@ public class FormatterTest {
   @Inject
   @Extension
   private FormatterTestHelper _formatterTestHelper;
-  
+
   /**
    * This example tests if the formatted document equals the unformatted document.
    * This is the most convenient way to test a formatter.
@@ -73,7 +73,7 @@ public class FormatterTest {
     };
     this._formatterTestHelper.assertFormatted(_function);
   }
-  
+
   /**
    * This example tests whether a messy document is being formatted properly.
    * In contrast to the first example, this approach also allows to test formatting strategies that are input-aware.
@@ -105,7 +105,7 @@ public class FormatterTest {
     };
     this._formatterTestHelper.assertFormatted(_function);
   }
-  
+
   /**
    * This example shows how to test property-dependent formatting behavior.
    */

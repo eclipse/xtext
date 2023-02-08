@@ -6,7 +6,6 @@
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:launching="http://www.eclipse.org/oomph/setup/launching/1.0"
-    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
@@ -14,7 +13,7 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Launching.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Launching.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
     name="xtext"
     label="Xtext">
   <annotation
@@ -30,8 +29,8 @@
   </annotation>
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-1.8"
-      location="${jre.location-1.8}"/>
+      version="JavaSE-11"
+      location="${jre.location-11}"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Xmx"
@@ -45,13 +44,13 @@
     <content>
       &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
       &lt;section name=&quot;Workbench&quot;>
-      	&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
-      		&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
-      		&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
-      		&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
-      		&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
-      		&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
-      	&lt;/section>
+        &lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
+          &lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
+          &lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
+          &lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
+          &lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
+          &lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
+        &lt;/section>
       &lt;/section>
 
     </content>
@@ -63,56 +62,26 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2021-06"
+      defaultValue="2023-03"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
     <choice
-        value="2021-09"
-        label="Eclipse 2021-09 - 4.21"/>
+        value="2023-03"
+        label="Eclipse 2023-03 - 4.27"/>
     <choice
-        value="2021-06"
-        label="Eclipse 2021-06 - 4.20"/>
+        value="2022-12"
+        label="Eclipse 2022-12 - 4.26"/>
     <choice
-        value="2021-03"
-        label="Eclipse 2021-03 - 4.19"/>
+        value="2022-09"
+        label="Eclipse 2022-09 - 4.25"/>
     <choice
-        value="2020-12"
-        label="Eclipse 2020-12 - 4.18"/>
+        value="2022-06"
+        label="Eclipse 2022-06 - 4.24"/>
     <choice
-        value="2020-09"
-        label="Eclipse 2020-09 - 4.17"/>
-    <choice
-        value="2020-06"
-        label="Eclipse 2020-06 - 4.16"/>
-    <choice
-        value="2020-03"
-        label="Eclipse 2020-03 - 4.15"/>
-    <choice
-        value="2019-12"
-        label="Eclipse 2019-12 - 4.14"/>
-    <choice
-        value="2019-09"
-        label="Eclipse 2019-09 - 4.13"/>
-    <choice
-        value="2019-06"
-        label="Eclipse 2019-06 - 4.12"/>
-    <choice
-        value="2019-03"
-        label="Eclipse 2019-03 - 4.11"/>
-    <choice
-        value="2018-12"
-        label="Eclipse 2018-12 - 4.10"/>
-    <choice
-        value="2018-09"
-        label="Eclipse 2018-09 - 4.9"/>
-    <choice
-        value="Photon"
-        label="Eclipse Photon- 4.8"/>
-    <choice
-        value="Oxygen"
-        label="Eclipse Oxygen - 4.7"/>
+        value="2022-03"
+        label="Eclipse 2022-03 - 4.23"/>
     <description>Choose the compatibility level of the target platform</description>
   </setupTask>
   <setupTask
@@ -139,7 +108,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="https://download.eclipse.org/tools/orbit/downloads/2021-09"/>
+      value="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -152,12 +121,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.lsp4j"
-      value="https://download.eclipse.org/lsp4j/updates/releases/0.12.0"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      type="URI"
-      name="p2.gef"
-      value="https://download.eclipse.org/tools/gef/updates/releases"/>
+      value="https://download.eclipse.org/lsp4j/updates/releases/0.19.0"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
@@ -183,16 +147,8 @@
       value="https://download.eclipse.org/technology/m2e/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="p2.m2e.connector.jdt"
-      value="https://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="p2.m2e.connector.tycho"
-      value="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
       name="p2.webtools"
-      value="https://download.eclipse.org/webtools/repository/oxygen/">
+      value="https://download.eclipse.org/webtools/repository/">
     <description>required by m2e</description>
   </setupTask>
   <setupTask
@@ -212,7 +168,11 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.license"
-      value="http://download.eclipse.org/cbi/updates/license/"/>
+      value="https://download.eclipse.org/cbi/updates/license/"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.gef-classic"
+      value="https://download.eclipse.org/tools/gef/classic/releases/3.14.0/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
@@ -344,15 +304,15 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform"
-          value="1.8"/>
+          value="11"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source"
-          value="1.8"/>
+          value="11"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance"
-          value="1.8"/>
+          value="11"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.formatter.disabling_tag"
@@ -434,8 +394,6 @@
         name="org.eclipse.epp.mpc.feature.group"
         optional="true"/>
     <requirement
-        name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
-    <requirement
         name="org.eclipse.pde.feature.group"/>
     <repository
         url="${p2.xtext}"/>
@@ -448,22 +406,13 @@
     <requirement
         name="org.eclipse.m2e.feature.feature.group"/>
     <requirement
-        name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
-    <requirement
         name="org.eclipse.buildship.feature.group"/>
-    <requirement
-        name="org.eclipse.wst.jsdt.feature.feature.group"/>
-    <requirement
-        name="org.sonatype.tycho.m2e.feature.feature.group"/>
-    <repository
-        url="${p2.m2e.connector.jdt}"/>
     <repository
         url="${p2.buildship}"/>
-    <repository
-        url="${p2.m2e.connector.tycho}"/>
   </setupTask>
   <setupTask
-      xsi:type="setup.workingsets:WorkingSetTask">
+      xsi:type="setup.workingsets:WorkingSetTask"
+      id="xtext.working.sets">
     <workingSet
         name="Root Projects"
         id="">
@@ -538,6 +487,226 @@
         locateNestedProjects="true"/>
     <description>Import projects from umbrella repository</description>
   </setupTask>
+  <setupTask
+      xsi:type="setup.targlets:TargletTask">
+    <targlet
+        name="Common Target Platform Repositories"
+        activeRepositoryList="${eclipse.target.platform}">
+      <requirement
+          name="org.eclipse.cbi.p2repo.analyzers"
+          optional="true"/>
+      <requirement
+          name="org.eclipse.cbi.p2repo.analyzers.common"
+          optional="true"/>
+      <requirement
+          name="org.eclipse.emf.sdk.feature.group"/>
+      <requirement
+          name="com.google.guava"
+          versionRange="[30.1.0,31.0.0)"/>
+      <requirement
+          name="com.google.inject"
+          versionRange="[5.0.1,6.0.0)"/>
+      <requirement
+          name="org.eclipse.platform.feature.group"/>
+      <requirement
+          name="org.eclipse.jdt.feature.group"/>
+      <requirement
+          name="org.eclipse.pde.feature.group"/>
+      <requirement
+          name="org.eclipse.xtend"/>
+      <requirement
+          name="org.eclipse.xtend.typesystem.emf"/>
+      <requirement
+          name="org.eclipse.xpand"
+          filter=""/>
+      <requirement
+          name="org.eclipse.lsp4j.sdk.feature.group"/>
+      <requirement
+          name="org.objectweb.asm"
+          versionRange="[9.4.0,9.5.0)"/>
+      <requirement
+          name="io.github.classgraph"
+          versionRange="[4.8.149,4.9.0)"/>
+      <requirement
+          name="org.apache.log4j"
+          versionRange="1.2.24"/>
+      <requirement
+          name="org.antlr.runtime"
+          versionRange="[3.2.0,3.2.1)"/>
+      <requirement
+          name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.mwe2.launcher.feature.group"/>
+      <repositoryList
+          name="2022-03">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/1.20.1"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.draw2d}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-03"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-06">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/1.20.1"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.draw2d}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-06"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-09">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.0.5"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-09"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2022-12">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.1.2"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-12"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2023-03">
+        <repository
+            url="${p2.xtext}"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.1.2"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="https://download.eclipse.org/eclipse/updates/4.27-I-builds"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2022-12"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+    </targlet>
+    <description>Target platform</description>
+  </setupTask>
   <project name="core"
       label="Xtext Core">
     <setupTask
@@ -600,7 +769,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -672,7 +841,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -742,7 +911,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -784,20 +953,8 @@
           name="Xtext Target Platform"
           activeRepositoryList="${eclipse.target.platform}">
         <requirement
-            name="org.eclipse.platform.feature.group"/>
-        <requirement
-            name="org.eclipse.jdt.feature.group"/>
-        <requirement
-            name="org.eclipse.pde.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
-        <requirement
             name="org.junit"
-            versionRange="[4.12.0,4.13.0)"/>
+            versionRange="[4.13.2,4.14.0)"/>
         <requirement
             name="org.junit.jupiter.api"
             versionRange="[5.1.0,6.0.0)"/>
@@ -823,12 +980,6 @@
             name="org.opentest4j"
             versionRange="[1.0.0,2.0.0)"/>
         <requirement
-            name="com.google.guava"
-            versionRange="[30.1.0,31.0.0)"/>
-        <requirement
-            name="com.google.inject"
-            versionRange="[5.0.1,6.0.0)"/>
-        <requirement
             name="org.eclipse.jdt.java8patch.feature.group"
             optional="true"/>
         <requirement
@@ -836,15 +987,6 @@
             optional="true"/>
         <requirement
             name="org.eclipse.draw2d.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.xtend"/>
-        <requirement
-            name="org.eclipse.xtend.typesystem.emf"/>
-        <requirement
-            name="org.eclipse.xpand"
-            filter=""/>
-        <requirement
-            name="org.eclipse.lsp4j.sdk.feature.group"/>
         <requirement
             name="org.eclipse.m2e.feature.feature.group"/>
         <requirement
@@ -858,553 +1000,11 @@
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
-            name="org.objectweb.asm"
-            versionRange="[9.2.0,9.3.0)"/>
-        <requirement
-            name="org.objectweb.asm.tree"
-            versionRange="[9.2.0,9.3.0)"/>
-        <requirement
-            name="io.github.classgraph"
-            versionRange="[4.8.35,4.9.0)"/>
-        <requirement
             name="org.eclipse.egit.feature.group"/>
-        <requirement
-            name="org.eclipse.cbi.p2repo.analyzers"
-            optional="true"/>
-        <requirement
-            name="org.eclipse.cbi.p2repo.analyzers.common"
-            optional="true"/>
         <requirement
             name="org.eclipse.license.feature.group"/>
         <requirement
             name="*"/>
-        <repositoryList
-            name="Oxygen">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="Photon">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2018-09">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2018-12">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-03">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-06">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.12"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-09">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.13"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2019-12">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.14"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-03">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.15"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-06">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.16.0"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-09">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.16.2"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2020-12">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.17.1"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2021-03">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.17.2"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2021-06">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.18.0"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
-        <repositoryList
-            name="2021-09">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.18.0"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="https://download.eclipse.org/eclipse/updates/4.21-I-builds"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.egit}"/>
-          <repository
-              url="${p2.license}"/>
-        </repositoryList>
       </targlet>
       <description>Target platform</description>
     </setupTask>
@@ -1426,7 +1026,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -1438,7 +1038,7 @@
               project="xtext-umbrella"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -1453,7 +1053,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -1465,6 +1065,87 @@
         option="-Doomph.redirection.xtext"
         value="=https://raw.githubusercontent.com/eclipse/xtext-eclipse/master/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.eclipse.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
         vm="true"/>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.builder.classpath"
+        excludedTriggers="BOOTSTRAP"
+        url="platform:/resource/org.eclipse.xtext.builder/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="&lt;classpathentry kind=&quot;src&quot; path=&quot;(emf-gen/)&quot;(/>)">
+        <substitution>emf-gen</substitution>
+        <substitution>>
+    &lt;attributes>
+      &lt;attribute name=&quot;ignore_optional_problems&quot; value=&quot;true&quot;/>
+    &lt;/attributes>
+  &lt;/classpathentry></substitution>
+      </modification>
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.builder</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.builder.tests.classpath"
+        excludedTriggers="BOOTSTRAP"
+        url="platform:/resource/org.eclipse.xtext.builder.tests/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.builder.tests</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.ui.testing.classpath"
+        excludedTriggers="BOOTSTRAP"
+        url="platform:/resource/org.eclipse.xtext.ui.testing/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.ui.testing</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.junit4.classpath"
+        excludedTriggers="BOOTSTRAP"
+        url="platform:/resource/org.eclipse.xtext.junit4/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.junit4</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.xbase.junit.classpath"
+        excludedTriggers="BOOTSTRAP"
+        url="platform:/resource/org.eclipse.xtext.xbase.junit/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.xbase.junit</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.xbase.ui.testing.classpath"
+        excludedTriggers="BOOTSTRAP"
+        url="platform:/resource/org.eclipse.xtext.xbase.ui.testing/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.xbase.ui.testing</description>
+    </setupTask>
     <stream
         name="master"/>
     <description>Plug-ins for Eclipse</description>
@@ -1533,7 +1214,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1589,7 +1270,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1677,7 +1358,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1691,32 +1372,13 @@
             name="org.eclipse.swtbot.ide.feature.group"/>
         <requirement
             name="org.eclipse.swtbot.generator.feature.feature.group"/>
-        <repositoryList
-            name="SWTBot">
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-        </repositoryList>
       </targlet>
       <targlet
           name="Xtend Target Platform"
           activeRepositoryList="${eclipse.target.platform}">
         <requirement
-            name="org.eclipse.platform.feature.group"/>
-        <requirement
-            name="org.eclipse.jdt.feature.group"/>
-        <requirement
-            name="org.eclipse.pde.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-        <requirement
-            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
-        <requirement
             name="org.junit"
-            versionRange="[4.12.0,4.13.0)"/>
+            versionRange="[4.13.2,4.14.0)"/>
         <requirement
             name="org.eclipse.m2e.feature.feature.group"/>
         <requirement
@@ -1730,616 +1392,13 @@
             name="org.eclipse.xtext.xbase.testing"/>
         <requirement
             name="org.eclipse.xtext.ui.testing"/>
-        <repositoryList
-            name="Photon">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.8"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
-        <repositoryList
-            name="Oxygen">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.12"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
+        <requirement
+            name="org.eclipse.xtext.xtext.generator"/>
       </targlet>
     </setupTask>
     <stream
         name="master"/>
     <description>The Xtend language</description>
-  </project>
-  <project name="issues"
-      label="Xtext Issues">
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        id="p2.mylyn"
-        label="Mylyn"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.context_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.discovery.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.gerrit.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.git.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.github.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.hudson.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.ide_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.java_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.monitor.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.pde_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.tasks.ide.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.team_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn.wikitext_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.mylyn_feature.feature.group"/>
-      <requirement
-          name="org.eclipse.egit.mylyn.feature.group"/>
-      <repository
-          url="https://download.eclipse.org/mylyn/releases/latest"/>
-      <description>Task and build connector</description>
-    </setupTask>
-    <stream
-        name="master"
-        label="All Issues (Bugzilla &amp; GitHub)">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          repositoryURL="https://bugs.eclipse.org/bugs"
-          userID="${bugzilla.id}"
-          password="${eclipse.user.password}">
-        <query
-            summary="Xtext Bugs"
-            url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;product=Xtend&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-umbrella"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Umbrella Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Umbrella (old) Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-core"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Core Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-lib"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Lib Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-extras"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Extras Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-eclipse"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Eclipse Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-web"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Web Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-maven"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Maven Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-xtend"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Xtend Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
-        name="github"
-        label="GitHub Issues (all)">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-umbrella"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Umbrella Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Umbrella (old) Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-core"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Core Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-lib"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Lib Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-extras"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Extras Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-eclipse"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Eclipse Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-web"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Web Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-maven"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Maven Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-xtend"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Xtend Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <description></description>
-    </stream>
-    <stream
-        name="bugzilla"
-        label="Eclipse Bugzilla Issues only">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          repositoryURL="https://bugs.eclipse.org/bugs"
-          userID="${bugzilla.id}"
-          password="${eclipse.user.password}">
-        <query
-            summary="Xtext Bugs"
-            url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;product=Xtend&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
-      </setupTask>
-    </stream>
-    <stream
-        name="xtext-core"
-        label="Xtext Core Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-core"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Core Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
-        name="xtext-lib"
-        label="Xbase/Xtend Libraries Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-lib"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Lib Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <description></description>
-    </stream>
-    <stream
-        name="xtext-extras"
-        label="Xtext Extras Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-extras"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Extras Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
-        name="xtext-eclipse"
-        label="Xtext Eclipse Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-eclipse"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Eclipse Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
-        name="xtext-web"
-        label="Xtext Web Support Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-web"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Web Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
-        name="xtext-maven"
-        label="Xtext Maven Support Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-maven"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Maven Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <description></description>
-    </stream>
-    <stream
-        name="xtext-xtend"
-        label="Xtend Language Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-xtend"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Xtend Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
-        name="xtext-umbrella"
-        label="Xtend Umbrella Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-umbrella"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Umbrella Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Umbrella (old) Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <description>Add Mylyn integration and Bugzilla/GitHub issues</description>
-  </project>
-  <project name="build"
-      label="Xtext Build Tasks">
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-core"
-        serverURL="${jenkins.url}/job/xtext-core/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-core Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-lib"
-        serverURL="${jenkins.url}/job/xtext-lib/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-lib Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-extras"
-        serverURL="${jenkins.url}/job/xtext-extras/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-extras Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-eclipse"
-        serverURL="${jenkins.url}/job/xtext-eclipse/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-eclipse Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-web"
-        serverURL="${jenkins.url}/job/xtext-web/"
-        userID="">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-web Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-maven"
-        serverURL="${jenkins.url}/job/xtext-maven/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-maven Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-xtend"
-        serverURL="${jenkins.url}/job/xtext-xtend/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-xtend Jenkins Build Job</description>
-    </setupTask>
-    <stream
-        name="master"/>
-    <description>Adds the Mylyn Build Integration feature and populates the &quot;Builds&quot; view with the Xtext related Jenkins build jobs</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"

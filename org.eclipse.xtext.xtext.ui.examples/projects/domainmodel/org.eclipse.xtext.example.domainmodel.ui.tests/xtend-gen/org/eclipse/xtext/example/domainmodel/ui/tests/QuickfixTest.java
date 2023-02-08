@@ -29,7 +29,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void fix_invalid_entity_name() {
     StringConcatenation _builder = new StringConcatenation();
@@ -45,7 +45,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Capitalize name", "Capitalize name of \'blog\'", _builder_1.toString());
     this.testQuickfixesOn(_builder, IssueCodes.INVALID_TYPE_NAME, _quickfix);
   }
-  
+
   @Test
   public void fix_invalid_property_name() {
     StringConcatenation _builder = new StringConcatenation();
@@ -67,7 +67,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Uncapitalize name", "Uncapitalize name of \'Title\'", _builder_1.toString());
     this.testQuickfixesOn(_builder, IssueCodes.INVALID_FEATURE_NAME, _quickfix);
   }
-  
+
   @Test
   public void fix_invalid_operation_name() {
     StringConcatenation _builder = new StringConcatenation();
@@ -95,7 +95,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Uncapitalize name", "Uncapitalize name of \'SetTitle\'", _builder_1.toString());
     this.testQuickfixesOn(_builder, IssueCodes.INVALID_FEATURE_NAME, _quickfix);
   }
-  
+
   @Test
   public void fix_unused_imports1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -112,7 +112,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
       "Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.", _builder_1.toString());
     this.testQuickfixesOn(_builder, org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_UNUSED, _quickfix);
   }
-  
+
   @Test
   public void fix_unused_imports2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -150,7 +150,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
       "Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.", _builder_1.toString());
     this.testQuickfixesOn(_builder, org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_UNUSED, _quickfix);
   }
-  
+
   @Test
   public void fix_wildcard_imports() {
     StringConcatenation _builder = new StringConcatenation();

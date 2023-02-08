@@ -375,7 +375,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				marker.delete();
 			if (derivedResourceMarkers.findDerivedResourceMarkers(iFile).length == 0) {
 				access.deleteFile(iFile, deleteMonitor);
-				context.needRebuild();
+				context.needRebuild(iFile.getProject());
 			}
 		}
 	}
@@ -391,7 +391,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			@Override
 			public boolean beforeFileDeletion(IFile file) {
 				derivedResources.remove(file);
-				context.needRebuild();
+				context.needRebuild(file.getProject());
 				return true;
 			}
 
@@ -409,7 +409,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				try {
 					derivedResources.remove(file);
 					derivedResourceMarkers.installMarker(file, uri);
-					context.needRebuild();
+					context.needRebuild(file.getProject());
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
 				}

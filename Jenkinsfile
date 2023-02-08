@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      inheritFrom 'centos-7'
+      inheritFrom 'centos-8'
     }
   }
   
@@ -10,10 +10,10 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['oxygen', 'photon', 'r201809', 'r201812', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'r202006', 'r202009', 'r202012', 'r202103', 'r202106', 'latest' ], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
-       'adoptopenjdk-hotspot-jdk8-latest', 'adoptopenjdk-hotspot-jdk11-latest', 'adoptopenjdk-hotspot-jdk16-latest'
+       'temurin-jdk11-latest', 'temurin-jdk17-latest'
     ])
     booleanParam(
       name: 'TRIGGER_DOWNSTREAM_BUILD', 
@@ -23,7 +23,10 @@ pipeline {
   }
 
   triggers {
-    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=adoptopenjdk-hotspot-jdk11-latest' : '')
+    parameterizedCron(env.BRANCH_NAME == 'master' ? '''
+      H H(0-1) * * * %TARGET_PLATFORM=r202206;JDK_VERSION=temurin-jdk11-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      ''' : '')
   }
 
   options {
@@ -33,7 +36,7 @@ pipeline {
   }
 
   tools {
-     maven "apache-maven-3.8.2"
+     maven "apache-maven-3.8.6"
      jdk "${params.JDK_VERSION}"
   }
 
@@ -79,6 +82,7 @@ pipeline {
   post {
     always {
       junit testResults: '**/target/surefire-reports/*.xml'
+      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     success {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
@@ -93,9 +97,6 @@ pipeline {
           }
         }
       }
-    }
-    unsuccessful {
-      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
       script {
@@ -150,11 +151,7 @@ def isTriggeredByUpstream() {
 def eclipseVersion() {
   def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
-    return "4.21"
-  } else if (targetPlatform == 'photon') {
-    return "4.8"
-  } else if (targetPlatform == 'oxygen') {
-    return "4.7"
+    return "4.27"
   } else {
     def baseDate = java.time.LocalDate.parse("2018-06-01") // 4.8 Photon
     def df = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
@@ -174,9 +171,12 @@ def selectedTargetPlatform() {
     def isUpstream = isTriggeredByUpstream()
     def javaVersion = javaVersion()
     
-    if (isTriggeredByUpstream() && javaVersion>=11) {
+    if (isTriggeredByUpstream() && javaVersion>=17) {
         println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
         return 'latest'
+    } else if (isTriggeredByUpstream() && javaVersion>=11) {
+        println("Choosing 'r202203' target since this build was triggered by upstream with Java ${javaVersion}")
+        return 'r202203'
     } else {
         return tp
     }

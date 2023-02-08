@@ -123,10 +123,10 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:186:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalOutlineTestLanguage.g:186:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalOutlineTestLanguage.g:191:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalOutlineTestLanguage.g:191:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalOutlineTestLanguage.g:186:11: ( '^' )?
+            // InternalOutlineTestLanguage.g:191:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -135,7 +135,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalOutlineTestLanguage.g:186:11: '^'
+                    // InternalOutlineTestLanguage.g:191:11: '^'
                     {
                     match('^'); 
 
@@ -153,7 +153,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalOutlineTestLanguage.g:186:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalOutlineTestLanguage.g:191:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -202,10 +202,10 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:188:10: ( ( '0' .. '9' )+ )
-            // InternalOutlineTestLanguage.g:188:12: ( '0' .. '9' )+
+            // InternalOutlineTestLanguage.g:193:10: ( ( '0' .. '9' )+ )
+            // InternalOutlineTestLanguage.g:193:12: ( '0' .. '9' )+
             {
-            // InternalOutlineTestLanguage.g:188:12: ( '0' .. '9' )+
+            // InternalOutlineTestLanguage.g:193:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -219,7 +219,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalOutlineTestLanguage.g:188:13: '0' .. '9'
+            	    // InternalOutlineTestLanguage.g:193:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -251,10 +251,10 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:190:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalOutlineTestLanguage.g:190:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalOutlineTestLanguage.g:195:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalOutlineTestLanguage.g:195:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalOutlineTestLanguage.g:190:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalOutlineTestLanguage.g:195:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -272,10 +272,10 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalOutlineTestLanguage.g:190:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalOutlineTestLanguage.g:195:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalOutlineTestLanguage.g:190:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalOutlineTestLanguage.g:195:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -291,7 +291,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalOutlineTestLanguage.g:190:21: '\\\\' .
+                    	    // InternalOutlineTestLanguage.g:195:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -299,7 +299,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalOutlineTestLanguage.g:190:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalOutlineTestLanguage.g:195:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -324,10 +324,10 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalOutlineTestLanguage.g:190:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalOutlineTestLanguage.g:195:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalOutlineTestLanguage.g:190:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalOutlineTestLanguage.g:195:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -343,7 +343,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalOutlineTestLanguage.g:190:54: '\\\\' .
+                    	    // InternalOutlineTestLanguage.g:195:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -351,7 +351,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalOutlineTestLanguage.g:190:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalOutlineTestLanguage.g:195:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -394,12 +394,12 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:192:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalOutlineTestLanguage.g:192:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalOutlineTestLanguage.g:197:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalOutlineTestLanguage.g:197:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalOutlineTestLanguage.g:192:24: ( options {greedy=false; } : . )*
+            // InternalOutlineTestLanguage.g:197:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -424,7 +424,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalOutlineTestLanguage.g:192:52: .
+            	    // InternalOutlineTestLanguage.g:197:52: .
             	    {
             	    matchAny(); 
 
@@ -454,12 +454,12 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:194:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalOutlineTestLanguage.g:194:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalOutlineTestLanguage.g:199:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalOutlineTestLanguage.g:199:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalOutlineTestLanguage.g:194:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalOutlineTestLanguage.g:199:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -472,7 +472,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalOutlineTestLanguage.g:194:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalOutlineTestLanguage.g:199:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -492,7 +492,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalOutlineTestLanguage.g:194:40: ( ( '\\r' )? '\\n' )?
+            // InternalOutlineTestLanguage.g:199:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -501,9 +501,9 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalOutlineTestLanguage.g:194:41: ( '\\r' )? '\\n'
+                    // InternalOutlineTestLanguage.g:199:41: ( '\\r' )? '\\n'
                     {
-                    // InternalOutlineTestLanguage.g:194:41: ( '\\r' )?
+                    // InternalOutlineTestLanguage.g:199:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -512,7 +512,7 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalOutlineTestLanguage.g:194:41: '\\r'
+                            // InternalOutlineTestLanguage.g:199:41: '\\r'
                             {
                             match('\r'); 
 
@@ -544,10 +544,10 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:196:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalOutlineTestLanguage.g:196:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalOutlineTestLanguage.g:201:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalOutlineTestLanguage.g:201:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalOutlineTestLanguage.g:196:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalOutlineTestLanguage.g:201:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -601,8 +601,8 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOutlineTestLanguage.g:198:16: ( . )
-            // InternalOutlineTestLanguage.g:198:18: .
+            // InternalOutlineTestLanguage.g:203:16: ( . )
+            // InternalOutlineTestLanguage.g:203:18: .
             {
             matchAny(); 
 

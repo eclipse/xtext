@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -120,11 +120,10 @@ public class PreferenceStoreAccessor {
 		style.setStyle(preferenceStore.getInt(styleKey));
 	}
 
-	@SuppressWarnings("all")
 	private ChainedPreferenceStore getPluginCssPreferenceStore() {
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
-				new FixedScopedPreferenceStore(new InstanceScope(), plugin.getBundle().getSymbolicName()),
-				new FixedScopedPreferenceStore(new InstanceScope(), Activator.getDefault().getBundle().getSymbolicName())
+				new FixedScopedPreferenceStore(InstanceScope.INSTANCE, plugin.getBundle().getSymbolicName()),
+				new FixedScopedPreferenceStore(InstanceScope.INSTANCE, Activator.getDefault().getBundle().getSymbolicName())
 		});
 	}
 

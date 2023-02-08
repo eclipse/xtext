@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalDomainModelTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -79,11 +87,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalDomainModelTestLanguage.g:53:1: entryRuleModel : ruleModel EOF ;
+    // InternalDomainModelTestLanguage.g:58:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:54:1: ( ruleModel EOF )
-            // InternalDomainModelTestLanguage.g:55:1: ruleModel EOF
+            // InternalDomainModelTestLanguage.g:59:1: ( ruleModel EOF )
+            // InternalDomainModelTestLanguage.g:60:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -109,21 +117,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleModel"
-    // InternalDomainModelTestLanguage.g:62:1: ruleModel : ( ( rule__Model__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:67:1: ruleModel : ( ( rule__Model__Group__0 ) ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:66:2: ( ( ( rule__Model__Group__0 ) ) )
-            // InternalDomainModelTestLanguage.g:67:2: ( ( rule__Model__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:71:2: ( ( ( rule__Model__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:72:2: ( ( rule__Model__Group__0 ) )
             {
-            // InternalDomainModelTestLanguage.g:67:2: ( ( rule__Model__Group__0 ) )
-            // InternalDomainModelTestLanguage.g:68:3: ( rule__Model__Group__0 )
+            // InternalDomainModelTestLanguage.g:72:2: ( ( rule__Model__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:73:3: ( rule__Model__Group__0 )
             {
              before(grammarAccess.getModelAccess().getGroup()); 
-            // InternalDomainModelTestLanguage.g:69:3: ( rule__Model__Group__0 )
-            // InternalDomainModelTestLanguage.g:69:4: rule__Model__Group__0
+            // InternalDomainModelTestLanguage.g:74:3: ( rule__Model__Group__0 )
+            // InternalDomainModelTestLanguage.g:74:4: rule__Model__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group__0();
@@ -156,11 +164,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalDomainModelTestLanguage.g:78:1: entryRuleImport : ruleImport EOF ;
+    // InternalDomainModelTestLanguage.g:83:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:79:1: ( ruleImport EOF )
-            // InternalDomainModelTestLanguage.g:80:1: ruleImport EOF
+            // InternalDomainModelTestLanguage.g:84:1: ( ruleImport EOF )
+            // InternalDomainModelTestLanguage.g:85:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -186,21 +194,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleImport"
-    // InternalDomainModelTestLanguage.g:87:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:92:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:91:2: ( ( ( rule__Import__Group__0 ) ) )
-            // InternalDomainModelTestLanguage.g:92:2: ( ( rule__Import__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:96:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:97:2: ( ( rule__Import__Group__0 ) )
             {
-            // InternalDomainModelTestLanguage.g:92:2: ( ( rule__Import__Group__0 ) )
-            // InternalDomainModelTestLanguage.g:93:3: ( rule__Import__Group__0 )
+            // InternalDomainModelTestLanguage.g:97:2: ( ( rule__Import__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:98:3: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // InternalDomainModelTestLanguage.g:94:3: ( rule__Import__Group__0 )
-            // InternalDomainModelTestLanguage.g:94:4: rule__Import__Group__0
+            // InternalDomainModelTestLanguage.g:99:3: ( rule__Import__Group__0 )
+            // InternalDomainModelTestLanguage.g:99:4: rule__Import__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__0();
@@ -233,11 +241,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleType"
-    // InternalDomainModelTestLanguage.g:103:1: entryRuleType : ruleType EOF ;
+    // InternalDomainModelTestLanguage.g:108:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:104:1: ( ruleType EOF )
-            // InternalDomainModelTestLanguage.g:105:1: ruleType EOF
+            // InternalDomainModelTestLanguage.g:109:1: ( ruleType EOF )
+            // InternalDomainModelTestLanguage.g:110:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -263,21 +271,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleType"
-    // InternalDomainModelTestLanguage.g:112:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
+    // InternalDomainModelTestLanguage.g:117:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
     public final void ruleType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:116:2: ( ( ( rule__Type__Alternatives ) ) )
-            // InternalDomainModelTestLanguage.g:117:2: ( ( rule__Type__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:121:2: ( ( ( rule__Type__Alternatives ) ) )
+            // InternalDomainModelTestLanguage.g:122:2: ( ( rule__Type__Alternatives ) )
             {
-            // InternalDomainModelTestLanguage.g:117:2: ( ( rule__Type__Alternatives ) )
-            // InternalDomainModelTestLanguage.g:118:3: ( rule__Type__Alternatives )
+            // InternalDomainModelTestLanguage.g:122:2: ( ( rule__Type__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:123:3: ( rule__Type__Alternatives )
             {
              before(grammarAccess.getTypeAccess().getAlternatives()); 
-            // InternalDomainModelTestLanguage.g:119:3: ( rule__Type__Alternatives )
-            // InternalDomainModelTestLanguage.g:119:4: rule__Type__Alternatives
+            // InternalDomainModelTestLanguage.g:124:3: ( rule__Type__Alternatives )
+            // InternalDomainModelTestLanguage.g:124:4: rule__Type__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Alternatives();
@@ -310,11 +318,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleDataType"
-    // InternalDomainModelTestLanguage.g:128:1: entryRuleDataType : ruleDataType EOF ;
+    // InternalDomainModelTestLanguage.g:133:1: entryRuleDataType : ruleDataType EOF ;
     public final void entryRuleDataType() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:129:1: ( ruleDataType EOF )
-            // InternalDomainModelTestLanguage.g:130:1: ruleDataType EOF
+            // InternalDomainModelTestLanguage.g:134:1: ( ruleDataType EOF )
+            // InternalDomainModelTestLanguage.g:135:1: ruleDataType EOF
             {
              before(grammarAccess.getDataTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -340,21 +348,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleDataType"
-    // InternalDomainModelTestLanguage.g:137:1: ruleDataType : ( ( rule__DataType__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:142:1: ruleDataType : ( ( rule__DataType__Group__0 ) ) ;
     public final void ruleDataType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:141:2: ( ( ( rule__DataType__Group__0 ) ) )
-            // InternalDomainModelTestLanguage.g:142:2: ( ( rule__DataType__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:146:2: ( ( ( rule__DataType__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:147:2: ( ( rule__DataType__Group__0 ) )
             {
-            // InternalDomainModelTestLanguage.g:142:2: ( ( rule__DataType__Group__0 ) )
-            // InternalDomainModelTestLanguage.g:143:3: ( rule__DataType__Group__0 )
+            // InternalDomainModelTestLanguage.g:147:2: ( ( rule__DataType__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:148:3: ( rule__DataType__Group__0 )
             {
              before(grammarAccess.getDataTypeAccess().getGroup()); 
-            // InternalDomainModelTestLanguage.g:144:3: ( rule__DataType__Group__0 )
-            // InternalDomainModelTestLanguage.g:144:4: rule__DataType__Group__0
+            // InternalDomainModelTestLanguage.g:149:3: ( rule__DataType__Group__0 )
+            // InternalDomainModelTestLanguage.g:149:4: rule__DataType__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__Group__0();
@@ -387,11 +395,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleClass"
-    // InternalDomainModelTestLanguage.g:153:1: entryRuleClass : ruleClass EOF ;
+    // InternalDomainModelTestLanguage.g:158:1: entryRuleClass : ruleClass EOF ;
     public final void entryRuleClass() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:154:1: ( ruleClass EOF )
-            // InternalDomainModelTestLanguage.g:155:1: ruleClass EOF
+            // InternalDomainModelTestLanguage.g:159:1: ( ruleClass EOF )
+            // InternalDomainModelTestLanguage.g:160:1: ruleClass EOF
             {
              before(grammarAccess.getClassRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -417,21 +425,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleClass"
-    // InternalDomainModelTestLanguage.g:162:1: ruleClass : ( ( rule__Class__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:167:1: ruleClass : ( ( rule__Class__Group__0 ) ) ;
     public final void ruleClass() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:166:2: ( ( ( rule__Class__Group__0 ) ) )
-            // InternalDomainModelTestLanguage.g:167:2: ( ( rule__Class__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:171:2: ( ( ( rule__Class__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:172:2: ( ( rule__Class__Group__0 ) )
             {
-            // InternalDomainModelTestLanguage.g:167:2: ( ( rule__Class__Group__0 ) )
-            // InternalDomainModelTestLanguage.g:168:3: ( rule__Class__Group__0 )
+            // InternalDomainModelTestLanguage.g:172:2: ( ( rule__Class__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:173:3: ( rule__Class__Group__0 )
             {
              before(grammarAccess.getClassAccess().getGroup()); 
-            // InternalDomainModelTestLanguage.g:169:3: ( rule__Class__Group__0 )
-            // InternalDomainModelTestLanguage.g:169:4: rule__Class__Group__0
+            // InternalDomainModelTestLanguage.g:174:3: ( rule__Class__Group__0 )
+            // InternalDomainModelTestLanguage.g:174:4: rule__Class__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__0();
@@ -464,11 +472,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleProperty"
-    // InternalDomainModelTestLanguage.g:178:1: entryRuleProperty : ruleProperty EOF ;
+    // InternalDomainModelTestLanguage.g:183:1: entryRuleProperty : ruleProperty EOF ;
     public final void entryRuleProperty() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:179:1: ( ruleProperty EOF )
-            // InternalDomainModelTestLanguage.g:180:1: ruleProperty EOF
+            // InternalDomainModelTestLanguage.g:184:1: ( ruleProperty EOF )
+            // InternalDomainModelTestLanguage.g:185:1: ruleProperty EOF
             {
              before(grammarAccess.getPropertyRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -494,21 +502,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleProperty"
-    // InternalDomainModelTestLanguage.g:187:1: ruleProperty : ( ( rule__Property__Alternatives ) ) ;
+    // InternalDomainModelTestLanguage.g:192:1: ruleProperty : ( ( rule__Property__Alternatives ) ) ;
     public final void ruleProperty() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:191:2: ( ( ( rule__Property__Alternatives ) ) )
-            // InternalDomainModelTestLanguage.g:192:2: ( ( rule__Property__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:196:2: ( ( ( rule__Property__Alternatives ) ) )
+            // InternalDomainModelTestLanguage.g:197:2: ( ( rule__Property__Alternatives ) )
             {
-            // InternalDomainModelTestLanguage.g:192:2: ( ( rule__Property__Alternatives ) )
-            // InternalDomainModelTestLanguage.g:193:3: ( rule__Property__Alternatives )
+            // InternalDomainModelTestLanguage.g:197:2: ( ( rule__Property__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:198:3: ( rule__Property__Alternatives )
             {
              before(grammarAccess.getPropertyAccess().getAlternatives()); 
-            // InternalDomainModelTestLanguage.g:194:3: ( rule__Property__Alternatives )
-            // InternalDomainModelTestLanguage.g:194:4: rule__Property__Alternatives
+            // InternalDomainModelTestLanguage.g:199:3: ( rule__Property__Alternatives )
+            // InternalDomainModelTestLanguage.g:199:4: rule__Property__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Property__Alternatives();
@@ -541,11 +549,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleAttribute"
-    // InternalDomainModelTestLanguage.g:203:1: entryRuleAttribute : ruleAttribute EOF ;
+    // InternalDomainModelTestLanguage.g:208:1: entryRuleAttribute : ruleAttribute EOF ;
     public final void entryRuleAttribute() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:204:1: ( ruleAttribute EOF )
-            // InternalDomainModelTestLanguage.g:205:1: ruleAttribute EOF
+            // InternalDomainModelTestLanguage.g:209:1: ( ruleAttribute EOF )
+            // InternalDomainModelTestLanguage.g:210:1: ruleAttribute EOF
             {
              before(grammarAccess.getAttributeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -571,21 +579,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleAttribute"
-    // InternalDomainModelTestLanguage.g:212:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:217:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
     public final void ruleAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:216:2: ( ( ( rule__Attribute__Group__0 ) ) )
-            // InternalDomainModelTestLanguage.g:217:2: ( ( rule__Attribute__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:221:2: ( ( ( rule__Attribute__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:222:2: ( ( rule__Attribute__Group__0 ) )
             {
-            // InternalDomainModelTestLanguage.g:217:2: ( ( rule__Attribute__Group__0 ) )
-            // InternalDomainModelTestLanguage.g:218:3: ( rule__Attribute__Group__0 )
+            // InternalDomainModelTestLanguage.g:222:2: ( ( rule__Attribute__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:223:3: ( rule__Attribute__Group__0 )
             {
              before(grammarAccess.getAttributeAccess().getGroup()); 
-            // InternalDomainModelTestLanguage.g:219:3: ( rule__Attribute__Group__0 )
-            // InternalDomainModelTestLanguage.g:219:4: rule__Attribute__Group__0
+            // InternalDomainModelTestLanguage.g:224:3: ( rule__Attribute__Group__0 )
+            // InternalDomainModelTestLanguage.g:224:4: rule__Attribute__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__0();
@@ -618,11 +626,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleReference"
-    // InternalDomainModelTestLanguage.g:228:1: entryRuleReference : ruleReference EOF ;
+    // InternalDomainModelTestLanguage.g:233:1: entryRuleReference : ruleReference EOF ;
     public final void entryRuleReference() throws RecognitionException {
         try {
-            // InternalDomainModelTestLanguage.g:229:1: ( ruleReference EOF )
-            // InternalDomainModelTestLanguage.g:230:1: ruleReference EOF
+            // InternalDomainModelTestLanguage.g:234:1: ( ruleReference EOF )
+            // InternalDomainModelTestLanguage.g:235:1: ruleReference EOF
             {
              before(grammarAccess.getReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -648,21 +656,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleReference"
-    // InternalDomainModelTestLanguage.g:237:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:242:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
     public final void ruleReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:241:2: ( ( ( rule__Reference__Group__0 ) ) )
-            // InternalDomainModelTestLanguage.g:242:2: ( ( rule__Reference__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:246:2: ( ( ( rule__Reference__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:247:2: ( ( rule__Reference__Group__0 ) )
             {
-            // InternalDomainModelTestLanguage.g:242:2: ( ( rule__Reference__Group__0 ) )
-            // InternalDomainModelTestLanguage.g:243:3: ( rule__Reference__Group__0 )
+            // InternalDomainModelTestLanguage.g:247:2: ( ( rule__Reference__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:248:3: ( rule__Reference__Group__0 )
             {
              before(grammarAccess.getReferenceAccess().getGroup()); 
-            // InternalDomainModelTestLanguage.g:244:3: ( rule__Reference__Group__0 )
-            // InternalDomainModelTestLanguage.g:244:4: rule__Reference__Group__0
+            // InternalDomainModelTestLanguage.g:249:3: ( rule__Reference__Group__0 )
+            // InternalDomainModelTestLanguage.g:249:4: rule__Reference__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__0();
@@ -695,13 +703,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Alternatives"
-    // InternalDomainModelTestLanguage.g:252:1: rule__Type__Alternatives : ( ( ruleDataType ) | ( ruleClass ) );
+    // InternalDomainModelTestLanguage.g:257:1: rule__Type__Alternatives : ( ( ruleDataType ) | ( ruleClass ) );
     public final void rule__Type__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:256:1: ( ( ruleDataType ) | ( ruleClass ) )
+            // InternalDomainModelTestLanguage.g:261:1: ( ( ruleDataType ) | ( ruleClass ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -719,10 +727,10 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt1) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:257:2: ( ruleDataType )
+                    // InternalDomainModelTestLanguage.g:262:2: ( ruleDataType )
                     {
-                    // InternalDomainModelTestLanguage.g:257:2: ( ruleDataType )
-                    // InternalDomainModelTestLanguage.g:258:3: ruleDataType
+                    // InternalDomainModelTestLanguage.g:262:2: ( ruleDataType )
+                    // InternalDomainModelTestLanguage.g:263:3: ruleDataType
                     {
                      before(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -738,10 +746,10 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalDomainModelTestLanguage.g:263:2: ( ruleClass )
+                    // InternalDomainModelTestLanguage.g:268:2: ( ruleClass )
                     {
-                    // InternalDomainModelTestLanguage.g:263:2: ( ruleClass )
-                    // InternalDomainModelTestLanguage.g:264:3: ruleClass
+                    // InternalDomainModelTestLanguage.g:268:2: ( ruleClass )
+                    // InternalDomainModelTestLanguage.g:269:3: ruleClass
                     {
                      before(grammarAccess.getTypeAccess().getClassParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -774,13 +782,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Property__Alternatives"
-    // InternalDomainModelTestLanguage.g:273:1: rule__Property__Alternatives : ( ( ruleAttribute ) | ( ruleReference ) );
+    // InternalDomainModelTestLanguage.g:278:1: rule__Property__Alternatives : ( ( ruleAttribute ) | ( ruleReference ) );
     public final void rule__Property__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:277:1: ( ( ruleAttribute ) | ( ruleReference ) )
+            // InternalDomainModelTestLanguage.g:282:1: ( ( ruleAttribute ) | ( ruleReference ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -798,10 +806,10 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt2) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:278:2: ( ruleAttribute )
+                    // InternalDomainModelTestLanguage.g:283:2: ( ruleAttribute )
                     {
-                    // InternalDomainModelTestLanguage.g:278:2: ( ruleAttribute )
-                    // InternalDomainModelTestLanguage.g:279:3: ruleAttribute
+                    // InternalDomainModelTestLanguage.g:283:2: ( ruleAttribute )
+                    // InternalDomainModelTestLanguage.g:284:3: ruleAttribute
                     {
                      before(grammarAccess.getPropertyAccess().getAttributeParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -817,10 +825,10 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalDomainModelTestLanguage.g:284:2: ( ruleReference )
+                    // InternalDomainModelTestLanguage.g:289:2: ( ruleReference )
                     {
-                    // InternalDomainModelTestLanguage.g:284:2: ( ruleReference )
-                    // InternalDomainModelTestLanguage.g:285:3: ruleReference
+                    // InternalDomainModelTestLanguage.g:289:2: ( ruleReference )
+                    // InternalDomainModelTestLanguage.g:290:3: ruleReference
                     {
                      before(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -853,14 +861,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__0"
-    // InternalDomainModelTestLanguage.g:294:1: rule__Model__Group__0 : rule__Model__Group__0__Impl rule__Model__Group__1 ;
+    // InternalDomainModelTestLanguage.g:299:1: rule__Model__Group__0 : rule__Model__Group__0__Impl rule__Model__Group__1 ;
     public final void rule__Model__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:298:1: ( rule__Model__Group__0__Impl rule__Model__Group__1 )
-            // InternalDomainModelTestLanguage.g:299:2: rule__Model__Group__0__Impl rule__Model__Group__1
+            // InternalDomainModelTestLanguage.g:303:1: ( rule__Model__Group__0__Impl rule__Model__Group__1 )
+            // InternalDomainModelTestLanguage.g:304:2: rule__Model__Group__0__Impl rule__Model__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__Model__Group__0__Impl();
@@ -891,20 +899,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__0__Impl"
-    // InternalDomainModelTestLanguage.g:306:1: rule__Model__Group__0__Impl : ( ( rule__Model__ImportsAssignment_0 )* ) ;
+    // InternalDomainModelTestLanguage.g:311:1: rule__Model__Group__0__Impl : ( ( rule__Model__ImportsAssignment_0 )* ) ;
     public final void rule__Model__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:310:1: ( ( ( rule__Model__ImportsAssignment_0 )* ) )
-            // InternalDomainModelTestLanguage.g:311:1: ( ( rule__Model__ImportsAssignment_0 )* )
+            // InternalDomainModelTestLanguage.g:315:1: ( ( ( rule__Model__ImportsAssignment_0 )* ) )
+            // InternalDomainModelTestLanguage.g:316:1: ( ( rule__Model__ImportsAssignment_0 )* )
             {
-            // InternalDomainModelTestLanguage.g:311:1: ( ( rule__Model__ImportsAssignment_0 )* )
-            // InternalDomainModelTestLanguage.g:312:2: ( rule__Model__ImportsAssignment_0 )*
+            // InternalDomainModelTestLanguage.g:316:1: ( ( rule__Model__ImportsAssignment_0 )* )
+            // InternalDomainModelTestLanguage.g:317:2: ( rule__Model__ImportsAssignment_0 )*
             {
              before(grammarAccess.getModelAccess().getImportsAssignment_0()); 
-            // InternalDomainModelTestLanguage.g:313:2: ( rule__Model__ImportsAssignment_0 )*
+            // InternalDomainModelTestLanguage.g:318:2: ( rule__Model__ImportsAssignment_0 )*
             loop3:
             do {
                 int alt3=2;
@@ -917,7 +925,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:313:3: rule__Model__ImportsAssignment_0
+            	    // InternalDomainModelTestLanguage.g:318:3: rule__Model__ImportsAssignment_0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_4);
             	    rule__Model__ImportsAssignment_0();
@@ -956,14 +964,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__1"
-    // InternalDomainModelTestLanguage.g:321:1: rule__Model__Group__1 : rule__Model__Group__1__Impl ;
+    // InternalDomainModelTestLanguage.g:326:1: rule__Model__Group__1 : rule__Model__Group__1__Impl ;
     public final void rule__Model__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:325:1: ( rule__Model__Group__1__Impl )
-            // InternalDomainModelTestLanguage.g:326:2: rule__Model__Group__1__Impl
+            // InternalDomainModelTestLanguage.g:330:1: ( rule__Model__Group__1__Impl )
+            // InternalDomainModelTestLanguage.g:331:2: rule__Model__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group__1__Impl();
@@ -989,20 +997,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__1__Impl"
-    // InternalDomainModelTestLanguage.g:332:1: rule__Model__Group__1__Impl : ( ( rule__Model__ElementsAssignment_1 )* ) ;
+    // InternalDomainModelTestLanguage.g:337:1: rule__Model__Group__1__Impl : ( ( rule__Model__ElementsAssignment_1 )* ) ;
     public final void rule__Model__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:336:1: ( ( ( rule__Model__ElementsAssignment_1 )* ) )
-            // InternalDomainModelTestLanguage.g:337:1: ( ( rule__Model__ElementsAssignment_1 )* )
+            // InternalDomainModelTestLanguage.g:341:1: ( ( ( rule__Model__ElementsAssignment_1 )* ) )
+            // InternalDomainModelTestLanguage.g:342:1: ( ( rule__Model__ElementsAssignment_1 )* )
             {
-            // InternalDomainModelTestLanguage.g:337:1: ( ( rule__Model__ElementsAssignment_1 )* )
-            // InternalDomainModelTestLanguage.g:338:2: ( rule__Model__ElementsAssignment_1 )*
+            // InternalDomainModelTestLanguage.g:342:1: ( ( rule__Model__ElementsAssignment_1 )* )
+            // InternalDomainModelTestLanguage.g:343:2: ( rule__Model__ElementsAssignment_1 )*
             {
              before(grammarAccess.getModelAccess().getElementsAssignment_1()); 
-            // InternalDomainModelTestLanguage.g:339:2: ( rule__Model__ElementsAssignment_1 )*
+            // InternalDomainModelTestLanguage.g:344:2: ( rule__Model__ElementsAssignment_1 )*
             loop4:
             do {
                 int alt4=2;
@@ -1015,7 +1023,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:339:3: rule__Model__ElementsAssignment_1
+            	    // InternalDomainModelTestLanguage.g:344:3: rule__Model__ElementsAssignment_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_5);
             	    rule__Model__ElementsAssignment_1();
@@ -1054,14 +1062,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // InternalDomainModelTestLanguage.g:348:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalDomainModelTestLanguage.g:353:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:352:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // InternalDomainModelTestLanguage.g:353:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalDomainModelTestLanguage.g:357:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalDomainModelTestLanguage.g:358:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Import__Group__0__Impl();
@@ -1092,17 +1100,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // InternalDomainModelTestLanguage.g:360:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalDomainModelTestLanguage.g:365:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:364:1: ( ( 'import' ) )
-            // InternalDomainModelTestLanguage.g:365:1: ( 'import' )
+            // InternalDomainModelTestLanguage.g:369:1: ( ( 'import' ) )
+            // InternalDomainModelTestLanguage.g:370:1: ( 'import' )
             {
-            // InternalDomainModelTestLanguage.g:365:1: ( 'import' )
-            // InternalDomainModelTestLanguage.g:366:2: 'import'
+            // InternalDomainModelTestLanguage.g:370:1: ( 'import' )
+            // InternalDomainModelTestLanguage.g:371:2: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -1129,14 +1137,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // InternalDomainModelTestLanguage.g:375:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // InternalDomainModelTestLanguage.g:380:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:379:1: ( rule__Import__Group__1__Impl )
-            // InternalDomainModelTestLanguage.g:380:2: rule__Import__Group__1__Impl
+            // InternalDomainModelTestLanguage.g:384:1: ( rule__Import__Group__1__Impl )
+            // InternalDomainModelTestLanguage.g:385:2: rule__Import__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__1__Impl();
@@ -1162,21 +1170,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // InternalDomainModelTestLanguage.g:386:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:391:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:390:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
-            // InternalDomainModelTestLanguage.g:391:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:395:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:396:1: ( ( rule__Import__ImportURIAssignment_1 ) )
             {
-            // InternalDomainModelTestLanguage.g:391:1: ( ( rule__Import__ImportURIAssignment_1 ) )
-            // InternalDomainModelTestLanguage.g:392:2: ( rule__Import__ImportURIAssignment_1 )
+            // InternalDomainModelTestLanguage.g:396:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:397:2: ( rule__Import__ImportURIAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportURIAssignment_1()); 
-            // InternalDomainModelTestLanguage.g:393:2: ( rule__Import__ImportURIAssignment_1 )
-            // InternalDomainModelTestLanguage.g:393:3: rule__Import__ImportURIAssignment_1
+            // InternalDomainModelTestLanguage.g:398:2: ( rule__Import__ImportURIAssignment_1 )
+            // InternalDomainModelTestLanguage.g:398:3: rule__Import__ImportURIAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__ImportURIAssignment_1();
@@ -1209,14 +1217,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__0"
-    // InternalDomainModelTestLanguage.g:402:1: rule__DataType__Group__0 : rule__DataType__Group__0__Impl rule__DataType__Group__1 ;
+    // InternalDomainModelTestLanguage.g:407:1: rule__DataType__Group__0 : rule__DataType__Group__0__Impl rule__DataType__Group__1 ;
     public final void rule__DataType__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:406:1: ( rule__DataType__Group__0__Impl rule__DataType__Group__1 )
-            // InternalDomainModelTestLanguage.g:407:2: rule__DataType__Group__0__Impl rule__DataType__Group__1
+            // InternalDomainModelTestLanguage.g:411:1: ( rule__DataType__Group__0__Impl rule__DataType__Group__1 )
+            // InternalDomainModelTestLanguage.g:412:2: rule__DataType__Group__0__Impl rule__DataType__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__DataType__Group__0__Impl();
@@ -1247,17 +1255,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__0__Impl"
-    // InternalDomainModelTestLanguage.g:414:1: rule__DataType__Group__0__Impl : ( 'datatype' ) ;
+    // InternalDomainModelTestLanguage.g:419:1: rule__DataType__Group__0__Impl : ( 'datatype' ) ;
     public final void rule__DataType__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:418:1: ( ( 'datatype' ) )
-            // InternalDomainModelTestLanguage.g:419:1: ( 'datatype' )
+            // InternalDomainModelTestLanguage.g:423:1: ( ( 'datatype' ) )
+            // InternalDomainModelTestLanguage.g:424:1: ( 'datatype' )
             {
-            // InternalDomainModelTestLanguage.g:419:1: ( 'datatype' )
-            // InternalDomainModelTestLanguage.g:420:2: 'datatype'
+            // InternalDomainModelTestLanguage.g:424:1: ( 'datatype' )
+            // InternalDomainModelTestLanguage.g:425:2: 'datatype'
             {
              before(grammarAccess.getDataTypeAccess().getDatatypeKeyword_0()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -1284,14 +1292,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__1"
-    // InternalDomainModelTestLanguage.g:429:1: rule__DataType__Group__1 : rule__DataType__Group__1__Impl rule__DataType__Group__2 ;
+    // InternalDomainModelTestLanguage.g:434:1: rule__DataType__Group__1 : rule__DataType__Group__1__Impl rule__DataType__Group__2 ;
     public final void rule__DataType__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:433:1: ( rule__DataType__Group__1__Impl rule__DataType__Group__2 )
-            // InternalDomainModelTestLanguage.g:434:2: rule__DataType__Group__1__Impl rule__DataType__Group__2
+            // InternalDomainModelTestLanguage.g:438:1: ( rule__DataType__Group__1__Impl rule__DataType__Group__2 )
+            // InternalDomainModelTestLanguage.g:439:2: rule__DataType__Group__1__Impl rule__DataType__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__DataType__Group__1__Impl();
@@ -1322,21 +1330,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__1__Impl"
-    // InternalDomainModelTestLanguage.g:441:1: rule__DataType__Group__1__Impl : ( ( rule__DataType__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:446:1: rule__DataType__Group__1__Impl : ( ( rule__DataType__NameAssignment_1 ) ) ;
     public final void rule__DataType__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:445:1: ( ( ( rule__DataType__NameAssignment_1 ) ) )
-            // InternalDomainModelTestLanguage.g:446:1: ( ( rule__DataType__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:450:1: ( ( ( rule__DataType__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:451:1: ( ( rule__DataType__NameAssignment_1 ) )
             {
-            // InternalDomainModelTestLanguage.g:446:1: ( ( rule__DataType__NameAssignment_1 ) )
-            // InternalDomainModelTestLanguage.g:447:2: ( rule__DataType__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:451:1: ( ( rule__DataType__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:452:2: ( rule__DataType__NameAssignment_1 )
             {
              before(grammarAccess.getDataTypeAccess().getNameAssignment_1()); 
-            // InternalDomainModelTestLanguage.g:448:2: ( rule__DataType__NameAssignment_1 )
-            // InternalDomainModelTestLanguage.g:448:3: rule__DataType__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:453:2: ( rule__DataType__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:453:3: rule__DataType__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__NameAssignment_1();
@@ -1369,14 +1377,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__2"
-    // InternalDomainModelTestLanguage.g:456:1: rule__DataType__Group__2 : rule__DataType__Group__2__Impl ;
+    // InternalDomainModelTestLanguage.g:461:1: rule__DataType__Group__2 : rule__DataType__Group__2__Impl ;
     public final void rule__DataType__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:460:1: ( rule__DataType__Group__2__Impl )
-            // InternalDomainModelTestLanguage.g:461:2: rule__DataType__Group__2__Impl
+            // InternalDomainModelTestLanguage.g:465:1: ( rule__DataType__Group__2__Impl )
+            // InternalDomainModelTestLanguage.g:466:2: rule__DataType__Group__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__Group__2__Impl();
@@ -1402,20 +1410,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__2__Impl"
-    // InternalDomainModelTestLanguage.g:467:1: rule__DataType__Group__2__Impl : ( ( ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:472:1: rule__DataType__Group__2__Impl : ( ( ';' )? ) ;
     public final void rule__DataType__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:471:1: ( ( ( ';' )? ) )
-            // InternalDomainModelTestLanguage.g:472:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:476:1: ( ( ( ';' )? ) )
+            // InternalDomainModelTestLanguage.g:477:1: ( ( ';' )? )
             {
-            // InternalDomainModelTestLanguage.g:472:1: ( ( ';' )? )
-            // InternalDomainModelTestLanguage.g:473:2: ( ';' )?
+            // InternalDomainModelTestLanguage.g:477:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:478:2: ( ';' )?
             {
              before(grammarAccess.getDataTypeAccess().getSemicolonKeyword_2()); 
-            // InternalDomainModelTestLanguage.g:474:2: ( ';' )?
+            // InternalDomainModelTestLanguage.g:479:2: ( ';' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1424,7 +1432,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt5) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:474:3: ';'
+                    // InternalDomainModelTestLanguage.g:479:3: ';'
                     {
                     match(input,13,FollowSets000.FOLLOW_2); 
 
@@ -1456,14 +1464,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__0"
-    // InternalDomainModelTestLanguage.g:483:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
+    // InternalDomainModelTestLanguage.g:488:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
     public final void rule__Class__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:487:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
-            // InternalDomainModelTestLanguage.g:488:2: rule__Class__Group__0__Impl rule__Class__Group__1
+            // InternalDomainModelTestLanguage.g:492:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
+            // InternalDomainModelTestLanguage.g:493:2: rule__Class__Group__0__Impl rule__Class__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Class__Group__0__Impl();
@@ -1494,17 +1502,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__0__Impl"
-    // InternalDomainModelTestLanguage.g:495:1: rule__Class__Group__0__Impl : ( 'class' ) ;
+    // InternalDomainModelTestLanguage.g:500:1: rule__Class__Group__0__Impl : ( 'class' ) ;
     public final void rule__Class__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:499:1: ( ( 'class' ) )
-            // InternalDomainModelTestLanguage.g:500:1: ( 'class' )
+            // InternalDomainModelTestLanguage.g:504:1: ( ( 'class' ) )
+            // InternalDomainModelTestLanguage.g:505:1: ( 'class' )
             {
-            // InternalDomainModelTestLanguage.g:500:1: ( 'class' )
-            // InternalDomainModelTestLanguage.g:501:2: 'class'
+            // InternalDomainModelTestLanguage.g:505:1: ( 'class' )
+            // InternalDomainModelTestLanguage.g:506:2: 'class'
             {
              before(grammarAccess.getClassAccess().getClassKeyword_0()); 
             match(input,14,FollowSets000.FOLLOW_2); 
@@ -1531,14 +1539,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__1"
-    // InternalDomainModelTestLanguage.g:510:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
+    // InternalDomainModelTestLanguage.g:515:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
     public final void rule__Class__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:514:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
-            // InternalDomainModelTestLanguage.g:515:2: rule__Class__Group__1__Impl rule__Class__Group__2
+            // InternalDomainModelTestLanguage.g:519:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
+            // InternalDomainModelTestLanguage.g:520:2: rule__Class__Group__1__Impl rule__Class__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_9);
             rule__Class__Group__1__Impl();
@@ -1569,21 +1577,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__1__Impl"
-    // InternalDomainModelTestLanguage.g:522:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:527:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
     public final void rule__Class__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:526:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
-            // InternalDomainModelTestLanguage.g:527:1: ( ( rule__Class__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:531:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:532:1: ( ( rule__Class__NameAssignment_1 ) )
             {
-            // InternalDomainModelTestLanguage.g:527:1: ( ( rule__Class__NameAssignment_1 ) )
-            // InternalDomainModelTestLanguage.g:528:2: ( rule__Class__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:532:1: ( ( rule__Class__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:533:2: ( rule__Class__NameAssignment_1 )
             {
              before(grammarAccess.getClassAccess().getNameAssignment_1()); 
-            // InternalDomainModelTestLanguage.g:529:2: ( rule__Class__NameAssignment_1 )
-            // InternalDomainModelTestLanguage.g:529:3: rule__Class__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:534:2: ( rule__Class__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:534:3: rule__Class__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__NameAssignment_1();
@@ -1616,14 +1624,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__2"
-    // InternalDomainModelTestLanguage.g:537:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
+    // InternalDomainModelTestLanguage.g:542:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
     public final void rule__Class__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:541:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
-            // InternalDomainModelTestLanguage.g:542:2: rule__Class__Group__2__Impl rule__Class__Group__3
+            // InternalDomainModelTestLanguage.g:546:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
+            // InternalDomainModelTestLanguage.g:547:2: rule__Class__Group__2__Impl rule__Class__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_9);
             rule__Class__Group__2__Impl();
@@ -1654,20 +1662,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__2__Impl"
-    // InternalDomainModelTestLanguage.g:549:1: rule__Class__Group__2__Impl : ( ( rule__Class__Group_2__0 )? ) ;
+    // InternalDomainModelTestLanguage.g:554:1: rule__Class__Group__2__Impl : ( ( rule__Class__Group_2__0 )? ) ;
     public final void rule__Class__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:553:1: ( ( ( rule__Class__Group_2__0 )? ) )
-            // InternalDomainModelTestLanguage.g:554:1: ( ( rule__Class__Group_2__0 )? )
+            // InternalDomainModelTestLanguage.g:558:1: ( ( ( rule__Class__Group_2__0 )? ) )
+            // InternalDomainModelTestLanguage.g:559:1: ( ( rule__Class__Group_2__0 )? )
             {
-            // InternalDomainModelTestLanguage.g:554:1: ( ( rule__Class__Group_2__0 )? )
-            // InternalDomainModelTestLanguage.g:555:2: ( rule__Class__Group_2__0 )?
+            // InternalDomainModelTestLanguage.g:559:1: ( ( rule__Class__Group_2__0 )? )
+            // InternalDomainModelTestLanguage.g:560:2: ( rule__Class__Group_2__0 )?
             {
              before(grammarAccess.getClassAccess().getGroup_2()); 
-            // InternalDomainModelTestLanguage.g:556:2: ( rule__Class__Group_2__0 )?
+            // InternalDomainModelTestLanguage.g:561:2: ( rule__Class__Group_2__0 )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1676,7 +1684,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt6) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:556:3: rule__Class__Group_2__0
+                    // InternalDomainModelTestLanguage.g:561:3: rule__Class__Group_2__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Class__Group_2__0();
@@ -1712,14 +1720,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__3"
-    // InternalDomainModelTestLanguage.g:564:1: rule__Class__Group__3 : rule__Class__Group__3__Impl rule__Class__Group__4 ;
+    // InternalDomainModelTestLanguage.g:569:1: rule__Class__Group__3 : rule__Class__Group__3__Impl rule__Class__Group__4 ;
     public final void rule__Class__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:568:1: ( rule__Class__Group__3__Impl rule__Class__Group__4 )
-            // InternalDomainModelTestLanguage.g:569:2: rule__Class__Group__3__Impl rule__Class__Group__4
+            // InternalDomainModelTestLanguage.g:573:1: ( rule__Class__Group__3__Impl rule__Class__Group__4 )
+            // InternalDomainModelTestLanguage.g:574:2: rule__Class__Group__3__Impl rule__Class__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Class__Group__3__Impl();
@@ -1750,17 +1758,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__3__Impl"
-    // InternalDomainModelTestLanguage.g:576:1: rule__Class__Group__3__Impl : ( '{' ) ;
+    // InternalDomainModelTestLanguage.g:581:1: rule__Class__Group__3__Impl : ( '{' ) ;
     public final void rule__Class__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:580:1: ( ( '{' ) )
-            // InternalDomainModelTestLanguage.g:581:1: ( '{' )
+            // InternalDomainModelTestLanguage.g:585:1: ( ( '{' ) )
+            // InternalDomainModelTestLanguage.g:586:1: ( '{' )
             {
-            // InternalDomainModelTestLanguage.g:581:1: ( '{' )
-            // InternalDomainModelTestLanguage.g:582:2: '{'
+            // InternalDomainModelTestLanguage.g:586:1: ( '{' )
+            // InternalDomainModelTestLanguage.g:587:2: '{'
             {
              before(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_3()); 
             match(input,15,FollowSets000.FOLLOW_2); 
@@ -1787,14 +1795,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__4"
-    // InternalDomainModelTestLanguage.g:591:1: rule__Class__Group__4 : rule__Class__Group__4__Impl rule__Class__Group__5 ;
+    // InternalDomainModelTestLanguage.g:596:1: rule__Class__Group__4 : rule__Class__Group__4__Impl rule__Class__Group__5 ;
     public final void rule__Class__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:595:1: ( rule__Class__Group__4__Impl rule__Class__Group__5 )
-            // InternalDomainModelTestLanguage.g:596:2: rule__Class__Group__4__Impl rule__Class__Group__5
+            // InternalDomainModelTestLanguage.g:600:1: ( rule__Class__Group__4__Impl rule__Class__Group__5 )
+            // InternalDomainModelTestLanguage.g:601:2: rule__Class__Group__4__Impl rule__Class__Group__5
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Class__Group__4__Impl();
@@ -1825,20 +1833,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__4__Impl"
-    // InternalDomainModelTestLanguage.g:603:1: rule__Class__Group__4__Impl : ( ( rule__Class__PropertiesAssignment_4 )* ) ;
+    // InternalDomainModelTestLanguage.g:608:1: rule__Class__Group__4__Impl : ( ( rule__Class__PropertiesAssignment_4 )* ) ;
     public final void rule__Class__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:607:1: ( ( ( rule__Class__PropertiesAssignment_4 )* ) )
-            // InternalDomainModelTestLanguage.g:608:1: ( ( rule__Class__PropertiesAssignment_4 )* )
+            // InternalDomainModelTestLanguage.g:612:1: ( ( ( rule__Class__PropertiesAssignment_4 )* ) )
+            // InternalDomainModelTestLanguage.g:613:1: ( ( rule__Class__PropertiesAssignment_4 )* )
             {
-            // InternalDomainModelTestLanguage.g:608:1: ( ( rule__Class__PropertiesAssignment_4 )* )
-            // InternalDomainModelTestLanguage.g:609:2: ( rule__Class__PropertiesAssignment_4 )*
+            // InternalDomainModelTestLanguage.g:613:1: ( ( rule__Class__PropertiesAssignment_4 )* )
+            // InternalDomainModelTestLanguage.g:614:2: ( rule__Class__PropertiesAssignment_4 )*
             {
              before(grammarAccess.getClassAccess().getPropertiesAssignment_4()); 
-            // InternalDomainModelTestLanguage.g:610:2: ( rule__Class__PropertiesAssignment_4 )*
+            // InternalDomainModelTestLanguage.g:615:2: ( rule__Class__PropertiesAssignment_4 )*
             loop7:
             do {
                 int alt7=2;
@@ -1851,7 +1859,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:610:3: rule__Class__PropertiesAssignment_4
+            	    // InternalDomainModelTestLanguage.g:615:3: rule__Class__PropertiesAssignment_4
             	    {
             	    pushFollow(FollowSets000.FOLLOW_11);
             	    rule__Class__PropertiesAssignment_4();
@@ -1890,14 +1898,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__5"
-    // InternalDomainModelTestLanguage.g:618:1: rule__Class__Group__5 : rule__Class__Group__5__Impl rule__Class__Group__6 ;
+    // InternalDomainModelTestLanguage.g:623:1: rule__Class__Group__5 : rule__Class__Group__5__Impl rule__Class__Group__6 ;
     public final void rule__Class__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:622:1: ( rule__Class__Group__5__Impl rule__Class__Group__6 )
-            // InternalDomainModelTestLanguage.g:623:2: rule__Class__Group__5__Impl rule__Class__Group__6
+            // InternalDomainModelTestLanguage.g:627:1: ( rule__Class__Group__5__Impl rule__Class__Group__6 )
+            // InternalDomainModelTestLanguage.g:628:2: rule__Class__Group__5__Impl rule__Class__Group__6
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Class__Group__5__Impl();
@@ -1928,20 +1936,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__5__Impl"
-    // InternalDomainModelTestLanguage.g:630:1: rule__Class__Group__5__Impl : ( ( rule__Class__SubClassesAssignment_5 )* ) ;
+    // InternalDomainModelTestLanguage.g:635:1: rule__Class__Group__5__Impl : ( ( rule__Class__SubClassesAssignment_5 )* ) ;
     public final void rule__Class__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:634:1: ( ( ( rule__Class__SubClassesAssignment_5 )* ) )
-            // InternalDomainModelTestLanguage.g:635:1: ( ( rule__Class__SubClassesAssignment_5 )* )
+            // InternalDomainModelTestLanguage.g:639:1: ( ( ( rule__Class__SubClassesAssignment_5 )* ) )
+            // InternalDomainModelTestLanguage.g:640:1: ( ( rule__Class__SubClassesAssignment_5 )* )
             {
-            // InternalDomainModelTestLanguage.g:635:1: ( ( rule__Class__SubClassesAssignment_5 )* )
-            // InternalDomainModelTestLanguage.g:636:2: ( rule__Class__SubClassesAssignment_5 )*
+            // InternalDomainModelTestLanguage.g:640:1: ( ( rule__Class__SubClassesAssignment_5 )* )
+            // InternalDomainModelTestLanguage.g:641:2: ( rule__Class__SubClassesAssignment_5 )*
             {
              before(grammarAccess.getClassAccess().getSubClassesAssignment_5()); 
-            // InternalDomainModelTestLanguage.g:637:2: ( rule__Class__SubClassesAssignment_5 )*
+            // InternalDomainModelTestLanguage.g:642:2: ( rule__Class__SubClassesAssignment_5 )*
             loop8:
             do {
                 int alt8=2;
@@ -1954,7 +1962,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:637:3: rule__Class__SubClassesAssignment_5
+            	    // InternalDomainModelTestLanguage.g:642:3: rule__Class__SubClassesAssignment_5
             	    {
             	    pushFollow(FollowSets000.FOLLOW_5);
             	    rule__Class__SubClassesAssignment_5();
@@ -1993,14 +2001,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__6"
-    // InternalDomainModelTestLanguage.g:645:1: rule__Class__Group__6 : rule__Class__Group__6__Impl ;
+    // InternalDomainModelTestLanguage.g:650:1: rule__Class__Group__6 : rule__Class__Group__6__Impl ;
     public final void rule__Class__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:649:1: ( rule__Class__Group__6__Impl )
-            // InternalDomainModelTestLanguage.g:650:2: rule__Class__Group__6__Impl
+            // InternalDomainModelTestLanguage.g:654:1: ( rule__Class__Group__6__Impl )
+            // InternalDomainModelTestLanguage.g:655:2: rule__Class__Group__6__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__6__Impl();
@@ -2026,17 +2034,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__6__Impl"
-    // InternalDomainModelTestLanguage.g:656:1: rule__Class__Group__6__Impl : ( '}' ) ;
+    // InternalDomainModelTestLanguage.g:661:1: rule__Class__Group__6__Impl : ( '}' ) ;
     public final void rule__Class__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:660:1: ( ( '}' ) )
-            // InternalDomainModelTestLanguage.g:661:1: ( '}' )
+            // InternalDomainModelTestLanguage.g:665:1: ( ( '}' ) )
+            // InternalDomainModelTestLanguage.g:666:1: ( '}' )
             {
-            // InternalDomainModelTestLanguage.g:661:1: ( '}' )
-            // InternalDomainModelTestLanguage.g:662:2: '}'
+            // InternalDomainModelTestLanguage.g:666:1: ( '}' )
+            // InternalDomainModelTestLanguage.g:667:2: '}'
             {
              before(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_6()); 
             match(input,16,FollowSets000.FOLLOW_2); 
@@ -2063,14 +2071,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__0"
-    // InternalDomainModelTestLanguage.g:672:1: rule__Class__Group_2__0 : rule__Class__Group_2__0__Impl rule__Class__Group_2__1 ;
+    // InternalDomainModelTestLanguage.g:677:1: rule__Class__Group_2__0 : rule__Class__Group_2__0__Impl rule__Class__Group_2__1 ;
     public final void rule__Class__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:676:1: ( rule__Class__Group_2__0__Impl rule__Class__Group_2__1 )
-            // InternalDomainModelTestLanguage.g:677:2: rule__Class__Group_2__0__Impl rule__Class__Group_2__1
+            // InternalDomainModelTestLanguage.g:681:1: ( rule__Class__Group_2__0__Impl rule__Class__Group_2__1 )
+            // InternalDomainModelTestLanguage.g:682:2: rule__Class__Group_2__0__Impl rule__Class__Group_2__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Class__Group_2__0__Impl();
@@ -2101,17 +2109,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__0__Impl"
-    // InternalDomainModelTestLanguage.g:684:1: rule__Class__Group_2__0__Impl : ( 'extends' ) ;
+    // InternalDomainModelTestLanguage.g:689:1: rule__Class__Group_2__0__Impl : ( 'extends' ) ;
     public final void rule__Class__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:688:1: ( ( 'extends' ) )
-            // InternalDomainModelTestLanguage.g:689:1: ( 'extends' )
+            // InternalDomainModelTestLanguage.g:693:1: ( ( 'extends' ) )
+            // InternalDomainModelTestLanguage.g:694:1: ( 'extends' )
             {
-            // InternalDomainModelTestLanguage.g:689:1: ( 'extends' )
-            // InternalDomainModelTestLanguage.g:690:2: 'extends'
+            // InternalDomainModelTestLanguage.g:694:1: ( 'extends' )
+            // InternalDomainModelTestLanguage.g:695:2: 'extends'
             {
              before(grammarAccess.getClassAccess().getExtendsKeyword_2_0()); 
             match(input,17,FollowSets000.FOLLOW_2); 
@@ -2138,14 +2146,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__1"
-    // InternalDomainModelTestLanguage.g:699:1: rule__Class__Group_2__1 : rule__Class__Group_2__1__Impl ;
+    // InternalDomainModelTestLanguage.g:704:1: rule__Class__Group_2__1 : rule__Class__Group_2__1__Impl ;
     public final void rule__Class__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:703:1: ( rule__Class__Group_2__1__Impl )
-            // InternalDomainModelTestLanguage.g:704:2: rule__Class__Group_2__1__Impl
+            // InternalDomainModelTestLanguage.g:708:1: ( rule__Class__Group_2__1__Impl )
+            // InternalDomainModelTestLanguage.g:709:2: rule__Class__Group_2__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group_2__1__Impl();
@@ -2171,21 +2179,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__1__Impl"
-    // InternalDomainModelTestLanguage.g:710:1: rule__Class__Group_2__1__Impl : ( ( rule__Class__SuperClassAssignment_2_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:715:1: rule__Class__Group_2__1__Impl : ( ( rule__Class__SuperClassAssignment_2_1 ) ) ;
     public final void rule__Class__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:714:1: ( ( ( rule__Class__SuperClassAssignment_2_1 ) ) )
-            // InternalDomainModelTestLanguage.g:715:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
+            // InternalDomainModelTestLanguage.g:719:1: ( ( ( rule__Class__SuperClassAssignment_2_1 ) ) )
+            // InternalDomainModelTestLanguage.g:720:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
             {
-            // InternalDomainModelTestLanguage.g:715:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
-            // InternalDomainModelTestLanguage.g:716:2: ( rule__Class__SuperClassAssignment_2_1 )
+            // InternalDomainModelTestLanguage.g:720:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
+            // InternalDomainModelTestLanguage.g:721:2: ( rule__Class__SuperClassAssignment_2_1 )
             {
              before(grammarAccess.getClassAccess().getSuperClassAssignment_2_1()); 
-            // InternalDomainModelTestLanguage.g:717:2: ( rule__Class__SuperClassAssignment_2_1 )
-            // InternalDomainModelTestLanguage.g:717:3: rule__Class__SuperClassAssignment_2_1
+            // InternalDomainModelTestLanguage.g:722:2: ( rule__Class__SuperClassAssignment_2_1 )
+            // InternalDomainModelTestLanguage.g:722:3: rule__Class__SuperClassAssignment_2_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__SuperClassAssignment_2_1();
@@ -2218,14 +2226,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__0"
-    // InternalDomainModelTestLanguage.g:726:1: rule__Attribute__Group__0 : rule__Attribute__Group__0__Impl rule__Attribute__Group__1 ;
+    // InternalDomainModelTestLanguage.g:731:1: rule__Attribute__Group__0 : rule__Attribute__Group__0__Impl rule__Attribute__Group__1 ;
     public final void rule__Attribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:730:1: ( rule__Attribute__Group__0__Impl rule__Attribute__Group__1 )
-            // InternalDomainModelTestLanguage.g:731:2: rule__Attribute__Group__0__Impl rule__Attribute__Group__1
+            // InternalDomainModelTestLanguage.g:735:1: ( rule__Attribute__Group__0__Impl rule__Attribute__Group__1 )
+            // InternalDomainModelTestLanguage.g:736:2: rule__Attribute__Group__0__Impl rule__Attribute__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Attribute__Group__0__Impl();
@@ -2256,17 +2264,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__0__Impl"
-    // InternalDomainModelTestLanguage.g:738:1: rule__Attribute__Group__0__Impl : ( 'attr' ) ;
+    // InternalDomainModelTestLanguage.g:743:1: rule__Attribute__Group__0__Impl : ( 'attr' ) ;
     public final void rule__Attribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:742:1: ( ( 'attr' ) )
-            // InternalDomainModelTestLanguage.g:743:1: ( 'attr' )
+            // InternalDomainModelTestLanguage.g:747:1: ( ( 'attr' ) )
+            // InternalDomainModelTestLanguage.g:748:1: ( 'attr' )
             {
-            // InternalDomainModelTestLanguage.g:743:1: ( 'attr' )
-            // InternalDomainModelTestLanguage.g:744:2: 'attr'
+            // InternalDomainModelTestLanguage.g:748:1: ( 'attr' )
+            // InternalDomainModelTestLanguage.g:749:2: 'attr'
             {
              before(grammarAccess.getAttributeAccess().getAttrKeyword_0()); 
             match(input,18,FollowSets000.FOLLOW_2); 
@@ -2293,14 +2301,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__1"
-    // InternalDomainModelTestLanguage.g:753:1: rule__Attribute__Group__1 : rule__Attribute__Group__1__Impl rule__Attribute__Group__2 ;
+    // InternalDomainModelTestLanguage.g:758:1: rule__Attribute__Group__1 : rule__Attribute__Group__1__Impl rule__Attribute__Group__2 ;
     public final void rule__Attribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:757:1: ( rule__Attribute__Group__1__Impl rule__Attribute__Group__2 )
-            // InternalDomainModelTestLanguage.g:758:2: rule__Attribute__Group__1__Impl rule__Attribute__Group__2
+            // InternalDomainModelTestLanguage.g:762:1: ( rule__Attribute__Group__1__Impl rule__Attribute__Group__2 )
+            // InternalDomainModelTestLanguage.g:763:2: rule__Attribute__Group__1__Impl rule__Attribute__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_12);
             rule__Attribute__Group__1__Impl();
@@ -2331,21 +2339,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__1__Impl"
-    // InternalDomainModelTestLanguage.g:765:1: rule__Attribute__Group__1__Impl : ( ( rule__Attribute__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:770:1: rule__Attribute__Group__1__Impl : ( ( rule__Attribute__NameAssignment_1 ) ) ;
     public final void rule__Attribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:769:1: ( ( ( rule__Attribute__NameAssignment_1 ) ) )
-            // InternalDomainModelTestLanguage.g:770:1: ( ( rule__Attribute__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:774:1: ( ( ( rule__Attribute__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:775:1: ( ( rule__Attribute__NameAssignment_1 ) )
             {
-            // InternalDomainModelTestLanguage.g:770:1: ( ( rule__Attribute__NameAssignment_1 ) )
-            // InternalDomainModelTestLanguage.g:771:2: ( rule__Attribute__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:775:1: ( ( rule__Attribute__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:776:2: ( rule__Attribute__NameAssignment_1 )
             {
              before(grammarAccess.getAttributeAccess().getNameAssignment_1()); 
-            // InternalDomainModelTestLanguage.g:772:2: ( rule__Attribute__NameAssignment_1 )
-            // InternalDomainModelTestLanguage.g:772:3: rule__Attribute__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:777:2: ( rule__Attribute__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:777:3: rule__Attribute__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__NameAssignment_1();
@@ -2378,14 +2386,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__2"
-    // InternalDomainModelTestLanguage.g:780:1: rule__Attribute__Group__2 : rule__Attribute__Group__2__Impl rule__Attribute__Group__3 ;
+    // InternalDomainModelTestLanguage.g:785:1: rule__Attribute__Group__2 : rule__Attribute__Group__2__Impl rule__Attribute__Group__3 ;
     public final void rule__Attribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:784:1: ( rule__Attribute__Group__2__Impl rule__Attribute__Group__3 )
-            // InternalDomainModelTestLanguage.g:785:2: rule__Attribute__Group__2__Impl rule__Attribute__Group__3
+            // InternalDomainModelTestLanguage.g:789:1: ( rule__Attribute__Group__2__Impl rule__Attribute__Group__3 )
+            // InternalDomainModelTestLanguage.g:790:2: rule__Attribute__Group__2__Impl rule__Attribute__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Attribute__Group__2__Impl();
@@ -2416,17 +2424,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__2__Impl"
-    // InternalDomainModelTestLanguage.g:792:1: rule__Attribute__Group__2__Impl : ( ':' ) ;
+    // InternalDomainModelTestLanguage.g:797:1: rule__Attribute__Group__2__Impl : ( ':' ) ;
     public final void rule__Attribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:796:1: ( ( ':' ) )
-            // InternalDomainModelTestLanguage.g:797:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:801:1: ( ( ':' ) )
+            // InternalDomainModelTestLanguage.g:802:1: ( ':' )
             {
-            // InternalDomainModelTestLanguage.g:797:1: ( ':' )
-            // InternalDomainModelTestLanguage.g:798:2: ':'
+            // InternalDomainModelTestLanguage.g:802:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:803:2: ':'
             {
              before(grammarAccess.getAttributeAccess().getColonKeyword_2()); 
             match(input,19,FollowSets000.FOLLOW_2); 
@@ -2453,14 +2461,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__3"
-    // InternalDomainModelTestLanguage.g:807:1: rule__Attribute__Group__3 : rule__Attribute__Group__3__Impl rule__Attribute__Group__4 ;
+    // InternalDomainModelTestLanguage.g:812:1: rule__Attribute__Group__3 : rule__Attribute__Group__3__Impl rule__Attribute__Group__4 ;
     public final void rule__Attribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:811:1: ( rule__Attribute__Group__3__Impl rule__Attribute__Group__4 )
-            // InternalDomainModelTestLanguage.g:812:2: rule__Attribute__Group__3__Impl rule__Attribute__Group__4
+            // InternalDomainModelTestLanguage.g:816:1: ( rule__Attribute__Group__3__Impl rule__Attribute__Group__4 )
+            // InternalDomainModelTestLanguage.g:817:2: rule__Attribute__Group__3__Impl rule__Attribute__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Attribute__Group__3__Impl();
@@ -2491,21 +2499,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__3__Impl"
-    // InternalDomainModelTestLanguage.g:819:1: rule__Attribute__Group__3__Impl : ( ( rule__Attribute__TypeAssignment_3 ) ) ;
+    // InternalDomainModelTestLanguage.g:824:1: rule__Attribute__Group__3__Impl : ( ( rule__Attribute__TypeAssignment_3 ) ) ;
     public final void rule__Attribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:823:1: ( ( ( rule__Attribute__TypeAssignment_3 ) ) )
-            // InternalDomainModelTestLanguage.g:824:1: ( ( rule__Attribute__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:828:1: ( ( ( rule__Attribute__TypeAssignment_3 ) ) )
+            // InternalDomainModelTestLanguage.g:829:1: ( ( rule__Attribute__TypeAssignment_3 ) )
             {
-            // InternalDomainModelTestLanguage.g:824:1: ( ( rule__Attribute__TypeAssignment_3 ) )
-            // InternalDomainModelTestLanguage.g:825:2: ( rule__Attribute__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:829:1: ( ( rule__Attribute__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:830:2: ( rule__Attribute__TypeAssignment_3 )
             {
              before(grammarAccess.getAttributeAccess().getTypeAssignment_3()); 
-            // InternalDomainModelTestLanguage.g:826:2: ( rule__Attribute__TypeAssignment_3 )
-            // InternalDomainModelTestLanguage.g:826:3: rule__Attribute__TypeAssignment_3
+            // InternalDomainModelTestLanguage.g:831:2: ( rule__Attribute__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:831:3: rule__Attribute__TypeAssignment_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__TypeAssignment_3();
@@ -2538,14 +2546,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__4"
-    // InternalDomainModelTestLanguage.g:834:1: rule__Attribute__Group__4 : rule__Attribute__Group__4__Impl ;
+    // InternalDomainModelTestLanguage.g:839:1: rule__Attribute__Group__4 : rule__Attribute__Group__4__Impl ;
     public final void rule__Attribute__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:838:1: ( rule__Attribute__Group__4__Impl )
-            // InternalDomainModelTestLanguage.g:839:2: rule__Attribute__Group__4__Impl
+            // InternalDomainModelTestLanguage.g:843:1: ( rule__Attribute__Group__4__Impl )
+            // InternalDomainModelTestLanguage.g:844:2: rule__Attribute__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__4__Impl();
@@ -2571,20 +2579,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__4__Impl"
-    // InternalDomainModelTestLanguage.g:845:1: rule__Attribute__Group__4__Impl : ( ( ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:850:1: rule__Attribute__Group__4__Impl : ( ( ';' )? ) ;
     public final void rule__Attribute__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:849:1: ( ( ( ';' )? ) )
-            // InternalDomainModelTestLanguage.g:850:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:854:1: ( ( ( ';' )? ) )
+            // InternalDomainModelTestLanguage.g:855:1: ( ( ';' )? )
             {
-            // InternalDomainModelTestLanguage.g:850:1: ( ( ';' )? )
-            // InternalDomainModelTestLanguage.g:851:2: ( ';' )?
+            // InternalDomainModelTestLanguage.g:855:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:856:2: ( ';' )?
             {
              before(grammarAccess.getAttributeAccess().getSemicolonKeyword_4()); 
-            // InternalDomainModelTestLanguage.g:852:2: ( ';' )?
+            // InternalDomainModelTestLanguage.g:857:2: ( ';' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2593,7 +2601,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt9) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:852:3: ';'
+                    // InternalDomainModelTestLanguage.g:857:3: ';'
                     {
                     match(input,13,FollowSets000.FOLLOW_2); 
 
@@ -2625,14 +2633,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__0"
-    // InternalDomainModelTestLanguage.g:861:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
+    // InternalDomainModelTestLanguage.g:866:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
     public final void rule__Reference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:865:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
-            // InternalDomainModelTestLanguage.g:866:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
+            // InternalDomainModelTestLanguage.g:870:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
+            // InternalDomainModelTestLanguage.g:871:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Reference__Group__0__Impl();
@@ -2663,17 +2671,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__0__Impl"
-    // InternalDomainModelTestLanguage.g:873:1: rule__Reference__Group__0__Impl : ( 'ref' ) ;
+    // InternalDomainModelTestLanguage.g:878:1: rule__Reference__Group__0__Impl : ( 'ref' ) ;
     public final void rule__Reference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:877:1: ( ( 'ref' ) )
-            // InternalDomainModelTestLanguage.g:878:1: ( 'ref' )
+            // InternalDomainModelTestLanguage.g:882:1: ( ( 'ref' ) )
+            // InternalDomainModelTestLanguage.g:883:1: ( 'ref' )
             {
-            // InternalDomainModelTestLanguage.g:878:1: ( 'ref' )
-            // InternalDomainModelTestLanguage.g:879:2: 'ref'
+            // InternalDomainModelTestLanguage.g:883:1: ( 'ref' )
+            // InternalDomainModelTestLanguage.g:884:2: 'ref'
             {
              before(grammarAccess.getReferenceAccess().getRefKeyword_0()); 
             match(input,20,FollowSets000.FOLLOW_2); 
@@ -2700,14 +2708,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__1"
-    // InternalDomainModelTestLanguage.g:888:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl rule__Reference__Group__2 ;
+    // InternalDomainModelTestLanguage.g:893:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl rule__Reference__Group__2 ;
     public final void rule__Reference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:892:1: ( rule__Reference__Group__1__Impl rule__Reference__Group__2 )
-            // InternalDomainModelTestLanguage.g:893:2: rule__Reference__Group__1__Impl rule__Reference__Group__2
+            // InternalDomainModelTestLanguage.g:897:1: ( rule__Reference__Group__1__Impl rule__Reference__Group__2 )
+            // InternalDomainModelTestLanguage.g:898:2: rule__Reference__Group__1__Impl rule__Reference__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_12);
             rule__Reference__Group__1__Impl();
@@ -2738,21 +2746,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__1__Impl"
-    // InternalDomainModelTestLanguage.g:900:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:905:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__NameAssignment_1 ) ) ;
     public final void rule__Reference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:904:1: ( ( ( rule__Reference__NameAssignment_1 ) ) )
-            // InternalDomainModelTestLanguage.g:905:1: ( ( rule__Reference__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:909:1: ( ( ( rule__Reference__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:910:1: ( ( rule__Reference__NameAssignment_1 ) )
             {
-            // InternalDomainModelTestLanguage.g:905:1: ( ( rule__Reference__NameAssignment_1 ) )
-            // InternalDomainModelTestLanguage.g:906:2: ( rule__Reference__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:910:1: ( ( rule__Reference__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:911:2: ( rule__Reference__NameAssignment_1 )
             {
              before(grammarAccess.getReferenceAccess().getNameAssignment_1()); 
-            // InternalDomainModelTestLanguage.g:907:2: ( rule__Reference__NameAssignment_1 )
-            // InternalDomainModelTestLanguage.g:907:3: rule__Reference__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:912:2: ( rule__Reference__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:912:3: rule__Reference__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__NameAssignment_1();
@@ -2785,14 +2793,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__2"
-    // InternalDomainModelTestLanguage.g:915:1: rule__Reference__Group__2 : rule__Reference__Group__2__Impl rule__Reference__Group__3 ;
+    // InternalDomainModelTestLanguage.g:920:1: rule__Reference__Group__2 : rule__Reference__Group__2__Impl rule__Reference__Group__3 ;
     public final void rule__Reference__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:919:1: ( rule__Reference__Group__2__Impl rule__Reference__Group__3 )
-            // InternalDomainModelTestLanguage.g:920:2: rule__Reference__Group__2__Impl rule__Reference__Group__3
+            // InternalDomainModelTestLanguage.g:924:1: ( rule__Reference__Group__2__Impl rule__Reference__Group__3 )
+            // InternalDomainModelTestLanguage.g:925:2: rule__Reference__Group__2__Impl rule__Reference__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Reference__Group__2__Impl();
@@ -2823,17 +2831,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__2__Impl"
-    // InternalDomainModelTestLanguage.g:927:1: rule__Reference__Group__2__Impl : ( ':' ) ;
+    // InternalDomainModelTestLanguage.g:932:1: rule__Reference__Group__2__Impl : ( ':' ) ;
     public final void rule__Reference__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:931:1: ( ( ':' ) )
-            // InternalDomainModelTestLanguage.g:932:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:936:1: ( ( ':' ) )
+            // InternalDomainModelTestLanguage.g:937:1: ( ':' )
             {
-            // InternalDomainModelTestLanguage.g:932:1: ( ':' )
-            // InternalDomainModelTestLanguage.g:933:2: ':'
+            // InternalDomainModelTestLanguage.g:937:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:938:2: ':'
             {
              before(grammarAccess.getReferenceAccess().getColonKeyword_2()); 
             match(input,19,FollowSets000.FOLLOW_2); 
@@ -2860,14 +2868,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__3"
-    // InternalDomainModelTestLanguage.g:942:1: rule__Reference__Group__3 : rule__Reference__Group__3__Impl rule__Reference__Group__4 ;
+    // InternalDomainModelTestLanguage.g:947:1: rule__Reference__Group__3 : rule__Reference__Group__3__Impl rule__Reference__Group__4 ;
     public final void rule__Reference__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:946:1: ( rule__Reference__Group__3__Impl rule__Reference__Group__4 )
-            // InternalDomainModelTestLanguage.g:947:2: rule__Reference__Group__3__Impl rule__Reference__Group__4
+            // InternalDomainModelTestLanguage.g:951:1: ( rule__Reference__Group__3__Impl rule__Reference__Group__4 )
+            // InternalDomainModelTestLanguage.g:952:2: rule__Reference__Group__3__Impl rule__Reference__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Reference__Group__3__Impl();
@@ -2898,21 +2906,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__3__Impl"
-    // InternalDomainModelTestLanguage.g:954:1: rule__Reference__Group__3__Impl : ( ( rule__Reference__TypeAssignment_3 ) ) ;
+    // InternalDomainModelTestLanguage.g:959:1: rule__Reference__Group__3__Impl : ( ( rule__Reference__TypeAssignment_3 ) ) ;
     public final void rule__Reference__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:958:1: ( ( ( rule__Reference__TypeAssignment_3 ) ) )
-            // InternalDomainModelTestLanguage.g:959:1: ( ( rule__Reference__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:963:1: ( ( ( rule__Reference__TypeAssignment_3 ) ) )
+            // InternalDomainModelTestLanguage.g:964:1: ( ( rule__Reference__TypeAssignment_3 ) )
             {
-            // InternalDomainModelTestLanguage.g:959:1: ( ( rule__Reference__TypeAssignment_3 ) )
-            // InternalDomainModelTestLanguage.g:960:2: ( rule__Reference__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:964:1: ( ( rule__Reference__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:965:2: ( rule__Reference__TypeAssignment_3 )
             {
              before(grammarAccess.getReferenceAccess().getTypeAssignment_3()); 
-            // InternalDomainModelTestLanguage.g:961:2: ( rule__Reference__TypeAssignment_3 )
-            // InternalDomainModelTestLanguage.g:961:3: rule__Reference__TypeAssignment_3
+            // InternalDomainModelTestLanguage.g:966:2: ( rule__Reference__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:966:3: rule__Reference__TypeAssignment_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__TypeAssignment_3();
@@ -2945,14 +2953,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__4"
-    // InternalDomainModelTestLanguage.g:969:1: rule__Reference__Group__4 : rule__Reference__Group__4__Impl ;
+    // InternalDomainModelTestLanguage.g:974:1: rule__Reference__Group__4 : rule__Reference__Group__4__Impl ;
     public final void rule__Reference__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:973:1: ( rule__Reference__Group__4__Impl )
-            // InternalDomainModelTestLanguage.g:974:2: rule__Reference__Group__4__Impl
+            // InternalDomainModelTestLanguage.g:978:1: ( rule__Reference__Group__4__Impl )
+            // InternalDomainModelTestLanguage.g:979:2: rule__Reference__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__4__Impl();
@@ -2978,20 +2986,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__4__Impl"
-    // InternalDomainModelTestLanguage.g:980:1: rule__Reference__Group__4__Impl : ( ( ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:985:1: rule__Reference__Group__4__Impl : ( ( ';' )? ) ;
     public final void rule__Reference__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:984:1: ( ( ( ';' )? ) )
-            // InternalDomainModelTestLanguage.g:985:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:989:1: ( ( ( ';' )? ) )
+            // InternalDomainModelTestLanguage.g:990:1: ( ( ';' )? )
             {
-            // InternalDomainModelTestLanguage.g:985:1: ( ( ';' )? )
-            // InternalDomainModelTestLanguage.g:986:2: ( ';' )?
+            // InternalDomainModelTestLanguage.g:990:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:991:2: ( ';' )?
             {
              before(grammarAccess.getReferenceAccess().getSemicolonKeyword_4()); 
-            // InternalDomainModelTestLanguage.g:987:2: ( ';' )?
+            // InternalDomainModelTestLanguage.g:992:2: ( ';' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -3000,7 +3008,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt10) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:987:3: ';'
+                    // InternalDomainModelTestLanguage.g:992:3: ';'
                     {
                     match(input,13,FollowSets000.FOLLOW_2); 
 
@@ -3032,17 +3040,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__ImportsAssignment_0"
-    // InternalDomainModelTestLanguage.g:996:1: rule__Model__ImportsAssignment_0 : ( ruleImport ) ;
+    // InternalDomainModelTestLanguage.g:1001:1: rule__Model__ImportsAssignment_0 : ( ruleImport ) ;
     public final void rule__Model__ImportsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1000:1: ( ( ruleImport ) )
-            // InternalDomainModelTestLanguage.g:1001:2: ( ruleImport )
+            // InternalDomainModelTestLanguage.g:1005:1: ( ( ruleImport ) )
+            // InternalDomainModelTestLanguage.g:1006:2: ( ruleImport )
             {
-            // InternalDomainModelTestLanguage.g:1001:2: ( ruleImport )
-            // InternalDomainModelTestLanguage.g:1002:3: ruleImport
+            // InternalDomainModelTestLanguage.g:1006:2: ( ruleImport )
+            // InternalDomainModelTestLanguage.g:1007:3: ruleImport
             {
              before(grammarAccess.getModelAccess().getImportsImportParserRuleCall_0_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -3073,17 +3081,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__ElementsAssignment_1"
-    // InternalDomainModelTestLanguage.g:1011:1: rule__Model__ElementsAssignment_1 : ( ruleType ) ;
+    // InternalDomainModelTestLanguage.g:1016:1: rule__Model__ElementsAssignment_1 : ( ruleType ) ;
     public final void rule__Model__ElementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1015:1: ( ( ruleType ) )
-            // InternalDomainModelTestLanguage.g:1016:2: ( ruleType )
+            // InternalDomainModelTestLanguage.g:1020:1: ( ( ruleType ) )
+            // InternalDomainModelTestLanguage.g:1021:2: ( ruleType )
             {
-            // InternalDomainModelTestLanguage.g:1016:2: ( ruleType )
-            // InternalDomainModelTestLanguage.g:1017:3: ruleType
+            // InternalDomainModelTestLanguage.g:1021:2: ( ruleType )
+            // InternalDomainModelTestLanguage.g:1022:3: ruleType
             {
              before(grammarAccess.getModelAccess().getElementsTypeParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -3114,17 +3122,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__ImportURIAssignment_1"
-    // InternalDomainModelTestLanguage.g:1026:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
+    // InternalDomainModelTestLanguage.g:1031:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Import__ImportURIAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1030:1: ( ( RULE_STRING ) )
-            // InternalDomainModelTestLanguage.g:1031:2: ( RULE_STRING )
+            // InternalDomainModelTestLanguage.g:1035:1: ( ( RULE_STRING ) )
+            // InternalDomainModelTestLanguage.g:1036:2: ( RULE_STRING )
             {
-            // InternalDomainModelTestLanguage.g:1031:2: ( RULE_STRING )
-            // InternalDomainModelTestLanguage.g:1032:3: RULE_STRING
+            // InternalDomainModelTestLanguage.g:1036:2: ( RULE_STRING )
+            // InternalDomainModelTestLanguage.g:1037:3: RULE_STRING
             {
              before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
             match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
@@ -3151,17 +3159,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__NameAssignment_1"
-    // InternalDomainModelTestLanguage.g:1041:1: rule__DataType__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1046:1: rule__DataType__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__DataType__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1045:1: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1046:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1050:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1051:2: ( RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:1046:2: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1047:3: RULE_ID
+            // InternalDomainModelTestLanguage.g:1051:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1052:3: RULE_ID
             {
              before(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -3188,17 +3196,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__NameAssignment_1"
-    // InternalDomainModelTestLanguage.g:1056:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1061:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Class__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1060:1: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1061:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1065:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1066:2: ( RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:1061:2: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1062:3: RULE_ID
+            // InternalDomainModelTestLanguage.g:1066:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1067:3: RULE_ID
             {
              before(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -3225,21 +3233,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__SuperClassAssignment_2_1"
-    // InternalDomainModelTestLanguage.g:1071:1: rule__Class__SuperClassAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // InternalDomainModelTestLanguage.g:1076:1: rule__Class__SuperClassAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__Class__SuperClassAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1075:1: ( ( ( RULE_ID ) ) )
-            // InternalDomainModelTestLanguage.g:1076:2: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1080:1: ( ( ( RULE_ID ) ) )
+            // InternalDomainModelTestLanguage.g:1081:2: ( ( RULE_ID ) )
             {
-            // InternalDomainModelTestLanguage.g:1076:2: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1077:3: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1081:2: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1082:3: ( RULE_ID )
             {
              before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_2_1_0()); 
-            // InternalDomainModelTestLanguage.g:1078:3: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1079:4: RULE_ID
+            // InternalDomainModelTestLanguage.g:1083:3: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1084:4: RULE_ID
             {
              before(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_2_1_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -3270,17 +3278,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__PropertiesAssignment_4"
-    // InternalDomainModelTestLanguage.g:1090:1: rule__Class__PropertiesAssignment_4 : ( ruleProperty ) ;
+    // InternalDomainModelTestLanguage.g:1095:1: rule__Class__PropertiesAssignment_4 : ( ruleProperty ) ;
     public final void rule__Class__PropertiesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1094:1: ( ( ruleProperty ) )
-            // InternalDomainModelTestLanguage.g:1095:2: ( ruleProperty )
+            // InternalDomainModelTestLanguage.g:1099:1: ( ( ruleProperty ) )
+            // InternalDomainModelTestLanguage.g:1100:2: ( ruleProperty )
             {
-            // InternalDomainModelTestLanguage.g:1095:2: ( ruleProperty )
-            // InternalDomainModelTestLanguage.g:1096:3: ruleProperty
+            // InternalDomainModelTestLanguage.g:1100:2: ( ruleProperty )
+            // InternalDomainModelTestLanguage.g:1101:3: ruleProperty
             {
              before(grammarAccess.getClassAccess().getPropertiesPropertyParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -3311,17 +3319,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__SubClassesAssignment_5"
-    // InternalDomainModelTestLanguage.g:1105:1: rule__Class__SubClassesAssignment_5 : ( ruleClass ) ;
+    // InternalDomainModelTestLanguage.g:1110:1: rule__Class__SubClassesAssignment_5 : ( ruleClass ) ;
     public final void rule__Class__SubClassesAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1109:1: ( ( ruleClass ) )
-            // InternalDomainModelTestLanguage.g:1110:2: ( ruleClass )
+            // InternalDomainModelTestLanguage.g:1114:1: ( ( ruleClass ) )
+            // InternalDomainModelTestLanguage.g:1115:2: ( ruleClass )
             {
-            // InternalDomainModelTestLanguage.g:1110:2: ( ruleClass )
-            // InternalDomainModelTestLanguage.g:1111:3: ruleClass
+            // InternalDomainModelTestLanguage.g:1115:2: ( ruleClass )
+            // InternalDomainModelTestLanguage.g:1116:3: ruleClass
             {
              before(grammarAccess.getClassAccess().getSubClassesClassParserRuleCall_5_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -3352,17 +3360,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__NameAssignment_1"
-    // InternalDomainModelTestLanguage.g:1120:1: rule__Attribute__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1125:1: rule__Attribute__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Attribute__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1124:1: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1125:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1129:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1130:2: ( RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:1125:2: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1126:3: RULE_ID
+            // InternalDomainModelTestLanguage.g:1130:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1131:3: RULE_ID
             {
              before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -3389,21 +3397,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__TypeAssignment_3"
-    // InternalDomainModelTestLanguage.g:1135:1: rule__Attribute__TypeAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalDomainModelTestLanguage.g:1140:1: rule__Attribute__TypeAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Attribute__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1139:1: ( ( ( RULE_ID ) ) )
-            // InternalDomainModelTestLanguage.g:1140:2: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1144:1: ( ( ( RULE_ID ) ) )
+            // InternalDomainModelTestLanguage.g:1145:2: ( ( RULE_ID ) )
             {
-            // InternalDomainModelTestLanguage.g:1140:2: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1141:3: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1145:2: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1146:3: ( RULE_ID )
             {
              before(grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_3_0()); 
-            // InternalDomainModelTestLanguage.g:1142:3: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1143:4: RULE_ID
+            // InternalDomainModelTestLanguage.g:1147:3: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1148:4: RULE_ID
             {
              before(grammarAccess.getAttributeAccess().getTypeDataTypeIDTerminalRuleCall_3_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -3434,17 +3442,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__NameAssignment_1"
-    // InternalDomainModelTestLanguage.g:1154:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1159:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Reference__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1158:1: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1159:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1163:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1164:2: ( RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:1159:2: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1160:3: RULE_ID
+            // InternalDomainModelTestLanguage.g:1164:2: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1165:3: RULE_ID
             {
              before(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -3471,21 +3479,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__TypeAssignment_3"
-    // InternalDomainModelTestLanguage.g:1169:1: rule__Reference__TypeAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalDomainModelTestLanguage.g:1174:1: rule__Reference__TypeAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Reference__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDomainModelTestLanguage.g:1173:1: ( ( ( RULE_ID ) ) )
-            // InternalDomainModelTestLanguage.g:1174:2: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1178:1: ( ( ( RULE_ID ) ) )
+            // InternalDomainModelTestLanguage.g:1179:2: ( ( RULE_ID ) )
             {
-            // InternalDomainModelTestLanguage.g:1174:2: ( ( RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:1175:3: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1179:2: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1180:3: ( RULE_ID )
             {
              before(grammarAccess.getReferenceAccess().getTypeClassCrossReference_3_0()); 
-            // InternalDomainModelTestLanguage.g:1176:3: ( RULE_ID )
-            // InternalDomainModelTestLanguage.g:1177:4: RULE_ID
+            // InternalDomainModelTestLanguage.g:1181:3: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1182:4: RULE_ID
             {
              before(grammarAccess.getReferenceAccess().getTypeClassIDTerminalRuleCall_3_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 

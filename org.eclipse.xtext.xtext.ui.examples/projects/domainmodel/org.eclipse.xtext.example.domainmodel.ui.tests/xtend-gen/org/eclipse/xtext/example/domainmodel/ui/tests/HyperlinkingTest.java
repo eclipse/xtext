@@ -28,7 +28,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void hyperlink_on_java_import_statement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -47,7 +47,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "java.util.Date");
   }
-  
+
   @Test
   public void hyperlink_on_java_member_type() {
     StringConcatenation _builder = new StringConcatenation();
@@ -66,7 +66,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "java.util.Date");
   }
-  
+
   @Test
   public void hyperlink_on_entity_import_statement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "foopackage.Foo");
   }
-  
+
   @Test
   public void hyperlink_javadoc_link_to_java_type() {
     StringConcatenation _builder = new StringConcatenation();
@@ -121,7 +121,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "java.util.Date");
   }
-  
+
   @Test
   public void hyperlink_on_entity_member_type() {
     StringConcatenation _builder = new StringConcatenation();
@@ -140,7 +140,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "Foo");
   }
-  
+
   @Test
   public void hyperlink_on_entity_member_type_in_package() {
     StringConcatenation _builder = new StringConcatenation();
@@ -167,7 +167,7 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "foopackage.Foo");
   }
-  
+
   @Test
   public void hyperlink_javadoc_link_to_entity_type() {
     StringConcatenation _builder = new StringConcatenation();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,7 +28,7 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
  * @since 2.3
  * @deprecated Use org.eclipse.xtext.testing.serializer.AssertStructureAcceptor instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 
 	protected Stack<RuleCall> stack = new Stack<RuleCall>();

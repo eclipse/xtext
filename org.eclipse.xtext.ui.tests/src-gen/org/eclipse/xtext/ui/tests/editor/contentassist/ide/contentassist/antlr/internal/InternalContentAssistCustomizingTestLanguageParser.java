@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalContentAssistCustomizingTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -73,11 +81,11 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalContentAssistCustomizingTestLanguage.g:53:1: entryRuleModel : ruleModel EOF ;
+    // InternalContentAssistCustomizingTestLanguage.g:58:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:54:1: ( ruleModel EOF )
-            // InternalContentAssistCustomizingTestLanguage.g:55:1: ruleModel EOF
+            // InternalContentAssistCustomizingTestLanguage.g:59:1: ( ruleModel EOF )
+            // InternalContentAssistCustomizingTestLanguage.g:60:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -103,20 +111,20 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "ruleModel"
-    // InternalContentAssistCustomizingTestLanguage.g:62:1: ruleModel : ( ( rule__Model__TypesAssignment )* ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:67:1: ruleModel : ( ( rule__Model__TypesAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:66:2: ( ( ( rule__Model__TypesAssignment )* ) )
-            // InternalContentAssistCustomizingTestLanguage.g:67:2: ( ( rule__Model__TypesAssignment )* )
+            // InternalContentAssistCustomizingTestLanguage.g:71:2: ( ( ( rule__Model__TypesAssignment )* ) )
+            // InternalContentAssistCustomizingTestLanguage.g:72:2: ( ( rule__Model__TypesAssignment )* )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:67:2: ( ( rule__Model__TypesAssignment )* )
-            // InternalContentAssistCustomizingTestLanguage.g:68:3: ( rule__Model__TypesAssignment )*
+            // InternalContentAssistCustomizingTestLanguage.g:72:2: ( ( rule__Model__TypesAssignment )* )
+            // InternalContentAssistCustomizingTestLanguage.g:73:3: ( rule__Model__TypesAssignment )*
             {
              before(grammarAccess.getModelAccess().getTypesAssignment()); 
-            // InternalContentAssistCustomizingTestLanguage.g:69:3: ( rule__Model__TypesAssignment )*
+            // InternalContentAssistCustomizingTestLanguage.g:74:3: ( rule__Model__TypesAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -129,7 +137,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalContentAssistCustomizingTestLanguage.g:69:4: rule__Model__TypesAssignment
+            	    // InternalContentAssistCustomizingTestLanguage.g:74:4: rule__Model__TypesAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Model__TypesAssignment();
@@ -168,11 +176,11 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "entryRuleType"
-    // InternalContentAssistCustomizingTestLanguage.g:78:1: entryRuleType : ruleType EOF ;
+    // InternalContentAssistCustomizingTestLanguage.g:83:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:79:1: ( ruleType EOF )
-            // InternalContentAssistCustomizingTestLanguage.g:80:1: ruleType EOF
+            // InternalContentAssistCustomizingTestLanguage.g:84:1: ( ruleType EOF )
+            // InternalContentAssistCustomizingTestLanguage.g:85:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -198,21 +206,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "ruleType"
-    // InternalContentAssistCustomizingTestLanguage.g:87:1: ruleType : ( ( rule__Type__Group__0 ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:92:1: ruleType : ( ( rule__Type__Group__0 ) ) ;
     public final void ruleType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:91:2: ( ( ( rule__Type__Group__0 ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:92:2: ( ( rule__Type__Group__0 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:96:2: ( ( ( rule__Type__Group__0 ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:97:2: ( ( rule__Type__Group__0 ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:92:2: ( ( rule__Type__Group__0 ) )
-            // InternalContentAssistCustomizingTestLanguage.g:93:3: ( rule__Type__Group__0 )
+            // InternalContentAssistCustomizingTestLanguage.g:97:2: ( ( rule__Type__Group__0 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:98:3: ( rule__Type__Group__0 )
             {
              before(grammarAccess.getTypeAccess().getGroup()); 
-            // InternalContentAssistCustomizingTestLanguage.g:94:3: ( rule__Type__Group__0 )
-            // InternalContentAssistCustomizingTestLanguage.g:94:4: rule__Type__Group__0
+            // InternalContentAssistCustomizingTestLanguage.g:99:3: ( rule__Type__Group__0 )
+            // InternalContentAssistCustomizingTestLanguage.g:99:4: rule__Type__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Group__0();
@@ -245,11 +253,11 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "entryRuleTypeRef"
-    // InternalContentAssistCustomizingTestLanguage.g:103:1: entryRuleTypeRef : ruleTypeRef EOF ;
+    // InternalContentAssistCustomizingTestLanguage.g:108:1: entryRuleTypeRef : ruleTypeRef EOF ;
     public final void entryRuleTypeRef() throws RecognitionException {
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:104:1: ( ruleTypeRef EOF )
-            // InternalContentAssistCustomizingTestLanguage.g:105:1: ruleTypeRef EOF
+            // InternalContentAssistCustomizingTestLanguage.g:109:1: ( ruleTypeRef EOF )
+            // InternalContentAssistCustomizingTestLanguage.g:110:1: ruleTypeRef EOF
             {
              before(grammarAccess.getTypeRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -275,21 +283,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "ruleTypeRef"
-    // InternalContentAssistCustomizingTestLanguage.g:112:1: ruleTypeRef : ( ( rule__TypeRef__TypeAssignment ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:117:1: ruleTypeRef : ( ( rule__TypeRef__TypeAssignment ) ) ;
     public final void ruleTypeRef() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:116:2: ( ( ( rule__TypeRef__TypeAssignment ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:117:2: ( ( rule__TypeRef__TypeAssignment ) )
+            // InternalContentAssistCustomizingTestLanguage.g:121:2: ( ( ( rule__TypeRef__TypeAssignment ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:122:2: ( ( rule__TypeRef__TypeAssignment ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:117:2: ( ( rule__TypeRef__TypeAssignment ) )
-            // InternalContentAssistCustomizingTestLanguage.g:118:3: ( rule__TypeRef__TypeAssignment )
+            // InternalContentAssistCustomizingTestLanguage.g:122:2: ( ( rule__TypeRef__TypeAssignment ) )
+            // InternalContentAssistCustomizingTestLanguage.g:123:3: ( rule__TypeRef__TypeAssignment )
             {
              before(grammarAccess.getTypeRefAccess().getTypeAssignment()); 
-            // InternalContentAssistCustomizingTestLanguage.g:119:3: ( rule__TypeRef__TypeAssignment )
-            // InternalContentAssistCustomizingTestLanguage.g:119:4: rule__TypeRef__TypeAssignment
+            // InternalContentAssistCustomizingTestLanguage.g:124:3: ( rule__TypeRef__TypeAssignment )
+            // InternalContentAssistCustomizingTestLanguage.g:124:4: rule__TypeRef__TypeAssignment
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__TypeRef__TypeAssignment();
@@ -322,11 +330,11 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalContentAssistCustomizingTestLanguage.g:128:1: entryRuleFQN : ruleFQN EOF ;
+    // InternalContentAssistCustomizingTestLanguage.g:133:1: entryRuleFQN : ruleFQN EOF ;
     public final void entryRuleFQN() throws RecognitionException {
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:129:1: ( ruleFQN EOF )
-            // InternalContentAssistCustomizingTestLanguage.g:130:1: ruleFQN EOF
+            // InternalContentAssistCustomizingTestLanguage.g:134:1: ( ruleFQN EOF )
+            // InternalContentAssistCustomizingTestLanguage.g:135:1: ruleFQN EOF
             {
              before(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -352,21 +360,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "ruleFQN"
-    // InternalContentAssistCustomizingTestLanguage.g:137:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:142:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
     public final void ruleFQN() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:141:2: ( ( ( rule__FQN__Group__0 ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:142:2: ( ( rule__FQN__Group__0 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:146:2: ( ( ( rule__FQN__Group__0 ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:147:2: ( ( rule__FQN__Group__0 ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:142:2: ( ( rule__FQN__Group__0 ) )
-            // InternalContentAssistCustomizingTestLanguage.g:143:3: ( rule__FQN__Group__0 )
+            // InternalContentAssistCustomizingTestLanguage.g:147:2: ( ( rule__FQN__Group__0 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:148:3: ( rule__FQN__Group__0 )
             {
              before(grammarAccess.getFQNAccess().getGroup()); 
-            // InternalContentAssistCustomizingTestLanguage.g:144:3: ( rule__FQN__Group__0 )
-            // InternalContentAssistCustomizingTestLanguage.g:144:4: rule__FQN__Group__0
+            // InternalContentAssistCustomizingTestLanguage.g:149:3: ( rule__FQN__Group__0 )
+            // InternalContentAssistCustomizingTestLanguage.g:149:4: rule__FQN__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group__0();
@@ -399,13 +407,13 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Alternatives_0"
-    // InternalContentAssistCustomizingTestLanguage.g:152:1: rule__Type__Alternatives_0 : ( ( ( rule__Type__NameAssignment_0_0 ) ) | ( ( rule__Type__NameAssignment_0_1 ) ) );
+    // InternalContentAssistCustomizingTestLanguage.g:157:1: rule__Type__Alternatives_0 : ( ( ( rule__Type__NameAssignment_0_0 ) ) | ( ( rule__Type__NameAssignment_0_1 ) ) );
     public final void rule__Type__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:156:1: ( ( ( rule__Type__NameAssignment_0_0 ) ) | ( ( rule__Type__NameAssignment_0_1 ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:161:1: ( ( ( rule__Type__NameAssignment_0_0 ) ) | ( ( rule__Type__NameAssignment_0_1 ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -423,14 +431,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
             }
             switch (alt2) {
                 case 1 :
-                    // InternalContentAssistCustomizingTestLanguage.g:157:2: ( ( rule__Type__NameAssignment_0_0 ) )
+                    // InternalContentAssistCustomizingTestLanguage.g:162:2: ( ( rule__Type__NameAssignment_0_0 ) )
                     {
-                    // InternalContentAssistCustomizingTestLanguage.g:157:2: ( ( rule__Type__NameAssignment_0_0 ) )
-                    // InternalContentAssistCustomizingTestLanguage.g:158:3: ( rule__Type__NameAssignment_0_0 )
+                    // InternalContentAssistCustomizingTestLanguage.g:162:2: ( ( rule__Type__NameAssignment_0_0 ) )
+                    // InternalContentAssistCustomizingTestLanguage.g:163:3: ( rule__Type__NameAssignment_0_0 )
                     {
                      before(grammarAccess.getTypeAccess().getNameAssignment_0_0()); 
-                    // InternalContentAssistCustomizingTestLanguage.g:159:3: ( rule__Type__NameAssignment_0_0 )
-                    // InternalContentAssistCustomizingTestLanguage.g:159:4: rule__Type__NameAssignment_0_0
+                    // InternalContentAssistCustomizingTestLanguage.g:164:3: ( rule__Type__NameAssignment_0_0 )
+                    // InternalContentAssistCustomizingTestLanguage.g:164:4: rule__Type__NameAssignment_0_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Type__NameAssignment_0_0();
@@ -448,14 +456,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistCustomizingTestLanguage.g:163:2: ( ( rule__Type__NameAssignment_0_1 ) )
+                    // InternalContentAssistCustomizingTestLanguage.g:168:2: ( ( rule__Type__NameAssignment_0_1 ) )
                     {
-                    // InternalContentAssistCustomizingTestLanguage.g:163:2: ( ( rule__Type__NameAssignment_0_1 ) )
-                    // InternalContentAssistCustomizingTestLanguage.g:164:3: ( rule__Type__NameAssignment_0_1 )
+                    // InternalContentAssistCustomizingTestLanguage.g:168:2: ( ( rule__Type__NameAssignment_0_1 ) )
+                    // InternalContentAssistCustomizingTestLanguage.g:169:3: ( rule__Type__NameAssignment_0_1 )
                     {
                      before(grammarAccess.getTypeAccess().getNameAssignment_0_1()); 
-                    // InternalContentAssistCustomizingTestLanguage.g:165:3: ( rule__Type__NameAssignment_0_1 )
-                    // InternalContentAssistCustomizingTestLanguage.g:165:4: rule__Type__NameAssignment_0_1
+                    // InternalContentAssistCustomizingTestLanguage.g:170:3: ( rule__Type__NameAssignment_0_1 )
+                    // InternalContentAssistCustomizingTestLanguage.g:170:4: rule__Type__NameAssignment_0_1
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Type__NameAssignment_0_1();
@@ -490,14 +498,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group__0"
-    // InternalContentAssistCustomizingTestLanguage.g:173:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
+    // InternalContentAssistCustomizingTestLanguage.g:178:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
     public final void rule__Type__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:177:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
-            // InternalContentAssistCustomizingTestLanguage.g:178:2: rule__Type__Group__0__Impl rule__Type__Group__1
+            // InternalContentAssistCustomizingTestLanguage.g:182:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
+            // InternalContentAssistCustomizingTestLanguage.g:183:2: rule__Type__Group__0__Impl rule__Type__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Type__Group__0__Impl();
@@ -528,21 +536,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group__0__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:185:1: rule__Type__Group__0__Impl : ( ( rule__Type__Alternatives_0 ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:190:1: rule__Type__Group__0__Impl : ( ( rule__Type__Alternatives_0 ) ) ;
     public final void rule__Type__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:189:1: ( ( ( rule__Type__Alternatives_0 ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:190:1: ( ( rule__Type__Alternatives_0 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:194:1: ( ( ( rule__Type__Alternatives_0 ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:195:1: ( ( rule__Type__Alternatives_0 ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:190:1: ( ( rule__Type__Alternatives_0 ) )
-            // InternalContentAssistCustomizingTestLanguage.g:191:2: ( rule__Type__Alternatives_0 )
+            // InternalContentAssistCustomizingTestLanguage.g:195:1: ( ( rule__Type__Alternatives_0 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:196:2: ( rule__Type__Alternatives_0 )
             {
              before(grammarAccess.getTypeAccess().getAlternatives_0()); 
-            // InternalContentAssistCustomizingTestLanguage.g:192:2: ( rule__Type__Alternatives_0 )
-            // InternalContentAssistCustomizingTestLanguage.g:192:3: rule__Type__Alternatives_0
+            // InternalContentAssistCustomizingTestLanguage.g:197:2: ( rule__Type__Alternatives_0 )
+            // InternalContentAssistCustomizingTestLanguage.g:197:3: rule__Type__Alternatives_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Alternatives_0();
@@ -575,14 +583,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group__1"
-    // InternalContentAssistCustomizingTestLanguage.g:200:1: rule__Type__Group__1 : rule__Type__Group__1__Impl rule__Type__Group__2 ;
+    // InternalContentAssistCustomizingTestLanguage.g:205:1: rule__Type__Group__1 : rule__Type__Group__1__Impl rule__Type__Group__2 ;
     public final void rule__Type__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:204:1: ( rule__Type__Group__1__Impl rule__Type__Group__2 )
-            // InternalContentAssistCustomizingTestLanguage.g:205:2: rule__Type__Group__1__Impl rule__Type__Group__2
+            // InternalContentAssistCustomizingTestLanguage.g:209:1: ( rule__Type__Group__1__Impl rule__Type__Group__2 )
+            // InternalContentAssistCustomizingTestLanguage.g:210:2: rule__Type__Group__1__Impl rule__Type__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Type__Group__1__Impl();
@@ -613,20 +621,20 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group__1__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:212:1: rule__Type__Group__1__Impl : ( ( rule__Type__Group_1__0 )? ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:217:1: rule__Type__Group__1__Impl : ( ( rule__Type__Group_1__0 )? ) ;
     public final void rule__Type__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:216:1: ( ( ( rule__Type__Group_1__0 )? ) )
-            // InternalContentAssistCustomizingTestLanguage.g:217:1: ( ( rule__Type__Group_1__0 )? )
+            // InternalContentAssistCustomizingTestLanguage.g:221:1: ( ( ( rule__Type__Group_1__0 )? ) )
+            // InternalContentAssistCustomizingTestLanguage.g:222:1: ( ( rule__Type__Group_1__0 )? )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:217:1: ( ( rule__Type__Group_1__0 )? )
-            // InternalContentAssistCustomizingTestLanguage.g:218:2: ( rule__Type__Group_1__0 )?
+            // InternalContentAssistCustomizingTestLanguage.g:222:1: ( ( rule__Type__Group_1__0 )? )
+            // InternalContentAssistCustomizingTestLanguage.g:223:2: ( rule__Type__Group_1__0 )?
             {
              before(grammarAccess.getTypeAccess().getGroup_1()); 
-            // InternalContentAssistCustomizingTestLanguage.g:219:2: ( rule__Type__Group_1__0 )?
+            // InternalContentAssistCustomizingTestLanguage.g:224:2: ( rule__Type__Group_1__0 )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -635,7 +643,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
             }
             switch (alt3) {
                 case 1 :
-                    // InternalContentAssistCustomizingTestLanguage.g:219:3: rule__Type__Group_1__0
+                    // InternalContentAssistCustomizingTestLanguage.g:224:3: rule__Type__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Type__Group_1__0();
@@ -671,14 +679,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group__2"
-    // InternalContentAssistCustomizingTestLanguage.g:227:1: rule__Type__Group__2 : rule__Type__Group__2__Impl ;
+    // InternalContentAssistCustomizingTestLanguage.g:232:1: rule__Type__Group__2 : rule__Type__Group__2__Impl ;
     public final void rule__Type__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:231:1: ( rule__Type__Group__2__Impl )
-            // InternalContentAssistCustomizingTestLanguage.g:232:2: rule__Type__Group__2__Impl
+            // InternalContentAssistCustomizingTestLanguage.g:236:1: ( rule__Type__Group__2__Impl )
+            // InternalContentAssistCustomizingTestLanguage.g:237:2: rule__Type__Group__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Group__2__Impl();
@@ -704,17 +712,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group__2__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:238:1: rule__Type__Group__2__Impl : ( ';' ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:243:1: rule__Type__Group__2__Impl : ( ';' ) ;
     public final void rule__Type__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:242:1: ( ( ';' ) )
-            // InternalContentAssistCustomizingTestLanguage.g:243:1: ( ';' )
+            // InternalContentAssistCustomizingTestLanguage.g:247:1: ( ( ';' ) )
+            // InternalContentAssistCustomizingTestLanguage.g:248:1: ( ';' )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:243:1: ( ';' )
-            // InternalContentAssistCustomizingTestLanguage.g:244:2: ';'
+            // InternalContentAssistCustomizingTestLanguage.g:248:1: ( ';' )
+            // InternalContentAssistCustomizingTestLanguage.g:249:2: ';'
             {
              before(grammarAccess.getTypeAccess().getSemicolonKeyword_2()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -741,14 +749,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group_1__0"
-    // InternalContentAssistCustomizingTestLanguage.g:254:1: rule__Type__Group_1__0 : rule__Type__Group_1__0__Impl rule__Type__Group_1__1 ;
+    // InternalContentAssistCustomizingTestLanguage.g:259:1: rule__Type__Group_1__0 : rule__Type__Group_1__0__Impl rule__Type__Group_1__1 ;
     public final void rule__Type__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:258:1: ( rule__Type__Group_1__0__Impl rule__Type__Group_1__1 )
-            // InternalContentAssistCustomizingTestLanguage.g:259:2: rule__Type__Group_1__0__Impl rule__Type__Group_1__1
+            // InternalContentAssistCustomizingTestLanguage.g:263:1: ( rule__Type__Group_1__0__Impl rule__Type__Group_1__1 )
+            // InternalContentAssistCustomizingTestLanguage.g:264:2: rule__Type__Group_1__0__Impl rule__Type__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Type__Group_1__0__Impl();
@@ -779,17 +787,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group_1__0__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:266:1: rule__Type__Group_1__0__Impl : ( 'extends' ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:271:1: rule__Type__Group_1__0__Impl : ( 'extends' ) ;
     public final void rule__Type__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:270:1: ( ( 'extends' ) )
-            // InternalContentAssistCustomizingTestLanguage.g:271:1: ( 'extends' )
+            // InternalContentAssistCustomizingTestLanguage.g:275:1: ( ( 'extends' ) )
+            // InternalContentAssistCustomizingTestLanguage.g:276:1: ( 'extends' )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:271:1: ( 'extends' )
-            // InternalContentAssistCustomizingTestLanguage.g:272:2: 'extends'
+            // InternalContentAssistCustomizingTestLanguage.g:276:1: ( 'extends' )
+            // InternalContentAssistCustomizingTestLanguage.g:277:2: 'extends'
             {
              before(grammarAccess.getTypeAccess().getExtendsKeyword_1_0()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -816,14 +824,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group_1__1"
-    // InternalContentAssistCustomizingTestLanguage.g:281:1: rule__Type__Group_1__1 : rule__Type__Group_1__1__Impl ;
+    // InternalContentAssistCustomizingTestLanguage.g:286:1: rule__Type__Group_1__1 : rule__Type__Group_1__1__Impl ;
     public final void rule__Type__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:285:1: ( rule__Type__Group_1__1__Impl )
-            // InternalContentAssistCustomizingTestLanguage.g:286:2: rule__Type__Group_1__1__Impl
+            // InternalContentAssistCustomizingTestLanguage.g:290:1: ( rule__Type__Group_1__1__Impl )
+            // InternalContentAssistCustomizingTestLanguage.g:291:2: rule__Type__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Group_1__1__Impl();
@@ -849,21 +857,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__Group_1__1__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:292:1: rule__Type__Group_1__1__Impl : ( ( rule__Type__SuperTypeAssignment_1_1 ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:297:1: rule__Type__Group_1__1__Impl : ( ( rule__Type__SuperTypeAssignment_1_1 ) ) ;
     public final void rule__Type__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:296:1: ( ( ( rule__Type__SuperTypeAssignment_1_1 ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:297:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:301:1: ( ( ( rule__Type__SuperTypeAssignment_1_1 ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:302:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:297:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
-            // InternalContentAssistCustomizingTestLanguage.g:298:2: ( rule__Type__SuperTypeAssignment_1_1 )
+            // InternalContentAssistCustomizingTestLanguage.g:302:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
+            // InternalContentAssistCustomizingTestLanguage.g:303:2: ( rule__Type__SuperTypeAssignment_1_1 )
             {
              before(grammarAccess.getTypeAccess().getSuperTypeAssignment_1_1()); 
-            // InternalContentAssistCustomizingTestLanguage.g:299:2: ( rule__Type__SuperTypeAssignment_1_1 )
-            // InternalContentAssistCustomizingTestLanguage.g:299:3: rule__Type__SuperTypeAssignment_1_1
+            // InternalContentAssistCustomizingTestLanguage.g:304:2: ( rule__Type__SuperTypeAssignment_1_1 )
+            // InternalContentAssistCustomizingTestLanguage.g:304:3: rule__Type__SuperTypeAssignment_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__SuperTypeAssignment_1_1();
@@ -896,14 +904,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // InternalContentAssistCustomizingTestLanguage.g:308:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // InternalContentAssistCustomizingTestLanguage.g:313:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:312:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // InternalContentAssistCustomizingTestLanguage.g:313:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // InternalContentAssistCustomizingTestLanguage.g:317:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // InternalContentAssistCustomizingTestLanguage.g:318:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__FQN__Group__0__Impl();
@@ -934,17 +942,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:320:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:325:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:324:1: ( ( RULE_ID ) )
-            // InternalContentAssistCustomizingTestLanguage.g:325:1: ( RULE_ID )
+            // InternalContentAssistCustomizingTestLanguage.g:329:1: ( ( RULE_ID ) )
+            // InternalContentAssistCustomizingTestLanguage.g:330:1: ( RULE_ID )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:325:1: ( RULE_ID )
-            // InternalContentAssistCustomizingTestLanguage.g:326:2: RULE_ID
+            // InternalContentAssistCustomizingTestLanguage.g:330:1: ( RULE_ID )
+            // InternalContentAssistCustomizingTestLanguage.g:331:2: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -971,14 +979,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // InternalContentAssistCustomizingTestLanguage.g:335:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // InternalContentAssistCustomizingTestLanguage.g:340:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:339:1: ( rule__FQN__Group__1__Impl )
-            // InternalContentAssistCustomizingTestLanguage.g:340:2: rule__FQN__Group__1__Impl
+            // InternalContentAssistCustomizingTestLanguage.g:344:1: ( rule__FQN__Group__1__Impl )
+            // InternalContentAssistCustomizingTestLanguage.g:345:2: rule__FQN__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group__1__Impl();
@@ -1004,20 +1012,20 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:346:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:351:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:350:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // InternalContentAssistCustomizingTestLanguage.g:351:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalContentAssistCustomizingTestLanguage.g:355:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // InternalContentAssistCustomizingTestLanguage.g:356:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:351:1: ( ( rule__FQN__Group_1__0 )* )
-            // InternalContentAssistCustomizingTestLanguage.g:352:2: ( rule__FQN__Group_1__0 )*
+            // InternalContentAssistCustomizingTestLanguage.g:356:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalContentAssistCustomizingTestLanguage.g:357:2: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // InternalContentAssistCustomizingTestLanguage.g:353:2: ( rule__FQN__Group_1__0 )*
+            // InternalContentAssistCustomizingTestLanguage.g:358:2: ( rule__FQN__Group_1__0 )*
             loop4:
             do {
                 int alt4=2;
@@ -1030,7 +1038,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalContentAssistCustomizingTestLanguage.g:353:3: rule__FQN__Group_1__0
+            	    // InternalContentAssistCustomizingTestLanguage.g:358:3: rule__FQN__Group_1__0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_7);
             	    rule__FQN__Group_1__0();
@@ -1069,14 +1077,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // InternalContentAssistCustomizingTestLanguage.g:362:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // InternalContentAssistCustomizingTestLanguage.g:367:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:366:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // InternalContentAssistCustomizingTestLanguage.g:367:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // InternalContentAssistCustomizingTestLanguage.g:371:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // InternalContentAssistCustomizingTestLanguage.g:372:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__FQN__Group_1__0__Impl();
@@ -1107,17 +1115,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:374:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:379:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:378:1: ( ( '.' ) )
-            // InternalContentAssistCustomizingTestLanguage.g:379:1: ( '.' )
+            // InternalContentAssistCustomizingTestLanguage.g:383:1: ( ( '.' ) )
+            // InternalContentAssistCustomizingTestLanguage.g:384:1: ( '.' )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:379:1: ( '.' )
-            // InternalContentAssistCustomizingTestLanguage.g:380:2: '.'
+            // InternalContentAssistCustomizingTestLanguage.g:384:1: ( '.' )
+            // InternalContentAssistCustomizingTestLanguage.g:385:2: '.'
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -1144,14 +1152,14 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // InternalContentAssistCustomizingTestLanguage.g:389:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // InternalContentAssistCustomizingTestLanguage.g:394:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:393:1: ( rule__FQN__Group_1__1__Impl )
-            // InternalContentAssistCustomizingTestLanguage.g:394:2: rule__FQN__Group_1__1__Impl
+            // InternalContentAssistCustomizingTestLanguage.g:398:1: ( rule__FQN__Group_1__1__Impl )
+            // InternalContentAssistCustomizingTestLanguage.g:399:2: rule__FQN__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group_1__1__Impl();
@@ -1177,17 +1185,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // InternalContentAssistCustomizingTestLanguage.g:400:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:405:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:404:1: ( ( RULE_ID ) )
-            // InternalContentAssistCustomizingTestLanguage.g:405:1: ( RULE_ID )
+            // InternalContentAssistCustomizingTestLanguage.g:409:1: ( ( RULE_ID ) )
+            // InternalContentAssistCustomizingTestLanguage.g:410:1: ( RULE_ID )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:405:1: ( RULE_ID )
-            // InternalContentAssistCustomizingTestLanguage.g:406:2: RULE_ID
+            // InternalContentAssistCustomizingTestLanguage.g:410:1: ( RULE_ID )
+            // InternalContentAssistCustomizingTestLanguage.g:411:2: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1214,17 +1222,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Model__TypesAssignment"
-    // InternalContentAssistCustomizingTestLanguage.g:416:1: rule__Model__TypesAssignment : ( ruleType ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:421:1: rule__Model__TypesAssignment : ( ruleType ) ;
     public final void rule__Model__TypesAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:420:1: ( ( ruleType ) )
-            // InternalContentAssistCustomizingTestLanguage.g:421:2: ( ruleType )
+            // InternalContentAssistCustomizingTestLanguage.g:425:1: ( ( ruleType ) )
+            // InternalContentAssistCustomizingTestLanguage.g:426:2: ( ruleType )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:421:2: ( ruleType )
-            // InternalContentAssistCustomizingTestLanguage.g:422:3: ruleType
+            // InternalContentAssistCustomizingTestLanguage.g:426:2: ( ruleType )
+            // InternalContentAssistCustomizingTestLanguage.g:427:3: ruleType
             {
              before(grammarAccess.getModelAccess().getTypesTypeParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1255,17 +1263,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__NameAssignment_0_0"
-    // InternalContentAssistCustomizingTestLanguage.g:431:1: rule__Type__NameAssignment_0_0 : ( ruleFQN ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:436:1: rule__Type__NameAssignment_0_0 : ( ruleFQN ) ;
     public final void rule__Type__NameAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:435:1: ( ( ruleFQN ) )
-            // InternalContentAssistCustomizingTestLanguage.g:436:2: ( ruleFQN )
+            // InternalContentAssistCustomizingTestLanguage.g:440:1: ( ( ruleFQN ) )
+            // InternalContentAssistCustomizingTestLanguage.g:441:2: ( ruleFQN )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:436:2: ( ruleFQN )
-            // InternalContentAssistCustomizingTestLanguage.g:437:3: ruleFQN
+            // InternalContentAssistCustomizingTestLanguage.g:441:2: ( ruleFQN )
+            // InternalContentAssistCustomizingTestLanguage.g:442:3: ruleFQN
             {
              before(grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1296,21 +1304,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__NameAssignment_0_1"
-    // InternalContentAssistCustomizingTestLanguage.g:446:1: rule__Type__NameAssignment_0_1 : ( ( 'FQN' ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:451:1: rule__Type__NameAssignment_0_1 : ( ( 'FQN' ) ) ;
     public final void rule__Type__NameAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:450:1: ( ( ( 'FQN' ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:451:2: ( ( 'FQN' ) )
+            // InternalContentAssistCustomizingTestLanguage.g:455:1: ( ( ( 'FQN' ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:456:2: ( ( 'FQN' ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:451:2: ( ( 'FQN' ) )
-            // InternalContentAssistCustomizingTestLanguage.g:452:3: ( 'FQN' )
+            // InternalContentAssistCustomizingTestLanguage.g:456:2: ( ( 'FQN' ) )
+            // InternalContentAssistCustomizingTestLanguage.g:457:3: ( 'FQN' )
             {
              before(grammarAccess.getTypeAccess().getNameFQNKeyword_0_1_0()); 
-            // InternalContentAssistCustomizingTestLanguage.g:453:3: ( 'FQN' )
-            // InternalContentAssistCustomizingTestLanguage.g:454:4: 'FQN'
+            // InternalContentAssistCustomizingTestLanguage.g:458:3: ( 'FQN' )
+            // InternalContentAssistCustomizingTestLanguage.g:459:4: 'FQN'
             {
              before(grammarAccess.getTypeAccess().getNameFQNKeyword_0_1_0()); 
             match(input,14,FollowSets000.FOLLOW_2); 
@@ -1341,17 +1349,17 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__Type__SuperTypeAssignment_1_1"
-    // InternalContentAssistCustomizingTestLanguage.g:465:1: rule__Type__SuperTypeAssignment_1_1 : ( ruleTypeRef ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:470:1: rule__Type__SuperTypeAssignment_1_1 : ( ruleTypeRef ) ;
     public final void rule__Type__SuperTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:469:1: ( ( ruleTypeRef ) )
-            // InternalContentAssistCustomizingTestLanguage.g:470:2: ( ruleTypeRef )
+            // InternalContentAssistCustomizingTestLanguage.g:474:1: ( ( ruleTypeRef ) )
+            // InternalContentAssistCustomizingTestLanguage.g:475:2: ( ruleTypeRef )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:470:2: ( ruleTypeRef )
-            // InternalContentAssistCustomizingTestLanguage.g:471:3: ruleTypeRef
+            // InternalContentAssistCustomizingTestLanguage.g:475:2: ( ruleTypeRef )
+            // InternalContentAssistCustomizingTestLanguage.g:476:3: ruleTypeRef
             {
              before(grammarAccess.getTypeAccess().getSuperTypeTypeRefParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1382,21 +1390,21 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start "rule__TypeRef__TypeAssignment"
-    // InternalContentAssistCustomizingTestLanguage.g:480:1: rule__TypeRef__TypeAssignment : ( ( ruleFQN ) ) ;
+    // InternalContentAssistCustomizingTestLanguage.g:485:1: rule__TypeRef__TypeAssignment : ( ( ruleFQN ) ) ;
     public final void rule__TypeRef__TypeAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalContentAssistCustomizingTestLanguage.g:484:1: ( ( ( ruleFQN ) ) )
-            // InternalContentAssistCustomizingTestLanguage.g:485:2: ( ( ruleFQN ) )
+            // InternalContentAssistCustomizingTestLanguage.g:489:1: ( ( ( ruleFQN ) ) )
+            // InternalContentAssistCustomizingTestLanguage.g:490:2: ( ( ruleFQN ) )
             {
-            // InternalContentAssistCustomizingTestLanguage.g:485:2: ( ( ruleFQN ) )
-            // InternalContentAssistCustomizingTestLanguage.g:486:3: ( ruleFQN )
+            // InternalContentAssistCustomizingTestLanguage.g:490:2: ( ( ruleFQN ) )
+            // InternalContentAssistCustomizingTestLanguage.g:491:3: ( ruleFQN )
             {
              before(grammarAccess.getTypeRefAccess().getTypeTypeCrossReference_0()); 
-            // InternalContentAssistCustomizingTestLanguage.g:487:3: ( ruleFQN )
-            // InternalContentAssistCustomizingTestLanguage.g:488:4: ruleFQN
+            // InternalContentAssistCustomizingTestLanguage.g:492:3: ( ruleFQN )
+            // InternalContentAssistCustomizingTestLanguage.g:493:4: ruleFQN
             {
              before(grammarAccess.getTypeRefAccess().getTypeTypeFQNParserRuleCall_0_1()); 
             pushFollow(FollowSets000.FOLLOW_2);

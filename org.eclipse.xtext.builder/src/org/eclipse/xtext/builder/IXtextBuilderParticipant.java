@@ -100,8 +100,21 @@ public interface IXtextBuilderParticipant {
 		/**
 		 * Request a rebuild after the this build run. It is necessary to call {@link #needRebuild()} if this
 		 * participant generates file that need to be compiled or processed by another builder.
+		 * 
+		 * @deprecated call {@link #needRebuild(IProject)}
 		 */
+		@Deprecated
 		void needRebuild();
+		
+		/**
+		 * Request a rebuild after the this build run. It is necessary to call {@link #needRebuild(IProject)} if this
+		 * participant generates file that need to be compiled or processed by another builder.
+		 * 
+		 * @param project the project to be rebuilt
+		 */
+		default void needRebuild(IProject project) {
+			needRebuild();
+		}
 	}
 	
 	public static enum BuildType {

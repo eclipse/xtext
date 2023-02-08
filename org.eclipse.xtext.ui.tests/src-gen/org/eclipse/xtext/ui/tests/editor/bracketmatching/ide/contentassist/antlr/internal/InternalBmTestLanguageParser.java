@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBmTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -75,11 +83,11 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "entryRuleFile"
-    // InternalBmTestLanguage.g:53:1: entryRuleFile : ruleFile EOF ;
+    // InternalBmTestLanguage.g:58:1: entryRuleFile : ruleFile EOF ;
     public final void entryRuleFile() throws RecognitionException {
         try {
-            // InternalBmTestLanguage.g:54:1: ( ruleFile EOF )
-            // InternalBmTestLanguage.g:55:1: ruleFile EOF
+            // InternalBmTestLanguage.g:59:1: ( ruleFile EOF )
+            // InternalBmTestLanguage.g:60:1: ruleFile EOF
             {
              before(grammarAccess.getFileRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -105,20 +113,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "ruleFile"
-    // InternalBmTestLanguage.g:62:1: ruleFile : ( ( rule__File__ExpressionAssignment )* ) ;
+    // InternalBmTestLanguage.g:67:1: ruleFile : ( ( rule__File__ExpressionAssignment )* ) ;
     public final void ruleFile() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:66:2: ( ( ( rule__File__ExpressionAssignment )* ) )
-            // InternalBmTestLanguage.g:67:2: ( ( rule__File__ExpressionAssignment )* )
+            // InternalBmTestLanguage.g:71:2: ( ( ( rule__File__ExpressionAssignment )* ) )
+            // InternalBmTestLanguage.g:72:2: ( ( rule__File__ExpressionAssignment )* )
             {
-            // InternalBmTestLanguage.g:67:2: ( ( rule__File__ExpressionAssignment )* )
-            // InternalBmTestLanguage.g:68:3: ( rule__File__ExpressionAssignment )*
+            // InternalBmTestLanguage.g:72:2: ( ( rule__File__ExpressionAssignment )* )
+            // InternalBmTestLanguage.g:73:3: ( rule__File__ExpressionAssignment )*
             {
              before(grammarAccess.getFileAccess().getExpressionAssignment()); 
-            // InternalBmTestLanguage.g:69:3: ( rule__File__ExpressionAssignment )*
+            // InternalBmTestLanguage.g:74:3: ( rule__File__ExpressionAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -131,7 +139,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:69:4: rule__File__ExpressionAssignment
+            	    // InternalBmTestLanguage.g:74:4: rule__File__ExpressionAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__File__ExpressionAssignment();
@@ -170,11 +178,11 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "entryRuleExpression"
-    // InternalBmTestLanguage.g:78:1: entryRuleExpression : ruleExpression EOF ;
+    // InternalBmTestLanguage.g:83:1: entryRuleExpression : ruleExpression EOF ;
     public final void entryRuleExpression() throws RecognitionException {
         try {
-            // InternalBmTestLanguage.g:79:1: ( ruleExpression EOF )
-            // InternalBmTestLanguage.g:80:1: ruleExpression EOF
+            // InternalBmTestLanguage.g:84:1: ( ruleExpression EOF )
+            // InternalBmTestLanguage.g:85:1: ruleExpression EOF
             {
              before(grammarAccess.getExpressionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -200,21 +208,21 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "ruleExpression"
-    // InternalBmTestLanguage.g:87:1: ruleExpression : ( ( rule__Expression__Alternatives ) ) ;
+    // InternalBmTestLanguage.g:92:1: ruleExpression : ( ( rule__Expression__Alternatives ) ) ;
     public final void ruleExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:91:2: ( ( ( rule__Expression__Alternatives ) ) )
-            // InternalBmTestLanguage.g:92:2: ( ( rule__Expression__Alternatives ) )
+            // InternalBmTestLanguage.g:96:2: ( ( ( rule__Expression__Alternatives ) ) )
+            // InternalBmTestLanguage.g:97:2: ( ( rule__Expression__Alternatives ) )
             {
-            // InternalBmTestLanguage.g:92:2: ( ( rule__Expression__Alternatives ) )
-            // InternalBmTestLanguage.g:93:3: ( rule__Expression__Alternatives )
+            // InternalBmTestLanguage.g:97:2: ( ( rule__Expression__Alternatives ) )
+            // InternalBmTestLanguage.g:98:3: ( rule__Expression__Alternatives )
             {
              before(grammarAccess.getExpressionAccess().getAlternatives()); 
-            // InternalBmTestLanguage.g:94:3: ( rule__Expression__Alternatives )
-            // InternalBmTestLanguage.g:94:4: rule__Expression__Alternatives
+            // InternalBmTestLanguage.g:99:3: ( rule__Expression__Alternatives )
+            // InternalBmTestLanguage.g:99:4: rule__Expression__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Expression__Alternatives();
@@ -247,11 +255,11 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "entryRuleSExpression"
-    // InternalBmTestLanguage.g:103:1: entryRuleSExpression : ruleSExpression EOF ;
+    // InternalBmTestLanguage.g:108:1: entryRuleSExpression : ruleSExpression EOF ;
     public final void entryRuleSExpression() throws RecognitionException {
         try {
-            // InternalBmTestLanguage.g:104:1: ( ruleSExpression EOF )
-            // InternalBmTestLanguage.g:105:1: ruleSExpression EOF
+            // InternalBmTestLanguage.g:109:1: ( ruleSExpression EOF )
+            // InternalBmTestLanguage.g:110:1: ruleSExpression EOF
             {
              before(grammarAccess.getSExpressionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -277,21 +285,21 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "ruleSExpression"
-    // InternalBmTestLanguage.g:112:1: ruleSExpression : ( ( rule__SExpression__Group__0 ) ) ;
+    // InternalBmTestLanguage.g:117:1: ruleSExpression : ( ( rule__SExpression__Group__0 ) ) ;
     public final void ruleSExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:116:2: ( ( ( rule__SExpression__Group__0 ) ) )
-            // InternalBmTestLanguage.g:117:2: ( ( rule__SExpression__Group__0 ) )
+            // InternalBmTestLanguage.g:121:2: ( ( ( rule__SExpression__Group__0 ) ) )
+            // InternalBmTestLanguage.g:122:2: ( ( rule__SExpression__Group__0 ) )
             {
-            // InternalBmTestLanguage.g:117:2: ( ( rule__SExpression__Group__0 ) )
-            // InternalBmTestLanguage.g:118:3: ( rule__SExpression__Group__0 )
+            // InternalBmTestLanguage.g:122:2: ( ( rule__SExpression__Group__0 ) )
+            // InternalBmTestLanguage.g:123:3: ( rule__SExpression__Group__0 )
             {
              before(grammarAccess.getSExpressionAccess().getGroup()); 
-            // InternalBmTestLanguage.g:119:3: ( rule__SExpression__Group__0 )
-            // InternalBmTestLanguage.g:119:4: rule__SExpression__Group__0
+            // InternalBmTestLanguage.g:124:3: ( rule__SExpression__Group__0 )
+            // InternalBmTestLanguage.g:124:4: rule__SExpression__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__SExpression__Group__0();
@@ -324,11 +332,11 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "entryRuleAtom"
-    // InternalBmTestLanguage.g:128:1: entryRuleAtom : ruleAtom EOF ;
+    // InternalBmTestLanguage.g:133:1: entryRuleAtom : ruleAtom EOF ;
     public final void entryRuleAtom() throws RecognitionException {
         try {
-            // InternalBmTestLanguage.g:129:1: ( ruleAtom EOF )
-            // InternalBmTestLanguage.g:130:1: ruleAtom EOF
+            // InternalBmTestLanguage.g:134:1: ( ruleAtom EOF )
+            // InternalBmTestLanguage.g:135:1: ruleAtom EOF
             {
              before(grammarAccess.getAtomRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -354,21 +362,21 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "ruleAtom"
-    // InternalBmTestLanguage.g:137:1: ruleAtom : ( ( rule__Atom__ValueAssignment ) ) ;
+    // InternalBmTestLanguage.g:142:1: ruleAtom : ( ( rule__Atom__ValueAssignment ) ) ;
     public final void ruleAtom() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:141:2: ( ( ( rule__Atom__ValueAssignment ) ) )
-            // InternalBmTestLanguage.g:142:2: ( ( rule__Atom__ValueAssignment ) )
+            // InternalBmTestLanguage.g:146:2: ( ( ( rule__Atom__ValueAssignment ) ) )
+            // InternalBmTestLanguage.g:147:2: ( ( rule__Atom__ValueAssignment ) )
             {
-            // InternalBmTestLanguage.g:142:2: ( ( rule__Atom__ValueAssignment ) )
-            // InternalBmTestLanguage.g:143:3: ( rule__Atom__ValueAssignment )
+            // InternalBmTestLanguage.g:147:2: ( ( rule__Atom__ValueAssignment ) )
+            // InternalBmTestLanguage.g:148:3: ( rule__Atom__ValueAssignment )
             {
              before(grammarAccess.getAtomAccess().getValueAssignment()); 
-            // InternalBmTestLanguage.g:144:3: ( rule__Atom__ValueAssignment )
-            // InternalBmTestLanguage.g:144:4: rule__Atom__ValueAssignment
+            // InternalBmTestLanguage.g:149:3: ( rule__Atom__ValueAssignment )
+            // InternalBmTestLanguage.g:149:4: rule__Atom__ValueAssignment
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Atom__ValueAssignment();
@@ -401,11 +409,11 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "entryRuleVALUE"
-    // InternalBmTestLanguage.g:153:1: entryRuleVALUE : ruleVALUE EOF ;
+    // InternalBmTestLanguage.g:158:1: entryRuleVALUE : ruleVALUE EOF ;
     public final void entryRuleVALUE() throws RecognitionException {
         try {
-            // InternalBmTestLanguage.g:154:1: ( ruleVALUE EOF )
-            // InternalBmTestLanguage.g:155:1: ruleVALUE EOF
+            // InternalBmTestLanguage.g:159:1: ( ruleVALUE EOF )
+            // InternalBmTestLanguage.g:160:1: ruleVALUE EOF
             {
              before(grammarAccess.getVALUERule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -431,21 +439,21 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "ruleVALUE"
-    // InternalBmTestLanguage.g:162:1: ruleVALUE : ( ( rule__VALUE__Alternatives ) ) ;
+    // InternalBmTestLanguage.g:167:1: ruleVALUE : ( ( rule__VALUE__Alternatives ) ) ;
     public final void ruleVALUE() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:166:2: ( ( ( rule__VALUE__Alternatives ) ) )
-            // InternalBmTestLanguage.g:167:2: ( ( rule__VALUE__Alternatives ) )
+            // InternalBmTestLanguage.g:171:2: ( ( ( rule__VALUE__Alternatives ) ) )
+            // InternalBmTestLanguage.g:172:2: ( ( rule__VALUE__Alternatives ) )
             {
-            // InternalBmTestLanguage.g:167:2: ( ( rule__VALUE__Alternatives ) )
-            // InternalBmTestLanguage.g:168:3: ( rule__VALUE__Alternatives )
+            // InternalBmTestLanguage.g:172:2: ( ( rule__VALUE__Alternatives ) )
+            // InternalBmTestLanguage.g:173:3: ( rule__VALUE__Alternatives )
             {
              before(grammarAccess.getVALUEAccess().getAlternatives()); 
-            // InternalBmTestLanguage.g:169:3: ( rule__VALUE__Alternatives )
-            // InternalBmTestLanguage.g:169:4: rule__VALUE__Alternatives
+            // InternalBmTestLanguage.g:174:3: ( rule__VALUE__Alternatives )
+            // InternalBmTestLanguage.g:174:4: rule__VALUE__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__VALUE__Alternatives();
@@ -478,13 +486,13 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Alternatives"
-    // InternalBmTestLanguage.g:177:1: rule__Expression__Alternatives : ( ( ruleSExpression ) | ( ruleAtom ) | ( ( rule__Expression__Group_2__0 ) ) );
+    // InternalBmTestLanguage.g:182:1: rule__Expression__Alternatives : ( ( ruleSExpression ) | ( ruleAtom ) | ( ( rule__Expression__Group_2__0 ) ) );
     public final void rule__Expression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:181:1: ( ( ruleSExpression ) | ( ruleAtom ) | ( ( rule__Expression__Group_2__0 ) ) )
+            // InternalBmTestLanguage.g:186:1: ( ( ruleSExpression ) | ( ruleAtom ) | ( ( rule__Expression__Group_2__0 ) ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -514,10 +522,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
             switch (alt2) {
                 case 1 :
-                    // InternalBmTestLanguage.g:182:2: ( ruleSExpression )
+                    // InternalBmTestLanguage.g:187:2: ( ruleSExpression )
                     {
-                    // InternalBmTestLanguage.g:182:2: ( ruleSExpression )
-                    // InternalBmTestLanguage.g:183:3: ruleSExpression
+                    // InternalBmTestLanguage.g:187:2: ( ruleSExpression )
+                    // InternalBmTestLanguage.g:188:3: ruleSExpression
                     {
                      before(grammarAccess.getExpressionAccess().getSExpressionParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -533,10 +541,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:188:2: ( ruleAtom )
+                    // InternalBmTestLanguage.g:193:2: ( ruleAtom )
                     {
-                    // InternalBmTestLanguage.g:188:2: ( ruleAtom )
-                    // InternalBmTestLanguage.g:189:3: ruleAtom
+                    // InternalBmTestLanguage.g:193:2: ( ruleAtom )
+                    // InternalBmTestLanguage.g:194:3: ruleAtom
                     {
                      before(grammarAccess.getExpressionAccess().getAtomParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -552,14 +560,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 3 :
-                    // InternalBmTestLanguage.g:194:2: ( ( rule__Expression__Group_2__0 ) )
+                    // InternalBmTestLanguage.g:199:2: ( ( rule__Expression__Group_2__0 ) )
                     {
-                    // InternalBmTestLanguage.g:194:2: ( ( rule__Expression__Group_2__0 ) )
-                    // InternalBmTestLanguage.g:195:3: ( rule__Expression__Group_2__0 )
+                    // InternalBmTestLanguage.g:199:2: ( ( rule__Expression__Group_2__0 ) )
+                    // InternalBmTestLanguage.g:200:3: ( rule__Expression__Group_2__0 )
                     {
                      before(grammarAccess.getExpressionAccess().getGroup_2()); 
-                    // InternalBmTestLanguage.g:196:3: ( rule__Expression__Group_2__0 )
-                    // InternalBmTestLanguage.g:196:4: rule__Expression__Group_2__0
+                    // InternalBmTestLanguage.g:201:3: ( rule__Expression__Group_2__0 )
+                    // InternalBmTestLanguage.g:201:4: rule__Expression__Group_2__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Expression__Group_2__0();
@@ -594,13 +602,13 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Alternatives_1"
-    // InternalBmTestLanguage.g:204:1: rule__SExpression__Alternatives_1 : ( ( ( rule__SExpression__Group_1_0__0 ) ) | ( ( rule__SExpression__Group_1_1__0 ) ) );
+    // InternalBmTestLanguage.g:209:1: rule__SExpression__Alternatives_1 : ( ( ( rule__SExpression__Group_1_0__0 ) ) | ( ( rule__SExpression__Group_1_1__0 ) ) );
     public final void rule__SExpression__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:208:1: ( ( ( rule__SExpression__Group_1_0__0 ) ) | ( ( rule__SExpression__Group_1_1__0 ) ) )
+            // InternalBmTestLanguage.g:213:1: ( ( ( rule__SExpression__Group_1_0__0 ) ) | ( ( rule__SExpression__Group_1_1__0 ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -618,14 +626,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             }
             switch (alt3) {
                 case 1 :
-                    // InternalBmTestLanguage.g:209:2: ( ( rule__SExpression__Group_1_0__0 ) )
+                    // InternalBmTestLanguage.g:214:2: ( ( rule__SExpression__Group_1_0__0 ) )
                     {
-                    // InternalBmTestLanguage.g:209:2: ( ( rule__SExpression__Group_1_0__0 ) )
-                    // InternalBmTestLanguage.g:210:3: ( rule__SExpression__Group_1_0__0 )
+                    // InternalBmTestLanguage.g:214:2: ( ( rule__SExpression__Group_1_0__0 ) )
+                    // InternalBmTestLanguage.g:215:3: ( rule__SExpression__Group_1_0__0 )
                     {
                      before(grammarAccess.getSExpressionAccess().getGroup_1_0()); 
-                    // InternalBmTestLanguage.g:211:3: ( rule__SExpression__Group_1_0__0 )
-                    // InternalBmTestLanguage.g:211:4: rule__SExpression__Group_1_0__0
+                    // InternalBmTestLanguage.g:216:3: ( rule__SExpression__Group_1_0__0 )
+                    // InternalBmTestLanguage.g:216:4: rule__SExpression__Group_1_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__SExpression__Group_1_0__0();
@@ -643,14 +651,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:215:2: ( ( rule__SExpression__Group_1_1__0 ) )
+                    // InternalBmTestLanguage.g:220:2: ( ( rule__SExpression__Group_1_1__0 ) )
                     {
-                    // InternalBmTestLanguage.g:215:2: ( ( rule__SExpression__Group_1_1__0 ) )
-                    // InternalBmTestLanguage.g:216:3: ( rule__SExpression__Group_1_1__0 )
+                    // InternalBmTestLanguage.g:220:2: ( ( rule__SExpression__Group_1_1__0 ) )
+                    // InternalBmTestLanguage.g:221:3: ( rule__SExpression__Group_1_1__0 )
                     {
                      before(grammarAccess.getSExpressionAccess().getGroup_1_1()); 
-                    // InternalBmTestLanguage.g:217:3: ( rule__SExpression__Group_1_1__0 )
-                    // InternalBmTestLanguage.g:217:4: rule__SExpression__Group_1_1__0
+                    // InternalBmTestLanguage.g:222:3: ( rule__SExpression__Group_1_1__0 )
+                    // InternalBmTestLanguage.g:222:4: rule__SExpression__Group_1_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__SExpression__Group_1_1__0();
@@ -685,13 +693,13 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__VALUE__Alternatives"
-    // InternalBmTestLanguage.g:225:1: rule__VALUE__Alternatives : ( ( RULE_ID ) | ( RULE_INT ) | ( RULE_STRING ) );
+    // InternalBmTestLanguage.g:230:1: rule__VALUE__Alternatives : ( ( RULE_ID ) | ( RULE_INT ) | ( RULE_STRING ) );
     public final void rule__VALUE__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:229:1: ( ( RULE_ID ) | ( RULE_INT ) | ( RULE_STRING ) )
+            // InternalBmTestLanguage.g:234:1: ( ( RULE_ID ) | ( RULE_INT ) | ( RULE_STRING ) )
             int alt4=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -718,10 +726,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
             switch (alt4) {
                 case 1 :
-                    // InternalBmTestLanguage.g:230:2: ( RULE_ID )
+                    // InternalBmTestLanguage.g:235:2: ( RULE_ID )
                     {
-                    // InternalBmTestLanguage.g:230:2: ( RULE_ID )
-                    // InternalBmTestLanguage.g:231:3: RULE_ID
+                    // InternalBmTestLanguage.g:235:2: ( RULE_ID )
+                    // InternalBmTestLanguage.g:236:3: RULE_ID
                     {
                      before(grammarAccess.getVALUEAccess().getIDTerminalRuleCall_0()); 
                     match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -733,10 +741,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:236:2: ( RULE_INT )
+                    // InternalBmTestLanguage.g:241:2: ( RULE_INT )
                     {
-                    // InternalBmTestLanguage.g:236:2: ( RULE_INT )
-                    // InternalBmTestLanguage.g:237:3: RULE_INT
+                    // InternalBmTestLanguage.g:241:2: ( RULE_INT )
+                    // InternalBmTestLanguage.g:242:3: RULE_INT
                     {
                      before(grammarAccess.getVALUEAccess().getINTTerminalRuleCall_1()); 
                     match(input,RULE_INT,FollowSets000.FOLLOW_2); 
@@ -748,10 +756,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     }
                     break;
                 case 3 :
-                    // InternalBmTestLanguage.g:242:2: ( RULE_STRING )
+                    // InternalBmTestLanguage.g:247:2: ( RULE_STRING )
                     {
-                    // InternalBmTestLanguage.g:242:2: ( RULE_STRING )
-                    // InternalBmTestLanguage.g:243:3: RULE_STRING
+                    // InternalBmTestLanguage.g:247:2: ( RULE_STRING )
+                    // InternalBmTestLanguage.g:248:3: RULE_STRING
                     {
                      before(grammarAccess.getVALUEAccess().getSTRINGTerminalRuleCall_2()); 
                     match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
@@ -780,14 +788,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Group_2__0"
-    // InternalBmTestLanguage.g:252:1: rule__Expression__Group_2__0 : rule__Expression__Group_2__0__Impl rule__Expression__Group_2__1 ;
+    // InternalBmTestLanguage.g:257:1: rule__Expression__Group_2__0 : rule__Expression__Group_2__0__Impl rule__Expression__Group_2__1 ;
     public final void rule__Expression__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:256:1: ( rule__Expression__Group_2__0__Impl rule__Expression__Group_2__1 )
-            // InternalBmTestLanguage.g:257:2: rule__Expression__Group_2__0__Impl rule__Expression__Group_2__1
+            // InternalBmTestLanguage.g:261:1: ( rule__Expression__Group_2__0__Impl rule__Expression__Group_2__1 )
+            // InternalBmTestLanguage.g:262:2: rule__Expression__Group_2__0__Impl rule__Expression__Group_2__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Expression__Group_2__0__Impl();
@@ -818,17 +826,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Group_2__0__Impl"
-    // InternalBmTestLanguage.g:264:1: rule__Expression__Group_2__0__Impl : ( '[' ) ;
+    // InternalBmTestLanguage.g:269:1: rule__Expression__Group_2__0__Impl : ( '[' ) ;
     public final void rule__Expression__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:268:1: ( ( '[' ) )
-            // InternalBmTestLanguage.g:269:1: ( '[' )
+            // InternalBmTestLanguage.g:273:1: ( ( '[' ) )
+            // InternalBmTestLanguage.g:274:1: ( '[' )
             {
-            // InternalBmTestLanguage.g:269:1: ( '[' )
-            // InternalBmTestLanguage.g:270:2: '['
+            // InternalBmTestLanguage.g:274:1: ( '[' )
+            // InternalBmTestLanguage.g:275:2: '['
             {
              before(grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -855,14 +863,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Group_2__1"
-    // InternalBmTestLanguage.g:279:1: rule__Expression__Group_2__1 : rule__Expression__Group_2__1__Impl rule__Expression__Group_2__2 ;
+    // InternalBmTestLanguage.g:284:1: rule__Expression__Group_2__1 : rule__Expression__Group_2__1__Impl rule__Expression__Group_2__2 ;
     public final void rule__Expression__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:283:1: ( rule__Expression__Group_2__1__Impl rule__Expression__Group_2__2 )
-            // InternalBmTestLanguage.g:284:2: rule__Expression__Group_2__1__Impl rule__Expression__Group_2__2
+            // InternalBmTestLanguage.g:288:1: ( rule__Expression__Group_2__1__Impl rule__Expression__Group_2__2 )
+            // InternalBmTestLanguage.g:289:2: rule__Expression__Group_2__1__Impl rule__Expression__Group_2__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Expression__Group_2__1__Impl();
@@ -893,17 +901,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Group_2__1__Impl"
-    // InternalBmTestLanguage.g:291:1: rule__Expression__Group_2__1__Impl : ( ruleExpression ) ;
+    // InternalBmTestLanguage.g:296:1: rule__Expression__Group_2__1__Impl : ( ruleExpression ) ;
     public final void rule__Expression__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:295:1: ( ( ruleExpression ) )
-            // InternalBmTestLanguage.g:296:1: ( ruleExpression )
+            // InternalBmTestLanguage.g:300:1: ( ( ruleExpression ) )
+            // InternalBmTestLanguage.g:301:1: ( ruleExpression )
             {
-            // InternalBmTestLanguage.g:296:1: ( ruleExpression )
-            // InternalBmTestLanguage.g:297:2: ruleExpression
+            // InternalBmTestLanguage.g:301:1: ( ruleExpression )
+            // InternalBmTestLanguage.g:302:2: ruleExpression
             {
              before(grammarAccess.getExpressionAccess().getExpressionParserRuleCall_2_1()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -934,14 +942,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Group_2__2"
-    // InternalBmTestLanguage.g:306:1: rule__Expression__Group_2__2 : rule__Expression__Group_2__2__Impl ;
+    // InternalBmTestLanguage.g:311:1: rule__Expression__Group_2__2 : rule__Expression__Group_2__2__Impl ;
     public final void rule__Expression__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:310:1: ( rule__Expression__Group_2__2__Impl )
-            // InternalBmTestLanguage.g:311:2: rule__Expression__Group_2__2__Impl
+            // InternalBmTestLanguage.g:315:1: ( rule__Expression__Group_2__2__Impl )
+            // InternalBmTestLanguage.g:316:2: rule__Expression__Group_2__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Expression__Group_2__2__Impl();
@@ -967,17 +975,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Expression__Group_2__2__Impl"
-    // InternalBmTestLanguage.g:317:1: rule__Expression__Group_2__2__Impl : ( ']' ) ;
+    // InternalBmTestLanguage.g:322:1: rule__Expression__Group_2__2__Impl : ( ']' ) ;
     public final void rule__Expression__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:321:1: ( ( ']' ) )
-            // InternalBmTestLanguage.g:322:1: ( ']' )
+            // InternalBmTestLanguage.g:326:1: ( ( ']' ) )
+            // InternalBmTestLanguage.g:327:1: ( ']' )
             {
-            // InternalBmTestLanguage.g:322:1: ( ']' )
-            // InternalBmTestLanguage.g:323:2: ']'
+            // InternalBmTestLanguage.g:327:1: ( ']' )
+            // InternalBmTestLanguage.g:328:2: ']'
             {
              before(grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -1004,14 +1012,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group__0"
-    // InternalBmTestLanguage.g:333:1: rule__SExpression__Group__0 : rule__SExpression__Group__0__Impl rule__SExpression__Group__1 ;
+    // InternalBmTestLanguage.g:338:1: rule__SExpression__Group__0 : rule__SExpression__Group__0__Impl rule__SExpression__Group__1 ;
     public final void rule__SExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:337:1: ( rule__SExpression__Group__0__Impl rule__SExpression__Group__1 )
-            // InternalBmTestLanguage.g:338:2: rule__SExpression__Group__0__Impl rule__SExpression__Group__1
+            // InternalBmTestLanguage.g:342:1: ( rule__SExpression__Group__0__Impl rule__SExpression__Group__1 )
+            // InternalBmTestLanguage.g:343:2: rule__SExpression__Group__0__Impl rule__SExpression__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__SExpression__Group__0__Impl();
@@ -1042,21 +1050,21 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group__0__Impl"
-    // InternalBmTestLanguage.g:345:1: rule__SExpression__Group__0__Impl : ( () ) ;
+    // InternalBmTestLanguage.g:350:1: rule__SExpression__Group__0__Impl : ( () ) ;
     public final void rule__SExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:349:1: ( ( () ) )
-            // InternalBmTestLanguage.g:350:1: ( () )
+            // InternalBmTestLanguage.g:354:1: ( ( () ) )
+            // InternalBmTestLanguage.g:355:1: ( () )
             {
-            // InternalBmTestLanguage.g:350:1: ( () )
-            // InternalBmTestLanguage.g:351:2: ()
+            // InternalBmTestLanguage.g:355:1: ( () )
+            // InternalBmTestLanguage.g:356:2: ()
             {
              before(grammarAccess.getSExpressionAccess().getSExpressionAction_0()); 
-            // InternalBmTestLanguage.g:352:2: ()
-            // InternalBmTestLanguage.g:352:3: 
+            // InternalBmTestLanguage.g:357:2: ()
+            // InternalBmTestLanguage.g:357:3: 
             {
             }
 
@@ -1079,14 +1087,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group__1"
-    // InternalBmTestLanguage.g:360:1: rule__SExpression__Group__1 : rule__SExpression__Group__1__Impl ;
+    // InternalBmTestLanguage.g:365:1: rule__SExpression__Group__1 : rule__SExpression__Group__1__Impl ;
     public final void rule__SExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:364:1: ( rule__SExpression__Group__1__Impl )
-            // InternalBmTestLanguage.g:365:2: rule__SExpression__Group__1__Impl
+            // InternalBmTestLanguage.g:369:1: ( rule__SExpression__Group__1__Impl )
+            // InternalBmTestLanguage.g:370:2: rule__SExpression__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__SExpression__Group__1__Impl();
@@ -1112,21 +1120,21 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group__1__Impl"
-    // InternalBmTestLanguage.g:371:1: rule__SExpression__Group__1__Impl : ( ( rule__SExpression__Alternatives_1 ) ) ;
+    // InternalBmTestLanguage.g:376:1: rule__SExpression__Group__1__Impl : ( ( rule__SExpression__Alternatives_1 ) ) ;
     public final void rule__SExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:375:1: ( ( ( rule__SExpression__Alternatives_1 ) ) )
-            // InternalBmTestLanguage.g:376:1: ( ( rule__SExpression__Alternatives_1 ) )
+            // InternalBmTestLanguage.g:380:1: ( ( ( rule__SExpression__Alternatives_1 ) ) )
+            // InternalBmTestLanguage.g:381:1: ( ( rule__SExpression__Alternatives_1 ) )
             {
-            // InternalBmTestLanguage.g:376:1: ( ( rule__SExpression__Alternatives_1 ) )
-            // InternalBmTestLanguage.g:377:2: ( rule__SExpression__Alternatives_1 )
+            // InternalBmTestLanguage.g:381:1: ( ( rule__SExpression__Alternatives_1 ) )
+            // InternalBmTestLanguage.g:382:2: ( rule__SExpression__Alternatives_1 )
             {
              before(grammarAccess.getSExpressionAccess().getAlternatives_1()); 
-            // InternalBmTestLanguage.g:378:2: ( rule__SExpression__Alternatives_1 )
-            // InternalBmTestLanguage.g:378:3: rule__SExpression__Alternatives_1
+            // InternalBmTestLanguage.g:383:2: ( rule__SExpression__Alternatives_1 )
+            // InternalBmTestLanguage.g:383:3: rule__SExpression__Alternatives_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__SExpression__Alternatives_1();
@@ -1159,14 +1167,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_0__0"
-    // InternalBmTestLanguage.g:387:1: rule__SExpression__Group_1_0__0 : rule__SExpression__Group_1_0__0__Impl rule__SExpression__Group_1_0__1 ;
+    // InternalBmTestLanguage.g:392:1: rule__SExpression__Group_1_0__0 : rule__SExpression__Group_1_0__0__Impl rule__SExpression__Group_1_0__1 ;
     public final void rule__SExpression__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:391:1: ( rule__SExpression__Group_1_0__0__Impl rule__SExpression__Group_1_0__1 )
-            // InternalBmTestLanguage.g:392:2: rule__SExpression__Group_1_0__0__Impl rule__SExpression__Group_1_0__1
+            // InternalBmTestLanguage.g:396:1: ( rule__SExpression__Group_1_0__0__Impl rule__SExpression__Group_1_0__1 )
+            // InternalBmTestLanguage.g:397:2: rule__SExpression__Group_1_0__0__Impl rule__SExpression__Group_1_0__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__SExpression__Group_1_0__0__Impl();
@@ -1197,17 +1205,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_0__0__Impl"
-    // InternalBmTestLanguage.g:399:1: rule__SExpression__Group_1_0__0__Impl : ( '(' ) ;
+    // InternalBmTestLanguage.g:404:1: rule__SExpression__Group_1_0__0__Impl : ( '(' ) ;
     public final void rule__SExpression__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:403:1: ( ( '(' ) )
-            // InternalBmTestLanguage.g:404:1: ( '(' )
+            // InternalBmTestLanguage.g:408:1: ( ( '(' ) )
+            // InternalBmTestLanguage.g:409:1: ( '(' )
             {
-            // InternalBmTestLanguage.g:404:1: ( '(' )
-            // InternalBmTestLanguage.g:405:2: '('
+            // InternalBmTestLanguage.g:409:1: ( '(' )
+            // InternalBmTestLanguage.g:410:2: '('
             {
              before(grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -1234,14 +1242,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_0__1"
-    // InternalBmTestLanguage.g:414:1: rule__SExpression__Group_1_0__1 : rule__SExpression__Group_1_0__1__Impl rule__SExpression__Group_1_0__2 ;
+    // InternalBmTestLanguage.g:419:1: rule__SExpression__Group_1_0__1 : rule__SExpression__Group_1_0__1__Impl rule__SExpression__Group_1_0__2 ;
     public final void rule__SExpression__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:418:1: ( rule__SExpression__Group_1_0__1__Impl rule__SExpression__Group_1_0__2 )
-            // InternalBmTestLanguage.g:419:2: rule__SExpression__Group_1_0__1__Impl rule__SExpression__Group_1_0__2
+            // InternalBmTestLanguage.g:423:1: ( rule__SExpression__Group_1_0__1__Impl rule__SExpression__Group_1_0__2 )
+            // InternalBmTestLanguage.g:424:2: rule__SExpression__Group_1_0__1__Impl rule__SExpression__Group_1_0__2
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__SExpression__Group_1_0__1__Impl();
@@ -1272,20 +1280,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_0__1__Impl"
-    // InternalBmTestLanguage.g:426:1: rule__SExpression__Group_1_0__1__Impl : ( ( rule__SExpression__ElementAssignment_1_0_1 )* ) ;
+    // InternalBmTestLanguage.g:431:1: rule__SExpression__Group_1_0__1__Impl : ( ( rule__SExpression__ElementAssignment_1_0_1 )* ) ;
     public final void rule__SExpression__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:430:1: ( ( ( rule__SExpression__ElementAssignment_1_0_1 )* ) )
-            // InternalBmTestLanguage.g:431:1: ( ( rule__SExpression__ElementAssignment_1_0_1 )* )
+            // InternalBmTestLanguage.g:435:1: ( ( ( rule__SExpression__ElementAssignment_1_0_1 )* ) )
+            // InternalBmTestLanguage.g:436:1: ( ( rule__SExpression__ElementAssignment_1_0_1 )* )
             {
-            // InternalBmTestLanguage.g:431:1: ( ( rule__SExpression__ElementAssignment_1_0_1 )* )
-            // InternalBmTestLanguage.g:432:2: ( rule__SExpression__ElementAssignment_1_0_1 )*
+            // InternalBmTestLanguage.g:436:1: ( ( rule__SExpression__ElementAssignment_1_0_1 )* )
+            // InternalBmTestLanguage.g:437:2: ( rule__SExpression__ElementAssignment_1_0_1 )*
             {
              before(grammarAccess.getSExpressionAccess().getElementAssignment_1_0_1()); 
-            // InternalBmTestLanguage.g:433:2: ( rule__SExpression__ElementAssignment_1_0_1 )*
+            // InternalBmTestLanguage.g:438:2: ( rule__SExpression__ElementAssignment_1_0_1 )*
             loop5:
             do {
                 int alt5=2;
@@ -1298,7 +1306,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:433:3: rule__SExpression__ElementAssignment_1_0_1
+            	    // InternalBmTestLanguage.g:438:3: rule__SExpression__ElementAssignment_1_0_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__SExpression__ElementAssignment_1_0_1();
@@ -1337,14 +1345,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_0__2"
-    // InternalBmTestLanguage.g:441:1: rule__SExpression__Group_1_0__2 : rule__SExpression__Group_1_0__2__Impl ;
+    // InternalBmTestLanguage.g:446:1: rule__SExpression__Group_1_0__2 : rule__SExpression__Group_1_0__2__Impl ;
     public final void rule__SExpression__Group_1_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:445:1: ( rule__SExpression__Group_1_0__2__Impl )
-            // InternalBmTestLanguage.g:446:2: rule__SExpression__Group_1_0__2__Impl
+            // InternalBmTestLanguage.g:450:1: ( rule__SExpression__Group_1_0__2__Impl )
+            // InternalBmTestLanguage.g:451:2: rule__SExpression__Group_1_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__SExpression__Group_1_0__2__Impl();
@@ -1370,17 +1378,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_0__2__Impl"
-    // InternalBmTestLanguage.g:452:1: rule__SExpression__Group_1_0__2__Impl : ( ')' ) ;
+    // InternalBmTestLanguage.g:457:1: rule__SExpression__Group_1_0__2__Impl : ( ')' ) ;
     public final void rule__SExpression__Group_1_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:456:1: ( ( ')' ) )
-            // InternalBmTestLanguage.g:457:1: ( ')' )
+            // InternalBmTestLanguage.g:461:1: ( ( ')' ) )
+            // InternalBmTestLanguage.g:462:1: ( ')' )
             {
-            // InternalBmTestLanguage.g:457:1: ( ')' )
-            // InternalBmTestLanguage.g:458:2: ')'
+            // InternalBmTestLanguage.g:462:1: ( ')' )
+            // InternalBmTestLanguage.g:463:2: ')'
             {
              before(grammarAccess.getSExpressionAccess().getRightParenthesisKeyword_1_0_2()); 
             match(input,14,FollowSets000.FOLLOW_2); 
@@ -1407,14 +1415,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_1__0"
-    // InternalBmTestLanguage.g:468:1: rule__SExpression__Group_1_1__0 : rule__SExpression__Group_1_1__0__Impl rule__SExpression__Group_1_1__1 ;
+    // InternalBmTestLanguage.g:473:1: rule__SExpression__Group_1_1__0 : rule__SExpression__Group_1_1__0__Impl rule__SExpression__Group_1_1__1 ;
     public final void rule__SExpression__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:472:1: ( rule__SExpression__Group_1_1__0__Impl rule__SExpression__Group_1_1__1 )
-            // InternalBmTestLanguage.g:473:2: rule__SExpression__Group_1_1__0__Impl rule__SExpression__Group_1_1__1
+            // InternalBmTestLanguage.g:477:1: ( rule__SExpression__Group_1_1__0__Impl rule__SExpression__Group_1_1__1 )
+            // InternalBmTestLanguage.g:478:2: rule__SExpression__Group_1_1__0__Impl rule__SExpression__Group_1_1__1
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__SExpression__Group_1_1__0__Impl();
@@ -1445,17 +1453,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_1__0__Impl"
-    // InternalBmTestLanguage.g:480:1: rule__SExpression__Group_1_1__0__Impl : ( 'begin' ) ;
+    // InternalBmTestLanguage.g:485:1: rule__SExpression__Group_1_1__0__Impl : ( 'begin' ) ;
     public final void rule__SExpression__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:484:1: ( ( 'begin' ) )
-            // InternalBmTestLanguage.g:485:1: ( 'begin' )
+            // InternalBmTestLanguage.g:489:1: ( ( 'begin' ) )
+            // InternalBmTestLanguage.g:490:1: ( 'begin' )
             {
-            // InternalBmTestLanguage.g:485:1: ( 'begin' )
-            // InternalBmTestLanguage.g:486:2: 'begin'
+            // InternalBmTestLanguage.g:490:1: ( 'begin' )
+            // InternalBmTestLanguage.g:491:2: 'begin'
             {
              before(grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0()); 
             match(input,15,FollowSets000.FOLLOW_2); 
@@ -1482,14 +1490,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_1__1"
-    // InternalBmTestLanguage.g:495:1: rule__SExpression__Group_1_1__1 : rule__SExpression__Group_1_1__1__Impl rule__SExpression__Group_1_1__2 ;
+    // InternalBmTestLanguage.g:500:1: rule__SExpression__Group_1_1__1 : rule__SExpression__Group_1_1__1__Impl rule__SExpression__Group_1_1__2 ;
     public final void rule__SExpression__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:499:1: ( rule__SExpression__Group_1_1__1__Impl rule__SExpression__Group_1_1__2 )
-            // InternalBmTestLanguage.g:500:2: rule__SExpression__Group_1_1__1__Impl rule__SExpression__Group_1_1__2
+            // InternalBmTestLanguage.g:504:1: ( rule__SExpression__Group_1_1__1__Impl rule__SExpression__Group_1_1__2 )
+            // InternalBmTestLanguage.g:505:2: rule__SExpression__Group_1_1__1__Impl rule__SExpression__Group_1_1__2
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__SExpression__Group_1_1__1__Impl();
@@ -1520,20 +1528,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_1__1__Impl"
-    // InternalBmTestLanguage.g:507:1: rule__SExpression__Group_1_1__1__Impl : ( ( rule__SExpression__ElementAssignment_1_1_1 )* ) ;
+    // InternalBmTestLanguage.g:512:1: rule__SExpression__Group_1_1__1__Impl : ( ( rule__SExpression__ElementAssignment_1_1_1 )* ) ;
     public final void rule__SExpression__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:511:1: ( ( ( rule__SExpression__ElementAssignment_1_1_1 )* ) )
-            // InternalBmTestLanguage.g:512:1: ( ( rule__SExpression__ElementAssignment_1_1_1 )* )
+            // InternalBmTestLanguage.g:516:1: ( ( ( rule__SExpression__ElementAssignment_1_1_1 )* ) )
+            // InternalBmTestLanguage.g:517:1: ( ( rule__SExpression__ElementAssignment_1_1_1 )* )
             {
-            // InternalBmTestLanguage.g:512:1: ( ( rule__SExpression__ElementAssignment_1_1_1 )* )
-            // InternalBmTestLanguage.g:513:2: ( rule__SExpression__ElementAssignment_1_1_1 )*
+            // InternalBmTestLanguage.g:517:1: ( ( rule__SExpression__ElementAssignment_1_1_1 )* )
+            // InternalBmTestLanguage.g:518:2: ( rule__SExpression__ElementAssignment_1_1_1 )*
             {
              before(grammarAccess.getSExpressionAccess().getElementAssignment_1_1_1()); 
-            // InternalBmTestLanguage.g:514:2: ( rule__SExpression__ElementAssignment_1_1_1 )*
+            // InternalBmTestLanguage.g:519:2: ( rule__SExpression__ElementAssignment_1_1_1 )*
             loop6:
             do {
                 int alt6=2;
@@ -1546,7 +1554,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:514:3: rule__SExpression__ElementAssignment_1_1_1
+            	    // InternalBmTestLanguage.g:519:3: rule__SExpression__ElementAssignment_1_1_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__SExpression__ElementAssignment_1_1_1();
@@ -1585,14 +1593,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_1__2"
-    // InternalBmTestLanguage.g:522:1: rule__SExpression__Group_1_1__2 : rule__SExpression__Group_1_1__2__Impl ;
+    // InternalBmTestLanguage.g:527:1: rule__SExpression__Group_1_1__2 : rule__SExpression__Group_1_1__2__Impl ;
     public final void rule__SExpression__Group_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:526:1: ( rule__SExpression__Group_1_1__2__Impl )
-            // InternalBmTestLanguage.g:527:2: rule__SExpression__Group_1_1__2__Impl
+            // InternalBmTestLanguage.g:531:1: ( rule__SExpression__Group_1_1__2__Impl )
+            // InternalBmTestLanguage.g:532:2: rule__SExpression__Group_1_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__SExpression__Group_1_1__2__Impl();
@@ -1618,17 +1626,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__Group_1_1__2__Impl"
-    // InternalBmTestLanguage.g:533:1: rule__SExpression__Group_1_1__2__Impl : ( 'end' ) ;
+    // InternalBmTestLanguage.g:538:1: rule__SExpression__Group_1_1__2__Impl : ( 'end' ) ;
     public final void rule__SExpression__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:537:1: ( ( 'end' ) )
-            // InternalBmTestLanguage.g:538:1: ( 'end' )
+            // InternalBmTestLanguage.g:542:1: ( ( 'end' ) )
+            // InternalBmTestLanguage.g:543:1: ( 'end' )
             {
-            // InternalBmTestLanguage.g:538:1: ( 'end' )
-            // InternalBmTestLanguage.g:539:2: 'end'
+            // InternalBmTestLanguage.g:543:1: ( 'end' )
+            // InternalBmTestLanguage.g:544:2: 'end'
             {
              before(grammarAccess.getSExpressionAccess().getEndKeyword_1_1_2()); 
             match(input,16,FollowSets000.FOLLOW_2); 
@@ -1655,17 +1663,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__File__ExpressionAssignment"
-    // InternalBmTestLanguage.g:549:1: rule__File__ExpressionAssignment : ( ruleExpression ) ;
+    // InternalBmTestLanguage.g:554:1: rule__File__ExpressionAssignment : ( ruleExpression ) ;
     public final void rule__File__ExpressionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:553:1: ( ( ruleExpression ) )
-            // InternalBmTestLanguage.g:554:2: ( ruleExpression )
+            // InternalBmTestLanguage.g:558:1: ( ( ruleExpression ) )
+            // InternalBmTestLanguage.g:559:2: ( ruleExpression )
             {
-            // InternalBmTestLanguage.g:554:2: ( ruleExpression )
-            // InternalBmTestLanguage.g:555:3: ruleExpression
+            // InternalBmTestLanguage.g:559:2: ( ruleExpression )
+            // InternalBmTestLanguage.g:560:3: ruleExpression
             {
              before(grammarAccess.getFileAccess().getExpressionExpressionParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1696,17 +1704,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__ElementAssignment_1_0_1"
-    // InternalBmTestLanguage.g:564:1: rule__SExpression__ElementAssignment_1_0_1 : ( ruleExpression ) ;
+    // InternalBmTestLanguage.g:569:1: rule__SExpression__ElementAssignment_1_0_1 : ( ruleExpression ) ;
     public final void rule__SExpression__ElementAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:568:1: ( ( ruleExpression ) )
-            // InternalBmTestLanguage.g:569:2: ( ruleExpression )
+            // InternalBmTestLanguage.g:573:1: ( ( ruleExpression ) )
+            // InternalBmTestLanguage.g:574:2: ( ruleExpression )
             {
-            // InternalBmTestLanguage.g:569:2: ( ruleExpression )
-            // InternalBmTestLanguage.g:570:3: ruleExpression
+            // InternalBmTestLanguage.g:574:2: ( ruleExpression )
+            // InternalBmTestLanguage.g:575:3: ruleExpression
             {
              before(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_0_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1737,17 +1745,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__SExpression__ElementAssignment_1_1_1"
-    // InternalBmTestLanguage.g:579:1: rule__SExpression__ElementAssignment_1_1_1 : ( ruleExpression ) ;
+    // InternalBmTestLanguage.g:584:1: rule__SExpression__ElementAssignment_1_1_1 : ( ruleExpression ) ;
     public final void rule__SExpression__ElementAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:583:1: ( ( ruleExpression ) )
-            // InternalBmTestLanguage.g:584:2: ( ruleExpression )
+            // InternalBmTestLanguage.g:588:1: ( ( ruleExpression ) )
+            // InternalBmTestLanguage.g:589:2: ( ruleExpression )
             {
-            // InternalBmTestLanguage.g:584:2: ( ruleExpression )
-            // InternalBmTestLanguage.g:585:3: ruleExpression
+            // InternalBmTestLanguage.g:589:2: ( ruleExpression )
+            // InternalBmTestLanguage.g:590:3: ruleExpression
             {
              before(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1778,17 +1786,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start "rule__Atom__ValueAssignment"
-    // InternalBmTestLanguage.g:594:1: rule__Atom__ValueAssignment : ( ruleVALUE ) ;
+    // InternalBmTestLanguage.g:599:1: rule__Atom__ValueAssignment : ( ruleVALUE ) ;
     public final void rule__Atom__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmTestLanguage.g:598:1: ( ( ruleVALUE ) )
-            // InternalBmTestLanguage.g:599:2: ( ruleVALUE )
+            // InternalBmTestLanguage.g:603:1: ( ( ruleVALUE ) )
+            // InternalBmTestLanguage.g:604:2: ( ruleVALUE )
             {
-            // InternalBmTestLanguage.g:599:2: ( ruleVALUE )
-            // InternalBmTestLanguage.g:600:3: ruleVALUE
+            // InternalBmTestLanguage.g:604:2: ( ruleVALUE )
+            // InternalBmTestLanguage.g:605:3: ruleVALUE
             {
              before(grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);

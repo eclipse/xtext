@@ -20,6 +20,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug304681TestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -96,11 +104,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug304681TestLanguage.g:54:1: entryRuleModel : ruleModel EOF ;
+    // InternalBug304681TestLanguage.g:59:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:55:1: ( ruleModel EOF )
-            // InternalBug304681TestLanguage.g:56:1: ruleModel EOF
+            // InternalBug304681TestLanguage.g:60:1: ( ruleModel EOF )
+            // InternalBug304681TestLanguage.g:61:1: ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelRule()); 
@@ -130,23 +138,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug304681TestLanguage.g:63:1: ruleModel : ( ( rule__Model__Alternatives ) ) ;
+    // InternalBug304681TestLanguage.g:68:1: ruleModel : ( ( rule__Model__Alternatives ) ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:67:2: ( ( ( rule__Model__Alternatives ) ) )
-            // InternalBug304681TestLanguage.g:68:2: ( ( rule__Model__Alternatives ) )
+            // InternalBug304681TestLanguage.g:72:2: ( ( ( rule__Model__Alternatives ) ) )
+            // InternalBug304681TestLanguage.g:73:2: ( ( rule__Model__Alternatives ) )
             {
-            // InternalBug304681TestLanguage.g:68:2: ( ( rule__Model__Alternatives ) )
-            // InternalBug304681TestLanguage.g:69:3: ( rule__Model__Alternatives )
+            // InternalBug304681TestLanguage.g:73:2: ( ( rule__Model__Alternatives ) )
+            // InternalBug304681TestLanguage.g:74:3: ( rule__Model__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getAlternatives()); 
             }
-            // InternalBug304681TestLanguage.g:70:3: ( rule__Model__Alternatives )
-            // InternalBug304681TestLanguage.g:70:4: rule__Model__Alternatives
+            // InternalBug304681TestLanguage.g:75:3: ( rule__Model__Alternatives )
+            // InternalBug304681TestLanguage.g:75:4: rule__Model__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Alternatives();
@@ -181,11 +189,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRulePackageDefinition"
-    // InternalBug304681TestLanguage.g:79:1: entryRulePackageDefinition : rulePackageDefinition EOF ;
+    // InternalBug304681TestLanguage.g:84:1: entryRulePackageDefinition : rulePackageDefinition EOF ;
     public final void entryRulePackageDefinition() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:80:1: ( rulePackageDefinition EOF )
-            // InternalBug304681TestLanguage.g:81:1: rulePackageDefinition EOF
+            // InternalBug304681TestLanguage.g:85:1: ( rulePackageDefinition EOF )
+            // InternalBug304681TestLanguage.g:86:1: rulePackageDefinition EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionRule()); 
@@ -215,23 +223,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rulePackageDefinition"
-    // InternalBug304681TestLanguage.g:88:1: rulePackageDefinition : ( ( rule__PackageDefinition__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:93:1: rulePackageDefinition : ( ( rule__PackageDefinition__Group__0 ) ) ;
     public final void rulePackageDefinition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:92:2: ( ( ( rule__PackageDefinition__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:93:2: ( ( rule__PackageDefinition__Group__0 ) )
+            // InternalBug304681TestLanguage.g:97:2: ( ( ( rule__PackageDefinition__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:98:2: ( ( rule__PackageDefinition__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:93:2: ( ( rule__PackageDefinition__Group__0 ) )
-            // InternalBug304681TestLanguage.g:94:3: ( rule__PackageDefinition__Group__0 )
+            // InternalBug304681TestLanguage.g:98:2: ( ( rule__PackageDefinition__Group__0 ) )
+            // InternalBug304681TestLanguage.g:99:3: ( rule__PackageDefinition__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:95:3: ( rule__PackageDefinition__Group__0 )
-            // InternalBug304681TestLanguage.g:95:4: rule__PackageDefinition__Group__0
+            // InternalBug304681TestLanguage.g:100:3: ( rule__PackageDefinition__Group__0 )
+            // InternalBug304681TestLanguage.g:100:4: rule__PackageDefinition__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__PackageDefinition__Group__0();
@@ -266,11 +274,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleObject"
-    // InternalBug304681TestLanguage.g:104:1: entryRuleObject : ruleObject EOF ;
+    // InternalBug304681TestLanguage.g:109:1: entryRuleObject : ruleObject EOF ;
     public final void entryRuleObject() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:105:1: ( ruleObject EOF )
-            // InternalBug304681TestLanguage.g:106:1: ruleObject EOF
+            // InternalBug304681TestLanguage.g:110:1: ( ruleObject EOF )
+            // InternalBug304681TestLanguage.g:111:1: ruleObject EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectRule()); 
@@ -300,23 +308,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleObject"
-    // InternalBug304681TestLanguage.g:113:1: ruleObject : ( ( rule__Object__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:118:1: ruleObject : ( ( rule__Object__Group__0 ) ) ;
     public final void ruleObject() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:117:2: ( ( ( rule__Object__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:118:2: ( ( rule__Object__Group__0 ) )
+            // InternalBug304681TestLanguage.g:122:2: ( ( ( rule__Object__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:123:2: ( ( rule__Object__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:118:2: ( ( rule__Object__Group__0 ) )
-            // InternalBug304681TestLanguage.g:119:3: ( rule__Object__Group__0 )
+            // InternalBug304681TestLanguage.g:123:2: ( ( rule__Object__Group__0 ) )
+            // InternalBug304681TestLanguage.g:124:3: ( rule__Object__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:120:3: ( rule__Object__Group__0 )
-            // InternalBug304681TestLanguage.g:120:4: rule__Object__Group__0
+            // InternalBug304681TestLanguage.g:125:3: ( rule__Object__Group__0 )
+            // InternalBug304681TestLanguage.g:125:4: rule__Object__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group__0();
@@ -351,11 +359,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleFeature"
-    // InternalBug304681TestLanguage.g:129:1: entryRuleFeature : ruleFeature EOF ;
+    // InternalBug304681TestLanguage.g:134:1: entryRuleFeature : ruleFeature EOF ;
     public final void entryRuleFeature() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:130:1: ( ruleFeature EOF )
-            // InternalBug304681TestLanguage.g:131:1: ruleFeature EOF
+            // InternalBug304681TestLanguage.g:135:1: ( ruleFeature EOF )
+            // InternalBug304681TestLanguage.g:136:1: ruleFeature EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFeatureRule()); 
@@ -385,23 +393,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleFeature"
-    // InternalBug304681TestLanguage.g:138:1: ruleFeature : ( ( rule__Feature__Alternatives ) ) ;
+    // InternalBug304681TestLanguage.g:143:1: ruleFeature : ( ( rule__Feature__Alternatives ) ) ;
     public final void ruleFeature() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:142:2: ( ( ( rule__Feature__Alternatives ) ) )
-            // InternalBug304681TestLanguage.g:143:2: ( ( rule__Feature__Alternatives ) )
+            // InternalBug304681TestLanguage.g:147:2: ( ( ( rule__Feature__Alternatives ) ) )
+            // InternalBug304681TestLanguage.g:148:2: ( ( rule__Feature__Alternatives ) )
             {
-            // InternalBug304681TestLanguage.g:143:2: ( ( rule__Feature__Alternatives ) )
-            // InternalBug304681TestLanguage.g:144:3: ( rule__Feature__Alternatives )
+            // InternalBug304681TestLanguage.g:148:2: ( ( rule__Feature__Alternatives ) )
+            // InternalBug304681TestLanguage.g:149:3: ( rule__Feature__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFeatureAccess().getAlternatives()); 
             }
-            // InternalBug304681TestLanguage.g:145:3: ( rule__Feature__Alternatives )
-            // InternalBug304681TestLanguage.g:145:4: rule__Feature__Alternatives
+            // InternalBug304681TestLanguage.g:150:3: ( rule__Feature__Alternatives )
+            // InternalBug304681TestLanguage.g:150:4: rule__Feature__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Feature__Alternatives();
@@ -436,11 +444,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleAttribute"
-    // InternalBug304681TestLanguage.g:154:1: entryRuleAttribute : ruleAttribute EOF ;
+    // InternalBug304681TestLanguage.g:159:1: entryRuleAttribute : ruleAttribute EOF ;
     public final void entryRuleAttribute() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:155:1: ( ruleAttribute EOF )
-            // InternalBug304681TestLanguage.g:156:1: ruleAttribute EOF
+            // InternalBug304681TestLanguage.g:160:1: ( ruleAttribute EOF )
+            // InternalBug304681TestLanguage.g:161:1: ruleAttribute EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRule()); 
@@ -470,23 +478,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleAttribute"
-    // InternalBug304681TestLanguage.g:163:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:168:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
     public final void ruleAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:167:2: ( ( ( rule__Attribute__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:168:2: ( ( rule__Attribute__Group__0 ) )
+            // InternalBug304681TestLanguage.g:172:2: ( ( ( rule__Attribute__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:173:2: ( ( rule__Attribute__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:168:2: ( ( rule__Attribute__Group__0 ) )
-            // InternalBug304681TestLanguage.g:169:3: ( rule__Attribute__Group__0 )
+            // InternalBug304681TestLanguage.g:173:2: ( ( rule__Attribute__Group__0 ) )
+            // InternalBug304681TestLanguage.g:174:3: ( rule__Attribute__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:170:3: ( rule__Attribute__Group__0 )
-            // InternalBug304681TestLanguage.g:170:4: rule__Attribute__Group__0
+            // InternalBug304681TestLanguage.g:175:3: ( rule__Attribute__Group__0 )
+            // InternalBug304681TestLanguage.g:175:4: rule__Attribute__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__0();
@@ -521,11 +529,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleReference"
-    // InternalBug304681TestLanguage.g:179:1: entryRuleReference : ruleReference EOF ;
+    // InternalBug304681TestLanguage.g:184:1: entryRuleReference : ruleReference EOF ;
     public final void entryRuleReference() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:180:1: ( ruleReference EOF )
-            // InternalBug304681TestLanguage.g:181:1: ruleReference EOF
+            // InternalBug304681TestLanguage.g:185:1: ( ruleReference EOF )
+            // InternalBug304681TestLanguage.g:186:1: ruleReference EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceRule()); 
@@ -555,23 +563,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleReference"
-    // InternalBug304681TestLanguage.g:188:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:193:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
     public final void ruleReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:192:2: ( ( ( rule__Reference__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:193:2: ( ( rule__Reference__Group__0 ) )
+            // InternalBug304681TestLanguage.g:197:2: ( ( ( rule__Reference__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:198:2: ( ( rule__Reference__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:193:2: ( ( rule__Reference__Group__0 ) )
-            // InternalBug304681TestLanguage.g:194:3: ( rule__Reference__Group__0 )
+            // InternalBug304681TestLanguage.g:198:2: ( ( rule__Reference__Group__0 ) )
+            // InternalBug304681TestLanguage.g:199:3: ( rule__Reference__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:195:3: ( rule__Reference__Group__0 )
-            // InternalBug304681TestLanguage.g:195:4: rule__Reference__Group__0
+            // InternalBug304681TestLanguage.g:200:3: ( rule__Reference__Group__0 )
+            // InternalBug304681TestLanguage.g:200:4: rule__Reference__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__0();
@@ -606,11 +614,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRulePackageDefinition2"
-    // InternalBug304681TestLanguage.g:204:1: entryRulePackageDefinition2 : rulePackageDefinition2 EOF ;
+    // InternalBug304681TestLanguage.g:209:1: entryRulePackageDefinition2 : rulePackageDefinition2 EOF ;
     public final void entryRulePackageDefinition2() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:205:1: ( rulePackageDefinition2 EOF )
-            // InternalBug304681TestLanguage.g:206:1: rulePackageDefinition2 EOF
+            // InternalBug304681TestLanguage.g:210:1: ( rulePackageDefinition2 EOF )
+            // InternalBug304681TestLanguage.g:211:1: rulePackageDefinition2 EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Rule()); 
@@ -640,23 +648,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rulePackageDefinition2"
-    // InternalBug304681TestLanguage.g:213:1: rulePackageDefinition2 : ( ( rule__PackageDefinition2__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:218:1: rulePackageDefinition2 : ( ( rule__PackageDefinition2__Group__0 ) ) ;
     public final void rulePackageDefinition2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:217:2: ( ( ( rule__PackageDefinition2__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:218:2: ( ( rule__PackageDefinition2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:222:2: ( ( ( rule__PackageDefinition2__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:223:2: ( ( rule__PackageDefinition2__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:218:2: ( ( rule__PackageDefinition2__Group__0 ) )
-            // InternalBug304681TestLanguage.g:219:3: ( rule__PackageDefinition2__Group__0 )
+            // InternalBug304681TestLanguage.g:223:2: ( ( rule__PackageDefinition2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:224:3: ( rule__PackageDefinition2__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:220:3: ( rule__PackageDefinition2__Group__0 )
-            // InternalBug304681TestLanguage.g:220:4: rule__PackageDefinition2__Group__0
+            // InternalBug304681TestLanguage.g:225:3: ( rule__PackageDefinition2__Group__0 )
+            // InternalBug304681TestLanguage.g:225:4: rule__PackageDefinition2__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__PackageDefinition2__Group__0();
@@ -691,11 +699,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleObject2"
-    // InternalBug304681TestLanguage.g:229:1: entryRuleObject2 : ruleObject2 EOF ;
+    // InternalBug304681TestLanguage.g:234:1: entryRuleObject2 : ruleObject2 EOF ;
     public final void entryRuleObject2() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:230:1: ( ruleObject2 EOF )
-            // InternalBug304681TestLanguage.g:231:1: ruleObject2 EOF
+            // InternalBug304681TestLanguage.g:235:1: ( ruleObject2 EOF )
+            // InternalBug304681TestLanguage.g:236:1: ruleObject2 EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Rule()); 
@@ -725,23 +733,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleObject2"
-    // InternalBug304681TestLanguage.g:238:1: ruleObject2 : ( ( rule__Object2__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:243:1: ruleObject2 : ( ( rule__Object2__Group__0 ) ) ;
     public final void ruleObject2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:242:2: ( ( ( rule__Object2__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:243:2: ( ( rule__Object2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:247:2: ( ( ( rule__Object2__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:248:2: ( ( rule__Object2__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:243:2: ( ( rule__Object2__Group__0 ) )
-            // InternalBug304681TestLanguage.g:244:3: ( rule__Object2__Group__0 )
+            // InternalBug304681TestLanguage.g:248:2: ( ( rule__Object2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:249:3: ( rule__Object2__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:245:3: ( rule__Object2__Group__0 )
-            // InternalBug304681TestLanguage.g:245:4: rule__Object2__Group__0
+            // InternalBug304681TestLanguage.g:250:3: ( rule__Object2__Group__0 )
+            // InternalBug304681TestLanguage.g:250:4: rule__Object2__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group__0();
@@ -776,11 +784,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleFeature2"
-    // InternalBug304681TestLanguage.g:254:1: entryRuleFeature2 : ruleFeature2 EOF ;
+    // InternalBug304681TestLanguage.g:259:1: entryRuleFeature2 : ruleFeature2 EOF ;
     public final void entryRuleFeature2() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:255:1: ( ruleFeature2 EOF )
-            // InternalBug304681TestLanguage.g:256:1: ruleFeature2 EOF
+            // InternalBug304681TestLanguage.g:260:1: ( ruleFeature2 EOF )
+            // InternalBug304681TestLanguage.g:261:1: ruleFeature2 EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFeature2Rule()); 
@@ -810,23 +818,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleFeature2"
-    // InternalBug304681TestLanguage.g:263:1: ruleFeature2 : ( ( rule__Feature2__Alternatives ) ) ;
+    // InternalBug304681TestLanguage.g:268:1: ruleFeature2 : ( ( rule__Feature2__Alternatives ) ) ;
     public final void ruleFeature2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:267:2: ( ( ( rule__Feature2__Alternatives ) ) )
-            // InternalBug304681TestLanguage.g:268:2: ( ( rule__Feature2__Alternatives ) )
+            // InternalBug304681TestLanguage.g:272:2: ( ( ( rule__Feature2__Alternatives ) ) )
+            // InternalBug304681TestLanguage.g:273:2: ( ( rule__Feature2__Alternatives ) )
             {
-            // InternalBug304681TestLanguage.g:268:2: ( ( rule__Feature2__Alternatives ) )
-            // InternalBug304681TestLanguage.g:269:3: ( rule__Feature2__Alternatives )
+            // InternalBug304681TestLanguage.g:273:2: ( ( rule__Feature2__Alternatives ) )
+            // InternalBug304681TestLanguage.g:274:3: ( rule__Feature2__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFeature2Access().getAlternatives()); 
             }
-            // InternalBug304681TestLanguage.g:270:3: ( rule__Feature2__Alternatives )
-            // InternalBug304681TestLanguage.g:270:4: rule__Feature2__Alternatives
+            // InternalBug304681TestLanguage.g:275:3: ( rule__Feature2__Alternatives )
+            // InternalBug304681TestLanguage.g:275:4: rule__Feature2__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Feature2__Alternatives();
@@ -861,11 +869,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleAttribute2"
-    // InternalBug304681TestLanguage.g:279:1: entryRuleAttribute2 : ruleAttribute2 EOF ;
+    // InternalBug304681TestLanguage.g:284:1: entryRuleAttribute2 : ruleAttribute2 EOF ;
     public final void entryRuleAttribute2() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:280:1: ( ruleAttribute2 EOF )
-            // InternalBug304681TestLanguage.g:281:1: ruleAttribute2 EOF
+            // InternalBug304681TestLanguage.g:285:1: ( ruleAttribute2 EOF )
+            // InternalBug304681TestLanguage.g:286:1: ruleAttribute2 EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Rule()); 
@@ -895,23 +903,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleAttribute2"
-    // InternalBug304681TestLanguage.g:288:1: ruleAttribute2 : ( ( rule__Attribute2__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:293:1: ruleAttribute2 : ( ( rule__Attribute2__Group__0 ) ) ;
     public final void ruleAttribute2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:292:2: ( ( ( rule__Attribute2__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:293:2: ( ( rule__Attribute2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:297:2: ( ( ( rule__Attribute2__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:298:2: ( ( rule__Attribute2__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:293:2: ( ( rule__Attribute2__Group__0 ) )
-            // InternalBug304681TestLanguage.g:294:3: ( rule__Attribute2__Group__0 )
+            // InternalBug304681TestLanguage.g:298:2: ( ( rule__Attribute2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:299:3: ( rule__Attribute2__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:295:3: ( rule__Attribute2__Group__0 )
-            // InternalBug304681TestLanguage.g:295:4: rule__Attribute2__Group__0
+            // InternalBug304681TestLanguage.g:300:3: ( rule__Attribute2__Group__0 )
+            // InternalBug304681TestLanguage.g:300:4: rule__Attribute2__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group__0();
@@ -946,11 +954,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleReference2"
-    // InternalBug304681TestLanguage.g:304:1: entryRuleReference2 : ruleReference2 EOF ;
+    // InternalBug304681TestLanguage.g:309:1: entryRuleReference2 : ruleReference2 EOF ;
     public final void entryRuleReference2() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:305:1: ( ruleReference2 EOF )
-            // InternalBug304681TestLanguage.g:306:1: ruleReference2 EOF
+            // InternalBug304681TestLanguage.g:310:1: ( ruleReference2 EOF )
+            // InternalBug304681TestLanguage.g:311:1: ruleReference2 EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Rule()); 
@@ -980,23 +988,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleReference2"
-    // InternalBug304681TestLanguage.g:313:1: ruleReference2 : ( ( rule__Reference2__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:318:1: ruleReference2 : ( ( rule__Reference2__Group__0 ) ) ;
     public final void ruleReference2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:317:2: ( ( ( rule__Reference2__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:318:2: ( ( rule__Reference2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:322:2: ( ( ( rule__Reference2__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:323:2: ( ( rule__Reference2__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:318:2: ( ( rule__Reference2__Group__0 ) )
-            // InternalBug304681TestLanguage.g:319:3: ( rule__Reference2__Group__0 )
+            // InternalBug304681TestLanguage.g:323:2: ( ( rule__Reference2__Group__0 ) )
+            // InternalBug304681TestLanguage.g:324:3: ( rule__Reference2__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:320:3: ( rule__Reference2__Group__0 )
-            // InternalBug304681TestLanguage.g:320:4: rule__Reference2__Group__0
+            // InternalBug304681TestLanguage.g:325:3: ( rule__Reference2__Group__0 )
+            // InternalBug304681TestLanguage.g:325:4: rule__Reference2__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group__0();
@@ -1031,11 +1039,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleConstraintDefinition"
-    // InternalBug304681TestLanguage.g:329:1: entryRuleConstraintDefinition : ruleConstraintDefinition EOF ;
+    // InternalBug304681TestLanguage.g:334:1: entryRuleConstraintDefinition : ruleConstraintDefinition EOF ;
     public final void entryRuleConstraintDefinition() throws RecognitionException {
         try {
-            // InternalBug304681TestLanguage.g:330:1: ( ruleConstraintDefinition EOF )
-            // InternalBug304681TestLanguage.g:331:1: ruleConstraintDefinition EOF
+            // InternalBug304681TestLanguage.g:335:1: ( ruleConstraintDefinition EOF )
+            // InternalBug304681TestLanguage.g:336:1: ruleConstraintDefinition EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionRule()); 
@@ -1065,23 +1073,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleConstraintDefinition"
-    // InternalBug304681TestLanguage.g:338:1: ruleConstraintDefinition : ( ( rule__ConstraintDefinition__Group__0 ) ) ;
+    // InternalBug304681TestLanguage.g:343:1: ruleConstraintDefinition : ( ( rule__ConstraintDefinition__Group__0 ) ) ;
     public final void ruleConstraintDefinition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:342:2: ( ( ( rule__ConstraintDefinition__Group__0 ) ) )
-            // InternalBug304681TestLanguage.g:343:2: ( ( rule__ConstraintDefinition__Group__0 ) )
+            // InternalBug304681TestLanguage.g:347:2: ( ( ( rule__ConstraintDefinition__Group__0 ) ) )
+            // InternalBug304681TestLanguage.g:348:2: ( ( rule__ConstraintDefinition__Group__0 ) )
             {
-            // InternalBug304681TestLanguage.g:343:2: ( ( rule__ConstraintDefinition__Group__0 ) )
-            // InternalBug304681TestLanguage.g:344:3: ( rule__ConstraintDefinition__Group__0 )
+            // InternalBug304681TestLanguage.g:348:2: ( ( rule__ConstraintDefinition__Group__0 ) )
+            // InternalBug304681TestLanguage.g:349:3: ( rule__ConstraintDefinition__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getGroup()); 
             }
-            // InternalBug304681TestLanguage.g:345:3: ( rule__ConstraintDefinition__Group__0 )
-            // InternalBug304681TestLanguage.g:345:4: rule__ConstraintDefinition__Group__0
+            // InternalBug304681TestLanguage.g:350:3: ( rule__ConstraintDefinition__Group__0 )
+            // InternalBug304681TestLanguage.g:350:4: rule__ConstraintDefinition__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__Group__0();
@@ -1116,13 +1124,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Alternatives"
-    // InternalBug304681TestLanguage.g:353:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) );
+    // InternalBug304681TestLanguage.g:358:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:357:1: ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) )
+            // InternalBug304681TestLanguage.g:362:1: ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1141,16 +1149,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:358:2: ( ( rule__Model__Group_0__0 ) )
+                    // InternalBug304681TestLanguage.g:363:2: ( ( rule__Model__Group_0__0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:358:2: ( ( rule__Model__Group_0__0 ) )
-                    // InternalBug304681TestLanguage.g:359:3: ( rule__Model__Group_0__0 )
+                    // InternalBug304681TestLanguage.g:363:2: ( ( rule__Model__Group_0__0 ) )
+                    // InternalBug304681TestLanguage.g:364:3: ( rule__Model__Group_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getModelAccess().getGroup_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:360:3: ( rule__Model__Group_0__0 )
-                    // InternalBug304681TestLanguage.g:360:4: rule__Model__Group_0__0
+                    // InternalBug304681TestLanguage.g:365:3: ( rule__Model__Group_0__0 )
+                    // InternalBug304681TestLanguage.g:365:4: rule__Model__Group_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Model__Group_0__0();
@@ -1170,16 +1178,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:364:2: ( ( rule__Model__Group_1__0 ) )
+                    // InternalBug304681TestLanguage.g:369:2: ( ( rule__Model__Group_1__0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:364:2: ( ( rule__Model__Group_1__0 ) )
-                    // InternalBug304681TestLanguage.g:365:3: ( rule__Model__Group_1__0 )
+                    // InternalBug304681TestLanguage.g:369:2: ( ( rule__Model__Group_1__0 ) )
+                    // InternalBug304681TestLanguage.g:370:3: ( rule__Model__Group_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getModelAccess().getGroup_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:366:3: ( rule__Model__Group_1__0 )
-                    // InternalBug304681TestLanguage.g:366:4: rule__Model__Group_1__0
+                    // InternalBug304681TestLanguage.g:371:3: ( rule__Model__Group_1__0 )
+                    // InternalBug304681TestLanguage.g:371:4: rule__Model__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Model__Group_1__0();
@@ -1216,13 +1224,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Alternatives_0"
-    // InternalBug304681TestLanguage.g:374:1: rule__Object__Alternatives_0 : ( ( ( rule__Object__EnabledAssignment_0_0 ) ) | ( ( rule__Object__AbstractAssignment_0_1 ) ) );
+    // InternalBug304681TestLanguage.g:379:1: rule__Object__Alternatives_0 : ( ( ( rule__Object__EnabledAssignment_0_0 ) ) | ( ( rule__Object__AbstractAssignment_0_1 ) ) );
     public final void rule__Object__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:378:1: ( ( ( rule__Object__EnabledAssignment_0_0 ) ) | ( ( rule__Object__AbstractAssignment_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:383:1: ( ( ( rule__Object__EnabledAssignment_0_0 ) ) | ( ( rule__Object__AbstractAssignment_0_1 ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1241,16 +1249,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt2) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:379:2: ( ( rule__Object__EnabledAssignment_0_0 ) )
+                    // InternalBug304681TestLanguage.g:384:2: ( ( rule__Object__EnabledAssignment_0_0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:379:2: ( ( rule__Object__EnabledAssignment_0_0 ) )
-                    // InternalBug304681TestLanguage.g:380:3: ( rule__Object__EnabledAssignment_0_0 )
+                    // InternalBug304681TestLanguage.g:384:2: ( ( rule__Object__EnabledAssignment_0_0 ) )
+                    // InternalBug304681TestLanguage.g:385:3: ( rule__Object__EnabledAssignment_0_0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getEnabledAssignment_0_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:381:3: ( rule__Object__EnabledAssignment_0_0 )
-                    // InternalBug304681TestLanguage.g:381:4: rule__Object__EnabledAssignment_0_0
+                    // InternalBug304681TestLanguage.g:386:3: ( rule__Object__EnabledAssignment_0_0 )
+                    // InternalBug304681TestLanguage.g:386:4: rule__Object__EnabledAssignment_0_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__EnabledAssignment_0_0();
@@ -1270,16 +1278,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:385:2: ( ( rule__Object__AbstractAssignment_0_1 ) )
+                    // InternalBug304681TestLanguage.g:390:2: ( ( rule__Object__AbstractAssignment_0_1 ) )
                     {
-                    // InternalBug304681TestLanguage.g:385:2: ( ( rule__Object__AbstractAssignment_0_1 ) )
-                    // InternalBug304681TestLanguage.g:386:3: ( rule__Object__AbstractAssignment_0_1 )
+                    // InternalBug304681TestLanguage.g:390:2: ( ( rule__Object__AbstractAssignment_0_1 ) )
+                    // InternalBug304681TestLanguage.g:391:3: ( rule__Object__AbstractAssignment_0_1 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getAbstractAssignment_0_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:387:3: ( rule__Object__AbstractAssignment_0_1 )
-                    // InternalBug304681TestLanguage.g:387:4: rule__Object__AbstractAssignment_0_1
+                    // InternalBug304681TestLanguage.g:392:3: ( rule__Object__AbstractAssignment_0_1 )
+                    // InternalBug304681TestLanguage.g:392:4: rule__Object__AbstractAssignment_0_1
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__AbstractAssignment_0_1();
@@ -1316,13 +1324,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Feature__Alternatives"
-    // InternalBug304681TestLanguage.g:395:1: rule__Feature__Alternatives : ( ( ruleAttribute ) | ( ruleReference ) );
+    // InternalBug304681TestLanguage.g:400:1: rule__Feature__Alternatives : ( ( ruleAttribute ) | ( ruleReference ) );
     public final void rule__Feature__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:399:1: ( ( ruleAttribute ) | ( ruleReference ) )
+            // InternalBug304681TestLanguage.g:404:1: ( ( ruleAttribute ) | ( ruleReference ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1341,10 +1349,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt3) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:400:2: ( ruleAttribute )
+                    // InternalBug304681TestLanguage.g:405:2: ( ruleAttribute )
                     {
-                    // InternalBug304681TestLanguage.g:400:2: ( ruleAttribute )
-                    // InternalBug304681TestLanguage.g:401:3: ruleAttribute
+                    // InternalBug304681TestLanguage.g:405:2: ( ruleAttribute )
+                    // InternalBug304681TestLanguage.g:406:3: ruleAttribute
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getFeatureAccess().getAttributeParserRuleCall_0()); 
@@ -1364,10 +1372,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:406:2: ( ruleReference )
+                    // InternalBug304681TestLanguage.g:411:2: ( ruleReference )
                     {
-                    // InternalBug304681TestLanguage.g:406:2: ( ruleReference )
-                    // InternalBug304681TestLanguage.g:407:3: ruleReference
+                    // InternalBug304681TestLanguage.g:411:2: ( ruleReference )
+                    // InternalBug304681TestLanguage.g:412:3: ruleReference
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getFeatureAccess().getReferenceParserRuleCall_1()); 
@@ -1404,13 +1412,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Alternatives_4"
-    // InternalBug304681TestLanguage.g:416:1: rule__Reference__Alternatives_4 : ( ( ( rule__Reference__Group_4_0__0 ) ) | ( ';' ) );
+    // InternalBug304681TestLanguage.g:421:1: rule__Reference__Alternatives_4 : ( ( ( rule__Reference__Group_4_0__0 ) ) | ( ';' ) );
     public final void rule__Reference__Alternatives_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:420:1: ( ( ( rule__Reference__Group_4_0__0 ) ) | ( ';' ) )
+            // InternalBug304681TestLanguage.g:425:1: ( ( ( rule__Reference__Group_4_0__0 ) ) | ( ';' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1429,16 +1437,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt4) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:421:2: ( ( rule__Reference__Group_4_0__0 ) )
+                    // InternalBug304681TestLanguage.g:426:2: ( ( rule__Reference__Group_4_0__0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:421:2: ( ( rule__Reference__Group_4_0__0 ) )
-                    // InternalBug304681TestLanguage.g:422:3: ( rule__Reference__Group_4_0__0 )
+                    // InternalBug304681TestLanguage.g:426:2: ( ( rule__Reference__Group_4_0__0 ) )
+                    // InternalBug304681TestLanguage.g:427:3: ( rule__Reference__Group_4_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReferenceAccess().getGroup_4_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:423:3: ( rule__Reference__Group_4_0__0 )
-                    // InternalBug304681TestLanguage.g:423:4: rule__Reference__Group_4_0__0
+                    // InternalBug304681TestLanguage.g:428:3: ( rule__Reference__Group_4_0__0 )
+                    // InternalBug304681TestLanguage.g:428:4: rule__Reference__Group_4_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference__Group_4_0__0();
@@ -1458,10 +1466,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:427:2: ( ';' )
+                    // InternalBug304681TestLanguage.g:432:2: ( ';' )
                     {
-                    // InternalBug304681TestLanguage.g:427:2: ( ';' )
-                    // InternalBug304681TestLanguage.g:428:3: ';'
+                    // InternalBug304681TestLanguage.g:432:2: ( ';' )
+                    // InternalBug304681TestLanguage.g:433:3: ';'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReferenceAccess().getSemicolonKeyword_4_1()); 
@@ -1494,13 +1502,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Alternatives_0"
-    // InternalBug304681TestLanguage.g:437:1: rule__Object2__Alternatives_0 : ( ( ( rule__Object2__EnabledAssignment_0_0 ) ) | ( ( rule__Object2__AbstractAssignment_0_1 ) ) );
+    // InternalBug304681TestLanguage.g:442:1: rule__Object2__Alternatives_0 : ( ( ( rule__Object2__EnabledAssignment_0_0 ) ) | ( ( rule__Object2__AbstractAssignment_0_1 ) ) );
     public final void rule__Object2__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:441:1: ( ( ( rule__Object2__EnabledAssignment_0_0 ) ) | ( ( rule__Object2__AbstractAssignment_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:446:1: ( ( ( rule__Object2__EnabledAssignment_0_0 ) ) | ( ( rule__Object2__AbstractAssignment_0_1 ) ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1519,16 +1527,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt5) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:442:2: ( ( rule__Object2__EnabledAssignment_0_0 ) )
+                    // InternalBug304681TestLanguage.g:447:2: ( ( rule__Object2__EnabledAssignment_0_0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:442:2: ( ( rule__Object2__EnabledAssignment_0_0 ) )
-                    // InternalBug304681TestLanguage.g:443:3: ( rule__Object2__EnabledAssignment_0_0 )
+                    // InternalBug304681TestLanguage.g:447:2: ( ( rule__Object2__EnabledAssignment_0_0 ) )
+                    // InternalBug304681TestLanguage.g:448:3: ( rule__Object2__EnabledAssignment_0_0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getEnabledAssignment_0_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:444:3: ( rule__Object2__EnabledAssignment_0_0 )
-                    // InternalBug304681TestLanguage.g:444:4: rule__Object2__EnabledAssignment_0_0
+                    // InternalBug304681TestLanguage.g:449:3: ( rule__Object2__EnabledAssignment_0_0 )
+                    // InternalBug304681TestLanguage.g:449:4: rule__Object2__EnabledAssignment_0_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__EnabledAssignment_0_0();
@@ -1548,16 +1556,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:448:2: ( ( rule__Object2__AbstractAssignment_0_1 ) )
+                    // InternalBug304681TestLanguage.g:453:2: ( ( rule__Object2__AbstractAssignment_0_1 ) )
                     {
-                    // InternalBug304681TestLanguage.g:448:2: ( ( rule__Object2__AbstractAssignment_0_1 ) )
-                    // InternalBug304681TestLanguage.g:449:3: ( rule__Object2__AbstractAssignment_0_1 )
+                    // InternalBug304681TestLanguage.g:453:2: ( ( rule__Object2__AbstractAssignment_0_1 ) )
+                    // InternalBug304681TestLanguage.g:454:3: ( rule__Object2__AbstractAssignment_0_1 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getAbstractAssignment_0_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:450:3: ( rule__Object2__AbstractAssignment_0_1 )
-                    // InternalBug304681TestLanguage.g:450:4: rule__Object2__AbstractAssignment_0_1
+                    // InternalBug304681TestLanguage.g:455:3: ( rule__Object2__AbstractAssignment_0_1 )
+                    // InternalBug304681TestLanguage.g:455:4: rule__Object2__AbstractAssignment_0_1
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__AbstractAssignment_0_1();
@@ -1594,13 +1602,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Feature2__Alternatives"
-    // InternalBug304681TestLanguage.g:458:1: rule__Feature2__Alternatives : ( ( ruleAttribute2 ) | ( ruleReference2 ) );
+    // InternalBug304681TestLanguage.g:463:1: rule__Feature2__Alternatives : ( ( ruleAttribute2 ) | ( ruleReference2 ) );
     public final void rule__Feature2__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:462:1: ( ( ruleAttribute2 ) | ( ruleReference2 ) )
+            // InternalBug304681TestLanguage.g:467:1: ( ( ruleAttribute2 ) | ( ruleReference2 ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1619,10 +1627,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:463:2: ( ruleAttribute2 )
+                    // InternalBug304681TestLanguage.g:468:2: ( ruleAttribute2 )
                     {
-                    // InternalBug304681TestLanguage.g:463:2: ( ruleAttribute2 )
-                    // InternalBug304681TestLanguage.g:464:3: ruleAttribute2
+                    // InternalBug304681TestLanguage.g:468:2: ( ruleAttribute2 )
+                    // InternalBug304681TestLanguage.g:469:3: ruleAttribute2
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getFeature2Access().getAttribute2ParserRuleCall_0()); 
@@ -1642,10 +1650,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:469:2: ( ruleReference2 )
+                    // InternalBug304681TestLanguage.g:474:2: ( ruleReference2 )
                     {
-                    // InternalBug304681TestLanguage.g:469:2: ( ruleReference2 )
-                    // InternalBug304681TestLanguage.g:470:3: ruleReference2
+                    // InternalBug304681TestLanguage.g:474:2: ( ruleReference2 )
+                    // InternalBug304681TestLanguage.g:475:3: ruleReference2
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getFeature2Access().getReference2ParserRuleCall_1()); 
@@ -1682,13 +1690,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Alternatives_3"
-    // InternalBug304681TestLanguage.g:479:1: rule__Attribute2__Alternatives_3 : ( ( ( rule__Attribute2__Group_3_0__0 ) ) | ( ';' ) );
+    // InternalBug304681TestLanguage.g:484:1: rule__Attribute2__Alternatives_3 : ( ( ( rule__Attribute2__Group_3_0__0 ) ) | ( ';' ) );
     public final void rule__Attribute2__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:483:1: ( ( ( rule__Attribute2__Group_3_0__0 ) ) | ( ';' ) )
+            // InternalBug304681TestLanguage.g:488:1: ( ( ( rule__Attribute2__Group_3_0__0 ) ) | ( ';' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1707,16 +1715,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt7) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:484:2: ( ( rule__Attribute2__Group_3_0__0 ) )
+                    // InternalBug304681TestLanguage.g:489:2: ( ( rule__Attribute2__Group_3_0__0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:484:2: ( ( rule__Attribute2__Group_3_0__0 ) )
-                    // InternalBug304681TestLanguage.g:485:3: ( rule__Attribute2__Group_3_0__0 )
+                    // InternalBug304681TestLanguage.g:489:2: ( ( rule__Attribute2__Group_3_0__0 ) )
+                    // InternalBug304681TestLanguage.g:490:3: ( rule__Attribute2__Group_3_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getGroup_3_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:486:3: ( rule__Attribute2__Group_3_0__0 )
-                    // InternalBug304681TestLanguage.g:486:4: rule__Attribute2__Group_3_0__0
+                    // InternalBug304681TestLanguage.g:491:3: ( rule__Attribute2__Group_3_0__0 )
+                    // InternalBug304681TestLanguage.g:491:4: rule__Attribute2__Group_3_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Attribute2__Group_3_0__0();
@@ -1736,10 +1744,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:490:2: ( ';' )
+                    // InternalBug304681TestLanguage.g:495:2: ( ';' )
                     {
-                    // InternalBug304681TestLanguage.g:490:2: ( ';' )
-                    // InternalBug304681TestLanguage.g:491:3: ';'
+                    // InternalBug304681TestLanguage.g:495:2: ( ';' )
+                    // InternalBug304681TestLanguage.g:496:3: ';'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getSemicolonKeyword_3_1()); 
@@ -1772,13 +1780,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Alternatives_4"
-    // InternalBug304681TestLanguage.g:500:1: rule__Reference2__Alternatives_4 : ( ( ( rule__Reference2__Group_4_0__0 ) ) | ( ';' ) );
+    // InternalBug304681TestLanguage.g:505:1: rule__Reference2__Alternatives_4 : ( ( ( rule__Reference2__Group_4_0__0 ) ) | ( ';' ) );
     public final void rule__Reference2__Alternatives_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:504:1: ( ( ( rule__Reference2__Group_4_0__0 ) ) | ( ';' ) )
+            // InternalBug304681TestLanguage.g:509:1: ( ( ( rule__Reference2__Group_4_0__0 ) ) | ( ';' ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1797,16 +1805,16 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt8) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:505:2: ( ( rule__Reference2__Group_4_0__0 ) )
+                    // InternalBug304681TestLanguage.g:510:2: ( ( rule__Reference2__Group_4_0__0 ) )
                     {
-                    // InternalBug304681TestLanguage.g:505:2: ( ( rule__Reference2__Group_4_0__0 ) )
-                    // InternalBug304681TestLanguage.g:506:3: ( rule__Reference2__Group_4_0__0 )
+                    // InternalBug304681TestLanguage.g:510:2: ( ( rule__Reference2__Group_4_0__0 ) )
+                    // InternalBug304681TestLanguage.g:511:3: ( rule__Reference2__Group_4_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReference2Access().getGroup_4_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:507:3: ( rule__Reference2__Group_4_0__0 )
-                    // InternalBug304681TestLanguage.g:507:4: rule__Reference2__Group_4_0__0
+                    // InternalBug304681TestLanguage.g:512:3: ( rule__Reference2__Group_4_0__0 )
+                    // InternalBug304681TestLanguage.g:512:4: rule__Reference2__Group_4_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference2__Group_4_0__0();
@@ -1826,10 +1834,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:511:2: ( ';' )
+                    // InternalBug304681TestLanguage.g:516:2: ( ';' )
                     {
-                    // InternalBug304681TestLanguage.g:511:2: ( ';' )
-                    // InternalBug304681TestLanguage.g:512:3: ';'
+                    // InternalBug304681TestLanguage.g:516:2: ( ';' )
+                    // InternalBug304681TestLanguage.g:517:3: ';'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReference2Access().getSemicolonKeyword_4_1()); 
@@ -1862,14 +1870,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_0__0"
-    // InternalBug304681TestLanguage.g:521:1: rule__Model__Group_0__0 : rule__Model__Group_0__0__Impl rule__Model__Group_0__1 ;
+    // InternalBug304681TestLanguage.g:526:1: rule__Model__Group_0__0 : rule__Model__Group_0__0__Impl rule__Model__Group_0__1 ;
     public final void rule__Model__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:525:1: ( rule__Model__Group_0__0__Impl rule__Model__Group_0__1 )
-            // InternalBug304681TestLanguage.g:526:2: rule__Model__Group_0__0__Impl rule__Model__Group_0__1
+            // InternalBug304681TestLanguage.g:530:1: ( rule__Model__Group_0__0__Impl rule__Model__Group_0__1 )
+            // InternalBug304681TestLanguage.g:531:2: rule__Model__Group_0__0__Impl rule__Model__Group_0__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__Model__Group_0__0__Impl();
@@ -1900,17 +1908,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_0__0__Impl"
-    // InternalBug304681TestLanguage.g:533:1: rule__Model__Group_0__0__Impl : ( '1' ) ;
+    // InternalBug304681TestLanguage.g:538:1: rule__Model__Group_0__0__Impl : ( '1' ) ;
     public final void rule__Model__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:537:1: ( ( '1' ) )
-            // InternalBug304681TestLanguage.g:538:1: ( '1' )
+            // InternalBug304681TestLanguage.g:542:1: ( ( '1' ) )
+            // InternalBug304681TestLanguage.g:543:1: ( '1' )
             {
-            // InternalBug304681TestLanguage.g:538:1: ( '1' )
-            // InternalBug304681TestLanguage.g:539:2: '1'
+            // InternalBug304681TestLanguage.g:543:1: ( '1' )
+            // InternalBug304681TestLanguage.g:544:2: '1'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDigitOneKeyword_0_0()); 
@@ -1941,14 +1949,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_0__1"
-    // InternalBug304681TestLanguage.g:548:1: rule__Model__Group_0__1 : rule__Model__Group_0__1__Impl ;
+    // InternalBug304681TestLanguage.g:553:1: rule__Model__Group_0__1 : rule__Model__Group_0__1__Impl ;
     public final void rule__Model__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:552:1: ( rule__Model__Group_0__1__Impl )
-            // InternalBug304681TestLanguage.g:553:2: rule__Model__Group_0__1__Impl
+            // InternalBug304681TestLanguage.g:557:1: ( rule__Model__Group_0__1__Impl )
+            // InternalBug304681TestLanguage.g:558:2: rule__Model__Group_0__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group_0__1__Impl();
@@ -1974,23 +1982,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_0__1__Impl"
-    // InternalBug304681TestLanguage.g:559:1: rule__Model__Group_0__1__Impl : ( ( rule__Model__DefinitionAssignment_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:564:1: rule__Model__Group_0__1__Impl : ( ( rule__Model__DefinitionAssignment_0_1 ) ) ;
     public final void rule__Model__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:563:1: ( ( ( rule__Model__DefinitionAssignment_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:564:1: ( ( rule__Model__DefinitionAssignment_0_1 ) )
+            // InternalBug304681TestLanguage.g:568:1: ( ( ( rule__Model__DefinitionAssignment_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:569:1: ( ( rule__Model__DefinitionAssignment_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:564:1: ( ( rule__Model__DefinitionAssignment_0_1 ) )
-            // InternalBug304681TestLanguage.g:565:2: ( rule__Model__DefinitionAssignment_0_1 )
+            // InternalBug304681TestLanguage.g:569:1: ( ( rule__Model__DefinitionAssignment_0_1 ) )
+            // InternalBug304681TestLanguage.g:570:2: ( rule__Model__DefinitionAssignment_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDefinitionAssignment_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:566:2: ( rule__Model__DefinitionAssignment_0_1 )
-            // InternalBug304681TestLanguage.g:566:3: rule__Model__DefinitionAssignment_0_1
+            // InternalBug304681TestLanguage.g:571:2: ( rule__Model__DefinitionAssignment_0_1 )
+            // InternalBug304681TestLanguage.g:571:3: rule__Model__DefinitionAssignment_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__DefinitionAssignment_0_1();
@@ -2025,14 +2033,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_1__0"
-    // InternalBug304681TestLanguage.g:575:1: rule__Model__Group_1__0 : rule__Model__Group_1__0__Impl rule__Model__Group_1__1 ;
+    // InternalBug304681TestLanguage.g:580:1: rule__Model__Group_1__0 : rule__Model__Group_1__0__Impl rule__Model__Group_1__1 ;
     public final void rule__Model__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:579:1: ( rule__Model__Group_1__0__Impl rule__Model__Group_1__1 )
-            // InternalBug304681TestLanguage.g:580:2: rule__Model__Group_1__0__Impl rule__Model__Group_1__1
+            // InternalBug304681TestLanguage.g:584:1: ( rule__Model__Group_1__0__Impl rule__Model__Group_1__1 )
+            // InternalBug304681TestLanguage.g:585:2: rule__Model__Group_1__0__Impl rule__Model__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__Model__Group_1__0__Impl();
@@ -2063,17 +2071,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_1__0__Impl"
-    // InternalBug304681TestLanguage.g:587:1: rule__Model__Group_1__0__Impl : ( '2' ) ;
+    // InternalBug304681TestLanguage.g:592:1: rule__Model__Group_1__0__Impl : ( '2' ) ;
     public final void rule__Model__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:591:1: ( ( '2' ) )
-            // InternalBug304681TestLanguage.g:592:1: ( '2' )
+            // InternalBug304681TestLanguage.g:596:1: ( ( '2' ) )
+            // InternalBug304681TestLanguage.g:597:1: ( '2' )
             {
-            // InternalBug304681TestLanguage.g:592:1: ( '2' )
-            // InternalBug304681TestLanguage.g:593:2: '2'
+            // InternalBug304681TestLanguage.g:597:1: ( '2' )
+            // InternalBug304681TestLanguage.g:598:2: '2'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDigitTwoKeyword_1_0()); 
@@ -2104,14 +2112,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_1__1"
-    // InternalBug304681TestLanguage.g:602:1: rule__Model__Group_1__1 : rule__Model__Group_1__1__Impl ;
+    // InternalBug304681TestLanguage.g:607:1: rule__Model__Group_1__1 : rule__Model__Group_1__1__Impl ;
     public final void rule__Model__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:606:1: ( rule__Model__Group_1__1__Impl )
-            // InternalBug304681TestLanguage.g:607:2: rule__Model__Group_1__1__Impl
+            // InternalBug304681TestLanguage.g:611:1: ( rule__Model__Group_1__1__Impl )
+            // InternalBug304681TestLanguage.g:612:2: rule__Model__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group_1__1__Impl();
@@ -2137,23 +2145,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__Group_1__1__Impl"
-    // InternalBug304681TestLanguage.g:613:1: rule__Model__Group_1__1__Impl : ( ( rule__Model__DefinitionAssignment_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:618:1: rule__Model__Group_1__1__Impl : ( ( rule__Model__DefinitionAssignment_1_1 ) ) ;
     public final void rule__Model__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:617:1: ( ( ( rule__Model__DefinitionAssignment_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:618:1: ( ( rule__Model__DefinitionAssignment_1_1 ) )
+            // InternalBug304681TestLanguage.g:622:1: ( ( ( rule__Model__DefinitionAssignment_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:623:1: ( ( rule__Model__DefinitionAssignment_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:618:1: ( ( rule__Model__DefinitionAssignment_1_1 ) )
-            // InternalBug304681TestLanguage.g:619:2: ( rule__Model__DefinitionAssignment_1_1 )
+            // InternalBug304681TestLanguage.g:623:1: ( ( rule__Model__DefinitionAssignment_1_1 ) )
+            // InternalBug304681TestLanguage.g:624:2: ( rule__Model__DefinitionAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDefinitionAssignment_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:620:2: ( rule__Model__DefinitionAssignment_1_1 )
-            // InternalBug304681TestLanguage.g:620:3: rule__Model__DefinitionAssignment_1_1
+            // InternalBug304681TestLanguage.g:625:2: ( rule__Model__DefinitionAssignment_1_1 )
+            // InternalBug304681TestLanguage.g:625:3: rule__Model__DefinitionAssignment_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__DefinitionAssignment_1_1();
@@ -2188,14 +2196,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__0"
-    // InternalBug304681TestLanguage.g:629:1: rule__PackageDefinition__Group__0 : rule__PackageDefinition__Group__0__Impl rule__PackageDefinition__Group__1 ;
+    // InternalBug304681TestLanguage.g:634:1: rule__PackageDefinition__Group__0 : rule__PackageDefinition__Group__0__Impl rule__PackageDefinition__Group__1 ;
     public final void rule__PackageDefinition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:633:1: ( rule__PackageDefinition__Group__0__Impl rule__PackageDefinition__Group__1 )
-            // InternalBug304681TestLanguage.g:634:2: rule__PackageDefinition__Group__0__Impl rule__PackageDefinition__Group__1
+            // InternalBug304681TestLanguage.g:638:1: ( rule__PackageDefinition__Group__0__Impl rule__PackageDefinition__Group__1 )
+            // InternalBug304681TestLanguage.g:639:2: rule__PackageDefinition__Group__0__Impl rule__PackageDefinition__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__PackageDefinition__Group__0__Impl();
@@ -2226,23 +2234,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:641:1: rule__PackageDefinition__Group__0__Impl : ( () ) ;
+    // InternalBug304681TestLanguage.g:646:1: rule__PackageDefinition__Group__0__Impl : ( () ) ;
     public final void rule__PackageDefinition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:645:1: ( ( () ) )
-            // InternalBug304681TestLanguage.g:646:1: ( () )
+            // InternalBug304681TestLanguage.g:650:1: ( ( () ) )
+            // InternalBug304681TestLanguage.g:651:1: ( () )
             {
-            // InternalBug304681TestLanguage.g:646:1: ( () )
-            // InternalBug304681TestLanguage.g:647:2: ()
+            // InternalBug304681TestLanguage.g:651:1: ( () )
+            // InternalBug304681TestLanguage.g:652:2: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getPackageDefinitionAction_0()); 
             }
-            // InternalBug304681TestLanguage.g:648:2: ()
-            // InternalBug304681TestLanguage.g:648:3: 
+            // InternalBug304681TestLanguage.g:653:2: ()
+            // InternalBug304681TestLanguage.g:653:3: 
             {
             }
 
@@ -2267,14 +2275,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__1"
-    // InternalBug304681TestLanguage.g:656:1: rule__PackageDefinition__Group__1 : rule__PackageDefinition__Group__1__Impl rule__PackageDefinition__Group__2 ;
+    // InternalBug304681TestLanguage.g:661:1: rule__PackageDefinition__Group__1 : rule__PackageDefinition__Group__1__Impl rule__PackageDefinition__Group__2 ;
     public final void rule__PackageDefinition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:660:1: ( rule__PackageDefinition__Group__1__Impl rule__PackageDefinition__Group__2 )
-            // InternalBug304681TestLanguage.g:661:2: rule__PackageDefinition__Group__1__Impl rule__PackageDefinition__Group__2
+            // InternalBug304681TestLanguage.g:665:1: ( rule__PackageDefinition__Group__1__Impl rule__PackageDefinition__Group__2 )
+            // InternalBug304681TestLanguage.g:666:2: rule__PackageDefinition__Group__1__Impl rule__PackageDefinition__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__PackageDefinition__Group__1__Impl();
@@ -2305,17 +2313,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:668:1: rule__PackageDefinition__Group__1__Impl : ( 'package' ) ;
+    // InternalBug304681TestLanguage.g:673:1: rule__PackageDefinition__Group__1__Impl : ( 'package' ) ;
     public final void rule__PackageDefinition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:672:1: ( ( 'package' ) )
-            // InternalBug304681TestLanguage.g:673:1: ( 'package' )
+            // InternalBug304681TestLanguage.g:677:1: ( ( 'package' ) )
+            // InternalBug304681TestLanguage.g:678:1: ( 'package' )
             {
-            // InternalBug304681TestLanguage.g:673:1: ( 'package' )
-            // InternalBug304681TestLanguage.g:674:2: 'package'
+            // InternalBug304681TestLanguage.g:678:1: ( 'package' )
+            // InternalBug304681TestLanguage.g:679:2: 'package'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getPackageKeyword_1()); 
@@ -2346,14 +2354,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__2"
-    // InternalBug304681TestLanguage.g:683:1: rule__PackageDefinition__Group__2 : rule__PackageDefinition__Group__2__Impl rule__PackageDefinition__Group__3 ;
+    // InternalBug304681TestLanguage.g:688:1: rule__PackageDefinition__Group__2 : rule__PackageDefinition__Group__2__Impl rule__PackageDefinition__Group__3 ;
     public final void rule__PackageDefinition__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:687:1: ( rule__PackageDefinition__Group__2__Impl rule__PackageDefinition__Group__3 )
-            // InternalBug304681TestLanguage.g:688:2: rule__PackageDefinition__Group__2__Impl rule__PackageDefinition__Group__3
+            // InternalBug304681TestLanguage.g:692:1: ( rule__PackageDefinition__Group__2__Impl rule__PackageDefinition__Group__3 )
+            // InternalBug304681TestLanguage.g:693:2: rule__PackageDefinition__Group__2__Impl rule__PackageDefinition__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__PackageDefinition__Group__2__Impl();
@@ -2384,23 +2392,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:695:1: rule__PackageDefinition__Group__2__Impl : ( ( rule__PackageDefinition__NamespaceAssignment_2 ) ) ;
+    // InternalBug304681TestLanguage.g:700:1: rule__PackageDefinition__Group__2__Impl : ( ( rule__PackageDefinition__NamespaceAssignment_2 ) ) ;
     public final void rule__PackageDefinition__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:699:1: ( ( ( rule__PackageDefinition__NamespaceAssignment_2 ) ) )
-            // InternalBug304681TestLanguage.g:700:1: ( ( rule__PackageDefinition__NamespaceAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:704:1: ( ( ( rule__PackageDefinition__NamespaceAssignment_2 ) ) )
+            // InternalBug304681TestLanguage.g:705:1: ( ( rule__PackageDefinition__NamespaceAssignment_2 ) )
             {
-            // InternalBug304681TestLanguage.g:700:1: ( ( rule__PackageDefinition__NamespaceAssignment_2 ) )
-            // InternalBug304681TestLanguage.g:701:2: ( rule__PackageDefinition__NamespaceAssignment_2 )
+            // InternalBug304681TestLanguage.g:705:1: ( ( rule__PackageDefinition__NamespaceAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:706:2: ( rule__PackageDefinition__NamespaceAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getNamespaceAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:702:2: ( rule__PackageDefinition__NamespaceAssignment_2 )
-            // InternalBug304681TestLanguage.g:702:3: rule__PackageDefinition__NamespaceAssignment_2
+            // InternalBug304681TestLanguage.g:707:2: ( rule__PackageDefinition__NamespaceAssignment_2 )
+            // InternalBug304681TestLanguage.g:707:3: rule__PackageDefinition__NamespaceAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__PackageDefinition__NamespaceAssignment_2();
@@ -2435,14 +2443,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__3"
-    // InternalBug304681TestLanguage.g:710:1: rule__PackageDefinition__Group__3 : rule__PackageDefinition__Group__3__Impl rule__PackageDefinition__Group__4 ;
+    // InternalBug304681TestLanguage.g:715:1: rule__PackageDefinition__Group__3 : rule__PackageDefinition__Group__3__Impl rule__PackageDefinition__Group__4 ;
     public final void rule__PackageDefinition__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:714:1: ( rule__PackageDefinition__Group__3__Impl rule__PackageDefinition__Group__4 )
-            // InternalBug304681TestLanguage.g:715:2: rule__PackageDefinition__Group__3__Impl rule__PackageDefinition__Group__4
+            // InternalBug304681TestLanguage.g:719:1: ( rule__PackageDefinition__Group__3__Impl rule__PackageDefinition__Group__4 )
+            // InternalBug304681TestLanguage.g:720:2: rule__PackageDefinition__Group__3__Impl rule__PackageDefinition__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__PackageDefinition__Group__3__Impl();
@@ -2473,17 +2481,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:722:1: rule__PackageDefinition__Group__3__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:727:1: rule__PackageDefinition__Group__3__Impl : ( ';' ) ;
     public final void rule__PackageDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:726:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:727:1: ( ';' )
+            // InternalBug304681TestLanguage.g:731:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:732:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:727:1: ( ';' )
-            // InternalBug304681TestLanguage.g:728:2: ';'
+            // InternalBug304681TestLanguage.g:732:1: ( ';' )
+            // InternalBug304681TestLanguage.g:733:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getSemicolonKeyword_3()); 
@@ -2514,14 +2522,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__4"
-    // InternalBug304681TestLanguage.g:737:1: rule__PackageDefinition__Group__4 : rule__PackageDefinition__Group__4__Impl ;
+    // InternalBug304681TestLanguage.g:742:1: rule__PackageDefinition__Group__4 : rule__PackageDefinition__Group__4__Impl ;
     public final void rule__PackageDefinition__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:741:1: ( rule__PackageDefinition__Group__4__Impl )
-            // InternalBug304681TestLanguage.g:742:2: rule__PackageDefinition__Group__4__Impl
+            // InternalBug304681TestLanguage.g:746:1: ( rule__PackageDefinition__Group__4__Impl )
+            // InternalBug304681TestLanguage.g:747:2: rule__PackageDefinition__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__PackageDefinition__Group__4__Impl();
@@ -2547,22 +2555,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:748:1: rule__PackageDefinition__Group__4__Impl : ( ( rule__PackageDefinition__ContentsAssignment_4 )* ) ;
+    // InternalBug304681TestLanguage.g:753:1: rule__PackageDefinition__Group__4__Impl : ( ( rule__PackageDefinition__ContentsAssignment_4 )* ) ;
     public final void rule__PackageDefinition__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:752:1: ( ( ( rule__PackageDefinition__ContentsAssignment_4 )* ) )
-            // InternalBug304681TestLanguage.g:753:1: ( ( rule__PackageDefinition__ContentsAssignment_4 )* )
+            // InternalBug304681TestLanguage.g:757:1: ( ( ( rule__PackageDefinition__ContentsAssignment_4 )* ) )
+            // InternalBug304681TestLanguage.g:758:1: ( ( rule__PackageDefinition__ContentsAssignment_4 )* )
             {
-            // InternalBug304681TestLanguage.g:753:1: ( ( rule__PackageDefinition__ContentsAssignment_4 )* )
-            // InternalBug304681TestLanguage.g:754:2: ( rule__PackageDefinition__ContentsAssignment_4 )*
+            // InternalBug304681TestLanguage.g:758:1: ( ( rule__PackageDefinition__ContentsAssignment_4 )* )
+            // InternalBug304681TestLanguage.g:759:2: ( rule__PackageDefinition__ContentsAssignment_4 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getContentsAssignment_4()); 
             }
-            // InternalBug304681TestLanguage.g:755:2: ( rule__PackageDefinition__ContentsAssignment_4 )*
+            // InternalBug304681TestLanguage.g:760:2: ( rule__PackageDefinition__ContentsAssignment_4 )*
             loop9:
             do {
                 int alt9=2;
@@ -2575,7 +2583,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:755:3: rule__PackageDefinition__ContentsAssignment_4
+            	    // InternalBug304681TestLanguage.g:760:3: rule__PackageDefinition__ContentsAssignment_4
             	    {
             	    pushFollow(FollowSets000.FOLLOW_7);
             	    rule__PackageDefinition__ContentsAssignment_4();
@@ -2616,14 +2624,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__0"
-    // InternalBug304681TestLanguage.g:764:1: rule__Object__Group__0 : rule__Object__Group__0__Impl rule__Object__Group__1 ;
+    // InternalBug304681TestLanguage.g:769:1: rule__Object__Group__0 : rule__Object__Group__0__Impl rule__Object__Group__1 ;
     public final void rule__Object__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:768:1: ( rule__Object__Group__0__Impl rule__Object__Group__1 )
-            // InternalBug304681TestLanguage.g:769:2: rule__Object__Group__0__Impl rule__Object__Group__1
+            // InternalBug304681TestLanguage.g:773:1: ( rule__Object__Group__0__Impl rule__Object__Group__1 )
+            // InternalBug304681TestLanguage.g:774:2: rule__Object__Group__0__Impl rule__Object__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Object__Group__0__Impl();
@@ -2654,22 +2662,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:776:1: rule__Object__Group__0__Impl : ( ( rule__Object__Alternatives_0 )? ) ;
+    // InternalBug304681TestLanguage.g:781:1: rule__Object__Group__0__Impl : ( ( rule__Object__Alternatives_0 )? ) ;
     public final void rule__Object__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:780:1: ( ( ( rule__Object__Alternatives_0 )? ) )
-            // InternalBug304681TestLanguage.g:781:1: ( ( rule__Object__Alternatives_0 )? )
+            // InternalBug304681TestLanguage.g:785:1: ( ( ( rule__Object__Alternatives_0 )? ) )
+            // InternalBug304681TestLanguage.g:786:1: ( ( rule__Object__Alternatives_0 )? )
             {
-            // InternalBug304681TestLanguage.g:781:1: ( ( rule__Object__Alternatives_0 )? )
-            // InternalBug304681TestLanguage.g:782:2: ( rule__Object__Alternatives_0 )?
+            // InternalBug304681TestLanguage.g:786:1: ( ( rule__Object__Alternatives_0 )? )
+            // InternalBug304681TestLanguage.g:787:2: ( rule__Object__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getAlternatives_0()); 
             }
-            // InternalBug304681TestLanguage.g:783:2: ( rule__Object__Alternatives_0 )?
+            // InternalBug304681TestLanguage.g:788:2: ( rule__Object__Alternatives_0 )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2678,7 +2686,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt10) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:783:3: rule__Object__Alternatives_0
+                    // InternalBug304681TestLanguage.g:788:3: rule__Object__Alternatives_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Alternatives_0();
@@ -2716,14 +2724,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__1"
-    // InternalBug304681TestLanguage.g:791:1: rule__Object__Group__1 : rule__Object__Group__1__Impl rule__Object__Group__2 ;
+    // InternalBug304681TestLanguage.g:796:1: rule__Object__Group__1 : rule__Object__Group__1__Impl rule__Object__Group__2 ;
     public final void rule__Object__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:795:1: ( rule__Object__Group__1__Impl rule__Object__Group__2 )
-            // InternalBug304681TestLanguage.g:796:2: rule__Object__Group__1__Impl rule__Object__Group__2
+            // InternalBug304681TestLanguage.g:800:1: ( rule__Object__Group__1__Impl rule__Object__Group__2 )
+            // InternalBug304681TestLanguage.g:801:2: rule__Object__Group__1__Impl rule__Object__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Object__Group__1__Impl();
@@ -2754,17 +2762,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:803:1: rule__Object__Group__1__Impl : ( 'object' ) ;
+    // InternalBug304681TestLanguage.g:808:1: rule__Object__Group__1__Impl : ( 'object' ) ;
     public final void rule__Object__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:807:1: ( ( 'object' ) )
-            // InternalBug304681TestLanguage.g:808:1: ( 'object' )
+            // InternalBug304681TestLanguage.g:812:1: ( ( 'object' ) )
+            // InternalBug304681TestLanguage.g:813:1: ( 'object' )
             {
-            // InternalBug304681TestLanguage.g:808:1: ( 'object' )
-            // InternalBug304681TestLanguage.g:809:2: 'object'
+            // InternalBug304681TestLanguage.g:813:1: ( 'object' )
+            // InternalBug304681TestLanguage.g:814:2: 'object'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getObjectKeyword_1()); 
@@ -2795,14 +2803,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__2"
-    // InternalBug304681TestLanguage.g:818:1: rule__Object__Group__2 : rule__Object__Group__2__Impl rule__Object__Group__3 ;
+    // InternalBug304681TestLanguage.g:823:1: rule__Object__Group__2 : rule__Object__Group__2__Impl rule__Object__Group__3 ;
     public final void rule__Object__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:822:1: ( rule__Object__Group__2__Impl rule__Object__Group__3 )
-            // InternalBug304681TestLanguage.g:823:2: rule__Object__Group__2__Impl rule__Object__Group__3
+            // InternalBug304681TestLanguage.g:827:1: ( rule__Object__Group__2__Impl rule__Object__Group__3 )
+            // InternalBug304681TestLanguage.g:828:2: rule__Object__Group__2__Impl rule__Object__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Object__Group__2__Impl();
@@ -2833,23 +2841,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:830:1: rule__Object__Group__2__Impl : ( ( rule__Object__NameAssignment_2 ) ) ;
+    // InternalBug304681TestLanguage.g:835:1: rule__Object__Group__2__Impl : ( ( rule__Object__NameAssignment_2 ) ) ;
     public final void rule__Object__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:834:1: ( ( ( rule__Object__NameAssignment_2 ) ) )
-            // InternalBug304681TestLanguage.g:835:1: ( ( rule__Object__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:839:1: ( ( ( rule__Object__NameAssignment_2 ) ) )
+            // InternalBug304681TestLanguage.g:840:1: ( ( rule__Object__NameAssignment_2 ) )
             {
-            // InternalBug304681TestLanguage.g:835:1: ( ( rule__Object__NameAssignment_2 ) )
-            // InternalBug304681TestLanguage.g:836:2: ( rule__Object__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:840:1: ( ( rule__Object__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:841:2: ( rule__Object__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getNameAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:837:2: ( rule__Object__NameAssignment_2 )
-            // InternalBug304681TestLanguage.g:837:3: rule__Object__NameAssignment_2
+            // InternalBug304681TestLanguage.g:842:2: ( rule__Object__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:842:3: rule__Object__NameAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__NameAssignment_2();
@@ -2884,14 +2892,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__3"
-    // InternalBug304681TestLanguage.g:845:1: rule__Object__Group__3 : rule__Object__Group__3__Impl rule__Object__Group__4 ;
+    // InternalBug304681TestLanguage.g:850:1: rule__Object__Group__3 : rule__Object__Group__3__Impl rule__Object__Group__4 ;
     public final void rule__Object__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:849:1: ( rule__Object__Group__3__Impl rule__Object__Group__4 )
-            // InternalBug304681TestLanguage.g:850:2: rule__Object__Group__3__Impl rule__Object__Group__4
+            // InternalBug304681TestLanguage.g:854:1: ( rule__Object__Group__3__Impl rule__Object__Group__4 )
+            // InternalBug304681TestLanguage.g:855:2: rule__Object__Group__3__Impl rule__Object__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Object__Group__3__Impl();
@@ -2922,22 +2930,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:857:1: rule__Object__Group__3__Impl : ( ( rule__Object__Group_3__0 )? ) ;
+    // InternalBug304681TestLanguage.g:862:1: rule__Object__Group__3__Impl : ( ( rule__Object__Group_3__0 )? ) ;
     public final void rule__Object__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:861:1: ( ( ( rule__Object__Group_3__0 )? ) )
-            // InternalBug304681TestLanguage.g:862:1: ( ( rule__Object__Group_3__0 )? )
+            // InternalBug304681TestLanguage.g:866:1: ( ( ( rule__Object__Group_3__0 )? ) )
+            // InternalBug304681TestLanguage.g:867:1: ( ( rule__Object__Group_3__0 )? )
             {
-            // InternalBug304681TestLanguage.g:862:1: ( ( rule__Object__Group_3__0 )? )
-            // InternalBug304681TestLanguage.g:863:2: ( rule__Object__Group_3__0 )?
+            // InternalBug304681TestLanguage.g:867:1: ( ( rule__Object__Group_3__0 )? )
+            // InternalBug304681TestLanguage.g:868:2: ( rule__Object__Group_3__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getGroup_3()); 
             }
-            // InternalBug304681TestLanguage.g:864:2: ( rule__Object__Group_3__0 )?
+            // InternalBug304681TestLanguage.g:869:2: ( rule__Object__Group_3__0 )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2946,7 +2954,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt11) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:864:3: rule__Object__Group_3__0
+                    // InternalBug304681TestLanguage.g:869:3: rule__Object__Group_3__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_3__0();
@@ -2984,14 +2992,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__4"
-    // InternalBug304681TestLanguage.g:872:1: rule__Object__Group__4 : rule__Object__Group__4__Impl rule__Object__Group__5 ;
+    // InternalBug304681TestLanguage.g:877:1: rule__Object__Group__4 : rule__Object__Group__4__Impl rule__Object__Group__5 ;
     public final void rule__Object__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:876:1: ( rule__Object__Group__4__Impl rule__Object__Group__5 )
-            // InternalBug304681TestLanguage.g:877:2: rule__Object__Group__4__Impl rule__Object__Group__5
+            // InternalBug304681TestLanguage.g:881:1: ( rule__Object__Group__4__Impl rule__Object__Group__5 )
+            // InternalBug304681TestLanguage.g:882:2: rule__Object__Group__4__Impl rule__Object__Group__5
             {
             pushFollow(FollowSets000.FOLLOW_9);
             rule__Object__Group__4__Impl();
@@ -3022,17 +3030,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:884:1: rule__Object__Group__4__Impl : ( '{' ) ;
+    // InternalBug304681TestLanguage.g:889:1: rule__Object__Group__4__Impl : ( '{' ) ;
     public final void rule__Object__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:888:1: ( ( '{' ) )
-            // InternalBug304681TestLanguage.g:889:1: ( '{' )
+            // InternalBug304681TestLanguage.g:893:1: ( ( '{' ) )
+            // InternalBug304681TestLanguage.g:894:1: ( '{' )
             {
-            // InternalBug304681TestLanguage.g:889:1: ( '{' )
-            // InternalBug304681TestLanguage.g:890:2: '{'
+            // InternalBug304681TestLanguage.g:894:1: ( '{' )
+            // InternalBug304681TestLanguage.g:895:2: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getLeftCurlyBracketKeyword_4()); 
@@ -3063,14 +3071,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__5"
-    // InternalBug304681TestLanguage.g:899:1: rule__Object__Group__5 : rule__Object__Group__5__Impl rule__Object__Group__6 ;
+    // InternalBug304681TestLanguage.g:904:1: rule__Object__Group__5 : rule__Object__Group__5__Impl rule__Object__Group__6 ;
     public final void rule__Object__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:903:1: ( rule__Object__Group__5__Impl rule__Object__Group__6 )
-            // InternalBug304681TestLanguage.g:904:2: rule__Object__Group__5__Impl rule__Object__Group__6
+            // InternalBug304681TestLanguage.g:908:1: ( rule__Object__Group__5__Impl rule__Object__Group__6 )
+            // InternalBug304681TestLanguage.g:909:2: rule__Object__Group__5__Impl rule__Object__Group__6
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Object__Group__5__Impl();
@@ -3101,23 +3109,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__5__Impl"
-    // InternalBug304681TestLanguage.g:911:1: rule__Object__Group__5__Impl : ( ( rule__Object__UnorderedGroup_5 ) ) ;
+    // InternalBug304681TestLanguage.g:916:1: rule__Object__Group__5__Impl : ( ( rule__Object__UnorderedGroup_5 ) ) ;
     public final void rule__Object__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:915:1: ( ( ( rule__Object__UnorderedGroup_5 ) ) )
-            // InternalBug304681TestLanguage.g:916:1: ( ( rule__Object__UnorderedGroup_5 ) )
+            // InternalBug304681TestLanguage.g:920:1: ( ( ( rule__Object__UnorderedGroup_5 ) ) )
+            // InternalBug304681TestLanguage.g:921:1: ( ( rule__Object__UnorderedGroup_5 ) )
             {
-            // InternalBug304681TestLanguage.g:916:1: ( ( rule__Object__UnorderedGroup_5 ) )
-            // InternalBug304681TestLanguage.g:917:2: ( rule__Object__UnorderedGroup_5 )
+            // InternalBug304681TestLanguage.g:921:1: ( ( rule__Object__UnorderedGroup_5 ) )
+            // InternalBug304681TestLanguage.g:922:2: ( rule__Object__UnorderedGroup_5 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getUnorderedGroup_5()); 
             }
-            // InternalBug304681TestLanguage.g:918:2: ( rule__Object__UnorderedGroup_5 )
-            // InternalBug304681TestLanguage.g:918:3: rule__Object__UnorderedGroup_5
+            // InternalBug304681TestLanguage.g:923:2: ( rule__Object__UnorderedGroup_5 )
+            // InternalBug304681TestLanguage.g:923:3: rule__Object__UnorderedGroup_5
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__UnorderedGroup_5();
@@ -3152,14 +3160,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__6"
-    // InternalBug304681TestLanguage.g:926:1: rule__Object__Group__6 : rule__Object__Group__6__Impl ;
+    // InternalBug304681TestLanguage.g:931:1: rule__Object__Group__6 : rule__Object__Group__6__Impl ;
     public final void rule__Object__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:930:1: ( rule__Object__Group__6__Impl )
-            // InternalBug304681TestLanguage.g:931:2: rule__Object__Group__6__Impl
+            // InternalBug304681TestLanguage.g:935:1: ( rule__Object__Group__6__Impl )
+            // InternalBug304681TestLanguage.g:936:2: rule__Object__Group__6__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group__6__Impl();
@@ -3185,17 +3193,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group__6__Impl"
-    // InternalBug304681TestLanguage.g:937:1: rule__Object__Group__6__Impl : ( '}' ) ;
+    // InternalBug304681TestLanguage.g:942:1: rule__Object__Group__6__Impl : ( '}' ) ;
     public final void rule__Object__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:941:1: ( ( '}' ) )
-            // InternalBug304681TestLanguage.g:942:1: ( '}' )
+            // InternalBug304681TestLanguage.g:946:1: ( ( '}' ) )
+            // InternalBug304681TestLanguage.g:947:1: ( '}' )
             {
-            // InternalBug304681TestLanguage.g:942:1: ( '}' )
-            // InternalBug304681TestLanguage.g:943:2: '}'
+            // InternalBug304681TestLanguage.g:947:1: ( '}' )
+            // InternalBug304681TestLanguage.g:948:2: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getRightCurlyBracketKeyword_6()); 
@@ -3226,14 +3234,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_3__0"
-    // InternalBug304681TestLanguage.g:953:1: rule__Object__Group_3__0 : rule__Object__Group_3__0__Impl rule__Object__Group_3__1 ;
+    // InternalBug304681TestLanguage.g:958:1: rule__Object__Group_3__0 : rule__Object__Group_3__0__Impl rule__Object__Group_3__1 ;
     public final void rule__Object__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:957:1: ( rule__Object__Group_3__0__Impl rule__Object__Group_3__1 )
-            // InternalBug304681TestLanguage.g:958:2: rule__Object__Group_3__0__Impl rule__Object__Group_3__1
+            // InternalBug304681TestLanguage.g:962:1: ( rule__Object__Group_3__0__Impl rule__Object__Group_3__1 )
+            // InternalBug304681TestLanguage.g:963:2: rule__Object__Group_3__0__Impl rule__Object__Group_3__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Object__Group_3__0__Impl();
@@ -3264,17 +3272,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_3__0__Impl"
-    // InternalBug304681TestLanguage.g:965:1: rule__Object__Group_3__0__Impl : ( 'extends' ) ;
+    // InternalBug304681TestLanguage.g:970:1: rule__Object__Group_3__0__Impl : ( 'extends' ) ;
     public final void rule__Object__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:969:1: ( ( 'extends' ) )
-            // InternalBug304681TestLanguage.g:970:1: ( 'extends' )
+            // InternalBug304681TestLanguage.g:974:1: ( ( 'extends' ) )
+            // InternalBug304681TestLanguage.g:975:1: ( 'extends' )
             {
-            // InternalBug304681TestLanguage.g:970:1: ( 'extends' )
-            // InternalBug304681TestLanguage.g:971:2: 'extends'
+            // InternalBug304681TestLanguage.g:975:1: ( 'extends' )
+            // InternalBug304681TestLanguage.g:976:2: 'extends'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getExtendsKeyword_3_0()); 
@@ -3305,14 +3313,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_3__1"
-    // InternalBug304681TestLanguage.g:980:1: rule__Object__Group_3__1 : rule__Object__Group_3__1__Impl ;
+    // InternalBug304681TestLanguage.g:985:1: rule__Object__Group_3__1 : rule__Object__Group_3__1__Impl ;
     public final void rule__Object__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:984:1: ( rule__Object__Group_3__1__Impl )
-            // InternalBug304681TestLanguage.g:985:2: rule__Object__Group_3__1__Impl
+            // InternalBug304681TestLanguage.g:989:1: ( rule__Object__Group_3__1__Impl )
+            // InternalBug304681TestLanguage.g:990:2: rule__Object__Group_3__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_3__1__Impl();
@@ -3338,23 +3346,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_3__1__Impl"
-    // InternalBug304681TestLanguage.g:991:1: rule__Object__Group_3__1__Impl : ( ( rule__Object__ParentAssignment_3_1 ) ) ;
+    // InternalBug304681TestLanguage.g:996:1: rule__Object__Group_3__1__Impl : ( ( rule__Object__ParentAssignment_3_1 ) ) ;
     public final void rule__Object__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:995:1: ( ( ( rule__Object__ParentAssignment_3_1 ) ) )
-            // InternalBug304681TestLanguage.g:996:1: ( ( rule__Object__ParentAssignment_3_1 ) )
+            // InternalBug304681TestLanguage.g:1000:1: ( ( ( rule__Object__ParentAssignment_3_1 ) ) )
+            // InternalBug304681TestLanguage.g:1001:1: ( ( rule__Object__ParentAssignment_3_1 ) )
             {
-            // InternalBug304681TestLanguage.g:996:1: ( ( rule__Object__ParentAssignment_3_1 ) )
-            // InternalBug304681TestLanguage.g:997:2: ( rule__Object__ParentAssignment_3_1 )
+            // InternalBug304681TestLanguage.g:1001:1: ( ( rule__Object__ParentAssignment_3_1 ) )
+            // InternalBug304681TestLanguage.g:1002:2: ( rule__Object__ParentAssignment_3_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getParentAssignment_3_1()); 
             }
-            // InternalBug304681TestLanguage.g:998:2: ( rule__Object__ParentAssignment_3_1 )
-            // InternalBug304681TestLanguage.g:998:3: rule__Object__ParentAssignment_3_1
+            // InternalBug304681TestLanguage.g:1003:2: ( rule__Object__ParentAssignment_3_1 )
+            // InternalBug304681TestLanguage.g:1003:3: rule__Object__ParentAssignment_3_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__ParentAssignment_3_1();
@@ -3389,14 +3397,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_0__0"
-    // InternalBug304681TestLanguage.g:1007:1: rule__Object__Group_5_0__0 : rule__Object__Group_5_0__0__Impl rule__Object__Group_5_0__1 ;
+    // InternalBug304681TestLanguage.g:1012:1: rule__Object__Group_5_0__0 : rule__Object__Group_5_0__0__Impl rule__Object__Group_5_0__1 ;
     public final void rule__Object__Group_5_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1011:1: ( rule__Object__Group_5_0__0__Impl rule__Object__Group_5_0__1 )
-            // InternalBug304681TestLanguage.g:1012:2: rule__Object__Group_5_0__0__Impl rule__Object__Group_5_0__1
+            // InternalBug304681TestLanguage.g:1016:1: ( rule__Object__Group_5_0__0__Impl rule__Object__Group_5_0__1 )
+            // InternalBug304681TestLanguage.g:1017:2: rule__Object__Group_5_0__0__Impl rule__Object__Group_5_0__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Object__Group_5_0__0__Impl();
@@ -3427,17 +3435,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_0__0__Impl"
-    // InternalBug304681TestLanguage.g:1019:1: rule__Object__Group_5_0__0__Impl : ( 'shortDescription' ) ;
+    // InternalBug304681TestLanguage.g:1024:1: rule__Object__Group_5_0__0__Impl : ( 'shortDescription' ) ;
     public final void rule__Object__Group_5_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1023:1: ( ( 'shortDescription' ) )
-            // InternalBug304681TestLanguage.g:1024:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:1028:1: ( ( 'shortDescription' ) )
+            // InternalBug304681TestLanguage.g:1029:1: ( 'shortDescription' )
             {
-            // InternalBug304681TestLanguage.g:1024:1: ( 'shortDescription' )
-            // InternalBug304681TestLanguage.g:1025:2: 'shortDescription'
+            // InternalBug304681TestLanguage.g:1029:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:1030:2: 'shortDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getShortDescriptionKeyword_5_0_0()); 
@@ -3468,14 +3476,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_0__1"
-    // InternalBug304681TestLanguage.g:1034:1: rule__Object__Group_5_0__1 : rule__Object__Group_5_0__1__Impl rule__Object__Group_5_0__2 ;
+    // InternalBug304681TestLanguage.g:1039:1: rule__Object__Group_5_0__1 : rule__Object__Group_5_0__1__Impl rule__Object__Group_5_0__2 ;
     public final void rule__Object__Group_5_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1038:1: ( rule__Object__Group_5_0__1__Impl rule__Object__Group_5_0__2 )
-            // InternalBug304681TestLanguage.g:1039:2: rule__Object__Group_5_0__1__Impl rule__Object__Group_5_0__2
+            // InternalBug304681TestLanguage.g:1043:1: ( rule__Object__Group_5_0__1__Impl rule__Object__Group_5_0__2 )
+            // InternalBug304681TestLanguage.g:1044:2: rule__Object__Group_5_0__1__Impl rule__Object__Group_5_0__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object__Group_5_0__1__Impl();
@@ -3506,23 +3514,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_0__1__Impl"
-    // InternalBug304681TestLanguage.g:1046:1: rule__Object__Group_5_0__1__Impl : ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1051:1: rule__Object__Group_5_0__1__Impl : ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) ) ;
     public final void rule__Object__Group_5_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1050:1: ( ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:1051:1: ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) )
+            // InternalBug304681TestLanguage.g:1055:1: ( ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:1056:1: ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1051:1: ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) )
-            // InternalBug304681TestLanguage.g:1052:2: ( rule__Object__ShortDescriptionAssignment_5_0_1 )
+            // InternalBug304681TestLanguage.g:1056:1: ( ( rule__Object__ShortDescriptionAssignment_5_0_1 ) )
+            // InternalBug304681TestLanguage.g:1057:2: ( rule__Object__ShortDescriptionAssignment_5_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getShortDescriptionAssignment_5_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:1053:2: ( rule__Object__ShortDescriptionAssignment_5_0_1 )
-            // InternalBug304681TestLanguage.g:1053:3: rule__Object__ShortDescriptionAssignment_5_0_1
+            // InternalBug304681TestLanguage.g:1058:2: ( rule__Object__ShortDescriptionAssignment_5_0_1 )
+            // InternalBug304681TestLanguage.g:1058:3: rule__Object__ShortDescriptionAssignment_5_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__ShortDescriptionAssignment_5_0_1();
@@ -3557,14 +3565,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_0__2"
-    // InternalBug304681TestLanguage.g:1061:1: rule__Object__Group_5_0__2 : rule__Object__Group_5_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:1066:1: rule__Object__Group_5_0__2 : rule__Object__Group_5_0__2__Impl ;
     public final void rule__Object__Group_5_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1065:1: ( rule__Object__Group_5_0__2__Impl )
-            // InternalBug304681TestLanguage.g:1066:2: rule__Object__Group_5_0__2__Impl
+            // InternalBug304681TestLanguage.g:1070:1: ( rule__Object__Group_5_0__2__Impl )
+            // InternalBug304681TestLanguage.g:1071:2: rule__Object__Group_5_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_0__2__Impl();
@@ -3590,17 +3598,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_0__2__Impl"
-    // InternalBug304681TestLanguage.g:1072:1: rule__Object__Group_5_0__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1077:1: rule__Object__Group_5_0__2__Impl : ( ';' ) ;
     public final void rule__Object__Group_5_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1076:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1077:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1081:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1082:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1077:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1078:2: ';'
+            // InternalBug304681TestLanguage.g:1082:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1083:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSemicolonKeyword_5_0_2()); 
@@ -3631,14 +3639,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_1__0"
-    // InternalBug304681TestLanguage.g:1088:1: rule__Object__Group_5_1__0 : rule__Object__Group_5_1__0__Impl rule__Object__Group_5_1__1 ;
+    // InternalBug304681TestLanguage.g:1093:1: rule__Object__Group_5_1__0 : rule__Object__Group_5_1__0__Impl rule__Object__Group_5_1__1 ;
     public final void rule__Object__Group_5_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1092:1: ( rule__Object__Group_5_1__0__Impl rule__Object__Group_5_1__1 )
-            // InternalBug304681TestLanguage.g:1093:2: rule__Object__Group_5_1__0__Impl rule__Object__Group_5_1__1
+            // InternalBug304681TestLanguage.g:1097:1: ( rule__Object__Group_5_1__0__Impl rule__Object__Group_5_1__1 )
+            // InternalBug304681TestLanguage.g:1098:2: rule__Object__Group_5_1__0__Impl rule__Object__Group_5_1__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Object__Group_5_1__0__Impl();
@@ -3669,17 +3677,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_1__0__Impl"
-    // InternalBug304681TestLanguage.g:1100:1: rule__Object__Group_5_1__0__Impl : ( 'longDescription' ) ;
+    // InternalBug304681TestLanguage.g:1105:1: rule__Object__Group_5_1__0__Impl : ( 'longDescription' ) ;
     public final void rule__Object__Group_5_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1104:1: ( ( 'longDescription' ) )
-            // InternalBug304681TestLanguage.g:1105:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:1109:1: ( ( 'longDescription' ) )
+            // InternalBug304681TestLanguage.g:1110:1: ( 'longDescription' )
             {
-            // InternalBug304681TestLanguage.g:1105:1: ( 'longDescription' )
-            // InternalBug304681TestLanguage.g:1106:2: 'longDescription'
+            // InternalBug304681TestLanguage.g:1110:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:1111:2: 'longDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getLongDescriptionKeyword_5_1_0()); 
@@ -3710,14 +3718,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_1__1"
-    // InternalBug304681TestLanguage.g:1115:1: rule__Object__Group_5_1__1 : rule__Object__Group_5_1__1__Impl rule__Object__Group_5_1__2 ;
+    // InternalBug304681TestLanguage.g:1120:1: rule__Object__Group_5_1__1 : rule__Object__Group_5_1__1__Impl rule__Object__Group_5_1__2 ;
     public final void rule__Object__Group_5_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1119:1: ( rule__Object__Group_5_1__1__Impl rule__Object__Group_5_1__2 )
-            // InternalBug304681TestLanguage.g:1120:2: rule__Object__Group_5_1__1__Impl rule__Object__Group_5_1__2
+            // InternalBug304681TestLanguage.g:1124:1: ( rule__Object__Group_5_1__1__Impl rule__Object__Group_5_1__2 )
+            // InternalBug304681TestLanguage.g:1125:2: rule__Object__Group_5_1__1__Impl rule__Object__Group_5_1__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object__Group_5_1__1__Impl();
@@ -3748,23 +3756,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_1__1__Impl"
-    // InternalBug304681TestLanguage.g:1127:1: rule__Object__Group_5_1__1__Impl : ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1132:1: rule__Object__Group_5_1__1__Impl : ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) ) ;
     public final void rule__Object__Group_5_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1131:1: ( ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:1132:1: ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) )
+            // InternalBug304681TestLanguage.g:1136:1: ( ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:1137:1: ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1132:1: ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) )
-            // InternalBug304681TestLanguage.g:1133:2: ( rule__Object__LongDescriptionAssignment_5_1_1 )
+            // InternalBug304681TestLanguage.g:1137:1: ( ( rule__Object__LongDescriptionAssignment_5_1_1 ) )
+            // InternalBug304681TestLanguage.g:1138:2: ( rule__Object__LongDescriptionAssignment_5_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getLongDescriptionAssignment_5_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:1134:2: ( rule__Object__LongDescriptionAssignment_5_1_1 )
-            // InternalBug304681TestLanguage.g:1134:3: rule__Object__LongDescriptionAssignment_5_1_1
+            // InternalBug304681TestLanguage.g:1139:2: ( rule__Object__LongDescriptionAssignment_5_1_1 )
+            // InternalBug304681TestLanguage.g:1139:3: rule__Object__LongDescriptionAssignment_5_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__LongDescriptionAssignment_5_1_1();
@@ -3799,14 +3807,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_1__2"
-    // InternalBug304681TestLanguage.g:1142:1: rule__Object__Group_5_1__2 : rule__Object__Group_5_1__2__Impl ;
+    // InternalBug304681TestLanguage.g:1147:1: rule__Object__Group_5_1__2 : rule__Object__Group_5_1__2__Impl ;
     public final void rule__Object__Group_5_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1146:1: ( rule__Object__Group_5_1__2__Impl )
-            // InternalBug304681TestLanguage.g:1147:2: rule__Object__Group_5_1__2__Impl
+            // InternalBug304681TestLanguage.g:1151:1: ( rule__Object__Group_5_1__2__Impl )
+            // InternalBug304681TestLanguage.g:1152:2: rule__Object__Group_5_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_1__2__Impl();
@@ -3832,17 +3840,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_1__2__Impl"
-    // InternalBug304681TestLanguage.g:1153:1: rule__Object__Group_5_1__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1158:1: rule__Object__Group_5_1__2__Impl : ( ';' ) ;
     public final void rule__Object__Group_5_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1157:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1158:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1162:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1163:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1158:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1159:2: ';'
+            // InternalBug304681TestLanguage.g:1163:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1164:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSemicolonKeyword_5_1_2()); 
@@ -3873,14 +3881,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_2__0"
-    // InternalBug304681TestLanguage.g:1169:1: rule__Object__Group_5_2__0 : rule__Object__Group_5_2__0__Impl rule__Object__Group_5_2__1 ;
+    // InternalBug304681TestLanguage.g:1174:1: rule__Object__Group_5_2__0 : rule__Object__Group_5_2__0__Impl rule__Object__Group_5_2__1 ;
     public final void rule__Object__Group_5_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1173:1: ( rule__Object__Group_5_2__0__Impl rule__Object__Group_5_2__1 )
-            // InternalBug304681TestLanguage.g:1174:2: rule__Object__Group_5_2__0__Impl rule__Object__Group_5_2__1
+            // InternalBug304681TestLanguage.g:1178:1: ( rule__Object__Group_5_2__0__Impl rule__Object__Group_5_2__1 )
+            // InternalBug304681TestLanguage.g:1179:2: rule__Object__Group_5_2__0__Impl rule__Object__Group_5_2__1
             {
             pushFollow(FollowSets000.FOLLOW_12);
             rule__Object__Group_5_2__0__Impl();
@@ -3911,17 +3919,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_2__0__Impl"
-    // InternalBug304681TestLanguage.g:1181:1: rule__Object__Group_5_2__0__Impl : ( 'serialUID' ) ;
+    // InternalBug304681TestLanguage.g:1186:1: rule__Object__Group_5_2__0__Impl : ( 'serialUID' ) ;
     public final void rule__Object__Group_5_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1185:1: ( ( 'serialUID' ) )
-            // InternalBug304681TestLanguage.g:1186:1: ( 'serialUID' )
+            // InternalBug304681TestLanguage.g:1190:1: ( ( 'serialUID' ) )
+            // InternalBug304681TestLanguage.g:1191:1: ( 'serialUID' )
             {
-            // InternalBug304681TestLanguage.g:1186:1: ( 'serialUID' )
-            // InternalBug304681TestLanguage.g:1187:2: 'serialUID'
+            // InternalBug304681TestLanguage.g:1191:1: ( 'serialUID' )
+            // InternalBug304681TestLanguage.g:1192:2: 'serialUID'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSerialUIDKeyword_5_2_0()); 
@@ -3952,14 +3960,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_2__1"
-    // InternalBug304681TestLanguage.g:1196:1: rule__Object__Group_5_2__1 : rule__Object__Group_5_2__1__Impl rule__Object__Group_5_2__2 ;
+    // InternalBug304681TestLanguage.g:1201:1: rule__Object__Group_5_2__1 : rule__Object__Group_5_2__1__Impl rule__Object__Group_5_2__2 ;
     public final void rule__Object__Group_5_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1200:1: ( rule__Object__Group_5_2__1__Impl rule__Object__Group_5_2__2 )
-            // InternalBug304681TestLanguage.g:1201:2: rule__Object__Group_5_2__1__Impl rule__Object__Group_5_2__2
+            // InternalBug304681TestLanguage.g:1205:1: ( rule__Object__Group_5_2__1__Impl rule__Object__Group_5_2__2 )
+            // InternalBug304681TestLanguage.g:1206:2: rule__Object__Group_5_2__1__Impl rule__Object__Group_5_2__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object__Group_5_2__1__Impl();
@@ -3990,23 +3998,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_2__1__Impl"
-    // InternalBug304681TestLanguage.g:1208:1: rule__Object__Group_5_2__1__Impl : ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1213:1: rule__Object__Group_5_2__1__Impl : ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) ) ;
     public final void rule__Object__Group_5_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1212:1: ( ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) ) )
-            // InternalBug304681TestLanguage.g:1213:1: ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) )
+            // InternalBug304681TestLanguage.g:1217:1: ( ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) ) )
+            // InternalBug304681TestLanguage.g:1218:1: ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1213:1: ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) )
-            // InternalBug304681TestLanguage.g:1214:2: ( rule__Object__SerialVersionUIDAssignment_5_2_1 )
+            // InternalBug304681TestLanguage.g:1218:1: ( ( rule__Object__SerialVersionUIDAssignment_5_2_1 ) )
+            // InternalBug304681TestLanguage.g:1219:2: ( rule__Object__SerialVersionUIDAssignment_5_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSerialVersionUIDAssignment_5_2_1()); 
             }
-            // InternalBug304681TestLanguage.g:1215:2: ( rule__Object__SerialVersionUIDAssignment_5_2_1 )
-            // InternalBug304681TestLanguage.g:1215:3: rule__Object__SerialVersionUIDAssignment_5_2_1
+            // InternalBug304681TestLanguage.g:1220:2: ( rule__Object__SerialVersionUIDAssignment_5_2_1 )
+            // InternalBug304681TestLanguage.g:1220:3: rule__Object__SerialVersionUIDAssignment_5_2_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__SerialVersionUIDAssignment_5_2_1();
@@ -4041,14 +4049,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_2__2"
-    // InternalBug304681TestLanguage.g:1223:1: rule__Object__Group_5_2__2 : rule__Object__Group_5_2__2__Impl ;
+    // InternalBug304681TestLanguage.g:1228:1: rule__Object__Group_5_2__2 : rule__Object__Group_5_2__2__Impl ;
     public final void rule__Object__Group_5_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1227:1: ( rule__Object__Group_5_2__2__Impl )
-            // InternalBug304681TestLanguage.g:1228:2: rule__Object__Group_5_2__2__Impl
+            // InternalBug304681TestLanguage.g:1232:1: ( rule__Object__Group_5_2__2__Impl )
+            // InternalBug304681TestLanguage.g:1233:2: rule__Object__Group_5_2__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_2__2__Impl();
@@ -4074,17 +4082,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_2__2__Impl"
-    // InternalBug304681TestLanguage.g:1234:1: rule__Object__Group_5_2__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1239:1: rule__Object__Group_5_2__2__Impl : ( ';' ) ;
     public final void rule__Object__Group_5_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1238:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1239:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1243:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1244:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1239:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1240:2: ';'
+            // InternalBug304681TestLanguage.g:1244:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1245:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSemicolonKeyword_5_2_2()); 
@@ -4115,14 +4123,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_3__0"
-    // InternalBug304681TestLanguage.g:1250:1: rule__Object__Group_5_3__0 : rule__Object__Group_5_3__0__Impl rule__Object__Group_5_3__1 ;
+    // InternalBug304681TestLanguage.g:1255:1: rule__Object__Group_5_3__0 : rule__Object__Group_5_3__0__Impl rule__Object__Group_5_3__1 ;
     public final void rule__Object__Group_5_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1254:1: ( rule__Object__Group_5_3__0__Impl rule__Object__Group_5_3__1 )
-            // InternalBug304681TestLanguage.g:1255:2: rule__Object__Group_5_3__0__Impl rule__Object__Group_5_3__1
+            // InternalBug304681TestLanguage.g:1259:1: ( rule__Object__Group_5_3__0__Impl rule__Object__Group_5_3__1 )
+            // InternalBug304681TestLanguage.g:1260:2: rule__Object__Group_5_3__0__Impl rule__Object__Group_5_3__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object__Group_5_3__0__Impl();
@@ -4153,23 +4161,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_3__0__Impl"
-    // InternalBug304681TestLanguage.g:1262:1: rule__Object__Group_5_3__0__Impl : ( ( rule__Object__CloneableAssignment_5_3_0 ) ) ;
+    // InternalBug304681TestLanguage.g:1267:1: rule__Object__Group_5_3__0__Impl : ( ( rule__Object__CloneableAssignment_5_3_0 ) ) ;
     public final void rule__Object__Group_5_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1266:1: ( ( ( rule__Object__CloneableAssignment_5_3_0 ) ) )
-            // InternalBug304681TestLanguage.g:1267:1: ( ( rule__Object__CloneableAssignment_5_3_0 ) )
+            // InternalBug304681TestLanguage.g:1271:1: ( ( ( rule__Object__CloneableAssignment_5_3_0 ) ) )
+            // InternalBug304681TestLanguage.g:1272:1: ( ( rule__Object__CloneableAssignment_5_3_0 ) )
             {
-            // InternalBug304681TestLanguage.g:1267:1: ( ( rule__Object__CloneableAssignment_5_3_0 ) )
-            // InternalBug304681TestLanguage.g:1268:2: ( rule__Object__CloneableAssignment_5_3_0 )
+            // InternalBug304681TestLanguage.g:1272:1: ( ( rule__Object__CloneableAssignment_5_3_0 ) )
+            // InternalBug304681TestLanguage.g:1273:2: ( rule__Object__CloneableAssignment_5_3_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getCloneableAssignment_5_3_0()); 
             }
-            // InternalBug304681TestLanguage.g:1269:2: ( rule__Object__CloneableAssignment_5_3_0 )
-            // InternalBug304681TestLanguage.g:1269:3: rule__Object__CloneableAssignment_5_3_0
+            // InternalBug304681TestLanguage.g:1274:2: ( rule__Object__CloneableAssignment_5_3_0 )
+            // InternalBug304681TestLanguage.g:1274:3: rule__Object__CloneableAssignment_5_3_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__CloneableAssignment_5_3_0();
@@ -4204,14 +4212,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_3__1"
-    // InternalBug304681TestLanguage.g:1277:1: rule__Object__Group_5_3__1 : rule__Object__Group_5_3__1__Impl ;
+    // InternalBug304681TestLanguage.g:1282:1: rule__Object__Group_5_3__1 : rule__Object__Group_5_3__1__Impl ;
     public final void rule__Object__Group_5_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1281:1: ( rule__Object__Group_5_3__1__Impl )
-            // InternalBug304681TestLanguage.g:1282:2: rule__Object__Group_5_3__1__Impl
+            // InternalBug304681TestLanguage.g:1286:1: ( rule__Object__Group_5_3__1__Impl )
+            // InternalBug304681TestLanguage.g:1287:2: rule__Object__Group_5_3__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_3__1__Impl();
@@ -4237,17 +4245,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_3__1__Impl"
-    // InternalBug304681TestLanguage.g:1288:1: rule__Object__Group_5_3__1__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1293:1: rule__Object__Group_5_3__1__Impl : ( ';' ) ;
     public final void rule__Object__Group_5_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1292:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1293:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1297:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1298:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1293:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1294:2: ';'
+            // InternalBug304681TestLanguage.g:1298:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1299:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSemicolonKeyword_5_3_1()); 
@@ -4278,14 +4286,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_5__0"
-    // InternalBug304681TestLanguage.g:1304:1: rule__Object__Group_5_5__0 : rule__Object__Group_5_5__0__Impl rule__Object__Group_5_5__1 ;
+    // InternalBug304681TestLanguage.g:1309:1: rule__Object__Group_5_5__0 : rule__Object__Group_5_5__0__Impl rule__Object__Group_5_5__1 ;
     public final void rule__Object__Group_5_5__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1308:1: ( rule__Object__Group_5_5__0__Impl rule__Object__Group_5_5__1 )
-            // InternalBug304681TestLanguage.g:1309:2: rule__Object__Group_5_5__0__Impl rule__Object__Group_5_5__1
+            // InternalBug304681TestLanguage.g:1313:1: ( rule__Object__Group_5_5__0__Impl rule__Object__Group_5_5__1 )
+            // InternalBug304681TestLanguage.g:1314:2: rule__Object__Group_5_5__0__Impl rule__Object__Group_5_5__1
             {
             pushFollow(FollowSets000.FOLLOW_13);
             rule__Object__Group_5_5__0__Impl();
@@ -4316,17 +4324,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_5__0__Impl"
-    // InternalBug304681TestLanguage.g:1316:1: rule__Object__Group_5_5__0__Impl : ( 'before' ) ;
+    // InternalBug304681TestLanguage.g:1321:1: rule__Object__Group_5_5__0__Impl : ( 'before' ) ;
     public final void rule__Object__Group_5_5__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1320:1: ( ( 'before' ) )
-            // InternalBug304681TestLanguage.g:1321:1: ( 'before' )
+            // InternalBug304681TestLanguage.g:1325:1: ( ( 'before' ) )
+            // InternalBug304681TestLanguage.g:1326:1: ( 'before' )
             {
-            // InternalBug304681TestLanguage.g:1321:1: ( 'before' )
-            // InternalBug304681TestLanguage.g:1322:2: 'before'
+            // InternalBug304681TestLanguage.g:1326:1: ( 'before' )
+            // InternalBug304681TestLanguage.g:1327:2: 'before'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0()); 
@@ -4357,14 +4365,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_5__1"
-    // InternalBug304681TestLanguage.g:1331:1: rule__Object__Group_5_5__1 : rule__Object__Group_5_5__1__Impl rule__Object__Group_5_5__2 ;
+    // InternalBug304681TestLanguage.g:1336:1: rule__Object__Group_5_5__1 : rule__Object__Group_5_5__1__Impl rule__Object__Group_5_5__2 ;
     public final void rule__Object__Group_5_5__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1335:1: ( rule__Object__Group_5_5__1__Impl rule__Object__Group_5_5__2 )
-            // InternalBug304681TestLanguage.g:1336:2: rule__Object__Group_5_5__1__Impl rule__Object__Group_5_5__2
+            // InternalBug304681TestLanguage.g:1340:1: ( rule__Object__Group_5_5__1__Impl rule__Object__Group_5_5__2 )
+            // InternalBug304681TestLanguage.g:1341:2: rule__Object__Group_5_5__1__Impl rule__Object__Group_5_5__2
             {
             pushFollow(FollowSets000.FOLLOW_13);
             rule__Object__Group_5_5__1__Impl();
@@ -4395,22 +4403,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_5__1__Impl"
-    // InternalBug304681TestLanguage.g:1343:1: rule__Object__Group_5_5__1__Impl : ( ( rule__Object__FeaturesAssignment_5_5_1 )* ) ;
+    // InternalBug304681TestLanguage.g:1348:1: rule__Object__Group_5_5__1__Impl : ( ( rule__Object__FeaturesAssignment_5_5_1 )* ) ;
     public final void rule__Object__Group_5_5__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1347:1: ( ( ( rule__Object__FeaturesAssignment_5_5_1 )* ) )
-            // InternalBug304681TestLanguage.g:1348:1: ( ( rule__Object__FeaturesAssignment_5_5_1 )* )
+            // InternalBug304681TestLanguage.g:1352:1: ( ( ( rule__Object__FeaturesAssignment_5_5_1 )* ) )
+            // InternalBug304681TestLanguage.g:1353:1: ( ( rule__Object__FeaturesAssignment_5_5_1 )* )
             {
-            // InternalBug304681TestLanguage.g:1348:1: ( ( rule__Object__FeaturesAssignment_5_5_1 )* )
-            // InternalBug304681TestLanguage.g:1349:2: ( rule__Object__FeaturesAssignment_5_5_1 )*
+            // InternalBug304681TestLanguage.g:1353:1: ( ( rule__Object__FeaturesAssignment_5_5_1 )* )
+            // InternalBug304681TestLanguage.g:1354:2: ( rule__Object__FeaturesAssignment_5_5_1 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_5_1()); 
             }
-            // InternalBug304681TestLanguage.g:1350:2: ( rule__Object__FeaturesAssignment_5_5_1 )*
+            // InternalBug304681TestLanguage.g:1355:2: ( rule__Object__FeaturesAssignment_5_5_1 )*
             loop12:
             do {
                 int alt12=2;
@@ -4423,7 +4431,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:1350:3: rule__Object__FeaturesAssignment_5_5_1
+            	    // InternalBug304681TestLanguage.g:1355:3: rule__Object__FeaturesAssignment_5_5_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_14);
             	    rule__Object__FeaturesAssignment_5_5_1();
@@ -4464,14 +4472,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_5__2"
-    // InternalBug304681TestLanguage.g:1358:1: rule__Object__Group_5_5__2 : rule__Object__Group_5_5__2__Impl ;
+    // InternalBug304681TestLanguage.g:1363:1: rule__Object__Group_5_5__2 : rule__Object__Group_5_5__2__Impl ;
     public final void rule__Object__Group_5_5__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1362:1: ( rule__Object__Group_5_5__2__Impl )
-            // InternalBug304681TestLanguage.g:1363:2: rule__Object__Group_5_5__2__Impl
+            // InternalBug304681TestLanguage.g:1367:1: ( rule__Object__Group_5_5__2__Impl )
+            // InternalBug304681TestLanguage.g:1368:2: rule__Object__Group_5_5__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_5__2__Impl();
@@ -4497,17 +4505,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_5__2__Impl"
-    // InternalBug304681TestLanguage.g:1369:1: rule__Object__Group_5_5__2__Impl : ( 'after' ) ;
+    // InternalBug304681TestLanguage.g:1374:1: rule__Object__Group_5_5__2__Impl : ( 'after' ) ;
     public final void rule__Object__Group_5_5__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1373:1: ( ( 'after' ) )
-            // InternalBug304681TestLanguage.g:1374:1: ( 'after' )
+            // InternalBug304681TestLanguage.g:1378:1: ( ( 'after' ) )
+            // InternalBug304681TestLanguage.g:1379:1: ( 'after' )
             {
-            // InternalBug304681TestLanguage.g:1374:1: ( 'after' )
-            // InternalBug304681TestLanguage.g:1375:2: 'after'
+            // InternalBug304681TestLanguage.g:1379:1: ( 'after' )
+            // InternalBug304681TestLanguage.g:1380:2: 'after'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getAfterKeyword_5_5_2()); 
@@ -4538,14 +4546,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_6__0"
-    // InternalBug304681TestLanguage.g:1385:1: rule__Object__Group_5_6__0 : rule__Object__Group_5_6__0__Impl rule__Object__Group_5_6__1 ;
+    // InternalBug304681TestLanguage.g:1390:1: rule__Object__Group_5_6__0 : rule__Object__Group_5_6__0__Impl rule__Object__Group_5_6__1 ;
     public final void rule__Object__Group_5_6__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1389:1: ( rule__Object__Group_5_6__0__Impl rule__Object__Group_5_6__1 )
-            // InternalBug304681TestLanguage.g:1390:2: rule__Object__Group_5_6__0__Impl rule__Object__Group_5_6__1
+            // InternalBug304681TestLanguage.g:1394:1: ( rule__Object__Group_5_6__0__Impl rule__Object__Group_5_6__1 )
+            // InternalBug304681TestLanguage.g:1395:2: rule__Object__Group_5_6__0__Impl rule__Object__Group_5_6__1
             {
             pushFollow(FollowSets000.FOLLOW_15);
             rule__Object__Group_5_6__0__Impl();
@@ -4576,17 +4584,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_6__0__Impl"
-    // InternalBug304681TestLanguage.g:1397:1: rule__Object__Group_5_6__0__Impl : ( 'optionalLoop' ) ;
+    // InternalBug304681TestLanguage.g:1402:1: rule__Object__Group_5_6__0__Impl : ( 'optionalLoop' ) ;
     public final void rule__Object__Group_5_6__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1401:1: ( ( 'optionalLoop' ) )
-            // InternalBug304681TestLanguage.g:1402:1: ( 'optionalLoop' )
+            // InternalBug304681TestLanguage.g:1406:1: ( ( 'optionalLoop' ) )
+            // InternalBug304681TestLanguage.g:1407:1: ( 'optionalLoop' )
             {
-            // InternalBug304681TestLanguage.g:1402:1: ( 'optionalLoop' )
-            // InternalBug304681TestLanguage.g:1403:2: 'optionalLoop'
+            // InternalBug304681TestLanguage.g:1407:1: ( 'optionalLoop' )
+            // InternalBug304681TestLanguage.g:1408:2: 'optionalLoop'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()); 
@@ -4617,14 +4625,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_6__1"
-    // InternalBug304681TestLanguage.g:1412:1: rule__Object__Group_5_6__1 : rule__Object__Group_5_6__1__Impl ;
+    // InternalBug304681TestLanguage.g:1417:1: rule__Object__Group_5_6__1 : rule__Object__Group_5_6__1__Impl ;
     public final void rule__Object__Group_5_6__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1416:1: ( rule__Object__Group_5_6__1__Impl )
-            // InternalBug304681TestLanguage.g:1417:2: rule__Object__Group_5_6__1__Impl
+            // InternalBug304681TestLanguage.g:1421:1: ( rule__Object__Group_5_6__1__Impl )
+            // InternalBug304681TestLanguage.g:1422:2: rule__Object__Group_5_6__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_6__1__Impl();
@@ -4650,29 +4658,29 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_6__1__Impl"
-    // InternalBug304681TestLanguage.g:1423:1: rule__Object__Group_5_6__1__Impl : ( ( rule__Object__FeaturesAssignment_5_6_1 )* ) ;
+    // InternalBug304681TestLanguage.g:1428:1: rule__Object__Group_5_6__1__Impl : ( ( rule__Object__FeaturesAssignment_5_6_1 )* ) ;
     public final void rule__Object__Group_5_6__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1427:1: ( ( ( rule__Object__FeaturesAssignment_5_6_1 )* ) )
-            // InternalBug304681TestLanguage.g:1428:1: ( ( rule__Object__FeaturesAssignment_5_6_1 )* )
+            // InternalBug304681TestLanguage.g:1432:1: ( ( ( rule__Object__FeaturesAssignment_5_6_1 )* ) )
+            // InternalBug304681TestLanguage.g:1433:1: ( ( rule__Object__FeaturesAssignment_5_6_1 )* )
             {
-            // InternalBug304681TestLanguage.g:1428:1: ( ( rule__Object__FeaturesAssignment_5_6_1 )* )
-            // InternalBug304681TestLanguage.g:1429:2: ( rule__Object__FeaturesAssignment_5_6_1 )*
+            // InternalBug304681TestLanguage.g:1433:1: ( ( rule__Object__FeaturesAssignment_5_6_1 )* )
+            // InternalBug304681TestLanguage.g:1434:2: ( rule__Object__FeaturesAssignment_5_6_1 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_6_1()); 
             }
-            // InternalBug304681TestLanguage.g:1430:2: ( rule__Object__FeaturesAssignment_5_6_1 )*
+            // InternalBug304681TestLanguage.g:1435:2: ( rule__Object__FeaturesAssignment_5_6_1 )*
             loop13:
             do {
                 int alt13=2;
                 alt13 = dfa13.predict(input);
                 switch (alt13) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:1430:3: rule__Object__FeaturesAssignment_5_6_1
+            	    // InternalBug304681TestLanguage.g:1435:3: rule__Object__FeaturesAssignment_5_6_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_14);
             	    rule__Object__FeaturesAssignment_5_6_1();
@@ -4713,14 +4721,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_7__0"
-    // InternalBug304681TestLanguage.g:1439:1: rule__Object__Group_5_7__0 : rule__Object__Group_5_7__0__Impl rule__Object__Group_5_7__1 ;
+    // InternalBug304681TestLanguage.g:1444:1: rule__Object__Group_5_7__0 : rule__Object__Group_5_7__0__Impl rule__Object__Group_5_7__1 ;
     public final void rule__Object__Group_5_7__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1443:1: ( rule__Object__Group_5_7__0__Impl rule__Object__Group_5_7__1 )
-            // InternalBug304681TestLanguage.g:1444:2: rule__Object__Group_5_7__0__Impl rule__Object__Group_5_7__1
+            // InternalBug304681TestLanguage.g:1448:1: ( rule__Object__Group_5_7__0__Impl rule__Object__Group_5_7__1 )
+            // InternalBug304681TestLanguage.g:1449:2: rule__Object__Group_5_7__0__Impl rule__Object__Group_5_7__1
             {
             pushFollow(FollowSets000.FOLLOW_15);
             rule__Object__Group_5_7__0__Impl();
@@ -4751,17 +4759,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_7__0__Impl"
-    // InternalBug304681TestLanguage.g:1451:1: rule__Object__Group_5_7__0__Impl : ( 'mandatoryLoop' ) ;
+    // InternalBug304681TestLanguage.g:1456:1: rule__Object__Group_5_7__0__Impl : ( 'mandatoryLoop' ) ;
     public final void rule__Object__Group_5_7__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1455:1: ( ( 'mandatoryLoop' ) )
-            // InternalBug304681TestLanguage.g:1456:1: ( 'mandatoryLoop' )
+            // InternalBug304681TestLanguage.g:1460:1: ( ( 'mandatoryLoop' ) )
+            // InternalBug304681TestLanguage.g:1461:1: ( 'mandatoryLoop' )
             {
-            // InternalBug304681TestLanguage.g:1456:1: ( 'mandatoryLoop' )
-            // InternalBug304681TestLanguage.g:1457:2: 'mandatoryLoop'
+            // InternalBug304681TestLanguage.g:1461:1: ( 'mandatoryLoop' )
+            // InternalBug304681TestLanguage.g:1462:2: 'mandatoryLoop'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getMandatoryLoopKeyword_5_7_0()); 
@@ -4792,14 +4800,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_7__1"
-    // InternalBug304681TestLanguage.g:1466:1: rule__Object__Group_5_7__1 : rule__Object__Group_5_7__1__Impl ;
+    // InternalBug304681TestLanguage.g:1471:1: rule__Object__Group_5_7__1 : rule__Object__Group_5_7__1__Impl ;
     public final void rule__Object__Group_5_7__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1470:1: ( rule__Object__Group_5_7__1__Impl )
-            // InternalBug304681TestLanguage.g:1471:2: rule__Object__Group_5_7__1__Impl
+            // InternalBug304681TestLanguage.g:1475:1: ( rule__Object__Group_5_7__1__Impl )
+            // InternalBug304681TestLanguage.g:1476:2: rule__Object__Group_5_7__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__Group_5_7__1__Impl();
@@ -4825,26 +4833,26 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__Group_5_7__1__Impl"
-    // InternalBug304681TestLanguage.g:1477:1: rule__Object__Group_5_7__1__Impl : ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) ) ;
+    // InternalBug304681TestLanguage.g:1482:1: rule__Object__Group_5_7__1__Impl : ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) ) ;
     public final void rule__Object__Group_5_7__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1481:1: ( ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) ) )
-            // InternalBug304681TestLanguage.g:1482:1: ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) )
+            // InternalBug304681TestLanguage.g:1486:1: ( ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) ) )
+            // InternalBug304681TestLanguage.g:1487:1: ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) )
             {
-            // InternalBug304681TestLanguage.g:1482:1: ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) )
-            // InternalBug304681TestLanguage.g:1483:2: ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* )
+            // InternalBug304681TestLanguage.g:1487:1: ( ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* ) )
+            // InternalBug304681TestLanguage.g:1488:2: ( ( rule__Object__FeaturesAssignment_5_7_1 ) ) ( ( rule__Object__FeaturesAssignment_5_7_1 )* )
             {
-            // InternalBug304681TestLanguage.g:1483:2: ( ( rule__Object__FeaturesAssignment_5_7_1 ) )
-            // InternalBug304681TestLanguage.g:1484:3: ( rule__Object__FeaturesAssignment_5_7_1 )
+            // InternalBug304681TestLanguage.g:1488:2: ( ( rule__Object__FeaturesAssignment_5_7_1 ) )
+            // InternalBug304681TestLanguage.g:1489:3: ( rule__Object__FeaturesAssignment_5_7_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_7_1()); 
             }
-            // InternalBug304681TestLanguage.g:1485:3: ( rule__Object__FeaturesAssignment_5_7_1 )
-            // InternalBug304681TestLanguage.g:1485:4: rule__Object__FeaturesAssignment_5_7_1
+            // InternalBug304681TestLanguage.g:1490:3: ( rule__Object__FeaturesAssignment_5_7_1 )
+            // InternalBug304681TestLanguage.g:1490:4: rule__Object__FeaturesAssignment_5_7_1
             {
             pushFollow(FollowSets000.FOLLOW_14);
             rule__Object__FeaturesAssignment_5_7_1();
@@ -4860,20 +4868,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
             }
 
-            // InternalBug304681TestLanguage.g:1488:2: ( ( rule__Object__FeaturesAssignment_5_7_1 )* )
-            // InternalBug304681TestLanguage.g:1489:3: ( rule__Object__FeaturesAssignment_5_7_1 )*
+            // InternalBug304681TestLanguage.g:1493:2: ( ( rule__Object__FeaturesAssignment_5_7_1 )* )
+            // InternalBug304681TestLanguage.g:1494:3: ( rule__Object__FeaturesAssignment_5_7_1 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_7_1()); 
             }
-            // InternalBug304681TestLanguage.g:1490:3: ( rule__Object__FeaturesAssignment_5_7_1 )*
+            // InternalBug304681TestLanguage.g:1495:3: ( rule__Object__FeaturesAssignment_5_7_1 )*
             loop14:
             do {
                 int alt14=2;
                 alt14 = dfa14.predict(input);
                 switch (alt14) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:1490:4: rule__Object__FeaturesAssignment_5_7_1
+            	    // InternalBug304681TestLanguage.g:1495:4: rule__Object__FeaturesAssignment_5_7_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_14);
             	    rule__Object__FeaturesAssignment_5_7_1();
@@ -4917,14 +4925,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__0"
-    // InternalBug304681TestLanguage.g:1500:1: rule__Attribute__Group__0 : rule__Attribute__Group__0__Impl rule__Attribute__Group__1 ;
+    // InternalBug304681TestLanguage.g:1505:1: rule__Attribute__Group__0 : rule__Attribute__Group__0__Impl rule__Attribute__Group__1 ;
     public final void rule__Attribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1504:1: ( rule__Attribute__Group__0__Impl rule__Attribute__Group__1 )
-            // InternalBug304681TestLanguage.g:1505:2: rule__Attribute__Group__0__Impl rule__Attribute__Group__1
+            // InternalBug304681TestLanguage.g:1509:1: ( rule__Attribute__Group__0__Impl rule__Attribute__Group__1 )
+            // InternalBug304681TestLanguage.g:1510:2: rule__Attribute__Group__0__Impl rule__Attribute__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Attribute__Group__0__Impl();
@@ -4955,17 +4963,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:1512:1: rule__Attribute__Group__0__Impl : ( 'Attribute' ) ;
+    // InternalBug304681TestLanguage.g:1517:1: rule__Attribute__Group__0__Impl : ( 'Attribute' ) ;
     public final void rule__Attribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1516:1: ( ( 'Attribute' ) )
-            // InternalBug304681TestLanguage.g:1517:1: ( 'Attribute' )
+            // InternalBug304681TestLanguage.g:1521:1: ( ( 'Attribute' ) )
+            // InternalBug304681TestLanguage.g:1522:1: ( 'Attribute' )
             {
-            // InternalBug304681TestLanguage.g:1517:1: ( 'Attribute' )
-            // InternalBug304681TestLanguage.g:1518:2: 'Attribute'
+            // InternalBug304681TestLanguage.g:1522:1: ( 'Attribute' )
+            // InternalBug304681TestLanguage.g:1523:2: 'Attribute'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getAttributeKeyword_0()); 
@@ -4996,14 +5004,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__1"
-    // InternalBug304681TestLanguage.g:1527:1: rule__Attribute__Group__1 : rule__Attribute__Group__1__Impl rule__Attribute__Group__2 ;
+    // InternalBug304681TestLanguage.g:1532:1: rule__Attribute__Group__1 : rule__Attribute__Group__1__Impl rule__Attribute__Group__2 ;
     public final void rule__Attribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1531:1: ( rule__Attribute__Group__1__Impl rule__Attribute__Group__2 )
-            // InternalBug304681TestLanguage.g:1532:2: rule__Attribute__Group__1__Impl rule__Attribute__Group__2
+            // InternalBug304681TestLanguage.g:1536:1: ( rule__Attribute__Group__1__Impl rule__Attribute__Group__2 )
+            // InternalBug304681TestLanguage.g:1537:2: rule__Attribute__Group__1__Impl rule__Attribute__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Attribute__Group__1__Impl();
@@ -5034,23 +5042,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:1539:1: rule__Attribute__Group__1__Impl : ( ( rule__Attribute__TypeAssignment_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1544:1: rule__Attribute__Group__1__Impl : ( ( rule__Attribute__TypeAssignment_1 ) ) ;
     public final void rule__Attribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1543:1: ( ( ( rule__Attribute__TypeAssignment_1 ) ) )
-            // InternalBug304681TestLanguage.g:1544:1: ( ( rule__Attribute__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:1548:1: ( ( ( rule__Attribute__TypeAssignment_1 ) ) )
+            // InternalBug304681TestLanguage.g:1549:1: ( ( rule__Attribute__TypeAssignment_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1544:1: ( ( rule__Attribute__TypeAssignment_1 ) )
-            // InternalBug304681TestLanguage.g:1545:2: ( rule__Attribute__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:1549:1: ( ( rule__Attribute__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:1550:2: ( rule__Attribute__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getTypeAssignment_1()); 
             }
-            // InternalBug304681TestLanguage.g:1546:2: ( rule__Attribute__TypeAssignment_1 )
-            // InternalBug304681TestLanguage.g:1546:3: rule__Attribute__TypeAssignment_1
+            // InternalBug304681TestLanguage.g:1551:2: ( rule__Attribute__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:1551:3: rule__Attribute__TypeAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__TypeAssignment_1();
@@ -5085,14 +5093,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__2"
-    // InternalBug304681TestLanguage.g:1554:1: rule__Attribute__Group__2 : rule__Attribute__Group__2__Impl rule__Attribute__Group__3 ;
+    // InternalBug304681TestLanguage.g:1559:1: rule__Attribute__Group__2 : rule__Attribute__Group__2__Impl rule__Attribute__Group__3 ;
     public final void rule__Attribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1558:1: ( rule__Attribute__Group__2__Impl rule__Attribute__Group__3 )
-            // InternalBug304681TestLanguage.g:1559:2: rule__Attribute__Group__2__Impl rule__Attribute__Group__3
+            // InternalBug304681TestLanguage.g:1563:1: ( rule__Attribute__Group__2__Impl rule__Attribute__Group__3 )
+            // InternalBug304681TestLanguage.g:1564:2: rule__Attribute__Group__2__Impl rule__Attribute__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Attribute__Group__2__Impl();
@@ -5123,23 +5131,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:1566:1: rule__Attribute__Group__2__Impl : ( ( rule__Attribute__NameAssignment_2 ) ) ;
+    // InternalBug304681TestLanguage.g:1571:1: rule__Attribute__Group__2__Impl : ( ( rule__Attribute__NameAssignment_2 ) ) ;
     public final void rule__Attribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1570:1: ( ( ( rule__Attribute__NameAssignment_2 ) ) )
-            // InternalBug304681TestLanguage.g:1571:1: ( ( rule__Attribute__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:1575:1: ( ( ( rule__Attribute__NameAssignment_2 ) ) )
+            // InternalBug304681TestLanguage.g:1576:1: ( ( rule__Attribute__NameAssignment_2 ) )
             {
-            // InternalBug304681TestLanguage.g:1571:1: ( ( rule__Attribute__NameAssignment_2 ) )
-            // InternalBug304681TestLanguage.g:1572:2: ( rule__Attribute__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:1576:1: ( ( rule__Attribute__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:1577:2: ( rule__Attribute__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getNameAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:1573:2: ( rule__Attribute__NameAssignment_2 )
-            // InternalBug304681TestLanguage.g:1573:3: rule__Attribute__NameAssignment_2
+            // InternalBug304681TestLanguage.g:1578:2: ( rule__Attribute__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:1578:3: rule__Attribute__NameAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__NameAssignment_2();
@@ -5174,14 +5182,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__3"
-    // InternalBug304681TestLanguage.g:1581:1: rule__Attribute__Group__3 : rule__Attribute__Group__3__Impl ;
+    // InternalBug304681TestLanguage.g:1586:1: rule__Attribute__Group__3 : rule__Attribute__Group__3__Impl ;
     public final void rule__Attribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1585:1: ( rule__Attribute__Group__3__Impl )
-            // InternalBug304681TestLanguage.g:1586:2: rule__Attribute__Group__3__Impl
+            // InternalBug304681TestLanguage.g:1590:1: ( rule__Attribute__Group__3__Impl )
+            // InternalBug304681TestLanguage.g:1591:2: rule__Attribute__Group__3__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__3__Impl();
@@ -5207,17 +5215,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:1592:1: rule__Attribute__Group__3__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1597:1: rule__Attribute__Group__3__Impl : ( ';' ) ;
     public final void rule__Attribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1596:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1597:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1601:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1602:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1597:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1598:2: ';'
+            // InternalBug304681TestLanguage.g:1602:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1603:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getSemicolonKeyword_3()); 
@@ -5248,14 +5256,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__0"
-    // InternalBug304681TestLanguage.g:1608:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
+    // InternalBug304681TestLanguage.g:1613:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
     public final void rule__Reference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1612:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
-            // InternalBug304681TestLanguage.g:1613:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
+            // InternalBug304681TestLanguage.g:1617:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
+            // InternalBug304681TestLanguage.g:1618:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Reference__Group__0__Impl();
@@ -5286,17 +5294,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:1620:1: rule__Reference__Group__0__Impl : ( 'Reference' ) ;
+    // InternalBug304681TestLanguage.g:1625:1: rule__Reference__Group__0__Impl : ( 'Reference' ) ;
     public final void rule__Reference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1624:1: ( ( 'Reference' ) )
-            // InternalBug304681TestLanguage.g:1625:1: ( 'Reference' )
+            // InternalBug304681TestLanguage.g:1629:1: ( ( 'Reference' ) )
+            // InternalBug304681TestLanguage.g:1630:1: ( 'Reference' )
             {
-            // InternalBug304681TestLanguage.g:1625:1: ( 'Reference' )
-            // InternalBug304681TestLanguage.g:1626:2: 'Reference'
+            // InternalBug304681TestLanguage.g:1630:1: ( 'Reference' )
+            // InternalBug304681TestLanguage.g:1631:2: 'Reference'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getReferenceKeyword_0()); 
@@ -5327,14 +5335,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__1"
-    // InternalBug304681TestLanguage.g:1635:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl rule__Reference__Group__2 ;
+    // InternalBug304681TestLanguage.g:1640:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl rule__Reference__Group__2 ;
     public final void rule__Reference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1639:1: ( rule__Reference__Group__1__Impl rule__Reference__Group__2 )
-            // InternalBug304681TestLanguage.g:1640:2: rule__Reference__Group__1__Impl rule__Reference__Group__2
+            // InternalBug304681TestLanguage.g:1644:1: ( rule__Reference__Group__1__Impl rule__Reference__Group__2 )
+            // InternalBug304681TestLanguage.g:1645:2: rule__Reference__Group__1__Impl rule__Reference__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_16);
             rule__Reference__Group__1__Impl();
@@ -5365,23 +5373,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:1647:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__TypeAssignment_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1652:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__TypeAssignment_1 ) ) ;
     public final void rule__Reference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1651:1: ( ( ( rule__Reference__TypeAssignment_1 ) ) )
-            // InternalBug304681TestLanguage.g:1652:1: ( ( rule__Reference__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:1656:1: ( ( ( rule__Reference__TypeAssignment_1 ) ) )
+            // InternalBug304681TestLanguage.g:1657:1: ( ( rule__Reference__TypeAssignment_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1652:1: ( ( rule__Reference__TypeAssignment_1 ) )
-            // InternalBug304681TestLanguage.g:1653:2: ( rule__Reference__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:1657:1: ( ( rule__Reference__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:1658:2: ( rule__Reference__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getTypeAssignment_1()); 
             }
-            // InternalBug304681TestLanguage.g:1654:2: ( rule__Reference__TypeAssignment_1 )
-            // InternalBug304681TestLanguage.g:1654:3: rule__Reference__TypeAssignment_1
+            // InternalBug304681TestLanguage.g:1659:2: ( rule__Reference__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:1659:3: rule__Reference__TypeAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__TypeAssignment_1();
@@ -5416,14 +5424,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__2"
-    // InternalBug304681TestLanguage.g:1662:1: rule__Reference__Group__2 : rule__Reference__Group__2__Impl rule__Reference__Group__3 ;
+    // InternalBug304681TestLanguage.g:1667:1: rule__Reference__Group__2 : rule__Reference__Group__2__Impl rule__Reference__Group__3 ;
     public final void rule__Reference__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1666:1: ( rule__Reference__Group__2__Impl rule__Reference__Group__3 )
-            // InternalBug304681TestLanguage.g:1667:2: rule__Reference__Group__2__Impl rule__Reference__Group__3
+            // InternalBug304681TestLanguage.g:1671:1: ( rule__Reference__Group__2__Impl rule__Reference__Group__3 )
+            // InternalBug304681TestLanguage.g:1672:2: rule__Reference__Group__2__Impl rule__Reference__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_16);
             rule__Reference__Group__2__Impl();
@@ -5454,22 +5462,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:1674:1: rule__Reference__Group__2__Impl : ( ( rule__Reference__ManyAssignment_2 )? ) ;
+    // InternalBug304681TestLanguage.g:1679:1: rule__Reference__Group__2__Impl : ( ( rule__Reference__ManyAssignment_2 )? ) ;
     public final void rule__Reference__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1678:1: ( ( ( rule__Reference__ManyAssignment_2 )? ) )
-            // InternalBug304681TestLanguage.g:1679:1: ( ( rule__Reference__ManyAssignment_2 )? )
+            // InternalBug304681TestLanguage.g:1683:1: ( ( ( rule__Reference__ManyAssignment_2 )? ) )
+            // InternalBug304681TestLanguage.g:1684:1: ( ( rule__Reference__ManyAssignment_2 )? )
             {
-            // InternalBug304681TestLanguage.g:1679:1: ( ( rule__Reference__ManyAssignment_2 )? )
-            // InternalBug304681TestLanguage.g:1680:2: ( rule__Reference__ManyAssignment_2 )?
+            // InternalBug304681TestLanguage.g:1684:1: ( ( rule__Reference__ManyAssignment_2 )? )
+            // InternalBug304681TestLanguage.g:1685:2: ( rule__Reference__ManyAssignment_2 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getManyAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:1681:2: ( rule__Reference__ManyAssignment_2 )?
+            // InternalBug304681TestLanguage.g:1686:2: ( rule__Reference__ManyAssignment_2 )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -5478,7 +5486,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt15) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:1681:3: rule__Reference__ManyAssignment_2
+                    // InternalBug304681TestLanguage.g:1686:3: rule__Reference__ManyAssignment_2
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference__ManyAssignment_2();
@@ -5516,14 +5524,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__3"
-    // InternalBug304681TestLanguage.g:1689:1: rule__Reference__Group__3 : rule__Reference__Group__3__Impl rule__Reference__Group__4 ;
+    // InternalBug304681TestLanguage.g:1694:1: rule__Reference__Group__3 : rule__Reference__Group__3__Impl rule__Reference__Group__4 ;
     public final void rule__Reference__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1693:1: ( rule__Reference__Group__3__Impl rule__Reference__Group__4 )
-            // InternalBug304681TestLanguage.g:1694:2: rule__Reference__Group__3__Impl rule__Reference__Group__4
+            // InternalBug304681TestLanguage.g:1698:1: ( rule__Reference__Group__3__Impl rule__Reference__Group__4 )
+            // InternalBug304681TestLanguage.g:1699:2: rule__Reference__Group__3__Impl rule__Reference__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_17);
             rule__Reference__Group__3__Impl();
@@ -5554,23 +5562,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:1701:1: rule__Reference__Group__3__Impl : ( ( rule__Reference__NameAssignment_3 ) ) ;
+    // InternalBug304681TestLanguage.g:1706:1: rule__Reference__Group__3__Impl : ( ( rule__Reference__NameAssignment_3 ) ) ;
     public final void rule__Reference__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1705:1: ( ( ( rule__Reference__NameAssignment_3 ) ) )
-            // InternalBug304681TestLanguage.g:1706:1: ( ( rule__Reference__NameAssignment_3 ) )
+            // InternalBug304681TestLanguage.g:1710:1: ( ( ( rule__Reference__NameAssignment_3 ) ) )
+            // InternalBug304681TestLanguage.g:1711:1: ( ( rule__Reference__NameAssignment_3 ) )
             {
-            // InternalBug304681TestLanguage.g:1706:1: ( ( rule__Reference__NameAssignment_3 ) )
-            // InternalBug304681TestLanguage.g:1707:2: ( rule__Reference__NameAssignment_3 )
+            // InternalBug304681TestLanguage.g:1711:1: ( ( rule__Reference__NameAssignment_3 ) )
+            // InternalBug304681TestLanguage.g:1712:2: ( rule__Reference__NameAssignment_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getNameAssignment_3()); 
             }
-            // InternalBug304681TestLanguage.g:1708:2: ( rule__Reference__NameAssignment_3 )
-            // InternalBug304681TestLanguage.g:1708:3: rule__Reference__NameAssignment_3
+            // InternalBug304681TestLanguage.g:1713:2: ( rule__Reference__NameAssignment_3 )
+            // InternalBug304681TestLanguage.g:1713:3: rule__Reference__NameAssignment_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__NameAssignment_3();
@@ -5605,14 +5613,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__4"
-    // InternalBug304681TestLanguage.g:1716:1: rule__Reference__Group__4 : rule__Reference__Group__4__Impl ;
+    // InternalBug304681TestLanguage.g:1721:1: rule__Reference__Group__4 : rule__Reference__Group__4__Impl ;
     public final void rule__Reference__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1720:1: ( rule__Reference__Group__4__Impl )
-            // InternalBug304681TestLanguage.g:1721:2: rule__Reference__Group__4__Impl
+            // InternalBug304681TestLanguage.g:1725:1: ( rule__Reference__Group__4__Impl )
+            // InternalBug304681TestLanguage.g:1726:2: rule__Reference__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__4__Impl();
@@ -5638,23 +5646,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:1727:1: rule__Reference__Group__4__Impl : ( ( rule__Reference__Alternatives_4 ) ) ;
+    // InternalBug304681TestLanguage.g:1732:1: rule__Reference__Group__4__Impl : ( ( rule__Reference__Alternatives_4 ) ) ;
     public final void rule__Reference__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1731:1: ( ( ( rule__Reference__Alternatives_4 ) ) )
-            // InternalBug304681TestLanguage.g:1732:1: ( ( rule__Reference__Alternatives_4 ) )
+            // InternalBug304681TestLanguage.g:1736:1: ( ( ( rule__Reference__Alternatives_4 ) ) )
+            // InternalBug304681TestLanguage.g:1737:1: ( ( rule__Reference__Alternatives_4 ) )
             {
-            // InternalBug304681TestLanguage.g:1732:1: ( ( rule__Reference__Alternatives_4 ) )
-            // InternalBug304681TestLanguage.g:1733:2: ( rule__Reference__Alternatives_4 )
+            // InternalBug304681TestLanguage.g:1737:1: ( ( rule__Reference__Alternatives_4 ) )
+            // InternalBug304681TestLanguage.g:1738:2: ( rule__Reference__Alternatives_4 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getAlternatives_4()); 
             }
-            // InternalBug304681TestLanguage.g:1734:2: ( rule__Reference__Alternatives_4 )
-            // InternalBug304681TestLanguage.g:1734:3: rule__Reference__Alternatives_4
+            // InternalBug304681TestLanguage.g:1739:2: ( rule__Reference__Alternatives_4 )
+            // InternalBug304681TestLanguage.g:1739:3: rule__Reference__Alternatives_4
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Alternatives_4();
@@ -5689,14 +5697,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0__0"
-    // InternalBug304681TestLanguage.g:1743:1: rule__Reference__Group_4_0__0 : rule__Reference__Group_4_0__0__Impl rule__Reference__Group_4_0__1 ;
+    // InternalBug304681TestLanguage.g:1748:1: rule__Reference__Group_4_0__0 : rule__Reference__Group_4_0__0__Impl rule__Reference__Group_4_0__1 ;
     public final void rule__Reference__Group_4_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1747:1: ( rule__Reference__Group_4_0__0__Impl rule__Reference__Group_4_0__1 )
-            // InternalBug304681TestLanguage.g:1748:2: rule__Reference__Group_4_0__0__Impl rule__Reference__Group_4_0__1
+            // InternalBug304681TestLanguage.g:1752:1: ( rule__Reference__Group_4_0__0__Impl rule__Reference__Group_4_0__1 )
+            // InternalBug304681TestLanguage.g:1753:2: rule__Reference__Group_4_0__0__Impl rule__Reference__Group_4_0__1
             {
             pushFollow(FollowSets000.FOLLOW_18);
             rule__Reference__Group_4_0__0__Impl();
@@ -5727,17 +5735,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0__0__Impl"
-    // InternalBug304681TestLanguage.g:1755:1: rule__Reference__Group_4_0__0__Impl : ( '{' ) ;
+    // InternalBug304681TestLanguage.g:1760:1: rule__Reference__Group_4_0__0__Impl : ( '{' ) ;
     public final void rule__Reference__Group_4_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1759:1: ( ( '{' ) )
-            // InternalBug304681TestLanguage.g:1760:1: ( '{' )
+            // InternalBug304681TestLanguage.g:1764:1: ( ( '{' ) )
+            // InternalBug304681TestLanguage.g:1765:1: ( '{' )
             {
-            // InternalBug304681TestLanguage.g:1760:1: ( '{' )
-            // InternalBug304681TestLanguage.g:1761:2: '{'
+            // InternalBug304681TestLanguage.g:1765:1: ( '{' )
+            // InternalBug304681TestLanguage.g:1766:2: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getLeftCurlyBracketKeyword_4_0_0()); 
@@ -5768,14 +5776,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0__1"
-    // InternalBug304681TestLanguage.g:1770:1: rule__Reference__Group_4_0__1 : rule__Reference__Group_4_0__1__Impl rule__Reference__Group_4_0__2 ;
+    // InternalBug304681TestLanguage.g:1775:1: rule__Reference__Group_4_0__1 : rule__Reference__Group_4_0__1__Impl rule__Reference__Group_4_0__2 ;
     public final void rule__Reference__Group_4_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1774:1: ( rule__Reference__Group_4_0__1__Impl rule__Reference__Group_4_0__2 )
-            // InternalBug304681TestLanguage.g:1775:2: rule__Reference__Group_4_0__1__Impl rule__Reference__Group_4_0__2
+            // InternalBug304681TestLanguage.g:1779:1: ( rule__Reference__Group_4_0__1__Impl rule__Reference__Group_4_0__2 )
+            // InternalBug304681TestLanguage.g:1780:2: rule__Reference__Group_4_0__1__Impl rule__Reference__Group_4_0__2
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Reference__Group_4_0__1__Impl();
@@ -5806,23 +5814,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0__1__Impl"
-    // InternalBug304681TestLanguage.g:1782:1: rule__Reference__Group_4_0__1__Impl : ( ( rule__Reference__UnorderedGroup_4_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1787:1: rule__Reference__Group_4_0__1__Impl : ( ( rule__Reference__UnorderedGroup_4_0_1 ) ) ;
     public final void rule__Reference__Group_4_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1786:1: ( ( ( rule__Reference__UnorderedGroup_4_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:1787:1: ( ( rule__Reference__UnorderedGroup_4_0_1 ) )
+            // InternalBug304681TestLanguage.g:1791:1: ( ( ( rule__Reference__UnorderedGroup_4_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:1792:1: ( ( rule__Reference__UnorderedGroup_4_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1787:1: ( ( rule__Reference__UnorderedGroup_4_0_1 ) )
-            // InternalBug304681TestLanguage.g:1788:2: ( rule__Reference__UnorderedGroup_4_0_1 )
+            // InternalBug304681TestLanguage.g:1792:1: ( ( rule__Reference__UnorderedGroup_4_0_1 ) )
+            // InternalBug304681TestLanguage.g:1793:2: ( rule__Reference__UnorderedGroup_4_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:1789:2: ( rule__Reference__UnorderedGroup_4_0_1 )
-            // InternalBug304681TestLanguage.g:1789:3: rule__Reference__UnorderedGroup_4_0_1
+            // InternalBug304681TestLanguage.g:1794:2: ( rule__Reference__UnorderedGroup_4_0_1 )
+            // InternalBug304681TestLanguage.g:1794:3: rule__Reference__UnorderedGroup_4_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__UnorderedGroup_4_0_1();
@@ -5857,14 +5865,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0__2"
-    // InternalBug304681TestLanguage.g:1797:1: rule__Reference__Group_4_0__2 : rule__Reference__Group_4_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:1802:1: rule__Reference__Group_4_0__2 : rule__Reference__Group_4_0__2__Impl ;
     public final void rule__Reference__Group_4_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1801:1: ( rule__Reference__Group_4_0__2__Impl )
-            // InternalBug304681TestLanguage.g:1802:2: rule__Reference__Group_4_0__2__Impl
+            // InternalBug304681TestLanguage.g:1806:1: ( rule__Reference__Group_4_0__2__Impl )
+            // InternalBug304681TestLanguage.g:1807:2: rule__Reference__Group_4_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group_4_0__2__Impl();
@@ -5890,17 +5898,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0__2__Impl"
-    // InternalBug304681TestLanguage.g:1808:1: rule__Reference__Group_4_0__2__Impl : ( '}' ) ;
+    // InternalBug304681TestLanguage.g:1813:1: rule__Reference__Group_4_0__2__Impl : ( '}' ) ;
     public final void rule__Reference__Group_4_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1812:1: ( ( '}' ) )
-            // InternalBug304681TestLanguage.g:1813:1: ( '}' )
+            // InternalBug304681TestLanguage.g:1817:1: ( ( '}' ) )
+            // InternalBug304681TestLanguage.g:1818:1: ( '}' )
             {
-            // InternalBug304681TestLanguage.g:1813:1: ( '}' )
-            // InternalBug304681TestLanguage.g:1814:2: '}'
+            // InternalBug304681TestLanguage.g:1818:1: ( '}' )
+            // InternalBug304681TestLanguage.g:1819:2: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getRightCurlyBracketKeyword_4_0_2()); 
@@ -5931,14 +5939,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_0__0"
-    // InternalBug304681TestLanguage.g:1824:1: rule__Reference__Group_4_0_1_0__0 : rule__Reference__Group_4_0_1_0__0__Impl rule__Reference__Group_4_0_1_0__1 ;
+    // InternalBug304681TestLanguage.g:1829:1: rule__Reference__Group_4_0_1_0__0 : rule__Reference__Group_4_0_1_0__0__Impl rule__Reference__Group_4_0_1_0__1 ;
     public final void rule__Reference__Group_4_0_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1828:1: ( rule__Reference__Group_4_0_1_0__0__Impl rule__Reference__Group_4_0_1_0__1 )
-            // InternalBug304681TestLanguage.g:1829:2: rule__Reference__Group_4_0_1_0__0__Impl rule__Reference__Group_4_0_1_0__1
+            // InternalBug304681TestLanguage.g:1833:1: ( rule__Reference__Group_4_0_1_0__0__Impl rule__Reference__Group_4_0_1_0__1 )
+            // InternalBug304681TestLanguage.g:1834:2: rule__Reference__Group_4_0_1_0__0__Impl rule__Reference__Group_4_0_1_0__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Reference__Group_4_0_1_0__0__Impl();
@@ -5969,17 +5977,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_0__0__Impl"
-    // InternalBug304681TestLanguage.g:1836:1: rule__Reference__Group_4_0_1_0__0__Impl : ( 'shortDescription' ) ;
+    // InternalBug304681TestLanguage.g:1841:1: rule__Reference__Group_4_0_1_0__0__Impl : ( 'shortDescription' ) ;
     public final void rule__Reference__Group_4_0_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1840:1: ( ( 'shortDescription' ) )
-            // InternalBug304681TestLanguage.g:1841:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:1845:1: ( ( 'shortDescription' ) )
+            // InternalBug304681TestLanguage.g:1846:1: ( 'shortDescription' )
             {
-            // InternalBug304681TestLanguage.g:1841:1: ( 'shortDescription' )
-            // InternalBug304681TestLanguage.g:1842:2: 'shortDescription'
+            // InternalBug304681TestLanguage.g:1846:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:1847:2: 'shortDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getShortDescriptionKeyword_4_0_1_0_0()); 
@@ -6010,14 +6018,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_0__1"
-    // InternalBug304681TestLanguage.g:1851:1: rule__Reference__Group_4_0_1_0__1 : rule__Reference__Group_4_0_1_0__1__Impl rule__Reference__Group_4_0_1_0__2 ;
+    // InternalBug304681TestLanguage.g:1856:1: rule__Reference__Group_4_0_1_0__1 : rule__Reference__Group_4_0_1_0__1__Impl rule__Reference__Group_4_0_1_0__2 ;
     public final void rule__Reference__Group_4_0_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1855:1: ( rule__Reference__Group_4_0_1_0__1__Impl rule__Reference__Group_4_0_1_0__2 )
-            // InternalBug304681TestLanguage.g:1856:2: rule__Reference__Group_4_0_1_0__1__Impl rule__Reference__Group_4_0_1_0__2
+            // InternalBug304681TestLanguage.g:1860:1: ( rule__Reference__Group_4_0_1_0__1__Impl rule__Reference__Group_4_0_1_0__2 )
+            // InternalBug304681TestLanguage.g:1861:2: rule__Reference__Group_4_0_1_0__1__Impl rule__Reference__Group_4_0_1_0__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Reference__Group_4_0_1_0__1__Impl();
@@ -6048,23 +6056,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_0__1__Impl"
-    // InternalBug304681TestLanguage.g:1863:1: rule__Reference__Group_4_0_1_0__1__Impl : ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1868:1: rule__Reference__Group_4_0_1_0__1__Impl : ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) ) ;
     public final void rule__Reference__Group_4_0_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1867:1: ( ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:1868:1: ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) )
+            // InternalBug304681TestLanguage.g:1872:1: ( ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:1873:1: ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1868:1: ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) )
-            // InternalBug304681TestLanguage.g:1869:2: ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 )
+            // InternalBug304681TestLanguage.g:1873:1: ( ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 ) )
+            // InternalBug304681TestLanguage.g:1874:2: ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getShortDescriptionAssignment_4_0_1_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:1870:2: ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 )
-            // InternalBug304681TestLanguage.g:1870:3: rule__Reference__ShortDescriptionAssignment_4_0_1_0_1
+            // InternalBug304681TestLanguage.g:1875:2: ( rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 )
+            // InternalBug304681TestLanguage.g:1875:3: rule__Reference__ShortDescriptionAssignment_4_0_1_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__ShortDescriptionAssignment_4_0_1_0_1();
@@ -6099,14 +6107,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_0__2"
-    // InternalBug304681TestLanguage.g:1878:1: rule__Reference__Group_4_0_1_0__2 : rule__Reference__Group_4_0_1_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:1883:1: rule__Reference__Group_4_0_1_0__2 : rule__Reference__Group_4_0_1_0__2__Impl ;
     public final void rule__Reference__Group_4_0_1_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1882:1: ( rule__Reference__Group_4_0_1_0__2__Impl )
-            // InternalBug304681TestLanguage.g:1883:2: rule__Reference__Group_4_0_1_0__2__Impl
+            // InternalBug304681TestLanguage.g:1887:1: ( rule__Reference__Group_4_0_1_0__2__Impl )
+            // InternalBug304681TestLanguage.g:1888:2: rule__Reference__Group_4_0_1_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group_4_0_1_0__2__Impl();
@@ -6132,17 +6140,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_0__2__Impl"
-    // InternalBug304681TestLanguage.g:1889:1: rule__Reference__Group_4_0_1_0__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1894:1: rule__Reference__Group_4_0_1_0__2__Impl : ( ';' ) ;
     public final void rule__Reference__Group_4_0_1_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1893:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1894:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1898:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1899:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1894:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1895:2: ';'
+            // InternalBug304681TestLanguage.g:1899:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1900:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getSemicolonKeyword_4_0_1_0_2()); 
@@ -6173,14 +6181,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_1__0"
-    // InternalBug304681TestLanguage.g:1905:1: rule__Reference__Group_4_0_1_1__0 : rule__Reference__Group_4_0_1_1__0__Impl rule__Reference__Group_4_0_1_1__1 ;
+    // InternalBug304681TestLanguage.g:1910:1: rule__Reference__Group_4_0_1_1__0 : rule__Reference__Group_4_0_1_1__0__Impl rule__Reference__Group_4_0_1_1__1 ;
     public final void rule__Reference__Group_4_0_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1909:1: ( rule__Reference__Group_4_0_1_1__0__Impl rule__Reference__Group_4_0_1_1__1 )
-            // InternalBug304681TestLanguage.g:1910:2: rule__Reference__Group_4_0_1_1__0__Impl rule__Reference__Group_4_0_1_1__1
+            // InternalBug304681TestLanguage.g:1914:1: ( rule__Reference__Group_4_0_1_1__0__Impl rule__Reference__Group_4_0_1_1__1 )
+            // InternalBug304681TestLanguage.g:1915:2: rule__Reference__Group_4_0_1_1__0__Impl rule__Reference__Group_4_0_1_1__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Reference__Group_4_0_1_1__0__Impl();
@@ -6211,17 +6219,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_1__0__Impl"
-    // InternalBug304681TestLanguage.g:1917:1: rule__Reference__Group_4_0_1_1__0__Impl : ( 'longDescription' ) ;
+    // InternalBug304681TestLanguage.g:1922:1: rule__Reference__Group_4_0_1_1__0__Impl : ( 'longDescription' ) ;
     public final void rule__Reference__Group_4_0_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1921:1: ( ( 'longDescription' ) )
-            // InternalBug304681TestLanguage.g:1922:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:1926:1: ( ( 'longDescription' ) )
+            // InternalBug304681TestLanguage.g:1927:1: ( 'longDescription' )
             {
-            // InternalBug304681TestLanguage.g:1922:1: ( 'longDescription' )
-            // InternalBug304681TestLanguage.g:1923:2: 'longDescription'
+            // InternalBug304681TestLanguage.g:1927:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:1928:2: 'longDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getLongDescriptionKeyword_4_0_1_1_0()); 
@@ -6252,14 +6260,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_1__1"
-    // InternalBug304681TestLanguage.g:1932:1: rule__Reference__Group_4_0_1_1__1 : rule__Reference__Group_4_0_1_1__1__Impl rule__Reference__Group_4_0_1_1__2 ;
+    // InternalBug304681TestLanguage.g:1937:1: rule__Reference__Group_4_0_1_1__1 : rule__Reference__Group_4_0_1_1__1__Impl rule__Reference__Group_4_0_1_1__2 ;
     public final void rule__Reference__Group_4_0_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1936:1: ( rule__Reference__Group_4_0_1_1__1__Impl rule__Reference__Group_4_0_1_1__2 )
-            // InternalBug304681TestLanguage.g:1937:2: rule__Reference__Group_4_0_1_1__1__Impl rule__Reference__Group_4_0_1_1__2
+            // InternalBug304681TestLanguage.g:1941:1: ( rule__Reference__Group_4_0_1_1__1__Impl rule__Reference__Group_4_0_1_1__2 )
+            // InternalBug304681TestLanguage.g:1942:2: rule__Reference__Group_4_0_1_1__1__Impl rule__Reference__Group_4_0_1_1__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Reference__Group_4_0_1_1__1__Impl();
@@ -6290,23 +6298,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_1__1__Impl"
-    // InternalBug304681TestLanguage.g:1944:1: rule__Reference__Group_4_0_1_1__1__Impl : ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:1949:1: rule__Reference__Group_4_0_1_1__1__Impl : ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) ) ;
     public final void rule__Reference__Group_4_0_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1948:1: ( ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:1949:1: ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) )
+            // InternalBug304681TestLanguage.g:1953:1: ( ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:1954:1: ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:1949:1: ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) )
-            // InternalBug304681TestLanguage.g:1950:2: ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 )
+            // InternalBug304681TestLanguage.g:1954:1: ( ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 ) )
+            // InternalBug304681TestLanguage.g:1955:2: ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getLongDescriptionAssignment_4_0_1_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:1951:2: ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 )
-            // InternalBug304681TestLanguage.g:1951:3: rule__Reference__LongDescriptionAssignment_4_0_1_1_1
+            // InternalBug304681TestLanguage.g:1956:2: ( rule__Reference__LongDescriptionAssignment_4_0_1_1_1 )
+            // InternalBug304681TestLanguage.g:1956:3: rule__Reference__LongDescriptionAssignment_4_0_1_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__LongDescriptionAssignment_4_0_1_1_1();
@@ -6341,14 +6349,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_1__2"
-    // InternalBug304681TestLanguage.g:1959:1: rule__Reference__Group_4_0_1_1__2 : rule__Reference__Group_4_0_1_1__2__Impl ;
+    // InternalBug304681TestLanguage.g:1964:1: rule__Reference__Group_4_0_1_1__2 : rule__Reference__Group_4_0_1_1__2__Impl ;
     public final void rule__Reference__Group_4_0_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1963:1: ( rule__Reference__Group_4_0_1_1__2__Impl )
-            // InternalBug304681TestLanguage.g:1964:2: rule__Reference__Group_4_0_1_1__2__Impl
+            // InternalBug304681TestLanguage.g:1968:1: ( rule__Reference__Group_4_0_1_1__2__Impl )
+            // InternalBug304681TestLanguage.g:1969:2: rule__Reference__Group_4_0_1_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group_4_0_1_1__2__Impl();
@@ -6374,17 +6382,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group_4_0_1_1__2__Impl"
-    // InternalBug304681TestLanguage.g:1970:1: rule__Reference__Group_4_0_1_1__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:1975:1: rule__Reference__Group_4_0_1_1__2__Impl : ( ';' ) ;
     public final void rule__Reference__Group_4_0_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1974:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:1975:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1979:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:1980:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:1975:1: ( ';' )
-            // InternalBug304681TestLanguage.g:1976:2: ';'
+            // InternalBug304681TestLanguage.g:1980:1: ( ';' )
+            // InternalBug304681TestLanguage.g:1981:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getSemicolonKeyword_4_0_1_1_2()); 
@@ -6415,14 +6423,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__0"
-    // InternalBug304681TestLanguage.g:1986:1: rule__PackageDefinition2__Group__0 : rule__PackageDefinition2__Group__0__Impl rule__PackageDefinition2__Group__1 ;
+    // InternalBug304681TestLanguage.g:1991:1: rule__PackageDefinition2__Group__0 : rule__PackageDefinition2__Group__0__Impl rule__PackageDefinition2__Group__1 ;
     public final void rule__PackageDefinition2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:1990:1: ( rule__PackageDefinition2__Group__0__Impl rule__PackageDefinition2__Group__1 )
-            // InternalBug304681TestLanguage.g:1991:2: rule__PackageDefinition2__Group__0__Impl rule__PackageDefinition2__Group__1
+            // InternalBug304681TestLanguage.g:1995:1: ( rule__PackageDefinition2__Group__0__Impl rule__PackageDefinition2__Group__1 )
+            // InternalBug304681TestLanguage.g:1996:2: rule__PackageDefinition2__Group__0__Impl rule__PackageDefinition2__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__PackageDefinition2__Group__0__Impl();
@@ -6453,23 +6461,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:1998:1: rule__PackageDefinition2__Group__0__Impl : ( () ) ;
+    // InternalBug304681TestLanguage.g:2003:1: rule__PackageDefinition2__Group__0__Impl : ( () ) ;
     public final void rule__PackageDefinition2__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2002:1: ( ( () ) )
-            // InternalBug304681TestLanguage.g:2003:1: ( () )
+            // InternalBug304681TestLanguage.g:2007:1: ( ( () ) )
+            // InternalBug304681TestLanguage.g:2008:1: ( () )
             {
-            // InternalBug304681TestLanguage.g:2003:1: ( () )
-            // InternalBug304681TestLanguage.g:2004:2: ()
+            // InternalBug304681TestLanguage.g:2008:1: ( () )
+            // InternalBug304681TestLanguage.g:2009:2: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getPackageDefinitionAction_0()); 
             }
-            // InternalBug304681TestLanguage.g:2005:2: ()
-            // InternalBug304681TestLanguage.g:2005:3: 
+            // InternalBug304681TestLanguage.g:2010:2: ()
+            // InternalBug304681TestLanguage.g:2010:3: 
             {
             }
 
@@ -6494,14 +6502,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__1"
-    // InternalBug304681TestLanguage.g:2013:1: rule__PackageDefinition2__Group__1 : rule__PackageDefinition2__Group__1__Impl rule__PackageDefinition2__Group__2 ;
+    // InternalBug304681TestLanguage.g:2018:1: rule__PackageDefinition2__Group__1 : rule__PackageDefinition2__Group__1__Impl rule__PackageDefinition2__Group__2 ;
     public final void rule__PackageDefinition2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2017:1: ( rule__PackageDefinition2__Group__1__Impl rule__PackageDefinition2__Group__2 )
-            // InternalBug304681TestLanguage.g:2018:2: rule__PackageDefinition2__Group__1__Impl rule__PackageDefinition2__Group__2
+            // InternalBug304681TestLanguage.g:2022:1: ( rule__PackageDefinition2__Group__1__Impl rule__PackageDefinition2__Group__2 )
+            // InternalBug304681TestLanguage.g:2023:2: rule__PackageDefinition2__Group__1__Impl rule__PackageDefinition2__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__PackageDefinition2__Group__1__Impl();
@@ -6532,17 +6540,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:2025:1: rule__PackageDefinition2__Group__1__Impl : ( 'package' ) ;
+    // InternalBug304681TestLanguage.g:2030:1: rule__PackageDefinition2__Group__1__Impl : ( 'package' ) ;
     public final void rule__PackageDefinition2__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2029:1: ( ( 'package' ) )
-            // InternalBug304681TestLanguage.g:2030:1: ( 'package' )
+            // InternalBug304681TestLanguage.g:2034:1: ( ( 'package' ) )
+            // InternalBug304681TestLanguage.g:2035:1: ( 'package' )
             {
-            // InternalBug304681TestLanguage.g:2030:1: ( 'package' )
-            // InternalBug304681TestLanguage.g:2031:2: 'package'
+            // InternalBug304681TestLanguage.g:2035:1: ( 'package' )
+            // InternalBug304681TestLanguage.g:2036:2: 'package'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getPackageKeyword_1()); 
@@ -6573,14 +6581,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__2"
-    // InternalBug304681TestLanguage.g:2040:1: rule__PackageDefinition2__Group__2 : rule__PackageDefinition2__Group__2__Impl rule__PackageDefinition2__Group__3 ;
+    // InternalBug304681TestLanguage.g:2045:1: rule__PackageDefinition2__Group__2 : rule__PackageDefinition2__Group__2__Impl rule__PackageDefinition2__Group__3 ;
     public final void rule__PackageDefinition2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2044:1: ( rule__PackageDefinition2__Group__2__Impl rule__PackageDefinition2__Group__3 )
-            // InternalBug304681TestLanguage.g:2045:2: rule__PackageDefinition2__Group__2__Impl rule__PackageDefinition2__Group__3
+            // InternalBug304681TestLanguage.g:2049:1: ( rule__PackageDefinition2__Group__2__Impl rule__PackageDefinition2__Group__3 )
+            // InternalBug304681TestLanguage.g:2050:2: rule__PackageDefinition2__Group__2__Impl rule__PackageDefinition2__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__PackageDefinition2__Group__2__Impl();
@@ -6611,23 +6619,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:2052:1: rule__PackageDefinition2__Group__2__Impl : ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) ) ;
+    // InternalBug304681TestLanguage.g:2057:1: rule__PackageDefinition2__Group__2__Impl : ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) ) ;
     public final void rule__PackageDefinition2__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2056:1: ( ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) ) )
-            // InternalBug304681TestLanguage.g:2057:1: ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:2061:1: ( ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) ) )
+            // InternalBug304681TestLanguage.g:2062:1: ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) )
             {
-            // InternalBug304681TestLanguage.g:2057:1: ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) )
-            // InternalBug304681TestLanguage.g:2058:2: ( rule__PackageDefinition2__NamespaceAssignment_2 )
+            // InternalBug304681TestLanguage.g:2062:1: ( ( rule__PackageDefinition2__NamespaceAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:2063:2: ( rule__PackageDefinition2__NamespaceAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getNamespaceAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:2059:2: ( rule__PackageDefinition2__NamespaceAssignment_2 )
-            // InternalBug304681TestLanguage.g:2059:3: rule__PackageDefinition2__NamespaceAssignment_2
+            // InternalBug304681TestLanguage.g:2064:2: ( rule__PackageDefinition2__NamespaceAssignment_2 )
+            // InternalBug304681TestLanguage.g:2064:3: rule__PackageDefinition2__NamespaceAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__PackageDefinition2__NamespaceAssignment_2();
@@ -6662,14 +6670,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__3"
-    // InternalBug304681TestLanguage.g:2067:1: rule__PackageDefinition2__Group__3 : rule__PackageDefinition2__Group__3__Impl rule__PackageDefinition2__Group__4 ;
+    // InternalBug304681TestLanguage.g:2072:1: rule__PackageDefinition2__Group__3 : rule__PackageDefinition2__Group__3__Impl rule__PackageDefinition2__Group__4 ;
     public final void rule__PackageDefinition2__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2071:1: ( rule__PackageDefinition2__Group__3__Impl rule__PackageDefinition2__Group__4 )
-            // InternalBug304681TestLanguage.g:2072:2: rule__PackageDefinition2__Group__3__Impl rule__PackageDefinition2__Group__4
+            // InternalBug304681TestLanguage.g:2076:1: ( rule__PackageDefinition2__Group__3__Impl rule__PackageDefinition2__Group__4 )
+            // InternalBug304681TestLanguage.g:2077:2: rule__PackageDefinition2__Group__3__Impl rule__PackageDefinition2__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__PackageDefinition2__Group__3__Impl();
@@ -6700,17 +6708,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:2079:1: rule__PackageDefinition2__Group__3__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:2084:1: rule__PackageDefinition2__Group__3__Impl : ( ';' ) ;
     public final void rule__PackageDefinition2__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2083:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:2084:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2088:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:2089:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:2084:1: ( ';' )
-            // InternalBug304681TestLanguage.g:2085:2: ';'
+            // InternalBug304681TestLanguage.g:2089:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2090:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getSemicolonKeyword_3()); 
@@ -6741,14 +6749,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__4"
-    // InternalBug304681TestLanguage.g:2094:1: rule__PackageDefinition2__Group__4 : rule__PackageDefinition2__Group__4__Impl ;
+    // InternalBug304681TestLanguage.g:2099:1: rule__PackageDefinition2__Group__4 : rule__PackageDefinition2__Group__4__Impl ;
     public final void rule__PackageDefinition2__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2098:1: ( rule__PackageDefinition2__Group__4__Impl )
-            // InternalBug304681TestLanguage.g:2099:2: rule__PackageDefinition2__Group__4__Impl
+            // InternalBug304681TestLanguage.g:2103:1: ( rule__PackageDefinition2__Group__4__Impl )
+            // InternalBug304681TestLanguage.g:2104:2: rule__PackageDefinition2__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__PackageDefinition2__Group__4__Impl();
@@ -6774,22 +6782,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:2105:1: rule__PackageDefinition2__Group__4__Impl : ( ( rule__PackageDefinition2__ContentsAssignment_4 )* ) ;
+    // InternalBug304681TestLanguage.g:2110:1: rule__PackageDefinition2__Group__4__Impl : ( ( rule__PackageDefinition2__ContentsAssignment_4 )* ) ;
     public final void rule__PackageDefinition2__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2109:1: ( ( ( rule__PackageDefinition2__ContentsAssignment_4 )* ) )
-            // InternalBug304681TestLanguage.g:2110:1: ( ( rule__PackageDefinition2__ContentsAssignment_4 )* )
+            // InternalBug304681TestLanguage.g:2114:1: ( ( ( rule__PackageDefinition2__ContentsAssignment_4 )* ) )
+            // InternalBug304681TestLanguage.g:2115:1: ( ( rule__PackageDefinition2__ContentsAssignment_4 )* )
             {
-            // InternalBug304681TestLanguage.g:2110:1: ( ( rule__PackageDefinition2__ContentsAssignment_4 )* )
-            // InternalBug304681TestLanguage.g:2111:2: ( rule__PackageDefinition2__ContentsAssignment_4 )*
+            // InternalBug304681TestLanguage.g:2115:1: ( ( rule__PackageDefinition2__ContentsAssignment_4 )* )
+            // InternalBug304681TestLanguage.g:2116:2: ( rule__PackageDefinition2__ContentsAssignment_4 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getContentsAssignment_4()); 
             }
-            // InternalBug304681TestLanguage.g:2112:2: ( rule__PackageDefinition2__ContentsAssignment_4 )*
+            // InternalBug304681TestLanguage.g:2117:2: ( rule__PackageDefinition2__ContentsAssignment_4 )*
             loop16:
             do {
                 int alt16=2;
@@ -6802,7 +6810,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:2112:3: rule__PackageDefinition2__ContentsAssignment_4
+            	    // InternalBug304681TestLanguage.g:2117:3: rule__PackageDefinition2__ContentsAssignment_4
             	    {
             	    pushFollow(FollowSets000.FOLLOW_7);
             	    rule__PackageDefinition2__ContentsAssignment_4();
@@ -6843,14 +6851,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__0"
-    // InternalBug304681TestLanguage.g:2121:1: rule__Object2__Group__0 : rule__Object2__Group__0__Impl rule__Object2__Group__1 ;
+    // InternalBug304681TestLanguage.g:2126:1: rule__Object2__Group__0 : rule__Object2__Group__0__Impl rule__Object2__Group__1 ;
     public final void rule__Object2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2125:1: ( rule__Object2__Group__0__Impl rule__Object2__Group__1 )
-            // InternalBug304681TestLanguage.g:2126:2: rule__Object2__Group__0__Impl rule__Object2__Group__1
+            // InternalBug304681TestLanguage.g:2130:1: ( rule__Object2__Group__0__Impl rule__Object2__Group__1 )
+            // InternalBug304681TestLanguage.g:2131:2: rule__Object2__Group__0__Impl rule__Object2__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Object2__Group__0__Impl();
@@ -6881,22 +6889,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:2133:1: rule__Object2__Group__0__Impl : ( ( rule__Object2__Alternatives_0 )? ) ;
+    // InternalBug304681TestLanguage.g:2138:1: rule__Object2__Group__0__Impl : ( ( rule__Object2__Alternatives_0 )? ) ;
     public final void rule__Object2__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2137:1: ( ( ( rule__Object2__Alternatives_0 )? ) )
-            // InternalBug304681TestLanguage.g:2138:1: ( ( rule__Object2__Alternatives_0 )? )
+            // InternalBug304681TestLanguage.g:2142:1: ( ( ( rule__Object2__Alternatives_0 )? ) )
+            // InternalBug304681TestLanguage.g:2143:1: ( ( rule__Object2__Alternatives_0 )? )
             {
-            // InternalBug304681TestLanguage.g:2138:1: ( ( rule__Object2__Alternatives_0 )? )
-            // InternalBug304681TestLanguage.g:2139:2: ( rule__Object2__Alternatives_0 )?
+            // InternalBug304681TestLanguage.g:2143:1: ( ( rule__Object2__Alternatives_0 )? )
+            // InternalBug304681TestLanguage.g:2144:2: ( rule__Object2__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getAlternatives_0()); 
             }
-            // InternalBug304681TestLanguage.g:2140:2: ( rule__Object2__Alternatives_0 )?
+            // InternalBug304681TestLanguage.g:2145:2: ( rule__Object2__Alternatives_0 )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -6905,7 +6913,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt17) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:2140:3: rule__Object2__Alternatives_0
+                    // InternalBug304681TestLanguage.g:2145:3: rule__Object2__Alternatives_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__Alternatives_0();
@@ -6943,14 +6951,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__1"
-    // InternalBug304681TestLanguage.g:2148:1: rule__Object2__Group__1 : rule__Object2__Group__1__Impl rule__Object2__Group__2 ;
+    // InternalBug304681TestLanguage.g:2153:1: rule__Object2__Group__1 : rule__Object2__Group__1__Impl rule__Object2__Group__2 ;
     public final void rule__Object2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2152:1: ( rule__Object2__Group__1__Impl rule__Object2__Group__2 )
-            // InternalBug304681TestLanguage.g:2153:2: rule__Object2__Group__1__Impl rule__Object2__Group__2
+            // InternalBug304681TestLanguage.g:2157:1: ( rule__Object2__Group__1__Impl rule__Object2__Group__2 )
+            // InternalBug304681TestLanguage.g:2158:2: rule__Object2__Group__1__Impl rule__Object2__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Object2__Group__1__Impl();
@@ -6981,17 +6989,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:2160:1: rule__Object2__Group__1__Impl : ( 'object' ) ;
+    // InternalBug304681TestLanguage.g:2165:1: rule__Object2__Group__1__Impl : ( 'object' ) ;
     public final void rule__Object2__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2164:1: ( ( 'object' ) )
-            // InternalBug304681TestLanguage.g:2165:1: ( 'object' )
+            // InternalBug304681TestLanguage.g:2169:1: ( ( 'object' ) )
+            // InternalBug304681TestLanguage.g:2170:1: ( 'object' )
             {
-            // InternalBug304681TestLanguage.g:2165:1: ( 'object' )
-            // InternalBug304681TestLanguage.g:2166:2: 'object'
+            // InternalBug304681TestLanguage.g:2170:1: ( 'object' )
+            // InternalBug304681TestLanguage.g:2171:2: 'object'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getObjectKeyword_1()); 
@@ -7022,14 +7030,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__2"
-    // InternalBug304681TestLanguage.g:2175:1: rule__Object2__Group__2 : rule__Object2__Group__2__Impl rule__Object2__Group__3 ;
+    // InternalBug304681TestLanguage.g:2180:1: rule__Object2__Group__2 : rule__Object2__Group__2__Impl rule__Object2__Group__3 ;
     public final void rule__Object2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2179:1: ( rule__Object2__Group__2__Impl rule__Object2__Group__3 )
-            // InternalBug304681TestLanguage.g:2180:2: rule__Object2__Group__2__Impl rule__Object2__Group__3
+            // InternalBug304681TestLanguage.g:2184:1: ( rule__Object2__Group__2__Impl rule__Object2__Group__3 )
+            // InternalBug304681TestLanguage.g:2185:2: rule__Object2__Group__2__Impl rule__Object2__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Object2__Group__2__Impl();
@@ -7060,23 +7068,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:2187:1: rule__Object2__Group__2__Impl : ( ( rule__Object2__NameAssignment_2 ) ) ;
+    // InternalBug304681TestLanguage.g:2192:1: rule__Object2__Group__2__Impl : ( ( rule__Object2__NameAssignment_2 ) ) ;
     public final void rule__Object2__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2191:1: ( ( ( rule__Object2__NameAssignment_2 ) ) )
-            // InternalBug304681TestLanguage.g:2192:1: ( ( rule__Object2__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:2196:1: ( ( ( rule__Object2__NameAssignment_2 ) ) )
+            // InternalBug304681TestLanguage.g:2197:1: ( ( rule__Object2__NameAssignment_2 ) )
             {
-            // InternalBug304681TestLanguage.g:2192:1: ( ( rule__Object2__NameAssignment_2 ) )
-            // InternalBug304681TestLanguage.g:2193:2: ( rule__Object2__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:2197:1: ( ( rule__Object2__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:2198:2: ( rule__Object2__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getNameAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:2194:2: ( rule__Object2__NameAssignment_2 )
-            // InternalBug304681TestLanguage.g:2194:3: rule__Object2__NameAssignment_2
+            // InternalBug304681TestLanguage.g:2199:2: ( rule__Object2__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:2199:3: rule__Object2__NameAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__NameAssignment_2();
@@ -7111,14 +7119,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__3"
-    // InternalBug304681TestLanguage.g:2202:1: rule__Object2__Group__3 : rule__Object2__Group__3__Impl rule__Object2__Group__4 ;
+    // InternalBug304681TestLanguage.g:2207:1: rule__Object2__Group__3 : rule__Object2__Group__3__Impl rule__Object2__Group__4 ;
     public final void rule__Object2__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2206:1: ( rule__Object2__Group__3__Impl rule__Object2__Group__4 )
-            // InternalBug304681TestLanguage.g:2207:2: rule__Object2__Group__3__Impl rule__Object2__Group__4
+            // InternalBug304681TestLanguage.g:2211:1: ( rule__Object2__Group__3__Impl rule__Object2__Group__4 )
+            // InternalBug304681TestLanguage.g:2212:2: rule__Object2__Group__3__Impl rule__Object2__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Object2__Group__3__Impl();
@@ -7149,22 +7157,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:2214:1: rule__Object2__Group__3__Impl : ( ( rule__Object2__Group_3__0 )? ) ;
+    // InternalBug304681TestLanguage.g:2219:1: rule__Object2__Group__3__Impl : ( ( rule__Object2__Group_3__0 )? ) ;
     public final void rule__Object2__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2218:1: ( ( ( rule__Object2__Group_3__0 )? ) )
-            // InternalBug304681TestLanguage.g:2219:1: ( ( rule__Object2__Group_3__0 )? )
+            // InternalBug304681TestLanguage.g:2223:1: ( ( ( rule__Object2__Group_3__0 )? ) )
+            // InternalBug304681TestLanguage.g:2224:1: ( ( rule__Object2__Group_3__0 )? )
             {
-            // InternalBug304681TestLanguage.g:2219:1: ( ( rule__Object2__Group_3__0 )? )
-            // InternalBug304681TestLanguage.g:2220:2: ( rule__Object2__Group_3__0 )?
+            // InternalBug304681TestLanguage.g:2224:1: ( ( rule__Object2__Group_3__0 )? )
+            // InternalBug304681TestLanguage.g:2225:2: ( rule__Object2__Group_3__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getGroup_3()); 
             }
-            // InternalBug304681TestLanguage.g:2221:2: ( rule__Object2__Group_3__0 )?
+            // InternalBug304681TestLanguage.g:2226:2: ( rule__Object2__Group_3__0 )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -7173,7 +7181,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt18) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:2221:3: rule__Object2__Group_3__0
+                    // InternalBug304681TestLanguage.g:2226:3: rule__Object2__Group_3__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__Group_3__0();
@@ -7211,14 +7219,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__4"
-    // InternalBug304681TestLanguage.g:2229:1: rule__Object2__Group__4 : rule__Object2__Group__4__Impl rule__Object2__Group__5 ;
+    // InternalBug304681TestLanguage.g:2234:1: rule__Object2__Group__4 : rule__Object2__Group__4__Impl rule__Object2__Group__5 ;
     public final void rule__Object2__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2233:1: ( rule__Object2__Group__4__Impl rule__Object2__Group__5 )
-            // InternalBug304681TestLanguage.g:2234:2: rule__Object2__Group__4__Impl rule__Object2__Group__5
+            // InternalBug304681TestLanguage.g:2238:1: ( rule__Object2__Group__4__Impl rule__Object2__Group__5 )
+            // InternalBug304681TestLanguage.g:2239:2: rule__Object2__Group__4__Impl rule__Object2__Group__5
             {
             pushFollow(FollowSets000.FOLLOW_19);
             rule__Object2__Group__4__Impl();
@@ -7249,17 +7257,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:2241:1: rule__Object2__Group__4__Impl : ( '{' ) ;
+    // InternalBug304681TestLanguage.g:2246:1: rule__Object2__Group__4__Impl : ( '{' ) ;
     public final void rule__Object2__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2245:1: ( ( '{' ) )
-            // InternalBug304681TestLanguage.g:2246:1: ( '{' )
+            // InternalBug304681TestLanguage.g:2250:1: ( ( '{' ) )
+            // InternalBug304681TestLanguage.g:2251:1: ( '{' )
             {
-            // InternalBug304681TestLanguage.g:2246:1: ( '{' )
-            // InternalBug304681TestLanguage.g:2247:2: '{'
+            // InternalBug304681TestLanguage.g:2251:1: ( '{' )
+            // InternalBug304681TestLanguage.g:2252:2: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getLeftCurlyBracketKeyword_4()); 
@@ -7290,14 +7298,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__5"
-    // InternalBug304681TestLanguage.g:2256:1: rule__Object2__Group__5 : rule__Object2__Group__5__Impl rule__Object2__Group__6 ;
+    // InternalBug304681TestLanguage.g:2261:1: rule__Object2__Group__5 : rule__Object2__Group__5__Impl rule__Object2__Group__6 ;
     public final void rule__Object2__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2260:1: ( rule__Object2__Group__5__Impl rule__Object2__Group__6 )
-            // InternalBug304681TestLanguage.g:2261:2: rule__Object2__Group__5__Impl rule__Object2__Group__6
+            // InternalBug304681TestLanguage.g:2265:1: ( rule__Object2__Group__5__Impl rule__Object2__Group__6 )
+            // InternalBug304681TestLanguage.g:2266:2: rule__Object2__Group__5__Impl rule__Object2__Group__6
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Object2__Group__5__Impl();
@@ -7328,23 +7336,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__5__Impl"
-    // InternalBug304681TestLanguage.g:2268:1: rule__Object2__Group__5__Impl : ( ( rule__Object2__UnorderedGroup_5 ) ) ;
+    // InternalBug304681TestLanguage.g:2273:1: rule__Object2__Group__5__Impl : ( ( rule__Object2__UnorderedGroup_5 ) ) ;
     public final void rule__Object2__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2272:1: ( ( ( rule__Object2__UnorderedGroup_5 ) ) )
-            // InternalBug304681TestLanguage.g:2273:1: ( ( rule__Object2__UnorderedGroup_5 ) )
+            // InternalBug304681TestLanguage.g:2277:1: ( ( ( rule__Object2__UnorderedGroup_5 ) ) )
+            // InternalBug304681TestLanguage.g:2278:1: ( ( rule__Object2__UnorderedGroup_5 ) )
             {
-            // InternalBug304681TestLanguage.g:2273:1: ( ( rule__Object2__UnorderedGroup_5 ) )
-            // InternalBug304681TestLanguage.g:2274:2: ( rule__Object2__UnorderedGroup_5 )
+            // InternalBug304681TestLanguage.g:2278:1: ( ( rule__Object2__UnorderedGroup_5 ) )
+            // InternalBug304681TestLanguage.g:2279:2: ( rule__Object2__UnorderedGroup_5 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getUnorderedGroup_5()); 
             }
-            // InternalBug304681TestLanguage.g:2275:2: ( rule__Object2__UnorderedGroup_5 )
-            // InternalBug304681TestLanguage.g:2275:3: rule__Object2__UnorderedGroup_5
+            // InternalBug304681TestLanguage.g:2280:2: ( rule__Object2__UnorderedGroup_5 )
+            // InternalBug304681TestLanguage.g:2280:3: rule__Object2__UnorderedGroup_5
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__UnorderedGroup_5();
@@ -7379,14 +7387,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__6"
-    // InternalBug304681TestLanguage.g:2283:1: rule__Object2__Group__6 : rule__Object2__Group__6__Impl ;
+    // InternalBug304681TestLanguage.g:2288:1: rule__Object2__Group__6 : rule__Object2__Group__6__Impl ;
     public final void rule__Object2__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2287:1: ( rule__Object2__Group__6__Impl )
-            // InternalBug304681TestLanguage.g:2288:2: rule__Object2__Group__6__Impl
+            // InternalBug304681TestLanguage.g:2292:1: ( rule__Object2__Group__6__Impl )
+            // InternalBug304681TestLanguage.g:2293:2: rule__Object2__Group__6__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group__6__Impl();
@@ -7412,17 +7420,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group__6__Impl"
-    // InternalBug304681TestLanguage.g:2294:1: rule__Object2__Group__6__Impl : ( '}' ) ;
+    // InternalBug304681TestLanguage.g:2299:1: rule__Object2__Group__6__Impl : ( '}' ) ;
     public final void rule__Object2__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2298:1: ( ( '}' ) )
-            // InternalBug304681TestLanguage.g:2299:1: ( '}' )
+            // InternalBug304681TestLanguage.g:2303:1: ( ( '}' ) )
+            // InternalBug304681TestLanguage.g:2304:1: ( '}' )
             {
-            // InternalBug304681TestLanguage.g:2299:1: ( '}' )
-            // InternalBug304681TestLanguage.g:2300:2: '}'
+            // InternalBug304681TestLanguage.g:2304:1: ( '}' )
+            // InternalBug304681TestLanguage.g:2305:2: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getRightCurlyBracketKeyword_6()); 
@@ -7453,14 +7461,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_3__0"
-    // InternalBug304681TestLanguage.g:2310:1: rule__Object2__Group_3__0 : rule__Object2__Group_3__0__Impl rule__Object2__Group_3__1 ;
+    // InternalBug304681TestLanguage.g:2315:1: rule__Object2__Group_3__0 : rule__Object2__Group_3__0__Impl rule__Object2__Group_3__1 ;
     public final void rule__Object2__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2314:1: ( rule__Object2__Group_3__0__Impl rule__Object2__Group_3__1 )
-            // InternalBug304681TestLanguage.g:2315:2: rule__Object2__Group_3__0__Impl rule__Object2__Group_3__1
+            // InternalBug304681TestLanguage.g:2319:1: ( rule__Object2__Group_3__0__Impl rule__Object2__Group_3__1 )
+            // InternalBug304681TestLanguage.g:2320:2: rule__Object2__Group_3__0__Impl rule__Object2__Group_3__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Object2__Group_3__0__Impl();
@@ -7491,17 +7499,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_3__0__Impl"
-    // InternalBug304681TestLanguage.g:2322:1: rule__Object2__Group_3__0__Impl : ( 'extends' ) ;
+    // InternalBug304681TestLanguage.g:2327:1: rule__Object2__Group_3__0__Impl : ( 'extends' ) ;
     public final void rule__Object2__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2326:1: ( ( 'extends' ) )
-            // InternalBug304681TestLanguage.g:2327:1: ( 'extends' )
+            // InternalBug304681TestLanguage.g:2331:1: ( ( 'extends' ) )
+            // InternalBug304681TestLanguage.g:2332:1: ( 'extends' )
             {
-            // InternalBug304681TestLanguage.g:2327:1: ( 'extends' )
-            // InternalBug304681TestLanguage.g:2328:2: 'extends'
+            // InternalBug304681TestLanguage.g:2332:1: ( 'extends' )
+            // InternalBug304681TestLanguage.g:2333:2: 'extends'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getExtendsKeyword_3_0()); 
@@ -7532,14 +7540,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_3__1"
-    // InternalBug304681TestLanguage.g:2337:1: rule__Object2__Group_3__1 : rule__Object2__Group_3__1__Impl ;
+    // InternalBug304681TestLanguage.g:2342:1: rule__Object2__Group_3__1 : rule__Object2__Group_3__1__Impl ;
     public final void rule__Object2__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2341:1: ( rule__Object2__Group_3__1__Impl )
-            // InternalBug304681TestLanguage.g:2342:2: rule__Object2__Group_3__1__Impl
+            // InternalBug304681TestLanguage.g:2346:1: ( rule__Object2__Group_3__1__Impl )
+            // InternalBug304681TestLanguage.g:2347:2: rule__Object2__Group_3__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group_3__1__Impl();
@@ -7565,23 +7573,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_3__1__Impl"
-    // InternalBug304681TestLanguage.g:2348:1: rule__Object2__Group_3__1__Impl : ( ( rule__Object2__ParentAssignment_3_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2353:1: rule__Object2__Group_3__1__Impl : ( ( rule__Object2__ParentAssignment_3_1 ) ) ;
     public final void rule__Object2__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2352:1: ( ( ( rule__Object2__ParentAssignment_3_1 ) ) )
-            // InternalBug304681TestLanguage.g:2353:1: ( ( rule__Object2__ParentAssignment_3_1 ) )
+            // InternalBug304681TestLanguage.g:2357:1: ( ( ( rule__Object2__ParentAssignment_3_1 ) ) )
+            // InternalBug304681TestLanguage.g:2358:1: ( ( rule__Object2__ParentAssignment_3_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2353:1: ( ( rule__Object2__ParentAssignment_3_1 ) )
-            // InternalBug304681TestLanguage.g:2354:2: ( rule__Object2__ParentAssignment_3_1 )
+            // InternalBug304681TestLanguage.g:2358:1: ( ( rule__Object2__ParentAssignment_3_1 ) )
+            // InternalBug304681TestLanguage.g:2359:2: ( rule__Object2__ParentAssignment_3_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getParentAssignment_3_1()); 
             }
-            // InternalBug304681TestLanguage.g:2355:2: ( rule__Object2__ParentAssignment_3_1 )
-            // InternalBug304681TestLanguage.g:2355:3: rule__Object2__ParentAssignment_3_1
+            // InternalBug304681TestLanguage.g:2360:2: ( rule__Object2__ParentAssignment_3_1 )
+            // InternalBug304681TestLanguage.g:2360:3: rule__Object2__ParentAssignment_3_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__ParentAssignment_3_1();
@@ -7616,14 +7624,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_0__0"
-    // InternalBug304681TestLanguage.g:2364:1: rule__Object2__Group_5_0__0 : rule__Object2__Group_5_0__0__Impl rule__Object2__Group_5_0__1 ;
+    // InternalBug304681TestLanguage.g:2369:1: rule__Object2__Group_5_0__0 : rule__Object2__Group_5_0__0__Impl rule__Object2__Group_5_0__1 ;
     public final void rule__Object2__Group_5_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2368:1: ( rule__Object2__Group_5_0__0__Impl rule__Object2__Group_5_0__1 )
-            // InternalBug304681TestLanguage.g:2369:2: rule__Object2__Group_5_0__0__Impl rule__Object2__Group_5_0__1
+            // InternalBug304681TestLanguage.g:2373:1: ( rule__Object2__Group_5_0__0__Impl rule__Object2__Group_5_0__1 )
+            // InternalBug304681TestLanguage.g:2374:2: rule__Object2__Group_5_0__0__Impl rule__Object2__Group_5_0__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Object2__Group_5_0__0__Impl();
@@ -7654,17 +7662,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_0__0__Impl"
-    // InternalBug304681TestLanguage.g:2376:1: rule__Object2__Group_5_0__0__Impl : ( 'shortDescription' ) ;
+    // InternalBug304681TestLanguage.g:2381:1: rule__Object2__Group_5_0__0__Impl : ( 'shortDescription' ) ;
     public final void rule__Object2__Group_5_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2380:1: ( ( 'shortDescription' ) )
-            // InternalBug304681TestLanguage.g:2381:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:2385:1: ( ( 'shortDescription' ) )
+            // InternalBug304681TestLanguage.g:2386:1: ( 'shortDescription' )
             {
-            // InternalBug304681TestLanguage.g:2381:1: ( 'shortDescription' )
-            // InternalBug304681TestLanguage.g:2382:2: 'shortDescription'
+            // InternalBug304681TestLanguage.g:2386:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:2387:2: 'shortDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getShortDescriptionKeyword_5_0_0()); 
@@ -7695,14 +7703,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_0__1"
-    // InternalBug304681TestLanguage.g:2391:1: rule__Object2__Group_5_0__1 : rule__Object2__Group_5_0__1__Impl rule__Object2__Group_5_0__2 ;
+    // InternalBug304681TestLanguage.g:2396:1: rule__Object2__Group_5_0__1 : rule__Object2__Group_5_0__1__Impl rule__Object2__Group_5_0__2 ;
     public final void rule__Object2__Group_5_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2395:1: ( rule__Object2__Group_5_0__1__Impl rule__Object2__Group_5_0__2 )
-            // InternalBug304681TestLanguage.g:2396:2: rule__Object2__Group_5_0__1__Impl rule__Object2__Group_5_0__2
+            // InternalBug304681TestLanguage.g:2400:1: ( rule__Object2__Group_5_0__1__Impl rule__Object2__Group_5_0__2 )
+            // InternalBug304681TestLanguage.g:2401:2: rule__Object2__Group_5_0__1__Impl rule__Object2__Group_5_0__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object2__Group_5_0__1__Impl();
@@ -7733,23 +7741,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_0__1__Impl"
-    // InternalBug304681TestLanguage.g:2403:1: rule__Object2__Group_5_0__1__Impl : ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2408:1: rule__Object2__Group_5_0__1__Impl : ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) ) ;
     public final void rule__Object2__Group_5_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2407:1: ( ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:2408:1: ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) )
+            // InternalBug304681TestLanguage.g:2412:1: ( ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:2413:1: ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2408:1: ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) )
-            // InternalBug304681TestLanguage.g:2409:2: ( rule__Object2__ShortDescriptionAssignment_5_0_1 )
+            // InternalBug304681TestLanguage.g:2413:1: ( ( rule__Object2__ShortDescriptionAssignment_5_0_1 ) )
+            // InternalBug304681TestLanguage.g:2414:2: ( rule__Object2__ShortDescriptionAssignment_5_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getShortDescriptionAssignment_5_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:2410:2: ( rule__Object2__ShortDescriptionAssignment_5_0_1 )
-            // InternalBug304681TestLanguage.g:2410:3: rule__Object2__ShortDescriptionAssignment_5_0_1
+            // InternalBug304681TestLanguage.g:2415:2: ( rule__Object2__ShortDescriptionAssignment_5_0_1 )
+            // InternalBug304681TestLanguage.g:2415:3: rule__Object2__ShortDescriptionAssignment_5_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__ShortDescriptionAssignment_5_0_1();
@@ -7784,14 +7792,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_0__2"
-    // InternalBug304681TestLanguage.g:2418:1: rule__Object2__Group_5_0__2 : rule__Object2__Group_5_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:2423:1: rule__Object2__Group_5_0__2 : rule__Object2__Group_5_0__2__Impl ;
     public final void rule__Object2__Group_5_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2422:1: ( rule__Object2__Group_5_0__2__Impl )
-            // InternalBug304681TestLanguage.g:2423:2: rule__Object2__Group_5_0__2__Impl
+            // InternalBug304681TestLanguage.g:2427:1: ( rule__Object2__Group_5_0__2__Impl )
+            // InternalBug304681TestLanguage.g:2428:2: rule__Object2__Group_5_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group_5_0__2__Impl();
@@ -7817,17 +7825,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_0__2__Impl"
-    // InternalBug304681TestLanguage.g:2429:1: rule__Object2__Group_5_0__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:2434:1: rule__Object2__Group_5_0__2__Impl : ( ';' ) ;
     public final void rule__Object2__Group_5_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2433:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:2434:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2438:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:2439:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:2434:1: ( ';' )
-            // InternalBug304681TestLanguage.g:2435:2: ';'
+            // InternalBug304681TestLanguage.g:2439:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2440:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSemicolonKeyword_5_0_2()); 
@@ -7858,14 +7866,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_1__0"
-    // InternalBug304681TestLanguage.g:2445:1: rule__Object2__Group_5_1__0 : rule__Object2__Group_5_1__0__Impl rule__Object2__Group_5_1__1 ;
+    // InternalBug304681TestLanguage.g:2450:1: rule__Object2__Group_5_1__0 : rule__Object2__Group_5_1__0__Impl rule__Object2__Group_5_1__1 ;
     public final void rule__Object2__Group_5_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2449:1: ( rule__Object2__Group_5_1__0__Impl rule__Object2__Group_5_1__1 )
-            // InternalBug304681TestLanguage.g:2450:2: rule__Object2__Group_5_1__0__Impl rule__Object2__Group_5_1__1
+            // InternalBug304681TestLanguage.g:2454:1: ( rule__Object2__Group_5_1__0__Impl rule__Object2__Group_5_1__1 )
+            // InternalBug304681TestLanguage.g:2455:2: rule__Object2__Group_5_1__0__Impl rule__Object2__Group_5_1__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Object2__Group_5_1__0__Impl();
@@ -7896,17 +7904,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_1__0__Impl"
-    // InternalBug304681TestLanguage.g:2457:1: rule__Object2__Group_5_1__0__Impl : ( 'longDescription' ) ;
+    // InternalBug304681TestLanguage.g:2462:1: rule__Object2__Group_5_1__0__Impl : ( 'longDescription' ) ;
     public final void rule__Object2__Group_5_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2461:1: ( ( 'longDescription' ) )
-            // InternalBug304681TestLanguage.g:2462:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:2466:1: ( ( 'longDescription' ) )
+            // InternalBug304681TestLanguage.g:2467:1: ( 'longDescription' )
             {
-            // InternalBug304681TestLanguage.g:2462:1: ( 'longDescription' )
-            // InternalBug304681TestLanguage.g:2463:2: 'longDescription'
+            // InternalBug304681TestLanguage.g:2467:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:2468:2: 'longDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getLongDescriptionKeyword_5_1_0()); 
@@ -7937,14 +7945,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_1__1"
-    // InternalBug304681TestLanguage.g:2472:1: rule__Object2__Group_5_1__1 : rule__Object2__Group_5_1__1__Impl rule__Object2__Group_5_1__2 ;
+    // InternalBug304681TestLanguage.g:2477:1: rule__Object2__Group_5_1__1 : rule__Object2__Group_5_1__1__Impl rule__Object2__Group_5_1__2 ;
     public final void rule__Object2__Group_5_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2476:1: ( rule__Object2__Group_5_1__1__Impl rule__Object2__Group_5_1__2 )
-            // InternalBug304681TestLanguage.g:2477:2: rule__Object2__Group_5_1__1__Impl rule__Object2__Group_5_1__2
+            // InternalBug304681TestLanguage.g:2481:1: ( rule__Object2__Group_5_1__1__Impl rule__Object2__Group_5_1__2 )
+            // InternalBug304681TestLanguage.g:2482:2: rule__Object2__Group_5_1__1__Impl rule__Object2__Group_5_1__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object2__Group_5_1__1__Impl();
@@ -7975,23 +7983,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_1__1__Impl"
-    // InternalBug304681TestLanguage.g:2484:1: rule__Object2__Group_5_1__1__Impl : ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2489:1: rule__Object2__Group_5_1__1__Impl : ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) ) ;
     public final void rule__Object2__Group_5_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2488:1: ( ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:2489:1: ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) )
+            // InternalBug304681TestLanguage.g:2493:1: ( ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:2494:1: ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2489:1: ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) )
-            // InternalBug304681TestLanguage.g:2490:2: ( rule__Object2__LongDescriptionAssignment_5_1_1 )
+            // InternalBug304681TestLanguage.g:2494:1: ( ( rule__Object2__LongDescriptionAssignment_5_1_1 ) )
+            // InternalBug304681TestLanguage.g:2495:2: ( rule__Object2__LongDescriptionAssignment_5_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getLongDescriptionAssignment_5_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:2491:2: ( rule__Object2__LongDescriptionAssignment_5_1_1 )
-            // InternalBug304681TestLanguage.g:2491:3: rule__Object2__LongDescriptionAssignment_5_1_1
+            // InternalBug304681TestLanguage.g:2496:2: ( rule__Object2__LongDescriptionAssignment_5_1_1 )
+            // InternalBug304681TestLanguage.g:2496:3: rule__Object2__LongDescriptionAssignment_5_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__LongDescriptionAssignment_5_1_1();
@@ -8026,14 +8034,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_1__2"
-    // InternalBug304681TestLanguage.g:2499:1: rule__Object2__Group_5_1__2 : rule__Object2__Group_5_1__2__Impl ;
+    // InternalBug304681TestLanguage.g:2504:1: rule__Object2__Group_5_1__2 : rule__Object2__Group_5_1__2__Impl ;
     public final void rule__Object2__Group_5_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2503:1: ( rule__Object2__Group_5_1__2__Impl )
-            // InternalBug304681TestLanguage.g:2504:2: rule__Object2__Group_5_1__2__Impl
+            // InternalBug304681TestLanguage.g:2508:1: ( rule__Object2__Group_5_1__2__Impl )
+            // InternalBug304681TestLanguage.g:2509:2: rule__Object2__Group_5_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group_5_1__2__Impl();
@@ -8059,17 +8067,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_1__2__Impl"
-    // InternalBug304681TestLanguage.g:2510:1: rule__Object2__Group_5_1__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:2515:1: rule__Object2__Group_5_1__2__Impl : ( ';' ) ;
     public final void rule__Object2__Group_5_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2514:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:2515:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2519:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:2520:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:2515:1: ( ';' )
-            // InternalBug304681TestLanguage.g:2516:2: ';'
+            // InternalBug304681TestLanguage.g:2520:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2521:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSemicolonKeyword_5_1_2()); 
@@ -8100,14 +8108,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_2__0"
-    // InternalBug304681TestLanguage.g:2526:1: rule__Object2__Group_5_2__0 : rule__Object2__Group_5_2__0__Impl rule__Object2__Group_5_2__1 ;
+    // InternalBug304681TestLanguage.g:2531:1: rule__Object2__Group_5_2__0 : rule__Object2__Group_5_2__0__Impl rule__Object2__Group_5_2__1 ;
     public final void rule__Object2__Group_5_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2530:1: ( rule__Object2__Group_5_2__0__Impl rule__Object2__Group_5_2__1 )
-            // InternalBug304681TestLanguage.g:2531:2: rule__Object2__Group_5_2__0__Impl rule__Object2__Group_5_2__1
+            // InternalBug304681TestLanguage.g:2535:1: ( rule__Object2__Group_5_2__0__Impl rule__Object2__Group_5_2__1 )
+            // InternalBug304681TestLanguage.g:2536:2: rule__Object2__Group_5_2__0__Impl rule__Object2__Group_5_2__1
             {
             pushFollow(FollowSets000.FOLLOW_12);
             rule__Object2__Group_5_2__0__Impl();
@@ -8138,17 +8146,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_2__0__Impl"
-    // InternalBug304681TestLanguage.g:2538:1: rule__Object2__Group_5_2__0__Impl : ( 'serialUID' ) ;
+    // InternalBug304681TestLanguage.g:2543:1: rule__Object2__Group_5_2__0__Impl : ( 'serialUID' ) ;
     public final void rule__Object2__Group_5_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2542:1: ( ( 'serialUID' ) )
-            // InternalBug304681TestLanguage.g:2543:1: ( 'serialUID' )
+            // InternalBug304681TestLanguage.g:2547:1: ( ( 'serialUID' ) )
+            // InternalBug304681TestLanguage.g:2548:1: ( 'serialUID' )
             {
-            // InternalBug304681TestLanguage.g:2543:1: ( 'serialUID' )
-            // InternalBug304681TestLanguage.g:2544:2: 'serialUID'
+            // InternalBug304681TestLanguage.g:2548:1: ( 'serialUID' )
+            // InternalBug304681TestLanguage.g:2549:2: 'serialUID'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSerialUIDKeyword_5_2_0()); 
@@ -8179,14 +8187,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_2__1"
-    // InternalBug304681TestLanguage.g:2553:1: rule__Object2__Group_5_2__1 : rule__Object2__Group_5_2__1__Impl rule__Object2__Group_5_2__2 ;
+    // InternalBug304681TestLanguage.g:2558:1: rule__Object2__Group_5_2__1 : rule__Object2__Group_5_2__1__Impl rule__Object2__Group_5_2__2 ;
     public final void rule__Object2__Group_5_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2557:1: ( rule__Object2__Group_5_2__1__Impl rule__Object2__Group_5_2__2 )
-            // InternalBug304681TestLanguage.g:2558:2: rule__Object2__Group_5_2__1__Impl rule__Object2__Group_5_2__2
+            // InternalBug304681TestLanguage.g:2562:1: ( rule__Object2__Group_5_2__1__Impl rule__Object2__Group_5_2__2 )
+            // InternalBug304681TestLanguage.g:2563:2: rule__Object2__Group_5_2__1__Impl rule__Object2__Group_5_2__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object2__Group_5_2__1__Impl();
@@ -8217,23 +8225,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_2__1__Impl"
-    // InternalBug304681TestLanguage.g:2565:1: rule__Object2__Group_5_2__1__Impl : ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2570:1: rule__Object2__Group_5_2__1__Impl : ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) ) ;
     public final void rule__Object2__Group_5_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2569:1: ( ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) ) )
-            // InternalBug304681TestLanguage.g:2570:1: ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) )
+            // InternalBug304681TestLanguage.g:2574:1: ( ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) ) )
+            // InternalBug304681TestLanguage.g:2575:1: ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2570:1: ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) )
-            // InternalBug304681TestLanguage.g:2571:2: ( rule__Object2__SerialVersionUIDAssignment_5_2_1 )
+            // InternalBug304681TestLanguage.g:2575:1: ( ( rule__Object2__SerialVersionUIDAssignment_5_2_1 ) )
+            // InternalBug304681TestLanguage.g:2576:2: ( rule__Object2__SerialVersionUIDAssignment_5_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSerialVersionUIDAssignment_5_2_1()); 
             }
-            // InternalBug304681TestLanguage.g:2572:2: ( rule__Object2__SerialVersionUIDAssignment_5_2_1 )
-            // InternalBug304681TestLanguage.g:2572:3: rule__Object2__SerialVersionUIDAssignment_5_2_1
+            // InternalBug304681TestLanguage.g:2577:2: ( rule__Object2__SerialVersionUIDAssignment_5_2_1 )
+            // InternalBug304681TestLanguage.g:2577:3: rule__Object2__SerialVersionUIDAssignment_5_2_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__SerialVersionUIDAssignment_5_2_1();
@@ -8268,14 +8276,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_2__2"
-    // InternalBug304681TestLanguage.g:2580:1: rule__Object2__Group_5_2__2 : rule__Object2__Group_5_2__2__Impl ;
+    // InternalBug304681TestLanguage.g:2585:1: rule__Object2__Group_5_2__2 : rule__Object2__Group_5_2__2__Impl ;
     public final void rule__Object2__Group_5_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2584:1: ( rule__Object2__Group_5_2__2__Impl )
-            // InternalBug304681TestLanguage.g:2585:2: rule__Object2__Group_5_2__2__Impl
+            // InternalBug304681TestLanguage.g:2589:1: ( rule__Object2__Group_5_2__2__Impl )
+            // InternalBug304681TestLanguage.g:2590:2: rule__Object2__Group_5_2__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group_5_2__2__Impl();
@@ -8301,17 +8309,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_2__2__Impl"
-    // InternalBug304681TestLanguage.g:2591:1: rule__Object2__Group_5_2__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:2596:1: rule__Object2__Group_5_2__2__Impl : ( ';' ) ;
     public final void rule__Object2__Group_5_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2595:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:2596:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2600:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:2601:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:2596:1: ( ';' )
-            // InternalBug304681TestLanguage.g:2597:2: ';'
+            // InternalBug304681TestLanguage.g:2601:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2602:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSemicolonKeyword_5_2_2()); 
@@ -8342,14 +8350,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_3__0"
-    // InternalBug304681TestLanguage.g:2607:1: rule__Object2__Group_5_3__0 : rule__Object2__Group_5_3__0__Impl rule__Object2__Group_5_3__1 ;
+    // InternalBug304681TestLanguage.g:2612:1: rule__Object2__Group_5_3__0 : rule__Object2__Group_5_3__0__Impl rule__Object2__Group_5_3__1 ;
     public final void rule__Object2__Group_5_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2611:1: ( rule__Object2__Group_5_3__0__Impl rule__Object2__Group_5_3__1 )
-            // InternalBug304681TestLanguage.g:2612:2: rule__Object2__Group_5_3__0__Impl rule__Object2__Group_5_3__1
+            // InternalBug304681TestLanguage.g:2616:1: ( rule__Object2__Group_5_3__0__Impl rule__Object2__Group_5_3__1 )
+            // InternalBug304681TestLanguage.g:2617:2: rule__Object2__Group_5_3__0__Impl rule__Object2__Group_5_3__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Object2__Group_5_3__0__Impl();
@@ -8380,23 +8388,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_3__0__Impl"
-    // InternalBug304681TestLanguage.g:2619:1: rule__Object2__Group_5_3__0__Impl : ( ( rule__Object2__CloneableAssignment_5_3_0 ) ) ;
+    // InternalBug304681TestLanguage.g:2624:1: rule__Object2__Group_5_3__0__Impl : ( ( rule__Object2__CloneableAssignment_5_3_0 ) ) ;
     public final void rule__Object2__Group_5_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2623:1: ( ( ( rule__Object2__CloneableAssignment_5_3_0 ) ) )
-            // InternalBug304681TestLanguage.g:2624:1: ( ( rule__Object2__CloneableAssignment_5_3_0 ) )
+            // InternalBug304681TestLanguage.g:2628:1: ( ( ( rule__Object2__CloneableAssignment_5_3_0 ) ) )
+            // InternalBug304681TestLanguage.g:2629:1: ( ( rule__Object2__CloneableAssignment_5_3_0 ) )
             {
-            // InternalBug304681TestLanguage.g:2624:1: ( ( rule__Object2__CloneableAssignment_5_3_0 ) )
-            // InternalBug304681TestLanguage.g:2625:2: ( rule__Object2__CloneableAssignment_5_3_0 )
+            // InternalBug304681TestLanguage.g:2629:1: ( ( rule__Object2__CloneableAssignment_5_3_0 ) )
+            // InternalBug304681TestLanguage.g:2630:2: ( rule__Object2__CloneableAssignment_5_3_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getCloneableAssignment_5_3_0()); 
             }
-            // InternalBug304681TestLanguage.g:2626:2: ( rule__Object2__CloneableAssignment_5_3_0 )
-            // InternalBug304681TestLanguage.g:2626:3: rule__Object2__CloneableAssignment_5_3_0
+            // InternalBug304681TestLanguage.g:2631:2: ( rule__Object2__CloneableAssignment_5_3_0 )
+            // InternalBug304681TestLanguage.g:2631:3: rule__Object2__CloneableAssignment_5_3_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__CloneableAssignment_5_3_0();
@@ -8431,14 +8439,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_3__1"
-    // InternalBug304681TestLanguage.g:2634:1: rule__Object2__Group_5_3__1 : rule__Object2__Group_5_3__1__Impl ;
+    // InternalBug304681TestLanguage.g:2639:1: rule__Object2__Group_5_3__1 : rule__Object2__Group_5_3__1__Impl ;
     public final void rule__Object2__Group_5_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2638:1: ( rule__Object2__Group_5_3__1__Impl )
-            // InternalBug304681TestLanguage.g:2639:2: rule__Object2__Group_5_3__1__Impl
+            // InternalBug304681TestLanguage.g:2643:1: ( rule__Object2__Group_5_3__1__Impl )
+            // InternalBug304681TestLanguage.g:2644:2: rule__Object2__Group_5_3__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__Group_5_3__1__Impl();
@@ -8464,17 +8472,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__Group_5_3__1__Impl"
-    // InternalBug304681TestLanguage.g:2645:1: rule__Object2__Group_5_3__1__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:2650:1: rule__Object2__Group_5_3__1__Impl : ( ';' ) ;
     public final void rule__Object2__Group_5_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2649:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:2650:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2654:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:2655:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:2650:1: ( ';' )
-            // InternalBug304681TestLanguage.g:2651:2: ';'
+            // InternalBug304681TestLanguage.g:2655:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2656:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSemicolonKeyword_5_3_1()); 
@@ -8505,14 +8513,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__0"
-    // InternalBug304681TestLanguage.g:2661:1: rule__Attribute2__Group__0 : rule__Attribute2__Group__0__Impl rule__Attribute2__Group__1 ;
+    // InternalBug304681TestLanguage.g:2666:1: rule__Attribute2__Group__0 : rule__Attribute2__Group__0__Impl rule__Attribute2__Group__1 ;
     public final void rule__Attribute2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2665:1: ( rule__Attribute2__Group__0__Impl rule__Attribute2__Group__1 )
-            // InternalBug304681TestLanguage.g:2666:2: rule__Attribute2__Group__0__Impl rule__Attribute2__Group__1
+            // InternalBug304681TestLanguage.g:2670:1: ( rule__Attribute2__Group__0__Impl rule__Attribute2__Group__1 )
+            // InternalBug304681TestLanguage.g:2671:2: rule__Attribute2__Group__0__Impl rule__Attribute2__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Attribute2__Group__0__Impl();
@@ -8543,17 +8551,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:2673:1: rule__Attribute2__Group__0__Impl : ( 'Attribute' ) ;
+    // InternalBug304681TestLanguage.g:2678:1: rule__Attribute2__Group__0__Impl : ( 'Attribute' ) ;
     public final void rule__Attribute2__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2677:1: ( ( 'Attribute' ) )
-            // InternalBug304681TestLanguage.g:2678:1: ( 'Attribute' )
+            // InternalBug304681TestLanguage.g:2682:1: ( ( 'Attribute' ) )
+            // InternalBug304681TestLanguage.g:2683:1: ( 'Attribute' )
             {
-            // InternalBug304681TestLanguage.g:2678:1: ( 'Attribute' )
-            // InternalBug304681TestLanguage.g:2679:2: 'Attribute'
+            // InternalBug304681TestLanguage.g:2683:1: ( 'Attribute' )
+            // InternalBug304681TestLanguage.g:2684:2: 'Attribute'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getAttributeKeyword_0()); 
@@ -8584,14 +8592,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__1"
-    // InternalBug304681TestLanguage.g:2688:1: rule__Attribute2__Group__1 : rule__Attribute2__Group__1__Impl rule__Attribute2__Group__2 ;
+    // InternalBug304681TestLanguage.g:2693:1: rule__Attribute2__Group__1 : rule__Attribute2__Group__1__Impl rule__Attribute2__Group__2 ;
     public final void rule__Attribute2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2692:1: ( rule__Attribute2__Group__1__Impl rule__Attribute2__Group__2 )
-            // InternalBug304681TestLanguage.g:2693:2: rule__Attribute2__Group__1__Impl rule__Attribute2__Group__2
+            // InternalBug304681TestLanguage.g:2697:1: ( rule__Attribute2__Group__1__Impl rule__Attribute2__Group__2 )
+            // InternalBug304681TestLanguage.g:2698:2: rule__Attribute2__Group__1__Impl rule__Attribute2__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Attribute2__Group__1__Impl();
@@ -8622,23 +8630,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:2700:1: rule__Attribute2__Group__1__Impl : ( ( rule__Attribute2__TypeAssignment_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2705:1: rule__Attribute2__Group__1__Impl : ( ( rule__Attribute2__TypeAssignment_1 ) ) ;
     public final void rule__Attribute2__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2704:1: ( ( ( rule__Attribute2__TypeAssignment_1 ) ) )
-            // InternalBug304681TestLanguage.g:2705:1: ( ( rule__Attribute2__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:2709:1: ( ( ( rule__Attribute2__TypeAssignment_1 ) ) )
+            // InternalBug304681TestLanguage.g:2710:1: ( ( rule__Attribute2__TypeAssignment_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2705:1: ( ( rule__Attribute2__TypeAssignment_1 ) )
-            // InternalBug304681TestLanguage.g:2706:2: ( rule__Attribute2__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:2710:1: ( ( rule__Attribute2__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:2711:2: ( rule__Attribute2__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTypeAssignment_1()); 
             }
-            // InternalBug304681TestLanguage.g:2707:2: ( rule__Attribute2__TypeAssignment_1 )
-            // InternalBug304681TestLanguage.g:2707:3: rule__Attribute2__TypeAssignment_1
+            // InternalBug304681TestLanguage.g:2712:2: ( rule__Attribute2__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:2712:3: rule__Attribute2__TypeAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__TypeAssignment_1();
@@ -8673,14 +8681,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__2"
-    // InternalBug304681TestLanguage.g:2715:1: rule__Attribute2__Group__2 : rule__Attribute2__Group__2__Impl rule__Attribute2__Group__3 ;
+    // InternalBug304681TestLanguage.g:2720:1: rule__Attribute2__Group__2 : rule__Attribute2__Group__2__Impl rule__Attribute2__Group__3 ;
     public final void rule__Attribute2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2719:1: ( rule__Attribute2__Group__2__Impl rule__Attribute2__Group__3 )
-            // InternalBug304681TestLanguage.g:2720:2: rule__Attribute2__Group__2__Impl rule__Attribute2__Group__3
+            // InternalBug304681TestLanguage.g:2724:1: ( rule__Attribute2__Group__2__Impl rule__Attribute2__Group__3 )
+            // InternalBug304681TestLanguage.g:2725:2: rule__Attribute2__Group__2__Impl rule__Attribute2__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_17);
             rule__Attribute2__Group__2__Impl();
@@ -8711,23 +8719,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:2727:1: rule__Attribute2__Group__2__Impl : ( ( rule__Attribute2__NameAssignment_2 ) ) ;
+    // InternalBug304681TestLanguage.g:2732:1: rule__Attribute2__Group__2__Impl : ( ( rule__Attribute2__NameAssignment_2 ) ) ;
     public final void rule__Attribute2__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2731:1: ( ( ( rule__Attribute2__NameAssignment_2 ) ) )
-            // InternalBug304681TestLanguage.g:2732:1: ( ( rule__Attribute2__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:2736:1: ( ( ( rule__Attribute2__NameAssignment_2 ) ) )
+            // InternalBug304681TestLanguage.g:2737:1: ( ( rule__Attribute2__NameAssignment_2 ) )
             {
-            // InternalBug304681TestLanguage.g:2732:1: ( ( rule__Attribute2__NameAssignment_2 ) )
-            // InternalBug304681TestLanguage.g:2733:2: ( rule__Attribute2__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:2737:1: ( ( rule__Attribute2__NameAssignment_2 ) )
+            // InternalBug304681TestLanguage.g:2738:2: ( rule__Attribute2__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getNameAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:2734:2: ( rule__Attribute2__NameAssignment_2 )
-            // InternalBug304681TestLanguage.g:2734:3: rule__Attribute2__NameAssignment_2
+            // InternalBug304681TestLanguage.g:2739:2: ( rule__Attribute2__NameAssignment_2 )
+            // InternalBug304681TestLanguage.g:2739:3: rule__Attribute2__NameAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__NameAssignment_2();
@@ -8762,14 +8770,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__3"
-    // InternalBug304681TestLanguage.g:2742:1: rule__Attribute2__Group__3 : rule__Attribute2__Group__3__Impl ;
+    // InternalBug304681TestLanguage.g:2747:1: rule__Attribute2__Group__3 : rule__Attribute2__Group__3__Impl ;
     public final void rule__Attribute2__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2746:1: ( rule__Attribute2__Group__3__Impl )
-            // InternalBug304681TestLanguage.g:2747:2: rule__Attribute2__Group__3__Impl
+            // InternalBug304681TestLanguage.g:2751:1: ( rule__Attribute2__Group__3__Impl )
+            // InternalBug304681TestLanguage.g:2752:2: rule__Attribute2__Group__3__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group__3__Impl();
@@ -8795,23 +8803,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:2753:1: rule__Attribute2__Group__3__Impl : ( ( rule__Attribute2__Alternatives_3 ) ) ;
+    // InternalBug304681TestLanguage.g:2758:1: rule__Attribute2__Group__3__Impl : ( ( rule__Attribute2__Alternatives_3 ) ) ;
     public final void rule__Attribute2__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2757:1: ( ( ( rule__Attribute2__Alternatives_3 ) ) )
-            // InternalBug304681TestLanguage.g:2758:1: ( ( rule__Attribute2__Alternatives_3 ) )
+            // InternalBug304681TestLanguage.g:2762:1: ( ( ( rule__Attribute2__Alternatives_3 ) ) )
+            // InternalBug304681TestLanguage.g:2763:1: ( ( rule__Attribute2__Alternatives_3 ) )
             {
-            // InternalBug304681TestLanguage.g:2758:1: ( ( rule__Attribute2__Alternatives_3 ) )
-            // InternalBug304681TestLanguage.g:2759:2: ( rule__Attribute2__Alternatives_3 )
+            // InternalBug304681TestLanguage.g:2763:1: ( ( rule__Attribute2__Alternatives_3 ) )
+            // InternalBug304681TestLanguage.g:2764:2: ( rule__Attribute2__Alternatives_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getAlternatives_3()); 
             }
-            // InternalBug304681TestLanguage.g:2760:2: ( rule__Attribute2__Alternatives_3 )
-            // InternalBug304681TestLanguage.g:2760:3: rule__Attribute2__Alternatives_3
+            // InternalBug304681TestLanguage.g:2765:2: ( rule__Attribute2__Alternatives_3 )
+            // InternalBug304681TestLanguage.g:2765:3: rule__Attribute2__Alternatives_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Alternatives_3();
@@ -8846,14 +8854,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0__0"
-    // InternalBug304681TestLanguage.g:2769:1: rule__Attribute2__Group_3_0__0 : rule__Attribute2__Group_3_0__0__Impl rule__Attribute2__Group_3_0__1 ;
+    // InternalBug304681TestLanguage.g:2774:1: rule__Attribute2__Group_3_0__0 : rule__Attribute2__Group_3_0__0__Impl rule__Attribute2__Group_3_0__1 ;
     public final void rule__Attribute2__Group_3_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2773:1: ( rule__Attribute2__Group_3_0__0__Impl rule__Attribute2__Group_3_0__1 )
-            // InternalBug304681TestLanguage.g:2774:2: rule__Attribute2__Group_3_0__0__Impl rule__Attribute2__Group_3_0__1
+            // InternalBug304681TestLanguage.g:2778:1: ( rule__Attribute2__Group_3_0__0__Impl rule__Attribute2__Group_3_0__1 )
+            // InternalBug304681TestLanguage.g:2779:2: rule__Attribute2__Group_3_0__0__Impl rule__Attribute2__Group_3_0__1
             {
             pushFollow(FollowSets000.FOLLOW_20);
             rule__Attribute2__Group_3_0__0__Impl();
@@ -8884,17 +8892,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0__0__Impl"
-    // InternalBug304681TestLanguage.g:2781:1: rule__Attribute2__Group_3_0__0__Impl : ( '{' ) ;
+    // InternalBug304681TestLanguage.g:2786:1: rule__Attribute2__Group_3_0__0__Impl : ( '{' ) ;
     public final void rule__Attribute2__Group_3_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2785:1: ( ( '{' ) )
-            // InternalBug304681TestLanguage.g:2786:1: ( '{' )
+            // InternalBug304681TestLanguage.g:2790:1: ( ( '{' ) )
+            // InternalBug304681TestLanguage.g:2791:1: ( '{' )
             {
-            // InternalBug304681TestLanguage.g:2786:1: ( '{' )
-            // InternalBug304681TestLanguage.g:2787:2: '{'
+            // InternalBug304681TestLanguage.g:2791:1: ( '{' )
+            // InternalBug304681TestLanguage.g:2792:2: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getLeftCurlyBracketKeyword_3_0_0()); 
@@ -8925,14 +8933,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0__1"
-    // InternalBug304681TestLanguage.g:2796:1: rule__Attribute2__Group_3_0__1 : rule__Attribute2__Group_3_0__1__Impl rule__Attribute2__Group_3_0__2 ;
+    // InternalBug304681TestLanguage.g:2801:1: rule__Attribute2__Group_3_0__1 : rule__Attribute2__Group_3_0__1__Impl rule__Attribute2__Group_3_0__2 ;
     public final void rule__Attribute2__Group_3_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2800:1: ( rule__Attribute2__Group_3_0__1__Impl rule__Attribute2__Group_3_0__2 )
-            // InternalBug304681TestLanguage.g:2801:2: rule__Attribute2__Group_3_0__1__Impl rule__Attribute2__Group_3_0__2
+            // InternalBug304681TestLanguage.g:2805:1: ( rule__Attribute2__Group_3_0__1__Impl rule__Attribute2__Group_3_0__2 )
+            // InternalBug304681TestLanguage.g:2806:2: rule__Attribute2__Group_3_0__1__Impl rule__Attribute2__Group_3_0__2
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Attribute2__Group_3_0__1__Impl();
@@ -8963,23 +8971,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0__1__Impl"
-    // InternalBug304681TestLanguage.g:2808:1: rule__Attribute2__Group_3_0__1__Impl : ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2813:1: rule__Attribute2__Group_3_0__1__Impl : ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) ) ;
     public final void rule__Attribute2__Group_3_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2812:1: ( ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:2813:1: ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) )
+            // InternalBug304681TestLanguage.g:2817:1: ( ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:2818:1: ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2813:1: ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) )
-            // InternalBug304681TestLanguage.g:2814:2: ( rule__Attribute2__UnorderedGroup_3_0_1 )
+            // InternalBug304681TestLanguage.g:2818:1: ( ( rule__Attribute2__UnorderedGroup_3_0_1 ) )
+            // InternalBug304681TestLanguage.g:2819:2: ( rule__Attribute2__UnorderedGroup_3_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:2815:2: ( rule__Attribute2__UnorderedGroup_3_0_1 )
-            // InternalBug304681TestLanguage.g:2815:3: rule__Attribute2__UnorderedGroup_3_0_1
+            // InternalBug304681TestLanguage.g:2820:2: ( rule__Attribute2__UnorderedGroup_3_0_1 )
+            // InternalBug304681TestLanguage.g:2820:3: rule__Attribute2__UnorderedGroup_3_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__UnorderedGroup_3_0_1();
@@ -9014,14 +9022,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0__2"
-    // InternalBug304681TestLanguage.g:2823:1: rule__Attribute2__Group_3_0__2 : rule__Attribute2__Group_3_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:2828:1: rule__Attribute2__Group_3_0__2 : rule__Attribute2__Group_3_0__2__Impl ;
     public final void rule__Attribute2__Group_3_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2827:1: ( rule__Attribute2__Group_3_0__2__Impl )
-            // InternalBug304681TestLanguage.g:2828:2: rule__Attribute2__Group_3_0__2__Impl
+            // InternalBug304681TestLanguage.g:2832:1: ( rule__Attribute2__Group_3_0__2__Impl )
+            // InternalBug304681TestLanguage.g:2833:2: rule__Attribute2__Group_3_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group_3_0__2__Impl();
@@ -9047,17 +9055,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0__2__Impl"
-    // InternalBug304681TestLanguage.g:2834:1: rule__Attribute2__Group_3_0__2__Impl : ( '}' ) ;
+    // InternalBug304681TestLanguage.g:2839:1: rule__Attribute2__Group_3_0__2__Impl : ( '}' ) ;
     public final void rule__Attribute2__Group_3_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2838:1: ( ( '}' ) )
-            // InternalBug304681TestLanguage.g:2839:1: ( '}' )
+            // InternalBug304681TestLanguage.g:2843:1: ( ( '}' ) )
+            // InternalBug304681TestLanguage.g:2844:1: ( '}' )
             {
-            // InternalBug304681TestLanguage.g:2839:1: ( '}' )
-            // InternalBug304681TestLanguage.g:2840:2: '}'
+            // InternalBug304681TestLanguage.g:2844:1: ( '}' )
+            // InternalBug304681TestLanguage.g:2845:2: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getRightCurlyBracketKeyword_3_0_2()); 
@@ -9088,14 +9096,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_0__0"
-    // InternalBug304681TestLanguage.g:2850:1: rule__Attribute2__Group_3_0_1_0__0 : rule__Attribute2__Group_3_0_1_0__0__Impl rule__Attribute2__Group_3_0_1_0__1 ;
+    // InternalBug304681TestLanguage.g:2855:1: rule__Attribute2__Group_3_0_1_0__0 : rule__Attribute2__Group_3_0_1_0__0__Impl rule__Attribute2__Group_3_0_1_0__1 ;
     public final void rule__Attribute2__Group_3_0_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2854:1: ( rule__Attribute2__Group_3_0_1_0__0__Impl rule__Attribute2__Group_3_0_1_0__1 )
-            // InternalBug304681TestLanguage.g:2855:2: rule__Attribute2__Group_3_0_1_0__0__Impl rule__Attribute2__Group_3_0_1_0__1
+            // InternalBug304681TestLanguage.g:2859:1: ( rule__Attribute2__Group_3_0_1_0__0__Impl rule__Attribute2__Group_3_0_1_0__1 )
+            // InternalBug304681TestLanguage.g:2860:2: rule__Attribute2__Group_3_0_1_0__0__Impl rule__Attribute2__Group_3_0_1_0__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Attribute2__Group_3_0_1_0__0__Impl();
@@ -9126,17 +9134,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_0__0__Impl"
-    // InternalBug304681TestLanguage.g:2862:1: rule__Attribute2__Group_3_0_1_0__0__Impl : ( 'shortDescription' ) ;
+    // InternalBug304681TestLanguage.g:2867:1: rule__Attribute2__Group_3_0_1_0__0__Impl : ( 'shortDescription' ) ;
     public final void rule__Attribute2__Group_3_0_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2866:1: ( ( 'shortDescription' ) )
-            // InternalBug304681TestLanguage.g:2867:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:2871:1: ( ( 'shortDescription' ) )
+            // InternalBug304681TestLanguage.g:2872:1: ( 'shortDescription' )
             {
-            // InternalBug304681TestLanguage.g:2867:1: ( 'shortDescription' )
-            // InternalBug304681TestLanguage.g:2868:2: 'shortDescription'
+            // InternalBug304681TestLanguage.g:2872:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:2873:2: 'shortDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getShortDescriptionKeyword_3_0_1_0_0()); 
@@ -9167,14 +9175,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_0__1"
-    // InternalBug304681TestLanguage.g:2877:1: rule__Attribute2__Group_3_0_1_0__1 : rule__Attribute2__Group_3_0_1_0__1__Impl rule__Attribute2__Group_3_0_1_0__2 ;
+    // InternalBug304681TestLanguage.g:2882:1: rule__Attribute2__Group_3_0_1_0__1 : rule__Attribute2__Group_3_0_1_0__1__Impl rule__Attribute2__Group_3_0_1_0__2 ;
     public final void rule__Attribute2__Group_3_0_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2881:1: ( rule__Attribute2__Group_3_0_1_0__1__Impl rule__Attribute2__Group_3_0_1_0__2 )
-            // InternalBug304681TestLanguage.g:2882:2: rule__Attribute2__Group_3_0_1_0__1__Impl rule__Attribute2__Group_3_0_1_0__2
+            // InternalBug304681TestLanguage.g:2886:1: ( rule__Attribute2__Group_3_0_1_0__1__Impl rule__Attribute2__Group_3_0_1_0__2 )
+            // InternalBug304681TestLanguage.g:2887:2: rule__Attribute2__Group_3_0_1_0__1__Impl rule__Attribute2__Group_3_0_1_0__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Attribute2__Group_3_0_1_0__1__Impl();
@@ -9205,23 +9213,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_0__1__Impl"
-    // InternalBug304681TestLanguage.g:2889:1: rule__Attribute2__Group_3_0_1_0__1__Impl : ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2894:1: rule__Attribute2__Group_3_0_1_0__1__Impl : ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) ) ;
     public final void rule__Attribute2__Group_3_0_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2893:1: ( ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:2894:1: ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) )
+            // InternalBug304681TestLanguage.g:2898:1: ( ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:2899:1: ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2894:1: ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) )
-            // InternalBug304681TestLanguage.g:2895:2: ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 )
+            // InternalBug304681TestLanguage.g:2899:1: ( ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 ) )
+            // InternalBug304681TestLanguage.g:2900:2: ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getShortDescriptionAssignment_3_0_1_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:2896:2: ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 )
-            // InternalBug304681TestLanguage.g:2896:3: rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1
+            // InternalBug304681TestLanguage.g:2901:2: ( rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 )
+            // InternalBug304681TestLanguage.g:2901:3: rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1();
@@ -9256,14 +9264,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_0__2"
-    // InternalBug304681TestLanguage.g:2904:1: rule__Attribute2__Group_3_0_1_0__2 : rule__Attribute2__Group_3_0_1_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:2909:1: rule__Attribute2__Group_3_0_1_0__2 : rule__Attribute2__Group_3_0_1_0__2__Impl ;
     public final void rule__Attribute2__Group_3_0_1_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2908:1: ( rule__Attribute2__Group_3_0_1_0__2__Impl )
-            // InternalBug304681TestLanguage.g:2909:2: rule__Attribute2__Group_3_0_1_0__2__Impl
+            // InternalBug304681TestLanguage.g:2913:1: ( rule__Attribute2__Group_3_0_1_0__2__Impl )
+            // InternalBug304681TestLanguage.g:2914:2: rule__Attribute2__Group_3_0_1_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group_3_0_1_0__2__Impl();
@@ -9289,17 +9297,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_0__2__Impl"
-    // InternalBug304681TestLanguage.g:2915:1: rule__Attribute2__Group_3_0_1_0__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:2920:1: rule__Attribute2__Group_3_0_1_0__2__Impl : ( ';' ) ;
     public final void rule__Attribute2__Group_3_0_1_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2919:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:2920:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2924:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:2925:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:2920:1: ( ';' )
-            // InternalBug304681TestLanguage.g:2921:2: ';'
+            // InternalBug304681TestLanguage.g:2925:1: ( ';' )
+            // InternalBug304681TestLanguage.g:2926:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getSemicolonKeyword_3_0_1_0_2()); 
@@ -9330,14 +9338,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_1__0"
-    // InternalBug304681TestLanguage.g:2931:1: rule__Attribute2__Group_3_0_1_1__0 : rule__Attribute2__Group_3_0_1_1__0__Impl rule__Attribute2__Group_3_0_1_1__1 ;
+    // InternalBug304681TestLanguage.g:2936:1: rule__Attribute2__Group_3_0_1_1__0 : rule__Attribute2__Group_3_0_1_1__0__Impl rule__Attribute2__Group_3_0_1_1__1 ;
     public final void rule__Attribute2__Group_3_0_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2935:1: ( rule__Attribute2__Group_3_0_1_1__0__Impl rule__Attribute2__Group_3_0_1_1__1 )
-            // InternalBug304681TestLanguage.g:2936:2: rule__Attribute2__Group_3_0_1_1__0__Impl rule__Attribute2__Group_3_0_1_1__1
+            // InternalBug304681TestLanguage.g:2940:1: ( rule__Attribute2__Group_3_0_1_1__0__Impl rule__Attribute2__Group_3_0_1_1__1 )
+            // InternalBug304681TestLanguage.g:2941:2: rule__Attribute2__Group_3_0_1_1__0__Impl rule__Attribute2__Group_3_0_1_1__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Attribute2__Group_3_0_1_1__0__Impl();
@@ -9368,17 +9376,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_1__0__Impl"
-    // InternalBug304681TestLanguage.g:2943:1: rule__Attribute2__Group_3_0_1_1__0__Impl : ( 'longDescription' ) ;
+    // InternalBug304681TestLanguage.g:2948:1: rule__Attribute2__Group_3_0_1_1__0__Impl : ( 'longDescription' ) ;
     public final void rule__Attribute2__Group_3_0_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2947:1: ( ( 'longDescription' ) )
-            // InternalBug304681TestLanguage.g:2948:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:2952:1: ( ( 'longDescription' ) )
+            // InternalBug304681TestLanguage.g:2953:1: ( 'longDescription' )
             {
-            // InternalBug304681TestLanguage.g:2948:1: ( 'longDescription' )
-            // InternalBug304681TestLanguage.g:2949:2: 'longDescription'
+            // InternalBug304681TestLanguage.g:2953:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:2954:2: 'longDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getLongDescriptionKeyword_3_0_1_1_0()); 
@@ -9409,14 +9417,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_1__1"
-    // InternalBug304681TestLanguage.g:2958:1: rule__Attribute2__Group_3_0_1_1__1 : rule__Attribute2__Group_3_0_1_1__1__Impl rule__Attribute2__Group_3_0_1_1__2 ;
+    // InternalBug304681TestLanguage.g:2963:1: rule__Attribute2__Group_3_0_1_1__1 : rule__Attribute2__Group_3_0_1_1__1__Impl rule__Attribute2__Group_3_0_1_1__2 ;
     public final void rule__Attribute2__Group_3_0_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2962:1: ( rule__Attribute2__Group_3_0_1_1__1__Impl rule__Attribute2__Group_3_0_1_1__2 )
-            // InternalBug304681TestLanguage.g:2963:2: rule__Attribute2__Group_3_0_1_1__1__Impl rule__Attribute2__Group_3_0_1_1__2
+            // InternalBug304681TestLanguage.g:2967:1: ( rule__Attribute2__Group_3_0_1_1__1__Impl rule__Attribute2__Group_3_0_1_1__2 )
+            // InternalBug304681TestLanguage.g:2968:2: rule__Attribute2__Group_3_0_1_1__1__Impl rule__Attribute2__Group_3_0_1_1__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Attribute2__Group_3_0_1_1__1__Impl();
@@ -9447,23 +9455,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_1__1__Impl"
-    // InternalBug304681TestLanguage.g:2970:1: rule__Attribute2__Group_3_0_1_1__1__Impl : ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:2975:1: rule__Attribute2__Group_3_0_1_1__1__Impl : ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) ) ;
     public final void rule__Attribute2__Group_3_0_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2974:1: ( ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:2975:1: ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) )
+            // InternalBug304681TestLanguage.g:2979:1: ( ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:2980:1: ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:2975:1: ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) )
-            // InternalBug304681TestLanguage.g:2976:2: ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 )
+            // InternalBug304681TestLanguage.g:2980:1: ( ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 ) )
+            // InternalBug304681TestLanguage.g:2981:2: ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getLongDescriptionAssignment_3_0_1_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:2977:2: ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 )
-            // InternalBug304681TestLanguage.g:2977:3: rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1
+            // InternalBug304681TestLanguage.g:2982:2: ( rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 )
+            // InternalBug304681TestLanguage.g:2982:3: rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1();
@@ -9498,14 +9506,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_1__2"
-    // InternalBug304681TestLanguage.g:2985:1: rule__Attribute2__Group_3_0_1_1__2 : rule__Attribute2__Group_3_0_1_1__2__Impl ;
+    // InternalBug304681TestLanguage.g:2990:1: rule__Attribute2__Group_3_0_1_1__2 : rule__Attribute2__Group_3_0_1_1__2__Impl ;
     public final void rule__Attribute2__Group_3_0_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:2989:1: ( rule__Attribute2__Group_3_0_1_1__2__Impl )
-            // InternalBug304681TestLanguage.g:2990:2: rule__Attribute2__Group_3_0_1_1__2__Impl
+            // InternalBug304681TestLanguage.g:2994:1: ( rule__Attribute2__Group_3_0_1_1__2__Impl )
+            // InternalBug304681TestLanguage.g:2995:2: rule__Attribute2__Group_3_0_1_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group_3_0_1_1__2__Impl();
@@ -9531,17 +9539,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_1__2__Impl"
-    // InternalBug304681TestLanguage.g:2996:1: rule__Attribute2__Group_3_0_1_1__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3001:1: rule__Attribute2__Group_3_0_1_1__2__Impl : ( ';' ) ;
     public final void rule__Attribute2__Group_3_0_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3000:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3001:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3005:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3006:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3001:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3002:2: ';'
+            // InternalBug304681TestLanguage.g:3006:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3007:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getSemicolonKeyword_3_0_1_1_2()); 
@@ -9572,14 +9580,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_3__0"
-    // InternalBug304681TestLanguage.g:3012:1: rule__Attribute2__Group_3_0_1_3__0 : rule__Attribute2__Group_3_0_1_3__0__Impl rule__Attribute2__Group_3_0_1_3__1 ;
+    // InternalBug304681TestLanguage.g:3017:1: rule__Attribute2__Group_3_0_1_3__0 : rule__Attribute2__Group_3_0_1_3__0__Impl rule__Attribute2__Group_3_0_1_3__1 ;
     public final void rule__Attribute2__Group_3_0_1_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3016:1: ( rule__Attribute2__Group_3_0_1_3__0__Impl rule__Attribute2__Group_3_0_1_3__1 )
-            // InternalBug304681TestLanguage.g:3017:2: rule__Attribute2__Group_3_0_1_3__0__Impl rule__Attribute2__Group_3_0_1_3__1
+            // InternalBug304681TestLanguage.g:3021:1: ( rule__Attribute2__Group_3_0_1_3__0__Impl rule__Attribute2__Group_3_0_1_3__1 )
+            // InternalBug304681TestLanguage.g:3022:2: rule__Attribute2__Group_3_0_1_3__0__Impl rule__Attribute2__Group_3_0_1_3__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Attribute2__Group_3_0_1_3__0__Impl();
@@ -9610,23 +9618,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_3__0__Impl"
-    // InternalBug304681TestLanguage.g:3024:1: rule__Attribute2__Group_3_0_1_3__0__Impl : ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) ) ;
+    // InternalBug304681TestLanguage.g:3029:1: rule__Attribute2__Group_3_0_1_3__0__Impl : ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) ) ;
     public final void rule__Attribute2__Group_3_0_1_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3028:1: ( ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) ) )
-            // InternalBug304681TestLanguage.g:3029:1: ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) )
+            // InternalBug304681TestLanguage.g:3033:1: ( ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) ) )
+            // InternalBug304681TestLanguage.g:3034:1: ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) )
             {
-            // InternalBug304681TestLanguage.g:3029:1: ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) )
-            // InternalBug304681TestLanguage.g:3030:2: ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 )
+            // InternalBug304681TestLanguage.g:3034:1: ( ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 ) )
+            // InternalBug304681TestLanguage.g:3035:2: ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getRequiredAssignment_3_0_1_3_0()); 
             }
-            // InternalBug304681TestLanguage.g:3031:2: ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 )
-            // InternalBug304681TestLanguage.g:3031:3: rule__Attribute2__RequiredAssignment_3_0_1_3_0
+            // InternalBug304681TestLanguage.g:3036:2: ( rule__Attribute2__RequiredAssignment_3_0_1_3_0 )
+            // InternalBug304681TestLanguage.g:3036:3: rule__Attribute2__RequiredAssignment_3_0_1_3_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__RequiredAssignment_3_0_1_3_0();
@@ -9661,14 +9669,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_3__1"
-    // InternalBug304681TestLanguage.g:3039:1: rule__Attribute2__Group_3_0_1_3__1 : rule__Attribute2__Group_3_0_1_3__1__Impl ;
+    // InternalBug304681TestLanguage.g:3044:1: rule__Attribute2__Group_3_0_1_3__1 : rule__Attribute2__Group_3_0_1_3__1__Impl ;
     public final void rule__Attribute2__Group_3_0_1_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3043:1: ( rule__Attribute2__Group_3_0_1_3__1__Impl )
-            // InternalBug304681TestLanguage.g:3044:2: rule__Attribute2__Group_3_0_1_3__1__Impl
+            // InternalBug304681TestLanguage.g:3048:1: ( rule__Attribute2__Group_3_0_1_3__1__Impl )
+            // InternalBug304681TestLanguage.g:3049:2: rule__Attribute2__Group_3_0_1_3__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group_3_0_1_3__1__Impl();
@@ -9694,17 +9702,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_3__1__Impl"
-    // InternalBug304681TestLanguage.g:3050:1: rule__Attribute2__Group_3_0_1_3__1__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3055:1: rule__Attribute2__Group_3_0_1_3__1__Impl : ( ';' ) ;
     public final void rule__Attribute2__Group_3_0_1_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3054:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3055:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3059:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3060:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3055:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3056:2: ';'
+            // InternalBug304681TestLanguage.g:3060:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3061:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getSemicolonKeyword_3_0_1_3_1()); 
@@ -9735,14 +9743,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_4__0"
-    // InternalBug304681TestLanguage.g:3066:1: rule__Attribute2__Group_3_0_1_4__0 : rule__Attribute2__Group_3_0_1_4__0__Impl rule__Attribute2__Group_3_0_1_4__1 ;
+    // InternalBug304681TestLanguage.g:3071:1: rule__Attribute2__Group_3_0_1_4__0 : rule__Attribute2__Group_3_0_1_4__0__Impl rule__Attribute2__Group_3_0_1_4__1 ;
     public final void rule__Attribute2__Group_3_0_1_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3070:1: ( rule__Attribute2__Group_3_0_1_4__0__Impl rule__Attribute2__Group_3_0_1_4__1 )
-            // InternalBug304681TestLanguage.g:3071:2: rule__Attribute2__Group_3_0_1_4__0__Impl rule__Attribute2__Group_3_0_1_4__1
+            // InternalBug304681TestLanguage.g:3075:1: ( rule__Attribute2__Group_3_0_1_4__0__Impl rule__Attribute2__Group_3_0_1_4__1 )
+            // InternalBug304681TestLanguage.g:3076:2: rule__Attribute2__Group_3_0_1_4__0__Impl rule__Attribute2__Group_3_0_1_4__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Attribute2__Group_3_0_1_4__0__Impl();
@@ -9773,23 +9781,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_4__0__Impl"
-    // InternalBug304681TestLanguage.g:3078:1: rule__Attribute2__Group_3_0_1_4__0__Impl : ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) ) ;
+    // InternalBug304681TestLanguage.g:3083:1: rule__Attribute2__Group_3_0_1_4__0__Impl : ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) ) ;
     public final void rule__Attribute2__Group_3_0_1_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3082:1: ( ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) ) )
-            // InternalBug304681TestLanguage.g:3083:1: ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) )
+            // InternalBug304681TestLanguage.g:3087:1: ( ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) ) )
+            // InternalBug304681TestLanguage.g:3088:1: ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) )
             {
-            // InternalBug304681TestLanguage.g:3083:1: ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) )
-            // InternalBug304681TestLanguage.g:3084:2: ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 )
+            // InternalBug304681TestLanguage.g:3088:1: ( ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 ) )
+            // InternalBug304681TestLanguage.g:3089:2: ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTechnicalAssignment_3_0_1_4_0()); 
             }
-            // InternalBug304681TestLanguage.g:3085:2: ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 )
-            // InternalBug304681TestLanguage.g:3085:3: rule__Attribute2__TechnicalAssignment_3_0_1_4_0
+            // InternalBug304681TestLanguage.g:3090:2: ( rule__Attribute2__TechnicalAssignment_3_0_1_4_0 )
+            // InternalBug304681TestLanguage.g:3090:3: rule__Attribute2__TechnicalAssignment_3_0_1_4_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__TechnicalAssignment_3_0_1_4_0();
@@ -9824,14 +9832,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_4__1"
-    // InternalBug304681TestLanguage.g:3093:1: rule__Attribute2__Group_3_0_1_4__1 : rule__Attribute2__Group_3_0_1_4__1__Impl ;
+    // InternalBug304681TestLanguage.g:3098:1: rule__Attribute2__Group_3_0_1_4__1 : rule__Attribute2__Group_3_0_1_4__1__Impl ;
     public final void rule__Attribute2__Group_3_0_1_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3097:1: ( rule__Attribute2__Group_3_0_1_4__1__Impl )
-            // InternalBug304681TestLanguage.g:3098:2: rule__Attribute2__Group_3_0_1_4__1__Impl
+            // InternalBug304681TestLanguage.g:3102:1: ( rule__Attribute2__Group_3_0_1_4__1__Impl )
+            // InternalBug304681TestLanguage.g:3103:2: rule__Attribute2__Group_3_0_1_4__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__Group_3_0_1_4__1__Impl();
@@ -9857,17 +9865,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__Group_3_0_1_4__1__Impl"
-    // InternalBug304681TestLanguage.g:3104:1: rule__Attribute2__Group_3_0_1_4__1__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3109:1: rule__Attribute2__Group_3_0_1_4__1__Impl : ( ';' ) ;
     public final void rule__Attribute2__Group_3_0_1_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3108:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3109:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3113:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3114:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3109:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3110:2: ';'
+            // InternalBug304681TestLanguage.g:3114:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3115:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getSemicolonKeyword_3_0_1_4_1()); 
@@ -9898,14 +9906,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__0"
-    // InternalBug304681TestLanguage.g:3120:1: rule__Reference2__Group__0 : rule__Reference2__Group__0__Impl rule__Reference2__Group__1 ;
+    // InternalBug304681TestLanguage.g:3125:1: rule__Reference2__Group__0 : rule__Reference2__Group__0__Impl rule__Reference2__Group__1 ;
     public final void rule__Reference2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3124:1: ( rule__Reference2__Group__0__Impl rule__Reference2__Group__1 )
-            // InternalBug304681TestLanguage.g:3125:2: rule__Reference2__Group__0__Impl rule__Reference2__Group__1
+            // InternalBug304681TestLanguage.g:3129:1: ( rule__Reference2__Group__0__Impl rule__Reference2__Group__1 )
+            // InternalBug304681TestLanguage.g:3130:2: rule__Reference2__Group__0__Impl rule__Reference2__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Reference2__Group__0__Impl();
@@ -9936,17 +9944,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:3132:1: rule__Reference2__Group__0__Impl : ( 'Reference' ) ;
+    // InternalBug304681TestLanguage.g:3137:1: rule__Reference2__Group__0__Impl : ( 'Reference' ) ;
     public final void rule__Reference2__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3136:1: ( ( 'Reference' ) )
-            // InternalBug304681TestLanguage.g:3137:1: ( 'Reference' )
+            // InternalBug304681TestLanguage.g:3141:1: ( ( 'Reference' ) )
+            // InternalBug304681TestLanguage.g:3142:1: ( 'Reference' )
             {
-            // InternalBug304681TestLanguage.g:3137:1: ( 'Reference' )
-            // InternalBug304681TestLanguage.g:3138:2: 'Reference'
+            // InternalBug304681TestLanguage.g:3142:1: ( 'Reference' )
+            // InternalBug304681TestLanguage.g:3143:2: 'Reference'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getReferenceKeyword_0()); 
@@ -9977,14 +9985,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__1"
-    // InternalBug304681TestLanguage.g:3147:1: rule__Reference2__Group__1 : rule__Reference2__Group__1__Impl rule__Reference2__Group__2 ;
+    // InternalBug304681TestLanguage.g:3152:1: rule__Reference2__Group__1 : rule__Reference2__Group__1__Impl rule__Reference2__Group__2 ;
     public final void rule__Reference2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3151:1: ( rule__Reference2__Group__1__Impl rule__Reference2__Group__2 )
-            // InternalBug304681TestLanguage.g:3152:2: rule__Reference2__Group__1__Impl rule__Reference2__Group__2
+            // InternalBug304681TestLanguage.g:3156:1: ( rule__Reference2__Group__1__Impl rule__Reference2__Group__2 )
+            // InternalBug304681TestLanguage.g:3157:2: rule__Reference2__Group__1__Impl rule__Reference2__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_16);
             rule__Reference2__Group__1__Impl();
@@ -10015,23 +10023,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:3159:1: rule__Reference2__Group__1__Impl : ( ( rule__Reference2__TypeAssignment_1 ) ) ;
+    // InternalBug304681TestLanguage.g:3164:1: rule__Reference2__Group__1__Impl : ( ( rule__Reference2__TypeAssignment_1 ) ) ;
     public final void rule__Reference2__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3163:1: ( ( ( rule__Reference2__TypeAssignment_1 ) ) )
-            // InternalBug304681TestLanguage.g:3164:1: ( ( rule__Reference2__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:3168:1: ( ( ( rule__Reference2__TypeAssignment_1 ) ) )
+            // InternalBug304681TestLanguage.g:3169:1: ( ( rule__Reference2__TypeAssignment_1 ) )
             {
-            // InternalBug304681TestLanguage.g:3164:1: ( ( rule__Reference2__TypeAssignment_1 ) )
-            // InternalBug304681TestLanguage.g:3165:2: ( rule__Reference2__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:3169:1: ( ( rule__Reference2__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:3170:2: ( rule__Reference2__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getTypeAssignment_1()); 
             }
-            // InternalBug304681TestLanguage.g:3166:2: ( rule__Reference2__TypeAssignment_1 )
-            // InternalBug304681TestLanguage.g:3166:3: rule__Reference2__TypeAssignment_1
+            // InternalBug304681TestLanguage.g:3171:2: ( rule__Reference2__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:3171:3: rule__Reference2__TypeAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__TypeAssignment_1();
@@ -10066,14 +10074,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__2"
-    // InternalBug304681TestLanguage.g:3174:1: rule__Reference2__Group__2 : rule__Reference2__Group__2__Impl rule__Reference2__Group__3 ;
+    // InternalBug304681TestLanguage.g:3179:1: rule__Reference2__Group__2 : rule__Reference2__Group__2__Impl rule__Reference2__Group__3 ;
     public final void rule__Reference2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3178:1: ( rule__Reference2__Group__2__Impl rule__Reference2__Group__3 )
-            // InternalBug304681TestLanguage.g:3179:2: rule__Reference2__Group__2__Impl rule__Reference2__Group__3
+            // InternalBug304681TestLanguage.g:3183:1: ( rule__Reference2__Group__2__Impl rule__Reference2__Group__3 )
+            // InternalBug304681TestLanguage.g:3184:2: rule__Reference2__Group__2__Impl rule__Reference2__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_16);
             rule__Reference2__Group__2__Impl();
@@ -10104,22 +10112,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:3186:1: rule__Reference2__Group__2__Impl : ( ( rule__Reference2__ManyAssignment_2 )? ) ;
+    // InternalBug304681TestLanguage.g:3191:1: rule__Reference2__Group__2__Impl : ( ( rule__Reference2__ManyAssignment_2 )? ) ;
     public final void rule__Reference2__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3190:1: ( ( ( rule__Reference2__ManyAssignment_2 )? ) )
-            // InternalBug304681TestLanguage.g:3191:1: ( ( rule__Reference2__ManyAssignment_2 )? )
+            // InternalBug304681TestLanguage.g:3195:1: ( ( ( rule__Reference2__ManyAssignment_2 )? ) )
+            // InternalBug304681TestLanguage.g:3196:1: ( ( rule__Reference2__ManyAssignment_2 )? )
             {
-            // InternalBug304681TestLanguage.g:3191:1: ( ( rule__Reference2__ManyAssignment_2 )? )
-            // InternalBug304681TestLanguage.g:3192:2: ( rule__Reference2__ManyAssignment_2 )?
+            // InternalBug304681TestLanguage.g:3196:1: ( ( rule__Reference2__ManyAssignment_2 )? )
+            // InternalBug304681TestLanguage.g:3197:2: ( rule__Reference2__ManyAssignment_2 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getManyAssignment_2()); 
             }
-            // InternalBug304681TestLanguage.g:3193:2: ( rule__Reference2__ManyAssignment_2 )?
+            // InternalBug304681TestLanguage.g:3198:2: ( rule__Reference2__ManyAssignment_2 )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -10128,7 +10136,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt19) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:3193:3: rule__Reference2__ManyAssignment_2
+                    // InternalBug304681TestLanguage.g:3198:3: rule__Reference2__ManyAssignment_2
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference2__ManyAssignment_2();
@@ -10166,14 +10174,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__3"
-    // InternalBug304681TestLanguage.g:3201:1: rule__Reference2__Group__3 : rule__Reference2__Group__3__Impl rule__Reference2__Group__4 ;
+    // InternalBug304681TestLanguage.g:3206:1: rule__Reference2__Group__3 : rule__Reference2__Group__3__Impl rule__Reference2__Group__4 ;
     public final void rule__Reference2__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3205:1: ( rule__Reference2__Group__3__Impl rule__Reference2__Group__4 )
-            // InternalBug304681TestLanguage.g:3206:2: rule__Reference2__Group__3__Impl rule__Reference2__Group__4
+            // InternalBug304681TestLanguage.g:3210:1: ( rule__Reference2__Group__3__Impl rule__Reference2__Group__4 )
+            // InternalBug304681TestLanguage.g:3211:2: rule__Reference2__Group__3__Impl rule__Reference2__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_17);
             rule__Reference2__Group__3__Impl();
@@ -10204,23 +10212,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:3213:1: rule__Reference2__Group__3__Impl : ( ( rule__Reference2__NameAssignment_3 ) ) ;
+    // InternalBug304681TestLanguage.g:3218:1: rule__Reference2__Group__3__Impl : ( ( rule__Reference2__NameAssignment_3 ) ) ;
     public final void rule__Reference2__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3217:1: ( ( ( rule__Reference2__NameAssignment_3 ) ) )
-            // InternalBug304681TestLanguage.g:3218:1: ( ( rule__Reference2__NameAssignment_3 ) )
+            // InternalBug304681TestLanguage.g:3222:1: ( ( ( rule__Reference2__NameAssignment_3 ) ) )
+            // InternalBug304681TestLanguage.g:3223:1: ( ( rule__Reference2__NameAssignment_3 ) )
             {
-            // InternalBug304681TestLanguage.g:3218:1: ( ( rule__Reference2__NameAssignment_3 ) )
-            // InternalBug304681TestLanguage.g:3219:2: ( rule__Reference2__NameAssignment_3 )
+            // InternalBug304681TestLanguage.g:3223:1: ( ( rule__Reference2__NameAssignment_3 ) )
+            // InternalBug304681TestLanguage.g:3224:2: ( rule__Reference2__NameAssignment_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getNameAssignment_3()); 
             }
-            // InternalBug304681TestLanguage.g:3220:2: ( rule__Reference2__NameAssignment_3 )
-            // InternalBug304681TestLanguage.g:3220:3: rule__Reference2__NameAssignment_3
+            // InternalBug304681TestLanguage.g:3225:2: ( rule__Reference2__NameAssignment_3 )
+            // InternalBug304681TestLanguage.g:3225:3: rule__Reference2__NameAssignment_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__NameAssignment_3();
@@ -10255,14 +10263,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__4"
-    // InternalBug304681TestLanguage.g:3228:1: rule__Reference2__Group__4 : rule__Reference2__Group__4__Impl ;
+    // InternalBug304681TestLanguage.g:3233:1: rule__Reference2__Group__4 : rule__Reference2__Group__4__Impl ;
     public final void rule__Reference2__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3232:1: ( rule__Reference2__Group__4__Impl )
-            // InternalBug304681TestLanguage.g:3233:2: rule__Reference2__Group__4__Impl
+            // InternalBug304681TestLanguage.g:3237:1: ( rule__Reference2__Group__4__Impl )
+            // InternalBug304681TestLanguage.g:3238:2: rule__Reference2__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group__4__Impl();
@@ -10288,23 +10296,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:3239:1: rule__Reference2__Group__4__Impl : ( ( rule__Reference2__Alternatives_4 ) ) ;
+    // InternalBug304681TestLanguage.g:3244:1: rule__Reference2__Group__4__Impl : ( ( rule__Reference2__Alternatives_4 ) ) ;
     public final void rule__Reference2__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3243:1: ( ( ( rule__Reference2__Alternatives_4 ) ) )
-            // InternalBug304681TestLanguage.g:3244:1: ( ( rule__Reference2__Alternatives_4 ) )
+            // InternalBug304681TestLanguage.g:3248:1: ( ( ( rule__Reference2__Alternatives_4 ) ) )
+            // InternalBug304681TestLanguage.g:3249:1: ( ( rule__Reference2__Alternatives_4 ) )
             {
-            // InternalBug304681TestLanguage.g:3244:1: ( ( rule__Reference2__Alternatives_4 ) )
-            // InternalBug304681TestLanguage.g:3245:2: ( rule__Reference2__Alternatives_4 )
+            // InternalBug304681TestLanguage.g:3249:1: ( ( rule__Reference2__Alternatives_4 ) )
+            // InternalBug304681TestLanguage.g:3250:2: ( rule__Reference2__Alternatives_4 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getAlternatives_4()); 
             }
-            // InternalBug304681TestLanguage.g:3246:2: ( rule__Reference2__Alternatives_4 )
-            // InternalBug304681TestLanguage.g:3246:3: rule__Reference2__Alternatives_4
+            // InternalBug304681TestLanguage.g:3251:2: ( rule__Reference2__Alternatives_4 )
+            // InternalBug304681TestLanguage.g:3251:3: rule__Reference2__Alternatives_4
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Alternatives_4();
@@ -10339,14 +10347,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0__0"
-    // InternalBug304681TestLanguage.g:3255:1: rule__Reference2__Group_4_0__0 : rule__Reference2__Group_4_0__0__Impl rule__Reference2__Group_4_0__1 ;
+    // InternalBug304681TestLanguage.g:3260:1: rule__Reference2__Group_4_0__0 : rule__Reference2__Group_4_0__0__Impl rule__Reference2__Group_4_0__1 ;
     public final void rule__Reference2__Group_4_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3259:1: ( rule__Reference2__Group_4_0__0__Impl rule__Reference2__Group_4_0__1 )
-            // InternalBug304681TestLanguage.g:3260:2: rule__Reference2__Group_4_0__0__Impl rule__Reference2__Group_4_0__1
+            // InternalBug304681TestLanguage.g:3264:1: ( rule__Reference2__Group_4_0__0__Impl rule__Reference2__Group_4_0__1 )
+            // InternalBug304681TestLanguage.g:3265:2: rule__Reference2__Group_4_0__0__Impl rule__Reference2__Group_4_0__1
             {
             pushFollow(FollowSets000.FOLLOW_18);
             rule__Reference2__Group_4_0__0__Impl();
@@ -10377,17 +10385,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0__0__Impl"
-    // InternalBug304681TestLanguage.g:3267:1: rule__Reference2__Group_4_0__0__Impl : ( '{' ) ;
+    // InternalBug304681TestLanguage.g:3272:1: rule__Reference2__Group_4_0__0__Impl : ( '{' ) ;
     public final void rule__Reference2__Group_4_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3271:1: ( ( '{' ) )
-            // InternalBug304681TestLanguage.g:3272:1: ( '{' )
+            // InternalBug304681TestLanguage.g:3276:1: ( ( '{' ) )
+            // InternalBug304681TestLanguage.g:3277:1: ( '{' )
             {
-            // InternalBug304681TestLanguage.g:3272:1: ( '{' )
-            // InternalBug304681TestLanguage.g:3273:2: '{'
+            // InternalBug304681TestLanguage.g:3277:1: ( '{' )
+            // InternalBug304681TestLanguage.g:3278:2: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getLeftCurlyBracketKeyword_4_0_0()); 
@@ -10418,14 +10426,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0__1"
-    // InternalBug304681TestLanguage.g:3282:1: rule__Reference2__Group_4_0__1 : rule__Reference2__Group_4_0__1__Impl rule__Reference2__Group_4_0__2 ;
+    // InternalBug304681TestLanguage.g:3287:1: rule__Reference2__Group_4_0__1 : rule__Reference2__Group_4_0__1__Impl rule__Reference2__Group_4_0__2 ;
     public final void rule__Reference2__Group_4_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3286:1: ( rule__Reference2__Group_4_0__1__Impl rule__Reference2__Group_4_0__2 )
-            // InternalBug304681TestLanguage.g:3287:2: rule__Reference2__Group_4_0__1__Impl rule__Reference2__Group_4_0__2
+            // InternalBug304681TestLanguage.g:3291:1: ( rule__Reference2__Group_4_0__1__Impl rule__Reference2__Group_4_0__2 )
+            // InternalBug304681TestLanguage.g:3292:2: rule__Reference2__Group_4_0__1__Impl rule__Reference2__Group_4_0__2
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__Reference2__Group_4_0__1__Impl();
@@ -10456,23 +10464,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0__1__Impl"
-    // InternalBug304681TestLanguage.g:3294:1: rule__Reference2__Group_4_0__1__Impl : ( ( rule__Reference2__UnorderedGroup_4_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:3299:1: rule__Reference2__Group_4_0__1__Impl : ( ( rule__Reference2__UnorderedGroup_4_0_1 ) ) ;
     public final void rule__Reference2__Group_4_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3298:1: ( ( ( rule__Reference2__UnorderedGroup_4_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:3299:1: ( ( rule__Reference2__UnorderedGroup_4_0_1 ) )
+            // InternalBug304681TestLanguage.g:3303:1: ( ( ( rule__Reference2__UnorderedGroup_4_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:3304:1: ( ( rule__Reference2__UnorderedGroup_4_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:3299:1: ( ( rule__Reference2__UnorderedGroup_4_0_1 ) )
-            // InternalBug304681TestLanguage.g:3300:2: ( rule__Reference2__UnorderedGroup_4_0_1 )
+            // InternalBug304681TestLanguage.g:3304:1: ( ( rule__Reference2__UnorderedGroup_4_0_1 ) )
+            // InternalBug304681TestLanguage.g:3305:2: ( rule__Reference2__UnorderedGroup_4_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:3301:2: ( rule__Reference2__UnorderedGroup_4_0_1 )
-            // InternalBug304681TestLanguage.g:3301:3: rule__Reference2__UnorderedGroup_4_0_1
+            // InternalBug304681TestLanguage.g:3306:2: ( rule__Reference2__UnorderedGroup_4_0_1 )
+            // InternalBug304681TestLanguage.g:3306:3: rule__Reference2__UnorderedGroup_4_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__UnorderedGroup_4_0_1();
@@ -10507,14 +10515,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0__2"
-    // InternalBug304681TestLanguage.g:3309:1: rule__Reference2__Group_4_0__2 : rule__Reference2__Group_4_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:3314:1: rule__Reference2__Group_4_0__2 : rule__Reference2__Group_4_0__2__Impl ;
     public final void rule__Reference2__Group_4_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3313:1: ( rule__Reference2__Group_4_0__2__Impl )
-            // InternalBug304681TestLanguage.g:3314:2: rule__Reference2__Group_4_0__2__Impl
+            // InternalBug304681TestLanguage.g:3318:1: ( rule__Reference2__Group_4_0__2__Impl )
+            // InternalBug304681TestLanguage.g:3319:2: rule__Reference2__Group_4_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group_4_0__2__Impl();
@@ -10540,17 +10548,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0__2__Impl"
-    // InternalBug304681TestLanguage.g:3320:1: rule__Reference2__Group_4_0__2__Impl : ( '}' ) ;
+    // InternalBug304681TestLanguage.g:3325:1: rule__Reference2__Group_4_0__2__Impl : ( '}' ) ;
     public final void rule__Reference2__Group_4_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3324:1: ( ( '}' ) )
-            // InternalBug304681TestLanguage.g:3325:1: ( '}' )
+            // InternalBug304681TestLanguage.g:3329:1: ( ( '}' ) )
+            // InternalBug304681TestLanguage.g:3330:1: ( '}' )
             {
-            // InternalBug304681TestLanguage.g:3325:1: ( '}' )
-            // InternalBug304681TestLanguage.g:3326:2: '}'
+            // InternalBug304681TestLanguage.g:3330:1: ( '}' )
+            // InternalBug304681TestLanguage.g:3331:2: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getRightCurlyBracketKeyword_4_0_2()); 
@@ -10581,14 +10589,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_0__0"
-    // InternalBug304681TestLanguage.g:3336:1: rule__Reference2__Group_4_0_1_0__0 : rule__Reference2__Group_4_0_1_0__0__Impl rule__Reference2__Group_4_0_1_0__1 ;
+    // InternalBug304681TestLanguage.g:3341:1: rule__Reference2__Group_4_0_1_0__0 : rule__Reference2__Group_4_0_1_0__0__Impl rule__Reference2__Group_4_0_1_0__1 ;
     public final void rule__Reference2__Group_4_0_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3340:1: ( rule__Reference2__Group_4_0_1_0__0__Impl rule__Reference2__Group_4_0_1_0__1 )
-            // InternalBug304681TestLanguage.g:3341:2: rule__Reference2__Group_4_0_1_0__0__Impl rule__Reference2__Group_4_0_1_0__1
+            // InternalBug304681TestLanguage.g:3345:1: ( rule__Reference2__Group_4_0_1_0__0__Impl rule__Reference2__Group_4_0_1_0__1 )
+            // InternalBug304681TestLanguage.g:3346:2: rule__Reference2__Group_4_0_1_0__0__Impl rule__Reference2__Group_4_0_1_0__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Reference2__Group_4_0_1_0__0__Impl();
@@ -10619,17 +10627,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_0__0__Impl"
-    // InternalBug304681TestLanguage.g:3348:1: rule__Reference2__Group_4_0_1_0__0__Impl : ( 'shortDescription' ) ;
+    // InternalBug304681TestLanguage.g:3353:1: rule__Reference2__Group_4_0_1_0__0__Impl : ( 'shortDescription' ) ;
     public final void rule__Reference2__Group_4_0_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3352:1: ( ( 'shortDescription' ) )
-            // InternalBug304681TestLanguage.g:3353:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:3357:1: ( ( 'shortDescription' ) )
+            // InternalBug304681TestLanguage.g:3358:1: ( 'shortDescription' )
             {
-            // InternalBug304681TestLanguage.g:3353:1: ( 'shortDescription' )
-            // InternalBug304681TestLanguage.g:3354:2: 'shortDescription'
+            // InternalBug304681TestLanguage.g:3358:1: ( 'shortDescription' )
+            // InternalBug304681TestLanguage.g:3359:2: 'shortDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getShortDescriptionKeyword_4_0_1_0_0()); 
@@ -10660,14 +10668,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_0__1"
-    // InternalBug304681TestLanguage.g:3363:1: rule__Reference2__Group_4_0_1_0__1 : rule__Reference2__Group_4_0_1_0__1__Impl rule__Reference2__Group_4_0_1_0__2 ;
+    // InternalBug304681TestLanguage.g:3368:1: rule__Reference2__Group_4_0_1_0__1 : rule__Reference2__Group_4_0_1_0__1__Impl rule__Reference2__Group_4_0_1_0__2 ;
     public final void rule__Reference2__Group_4_0_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3367:1: ( rule__Reference2__Group_4_0_1_0__1__Impl rule__Reference2__Group_4_0_1_0__2 )
-            // InternalBug304681TestLanguage.g:3368:2: rule__Reference2__Group_4_0_1_0__1__Impl rule__Reference2__Group_4_0_1_0__2
+            // InternalBug304681TestLanguage.g:3372:1: ( rule__Reference2__Group_4_0_1_0__1__Impl rule__Reference2__Group_4_0_1_0__2 )
+            // InternalBug304681TestLanguage.g:3373:2: rule__Reference2__Group_4_0_1_0__1__Impl rule__Reference2__Group_4_0_1_0__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Reference2__Group_4_0_1_0__1__Impl();
@@ -10698,23 +10706,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_0__1__Impl"
-    // InternalBug304681TestLanguage.g:3375:1: rule__Reference2__Group_4_0_1_0__1__Impl : ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) ) ;
+    // InternalBug304681TestLanguage.g:3380:1: rule__Reference2__Group_4_0_1_0__1__Impl : ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) ) ;
     public final void rule__Reference2__Group_4_0_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3379:1: ( ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) ) )
-            // InternalBug304681TestLanguage.g:3380:1: ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) )
+            // InternalBug304681TestLanguage.g:3384:1: ( ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) ) )
+            // InternalBug304681TestLanguage.g:3385:1: ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) )
             {
-            // InternalBug304681TestLanguage.g:3380:1: ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) )
-            // InternalBug304681TestLanguage.g:3381:2: ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 )
+            // InternalBug304681TestLanguage.g:3385:1: ( ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 ) )
+            // InternalBug304681TestLanguage.g:3386:2: ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getShortDescriptionAssignment_4_0_1_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:3382:2: ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 )
-            // InternalBug304681TestLanguage.g:3382:3: rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1
+            // InternalBug304681TestLanguage.g:3387:2: ( rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 )
+            // InternalBug304681TestLanguage.g:3387:3: rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1();
@@ -10749,14 +10757,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_0__2"
-    // InternalBug304681TestLanguage.g:3390:1: rule__Reference2__Group_4_0_1_0__2 : rule__Reference2__Group_4_0_1_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:3395:1: rule__Reference2__Group_4_0_1_0__2 : rule__Reference2__Group_4_0_1_0__2__Impl ;
     public final void rule__Reference2__Group_4_0_1_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3394:1: ( rule__Reference2__Group_4_0_1_0__2__Impl )
-            // InternalBug304681TestLanguage.g:3395:2: rule__Reference2__Group_4_0_1_0__2__Impl
+            // InternalBug304681TestLanguage.g:3399:1: ( rule__Reference2__Group_4_0_1_0__2__Impl )
+            // InternalBug304681TestLanguage.g:3400:2: rule__Reference2__Group_4_0_1_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group_4_0_1_0__2__Impl();
@@ -10782,17 +10790,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_0__2__Impl"
-    // InternalBug304681TestLanguage.g:3401:1: rule__Reference2__Group_4_0_1_0__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3406:1: rule__Reference2__Group_4_0_1_0__2__Impl : ( ';' ) ;
     public final void rule__Reference2__Group_4_0_1_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3405:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3406:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3410:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3411:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3406:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3407:2: ';'
+            // InternalBug304681TestLanguage.g:3411:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3412:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getSemicolonKeyword_4_0_1_0_2()); 
@@ -10823,14 +10831,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_1__0"
-    // InternalBug304681TestLanguage.g:3417:1: rule__Reference2__Group_4_0_1_1__0 : rule__Reference2__Group_4_0_1_1__0__Impl rule__Reference2__Group_4_0_1_1__1 ;
+    // InternalBug304681TestLanguage.g:3422:1: rule__Reference2__Group_4_0_1_1__0 : rule__Reference2__Group_4_0_1_1__0__Impl rule__Reference2__Group_4_0_1_1__1 ;
     public final void rule__Reference2__Group_4_0_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3421:1: ( rule__Reference2__Group_4_0_1_1__0__Impl rule__Reference2__Group_4_0_1_1__1 )
-            // InternalBug304681TestLanguage.g:3422:2: rule__Reference2__Group_4_0_1_1__0__Impl rule__Reference2__Group_4_0_1_1__1
+            // InternalBug304681TestLanguage.g:3426:1: ( rule__Reference2__Group_4_0_1_1__0__Impl rule__Reference2__Group_4_0_1_1__1 )
+            // InternalBug304681TestLanguage.g:3427:2: rule__Reference2__Group_4_0_1_1__0__Impl rule__Reference2__Group_4_0_1_1__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__Reference2__Group_4_0_1_1__0__Impl();
@@ -10861,17 +10869,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_1__0__Impl"
-    // InternalBug304681TestLanguage.g:3429:1: rule__Reference2__Group_4_0_1_1__0__Impl : ( 'longDescription' ) ;
+    // InternalBug304681TestLanguage.g:3434:1: rule__Reference2__Group_4_0_1_1__0__Impl : ( 'longDescription' ) ;
     public final void rule__Reference2__Group_4_0_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3433:1: ( ( 'longDescription' ) )
-            // InternalBug304681TestLanguage.g:3434:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:3438:1: ( ( 'longDescription' ) )
+            // InternalBug304681TestLanguage.g:3439:1: ( 'longDescription' )
             {
-            // InternalBug304681TestLanguage.g:3434:1: ( 'longDescription' )
-            // InternalBug304681TestLanguage.g:3435:2: 'longDescription'
+            // InternalBug304681TestLanguage.g:3439:1: ( 'longDescription' )
+            // InternalBug304681TestLanguage.g:3440:2: 'longDescription'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getLongDescriptionKeyword_4_0_1_1_0()); 
@@ -10902,14 +10910,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_1__1"
-    // InternalBug304681TestLanguage.g:3444:1: rule__Reference2__Group_4_0_1_1__1 : rule__Reference2__Group_4_0_1_1__1__Impl rule__Reference2__Group_4_0_1_1__2 ;
+    // InternalBug304681TestLanguage.g:3449:1: rule__Reference2__Group_4_0_1_1__1 : rule__Reference2__Group_4_0_1_1__1__Impl rule__Reference2__Group_4_0_1_1__2 ;
     public final void rule__Reference2__Group_4_0_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3448:1: ( rule__Reference2__Group_4_0_1_1__1__Impl rule__Reference2__Group_4_0_1_1__2 )
-            // InternalBug304681TestLanguage.g:3449:2: rule__Reference2__Group_4_0_1_1__1__Impl rule__Reference2__Group_4_0_1_1__2
+            // InternalBug304681TestLanguage.g:3453:1: ( rule__Reference2__Group_4_0_1_1__1__Impl rule__Reference2__Group_4_0_1_1__2 )
+            // InternalBug304681TestLanguage.g:3454:2: rule__Reference2__Group_4_0_1_1__1__Impl rule__Reference2__Group_4_0_1_1__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Reference2__Group_4_0_1_1__1__Impl();
@@ -10940,23 +10948,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_1__1__Impl"
-    // InternalBug304681TestLanguage.g:3456:1: rule__Reference2__Group_4_0_1_1__1__Impl : ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:3461:1: rule__Reference2__Group_4_0_1_1__1__Impl : ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) ) ;
     public final void rule__Reference2__Group_4_0_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3460:1: ( ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:3461:1: ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) )
+            // InternalBug304681TestLanguage.g:3465:1: ( ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:3466:1: ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:3461:1: ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) )
-            // InternalBug304681TestLanguage.g:3462:2: ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 )
+            // InternalBug304681TestLanguage.g:3466:1: ( ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 ) )
+            // InternalBug304681TestLanguage.g:3467:2: ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getLongDescriptionAssignment_4_0_1_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:3463:2: ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 )
-            // InternalBug304681TestLanguage.g:3463:3: rule__Reference2__LongDescriptionAssignment_4_0_1_1_1
+            // InternalBug304681TestLanguage.g:3468:2: ( rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 )
+            // InternalBug304681TestLanguage.g:3468:3: rule__Reference2__LongDescriptionAssignment_4_0_1_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__LongDescriptionAssignment_4_0_1_1_1();
@@ -10991,14 +10999,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_1__2"
-    // InternalBug304681TestLanguage.g:3471:1: rule__Reference2__Group_4_0_1_1__2 : rule__Reference2__Group_4_0_1_1__2__Impl ;
+    // InternalBug304681TestLanguage.g:3476:1: rule__Reference2__Group_4_0_1_1__2 : rule__Reference2__Group_4_0_1_1__2__Impl ;
     public final void rule__Reference2__Group_4_0_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3475:1: ( rule__Reference2__Group_4_0_1_1__2__Impl )
-            // InternalBug304681TestLanguage.g:3476:2: rule__Reference2__Group_4_0_1_1__2__Impl
+            // InternalBug304681TestLanguage.g:3480:1: ( rule__Reference2__Group_4_0_1_1__2__Impl )
+            // InternalBug304681TestLanguage.g:3481:2: rule__Reference2__Group_4_0_1_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group_4_0_1_1__2__Impl();
@@ -11024,17 +11032,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group_4_0_1_1__2__Impl"
-    // InternalBug304681TestLanguage.g:3482:1: rule__Reference2__Group_4_0_1_1__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3487:1: rule__Reference2__Group_4_0_1_1__2__Impl : ( ';' ) ;
     public final void rule__Reference2__Group_4_0_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3486:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3487:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3491:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3492:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3487:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3488:2: ';'
+            // InternalBug304681TestLanguage.g:3492:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3493:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getSemicolonKeyword_4_0_1_1_2()); 
@@ -11065,14 +11073,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__0"
-    // InternalBug304681TestLanguage.g:3498:1: rule__ConstraintDefinition__Group__0 : rule__ConstraintDefinition__Group__0__Impl rule__ConstraintDefinition__Group__1 ;
+    // InternalBug304681TestLanguage.g:3503:1: rule__ConstraintDefinition__Group__0 : rule__ConstraintDefinition__Group__0__Impl rule__ConstraintDefinition__Group__1 ;
     public final void rule__ConstraintDefinition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3502:1: ( rule__ConstraintDefinition__Group__0__Impl rule__ConstraintDefinition__Group__1 )
-            // InternalBug304681TestLanguage.g:3503:2: rule__ConstraintDefinition__Group__0__Impl rule__ConstraintDefinition__Group__1
+            // InternalBug304681TestLanguage.g:3507:1: ( rule__ConstraintDefinition__Group__0__Impl rule__ConstraintDefinition__Group__1 )
+            // InternalBug304681TestLanguage.g:3508:2: rule__ConstraintDefinition__Group__0__Impl rule__ConstraintDefinition__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__ConstraintDefinition__Group__0__Impl();
@@ -11103,17 +11111,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__0__Impl"
-    // InternalBug304681TestLanguage.g:3510:1: rule__ConstraintDefinition__Group__0__Impl : ( 'constraint' ) ;
+    // InternalBug304681TestLanguage.g:3515:1: rule__ConstraintDefinition__Group__0__Impl : ( 'constraint' ) ;
     public final void rule__ConstraintDefinition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3514:1: ( ( 'constraint' ) )
-            // InternalBug304681TestLanguage.g:3515:1: ( 'constraint' )
+            // InternalBug304681TestLanguage.g:3519:1: ( ( 'constraint' ) )
+            // InternalBug304681TestLanguage.g:3520:1: ( 'constraint' )
             {
-            // InternalBug304681TestLanguage.g:3515:1: ( 'constraint' )
-            // InternalBug304681TestLanguage.g:3516:2: 'constraint'
+            // InternalBug304681TestLanguage.g:3520:1: ( 'constraint' )
+            // InternalBug304681TestLanguage.g:3521:2: 'constraint'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getConstraintKeyword_0()); 
@@ -11144,14 +11152,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__1"
-    // InternalBug304681TestLanguage.g:3525:1: rule__ConstraintDefinition__Group__1 : rule__ConstraintDefinition__Group__1__Impl rule__ConstraintDefinition__Group__2 ;
+    // InternalBug304681TestLanguage.g:3530:1: rule__ConstraintDefinition__Group__1 : rule__ConstraintDefinition__Group__1__Impl rule__ConstraintDefinition__Group__2 ;
     public final void rule__ConstraintDefinition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3529:1: ( rule__ConstraintDefinition__Group__1__Impl rule__ConstraintDefinition__Group__2 )
-            // InternalBug304681TestLanguage.g:3530:2: rule__ConstraintDefinition__Group__1__Impl rule__ConstraintDefinition__Group__2
+            // InternalBug304681TestLanguage.g:3534:1: ( rule__ConstraintDefinition__Group__1__Impl rule__ConstraintDefinition__Group__2 )
+            // InternalBug304681TestLanguage.g:3535:2: rule__ConstraintDefinition__Group__1__Impl rule__ConstraintDefinition__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_21);
             rule__ConstraintDefinition__Group__1__Impl();
@@ -11182,23 +11190,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__1__Impl"
-    // InternalBug304681TestLanguage.g:3537:1: rule__ConstraintDefinition__Group__1__Impl : ( ( rule__ConstraintDefinition__TypeAssignment_1 ) ) ;
+    // InternalBug304681TestLanguage.g:3542:1: rule__ConstraintDefinition__Group__1__Impl : ( ( rule__ConstraintDefinition__TypeAssignment_1 ) ) ;
     public final void rule__ConstraintDefinition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3541:1: ( ( ( rule__ConstraintDefinition__TypeAssignment_1 ) ) )
-            // InternalBug304681TestLanguage.g:3542:1: ( ( rule__ConstraintDefinition__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:3546:1: ( ( ( rule__ConstraintDefinition__TypeAssignment_1 ) ) )
+            // InternalBug304681TestLanguage.g:3547:1: ( ( rule__ConstraintDefinition__TypeAssignment_1 ) )
             {
-            // InternalBug304681TestLanguage.g:3542:1: ( ( rule__ConstraintDefinition__TypeAssignment_1 ) )
-            // InternalBug304681TestLanguage.g:3543:2: ( rule__ConstraintDefinition__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:3547:1: ( ( rule__ConstraintDefinition__TypeAssignment_1 ) )
+            // InternalBug304681TestLanguage.g:3548:2: ( rule__ConstraintDefinition__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getTypeAssignment_1()); 
             }
-            // InternalBug304681TestLanguage.g:3544:2: ( rule__ConstraintDefinition__TypeAssignment_1 )
-            // InternalBug304681TestLanguage.g:3544:3: rule__ConstraintDefinition__TypeAssignment_1
+            // InternalBug304681TestLanguage.g:3549:2: ( rule__ConstraintDefinition__TypeAssignment_1 )
+            // InternalBug304681TestLanguage.g:3549:3: rule__ConstraintDefinition__TypeAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__TypeAssignment_1();
@@ -11233,14 +11241,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__2"
-    // InternalBug304681TestLanguage.g:3552:1: rule__ConstraintDefinition__Group__2 : rule__ConstraintDefinition__Group__2__Impl rule__ConstraintDefinition__Group__3 ;
+    // InternalBug304681TestLanguage.g:3557:1: rule__ConstraintDefinition__Group__2 : rule__ConstraintDefinition__Group__2__Impl rule__ConstraintDefinition__Group__3 ;
     public final void rule__ConstraintDefinition__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3556:1: ( rule__ConstraintDefinition__Group__2__Impl rule__ConstraintDefinition__Group__3 )
-            // InternalBug304681TestLanguage.g:3557:2: rule__ConstraintDefinition__Group__2__Impl rule__ConstraintDefinition__Group__3
+            // InternalBug304681TestLanguage.g:3561:1: ( rule__ConstraintDefinition__Group__2__Impl rule__ConstraintDefinition__Group__3 )
+            // InternalBug304681TestLanguage.g:3562:2: rule__ConstraintDefinition__Group__2__Impl rule__ConstraintDefinition__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_22);
             rule__ConstraintDefinition__Group__2__Impl();
@@ -11271,17 +11279,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__2__Impl"
-    // InternalBug304681TestLanguage.g:3564:1: rule__ConstraintDefinition__Group__2__Impl : ( '{' ) ;
+    // InternalBug304681TestLanguage.g:3569:1: rule__ConstraintDefinition__Group__2__Impl : ( '{' ) ;
     public final void rule__ConstraintDefinition__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3568:1: ( ( '{' ) )
-            // InternalBug304681TestLanguage.g:3569:1: ( '{' )
+            // InternalBug304681TestLanguage.g:3573:1: ( ( '{' ) )
+            // InternalBug304681TestLanguage.g:3574:1: ( '{' )
             {
-            // InternalBug304681TestLanguage.g:3569:1: ( '{' )
-            // InternalBug304681TestLanguage.g:3570:2: '{'
+            // InternalBug304681TestLanguage.g:3574:1: ( '{' )
+            // InternalBug304681TestLanguage.g:3575:2: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getLeftCurlyBracketKeyword_2()); 
@@ -11312,14 +11320,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__3"
-    // InternalBug304681TestLanguage.g:3579:1: rule__ConstraintDefinition__Group__3 : rule__ConstraintDefinition__Group__3__Impl rule__ConstraintDefinition__Group__4 ;
+    // InternalBug304681TestLanguage.g:3584:1: rule__ConstraintDefinition__Group__3 : rule__ConstraintDefinition__Group__3__Impl rule__ConstraintDefinition__Group__4 ;
     public final void rule__ConstraintDefinition__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3583:1: ( rule__ConstraintDefinition__Group__3__Impl rule__ConstraintDefinition__Group__4 )
-            // InternalBug304681TestLanguage.g:3584:2: rule__ConstraintDefinition__Group__3__Impl rule__ConstraintDefinition__Group__4
+            // InternalBug304681TestLanguage.g:3588:1: ( rule__ConstraintDefinition__Group__3__Impl rule__ConstraintDefinition__Group__4 )
+            // InternalBug304681TestLanguage.g:3589:2: rule__ConstraintDefinition__Group__3__Impl rule__ConstraintDefinition__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_10);
             rule__ConstraintDefinition__Group__3__Impl();
@@ -11350,23 +11358,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__3__Impl"
-    // InternalBug304681TestLanguage.g:3591:1: rule__ConstraintDefinition__Group__3__Impl : ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) ) ;
+    // InternalBug304681TestLanguage.g:3596:1: rule__ConstraintDefinition__Group__3__Impl : ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) ) ;
     public final void rule__ConstraintDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3595:1: ( ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) ) )
-            // InternalBug304681TestLanguage.g:3596:1: ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) )
+            // InternalBug304681TestLanguage.g:3600:1: ( ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) ) )
+            // InternalBug304681TestLanguage.g:3601:1: ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) )
             {
-            // InternalBug304681TestLanguage.g:3596:1: ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) )
-            // InternalBug304681TestLanguage.g:3597:2: ( rule__ConstraintDefinition__UnorderedGroup_3 )
+            // InternalBug304681TestLanguage.g:3601:1: ( ( rule__ConstraintDefinition__UnorderedGroup_3 ) )
+            // InternalBug304681TestLanguage.g:3602:2: ( rule__ConstraintDefinition__UnorderedGroup_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3()); 
             }
-            // InternalBug304681TestLanguage.g:3598:2: ( rule__ConstraintDefinition__UnorderedGroup_3 )
-            // InternalBug304681TestLanguage.g:3598:3: rule__ConstraintDefinition__UnorderedGroup_3
+            // InternalBug304681TestLanguage.g:3603:2: ( rule__ConstraintDefinition__UnorderedGroup_3 )
+            // InternalBug304681TestLanguage.g:3603:3: rule__ConstraintDefinition__UnorderedGroup_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__UnorderedGroup_3();
@@ -11401,14 +11409,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__4"
-    // InternalBug304681TestLanguage.g:3606:1: rule__ConstraintDefinition__Group__4 : rule__ConstraintDefinition__Group__4__Impl ;
+    // InternalBug304681TestLanguage.g:3611:1: rule__ConstraintDefinition__Group__4 : rule__ConstraintDefinition__Group__4__Impl ;
     public final void rule__ConstraintDefinition__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3610:1: ( rule__ConstraintDefinition__Group__4__Impl )
-            // InternalBug304681TestLanguage.g:3611:2: rule__ConstraintDefinition__Group__4__Impl
+            // InternalBug304681TestLanguage.g:3615:1: ( rule__ConstraintDefinition__Group__4__Impl )
+            // InternalBug304681TestLanguage.g:3616:2: rule__ConstraintDefinition__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__Group__4__Impl();
@@ -11434,17 +11442,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group__4__Impl"
-    // InternalBug304681TestLanguage.g:3617:1: rule__ConstraintDefinition__Group__4__Impl : ( '}' ) ;
+    // InternalBug304681TestLanguage.g:3622:1: rule__ConstraintDefinition__Group__4__Impl : ( '}' ) ;
     public final void rule__ConstraintDefinition__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3621:1: ( ( '}' ) )
-            // InternalBug304681TestLanguage.g:3622:1: ( '}' )
+            // InternalBug304681TestLanguage.g:3626:1: ( ( '}' ) )
+            // InternalBug304681TestLanguage.g:3627:1: ( '}' )
             {
-            // InternalBug304681TestLanguage.g:3622:1: ( '}' )
-            // InternalBug304681TestLanguage.g:3623:2: '}'
+            // InternalBug304681TestLanguage.g:3627:1: ( '}' )
+            // InternalBug304681TestLanguage.g:3628:2: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getRightCurlyBracketKeyword_4()); 
@@ -11475,14 +11483,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_0__0"
-    // InternalBug304681TestLanguage.g:3633:1: rule__ConstraintDefinition__Group_3_0__0 : rule__ConstraintDefinition__Group_3_0__0__Impl rule__ConstraintDefinition__Group_3_0__1 ;
+    // InternalBug304681TestLanguage.g:3638:1: rule__ConstraintDefinition__Group_3_0__0 : rule__ConstraintDefinition__Group_3_0__0__Impl rule__ConstraintDefinition__Group_3_0__1 ;
     public final void rule__ConstraintDefinition__Group_3_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3637:1: ( rule__ConstraintDefinition__Group_3_0__0__Impl rule__ConstraintDefinition__Group_3_0__1 )
-            // InternalBug304681TestLanguage.g:3638:2: rule__ConstraintDefinition__Group_3_0__0__Impl rule__ConstraintDefinition__Group_3_0__1
+            // InternalBug304681TestLanguage.g:3642:1: ( rule__ConstraintDefinition__Group_3_0__0__Impl rule__ConstraintDefinition__Group_3_0__1 )
+            // InternalBug304681TestLanguage.g:3643:2: rule__ConstraintDefinition__Group_3_0__0__Impl rule__ConstraintDefinition__Group_3_0__1
             {
             pushFollow(FollowSets000.FOLLOW_23);
             rule__ConstraintDefinition__Group_3_0__0__Impl();
@@ -11513,17 +11521,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_0__0__Impl"
-    // InternalBug304681TestLanguage.g:3645:1: rule__ConstraintDefinition__Group_3_0__0__Impl : ( 'parameters' ) ;
+    // InternalBug304681TestLanguage.g:3650:1: rule__ConstraintDefinition__Group_3_0__0__Impl : ( 'parameters' ) ;
     public final void rule__ConstraintDefinition__Group_3_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3649:1: ( ( 'parameters' ) )
-            // InternalBug304681TestLanguage.g:3650:1: ( 'parameters' )
+            // InternalBug304681TestLanguage.g:3654:1: ( ( 'parameters' ) )
+            // InternalBug304681TestLanguage.g:3655:1: ( 'parameters' )
             {
-            // InternalBug304681TestLanguage.g:3650:1: ( 'parameters' )
-            // InternalBug304681TestLanguage.g:3651:2: 'parameters'
+            // InternalBug304681TestLanguage.g:3655:1: ( 'parameters' )
+            // InternalBug304681TestLanguage.g:3656:2: 'parameters'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getParametersKeyword_3_0_0()); 
@@ -11554,14 +11562,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_0__1"
-    // InternalBug304681TestLanguage.g:3660:1: rule__ConstraintDefinition__Group_3_0__1 : rule__ConstraintDefinition__Group_3_0__1__Impl rule__ConstraintDefinition__Group_3_0__2 ;
+    // InternalBug304681TestLanguage.g:3665:1: rule__ConstraintDefinition__Group_3_0__1 : rule__ConstraintDefinition__Group_3_0__1__Impl rule__ConstraintDefinition__Group_3_0__2 ;
     public final void rule__ConstraintDefinition__Group_3_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3664:1: ( rule__ConstraintDefinition__Group_3_0__1__Impl rule__ConstraintDefinition__Group_3_0__2 )
-            // InternalBug304681TestLanguage.g:3665:2: rule__ConstraintDefinition__Group_3_0__1__Impl rule__ConstraintDefinition__Group_3_0__2
+            // InternalBug304681TestLanguage.g:3669:1: ( rule__ConstraintDefinition__Group_3_0__1__Impl rule__ConstraintDefinition__Group_3_0__2 )
+            // InternalBug304681TestLanguage.g:3670:2: rule__ConstraintDefinition__Group_3_0__1__Impl rule__ConstraintDefinition__Group_3_0__2
             {
             pushFollow(FollowSets000.FOLLOW_23);
             rule__ConstraintDefinition__Group_3_0__1__Impl();
@@ -11592,22 +11600,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_0__1__Impl"
-    // InternalBug304681TestLanguage.g:3672:1: rule__ConstraintDefinition__Group_3_0__1__Impl : ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* ) ;
+    // InternalBug304681TestLanguage.g:3677:1: rule__ConstraintDefinition__Group_3_0__1__Impl : ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* ) ;
     public final void rule__ConstraintDefinition__Group_3_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3676:1: ( ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* ) )
-            // InternalBug304681TestLanguage.g:3677:1: ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* )
+            // InternalBug304681TestLanguage.g:3681:1: ( ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* ) )
+            // InternalBug304681TestLanguage.g:3682:1: ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* )
             {
-            // InternalBug304681TestLanguage.g:3677:1: ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* )
-            // InternalBug304681TestLanguage.g:3678:2: ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )*
+            // InternalBug304681TestLanguage.g:3682:1: ( ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )* )
+            // InternalBug304681TestLanguage.g:3683:2: ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getParametersAssignment_3_0_1()); 
             }
-            // InternalBug304681TestLanguage.g:3679:2: ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )*
+            // InternalBug304681TestLanguage.g:3684:2: ( rule__ConstraintDefinition__ParametersAssignment_3_0_1 )*
             loop20:
             do {
                 int alt20=2;
@@ -11620,7 +11628,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalBug304681TestLanguage.g:3679:3: rule__ConstraintDefinition__ParametersAssignment_3_0_1
+            	    // InternalBug304681TestLanguage.g:3684:3: rule__ConstraintDefinition__ParametersAssignment_3_0_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_24);
             	    rule__ConstraintDefinition__ParametersAssignment_3_0_1();
@@ -11661,14 +11669,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_0__2"
-    // InternalBug304681TestLanguage.g:3687:1: rule__ConstraintDefinition__Group_3_0__2 : rule__ConstraintDefinition__Group_3_0__2__Impl ;
+    // InternalBug304681TestLanguage.g:3692:1: rule__ConstraintDefinition__Group_3_0__2 : rule__ConstraintDefinition__Group_3_0__2__Impl ;
     public final void rule__ConstraintDefinition__Group_3_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3691:1: ( rule__ConstraintDefinition__Group_3_0__2__Impl )
-            // InternalBug304681TestLanguage.g:3692:2: rule__ConstraintDefinition__Group_3_0__2__Impl
+            // InternalBug304681TestLanguage.g:3696:1: ( rule__ConstraintDefinition__Group_3_0__2__Impl )
+            // InternalBug304681TestLanguage.g:3697:2: rule__ConstraintDefinition__Group_3_0__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__Group_3_0__2__Impl();
@@ -11694,17 +11702,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_0__2__Impl"
-    // InternalBug304681TestLanguage.g:3698:1: rule__ConstraintDefinition__Group_3_0__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3703:1: rule__ConstraintDefinition__Group_3_0__2__Impl : ( ';' ) ;
     public final void rule__ConstraintDefinition__Group_3_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3702:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3703:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3707:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3708:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3703:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3704:2: ';'
+            // InternalBug304681TestLanguage.g:3708:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3709:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getSemicolonKeyword_3_0_2()); 
@@ -11735,14 +11743,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_1__0"
-    // InternalBug304681TestLanguage.g:3714:1: rule__ConstraintDefinition__Group_3_1__0 : rule__ConstraintDefinition__Group_3_1__0__Impl rule__ConstraintDefinition__Group_3_1__1 ;
+    // InternalBug304681TestLanguage.g:3719:1: rule__ConstraintDefinition__Group_3_1__0 : rule__ConstraintDefinition__Group_3_1__0__Impl rule__ConstraintDefinition__Group_3_1__1 ;
     public final void rule__ConstraintDefinition__Group_3_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3718:1: ( rule__ConstraintDefinition__Group_3_1__0__Impl rule__ConstraintDefinition__Group_3_1__1 )
-            // InternalBug304681TestLanguage.g:3719:2: rule__ConstraintDefinition__Group_3_1__0__Impl rule__ConstraintDefinition__Group_3_1__1
+            // InternalBug304681TestLanguage.g:3723:1: ( rule__ConstraintDefinition__Group_3_1__0__Impl rule__ConstraintDefinition__Group_3_1__1 )
+            // InternalBug304681TestLanguage.g:3724:2: rule__ConstraintDefinition__Group_3_1__0__Impl rule__ConstraintDefinition__Group_3_1__1
             {
             pushFollow(FollowSets000.FOLLOW_11);
             rule__ConstraintDefinition__Group_3_1__0__Impl();
@@ -11773,17 +11781,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_1__0__Impl"
-    // InternalBug304681TestLanguage.g:3726:1: rule__ConstraintDefinition__Group_3_1__0__Impl : ( 'message' ) ;
+    // InternalBug304681TestLanguage.g:3731:1: rule__ConstraintDefinition__Group_3_1__0__Impl : ( 'message' ) ;
     public final void rule__ConstraintDefinition__Group_3_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3730:1: ( ( 'message' ) )
-            // InternalBug304681TestLanguage.g:3731:1: ( 'message' )
+            // InternalBug304681TestLanguage.g:3735:1: ( ( 'message' ) )
+            // InternalBug304681TestLanguage.g:3736:1: ( 'message' )
             {
-            // InternalBug304681TestLanguage.g:3731:1: ( 'message' )
-            // InternalBug304681TestLanguage.g:3732:2: 'message'
+            // InternalBug304681TestLanguage.g:3736:1: ( 'message' )
+            // InternalBug304681TestLanguage.g:3737:2: 'message'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getMessageKeyword_3_1_0()); 
@@ -11814,14 +11822,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_1__1"
-    // InternalBug304681TestLanguage.g:3741:1: rule__ConstraintDefinition__Group_3_1__1 : rule__ConstraintDefinition__Group_3_1__1__Impl rule__ConstraintDefinition__Group_3_1__2 ;
+    // InternalBug304681TestLanguage.g:3746:1: rule__ConstraintDefinition__Group_3_1__1 : rule__ConstraintDefinition__Group_3_1__1__Impl rule__ConstraintDefinition__Group_3_1__2 ;
     public final void rule__ConstraintDefinition__Group_3_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3745:1: ( rule__ConstraintDefinition__Group_3_1__1__Impl rule__ConstraintDefinition__Group_3_1__2 )
-            // InternalBug304681TestLanguage.g:3746:2: rule__ConstraintDefinition__Group_3_1__1__Impl rule__ConstraintDefinition__Group_3_1__2
+            // InternalBug304681TestLanguage.g:3750:1: ( rule__ConstraintDefinition__Group_3_1__1__Impl rule__ConstraintDefinition__Group_3_1__2 )
+            // InternalBug304681TestLanguage.g:3751:2: rule__ConstraintDefinition__Group_3_1__1__Impl rule__ConstraintDefinition__Group_3_1__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__ConstraintDefinition__Group_3_1__1__Impl();
@@ -11852,23 +11860,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_1__1__Impl"
-    // InternalBug304681TestLanguage.g:3753:1: rule__ConstraintDefinition__Group_3_1__1__Impl : ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) ) ;
+    // InternalBug304681TestLanguage.g:3758:1: rule__ConstraintDefinition__Group_3_1__1__Impl : ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) ) ;
     public final void rule__ConstraintDefinition__Group_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3757:1: ( ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) ) )
-            // InternalBug304681TestLanguage.g:3758:1: ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) )
+            // InternalBug304681TestLanguage.g:3762:1: ( ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) ) )
+            // InternalBug304681TestLanguage.g:3763:1: ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) )
             {
-            // InternalBug304681TestLanguage.g:3758:1: ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) )
-            // InternalBug304681TestLanguage.g:3759:2: ( rule__ConstraintDefinition__MessageAssignment_3_1_1 )
+            // InternalBug304681TestLanguage.g:3763:1: ( ( rule__ConstraintDefinition__MessageAssignment_3_1_1 ) )
+            // InternalBug304681TestLanguage.g:3764:2: ( rule__ConstraintDefinition__MessageAssignment_3_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getMessageAssignment_3_1_1()); 
             }
-            // InternalBug304681TestLanguage.g:3760:2: ( rule__ConstraintDefinition__MessageAssignment_3_1_1 )
-            // InternalBug304681TestLanguage.g:3760:3: rule__ConstraintDefinition__MessageAssignment_3_1_1
+            // InternalBug304681TestLanguage.g:3765:2: ( rule__ConstraintDefinition__MessageAssignment_3_1_1 )
+            // InternalBug304681TestLanguage.g:3765:3: rule__ConstraintDefinition__MessageAssignment_3_1_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__MessageAssignment_3_1_1();
@@ -11903,14 +11911,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_1__2"
-    // InternalBug304681TestLanguage.g:3768:1: rule__ConstraintDefinition__Group_3_1__2 : rule__ConstraintDefinition__Group_3_1__2__Impl ;
+    // InternalBug304681TestLanguage.g:3773:1: rule__ConstraintDefinition__Group_3_1__2 : rule__ConstraintDefinition__Group_3_1__2__Impl ;
     public final void rule__ConstraintDefinition__Group_3_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3772:1: ( rule__ConstraintDefinition__Group_3_1__2__Impl )
-            // InternalBug304681TestLanguage.g:3773:2: rule__ConstraintDefinition__Group_3_1__2__Impl
+            // InternalBug304681TestLanguage.g:3777:1: ( rule__ConstraintDefinition__Group_3_1__2__Impl )
+            // InternalBug304681TestLanguage.g:3778:2: rule__ConstraintDefinition__Group_3_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__Group_3_1__2__Impl();
@@ -11936,17 +11944,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__Group_3_1__2__Impl"
-    // InternalBug304681TestLanguage.g:3779:1: rule__ConstraintDefinition__Group_3_1__2__Impl : ( ';' ) ;
+    // InternalBug304681TestLanguage.g:3784:1: rule__ConstraintDefinition__Group_3_1__2__Impl : ( ';' ) ;
     public final void rule__ConstraintDefinition__Group_3_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3783:1: ( ( ';' ) )
-            // InternalBug304681TestLanguage.g:3784:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3788:1: ( ( ';' ) )
+            // InternalBug304681TestLanguage.g:3789:1: ( ';' )
             {
-            // InternalBug304681TestLanguage.g:3784:1: ( ';' )
-            // InternalBug304681TestLanguage.g:3785:2: ';'
+            // InternalBug304681TestLanguage.g:3789:1: ( ';' )
+            // InternalBug304681TestLanguage.g:3790:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getSemicolonKeyword_3_1_2()); 
@@ -11977,17 +11985,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5"
-    // InternalBug304681TestLanguage.g:3795:1: rule__Object__UnorderedGroup_5 : ( rule__Object__UnorderedGroup_5__0 )? ;
+    // InternalBug304681TestLanguage.g:3800:1: rule__Object__UnorderedGroup_5 : ( rule__Object__UnorderedGroup_5__0 )? ;
     public final void rule__Object__UnorderedGroup_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getObjectAccess().getUnorderedGroup_5());
         	
         try {
-            // InternalBug304681TestLanguage.g:3800:1: ( ( rule__Object__UnorderedGroup_5__0 )? )
-            // InternalBug304681TestLanguage.g:3801:2: ( rule__Object__UnorderedGroup_5__0 )?
+            // InternalBug304681TestLanguage.g:3805:1: ( ( rule__Object__UnorderedGroup_5__0 )? )
+            // InternalBug304681TestLanguage.g:3806:2: ( rule__Object__UnorderedGroup_5__0 )?
             {
-            // InternalBug304681TestLanguage.g:3801:2: ( rule__Object__UnorderedGroup_5__0 )?
+            // InternalBug304681TestLanguage.g:3806:2: ( rule__Object__UnorderedGroup_5__0 )?
             int alt21=2;
             alt21 = dfa21.predict(input);
             switch (alt21) {
@@ -12025,43 +12033,43 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__Impl"
-    // InternalBug304681TestLanguage.g:3809:1: rule__Object__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:3814:1: rule__Object__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) ;
     public final void rule__Object__UnorderedGroup_5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
         	
         try {
-            // InternalBug304681TestLanguage.g:3814:1: ( ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) )
-            // InternalBug304681TestLanguage.g:3815:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:3819:1: ( ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) )
+            // InternalBug304681TestLanguage.g:3820:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:3815:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:3820:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
             int alt23=8;
             alt23 = dfa23.predict(input);
             switch (alt23) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:3816:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3821:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3816:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3817:4: {...}? => ( ( ( rule__Object__Group_5_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3821:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3822:4: {...}? => ( ( ( rule__Object__Group_5_0__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)");
                     }
-                    // InternalBug304681TestLanguage.g:3817:102: ( ( ( rule__Object__Group_5_0__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3818:5: ( ( rule__Object__Group_5_0__0 ) )
+                    // InternalBug304681TestLanguage.g:3822:102: ( ( ( rule__Object__Group_5_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3823:5: ( ( rule__Object__Group_5_0__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3824:5: ( ( rule__Object__Group_5_0__0 ) )
-                    // InternalBug304681TestLanguage.g:3825:6: ( rule__Object__Group_5_0__0 )
+                    // InternalBug304681TestLanguage.g:3829:5: ( ( rule__Object__Group_5_0__0 ) )
+                    // InternalBug304681TestLanguage.g:3830:6: ( rule__Object__Group_5_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:3826:6: ( rule__Object__Group_5_0__0 )
-                    // InternalBug304681TestLanguage.g:3826:7: rule__Object__Group_5_0__0
+                    // InternalBug304681TestLanguage.g:3831:6: ( rule__Object__Group_5_0__0 )
+                    // InternalBug304681TestLanguage.g:3831:7: rule__Object__Group_5_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_0__0();
@@ -12087,28 +12095,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:3831:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3836:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3831:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3832:4: {...}? => ( ( ( rule__Object__Group_5_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3836:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3837:4: {...}? => ( ( ( rule__Object__Group_5_1__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)");
                     }
-                    // InternalBug304681TestLanguage.g:3832:102: ( ( ( rule__Object__Group_5_1__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3833:5: ( ( rule__Object__Group_5_1__0 ) )
+                    // InternalBug304681TestLanguage.g:3837:102: ( ( ( rule__Object__Group_5_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3838:5: ( ( rule__Object__Group_5_1__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3839:5: ( ( rule__Object__Group_5_1__0 ) )
-                    // InternalBug304681TestLanguage.g:3840:6: ( rule__Object__Group_5_1__0 )
+                    // InternalBug304681TestLanguage.g:3844:5: ( ( rule__Object__Group_5_1__0 ) )
+                    // InternalBug304681TestLanguage.g:3845:6: ( rule__Object__Group_5_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:3841:6: ( rule__Object__Group_5_1__0 )
-                    // InternalBug304681TestLanguage.g:3841:7: rule__Object__Group_5_1__0
+                    // InternalBug304681TestLanguage.g:3846:6: ( rule__Object__Group_5_1__0 )
+                    // InternalBug304681TestLanguage.g:3846:7: rule__Object__Group_5_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_1__0();
@@ -12134,28 +12142,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 3 :
-                    // InternalBug304681TestLanguage.g:3846:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3851:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3846:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3847:4: {...}? => ( ( ( rule__Object__Group_5_2__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3851:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3852:4: {...}? => ( ( ( rule__Object__Group_5_2__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)");
                     }
-                    // InternalBug304681TestLanguage.g:3847:102: ( ( ( rule__Object__Group_5_2__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3848:5: ( ( rule__Object__Group_5_2__0 ) )
+                    // InternalBug304681TestLanguage.g:3852:102: ( ( ( rule__Object__Group_5_2__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3853:5: ( ( rule__Object__Group_5_2__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3854:5: ( ( rule__Object__Group_5_2__0 ) )
-                    // InternalBug304681TestLanguage.g:3855:6: ( rule__Object__Group_5_2__0 )
+                    // InternalBug304681TestLanguage.g:3859:5: ( ( rule__Object__Group_5_2__0 ) )
+                    // InternalBug304681TestLanguage.g:3860:6: ( rule__Object__Group_5_2__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_2()); 
                     }
-                    // InternalBug304681TestLanguage.g:3856:6: ( rule__Object__Group_5_2__0 )
-                    // InternalBug304681TestLanguage.g:3856:7: rule__Object__Group_5_2__0
+                    // InternalBug304681TestLanguage.g:3861:6: ( rule__Object__Group_5_2__0 )
+                    // InternalBug304681TestLanguage.g:3861:7: rule__Object__Group_5_2__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_2__0();
@@ -12181,28 +12189,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 4 :
-                    // InternalBug304681TestLanguage.g:3861:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3866:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3861:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3862:4: {...}? => ( ( ( rule__Object__Group_5_3__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3866:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3867:4: {...}? => ( ( ( rule__Object__Group_5_3__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)");
                     }
-                    // InternalBug304681TestLanguage.g:3862:102: ( ( ( rule__Object__Group_5_3__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3863:5: ( ( rule__Object__Group_5_3__0 ) )
+                    // InternalBug304681TestLanguage.g:3867:102: ( ( ( rule__Object__Group_5_3__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3868:5: ( ( rule__Object__Group_5_3__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3869:5: ( ( rule__Object__Group_5_3__0 ) )
-                    // InternalBug304681TestLanguage.g:3870:6: ( rule__Object__Group_5_3__0 )
+                    // InternalBug304681TestLanguage.g:3874:5: ( ( rule__Object__Group_5_3__0 ) )
+                    // InternalBug304681TestLanguage.g:3875:6: ( rule__Object__Group_5_3__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_3()); 
                     }
-                    // InternalBug304681TestLanguage.g:3871:6: ( rule__Object__Group_5_3__0 )
-                    // InternalBug304681TestLanguage.g:3871:7: rule__Object__Group_5_3__0
+                    // InternalBug304681TestLanguage.g:3876:6: ( rule__Object__Group_5_3__0 )
+                    // InternalBug304681TestLanguage.g:3876:7: rule__Object__Group_5_3__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_3__0();
@@ -12228,31 +12236,31 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 5 :
-                    // InternalBug304681TestLanguage.g:3876:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+                    // InternalBug304681TestLanguage.g:3881:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3876:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
-                    // InternalBug304681TestLanguage.g:3877:4: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
+                    // InternalBug304681TestLanguage.g:3881:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+                    // InternalBug304681TestLanguage.g:3882:4: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
                     }
-                    // InternalBug304681TestLanguage.g:3877:102: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
-                    // InternalBug304681TestLanguage.g:3878:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
+                    // InternalBug304681TestLanguage.g:3882:102: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
+                    // InternalBug304681TestLanguage.g:3883:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3884:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
-                    // InternalBug304681TestLanguage.g:3885:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
+                    // InternalBug304681TestLanguage.g:3889:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
+                    // InternalBug304681TestLanguage.g:3890:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
                     {
-                    // InternalBug304681TestLanguage.g:3885:6: ( ( rule__Object__FeaturesAssignment_5_4 ) )
-                    // InternalBug304681TestLanguage.g:3886:7: ( rule__Object__FeaturesAssignment_5_4 )
+                    // InternalBug304681TestLanguage.g:3890:6: ( ( rule__Object__FeaturesAssignment_5_4 ) )
+                    // InternalBug304681TestLanguage.g:3891:7: ( rule__Object__FeaturesAssignment_5_4 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); 
                     }
-                    // InternalBug304681TestLanguage.g:3887:7: ( rule__Object__FeaturesAssignment_5_4 )
-                    // InternalBug304681TestLanguage.g:3887:8: rule__Object__FeaturesAssignment_5_4
+                    // InternalBug304681TestLanguage.g:3892:7: ( rule__Object__FeaturesAssignment_5_4 )
+                    // InternalBug304681TestLanguage.g:3892:8: rule__Object__FeaturesAssignment_5_4
                     {
                     pushFollow(FollowSets000.FOLLOW_14);
                     rule__Object__FeaturesAssignment_5_4();
@@ -12268,20 +12276,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                     }
 
-                    // InternalBug304681TestLanguage.g:3890:6: ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
-                    // InternalBug304681TestLanguage.g:3891:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
+                    // InternalBug304681TestLanguage.g:3895:6: ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
+                    // InternalBug304681TestLanguage.g:3896:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); 
                     }
-                    // InternalBug304681TestLanguage.g:3892:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
+                    // InternalBug304681TestLanguage.g:3897:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
                     loop22:
                     do {
                         int alt22=2;
                         alt22 = dfa22.predict(input);
                         switch (alt22) {
                     	case 1 :
-                    	    // InternalBug304681TestLanguage.g:3892:8: ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4
+                    	    // InternalBug304681TestLanguage.g:3897:8: ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4
                     	    {
                     	    pushFollow(FollowSets000.FOLLOW_14);
                     	    rule__Object__FeaturesAssignment_5_4();
@@ -12316,28 +12324,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 6 :
-                    // InternalBug304681TestLanguage.g:3898:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3903:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3898:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3899:4: {...}? => ( ( ( rule__Object__Group_5_5__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3903:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3904:4: {...}? => ( ( ( rule__Object__Group_5_5__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)");
                     }
-                    // InternalBug304681TestLanguage.g:3899:102: ( ( ( rule__Object__Group_5_5__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3900:5: ( ( rule__Object__Group_5_5__0 ) )
+                    // InternalBug304681TestLanguage.g:3904:102: ( ( ( rule__Object__Group_5_5__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3905:5: ( ( rule__Object__Group_5_5__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3906:5: ( ( rule__Object__Group_5_5__0 ) )
-                    // InternalBug304681TestLanguage.g:3907:6: ( rule__Object__Group_5_5__0 )
+                    // InternalBug304681TestLanguage.g:3911:5: ( ( rule__Object__Group_5_5__0 ) )
+                    // InternalBug304681TestLanguage.g:3912:6: ( rule__Object__Group_5_5__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_5()); 
                     }
-                    // InternalBug304681TestLanguage.g:3908:6: ( rule__Object__Group_5_5__0 )
-                    // InternalBug304681TestLanguage.g:3908:7: rule__Object__Group_5_5__0
+                    // InternalBug304681TestLanguage.g:3913:6: ( rule__Object__Group_5_5__0 )
+                    // InternalBug304681TestLanguage.g:3913:7: rule__Object__Group_5_5__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_5__0();
@@ -12363,28 +12371,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 7 :
-                    // InternalBug304681TestLanguage.g:3913:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3918:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3913:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3914:4: {...}? => ( ( ( rule__Object__Group_5_6__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3918:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3919:4: {...}? => ( ( ( rule__Object__Group_5_6__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)");
                     }
-                    // InternalBug304681TestLanguage.g:3914:102: ( ( ( rule__Object__Group_5_6__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3915:5: ( ( rule__Object__Group_5_6__0 ) )
+                    // InternalBug304681TestLanguage.g:3919:102: ( ( ( rule__Object__Group_5_6__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3920:5: ( ( rule__Object__Group_5_6__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3921:5: ( ( rule__Object__Group_5_6__0 ) )
-                    // InternalBug304681TestLanguage.g:3922:6: ( rule__Object__Group_5_6__0 )
+                    // InternalBug304681TestLanguage.g:3926:5: ( ( rule__Object__Group_5_6__0 ) )
+                    // InternalBug304681TestLanguage.g:3927:6: ( rule__Object__Group_5_6__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_6()); 
                     }
-                    // InternalBug304681TestLanguage.g:3923:6: ( rule__Object__Group_5_6__0 )
-                    // InternalBug304681TestLanguage.g:3923:7: rule__Object__Group_5_6__0
+                    // InternalBug304681TestLanguage.g:3928:6: ( rule__Object__Group_5_6__0 )
+                    // InternalBug304681TestLanguage.g:3928:7: rule__Object__Group_5_6__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_6__0();
@@ -12410,28 +12418,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 8 :
-                    // InternalBug304681TestLanguage.g:3928:3: ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3933:3: ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:3928:3: ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:3929:4: {...}? => ( ( ( rule__Object__Group_5_7__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3933:3: ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:3934:4: {...}? => ( ( ( rule__Object__Group_5_7__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)");
                     }
-                    // InternalBug304681TestLanguage.g:3929:102: ( ( ( rule__Object__Group_5_7__0 ) ) )
-                    // InternalBug304681TestLanguage.g:3930:5: ( ( rule__Object__Group_5_7__0 ) )
+                    // InternalBug304681TestLanguage.g:3934:102: ( ( ( rule__Object__Group_5_7__0 ) ) )
+                    // InternalBug304681TestLanguage.g:3935:5: ( ( rule__Object__Group_5_7__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:3936:5: ( ( rule__Object__Group_5_7__0 ) )
-                    // InternalBug304681TestLanguage.g:3937:6: ( rule__Object__Group_5_7__0 )
+                    // InternalBug304681TestLanguage.g:3941:5: ( ( rule__Object__Group_5_7__0 ) )
+                    // InternalBug304681TestLanguage.g:3942:6: ( rule__Object__Group_5_7__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getGroup_5_7()); 
                     }
-                    // InternalBug304681TestLanguage.g:3938:6: ( rule__Object__Group_5_7__0 )
-                    // InternalBug304681TestLanguage.g:3938:7: rule__Object__Group_5_7__0
+                    // InternalBug304681TestLanguage.g:3943:6: ( rule__Object__Group_5_7__0 )
+                    // InternalBug304681TestLanguage.g:3943:7: rule__Object__Group_5_7__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object__Group_5_7__0();
@@ -12480,21 +12488,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__0"
-    // InternalBug304681TestLanguage.g:3951:1: rule__Object__UnorderedGroup_5__0 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )? ;
+    // InternalBug304681TestLanguage.g:3956:1: rule__Object__UnorderedGroup_5__0 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )? ;
     public final void rule__Object__UnorderedGroup_5__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3955:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )? )
-            // InternalBug304681TestLanguage.g:3956:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )?
+            // InternalBug304681TestLanguage.g:3960:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )? )
+            // InternalBug304681TestLanguage.g:3961:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:3957:2: ( rule__Object__UnorderedGroup_5__1 )?
+            // InternalBug304681TestLanguage.g:3962:2: ( rule__Object__UnorderedGroup_5__1 )?
             int alt24=2;
             alt24 = dfa24.predict(input);
             switch (alt24) {
@@ -12531,21 +12539,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__1"
-    // InternalBug304681TestLanguage.g:3963:1: rule__Object__UnorderedGroup_5__1 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )? ;
+    // InternalBug304681TestLanguage.g:3968:1: rule__Object__UnorderedGroup_5__1 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )? ;
     public final void rule__Object__UnorderedGroup_5__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3967:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )? )
-            // InternalBug304681TestLanguage.g:3968:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )?
+            // InternalBug304681TestLanguage.g:3972:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )? )
+            // InternalBug304681TestLanguage.g:3973:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:3969:2: ( rule__Object__UnorderedGroup_5__2 )?
+            // InternalBug304681TestLanguage.g:3974:2: ( rule__Object__UnorderedGroup_5__2 )?
             int alt25=2;
             alt25 = dfa25.predict(input);
             switch (alt25) {
@@ -12582,21 +12590,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__2"
-    // InternalBug304681TestLanguage.g:3975:1: rule__Object__UnorderedGroup_5__2 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )? ;
+    // InternalBug304681TestLanguage.g:3980:1: rule__Object__UnorderedGroup_5__2 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )? ;
     public final void rule__Object__UnorderedGroup_5__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3979:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )? )
-            // InternalBug304681TestLanguage.g:3980:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )?
+            // InternalBug304681TestLanguage.g:3984:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )? )
+            // InternalBug304681TestLanguage.g:3985:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:3981:2: ( rule__Object__UnorderedGroup_5__3 )?
+            // InternalBug304681TestLanguage.g:3986:2: ( rule__Object__UnorderedGroup_5__3 )?
             int alt26=2;
             alt26 = dfa26.predict(input);
             switch (alt26) {
@@ -12633,21 +12641,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__3"
-    // InternalBug304681TestLanguage.g:3987:1: rule__Object__UnorderedGroup_5__3 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )? ;
+    // InternalBug304681TestLanguage.g:3992:1: rule__Object__UnorderedGroup_5__3 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )? ;
     public final void rule__Object__UnorderedGroup_5__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:3991:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )? )
-            // InternalBug304681TestLanguage.g:3992:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )?
+            // InternalBug304681TestLanguage.g:3996:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )? )
+            // InternalBug304681TestLanguage.g:3997:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:3993:2: ( rule__Object__UnorderedGroup_5__4 )?
+            // InternalBug304681TestLanguage.g:3998:2: ( rule__Object__UnorderedGroup_5__4 )?
             int alt27=2;
             alt27 = dfa27.predict(input);
             switch (alt27) {
@@ -12684,21 +12692,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__4"
-    // InternalBug304681TestLanguage.g:3999:1: rule__Object__UnorderedGroup_5__4 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )? ;
+    // InternalBug304681TestLanguage.g:4004:1: rule__Object__UnorderedGroup_5__4 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )? ;
     public final void rule__Object__UnorderedGroup_5__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4003:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )? )
-            // InternalBug304681TestLanguage.g:4004:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )?
+            // InternalBug304681TestLanguage.g:4008:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )? )
+            // InternalBug304681TestLanguage.g:4009:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4005:2: ( rule__Object__UnorderedGroup_5__5 )?
+            // InternalBug304681TestLanguage.g:4010:2: ( rule__Object__UnorderedGroup_5__5 )?
             int alt28=2;
             alt28 = dfa28.predict(input);
             switch (alt28) {
@@ -12735,21 +12743,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__5"
-    // InternalBug304681TestLanguage.g:4011:1: rule__Object__UnorderedGroup_5__5 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )? ;
+    // InternalBug304681TestLanguage.g:4016:1: rule__Object__UnorderedGroup_5__5 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )? ;
     public final void rule__Object__UnorderedGroup_5__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4015:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )? )
-            // InternalBug304681TestLanguage.g:4016:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )?
+            // InternalBug304681TestLanguage.g:4020:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )? )
+            // InternalBug304681TestLanguage.g:4021:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4017:2: ( rule__Object__UnorderedGroup_5__6 )?
+            // InternalBug304681TestLanguage.g:4022:2: ( rule__Object__UnorderedGroup_5__6 )?
             int alt29=2;
             alt29 = dfa29.predict(input);
             switch (alt29) {
@@ -12786,21 +12794,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__6"
-    // InternalBug304681TestLanguage.g:4023:1: rule__Object__UnorderedGroup_5__6 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )? ;
+    // InternalBug304681TestLanguage.g:4028:1: rule__Object__UnorderedGroup_5__6 : rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )? ;
     public final void rule__Object__UnorderedGroup_5__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4027:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )? )
-            // InternalBug304681TestLanguage.g:4028:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )?
+            // InternalBug304681TestLanguage.g:4032:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )? )
+            // InternalBug304681TestLanguage.g:4033:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )?
             {
             pushFollow(FollowSets000.FOLLOW_25);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4029:2: ( rule__Object__UnorderedGroup_5__7 )?
+            // InternalBug304681TestLanguage.g:4034:2: ( rule__Object__UnorderedGroup_5__7 )?
             int alt30=2;
             alt30 = dfa30.predict(input);
             switch (alt30) {
@@ -12837,14 +12845,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__7"
-    // InternalBug304681TestLanguage.g:4035:1: rule__Object__UnorderedGroup_5__7 : rule__Object__UnorderedGroup_5__Impl ;
+    // InternalBug304681TestLanguage.g:4040:1: rule__Object__UnorderedGroup_5__7 : rule__Object__UnorderedGroup_5__Impl ;
     public final void rule__Object__UnorderedGroup_5__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4039:1: ( rule__Object__UnorderedGroup_5__Impl )
-            // InternalBug304681TestLanguage.g:4040:2: rule__Object__UnorderedGroup_5__Impl
+            // InternalBug304681TestLanguage.g:4044:1: ( rule__Object__UnorderedGroup_5__Impl )
+            // InternalBug304681TestLanguage.g:4045:2: rule__Object__UnorderedGroup_5__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object__UnorderedGroup_5__Impl();
@@ -12870,17 +12878,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__UnorderedGroup_4_0_1"
-    // InternalBug304681TestLanguage.g:4047:1: rule__Reference__UnorderedGroup_4_0_1 : ( rule__Reference__UnorderedGroup_4_0_1__0 )? ;
+    // InternalBug304681TestLanguage.g:4052:1: rule__Reference__UnorderedGroup_4_0_1 : ( rule__Reference__UnorderedGroup_4_0_1__0 )? ;
     public final void rule__Reference__UnorderedGroup_4_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1());
         	
         try {
-            // InternalBug304681TestLanguage.g:4052:1: ( ( rule__Reference__UnorderedGroup_4_0_1__0 )? )
-            // InternalBug304681TestLanguage.g:4053:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )?
+            // InternalBug304681TestLanguage.g:4057:1: ( ( rule__Reference__UnorderedGroup_4_0_1__0 )? )
+            // InternalBug304681TestLanguage.g:4058:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )?
             {
-            // InternalBug304681TestLanguage.g:4053:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )?
+            // InternalBug304681TestLanguage.g:4058:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )?
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -12925,17 +12933,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__UnorderedGroup_4_0_1__Impl"
-    // InternalBug304681TestLanguage.g:4061:1: rule__Reference__UnorderedGroup_4_0_1__Impl : ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:4066:1: rule__Reference__UnorderedGroup_4_0_1__Impl : ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) ) ;
     public final void rule__Reference__UnorderedGroup_4_0_1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
         	
         try {
-            // InternalBug304681TestLanguage.g:4066:1: ( ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) ) )
-            // InternalBug304681TestLanguage.g:4067:3: ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4071:1: ( ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4072:3: ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:4067:3: ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4072:3: ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) ) )
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -12954,28 +12962,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt32) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:4068:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4073:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4068:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4069:4: {...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4073:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4074:4: {...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Reference__UnorderedGroup_4_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)");
                     }
-                    // InternalBug304681TestLanguage.g:4069:109: ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4070:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4074:109: ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4075:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4076:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
-                    // InternalBug304681TestLanguage.g:4077:6: ( rule__Reference__Group_4_0_1_0__0 )
+                    // InternalBug304681TestLanguage.g:4081:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4082:6: ( rule__Reference__Group_4_0_1_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReferenceAccess().getGroup_4_0_1_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:4078:6: ( rule__Reference__Group_4_0_1_0__0 )
-                    // InternalBug304681TestLanguage.g:4078:7: rule__Reference__Group_4_0_1_0__0
+                    // InternalBug304681TestLanguage.g:4083:6: ( rule__Reference__Group_4_0_1_0__0 )
+                    // InternalBug304681TestLanguage.g:4083:7: rule__Reference__Group_4_0_1_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference__Group_4_0_1_0__0();
@@ -13001,28 +13009,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:4083:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4088:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4083:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4084:4: {...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4088:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4089:4: {...}? => ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Reference__UnorderedGroup_4_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)");
                     }
-                    // InternalBug304681TestLanguage.g:4084:109: ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4085:5: ( ( rule__Reference__Group_4_0_1_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4089:109: ( ( ( rule__Reference__Group_4_0_1_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4090:5: ( ( rule__Reference__Group_4_0_1_1__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4091:5: ( ( rule__Reference__Group_4_0_1_1__0 ) )
-                    // InternalBug304681TestLanguage.g:4092:6: ( rule__Reference__Group_4_0_1_1__0 )
+                    // InternalBug304681TestLanguage.g:4096:5: ( ( rule__Reference__Group_4_0_1_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4097:6: ( rule__Reference__Group_4_0_1_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReferenceAccess().getGroup_4_0_1_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:4093:6: ( rule__Reference__Group_4_0_1_1__0 )
-                    // InternalBug304681TestLanguage.g:4093:7: rule__Reference__Group_4_0_1_1__0
+                    // InternalBug304681TestLanguage.g:4098:6: ( rule__Reference__Group_4_0_1_1__0 )
+                    // InternalBug304681TestLanguage.g:4098:7: rule__Reference__Group_4_0_1_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference__Group_4_0_1_1__0();
@@ -13071,21 +13079,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__UnorderedGroup_4_0_1__0"
-    // InternalBug304681TestLanguage.g:4106:1: rule__Reference__UnorderedGroup_4_0_1__0 : rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )? ;
+    // InternalBug304681TestLanguage.g:4111:1: rule__Reference__UnorderedGroup_4_0_1__0 : rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )? ;
     public final void rule__Reference__UnorderedGroup_4_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4110:1: ( rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )? )
-            // InternalBug304681TestLanguage.g:4111:2: rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )?
+            // InternalBug304681TestLanguage.g:4115:1: ( rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )? )
+            // InternalBug304681TestLanguage.g:4116:2: rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )?
             {
             pushFollow(FollowSets000.FOLLOW_26);
             rule__Reference__UnorderedGroup_4_0_1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4112:2: ( rule__Reference__UnorderedGroup_4_0_1__1 )?
+            // InternalBug304681TestLanguage.g:4117:2: ( rule__Reference__UnorderedGroup_4_0_1__1 )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -13129,14 +13137,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__UnorderedGroup_4_0_1__1"
-    // InternalBug304681TestLanguage.g:4118:1: rule__Reference__UnorderedGroup_4_0_1__1 : rule__Reference__UnorderedGroup_4_0_1__Impl ;
+    // InternalBug304681TestLanguage.g:4123:1: rule__Reference__UnorderedGroup_4_0_1__1 : rule__Reference__UnorderedGroup_4_0_1__Impl ;
     public final void rule__Reference__UnorderedGroup_4_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4122:1: ( rule__Reference__UnorderedGroup_4_0_1__Impl )
-            // InternalBug304681TestLanguage.g:4123:2: rule__Reference__UnorderedGroup_4_0_1__Impl
+            // InternalBug304681TestLanguage.g:4127:1: ( rule__Reference__UnorderedGroup_4_0_1__Impl )
+            // InternalBug304681TestLanguage.g:4128:2: rule__Reference__UnorderedGroup_4_0_1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__UnorderedGroup_4_0_1__Impl();
@@ -13162,17 +13170,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5"
-    // InternalBug304681TestLanguage.g:4130:1: rule__Object2__UnorderedGroup_5 : ( rule__Object2__UnorderedGroup_5__0 )? ;
+    // InternalBug304681TestLanguage.g:4135:1: rule__Object2__UnorderedGroup_5 : ( rule__Object2__UnorderedGroup_5__0 )? ;
     public final void rule__Object2__UnorderedGroup_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getObject2Access().getUnorderedGroup_5());
         	
         try {
-            // InternalBug304681TestLanguage.g:4135:1: ( ( rule__Object2__UnorderedGroup_5__0 )? )
-            // InternalBug304681TestLanguage.g:4136:2: ( rule__Object2__UnorderedGroup_5__0 )?
+            // InternalBug304681TestLanguage.g:4140:1: ( ( rule__Object2__UnorderedGroup_5__0 )? )
+            // InternalBug304681TestLanguage.g:4141:2: ( rule__Object2__UnorderedGroup_5__0 )?
             {
-            // InternalBug304681TestLanguage.g:4136:2: ( rule__Object2__UnorderedGroup_5__0 )?
+            // InternalBug304681TestLanguage.g:4141:2: ( rule__Object2__UnorderedGroup_5__0 )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -13229,17 +13237,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__Impl"
-    // InternalBug304681TestLanguage.g:4144:1: rule__Object2__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:4149:1: rule__Object2__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) ;
     public final void rule__Object2__UnorderedGroup_5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
         	
         try {
-            // InternalBug304681TestLanguage.g:4149:1: ( ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) )
-            // InternalBug304681TestLanguage.g:4150:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4154:1: ( ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4155:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:4150:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4155:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
             int alt36=5;
             int LA36_0 = input.LA(1);
 
@@ -13267,28 +13275,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt36) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:4151:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4156:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4151:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4152:4: {...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4156:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4157:4: {...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object2__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0)");
                     }
-                    // InternalBug304681TestLanguage.g:4152:103: ( ( ( rule__Object2__Group_5_0__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4153:5: ( ( rule__Object2__Group_5_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4157:103: ( ( ( rule__Object2__Group_5_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4158:5: ( ( rule__Object2__Group_5_0__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4159:5: ( ( rule__Object2__Group_5_0__0 ) )
-                    // InternalBug304681TestLanguage.g:4160:6: ( rule__Object2__Group_5_0__0 )
+                    // InternalBug304681TestLanguage.g:4164:5: ( ( rule__Object2__Group_5_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4165:6: ( rule__Object2__Group_5_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getGroup_5_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:4161:6: ( rule__Object2__Group_5_0__0 )
-                    // InternalBug304681TestLanguage.g:4161:7: rule__Object2__Group_5_0__0
+                    // InternalBug304681TestLanguage.g:4166:6: ( rule__Object2__Group_5_0__0 )
+                    // InternalBug304681TestLanguage.g:4166:7: rule__Object2__Group_5_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__Group_5_0__0();
@@ -13314,28 +13322,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:4166:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4171:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4166:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4167:4: {...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4171:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4172:4: {...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object2__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1)");
                     }
-                    // InternalBug304681TestLanguage.g:4167:103: ( ( ( rule__Object2__Group_5_1__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4168:5: ( ( rule__Object2__Group_5_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4172:103: ( ( ( rule__Object2__Group_5_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4173:5: ( ( rule__Object2__Group_5_1__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4174:5: ( ( rule__Object2__Group_5_1__0 ) )
-                    // InternalBug304681TestLanguage.g:4175:6: ( rule__Object2__Group_5_1__0 )
+                    // InternalBug304681TestLanguage.g:4179:5: ( ( rule__Object2__Group_5_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4180:6: ( rule__Object2__Group_5_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getGroup_5_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:4176:6: ( rule__Object2__Group_5_1__0 )
-                    // InternalBug304681TestLanguage.g:4176:7: rule__Object2__Group_5_1__0
+                    // InternalBug304681TestLanguage.g:4181:6: ( rule__Object2__Group_5_1__0 )
+                    // InternalBug304681TestLanguage.g:4181:7: rule__Object2__Group_5_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__Group_5_1__0();
@@ -13361,28 +13369,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 3 :
-                    // InternalBug304681TestLanguage.g:4181:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4186:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4181:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4182:4: {...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4186:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4187:4: {...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object2__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2)");
                     }
-                    // InternalBug304681TestLanguage.g:4182:103: ( ( ( rule__Object2__Group_5_2__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4183:5: ( ( rule__Object2__Group_5_2__0 ) )
+                    // InternalBug304681TestLanguage.g:4187:103: ( ( ( rule__Object2__Group_5_2__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4188:5: ( ( rule__Object2__Group_5_2__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4189:5: ( ( rule__Object2__Group_5_2__0 ) )
-                    // InternalBug304681TestLanguage.g:4190:6: ( rule__Object2__Group_5_2__0 )
+                    // InternalBug304681TestLanguage.g:4194:5: ( ( rule__Object2__Group_5_2__0 ) )
+                    // InternalBug304681TestLanguage.g:4195:6: ( rule__Object2__Group_5_2__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getGroup_5_2()); 
                     }
-                    // InternalBug304681TestLanguage.g:4191:6: ( rule__Object2__Group_5_2__0 )
-                    // InternalBug304681TestLanguage.g:4191:7: rule__Object2__Group_5_2__0
+                    // InternalBug304681TestLanguage.g:4196:6: ( rule__Object2__Group_5_2__0 )
+                    // InternalBug304681TestLanguage.g:4196:7: rule__Object2__Group_5_2__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__Group_5_2__0();
@@ -13408,28 +13416,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 4 :
-                    // InternalBug304681TestLanguage.g:4196:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4201:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4196:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4197:4: {...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4201:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4202:4: {...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object2__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3)");
                     }
-                    // InternalBug304681TestLanguage.g:4197:103: ( ( ( rule__Object2__Group_5_3__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4198:5: ( ( rule__Object2__Group_5_3__0 ) )
+                    // InternalBug304681TestLanguage.g:4202:103: ( ( ( rule__Object2__Group_5_3__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4203:5: ( ( rule__Object2__Group_5_3__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4204:5: ( ( rule__Object2__Group_5_3__0 ) )
-                    // InternalBug304681TestLanguage.g:4205:6: ( rule__Object2__Group_5_3__0 )
+                    // InternalBug304681TestLanguage.g:4209:5: ( ( rule__Object2__Group_5_3__0 ) )
+                    // InternalBug304681TestLanguage.g:4210:6: ( rule__Object2__Group_5_3__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getGroup_5_3()); 
                     }
-                    // InternalBug304681TestLanguage.g:4206:6: ( rule__Object2__Group_5_3__0 )
-                    // InternalBug304681TestLanguage.g:4206:7: rule__Object2__Group_5_3__0
+                    // InternalBug304681TestLanguage.g:4211:6: ( rule__Object2__Group_5_3__0 )
+                    // InternalBug304681TestLanguage.g:4211:7: rule__Object2__Group_5_3__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Object2__Group_5_3__0();
@@ -13455,31 +13463,31 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 5 :
-                    // InternalBug304681TestLanguage.g:4211:3: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
+                    // InternalBug304681TestLanguage.g:4216:3: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4211:3: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
-                    // InternalBug304681TestLanguage.g:4212:4: {...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) )
+                    // InternalBug304681TestLanguage.g:4216:3: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
+                    // InternalBug304681TestLanguage.g:4217:4: {...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object2__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4)");
                     }
-                    // InternalBug304681TestLanguage.g:4212:103: ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) )
-                    // InternalBug304681TestLanguage.g:4213:5: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) )
+                    // InternalBug304681TestLanguage.g:4217:103: ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) )
+                    // InternalBug304681TestLanguage.g:4218:5: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4219:5: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) )
-                    // InternalBug304681TestLanguage.g:4220:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* )
+                    // InternalBug304681TestLanguage.g:4224:5: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) )
+                    // InternalBug304681TestLanguage.g:4225:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* )
                     {
-                    // InternalBug304681TestLanguage.g:4220:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) )
-                    // InternalBug304681TestLanguage.g:4221:7: ( rule__Object2__FeaturesAssignment_5_4 )
+                    // InternalBug304681TestLanguage.g:4225:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) )
+                    // InternalBug304681TestLanguage.g:4226:7: ( rule__Object2__FeaturesAssignment_5_4 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getFeaturesAssignment_5_4()); 
                     }
-                    // InternalBug304681TestLanguage.g:4222:7: ( rule__Object2__FeaturesAssignment_5_4 )
-                    // InternalBug304681TestLanguage.g:4222:8: rule__Object2__FeaturesAssignment_5_4
+                    // InternalBug304681TestLanguage.g:4227:7: ( rule__Object2__FeaturesAssignment_5_4 )
+                    // InternalBug304681TestLanguage.g:4227:8: rule__Object2__FeaturesAssignment_5_4
                     {
                     pushFollow(FollowSets000.FOLLOW_27);
                     rule__Object2__FeaturesAssignment_5_4();
@@ -13495,20 +13503,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                     }
 
-                    // InternalBug304681TestLanguage.g:4225:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* )
-                    // InternalBug304681TestLanguage.g:4226:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*
+                    // InternalBug304681TestLanguage.g:4230:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* )
+                    // InternalBug304681TestLanguage.g:4231:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getFeaturesAssignment_5_4()); 
                     }
-                    // InternalBug304681TestLanguage.g:4227:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*
+                    // InternalBug304681TestLanguage.g:4232:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*
                     loop35:
                     do {
                         int alt35=2;
                         alt35 = dfa35.predict(input);
                         switch (alt35) {
                     	case 1 :
-                    	    // InternalBug304681TestLanguage.g:4227:8: ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4
+                    	    // InternalBug304681TestLanguage.g:4232:8: ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4
                     	    {
                     	    pushFollow(FollowSets000.FOLLOW_27);
                     	    rule__Object2__FeaturesAssignment_5_4();
@@ -13566,21 +13574,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__0"
-    // InternalBug304681TestLanguage.g:4241:1: rule__Object2__UnorderedGroup_5__0 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )? ;
+    // InternalBug304681TestLanguage.g:4246:1: rule__Object2__UnorderedGroup_5__0 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )? ;
     public final void rule__Object2__UnorderedGroup_5__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4245:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )? )
-            // InternalBug304681TestLanguage.g:4246:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )?
+            // InternalBug304681TestLanguage.g:4250:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )? )
+            // InternalBug304681TestLanguage.g:4251:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )?
             {
             pushFollow(FollowSets000.FOLLOW_27);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4247:2: ( rule__Object2__UnorderedGroup_5__1 )?
+            // InternalBug304681TestLanguage.g:4252:2: ( rule__Object2__UnorderedGroup_5__1 )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -13636,21 +13644,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__1"
-    // InternalBug304681TestLanguage.g:4253:1: rule__Object2__UnorderedGroup_5__1 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )? ;
+    // InternalBug304681TestLanguage.g:4258:1: rule__Object2__UnorderedGroup_5__1 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )? ;
     public final void rule__Object2__UnorderedGroup_5__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4257:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )? )
-            // InternalBug304681TestLanguage.g:4258:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )?
+            // InternalBug304681TestLanguage.g:4262:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )? )
+            // InternalBug304681TestLanguage.g:4263:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )?
             {
             pushFollow(FollowSets000.FOLLOW_27);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4259:2: ( rule__Object2__UnorderedGroup_5__2 )?
+            // InternalBug304681TestLanguage.g:4264:2: ( rule__Object2__UnorderedGroup_5__2 )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -13706,21 +13714,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__2"
-    // InternalBug304681TestLanguage.g:4265:1: rule__Object2__UnorderedGroup_5__2 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )? ;
+    // InternalBug304681TestLanguage.g:4270:1: rule__Object2__UnorderedGroup_5__2 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )? ;
     public final void rule__Object2__UnorderedGroup_5__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4269:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )? )
-            // InternalBug304681TestLanguage.g:4270:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )?
+            // InternalBug304681TestLanguage.g:4274:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )? )
+            // InternalBug304681TestLanguage.g:4275:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )?
             {
             pushFollow(FollowSets000.FOLLOW_27);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4271:2: ( rule__Object2__UnorderedGroup_5__3 )?
+            // InternalBug304681TestLanguage.g:4276:2: ( rule__Object2__UnorderedGroup_5__3 )?
             int alt39=2;
             int LA39_0 = input.LA(1);
 
@@ -13776,21 +13784,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__3"
-    // InternalBug304681TestLanguage.g:4277:1: rule__Object2__UnorderedGroup_5__3 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )? ;
+    // InternalBug304681TestLanguage.g:4282:1: rule__Object2__UnorderedGroup_5__3 : rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )? ;
     public final void rule__Object2__UnorderedGroup_5__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4281:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )? )
-            // InternalBug304681TestLanguage.g:4282:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )?
+            // InternalBug304681TestLanguage.g:4286:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )? )
+            // InternalBug304681TestLanguage.g:4287:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )?
             {
             pushFollow(FollowSets000.FOLLOW_27);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4283:2: ( rule__Object2__UnorderedGroup_5__4 )?
+            // InternalBug304681TestLanguage.g:4288:2: ( rule__Object2__UnorderedGroup_5__4 )?
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -13846,14 +13854,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__4"
-    // InternalBug304681TestLanguage.g:4289:1: rule__Object2__UnorderedGroup_5__4 : rule__Object2__UnorderedGroup_5__Impl ;
+    // InternalBug304681TestLanguage.g:4294:1: rule__Object2__UnorderedGroup_5__4 : rule__Object2__UnorderedGroup_5__Impl ;
     public final void rule__Object2__UnorderedGroup_5__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4293:1: ( rule__Object2__UnorderedGroup_5__Impl )
-            // InternalBug304681TestLanguage.g:4294:2: rule__Object2__UnorderedGroup_5__Impl
+            // InternalBug304681TestLanguage.g:4298:1: ( rule__Object2__UnorderedGroup_5__Impl )
+            // InternalBug304681TestLanguage.g:4299:2: rule__Object2__UnorderedGroup_5__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Object2__UnorderedGroup_5__Impl();
@@ -13879,17 +13887,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1"
-    // InternalBug304681TestLanguage.g:4301:1: rule__Attribute2__UnorderedGroup_3_0_1 : ( rule__Attribute2__UnorderedGroup_3_0_1__0 )? ;
+    // InternalBug304681TestLanguage.g:4306:1: rule__Attribute2__UnorderedGroup_3_0_1 : ( rule__Attribute2__UnorderedGroup_3_0_1__0 )? ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1());
         	
         try {
-            // InternalBug304681TestLanguage.g:4306:1: ( ( rule__Attribute2__UnorderedGroup_3_0_1__0 )? )
-            // InternalBug304681TestLanguage.g:4307:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )?
+            // InternalBug304681TestLanguage.g:4311:1: ( ( rule__Attribute2__UnorderedGroup_3_0_1__0 )? )
+            // InternalBug304681TestLanguage.g:4312:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )?
             {
-            // InternalBug304681TestLanguage.g:4307:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )?
+            // InternalBug304681TestLanguage.g:4312:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )?
             int alt41=2;
             int LA41_0 = input.LA(1);
 
@@ -13943,17 +13951,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__Impl"
-    // InternalBug304681TestLanguage.g:4315:1: rule__Attribute2__UnorderedGroup_3_0_1__Impl : ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:4320:1: rule__Attribute2__UnorderedGroup_3_0_1__Impl : ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
         	
         try {
-            // InternalBug304681TestLanguage.g:4320:1: ( ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) )
-            // InternalBug304681TestLanguage.g:4321:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4325:1: ( ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4326:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:4321:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4326:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
             int alt43=5;
             int LA43_0 = input.LA(1);
 
@@ -13981,28 +13989,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt43) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:4322:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4327:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4322:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4323:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4327:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4328:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Attribute2__UnorderedGroup_3_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0)");
                     }
-                    // InternalBug304681TestLanguage.g:4323:110: ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4324:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4328:110: ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4329:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4330:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
-                    // InternalBug304681TestLanguage.g:4331:6: ( rule__Attribute2__Group_3_0_1_0__0 )
+                    // InternalBug304681TestLanguage.g:4335:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4336:6: ( rule__Attribute2__Group_3_0_1_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getGroup_3_0_1_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:4332:6: ( rule__Attribute2__Group_3_0_1_0__0 )
-                    // InternalBug304681TestLanguage.g:4332:7: rule__Attribute2__Group_3_0_1_0__0
+                    // InternalBug304681TestLanguage.g:4337:6: ( rule__Attribute2__Group_3_0_1_0__0 )
+                    // InternalBug304681TestLanguage.g:4337:7: rule__Attribute2__Group_3_0_1_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Attribute2__Group_3_0_1_0__0();
@@ -14028,28 +14036,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:4337:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4342:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4337:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4338:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4342:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4343:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Attribute2__UnorderedGroup_3_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1)");
                     }
-                    // InternalBug304681TestLanguage.g:4338:110: ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4339:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4343:110: ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4344:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4345:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
-                    // InternalBug304681TestLanguage.g:4346:6: ( rule__Attribute2__Group_3_0_1_1__0 )
+                    // InternalBug304681TestLanguage.g:4350:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4351:6: ( rule__Attribute2__Group_3_0_1_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getGroup_3_0_1_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:4347:6: ( rule__Attribute2__Group_3_0_1_1__0 )
-                    // InternalBug304681TestLanguage.g:4347:7: rule__Attribute2__Group_3_0_1_1__0
+                    // InternalBug304681TestLanguage.g:4352:6: ( rule__Attribute2__Group_3_0_1_1__0 )
+                    // InternalBug304681TestLanguage.g:4352:7: rule__Attribute2__Group_3_0_1_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Attribute2__Group_3_0_1_1__0();
@@ -14075,31 +14083,31 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 3 :
-                    // InternalBug304681TestLanguage.g:4352:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+                    // InternalBug304681TestLanguage.g:4357:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4352:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
-                    // InternalBug304681TestLanguage.g:4353:4: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+                    // InternalBug304681TestLanguage.g:4357:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+                    // InternalBug304681TestLanguage.g:4358:4: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Attribute2__UnorderedGroup_3_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
                     }
-                    // InternalBug304681TestLanguage.g:4353:110: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
-                    // InternalBug304681TestLanguage.g:4354:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+                    // InternalBug304681TestLanguage.g:4358:110: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+                    // InternalBug304681TestLanguage.g:4359:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4360:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
-                    // InternalBug304681TestLanguage.g:4361:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+                    // InternalBug304681TestLanguage.g:4365:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+                    // InternalBug304681TestLanguage.g:4366:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
                     {
-                    // InternalBug304681TestLanguage.g:4361:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) )
-                    // InternalBug304681TestLanguage.g:4362:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
+                    // InternalBug304681TestLanguage.g:4366:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) )
+                    // InternalBug304681TestLanguage.g:4367:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); 
                     }
-                    // InternalBug304681TestLanguage.g:4363:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
-                    // InternalBug304681TestLanguage.g:4363:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+                    // InternalBug304681TestLanguage.g:4368:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
+                    // InternalBug304681TestLanguage.g:4368:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
                     {
                     pushFollow(FollowSets000.FOLLOW_28);
                     rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
@@ -14115,20 +14123,20 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                     }
 
-                    // InternalBug304681TestLanguage.g:4366:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
-                    // InternalBug304681TestLanguage.g:4367:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+                    // InternalBug304681TestLanguage.g:4371:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+                    // InternalBug304681TestLanguage.g:4372:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); 
                     }
-                    // InternalBug304681TestLanguage.g:4368:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+                    // InternalBug304681TestLanguage.g:4373:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
                     loop42:
                     do {
                         int alt42=2;
                         alt42 = dfa42.predict(input);
                         switch (alt42) {
                     	case 1 :
-                    	    // InternalBug304681TestLanguage.g:4368:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+                    	    // InternalBug304681TestLanguage.g:4373:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
                     	    {
                     	    pushFollow(FollowSets000.FOLLOW_28);
                     	    rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
@@ -14163,28 +14171,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 4 :
-                    // InternalBug304681TestLanguage.g:4374:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4379:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4374:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4375:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4379:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4380:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Attribute2__UnorderedGroup_3_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3)");
                     }
-                    // InternalBug304681TestLanguage.g:4375:110: ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4376:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
+                    // InternalBug304681TestLanguage.g:4380:110: ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4381:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4382:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
-                    // InternalBug304681TestLanguage.g:4383:6: ( rule__Attribute2__Group_3_0_1_3__0 )
+                    // InternalBug304681TestLanguage.g:4387:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
+                    // InternalBug304681TestLanguage.g:4388:6: ( rule__Attribute2__Group_3_0_1_3__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getGroup_3_0_1_3()); 
                     }
-                    // InternalBug304681TestLanguage.g:4384:6: ( rule__Attribute2__Group_3_0_1_3__0 )
-                    // InternalBug304681TestLanguage.g:4384:7: rule__Attribute2__Group_3_0_1_3__0
+                    // InternalBug304681TestLanguage.g:4389:6: ( rule__Attribute2__Group_3_0_1_3__0 )
+                    // InternalBug304681TestLanguage.g:4389:7: rule__Attribute2__Group_3_0_1_3__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Attribute2__Group_3_0_1_3__0();
@@ -14210,28 +14218,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 5 :
-                    // InternalBug304681TestLanguage.g:4389:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4394:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4389:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4390:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4394:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4395:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Attribute2__UnorderedGroup_3_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4)");
                     }
-                    // InternalBug304681TestLanguage.g:4390:110: ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4391:5: ( ( rule__Attribute2__Group_3_0_1_4__0 ) )
+                    // InternalBug304681TestLanguage.g:4395:110: ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4396:5: ( ( rule__Attribute2__Group_3_0_1_4__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4397:5: ( ( rule__Attribute2__Group_3_0_1_4__0 ) )
-                    // InternalBug304681TestLanguage.g:4398:6: ( rule__Attribute2__Group_3_0_1_4__0 )
+                    // InternalBug304681TestLanguage.g:4402:5: ( ( rule__Attribute2__Group_3_0_1_4__0 ) )
+                    // InternalBug304681TestLanguage.g:4403:6: ( rule__Attribute2__Group_3_0_1_4__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getGroup_3_0_1_4()); 
                     }
-                    // InternalBug304681TestLanguage.g:4399:6: ( rule__Attribute2__Group_3_0_1_4__0 )
-                    // InternalBug304681TestLanguage.g:4399:7: rule__Attribute2__Group_3_0_1_4__0
+                    // InternalBug304681TestLanguage.g:4404:6: ( rule__Attribute2__Group_3_0_1_4__0 )
+                    // InternalBug304681TestLanguage.g:4404:7: rule__Attribute2__Group_3_0_1_4__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Attribute2__Group_3_0_1_4__0();
@@ -14280,21 +14288,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__0"
-    // InternalBug304681TestLanguage.g:4412:1: rule__Attribute2__UnorderedGroup_3_0_1__0 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )? ;
+    // InternalBug304681TestLanguage.g:4417:1: rule__Attribute2__UnorderedGroup_3_0_1__0 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )? ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4416:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )? )
-            // InternalBug304681TestLanguage.g:4417:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )?
+            // InternalBug304681TestLanguage.g:4421:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )? )
+            // InternalBug304681TestLanguage.g:4422:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )?
             {
             pushFollow(FollowSets000.FOLLOW_29);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4418:2: ( rule__Attribute2__UnorderedGroup_3_0_1__1 )?
+            // InternalBug304681TestLanguage.g:4423:2: ( rule__Attribute2__UnorderedGroup_3_0_1__1 )?
             int alt44=2;
             int LA44_0 = input.LA(1);
 
@@ -14347,21 +14355,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__1"
-    // InternalBug304681TestLanguage.g:4424:1: rule__Attribute2__UnorderedGroup_3_0_1__1 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )? ;
+    // InternalBug304681TestLanguage.g:4429:1: rule__Attribute2__UnorderedGroup_3_0_1__1 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )? ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4428:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )? )
-            // InternalBug304681TestLanguage.g:4429:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )?
+            // InternalBug304681TestLanguage.g:4433:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )? )
+            // InternalBug304681TestLanguage.g:4434:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )?
             {
             pushFollow(FollowSets000.FOLLOW_29);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4430:2: ( rule__Attribute2__UnorderedGroup_3_0_1__2 )?
+            // InternalBug304681TestLanguage.g:4435:2: ( rule__Attribute2__UnorderedGroup_3_0_1__2 )?
             int alt45=2;
             int LA45_0 = input.LA(1);
 
@@ -14414,21 +14422,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__2"
-    // InternalBug304681TestLanguage.g:4436:1: rule__Attribute2__UnorderedGroup_3_0_1__2 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )? ;
+    // InternalBug304681TestLanguage.g:4441:1: rule__Attribute2__UnorderedGroup_3_0_1__2 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )? ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4440:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )? )
-            // InternalBug304681TestLanguage.g:4441:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )?
+            // InternalBug304681TestLanguage.g:4445:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )? )
+            // InternalBug304681TestLanguage.g:4446:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )?
             {
             pushFollow(FollowSets000.FOLLOW_29);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4442:2: ( rule__Attribute2__UnorderedGroup_3_0_1__3 )?
+            // InternalBug304681TestLanguage.g:4447:2: ( rule__Attribute2__UnorderedGroup_3_0_1__3 )?
             int alt46=2;
             int LA46_0 = input.LA(1);
 
@@ -14481,21 +14489,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__3"
-    // InternalBug304681TestLanguage.g:4448:1: rule__Attribute2__UnorderedGroup_3_0_1__3 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )? ;
+    // InternalBug304681TestLanguage.g:4453:1: rule__Attribute2__UnorderedGroup_3_0_1__3 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )? ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4452:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )? )
-            // InternalBug304681TestLanguage.g:4453:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )?
+            // InternalBug304681TestLanguage.g:4457:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )? )
+            // InternalBug304681TestLanguage.g:4458:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )?
             {
             pushFollow(FollowSets000.FOLLOW_29);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4454:2: ( rule__Attribute2__UnorderedGroup_3_0_1__4 )?
+            // InternalBug304681TestLanguage.g:4459:2: ( rule__Attribute2__UnorderedGroup_3_0_1__4 )?
             int alt47=2;
             int LA47_0 = input.LA(1);
 
@@ -14548,14 +14556,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__4"
-    // InternalBug304681TestLanguage.g:4460:1: rule__Attribute2__UnorderedGroup_3_0_1__4 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ;
+    // InternalBug304681TestLanguage.g:4465:1: rule__Attribute2__UnorderedGroup_3_0_1__4 : rule__Attribute2__UnorderedGroup_3_0_1__Impl ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4464:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl )
-            // InternalBug304681TestLanguage.g:4465:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl
+            // InternalBug304681TestLanguage.g:4469:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl )
+            // InternalBug304681TestLanguage.g:4470:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
@@ -14581,17 +14589,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__UnorderedGroup_4_0_1"
-    // InternalBug304681TestLanguage.g:4472:1: rule__Reference2__UnorderedGroup_4_0_1 : ( rule__Reference2__UnorderedGroup_4_0_1__0 )? ;
+    // InternalBug304681TestLanguage.g:4477:1: rule__Reference2__UnorderedGroup_4_0_1 : ( rule__Reference2__UnorderedGroup_4_0_1__0 )? ;
     public final void rule__Reference2__UnorderedGroup_4_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1());
         	
         try {
-            // InternalBug304681TestLanguage.g:4477:1: ( ( rule__Reference2__UnorderedGroup_4_0_1__0 )? )
-            // InternalBug304681TestLanguage.g:4478:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )?
+            // InternalBug304681TestLanguage.g:4482:1: ( ( rule__Reference2__UnorderedGroup_4_0_1__0 )? )
+            // InternalBug304681TestLanguage.g:4483:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )?
             {
-            // InternalBug304681TestLanguage.g:4478:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )?
+            // InternalBug304681TestLanguage.g:4483:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )?
             int alt48=2;
             int LA48_0 = input.LA(1);
 
@@ -14636,17 +14644,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__UnorderedGroup_4_0_1__Impl"
-    // InternalBug304681TestLanguage.g:4486:1: rule__Reference2__UnorderedGroup_4_0_1__Impl : ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:4491:1: rule__Reference2__UnorderedGroup_4_0_1__Impl : ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) ) ;
     public final void rule__Reference2__UnorderedGroup_4_0_1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
         	
         try {
-            // InternalBug304681TestLanguage.g:4491:1: ( ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) ) )
-            // InternalBug304681TestLanguage.g:4492:3: ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4496:1: ( ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4497:3: ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:4492:3: ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4497:3: ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) ) )
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -14665,28 +14673,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt49) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:4493:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4498:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4493:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4494:4: {...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4498:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4499:4: {...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Reference2__UnorderedGroup_4_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0)");
                     }
-                    // InternalBug304681TestLanguage.g:4494:110: ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4495:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4499:110: ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4500:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4501:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
-                    // InternalBug304681TestLanguage.g:4502:6: ( rule__Reference2__Group_4_0_1_0__0 )
+                    // InternalBug304681TestLanguage.g:4506:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4507:6: ( rule__Reference2__Group_4_0_1_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReference2Access().getGroup_4_0_1_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:4503:6: ( rule__Reference2__Group_4_0_1_0__0 )
-                    // InternalBug304681TestLanguage.g:4503:7: rule__Reference2__Group_4_0_1_0__0
+                    // InternalBug304681TestLanguage.g:4508:6: ( rule__Reference2__Group_4_0_1_0__0 )
+                    // InternalBug304681TestLanguage.g:4508:7: rule__Reference2__Group_4_0_1_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference2__Group_4_0_1_0__0();
@@ -14712,28 +14720,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:4508:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4513:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4508:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4509:4: {...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4513:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4514:4: {...}? => ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Reference2__UnorderedGroup_4_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1)");
                     }
-                    // InternalBug304681TestLanguage.g:4509:110: ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4510:5: ( ( rule__Reference2__Group_4_0_1_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4514:110: ( ( ( rule__Reference2__Group_4_0_1_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4515:5: ( ( rule__Reference2__Group_4_0_1_1__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4516:5: ( ( rule__Reference2__Group_4_0_1_1__0 ) )
-                    // InternalBug304681TestLanguage.g:4517:6: ( rule__Reference2__Group_4_0_1_1__0 )
+                    // InternalBug304681TestLanguage.g:4521:5: ( ( rule__Reference2__Group_4_0_1_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4522:6: ( rule__Reference2__Group_4_0_1_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getReference2Access().getGroup_4_0_1_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:4518:6: ( rule__Reference2__Group_4_0_1_1__0 )
-                    // InternalBug304681TestLanguage.g:4518:7: rule__Reference2__Group_4_0_1_1__0
+                    // InternalBug304681TestLanguage.g:4523:6: ( rule__Reference2__Group_4_0_1_1__0 )
+                    // InternalBug304681TestLanguage.g:4523:7: rule__Reference2__Group_4_0_1_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Reference2__Group_4_0_1_1__0();
@@ -14782,21 +14790,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__UnorderedGroup_4_0_1__0"
-    // InternalBug304681TestLanguage.g:4531:1: rule__Reference2__UnorderedGroup_4_0_1__0 : rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )? ;
+    // InternalBug304681TestLanguage.g:4536:1: rule__Reference2__UnorderedGroup_4_0_1__0 : rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )? ;
     public final void rule__Reference2__UnorderedGroup_4_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4535:1: ( rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )? )
-            // InternalBug304681TestLanguage.g:4536:2: rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )?
+            // InternalBug304681TestLanguage.g:4540:1: ( rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )? )
+            // InternalBug304681TestLanguage.g:4541:2: rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )?
             {
             pushFollow(FollowSets000.FOLLOW_26);
             rule__Reference2__UnorderedGroup_4_0_1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4537:2: ( rule__Reference2__UnorderedGroup_4_0_1__1 )?
+            // InternalBug304681TestLanguage.g:4542:2: ( rule__Reference2__UnorderedGroup_4_0_1__1 )?
             int alt50=2;
             int LA50_0 = input.LA(1);
 
@@ -14840,14 +14848,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__UnorderedGroup_4_0_1__1"
-    // InternalBug304681TestLanguage.g:4543:1: rule__Reference2__UnorderedGroup_4_0_1__1 : rule__Reference2__UnorderedGroup_4_0_1__Impl ;
+    // InternalBug304681TestLanguage.g:4548:1: rule__Reference2__UnorderedGroup_4_0_1__1 : rule__Reference2__UnorderedGroup_4_0_1__Impl ;
     public final void rule__Reference2__UnorderedGroup_4_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4547:1: ( rule__Reference2__UnorderedGroup_4_0_1__Impl )
-            // InternalBug304681TestLanguage.g:4548:2: rule__Reference2__UnorderedGroup_4_0_1__Impl
+            // InternalBug304681TestLanguage.g:4552:1: ( rule__Reference2__UnorderedGroup_4_0_1__Impl )
+            // InternalBug304681TestLanguage.g:4553:2: rule__Reference2__UnorderedGroup_4_0_1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__UnorderedGroup_4_0_1__Impl();
@@ -14873,15 +14881,15 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__UnorderedGroup_3"
-    // InternalBug304681TestLanguage.g:4555:1: rule__ConstraintDefinition__UnorderedGroup_3 : rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?;
+    // InternalBug304681TestLanguage.g:4560:1: rule__ConstraintDefinition__UnorderedGroup_3 : rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?;
     public final void rule__ConstraintDefinition__UnorderedGroup_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3());
         	
         try {
-            // InternalBug304681TestLanguage.g:4560:1: ( rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?)
-            // InternalBug304681TestLanguage.g:4561:2: rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?
+            // InternalBug304681TestLanguage.g:4565:1: ( rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?)
+            // InternalBug304681TestLanguage.g:4566:2: rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__UnorderedGroup_3__0();
@@ -14912,17 +14920,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__UnorderedGroup_3__Impl"
-    // InternalBug304681TestLanguage.g:4569:1: rule__ConstraintDefinition__UnorderedGroup_3__Impl : ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) ) ;
+    // InternalBug304681TestLanguage.g:4574:1: rule__ConstraintDefinition__UnorderedGroup_3__Impl : ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) ) ;
     public final void rule__ConstraintDefinition__UnorderedGroup_3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
         	
         try {
-            // InternalBug304681TestLanguage.g:4574:1: ( ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) ) )
-            // InternalBug304681TestLanguage.g:4575:3: ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4579:1: ( ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4580:3: ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) )
             {
-            // InternalBug304681TestLanguage.g:4575:3: ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) )
+            // InternalBug304681TestLanguage.g:4580:3: ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) | ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) ) )
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -14941,28 +14949,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             }
             switch (alt51) {
                 case 1 :
-                    // InternalBug304681TestLanguage.g:4576:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4581:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4576:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4577:4: {...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4581:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4582:4: {...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__ConstraintDefinition__UnorderedGroup_3__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0)");
                     }
-                    // InternalBug304681TestLanguage.g:4577:116: ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4578:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4582:116: ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4583:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4584:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
-                    // InternalBug304681TestLanguage.g:4585:6: ( rule__ConstraintDefinition__Group_3_0__0 )
+                    // InternalBug304681TestLanguage.g:4589:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
+                    // InternalBug304681TestLanguage.g:4590:6: ( rule__ConstraintDefinition__Group_3_0__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getConstraintDefinitionAccess().getGroup_3_0()); 
                     }
-                    // InternalBug304681TestLanguage.g:4586:6: ( rule__ConstraintDefinition__Group_3_0__0 )
-                    // InternalBug304681TestLanguage.g:4586:7: rule__ConstraintDefinition__Group_3_0__0
+                    // InternalBug304681TestLanguage.g:4591:6: ( rule__ConstraintDefinition__Group_3_0__0 )
+                    // InternalBug304681TestLanguage.g:4591:7: rule__ConstraintDefinition__Group_3_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__ConstraintDefinition__Group_3_0__0();
@@ -14988,28 +14996,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalBug304681TestLanguage.g:4591:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4596:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) )
                     {
-                    // InternalBug304681TestLanguage.g:4591:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) )
-                    // InternalBug304681TestLanguage.g:4592:4: {...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4596:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) ) )
+                    // InternalBug304681TestLanguage.g:4597:4: {...}? => ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__ConstraintDefinition__UnorderedGroup_3__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1)");
                     }
-                    // InternalBug304681TestLanguage.g:4592:116: ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) )
-                    // InternalBug304681TestLanguage.g:4593:5: ( ( rule__ConstraintDefinition__Group_3_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4597:116: ( ( ( rule__ConstraintDefinition__Group_3_1__0 ) ) )
+                    // InternalBug304681TestLanguage.g:4598:5: ( ( rule__ConstraintDefinition__Group_3_1__0 ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1);
                     selected = true;
-                    // InternalBug304681TestLanguage.g:4599:5: ( ( rule__ConstraintDefinition__Group_3_1__0 ) )
-                    // InternalBug304681TestLanguage.g:4600:6: ( rule__ConstraintDefinition__Group_3_1__0 )
+                    // InternalBug304681TestLanguage.g:4604:5: ( ( rule__ConstraintDefinition__Group_3_1__0 ) )
+                    // InternalBug304681TestLanguage.g:4605:6: ( rule__ConstraintDefinition__Group_3_1__0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getConstraintDefinitionAccess().getGroup_3_1()); 
                     }
-                    // InternalBug304681TestLanguage.g:4601:6: ( rule__ConstraintDefinition__Group_3_1__0 )
-                    // InternalBug304681TestLanguage.g:4601:7: rule__ConstraintDefinition__Group_3_1__0
+                    // InternalBug304681TestLanguage.g:4606:6: ( rule__ConstraintDefinition__Group_3_1__0 )
+                    // InternalBug304681TestLanguage.g:4606:7: rule__ConstraintDefinition__Group_3_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__ConstraintDefinition__Group_3_1__0();
@@ -15058,21 +15066,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__UnorderedGroup_3__0"
-    // InternalBug304681TestLanguage.g:4614:1: rule__ConstraintDefinition__UnorderedGroup_3__0 : rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )? ;
+    // InternalBug304681TestLanguage.g:4619:1: rule__ConstraintDefinition__UnorderedGroup_3__0 : rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )? ;
     public final void rule__ConstraintDefinition__UnorderedGroup_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4618:1: ( rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )? )
-            // InternalBug304681TestLanguage.g:4619:2: rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )?
+            // InternalBug304681TestLanguage.g:4623:1: ( rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )? )
+            // InternalBug304681TestLanguage.g:4624:2: rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )?
             {
             pushFollow(FollowSets000.FOLLOW_30);
             rule__ConstraintDefinition__UnorderedGroup_3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            // InternalBug304681TestLanguage.g:4620:2: ( rule__ConstraintDefinition__UnorderedGroup_3__1 )?
+            // InternalBug304681TestLanguage.g:4625:2: ( rule__ConstraintDefinition__UnorderedGroup_3__1 )?
             int alt52=2;
             int LA52_0 = input.LA(1);
 
@@ -15116,14 +15124,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__UnorderedGroup_3__1"
-    // InternalBug304681TestLanguage.g:4626:1: rule__ConstraintDefinition__UnorderedGroup_3__1 : rule__ConstraintDefinition__UnorderedGroup_3__Impl ;
+    // InternalBug304681TestLanguage.g:4631:1: rule__ConstraintDefinition__UnorderedGroup_3__1 : rule__ConstraintDefinition__UnorderedGroup_3__Impl ;
     public final void rule__ConstraintDefinition__UnorderedGroup_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4630:1: ( rule__ConstraintDefinition__UnorderedGroup_3__Impl )
-            // InternalBug304681TestLanguage.g:4631:2: rule__ConstraintDefinition__UnorderedGroup_3__Impl
+            // InternalBug304681TestLanguage.g:4635:1: ( rule__ConstraintDefinition__UnorderedGroup_3__Impl )
+            // InternalBug304681TestLanguage.g:4636:2: rule__ConstraintDefinition__UnorderedGroup_3__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ConstraintDefinition__UnorderedGroup_3__Impl();
@@ -15149,17 +15157,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__DefinitionAssignment_0_1"
-    // InternalBug304681TestLanguage.g:4638:1: rule__Model__DefinitionAssignment_0_1 : ( rulePackageDefinition ) ;
+    // InternalBug304681TestLanguage.g:4643:1: rule__Model__DefinitionAssignment_0_1 : ( rulePackageDefinition ) ;
     public final void rule__Model__DefinitionAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4642:1: ( ( rulePackageDefinition ) )
-            // InternalBug304681TestLanguage.g:4643:2: ( rulePackageDefinition )
+            // InternalBug304681TestLanguage.g:4647:1: ( ( rulePackageDefinition ) )
+            // InternalBug304681TestLanguage.g:4648:2: ( rulePackageDefinition )
             {
-            // InternalBug304681TestLanguage.g:4643:2: ( rulePackageDefinition )
-            // InternalBug304681TestLanguage.g:4644:3: rulePackageDefinition
+            // InternalBug304681TestLanguage.g:4648:2: ( rulePackageDefinition )
+            // InternalBug304681TestLanguage.g:4649:3: rulePackageDefinition
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDefinitionPackageDefinitionParserRuleCall_0_1_0()); 
@@ -15194,17 +15202,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Model__DefinitionAssignment_1_1"
-    // InternalBug304681TestLanguage.g:4653:1: rule__Model__DefinitionAssignment_1_1 : ( rulePackageDefinition2 ) ;
+    // InternalBug304681TestLanguage.g:4658:1: rule__Model__DefinitionAssignment_1_1 : ( rulePackageDefinition2 ) ;
     public final void rule__Model__DefinitionAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4657:1: ( ( rulePackageDefinition2 ) )
-            // InternalBug304681TestLanguage.g:4658:2: ( rulePackageDefinition2 )
+            // InternalBug304681TestLanguage.g:4662:1: ( ( rulePackageDefinition2 ) )
+            // InternalBug304681TestLanguage.g:4663:2: ( rulePackageDefinition2 )
             {
-            // InternalBug304681TestLanguage.g:4658:2: ( rulePackageDefinition2 )
-            // InternalBug304681TestLanguage.g:4659:3: rulePackageDefinition2
+            // InternalBug304681TestLanguage.g:4663:2: ( rulePackageDefinition2 )
+            // InternalBug304681TestLanguage.g:4664:3: rulePackageDefinition2
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDefinitionPackageDefinition2ParserRuleCall_1_1_0()); 
@@ -15239,17 +15247,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__NamespaceAssignment_2"
-    // InternalBug304681TestLanguage.g:4668:1: rule__PackageDefinition__NamespaceAssignment_2 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:4673:1: rule__PackageDefinition__NamespaceAssignment_2 : ( RULE_ID ) ;
     public final void rule__PackageDefinition__NamespaceAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4672:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4673:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4677:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4678:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:4673:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4674:3: RULE_ID
+            // InternalBug304681TestLanguage.g:4678:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4679:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0()); 
@@ -15280,17 +15288,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition__ContentsAssignment_4"
-    // InternalBug304681TestLanguage.g:4683:1: rule__PackageDefinition__ContentsAssignment_4 : ( ruleObject ) ;
+    // InternalBug304681TestLanguage.g:4688:1: rule__PackageDefinition__ContentsAssignment_4 : ( ruleObject ) ;
     public final void rule__PackageDefinition__ContentsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4687:1: ( ( ruleObject ) )
-            // InternalBug304681TestLanguage.g:4688:2: ( ruleObject )
+            // InternalBug304681TestLanguage.g:4692:1: ( ( ruleObject ) )
+            // InternalBug304681TestLanguage.g:4693:2: ( ruleObject )
             {
-            // InternalBug304681TestLanguage.g:4688:2: ( ruleObject )
-            // InternalBug304681TestLanguage.g:4689:3: ruleObject
+            // InternalBug304681TestLanguage.g:4693:2: ( ruleObject )
+            // InternalBug304681TestLanguage.g:4694:3: ruleObject
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getContentsObjectParserRuleCall_4_0()); 
@@ -15325,23 +15333,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__EnabledAssignment_0_0"
-    // InternalBug304681TestLanguage.g:4698:1: rule__Object__EnabledAssignment_0_0 : ( ( 'enabled' ) ) ;
+    // InternalBug304681TestLanguage.g:4703:1: rule__Object__EnabledAssignment_0_0 : ( ( 'enabled' ) ) ;
     public final void rule__Object__EnabledAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4702:1: ( ( ( 'enabled' ) ) )
-            // InternalBug304681TestLanguage.g:4703:2: ( ( 'enabled' ) )
+            // InternalBug304681TestLanguage.g:4707:1: ( ( ( 'enabled' ) ) )
+            // InternalBug304681TestLanguage.g:4708:2: ( ( 'enabled' ) )
             {
-            // InternalBug304681TestLanguage.g:4703:2: ( ( 'enabled' ) )
-            // InternalBug304681TestLanguage.g:4704:3: ( 'enabled' )
+            // InternalBug304681TestLanguage.g:4708:2: ( ( 'enabled' ) )
+            // InternalBug304681TestLanguage.g:4709:3: ( 'enabled' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getEnabledEnabledKeyword_0_0_0()); 
             }
-            // InternalBug304681TestLanguage.g:4705:3: ( 'enabled' )
-            // InternalBug304681TestLanguage.g:4706:4: 'enabled'
+            // InternalBug304681TestLanguage.g:4710:3: ( 'enabled' )
+            // InternalBug304681TestLanguage.g:4711:4: 'enabled'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getEnabledEnabledKeyword_0_0_0()); 
@@ -15378,23 +15386,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__AbstractAssignment_0_1"
-    // InternalBug304681TestLanguage.g:4717:1: rule__Object__AbstractAssignment_0_1 : ( ( 'abstract' ) ) ;
+    // InternalBug304681TestLanguage.g:4722:1: rule__Object__AbstractAssignment_0_1 : ( ( 'abstract' ) ) ;
     public final void rule__Object__AbstractAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4721:1: ( ( ( 'abstract' ) ) )
-            // InternalBug304681TestLanguage.g:4722:2: ( ( 'abstract' ) )
+            // InternalBug304681TestLanguage.g:4726:1: ( ( ( 'abstract' ) ) )
+            // InternalBug304681TestLanguage.g:4727:2: ( ( 'abstract' ) )
             {
-            // InternalBug304681TestLanguage.g:4722:2: ( ( 'abstract' ) )
-            // InternalBug304681TestLanguage.g:4723:3: ( 'abstract' )
+            // InternalBug304681TestLanguage.g:4727:2: ( ( 'abstract' ) )
+            // InternalBug304681TestLanguage.g:4728:3: ( 'abstract' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getAbstractAbstractKeyword_0_1_0()); 
             }
-            // InternalBug304681TestLanguage.g:4724:3: ( 'abstract' )
-            // InternalBug304681TestLanguage.g:4725:4: 'abstract'
+            // InternalBug304681TestLanguage.g:4729:3: ( 'abstract' )
+            // InternalBug304681TestLanguage.g:4730:4: 'abstract'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getAbstractAbstractKeyword_0_1_0()); 
@@ -15431,17 +15439,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__NameAssignment_2"
-    // InternalBug304681TestLanguage.g:4736:1: rule__Object__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:4741:1: rule__Object__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Object__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4740:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4741:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4745:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4746:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:4741:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4742:3: RULE_ID
+            // InternalBug304681TestLanguage.g:4746:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4747:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0()); 
@@ -15472,23 +15480,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__ParentAssignment_3_1"
-    // InternalBug304681TestLanguage.g:4751:1: rule__Object__ParentAssignment_3_1 : ( ( RULE_ID ) ) ;
+    // InternalBug304681TestLanguage.g:4756:1: rule__Object__ParentAssignment_3_1 : ( ( RULE_ID ) ) ;
     public final void rule__Object__ParentAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4755:1: ( ( ( RULE_ID ) ) )
-            // InternalBug304681TestLanguage.g:4756:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4760:1: ( ( ( RULE_ID ) ) )
+            // InternalBug304681TestLanguage.g:4761:2: ( ( RULE_ID ) )
             {
-            // InternalBug304681TestLanguage.g:4756:2: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4757:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4761:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4762:3: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getParentObjectCrossReference_3_1_0()); 
             }
-            // InternalBug304681TestLanguage.g:4758:3: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4759:4: RULE_ID
+            // InternalBug304681TestLanguage.g:4763:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4764:4: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getParentObjectIDTerminalRuleCall_3_1_0_1()); 
@@ -15525,17 +15533,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__ShortDescriptionAssignment_5_0_1"
-    // InternalBug304681TestLanguage.g:4770:1: rule__Object__ShortDescriptionAssignment_5_0_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:4775:1: rule__Object__ShortDescriptionAssignment_5_0_1 : ( RULE_STRING ) ;
     public final void rule__Object__ShortDescriptionAssignment_5_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4774:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:4775:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:4779:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:4780:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:4775:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:4776:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:4780:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:4781:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0()); 
@@ -15566,17 +15574,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__LongDescriptionAssignment_5_1_1"
-    // InternalBug304681TestLanguage.g:4785:1: rule__Object__LongDescriptionAssignment_5_1_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:4790:1: rule__Object__LongDescriptionAssignment_5_1_1 : ( RULE_STRING ) ;
     public final void rule__Object__LongDescriptionAssignment_5_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4789:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:4790:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:4794:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:4795:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:4790:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:4791:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:4795:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:4796:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0()); 
@@ -15607,17 +15615,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__SerialVersionUIDAssignment_5_2_1"
-    // InternalBug304681TestLanguage.g:4800:1: rule__Object__SerialVersionUIDAssignment_5_2_1 : ( RULE_INT ) ;
+    // InternalBug304681TestLanguage.g:4805:1: rule__Object__SerialVersionUIDAssignment_5_2_1 : ( RULE_INT ) ;
     public final void rule__Object__SerialVersionUIDAssignment_5_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4804:1: ( ( RULE_INT ) )
-            // InternalBug304681TestLanguage.g:4805:2: ( RULE_INT )
+            // InternalBug304681TestLanguage.g:4809:1: ( ( RULE_INT ) )
+            // InternalBug304681TestLanguage.g:4810:2: ( RULE_INT )
             {
-            // InternalBug304681TestLanguage.g:4805:2: ( RULE_INT )
-            // InternalBug304681TestLanguage.g:4806:3: RULE_INT
+            // InternalBug304681TestLanguage.g:4810:2: ( RULE_INT )
+            // InternalBug304681TestLanguage.g:4811:3: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0()); 
@@ -15648,23 +15656,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__CloneableAssignment_5_3_0"
-    // InternalBug304681TestLanguage.g:4815:1: rule__Object__CloneableAssignment_5_3_0 : ( ( 'cloneable' ) ) ;
+    // InternalBug304681TestLanguage.g:4820:1: rule__Object__CloneableAssignment_5_3_0 : ( ( 'cloneable' ) ) ;
     public final void rule__Object__CloneableAssignment_5_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4819:1: ( ( ( 'cloneable' ) ) )
-            // InternalBug304681TestLanguage.g:4820:2: ( ( 'cloneable' ) )
+            // InternalBug304681TestLanguage.g:4824:1: ( ( ( 'cloneable' ) ) )
+            // InternalBug304681TestLanguage.g:4825:2: ( ( 'cloneable' ) )
             {
-            // InternalBug304681TestLanguage.g:4820:2: ( ( 'cloneable' ) )
-            // InternalBug304681TestLanguage.g:4821:3: ( 'cloneable' )
+            // InternalBug304681TestLanguage.g:4825:2: ( ( 'cloneable' ) )
+            // InternalBug304681TestLanguage.g:4826:3: ( 'cloneable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getCloneableCloneableKeyword_5_3_0_0()); 
             }
-            // InternalBug304681TestLanguage.g:4822:3: ( 'cloneable' )
-            // InternalBug304681TestLanguage.g:4823:4: 'cloneable'
+            // InternalBug304681TestLanguage.g:4827:3: ( 'cloneable' )
+            // InternalBug304681TestLanguage.g:4828:4: 'cloneable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getCloneableCloneableKeyword_5_3_0_0()); 
@@ -15701,17 +15709,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__FeaturesAssignment_5_4"
-    // InternalBug304681TestLanguage.g:4834:1: rule__Object__FeaturesAssignment_5_4 : ( ruleFeature ) ;
+    // InternalBug304681TestLanguage.g:4839:1: rule__Object__FeaturesAssignment_5_4 : ( ruleFeature ) ;
     public final void rule__Object__FeaturesAssignment_5_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4838:1: ( ( ruleFeature ) )
-            // InternalBug304681TestLanguage.g:4839:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4843:1: ( ( ruleFeature ) )
+            // InternalBug304681TestLanguage.g:4844:2: ( ruleFeature )
             {
-            // InternalBug304681TestLanguage.g:4839:2: ( ruleFeature )
-            // InternalBug304681TestLanguage.g:4840:3: ruleFeature
+            // InternalBug304681TestLanguage.g:4844:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4845:3: ruleFeature
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_4_0()); 
@@ -15746,17 +15754,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__FeaturesAssignment_5_5_1"
-    // InternalBug304681TestLanguage.g:4849:1: rule__Object__FeaturesAssignment_5_5_1 : ( ruleFeature ) ;
+    // InternalBug304681TestLanguage.g:4854:1: rule__Object__FeaturesAssignment_5_5_1 : ( ruleFeature ) ;
     public final void rule__Object__FeaturesAssignment_5_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4853:1: ( ( ruleFeature ) )
-            // InternalBug304681TestLanguage.g:4854:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4858:1: ( ( ruleFeature ) )
+            // InternalBug304681TestLanguage.g:4859:2: ( ruleFeature )
             {
-            // InternalBug304681TestLanguage.g:4854:2: ( ruleFeature )
-            // InternalBug304681TestLanguage.g:4855:3: ruleFeature
+            // InternalBug304681TestLanguage.g:4859:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4860:3: ruleFeature
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_5_1_0()); 
@@ -15791,17 +15799,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__FeaturesAssignment_5_6_1"
-    // InternalBug304681TestLanguage.g:4864:1: rule__Object__FeaturesAssignment_5_6_1 : ( ruleFeature ) ;
+    // InternalBug304681TestLanguage.g:4869:1: rule__Object__FeaturesAssignment_5_6_1 : ( ruleFeature ) ;
     public final void rule__Object__FeaturesAssignment_5_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4868:1: ( ( ruleFeature ) )
-            // InternalBug304681TestLanguage.g:4869:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4873:1: ( ( ruleFeature ) )
+            // InternalBug304681TestLanguage.g:4874:2: ( ruleFeature )
             {
-            // InternalBug304681TestLanguage.g:4869:2: ( ruleFeature )
-            // InternalBug304681TestLanguage.g:4870:3: ruleFeature
+            // InternalBug304681TestLanguage.g:4874:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4875:3: ruleFeature
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_6_1_0()); 
@@ -15836,17 +15844,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__FeaturesAssignment_5_7_1"
-    // InternalBug304681TestLanguage.g:4879:1: rule__Object__FeaturesAssignment_5_7_1 : ( ruleFeature ) ;
+    // InternalBug304681TestLanguage.g:4884:1: rule__Object__FeaturesAssignment_5_7_1 : ( ruleFeature ) ;
     public final void rule__Object__FeaturesAssignment_5_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4883:1: ( ( ruleFeature ) )
-            // InternalBug304681TestLanguage.g:4884:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4888:1: ( ( ruleFeature ) )
+            // InternalBug304681TestLanguage.g:4889:2: ( ruleFeature )
             {
-            // InternalBug304681TestLanguage.g:4884:2: ( ruleFeature )
-            // InternalBug304681TestLanguage.g:4885:3: ruleFeature
+            // InternalBug304681TestLanguage.g:4889:2: ( ruleFeature )
+            // InternalBug304681TestLanguage.g:4890:3: ruleFeature
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_7_1_0()); 
@@ -15881,17 +15889,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__TypeAssignment_1"
-    // InternalBug304681TestLanguage.g:4894:1: rule__Attribute__TypeAssignment_1 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:4899:1: rule__Attribute__TypeAssignment_1 : ( RULE_ID ) ;
     public final void rule__Attribute__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4898:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4899:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4903:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4904:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:4899:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4900:3: RULE_ID
+            // InternalBug304681TestLanguage.g:4904:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4905:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0()); 
@@ -15922,17 +15930,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute__NameAssignment_2"
-    // InternalBug304681TestLanguage.g:4909:1: rule__Attribute__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:4914:1: rule__Attribute__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Attribute__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4913:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4914:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4918:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4919:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:4914:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4915:3: RULE_ID
+            // InternalBug304681TestLanguage.g:4919:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4920:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
@@ -15963,23 +15971,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__TypeAssignment_1"
-    // InternalBug304681TestLanguage.g:4924:1: rule__Reference__TypeAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalBug304681TestLanguage.g:4929:1: rule__Reference__TypeAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__Reference__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4928:1: ( ( ( RULE_ID ) ) )
-            // InternalBug304681TestLanguage.g:4929:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4933:1: ( ( ( RULE_ID ) ) )
+            // InternalBug304681TestLanguage.g:4934:2: ( ( RULE_ID ) )
             {
-            // InternalBug304681TestLanguage.g:4929:2: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4930:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4934:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4935:3: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getTypeObjectCrossReference_1_0()); 
             }
-            // InternalBug304681TestLanguage.g:4931:3: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4932:4: RULE_ID
+            // InternalBug304681TestLanguage.g:4936:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4937:4: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getTypeObjectIDTerminalRuleCall_1_0_1()); 
@@ -16016,23 +16024,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__ManyAssignment_2"
-    // InternalBug304681TestLanguage.g:4943:1: rule__Reference__ManyAssignment_2 : ( ( '*' ) ) ;
+    // InternalBug304681TestLanguage.g:4948:1: rule__Reference__ManyAssignment_2 : ( ( '*' ) ) ;
     public final void rule__Reference__ManyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4947:1: ( ( ( '*' ) ) )
-            // InternalBug304681TestLanguage.g:4948:2: ( ( '*' ) )
+            // InternalBug304681TestLanguage.g:4952:1: ( ( ( '*' ) ) )
+            // InternalBug304681TestLanguage.g:4953:2: ( ( '*' ) )
             {
-            // InternalBug304681TestLanguage.g:4948:2: ( ( '*' ) )
-            // InternalBug304681TestLanguage.g:4949:3: ( '*' )
+            // InternalBug304681TestLanguage.g:4953:2: ( ( '*' ) )
+            // InternalBug304681TestLanguage.g:4954:3: ( '*' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getManyAsteriskKeyword_2_0()); 
             }
-            // InternalBug304681TestLanguage.g:4950:3: ( '*' )
-            // InternalBug304681TestLanguage.g:4951:4: '*'
+            // InternalBug304681TestLanguage.g:4955:3: ( '*' )
+            // InternalBug304681TestLanguage.g:4956:4: '*'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getManyAsteriskKeyword_2_0()); 
@@ -16069,17 +16077,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__NameAssignment_3"
-    // InternalBug304681TestLanguage.g:4962:1: rule__Reference__NameAssignment_3 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:4967:1: rule__Reference__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__Reference__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4966:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:4967:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4971:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:4972:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:4967:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:4968:3: RULE_ID
+            // InternalBug304681TestLanguage.g:4972:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:4973:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0()); 
@@ -16110,17 +16118,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__ShortDescriptionAssignment_4_0_1_0_1"
-    // InternalBug304681TestLanguage.g:4977:1: rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:4982:1: rule__Reference__ShortDescriptionAssignment_4_0_1_0_1 : ( RULE_STRING ) ;
     public final void rule__Reference__ShortDescriptionAssignment_4_0_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4981:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:4982:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:4986:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:4987:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:4982:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:4983:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:4987:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:4988:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0()); 
@@ -16151,17 +16159,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__LongDescriptionAssignment_4_0_1_1_1"
-    // InternalBug304681TestLanguage.g:4992:1: rule__Reference__LongDescriptionAssignment_4_0_1_1_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:4997:1: rule__Reference__LongDescriptionAssignment_4_0_1_1_1 : ( RULE_STRING ) ;
     public final void rule__Reference__LongDescriptionAssignment_4_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:4996:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:4997:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5001:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5002:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:4997:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:4998:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5002:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5003:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0()); 
@@ -16192,17 +16200,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__NamespaceAssignment_2"
-    // InternalBug304681TestLanguage.g:5007:1: rule__PackageDefinition2__NamespaceAssignment_2 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:5012:1: rule__PackageDefinition2__NamespaceAssignment_2 : ( RULE_ID ) ;
     public final void rule__PackageDefinition2__NamespaceAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5011:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5012:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5016:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5017:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:5012:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5013:3: RULE_ID
+            // InternalBug304681TestLanguage.g:5017:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5018:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0()); 
@@ -16233,17 +16241,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDefinition2__ContentsAssignment_4"
-    // InternalBug304681TestLanguage.g:5022:1: rule__PackageDefinition2__ContentsAssignment_4 : ( ruleObject2 ) ;
+    // InternalBug304681TestLanguage.g:5027:1: rule__PackageDefinition2__ContentsAssignment_4 : ( ruleObject2 ) ;
     public final void rule__PackageDefinition2__ContentsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5026:1: ( ( ruleObject2 ) )
-            // InternalBug304681TestLanguage.g:5027:2: ( ruleObject2 )
+            // InternalBug304681TestLanguage.g:5031:1: ( ( ruleObject2 ) )
+            // InternalBug304681TestLanguage.g:5032:2: ( ruleObject2 )
             {
-            // InternalBug304681TestLanguage.g:5027:2: ( ruleObject2 )
-            // InternalBug304681TestLanguage.g:5028:3: ruleObject2
+            // InternalBug304681TestLanguage.g:5032:2: ( ruleObject2 )
+            // InternalBug304681TestLanguage.g:5033:3: ruleObject2
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getContentsObject2ParserRuleCall_4_0()); 
@@ -16278,23 +16286,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__EnabledAssignment_0_0"
-    // InternalBug304681TestLanguage.g:5037:1: rule__Object2__EnabledAssignment_0_0 : ( ( 'enabled' ) ) ;
+    // InternalBug304681TestLanguage.g:5042:1: rule__Object2__EnabledAssignment_0_0 : ( ( 'enabled' ) ) ;
     public final void rule__Object2__EnabledAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5041:1: ( ( ( 'enabled' ) ) )
-            // InternalBug304681TestLanguage.g:5042:2: ( ( 'enabled' ) )
+            // InternalBug304681TestLanguage.g:5046:1: ( ( ( 'enabled' ) ) )
+            // InternalBug304681TestLanguage.g:5047:2: ( ( 'enabled' ) )
             {
-            // InternalBug304681TestLanguage.g:5042:2: ( ( 'enabled' ) )
-            // InternalBug304681TestLanguage.g:5043:3: ( 'enabled' )
+            // InternalBug304681TestLanguage.g:5047:2: ( ( 'enabled' ) )
+            // InternalBug304681TestLanguage.g:5048:3: ( 'enabled' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getEnabledEnabledKeyword_0_0_0()); 
             }
-            // InternalBug304681TestLanguage.g:5044:3: ( 'enabled' )
-            // InternalBug304681TestLanguage.g:5045:4: 'enabled'
+            // InternalBug304681TestLanguage.g:5049:3: ( 'enabled' )
+            // InternalBug304681TestLanguage.g:5050:4: 'enabled'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getEnabledEnabledKeyword_0_0_0()); 
@@ -16331,23 +16339,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__AbstractAssignment_0_1"
-    // InternalBug304681TestLanguage.g:5056:1: rule__Object2__AbstractAssignment_0_1 : ( ( 'abstract' ) ) ;
+    // InternalBug304681TestLanguage.g:5061:1: rule__Object2__AbstractAssignment_0_1 : ( ( 'abstract' ) ) ;
     public final void rule__Object2__AbstractAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5060:1: ( ( ( 'abstract' ) ) )
-            // InternalBug304681TestLanguage.g:5061:2: ( ( 'abstract' ) )
+            // InternalBug304681TestLanguage.g:5065:1: ( ( ( 'abstract' ) ) )
+            // InternalBug304681TestLanguage.g:5066:2: ( ( 'abstract' ) )
             {
-            // InternalBug304681TestLanguage.g:5061:2: ( ( 'abstract' ) )
-            // InternalBug304681TestLanguage.g:5062:3: ( 'abstract' )
+            // InternalBug304681TestLanguage.g:5066:2: ( ( 'abstract' ) )
+            // InternalBug304681TestLanguage.g:5067:3: ( 'abstract' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getAbstractAbstractKeyword_0_1_0()); 
             }
-            // InternalBug304681TestLanguage.g:5063:3: ( 'abstract' )
-            // InternalBug304681TestLanguage.g:5064:4: 'abstract'
+            // InternalBug304681TestLanguage.g:5068:3: ( 'abstract' )
+            // InternalBug304681TestLanguage.g:5069:4: 'abstract'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getAbstractAbstractKeyword_0_1_0()); 
@@ -16384,17 +16392,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__NameAssignment_2"
-    // InternalBug304681TestLanguage.g:5075:1: rule__Object2__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:5080:1: rule__Object2__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Object2__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5079:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5080:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5084:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5085:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:5080:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5081:3: RULE_ID
+            // InternalBug304681TestLanguage.g:5085:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5086:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0()); 
@@ -16425,23 +16433,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__ParentAssignment_3_1"
-    // InternalBug304681TestLanguage.g:5090:1: rule__Object2__ParentAssignment_3_1 : ( ( RULE_ID ) ) ;
+    // InternalBug304681TestLanguage.g:5095:1: rule__Object2__ParentAssignment_3_1 : ( ( RULE_ID ) ) ;
     public final void rule__Object2__ParentAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5094:1: ( ( ( RULE_ID ) ) )
-            // InternalBug304681TestLanguage.g:5095:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5099:1: ( ( ( RULE_ID ) ) )
+            // InternalBug304681TestLanguage.g:5100:2: ( ( RULE_ID ) )
             {
-            // InternalBug304681TestLanguage.g:5095:2: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5096:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5100:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5101:3: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getParentObjectCrossReference_3_1_0()); 
             }
-            // InternalBug304681TestLanguage.g:5097:3: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5098:4: RULE_ID
+            // InternalBug304681TestLanguage.g:5102:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5103:4: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getParentObjectIDTerminalRuleCall_3_1_0_1()); 
@@ -16478,17 +16486,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__ShortDescriptionAssignment_5_0_1"
-    // InternalBug304681TestLanguage.g:5109:1: rule__Object2__ShortDescriptionAssignment_5_0_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5114:1: rule__Object2__ShortDescriptionAssignment_5_0_1 : ( RULE_STRING ) ;
     public final void rule__Object2__ShortDescriptionAssignment_5_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5113:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5114:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5118:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5119:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5114:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5115:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5119:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5120:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0()); 
@@ -16519,17 +16527,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__LongDescriptionAssignment_5_1_1"
-    // InternalBug304681TestLanguage.g:5124:1: rule__Object2__LongDescriptionAssignment_5_1_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5129:1: rule__Object2__LongDescriptionAssignment_5_1_1 : ( RULE_STRING ) ;
     public final void rule__Object2__LongDescriptionAssignment_5_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5128:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5129:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5133:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5134:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5129:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5130:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5134:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5135:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0()); 
@@ -16560,17 +16568,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__SerialVersionUIDAssignment_5_2_1"
-    // InternalBug304681TestLanguage.g:5139:1: rule__Object2__SerialVersionUIDAssignment_5_2_1 : ( RULE_INT ) ;
+    // InternalBug304681TestLanguage.g:5144:1: rule__Object2__SerialVersionUIDAssignment_5_2_1 : ( RULE_INT ) ;
     public final void rule__Object2__SerialVersionUIDAssignment_5_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5143:1: ( ( RULE_INT ) )
-            // InternalBug304681TestLanguage.g:5144:2: ( RULE_INT )
+            // InternalBug304681TestLanguage.g:5148:1: ( ( RULE_INT ) )
+            // InternalBug304681TestLanguage.g:5149:2: ( RULE_INT )
             {
-            // InternalBug304681TestLanguage.g:5144:2: ( RULE_INT )
-            // InternalBug304681TestLanguage.g:5145:3: RULE_INT
+            // InternalBug304681TestLanguage.g:5149:2: ( RULE_INT )
+            // InternalBug304681TestLanguage.g:5150:3: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0()); 
@@ -16601,23 +16609,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__CloneableAssignment_5_3_0"
-    // InternalBug304681TestLanguage.g:5154:1: rule__Object2__CloneableAssignment_5_3_0 : ( ( 'cloneable' ) ) ;
+    // InternalBug304681TestLanguage.g:5159:1: rule__Object2__CloneableAssignment_5_3_0 : ( ( 'cloneable' ) ) ;
     public final void rule__Object2__CloneableAssignment_5_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5158:1: ( ( ( 'cloneable' ) ) )
-            // InternalBug304681TestLanguage.g:5159:2: ( ( 'cloneable' ) )
+            // InternalBug304681TestLanguage.g:5163:1: ( ( ( 'cloneable' ) ) )
+            // InternalBug304681TestLanguage.g:5164:2: ( ( 'cloneable' ) )
             {
-            // InternalBug304681TestLanguage.g:5159:2: ( ( 'cloneable' ) )
-            // InternalBug304681TestLanguage.g:5160:3: ( 'cloneable' )
+            // InternalBug304681TestLanguage.g:5164:2: ( ( 'cloneable' ) )
+            // InternalBug304681TestLanguage.g:5165:3: ( 'cloneable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getCloneableCloneableKeyword_5_3_0_0()); 
             }
-            // InternalBug304681TestLanguage.g:5161:3: ( 'cloneable' )
-            // InternalBug304681TestLanguage.g:5162:4: 'cloneable'
+            // InternalBug304681TestLanguage.g:5166:3: ( 'cloneable' )
+            // InternalBug304681TestLanguage.g:5167:4: 'cloneable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getCloneableCloneableKeyword_5_3_0_0()); 
@@ -16654,17 +16662,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__FeaturesAssignment_5_4"
-    // InternalBug304681TestLanguage.g:5173:1: rule__Object2__FeaturesAssignment_5_4 : ( ruleFeature2 ) ;
+    // InternalBug304681TestLanguage.g:5178:1: rule__Object2__FeaturesAssignment_5_4 : ( ruleFeature2 ) ;
     public final void rule__Object2__FeaturesAssignment_5_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5177:1: ( ( ruleFeature2 ) )
-            // InternalBug304681TestLanguage.g:5178:2: ( ruleFeature2 )
+            // InternalBug304681TestLanguage.g:5182:1: ( ( ruleFeature2 ) )
+            // InternalBug304681TestLanguage.g:5183:2: ( ruleFeature2 )
             {
-            // InternalBug304681TestLanguage.g:5178:2: ( ruleFeature2 )
-            // InternalBug304681TestLanguage.g:5179:3: ruleFeature2
+            // InternalBug304681TestLanguage.g:5183:2: ( ruleFeature2 )
+            // InternalBug304681TestLanguage.g:5184:3: ruleFeature2
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getFeaturesFeature2ParserRuleCall_5_4_0()); 
@@ -16699,17 +16707,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__TypeAssignment_1"
-    // InternalBug304681TestLanguage.g:5188:1: rule__Attribute2__TypeAssignment_1 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:5193:1: rule__Attribute2__TypeAssignment_1 : ( RULE_ID ) ;
     public final void rule__Attribute2__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5192:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5193:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5197:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5198:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:5193:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5194:3: RULE_ID
+            // InternalBug304681TestLanguage.g:5198:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5199:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0()); 
@@ -16740,17 +16748,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__NameAssignment_2"
-    // InternalBug304681TestLanguage.g:5203:1: rule__Attribute2__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:5208:1: rule__Attribute2__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Attribute2__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5207:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5208:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5212:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5213:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:5208:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5209:3: RULE_ID
+            // InternalBug304681TestLanguage.g:5213:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5214:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0()); 
@@ -16781,17 +16789,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1"
-    // InternalBug304681TestLanguage.g:5218:1: rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5223:1: rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1 : ( RULE_STRING ) ;
     public final void rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5222:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5223:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5227:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5228:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5223:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5224:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5228:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5229:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0()); 
@@ -16822,17 +16830,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1"
-    // InternalBug304681TestLanguage.g:5233:1: rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5238:1: rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1 : ( RULE_STRING ) ;
     public final void rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5237:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5238:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5242:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5243:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5238:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5239:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5243:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5244:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0()); 
@@ -16863,17 +16871,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2"
-    // InternalBug304681TestLanguage.g:5248:1: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 : ( ruleConstraintDefinition ) ;
+    // InternalBug304681TestLanguage.g:5253:1: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 : ( ruleConstraintDefinition ) ;
     public final void rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5252:1: ( ( ruleConstraintDefinition ) )
-            // InternalBug304681TestLanguage.g:5253:2: ( ruleConstraintDefinition )
+            // InternalBug304681TestLanguage.g:5257:1: ( ( ruleConstraintDefinition ) )
+            // InternalBug304681TestLanguage.g:5258:2: ( ruleConstraintDefinition )
             {
-            // InternalBug304681TestLanguage.g:5253:2: ( ruleConstraintDefinition )
-            // InternalBug304681TestLanguage.g:5254:3: ruleConstraintDefinition
+            // InternalBug304681TestLanguage.g:5258:2: ( ruleConstraintDefinition )
+            // InternalBug304681TestLanguage.g:5259:3: ruleConstraintDefinition
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getConstraintDefinitionsConstraintDefinitionParserRuleCall_3_0_1_2_0()); 
@@ -16908,23 +16916,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__RequiredAssignment_3_0_1_3_0"
-    // InternalBug304681TestLanguage.g:5263:1: rule__Attribute2__RequiredAssignment_3_0_1_3_0 : ( ( 'required' ) ) ;
+    // InternalBug304681TestLanguage.g:5268:1: rule__Attribute2__RequiredAssignment_3_0_1_3_0 : ( ( 'required' ) ) ;
     public final void rule__Attribute2__RequiredAssignment_3_0_1_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5267:1: ( ( ( 'required' ) ) )
-            // InternalBug304681TestLanguage.g:5268:2: ( ( 'required' ) )
+            // InternalBug304681TestLanguage.g:5272:1: ( ( ( 'required' ) ) )
+            // InternalBug304681TestLanguage.g:5273:2: ( ( 'required' ) )
             {
-            // InternalBug304681TestLanguage.g:5268:2: ( ( 'required' ) )
-            // InternalBug304681TestLanguage.g:5269:3: ( 'required' )
+            // InternalBug304681TestLanguage.g:5273:2: ( ( 'required' ) )
+            // InternalBug304681TestLanguage.g:5274:3: ( 'required' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getRequiredRequiredKeyword_3_0_1_3_0_0()); 
             }
-            // InternalBug304681TestLanguage.g:5270:3: ( 'required' )
-            // InternalBug304681TestLanguage.g:5271:4: 'required'
+            // InternalBug304681TestLanguage.g:5275:3: ( 'required' )
+            // InternalBug304681TestLanguage.g:5276:4: 'required'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getRequiredRequiredKeyword_3_0_1_3_0_0()); 
@@ -16961,23 +16969,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__TechnicalAssignment_3_0_1_4_0"
-    // InternalBug304681TestLanguage.g:5282:1: rule__Attribute2__TechnicalAssignment_3_0_1_4_0 : ( ( 'technical' ) ) ;
+    // InternalBug304681TestLanguage.g:5287:1: rule__Attribute2__TechnicalAssignment_3_0_1_4_0 : ( ( 'technical' ) ) ;
     public final void rule__Attribute2__TechnicalAssignment_3_0_1_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5286:1: ( ( ( 'technical' ) ) )
-            // InternalBug304681TestLanguage.g:5287:2: ( ( 'technical' ) )
+            // InternalBug304681TestLanguage.g:5291:1: ( ( ( 'technical' ) ) )
+            // InternalBug304681TestLanguage.g:5292:2: ( ( 'technical' ) )
             {
-            // InternalBug304681TestLanguage.g:5287:2: ( ( 'technical' ) )
-            // InternalBug304681TestLanguage.g:5288:3: ( 'technical' )
+            // InternalBug304681TestLanguage.g:5292:2: ( ( 'technical' ) )
+            // InternalBug304681TestLanguage.g:5293:3: ( 'technical' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTechnicalTechnicalKeyword_3_0_1_4_0_0()); 
             }
-            // InternalBug304681TestLanguage.g:5289:3: ( 'technical' )
-            // InternalBug304681TestLanguage.g:5290:4: 'technical'
+            // InternalBug304681TestLanguage.g:5294:3: ( 'technical' )
+            // InternalBug304681TestLanguage.g:5295:4: 'technical'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTechnicalTechnicalKeyword_3_0_1_4_0_0()); 
@@ -17014,23 +17022,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__TypeAssignment_1"
-    // InternalBug304681TestLanguage.g:5301:1: rule__Reference2__TypeAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalBug304681TestLanguage.g:5306:1: rule__Reference2__TypeAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__Reference2__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5305:1: ( ( ( RULE_ID ) ) )
-            // InternalBug304681TestLanguage.g:5306:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5310:1: ( ( ( RULE_ID ) ) )
+            // InternalBug304681TestLanguage.g:5311:2: ( ( RULE_ID ) )
             {
-            // InternalBug304681TestLanguage.g:5306:2: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5307:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5311:2: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5312:3: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getTypeObjectCrossReference_1_0()); 
             }
-            // InternalBug304681TestLanguage.g:5308:3: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5309:4: RULE_ID
+            // InternalBug304681TestLanguage.g:5313:3: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5314:4: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getTypeObjectIDTerminalRuleCall_1_0_1()); 
@@ -17067,23 +17075,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__ManyAssignment_2"
-    // InternalBug304681TestLanguage.g:5320:1: rule__Reference2__ManyAssignment_2 : ( ( '*' ) ) ;
+    // InternalBug304681TestLanguage.g:5325:1: rule__Reference2__ManyAssignment_2 : ( ( '*' ) ) ;
     public final void rule__Reference2__ManyAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5324:1: ( ( ( '*' ) ) )
-            // InternalBug304681TestLanguage.g:5325:2: ( ( '*' ) )
+            // InternalBug304681TestLanguage.g:5329:1: ( ( ( '*' ) ) )
+            // InternalBug304681TestLanguage.g:5330:2: ( ( '*' ) )
             {
-            // InternalBug304681TestLanguage.g:5325:2: ( ( '*' ) )
-            // InternalBug304681TestLanguage.g:5326:3: ( '*' )
+            // InternalBug304681TestLanguage.g:5330:2: ( ( '*' ) )
+            // InternalBug304681TestLanguage.g:5331:3: ( '*' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getManyAsteriskKeyword_2_0()); 
             }
-            // InternalBug304681TestLanguage.g:5327:3: ( '*' )
-            // InternalBug304681TestLanguage.g:5328:4: '*'
+            // InternalBug304681TestLanguage.g:5332:3: ( '*' )
+            // InternalBug304681TestLanguage.g:5333:4: '*'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getManyAsteriskKeyword_2_0()); 
@@ -17120,17 +17128,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__NameAssignment_3"
-    // InternalBug304681TestLanguage.g:5339:1: rule__Reference2__NameAssignment_3 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:5344:1: rule__Reference2__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__Reference2__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5343:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5344:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5348:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5349:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:5344:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5345:3: RULE_ID
+            // InternalBug304681TestLanguage.g:5349:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5350:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0()); 
@@ -17161,17 +17169,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1"
-    // InternalBug304681TestLanguage.g:5354:1: rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5359:1: rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1 : ( RULE_STRING ) ;
     public final void rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5358:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5359:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5363:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5364:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5359:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5360:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5364:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5365:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0()); 
@@ -17202,17 +17210,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__LongDescriptionAssignment_4_0_1_1_1"
-    // InternalBug304681TestLanguage.g:5369:1: rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5374:1: rule__Reference2__LongDescriptionAssignment_4_0_1_1_1 : ( RULE_STRING ) ;
     public final void rule__Reference2__LongDescriptionAssignment_4_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5373:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5374:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5378:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5379:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5374:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5375:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5379:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5380:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0()); 
@@ -17243,17 +17251,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__TypeAssignment_1"
-    // InternalBug304681TestLanguage.g:5384:1: rule__ConstraintDefinition__TypeAssignment_1 : ( RULE_ID ) ;
+    // InternalBug304681TestLanguage.g:5389:1: rule__ConstraintDefinition__TypeAssignment_1 : ( RULE_ID ) ;
     public final void rule__ConstraintDefinition__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5388:1: ( ( RULE_ID ) )
-            // InternalBug304681TestLanguage.g:5389:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5393:1: ( ( RULE_ID ) )
+            // InternalBug304681TestLanguage.g:5394:2: ( RULE_ID )
             {
-            // InternalBug304681TestLanguage.g:5389:2: ( RULE_ID )
-            // InternalBug304681TestLanguage.g:5390:3: RULE_ID
+            // InternalBug304681TestLanguage.g:5394:2: ( RULE_ID )
+            // InternalBug304681TestLanguage.g:5395:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0()); 
@@ -17284,17 +17292,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__ParametersAssignment_3_0_1"
-    // InternalBug304681TestLanguage.g:5399:1: rule__ConstraintDefinition__ParametersAssignment_3_0_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5404:1: rule__ConstraintDefinition__ParametersAssignment_3_0_1 : ( RULE_STRING ) ;
     public final void rule__ConstraintDefinition__ParametersAssignment_3_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5403:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5404:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5408:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5409:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5404:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5405:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5409:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5410:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0()); 
@@ -17325,17 +17333,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__ConstraintDefinition__MessageAssignment_3_1_1"
-    // InternalBug304681TestLanguage.g:5414:1: rule__ConstraintDefinition__MessageAssignment_3_1_1 : ( RULE_STRING ) ;
+    // InternalBug304681TestLanguage.g:5419:1: rule__ConstraintDefinition__MessageAssignment_3_1_1 : ( RULE_STRING ) ;
     public final void rule__ConstraintDefinition__MessageAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBug304681TestLanguage.g:5418:1: ( ( RULE_STRING ) )
-            // InternalBug304681TestLanguage.g:5419:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5423:1: ( ( RULE_STRING ) )
+            // InternalBug304681TestLanguage.g:5424:2: ( RULE_STRING )
             {
-            // InternalBug304681TestLanguage.g:5419:2: ( RULE_STRING )
-            // InternalBug304681TestLanguage.g:5420:3: RULE_STRING
+            // InternalBug304681TestLanguage.g:5424:2: ( RULE_STRING )
+            // InternalBug304681TestLanguage.g:5425:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0()); 
@@ -17366,8 +17374,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred13_InternalBug304681TestLanguage
     public final void synpred13_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:1430:3: ( rule__Object__FeaturesAssignment_5_6_1 )
-        // InternalBug304681TestLanguage.g:1430:3: rule__Object__FeaturesAssignment_5_6_1
+        // InternalBug304681TestLanguage.g:1435:3: ( rule__Object__FeaturesAssignment_5_6_1 )
+        // InternalBug304681TestLanguage.g:1435:3: rule__Object__FeaturesAssignment_5_6_1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__FeaturesAssignment_5_6_1();
@@ -17381,8 +17389,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred14_InternalBug304681TestLanguage
     public final void synpred14_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:1490:4: ( rule__Object__FeaturesAssignment_5_7_1 )
-        // InternalBug304681TestLanguage.g:1490:4: rule__Object__FeaturesAssignment_5_7_1
+        // InternalBug304681TestLanguage.g:1495:4: ( rule__Object__FeaturesAssignment_5_7_1 )
+        // InternalBug304681TestLanguage.g:1495:4: rule__Object__FeaturesAssignment_5_7_1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__FeaturesAssignment_5_7_1();
@@ -17396,8 +17404,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred21_InternalBug304681TestLanguage
     public final void synpred21_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3801:2: ( rule__Object__UnorderedGroup_5__0 )
-        // InternalBug304681TestLanguage.g:3801:2: rule__Object__UnorderedGroup_5__0
+        // InternalBug304681TestLanguage.g:3806:2: ( rule__Object__UnorderedGroup_5__0 )
+        // InternalBug304681TestLanguage.g:3806:2: rule__Object__UnorderedGroup_5__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__0();
@@ -17411,28 +17419,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred22_InternalBug304681TestLanguage
     public final void synpred22_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3816:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3816:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3821:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3821:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3816:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:3817:4: {...}? => ( ( ( rule__Object__Group_5_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:3821:3: ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3822:4: {...}? => ( ( ( rule__Object__Group_5_0__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred22_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)");
         }
-        // InternalBug304681TestLanguage.g:3817:102: ( ( ( rule__Object__Group_5_0__0 ) ) )
-        // InternalBug304681TestLanguage.g:3818:5: ( ( rule__Object__Group_5_0__0 ) )
+        // InternalBug304681TestLanguage.g:3822:102: ( ( ( rule__Object__Group_5_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:3823:5: ( ( rule__Object__Group_5_0__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0);
-        // InternalBug304681TestLanguage.g:3824:5: ( ( rule__Object__Group_5_0__0 ) )
-        // InternalBug304681TestLanguage.g:3825:6: ( rule__Object__Group_5_0__0 )
+        // InternalBug304681TestLanguage.g:3829:5: ( ( rule__Object__Group_5_0__0 ) )
+        // InternalBug304681TestLanguage.g:3830:6: ( rule__Object__Group_5_0__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getGroup_5_0()); 
         }
-        // InternalBug304681TestLanguage.g:3826:6: ( rule__Object__Group_5_0__0 )
-        // InternalBug304681TestLanguage.g:3826:7: rule__Object__Group_5_0__0
+        // InternalBug304681TestLanguage.g:3831:6: ( rule__Object__Group_5_0__0 )
+        // InternalBug304681TestLanguage.g:3831:7: rule__Object__Group_5_0__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__Group_5_0__0();
@@ -17458,28 +17466,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred23_InternalBug304681TestLanguage
     public final void synpred23_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3831:3: ( ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3831:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3836:3: ( ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3836:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3831:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:3832:4: {...}? => ( ( ( rule__Object__Group_5_1__0 ) ) )
+        // InternalBug304681TestLanguage.g:3836:3: ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3837:4: {...}? => ( ( ( rule__Object__Group_5_1__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred23_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)");
         }
-        // InternalBug304681TestLanguage.g:3832:102: ( ( ( rule__Object__Group_5_1__0 ) ) )
-        // InternalBug304681TestLanguage.g:3833:5: ( ( rule__Object__Group_5_1__0 ) )
+        // InternalBug304681TestLanguage.g:3837:102: ( ( ( rule__Object__Group_5_1__0 ) ) )
+        // InternalBug304681TestLanguage.g:3838:5: ( ( rule__Object__Group_5_1__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1);
-        // InternalBug304681TestLanguage.g:3839:5: ( ( rule__Object__Group_5_1__0 ) )
-        // InternalBug304681TestLanguage.g:3840:6: ( rule__Object__Group_5_1__0 )
+        // InternalBug304681TestLanguage.g:3844:5: ( ( rule__Object__Group_5_1__0 ) )
+        // InternalBug304681TestLanguage.g:3845:6: ( rule__Object__Group_5_1__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getGroup_5_1()); 
         }
-        // InternalBug304681TestLanguage.g:3841:6: ( rule__Object__Group_5_1__0 )
-        // InternalBug304681TestLanguage.g:3841:7: rule__Object__Group_5_1__0
+        // InternalBug304681TestLanguage.g:3846:6: ( rule__Object__Group_5_1__0 )
+        // InternalBug304681TestLanguage.g:3846:7: rule__Object__Group_5_1__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__Group_5_1__0();
@@ -17505,28 +17513,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred24_InternalBug304681TestLanguage
     public final void synpred24_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3846:3: ( ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3846:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3851:3: ( ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3851:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3846:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:3847:4: {...}? => ( ( ( rule__Object__Group_5_2__0 ) ) )
+        // InternalBug304681TestLanguage.g:3851:3: ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3852:4: {...}? => ( ( ( rule__Object__Group_5_2__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred24_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)");
         }
-        // InternalBug304681TestLanguage.g:3847:102: ( ( ( rule__Object__Group_5_2__0 ) ) )
-        // InternalBug304681TestLanguage.g:3848:5: ( ( rule__Object__Group_5_2__0 ) )
+        // InternalBug304681TestLanguage.g:3852:102: ( ( ( rule__Object__Group_5_2__0 ) ) )
+        // InternalBug304681TestLanguage.g:3853:5: ( ( rule__Object__Group_5_2__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2);
-        // InternalBug304681TestLanguage.g:3854:5: ( ( rule__Object__Group_5_2__0 ) )
-        // InternalBug304681TestLanguage.g:3855:6: ( rule__Object__Group_5_2__0 )
+        // InternalBug304681TestLanguage.g:3859:5: ( ( rule__Object__Group_5_2__0 ) )
+        // InternalBug304681TestLanguage.g:3860:6: ( rule__Object__Group_5_2__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getGroup_5_2()); 
         }
-        // InternalBug304681TestLanguage.g:3856:6: ( rule__Object__Group_5_2__0 )
-        // InternalBug304681TestLanguage.g:3856:7: rule__Object__Group_5_2__0
+        // InternalBug304681TestLanguage.g:3861:6: ( rule__Object__Group_5_2__0 )
+        // InternalBug304681TestLanguage.g:3861:7: rule__Object__Group_5_2__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__Group_5_2__0();
@@ -17552,28 +17560,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred25_InternalBug304681TestLanguage
     public final void synpred25_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3861:3: ( ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3861:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3866:3: ( ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3866:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3861:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:3862:4: {...}? => ( ( ( rule__Object__Group_5_3__0 ) ) )
+        // InternalBug304681TestLanguage.g:3866:3: ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3867:4: {...}? => ( ( ( rule__Object__Group_5_3__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred25_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)");
         }
-        // InternalBug304681TestLanguage.g:3862:102: ( ( ( rule__Object__Group_5_3__0 ) ) )
-        // InternalBug304681TestLanguage.g:3863:5: ( ( rule__Object__Group_5_3__0 ) )
+        // InternalBug304681TestLanguage.g:3867:102: ( ( ( rule__Object__Group_5_3__0 ) ) )
+        // InternalBug304681TestLanguage.g:3868:5: ( ( rule__Object__Group_5_3__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3);
-        // InternalBug304681TestLanguage.g:3869:5: ( ( rule__Object__Group_5_3__0 ) )
-        // InternalBug304681TestLanguage.g:3870:6: ( rule__Object__Group_5_3__0 )
+        // InternalBug304681TestLanguage.g:3874:5: ( ( rule__Object__Group_5_3__0 ) )
+        // InternalBug304681TestLanguage.g:3875:6: ( rule__Object__Group_5_3__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getGroup_5_3()); 
         }
-        // InternalBug304681TestLanguage.g:3871:6: ( rule__Object__Group_5_3__0 )
-        // InternalBug304681TestLanguage.g:3871:7: rule__Object__Group_5_3__0
+        // InternalBug304681TestLanguage.g:3876:6: ( rule__Object__Group_5_3__0 )
+        // InternalBug304681TestLanguage.g:3876:7: rule__Object__Group_5_3__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__Group_5_3__0();
@@ -17599,8 +17607,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred26_InternalBug304681TestLanguage
     public final void synpred26_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3892:8: ( rule__Object__FeaturesAssignment_5_4 )
-        // InternalBug304681TestLanguage.g:3892:9: rule__Object__FeaturesAssignment_5_4
+        // InternalBug304681TestLanguage.g:3897:8: ( rule__Object__FeaturesAssignment_5_4 )
+        // InternalBug304681TestLanguage.g:3897:9: rule__Object__FeaturesAssignment_5_4
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__FeaturesAssignment_5_4();
@@ -17614,31 +17622,31 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred27_InternalBug304681TestLanguage
     public final void synpred27_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3876:3: ( ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3876:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+        // InternalBug304681TestLanguage.g:3881:3: ( ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3881:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3876:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
-        // InternalBug304681TestLanguage.g:3877:4: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
+        // InternalBug304681TestLanguage.g:3881:3: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+        // InternalBug304681TestLanguage.g:3882:4: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred27_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
         }
-        // InternalBug304681TestLanguage.g:3877:102: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
-        // InternalBug304681TestLanguage.g:3878:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
+        // InternalBug304681TestLanguage.g:3882:102: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
+        // InternalBug304681TestLanguage.g:3883:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
-        // InternalBug304681TestLanguage.g:3884:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
-        // InternalBug304681TestLanguage.g:3885:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
+        // InternalBug304681TestLanguage.g:3889:5: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
+        // InternalBug304681TestLanguage.g:3890:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
         {
-        // InternalBug304681TestLanguage.g:3885:6: ( ( rule__Object__FeaturesAssignment_5_4 ) )
-        // InternalBug304681TestLanguage.g:3886:7: ( rule__Object__FeaturesAssignment_5_4 )
+        // InternalBug304681TestLanguage.g:3890:6: ( ( rule__Object__FeaturesAssignment_5_4 ) )
+        // InternalBug304681TestLanguage.g:3891:7: ( rule__Object__FeaturesAssignment_5_4 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); 
         }
-        // InternalBug304681TestLanguage.g:3887:7: ( rule__Object__FeaturesAssignment_5_4 )
-        // InternalBug304681TestLanguage.g:3887:8: rule__Object__FeaturesAssignment_5_4
+        // InternalBug304681TestLanguage.g:3892:7: ( rule__Object__FeaturesAssignment_5_4 )
+        // InternalBug304681TestLanguage.g:3892:8: rule__Object__FeaturesAssignment_5_4
         {
         pushFollow(FollowSets000.FOLLOW_14);
         rule__Object__FeaturesAssignment_5_4();
@@ -17651,13 +17659,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
         }
 
-        // InternalBug304681TestLanguage.g:3890:6: ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
-        // InternalBug304681TestLanguage.g:3891:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
+        // InternalBug304681TestLanguage.g:3895:6: ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
+        // InternalBug304681TestLanguage.g:3896:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); 
         }
-        // InternalBug304681TestLanguage.g:3892:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
+        // InternalBug304681TestLanguage.g:3897:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
         loop53:
         do {
             int alt53=2;
@@ -17673,7 +17681,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
             switch (alt53) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:3892:8: ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4
+        	    // InternalBug304681TestLanguage.g:3897:8: ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4
         	    {
         	    pushFollow(FollowSets000.FOLLOW_14);
         	    rule__Object__FeaturesAssignment_5_4();
@@ -17708,28 +17716,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred28_InternalBug304681TestLanguage
     public final void synpred28_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3898:3: ( ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3898:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3903:3: ( ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3903:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3898:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:3899:4: {...}? => ( ( ( rule__Object__Group_5_5__0 ) ) )
+        // InternalBug304681TestLanguage.g:3903:3: ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3904:4: {...}? => ( ( ( rule__Object__Group_5_5__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred28_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)");
         }
-        // InternalBug304681TestLanguage.g:3899:102: ( ( ( rule__Object__Group_5_5__0 ) ) )
-        // InternalBug304681TestLanguage.g:3900:5: ( ( rule__Object__Group_5_5__0 ) )
+        // InternalBug304681TestLanguage.g:3904:102: ( ( ( rule__Object__Group_5_5__0 ) ) )
+        // InternalBug304681TestLanguage.g:3905:5: ( ( rule__Object__Group_5_5__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5);
-        // InternalBug304681TestLanguage.g:3906:5: ( ( rule__Object__Group_5_5__0 ) )
-        // InternalBug304681TestLanguage.g:3907:6: ( rule__Object__Group_5_5__0 )
+        // InternalBug304681TestLanguage.g:3911:5: ( ( rule__Object__Group_5_5__0 ) )
+        // InternalBug304681TestLanguage.g:3912:6: ( rule__Object__Group_5_5__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getGroup_5_5()); 
         }
-        // InternalBug304681TestLanguage.g:3908:6: ( rule__Object__Group_5_5__0 )
-        // InternalBug304681TestLanguage.g:3908:7: rule__Object__Group_5_5__0
+        // InternalBug304681TestLanguage.g:3913:6: ( rule__Object__Group_5_5__0 )
+        // InternalBug304681TestLanguage.g:3913:7: rule__Object__Group_5_5__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__Group_5_5__0();
@@ -17755,28 +17763,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred29_InternalBug304681TestLanguage
     public final void synpred29_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3913:3: ( ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:3913:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3918:3: ( ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:3918:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:3913:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:3914:4: {...}? => ( ( ( rule__Object__Group_5_6__0 ) ) )
+        // InternalBug304681TestLanguage.g:3918:3: ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:3919:4: {...}? => ( ( ( rule__Object__Group_5_6__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred29_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)");
         }
-        // InternalBug304681TestLanguage.g:3914:102: ( ( ( rule__Object__Group_5_6__0 ) ) )
-        // InternalBug304681TestLanguage.g:3915:5: ( ( rule__Object__Group_5_6__0 ) )
+        // InternalBug304681TestLanguage.g:3919:102: ( ( ( rule__Object__Group_5_6__0 ) ) )
+        // InternalBug304681TestLanguage.g:3920:5: ( ( rule__Object__Group_5_6__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6);
-        // InternalBug304681TestLanguage.g:3921:5: ( ( rule__Object__Group_5_6__0 ) )
-        // InternalBug304681TestLanguage.g:3922:6: ( rule__Object__Group_5_6__0 )
+        // InternalBug304681TestLanguage.g:3926:5: ( ( rule__Object__Group_5_6__0 ) )
+        // InternalBug304681TestLanguage.g:3927:6: ( rule__Object__Group_5_6__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getGroup_5_6()); 
         }
-        // InternalBug304681TestLanguage.g:3923:6: ( rule__Object__Group_5_6__0 )
-        // InternalBug304681TestLanguage.g:3923:7: rule__Object__Group_5_6__0
+        // InternalBug304681TestLanguage.g:3928:6: ( rule__Object__Group_5_6__0 )
+        // InternalBug304681TestLanguage.g:3928:7: rule__Object__Group_5_6__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__Group_5_6__0();
@@ -17802,8 +17810,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred30_InternalBug304681TestLanguage
     public final void synpred30_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3957:2: ( rule__Object__UnorderedGroup_5__1 )
-        // InternalBug304681TestLanguage.g:3957:2: rule__Object__UnorderedGroup_5__1
+        // InternalBug304681TestLanguage.g:3962:2: ( rule__Object__UnorderedGroup_5__1 )
+        // InternalBug304681TestLanguage.g:3962:2: rule__Object__UnorderedGroup_5__1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__1();
@@ -17817,8 +17825,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred31_InternalBug304681TestLanguage
     public final void synpred31_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3969:2: ( rule__Object__UnorderedGroup_5__2 )
-        // InternalBug304681TestLanguage.g:3969:2: rule__Object__UnorderedGroup_5__2
+        // InternalBug304681TestLanguage.g:3974:2: ( rule__Object__UnorderedGroup_5__2 )
+        // InternalBug304681TestLanguage.g:3974:2: rule__Object__UnorderedGroup_5__2
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__2();
@@ -17832,8 +17840,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred32_InternalBug304681TestLanguage
     public final void synpred32_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3981:2: ( rule__Object__UnorderedGroup_5__3 )
-        // InternalBug304681TestLanguage.g:3981:2: rule__Object__UnorderedGroup_5__3
+        // InternalBug304681TestLanguage.g:3986:2: ( rule__Object__UnorderedGroup_5__3 )
+        // InternalBug304681TestLanguage.g:3986:2: rule__Object__UnorderedGroup_5__3
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__3();
@@ -17847,8 +17855,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred33_InternalBug304681TestLanguage
     public final void synpred33_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:3993:2: ( rule__Object__UnorderedGroup_5__4 )
-        // InternalBug304681TestLanguage.g:3993:2: rule__Object__UnorderedGroup_5__4
+        // InternalBug304681TestLanguage.g:3998:2: ( rule__Object__UnorderedGroup_5__4 )
+        // InternalBug304681TestLanguage.g:3998:2: rule__Object__UnorderedGroup_5__4
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__4();
@@ -17862,8 +17870,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred34_InternalBug304681TestLanguage
     public final void synpred34_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4005:2: ( rule__Object__UnorderedGroup_5__5 )
-        // InternalBug304681TestLanguage.g:4005:2: rule__Object__UnorderedGroup_5__5
+        // InternalBug304681TestLanguage.g:4010:2: ( rule__Object__UnorderedGroup_5__5 )
+        // InternalBug304681TestLanguage.g:4010:2: rule__Object__UnorderedGroup_5__5
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__5();
@@ -17877,8 +17885,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred35_InternalBug304681TestLanguage
     public final void synpred35_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4017:2: ( rule__Object__UnorderedGroup_5__6 )
-        // InternalBug304681TestLanguage.g:4017:2: rule__Object__UnorderedGroup_5__6
+        // InternalBug304681TestLanguage.g:4022:2: ( rule__Object__UnorderedGroup_5__6 )
+        // InternalBug304681TestLanguage.g:4022:2: rule__Object__UnorderedGroup_5__6
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__6();
@@ -17892,8 +17900,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred36_InternalBug304681TestLanguage
     public final void synpred36_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4029:2: ( rule__Object__UnorderedGroup_5__7 )
-        // InternalBug304681TestLanguage.g:4029:2: rule__Object__UnorderedGroup_5__7
+        // InternalBug304681TestLanguage.g:4034:2: ( rule__Object__UnorderedGroup_5__7 )
+        // InternalBug304681TestLanguage.g:4034:2: rule__Object__UnorderedGroup_5__7
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object__UnorderedGroup_5__7();
@@ -17907,8 +17915,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred37_InternalBug304681TestLanguage
     public final void synpred37_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4053:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )
-        // InternalBug304681TestLanguage.g:4053:2: rule__Reference__UnorderedGroup_4_0_1__0
+        // InternalBug304681TestLanguage.g:4058:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )
+        // InternalBug304681TestLanguage.g:4058:2: rule__Reference__UnorderedGroup_4_0_1__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Reference__UnorderedGroup_4_0_1__0();
@@ -17922,28 +17930,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred38_InternalBug304681TestLanguage
     public final void synpred38_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4068:3: ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4068:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4073:3: ( ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4073:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4068:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4069:4: {...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4073:3: ({...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4074:4: {...}? => ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred38_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)");
         }
-        // InternalBug304681TestLanguage.g:4069:109: ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
-        // InternalBug304681TestLanguage.g:4070:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
+        // InternalBug304681TestLanguage.g:4074:109: ( ( ( rule__Reference__Group_4_0_1_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4075:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0);
-        // InternalBug304681TestLanguage.g:4076:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
-        // InternalBug304681TestLanguage.g:4077:6: ( rule__Reference__Group_4_0_1_0__0 )
+        // InternalBug304681TestLanguage.g:4081:5: ( ( rule__Reference__Group_4_0_1_0__0 ) )
+        // InternalBug304681TestLanguage.g:4082:6: ( rule__Reference__Group_4_0_1_0__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getReferenceAccess().getGroup_4_0_1_0()); 
         }
-        // InternalBug304681TestLanguage.g:4078:6: ( rule__Reference__Group_4_0_1_0__0 )
-        // InternalBug304681TestLanguage.g:4078:7: rule__Reference__Group_4_0_1_0__0
+        // InternalBug304681TestLanguage.g:4083:6: ( rule__Reference__Group_4_0_1_0__0 )
+        // InternalBug304681TestLanguage.g:4083:7: rule__Reference__Group_4_0_1_0__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Reference__Group_4_0_1_0__0();
@@ -17969,8 +17977,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred39_InternalBug304681TestLanguage
     public final void synpred39_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4112:2: ( rule__Reference__UnorderedGroup_4_0_1__1 )
-        // InternalBug304681TestLanguage.g:4112:2: rule__Reference__UnorderedGroup_4_0_1__1
+        // InternalBug304681TestLanguage.g:4117:2: ( rule__Reference__UnorderedGroup_4_0_1__1 )
+        // InternalBug304681TestLanguage.g:4117:2: rule__Reference__UnorderedGroup_4_0_1__1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Reference__UnorderedGroup_4_0_1__1();
@@ -17984,8 +17992,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred40_InternalBug304681TestLanguage
     public final void synpred40_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4136:2: ( rule__Object2__UnorderedGroup_5__0 )
-        // InternalBug304681TestLanguage.g:4136:2: rule__Object2__UnorderedGroup_5__0
+        // InternalBug304681TestLanguage.g:4141:2: ( rule__Object2__UnorderedGroup_5__0 )
+        // InternalBug304681TestLanguage.g:4141:2: rule__Object2__UnorderedGroup_5__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__UnorderedGroup_5__0();
@@ -17999,28 +18007,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred41_InternalBug304681TestLanguage
     public final void synpred41_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4151:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4151:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4156:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4156:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4151:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4152:4: {...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4156:3: ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4157:4: {...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred41_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0)");
         }
-        // InternalBug304681TestLanguage.g:4152:103: ( ( ( rule__Object2__Group_5_0__0 ) ) )
-        // InternalBug304681TestLanguage.g:4153:5: ( ( rule__Object2__Group_5_0__0 ) )
+        // InternalBug304681TestLanguage.g:4157:103: ( ( ( rule__Object2__Group_5_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4158:5: ( ( rule__Object2__Group_5_0__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0);
-        // InternalBug304681TestLanguage.g:4159:5: ( ( rule__Object2__Group_5_0__0 ) )
-        // InternalBug304681TestLanguage.g:4160:6: ( rule__Object2__Group_5_0__0 )
+        // InternalBug304681TestLanguage.g:4164:5: ( ( rule__Object2__Group_5_0__0 ) )
+        // InternalBug304681TestLanguage.g:4165:6: ( rule__Object2__Group_5_0__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObject2Access().getGroup_5_0()); 
         }
-        // InternalBug304681TestLanguage.g:4161:6: ( rule__Object2__Group_5_0__0 )
-        // InternalBug304681TestLanguage.g:4161:7: rule__Object2__Group_5_0__0
+        // InternalBug304681TestLanguage.g:4166:6: ( rule__Object2__Group_5_0__0 )
+        // InternalBug304681TestLanguage.g:4166:7: rule__Object2__Group_5_0__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__Group_5_0__0();
@@ -18046,28 +18054,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred42_InternalBug304681TestLanguage
     public final void synpred42_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4166:3: ( ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4166:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4171:3: ( ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4171:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4166:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4167:4: {...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) )
+        // InternalBug304681TestLanguage.g:4171:3: ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4172:4: {...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred42_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1)");
         }
-        // InternalBug304681TestLanguage.g:4167:103: ( ( ( rule__Object2__Group_5_1__0 ) ) )
-        // InternalBug304681TestLanguage.g:4168:5: ( ( rule__Object2__Group_5_1__0 ) )
+        // InternalBug304681TestLanguage.g:4172:103: ( ( ( rule__Object2__Group_5_1__0 ) ) )
+        // InternalBug304681TestLanguage.g:4173:5: ( ( rule__Object2__Group_5_1__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1);
-        // InternalBug304681TestLanguage.g:4174:5: ( ( rule__Object2__Group_5_1__0 ) )
-        // InternalBug304681TestLanguage.g:4175:6: ( rule__Object2__Group_5_1__0 )
+        // InternalBug304681TestLanguage.g:4179:5: ( ( rule__Object2__Group_5_1__0 ) )
+        // InternalBug304681TestLanguage.g:4180:6: ( rule__Object2__Group_5_1__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObject2Access().getGroup_5_1()); 
         }
-        // InternalBug304681TestLanguage.g:4176:6: ( rule__Object2__Group_5_1__0 )
-        // InternalBug304681TestLanguage.g:4176:7: rule__Object2__Group_5_1__0
+        // InternalBug304681TestLanguage.g:4181:6: ( rule__Object2__Group_5_1__0 )
+        // InternalBug304681TestLanguage.g:4181:7: rule__Object2__Group_5_1__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__Group_5_1__0();
@@ -18093,28 +18101,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred43_InternalBug304681TestLanguage
     public final void synpred43_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4181:3: ( ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4181:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4186:3: ( ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4186:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4181:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4182:4: {...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) )
+        // InternalBug304681TestLanguage.g:4186:3: ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4187:4: {...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred43_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2)");
         }
-        // InternalBug304681TestLanguage.g:4182:103: ( ( ( rule__Object2__Group_5_2__0 ) ) )
-        // InternalBug304681TestLanguage.g:4183:5: ( ( rule__Object2__Group_5_2__0 ) )
+        // InternalBug304681TestLanguage.g:4187:103: ( ( ( rule__Object2__Group_5_2__0 ) ) )
+        // InternalBug304681TestLanguage.g:4188:5: ( ( rule__Object2__Group_5_2__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2);
-        // InternalBug304681TestLanguage.g:4189:5: ( ( rule__Object2__Group_5_2__0 ) )
-        // InternalBug304681TestLanguage.g:4190:6: ( rule__Object2__Group_5_2__0 )
+        // InternalBug304681TestLanguage.g:4194:5: ( ( rule__Object2__Group_5_2__0 ) )
+        // InternalBug304681TestLanguage.g:4195:6: ( rule__Object2__Group_5_2__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObject2Access().getGroup_5_2()); 
         }
-        // InternalBug304681TestLanguage.g:4191:6: ( rule__Object2__Group_5_2__0 )
-        // InternalBug304681TestLanguage.g:4191:7: rule__Object2__Group_5_2__0
+        // InternalBug304681TestLanguage.g:4196:6: ( rule__Object2__Group_5_2__0 )
+        // InternalBug304681TestLanguage.g:4196:7: rule__Object2__Group_5_2__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__Group_5_2__0();
@@ -18140,28 +18148,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred44_InternalBug304681TestLanguage
     public final void synpred44_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4196:3: ( ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4196:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4201:3: ( ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4201:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4196:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4197:4: {...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) )
+        // InternalBug304681TestLanguage.g:4201:3: ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4202:4: {...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred44_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3)");
         }
-        // InternalBug304681TestLanguage.g:4197:103: ( ( ( rule__Object2__Group_5_3__0 ) ) )
-        // InternalBug304681TestLanguage.g:4198:5: ( ( rule__Object2__Group_5_3__0 ) )
+        // InternalBug304681TestLanguage.g:4202:103: ( ( ( rule__Object2__Group_5_3__0 ) ) )
+        // InternalBug304681TestLanguage.g:4203:5: ( ( rule__Object2__Group_5_3__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3);
-        // InternalBug304681TestLanguage.g:4204:5: ( ( rule__Object2__Group_5_3__0 ) )
-        // InternalBug304681TestLanguage.g:4205:6: ( rule__Object2__Group_5_3__0 )
+        // InternalBug304681TestLanguage.g:4209:5: ( ( rule__Object2__Group_5_3__0 ) )
+        // InternalBug304681TestLanguage.g:4210:6: ( rule__Object2__Group_5_3__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObject2Access().getGroup_5_3()); 
         }
-        // InternalBug304681TestLanguage.g:4206:6: ( rule__Object2__Group_5_3__0 )
-        // InternalBug304681TestLanguage.g:4206:7: rule__Object2__Group_5_3__0
+        // InternalBug304681TestLanguage.g:4211:6: ( rule__Object2__Group_5_3__0 )
+        // InternalBug304681TestLanguage.g:4211:7: rule__Object2__Group_5_3__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__Group_5_3__0();
@@ -18187,8 +18195,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred45_InternalBug304681TestLanguage
     public final void synpred45_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4227:8: ( rule__Object2__FeaturesAssignment_5_4 )
-        // InternalBug304681TestLanguage.g:4227:9: rule__Object2__FeaturesAssignment_5_4
+        // InternalBug304681TestLanguage.g:4232:8: ( rule__Object2__FeaturesAssignment_5_4 )
+        // InternalBug304681TestLanguage.g:4232:9: rule__Object2__FeaturesAssignment_5_4
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__FeaturesAssignment_5_4();
@@ -18202,8 +18210,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred46_InternalBug304681TestLanguage
     public final void synpred46_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4247:2: ( rule__Object2__UnorderedGroup_5__1 )
-        // InternalBug304681TestLanguage.g:4247:2: rule__Object2__UnorderedGroup_5__1
+        // InternalBug304681TestLanguage.g:4252:2: ( rule__Object2__UnorderedGroup_5__1 )
+        // InternalBug304681TestLanguage.g:4252:2: rule__Object2__UnorderedGroup_5__1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__UnorderedGroup_5__1();
@@ -18217,8 +18225,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred47_InternalBug304681TestLanguage
     public final void synpred47_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4259:2: ( rule__Object2__UnorderedGroup_5__2 )
-        // InternalBug304681TestLanguage.g:4259:2: rule__Object2__UnorderedGroup_5__2
+        // InternalBug304681TestLanguage.g:4264:2: ( rule__Object2__UnorderedGroup_5__2 )
+        // InternalBug304681TestLanguage.g:4264:2: rule__Object2__UnorderedGroup_5__2
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__UnorderedGroup_5__2();
@@ -18232,8 +18240,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred48_InternalBug304681TestLanguage
     public final void synpred48_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4271:2: ( rule__Object2__UnorderedGroup_5__3 )
-        // InternalBug304681TestLanguage.g:4271:2: rule__Object2__UnorderedGroup_5__3
+        // InternalBug304681TestLanguage.g:4276:2: ( rule__Object2__UnorderedGroup_5__3 )
+        // InternalBug304681TestLanguage.g:4276:2: rule__Object2__UnorderedGroup_5__3
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__UnorderedGroup_5__3();
@@ -18247,8 +18255,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred49_InternalBug304681TestLanguage
     public final void synpred49_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4283:2: ( rule__Object2__UnorderedGroup_5__4 )
-        // InternalBug304681TestLanguage.g:4283:2: rule__Object2__UnorderedGroup_5__4
+        // InternalBug304681TestLanguage.g:4288:2: ( rule__Object2__UnorderedGroup_5__4 )
+        // InternalBug304681TestLanguage.g:4288:2: rule__Object2__UnorderedGroup_5__4
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Object2__UnorderedGroup_5__4();
@@ -18262,8 +18270,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred50_InternalBug304681TestLanguage
     public final void synpred50_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4307:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )
-        // InternalBug304681TestLanguage.g:4307:2: rule__Attribute2__UnorderedGroup_3_0_1__0
+        // InternalBug304681TestLanguage.g:4312:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )
+        // InternalBug304681TestLanguage.g:4312:2: rule__Attribute2__UnorderedGroup_3_0_1__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__UnorderedGroup_3_0_1__0();
@@ -18277,28 +18285,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred51_InternalBug304681TestLanguage
     public final void synpred51_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4322:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4322:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4327:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4327:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4322:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4323:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4327:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4328:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred51_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0)");
         }
-        // InternalBug304681TestLanguage.g:4323:110: ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
-        // InternalBug304681TestLanguage.g:4324:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
+        // InternalBug304681TestLanguage.g:4328:110: ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4329:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0);
-        // InternalBug304681TestLanguage.g:4330:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
-        // InternalBug304681TestLanguage.g:4331:6: ( rule__Attribute2__Group_3_0_1_0__0 )
+        // InternalBug304681TestLanguage.g:4335:5: ( ( rule__Attribute2__Group_3_0_1_0__0 ) )
+        // InternalBug304681TestLanguage.g:4336:6: ( rule__Attribute2__Group_3_0_1_0__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getAttribute2Access().getGroup_3_0_1_0()); 
         }
-        // InternalBug304681TestLanguage.g:4332:6: ( rule__Attribute2__Group_3_0_1_0__0 )
-        // InternalBug304681TestLanguage.g:4332:7: rule__Attribute2__Group_3_0_1_0__0
+        // InternalBug304681TestLanguage.g:4337:6: ( rule__Attribute2__Group_3_0_1_0__0 )
+        // InternalBug304681TestLanguage.g:4337:7: rule__Attribute2__Group_3_0_1_0__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__Group_3_0_1_0__0();
@@ -18324,28 +18332,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred52_InternalBug304681TestLanguage
     public final void synpred52_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4337:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4337:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4342:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4342:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4337:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4338:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
+        // InternalBug304681TestLanguage.g:4342:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4343:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred52_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1)");
         }
-        // InternalBug304681TestLanguage.g:4338:110: ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
-        // InternalBug304681TestLanguage.g:4339:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
+        // InternalBug304681TestLanguage.g:4343:110: ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) )
+        // InternalBug304681TestLanguage.g:4344:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1);
-        // InternalBug304681TestLanguage.g:4345:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
-        // InternalBug304681TestLanguage.g:4346:6: ( rule__Attribute2__Group_3_0_1_1__0 )
+        // InternalBug304681TestLanguage.g:4350:5: ( ( rule__Attribute2__Group_3_0_1_1__0 ) )
+        // InternalBug304681TestLanguage.g:4351:6: ( rule__Attribute2__Group_3_0_1_1__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getAttribute2Access().getGroup_3_0_1_1()); 
         }
-        // InternalBug304681TestLanguage.g:4347:6: ( rule__Attribute2__Group_3_0_1_1__0 )
-        // InternalBug304681TestLanguage.g:4347:7: rule__Attribute2__Group_3_0_1_1__0
+        // InternalBug304681TestLanguage.g:4352:6: ( rule__Attribute2__Group_3_0_1_1__0 )
+        // InternalBug304681TestLanguage.g:4352:7: rule__Attribute2__Group_3_0_1_1__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__Group_3_0_1_1__0();
@@ -18371,8 +18379,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred53_InternalBug304681TestLanguage
     public final void synpred53_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4368:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
-        // InternalBug304681TestLanguage.g:4368:9: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+        // InternalBug304681TestLanguage.g:4373:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
+        // InternalBug304681TestLanguage.g:4373:9: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
@@ -18386,31 +18394,31 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred54_InternalBug304681TestLanguage
     public final void synpred54_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4352:3: ( ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4352:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+        // InternalBug304681TestLanguage.g:4357:3: ( ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4357:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4352:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
-        // InternalBug304681TestLanguage.g:4353:4: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+        // InternalBug304681TestLanguage.g:4357:3: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+        // InternalBug304681TestLanguage.g:4358:4: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred54_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
         }
-        // InternalBug304681TestLanguage.g:4353:110: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
-        // InternalBug304681TestLanguage.g:4354:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+        // InternalBug304681TestLanguage.g:4358:110: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+        // InternalBug304681TestLanguage.g:4359:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2);
-        // InternalBug304681TestLanguage.g:4360:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
-        // InternalBug304681TestLanguage.g:4361:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+        // InternalBug304681TestLanguage.g:4365:5: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+        // InternalBug304681TestLanguage.g:4366:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
         {
-        // InternalBug304681TestLanguage.g:4361:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) )
-        // InternalBug304681TestLanguage.g:4362:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
+        // InternalBug304681TestLanguage.g:4366:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) )
+        // InternalBug304681TestLanguage.g:4367:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); 
         }
-        // InternalBug304681TestLanguage.g:4363:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
-        // InternalBug304681TestLanguage.g:4363:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+        // InternalBug304681TestLanguage.g:4368:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
+        // InternalBug304681TestLanguage.g:4368:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
         {
         pushFollow(FollowSets000.FOLLOW_28);
         rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
@@ -18423,13 +18431,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
         }
 
-        // InternalBug304681TestLanguage.g:4366:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
-        // InternalBug304681TestLanguage.g:4367:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+        // InternalBug304681TestLanguage.g:4371:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+        // InternalBug304681TestLanguage.g:4372:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); 
         }
-        // InternalBug304681TestLanguage.g:4368:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+        // InternalBug304681TestLanguage.g:4373:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
         loop54:
         do {
             int alt54=2;
@@ -18442,7 +18450,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
             switch (alt54) {
         	case 1 :
-        	    // InternalBug304681TestLanguage.g:4368:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+        	    // InternalBug304681TestLanguage.g:4373:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
         	    {
         	    pushFollow(FollowSets000.FOLLOW_28);
         	    rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
@@ -18477,28 +18485,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred55_InternalBug304681TestLanguage
     public final void synpred55_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4374:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4374:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4379:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4379:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4374:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4375:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
+        // InternalBug304681TestLanguage.g:4379:3: ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4380:4: {...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred55_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3)");
         }
-        // InternalBug304681TestLanguage.g:4375:110: ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
-        // InternalBug304681TestLanguage.g:4376:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
+        // InternalBug304681TestLanguage.g:4380:110: ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) )
+        // InternalBug304681TestLanguage.g:4381:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3);
-        // InternalBug304681TestLanguage.g:4382:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
-        // InternalBug304681TestLanguage.g:4383:6: ( rule__Attribute2__Group_3_0_1_3__0 )
+        // InternalBug304681TestLanguage.g:4387:5: ( ( rule__Attribute2__Group_3_0_1_3__0 ) )
+        // InternalBug304681TestLanguage.g:4388:6: ( rule__Attribute2__Group_3_0_1_3__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getAttribute2Access().getGroup_3_0_1_3()); 
         }
-        // InternalBug304681TestLanguage.g:4384:6: ( rule__Attribute2__Group_3_0_1_3__0 )
-        // InternalBug304681TestLanguage.g:4384:7: rule__Attribute2__Group_3_0_1_3__0
+        // InternalBug304681TestLanguage.g:4389:6: ( rule__Attribute2__Group_3_0_1_3__0 )
+        // InternalBug304681TestLanguage.g:4389:7: rule__Attribute2__Group_3_0_1_3__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__Group_3_0_1_3__0();
@@ -18524,8 +18532,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred56_InternalBug304681TestLanguage
     public final void synpred56_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4418:2: ( rule__Attribute2__UnorderedGroup_3_0_1__1 )
-        // InternalBug304681TestLanguage.g:4418:2: rule__Attribute2__UnorderedGroup_3_0_1__1
+        // InternalBug304681TestLanguage.g:4423:2: ( rule__Attribute2__UnorderedGroup_3_0_1__1 )
+        // InternalBug304681TestLanguage.g:4423:2: rule__Attribute2__UnorderedGroup_3_0_1__1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__UnorderedGroup_3_0_1__1();
@@ -18539,8 +18547,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred57_InternalBug304681TestLanguage
     public final void synpred57_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4430:2: ( rule__Attribute2__UnorderedGroup_3_0_1__2 )
-        // InternalBug304681TestLanguage.g:4430:2: rule__Attribute2__UnorderedGroup_3_0_1__2
+        // InternalBug304681TestLanguage.g:4435:2: ( rule__Attribute2__UnorderedGroup_3_0_1__2 )
+        // InternalBug304681TestLanguage.g:4435:2: rule__Attribute2__UnorderedGroup_3_0_1__2
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__UnorderedGroup_3_0_1__2();
@@ -18554,8 +18562,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred58_InternalBug304681TestLanguage
     public final void synpred58_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4442:2: ( rule__Attribute2__UnorderedGroup_3_0_1__3 )
-        // InternalBug304681TestLanguage.g:4442:2: rule__Attribute2__UnorderedGroup_3_0_1__3
+        // InternalBug304681TestLanguage.g:4447:2: ( rule__Attribute2__UnorderedGroup_3_0_1__3 )
+        // InternalBug304681TestLanguage.g:4447:2: rule__Attribute2__UnorderedGroup_3_0_1__3
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__UnorderedGroup_3_0_1__3();
@@ -18569,8 +18577,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred59_InternalBug304681TestLanguage
     public final void synpred59_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4454:2: ( rule__Attribute2__UnorderedGroup_3_0_1__4 )
-        // InternalBug304681TestLanguage.g:4454:2: rule__Attribute2__UnorderedGroup_3_0_1__4
+        // InternalBug304681TestLanguage.g:4459:2: ( rule__Attribute2__UnorderedGroup_3_0_1__4 )
+        // InternalBug304681TestLanguage.g:4459:2: rule__Attribute2__UnorderedGroup_3_0_1__4
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Attribute2__UnorderedGroup_3_0_1__4();
@@ -18584,8 +18592,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred60_InternalBug304681TestLanguage
     public final void synpred60_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4478:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )
-        // InternalBug304681TestLanguage.g:4478:2: rule__Reference2__UnorderedGroup_4_0_1__0
+        // InternalBug304681TestLanguage.g:4483:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )
+        // InternalBug304681TestLanguage.g:4483:2: rule__Reference2__UnorderedGroup_4_0_1__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Reference2__UnorderedGroup_4_0_1__0();
@@ -18599,28 +18607,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred61_InternalBug304681TestLanguage
     public final void synpred61_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4493:3: ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4493:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4498:3: ( ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4498:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4493:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4494:4: {...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4498:3: ({...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4499:4: {...}? => ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred61_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0)");
         }
-        // InternalBug304681TestLanguage.g:4494:110: ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
-        // InternalBug304681TestLanguage.g:4495:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
+        // InternalBug304681TestLanguage.g:4499:110: ( ( ( rule__Reference2__Group_4_0_1_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4500:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0);
-        // InternalBug304681TestLanguage.g:4501:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
-        // InternalBug304681TestLanguage.g:4502:6: ( rule__Reference2__Group_4_0_1_0__0 )
+        // InternalBug304681TestLanguage.g:4506:5: ( ( rule__Reference2__Group_4_0_1_0__0 ) )
+        // InternalBug304681TestLanguage.g:4507:6: ( rule__Reference2__Group_4_0_1_0__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getReference2Access().getGroup_4_0_1_0()); 
         }
-        // InternalBug304681TestLanguage.g:4503:6: ( rule__Reference2__Group_4_0_1_0__0 )
-        // InternalBug304681TestLanguage.g:4503:7: rule__Reference2__Group_4_0_1_0__0
+        // InternalBug304681TestLanguage.g:4508:6: ( rule__Reference2__Group_4_0_1_0__0 )
+        // InternalBug304681TestLanguage.g:4508:7: rule__Reference2__Group_4_0_1_0__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Reference2__Group_4_0_1_0__0();
@@ -18646,8 +18654,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred62_InternalBug304681TestLanguage
     public final void synpred62_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4537:2: ( rule__Reference2__UnorderedGroup_4_0_1__1 )
-        // InternalBug304681TestLanguage.g:4537:2: rule__Reference2__UnorderedGroup_4_0_1__1
+        // InternalBug304681TestLanguage.g:4542:2: ( rule__Reference2__UnorderedGroup_4_0_1__1 )
+        // InternalBug304681TestLanguage.g:4542:2: rule__Reference2__UnorderedGroup_4_0_1__1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__Reference2__UnorderedGroup_4_0_1__1();
@@ -18661,28 +18669,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred63_InternalBug304681TestLanguage
     public final void synpred63_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4576:3: ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) )
-        // InternalBug304681TestLanguage.g:4576:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4581:3: ( ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) ) )
+        // InternalBug304681TestLanguage.g:4581:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
         {
-        // InternalBug304681TestLanguage.g:4576:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
-        // InternalBug304681TestLanguage.g:4577:4: {...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4581:3: ({...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) ) )
+        // InternalBug304681TestLanguage.g:4582:4: {...}? => ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred63_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0)");
         }
-        // InternalBug304681TestLanguage.g:4577:116: ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
-        // InternalBug304681TestLanguage.g:4578:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
+        // InternalBug304681TestLanguage.g:4582:116: ( ( ( rule__ConstraintDefinition__Group_3_0__0 ) ) )
+        // InternalBug304681TestLanguage.g:4583:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0);
-        // InternalBug304681TestLanguage.g:4584:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
-        // InternalBug304681TestLanguage.g:4585:6: ( rule__ConstraintDefinition__Group_3_0__0 )
+        // InternalBug304681TestLanguage.g:4589:5: ( ( rule__ConstraintDefinition__Group_3_0__0 ) )
+        // InternalBug304681TestLanguage.g:4590:6: ( rule__ConstraintDefinition__Group_3_0__0 )
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getConstraintDefinitionAccess().getGroup_3_0()); 
         }
-        // InternalBug304681TestLanguage.g:4586:6: ( rule__ConstraintDefinition__Group_3_0__0 )
-        // InternalBug304681TestLanguage.g:4586:7: rule__ConstraintDefinition__Group_3_0__0
+        // InternalBug304681TestLanguage.g:4591:6: ( rule__ConstraintDefinition__Group_3_0__0 )
+        // InternalBug304681TestLanguage.g:4591:7: rule__ConstraintDefinition__Group_3_0__0
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__ConstraintDefinition__Group_3_0__0();
@@ -18708,8 +18716,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred64_InternalBug304681TestLanguage
     public final void synpred64_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // InternalBug304681TestLanguage.g:4620:2: ( rule__ConstraintDefinition__UnorderedGroup_3__1 )
-        // InternalBug304681TestLanguage.g:4620:2: rule__ConstraintDefinition__UnorderedGroup_3__1
+        // InternalBug304681TestLanguage.g:4625:2: ( rule__ConstraintDefinition__UnorderedGroup_3__1 )
+        // InternalBug304681TestLanguage.g:4625:2: rule__ConstraintDefinition__UnorderedGroup_3__1
         {
         pushFollow(FollowSets000.FOLLOW_2);
         rule__ConstraintDefinition__UnorderedGroup_3__1();
@@ -19440,7 +19448,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "()* loopback of 1430:2: ( rule__Object__FeaturesAssignment_5_6_1 )*";
+            return "()* loopback of 1435:2: ( rule__Object__FeaturesAssignment_5_6_1 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19516,7 +19524,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "()* loopback of 1490:3: ( rule__Object__FeaturesAssignment_5_7_1 )*";
+            return "()* loopback of 1495:3: ( rule__Object__FeaturesAssignment_5_7_1 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19615,7 +19623,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "3801:2: ( rule__Object__UnorderedGroup_5__0 )?";
+            return "3806:2: ( rule__Object__UnorderedGroup_5__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19699,7 +19707,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_20;
         }
         public String getDescription() {
-            return "3815:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )";
+            return "3820:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19757,7 +19765,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "()* loopback of 3892:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*";
+            return "()* loopback of 3897:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19833,7 +19841,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "3957:2: ( rule__Object__UnorderedGroup_5__1 )?";
+            return "3962:2: ( rule__Object__UnorderedGroup_5__1 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19893,7 +19901,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "3969:2: ( rule__Object__UnorderedGroup_5__2 )?";
+            return "3974:2: ( rule__Object__UnorderedGroup_5__2 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19953,7 +19961,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "3981:2: ( rule__Object__UnorderedGroup_5__3 )?";
+            return "3986:2: ( rule__Object__UnorderedGroup_5__3 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20013,7 +20021,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "3993:2: ( rule__Object__UnorderedGroup_5__4 )?";
+            return "3998:2: ( rule__Object__UnorderedGroup_5__4 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20073,7 +20081,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "4005:2: ( rule__Object__UnorderedGroup_5__5 )?";
+            return "4010:2: ( rule__Object__UnorderedGroup_5__5 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20133,7 +20141,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "4017:2: ( rule__Object__UnorderedGroup_5__6 )?";
+            return "4022:2: ( rule__Object__UnorderedGroup_5__6 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20193,7 +20201,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "4029:2: ( rule__Object__UnorderedGroup_5__7 )?";
+            return "4034:2: ( rule__Object__UnorderedGroup_5__7 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20775,7 +20783,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_28;
         }
         public String getDescription() {
-            return "()* loopback of 4227:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*";
+            return "()* loopback of 4232:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20899,7 +20907,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = dfa_35;
         }
         public String getDescription() {
-            return "()* loopback of 4368:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*";
+            return "()* loopback of 4373:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;

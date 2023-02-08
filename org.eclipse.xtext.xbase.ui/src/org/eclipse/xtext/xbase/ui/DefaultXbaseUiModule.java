@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -33,7 +33,6 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
@@ -58,7 +57,6 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
  * @since 2.8
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
 	public DefaultXbaseUiModule(AbstractUIPlugin plugin) {
@@ -83,7 +81,7 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	 * @deprecated clients should use the new org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 	 */
 	@Deprecated
-	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+	public Class<? extends org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return null;
 	}
 	

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -30,7 +30,7 @@ import org.osgi.framework.FrameworkUtil;
  * @author dietrich - Initial contribution and API
  * @deprecated Use org.eclipse.xtext.ui.testing.util.TargetPlatformUtil instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class TargetPlatformUtil {
 	
 	/**

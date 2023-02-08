@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,7 +14,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.testing.InjectWith;
@@ -28,6 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.common.base.Strings;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 
@@ -43,7 +43,7 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 	public TestedWorkspaceWithJDT workspace;
 	
 	@Inject
-	private EclipseResourceFileSystemAccess2 fsa;
+	private EclipseResourceFileSystemAccess2ForTest fsa;
 	
 	private IProject project;
 
@@ -72,6 +72,27 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 		} finally {
 			stream.close();
 		}
+	}
+	
+	@Test
+	public void testHasContentsChanged() throws Exception {
+		fsa.generateFile("tmp/X", "XX");
+		IFolder dir = project.getFolder("src-gen/tmp");
+		assertTrue(dir.exists());
+		IFile file = dir.getFile("X");
+		assertTrue(file.exists());
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream("XY")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream("YX")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream("X")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream("XXX")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream("")));
+		assertFalse(fsa.hasContentsChanged(file, new StringInputStream("XX")));
+		String longContent = Strings.repeat("A", 20000);
+		file.setContents(new StringInputStream(longContent+"XX"), true, false, new NullProgressMonitor());
+		assertFalse(fsa.hasContentsChanged(file, new StringInputStream(longContent+"XX")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream(longContent+"YX")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream(longContent+"X")));
+		assertTrue(fsa.hasContentsChanged(file, new StringInputStream(longContent+"XXX")));
 	}
 
 	@Test

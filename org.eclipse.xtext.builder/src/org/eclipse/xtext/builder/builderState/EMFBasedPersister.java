@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -41,7 +40,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein
  */
-@SuppressWarnings("deprecation")
 public class EMFBasedPersister implements PersistedStateProvider {
 
 	private final static Logger log = Logger.getLogger(EMFBasedPersister.class);
@@ -52,8 +50,8 @@ public class EMFBasedPersister implements PersistedStateProvider {
 	@Inject
 	private IBuilderState builderState;
 
-	@Inject
-	private BuildScheduler buildManager;
+	@Inject @SuppressWarnings("deprecation")
+	private org.eclipse.xtext.builder.impl.BuildScheduler buildManager;
 	
 	private Resource.Factory factory;
 
@@ -245,6 +243,7 @@ public class EMFBasedPersister implements PersistedStateProvider {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void scheduleRecoveryBuild() {
 		Iterable<IProject> projects = Lists.newArrayList(workspace.getRoot().getProjects());
 		buildManager.scheduleBuildIfNecessary(projects, IBuildFlag.RECOVERY_BUILD);

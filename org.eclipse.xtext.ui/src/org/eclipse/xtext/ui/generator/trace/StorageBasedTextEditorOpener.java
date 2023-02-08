@@ -79,7 +79,7 @@ public class StorageBasedTextEditorOpener extends FileOpener {
 	public void open(IWorkbenchPage page) {
 		try {
 			IEditorInput input = EditorUtils.createEditorInput(storage);
-			IEditorDescriptor editorDescriptor = IDE.getEditorDescriptor(storage.getName());
+			IEditorDescriptor editorDescriptor = IDE.getEditorDescriptor(storage.getName(), true, false);
 			IEditorPart opened = IDE.openEditor(page, input, editorDescriptor.getId());
 			if (region != null && opened instanceof ITextEditor) {
 				ITextEditor openedTextEditor = (ITextEditor) opened;

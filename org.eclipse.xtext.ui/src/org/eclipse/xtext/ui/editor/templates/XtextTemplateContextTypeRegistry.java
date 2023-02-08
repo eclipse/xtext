@@ -12,7 +12,7 @@ package org.eclipse.xtext.ui.editor.templates;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
+import org.eclipse.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
@@ -30,7 +30,7 @@ import com.google.inject.Singleton;
  * @author Michael Clay
  */
 @Singleton
-public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
+public class XtextTemplateContextTypeRegistry extends org.eclipse.jface.text.templates.ContextTypeRegistry {
 	
 	private final ContextTypeIdHelper helper;
 
@@ -74,7 +74,7 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 		}
 		Collections.sort(allContextTypes);
 		for (XtextTemplateContextType templateContextType: allContextTypes) {
-			addContextType(templateContextType);
+			((ContextTypeRegistry) this).addContextType(templateContextType);
 		}
 	}
 	

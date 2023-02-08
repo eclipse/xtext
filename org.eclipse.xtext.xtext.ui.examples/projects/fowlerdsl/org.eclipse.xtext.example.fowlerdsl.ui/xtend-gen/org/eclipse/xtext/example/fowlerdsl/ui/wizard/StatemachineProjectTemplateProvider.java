@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider;
 public class StatemachineProjectTemplateProvider implements IProjectTemplateProvider {
   @Inject
   private MrsGrantsSecretCompartmentsProject project;
-  
+
   @Override
   public AbstractProjectTemplate[] getProjectTemplates() {
     return new AbstractProjectTemplate[] { this.project };

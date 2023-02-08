@@ -4,17 +4,16 @@ if [ -z "$JENKINS_URL" ]; then
   JENKINS_URL=https://ci.eclipse.org/xtext/
 fi
 
-# Use TARGET_PLATFORM from environment and 'oxygen' as default.
+# Use TARGET_PLATFORM from environment and 'r202203' as default.
 # Overridable by 'tp' command-line arg
 if [ -z "$TARGET_PLATFORM" ]; then
-  TARGET_PLATFORM=oxygen
+  TARGET_PLATFORM=r202203
 fi
 
 MVN_ARGS=(\
   --batch-mode \
   --update-snapshots \
   --fae \
-  -Dmaven.test.failure.ignore=true \
   -Declipse.p2.mirrors=false \
   -Dtycho.disableP2Mirrors=true \
   -DJENKINS_URL=$JENKINS_URL \
@@ -31,7 +30,7 @@ while [ "$1" != "" ]; do
       echo ""
       echo "./1-maven-build.sh"
       echo -e "\t-h --help"
-      echo -e "\t--tp=$TARGET_PLATFORM (valid values: oxygen,photon,r201809,r201812,latest)"
+      echo -e "\t--tp=$TARGET_PLATFORM (valid values: r202203,r202206,...,latest)"
       echo ""
       exit
       ;;
@@ -42,7 +41,7 @@ while [ "$1" != "" ]; do
       MVN_ARGS+=(-DskipTests=true)
       ;;
     --local-repository)
-      MVN_ARGS+=(-Dmaven.repo.local='$VALUE')
+      MVN_ARGS+=(-Dmaven.repo.local="$VALUE")
       ;;
     *)
       # append any additionally passed arg

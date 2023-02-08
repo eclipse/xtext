@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalReferringTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -72,11 +80,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleMain"
-    // InternalReferringTestLanguage.g:53:1: entryRuleMain : ruleMain EOF ;
+    // InternalReferringTestLanguage.g:58:1: entryRuleMain : ruleMain EOF ;
     public final void entryRuleMain() throws RecognitionException {
         try {
-            // InternalReferringTestLanguage.g:54:1: ( ruleMain EOF )
-            // InternalReferringTestLanguage.g:55:1: ruleMain EOF
+            // InternalReferringTestLanguage.g:59:1: ( ruleMain EOF )
+            // InternalReferringTestLanguage.g:60:1: ruleMain EOF
             {
              before(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -102,20 +110,20 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleMain"
-    // InternalReferringTestLanguage.g:62:1: ruleMain : ( ( rule__Main__ReferencedAssignment )* ) ;
+    // InternalReferringTestLanguage.g:67:1: ruleMain : ( ( rule__Main__ReferencedAssignment )* ) ;
     public final void ruleMain() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:66:2: ( ( ( rule__Main__ReferencedAssignment )* ) )
-            // InternalReferringTestLanguage.g:67:2: ( ( rule__Main__ReferencedAssignment )* )
+            // InternalReferringTestLanguage.g:71:2: ( ( ( rule__Main__ReferencedAssignment )* ) )
+            // InternalReferringTestLanguage.g:72:2: ( ( rule__Main__ReferencedAssignment )* )
             {
-            // InternalReferringTestLanguage.g:67:2: ( ( rule__Main__ReferencedAssignment )* )
-            // InternalReferringTestLanguage.g:68:3: ( rule__Main__ReferencedAssignment )*
+            // InternalReferringTestLanguage.g:72:2: ( ( rule__Main__ReferencedAssignment )* )
+            // InternalReferringTestLanguage.g:73:3: ( rule__Main__ReferencedAssignment )*
             {
              before(grammarAccess.getMainAccess().getReferencedAssignment()); 
-            // InternalReferringTestLanguage.g:69:3: ( rule__Main__ReferencedAssignment )*
+            // InternalReferringTestLanguage.g:74:3: ( rule__Main__ReferencedAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -128,7 +136,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:69:4: rule__Main__ReferencedAssignment
+            	    // InternalReferringTestLanguage.g:74:4: rule__Main__ReferencedAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Main__ReferencedAssignment();
@@ -167,11 +175,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleAbstractReference"
-    // InternalReferringTestLanguage.g:78:1: entryRuleAbstractReference : ruleAbstractReference EOF ;
+    // InternalReferringTestLanguage.g:83:1: entryRuleAbstractReference : ruleAbstractReference EOF ;
     public final void entryRuleAbstractReference() throws RecognitionException {
         try {
-            // InternalReferringTestLanguage.g:79:1: ( ruleAbstractReference EOF )
-            // InternalReferringTestLanguage.g:80:1: ruleAbstractReference EOF
+            // InternalReferringTestLanguage.g:84:1: ( ruleAbstractReference EOF )
+            // InternalReferringTestLanguage.g:85:1: ruleAbstractReference EOF
             {
              before(grammarAccess.getAbstractReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -197,21 +205,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleAbstractReference"
-    // InternalReferringTestLanguage.g:87:1: ruleAbstractReference : ( ( rule__AbstractReference__Alternatives ) ) ;
+    // InternalReferringTestLanguage.g:92:1: ruleAbstractReference : ( ( rule__AbstractReference__Alternatives ) ) ;
     public final void ruleAbstractReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:91:2: ( ( ( rule__AbstractReference__Alternatives ) ) )
-            // InternalReferringTestLanguage.g:92:2: ( ( rule__AbstractReference__Alternatives ) )
+            // InternalReferringTestLanguage.g:96:2: ( ( ( rule__AbstractReference__Alternatives ) ) )
+            // InternalReferringTestLanguage.g:97:2: ( ( rule__AbstractReference__Alternatives ) )
             {
-            // InternalReferringTestLanguage.g:92:2: ( ( rule__AbstractReference__Alternatives ) )
-            // InternalReferringTestLanguage.g:93:3: ( rule__AbstractReference__Alternatives )
+            // InternalReferringTestLanguage.g:97:2: ( ( rule__AbstractReference__Alternatives ) )
+            // InternalReferringTestLanguage.g:98:3: ( rule__AbstractReference__Alternatives )
             {
              before(grammarAccess.getAbstractReferenceAccess().getAlternatives()); 
-            // InternalReferringTestLanguage.g:94:3: ( rule__AbstractReference__Alternatives )
-            // InternalReferringTestLanguage.g:94:4: rule__AbstractReference__Alternatives
+            // InternalReferringTestLanguage.g:99:3: ( rule__AbstractReference__Alternatives )
+            // InternalReferringTestLanguage.g:99:4: rule__AbstractReference__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__AbstractReference__Alternatives();
@@ -244,11 +252,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleReference"
-    // InternalReferringTestLanguage.g:103:1: entryRuleReference : ruleReference EOF ;
+    // InternalReferringTestLanguage.g:108:1: entryRuleReference : ruleReference EOF ;
     public final void entryRuleReference() throws RecognitionException {
         try {
-            // InternalReferringTestLanguage.g:104:1: ( ruleReference EOF )
-            // InternalReferringTestLanguage.g:105:1: ruleReference EOF
+            // InternalReferringTestLanguage.g:109:1: ( ruleReference EOF )
+            // InternalReferringTestLanguage.g:110:1: ruleReference EOF
             {
              before(grammarAccess.getReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -274,21 +282,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleReference"
-    // InternalReferringTestLanguage.g:112:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
+    // InternalReferringTestLanguage.g:117:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
     public final void ruleReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:116:2: ( ( ( rule__Reference__Group__0 ) ) )
-            // InternalReferringTestLanguage.g:117:2: ( ( rule__Reference__Group__0 ) )
+            // InternalReferringTestLanguage.g:121:2: ( ( ( rule__Reference__Group__0 ) ) )
+            // InternalReferringTestLanguage.g:122:2: ( ( rule__Reference__Group__0 ) )
             {
-            // InternalReferringTestLanguage.g:117:2: ( ( rule__Reference__Group__0 ) )
-            // InternalReferringTestLanguage.g:118:3: ( rule__Reference__Group__0 )
+            // InternalReferringTestLanguage.g:122:2: ( ( rule__Reference__Group__0 ) )
+            // InternalReferringTestLanguage.g:123:3: ( rule__Reference__Group__0 )
             {
              before(grammarAccess.getReferenceAccess().getGroup()); 
-            // InternalReferringTestLanguage.g:119:3: ( rule__Reference__Group__0 )
-            // InternalReferringTestLanguage.g:119:4: rule__Reference__Group__0
+            // InternalReferringTestLanguage.g:124:3: ( rule__Reference__Group__0 )
+            // InternalReferringTestLanguage.g:124:4: rule__Reference__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__0();
@@ -321,11 +329,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleReference2"
-    // InternalReferringTestLanguage.g:128:1: entryRuleReference2 : ruleReference2 EOF ;
+    // InternalReferringTestLanguage.g:133:1: entryRuleReference2 : ruleReference2 EOF ;
     public final void entryRuleReference2() throws RecognitionException {
         try {
-            // InternalReferringTestLanguage.g:129:1: ( ruleReference2 EOF )
-            // InternalReferringTestLanguage.g:130:1: ruleReference2 EOF
+            // InternalReferringTestLanguage.g:134:1: ( ruleReference2 EOF )
+            // InternalReferringTestLanguage.g:135:1: ruleReference2 EOF
             {
              before(grammarAccess.getReference2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -351,21 +359,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleReference2"
-    // InternalReferringTestLanguage.g:137:1: ruleReference2 : ( ( rule__Reference2__Group__0 ) ) ;
+    // InternalReferringTestLanguage.g:142:1: ruleReference2 : ( ( rule__Reference2__Group__0 ) ) ;
     public final void ruleReference2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:141:2: ( ( ( rule__Reference2__Group__0 ) ) )
-            // InternalReferringTestLanguage.g:142:2: ( ( rule__Reference2__Group__0 ) )
+            // InternalReferringTestLanguage.g:146:2: ( ( ( rule__Reference2__Group__0 ) ) )
+            // InternalReferringTestLanguage.g:147:2: ( ( rule__Reference2__Group__0 ) )
             {
-            // InternalReferringTestLanguage.g:142:2: ( ( rule__Reference2__Group__0 ) )
-            // InternalReferringTestLanguage.g:143:3: ( rule__Reference2__Group__0 )
+            // InternalReferringTestLanguage.g:147:2: ( ( rule__Reference2__Group__0 ) )
+            // InternalReferringTestLanguage.g:148:3: ( rule__Reference2__Group__0 )
             {
              before(grammarAccess.getReference2Access().getGroup()); 
-            // InternalReferringTestLanguage.g:144:3: ( rule__Reference2__Group__0 )
-            // InternalReferringTestLanguage.g:144:4: rule__Reference2__Group__0
+            // InternalReferringTestLanguage.g:149:3: ( rule__Reference2__Group__0 )
+            // InternalReferringTestLanguage.g:149:4: rule__Reference2__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group__0();
@@ -398,11 +406,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleNamed"
-    // InternalReferringTestLanguage.g:153:1: entryRuleNamed : ruleNamed EOF ;
+    // InternalReferringTestLanguage.g:158:1: entryRuleNamed : ruleNamed EOF ;
     public final void entryRuleNamed() throws RecognitionException {
         try {
-            // InternalReferringTestLanguage.g:154:1: ( ruleNamed EOF )
-            // InternalReferringTestLanguage.g:155:1: ruleNamed EOF
+            // InternalReferringTestLanguage.g:159:1: ( ruleNamed EOF )
+            // InternalReferringTestLanguage.g:160:1: ruleNamed EOF
             {
              before(grammarAccess.getNamedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -428,21 +436,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleNamed"
-    // InternalReferringTestLanguage.g:162:1: ruleNamed : ( ( rule__Named__NameAssignment ) ) ;
+    // InternalReferringTestLanguage.g:167:1: ruleNamed : ( ( rule__Named__NameAssignment ) ) ;
     public final void ruleNamed() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:166:2: ( ( ( rule__Named__NameAssignment ) ) )
-            // InternalReferringTestLanguage.g:167:2: ( ( rule__Named__NameAssignment ) )
+            // InternalReferringTestLanguage.g:171:2: ( ( ( rule__Named__NameAssignment ) ) )
+            // InternalReferringTestLanguage.g:172:2: ( ( rule__Named__NameAssignment ) )
             {
-            // InternalReferringTestLanguage.g:167:2: ( ( rule__Named__NameAssignment ) )
-            // InternalReferringTestLanguage.g:168:3: ( rule__Named__NameAssignment )
+            // InternalReferringTestLanguage.g:172:2: ( ( rule__Named__NameAssignment ) )
+            // InternalReferringTestLanguage.g:173:3: ( rule__Named__NameAssignment )
             {
              before(grammarAccess.getNamedAccess().getNameAssignment()); 
-            // InternalReferringTestLanguage.g:169:3: ( rule__Named__NameAssignment )
-            // InternalReferringTestLanguage.g:169:4: rule__Named__NameAssignment
+            // InternalReferringTestLanguage.g:174:3: ( rule__Named__NameAssignment )
+            // InternalReferringTestLanguage.g:174:4: rule__Named__NameAssignment
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Named__NameAssignment();
@@ -475,11 +483,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalReferringTestLanguage.g:178:1: entryRuleFQN : ruleFQN EOF ;
+    // InternalReferringTestLanguage.g:183:1: entryRuleFQN : ruleFQN EOF ;
     public final void entryRuleFQN() throws RecognitionException {
         try {
-            // InternalReferringTestLanguage.g:179:1: ( ruleFQN EOF )
-            // InternalReferringTestLanguage.g:180:1: ruleFQN EOF
+            // InternalReferringTestLanguage.g:184:1: ( ruleFQN EOF )
+            // InternalReferringTestLanguage.g:185:1: ruleFQN EOF
             {
              before(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -505,21 +513,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleFQN"
-    // InternalReferringTestLanguage.g:187:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
+    // InternalReferringTestLanguage.g:192:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
     public final void ruleFQN() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:191:2: ( ( ( rule__FQN__Group__0 ) ) )
-            // InternalReferringTestLanguage.g:192:2: ( ( rule__FQN__Group__0 ) )
+            // InternalReferringTestLanguage.g:196:2: ( ( ( rule__FQN__Group__0 ) ) )
+            // InternalReferringTestLanguage.g:197:2: ( ( rule__FQN__Group__0 ) )
             {
-            // InternalReferringTestLanguage.g:192:2: ( ( rule__FQN__Group__0 ) )
-            // InternalReferringTestLanguage.g:193:3: ( rule__FQN__Group__0 )
+            // InternalReferringTestLanguage.g:197:2: ( ( rule__FQN__Group__0 ) )
+            // InternalReferringTestLanguage.g:198:3: ( rule__FQN__Group__0 )
             {
              before(grammarAccess.getFQNAccess().getGroup()); 
-            // InternalReferringTestLanguage.g:194:3: ( rule__FQN__Group__0 )
-            // InternalReferringTestLanguage.g:194:4: rule__FQN__Group__0
+            // InternalReferringTestLanguage.g:199:3: ( rule__FQN__Group__0 )
+            // InternalReferringTestLanguage.g:199:4: rule__FQN__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group__0();
@@ -552,13 +560,13 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__AbstractReference__Alternatives"
-    // InternalReferringTestLanguage.g:202:1: rule__AbstractReference__Alternatives : ( ( ruleReference ) | ( ruleReference2 ) );
+    // InternalReferringTestLanguage.g:207:1: rule__AbstractReference__Alternatives : ( ( ruleReference ) | ( ruleReference2 ) );
     public final void rule__AbstractReference__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:206:1: ( ( ruleReference ) | ( ruleReference2 ) )
+            // InternalReferringTestLanguage.g:211:1: ( ( ruleReference ) | ( ruleReference2 ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -576,10 +584,10 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
             }
             switch (alt2) {
                 case 1 :
-                    // InternalReferringTestLanguage.g:207:2: ( ruleReference )
+                    // InternalReferringTestLanguage.g:212:2: ( ruleReference )
                     {
-                    // InternalReferringTestLanguage.g:207:2: ( ruleReference )
-                    // InternalReferringTestLanguage.g:208:3: ruleReference
+                    // InternalReferringTestLanguage.g:212:2: ( ruleReference )
+                    // InternalReferringTestLanguage.g:213:3: ruleReference
                     {
                      before(grammarAccess.getAbstractReferenceAccess().getReferenceParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -595,10 +603,10 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalReferringTestLanguage.g:213:2: ( ruleReference2 )
+                    // InternalReferringTestLanguage.g:218:2: ( ruleReference2 )
                     {
-                    // InternalReferringTestLanguage.g:213:2: ( ruleReference2 )
-                    // InternalReferringTestLanguage.g:214:3: ruleReference2
+                    // InternalReferringTestLanguage.g:218:2: ( ruleReference2 )
+                    // InternalReferringTestLanguage.g:219:3: ruleReference2
                     {
                      before(grammarAccess.getAbstractReferenceAccess().getReference2ParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -631,14 +639,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__0"
-    // InternalReferringTestLanguage.g:223:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
+    // InternalReferringTestLanguage.g:228:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
     public final void rule__Reference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:227:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
-            // InternalReferringTestLanguage.g:228:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
+            // InternalReferringTestLanguage.g:232:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
+            // InternalReferringTestLanguage.g:233:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Reference__Group__0__Impl();
@@ -669,17 +677,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__0__Impl"
-    // InternalReferringTestLanguage.g:235:1: rule__Reference__Group__0__Impl : ( 'ref' ) ;
+    // InternalReferringTestLanguage.g:240:1: rule__Reference__Group__0__Impl : ( 'ref' ) ;
     public final void rule__Reference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:239:1: ( ( 'ref' ) )
-            // InternalReferringTestLanguage.g:240:1: ( 'ref' )
+            // InternalReferringTestLanguage.g:244:1: ( ( 'ref' ) )
+            // InternalReferringTestLanguage.g:245:1: ( 'ref' )
             {
-            // InternalReferringTestLanguage.g:240:1: ( 'ref' )
-            // InternalReferringTestLanguage.g:241:2: 'ref'
+            // InternalReferringTestLanguage.g:245:1: ( 'ref' )
+            // InternalReferringTestLanguage.g:246:2: 'ref'
             {
              before(grammarAccess.getReferenceAccess().getRefKeyword_0()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -706,14 +714,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__1"
-    // InternalReferringTestLanguage.g:250:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl ;
+    // InternalReferringTestLanguage.g:255:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl ;
     public final void rule__Reference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:254:1: ( rule__Reference__Group__1__Impl )
-            // InternalReferringTestLanguage.g:255:2: rule__Reference__Group__1__Impl
+            // InternalReferringTestLanguage.g:259:1: ( rule__Reference__Group__1__Impl )
+            // InternalReferringTestLanguage.g:260:2: rule__Reference__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__1__Impl();
@@ -739,21 +747,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__Group__1__Impl"
-    // InternalReferringTestLanguage.g:261:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__ReferencedAssignment_1 ) ) ;
+    // InternalReferringTestLanguage.g:266:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__ReferencedAssignment_1 ) ) ;
     public final void rule__Reference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:265:1: ( ( ( rule__Reference__ReferencedAssignment_1 ) ) )
-            // InternalReferringTestLanguage.g:266:1: ( ( rule__Reference__ReferencedAssignment_1 ) )
+            // InternalReferringTestLanguage.g:270:1: ( ( ( rule__Reference__ReferencedAssignment_1 ) ) )
+            // InternalReferringTestLanguage.g:271:1: ( ( rule__Reference__ReferencedAssignment_1 ) )
             {
-            // InternalReferringTestLanguage.g:266:1: ( ( rule__Reference__ReferencedAssignment_1 ) )
-            // InternalReferringTestLanguage.g:267:2: ( rule__Reference__ReferencedAssignment_1 )
+            // InternalReferringTestLanguage.g:271:1: ( ( rule__Reference__ReferencedAssignment_1 ) )
+            // InternalReferringTestLanguage.g:272:2: ( rule__Reference__ReferencedAssignment_1 )
             {
              before(grammarAccess.getReferenceAccess().getReferencedAssignment_1()); 
-            // InternalReferringTestLanguage.g:268:2: ( rule__Reference__ReferencedAssignment_1 )
-            // InternalReferringTestLanguage.g:268:3: rule__Reference__ReferencedAssignment_1
+            // InternalReferringTestLanguage.g:273:2: ( rule__Reference__ReferencedAssignment_1 )
+            // InternalReferringTestLanguage.g:273:3: rule__Reference__ReferencedAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__ReferencedAssignment_1();
@@ -786,14 +794,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__0"
-    // InternalReferringTestLanguage.g:277:1: rule__Reference2__Group__0 : rule__Reference2__Group__0__Impl rule__Reference2__Group__1 ;
+    // InternalReferringTestLanguage.g:282:1: rule__Reference2__Group__0 : rule__Reference2__Group__0__Impl rule__Reference2__Group__1 ;
     public final void rule__Reference2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:281:1: ( rule__Reference2__Group__0__Impl rule__Reference2__Group__1 )
-            // InternalReferringTestLanguage.g:282:2: rule__Reference2__Group__0__Impl rule__Reference2__Group__1
+            // InternalReferringTestLanguage.g:286:1: ( rule__Reference2__Group__0__Impl rule__Reference2__Group__1 )
+            // InternalReferringTestLanguage.g:287:2: rule__Reference2__Group__0__Impl rule__Reference2__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Reference2__Group__0__Impl();
@@ -824,17 +832,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__0__Impl"
-    // InternalReferringTestLanguage.g:289:1: rule__Reference2__Group__0__Impl : ( ruleNamed ) ;
+    // InternalReferringTestLanguage.g:294:1: rule__Reference2__Group__0__Impl : ( ruleNamed ) ;
     public final void rule__Reference2__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:293:1: ( ( ruleNamed ) )
-            // InternalReferringTestLanguage.g:294:1: ( ruleNamed )
+            // InternalReferringTestLanguage.g:298:1: ( ( ruleNamed ) )
+            // InternalReferringTestLanguage.g:299:1: ( ruleNamed )
             {
-            // InternalReferringTestLanguage.g:294:1: ( ruleNamed )
-            // InternalReferringTestLanguage.g:295:2: ruleNamed
+            // InternalReferringTestLanguage.g:299:1: ( ruleNamed )
+            // InternalReferringTestLanguage.g:300:2: ruleNamed
             {
              before(grammarAccess.getReference2Access().getNamedParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -865,14 +873,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__1"
-    // InternalReferringTestLanguage.g:304:1: rule__Reference2__Group__1 : rule__Reference2__Group__1__Impl rule__Reference2__Group__2 ;
+    // InternalReferringTestLanguage.g:309:1: rule__Reference2__Group__1 : rule__Reference2__Group__1__Impl rule__Reference2__Group__2 ;
     public final void rule__Reference2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:308:1: ( rule__Reference2__Group__1__Impl rule__Reference2__Group__2 )
-            // InternalReferringTestLanguage.g:309:2: rule__Reference2__Group__1__Impl rule__Reference2__Group__2
+            // InternalReferringTestLanguage.g:313:1: ( rule__Reference2__Group__1__Impl rule__Reference2__Group__2 )
+            // InternalReferringTestLanguage.g:314:2: rule__Reference2__Group__1__Impl rule__Reference2__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Reference2__Group__1__Impl();
@@ -903,17 +911,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__1__Impl"
-    // InternalReferringTestLanguage.g:316:1: rule__Reference2__Group__1__Impl : ( '=' ) ;
+    // InternalReferringTestLanguage.g:321:1: rule__Reference2__Group__1__Impl : ( '=' ) ;
     public final void rule__Reference2__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:320:1: ( ( '=' ) )
-            // InternalReferringTestLanguage.g:321:1: ( '=' )
+            // InternalReferringTestLanguage.g:325:1: ( ( '=' ) )
+            // InternalReferringTestLanguage.g:326:1: ( '=' )
             {
-            // InternalReferringTestLanguage.g:321:1: ( '=' )
-            // InternalReferringTestLanguage.g:322:2: '='
+            // InternalReferringTestLanguage.g:326:1: ( '=' )
+            // InternalReferringTestLanguage.g:327:2: '='
             {
              before(grammarAccess.getReference2Access().getEqualsSignKeyword_1()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -940,14 +948,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__2"
-    // InternalReferringTestLanguage.g:331:1: rule__Reference2__Group__2 : rule__Reference2__Group__2__Impl ;
+    // InternalReferringTestLanguage.g:336:1: rule__Reference2__Group__2 : rule__Reference2__Group__2__Impl ;
     public final void rule__Reference2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:335:1: ( rule__Reference2__Group__2__Impl )
-            // InternalReferringTestLanguage.g:336:2: rule__Reference2__Group__2__Impl
+            // InternalReferringTestLanguage.g:340:1: ( rule__Reference2__Group__2__Impl )
+            // InternalReferringTestLanguage.g:341:2: rule__Reference2__Group__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__Group__2__Impl();
@@ -973,21 +981,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__Group__2__Impl"
-    // InternalReferringTestLanguage.g:342:1: rule__Reference2__Group__2__Impl : ( ( rule__Reference2__ReferencedAssignment_2 ) ) ;
+    // InternalReferringTestLanguage.g:347:1: rule__Reference2__Group__2__Impl : ( ( rule__Reference2__ReferencedAssignment_2 ) ) ;
     public final void rule__Reference2__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:346:1: ( ( ( rule__Reference2__ReferencedAssignment_2 ) ) )
-            // InternalReferringTestLanguage.g:347:1: ( ( rule__Reference2__ReferencedAssignment_2 ) )
+            // InternalReferringTestLanguage.g:351:1: ( ( ( rule__Reference2__ReferencedAssignment_2 ) ) )
+            // InternalReferringTestLanguage.g:352:1: ( ( rule__Reference2__ReferencedAssignment_2 ) )
             {
-            // InternalReferringTestLanguage.g:347:1: ( ( rule__Reference2__ReferencedAssignment_2 ) )
-            // InternalReferringTestLanguage.g:348:2: ( rule__Reference2__ReferencedAssignment_2 )
+            // InternalReferringTestLanguage.g:352:1: ( ( rule__Reference2__ReferencedAssignment_2 ) )
+            // InternalReferringTestLanguage.g:353:2: ( rule__Reference2__ReferencedAssignment_2 )
             {
              before(grammarAccess.getReference2Access().getReferencedAssignment_2()); 
-            // InternalReferringTestLanguage.g:349:2: ( rule__Reference2__ReferencedAssignment_2 )
-            // InternalReferringTestLanguage.g:349:3: rule__Reference2__ReferencedAssignment_2
+            // InternalReferringTestLanguage.g:354:2: ( rule__Reference2__ReferencedAssignment_2 )
+            // InternalReferringTestLanguage.g:354:3: rule__Reference2__ReferencedAssignment_2
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference2__ReferencedAssignment_2();
@@ -1020,14 +1028,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // InternalReferringTestLanguage.g:358:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // InternalReferringTestLanguage.g:363:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:362:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // InternalReferringTestLanguage.g:363:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // InternalReferringTestLanguage.g:367:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // InternalReferringTestLanguage.g:368:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__FQN__Group__0__Impl();
@@ -1058,17 +1066,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // InternalReferringTestLanguage.g:370:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    // InternalReferringTestLanguage.g:375:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:374:1: ( ( RULE_ID ) )
-            // InternalReferringTestLanguage.g:375:1: ( RULE_ID )
+            // InternalReferringTestLanguage.g:379:1: ( ( RULE_ID ) )
+            // InternalReferringTestLanguage.g:380:1: ( RULE_ID )
             {
-            // InternalReferringTestLanguage.g:375:1: ( RULE_ID )
-            // InternalReferringTestLanguage.g:376:2: RULE_ID
+            // InternalReferringTestLanguage.g:380:1: ( RULE_ID )
+            // InternalReferringTestLanguage.g:381:2: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1095,14 +1103,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // InternalReferringTestLanguage.g:385:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // InternalReferringTestLanguage.g:390:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:389:1: ( rule__FQN__Group__1__Impl )
-            // InternalReferringTestLanguage.g:390:2: rule__FQN__Group__1__Impl
+            // InternalReferringTestLanguage.g:394:1: ( rule__FQN__Group__1__Impl )
+            // InternalReferringTestLanguage.g:395:2: rule__FQN__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group__1__Impl();
@@ -1128,20 +1136,20 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // InternalReferringTestLanguage.g:396:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // InternalReferringTestLanguage.g:401:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:400:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // InternalReferringTestLanguage.g:401:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalReferringTestLanguage.g:405:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // InternalReferringTestLanguage.g:406:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // InternalReferringTestLanguage.g:401:1: ( ( rule__FQN__Group_1__0 )* )
-            // InternalReferringTestLanguage.g:402:2: ( rule__FQN__Group_1__0 )*
+            // InternalReferringTestLanguage.g:406:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalReferringTestLanguage.g:407:2: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // InternalReferringTestLanguage.g:403:2: ( rule__FQN__Group_1__0 )*
+            // InternalReferringTestLanguage.g:408:2: ( rule__FQN__Group_1__0 )*
             loop3:
             do {
                 int alt3=2;
@@ -1154,7 +1162,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:403:3: rule__FQN__Group_1__0
+            	    // InternalReferringTestLanguage.g:408:3: rule__FQN__Group_1__0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_7);
             	    rule__FQN__Group_1__0();
@@ -1193,14 +1201,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // InternalReferringTestLanguage.g:412:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // InternalReferringTestLanguage.g:417:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:416:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // InternalReferringTestLanguage.g:417:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // InternalReferringTestLanguage.g:421:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // InternalReferringTestLanguage.g:422:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__FQN__Group_1__0__Impl();
@@ -1231,17 +1239,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // InternalReferringTestLanguage.g:424:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    // InternalReferringTestLanguage.g:429:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:428:1: ( ( '.' ) )
-            // InternalReferringTestLanguage.g:429:1: ( '.' )
+            // InternalReferringTestLanguage.g:433:1: ( ( '.' ) )
+            // InternalReferringTestLanguage.g:434:1: ( '.' )
             {
-            // InternalReferringTestLanguage.g:429:1: ( '.' )
-            // InternalReferringTestLanguage.g:430:2: '.'
+            // InternalReferringTestLanguage.g:434:1: ( '.' )
+            // InternalReferringTestLanguage.g:435:2: '.'
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -1268,14 +1276,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // InternalReferringTestLanguage.g:439:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // InternalReferringTestLanguage.g:444:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:443:1: ( rule__FQN__Group_1__1__Impl )
-            // InternalReferringTestLanguage.g:444:2: rule__FQN__Group_1__1__Impl
+            // InternalReferringTestLanguage.g:448:1: ( rule__FQN__Group_1__1__Impl )
+            // InternalReferringTestLanguage.g:449:2: rule__FQN__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__FQN__Group_1__1__Impl();
@@ -1301,17 +1309,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // InternalReferringTestLanguage.g:450:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    // InternalReferringTestLanguage.g:455:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:454:1: ( ( RULE_ID ) )
-            // InternalReferringTestLanguage.g:455:1: ( RULE_ID )
+            // InternalReferringTestLanguage.g:459:1: ( ( RULE_ID ) )
+            // InternalReferringTestLanguage.g:460:1: ( RULE_ID )
             {
-            // InternalReferringTestLanguage.g:455:1: ( RULE_ID )
-            // InternalReferringTestLanguage.g:456:2: RULE_ID
+            // InternalReferringTestLanguage.g:460:1: ( RULE_ID )
+            // InternalReferringTestLanguage.g:461:2: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1338,17 +1346,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Main__ReferencedAssignment"
-    // InternalReferringTestLanguage.g:466:1: rule__Main__ReferencedAssignment : ( ruleAbstractReference ) ;
+    // InternalReferringTestLanguage.g:471:1: rule__Main__ReferencedAssignment : ( ruleAbstractReference ) ;
     public final void rule__Main__ReferencedAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:470:1: ( ( ruleAbstractReference ) )
-            // InternalReferringTestLanguage.g:471:2: ( ruleAbstractReference )
+            // InternalReferringTestLanguage.g:475:1: ( ( ruleAbstractReference ) )
+            // InternalReferringTestLanguage.g:476:2: ( ruleAbstractReference )
             {
-            // InternalReferringTestLanguage.g:471:2: ( ruleAbstractReference )
-            // InternalReferringTestLanguage.g:472:3: ruleAbstractReference
+            // InternalReferringTestLanguage.g:476:2: ( ruleAbstractReference )
+            // InternalReferringTestLanguage.g:477:3: ruleAbstractReference
             {
              before(grammarAccess.getMainAccess().getReferencedAbstractReferenceParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1379,21 +1387,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference__ReferencedAssignment_1"
-    // InternalReferringTestLanguage.g:481:1: rule__Reference__ReferencedAssignment_1 : ( ( ruleFQN ) ) ;
+    // InternalReferringTestLanguage.g:486:1: rule__Reference__ReferencedAssignment_1 : ( ( ruleFQN ) ) ;
     public final void rule__Reference__ReferencedAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:485:1: ( ( ( ruleFQN ) ) )
-            // InternalReferringTestLanguage.g:486:2: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:490:1: ( ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:491:2: ( ( ruleFQN ) )
             {
-            // InternalReferringTestLanguage.g:486:2: ( ( ruleFQN ) )
-            // InternalReferringTestLanguage.g:487:3: ( ruleFQN )
+            // InternalReferringTestLanguage.g:491:2: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:492:3: ( ruleFQN )
             {
              before(grammarAccess.getReferenceAccess().getReferencedEObjectCrossReference_1_0()); 
-            // InternalReferringTestLanguage.g:488:3: ( ruleFQN )
-            // InternalReferringTestLanguage.g:489:4: ruleFQN
+            // InternalReferringTestLanguage.g:493:3: ( ruleFQN )
+            // InternalReferringTestLanguage.g:494:4: ruleFQN
             {
              before(grammarAccess.getReferenceAccess().getReferencedEObjectFQNParserRuleCall_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1428,21 +1436,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Reference2__ReferencedAssignment_2"
-    // InternalReferringTestLanguage.g:500:1: rule__Reference2__ReferencedAssignment_2 : ( ( ruleFQN ) ) ;
+    // InternalReferringTestLanguage.g:505:1: rule__Reference2__ReferencedAssignment_2 : ( ( ruleFQN ) ) ;
     public final void rule__Reference2__ReferencedAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:504:1: ( ( ( ruleFQN ) ) )
-            // InternalReferringTestLanguage.g:505:2: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:509:1: ( ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:510:2: ( ( ruleFQN ) )
             {
-            // InternalReferringTestLanguage.g:505:2: ( ( ruleFQN ) )
-            // InternalReferringTestLanguage.g:506:3: ( ruleFQN )
+            // InternalReferringTestLanguage.g:510:2: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:511:3: ( ruleFQN )
             {
              before(grammarAccess.getReference2Access().getReferencedEObjectCrossReference_2_0()); 
-            // InternalReferringTestLanguage.g:507:3: ( ruleFQN )
-            // InternalReferringTestLanguage.g:508:4: ruleFQN
+            // InternalReferringTestLanguage.g:512:3: ( ruleFQN )
+            // InternalReferringTestLanguage.g:513:4: ruleFQN
             {
              before(grammarAccess.getReference2Access().getReferencedEObjectFQNParserRuleCall_2_0_1()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1477,17 +1485,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Named__NameAssignment"
-    // InternalReferringTestLanguage.g:519:1: rule__Named__NameAssignment : ( RULE_ID ) ;
+    // InternalReferringTestLanguage.g:524:1: rule__Named__NameAssignment : ( RULE_ID ) ;
     public final void rule__Named__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalReferringTestLanguage.g:523:1: ( ( RULE_ID ) )
-            // InternalReferringTestLanguage.g:524:2: ( RULE_ID )
+            // InternalReferringTestLanguage.g:528:1: ( ( RULE_ID ) )
+            // InternalReferringTestLanguage.g:529:2: ( RULE_ID )
             {
-            // InternalReferringTestLanguage.g:524:2: ( RULE_ID )
-            // InternalReferringTestLanguage.g:525:3: RULE_ID
+            // InternalReferringTestLanguage.g:529:2: ( RULE_ID )
+            // InternalReferringTestLanguage.g:530:3: RULE_ID
             {
              before(grammarAccess.getNamedAccess().getNameIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IOrdinaryClassFile;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.debug.core.IJavaLineBreakpoint;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
@@ -87,8 +88,8 @@ public class JavaBreakPointProvider {
 
 	private String getHandleId(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
 		IClassFile classFile = getClassFile(breakpoint);
-		if (classFile != null)
-			return classFile.getType().getHandleIdentifier();
+		if (classFile != null && classFile instanceof IOrdinaryClassFile)
+			return ((IOrdinaryClassFile)classFile).getType().getHandleIdentifier();
 		ILocationInEclipseResource javaLocation = getJavaLocation(breakpoint);
 		if (javaLocation == null)
 			return null;

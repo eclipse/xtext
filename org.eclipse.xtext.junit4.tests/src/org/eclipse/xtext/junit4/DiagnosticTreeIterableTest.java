@@ -16,6 +16,7 @@ import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Deprecated(forRemoval = true)
 public class DiagnosticTreeIterableTest {
 
 	@Test

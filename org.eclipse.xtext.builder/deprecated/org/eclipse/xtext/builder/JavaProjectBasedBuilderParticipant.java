@@ -146,7 +146,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			GeneratorContext generatorContext = new GeneratorContext();
 			generatorContext.setCancelIndicator(cancelIndicator);
 			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, generatorContext);
-			context.needRebuild();
+			context.needRebuild(context.getBuiltProject());
 		}
 	}
 

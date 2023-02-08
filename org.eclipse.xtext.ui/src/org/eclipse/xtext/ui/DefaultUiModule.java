@@ -23,7 +23,6 @@ import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.PlatformUI;
@@ -137,7 +136,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(AbstractUIPlugin.class).toInstance(plugin);
-		@SuppressWarnings("deprecation")
 		IDialogSettings dialogSettings = plugin.getDialogSettings();
 		binder.bind(IDialogSettings.class).toInstance(dialogSettings);
 	}
@@ -263,7 +261,8 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return XtextTemplateStore.class;
 	}
 
-	public Class<? extends ContextTypeRegistry> bindContextTypeRegistry() {
+	@SuppressWarnings("deprecation")
+	public Class<? extends org.eclipse.jface.text.templates.ContextTypeRegistry> bindContextTypeRegistry() {
 		return XtextTemplateContextTypeRegistry.class;
 	}
 
@@ -402,6 +401,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	/**
 	 * @since 2.4
 	 */
+	@SuppressWarnings("deprecation")
 	public Class<? extends org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return org.eclipse.xtext.ui.editor.copyqualifiedname.DefaultCopyQualifiedNameService.class;
 	}
@@ -409,6 +409,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	/**
 	 * @since 2.14
 	 */
+	@SuppressWarnings("deprecation")
 	public Class<? extends ICopyQualifiedNameService> bindICopyQualifiedNameService() {
 		return org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService.class;
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
  * @author Peter Friese - Initial contribution and API
  * @deprecated Use org.eclipse.xtext.ui.testing.AbstractEditorTest instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;

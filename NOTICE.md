@@ -31,7 +31,6 @@ The project maintains the following source code repositories:
 * https://github.com/eclipse/xtext-lib
 * https://github.com/eclipse/xtext-extras
 * https://github.com/eclipse/xtext-eclipse
-* https://github.com/eclipse/xtext-idea
 * https://github.com/eclipse/xtext-web
 * https://github.com/eclipse/xtext-maven
 * https://github.com/eclipse/xtext-gradle
@@ -41,22 +40,6 @@ The project maintains the following source code repositories:
 ## Third-party Content
 
 This project leverages the following third party content.
-
-ANTLR (3.0)
-
-* License: New BSD license
-
-ANTLR (3.0)
-
-* License: New BSD license
-
-ANTLR Runtime (3.1.1)
-
-* License: New BSD license
-
-ANTLR Runtime only: (3.2)
-
-* License: New BSD License
 
 ANTLR Runtime only: Version (3.2)
 
@@ -72,9 +55,6 @@ Apache Commons Lang (2.4)
 
 * License: Apache License, 2.0
 
-Apache Jasper (2.0)
-
-* License: Apache License, 2.0
 
 Apache Log4j (1.2.17)
 
@@ -84,325 +64,39 @@ args4j (2.33)
 
 * License: MIT License
 
-asm (3.2)
-
-* License: New BSD License
-
-asm (3.3.1)
-
-* License: New BSD License
-
-asm (4.0)
-
-* License: New BSD License
-
-ASM (5.0.1)
-
-* License: New BSD license
-
-ASM (6.0)
+ASM (9.4)
 
 * License: BSD-3-Clause
 
-ASM (6.1)
-
-* License: BSD 3-Clause
-
-ASM (6.1.1)
-
-* License: BSD-3-Clause
-
-asm (6.2)
-
-* License: BSD-3-Clause
-
-asm (7.1)
-
-* License: BSD-3-Clause
-
-ASM (7.2)
-
-* License: BSD-3-Clause
-
-ASM (7.2)
-
-* License: BSD-3-Clause
-
-ASM (7.3.1)
-
-* License: BSD-3-Clause
-
-ASM (8.0)
-
-* License: BSD-3-Clause
-
-asm 7 (n/a)
-
-* License: BSD-3-Clause
-
-atinject (Package javax.inject) (1.0)
-
-* License: Apache License, 2.0
-
-atinject (Package javax.inject) (1.0)
-
-* License: Apache License, 2.0
-
-Caliper (0.5.0)
-
-* License: Apache License, 2.0
-* Project: http://code.google.com/p/caliper/
-* Source: http://code.google.com/p/caliper/source/browse/?name=v0.5-rc1
-
-classgraph (4.8.35)
+classgraph (4.8.149)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph
 * Source: https://github.com/classgraph/classgraph
 
-Easymock (2.3)
-
-* License: MIT license
-
-easymock (2.4)
-
-* License: MIT license
-
-Google Collections (0.8)
-
-* License: Apache License, 2.0
-* Project: http://code.google.com/p/google-collections/
-* Source: http://code.google.com/p/google-collections/source/browse/
-
-Google Collections (1.0)
+Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
-Google Gson (2.1)
-
-* License: Apache License, 2.0
-
-Google Guava (15.0.0)
+Google Guava (30.1)
 
 * License: Apache License 2.0
 
-Google Guava Testlib (18.0)
-
-* License: Apache-2.0 
-* Project: https://github.com/google/guava/wiki
-* Source: https://github.com/google/guava
-
-Google Guava Testlib (21.0)
-
-* License: Apache-2.0 
-* Project: https://github.com/google/guava
-* Source: https://github.com/google/guava/tree/master/guava-testlib
-
-Google Guice / Inject Core API (3.0.0)
+Google Guice / Inject Core API (5.0.1)
 
 * License: Apache License, 2.0
 
-Google Guice / Inject Core API (3.0.0)
+Gradle Wrapper (7.4)
 
 * License: Apache License, 2.0
 
-google-guice (1.0)
-
-* License: Apache License, 2.0
-* Project: http://code.google.com/p/google-guice/
-* Source: http://code.google.com/p/google-guice/source
-
-Gradle Wrapper (2.0)
+guava gwt (30.1)
 
 * License: Apache License, 2.0
 
-Gradle Wrapper (2.0)
-
-* License: Apache License, 2.0
-
-Gradle Wrapper (4.4)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle
-
-Gradle Wrapper (4.6)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/v4.6.0/subprojects/wrapper
-
-Gradle Wrapper (4.9)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/v4.9.0/subprojects/wrapper
-
-Gradle Wrapper (4.10)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/v4.10.0/subprojects/wrapper
-
-Gradle Wrapper (4.10.2)
-
-* License: Apache-2.0
-* Project: www.gradle.org
-* Source: https://github.com/gradle/gradle/tree/master/subprojects/wrapper
-
-Gradle Wrapper (5.0)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/master/subprojects/wrapper
-
-Gradle Wrapper (5.2.1)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/master/subprojects/wrapper
-
-Gradle Wrapper (5.3.1)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/master/subprojects/wrapper
-
-Gradle Wrapper (5.4.1)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/master/subprojects/wrapper
-
-Gradle Wrapper (5.5)
-
-* License: Apache-2.0
-* Project: https://gradle.org/
-* Source: https://github.com/gradle/gradle/tree/master/subprojects/wrapper
-
-Gradle Wrapper (5.6)
-
-* License: Apache-2.0
-
-Gradle Wrapper (5.6.1)
-
-* License: Apache-2.0
-
-Gradle Wrapper (5.6.3)
-
-* License: Apache-2.0
-
-Gradle Wrapper (6.0)
-
-* License: Apache-2.0
-
-Gradle Wrapper (6.1)
-
-* License: Apache-2.0
-
-Gradle Wrapper (6.2)
-
-* License: Apache-2.0
-
-Gradle Wrapper (6.4)
-
-* License: Apache-2.0
-
-Gradle Wrapper (6.5.1)
-
-* License: Apache-2.0
-
-Gradle Wrapper (6.7)
-
-* License: Apache-2.0
-
-gson (2.8.2)
-
-* License: Apache-2.0
-
-Guava (10.0.1)
-
-* License: Apache License, 2.0
-
-Guava (10.0.1)
-
-* License: Apache License, 2.0
-
-Guava (13.0)
-
-* License: Apache License, 2.0
-* Project: http://code.google.com/p/guava-libraries/
-* Source:
-   search.maven.org/remotecontent?filepath=com/google/guava/guava/13.0/guava-13.0.jar
-
-Guava (13.0.1)
-
-* License: Apache License, 2.0
-* Project: http://code.google.com/p/guava-libraries/
-* Source:
-   http://search.maven.org/remotecontent?filepath=com/google/guava/guava/13.0.1/guava-13.0.1-sources.jar
-
-guava (27.1)
-
-* License: Apache-2.0 AND LicenseRef-Public-Domain
-
-guava (27.1)
-
-* License: Apache-2.0 AND LicenseRef-Public-Domain
-
-guava gwt (13.0.1)
-
-* License: Apache License, 2.0
-
-Guice (2.0)
-
-* License: Apache License, 2.0
-
-Guice (2.0)
-
-* License: Apache License, 2.0
-* Project: http://code.google.com/p/google-guice/
-* Source: http://google-guice.googlecode.com/files/guice-2.0-src.zip
-
-junit (4.13.0)
-
-* License: EPL-1.0
-
-JUnit (5.0.0)
-
-* License: EPL-2.0 AND Apache-2.0
-
-JUnit (5.1)
-
-* License: EPL-2.0 AND Apache-2.0
-
-JUnit (5.3.1)
-
-* License: EPL-2.0 AND Apache-2.0
-
-JUnit (5.4.0)
-
-* License: EPL-1.0 AND Apache-2.0
-
-JUnit (5.5.1)
-
-* License: EPL-1.0 AND Apache-2.0
-
-JUnit (5.6.0)
+JUnit (5.9.1)
 
 * License: EPL-2.0
-
-log4j (1.2.15)
-
-* License: Apache License, 2.0
-
-log4j (1.2.15)
-
-* License: Apache License, 2.0
-
-log4j (1.2.15)
-
-* License: Apache License, 2.0
 
 ## Cryptography
 

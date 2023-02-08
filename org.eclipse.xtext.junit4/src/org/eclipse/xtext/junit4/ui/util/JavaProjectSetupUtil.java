@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ import com.google.common.io.ByteStreams;
  * @author Sven Efftinge
  * @deprecated Use org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class JavaProjectSetupUtil {
 
 	private static final String JRE_CONTAINER_1_5 = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5";
@@ -387,7 +388,7 @@ public class JavaProjectSetupUtil {
 
 	public static File createExternalJar(InputStream data, String nameWithoutJarSuffix) throws IOException,
 			FileNotFoundException {
-		File tempFile = File.createTempFile(nameWithoutJarSuffix, ".jar");
+		File tempFile = Files.createTempFile(nameWithoutJarSuffix, ".jar").toFile();
 		tempFile.createNewFile();
 		tempFile.deleteOnExit();
 		FileOutputStream stream = new FileOutputStream(tempFile);

@@ -12,16 +12,15 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 
@@ -33,7 +32,7 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class TwoContextsContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
+public class TwoContextsContentAssistTest extends AbstractXtextTests {
 
 	@Test public void testTwoContexts() throws Exception {
     	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "Foo", "FooBar");

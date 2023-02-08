@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -376,8 +377,14 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	}
 
 	protected boolean hasContentsChanged(IFile file, StringInputStream newContent) {
-		return hasContentsChanged(file, (InputStream) newContent);
+		try {
+			return hasContentsChangedNew(file, newContent);
+		} catch (CoreException e) {
+			return true;
+		}
 	}
+
+	private static final int DEFAULT_BUFFER_SIZE = 8192;
 
 	/**
 	 * @since 2.4
@@ -406,6 +413,37 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 					// ignore
 				}
 			}
+		}
+		return contentChanged;
+	}
+	
+	/**
+	 * @throws CoreException thrown by {@link IFile#getContents()}
+g	 * @since 2.30
+	 */
+	protected boolean hasContentsChangedNew(IFile oldContent, InputStream newStream) throws CoreException {
+		byte[] oldBytes = new byte[DEFAULT_BUFFER_SIZE];
+		byte[] newBytes = new byte[DEFAULT_BUFFER_SIZE];
+		boolean contentChanged;
+		int newRead;
+		int oldRead;
+		try (InputStream oldStream = oldContent.getContents()) {
+			do {
+				oldRead = ByteStreams.read(oldStream, oldBytes, 0, DEFAULT_BUFFER_SIZE);
+				newRead = ByteStreams.read(newStream, newBytes, 0, DEFAULT_BUFFER_SIZE);
+				if(newRead != oldRead) {
+					contentChanged = true;
+					break;
+				}
+				contentChanged = !Arrays.equals(oldBytes, 0, oldRead, newBytes, 0, newRead);
+				if(newRead < DEFAULT_BUFFER_SIZE) {
+					// EOF
+					break;
+				}
+			} while (!contentChanged);
+
+		} catch (IOException e) {
+			contentChanged = true;
 		}
 		return contentChanged;
 	}

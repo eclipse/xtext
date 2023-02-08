@@ -2,39 +2,37 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Xtext Testlanguages for UI and Runtime - UI
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.30.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.testlanguages;visibility:=reexport,
  org.eclipse.xtext.testlanguages.ide;visibility:=reexport,
  org.eclipse.xtext.ui,
- org.eclipse.ui.editors;bundle-version="3.11.0",
+ org.eclipse.ui.editors;bundle-version="3.14.300",
  org.eclipse.ui.ide;bundle-version="3.13.1",
  org.eclipse.xtext.ui.shared,
- org.eclipse.ui;bundle-version="3.109.0",
+ org.eclipse.ui;bundle-version="3.201.0",
  org.eclipse.xtext.builder,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare;bundle-version="3.7.101",
+ org.eclipse.compare;bundle-version="3.8.300",
  org.eclipse.xtend.lib;resolution:=optional,
  com.google.guava;bundle-version="[30.1.0,31.0.0)",
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.eclipse.core.runtime;bundle-version="3.13.0",
- org.eclipse.ui.workbench;bundle-version="3.110.1";resolution:=optional,
+ org.eclipse.core.runtime;bundle-version="3.24.100",
+ org.eclipse.ui.workbench;bundle-version="3.125.0";resolution:=optional,
  org.eclipse.xtext.testing;bundle-version="2.11.0",
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.testing,
- org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.ui.testing
-Import-Package: org.apache.log4j;version="1.2.15",
+Import-Package: org.apache.log4j;version="1.2.24",
  org.hamcrest.core,
- org.junit;version="4.5.0",
- org.junit.runners.model;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+ org.junit;version="4.13.2",
+ org.junit.runners.model;version="4.13.2",
+ org.junit.runner;version="4.13.2",
+ org.junit.runners;version="4.13.2",
+ org.junit.runner.manipulation;version="4.13.2",
+ org.junit.runner.notification;version="4.13.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.testlanguages.backtracking.ui,
  org.eclipse.xtext.testlanguages.backtracking.ui.contentassist,
  org.eclipse.xtext.testlanguages.backtracking.ui.labeling,

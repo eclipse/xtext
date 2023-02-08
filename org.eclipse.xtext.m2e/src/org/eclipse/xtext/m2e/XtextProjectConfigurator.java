@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtext.m2e;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.HIDE_LOCAL_SYNTHETIC_VARIABLES;
@@ -16,11 +24,15 @@ import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.PREF
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getIgnoreSourceFolderKey;
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getKey;
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
+import org.eclipse.m2e.core.project.IMavenProjectFacade;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.project.MavenProject;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -45,9 +57,8 @@ import com.google.common.base.Strings;
 public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 
 	@Override
-	public void configure(ProjectConfigurationRequest request,
-			IProgressMonitor monitor) throws CoreException {
-		addNature(request.getProject(), XtextProjectHelper.NATURE_ID, monitor);
+	public void configure(ProjectConfigurationRequest request, IProgressMonitor monitor) throws CoreException {
+		addNature(getProject(request), XtextProjectHelper.NATURE_ID, monitor);
 		configureLanguages(request, monitor);
 	}
 
@@ -55,9 +66,9 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		List<MojoExecution> executions = getMojoExecutions(request, monitor);
 		SubMonitor progress = SubMonitor.convert(monitor, executions.size());
 		for (MojoExecution execution : executions) {
-			Languages languages = maven.getMojoParameterValue(request.getMavenProject(), execution, "languages", Languages.class, progress.split(1));
-			if(languages!=null) {
-				ProjectScope projectPreferences = new ProjectScope(request.getProject());
+			Languages languages = maven.getMojoParameterValue(getMavenProject(request), execution, "languages", Languages.class, progress.split(1));
+			if (languages != null) {
+				ProjectScope projectPreferences = new ProjectScope(getProject(request));
 				for (Language language : languages) {
 					configureLanguage(projectPreferences, language, request);
 				}
@@ -105,7 +116,7 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 	
 	private String makeProjectRelative(String fileName,
 			ProjectConfigurationRequest request) {
-		File baseDir = request.getMavenProject().getBasedir();
+		File baseDir = getMavenProject(request).getBasedir();
 		File file = new File(fileName);
 		String relativePath;
 		if (file.isAbsolute()) {
@@ -116,4 +127,28 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		String unixDelimited = relativePath.replaceAll("\\\\", "/");
 		return CharMatcher.is('/').trimFrom(unixDelimited);
 	}
+
+	static IProject getProject(ProjectConfigurationRequest request) {
+		return XtextProjectConfigurator.<ProjectConfigurationRequest, IMavenProjectFacade>call(request, "getMavenProjectFacade", "mavenProjectFacade").getProject();
+	}
+
+	static MavenProject getMavenProject(ProjectConfigurationRequest request) {
+		return call(request, "getMavenProject", "mavenProject");
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T, R> R call(T obj, String oldMethodName, String newMethodName) {
+		try {
+			Method method = obj.getClass().getMethod(oldMethodName);
+			return (R) method.invoke(obj);
+		} catch (ReflectiveOperationException er) {
+			try { // We are probably running with M2E >= 2.0 try the new method name
+				Method method = obj.getClass().getMethod(newMethodName);
+				return (R) method.invoke(obj);
+			} catch (ReflectiveOperationException e) {
+				throw new IllegalStateException(e);
+			}
+		}
+	}
+
 }

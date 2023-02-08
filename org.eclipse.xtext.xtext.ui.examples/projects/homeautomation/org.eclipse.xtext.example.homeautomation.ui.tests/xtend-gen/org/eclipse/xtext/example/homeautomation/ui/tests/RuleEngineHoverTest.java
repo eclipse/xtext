@@ -29,7 +29,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void hover_over_device_name() {
     StringConcatenation _builder = new StringConcatenation();
@@ -39,7 +39,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
     _builder_1.append("Device Window");
     this.hasHoverOver(_builder, "Window", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_device_state() {
     StringConcatenation _builder = new StringConcatenation();
@@ -49,7 +49,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
     _builder_1.append("State open");
     this.hasHoverOver(_builder, "open", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_fire_expression() {
     StringConcatenation _builder = new StringConcatenation();
@@ -67,7 +67,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
     _builder_1.append("void Hover.fire(Object event)");
     this.hasHoverOver(_builder, "fire", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_link_in_javadoc1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
     _builder_1.append("Device Window");
     this.hasHoverInJavadoc(_builder, "Window", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_link_in_javadoc2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -119,7 +119,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
     _builder_1.append("Device Heater");
     this.hasHoverInJavadoc(_builder, "Heater", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_link_in_javadoc3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -137,7 +137,7 @@ public class RuleEngineHoverTest extends AbstractHoverTest {
     _builder_1.append("An ordered collection (also known as a <i>sequence</i>");
     this.hasHoverInJavadoc(_builder, "java.util.List", _builder_1.toString());
   }
-  
+
   private void hasHoverInJavadoc(final CharSequence it, final String hoverText, final String hoverContent) {
     final int startOfJavadoc = it.toString().indexOf("/**");
     int _indexOf = it.toString().indexOf(hoverText, startOfJavadoc);

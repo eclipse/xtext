@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalImportUriUiTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -72,11 +80,11 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleMain"
-    // InternalImportUriUiTestLanguage.g:53:1: entryRuleMain : ruleMain EOF ;
+    // InternalImportUriUiTestLanguage.g:58:1: entryRuleMain : ruleMain EOF ;
     public final void entryRuleMain() throws RecognitionException {
         try {
-            // InternalImportUriUiTestLanguage.g:54:1: ( ruleMain EOF )
-            // InternalImportUriUiTestLanguage.g:55:1: ruleMain EOF
+            // InternalImportUriUiTestLanguage.g:59:1: ( ruleMain EOF )
+            // InternalImportUriUiTestLanguage.g:60:1: ruleMain EOF
             {
              before(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -102,21 +110,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleMain"
-    // InternalImportUriUiTestLanguage.g:62:1: ruleMain : ( ( rule__Main__Group__0 ) ) ;
+    // InternalImportUriUiTestLanguage.g:67:1: ruleMain : ( ( rule__Main__Group__0 ) ) ;
     public final void ruleMain() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:66:2: ( ( ( rule__Main__Group__0 ) ) )
-            // InternalImportUriUiTestLanguage.g:67:2: ( ( rule__Main__Group__0 ) )
+            // InternalImportUriUiTestLanguage.g:71:2: ( ( ( rule__Main__Group__0 ) ) )
+            // InternalImportUriUiTestLanguage.g:72:2: ( ( rule__Main__Group__0 ) )
             {
-            // InternalImportUriUiTestLanguage.g:67:2: ( ( rule__Main__Group__0 ) )
-            // InternalImportUriUiTestLanguage.g:68:3: ( rule__Main__Group__0 )
+            // InternalImportUriUiTestLanguage.g:72:2: ( ( rule__Main__Group__0 ) )
+            // InternalImportUriUiTestLanguage.g:73:3: ( rule__Main__Group__0 )
             {
              before(grammarAccess.getMainAccess().getGroup()); 
-            // InternalImportUriUiTestLanguage.g:69:3: ( rule__Main__Group__0 )
-            // InternalImportUriUiTestLanguage.g:69:4: rule__Main__Group__0
+            // InternalImportUriUiTestLanguage.g:74:3: ( rule__Main__Group__0 )
+            // InternalImportUriUiTestLanguage.g:74:4: rule__Main__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Main__Group__0();
@@ -149,11 +157,11 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalImportUriUiTestLanguage.g:78:1: entryRuleImport : ruleImport EOF ;
+    // InternalImportUriUiTestLanguage.g:83:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // InternalImportUriUiTestLanguage.g:79:1: ( ruleImport EOF )
-            // InternalImportUriUiTestLanguage.g:80:1: ruleImport EOF
+            // InternalImportUriUiTestLanguage.g:84:1: ( ruleImport EOF )
+            // InternalImportUriUiTestLanguage.g:85:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -179,21 +187,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleImport"
-    // InternalImportUriUiTestLanguage.g:87:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // InternalImportUriUiTestLanguage.g:92:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:91:2: ( ( ( rule__Import__Group__0 ) ) )
-            // InternalImportUriUiTestLanguage.g:92:2: ( ( rule__Import__Group__0 ) )
+            // InternalImportUriUiTestLanguage.g:96:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalImportUriUiTestLanguage.g:97:2: ( ( rule__Import__Group__0 ) )
             {
-            // InternalImportUriUiTestLanguage.g:92:2: ( ( rule__Import__Group__0 ) )
-            // InternalImportUriUiTestLanguage.g:93:3: ( rule__Import__Group__0 )
+            // InternalImportUriUiTestLanguage.g:97:2: ( ( rule__Import__Group__0 ) )
+            // InternalImportUriUiTestLanguage.g:98:3: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // InternalImportUriUiTestLanguage.g:94:3: ( rule__Import__Group__0 )
-            // InternalImportUriUiTestLanguage.g:94:4: rule__Import__Group__0
+            // InternalImportUriUiTestLanguage.g:99:3: ( rule__Import__Group__0 )
+            // InternalImportUriUiTestLanguage.g:99:4: rule__Import__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__0();
@@ -226,11 +234,11 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleType"
-    // InternalImportUriUiTestLanguage.g:103:1: entryRuleType : ruleType EOF ;
+    // InternalImportUriUiTestLanguage.g:108:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // InternalImportUriUiTestLanguage.g:104:1: ( ruleType EOF )
-            // InternalImportUriUiTestLanguage.g:105:1: ruleType EOF
+            // InternalImportUriUiTestLanguage.g:109:1: ( ruleType EOF )
+            // InternalImportUriUiTestLanguage.g:110:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -256,21 +264,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleType"
-    // InternalImportUriUiTestLanguage.g:112:1: ruleType : ( ( rule__Type__Group__0 ) ) ;
+    // InternalImportUriUiTestLanguage.g:117:1: ruleType : ( ( rule__Type__Group__0 ) ) ;
     public final void ruleType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:116:2: ( ( ( rule__Type__Group__0 ) ) )
-            // InternalImportUriUiTestLanguage.g:117:2: ( ( rule__Type__Group__0 ) )
+            // InternalImportUriUiTestLanguage.g:121:2: ( ( ( rule__Type__Group__0 ) ) )
+            // InternalImportUriUiTestLanguage.g:122:2: ( ( rule__Type__Group__0 ) )
             {
-            // InternalImportUriUiTestLanguage.g:117:2: ( ( rule__Type__Group__0 ) )
-            // InternalImportUriUiTestLanguage.g:118:3: ( rule__Type__Group__0 )
+            // InternalImportUriUiTestLanguage.g:122:2: ( ( rule__Type__Group__0 ) )
+            // InternalImportUriUiTestLanguage.g:123:3: ( rule__Type__Group__0 )
             {
              before(grammarAccess.getTypeAccess().getGroup()); 
-            // InternalImportUriUiTestLanguage.g:119:3: ( rule__Type__Group__0 )
-            // InternalImportUriUiTestLanguage.g:119:4: rule__Type__Group__0
+            // InternalImportUriUiTestLanguage.g:124:3: ( rule__Type__Group__0 )
+            // InternalImportUriUiTestLanguage.g:124:4: rule__Type__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Group__0();
@@ -303,14 +311,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__Group__0"
-    // InternalImportUriUiTestLanguage.g:127:1: rule__Main__Group__0 : rule__Main__Group__0__Impl rule__Main__Group__1 ;
+    // InternalImportUriUiTestLanguage.g:132:1: rule__Main__Group__0 : rule__Main__Group__0__Impl rule__Main__Group__1 ;
     public final void rule__Main__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:131:1: ( rule__Main__Group__0__Impl rule__Main__Group__1 )
-            // InternalImportUriUiTestLanguage.g:132:2: rule__Main__Group__0__Impl rule__Main__Group__1
+            // InternalImportUriUiTestLanguage.g:136:1: ( rule__Main__Group__0__Impl rule__Main__Group__1 )
+            // InternalImportUriUiTestLanguage.g:137:2: rule__Main__Group__0__Impl rule__Main__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_3);
             rule__Main__Group__0__Impl();
@@ -341,20 +349,20 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__Group__0__Impl"
-    // InternalImportUriUiTestLanguage.g:139:1: rule__Main__Group__0__Impl : ( ( rule__Main__ImportsAssignment_0 )* ) ;
+    // InternalImportUriUiTestLanguage.g:144:1: rule__Main__Group__0__Impl : ( ( rule__Main__ImportsAssignment_0 )* ) ;
     public final void rule__Main__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:143:1: ( ( ( rule__Main__ImportsAssignment_0 )* ) )
-            // InternalImportUriUiTestLanguage.g:144:1: ( ( rule__Main__ImportsAssignment_0 )* )
+            // InternalImportUriUiTestLanguage.g:148:1: ( ( ( rule__Main__ImportsAssignment_0 )* ) )
+            // InternalImportUriUiTestLanguage.g:149:1: ( ( rule__Main__ImportsAssignment_0 )* )
             {
-            // InternalImportUriUiTestLanguage.g:144:1: ( ( rule__Main__ImportsAssignment_0 )* )
-            // InternalImportUriUiTestLanguage.g:145:2: ( rule__Main__ImportsAssignment_0 )*
+            // InternalImportUriUiTestLanguage.g:149:1: ( ( rule__Main__ImportsAssignment_0 )* )
+            // InternalImportUriUiTestLanguage.g:150:2: ( rule__Main__ImportsAssignment_0 )*
             {
              before(grammarAccess.getMainAccess().getImportsAssignment_0()); 
-            // InternalImportUriUiTestLanguage.g:146:2: ( rule__Main__ImportsAssignment_0 )*
+            // InternalImportUriUiTestLanguage.g:151:2: ( rule__Main__ImportsAssignment_0 )*
             loop1:
             do {
                 int alt1=2;
@@ -367,7 +375,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalImportUriUiTestLanguage.g:146:3: rule__Main__ImportsAssignment_0
+            	    // InternalImportUriUiTestLanguage.g:151:3: rule__Main__ImportsAssignment_0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_4);
             	    rule__Main__ImportsAssignment_0();
@@ -406,14 +414,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__Group__1"
-    // InternalImportUriUiTestLanguage.g:154:1: rule__Main__Group__1 : rule__Main__Group__1__Impl ;
+    // InternalImportUriUiTestLanguage.g:159:1: rule__Main__Group__1 : rule__Main__Group__1__Impl ;
     public final void rule__Main__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:158:1: ( rule__Main__Group__1__Impl )
-            // InternalImportUriUiTestLanguage.g:159:2: rule__Main__Group__1__Impl
+            // InternalImportUriUiTestLanguage.g:163:1: ( rule__Main__Group__1__Impl )
+            // InternalImportUriUiTestLanguage.g:164:2: rule__Main__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Main__Group__1__Impl();
@@ -439,20 +447,20 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__Group__1__Impl"
-    // InternalImportUriUiTestLanguage.g:165:1: rule__Main__Group__1__Impl : ( ( rule__Main__TypesAssignment_1 )* ) ;
+    // InternalImportUriUiTestLanguage.g:170:1: rule__Main__Group__1__Impl : ( ( rule__Main__TypesAssignment_1 )* ) ;
     public final void rule__Main__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:169:1: ( ( ( rule__Main__TypesAssignment_1 )* ) )
-            // InternalImportUriUiTestLanguage.g:170:1: ( ( rule__Main__TypesAssignment_1 )* )
+            // InternalImportUriUiTestLanguage.g:174:1: ( ( ( rule__Main__TypesAssignment_1 )* ) )
+            // InternalImportUriUiTestLanguage.g:175:1: ( ( rule__Main__TypesAssignment_1 )* )
             {
-            // InternalImportUriUiTestLanguage.g:170:1: ( ( rule__Main__TypesAssignment_1 )* )
-            // InternalImportUriUiTestLanguage.g:171:2: ( rule__Main__TypesAssignment_1 )*
+            // InternalImportUriUiTestLanguage.g:175:1: ( ( rule__Main__TypesAssignment_1 )* )
+            // InternalImportUriUiTestLanguage.g:176:2: ( rule__Main__TypesAssignment_1 )*
             {
              before(grammarAccess.getMainAccess().getTypesAssignment_1()); 
-            // InternalImportUriUiTestLanguage.g:172:2: ( rule__Main__TypesAssignment_1 )*
+            // InternalImportUriUiTestLanguage.g:177:2: ( rule__Main__TypesAssignment_1 )*
             loop2:
             do {
                 int alt2=2;
@@ -465,7 +473,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalImportUriUiTestLanguage.g:172:3: rule__Main__TypesAssignment_1
+            	    // InternalImportUriUiTestLanguage.g:177:3: rule__Main__TypesAssignment_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_5);
             	    rule__Main__TypesAssignment_1();
@@ -504,14 +512,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // InternalImportUriUiTestLanguage.g:181:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalImportUriUiTestLanguage.g:186:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:185:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // InternalImportUriUiTestLanguage.g:186:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalImportUriUiTestLanguage.g:190:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalImportUriUiTestLanguage.g:191:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Import__Group__0__Impl();
@@ -542,17 +550,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // InternalImportUriUiTestLanguage.g:193:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalImportUriUiTestLanguage.g:198:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:197:1: ( ( 'import' ) )
-            // InternalImportUriUiTestLanguage.g:198:1: ( 'import' )
+            // InternalImportUriUiTestLanguage.g:202:1: ( ( 'import' ) )
+            // InternalImportUriUiTestLanguage.g:203:1: ( 'import' )
             {
-            // InternalImportUriUiTestLanguage.g:198:1: ( 'import' )
-            // InternalImportUriUiTestLanguage.g:199:2: 'import'
+            // InternalImportUriUiTestLanguage.g:203:1: ( 'import' )
+            // InternalImportUriUiTestLanguage.g:204:2: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -579,14 +587,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // InternalImportUriUiTestLanguage.g:208:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // InternalImportUriUiTestLanguage.g:213:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:212:1: ( rule__Import__Group__1__Impl )
-            // InternalImportUriUiTestLanguage.g:213:2: rule__Import__Group__1__Impl
+            // InternalImportUriUiTestLanguage.g:217:1: ( rule__Import__Group__1__Impl )
+            // InternalImportUriUiTestLanguage.g:218:2: rule__Import__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__1__Impl();
@@ -612,21 +620,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // InternalImportUriUiTestLanguage.g:219:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
+    // InternalImportUriUiTestLanguage.g:224:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:223:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
-            // InternalImportUriUiTestLanguage.g:224:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalImportUriUiTestLanguage.g:228:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
+            // InternalImportUriUiTestLanguage.g:229:1: ( ( rule__Import__ImportURIAssignment_1 ) )
             {
-            // InternalImportUriUiTestLanguage.g:224:1: ( ( rule__Import__ImportURIAssignment_1 ) )
-            // InternalImportUriUiTestLanguage.g:225:2: ( rule__Import__ImportURIAssignment_1 )
+            // InternalImportUriUiTestLanguage.g:229:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalImportUriUiTestLanguage.g:230:2: ( rule__Import__ImportURIAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportURIAssignment_1()); 
-            // InternalImportUriUiTestLanguage.g:226:2: ( rule__Import__ImportURIAssignment_1 )
-            // InternalImportUriUiTestLanguage.g:226:3: rule__Import__ImportURIAssignment_1
+            // InternalImportUriUiTestLanguage.g:231:2: ( rule__Import__ImportURIAssignment_1 )
+            // InternalImportUriUiTestLanguage.g:231:3: rule__Import__ImportURIAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__ImportURIAssignment_1();
@@ -659,14 +667,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__0"
-    // InternalImportUriUiTestLanguage.g:235:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
+    // InternalImportUriUiTestLanguage.g:240:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
     public final void rule__Type__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:239:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
-            // InternalImportUriUiTestLanguage.g:240:2: rule__Type__Group__0__Impl rule__Type__Group__1
+            // InternalImportUriUiTestLanguage.g:244:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
+            // InternalImportUriUiTestLanguage.g:245:2: rule__Type__Group__0__Impl rule__Type__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Type__Group__0__Impl();
@@ -697,17 +705,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__0__Impl"
-    // InternalImportUriUiTestLanguage.g:247:1: rule__Type__Group__0__Impl : ( 'type' ) ;
+    // InternalImportUriUiTestLanguage.g:252:1: rule__Type__Group__0__Impl : ( 'type' ) ;
     public final void rule__Type__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:251:1: ( ( 'type' ) )
-            // InternalImportUriUiTestLanguage.g:252:1: ( 'type' )
+            // InternalImportUriUiTestLanguage.g:256:1: ( ( 'type' ) )
+            // InternalImportUriUiTestLanguage.g:257:1: ( 'type' )
             {
-            // InternalImportUriUiTestLanguage.g:252:1: ( 'type' )
-            // InternalImportUriUiTestLanguage.g:253:2: 'type'
+            // InternalImportUriUiTestLanguage.g:257:1: ( 'type' )
+            // InternalImportUriUiTestLanguage.g:258:2: 'type'
             {
              before(grammarAccess.getTypeAccess().getTypeKeyword_0()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -734,14 +742,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__1"
-    // InternalImportUriUiTestLanguage.g:262:1: rule__Type__Group__1 : rule__Type__Group__1__Impl rule__Type__Group__2 ;
+    // InternalImportUriUiTestLanguage.g:267:1: rule__Type__Group__1 : rule__Type__Group__1__Impl rule__Type__Group__2 ;
     public final void rule__Type__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:266:1: ( rule__Type__Group__1__Impl rule__Type__Group__2 )
-            // InternalImportUriUiTestLanguage.g:267:2: rule__Type__Group__1__Impl rule__Type__Group__2
+            // InternalImportUriUiTestLanguage.g:271:1: ( rule__Type__Group__1__Impl rule__Type__Group__2 )
+            // InternalImportUriUiTestLanguage.g:272:2: rule__Type__Group__1__Impl rule__Type__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Type__Group__1__Impl();
@@ -772,21 +780,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__1__Impl"
-    // InternalImportUriUiTestLanguage.g:274:1: rule__Type__Group__1__Impl : ( ( rule__Type__NameAssignment_1 ) ) ;
+    // InternalImportUriUiTestLanguage.g:279:1: rule__Type__Group__1__Impl : ( ( rule__Type__NameAssignment_1 ) ) ;
     public final void rule__Type__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:278:1: ( ( ( rule__Type__NameAssignment_1 ) ) )
-            // InternalImportUriUiTestLanguage.g:279:1: ( ( rule__Type__NameAssignment_1 ) )
+            // InternalImportUriUiTestLanguage.g:283:1: ( ( ( rule__Type__NameAssignment_1 ) ) )
+            // InternalImportUriUiTestLanguage.g:284:1: ( ( rule__Type__NameAssignment_1 ) )
             {
-            // InternalImportUriUiTestLanguage.g:279:1: ( ( rule__Type__NameAssignment_1 ) )
-            // InternalImportUriUiTestLanguage.g:280:2: ( rule__Type__NameAssignment_1 )
+            // InternalImportUriUiTestLanguage.g:284:1: ( ( rule__Type__NameAssignment_1 ) )
+            // InternalImportUriUiTestLanguage.g:285:2: ( rule__Type__NameAssignment_1 )
             {
              before(grammarAccess.getTypeAccess().getNameAssignment_1()); 
-            // InternalImportUriUiTestLanguage.g:281:2: ( rule__Type__NameAssignment_1 )
-            // InternalImportUriUiTestLanguage.g:281:3: rule__Type__NameAssignment_1
+            // InternalImportUriUiTestLanguage.g:286:2: ( rule__Type__NameAssignment_1 )
+            // InternalImportUriUiTestLanguage.g:286:3: rule__Type__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__NameAssignment_1();
@@ -819,14 +827,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__2"
-    // InternalImportUriUiTestLanguage.g:289:1: rule__Type__Group__2 : rule__Type__Group__2__Impl rule__Type__Group__3 ;
+    // InternalImportUriUiTestLanguage.g:294:1: rule__Type__Group__2 : rule__Type__Group__2__Impl rule__Type__Group__3 ;
     public final void rule__Type__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:293:1: ( rule__Type__Group__2__Impl rule__Type__Group__3 )
-            // InternalImportUriUiTestLanguage.g:294:2: rule__Type__Group__2__Impl rule__Type__Group__3
+            // InternalImportUriUiTestLanguage.g:298:1: ( rule__Type__Group__2__Impl rule__Type__Group__3 )
+            // InternalImportUriUiTestLanguage.g:299:2: rule__Type__Group__2__Impl rule__Type__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Type__Group__2__Impl();
@@ -857,17 +865,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__2__Impl"
-    // InternalImportUriUiTestLanguage.g:301:1: rule__Type__Group__2__Impl : ( 'extends' ) ;
+    // InternalImportUriUiTestLanguage.g:306:1: rule__Type__Group__2__Impl : ( 'extends' ) ;
     public final void rule__Type__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:305:1: ( ( 'extends' ) )
-            // InternalImportUriUiTestLanguage.g:306:1: ( 'extends' )
+            // InternalImportUriUiTestLanguage.g:310:1: ( ( 'extends' ) )
+            // InternalImportUriUiTestLanguage.g:311:1: ( 'extends' )
             {
-            // InternalImportUriUiTestLanguage.g:306:1: ( 'extends' )
-            // InternalImportUriUiTestLanguage.g:307:2: 'extends'
+            // InternalImportUriUiTestLanguage.g:311:1: ( 'extends' )
+            // InternalImportUriUiTestLanguage.g:312:2: 'extends'
             {
              before(grammarAccess.getTypeAccess().getExtendsKeyword_2()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -894,14 +902,14 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__3"
-    // InternalImportUriUiTestLanguage.g:316:1: rule__Type__Group__3 : rule__Type__Group__3__Impl ;
+    // InternalImportUriUiTestLanguage.g:321:1: rule__Type__Group__3 : rule__Type__Group__3__Impl ;
     public final void rule__Type__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:320:1: ( rule__Type__Group__3__Impl )
-            // InternalImportUriUiTestLanguage.g:321:2: rule__Type__Group__3__Impl
+            // InternalImportUriUiTestLanguage.g:325:1: ( rule__Type__Group__3__Impl )
+            // InternalImportUriUiTestLanguage.g:326:2: rule__Type__Group__3__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Group__3__Impl();
@@ -927,21 +935,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Group__3__Impl"
-    // InternalImportUriUiTestLanguage.g:327:1: rule__Type__Group__3__Impl : ( ( rule__Type__ExtendsAssignment_3 ) ) ;
+    // InternalImportUriUiTestLanguage.g:332:1: rule__Type__Group__3__Impl : ( ( rule__Type__ExtendsAssignment_3 ) ) ;
     public final void rule__Type__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:331:1: ( ( ( rule__Type__ExtendsAssignment_3 ) ) )
-            // InternalImportUriUiTestLanguage.g:332:1: ( ( rule__Type__ExtendsAssignment_3 ) )
+            // InternalImportUriUiTestLanguage.g:336:1: ( ( ( rule__Type__ExtendsAssignment_3 ) ) )
+            // InternalImportUriUiTestLanguage.g:337:1: ( ( rule__Type__ExtendsAssignment_3 ) )
             {
-            // InternalImportUriUiTestLanguage.g:332:1: ( ( rule__Type__ExtendsAssignment_3 ) )
-            // InternalImportUriUiTestLanguage.g:333:2: ( rule__Type__ExtendsAssignment_3 )
+            // InternalImportUriUiTestLanguage.g:337:1: ( ( rule__Type__ExtendsAssignment_3 ) )
+            // InternalImportUriUiTestLanguage.g:338:2: ( rule__Type__ExtendsAssignment_3 )
             {
              before(grammarAccess.getTypeAccess().getExtendsAssignment_3()); 
-            // InternalImportUriUiTestLanguage.g:334:2: ( rule__Type__ExtendsAssignment_3 )
-            // InternalImportUriUiTestLanguage.g:334:3: rule__Type__ExtendsAssignment_3
+            // InternalImportUriUiTestLanguage.g:339:2: ( rule__Type__ExtendsAssignment_3 )
+            // InternalImportUriUiTestLanguage.g:339:3: rule__Type__ExtendsAssignment_3
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__ExtendsAssignment_3();
@@ -974,17 +982,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__ImportsAssignment_0"
-    // InternalImportUriUiTestLanguage.g:343:1: rule__Main__ImportsAssignment_0 : ( ruleImport ) ;
+    // InternalImportUriUiTestLanguage.g:348:1: rule__Main__ImportsAssignment_0 : ( ruleImport ) ;
     public final void rule__Main__ImportsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:347:1: ( ( ruleImport ) )
-            // InternalImportUriUiTestLanguage.g:348:2: ( ruleImport )
+            // InternalImportUriUiTestLanguage.g:352:1: ( ( ruleImport ) )
+            // InternalImportUriUiTestLanguage.g:353:2: ( ruleImport )
             {
-            // InternalImportUriUiTestLanguage.g:348:2: ( ruleImport )
-            // InternalImportUriUiTestLanguage.g:349:3: ruleImport
+            // InternalImportUriUiTestLanguage.g:353:2: ( ruleImport )
+            // InternalImportUriUiTestLanguage.g:354:3: ruleImport
             {
              before(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1015,17 +1023,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__TypesAssignment_1"
-    // InternalImportUriUiTestLanguage.g:358:1: rule__Main__TypesAssignment_1 : ( ruleType ) ;
+    // InternalImportUriUiTestLanguage.g:363:1: rule__Main__TypesAssignment_1 : ( ruleType ) ;
     public final void rule__Main__TypesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:362:1: ( ( ruleType ) )
-            // InternalImportUriUiTestLanguage.g:363:2: ( ruleType )
+            // InternalImportUriUiTestLanguage.g:367:1: ( ( ruleType ) )
+            // InternalImportUriUiTestLanguage.g:368:2: ( ruleType )
             {
-            // InternalImportUriUiTestLanguage.g:363:2: ( ruleType )
-            // InternalImportUriUiTestLanguage.g:364:3: ruleType
+            // InternalImportUriUiTestLanguage.g:368:2: ( ruleType )
+            // InternalImportUriUiTestLanguage.g:369:3: ruleType
             {
              before(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1056,17 +1064,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__ImportURIAssignment_1"
-    // InternalImportUriUiTestLanguage.g:373:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
+    // InternalImportUriUiTestLanguage.g:378:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Import__ImportURIAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:377:1: ( ( RULE_STRING ) )
-            // InternalImportUriUiTestLanguage.g:378:2: ( RULE_STRING )
+            // InternalImportUriUiTestLanguage.g:382:1: ( ( RULE_STRING ) )
+            // InternalImportUriUiTestLanguage.g:383:2: ( RULE_STRING )
             {
-            // InternalImportUriUiTestLanguage.g:378:2: ( RULE_STRING )
-            // InternalImportUriUiTestLanguage.g:379:3: RULE_STRING
+            // InternalImportUriUiTestLanguage.g:383:2: ( RULE_STRING )
+            // InternalImportUriUiTestLanguage.g:384:3: RULE_STRING
             {
              before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
             match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
@@ -1093,17 +1101,17 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__NameAssignment_1"
-    // InternalImportUriUiTestLanguage.g:388:1: rule__Type__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalImportUriUiTestLanguage.g:393:1: rule__Type__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Type__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:392:1: ( ( RULE_ID ) )
-            // InternalImportUriUiTestLanguage.g:393:2: ( RULE_ID )
+            // InternalImportUriUiTestLanguage.g:397:1: ( ( RULE_ID ) )
+            // InternalImportUriUiTestLanguage.g:398:2: ( RULE_ID )
             {
-            // InternalImportUriUiTestLanguage.g:393:2: ( RULE_ID )
-            // InternalImportUriUiTestLanguage.g:394:3: RULE_ID
+            // InternalImportUriUiTestLanguage.g:398:2: ( RULE_ID )
+            // InternalImportUriUiTestLanguage.g:399:3: RULE_ID
             {
              before(grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1130,21 +1138,21 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__ExtendsAssignment_3"
-    // InternalImportUriUiTestLanguage.g:403:1: rule__Type__ExtendsAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalImportUriUiTestLanguage.g:408:1: rule__Type__ExtendsAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Type__ExtendsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalImportUriUiTestLanguage.g:407:1: ( ( ( RULE_ID ) ) )
-            // InternalImportUriUiTestLanguage.g:408:2: ( ( RULE_ID ) )
+            // InternalImportUriUiTestLanguage.g:412:1: ( ( ( RULE_ID ) ) )
+            // InternalImportUriUiTestLanguage.g:413:2: ( ( RULE_ID ) )
             {
-            // InternalImportUriUiTestLanguage.g:408:2: ( ( RULE_ID ) )
-            // InternalImportUriUiTestLanguage.g:409:3: ( RULE_ID )
+            // InternalImportUriUiTestLanguage.g:413:2: ( ( RULE_ID ) )
+            // InternalImportUriUiTestLanguage.g:414:3: ( RULE_ID )
             {
              before(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0()); 
-            // InternalImportUriUiTestLanguage.g:410:3: ( RULE_ID )
-            // InternalImportUriUiTestLanguage.g:411:4: RULE_ID
+            // InternalImportUriUiTestLanguage.g:415:3: ( RULE_ID )
+            // InternalImportUriUiTestLanguage.g:416:4: RULE_ID
             {
              before(grammarAccess.getTypeAccess().getExtendsTypeIDTerminalRuleCall_3_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 

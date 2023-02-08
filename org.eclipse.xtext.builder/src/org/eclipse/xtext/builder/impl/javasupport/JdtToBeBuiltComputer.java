@@ -40,7 +40,6 @@ import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.ExternalFoldersManager;
 import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jdt.internal.core.JavaProject;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
@@ -154,19 +153,13 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	}
 
 	/**
-	 * Handle all fragment roots that are on the classpath and not a source folder.
+	 * By default, handle all fragment roots that are on the class-path, not from the JRE and not a source folder.
+	 * 
+	 * @see IStorage2UriMapperJdtExtensions#shouldHandle(IPackageFragmentRoot)
 	 * @since 2.23
 	 */
 	protected boolean shouldHandle(IPackageFragmentRoot root) {
-		try {
-			boolean result = !JavaRuntime.newDefaultJREContainerPath().isPrefixOf(root.getRawClasspathEntry().getPath());
-			result &= (root.isArchive() || root.isExternal()); 
-			return result;
-		} catch (JavaModelException ex) {
-			if (!ex.isDoesNotExist())
-				log.error(ex.getMessage(), ex);
-			return false;
-		}
+		return this.jdtUriMapperExtension.shouldHandle(root);
 	}
 
 	@Override

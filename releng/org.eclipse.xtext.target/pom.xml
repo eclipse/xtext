@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
-		<version>2.26.0-SNAPSHOT</version>
+		<version>2.30.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 
@@ -28,74 +28,24 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>${project.artifactId}-oxygen.target</file>
+									<file>${project.artifactId}-r202203.target</file>
 									<type>target</type>
-									<classifier>${project.artifactId}-oxygen</classifier>
+									<classifier>${project.artifactId}-r202203</classifier>
 								</artifact>
 								<artifact>
-									<file>${project.artifactId}-photon.target</file>
+									<file>${project.artifactId}-r202206.target</file>
 									<type>target</type>
-									<classifier>${project.artifactId}-photon</classifier>
+									<classifier>${project.artifactId}-r202206</classifier>
 								</artifact>
 								<artifact>
-									<file>${project.artifactId}-r201809.target</file>
+									<file>${project.artifactId}-r202209.target</file>
 									<type>target</type>
-									<classifier>${project.artifactId}-r201809</classifier>
+									<classifier>${project.artifactId}-r202209</classifier>
 								</artifact>
 								<artifact>
-									<file>${project.artifactId}-r201812.target</file>
+									<file>${project.artifactId}-r202212.target</file>
 									<type>target</type>
-									<classifier>${project.artifactId}-r201812</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201903.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201903</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201906.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201906</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201909.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201909</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201912.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201912</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r202003.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r202003</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r202006.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r202006</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r202009.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r202009</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r202012.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r202012</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r202103.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r202103</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r202106.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r202106</classifier>
+									<classifier>${project.artifactId}-r202212</classifier>
 								</artifact>
 								<artifact>
 									<file>${project.artifactId}-latest.target</file>

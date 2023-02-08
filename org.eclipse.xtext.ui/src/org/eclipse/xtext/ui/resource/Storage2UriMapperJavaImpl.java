@@ -13,9 +13,11 @@ import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,13 +47,11 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ForwardingMap;
@@ -73,12 +73,12 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	public static class PackageFragmentRootData {
 		public URI uriPrefix;
 		public final Object modificationStamp;
-		public Map<String, IPackageFragmentRoot> associatedRoots;
+		public final Map<String, IPackageFragmentRoot> associatedRoots;
 		public Map<URI, IStorage> uri2Storage = newLinkedHashMap();
 
 		public PackageFragmentRootData(Object modificationStamp) {
 			this.modificationStamp = modificationStamp;
-			this.associatedRoots = newLinkedHashMap();
+			this.associatedRoots = Collections.synchronizedMap(new LinkedHashMap<>());
 		}
 		
 		@Override
@@ -87,19 +87,25 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 
 		public boolean exists() {
-			Map<String, IPackageFragmentRoot> roots = associatedRoots;
-			if (roots.isEmpty()) {
-				return false;
-			}
-			return IterableExtensions.head(roots.values()).exists();
+			IPackageFragmentRoot root = anyPackageFragmentRoot();
+			return root != null && root.exists();
 		}
 
 		public IPath getPath() {
-			Map<String, IPackageFragmentRoot> roots = associatedRoots;
-			if (roots.isEmpty()) {
+			IPackageFragmentRoot root = anyPackageFragmentRoot();
+			if (root == null) {
 				return null;
 			}
-			return IterableExtensions.head(roots.values()).getPath();
+			return root.getPath();
+		}
+		
+		private IPackageFragmentRoot anyPackageFragmentRoot() {
+			synchronized(associatedRoots) {
+				if (associatedRoots.isEmpty()) {
+					return null;
+				}
+				return associatedRoots.values().iterator().next();
+			}
 		}
 
 		public void addRoot(IPackageFragmentRoot root) {
@@ -108,13 +114,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 				if ("JImageModuleFragmentBridge".equals(root.getClass().getSimpleName())) {
 					return;
 				}
-				String handleIdentifier = root.getHandleIdentifier();
-				Map<String, IPackageFragmentRoot> roots = associatedRoots;
-				if (!root.equals(roots.get(handleIdentifier))) {
-					Map<String,IPackageFragmentRoot> copy = newLinkedHashMap(roots);
-					copy.put(handleIdentifier, root);
-					associatedRoots = copy;
-				}
+				associatedRoots.put(root.getHandleIdentifier(), root);
 			}
 		}
 
@@ -243,7 +243,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	}
 	
 	protected PackageFragmentRootData getData(IPackageFragmentRoot root) {
-		final boolean isCachable = root.isArchive() || root.isExternal();
+		final boolean isCachable = shouldHandle(root);
 		if (isCachable) {
 			return getCachedData(root);
 		}
@@ -312,95 +312,113 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * @since 2.4
 	 */
 	protected PackageFragmentRootData initializeData(final IPackageFragmentRoot root) {
-		final PackageFragmentRootData data = new PackageFragmentRootData(computeModificationStamp(root));
+		final PackageFragmentRootData data = createPackageFragmentRootData(root);
 		data.addRoot(root);
-		try {
-			final SourceAttachmentPackageFragmentRootWalker<Void> walker = new SourceAttachmentPackageFragmentRootWalker<Void>() {
-				
-				@Override
-				protected URI getURI(IFile file,
-						org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState state) {
-					if (!uriValidator.isPossiblyManaged(file))
-						return null;
-					return super.getURI(file, state);
-				}
+		if (shouldHandle(root)) {
+			try {
+				final SourceAttachmentPackageFragmentRootWalker<Void> walker = new SourceAttachmentPackageFragmentRootWalker<Void>() {
 
-				@Override
-				protected URI getURI(IJarEntryResource jarEntry,
-						org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState state) {
-					if (!uriValidator.isPossiblyManaged(jarEntry))
-						return null;
-					final URI uri = locator.getURI(root, jarEntry, state);
-					if (!uriValidator.isValid(uri, jarEntry))
-						return null;
-					return uri;
-				}
+					@Override
+					protected URI getURI(IFile file, org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState state) {
+						if (!uriValidator.isPossiblyManaged(file))
+							return null;
+						return super.getURI(file, state);
+					}
 
-				@Override
-				protected Void handle(URI uri, IStorage storage,
-						org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState state) {
-					data.uri2Storage.put(uri, storage);
-					return null;
-				}
-				
-			};
-			walker.traverse(root, false);
-			if (walker.getBundleSymbolicName() != null)
-				data.uriPrefix = URI.createPlatformResourceURI(walker.getBundleSymbolicName()+"/", true);
-		} catch (RuntimeException e) {
-			log.error(e.getMessage(), e);
-		} catch (JavaModelException e) {
-			log.debug(e.getMessage(), e);
+					@Override
+					protected URI getURI(IJarEntryResource jarEntry,
+							org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState state) {
+						if (!uriValidator.isPossiblyManaged(jarEntry))
+							return null;
+						final URI uri = locator.getURI(root, jarEntry, state);
+						if (!uriValidator.isValid(uri, jarEntry))
+							return null;
+						return uri;
+					}
+
+					@Override
+					protected Void handle(URI uri, IStorage storage,
+							org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState state) {
+						data.uri2Storage.put(uri, storage);
+						return null;
+					}
+				};
+				walker.traverse(root, false);
+				if (walker.getBundleSymbolicName() != null)
+					data.uriPrefix = URI.createPlatformResourceURI(walker.getBundleSymbolicName() + "/", true);
+			} catch (RuntimeException e) {
+				log.error(e.getMessage(), e);
+			} catch (JavaModelException e) {
+				log.debug(e.getMessage(), e);
+			}
 		}
 		return data;
+	}
+	
+	/**
+	 * @since 2.27
+	 */
+	protected PackageFragmentRootData createPackageFragmentRootData(final IPackageFragmentRoot root) {
+		return new PackageFragmentRootData(computeModificationStamp(root));
 	}
 	
 	/* @NonNull */
 	@Override
 	public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
-		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
-		List<PackageFragmentRootData> packageFragmentRootDatas;
+		// Pessimistic copy of the cachedPackageFragmentRootData
+		Collection<PackageFragmentRootData> packageFragmentRootDatas;
 		synchronized(cachedPackageFragmentRootData) {
-			packageFragmentRootDatas = newArrayList(cachedPackageFragmentRootData.values());
+			packageFragmentRootDatas = cachedPackageFragmentRootData.values();
 		}
-		Iterator<PackageFragmentRootData> iterator = packageFragmentRootDatas.iterator();
-		while (iterator.hasNext()) {
-			PackageFragmentRootData data = iterator.next();
-			if (data.exists()) {
-				if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
-					IStorage storage = data.uri2Storage.get(uri);
-					if (storage != null) {
-						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
-							result.add(Tuples.create(storage, root.getJavaProject().getProject()));
-						}
-					}
-				}
-			} else {
-				iterator.remove();
-			}
-		}
-		if (result.isEmpty() && uri.isArchive()) {
+		
+		/* 
+		 * We iterate all known package fragment roots and put them into two buckets if matching:
+		 * - uriPrefix == null || uri startsWith uriPrefix
+		 *   => regularMatch
+		 * 
+		 * - uri.isArchive && archiveURI.isFile || isPlatformResource && uriPrefix is not null && no other matches && 
+		 *   => archiveMatch
+		 */
+		List<Pair<IStorage, IProject>> regularMatches = new ArrayList<Pair<IStorage,IProject>>(1);
+		List<Pair<IStorage, IProject>> archiveMatches = null;
+		IPath archivePath = null;
+		if (uri.isArchive()) {
 			String authority = uri.authority();
-			authority = authority.substring(0, authority.length() - 1);
-			URI archiveURI = URI.createURI(authority);
+			URI archiveURI = URI.createURI(authority.substring(0, authority.length() - 1));
 			if (archiveURI.isFile() || archiveURI.isPlatformResource()) {
-				IPath archivePath = new Path(archiveURI.isPlatformResource()? archiveURI.toPlatformString(true): archiveURI.toFileString());
-				for (PackageFragmentRootData data : packageFragmentRootDatas) {
-					if (data.uriPrefix != null && archivePath.equals(data.getPath())) {
-						// prefixes have an empty last segment.
-						URI prefix = data.uriPrefix.lastSegment().length()==0 ? data.uriPrefix.trimSegments(1) : data.uriPrefix;
-						URI expectedURI = prefix.appendSegments(uri.segments());
-						IStorage storage = data.uri2Storage.get(expectedURI);
-						if (storage != null) {
-							for (IPackageFragmentRoot root : data.associatedRoots.values()) {
-								result.add(Tuples.create(storage, root.getJavaProject().getProject()));
-							}
+				archivePath = new Path(archiveURI.isPlatformResource()? archiveURI.toPlatformString(true): archiveURI.toFileString());
+				archiveMatches = new ArrayList<Pair<IStorage,IProject>>(1);
+			}
+		}
+		for(PackageFragmentRootData data: packageFragmentRootDatas) {
+			if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
+				IStorage storage = data.uri2Storage.get(uri);
+				if (storage != null && data.exists()) {
+					synchronized(data.associatedRoots) {
+						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
+							regularMatches.add(Tuples.create(storage, root.getJavaProject().getProject()));
+							archiveMatches = null;
+						}
+					}
+				}
+			} else if (archiveMatches != null && archivePath != null && data.uriPrefix != null && archivePath.equals(data.getPath())) {
+				// prefixes have an empty last segment.
+				URI prefix = data.uriPrefix.lastSegment().length()==0 ? data.uriPrefix.trimSegments(1) : data.uriPrefix;
+				URI expectedURI = prefix.appendSegments(uri.segments());
+				IStorage storage = data.uri2Storage.get(expectedURI);
+				if (storage != null && data.exists()) {
+					synchronized (data.associatedRoots) {
+						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
+							archiveMatches.add(Tuples.create(storage, root.getJavaProject().getProject()));
 						}
 					}
 				}
 			}
 		}
-		return result;
+		if (archiveMatches != null) {
+			return archiveMatches;
+		}
+		return regularMatches;
 	}
 	
 	/**
@@ -476,9 +494,10 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		try {
 			if (project.exists() && project.getProject().isAccessible()) {
 				for(IPackageFragmentRoot root: project.getPackageFragmentRoots()) {
-					boolean isCachable = root.isArchive() || root.isExternal();
-					if(isCachable) 
+					boolean isCachable = shouldHandle(root);
+					if(isCachable) {
 						datas.add(getCachedData(root));
+					}
 				}
 			}
 		} catch (JavaModelException e) {
@@ -499,39 +518,37 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			if (toBeKept.contains(data)) {
 				continue;
 			}
-			// create a copy of the known associated roots to avoid concurrent modification
-			// and conflicts with other readers
-			Map<String, IPackageFragmentRoot> copy = newLinkedHashMap(data.associatedRoots);
-			Iterator<IPackageFragmentRoot> i = copy.values().iterator();
-			IPackageFragmentRoot someRoot = null;
-			boolean didChange = false;
-			while (i.hasNext()) {
-				IPackageFragmentRoot root = i.next();
-				if (project.equals(root.getJavaProject())) {
-					i.remove();
-					didChange = true;
-				} else if (someRoot == null) {
-					someRoot = root;
-				}
-			}
-			if (copy.size() == 0) {
-				toBeRemoved.add(data);
-			} else if (didChange) {
-				// get rid of cached storages that still point to roots / projects that are no longer available
-				// and recompute them lazily on demand
-				data.associatedRoots = copy;
-				final IPackageFragmentRoot rootToProcess = someRoot;
-				data.uri2Storage = new ForwardingMap<URI, IStorage>() {
-					Map<URI, IStorage> delegate;
-					@Override
-					protected Map<URI, IStorage> delegate() {
-						if (delegate == null) {
-							PackageFragmentRootData newlyCollected = initializeData(rootToProcess);
-							return delegate = newlyCollected.uri2Storage; 
-						}
-						return delegate;
+			Map<String, IPackageFragmentRoot> associatedRoots = data.associatedRoots;
+			synchronized(associatedRoots) {
+				Iterator<IPackageFragmentRoot> i = associatedRoots.values().iterator();
+				IPackageFragmentRoot someRoot = null;
+				boolean didChange = false;
+				while (i.hasNext()) {
+					IPackageFragmentRoot root = i.next();
+					if (project.equals(root.getJavaProject())) {
+						i.remove();
+						didChange = true;
+					} else if (someRoot == null) {
+						someRoot = root;
 					}
-				};
+				}
+				if (associatedRoots.size() == 0) {
+					toBeRemoved.add(data);
+				} else if (didChange) {
+					// get rid of cached storages that still point to roots / projects that are no longer available
+					// and recompute them lazily on demand
+					final IPackageFragmentRoot rootToProcess = someRoot;
+					data.uri2Storage = new ForwardingMap<URI, IStorage>() {
+						Map<URI, IStorage> delegate;
+						@Override
+						protected Map<URI, IStorage> delegate() {
+							if (delegate == null) {
+								return delegate = initializeData(rootToProcess).uri2Storage; 
+							}
+							return delegate;
+						}
+					};
+				}
 			}
 		}
 		if(!toBeRemoved.isEmpty()) {
@@ -551,7 +568,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	
 	/**
 	 * Schedules cache initialization to be performed in the background.
-	 * Cache init needs a WS lock, though.
+	 * Cache initialization needs a WS lock, though.
 	 * 
 	 * @since 2.9
 	 */
@@ -560,6 +577,13 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			useNewThreadToInitialize(false);
 		}
 	}
+	
+	/**
+	 * @since 2.26
+	 */
+	public void syncInitializeCache() {
+		initializeCache(true);
+	}
 
 	protected boolean initializeCache(boolean wait) {
 		if(!isInitialized) {
@@ -567,13 +591,13 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			 * IWorkspace.run(IWorkspaceRunnable, ISchedulingRule, int, IProgressMonitor)
 			 * accepts a scheduling rule to allow a workspace runnable to be postponed
 			 * when another plain job with the same SR is still running (and vice versa),
-			 * but the main lock during the run is the one of the Workmanager.
+			 * but the main lock during the run is the one of the WorkManager.
 			 * Even if there is no current rule on the manager, the workspace may be currently
 			 * locked by this thread. If that is already the case, initialize the cache
 			 * immediately, otherwise postpone the initialization to another thread.  
 			 */
 			// basically two scenarios: the current thread has the build rule or ws-root rule
-			// that is, we can init directly
+			// that is, we can initialize directly
 			switch(workspaceLockAccess.isWorkspaceLockedByCurrentThread(workspace)) {
 				case YES: {
 					// perform initialization from the current thread and everything should be fine
@@ -583,7 +607,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 					} catch (CoreException e) {
 						log.error(e.getMessage(), e);
 					}
-					// this may have happend while another thread is already waiting to aquire the WS root
+					// this may have happened while another thread is already waiting to acquire the WS root
 					// release the guard to let potentially waiting threads continue as early as possible 
 					CountDownLatch guard = initializerGuard.get();
 					if (guard != null) {
@@ -605,7 +629,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	}
 
 	/**
-	 * If no thread has been spawned so far, spawns a new one that will perform the cache init.
+	 * If no thread has been spawned so far, spawns a new one that will perform the cache initialization.
 	 * Optionally waits for the cache initialization to be performed in a another thread.
 	 */
 	protected void useNewThreadToInitialize(boolean wait) {
@@ -626,7 +650,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			if (initializerGuard.compareAndSet(null, newGuard)) {
 				// still no other thread created a guard in the (short) meantime 
 				myGuard = newGuard;
-				// aquire the WS rule in an own thread and perform the initialization from there
+				// acquire the WS rule in an own thread and perform the initialization from there
 				startInitializerThread(newGuard);
 			} else {
 				// use the guard that was created by another thread
@@ -665,11 +689,12 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	protected void doInitializeCache() throws CoreException {
 		if(!isInitialized) {
 			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+				@SuppressWarnings("restriction")
 				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					if(!isInitialized) {
 						for(IProject project: workspace.getRoot().getProjects()) {
-							if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
+							if(project.isAccessible() && org.eclipse.jdt.internal.core.JavaProject.hasJavaNature(project)) {
 								IJavaProject javaProject = JavaCore.create(project);
 								updateCache(javaProject);
 							}
@@ -706,7 +731,4 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 		return result == null ? Collections.<IJavaElementDelta>emptySet() : result;
 	}
-	
-	
-
 }

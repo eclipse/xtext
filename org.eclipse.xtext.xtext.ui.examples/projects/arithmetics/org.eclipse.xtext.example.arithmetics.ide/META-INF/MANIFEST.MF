@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Arithmetics Example - Generic IDE
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.30.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.example.arithmetics.ide;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr,
  org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal

@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.notification;
 
 import java.util.Collection;
@@ -50,7 +58,7 @@ import com.google.inject.Inject;
 public class DeltaConverter {
 
 	/**
-	 * Wraps an exception that occured during event conversion. Events that cannot be converted are assumed to have
+	 * Wraps an exception that occurred during event conversion. Events that cannot be converted are assumed to have
 	 * changes but the {@link #getUri()} may be misleading.
 	 * 
 	 * @since 2.4

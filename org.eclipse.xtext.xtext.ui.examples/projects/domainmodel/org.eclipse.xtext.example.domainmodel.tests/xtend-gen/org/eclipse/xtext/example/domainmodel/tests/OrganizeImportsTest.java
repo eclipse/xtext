@@ -37,10 +37,10 @@ public class OrganizeImportsTest {
   @Inject
   @Extension
   private ParseHelper<DomainModel> _parseHelper;
-  
+
   @Inject
   private ImportOrganizer importOrganizer;
-  
+
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) throws Exception {
     final DomainModel domainModel = this._parseHelper.parse(model.toString());
     Resource _eResource = domainModel.eResource();
@@ -69,7 +69,7 @@ public class OrganizeImportsTest {
     }
     Assert.assertEquals(expected.toString(), builder.toString());
   }
-  
+
   @Test
   public void testSimple() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -107,7 +107,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultPackageLeadingWhitespace() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -124,7 +124,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultPackageWithJavaDoc() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -154,7 +154,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -183,7 +183,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -218,7 +218,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -265,7 +265,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -312,7 +312,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -336,7 +336,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -385,7 +385,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -421,7 +421,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -464,7 +464,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_05() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -503,7 +503,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashSameFileWins_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -544,7 +544,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashSameFileWins() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -573,7 +573,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashOrder_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -609,7 +609,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashOrder_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -645,7 +645,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashMoreCommon() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -687,7 +687,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashInnerClasses() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -724,7 +724,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashInnerClassesWithPreference() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -761,7 +761,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticImport_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -802,7 +802,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticImport_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -843,7 +843,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImplicitExtensions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -879,7 +879,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticExtensions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -920,7 +920,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -971,7 +971,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1022,7 +1022,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1073,7 +1073,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1124,7 +1124,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_05() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1175,7 +1175,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_06() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1226,7 +1226,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFunctionTypes_afterResolve() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1277,7 +1277,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImport_PairOf() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1328,7 +1328,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testArrayType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1379,7 +1379,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassWithSameName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1412,7 +1412,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJavaDoc() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1442,7 +1442,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalNameClash() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1541,7 +1541,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSamePackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1580,7 +1580,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSuperPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1634,7 +1634,7 @@ public class OrganizeImportsTest {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSubPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

@@ -246,10 +246,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug303200TestLanguage.g:1037:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // InternalBug303200TestLanguage.g:1037:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // InternalBug303200TestLanguage.g:1042:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // InternalBug303200TestLanguage.g:1042:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // InternalBug303200TestLanguage.g:1037:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // InternalBug303200TestLanguage.g:1042:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -303,10 +303,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug303200TestLanguage.g:1039:9: ( ( ' ' | '\\t' )+ )
-            // InternalBug303200TestLanguage.g:1039:11: ( ' ' | '\\t' )+
+            // InternalBug303200TestLanguage.g:1044:9: ( ( ' ' | '\\t' )+ )
+            // InternalBug303200TestLanguage.g:1044:11: ( ' ' | '\\t' )+
             {
-            // InternalBug303200TestLanguage.g:1039:11: ( ' ' | '\\t' )+
+            // InternalBug303200TestLanguage.g:1044:11: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -360,8 +360,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug303200TestLanguage.g:1041:9: ( ( '\\r' | '\\n' ) )
-            // InternalBug303200TestLanguage.g:1041:11: ( '\\r' | '\\n' )
+            // InternalBug303200TestLanguage.g:1046:9: ( ( '\\r' | '\\n' ) )
+            // InternalBug303200TestLanguage.g:1046:11: ( '\\r' | '\\n' )
             {
             if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
                 input.consume();

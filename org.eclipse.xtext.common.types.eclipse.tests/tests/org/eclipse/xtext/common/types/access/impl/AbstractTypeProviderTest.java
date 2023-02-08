@@ -829,13 +829,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(2, methodCount);
 		int constructorCount = TestEnum.class.getDeclaredConstructors().length;
 		// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
-		assertEquals(2, constructorCount);
+		assertEquals(1, constructorCount);
 		int fieldCount = TestEnum.class.getDeclaredFields().length;
 		// FirstValue, SecondValue, string, ENUM$VALUES
 		assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
 		// ENUM$VALUES is synthetic
 		// TestEnum(String, String, EnumType) is synthetic
-		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 2,
+		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 1,
 				type.getMembers().size());
 	}
 

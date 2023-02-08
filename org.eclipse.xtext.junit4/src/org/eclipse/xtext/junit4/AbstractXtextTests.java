@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -58,7 +58,7 @@ import com.google.inject.name.Names;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.3
  */
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true, since = "2.30")
 public abstract class AbstractXtextTests extends Assert implements ResourceLoadHelper {
 
 	private Injector injector;

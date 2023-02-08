@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -78,7 +86,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug307519TestLanguage.g:65:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug307519TestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -86,8 +94,8 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug307519TestLanguage.g:65:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug307519TestLanguage.g:66:2: iv_ruleModel= ruleModel EOF
+            // InternalBug307519TestLanguage.g:70:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug307519TestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -114,7 +122,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug307519TestLanguage.g:72:1: ruleModel returns [EObject current=null] : ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ ;
+    // InternalBug307519TestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -127,10 +135,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug307519TestLanguage.g:78:2: ( ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ )
-            // InternalBug307519TestLanguage.g:79:2: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
+            // InternalBug307519TestLanguage.g:83:2: ( ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ )
+            // InternalBug307519TestLanguage.g:84:2: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
             {
-            // InternalBug307519TestLanguage.g:79:2: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
+            // InternalBug307519TestLanguage.g:84:2: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
             int cnt1=0;
             loop1:
             do {
@@ -165,13 +173,13 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalBug307519TestLanguage.g:80:3: ( (lv_e1_0_0= ruleElem1 ) )
+            	    // InternalBug307519TestLanguage.g:85:3: ( (lv_e1_0_0= ruleElem1 ) )
             	    {
-            	    // InternalBug307519TestLanguage.g:80:3: ( (lv_e1_0_0= ruleElem1 ) )
-            	    // InternalBug307519TestLanguage.g:81:4: (lv_e1_0_0= ruleElem1 )
+            	    // InternalBug307519TestLanguage.g:85:3: ( (lv_e1_0_0= ruleElem1 ) )
+            	    // InternalBug307519TestLanguage.g:86:4: (lv_e1_0_0= ruleElem1 )
             	    {
-            	    // InternalBug307519TestLanguage.g:81:4: (lv_e1_0_0= ruleElem1 )
-            	    // InternalBug307519TestLanguage.g:82:5: lv_e1_0_0= ruleElem1
+            	    // InternalBug307519TestLanguage.g:86:4: (lv_e1_0_0= ruleElem1 )
+            	    // InternalBug307519TestLanguage.g:87:5: lv_e1_0_0= ruleElem1
             	    {
 
             	    					newCompositeNode(grammarAccess.getModelAccess().getE1Elem1ParserRuleCall_0_0());
@@ -202,13 +210,13 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // InternalBug307519TestLanguage.g:100:3: ( (lv_e2_1_0= ruleElem2 ) )
+            	    // InternalBug307519TestLanguage.g:105:3: ( (lv_e2_1_0= ruleElem2 ) )
             	    {
-            	    // InternalBug307519TestLanguage.g:100:3: ( (lv_e2_1_0= ruleElem2 ) )
-            	    // InternalBug307519TestLanguage.g:101:4: (lv_e2_1_0= ruleElem2 )
+            	    // InternalBug307519TestLanguage.g:105:3: ( (lv_e2_1_0= ruleElem2 ) )
+            	    // InternalBug307519TestLanguage.g:106:4: (lv_e2_1_0= ruleElem2 )
             	    {
-            	    // InternalBug307519TestLanguage.g:101:4: (lv_e2_1_0= ruleElem2 )
-            	    // InternalBug307519TestLanguage.g:102:5: lv_e2_1_0= ruleElem2
+            	    // InternalBug307519TestLanguage.g:106:4: (lv_e2_1_0= ruleElem2 )
+            	    // InternalBug307519TestLanguage.g:107:5: lv_e2_1_0= ruleElem2
             	    {
 
             	    					newCompositeNode(grammarAccess.getModelAccess().getE2Elem2ParserRuleCall_1_0());
@@ -268,7 +276,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleElem1"
-    // InternalBug307519TestLanguage.g:123:1: entryRuleElem1 returns [EObject current=null] : iv_ruleElem1= ruleElem1 EOF ;
+    // InternalBug307519TestLanguage.g:128:1: entryRuleElem1 returns [EObject current=null] : iv_ruleElem1= ruleElem1 EOF ;
     public final EObject entryRuleElem1() throws RecognitionException {
         EObject current = null;
 
@@ -276,8 +284,8 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug307519TestLanguage.g:123:46: (iv_ruleElem1= ruleElem1 EOF )
-            // InternalBug307519TestLanguage.g:124:2: iv_ruleElem1= ruleElem1 EOF
+            // InternalBug307519TestLanguage.g:128:46: (iv_ruleElem1= ruleElem1 EOF )
+            // InternalBug307519TestLanguage.g:129:2: iv_ruleElem1= ruleElem1 EOF
             {
              newCompositeNode(grammarAccess.getElem1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -304,7 +312,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleElem1"
-    // InternalBug307519TestLanguage.g:130:1: ruleElem1 returns [EObject current=null] : ( (lv_value_0_0= ruleEnumT ) ) ;
+    // InternalBug307519TestLanguage.g:135:1: ruleElem1 returns [EObject current=null] : ( (lv_value_0_0= ruleEnumT ) ) ;
     public final EObject ruleElem1() throws RecognitionException {
         EObject current = null;
 
@@ -315,14 +323,14 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug307519TestLanguage.g:136:2: ( ( (lv_value_0_0= ruleEnumT ) ) )
-            // InternalBug307519TestLanguage.g:137:2: ( (lv_value_0_0= ruleEnumT ) )
+            // InternalBug307519TestLanguage.g:141:2: ( ( (lv_value_0_0= ruleEnumT ) ) )
+            // InternalBug307519TestLanguage.g:142:2: ( (lv_value_0_0= ruleEnumT ) )
             {
-            // InternalBug307519TestLanguage.g:137:2: ( (lv_value_0_0= ruleEnumT ) )
-            // InternalBug307519TestLanguage.g:138:3: (lv_value_0_0= ruleEnumT )
+            // InternalBug307519TestLanguage.g:142:2: ( (lv_value_0_0= ruleEnumT ) )
+            // InternalBug307519TestLanguage.g:143:3: (lv_value_0_0= ruleEnumT )
             {
-            // InternalBug307519TestLanguage.g:138:3: (lv_value_0_0= ruleEnumT )
-            // InternalBug307519TestLanguage.g:139:4: lv_value_0_0= ruleEnumT
+            // InternalBug307519TestLanguage.g:143:3: (lv_value_0_0= ruleEnumT )
+            // InternalBug307519TestLanguage.g:144:4: lv_value_0_0= ruleEnumT
             {
 
             				newCompositeNode(grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0());
@@ -369,7 +377,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleElem2"
-    // InternalBug307519TestLanguage.g:159:1: entryRuleElem2 returns [EObject current=null] : iv_ruleElem2= ruleElem2 EOF ;
+    // InternalBug307519TestLanguage.g:164:1: entryRuleElem2 returns [EObject current=null] : iv_ruleElem2= ruleElem2 EOF ;
     public final EObject entryRuleElem2() throws RecognitionException {
         EObject current = null;
 
@@ -377,8 +385,8 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug307519TestLanguage.g:159:46: (iv_ruleElem2= ruleElem2 EOF )
-            // InternalBug307519TestLanguage.g:160:2: iv_ruleElem2= ruleElem2 EOF
+            // InternalBug307519TestLanguage.g:164:46: (iv_ruleElem2= ruleElem2 EOF )
+            // InternalBug307519TestLanguage.g:165:2: iv_ruleElem2= ruleElem2 EOF
             {
              newCompositeNode(grammarAccess.getElem2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -405,7 +413,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleElem2"
-    // InternalBug307519TestLanguage.g:166:1: ruleElem2 returns [EObject current=null] : ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) ;
+    // InternalBug307519TestLanguage.g:171:1: ruleElem2 returns [EObject current=null] : ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) ;
     public final EObject ruleElem2() throws RecognitionException {
         EObject current = null;
 
@@ -419,17 +427,17 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug307519TestLanguage.g:172:2: ( ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) )
-            // InternalBug307519TestLanguage.g:173:2: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
+            // InternalBug307519TestLanguage.g:177:2: ( ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) )
+            // InternalBug307519TestLanguage.g:178:2: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
             {
-            // InternalBug307519TestLanguage.g:173:2: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
-            // InternalBug307519TestLanguage.g:174:3: ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$'
+            // InternalBug307519TestLanguage.g:178:2: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
+            // InternalBug307519TestLanguage.g:179:3: ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$'
             {
-            // InternalBug307519TestLanguage.g:174:3: ( (lv_value_0_0= ruleEnumT ) )
-            // InternalBug307519TestLanguage.g:175:4: (lv_value_0_0= ruleEnumT )
+            // InternalBug307519TestLanguage.g:179:3: ( (lv_value_0_0= ruleEnumT ) )
+            // InternalBug307519TestLanguage.g:180:4: (lv_value_0_0= ruleEnumT )
             {
-            // InternalBug307519TestLanguage.g:175:4: (lv_value_0_0= ruleEnumT )
-            // InternalBug307519TestLanguage.g:176:5: lv_value_0_0= ruleEnumT
+            // InternalBug307519TestLanguage.g:180:4: (lv_value_0_0= ruleEnumT )
+            // InternalBug307519TestLanguage.g:181:5: lv_value_0_0= ruleEnumT
             {
 
             					newCompositeNode(grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0());
@@ -491,7 +499,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleEnumT"
-    // InternalBug307519TestLanguage.g:209:1: ruleEnumT returns [Enumerator current=null] : ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) ;
+    // InternalBug307519TestLanguage.g:214:1: ruleEnumT returns [Enumerator current=null] : ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) ;
     public final Enumerator ruleEnumT() throws RecognitionException {
         Enumerator current = null;
 
@@ -502,10 +510,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug307519TestLanguage.g:215:2: ( ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) )
-            // InternalBug307519TestLanguage.g:216:2: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
+            // InternalBug307519TestLanguage.g:220:2: ( ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) )
+            // InternalBug307519TestLanguage.g:221:2: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
             {
-            // InternalBug307519TestLanguage.g:216:2: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
+            // InternalBug307519TestLanguage.g:221:2: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -523,10 +531,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // InternalBug307519TestLanguage.g:217:3: (enumLiteral_0= 'T1' )
+                    // InternalBug307519TestLanguage.g:222:3: (enumLiteral_0= 'T1' )
                     {
-                    // InternalBug307519TestLanguage.g:217:3: (enumLiteral_0= 'T1' )
-                    // InternalBug307519TestLanguage.g:218:4: enumLiteral_0= 'T1'
+                    // InternalBug307519TestLanguage.g:222:3: (enumLiteral_0= 'T1' )
+                    // InternalBug307519TestLanguage.g:223:4: enumLiteral_0= 'T1'
                     {
                     enumLiteral_0=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
@@ -540,10 +548,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug307519TestLanguage.g:225:3: (enumLiteral_1= 'T2' )
+                    // InternalBug307519TestLanguage.g:230:3: (enumLiteral_1= 'T2' )
                     {
-                    // InternalBug307519TestLanguage.g:225:3: (enumLiteral_1= 'T2' )
-                    // InternalBug307519TestLanguage.g:226:4: enumLiteral_1= 'T2'
+                    // InternalBug307519TestLanguage.g:230:3: (enumLiteral_1= 'T2' )
+                    // InternalBug307519TestLanguage.g:231:4: enumLiteral_1= 'T2'
                     {
                     enumLiteral_1=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 

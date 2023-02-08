@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,10 +19,10 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -77,27 +77,24 @@ public class PreferenceStoreAccessTest extends Assert implements IPreferenceStor
 		assertTrue(readable.getBoolean("someBoolean"));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testScope() {
-		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), "org");
+		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, "org");
 		assertFalse("partial keys are not supported", scopedPreferenceStore.getBoolean("xtext.MyLanguage.someBoolean"));
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test public void testScopeWithAnotherInstance() {
 		// ensure initialization
 		getWritable();
-		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
+		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, LANGUAGE_ID);
 		assertTrue(scopedPreferenceStore.getBoolean("someBoolean"));
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test public void testChainedPreferenceStore() {
-		ScopedPreferenceStore configurationStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
+		ScopedPreferenceStore configurationStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, LANGUAGE_ID);
 		configurationStore.setValue("someInt", 12);
 		configurationStore.setValue("anotherInt", 12);
 		configurationStore.setDefault("thirdInt", 12);
-		ScopedPreferenceStore instanceStore = new ScopedPreferenceStore(new InstanceScope(), LANGUAGE_ID);
+		ScopedPreferenceStore instanceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, LANGUAGE_ID);
 		instanceStore.setValue("someInt", 13);
 		instanceStore.setDefault("anotherInt", 13);
 		ChainedPreferenceStore chainedStore = new ChainedPreferenceStore(new IPreferenceStore[] { instanceStore, configurationStore });

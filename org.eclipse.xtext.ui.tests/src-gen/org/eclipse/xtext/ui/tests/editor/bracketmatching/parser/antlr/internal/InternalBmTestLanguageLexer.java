@@ -167,10 +167,10 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:319:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalBmTestLanguage.g:319:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBmTestLanguage.g:324:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalBmTestLanguage.g:324:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalBmTestLanguage.g:319:11: ( '^' )?
+            // InternalBmTestLanguage.g:324:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -179,7 +179,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBmTestLanguage.g:319:11: '^'
+                    // InternalBmTestLanguage.g:324:11: '^'
                     {
                     match('^'); 
 
@@ -197,7 +197,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalBmTestLanguage.g:319:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBmTestLanguage.g:324:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -246,10 +246,10 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:321:10: ( ( '0' .. '9' )+ )
-            // InternalBmTestLanguage.g:321:12: ( '0' .. '9' )+
+            // InternalBmTestLanguage.g:326:10: ( ( '0' .. '9' )+ )
+            // InternalBmTestLanguage.g:326:12: ( '0' .. '9' )+
             {
-            // InternalBmTestLanguage.g:321:12: ( '0' .. '9' )+
+            // InternalBmTestLanguage.g:326:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -263,7 +263,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:321:13: '0' .. '9'
+            	    // InternalBmTestLanguage.g:326:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -295,10 +295,10 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:323:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalBmTestLanguage.g:323:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBmTestLanguage.g:328:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalBmTestLanguage.g:328:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalBmTestLanguage.g:323:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBmTestLanguage.g:328:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -316,10 +316,10 @@ public class InternalBmTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBmTestLanguage.g:323:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalBmTestLanguage.g:328:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalBmTestLanguage.g:323:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalBmTestLanguage.g:328:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -335,7 +335,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalBmTestLanguage.g:323:21: '\\\\' .
+                    	    // InternalBmTestLanguage.g:328:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -343,7 +343,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBmTestLanguage.g:323:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalBmTestLanguage.g:328:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -368,10 +368,10 @@ public class InternalBmTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:323:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalBmTestLanguage.g:328:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalBmTestLanguage.g:323:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalBmTestLanguage.g:328:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -387,7 +387,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalBmTestLanguage.g:323:54: '\\\\' .
+                    	    // InternalBmTestLanguage.g:328:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -395,7 +395,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBmTestLanguage.g:323:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalBmTestLanguage.g:328:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -438,12 +438,12 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:325:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalBmTestLanguage.g:325:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalBmTestLanguage.g:330:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalBmTestLanguage.g:330:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalBmTestLanguage.g:325:24: ( options {greedy=false; } : . )*
+            // InternalBmTestLanguage.g:330:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -468,7 +468,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:325:52: .
+            	    // InternalBmTestLanguage.g:330:52: .
             	    {
             	    matchAny(); 
 
@@ -498,12 +498,12 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:327:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalBmTestLanguage.g:327:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalBmTestLanguage.g:332:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBmTestLanguage.g:332:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalBmTestLanguage.g:327:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBmTestLanguage.g:332:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -516,7 +516,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:327:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalBmTestLanguage.g:332:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -536,7 +536,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalBmTestLanguage.g:327:40: ( ( '\\r' )? '\\n' )?
+            // InternalBmTestLanguage.g:332:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -545,9 +545,9 @@ public class InternalBmTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalBmTestLanguage.g:327:41: ( '\\r' )? '\\n'
+                    // InternalBmTestLanguage.g:332:41: ( '\\r' )? '\\n'
                     {
-                    // InternalBmTestLanguage.g:327:41: ( '\\r' )?
+                    // InternalBmTestLanguage.g:332:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -556,7 +556,7 @@ public class InternalBmTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalBmTestLanguage.g:327:41: '\\r'
+                            // InternalBmTestLanguage.g:332:41: '\\r'
                             {
                             match('\r'); 
 
@@ -588,10 +588,10 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:329:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBmTestLanguage.g:329:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBmTestLanguage.g:334:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBmTestLanguage.g:334:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBmTestLanguage.g:329:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBmTestLanguage.g:334:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -645,8 +645,8 @@ public class InternalBmTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBmTestLanguage.g:331:16: ( . )
-            // InternalBmTestLanguage.g:331:18: .
+            // InternalBmTestLanguage.g:336:16: ( . )
+            // InternalBmTestLanguage.g:336:18: .
             {
             matchAny(); 
 

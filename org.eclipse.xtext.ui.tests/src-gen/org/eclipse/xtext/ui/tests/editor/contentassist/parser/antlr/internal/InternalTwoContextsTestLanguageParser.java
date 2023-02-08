@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -74,7 +82,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleMainModel"
-    // InternalTwoContextsTestLanguage.g:64:1: entryRuleMainModel returns [EObject current=null] : iv_ruleMainModel= ruleMainModel EOF ;
+    // InternalTwoContextsTestLanguage.g:69:1: entryRuleMainModel returns [EObject current=null] : iv_ruleMainModel= ruleMainModel EOF ;
     public final EObject entryRuleMainModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +90,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalTwoContextsTestLanguage.g:64:50: (iv_ruleMainModel= ruleMainModel EOF )
-            // InternalTwoContextsTestLanguage.g:65:2: iv_ruleMainModel= ruleMainModel EOF
+            // InternalTwoContextsTestLanguage.g:69:50: (iv_ruleMainModel= ruleMainModel EOF )
+            // InternalTwoContextsTestLanguage.g:70:2: iv_ruleMainModel= ruleMainModel EOF
             {
              newCompositeNode(grammarAccess.getMainModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -110,7 +118,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleMainModel"
-    // InternalTwoContextsTestLanguage.g:71:1: ruleMainModel returns [EObject current=null] : ( (lv_elements_0_0= ruleAnElement ) )* ;
+    // InternalTwoContextsTestLanguage.g:76:1: ruleMainModel returns [EObject current=null] : ( (lv_elements_0_0= ruleAnElement ) )* ;
     public final EObject ruleMainModel() throws RecognitionException {
         EObject current = null;
 
@@ -121,10 +129,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalTwoContextsTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleAnElement ) )* )
-            // InternalTwoContextsTestLanguage.g:78:2: ( (lv_elements_0_0= ruleAnElement ) )*
+            // InternalTwoContextsTestLanguage.g:82:2: ( ( (lv_elements_0_0= ruleAnElement ) )* )
+            // InternalTwoContextsTestLanguage.g:83:2: ( (lv_elements_0_0= ruleAnElement ) )*
             {
-            // InternalTwoContextsTestLanguage.g:78:2: ( (lv_elements_0_0= ruleAnElement ) )*
+            // InternalTwoContextsTestLanguage.g:83:2: ( (lv_elements_0_0= ruleAnElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -137,10 +145,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalTwoContextsTestLanguage.g:79:3: (lv_elements_0_0= ruleAnElement )
+            	    // InternalTwoContextsTestLanguage.g:84:3: (lv_elements_0_0= ruleAnElement )
             	    {
-            	    // InternalTwoContextsTestLanguage.g:79:3: (lv_elements_0_0= ruleAnElement )
-            	    // InternalTwoContextsTestLanguage.g:80:4: lv_elements_0_0= ruleAnElement
+            	    // InternalTwoContextsTestLanguage.g:84:3: (lv_elements_0_0= ruleAnElement )
+            	    // InternalTwoContextsTestLanguage.g:85:4: lv_elements_0_0= ruleAnElement
             	    {
 
             	    				newCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0());
@@ -193,7 +201,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleAnElement"
-    // InternalTwoContextsTestLanguage.g:100:1: entryRuleAnElement returns [EObject current=null] : iv_ruleAnElement= ruleAnElement EOF ;
+    // InternalTwoContextsTestLanguage.g:105:1: entryRuleAnElement returns [EObject current=null] : iv_ruleAnElement= ruleAnElement EOF ;
     public final EObject entryRuleAnElement() throws RecognitionException {
         EObject current = null;
 
@@ -201,8 +209,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalTwoContextsTestLanguage.g:100:50: (iv_ruleAnElement= ruleAnElement EOF )
-            // InternalTwoContextsTestLanguage.g:101:2: iv_ruleAnElement= ruleAnElement EOF
+            // InternalTwoContextsTestLanguage.g:105:50: (iv_ruleAnElement= ruleAnElement EOF )
+            // InternalTwoContextsTestLanguage.g:106:2: iv_ruleAnElement= ruleAnElement EOF
             {
              newCompositeNode(grammarAccess.getAnElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -229,7 +237,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleAnElement"
-    // InternalTwoContextsTestLanguage.g:107:1: ruleAnElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' ) ;
+    // InternalTwoContextsTestLanguage.g:112:1: ruleAnElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' ) ;
     public final EObject ruleAnElement() throws RecognitionException {
         EObject current = null;
 
@@ -242,17 +250,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalTwoContextsTestLanguage.g:113:2: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' ) )
-            // InternalTwoContextsTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' )
+            // InternalTwoContextsTestLanguage.g:118:2: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' ) )
+            // InternalTwoContextsTestLanguage.g:119:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' )
             {
-            // InternalTwoContextsTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' )
-            // InternalTwoContextsTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';'
+            // InternalTwoContextsTestLanguage.g:119:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';' )
+            // InternalTwoContextsTestLanguage.g:120:3: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )? otherlv_3= ';'
             {
-            // InternalTwoContextsTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalTwoContextsTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
+            // InternalTwoContextsTestLanguage.g:120:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalTwoContextsTestLanguage.g:121:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalTwoContextsTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
-            // InternalTwoContextsTestLanguage.g:117:5: lv_name_0_0= RULE_ID
+            // InternalTwoContextsTestLanguage.g:121:4: (lv_name_0_0= RULE_ID )
+            // InternalTwoContextsTestLanguage.g:122:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -274,7 +282,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            // InternalTwoContextsTestLanguage.g:133:3: (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )?
+            // InternalTwoContextsTestLanguage.g:138:3: (otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -283,17 +291,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt2) {
                 case 1 :
-                    // InternalTwoContextsTestLanguage.g:134:4: otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) )
+                    // InternalTwoContextsTestLanguage.g:139:4: otherlv_1= 'refersTo' ( (otherlv_2= RULE_ID ) )
                     {
                     otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getAnElementAccess().getRefersToKeyword_1_0());
                     			
-                    // InternalTwoContextsTestLanguage.g:138:4: ( (otherlv_2= RULE_ID ) )
-                    // InternalTwoContextsTestLanguage.g:139:5: (otherlv_2= RULE_ID )
+                    // InternalTwoContextsTestLanguage.g:143:4: ( (otherlv_2= RULE_ID ) )
+                    // InternalTwoContextsTestLanguage.g:144:5: (otherlv_2= RULE_ID )
                     {
-                    // InternalTwoContextsTestLanguage.g:139:5: (otherlv_2= RULE_ID )
-                    // InternalTwoContextsTestLanguage.g:140:6: otherlv_2= RULE_ID
+                    // InternalTwoContextsTestLanguage.g:144:5: (otherlv_2= RULE_ID )
+                    // InternalTwoContextsTestLanguage.g:145:6: otherlv_2= RULE_ID
                     {
 
                     						if (current==null) {

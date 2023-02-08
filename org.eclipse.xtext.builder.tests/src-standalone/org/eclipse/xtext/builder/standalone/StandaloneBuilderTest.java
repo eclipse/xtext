@@ -174,7 +174,7 @@ public class StandaloneBuilderTest {
 		testBuilder.setTempDir(TMP_DIR);
 		testBuilder.setDebugLog(true);
 		assertTrue("Builder launch returned false", testBuilder.launch());
-		File compiledClazz = getFile("tmp/classes/JavaClass.class");
+		File compiledClazz = getFile("tmp/stub-classes/JavaClass.class");
 		assertTrue("java compilation failed", compiledClazz.exists());
 
 	}

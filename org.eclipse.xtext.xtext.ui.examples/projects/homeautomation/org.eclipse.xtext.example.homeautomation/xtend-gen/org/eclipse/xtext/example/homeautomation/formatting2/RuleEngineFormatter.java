@@ -79,16 +79,16 @@ public class RuleEngineFormatter extends XbaseFormatter {
       document.<Declaration>append(document.<Declaration>format(declaration), _function_1);
     }
   }
-  
+
   protected void _format(final Device device, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(this.textRegionExtensions.regionFor(device).feature(RuleEnginePackage.Literals.DEVICE__NAME), _function);
+    document.surround(this.regionFor(device).feature(RuleEnginePackage.Literals.DEVICE__NAME), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(this.textRegionExtensions.regionFor(device).keyword("be"), _function_1);
+    document.surround(this.regionFor(device).keyword("be"), _function_1);
     EList<State> _states = device.getStates();
     for (final State state : _states) {
       final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
@@ -97,25 +97,25 @@ public class RuleEngineFormatter extends XbaseFormatter {
       final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
         it.oneSpace();
       };
-      document.append(document.prepend(this.textRegionExtensions.immediatelyPreceding(document.<State>format(state)).keyword(","), _function_2), _function_3);
+      document.append(document.prepend(this.immediatelyPreceding(document.<State>format(state)).keyword(","), _function_2), _function_3);
     }
   }
-  
+
   protected void _format(final Rule rule, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(this.textRegionExtensions.regionFor(rule).feature(RuleEnginePackage.Literals.RULE__DESCRIPTION), _function);
+    document.surround(this.regionFor(rule).feature(RuleEnginePackage.Literals.RULE__DESCRIPTION), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.surround(this.textRegionExtensions.regionFor(rule).feature(RuleEnginePackage.Literals.RULE__DEVICE_STATE), _function_1);
+    document.surround(this.regionFor(rule).feature(RuleEnginePackage.Literals.RULE__DEVICE_STATE), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
     document.<XExpression>prepend(document.<XExpression>format(rule.getThenPart()), _function_2);
   }
-  
+
   @Override
   protected void _format(final XBlockExpression expr, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -125,7 +125,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     EList<XExpression> _expressions = expr.getExpressions();
     for (final XExpression child : _expressions) {
       {
-        final ISemanticRegion sem = this.textRegionExtensions.immediatelyFollowing(child).keyword(";");
+        final ISemanticRegion sem = this.immediatelyFollowing(child).keyword(";");
         if ((sem != null)) {
           final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
             it.noSpace();
@@ -153,17 +153,17 @@ public class RuleEngineFormatter extends XbaseFormatter {
       }
     }
   }
-  
+
   @Override
   protected void _format(final XSwitchExpression expr, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
-    document.set(this.textRegionExtensions.previousHiddenRegion(expr.getSwitch()), this.textRegionExtensions.nextHiddenRegion(expr), _function);
+    document.set(this.previousHiddenRegion(expr.getSwitch()), this.nextHiddenRegion(expr), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(this.textRegionExtensions.regionFor(expr).keyword("switch"), _function_1);
+    document.append(this.regionFor(expr).keyword("switch"), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
@@ -208,7 +208,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
         final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
-        document.append(document.prepend(this.textRegionExtensions.regionFor(c).feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH), _function_8), _function_9);
+        document.append(document.prepend(this.regionFor(c).feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH), _function_8), _function_9);
         document.<XExpression>format(c.getCase());
         if ((Objects.equal(c, IterableExtensions.<XCasePart>last(expr.getCases())) && (expr.getDefault() == null))) {
           this.formatBody(c.getThen(), true, document);
@@ -223,11 +223,11 @@ public class RuleEngineFormatter extends XbaseFormatter {
       final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      document.append(this.textRegionExtensions.regionFor(expr).keyword("default"), _function_3);
+      document.append(this.regionFor(expr).keyword("default"), _function_3);
       this.formatBody(expr.getDefault(), true, document);
     }
   }
-  
+
   @Override
   protected void formatBody(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -239,7 +239,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       };
       doc.<XBlockExpression>prepend(((XBlockExpression)expr), _function);
     } else {
-      if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
+      if ((forceMultiline || this.previousHiddenRegion(expr).isMultiline())) {
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
@@ -256,7 +256,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -268,7 +268,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       };
       doc.<XBlockExpression>surround(((XBlockExpression)expr), _function);
     } else {
-      if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
+      if ((forceMultiline || this.previousHiddenRegion(expr).isMultiline())) {
         final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
           it.newLine();
         };
@@ -288,7 +288,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   protected void formatBodyParagraph(final XExpression expr, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -307,7 +307,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   public void format(final Object device, final IFormattableDocument document) {
     if (device instanceof JvmTypeParameter) {

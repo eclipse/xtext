@@ -30,12 +30,12 @@ public class HighlightingTest extends AbstractHighlightingTest {
   @Inject
   @Extension
   private XbaseHighlightingConfiguration _xbaseHighlightingConfiguration;
-  
+
   @Before
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void package_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -43,7 +43,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "package", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void entity_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -51,7 +51,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "entity", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void extends_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -61,7 +61,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "extends", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void op_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -74,7 +74,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "op", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void import_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -89,7 +89,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "import", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void int_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -102,7 +102,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "int", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void boolean_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -115,7 +115,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "boolean", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void if_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -134,7 +134,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "if", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void else_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -153,7 +153,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "else", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void return_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -172,7 +172,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "return", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void instanceof_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -193,7 +193,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "instanceof", this._xbaseHighlightingConfiguration.keywordTextStyle());
   }
-  
+
   @Test
   public void single_line_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -205,7 +205,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "A language to model domain-model elements", this._xbaseHighlightingConfiguration.commentTextStyle());
   }
-  
+
   @Test
   public void multi_line_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -244,7 +244,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder_1.newLine();
     this.testHighlighting(_builder, _builder_1.toString(), this._xbaseHighlightingConfiguration.commentTextStyle());
   }
-  
+
   @Test
   public void javadoc_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -283,7 +283,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder_1.newLine();
     this.testHighlighting(_builder, _builder_1.toString(), this._xbaseHighlightingConfiguration.commentTextStyle());
   }
-  
+
   @Test
   public void fixme_task_in_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -299,7 +299,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "FIXME", this._xbaseHighlightingConfiguration.taskTextStyle());
   }
-  
+
   @Test
   public void todo_task_in_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -315,7 +315,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "TODO", this._xbaseHighlightingConfiguration.taskTextStyle());
   }
-  
+
   @Test
   public void xxx_task_in_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -331,7 +331,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "XXX", this._xbaseHighlightingConfiguration.taskTextStyle());
   }
-  
+
   @Test
   public void single_quoted_string() {
     StringConcatenation _builder = new StringConcatenation();
@@ -353,7 +353,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "\'foo\'", this._xbaseHighlightingConfiguration.stringTextStyle());
   }
-  
+
   @Test
   public void double_quoted_string() {
     StringConcatenation _builder = new StringConcatenation();
@@ -375,7 +375,7 @@ public class HighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "\"foo\"", this._xbaseHighlightingConfiguration.stringTextStyle());
   }
-  
+
   @Test
   public void number_literal() {
     StringConcatenation _builder = new StringConcatenation();

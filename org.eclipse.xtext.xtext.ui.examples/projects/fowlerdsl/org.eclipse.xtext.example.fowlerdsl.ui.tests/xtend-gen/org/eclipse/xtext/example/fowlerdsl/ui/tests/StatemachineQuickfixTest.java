@@ -201,7 +201,7 @@ public class StatemachineQuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix_4 = new AbstractQuickfixTest.Quickfix("Change to \'panelClosed\'", "Change to \'panelClosed\'", _builder_5.toString());
     this.testQuickfixesOn(_builder, Diagnostic.LINKING_DIAGNOSTIC, _quickfix, _quickfix_1, _quickfix_2, _quickfix_3, _quickfix_4);
   }
-  
+
   @Test
   public void fix_invalid_state_action() {
     StringConcatenation _builder = new StringConcatenation();
@@ -335,7 +335,7 @@ public class StatemachineQuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix_3 = new AbstractQuickfixTest.Quickfix("Change to \'unlockDoor\'", "Change to \'unlockDoor\'", _builder_4.toString());
     this.testQuickfixesOn(_builder, Diagnostic.LINKING_DIAGNOSTIC, _quickfix, _quickfix_1, _quickfix_2, _quickfix_3);
   }
-  
+
   @Test
   public void fix_invalid_state_name() {
     StringConcatenation _builder = new StringConcatenation();
@@ -379,7 +379,7 @@ public class StatemachineQuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Change to \'idle\'.", "Change to \'idle\'.", _builder_1.toString());
     this.testQuickfixesOn(_builder, StatemachineValidator.INVALID_NAME, _quickfix);
   }
-  
+
   @Test
   public void fix_invalid_transition_event() {
     StringConcatenation _builder = new StringConcatenation();
@@ -587,7 +587,7 @@ public class StatemachineQuickfixTest extends AbstractQuickfixTest {
     AbstractQuickfixTest.Quickfix _quickfix_4 = new AbstractQuickfixTest.Quickfix("Change to \'panelClosed\'", "Change to \'panelClosed\'", _builder_5.toString());
     this.testQuickfixesOn(_builder, Diagnostic.LINKING_DIAGNOSTIC, _quickfix, _quickfix_1, _quickfix_2, _quickfix_3, _quickfix_4);
   }
-  
+
   @Test
   public void fix_invalid_transition_state() {
     StringConcatenation _builder = new StringConcatenation();

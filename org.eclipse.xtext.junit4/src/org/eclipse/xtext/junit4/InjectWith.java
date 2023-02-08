@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE})
 @Inherited
 @Documented
-@Deprecated
+@Deprecated(forRemoval = true)
 public @interface InjectWith {
 	/**
 	 * the IInjectorProvider class which will be used to create an {@link Injector Injector}.

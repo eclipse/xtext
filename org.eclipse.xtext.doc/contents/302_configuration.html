@@ -90,14 +90,14 @@ Person {
 }
 </code></pre>
 
-<p>Although arbitrary Java classes can be used, the standard root element for MWE2 files is <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a>, which is part of the very slim runtime model shipped with MWE2. It accepts <em>beans</em> and <em>components</em>.</p>
+<p>Although arbitrary Java classes can be used, the standard root element for MWE2 files is <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a>, which is part of the very slim runtime model shipped with MWE2. It accepts <em>beans</em> and <em>components</em>.</p>
 
 <ul>
   <li>
-    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage.Registry</a>.</p>
+    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage.Registry</a>.</p>
   </li>
   <li>
-    <p>The method Workflow.addComponent(..) accepts instances of <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.</p>
+    <p>The method Workflow.addComponent(..) accepts instances of <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.</p>
   </li>
 </ul>
 
@@ -109,7 +109,7 @@ Person {
 
 <p>This documentation is about the new generator infrastructure introduced with Xtext 2.9. In order to migrate an older Xtext project to this new infrastructure, the recommended approach is to create a new Xtext project and copy the grammar and existing configuration from the old project to the new one step by step.</p>
 
-<p>The entry point for Xtext code generation is <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.xtend">XtextGenerator</a>, which is composed of a <em>general configuration</em> and a set of <em>language configurations</em>. The general configuration describes the structure of your project as well as general settings for generating code. Each language configuration corresponds to a specific grammar file and allows to configure the generated code for the respective language. The actual code generation is performed by <em>generator fragments</em> contained in a language configuration.</p>
+<p>The entry point for Xtext code generation is <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.java">XtextGenerator</a>, which is composed of a <em>general configuration</em> and a set of <em>language configurations</em>. The general configuration describes the structure of your project as well as general settings for generating code. Each language configuration corresponds to a specific grammar file and allows to configure the generated code for the respective language. The actual code generation is performed by <em>generator fragments</em> contained in a language configuration.</p>
 
 <p>In the following we see an exemplary language generator configuration written in MWE2:</p>
 
@@ -213,7 +213,7 @@ Workflow {
   <li><code>preferXtendStubs</code> – Whether to prefer Xtend over Java for stub files to be implemented manually; this option applies only to files in <code>src</code> folders, while for <code>src-gen</code> folders Java files are always generated.</li>
 </ul>
 
-<p>The container for the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.java">StandardProjectConfig</a> and <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/CodeConfig.java">CodeConfig</a> is of type <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/DefaultGeneratorModule.java">DefaultGeneratorModule</a> and is assigned to the property <code>configuration</code> of the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.xtend">XtextGenerator</a>. The DefaultGeneratorModule is actually a <a href="https://github.com/google/guice">Guice</a> module, which can be subclassed in a similar way as explained in <a href="#dependency-injection">Dependency Injection</a> for overriding default configurations. This allows to alter the configuration in places that are not accessible through MWE2. For instance, you could bind your own subclass of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorNaming.java">XtextGeneratorNaming</a> in order to influence the names of generated classes.</p>
+<p>The container for the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.java">StandardProjectConfig</a> and <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/CodeConfig.java">CodeConfig</a> is of type <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/DefaultGeneratorModule.java">DefaultGeneratorModule</a> and is assigned to the property <code>configuration</code> of the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.java">XtextGenerator</a>. The DefaultGeneratorModule is actually a <a href="https://github.com/google/guice">Guice</a> module, which can be subclassed in a similar way as explained in <a href="#dependency-injection">Dependency Injection</a> for overriding default configurations. This allows to alter the configuration in places that are not accessible through MWE2. For instance, you could bind your own subclass of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorNaming.java">XtextGeneratorNaming</a> in order to influence the names of generated classes.</p>
 
 <h3 id="language-configuration">Language Configuration</h3>
 
@@ -221,7 +221,7 @@ Workflow {
 
 <ul>
   <li><code>name</code> – The name of the language exactly as specified in the first line of your grammar definition</li>
-  <li><code>grammarUri</code> – A <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> pointing to the grammar definition file; if omitted, the grammar file is assumed to be in the Java source folder of the runtime project and to be named according to the language name.</li>
+  <li><code>grammarUri</code> – A <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> pointing to the grammar definition file; if omitted, the grammar file is assumed to be in the Java source folder of the runtime project and to be named according to the language name.</li>
   <li><code>fileExtensions</code> – A comma-separated list of file extensions for the language</li>
   <li><code>referencedResources</code> – Additional resources to load (see <a href="#importing-metamodels">Importing Existing Metamodels</a>)</li>
 </ul>
@@ -295,7 +295,7 @@ Workflow {
 
 <p>If you are importing more than one metamodel, you can add more <code>referencedResource</code> declarations as required.</p>
 
-<p>In some occasions this simple way of referencing metamodels is not sufficient; you can then use the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> as a Workflow bean for fine-tuning your EMF setup. Example:</p>
+<p>In some occasions this simple way of referencing metamodels is not sufficient; you can then use the <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> as a Workflow bean for fine-tuning your EMF setup. Example:</p>
 
 <pre><code class="language-mwe2">bean = StandaloneSetup {
     platformUri = "${rootPath}"
@@ -402,7 +402,7 @@ Workflow {
 }
 </code></pre>
 
-<p>The setup method returns an <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a>, which can further be used to obtain a parser, etc. It also registers the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource.Factory</a> and generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> to the respective global registries provided by EMF. So basically after having run the setup you can start using EMF API to load and store models of your language.</p>
+<p>The setup method returns an <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a>, which can further be used to obtain a parser, etc. It also registers the <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource.Factory</a> and generated <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> to the respective global registries provided by EMF. So basically after having run the setup you can start using EMF API to load and store models of your language.</p>
 
 <p><strong>Caveat:</strong> The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">ISetup</a> class is intended to be used for runtime and for unit testing, only. If you use it in an Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.</p>
 

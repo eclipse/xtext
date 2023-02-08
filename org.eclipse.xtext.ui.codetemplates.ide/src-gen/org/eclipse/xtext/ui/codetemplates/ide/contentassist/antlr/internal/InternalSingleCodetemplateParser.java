@@ -21,6 +21,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalSingleCodetemplateParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -99,11 +107,11 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleCodetemplates"
-    // InternalSingleCodetemplateParser.g:67:1: entryRuleCodetemplates : ruleCodetemplates EOF ;
+    // InternalSingleCodetemplateParser.g:72:1: entryRuleCodetemplates : ruleCodetemplates EOF ;
     public final void entryRuleCodetemplates() throws RecognitionException {
         try {
-            // InternalSingleCodetemplateParser.g:68:1: ( ruleCodetemplates EOF )
-            // InternalSingleCodetemplateParser.g:69:1: ruleCodetemplates EOF
+            // InternalSingleCodetemplateParser.g:73:1: ( ruleCodetemplates EOF )
+            // InternalSingleCodetemplateParser.g:74:1: ruleCodetemplates EOF
             {
              before(grammarAccess.getCodetemplatesRule()); 
             pushFollow(FOLLOW_1);
@@ -129,21 +137,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleCodetemplates"
-    // InternalSingleCodetemplateParser.g:76:1: ruleCodetemplates : ( ( rule__Codetemplates__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:81:1: ruleCodetemplates : ( ( rule__Codetemplates__Group__0 ) ) ;
     public final void ruleCodetemplates() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:80:2: ( ( ( rule__Codetemplates__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:81:2: ( ( rule__Codetemplates__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:85:2: ( ( ( rule__Codetemplates__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:86:2: ( ( rule__Codetemplates__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:81:2: ( ( rule__Codetemplates__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:82:3: ( rule__Codetemplates__Group__0 )
+            // InternalSingleCodetemplateParser.g:86:2: ( ( rule__Codetemplates__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:87:3: ( rule__Codetemplates__Group__0 )
             {
              before(grammarAccess.getCodetemplatesAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:83:3: ( rule__Codetemplates__Group__0 )
-            // InternalSingleCodetemplateParser.g:83:4: rule__Codetemplates__Group__0
+            // InternalSingleCodetemplateParser.g:88:3: ( rule__Codetemplates__Group__0 )
+            // InternalSingleCodetemplateParser.g:88:4: rule__Codetemplates__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplates__Group__0();
@@ -176,11 +184,11 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleCodetemplate"
-    // InternalSingleCodetemplateParser.g:92:1: entryRuleCodetemplate : ruleCodetemplate EOF ;
+    // InternalSingleCodetemplateParser.g:97:1: entryRuleCodetemplate : ruleCodetemplate EOF ;
     public final void entryRuleCodetemplate() throws RecognitionException {
         try {
-            // InternalSingleCodetemplateParser.g:93:1: ( ruleCodetemplate EOF )
-            // InternalSingleCodetemplateParser.g:94:1: ruleCodetemplate EOF
+            // InternalSingleCodetemplateParser.g:98:1: ( ruleCodetemplate EOF )
+            // InternalSingleCodetemplateParser.g:99:1: ruleCodetemplate EOF
             {
              before(grammarAccess.getCodetemplateRule()); 
             pushFollow(FOLLOW_1);
@@ -206,21 +214,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleCodetemplate"
-    // InternalSingleCodetemplateParser.g:101:1: ruleCodetemplate : ( ( rule__Codetemplate__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:106:1: ruleCodetemplate : ( ( rule__Codetemplate__Group__0 ) ) ;
     public final void ruleCodetemplate() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:105:2: ( ( ( rule__Codetemplate__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:106:2: ( ( rule__Codetemplate__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:110:2: ( ( ( rule__Codetemplate__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:111:2: ( ( rule__Codetemplate__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:106:2: ( ( rule__Codetemplate__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:107:3: ( rule__Codetemplate__Group__0 )
+            // InternalSingleCodetemplateParser.g:111:2: ( ( rule__Codetemplate__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:112:3: ( rule__Codetemplate__Group__0 )
             {
              before(grammarAccess.getCodetemplateAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:108:3: ( rule__Codetemplate__Group__0 )
-            // InternalSingleCodetemplateParser.g:108:4: rule__Codetemplate__Group__0
+            // InternalSingleCodetemplateParser.g:113:3: ( rule__Codetemplate__Group__0 )
+            // InternalSingleCodetemplateParser.g:113:4: rule__Codetemplate__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplate__Group__0();
@@ -253,14 +261,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleTemplateBodyWithQuotes"
-    // InternalSingleCodetemplateParser.g:117:1: entryRuleTemplateBodyWithQuotes : ruleTemplateBodyWithQuotes EOF ;
+    // InternalSingleCodetemplateParser.g:122:1: entryRuleTemplateBodyWithQuotes : ruleTemplateBodyWithQuotes EOF ;
     public final void entryRuleTemplateBodyWithQuotes() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:121:1: ( ruleTemplateBodyWithQuotes EOF )
-            // InternalSingleCodetemplateParser.g:122:1: ruleTemplateBodyWithQuotes EOF
+            // InternalSingleCodetemplateParser.g:126:1: ( ruleTemplateBodyWithQuotes EOF )
+            // InternalSingleCodetemplateParser.g:127:1: ruleTemplateBodyWithQuotes EOF
             {
              before(grammarAccess.getTemplateBodyWithQuotesRule()); 
             pushFollow(FOLLOW_1);
@@ -289,22 +297,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleTemplateBodyWithQuotes"
-    // InternalSingleCodetemplateParser.g:132:1: ruleTemplateBodyWithQuotes : ( ( rule__TemplateBodyWithQuotes__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:137:1: ruleTemplateBodyWithQuotes : ( ( rule__TemplateBodyWithQuotes__Group__0 ) ) ;
     public final void ruleTemplateBodyWithQuotes() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:137:2: ( ( ( rule__TemplateBodyWithQuotes__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:138:2: ( ( rule__TemplateBodyWithQuotes__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:142:2: ( ( ( rule__TemplateBodyWithQuotes__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:143:2: ( ( rule__TemplateBodyWithQuotes__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:138:2: ( ( rule__TemplateBodyWithQuotes__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:139:3: ( rule__TemplateBodyWithQuotes__Group__0 )
+            // InternalSingleCodetemplateParser.g:143:2: ( ( rule__TemplateBodyWithQuotes__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:144:3: ( rule__TemplateBodyWithQuotes__Group__0 )
             {
              before(grammarAccess.getTemplateBodyWithQuotesAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:140:3: ( rule__TemplateBodyWithQuotes__Group__0 )
-            // InternalSingleCodetemplateParser.g:140:4: rule__TemplateBodyWithQuotes__Group__0
+            // InternalSingleCodetemplateParser.g:145:3: ( rule__TemplateBodyWithQuotes__Group__0 )
+            // InternalSingleCodetemplateParser.g:145:4: rule__TemplateBodyWithQuotes__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__TemplateBodyWithQuotes__Group__0();
@@ -338,14 +346,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleLiteralValue"
-    // InternalSingleCodetemplateParser.g:150:1: entryRuleLiteralValue : ruleLiteralValue EOF ;
+    // InternalSingleCodetemplateParser.g:155:1: entryRuleLiteralValue : ruleLiteralValue EOF ;
     public final void entryRuleLiteralValue() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:154:1: ( ruleLiteralValue EOF )
-            // InternalSingleCodetemplateParser.g:155:1: ruleLiteralValue EOF
+            // InternalSingleCodetemplateParser.g:159:1: ( ruleLiteralValue EOF )
+            // InternalSingleCodetemplateParser.g:160:1: ruleLiteralValue EOF
             {
              before(grammarAccess.getLiteralValueRule()); 
             pushFollow(FOLLOW_1);
@@ -374,25 +382,25 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleLiteralValue"
-    // InternalSingleCodetemplateParser.g:165:1: ruleLiteralValue : ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) ) ;
+    // InternalSingleCodetemplateParser.g:170:1: ruleLiteralValue : ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) ) ;
     public final void ruleLiteralValue() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:170:2: ( ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) ) )
-            // InternalSingleCodetemplateParser.g:171:2: ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) )
+            // InternalSingleCodetemplateParser.g:175:2: ( ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) ) )
+            // InternalSingleCodetemplateParser.g:176:2: ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) )
             {
-            // InternalSingleCodetemplateParser.g:171:2: ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) )
-            // InternalSingleCodetemplateParser.g:172:3: ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* )
+            // InternalSingleCodetemplateParser.g:176:2: ( ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* ) )
+            // InternalSingleCodetemplateParser.g:177:3: ( ( rule__LiteralValue__Alternatives ) ) ( ( rule__LiteralValue__Alternatives )* )
             {
-            // InternalSingleCodetemplateParser.g:172:3: ( ( rule__LiteralValue__Alternatives ) )
-            // InternalSingleCodetemplateParser.g:173:4: ( rule__LiteralValue__Alternatives )
+            // InternalSingleCodetemplateParser.g:177:3: ( ( rule__LiteralValue__Alternatives ) )
+            // InternalSingleCodetemplateParser.g:178:4: ( rule__LiteralValue__Alternatives )
             {
              before(grammarAccess.getLiteralValueAccess().getAlternatives()); 
-            // InternalSingleCodetemplateParser.g:174:4: ( rule__LiteralValue__Alternatives )
-            // InternalSingleCodetemplateParser.g:174:5: rule__LiteralValue__Alternatives
+            // InternalSingleCodetemplateParser.g:179:4: ( rule__LiteralValue__Alternatives )
+            // InternalSingleCodetemplateParser.g:179:5: rule__LiteralValue__Alternatives
             {
             pushFollow(FOLLOW_3);
             rule__LiteralValue__Alternatives();
@@ -406,11 +414,11 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
             }
 
-            // InternalSingleCodetemplateParser.g:177:3: ( ( rule__LiteralValue__Alternatives )* )
-            // InternalSingleCodetemplateParser.g:178:4: ( rule__LiteralValue__Alternatives )*
+            // InternalSingleCodetemplateParser.g:182:3: ( ( rule__LiteralValue__Alternatives )* )
+            // InternalSingleCodetemplateParser.g:183:4: ( rule__LiteralValue__Alternatives )*
             {
              before(grammarAccess.getLiteralValueAccess().getAlternatives()); 
-            // InternalSingleCodetemplateParser.g:179:4: ( rule__LiteralValue__Alternatives )*
+            // InternalSingleCodetemplateParser.g:184:4: ( rule__LiteralValue__Alternatives )*
             loop1:
             do {
                 int alt1=2;
@@ -423,7 +431,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:179:5: rule__LiteralValue__Alternatives
+            	    // InternalSingleCodetemplateParser.g:184:5: rule__LiteralValue__Alternatives
             	    {
             	    pushFollow(FOLLOW_3);
             	    rule__LiteralValue__Alternatives();
@@ -466,14 +474,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleTemplateBody"
-    // InternalSingleCodetemplateParser.g:190:1: entryRuleTemplateBody : ruleTemplateBody EOF ;
+    // InternalSingleCodetemplateParser.g:195:1: entryRuleTemplateBody : ruleTemplateBody EOF ;
     public final void entryRuleTemplateBody() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:194:1: ( ruleTemplateBody EOF )
-            // InternalSingleCodetemplateParser.g:195:1: ruleTemplateBody EOF
+            // InternalSingleCodetemplateParser.g:199:1: ( ruleTemplateBody EOF )
+            // InternalSingleCodetemplateParser.g:200:1: ruleTemplateBody EOF
             {
              before(grammarAccess.getTemplateBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -502,22 +510,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleTemplateBody"
-    // InternalSingleCodetemplateParser.g:205:1: ruleTemplateBody : ( ( rule__TemplateBody__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:210:1: ruleTemplateBody : ( ( rule__TemplateBody__Group__0 ) ) ;
     public final void ruleTemplateBody() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:210:2: ( ( ( rule__TemplateBody__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:211:2: ( ( rule__TemplateBody__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:215:2: ( ( ( rule__TemplateBody__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:216:2: ( ( rule__TemplateBody__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:211:2: ( ( rule__TemplateBody__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:212:3: ( rule__TemplateBody__Group__0 )
+            // InternalSingleCodetemplateParser.g:216:2: ( ( rule__TemplateBody__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:217:3: ( rule__TemplateBody__Group__0 )
             {
              before(grammarAccess.getTemplateBodyAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:213:3: ( rule__TemplateBody__Group__0 )
-            // InternalSingleCodetemplateParser.g:213:4: rule__TemplateBody__Group__0
+            // InternalSingleCodetemplateParser.g:218:3: ( rule__TemplateBody__Group__0 )
+            // InternalSingleCodetemplateParser.g:218:4: rule__TemplateBody__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__TemplateBody__Group__0();
@@ -551,14 +559,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleVariableOrDollar"
-    // InternalSingleCodetemplateParser.g:223:1: entryRuleVariableOrDollar : ruleVariableOrDollar EOF ;
+    // InternalSingleCodetemplateParser.g:228:1: entryRuleVariableOrDollar : ruleVariableOrDollar EOF ;
     public final void entryRuleVariableOrDollar() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:227:1: ( ruleVariableOrDollar EOF )
-            // InternalSingleCodetemplateParser.g:228:1: ruleVariableOrDollar EOF
+            // InternalSingleCodetemplateParser.g:232:1: ( ruleVariableOrDollar EOF )
+            // InternalSingleCodetemplateParser.g:233:1: ruleVariableOrDollar EOF
             {
              before(grammarAccess.getVariableOrDollarRule()); 
             pushFollow(FOLLOW_1);
@@ -587,22 +595,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleVariableOrDollar"
-    // InternalSingleCodetemplateParser.g:238:1: ruleVariableOrDollar : ( ( rule__VariableOrDollar__Alternatives ) ) ;
+    // InternalSingleCodetemplateParser.g:243:1: ruleVariableOrDollar : ( ( rule__VariableOrDollar__Alternatives ) ) ;
     public final void ruleVariableOrDollar() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:243:2: ( ( ( rule__VariableOrDollar__Alternatives ) ) )
-            // InternalSingleCodetemplateParser.g:244:2: ( ( rule__VariableOrDollar__Alternatives ) )
+            // InternalSingleCodetemplateParser.g:248:2: ( ( ( rule__VariableOrDollar__Alternatives ) ) )
+            // InternalSingleCodetemplateParser.g:249:2: ( ( rule__VariableOrDollar__Alternatives ) )
             {
-            // InternalSingleCodetemplateParser.g:244:2: ( ( rule__VariableOrDollar__Alternatives ) )
-            // InternalSingleCodetemplateParser.g:245:3: ( rule__VariableOrDollar__Alternatives )
+            // InternalSingleCodetemplateParser.g:249:2: ( ( rule__VariableOrDollar__Alternatives ) )
+            // InternalSingleCodetemplateParser.g:250:3: ( rule__VariableOrDollar__Alternatives )
             {
              before(grammarAccess.getVariableOrDollarAccess().getAlternatives()); 
-            // InternalSingleCodetemplateParser.g:246:3: ( rule__VariableOrDollar__Alternatives )
-            // InternalSingleCodetemplateParser.g:246:4: rule__VariableOrDollar__Alternatives
+            // InternalSingleCodetemplateParser.g:251:3: ( rule__VariableOrDollar__Alternatives )
+            // InternalSingleCodetemplateParser.g:251:4: rule__VariableOrDollar__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__VariableOrDollar__Alternatives();
@@ -636,14 +644,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleVariable"
-    // InternalSingleCodetemplateParser.g:256:1: entryRuleVariable : ruleVariable EOF ;
+    // InternalSingleCodetemplateParser.g:261:1: entryRuleVariable : ruleVariable EOF ;
     public final void entryRuleVariable() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:260:1: ( ruleVariable EOF )
-            // InternalSingleCodetemplateParser.g:261:1: ruleVariable EOF
+            // InternalSingleCodetemplateParser.g:265:1: ( ruleVariable EOF )
+            // InternalSingleCodetemplateParser.g:266:1: ruleVariable EOF
             {
              before(grammarAccess.getVariableRule()); 
             pushFollow(FOLLOW_1);
@@ -672,22 +680,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleVariable"
-    // InternalSingleCodetemplateParser.g:271:1: ruleVariable : ( ( rule__Variable__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:276:1: ruleVariable : ( ( rule__Variable__Group__0 ) ) ;
     public final void ruleVariable() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:276:2: ( ( ( rule__Variable__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:277:2: ( ( rule__Variable__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:281:2: ( ( ( rule__Variable__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:282:2: ( ( rule__Variable__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:277:2: ( ( rule__Variable__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:278:3: ( rule__Variable__Group__0 )
+            // InternalSingleCodetemplateParser.g:282:2: ( ( rule__Variable__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:283:3: ( rule__Variable__Group__0 )
             {
              before(grammarAccess.getVariableAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:279:3: ( rule__Variable__Group__0 )
-            // InternalSingleCodetemplateParser.g:279:4: rule__Variable__Group__0
+            // InternalSingleCodetemplateParser.g:284:3: ( rule__Variable__Group__0 )
+            // InternalSingleCodetemplateParser.g:284:4: rule__Variable__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group__0();
@@ -721,14 +729,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleValidID"
-    // InternalSingleCodetemplateParser.g:289:1: entryRuleValidID : ruleValidID EOF ;
+    // InternalSingleCodetemplateParser.g:294:1: entryRuleValidID : ruleValidID EOF ;
     public final void entryRuleValidID() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:293:1: ( ruleValidID EOF )
-            // InternalSingleCodetemplateParser.g:294:1: ruleValidID EOF
+            // InternalSingleCodetemplateParser.g:298:1: ( ruleValidID EOF )
+            // InternalSingleCodetemplateParser.g:299:1: ruleValidID EOF
             {
              before(grammarAccess.getValidIDRule()); 
             pushFollow(FOLLOW_1);
@@ -757,22 +765,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleValidID"
-    // InternalSingleCodetemplateParser.g:304:1: ruleValidID : ( ( rule__ValidID__Alternatives ) ) ;
+    // InternalSingleCodetemplateParser.g:309:1: ruleValidID : ( ( rule__ValidID__Alternatives ) ) ;
     public final void ruleValidID() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:309:2: ( ( ( rule__ValidID__Alternatives ) ) )
-            // InternalSingleCodetemplateParser.g:310:2: ( ( rule__ValidID__Alternatives ) )
+            // InternalSingleCodetemplateParser.g:314:2: ( ( ( rule__ValidID__Alternatives ) ) )
+            // InternalSingleCodetemplateParser.g:315:2: ( ( rule__ValidID__Alternatives ) )
             {
-            // InternalSingleCodetemplateParser.g:310:2: ( ( rule__ValidID__Alternatives ) )
-            // InternalSingleCodetemplateParser.g:311:3: ( rule__ValidID__Alternatives )
+            // InternalSingleCodetemplateParser.g:315:2: ( ( rule__ValidID__Alternatives ) )
+            // InternalSingleCodetemplateParser.g:316:3: ( rule__ValidID__Alternatives )
             {
              before(grammarAccess.getValidIDAccess().getAlternatives()); 
-            // InternalSingleCodetemplateParser.g:312:3: ( rule__ValidID__Alternatives )
-            // InternalSingleCodetemplateParser.g:312:4: rule__ValidID__Alternatives
+            // InternalSingleCodetemplateParser.g:317:3: ( rule__ValidID__Alternatives )
+            // InternalSingleCodetemplateParser.g:317:4: rule__ValidID__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__ValidID__Alternatives();
@@ -806,14 +814,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalSingleCodetemplateParser.g:322:1: entryRuleFQN : ruleFQN EOF ;
+    // InternalSingleCodetemplateParser.g:327:1: entryRuleFQN : ruleFQN EOF ;
     public final void entryRuleFQN() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:326:1: ( ruleFQN EOF )
-            // InternalSingleCodetemplateParser.g:327:1: ruleFQN EOF
+            // InternalSingleCodetemplateParser.g:331:1: ( ruleFQN EOF )
+            // InternalSingleCodetemplateParser.g:332:1: ruleFQN EOF
             {
              before(grammarAccess.getFQNRule()); 
             pushFollow(FOLLOW_1);
@@ -842,22 +850,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleFQN"
-    // InternalSingleCodetemplateParser.g:337:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:342:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
     public final void ruleFQN() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:342:2: ( ( ( rule__FQN__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:343:2: ( ( rule__FQN__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:347:2: ( ( ( rule__FQN__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:348:2: ( ( rule__FQN__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:343:2: ( ( rule__FQN__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:344:3: ( rule__FQN__Group__0 )
+            // InternalSingleCodetemplateParser.g:348:2: ( ( rule__FQN__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:349:3: ( rule__FQN__Group__0 )
             {
              before(grammarAccess.getFQNAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:345:3: ( rule__FQN__Group__0 )
-            // InternalSingleCodetemplateParser.g:345:4: rule__FQN__Group__0
+            // InternalSingleCodetemplateParser.g:350:3: ( rule__FQN__Group__0 )
+            // InternalSingleCodetemplateParser.g:350:4: rule__FQN__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__FQN__Group__0();
@@ -891,14 +899,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleLiteral"
-    // InternalSingleCodetemplateParser.g:355:1: entryRuleLiteral : ruleLiteral EOF ;
+    // InternalSingleCodetemplateParser.g:360:1: entryRuleLiteral : ruleLiteral EOF ;
     public final void entryRuleLiteral() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:359:1: ( ruleLiteral EOF )
-            // InternalSingleCodetemplateParser.g:360:1: ruleLiteral EOF
+            // InternalSingleCodetemplateParser.g:364:1: ( ruleLiteral EOF )
+            // InternalSingleCodetemplateParser.g:365:1: ruleLiteral EOF
             {
              before(grammarAccess.getLiteralRule()); 
             pushFollow(FOLLOW_1);
@@ -927,22 +935,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleLiteral"
-    // InternalSingleCodetemplateParser.g:370:1: ruleLiteral : ( ( rule__Literal__ValueAssignment ) ) ;
+    // InternalSingleCodetemplateParser.g:375:1: ruleLiteral : ( ( rule__Literal__ValueAssignment ) ) ;
     public final void ruleLiteral() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:375:2: ( ( ( rule__Literal__ValueAssignment ) ) )
-            // InternalSingleCodetemplateParser.g:376:2: ( ( rule__Literal__ValueAssignment ) )
+            // InternalSingleCodetemplateParser.g:380:2: ( ( ( rule__Literal__ValueAssignment ) ) )
+            // InternalSingleCodetemplateParser.g:381:2: ( ( rule__Literal__ValueAssignment ) )
             {
-            // InternalSingleCodetemplateParser.g:376:2: ( ( rule__Literal__ValueAssignment ) )
-            // InternalSingleCodetemplateParser.g:377:3: ( rule__Literal__ValueAssignment )
+            // InternalSingleCodetemplateParser.g:381:2: ( ( rule__Literal__ValueAssignment ) )
+            // InternalSingleCodetemplateParser.g:382:3: ( rule__Literal__ValueAssignment )
             {
              before(grammarAccess.getLiteralAccess().getValueAssignment()); 
-            // InternalSingleCodetemplateParser.g:378:3: ( rule__Literal__ValueAssignment )
-            // InternalSingleCodetemplateParser.g:378:4: rule__Literal__ValueAssignment
+            // InternalSingleCodetemplateParser.g:383:3: ( rule__Literal__ValueAssignment )
+            // InternalSingleCodetemplateParser.g:383:4: rule__Literal__ValueAssignment
             {
             pushFollow(FOLLOW_2);
             rule__Literal__ValueAssignment();
@@ -976,14 +984,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleDollar"
-    // InternalSingleCodetemplateParser.g:388:1: entryRuleDollar : ruleDollar EOF ;
+    // InternalSingleCodetemplateParser.g:393:1: entryRuleDollar : ruleDollar EOF ;
     public final void entryRuleDollar() throws RecognitionException {
          
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalSingleCodetemplateParser.g:392:1: ( ruleDollar EOF )
-            // InternalSingleCodetemplateParser.g:393:1: ruleDollar EOF
+            // InternalSingleCodetemplateParser.g:397:1: ( ruleDollar EOF )
+            // InternalSingleCodetemplateParser.g:398:1: ruleDollar EOF
             {
              before(grammarAccess.getDollarRule()); 
             pushFollow(FOLLOW_1);
@@ -1012,22 +1020,22 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleDollar"
-    // InternalSingleCodetemplateParser.g:403:1: ruleDollar : ( ( rule__Dollar__Group__0 ) ) ;
+    // InternalSingleCodetemplateParser.g:408:1: ruleDollar : ( ( rule__Dollar__Group__0 ) ) ;
     public final void ruleDollar() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:408:2: ( ( ( rule__Dollar__Group__0 ) ) )
-            // InternalSingleCodetemplateParser.g:409:2: ( ( rule__Dollar__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:413:2: ( ( ( rule__Dollar__Group__0 ) ) )
+            // InternalSingleCodetemplateParser.g:414:2: ( ( rule__Dollar__Group__0 ) )
             {
-            // InternalSingleCodetemplateParser.g:409:2: ( ( rule__Dollar__Group__0 ) )
-            // InternalSingleCodetemplateParser.g:410:3: ( rule__Dollar__Group__0 )
+            // InternalSingleCodetemplateParser.g:414:2: ( ( rule__Dollar__Group__0 ) )
+            // InternalSingleCodetemplateParser.g:415:3: ( rule__Dollar__Group__0 )
             {
              before(grammarAccess.getDollarAccess().getGroup()); 
-            // InternalSingleCodetemplateParser.g:411:3: ( rule__Dollar__Group__0 )
-            // InternalSingleCodetemplateParser.g:411:4: rule__Dollar__Group__0
+            // InternalSingleCodetemplateParser.g:416:3: ( rule__Dollar__Group__0 )
+            // InternalSingleCodetemplateParser.g:416:4: rule__Dollar__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Dollar__Group__0();
@@ -1061,13 +1069,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Alternatives_2"
-    // InternalSingleCodetemplateParser.g:420:1: rule__Codetemplate__Alternatives_2 : ( ( ( rule__Codetemplate__ContextAssignment_2_0 ) ) | ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) ) );
+    // InternalSingleCodetemplateParser.g:425:1: rule__Codetemplate__Alternatives_2 : ( ( ( rule__Codetemplate__ContextAssignment_2_0 ) ) | ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) ) );
     public final void rule__Codetemplate__Alternatives_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:424:1: ( ( ( rule__Codetemplate__ContextAssignment_2_0 ) ) | ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) ) )
+            // InternalSingleCodetemplateParser.g:429:1: ( ( ( rule__Codetemplate__ContextAssignment_2_0 ) ) | ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1085,14 +1093,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt2) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:425:2: ( ( rule__Codetemplate__ContextAssignment_2_0 ) )
+                    // InternalSingleCodetemplateParser.g:430:2: ( ( rule__Codetemplate__ContextAssignment_2_0 ) )
                     {
-                    // InternalSingleCodetemplateParser.g:425:2: ( ( rule__Codetemplate__ContextAssignment_2_0 ) )
-                    // InternalSingleCodetemplateParser.g:426:3: ( rule__Codetemplate__ContextAssignment_2_0 )
+                    // InternalSingleCodetemplateParser.g:430:2: ( ( rule__Codetemplate__ContextAssignment_2_0 ) )
+                    // InternalSingleCodetemplateParser.g:431:3: ( rule__Codetemplate__ContextAssignment_2_0 )
                     {
                      before(grammarAccess.getCodetemplateAccess().getContextAssignment_2_0()); 
-                    // InternalSingleCodetemplateParser.g:427:3: ( rule__Codetemplate__ContextAssignment_2_0 )
-                    // InternalSingleCodetemplateParser.g:427:4: rule__Codetemplate__ContextAssignment_2_0
+                    // InternalSingleCodetemplateParser.g:432:3: ( rule__Codetemplate__ContextAssignment_2_0 )
+                    // InternalSingleCodetemplateParser.g:432:4: rule__Codetemplate__ContextAssignment_2_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Codetemplate__ContextAssignment_2_0();
@@ -1110,14 +1118,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:431:2: ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) )
+                    // InternalSingleCodetemplateParser.g:436:2: ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) )
                     {
-                    // InternalSingleCodetemplateParser.g:431:2: ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) )
-                    // InternalSingleCodetemplateParser.g:432:3: ( rule__Codetemplate__KeywordContextAssignment_2_1 )
+                    // InternalSingleCodetemplateParser.g:436:2: ( ( rule__Codetemplate__KeywordContextAssignment_2_1 ) )
+                    // InternalSingleCodetemplateParser.g:437:3: ( rule__Codetemplate__KeywordContextAssignment_2_1 )
                     {
                      before(grammarAccess.getCodetemplateAccess().getKeywordContextAssignment_2_1()); 
-                    // InternalSingleCodetemplateParser.g:433:3: ( rule__Codetemplate__KeywordContextAssignment_2_1 )
-                    // InternalSingleCodetemplateParser.g:433:4: rule__Codetemplate__KeywordContextAssignment_2_1
+                    // InternalSingleCodetemplateParser.g:438:3: ( rule__Codetemplate__KeywordContextAssignment_2_1 )
+                    // InternalSingleCodetemplateParser.g:438:4: rule__Codetemplate__KeywordContextAssignment_2_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__Codetemplate__KeywordContextAssignment_2_1();
@@ -1152,13 +1160,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__LiteralValue__Alternatives"
-    // InternalSingleCodetemplateParser.g:441:1: rule__LiteralValue__Alternatives : ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) );
+    // InternalSingleCodetemplateParser.g:446:1: rule__LiteralValue__Alternatives : ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) );
     public final void rule__LiteralValue__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:445:1: ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) )
+            // InternalSingleCodetemplateParser.g:450:1: ( ( RULE_WS ) | ( RULE_ANY_OTHER ) | ( RULE_ID ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case RULE_WS:
@@ -1185,10 +1193,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
             switch (alt3) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:446:2: ( RULE_WS )
+                    // InternalSingleCodetemplateParser.g:451:2: ( RULE_WS )
                     {
-                    // InternalSingleCodetemplateParser.g:446:2: ( RULE_WS )
-                    // InternalSingleCodetemplateParser.g:447:3: RULE_WS
+                    // InternalSingleCodetemplateParser.g:451:2: ( RULE_WS )
+                    // InternalSingleCodetemplateParser.g:452:3: RULE_WS
                     {
                      before(grammarAccess.getLiteralValueAccess().getWSTerminalRuleCall_0()); 
                     match(input,RULE_WS,FOLLOW_2); 
@@ -1200,10 +1208,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:452:2: ( RULE_ANY_OTHER )
+                    // InternalSingleCodetemplateParser.g:457:2: ( RULE_ANY_OTHER )
                     {
-                    // InternalSingleCodetemplateParser.g:452:2: ( RULE_ANY_OTHER )
-                    // InternalSingleCodetemplateParser.g:453:3: RULE_ANY_OTHER
+                    // InternalSingleCodetemplateParser.g:457:2: ( RULE_ANY_OTHER )
+                    // InternalSingleCodetemplateParser.g:458:3: RULE_ANY_OTHER
                     {
                      before(grammarAccess.getLiteralValueAccess().getANY_OTHERTerminalRuleCall_1()); 
                     match(input,RULE_ANY_OTHER,FOLLOW_2); 
@@ -1215,10 +1223,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 3 :
-                    // InternalSingleCodetemplateParser.g:458:2: ( RULE_ID )
+                    // InternalSingleCodetemplateParser.g:463:2: ( RULE_ID )
                     {
-                    // InternalSingleCodetemplateParser.g:458:2: ( RULE_ID )
-                    // InternalSingleCodetemplateParser.g:459:3: RULE_ID
+                    // InternalSingleCodetemplateParser.g:463:2: ( RULE_ID )
+                    // InternalSingleCodetemplateParser.g:464:3: RULE_ID
                     {
                      before(grammarAccess.getLiteralValueAccess().getIDTerminalRuleCall_2()); 
                     match(input,RULE_ID,FOLLOW_2); 
@@ -1247,13 +1255,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__VariableOrDollar__Alternatives"
-    // InternalSingleCodetemplateParser.g:468:1: rule__VariableOrDollar__Alternatives : ( ( ruleVariable ) | ( ruleDollar ) );
+    // InternalSingleCodetemplateParser.g:473:1: rule__VariableOrDollar__Alternatives : ( ( ruleVariable ) | ( ruleDollar ) );
     public final void rule__VariableOrDollar__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:472:1: ( ( ruleVariable ) | ( ruleDollar ) )
+            // InternalSingleCodetemplateParser.g:477:1: ( ( ruleVariable ) | ( ruleDollar ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1271,10 +1279,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt4) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:473:2: ( ruleVariable )
+                    // InternalSingleCodetemplateParser.g:478:2: ( ruleVariable )
                     {
-                    // InternalSingleCodetemplateParser.g:473:2: ( ruleVariable )
-                    // InternalSingleCodetemplateParser.g:474:3: ruleVariable
+                    // InternalSingleCodetemplateParser.g:478:2: ( ruleVariable )
+                    // InternalSingleCodetemplateParser.g:479:3: ruleVariable
                     {
                      before(grammarAccess.getVariableOrDollarAccess().getVariableParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -1290,10 +1298,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:479:2: ( ruleDollar )
+                    // InternalSingleCodetemplateParser.g:484:2: ( ruleDollar )
                     {
-                    // InternalSingleCodetemplateParser.g:479:2: ( ruleDollar )
-                    // InternalSingleCodetemplateParser.g:480:3: ruleDollar
+                    // InternalSingleCodetemplateParser.g:484:2: ( ruleDollar )
+                    // InternalSingleCodetemplateParser.g:485:3: ruleDollar
                     {
                      before(grammarAccess.getVariableOrDollarAccess().getDollarParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -1326,25 +1334,25 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Alternatives_2"
-    // InternalSingleCodetemplateParser.g:489:1: rule__Variable__Alternatives_2 : ( ( ( rule__Variable__NameAssignment_2_0 ) ) | ( ( rule__Variable__Group_2_1__0 ) ) );
+    // InternalSingleCodetemplateParser.g:494:1: rule__Variable__Alternatives_2 : ( ( ( rule__Variable__NameAssignment_2_0 ) ) | ( ( rule__Variable__Group_2_1__0 ) ) );
     public final void rule__Variable__Alternatives_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:493:1: ( ( ( rule__Variable__NameAssignment_2_0 ) ) | ( ( rule__Variable__Group_2_1__0 ) ) )
+            // InternalSingleCodetemplateParser.g:498:1: ( ( ( rule__Variable__NameAssignment_2_0 ) ) | ( ( rule__Variable__Group_2_1__0 ) ) )
             int alt5=2;
             alt5 = dfa5.predict(input);
             switch (alt5) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:494:2: ( ( rule__Variable__NameAssignment_2_0 ) )
+                    // InternalSingleCodetemplateParser.g:499:2: ( ( rule__Variable__NameAssignment_2_0 ) )
                     {
-                    // InternalSingleCodetemplateParser.g:494:2: ( ( rule__Variable__NameAssignment_2_0 ) )
-                    // InternalSingleCodetemplateParser.g:495:3: ( rule__Variable__NameAssignment_2_0 )
+                    // InternalSingleCodetemplateParser.g:499:2: ( ( rule__Variable__NameAssignment_2_0 ) )
+                    // InternalSingleCodetemplateParser.g:500:3: ( rule__Variable__NameAssignment_2_0 )
                     {
                      before(grammarAccess.getVariableAccess().getNameAssignment_2_0()); 
-                    // InternalSingleCodetemplateParser.g:496:3: ( rule__Variable__NameAssignment_2_0 )
-                    // InternalSingleCodetemplateParser.g:496:4: rule__Variable__NameAssignment_2_0
+                    // InternalSingleCodetemplateParser.g:501:3: ( rule__Variable__NameAssignment_2_0 )
+                    // InternalSingleCodetemplateParser.g:501:4: rule__Variable__NameAssignment_2_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Variable__NameAssignment_2_0();
@@ -1362,14 +1370,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:500:2: ( ( rule__Variable__Group_2_1__0 ) )
+                    // InternalSingleCodetemplateParser.g:505:2: ( ( rule__Variable__Group_2_1__0 ) )
                     {
-                    // InternalSingleCodetemplateParser.g:500:2: ( ( rule__Variable__Group_2_1__0 ) )
-                    // InternalSingleCodetemplateParser.g:501:3: ( rule__Variable__Group_2_1__0 )
+                    // InternalSingleCodetemplateParser.g:505:2: ( ( rule__Variable__Group_2_1__0 ) )
+                    // InternalSingleCodetemplateParser.g:506:3: ( rule__Variable__Group_2_1__0 )
                     {
                      before(grammarAccess.getVariableAccess().getGroup_2_1()); 
-                    // InternalSingleCodetemplateParser.g:502:3: ( rule__Variable__Group_2_1__0 )
-                    // InternalSingleCodetemplateParser.g:502:4: rule__Variable__Group_2_1__0
+                    // InternalSingleCodetemplateParser.g:507:3: ( rule__Variable__Group_2_1__0 )
+                    // InternalSingleCodetemplateParser.g:507:4: rule__Variable__Group_2_1__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Variable__Group_2_1__0();
@@ -1404,13 +1412,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__ParametersAlternatives_2_1_4_3_0_0"
-    // InternalSingleCodetemplateParser.g:510:1: rule__Variable__ParametersAlternatives_2_1_4_3_0_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
+    // InternalSingleCodetemplateParser.g:515:1: rule__Variable__ParametersAlternatives_2_1_4_3_0_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
     public final void rule__Variable__ParametersAlternatives_2_1_4_3_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:514:1: ( ( RULE_STRING ) | ( ruleFQN ) )
+            // InternalSingleCodetemplateParser.g:519:1: ( ( RULE_STRING ) | ( ruleFQN ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1428,10 +1436,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt6) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:515:2: ( RULE_STRING )
+                    // InternalSingleCodetemplateParser.g:520:2: ( RULE_STRING )
                     {
-                    // InternalSingleCodetemplateParser.g:515:2: ( RULE_STRING )
-                    // InternalSingleCodetemplateParser.g:516:3: RULE_STRING
+                    // InternalSingleCodetemplateParser.g:520:2: ( RULE_STRING )
+                    // InternalSingleCodetemplateParser.g:521:3: RULE_STRING
                     {
                      before(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_0_0_0()); 
                     match(input,RULE_STRING,FOLLOW_2); 
@@ -1443,10 +1451,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:521:2: ( ruleFQN )
+                    // InternalSingleCodetemplateParser.g:526:2: ( ruleFQN )
                     {
-                    // InternalSingleCodetemplateParser.g:521:2: ( ruleFQN )
-                    // InternalSingleCodetemplateParser.g:522:3: ruleFQN
+                    // InternalSingleCodetemplateParser.g:526:2: ( ruleFQN )
+                    // InternalSingleCodetemplateParser.g:527:3: ruleFQN
                     {
                      before(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_0_0_1()); 
                     pushFollow(FOLLOW_2);
@@ -1479,13 +1487,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0"
-    // InternalSingleCodetemplateParser.g:531:1: rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
+    // InternalSingleCodetemplateParser.g:536:1: rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 : ( ( RULE_STRING ) | ( ruleFQN ) );
     public final void rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:535:1: ( ( RULE_STRING ) | ( ruleFQN ) )
+            // InternalSingleCodetemplateParser.g:540:1: ( ( RULE_STRING ) | ( ruleFQN ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1503,10 +1511,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt7) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:536:2: ( RULE_STRING )
+                    // InternalSingleCodetemplateParser.g:541:2: ( RULE_STRING )
                     {
-                    // InternalSingleCodetemplateParser.g:536:2: ( RULE_STRING )
-                    // InternalSingleCodetemplateParser.g:537:3: RULE_STRING
+                    // InternalSingleCodetemplateParser.g:541:2: ( RULE_STRING )
+                    // InternalSingleCodetemplateParser.g:542:3: RULE_STRING
                     {
                      before(grammarAccess.getVariableAccess().getParametersSTRINGTerminalRuleCall_2_1_4_3_1_3_0_0()); 
                     match(input,RULE_STRING,FOLLOW_2); 
@@ -1518,10 +1526,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:542:2: ( ruleFQN )
+                    // InternalSingleCodetemplateParser.g:547:2: ( ruleFQN )
                     {
-                    // InternalSingleCodetemplateParser.g:542:2: ( ruleFQN )
-                    // InternalSingleCodetemplateParser.g:543:3: ruleFQN
+                    // InternalSingleCodetemplateParser.g:547:2: ( ruleFQN )
+                    // InternalSingleCodetemplateParser.g:548:3: ruleFQN
                     {
                      before(grammarAccess.getVariableAccess().getParametersFQNParserRuleCall_2_1_4_3_1_3_0_1()); 
                     pushFollow(FOLLOW_2);
@@ -1554,13 +1562,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__ValidID__Alternatives"
-    // InternalSingleCodetemplateParser.g:552:1: rule__ValidID__Alternatives : ( ( RULE_ID ) | ( For ) | ( Templates ) );
+    // InternalSingleCodetemplateParser.g:557:1: rule__ValidID__Alternatives : ( ( RULE_ID ) | ( For ) | ( Templates ) );
     public final void rule__ValidID__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:556:1: ( ( RULE_ID ) | ( For ) | ( Templates ) )
+            // InternalSingleCodetemplateParser.g:561:1: ( ( RULE_ID ) | ( For ) | ( Templates ) )
             int alt8=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -1587,10 +1595,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
             switch (alt8) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:557:2: ( RULE_ID )
+                    // InternalSingleCodetemplateParser.g:562:2: ( RULE_ID )
                     {
-                    // InternalSingleCodetemplateParser.g:557:2: ( RULE_ID )
-                    // InternalSingleCodetemplateParser.g:558:3: RULE_ID
+                    // InternalSingleCodetemplateParser.g:562:2: ( RULE_ID )
+                    // InternalSingleCodetemplateParser.g:563:3: RULE_ID
                     {
                      before(grammarAccess.getValidIDAccess().getIDTerminalRuleCall_0()); 
                     match(input,RULE_ID,FOLLOW_2); 
@@ -1602,10 +1610,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:563:2: ( For )
+                    // InternalSingleCodetemplateParser.g:568:2: ( For )
                     {
-                    // InternalSingleCodetemplateParser.g:563:2: ( For )
-                    // InternalSingleCodetemplateParser.g:564:3: For
+                    // InternalSingleCodetemplateParser.g:568:2: ( For )
+                    // InternalSingleCodetemplateParser.g:569:3: For
                     {
                      before(grammarAccess.getValidIDAccess().getForKeyword_1()); 
                     match(input,For,FOLLOW_2); 
@@ -1617,10 +1625,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 3 :
-                    // InternalSingleCodetemplateParser.g:569:2: ( Templates )
+                    // InternalSingleCodetemplateParser.g:574:2: ( Templates )
                     {
-                    // InternalSingleCodetemplateParser.g:569:2: ( Templates )
-                    // InternalSingleCodetemplateParser.g:570:3: Templates
+                    // InternalSingleCodetemplateParser.g:574:2: ( Templates )
+                    // InternalSingleCodetemplateParser.g:575:3: Templates
                     {
                      before(grammarAccess.getValidIDAccess().getTemplatesKeyword_2()); 
                     match(input,Templates,FOLLOW_2); 
@@ -1649,13 +1657,13 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Dollar__Alternatives_1"
-    // InternalSingleCodetemplateParser.g:579:1: rule__Dollar__Alternatives_1 : ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( DollarSign ) );
+    // InternalSingleCodetemplateParser.g:584:1: rule__Dollar__Alternatives_1 : ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( DollarSign ) );
     public final void rule__Dollar__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:583:1: ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( DollarSign ) )
+            // InternalSingleCodetemplateParser.g:588:1: ( ( ( rule__Dollar__EscapedAssignment_1_0 ) ) | ( DollarSign ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1673,14 +1681,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt9) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:584:2: ( ( rule__Dollar__EscapedAssignment_1_0 ) )
+                    // InternalSingleCodetemplateParser.g:589:2: ( ( rule__Dollar__EscapedAssignment_1_0 ) )
                     {
-                    // InternalSingleCodetemplateParser.g:584:2: ( ( rule__Dollar__EscapedAssignment_1_0 ) )
-                    // InternalSingleCodetemplateParser.g:585:3: ( rule__Dollar__EscapedAssignment_1_0 )
+                    // InternalSingleCodetemplateParser.g:589:2: ( ( rule__Dollar__EscapedAssignment_1_0 ) )
+                    // InternalSingleCodetemplateParser.g:590:3: ( rule__Dollar__EscapedAssignment_1_0 )
                     {
                      before(grammarAccess.getDollarAccess().getEscapedAssignment_1_0()); 
-                    // InternalSingleCodetemplateParser.g:586:3: ( rule__Dollar__EscapedAssignment_1_0 )
-                    // InternalSingleCodetemplateParser.g:586:4: rule__Dollar__EscapedAssignment_1_0
+                    // InternalSingleCodetemplateParser.g:591:3: ( rule__Dollar__EscapedAssignment_1_0 )
+                    // InternalSingleCodetemplateParser.g:591:4: rule__Dollar__EscapedAssignment_1_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Dollar__EscapedAssignment_1_0();
@@ -1698,10 +1706,10 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
                     }
                     break;
                 case 2 :
-                    // InternalSingleCodetemplateParser.g:590:2: ( DollarSign )
+                    // InternalSingleCodetemplateParser.g:595:2: ( DollarSign )
                     {
-                    // InternalSingleCodetemplateParser.g:590:2: ( DollarSign )
-                    // InternalSingleCodetemplateParser.g:591:3: DollarSign
+                    // InternalSingleCodetemplateParser.g:595:2: ( DollarSign )
+                    // InternalSingleCodetemplateParser.g:596:3: DollarSign
                     {
                      before(grammarAccess.getDollarAccess().getDollarSignKeyword_1_1()); 
                     match(input,DollarSign,FOLLOW_2); 
@@ -1730,14 +1738,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__0"
-    // InternalSingleCodetemplateParser.g:600:1: rule__Codetemplates__Group__0 : rule__Codetemplates__Group__0__Impl rule__Codetemplates__Group__1 ;
+    // InternalSingleCodetemplateParser.g:605:1: rule__Codetemplates__Group__0 : rule__Codetemplates__Group__0__Impl rule__Codetemplates__Group__1 ;
     public final void rule__Codetemplates__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:604:1: ( rule__Codetemplates__Group__0__Impl rule__Codetemplates__Group__1 )
-            // InternalSingleCodetemplateParser.g:605:2: rule__Codetemplates__Group__0__Impl rule__Codetemplates__Group__1
+            // InternalSingleCodetemplateParser.g:609:1: ( rule__Codetemplates__Group__0__Impl rule__Codetemplates__Group__1 )
+            // InternalSingleCodetemplateParser.g:610:2: rule__Codetemplates__Group__0__Impl rule__Codetemplates__Group__1
             {
             pushFollow(FOLLOW_4);
             rule__Codetemplates__Group__0__Impl();
@@ -1768,17 +1776,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:612:1: rule__Codetemplates__Group__0__Impl : ( Templates ) ;
+    // InternalSingleCodetemplateParser.g:617:1: rule__Codetemplates__Group__0__Impl : ( Templates ) ;
     public final void rule__Codetemplates__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:616:1: ( ( Templates ) )
-            // InternalSingleCodetemplateParser.g:617:1: ( Templates )
+            // InternalSingleCodetemplateParser.g:621:1: ( ( Templates ) )
+            // InternalSingleCodetemplateParser.g:622:1: ( Templates )
             {
-            // InternalSingleCodetemplateParser.g:617:1: ( Templates )
-            // InternalSingleCodetemplateParser.g:618:2: Templates
+            // InternalSingleCodetemplateParser.g:622:1: ( Templates )
+            // InternalSingleCodetemplateParser.g:623:2: Templates
             {
              before(grammarAccess.getCodetemplatesAccess().getTemplatesKeyword_0()); 
             match(input,Templates,FOLLOW_2); 
@@ -1805,14 +1813,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__1"
-    // InternalSingleCodetemplateParser.g:627:1: rule__Codetemplates__Group__1 : rule__Codetemplates__Group__1__Impl rule__Codetemplates__Group__2 ;
+    // InternalSingleCodetemplateParser.g:632:1: rule__Codetemplates__Group__1 : rule__Codetemplates__Group__1__Impl rule__Codetemplates__Group__2 ;
     public final void rule__Codetemplates__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:631:1: ( rule__Codetemplates__Group__1__Impl rule__Codetemplates__Group__2 )
-            // InternalSingleCodetemplateParser.g:632:2: rule__Codetemplates__Group__1__Impl rule__Codetemplates__Group__2
+            // InternalSingleCodetemplateParser.g:636:1: ( rule__Codetemplates__Group__1__Impl rule__Codetemplates__Group__2 )
+            // InternalSingleCodetemplateParser.g:637:2: rule__Codetemplates__Group__1__Impl rule__Codetemplates__Group__2
             {
             pushFollow(FOLLOW_5);
             rule__Codetemplates__Group__1__Impl();
@@ -1843,17 +1851,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:639:1: rule__Codetemplates__Group__1__Impl : ( For ) ;
+    // InternalSingleCodetemplateParser.g:644:1: rule__Codetemplates__Group__1__Impl : ( For ) ;
     public final void rule__Codetemplates__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:643:1: ( ( For ) )
-            // InternalSingleCodetemplateParser.g:644:1: ( For )
+            // InternalSingleCodetemplateParser.g:648:1: ( ( For ) )
+            // InternalSingleCodetemplateParser.g:649:1: ( For )
             {
-            // InternalSingleCodetemplateParser.g:644:1: ( For )
-            // InternalSingleCodetemplateParser.g:645:2: For
+            // InternalSingleCodetemplateParser.g:649:1: ( For )
+            // InternalSingleCodetemplateParser.g:650:2: For
             {
              before(grammarAccess.getCodetemplatesAccess().getForKeyword_1()); 
             match(input,For,FOLLOW_2); 
@@ -1880,14 +1888,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__2"
-    // InternalSingleCodetemplateParser.g:654:1: rule__Codetemplates__Group__2 : rule__Codetemplates__Group__2__Impl rule__Codetemplates__Group__3 ;
+    // InternalSingleCodetemplateParser.g:659:1: rule__Codetemplates__Group__2 : rule__Codetemplates__Group__2__Impl rule__Codetemplates__Group__3 ;
     public final void rule__Codetemplates__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:658:1: ( rule__Codetemplates__Group__2__Impl rule__Codetemplates__Group__3 )
-            // InternalSingleCodetemplateParser.g:659:2: rule__Codetemplates__Group__2__Impl rule__Codetemplates__Group__3
+            // InternalSingleCodetemplateParser.g:663:1: ( rule__Codetemplates__Group__2__Impl rule__Codetemplates__Group__3 )
+            // InternalSingleCodetemplateParser.g:664:2: rule__Codetemplates__Group__2__Impl rule__Codetemplates__Group__3
             {
             pushFollow(FOLLOW_6);
             rule__Codetemplates__Group__2__Impl();
@@ -1918,21 +1926,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__2__Impl"
-    // InternalSingleCodetemplateParser.g:666:1: rule__Codetemplates__Group__2__Impl : ( ( rule__Codetemplates__LanguageAssignment_2 ) ) ;
+    // InternalSingleCodetemplateParser.g:671:1: rule__Codetemplates__Group__2__Impl : ( ( rule__Codetemplates__LanguageAssignment_2 ) ) ;
     public final void rule__Codetemplates__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:670:1: ( ( ( rule__Codetemplates__LanguageAssignment_2 ) ) )
-            // InternalSingleCodetemplateParser.g:671:1: ( ( rule__Codetemplates__LanguageAssignment_2 ) )
+            // InternalSingleCodetemplateParser.g:675:1: ( ( ( rule__Codetemplates__LanguageAssignment_2 ) ) )
+            // InternalSingleCodetemplateParser.g:676:1: ( ( rule__Codetemplates__LanguageAssignment_2 ) )
             {
-            // InternalSingleCodetemplateParser.g:671:1: ( ( rule__Codetemplates__LanguageAssignment_2 ) )
-            // InternalSingleCodetemplateParser.g:672:2: ( rule__Codetemplates__LanguageAssignment_2 )
+            // InternalSingleCodetemplateParser.g:676:1: ( ( rule__Codetemplates__LanguageAssignment_2 ) )
+            // InternalSingleCodetemplateParser.g:677:2: ( rule__Codetemplates__LanguageAssignment_2 )
             {
              before(grammarAccess.getCodetemplatesAccess().getLanguageAssignment_2()); 
-            // InternalSingleCodetemplateParser.g:673:2: ( rule__Codetemplates__LanguageAssignment_2 )
-            // InternalSingleCodetemplateParser.g:673:3: rule__Codetemplates__LanguageAssignment_2
+            // InternalSingleCodetemplateParser.g:678:2: ( rule__Codetemplates__LanguageAssignment_2 )
+            // InternalSingleCodetemplateParser.g:678:3: rule__Codetemplates__LanguageAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplates__LanguageAssignment_2();
@@ -1965,14 +1973,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__3"
-    // InternalSingleCodetemplateParser.g:681:1: rule__Codetemplates__Group__3 : rule__Codetemplates__Group__3__Impl ;
+    // InternalSingleCodetemplateParser.g:686:1: rule__Codetemplates__Group__3 : rule__Codetemplates__Group__3__Impl ;
     public final void rule__Codetemplates__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:685:1: ( rule__Codetemplates__Group__3__Impl )
-            // InternalSingleCodetemplateParser.g:686:2: rule__Codetemplates__Group__3__Impl
+            // InternalSingleCodetemplateParser.g:690:1: ( rule__Codetemplates__Group__3__Impl )
+            // InternalSingleCodetemplateParser.g:691:2: rule__Codetemplates__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplates__Group__3__Impl();
@@ -1998,21 +2006,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__Group__3__Impl"
-    // InternalSingleCodetemplateParser.g:692:1: rule__Codetemplates__Group__3__Impl : ( ( rule__Codetemplates__TemplatesAssignment_3 ) ) ;
+    // InternalSingleCodetemplateParser.g:697:1: rule__Codetemplates__Group__3__Impl : ( ( rule__Codetemplates__TemplatesAssignment_3 ) ) ;
     public final void rule__Codetemplates__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:696:1: ( ( ( rule__Codetemplates__TemplatesAssignment_3 ) ) )
-            // InternalSingleCodetemplateParser.g:697:1: ( ( rule__Codetemplates__TemplatesAssignment_3 ) )
+            // InternalSingleCodetemplateParser.g:701:1: ( ( ( rule__Codetemplates__TemplatesAssignment_3 ) ) )
+            // InternalSingleCodetemplateParser.g:702:1: ( ( rule__Codetemplates__TemplatesAssignment_3 ) )
             {
-            // InternalSingleCodetemplateParser.g:697:1: ( ( rule__Codetemplates__TemplatesAssignment_3 ) )
-            // InternalSingleCodetemplateParser.g:698:2: ( rule__Codetemplates__TemplatesAssignment_3 )
+            // InternalSingleCodetemplateParser.g:702:1: ( ( rule__Codetemplates__TemplatesAssignment_3 ) )
+            // InternalSingleCodetemplateParser.g:703:2: ( rule__Codetemplates__TemplatesAssignment_3 )
             {
              before(grammarAccess.getCodetemplatesAccess().getTemplatesAssignment_3()); 
-            // InternalSingleCodetemplateParser.g:699:2: ( rule__Codetemplates__TemplatesAssignment_3 )
-            // InternalSingleCodetemplateParser.g:699:3: rule__Codetemplates__TemplatesAssignment_3
+            // InternalSingleCodetemplateParser.g:704:2: ( rule__Codetemplates__TemplatesAssignment_3 )
+            // InternalSingleCodetemplateParser.g:704:3: rule__Codetemplates__TemplatesAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplates__TemplatesAssignment_3();
@@ -2045,14 +2053,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__0"
-    // InternalSingleCodetemplateParser.g:708:1: rule__Codetemplate__Group__0 : rule__Codetemplate__Group__0__Impl rule__Codetemplate__Group__1 ;
+    // InternalSingleCodetemplateParser.g:713:1: rule__Codetemplate__Group__0 : rule__Codetemplate__Group__0__Impl rule__Codetemplate__Group__1 ;
     public final void rule__Codetemplate__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:712:1: ( rule__Codetemplate__Group__0__Impl rule__Codetemplate__Group__1 )
-            // InternalSingleCodetemplateParser.g:713:2: rule__Codetemplate__Group__0__Impl rule__Codetemplate__Group__1
+            // InternalSingleCodetemplateParser.g:717:1: ( rule__Codetemplate__Group__0__Impl rule__Codetemplate__Group__1 )
+            // InternalSingleCodetemplateParser.g:718:2: rule__Codetemplate__Group__0__Impl rule__Codetemplate__Group__1
             {
             pushFollow(FOLLOW_4);
             rule__Codetemplate__Group__0__Impl();
@@ -2083,21 +2091,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:720:1: rule__Codetemplate__Group__0__Impl : ( ( rule__Codetemplate__NameAssignment_0 ) ) ;
+    // InternalSingleCodetemplateParser.g:725:1: rule__Codetemplate__Group__0__Impl : ( ( rule__Codetemplate__NameAssignment_0 ) ) ;
     public final void rule__Codetemplate__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:724:1: ( ( ( rule__Codetemplate__NameAssignment_0 ) ) )
-            // InternalSingleCodetemplateParser.g:725:1: ( ( rule__Codetemplate__NameAssignment_0 ) )
+            // InternalSingleCodetemplateParser.g:729:1: ( ( ( rule__Codetemplate__NameAssignment_0 ) ) )
+            // InternalSingleCodetemplateParser.g:730:1: ( ( rule__Codetemplate__NameAssignment_0 ) )
             {
-            // InternalSingleCodetemplateParser.g:725:1: ( ( rule__Codetemplate__NameAssignment_0 ) )
-            // InternalSingleCodetemplateParser.g:726:2: ( rule__Codetemplate__NameAssignment_0 )
+            // InternalSingleCodetemplateParser.g:730:1: ( ( rule__Codetemplate__NameAssignment_0 ) )
+            // InternalSingleCodetemplateParser.g:731:2: ( rule__Codetemplate__NameAssignment_0 )
             {
              before(grammarAccess.getCodetemplateAccess().getNameAssignment_0()); 
-            // InternalSingleCodetemplateParser.g:727:2: ( rule__Codetemplate__NameAssignment_0 )
-            // InternalSingleCodetemplateParser.g:727:3: rule__Codetemplate__NameAssignment_0
+            // InternalSingleCodetemplateParser.g:732:2: ( rule__Codetemplate__NameAssignment_0 )
+            // InternalSingleCodetemplateParser.g:732:3: rule__Codetemplate__NameAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplate__NameAssignment_0();
@@ -2130,14 +2138,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__1"
-    // InternalSingleCodetemplateParser.g:735:1: rule__Codetemplate__Group__1 : rule__Codetemplate__Group__1__Impl rule__Codetemplate__Group__2 ;
+    // InternalSingleCodetemplateParser.g:740:1: rule__Codetemplate__Group__1 : rule__Codetemplate__Group__1__Impl rule__Codetemplate__Group__2 ;
     public final void rule__Codetemplate__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:739:1: ( rule__Codetemplate__Group__1__Impl rule__Codetemplate__Group__2 )
-            // InternalSingleCodetemplateParser.g:740:2: rule__Codetemplate__Group__1__Impl rule__Codetemplate__Group__2
+            // InternalSingleCodetemplateParser.g:744:1: ( rule__Codetemplate__Group__1__Impl rule__Codetemplate__Group__2 )
+            // InternalSingleCodetemplateParser.g:745:2: rule__Codetemplate__Group__1__Impl rule__Codetemplate__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__Codetemplate__Group__1__Impl();
@@ -2168,17 +2176,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:747:1: rule__Codetemplate__Group__1__Impl : ( For ) ;
+    // InternalSingleCodetemplateParser.g:752:1: rule__Codetemplate__Group__1__Impl : ( For ) ;
     public final void rule__Codetemplate__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:751:1: ( ( For ) )
-            // InternalSingleCodetemplateParser.g:752:1: ( For )
+            // InternalSingleCodetemplateParser.g:756:1: ( ( For ) )
+            // InternalSingleCodetemplateParser.g:757:1: ( For )
             {
-            // InternalSingleCodetemplateParser.g:752:1: ( For )
-            // InternalSingleCodetemplateParser.g:753:2: For
+            // InternalSingleCodetemplateParser.g:757:1: ( For )
+            // InternalSingleCodetemplateParser.g:758:2: For
             {
              before(grammarAccess.getCodetemplateAccess().getForKeyword_1()); 
             match(input,For,FOLLOW_2); 
@@ -2205,14 +2213,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__2"
-    // InternalSingleCodetemplateParser.g:762:1: rule__Codetemplate__Group__2 : rule__Codetemplate__Group__2__Impl rule__Codetemplate__Group__3 ;
+    // InternalSingleCodetemplateParser.g:767:1: rule__Codetemplate__Group__2 : rule__Codetemplate__Group__2__Impl rule__Codetemplate__Group__3 ;
     public final void rule__Codetemplate__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:766:1: ( rule__Codetemplate__Group__2__Impl rule__Codetemplate__Group__3 )
-            // InternalSingleCodetemplateParser.g:767:2: rule__Codetemplate__Group__2__Impl rule__Codetemplate__Group__3
+            // InternalSingleCodetemplateParser.g:771:1: ( rule__Codetemplate__Group__2__Impl rule__Codetemplate__Group__3 )
+            // InternalSingleCodetemplateParser.g:772:2: rule__Codetemplate__Group__2__Impl rule__Codetemplate__Group__3
             {
             pushFollow(FOLLOW_8);
             rule__Codetemplate__Group__2__Impl();
@@ -2243,21 +2251,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__2__Impl"
-    // InternalSingleCodetemplateParser.g:774:1: rule__Codetemplate__Group__2__Impl : ( ( rule__Codetemplate__Alternatives_2 ) ) ;
+    // InternalSingleCodetemplateParser.g:779:1: rule__Codetemplate__Group__2__Impl : ( ( rule__Codetemplate__Alternatives_2 ) ) ;
     public final void rule__Codetemplate__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:778:1: ( ( ( rule__Codetemplate__Alternatives_2 ) ) )
-            // InternalSingleCodetemplateParser.g:779:1: ( ( rule__Codetemplate__Alternatives_2 ) )
+            // InternalSingleCodetemplateParser.g:783:1: ( ( ( rule__Codetemplate__Alternatives_2 ) ) )
+            // InternalSingleCodetemplateParser.g:784:1: ( ( rule__Codetemplate__Alternatives_2 ) )
             {
-            // InternalSingleCodetemplateParser.g:779:1: ( ( rule__Codetemplate__Alternatives_2 ) )
-            // InternalSingleCodetemplateParser.g:780:2: ( rule__Codetemplate__Alternatives_2 )
+            // InternalSingleCodetemplateParser.g:784:1: ( ( rule__Codetemplate__Alternatives_2 ) )
+            // InternalSingleCodetemplateParser.g:785:2: ( rule__Codetemplate__Alternatives_2 )
             {
              before(grammarAccess.getCodetemplateAccess().getAlternatives_2()); 
-            // InternalSingleCodetemplateParser.g:781:2: ( rule__Codetemplate__Alternatives_2 )
-            // InternalSingleCodetemplateParser.g:781:3: rule__Codetemplate__Alternatives_2
+            // InternalSingleCodetemplateParser.g:786:2: ( rule__Codetemplate__Alternatives_2 )
+            // InternalSingleCodetemplateParser.g:786:3: rule__Codetemplate__Alternatives_2
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplate__Alternatives_2();
@@ -2290,14 +2298,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__3"
-    // InternalSingleCodetemplateParser.g:789:1: rule__Codetemplate__Group__3 : rule__Codetemplate__Group__3__Impl ;
+    // InternalSingleCodetemplateParser.g:794:1: rule__Codetemplate__Group__3 : rule__Codetemplate__Group__3__Impl ;
     public final void rule__Codetemplate__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:793:1: ( rule__Codetemplate__Group__3__Impl )
-            // InternalSingleCodetemplateParser.g:794:2: rule__Codetemplate__Group__3__Impl
+            // InternalSingleCodetemplateParser.g:798:1: ( rule__Codetemplate__Group__3__Impl )
+            // InternalSingleCodetemplateParser.g:799:2: rule__Codetemplate__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplate__Group__3__Impl();
@@ -2323,21 +2331,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__Group__3__Impl"
-    // InternalSingleCodetemplateParser.g:800:1: rule__Codetemplate__Group__3__Impl : ( ( rule__Codetemplate__BodyAssignment_3 ) ) ;
+    // InternalSingleCodetemplateParser.g:805:1: rule__Codetemplate__Group__3__Impl : ( ( rule__Codetemplate__BodyAssignment_3 ) ) ;
     public final void rule__Codetemplate__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:804:1: ( ( ( rule__Codetemplate__BodyAssignment_3 ) ) )
-            // InternalSingleCodetemplateParser.g:805:1: ( ( rule__Codetemplate__BodyAssignment_3 ) )
+            // InternalSingleCodetemplateParser.g:809:1: ( ( ( rule__Codetemplate__BodyAssignment_3 ) ) )
+            // InternalSingleCodetemplateParser.g:810:1: ( ( rule__Codetemplate__BodyAssignment_3 ) )
             {
-            // InternalSingleCodetemplateParser.g:805:1: ( ( rule__Codetemplate__BodyAssignment_3 ) )
-            // InternalSingleCodetemplateParser.g:806:2: ( rule__Codetemplate__BodyAssignment_3 )
+            // InternalSingleCodetemplateParser.g:810:1: ( ( rule__Codetemplate__BodyAssignment_3 ) )
+            // InternalSingleCodetemplateParser.g:811:2: ( rule__Codetemplate__BodyAssignment_3 )
             {
              before(grammarAccess.getCodetemplateAccess().getBodyAssignment_3()); 
-            // InternalSingleCodetemplateParser.g:807:2: ( rule__Codetemplate__BodyAssignment_3 )
-            // InternalSingleCodetemplateParser.g:807:3: rule__Codetemplate__BodyAssignment_3
+            // InternalSingleCodetemplateParser.g:812:2: ( rule__Codetemplate__BodyAssignment_3 )
+            // InternalSingleCodetemplateParser.g:812:3: rule__Codetemplate__BodyAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Codetemplate__BodyAssignment_3();
@@ -2370,14 +2378,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBodyWithQuotes__Group__0"
-    // InternalSingleCodetemplateParser.g:816:1: rule__TemplateBodyWithQuotes__Group__0 : rule__TemplateBodyWithQuotes__Group__0__Impl rule__TemplateBodyWithQuotes__Group__1 ;
+    // InternalSingleCodetemplateParser.g:821:1: rule__TemplateBodyWithQuotes__Group__0 : rule__TemplateBodyWithQuotes__Group__0__Impl rule__TemplateBodyWithQuotes__Group__1 ;
     public final void rule__TemplateBodyWithQuotes__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:820:1: ( rule__TemplateBodyWithQuotes__Group__0__Impl rule__TemplateBodyWithQuotes__Group__1 )
-            // InternalSingleCodetemplateParser.g:821:2: rule__TemplateBodyWithQuotes__Group__0__Impl rule__TemplateBodyWithQuotes__Group__1
+            // InternalSingleCodetemplateParser.g:825:1: ( rule__TemplateBodyWithQuotes__Group__0__Impl rule__TemplateBodyWithQuotes__Group__1 )
+            // InternalSingleCodetemplateParser.g:826:2: rule__TemplateBodyWithQuotes__Group__0__Impl rule__TemplateBodyWithQuotes__Group__1
             {
             pushFollow(FOLLOW_9);
             rule__TemplateBodyWithQuotes__Group__0__Impl();
@@ -2408,17 +2416,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBodyWithQuotes__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:828:1: rule__TemplateBodyWithQuotes__Group__0__Impl : ( GreaterThanSignGreaterThanSign ) ;
+    // InternalSingleCodetemplateParser.g:833:1: rule__TemplateBodyWithQuotes__Group__0__Impl : ( GreaterThanSignGreaterThanSign ) ;
     public final void rule__TemplateBodyWithQuotes__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:832:1: ( ( GreaterThanSignGreaterThanSign ) )
-            // InternalSingleCodetemplateParser.g:833:1: ( GreaterThanSignGreaterThanSign )
+            // InternalSingleCodetemplateParser.g:837:1: ( ( GreaterThanSignGreaterThanSign ) )
+            // InternalSingleCodetemplateParser.g:838:1: ( GreaterThanSignGreaterThanSign )
             {
-            // InternalSingleCodetemplateParser.g:833:1: ( GreaterThanSignGreaterThanSign )
-            // InternalSingleCodetemplateParser.g:834:2: GreaterThanSignGreaterThanSign
+            // InternalSingleCodetemplateParser.g:838:1: ( GreaterThanSignGreaterThanSign )
+            // InternalSingleCodetemplateParser.g:839:2: GreaterThanSignGreaterThanSign
             {
              before(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_0()); 
             match(input,GreaterThanSignGreaterThanSign,FOLLOW_2); 
@@ -2445,14 +2453,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBodyWithQuotes__Group__1"
-    // InternalSingleCodetemplateParser.g:843:1: rule__TemplateBodyWithQuotes__Group__1 : rule__TemplateBodyWithQuotes__Group__1__Impl ;
+    // InternalSingleCodetemplateParser.g:848:1: rule__TemplateBodyWithQuotes__Group__1 : rule__TemplateBodyWithQuotes__Group__1__Impl ;
     public final void rule__TemplateBodyWithQuotes__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:847:1: ( rule__TemplateBodyWithQuotes__Group__1__Impl )
-            // InternalSingleCodetemplateParser.g:848:2: rule__TemplateBodyWithQuotes__Group__1__Impl
+            // InternalSingleCodetemplateParser.g:852:1: ( rule__TemplateBodyWithQuotes__Group__1__Impl )
+            // InternalSingleCodetemplateParser.g:853:2: rule__TemplateBodyWithQuotes__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TemplateBodyWithQuotes__Group__1__Impl();
@@ -2478,17 +2486,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBodyWithQuotes__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:854:1: rule__TemplateBodyWithQuotes__Group__1__Impl : ( ruleTemplateBody ) ;
+    // InternalSingleCodetemplateParser.g:859:1: rule__TemplateBodyWithQuotes__Group__1__Impl : ( ruleTemplateBody ) ;
     public final void rule__TemplateBodyWithQuotes__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:858:1: ( ( ruleTemplateBody ) )
-            // InternalSingleCodetemplateParser.g:859:1: ( ruleTemplateBody )
+            // InternalSingleCodetemplateParser.g:863:1: ( ( ruleTemplateBody ) )
+            // InternalSingleCodetemplateParser.g:864:1: ( ruleTemplateBody )
             {
-            // InternalSingleCodetemplateParser.g:859:1: ( ruleTemplateBody )
-            // InternalSingleCodetemplateParser.g:860:2: ruleTemplateBody
+            // InternalSingleCodetemplateParser.g:864:1: ( ruleTemplateBody )
+            // InternalSingleCodetemplateParser.g:865:2: ruleTemplateBody
             {
              before(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_1()); 
             pushFollow(FOLLOW_2);
@@ -2519,14 +2527,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group__0"
-    // InternalSingleCodetemplateParser.g:870:1: rule__TemplateBody__Group__0 : rule__TemplateBody__Group__0__Impl rule__TemplateBody__Group__1 ;
+    // InternalSingleCodetemplateParser.g:875:1: rule__TemplateBody__Group__0 : rule__TemplateBody__Group__0__Impl rule__TemplateBody__Group__1 ;
     public final void rule__TemplateBody__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:874:1: ( rule__TemplateBody__Group__0__Impl rule__TemplateBody__Group__1 )
-            // InternalSingleCodetemplateParser.g:875:2: rule__TemplateBody__Group__0__Impl rule__TemplateBody__Group__1
+            // InternalSingleCodetemplateParser.g:879:1: ( rule__TemplateBody__Group__0__Impl rule__TemplateBody__Group__1 )
+            // InternalSingleCodetemplateParser.g:880:2: rule__TemplateBody__Group__0__Impl rule__TemplateBody__Group__1
             {
             pushFollow(FOLLOW_9);
             rule__TemplateBody__Group__0__Impl();
@@ -2557,21 +2565,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:882:1: rule__TemplateBody__Group__0__Impl : ( () ) ;
+    // InternalSingleCodetemplateParser.g:887:1: rule__TemplateBody__Group__0__Impl : ( () ) ;
     public final void rule__TemplateBody__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:886:1: ( ( () ) )
-            // InternalSingleCodetemplateParser.g:887:1: ( () )
+            // InternalSingleCodetemplateParser.g:891:1: ( ( () ) )
+            // InternalSingleCodetemplateParser.g:892:1: ( () )
             {
-            // InternalSingleCodetemplateParser.g:887:1: ( () )
-            // InternalSingleCodetemplateParser.g:888:2: ()
+            // InternalSingleCodetemplateParser.g:892:1: ( () )
+            // InternalSingleCodetemplateParser.g:893:2: ()
             {
              before(grammarAccess.getTemplateBodyAccess().getTemplateBodyAction_0()); 
-            // InternalSingleCodetemplateParser.g:889:2: ()
-            // InternalSingleCodetemplateParser.g:889:3: 
+            // InternalSingleCodetemplateParser.g:894:2: ()
+            // InternalSingleCodetemplateParser.g:894:3: 
             {
             }
 
@@ -2594,14 +2602,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group__1"
-    // InternalSingleCodetemplateParser.g:897:1: rule__TemplateBody__Group__1 : rule__TemplateBody__Group__1__Impl rule__TemplateBody__Group__2 ;
+    // InternalSingleCodetemplateParser.g:902:1: rule__TemplateBody__Group__1 : rule__TemplateBody__Group__1__Impl rule__TemplateBody__Group__2 ;
     public final void rule__TemplateBody__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:901:1: ( rule__TemplateBody__Group__1__Impl rule__TemplateBody__Group__2 )
-            // InternalSingleCodetemplateParser.g:902:2: rule__TemplateBody__Group__1__Impl rule__TemplateBody__Group__2
+            // InternalSingleCodetemplateParser.g:906:1: ( rule__TemplateBody__Group__1__Impl rule__TemplateBody__Group__2 )
+            // InternalSingleCodetemplateParser.g:907:2: rule__TemplateBody__Group__1__Impl rule__TemplateBody__Group__2
             {
             pushFollow(FOLLOW_9);
             rule__TemplateBody__Group__1__Impl();
@@ -2632,20 +2640,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:909:1: rule__TemplateBody__Group__1__Impl : ( ( rule__TemplateBody__PartsAssignment_1 )? ) ;
+    // InternalSingleCodetemplateParser.g:914:1: rule__TemplateBody__Group__1__Impl : ( ( rule__TemplateBody__PartsAssignment_1 )? ) ;
     public final void rule__TemplateBody__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:913:1: ( ( ( rule__TemplateBody__PartsAssignment_1 )? ) )
-            // InternalSingleCodetemplateParser.g:914:1: ( ( rule__TemplateBody__PartsAssignment_1 )? )
+            // InternalSingleCodetemplateParser.g:918:1: ( ( ( rule__TemplateBody__PartsAssignment_1 )? ) )
+            // InternalSingleCodetemplateParser.g:919:1: ( ( rule__TemplateBody__PartsAssignment_1 )? )
             {
-            // InternalSingleCodetemplateParser.g:914:1: ( ( rule__TemplateBody__PartsAssignment_1 )? )
-            // InternalSingleCodetemplateParser.g:915:2: ( rule__TemplateBody__PartsAssignment_1 )?
+            // InternalSingleCodetemplateParser.g:919:1: ( ( rule__TemplateBody__PartsAssignment_1 )? )
+            // InternalSingleCodetemplateParser.g:920:2: ( rule__TemplateBody__PartsAssignment_1 )?
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsAssignment_1()); 
-            // InternalSingleCodetemplateParser.g:916:2: ( rule__TemplateBody__PartsAssignment_1 )?
+            // InternalSingleCodetemplateParser.g:921:2: ( rule__TemplateBody__PartsAssignment_1 )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2654,7 +2662,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt10) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:916:3: rule__TemplateBody__PartsAssignment_1
+                    // InternalSingleCodetemplateParser.g:921:3: rule__TemplateBody__PartsAssignment_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__TemplateBody__PartsAssignment_1();
@@ -2690,14 +2698,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group__2"
-    // InternalSingleCodetemplateParser.g:924:1: rule__TemplateBody__Group__2 : rule__TemplateBody__Group__2__Impl ;
+    // InternalSingleCodetemplateParser.g:929:1: rule__TemplateBody__Group__2 : rule__TemplateBody__Group__2__Impl ;
     public final void rule__TemplateBody__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:928:1: ( rule__TemplateBody__Group__2__Impl )
-            // InternalSingleCodetemplateParser.g:929:2: rule__TemplateBody__Group__2__Impl
+            // InternalSingleCodetemplateParser.g:933:1: ( rule__TemplateBody__Group__2__Impl )
+            // InternalSingleCodetemplateParser.g:934:2: rule__TemplateBody__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TemplateBody__Group__2__Impl();
@@ -2723,20 +2731,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group__2__Impl"
-    // InternalSingleCodetemplateParser.g:935:1: rule__TemplateBody__Group__2__Impl : ( ( rule__TemplateBody__Group_2__0 )* ) ;
+    // InternalSingleCodetemplateParser.g:940:1: rule__TemplateBody__Group__2__Impl : ( ( rule__TemplateBody__Group_2__0 )* ) ;
     public final void rule__TemplateBody__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:939:1: ( ( ( rule__TemplateBody__Group_2__0 )* ) )
-            // InternalSingleCodetemplateParser.g:940:1: ( ( rule__TemplateBody__Group_2__0 )* )
+            // InternalSingleCodetemplateParser.g:944:1: ( ( ( rule__TemplateBody__Group_2__0 )* ) )
+            // InternalSingleCodetemplateParser.g:945:1: ( ( rule__TemplateBody__Group_2__0 )* )
             {
-            // InternalSingleCodetemplateParser.g:940:1: ( ( rule__TemplateBody__Group_2__0 )* )
-            // InternalSingleCodetemplateParser.g:941:2: ( rule__TemplateBody__Group_2__0 )*
+            // InternalSingleCodetemplateParser.g:945:1: ( ( rule__TemplateBody__Group_2__0 )* )
+            // InternalSingleCodetemplateParser.g:946:2: ( rule__TemplateBody__Group_2__0 )*
             {
              before(grammarAccess.getTemplateBodyAccess().getGroup_2()); 
-            // InternalSingleCodetemplateParser.g:942:2: ( rule__TemplateBody__Group_2__0 )*
+            // InternalSingleCodetemplateParser.g:947:2: ( rule__TemplateBody__Group_2__0 )*
             loop11:
             do {
                 int alt11=2;
@@ -2749,7 +2757,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:942:3: rule__TemplateBody__Group_2__0
+            	    // InternalSingleCodetemplateParser.g:947:3: rule__TemplateBody__Group_2__0
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__TemplateBody__Group_2__0();
@@ -2788,14 +2796,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group_2__0"
-    // InternalSingleCodetemplateParser.g:951:1: rule__TemplateBody__Group_2__0 : rule__TemplateBody__Group_2__0__Impl rule__TemplateBody__Group_2__1 ;
+    // InternalSingleCodetemplateParser.g:956:1: rule__TemplateBody__Group_2__0 : rule__TemplateBody__Group_2__0__Impl rule__TemplateBody__Group_2__1 ;
     public final void rule__TemplateBody__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:955:1: ( rule__TemplateBody__Group_2__0__Impl rule__TemplateBody__Group_2__1 )
-            // InternalSingleCodetemplateParser.g:956:2: rule__TemplateBody__Group_2__0__Impl rule__TemplateBody__Group_2__1
+            // InternalSingleCodetemplateParser.g:960:1: ( rule__TemplateBody__Group_2__0__Impl rule__TemplateBody__Group_2__1 )
+            // InternalSingleCodetemplateParser.g:961:2: rule__TemplateBody__Group_2__0__Impl rule__TemplateBody__Group_2__1
             {
             pushFollow(FOLLOW_11);
             rule__TemplateBody__Group_2__0__Impl();
@@ -2826,21 +2834,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group_2__0__Impl"
-    // InternalSingleCodetemplateParser.g:963:1: rule__TemplateBody__Group_2__0__Impl : ( ( rule__TemplateBody__PartsAssignment_2_0 ) ) ;
+    // InternalSingleCodetemplateParser.g:968:1: rule__TemplateBody__Group_2__0__Impl : ( ( rule__TemplateBody__PartsAssignment_2_0 ) ) ;
     public final void rule__TemplateBody__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:967:1: ( ( ( rule__TemplateBody__PartsAssignment_2_0 ) ) )
-            // InternalSingleCodetemplateParser.g:968:1: ( ( rule__TemplateBody__PartsAssignment_2_0 ) )
+            // InternalSingleCodetemplateParser.g:972:1: ( ( ( rule__TemplateBody__PartsAssignment_2_0 ) ) )
+            // InternalSingleCodetemplateParser.g:973:1: ( ( rule__TemplateBody__PartsAssignment_2_0 ) )
             {
-            // InternalSingleCodetemplateParser.g:968:1: ( ( rule__TemplateBody__PartsAssignment_2_0 ) )
-            // InternalSingleCodetemplateParser.g:969:2: ( rule__TemplateBody__PartsAssignment_2_0 )
+            // InternalSingleCodetemplateParser.g:973:1: ( ( rule__TemplateBody__PartsAssignment_2_0 ) )
+            // InternalSingleCodetemplateParser.g:974:2: ( rule__TemplateBody__PartsAssignment_2_0 )
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsAssignment_2_0()); 
-            // InternalSingleCodetemplateParser.g:970:2: ( rule__TemplateBody__PartsAssignment_2_0 )
-            // InternalSingleCodetemplateParser.g:970:3: rule__TemplateBody__PartsAssignment_2_0
+            // InternalSingleCodetemplateParser.g:975:2: ( rule__TemplateBody__PartsAssignment_2_0 )
+            // InternalSingleCodetemplateParser.g:975:3: rule__TemplateBody__PartsAssignment_2_0
             {
             pushFollow(FOLLOW_2);
             rule__TemplateBody__PartsAssignment_2_0();
@@ -2873,14 +2881,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group_2__1"
-    // InternalSingleCodetemplateParser.g:978:1: rule__TemplateBody__Group_2__1 : rule__TemplateBody__Group_2__1__Impl ;
+    // InternalSingleCodetemplateParser.g:983:1: rule__TemplateBody__Group_2__1 : rule__TemplateBody__Group_2__1__Impl ;
     public final void rule__TemplateBody__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:982:1: ( rule__TemplateBody__Group_2__1__Impl )
-            // InternalSingleCodetemplateParser.g:983:2: rule__TemplateBody__Group_2__1__Impl
+            // InternalSingleCodetemplateParser.g:987:1: ( rule__TemplateBody__Group_2__1__Impl )
+            // InternalSingleCodetemplateParser.g:988:2: rule__TemplateBody__Group_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TemplateBody__Group_2__1__Impl();
@@ -2906,20 +2914,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__Group_2__1__Impl"
-    // InternalSingleCodetemplateParser.g:989:1: rule__TemplateBody__Group_2__1__Impl : ( ( rule__TemplateBody__PartsAssignment_2_1 )? ) ;
+    // InternalSingleCodetemplateParser.g:994:1: rule__TemplateBody__Group_2__1__Impl : ( ( rule__TemplateBody__PartsAssignment_2_1 )? ) ;
     public final void rule__TemplateBody__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:993:1: ( ( ( rule__TemplateBody__PartsAssignment_2_1 )? ) )
-            // InternalSingleCodetemplateParser.g:994:1: ( ( rule__TemplateBody__PartsAssignment_2_1 )? )
+            // InternalSingleCodetemplateParser.g:998:1: ( ( ( rule__TemplateBody__PartsAssignment_2_1 )? ) )
+            // InternalSingleCodetemplateParser.g:999:1: ( ( rule__TemplateBody__PartsAssignment_2_1 )? )
             {
-            // InternalSingleCodetemplateParser.g:994:1: ( ( rule__TemplateBody__PartsAssignment_2_1 )? )
-            // InternalSingleCodetemplateParser.g:995:2: ( rule__TemplateBody__PartsAssignment_2_1 )?
+            // InternalSingleCodetemplateParser.g:999:1: ( ( rule__TemplateBody__PartsAssignment_2_1 )? )
+            // InternalSingleCodetemplateParser.g:1000:2: ( rule__TemplateBody__PartsAssignment_2_1 )?
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsAssignment_2_1()); 
-            // InternalSingleCodetemplateParser.g:996:2: ( rule__TemplateBody__PartsAssignment_2_1 )?
+            // InternalSingleCodetemplateParser.g:1001:2: ( rule__TemplateBody__PartsAssignment_2_1 )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2928,7 +2936,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt12) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:996:3: rule__TemplateBody__PartsAssignment_2_1
+                    // InternalSingleCodetemplateParser.g:1001:3: rule__TemplateBody__PartsAssignment_2_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__TemplateBody__PartsAssignment_2_1();
@@ -2964,14 +2972,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__0"
-    // InternalSingleCodetemplateParser.g:1005:1: rule__Variable__Group__0 : rule__Variable__Group__0__Impl rule__Variable__Group__1 ;
+    // InternalSingleCodetemplateParser.g:1010:1: rule__Variable__Group__0 : rule__Variable__Group__0__Impl rule__Variable__Group__1 ;
     public final void rule__Variable__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1009:1: ( rule__Variable__Group__0__Impl rule__Variable__Group__1 )
-            // InternalSingleCodetemplateParser.g:1010:2: rule__Variable__Group__0__Impl rule__Variable__Group__1
+            // InternalSingleCodetemplateParser.g:1014:1: ( rule__Variable__Group__0__Impl rule__Variable__Group__1 )
+            // InternalSingleCodetemplateParser.g:1015:2: rule__Variable__Group__0__Impl rule__Variable__Group__1
             {
             pushFollow(FOLLOW_12);
             rule__Variable__Group__0__Impl();
@@ -3002,17 +3010,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:1017:1: rule__Variable__Group__0__Impl : ( DollarSignLeftCurlyBracket ) ;
+    // InternalSingleCodetemplateParser.g:1022:1: rule__Variable__Group__0__Impl : ( DollarSignLeftCurlyBracket ) ;
     public final void rule__Variable__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1021:1: ( ( DollarSignLeftCurlyBracket ) )
-            // InternalSingleCodetemplateParser.g:1022:1: ( DollarSignLeftCurlyBracket )
+            // InternalSingleCodetemplateParser.g:1026:1: ( ( DollarSignLeftCurlyBracket ) )
+            // InternalSingleCodetemplateParser.g:1027:1: ( DollarSignLeftCurlyBracket )
             {
-            // InternalSingleCodetemplateParser.g:1022:1: ( DollarSignLeftCurlyBracket )
-            // InternalSingleCodetemplateParser.g:1023:2: DollarSignLeftCurlyBracket
+            // InternalSingleCodetemplateParser.g:1027:1: ( DollarSignLeftCurlyBracket )
+            // InternalSingleCodetemplateParser.g:1028:2: DollarSignLeftCurlyBracket
             {
              before(grammarAccess.getVariableAccess().getDollarSignLeftCurlyBracketKeyword_0()); 
             match(input,DollarSignLeftCurlyBracket,FOLLOW_2); 
@@ -3039,14 +3047,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__1"
-    // InternalSingleCodetemplateParser.g:1032:1: rule__Variable__Group__1 : rule__Variable__Group__1__Impl rule__Variable__Group__2 ;
+    // InternalSingleCodetemplateParser.g:1037:1: rule__Variable__Group__1 : rule__Variable__Group__1__Impl rule__Variable__Group__2 ;
     public final void rule__Variable__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1036:1: ( rule__Variable__Group__1__Impl rule__Variable__Group__2 )
-            // InternalSingleCodetemplateParser.g:1037:2: rule__Variable__Group__1__Impl rule__Variable__Group__2
+            // InternalSingleCodetemplateParser.g:1041:1: ( rule__Variable__Group__1__Impl rule__Variable__Group__2 )
+            // InternalSingleCodetemplateParser.g:1042:2: rule__Variable__Group__1__Impl rule__Variable__Group__2
             {
             pushFollow(FOLLOW_12);
             rule__Variable__Group__1__Impl();
@@ -3077,20 +3085,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:1044:1: rule__Variable__Group__1__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1049:1: rule__Variable__Group__1__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1048:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1049:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1053:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1054:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1049:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1050:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1054:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1055:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_1()); 
-            // InternalSingleCodetemplateParser.g:1051:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1056:2: ( RULE_WS )*
             loop13:
             do {
                 int alt13=2;
@@ -3103,7 +3111,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1051:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1056:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -3138,14 +3146,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__2"
-    // InternalSingleCodetemplateParser.g:1059:1: rule__Variable__Group__2 : rule__Variable__Group__2__Impl rule__Variable__Group__3 ;
+    // InternalSingleCodetemplateParser.g:1064:1: rule__Variable__Group__2 : rule__Variable__Group__2__Impl rule__Variable__Group__3 ;
     public final void rule__Variable__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1063:1: ( rule__Variable__Group__2__Impl rule__Variable__Group__3 )
-            // InternalSingleCodetemplateParser.g:1064:2: rule__Variable__Group__2__Impl rule__Variable__Group__3
+            // InternalSingleCodetemplateParser.g:1068:1: ( rule__Variable__Group__2__Impl rule__Variable__Group__3 )
+            // InternalSingleCodetemplateParser.g:1069:2: rule__Variable__Group__2__Impl rule__Variable__Group__3
             {
             pushFollow(FOLLOW_14);
             rule__Variable__Group__2__Impl();
@@ -3176,21 +3184,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__2__Impl"
-    // InternalSingleCodetemplateParser.g:1071:1: rule__Variable__Group__2__Impl : ( ( rule__Variable__Alternatives_2 ) ) ;
+    // InternalSingleCodetemplateParser.g:1076:1: rule__Variable__Group__2__Impl : ( ( rule__Variable__Alternatives_2 ) ) ;
     public final void rule__Variable__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1075:1: ( ( ( rule__Variable__Alternatives_2 ) ) )
-            // InternalSingleCodetemplateParser.g:1076:1: ( ( rule__Variable__Alternatives_2 ) )
+            // InternalSingleCodetemplateParser.g:1080:1: ( ( ( rule__Variable__Alternatives_2 ) ) )
+            // InternalSingleCodetemplateParser.g:1081:1: ( ( rule__Variable__Alternatives_2 ) )
             {
-            // InternalSingleCodetemplateParser.g:1076:1: ( ( rule__Variable__Alternatives_2 ) )
-            // InternalSingleCodetemplateParser.g:1077:2: ( rule__Variable__Alternatives_2 )
+            // InternalSingleCodetemplateParser.g:1081:1: ( ( rule__Variable__Alternatives_2 ) )
+            // InternalSingleCodetemplateParser.g:1082:2: ( rule__Variable__Alternatives_2 )
             {
              before(grammarAccess.getVariableAccess().getAlternatives_2()); 
-            // InternalSingleCodetemplateParser.g:1078:2: ( rule__Variable__Alternatives_2 )
-            // InternalSingleCodetemplateParser.g:1078:3: rule__Variable__Alternatives_2
+            // InternalSingleCodetemplateParser.g:1083:2: ( rule__Variable__Alternatives_2 )
+            // InternalSingleCodetemplateParser.g:1083:3: rule__Variable__Alternatives_2
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Alternatives_2();
@@ -3223,14 +3231,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__3"
-    // InternalSingleCodetemplateParser.g:1086:1: rule__Variable__Group__3 : rule__Variable__Group__3__Impl rule__Variable__Group__4 ;
+    // InternalSingleCodetemplateParser.g:1091:1: rule__Variable__Group__3 : rule__Variable__Group__3__Impl rule__Variable__Group__4 ;
     public final void rule__Variable__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1090:1: ( rule__Variable__Group__3__Impl rule__Variable__Group__4 )
-            // InternalSingleCodetemplateParser.g:1091:2: rule__Variable__Group__3__Impl rule__Variable__Group__4
+            // InternalSingleCodetemplateParser.g:1095:1: ( rule__Variable__Group__3__Impl rule__Variable__Group__4 )
+            // InternalSingleCodetemplateParser.g:1096:2: rule__Variable__Group__3__Impl rule__Variable__Group__4
             {
             pushFollow(FOLLOW_14);
             rule__Variable__Group__3__Impl();
@@ -3261,20 +3269,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__3__Impl"
-    // InternalSingleCodetemplateParser.g:1098:1: rule__Variable__Group__3__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1103:1: rule__Variable__Group__3__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1102:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1103:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1107:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1108:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1103:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1104:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1108:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1109:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_3()); 
-            // InternalSingleCodetemplateParser.g:1105:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1110:2: ( RULE_WS )*
             loop14:
             do {
                 int alt14=2;
@@ -3287,7 +3295,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1105:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1110:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -3322,14 +3330,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__4"
-    // InternalSingleCodetemplateParser.g:1113:1: rule__Variable__Group__4 : rule__Variable__Group__4__Impl ;
+    // InternalSingleCodetemplateParser.g:1118:1: rule__Variable__Group__4 : rule__Variable__Group__4__Impl ;
     public final void rule__Variable__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1117:1: ( rule__Variable__Group__4__Impl )
-            // InternalSingleCodetemplateParser.g:1118:2: rule__Variable__Group__4__Impl
+            // InternalSingleCodetemplateParser.g:1122:1: ( rule__Variable__Group__4__Impl )
+            // InternalSingleCodetemplateParser.g:1123:2: rule__Variable__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group__4__Impl();
@@ -3355,17 +3363,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group__4__Impl"
-    // InternalSingleCodetemplateParser.g:1124:1: rule__Variable__Group__4__Impl : ( RightCurlyBracket ) ;
+    // InternalSingleCodetemplateParser.g:1129:1: rule__Variable__Group__4__Impl : ( RightCurlyBracket ) ;
     public final void rule__Variable__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1128:1: ( ( RightCurlyBracket ) )
-            // InternalSingleCodetemplateParser.g:1129:1: ( RightCurlyBracket )
+            // InternalSingleCodetemplateParser.g:1133:1: ( ( RightCurlyBracket ) )
+            // InternalSingleCodetemplateParser.g:1134:1: ( RightCurlyBracket )
             {
-            // InternalSingleCodetemplateParser.g:1129:1: ( RightCurlyBracket )
-            // InternalSingleCodetemplateParser.g:1130:2: RightCurlyBracket
+            // InternalSingleCodetemplateParser.g:1134:1: ( RightCurlyBracket )
+            // InternalSingleCodetemplateParser.g:1135:2: RightCurlyBracket
             {
              before(grammarAccess.getVariableAccess().getRightCurlyBracketKeyword_4()); 
             match(input,RightCurlyBracket,FOLLOW_2); 
@@ -3392,14 +3400,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__0"
-    // InternalSingleCodetemplateParser.g:1140:1: rule__Variable__Group_2_1__0 : rule__Variable__Group_2_1__0__Impl rule__Variable__Group_2_1__1 ;
+    // InternalSingleCodetemplateParser.g:1145:1: rule__Variable__Group_2_1__0 : rule__Variable__Group_2_1__0__Impl rule__Variable__Group_2_1__1 ;
     public final void rule__Variable__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1144:1: ( rule__Variable__Group_2_1__0__Impl rule__Variable__Group_2_1__1 )
-            // InternalSingleCodetemplateParser.g:1145:2: rule__Variable__Group_2_1__0__Impl rule__Variable__Group_2_1__1
+            // InternalSingleCodetemplateParser.g:1149:1: ( rule__Variable__Group_2_1__0__Impl rule__Variable__Group_2_1__1 )
+            // InternalSingleCodetemplateParser.g:1150:2: rule__Variable__Group_2_1__0__Impl rule__Variable__Group_2_1__1
             {
             pushFollow(FOLLOW_12);
             rule__Variable__Group_2_1__0__Impl();
@@ -3430,20 +3438,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__0__Impl"
-    // InternalSingleCodetemplateParser.g:1152:1: rule__Variable__Group_2_1__0__Impl : ( ( rule__Variable__Group_2_1_0__0 )? ) ;
+    // InternalSingleCodetemplateParser.g:1157:1: rule__Variable__Group_2_1__0__Impl : ( ( rule__Variable__Group_2_1_0__0 )? ) ;
     public final void rule__Variable__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1156:1: ( ( ( rule__Variable__Group_2_1_0__0 )? ) )
-            // InternalSingleCodetemplateParser.g:1157:1: ( ( rule__Variable__Group_2_1_0__0 )? )
+            // InternalSingleCodetemplateParser.g:1161:1: ( ( ( rule__Variable__Group_2_1_0__0 )? ) )
+            // InternalSingleCodetemplateParser.g:1162:1: ( ( rule__Variable__Group_2_1_0__0 )? )
             {
-            // InternalSingleCodetemplateParser.g:1157:1: ( ( rule__Variable__Group_2_1_0__0 )? )
-            // InternalSingleCodetemplateParser.g:1158:2: ( rule__Variable__Group_2_1_0__0 )?
+            // InternalSingleCodetemplateParser.g:1162:1: ( ( rule__Variable__Group_2_1_0__0 )? )
+            // InternalSingleCodetemplateParser.g:1163:2: ( rule__Variable__Group_2_1_0__0 )?
             {
              before(grammarAccess.getVariableAccess().getGroup_2_1_0()); 
-            // InternalSingleCodetemplateParser.g:1159:2: ( rule__Variable__Group_2_1_0__0 )?
+            // InternalSingleCodetemplateParser.g:1164:2: ( rule__Variable__Group_2_1_0__0 )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -3452,7 +3460,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt15) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:1159:3: rule__Variable__Group_2_1_0__0
+                    // InternalSingleCodetemplateParser.g:1164:3: rule__Variable__Group_2_1_0__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Variable__Group_2_1_0__0();
@@ -3488,14 +3496,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__1"
-    // InternalSingleCodetemplateParser.g:1167:1: rule__Variable__Group_2_1__1 : rule__Variable__Group_2_1__1__Impl rule__Variable__Group_2_1__2 ;
+    // InternalSingleCodetemplateParser.g:1172:1: rule__Variable__Group_2_1__1 : rule__Variable__Group_2_1__1__Impl rule__Variable__Group_2_1__2 ;
     public final void rule__Variable__Group_2_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1171:1: ( rule__Variable__Group_2_1__1__Impl rule__Variable__Group_2_1__2 )
-            // InternalSingleCodetemplateParser.g:1172:2: rule__Variable__Group_2_1__1__Impl rule__Variable__Group_2_1__2
+            // InternalSingleCodetemplateParser.g:1176:1: ( rule__Variable__Group_2_1__1__Impl rule__Variable__Group_2_1__2 )
+            // InternalSingleCodetemplateParser.g:1177:2: rule__Variable__Group_2_1__1__Impl rule__Variable__Group_2_1__2
             {
             pushFollow(FOLLOW_15);
             rule__Variable__Group_2_1__1__Impl();
@@ -3526,17 +3534,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__1__Impl"
-    // InternalSingleCodetemplateParser.g:1179:1: rule__Variable__Group_2_1__1__Impl : ( Colon ) ;
+    // InternalSingleCodetemplateParser.g:1184:1: rule__Variable__Group_2_1__1__Impl : ( Colon ) ;
     public final void rule__Variable__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1183:1: ( ( Colon ) )
-            // InternalSingleCodetemplateParser.g:1184:1: ( Colon )
+            // InternalSingleCodetemplateParser.g:1188:1: ( ( Colon ) )
+            // InternalSingleCodetemplateParser.g:1189:1: ( Colon )
             {
-            // InternalSingleCodetemplateParser.g:1184:1: ( Colon )
-            // InternalSingleCodetemplateParser.g:1185:2: Colon
+            // InternalSingleCodetemplateParser.g:1189:1: ( Colon )
+            // InternalSingleCodetemplateParser.g:1190:2: Colon
             {
              before(grammarAccess.getVariableAccess().getColonKeyword_2_1_1()); 
             match(input,Colon,FOLLOW_2); 
@@ -3563,14 +3571,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__2"
-    // InternalSingleCodetemplateParser.g:1194:1: rule__Variable__Group_2_1__2 : rule__Variable__Group_2_1__2__Impl rule__Variable__Group_2_1__3 ;
+    // InternalSingleCodetemplateParser.g:1199:1: rule__Variable__Group_2_1__2 : rule__Variable__Group_2_1__2__Impl rule__Variable__Group_2_1__3 ;
     public final void rule__Variable__Group_2_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1198:1: ( rule__Variable__Group_2_1__2__Impl rule__Variable__Group_2_1__3 )
-            // InternalSingleCodetemplateParser.g:1199:2: rule__Variable__Group_2_1__2__Impl rule__Variable__Group_2_1__3
+            // InternalSingleCodetemplateParser.g:1203:1: ( rule__Variable__Group_2_1__2__Impl rule__Variable__Group_2_1__3 )
+            // InternalSingleCodetemplateParser.g:1204:2: rule__Variable__Group_2_1__2__Impl rule__Variable__Group_2_1__3
             {
             pushFollow(FOLLOW_15);
             rule__Variable__Group_2_1__2__Impl();
@@ -3601,20 +3609,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__2__Impl"
-    // InternalSingleCodetemplateParser.g:1206:1: rule__Variable__Group_2_1__2__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1211:1: rule__Variable__Group_2_1__2__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1210:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1211:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1215:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1216:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1211:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1212:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1216:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1217:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_2()); 
-            // InternalSingleCodetemplateParser.g:1213:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1218:2: ( RULE_WS )*
             loop16:
             do {
                 int alt16=2;
@@ -3627,7 +3635,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1213:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1218:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -3662,14 +3670,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__3"
-    // InternalSingleCodetemplateParser.g:1221:1: rule__Variable__Group_2_1__3 : rule__Variable__Group_2_1__3__Impl rule__Variable__Group_2_1__4 ;
+    // InternalSingleCodetemplateParser.g:1226:1: rule__Variable__Group_2_1__3 : rule__Variable__Group_2_1__3__Impl rule__Variable__Group_2_1__4 ;
     public final void rule__Variable__Group_2_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1225:1: ( rule__Variable__Group_2_1__3__Impl rule__Variable__Group_2_1__4 )
-            // InternalSingleCodetemplateParser.g:1226:2: rule__Variable__Group_2_1__3__Impl rule__Variable__Group_2_1__4
+            // InternalSingleCodetemplateParser.g:1230:1: ( rule__Variable__Group_2_1__3__Impl rule__Variable__Group_2_1__4 )
+            // InternalSingleCodetemplateParser.g:1231:2: rule__Variable__Group_2_1__3__Impl rule__Variable__Group_2_1__4
             {
             pushFollow(FOLLOW_16);
             rule__Variable__Group_2_1__3__Impl();
@@ -3700,21 +3708,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__3__Impl"
-    // InternalSingleCodetemplateParser.g:1233:1: rule__Variable__Group_2_1__3__Impl : ( ( rule__Variable__TypeAssignment_2_1_3 ) ) ;
+    // InternalSingleCodetemplateParser.g:1238:1: rule__Variable__Group_2_1__3__Impl : ( ( rule__Variable__TypeAssignment_2_1_3 ) ) ;
     public final void rule__Variable__Group_2_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1237:1: ( ( ( rule__Variable__TypeAssignment_2_1_3 ) ) )
-            // InternalSingleCodetemplateParser.g:1238:1: ( ( rule__Variable__TypeAssignment_2_1_3 ) )
+            // InternalSingleCodetemplateParser.g:1242:1: ( ( ( rule__Variable__TypeAssignment_2_1_3 ) ) )
+            // InternalSingleCodetemplateParser.g:1243:1: ( ( rule__Variable__TypeAssignment_2_1_3 ) )
             {
-            // InternalSingleCodetemplateParser.g:1238:1: ( ( rule__Variable__TypeAssignment_2_1_3 ) )
-            // InternalSingleCodetemplateParser.g:1239:2: ( rule__Variable__TypeAssignment_2_1_3 )
+            // InternalSingleCodetemplateParser.g:1243:1: ( ( rule__Variable__TypeAssignment_2_1_3 ) )
+            // InternalSingleCodetemplateParser.g:1244:2: ( rule__Variable__TypeAssignment_2_1_3 )
             {
              before(grammarAccess.getVariableAccess().getTypeAssignment_2_1_3()); 
-            // InternalSingleCodetemplateParser.g:1240:2: ( rule__Variable__TypeAssignment_2_1_3 )
-            // InternalSingleCodetemplateParser.g:1240:3: rule__Variable__TypeAssignment_2_1_3
+            // InternalSingleCodetemplateParser.g:1245:2: ( rule__Variable__TypeAssignment_2_1_3 )
+            // InternalSingleCodetemplateParser.g:1245:3: rule__Variable__TypeAssignment_2_1_3
             {
             pushFollow(FOLLOW_2);
             rule__Variable__TypeAssignment_2_1_3();
@@ -3747,14 +3755,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__4"
-    // InternalSingleCodetemplateParser.g:1248:1: rule__Variable__Group_2_1__4 : rule__Variable__Group_2_1__4__Impl ;
+    // InternalSingleCodetemplateParser.g:1253:1: rule__Variable__Group_2_1__4 : rule__Variable__Group_2_1__4__Impl ;
     public final void rule__Variable__Group_2_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1252:1: ( rule__Variable__Group_2_1__4__Impl )
-            // InternalSingleCodetemplateParser.g:1253:2: rule__Variable__Group_2_1__4__Impl
+            // InternalSingleCodetemplateParser.g:1257:1: ( rule__Variable__Group_2_1__4__Impl )
+            // InternalSingleCodetemplateParser.g:1258:2: rule__Variable__Group_2_1__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group_2_1__4__Impl();
@@ -3780,25 +3788,25 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1__4__Impl"
-    // InternalSingleCodetemplateParser.g:1259:1: rule__Variable__Group_2_1__4__Impl : ( ( rule__Variable__Group_2_1_4__0 )? ) ;
+    // InternalSingleCodetemplateParser.g:1264:1: rule__Variable__Group_2_1__4__Impl : ( ( rule__Variable__Group_2_1_4__0 )? ) ;
     public final void rule__Variable__Group_2_1__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1263:1: ( ( ( rule__Variable__Group_2_1_4__0 )? ) )
-            // InternalSingleCodetemplateParser.g:1264:1: ( ( rule__Variable__Group_2_1_4__0 )? )
+            // InternalSingleCodetemplateParser.g:1268:1: ( ( ( rule__Variable__Group_2_1_4__0 )? ) )
+            // InternalSingleCodetemplateParser.g:1269:1: ( ( rule__Variable__Group_2_1_4__0 )? )
             {
-            // InternalSingleCodetemplateParser.g:1264:1: ( ( rule__Variable__Group_2_1_4__0 )? )
-            // InternalSingleCodetemplateParser.g:1265:2: ( rule__Variable__Group_2_1_4__0 )?
+            // InternalSingleCodetemplateParser.g:1269:1: ( ( rule__Variable__Group_2_1_4__0 )? )
+            // InternalSingleCodetemplateParser.g:1270:2: ( rule__Variable__Group_2_1_4__0 )?
             {
              before(grammarAccess.getVariableAccess().getGroup_2_1_4()); 
-            // InternalSingleCodetemplateParser.g:1266:2: ( rule__Variable__Group_2_1_4__0 )?
+            // InternalSingleCodetemplateParser.g:1271:2: ( rule__Variable__Group_2_1_4__0 )?
             int alt17=2;
             alt17 = dfa17.predict(input);
             switch (alt17) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:1266:3: rule__Variable__Group_2_1_4__0
+                    // InternalSingleCodetemplateParser.g:1271:3: rule__Variable__Group_2_1_4__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Variable__Group_2_1_4__0();
@@ -3834,14 +3842,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_0__0"
-    // InternalSingleCodetemplateParser.g:1275:1: rule__Variable__Group_2_1_0__0 : rule__Variable__Group_2_1_0__0__Impl rule__Variable__Group_2_1_0__1 ;
+    // InternalSingleCodetemplateParser.g:1280:1: rule__Variable__Group_2_1_0__0 : rule__Variable__Group_2_1_0__0__Impl rule__Variable__Group_2_1_0__1 ;
     public final void rule__Variable__Group_2_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1279:1: ( rule__Variable__Group_2_1_0__0__Impl rule__Variable__Group_2_1_0__1 )
-            // InternalSingleCodetemplateParser.g:1280:2: rule__Variable__Group_2_1_0__0__Impl rule__Variable__Group_2_1_0__1
+            // InternalSingleCodetemplateParser.g:1284:1: ( rule__Variable__Group_2_1_0__0__Impl rule__Variable__Group_2_1_0__1 )
+            // InternalSingleCodetemplateParser.g:1285:2: rule__Variable__Group_2_1_0__0__Impl rule__Variable__Group_2_1_0__1
             {
             pushFollow(FOLLOW_17);
             rule__Variable__Group_2_1_0__0__Impl();
@@ -3872,21 +3880,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_0__0__Impl"
-    // InternalSingleCodetemplateParser.g:1287:1: rule__Variable__Group_2_1_0__0__Impl : ( ( rule__Variable__NameAssignment_2_1_0_0 ) ) ;
+    // InternalSingleCodetemplateParser.g:1292:1: rule__Variable__Group_2_1_0__0__Impl : ( ( rule__Variable__NameAssignment_2_1_0_0 ) ) ;
     public final void rule__Variable__Group_2_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1291:1: ( ( ( rule__Variable__NameAssignment_2_1_0_0 ) ) )
-            // InternalSingleCodetemplateParser.g:1292:1: ( ( rule__Variable__NameAssignment_2_1_0_0 ) )
+            // InternalSingleCodetemplateParser.g:1296:1: ( ( ( rule__Variable__NameAssignment_2_1_0_0 ) ) )
+            // InternalSingleCodetemplateParser.g:1297:1: ( ( rule__Variable__NameAssignment_2_1_0_0 ) )
             {
-            // InternalSingleCodetemplateParser.g:1292:1: ( ( rule__Variable__NameAssignment_2_1_0_0 ) )
-            // InternalSingleCodetemplateParser.g:1293:2: ( rule__Variable__NameAssignment_2_1_0_0 )
+            // InternalSingleCodetemplateParser.g:1297:1: ( ( rule__Variable__NameAssignment_2_1_0_0 ) )
+            // InternalSingleCodetemplateParser.g:1298:2: ( rule__Variable__NameAssignment_2_1_0_0 )
             {
              before(grammarAccess.getVariableAccess().getNameAssignment_2_1_0_0()); 
-            // InternalSingleCodetemplateParser.g:1294:2: ( rule__Variable__NameAssignment_2_1_0_0 )
-            // InternalSingleCodetemplateParser.g:1294:3: rule__Variable__NameAssignment_2_1_0_0
+            // InternalSingleCodetemplateParser.g:1299:2: ( rule__Variable__NameAssignment_2_1_0_0 )
+            // InternalSingleCodetemplateParser.g:1299:3: rule__Variable__NameAssignment_2_1_0_0
             {
             pushFollow(FOLLOW_2);
             rule__Variable__NameAssignment_2_1_0_0();
@@ -3919,14 +3927,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_0__1"
-    // InternalSingleCodetemplateParser.g:1302:1: rule__Variable__Group_2_1_0__1 : rule__Variable__Group_2_1_0__1__Impl ;
+    // InternalSingleCodetemplateParser.g:1307:1: rule__Variable__Group_2_1_0__1 : rule__Variable__Group_2_1_0__1__Impl ;
     public final void rule__Variable__Group_2_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1306:1: ( rule__Variable__Group_2_1_0__1__Impl )
-            // InternalSingleCodetemplateParser.g:1307:2: rule__Variable__Group_2_1_0__1__Impl
+            // InternalSingleCodetemplateParser.g:1311:1: ( rule__Variable__Group_2_1_0__1__Impl )
+            // InternalSingleCodetemplateParser.g:1312:2: rule__Variable__Group_2_1_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group_2_1_0__1__Impl();
@@ -3952,20 +3960,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_0__1__Impl"
-    // InternalSingleCodetemplateParser.g:1313:1: rule__Variable__Group_2_1_0__1__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1318:1: rule__Variable__Group_2_1_0__1__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1317:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1318:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1322:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1323:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1318:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1319:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1323:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1324:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_0_1()); 
-            // InternalSingleCodetemplateParser.g:1320:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1325:2: ( RULE_WS )*
             loop18:
             do {
                 int alt18=2;
@@ -3978,7 +3986,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1320:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1325:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -4013,14 +4021,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__0"
-    // InternalSingleCodetemplateParser.g:1329:1: rule__Variable__Group_2_1_4__0 : rule__Variable__Group_2_1_4__0__Impl rule__Variable__Group_2_1_4__1 ;
+    // InternalSingleCodetemplateParser.g:1334:1: rule__Variable__Group_2_1_4__0 : rule__Variable__Group_2_1_4__0__Impl rule__Variable__Group_2_1_4__1 ;
     public final void rule__Variable__Group_2_1_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1333:1: ( rule__Variable__Group_2_1_4__0__Impl rule__Variable__Group_2_1_4__1 )
-            // InternalSingleCodetemplateParser.g:1334:2: rule__Variable__Group_2_1_4__0__Impl rule__Variable__Group_2_1_4__1
+            // InternalSingleCodetemplateParser.g:1338:1: ( rule__Variable__Group_2_1_4__0__Impl rule__Variable__Group_2_1_4__1 )
+            // InternalSingleCodetemplateParser.g:1339:2: rule__Variable__Group_2_1_4__0__Impl rule__Variable__Group_2_1_4__1
             {
             pushFollow(FOLLOW_16);
             rule__Variable__Group_2_1_4__0__Impl();
@@ -4051,20 +4059,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__0__Impl"
-    // InternalSingleCodetemplateParser.g:1341:1: rule__Variable__Group_2_1_4__0__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1346:1: rule__Variable__Group_2_1_4__0__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1345:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1346:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1350:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1351:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1346:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1347:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1351:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1352:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_0()); 
-            // InternalSingleCodetemplateParser.g:1348:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1353:2: ( RULE_WS )*
             loop19:
             do {
                 int alt19=2;
@@ -4077,7 +4085,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt19) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1348:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1353:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -4112,14 +4120,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__1"
-    // InternalSingleCodetemplateParser.g:1356:1: rule__Variable__Group_2_1_4__1 : rule__Variable__Group_2_1_4__1__Impl rule__Variable__Group_2_1_4__2 ;
+    // InternalSingleCodetemplateParser.g:1361:1: rule__Variable__Group_2_1_4__1 : rule__Variable__Group_2_1_4__1__Impl rule__Variable__Group_2_1_4__2 ;
     public final void rule__Variable__Group_2_1_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1360:1: ( rule__Variable__Group_2_1_4__1__Impl rule__Variable__Group_2_1_4__2 )
-            // InternalSingleCodetemplateParser.g:1361:2: rule__Variable__Group_2_1_4__1__Impl rule__Variable__Group_2_1_4__2
+            // InternalSingleCodetemplateParser.g:1365:1: ( rule__Variable__Group_2_1_4__1__Impl rule__Variable__Group_2_1_4__2 )
+            // InternalSingleCodetemplateParser.g:1366:2: rule__Variable__Group_2_1_4__1__Impl rule__Variable__Group_2_1_4__2
             {
             pushFollow(FOLLOW_18);
             rule__Variable__Group_2_1_4__1__Impl();
@@ -4150,21 +4158,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__1__Impl"
-    // InternalSingleCodetemplateParser.g:1368:1: rule__Variable__Group_2_1_4__1__Impl : ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) ) ;
+    // InternalSingleCodetemplateParser.g:1373:1: rule__Variable__Group_2_1_4__1__Impl : ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) ) ;
     public final void rule__Variable__Group_2_1_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1372:1: ( ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) ) )
-            // InternalSingleCodetemplateParser.g:1373:1: ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) )
+            // InternalSingleCodetemplateParser.g:1377:1: ( ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) ) )
+            // InternalSingleCodetemplateParser.g:1378:1: ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) )
             {
-            // InternalSingleCodetemplateParser.g:1373:1: ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) )
-            // InternalSingleCodetemplateParser.g:1374:2: ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 )
+            // InternalSingleCodetemplateParser.g:1378:1: ( ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 ) )
+            // InternalSingleCodetemplateParser.g:1379:2: ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 )
             {
              before(grammarAccess.getVariableAccess().getExpectingParametersAssignment_2_1_4_1()); 
-            // InternalSingleCodetemplateParser.g:1375:2: ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 )
-            // InternalSingleCodetemplateParser.g:1375:3: rule__Variable__ExpectingParametersAssignment_2_1_4_1
+            // InternalSingleCodetemplateParser.g:1380:2: ( rule__Variable__ExpectingParametersAssignment_2_1_4_1 )
+            // InternalSingleCodetemplateParser.g:1380:3: rule__Variable__ExpectingParametersAssignment_2_1_4_1
             {
             pushFollow(FOLLOW_2);
             rule__Variable__ExpectingParametersAssignment_2_1_4_1();
@@ -4197,14 +4205,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__2"
-    // InternalSingleCodetemplateParser.g:1383:1: rule__Variable__Group_2_1_4__2 : rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 ;
+    // InternalSingleCodetemplateParser.g:1388:1: rule__Variable__Group_2_1_4__2 : rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 ;
     public final void rule__Variable__Group_2_1_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1387:1: ( rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 )
-            // InternalSingleCodetemplateParser.g:1388:2: rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3
+            // InternalSingleCodetemplateParser.g:1392:1: ( rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3 )
+            // InternalSingleCodetemplateParser.g:1393:2: rule__Variable__Group_2_1_4__2__Impl rule__Variable__Group_2_1_4__3
             {
             pushFollow(FOLLOW_18);
             rule__Variable__Group_2_1_4__2__Impl();
@@ -4235,20 +4243,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__2__Impl"
-    // InternalSingleCodetemplateParser.g:1395:1: rule__Variable__Group_2_1_4__2__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1400:1: rule__Variable__Group_2_1_4__2__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1399:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1400:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1404:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1405:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1400:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1401:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1405:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1406:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_2()); 
-            // InternalSingleCodetemplateParser.g:1402:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1407:2: ( RULE_WS )*
             loop20:
             do {
                 int alt20=2;
@@ -4261,7 +4269,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1402:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1407:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -4296,14 +4304,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__3"
-    // InternalSingleCodetemplateParser.g:1410:1: rule__Variable__Group_2_1_4__3 : rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 ;
+    // InternalSingleCodetemplateParser.g:1415:1: rule__Variable__Group_2_1_4__3 : rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 ;
     public final void rule__Variable__Group_2_1_4__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1414:1: ( rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 )
-            // InternalSingleCodetemplateParser.g:1415:2: rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4
+            // InternalSingleCodetemplateParser.g:1419:1: ( rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4 )
+            // InternalSingleCodetemplateParser.g:1420:2: rule__Variable__Group_2_1_4__3__Impl rule__Variable__Group_2_1_4__4
             {
             pushFollow(FOLLOW_18);
             rule__Variable__Group_2_1_4__3__Impl();
@@ -4334,20 +4342,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__3__Impl"
-    // InternalSingleCodetemplateParser.g:1422:1: rule__Variable__Group_2_1_4__3__Impl : ( ( rule__Variable__Group_2_1_4_3__0 )? ) ;
+    // InternalSingleCodetemplateParser.g:1427:1: rule__Variable__Group_2_1_4__3__Impl : ( ( rule__Variable__Group_2_1_4_3__0 )? ) ;
     public final void rule__Variable__Group_2_1_4__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1426:1: ( ( ( rule__Variable__Group_2_1_4_3__0 )? ) )
-            // InternalSingleCodetemplateParser.g:1427:1: ( ( rule__Variable__Group_2_1_4_3__0 )? )
+            // InternalSingleCodetemplateParser.g:1431:1: ( ( ( rule__Variable__Group_2_1_4_3__0 )? ) )
+            // InternalSingleCodetemplateParser.g:1432:1: ( ( rule__Variable__Group_2_1_4_3__0 )? )
             {
-            // InternalSingleCodetemplateParser.g:1427:1: ( ( rule__Variable__Group_2_1_4_3__0 )? )
-            // InternalSingleCodetemplateParser.g:1428:2: ( rule__Variable__Group_2_1_4_3__0 )?
+            // InternalSingleCodetemplateParser.g:1432:1: ( ( rule__Variable__Group_2_1_4_3__0 )? )
+            // InternalSingleCodetemplateParser.g:1433:2: ( rule__Variable__Group_2_1_4_3__0 )?
             {
              before(grammarAccess.getVariableAccess().getGroup_2_1_4_3()); 
-            // InternalSingleCodetemplateParser.g:1429:2: ( rule__Variable__Group_2_1_4_3__0 )?
+            // InternalSingleCodetemplateParser.g:1434:2: ( rule__Variable__Group_2_1_4_3__0 )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -4356,7 +4364,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             }
             switch (alt21) {
                 case 1 :
-                    // InternalSingleCodetemplateParser.g:1429:3: rule__Variable__Group_2_1_4_3__0
+                    // InternalSingleCodetemplateParser.g:1434:3: rule__Variable__Group_2_1_4_3__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Variable__Group_2_1_4_3__0();
@@ -4392,14 +4400,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__4"
-    // InternalSingleCodetemplateParser.g:1437:1: rule__Variable__Group_2_1_4__4 : rule__Variable__Group_2_1_4__4__Impl ;
+    // InternalSingleCodetemplateParser.g:1442:1: rule__Variable__Group_2_1_4__4 : rule__Variable__Group_2_1_4__4__Impl ;
     public final void rule__Variable__Group_2_1_4__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1441:1: ( rule__Variable__Group_2_1_4__4__Impl )
-            // InternalSingleCodetemplateParser.g:1442:2: rule__Variable__Group_2_1_4__4__Impl
+            // InternalSingleCodetemplateParser.g:1446:1: ( rule__Variable__Group_2_1_4__4__Impl )
+            // InternalSingleCodetemplateParser.g:1447:2: rule__Variable__Group_2_1_4__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group_2_1_4__4__Impl();
@@ -4425,17 +4433,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4__4__Impl"
-    // InternalSingleCodetemplateParser.g:1448:1: rule__Variable__Group_2_1_4__4__Impl : ( RightParenthesis ) ;
+    // InternalSingleCodetemplateParser.g:1453:1: rule__Variable__Group_2_1_4__4__Impl : ( RightParenthesis ) ;
     public final void rule__Variable__Group_2_1_4__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1452:1: ( ( RightParenthesis ) )
-            // InternalSingleCodetemplateParser.g:1453:1: ( RightParenthesis )
+            // InternalSingleCodetemplateParser.g:1457:1: ( ( RightParenthesis ) )
+            // InternalSingleCodetemplateParser.g:1458:1: ( RightParenthesis )
             {
-            // InternalSingleCodetemplateParser.g:1453:1: ( RightParenthesis )
-            // InternalSingleCodetemplateParser.g:1454:2: RightParenthesis
+            // InternalSingleCodetemplateParser.g:1458:1: ( RightParenthesis )
+            // InternalSingleCodetemplateParser.g:1459:2: RightParenthesis
             {
              before(grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_4()); 
             match(input,RightParenthesis,FOLLOW_2); 
@@ -4462,14 +4470,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3__0"
-    // InternalSingleCodetemplateParser.g:1464:1: rule__Variable__Group_2_1_4_3__0 : rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1 ;
+    // InternalSingleCodetemplateParser.g:1469:1: rule__Variable__Group_2_1_4_3__0 : rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1 ;
     public final void rule__Variable__Group_2_1_4_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1468:1: ( rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1 )
-            // InternalSingleCodetemplateParser.g:1469:2: rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1
+            // InternalSingleCodetemplateParser.g:1473:1: ( rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1 )
+            // InternalSingleCodetemplateParser.g:1474:2: rule__Variable__Group_2_1_4_3__0__Impl rule__Variable__Group_2_1_4_3__1
             {
             pushFollow(FOLLOW_19);
             rule__Variable__Group_2_1_4_3__0__Impl();
@@ -4500,21 +4508,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3__0__Impl"
-    // InternalSingleCodetemplateParser.g:1476:1: rule__Variable__Group_2_1_4_3__0__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) ) ;
+    // InternalSingleCodetemplateParser.g:1481:1: rule__Variable__Group_2_1_4_3__0__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) ) ;
     public final void rule__Variable__Group_2_1_4_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1480:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) ) )
-            // InternalSingleCodetemplateParser.g:1481:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) )
+            // InternalSingleCodetemplateParser.g:1485:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) ) )
+            // InternalSingleCodetemplateParser.g:1486:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) )
             {
-            // InternalSingleCodetemplateParser.g:1481:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) )
-            // InternalSingleCodetemplateParser.g:1482:2: ( rule__Variable__ParametersAssignment_2_1_4_3_0 )
+            // InternalSingleCodetemplateParser.g:1486:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_0 ) )
+            // InternalSingleCodetemplateParser.g:1487:2: ( rule__Variable__ParametersAssignment_2_1_4_3_0 )
             {
              before(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_0()); 
-            // InternalSingleCodetemplateParser.g:1483:2: ( rule__Variable__ParametersAssignment_2_1_4_3_0 )
-            // InternalSingleCodetemplateParser.g:1483:3: rule__Variable__ParametersAssignment_2_1_4_3_0
+            // InternalSingleCodetemplateParser.g:1488:2: ( rule__Variable__ParametersAssignment_2_1_4_3_0 )
+            // InternalSingleCodetemplateParser.g:1488:3: rule__Variable__ParametersAssignment_2_1_4_3_0
             {
             pushFollow(FOLLOW_2);
             rule__Variable__ParametersAssignment_2_1_4_3_0();
@@ -4547,14 +4555,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3__1"
-    // InternalSingleCodetemplateParser.g:1491:1: rule__Variable__Group_2_1_4_3__1 : rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2 ;
+    // InternalSingleCodetemplateParser.g:1496:1: rule__Variable__Group_2_1_4_3__1 : rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2 ;
     public final void rule__Variable__Group_2_1_4_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1495:1: ( rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2 )
-            // InternalSingleCodetemplateParser.g:1496:2: rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2
+            // InternalSingleCodetemplateParser.g:1500:1: ( rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2 )
+            // InternalSingleCodetemplateParser.g:1501:2: rule__Variable__Group_2_1_4_3__1__Impl rule__Variable__Group_2_1_4_3__2
             {
             pushFollow(FOLLOW_19);
             rule__Variable__Group_2_1_4_3__1__Impl();
@@ -4585,27 +4593,27 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3__1__Impl"
-    // InternalSingleCodetemplateParser.g:1503:1: rule__Variable__Group_2_1_4_3__1__Impl : ( ( rule__Variable__Group_2_1_4_3_1__0 )* ) ;
+    // InternalSingleCodetemplateParser.g:1508:1: rule__Variable__Group_2_1_4_3__1__Impl : ( ( rule__Variable__Group_2_1_4_3_1__0 )* ) ;
     public final void rule__Variable__Group_2_1_4_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1507:1: ( ( ( rule__Variable__Group_2_1_4_3_1__0 )* ) )
-            // InternalSingleCodetemplateParser.g:1508:1: ( ( rule__Variable__Group_2_1_4_3_1__0 )* )
+            // InternalSingleCodetemplateParser.g:1512:1: ( ( ( rule__Variable__Group_2_1_4_3_1__0 )* ) )
+            // InternalSingleCodetemplateParser.g:1513:1: ( ( rule__Variable__Group_2_1_4_3_1__0 )* )
             {
-            // InternalSingleCodetemplateParser.g:1508:1: ( ( rule__Variable__Group_2_1_4_3_1__0 )* )
-            // InternalSingleCodetemplateParser.g:1509:2: ( rule__Variable__Group_2_1_4_3_1__0 )*
+            // InternalSingleCodetemplateParser.g:1513:1: ( ( rule__Variable__Group_2_1_4_3_1__0 )* )
+            // InternalSingleCodetemplateParser.g:1514:2: ( rule__Variable__Group_2_1_4_3_1__0 )*
             {
              before(grammarAccess.getVariableAccess().getGroup_2_1_4_3_1()); 
-            // InternalSingleCodetemplateParser.g:1510:2: ( rule__Variable__Group_2_1_4_3_1__0 )*
+            // InternalSingleCodetemplateParser.g:1515:2: ( rule__Variable__Group_2_1_4_3_1__0 )*
             loop22:
             do {
                 int alt22=2;
                 alt22 = dfa22.predict(input);
                 switch (alt22) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1510:3: rule__Variable__Group_2_1_4_3_1__0
+            	    // InternalSingleCodetemplateParser.g:1515:3: rule__Variable__Group_2_1_4_3_1__0
             	    {
             	    pushFollow(FOLLOW_20);
             	    rule__Variable__Group_2_1_4_3_1__0();
@@ -4644,14 +4652,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3__2"
-    // InternalSingleCodetemplateParser.g:1518:1: rule__Variable__Group_2_1_4_3__2 : rule__Variable__Group_2_1_4_3__2__Impl ;
+    // InternalSingleCodetemplateParser.g:1523:1: rule__Variable__Group_2_1_4_3__2 : rule__Variable__Group_2_1_4_3__2__Impl ;
     public final void rule__Variable__Group_2_1_4_3__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1522:1: ( rule__Variable__Group_2_1_4_3__2__Impl )
-            // InternalSingleCodetemplateParser.g:1523:2: rule__Variable__Group_2_1_4_3__2__Impl
+            // InternalSingleCodetemplateParser.g:1527:1: ( rule__Variable__Group_2_1_4_3__2__Impl )
+            // InternalSingleCodetemplateParser.g:1528:2: rule__Variable__Group_2_1_4_3__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group_2_1_4_3__2__Impl();
@@ -4677,20 +4685,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3__2__Impl"
-    // InternalSingleCodetemplateParser.g:1529:1: rule__Variable__Group_2_1_4_3__2__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1534:1: rule__Variable__Group_2_1_4_3__2__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_4_3__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1533:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1534:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1538:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1539:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1534:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1535:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1539:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1540:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_2()); 
-            // InternalSingleCodetemplateParser.g:1536:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1541:2: ( RULE_WS )*
             loop23:
             do {
                 int alt23=2;
@@ -4703,7 +4711,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt23) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1536:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1541:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -4738,14 +4746,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__0"
-    // InternalSingleCodetemplateParser.g:1545:1: rule__Variable__Group_2_1_4_3_1__0 : rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1 ;
+    // InternalSingleCodetemplateParser.g:1550:1: rule__Variable__Group_2_1_4_3_1__0 : rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1 ;
     public final void rule__Variable__Group_2_1_4_3_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1549:1: ( rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1 )
-            // InternalSingleCodetemplateParser.g:1550:2: rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1
+            // InternalSingleCodetemplateParser.g:1554:1: ( rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1 )
+            // InternalSingleCodetemplateParser.g:1555:2: rule__Variable__Group_2_1_4_3_1__0__Impl rule__Variable__Group_2_1_4_3_1__1
             {
             pushFollow(FOLLOW_19);
             rule__Variable__Group_2_1_4_3_1__0__Impl();
@@ -4776,20 +4784,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__0__Impl"
-    // InternalSingleCodetemplateParser.g:1557:1: rule__Variable__Group_2_1_4_3_1__0__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1562:1: rule__Variable__Group_2_1_4_3_1__0__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_4_3_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1561:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1562:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1566:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1567:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1562:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1563:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1567:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1568:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_0()); 
-            // InternalSingleCodetemplateParser.g:1564:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1569:2: ( RULE_WS )*
             loop24:
             do {
                 int alt24=2;
@@ -4802,7 +4810,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt24) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1564:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1569:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -4837,14 +4845,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__1"
-    // InternalSingleCodetemplateParser.g:1572:1: rule__Variable__Group_2_1_4_3_1__1 : rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2 ;
+    // InternalSingleCodetemplateParser.g:1577:1: rule__Variable__Group_2_1_4_3_1__1 : rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2 ;
     public final void rule__Variable__Group_2_1_4_3_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1576:1: ( rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2 )
-            // InternalSingleCodetemplateParser.g:1577:2: rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2
+            // InternalSingleCodetemplateParser.g:1581:1: ( rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2 )
+            // InternalSingleCodetemplateParser.g:1582:2: rule__Variable__Group_2_1_4_3_1__1__Impl rule__Variable__Group_2_1_4_3_1__2
             {
             pushFollow(FOLLOW_21);
             rule__Variable__Group_2_1_4_3_1__1__Impl();
@@ -4875,17 +4883,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__1__Impl"
-    // InternalSingleCodetemplateParser.g:1584:1: rule__Variable__Group_2_1_4_3_1__1__Impl : ( Comma ) ;
+    // InternalSingleCodetemplateParser.g:1589:1: rule__Variable__Group_2_1_4_3_1__1__Impl : ( Comma ) ;
     public final void rule__Variable__Group_2_1_4_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1588:1: ( ( Comma ) )
-            // InternalSingleCodetemplateParser.g:1589:1: ( Comma )
+            // InternalSingleCodetemplateParser.g:1593:1: ( ( Comma ) )
+            // InternalSingleCodetemplateParser.g:1594:1: ( Comma )
             {
-            // InternalSingleCodetemplateParser.g:1589:1: ( Comma )
-            // InternalSingleCodetemplateParser.g:1590:2: Comma
+            // InternalSingleCodetemplateParser.g:1594:1: ( Comma )
+            // InternalSingleCodetemplateParser.g:1595:2: Comma
             {
              before(grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_3_1_1()); 
             match(input,Comma,FOLLOW_2); 
@@ -4912,14 +4920,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__2"
-    // InternalSingleCodetemplateParser.g:1599:1: rule__Variable__Group_2_1_4_3_1__2 : rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3 ;
+    // InternalSingleCodetemplateParser.g:1604:1: rule__Variable__Group_2_1_4_3_1__2 : rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3 ;
     public final void rule__Variable__Group_2_1_4_3_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1603:1: ( rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3 )
-            // InternalSingleCodetemplateParser.g:1604:2: rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3
+            // InternalSingleCodetemplateParser.g:1608:1: ( rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3 )
+            // InternalSingleCodetemplateParser.g:1609:2: rule__Variable__Group_2_1_4_3_1__2__Impl rule__Variable__Group_2_1_4_3_1__3
             {
             pushFollow(FOLLOW_21);
             rule__Variable__Group_2_1_4_3_1__2__Impl();
@@ -4950,20 +4958,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__2__Impl"
-    // InternalSingleCodetemplateParser.g:1611:1: rule__Variable__Group_2_1_4_3_1__2__Impl : ( ( RULE_WS )* ) ;
+    // InternalSingleCodetemplateParser.g:1616:1: rule__Variable__Group_2_1_4_3_1__2__Impl : ( ( RULE_WS )* ) ;
     public final void rule__Variable__Group_2_1_4_3_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1615:1: ( ( ( RULE_WS )* ) )
-            // InternalSingleCodetemplateParser.g:1616:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1620:1: ( ( ( RULE_WS )* ) )
+            // InternalSingleCodetemplateParser.g:1621:1: ( ( RULE_WS )* )
             {
-            // InternalSingleCodetemplateParser.g:1616:1: ( ( RULE_WS )* )
-            // InternalSingleCodetemplateParser.g:1617:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1621:1: ( ( RULE_WS )* )
+            // InternalSingleCodetemplateParser.g:1622:2: ( RULE_WS )*
             {
              before(grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_3_1_2()); 
-            // InternalSingleCodetemplateParser.g:1618:2: ( RULE_WS )*
+            // InternalSingleCodetemplateParser.g:1623:2: ( RULE_WS )*
             loop25:
             do {
                 int alt25=2;
@@ -4976,7 +4984,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt25) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1618:3: RULE_WS
+            	    // InternalSingleCodetemplateParser.g:1623:3: RULE_WS
             	    {
             	    match(input,RULE_WS,FOLLOW_13); 
 
@@ -5011,14 +5019,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__3"
-    // InternalSingleCodetemplateParser.g:1626:1: rule__Variable__Group_2_1_4_3_1__3 : rule__Variable__Group_2_1_4_3_1__3__Impl ;
+    // InternalSingleCodetemplateParser.g:1631:1: rule__Variable__Group_2_1_4_3_1__3 : rule__Variable__Group_2_1_4_3_1__3__Impl ;
     public final void rule__Variable__Group_2_1_4_3_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1630:1: ( rule__Variable__Group_2_1_4_3_1__3__Impl )
-            // InternalSingleCodetemplateParser.g:1631:2: rule__Variable__Group_2_1_4_3_1__3__Impl
+            // InternalSingleCodetemplateParser.g:1635:1: ( rule__Variable__Group_2_1_4_3_1__3__Impl )
+            // InternalSingleCodetemplateParser.g:1636:2: rule__Variable__Group_2_1_4_3_1__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Variable__Group_2_1_4_3_1__3__Impl();
@@ -5044,21 +5052,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__Group_2_1_4_3_1__3__Impl"
-    // InternalSingleCodetemplateParser.g:1637:1: rule__Variable__Group_2_1_4_3_1__3__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) ) ;
+    // InternalSingleCodetemplateParser.g:1642:1: rule__Variable__Group_2_1_4_3_1__3__Impl : ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) ) ;
     public final void rule__Variable__Group_2_1_4_3_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1641:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) ) )
-            // InternalSingleCodetemplateParser.g:1642:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) )
+            // InternalSingleCodetemplateParser.g:1646:1: ( ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) ) )
+            // InternalSingleCodetemplateParser.g:1647:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) )
             {
-            // InternalSingleCodetemplateParser.g:1642:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) )
-            // InternalSingleCodetemplateParser.g:1643:2: ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 )
+            // InternalSingleCodetemplateParser.g:1647:1: ( ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 ) )
+            // InternalSingleCodetemplateParser.g:1648:2: ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 )
             {
              before(grammarAccess.getVariableAccess().getParametersAssignment_2_1_4_3_1_3()); 
-            // InternalSingleCodetemplateParser.g:1644:2: ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 )
-            // InternalSingleCodetemplateParser.g:1644:3: rule__Variable__ParametersAssignment_2_1_4_3_1_3
+            // InternalSingleCodetemplateParser.g:1649:2: ( rule__Variable__ParametersAssignment_2_1_4_3_1_3 )
+            // InternalSingleCodetemplateParser.g:1649:3: rule__Variable__ParametersAssignment_2_1_4_3_1_3
             {
             pushFollow(FOLLOW_2);
             rule__Variable__ParametersAssignment_2_1_4_3_1_3();
@@ -5091,14 +5099,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // InternalSingleCodetemplateParser.g:1653:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // InternalSingleCodetemplateParser.g:1658:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1657:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // InternalSingleCodetemplateParser.g:1658:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // InternalSingleCodetemplateParser.g:1662:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // InternalSingleCodetemplateParser.g:1663:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
             pushFollow(FOLLOW_22);
             rule__FQN__Group__0__Impl();
@@ -5129,17 +5137,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:1665:1: rule__FQN__Group__0__Impl : ( ruleValidID ) ;
+    // InternalSingleCodetemplateParser.g:1670:1: rule__FQN__Group__0__Impl : ( ruleValidID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1669:1: ( ( ruleValidID ) )
-            // InternalSingleCodetemplateParser.g:1670:1: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1674:1: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1675:1: ( ruleValidID )
             {
-            // InternalSingleCodetemplateParser.g:1670:1: ( ruleValidID )
-            // InternalSingleCodetemplateParser.g:1671:2: ruleValidID
+            // InternalSingleCodetemplateParser.g:1675:1: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1676:2: ruleValidID
             {
              before(grammarAccess.getFQNAccess().getValidIDParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -5170,14 +5178,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // InternalSingleCodetemplateParser.g:1680:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // InternalSingleCodetemplateParser.g:1685:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1684:1: ( rule__FQN__Group__1__Impl )
-            // InternalSingleCodetemplateParser.g:1685:2: rule__FQN__Group__1__Impl
+            // InternalSingleCodetemplateParser.g:1689:1: ( rule__FQN__Group__1__Impl )
+            // InternalSingleCodetemplateParser.g:1690:2: rule__FQN__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__FQN__Group__1__Impl();
@@ -5203,20 +5211,20 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:1691:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // InternalSingleCodetemplateParser.g:1696:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1695:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // InternalSingleCodetemplateParser.g:1696:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalSingleCodetemplateParser.g:1700:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // InternalSingleCodetemplateParser.g:1701:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // InternalSingleCodetemplateParser.g:1696:1: ( ( rule__FQN__Group_1__0 )* )
-            // InternalSingleCodetemplateParser.g:1697:2: ( rule__FQN__Group_1__0 )*
+            // InternalSingleCodetemplateParser.g:1701:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalSingleCodetemplateParser.g:1702:2: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // InternalSingleCodetemplateParser.g:1698:2: ( rule__FQN__Group_1__0 )*
+            // InternalSingleCodetemplateParser.g:1703:2: ( rule__FQN__Group_1__0 )*
             loop26:
             do {
                 int alt26=2;
@@ -5229,7 +5237,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
                 switch (alt26) {
             	case 1 :
-            	    // InternalSingleCodetemplateParser.g:1698:3: rule__FQN__Group_1__0
+            	    // InternalSingleCodetemplateParser.g:1703:3: rule__FQN__Group_1__0
             	    {
             	    pushFollow(FOLLOW_23);
             	    rule__FQN__Group_1__0();
@@ -5268,14 +5276,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // InternalSingleCodetemplateParser.g:1707:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // InternalSingleCodetemplateParser.g:1712:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1711:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // InternalSingleCodetemplateParser.g:1712:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // InternalSingleCodetemplateParser.g:1716:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // InternalSingleCodetemplateParser.g:1717:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__FQN__Group_1__0__Impl();
@@ -5306,17 +5314,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // InternalSingleCodetemplateParser.g:1719:1: rule__FQN__Group_1__0__Impl : ( FullStop ) ;
+    // InternalSingleCodetemplateParser.g:1724:1: rule__FQN__Group_1__0__Impl : ( FullStop ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1723:1: ( ( FullStop ) )
-            // InternalSingleCodetemplateParser.g:1724:1: ( FullStop )
+            // InternalSingleCodetemplateParser.g:1728:1: ( ( FullStop ) )
+            // InternalSingleCodetemplateParser.g:1729:1: ( FullStop )
             {
-            // InternalSingleCodetemplateParser.g:1724:1: ( FullStop )
-            // InternalSingleCodetemplateParser.g:1725:2: FullStop
+            // InternalSingleCodetemplateParser.g:1729:1: ( FullStop )
+            // InternalSingleCodetemplateParser.g:1730:2: FullStop
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             match(input,FullStop,FOLLOW_2); 
@@ -5343,14 +5351,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // InternalSingleCodetemplateParser.g:1734:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // InternalSingleCodetemplateParser.g:1739:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1738:1: ( rule__FQN__Group_1__1__Impl )
-            // InternalSingleCodetemplateParser.g:1739:2: rule__FQN__Group_1__1__Impl
+            // InternalSingleCodetemplateParser.g:1743:1: ( rule__FQN__Group_1__1__Impl )
+            // InternalSingleCodetemplateParser.g:1744:2: rule__FQN__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__FQN__Group_1__1__Impl();
@@ -5376,17 +5384,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // InternalSingleCodetemplateParser.g:1745:1: rule__FQN__Group_1__1__Impl : ( ruleValidID ) ;
+    // InternalSingleCodetemplateParser.g:1750:1: rule__FQN__Group_1__1__Impl : ( ruleValidID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1749:1: ( ( ruleValidID ) )
-            // InternalSingleCodetemplateParser.g:1750:1: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1754:1: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1755:1: ( ruleValidID )
             {
-            // InternalSingleCodetemplateParser.g:1750:1: ( ruleValidID )
-            // InternalSingleCodetemplateParser.g:1751:2: ruleValidID
+            // InternalSingleCodetemplateParser.g:1755:1: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1756:2: ruleValidID
             {
              before(grammarAccess.getFQNAccess().getValidIDParserRuleCall_1_1()); 
             pushFollow(FOLLOW_2);
@@ -5417,14 +5425,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Dollar__Group__0"
-    // InternalSingleCodetemplateParser.g:1761:1: rule__Dollar__Group__0 : rule__Dollar__Group__0__Impl rule__Dollar__Group__1 ;
+    // InternalSingleCodetemplateParser.g:1766:1: rule__Dollar__Group__0 : rule__Dollar__Group__0__Impl rule__Dollar__Group__1 ;
     public final void rule__Dollar__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1765:1: ( rule__Dollar__Group__0__Impl rule__Dollar__Group__1 )
-            // InternalSingleCodetemplateParser.g:1766:2: rule__Dollar__Group__0__Impl rule__Dollar__Group__1
+            // InternalSingleCodetemplateParser.g:1770:1: ( rule__Dollar__Group__0__Impl rule__Dollar__Group__1 )
+            // InternalSingleCodetemplateParser.g:1771:2: rule__Dollar__Group__0__Impl rule__Dollar__Group__1
             {
             pushFollow(FOLLOW_24);
             rule__Dollar__Group__0__Impl();
@@ -5455,21 +5463,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Dollar__Group__0__Impl"
-    // InternalSingleCodetemplateParser.g:1773:1: rule__Dollar__Group__0__Impl : ( () ) ;
+    // InternalSingleCodetemplateParser.g:1778:1: rule__Dollar__Group__0__Impl : ( () ) ;
     public final void rule__Dollar__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1777:1: ( ( () ) )
-            // InternalSingleCodetemplateParser.g:1778:1: ( () )
+            // InternalSingleCodetemplateParser.g:1782:1: ( ( () ) )
+            // InternalSingleCodetemplateParser.g:1783:1: ( () )
             {
-            // InternalSingleCodetemplateParser.g:1778:1: ( () )
-            // InternalSingleCodetemplateParser.g:1779:2: ()
+            // InternalSingleCodetemplateParser.g:1783:1: ( () )
+            // InternalSingleCodetemplateParser.g:1784:2: ()
             {
              before(grammarAccess.getDollarAccess().getDollarAction_0()); 
-            // InternalSingleCodetemplateParser.g:1780:2: ()
-            // InternalSingleCodetemplateParser.g:1780:3: 
+            // InternalSingleCodetemplateParser.g:1785:2: ()
+            // InternalSingleCodetemplateParser.g:1785:3: 
             {
             }
 
@@ -5492,14 +5500,14 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Dollar__Group__1"
-    // InternalSingleCodetemplateParser.g:1788:1: rule__Dollar__Group__1 : rule__Dollar__Group__1__Impl ;
+    // InternalSingleCodetemplateParser.g:1793:1: rule__Dollar__Group__1 : rule__Dollar__Group__1__Impl ;
     public final void rule__Dollar__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1792:1: ( rule__Dollar__Group__1__Impl )
-            // InternalSingleCodetemplateParser.g:1793:2: rule__Dollar__Group__1__Impl
+            // InternalSingleCodetemplateParser.g:1797:1: ( rule__Dollar__Group__1__Impl )
+            // InternalSingleCodetemplateParser.g:1798:2: rule__Dollar__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Dollar__Group__1__Impl();
@@ -5525,21 +5533,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Dollar__Group__1__Impl"
-    // InternalSingleCodetemplateParser.g:1799:1: rule__Dollar__Group__1__Impl : ( ( rule__Dollar__Alternatives_1 ) ) ;
+    // InternalSingleCodetemplateParser.g:1804:1: rule__Dollar__Group__1__Impl : ( ( rule__Dollar__Alternatives_1 ) ) ;
     public final void rule__Dollar__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1803:1: ( ( ( rule__Dollar__Alternatives_1 ) ) )
-            // InternalSingleCodetemplateParser.g:1804:1: ( ( rule__Dollar__Alternatives_1 ) )
+            // InternalSingleCodetemplateParser.g:1808:1: ( ( ( rule__Dollar__Alternatives_1 ) ) )
+            // InternalSingleCodetemplateParser.g:1809:1: ( ( rule__Dollar__Alternatives_1 ) )
             {
-            // InternalSingleCodetemplateParser.g:1804:1: ( ( rule__Dollar__Alternatives_1 ) )
-            // InternalSingleCodetemplateParser.g:1805:2: ( rule__Dollar__Alternatives_1 )
+            // InternalSingleCodetemplateParser.g:1809:1: ( ( rule__Dollar__Alternatives_1 ) )
+            // InternalSingleCodetemplateParser.g:1810:2: ( rule__Dollar__Alternatives_1 )
             {
              before(grammarAccess.getDollarAccess().getAlternatives_1()); 
-            // InternalSingleCodetemplateParser.g:1806:2: ( rule__Dollar__Alternatives_1 )
-            // InternalSingleCodetemplateParser.g:1806:3: rule__Dollar__Alternatives_1
+            // InternalSingleCodetemplateParser.g:1811:2: ( rule__Dollar__Alternatives_1 )
+            // InternalSingleCodetemplateParser.g:1811:3: rule__Dollar__Alternatives_1
             {
             pushFollow(FOLLOW_2);
             rule__Dollar__Alternatives_1();
@@ -5572,21 +5580,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__LanguageAssignment_2"
-    // InternalSingleCodetemplateParser.g:1815:1: rule__Codetemplates__LanguageAssignment_2 : ( ( ruleFQN ) ) ;
+    // InternalSingleCodetemplateParser.g:1820:1: rule__Codetemplates__LanguageAssignment_2 : ( ( ruleFQN ) ) ;
     public final void rule__Codetemplates__LanguageAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1819:1: ( ( ( ruleFQN ) ) )
-            // InternalSingleCodetemplateParser.g:1820:2: ( ( ruleFQN ) )
+            // InternalSingleCodetemplateParser.g:1824:1: ( ( ( ruleFQN ) ) )
+            // InternalSingleCodetemplateParser.g:1825:2: ( ( ruleFQN ) )
             {
-            // InternalSingleCodetemplateParser.g:1820:2: ( ( ruleFQN ) )
-            // InternalSingleCodetemplateParser.g:1821:3: ( ruleFQN )
+            // InternalSingleCodetemplateParser.g:1825:2: ( ( ruleFQN ) )
+            // InternalSingleCodetemplateParser.g:1826:3: ( ruleFQN )
             {
              before(grammarAccess.getCodetemplatesAccess().getLanguageGrammarCrossReference_2_0()); 
-            // InternalSingleCodetemplateParser.g:1822:3: ( ruleFQN )
-            // InternalSingleCodetemplateParser.g:1823:4: ruleFQN
+            // InternalSingleCodetemplateParser.g:1827:3: ( ruleFQN )
+            // InternalSingleCodetemplateParser.g:1828:4: ruleFQN
             {
              before(grammarAccess.getCodetemplatesAccess().getLanguageGrammarFQNParserRuleCall_2_0_1()); 
             pushFollow(FOLLOW_2);
@@ -5621,17 +5629,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplates__TemplatesAssignment_3"
-    // InternalSingleCodetemplateParser.g:1834:1: rule__Codetemplates__TemplatesAssignment_3 : ( ruleCodetemplate ) ;
+    // InternalSingleCodetemplateParser.g:1839:1: rule__Codetemplates__TemplatesAssignment_3 : ( ruleCodetemplate ) ;
     public final void rule__Codetemplates__TemplatesAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1838:1: ( ( ruleCodetemplate ) )
-            // InternalSingleCodetemplateParser.g:1839:2: ( ruleCodetemplate )
+            // InternalSingleCodetemplateParser.g:1843:1: ( ( ruleCodetemplate ) )
+            // InternalSingleCodetemplateParser.g:1844:2: ( ruleCodetemplate )
             {
-            // InternalSingleCodetemplateParser.g:1839:2: ( ruleCodetemplate )
-            // InternalSingleCodetemplateParser.g:1840:3: ruleCodetemplate
+            // InternalSingleCodetemplateParser.g:1844:2: ( ruleCodetemplate )
+            // InternalSingleCodetemplateParser.g:1845:3: ruleCodetemplate
             {
              before(grammarAccess.getCodetemplatesAccess().getTemplatesCodetemplateParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -5662,17 +5670,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__NameAssignment_0"
-    // InternalSingleCodetemplateParser.g:1849:1: rule__Codetemplate__NameAssignment_0 : ( RULE_STRING ) ;
+    // InternalSingleCodetemplateParser.g:1854:1: rule__Codetemplate__NameAssignment_0 : ( RULE_STRING ) ;
     public final void rule__Codetemplate__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1853:1: ( ( RULE_STRING ) )
-            // InternalSingleCodetemplateParser.g:1854:2: ( RULE_STRING )
+            // InternalSingleCodetemplateParser.g:1858:1: ( ( RULE_STRING ) )
+            // InternalSingleCodetemplateParser.g:1859:2: ( RULE_STRING )
             {
-            // InternalSingleCodetemplateParser.g:1854:2: ( RULE_STRING )
-            // InternalSingleCodetemplateParser.g:1855:3: RULE_STRING
+            // InternalSingleCodetemplateParser.g:1859:2: ( RULE_STRING )
+            // InternalSingleCodetemplateParser.g:1860:3: RULE_STRING
             {
              before(grammarAccess.getCodetemplateAccess().getNameSTRINGTerminalRuleCall_0_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -5699,21 +5707,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__ContextAssignment_2_0"
-    // InternalSingleCodetemplateParser.g:1864:1: rule__Codetemplate__ContextAssignment_2_0 : ( ( ruleValidID ) ) ;
+    // InternalSingleCodetemplateParser.g:1869:1: rule__Codetemplate__ContextAssignment_2_0 : ( ( ruleValidID ) ) ;
     public final void rule__Codetemplate__ContextAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1868:1: ( ( ( ruleValidID ) ) )
-            // InternalSingleCodetemplateParser.g:1869:2: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1873:1: ( ( ( ruleValidID ) ) )
+            // InternalSingleCodetemplateParser.g:1874:2: ( ( ruleValidID ) )
             {
-            // InternalSingleCodetemplateParser.g:1869:2: ( ( ruleValidID ) )
-            // InternalSingleCodetemplateParser.g:1870:3: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1874:2: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1875:3: ( ruleValidID )
             {
              before(grammarAccess.getCodetemplateAccess().getContextAbstractRuleCrossReference_2_0_0()); 
-            // InternalSingleCodetemplateParser.g:1871:3: ( ruleValidID )
-            // InternalSingleCodetemplateParser.g:1872:4: ruleValidID
+            // InternalSingleCodetemplateParser.g:1876:3: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1877:4: ruleValidID
             {
              before(grammarAccess.getCodetemplateAccess().getContextAbstractRuleValidIDParserRuleCall_2_0_0_1()); 
             pushFollow(FOLLOW_2);
@@ -5748,17 +5756,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__KeywordContextAssignment_2_1"
-    // InternalSingleCodetemplateParser.g:1883:1: rule__Codetemplate__KeywordContextAssignment_2_1 : ( RULE_STRING ) ;
+    // InternalSingleCodetemplateParser.g:1888:1: rule__Codetemplate__KeywordContextAssignment_2_1 : ( RULE_STRING ) ;
     public final void rule__Codetemplate__KeywordContextAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1887:1: ( ( RULE_STRING ) )
-            // InternalSingleCodetemplateParser.g:1888:2: ( RULE_STRING )
+            // InternalSingleCodetemplateParser.g:1892:1: ( ( RULE_STRING ) )
+            // InternalSingleCodetemplateParser.g:1893:2: ( RULE_STRING )
             {
-            // InternalSingleCodetemplateParser.g:1888:2: ( RULE_STRING )
-            // InternalSingleCodetemplateParser.g:1889:3: RULE_STRING
+            // InternalSingleCodetemplateParser.g:1893:2: ( RULE_STRING )
+            // InternalSingleCodetemplateParser.g:1894:3: RULE_STRING
             {
              before(grammarAccess.getCodetemplateAccess().getKeywordContextSTRINGTerminalRuleCall_2_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -5785,17 +5793,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Codetemplate__BodyAssignment_3"
-    // InternalSingleCodetemplateParser.g:1898:1: rule__Codetemplate__BodyAssignment_3 : ( ruleTemplateBodyWithQuotes ) ;
+    // InternalSingleCodetemplateParser.g:1903:1: rule__Codetemplate__BodyAssignment_3 : ( ruleTemplateBodyWithQuotes ) ;
     public final void rule__Codetemplate__BodyAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1902:1: ( ( ruleTemplateBodyWithQuotes ) )
-            // InternalSingleCodetemplateParser.g:1903:2: ( ruleTemplateBodyWithQuotes )
+            // InternalSingleCodetemplateParser.g:1907:1: ( ( ruleTemplateBodyWithQuotes ) )
+            // InternalSingleCodetemplateParser.g:1908:2: ( ruleTemplateBodyWithQuotes )
             {
-            // InternalSingleCodetemplateParser.g:1903:2: ( ruleTemplateBodyWithQuotes )
-            // InternalSingleCodetemplateParser.g:1904:3: ruleTemplateBodyWithQuotes
+            // InternalSingleCodetemplateParser.g:1908:2: ( ruleTemplateBodyWithQuotes )
+            // InternalSingleCodetemplateParser.g:1909:3: ruleTemplateBodyWithQuotes
             {
              before(grammarAccess.getCodetemplateAccess().getBodyTemplateBodyWithQuotesParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -5826,17 +5834,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__PartsAssignment_1"
-    // InternalSingleCodetemplateParser.g:1913:1: rule__TemplateBody__PartsAssignment_1 : ( ruleLiteral ) ;
+    // InternalSingleCodetemplateParser.g:1918:1: rule__TemplateBody__PartsAssignment_1 : ( ruleLiteral ) ;
     public final void rule__TemplateBody__PartsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1917:1: ( ( ruleLiteral ) )
-            // InternalSingleCodetemplateParser.g:1918:2: ( ruleLiteral )
+            // InternalSingleCodetemplateParser.g:1922:1: ( ( ruleLiteral ) )
+            // InternalSingleCodetemplateParser.g:1923:2: ( ruleLiteral )
             {
-            // InternalSingleCodetemplateParser.g:1918:2: ( ruleLiteral )
-            // InternalSingleCodetemplateParser.g:1919:3: ruleLiteral
+            // InternalSingleCodetemplateParser.g:1923:2: ( ruleLiteral )
+            // InternalSingleCodetemplateParser.g:1924:3: ruleLiteral
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsLiteralParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -5867,17 +5875,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__PartsAssignment_2_0"
-    // InternalSingleCodetemplateParser.g:1928:1: rule__TemplateBody__PartsAssignment_2_0 : ( ruleVariableOrDollar ) ;
+    // InternalSingleCodetemplateParser.g:1933:1: rule__TemplateBody__PartsAssignment_2_0 : ( ruleVariableOrDollar ) ;
     public final void rule__TemplateBody__PartsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1932:1: ( ( ruleVariableOrDollar ) )
-            // InternalSingleCodetemplateParser.g:1933:2: ( ruleVariableOrDollar )
+            // InternalSingleCodetemplateParser.g:1937:1: ( ( ruleVariableOrDollar ) )
+            // InternalSingleCodetemplateParser.g:1938:2: ( ruleVariableOrDollar )
             {
-            // InternalSingleCodetemplateParser.g:1933:2: ( ruleVariableOrDollar )
-            // InternalSingleCodetemplateParser.g:1934:3: ruleVariableOrDollar
+            // InternalSingleCodetemplateParser.g:1938:2: ( ruleVariableOrDollar )
+            // InternalSingleCodetemplateParser.g:1939:3: ruleVariableOrDollar
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsVariableOrDollarParserRuleCall_2_0_0()); 
             pushFollow(FOLLOW_2);
@@ -5908,17 +5916,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TemplateBody__PartsAssignment_2_1"
-    // InternalSingleCodetemplateParser.g:1943:1: rule__TemplateBody__PartsAssignment_2_1 : ( ruleLiteral ) ;
+    // InternalSingleCodetemplateParser.g:1948:1: rule__TemplateBody__PartsAssignment_2_1 : ( ruleLiteral ) ;
     public final void rule__TemplateBody__PartsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1947:1: ( ( ruleLiteral ) )
-            // InternalSingleCodetemplateParser.g:1948:2: ( ruleLiteral )
+            // InternalSingleCodetemplateParser.g:1952:1: ( ( ruleLiteral ) )
+            // InternalSingleCodetemplateParser.g:1953:2: ( ruleLiteral )
             {
-            // InternalSingleCodetemplateParser.g:1948:2: ( ruleLiteral )
-            // InternalSingleCodetemplateParser.g:1949:3: ruleLiteral
+            // InternalSingleCodetemplateParser.g:1953:2: ( ruleLiteral )
+            // InternalSingleCodetemplateParser.g:1954:3: ruleLiteral
             {
              before(grammarAccess.getTemplateBodyAccess().getPartsLiteralParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -5949,17 +5957,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__NameAssignment_2_0"
-    // InternalSingleCodetemplateParser.g:1958:1: rule__Variable__NameAssignment_2_0 : ( ruleValidID ) ;
+    // InternalSingleCodetemplateParser.g:1963:1: rule__Variable__NameAssignment_2_0 : ( ruleValidID ) ;
     public final void rule__Variable__NameAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1962:1: ( ( ruleValidID ) )
-            // InternalSingleCodetemplateParser.g:1963:2: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1967:1: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1968:2: ( ruleValidID )
             {
-            // InternalSingleCodetemplateParser.g:1963:2: ( ruleValidID )
-            // InternalSingleCodetemplateParser.g:1964:3: ruleValidID
+            // InternalSingleCodetemplateParser.g:1968:2: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1969:3: ruleValidID
             {
              before(grammarAccess.getVariableAccess().getNameValidIDParserRuleCall_2_0_0()); 
             pushFollow(FOLLOW_2);
@@ -5990,17 +5998,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__NameAssignment_2_1_0_0"
-    // InternalSingleCodetemplateParser.g:1973:1: rule__Variable__NameAssignment_2_1_0_0 : ( ruleValidID ) ;
+    // InternalSingleCodetemplateParser.g:1978:1: rule__Variable__NameAssignment_2_1_0_0 : ( ruleValidID ) ;
     public final void rule__Variable__NameAssignment_2_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1977:1: ( ( ruleValidID ) )
-            // InternalSingleCodetemplateParser.g:1978:2: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1982:1: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1983:2: ( ruleValidID )
             {
-            // InternalSingleCodetemplateParser.g:1978:2: ( ruleValidID )
-            // InternalSingleCodetemplateParser.g:1979:3: ruleValidID
+            // InternalSingleCodetemplateParser.g:1983:2: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1984:3: ruleValidID
             {
              before(grammarAccess.getVariableAccess().getNameValidIDParserRuleCall_2_1_0_0_0()); 
             pushFollow(FOLLOW_2);
@@ -6031,17 +6039,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__TypeAssignment_2_1_3"
-    // InternalSingleCodetemplateParser.g:1988:1: rule__Variable__TypeAssignment_2_1_3 : ( ruleValidID ) ;
+    // InternalSingleCodetemplateParser.g:1993:1: rule__Variable__TypeAssignment_2_1_3 : ( ruleValidID ) ;
     public final void rule__Variable__TypeAssignment_2_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:1992:1: ( ( ruleValidID ) )
-            // InternalSingleCodetemplateParser.g:1993:2: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1997:1: ( ( ruleValidID ) )
+            // InternalSingleCodetemplateParser.g:1998:2: ( ruleValidID )
             {
-            // InternalSingleCodetemplateParser.g:1993:2: ( ruleValidID )
-            // InternalSingleCodetemplateParser.g:1994:3: ruleValidID
+            // InternalSingleCodetemplateParser.g:1998:2: ( ruleValidID )
+            // InternalSingleCodetemplateParser.g:1999:3: ruleValidID
             {
              before(grammarAccess.getVariableAccess().getTypeValidIDParserRuleCall_2_1_3_0()); 
             pushFollow(FOLLOW_2);
@@ -6072,21 +6080,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__ExpectingParametersAssignment_2_1_4_1"
-    // InternalSingleCodetemplateParser.g:2003:1: rule__Variable__ExpectingParametersAssignment_2_1_4_1 : ( ( LeftParenthesis ) ) ;
+    // InternalSingleCodetemplateParser.g:2008:1: rule__Variable__ExpectingParametersAssignment_2_1_4_1 : ( ( LeftParenthesis ) ) ;
     public final void rule__Variable__ExpectingParametersAssignment_2_1_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:2007:1: ( ( ( LeftParenthesis ) ) )
-            // InternalSingleCodetemplateParser.g:2008:2: ( ( LeftParenthesis ) )
+            // InternalSingleCodetemplateParser.g:2012:1: ( ( ( LeftParenthesis ) ) )
+            // InternalSingleCodetemplateParser.g:2013:2: ( ( LeftParenthesis ) )
             {
-            // InternalSingleCodetemplateParser.g:2008:2: ( ( LeftParenthesis ) )
-            // InternalSingleCodetemplateParser.g:2009:3: ( LeftParenthesis )
+            // InternalSingleCodetemplateParser.g:2013:2: ( ( LeftParenthesis ) )
+            // InternalSingleCodetemplateParser.g:2014:3: ( LeftParenthesis )
             {
              before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
-            // InternalSingleCodetemplateParser.g:2010:3: ( LeftParenthesis )
-            // InternalSingleCodetemplateParser.g:2011:4: LeftParenthesis
+            // InternalSingleCodetemplateParser.g:2015:3: ( LeftParenthesis )
+            // InternalSingleCodetemplateParser.g:2016:4: LeftParenthesis
             {
              before(grammarAccess.getVariableAccess().getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0()); 
             match(input,LeftParenthesis,FOLLOW_2); 
@@ -6117,21 +6125,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__ParametersAssignment_2_1_4_3_0"
-    // InternalSingleCodetemplateParser.g:2022:1: rule__Variable__ParametersAssignment_2_1_4_3_0 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) ) ;
+    // InternalSingleCodetemplateParser.g:2027:1: rule__Variable__ParametersAssignment_2_1_4_3_0 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) ) ;
     public final void rule__Variable__ParametersAssignment_2_1_4_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:2026:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) ) )
-            // InternalSingleCodetemplateParser.g:2027:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) )
+            // InternalSingleCodetemplateParser.g:2031:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) ) )
+            // InternalSingleCodetemplateParser.g:2032:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) )
             {
-            // InternalSingleCodetemplateParser.g:2027:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) )
-            // InternalSingleCodetemplateParser.g:2028:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 )
+            // InternalSingleCodetemplateParser.g:2032:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 ) )
+            // InternalSingleCodetemplateParser.g:2033:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 )
             {
              before(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_0_0()); 
-            // InternalSingleCodetemplateParser.g:2029:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 )
-            // InternalSingleCodetemplateParser.g:2029:4: rule__Variable__ParametersAlternatives_2_1_4_3_0_0
+            // InternalSingleCodetemplateParser.g:2034:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_0_0 )
+            // InternalSingleCodetemplateParser.g:2034:4: rule__Variable__ParametersAlternatives_2_1_4_3_0_0
             {
             pushFollow(FOLLOW_2);
             rule__Variable__ParametersAlternatives_2_1_4_3_0_0();
@@ -6164,21 +6172,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Variable__ParametersAssignment_2_1_4_3_1_3"
-    // InternalSingleCodetemplateParser.g:2037:1: rule__Variable__ParametersAssignment_2_1_4_3_1_3 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) ) ;
+    // InternalSingleCodetemplateParser.g:2042:1: rule__Variable__ParametersAssignment_2_1_4_3_1_3 : ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) ) ;
     public final void rule__Variable__ParametersAssignment_2_1_4_3_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:2041:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) ) )
-            // InternalSingleCodetemplateParser.g:2042:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) )
+            // InternalSingleCodetemplateParser.g:2046:1: ( ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) ) )
+            // InternalSingleCodetemplateParser.g:2047:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) )
             {
-            // InternalSingleCodetemplateParser.g:2042:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) )
-            // InternalSingleCodetemplateParser.g:2043:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 )
+            // InternalSingleCodetemplateParser.g:2047:2: ( ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 ) )
+            // InternalSingleCodetemplateParser.g:2048:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 )
             {
              before(grammarAccess.getVariableAccess().getParametersAlternatives_2_1_4_3_1_3_0()); 
-            // InternalSingleCodetemplateParser.g:2044:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 )
-            // InternalSingleCodetemplateParser.g:2044:4: rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0
+            // InternalSingleCodetemplateParser.g:2049:3: ( rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0 )
+            // InternalSingleCodetemplateParser.g:2049:4: rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0
             {
             pushFollow(FOLLOW_2);
             rule__Variable__ParametersAlternatives_2_1_4_3_1_3_0();
@@ -6211,17 +6219,17 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Literal__ValueAssignment"
-    // InternalSingleCodetemplateParser.g:2052:1: rule__Literal__ValueAssignment : ( ruleLiteralValue ) ;
+    // InternalSingleCodetemplateParser.g:2057:1: rule__Literal__ValueAssignment : ( ruleLiteralValue ) ;
     public final void rule__Literal__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:2056:1: ( ( ruleLiteralValue ) )
-            // InternalSingleCodetemplateParser.g:2057:2: ( ruleLiteralValue )
+            // InternalSingleCodetemplateParser.g:2061:1: ( ( ruleLiteralValue ) )
+            // InternalSingleCodetemplateParser.g:2062:2: ( ruleLiteralValue )
             {
-            // InternalSingleCodetemplateParser.g:2057:2: ( ruleLiteralValue )
-            // InternalSingleCodetemplateParser.g:2058:3: ruleLiteralValue
+            // InternalSingleCodetemplateParser.g:2062:2: ( ruleLiteralValue )
+            // InternalSingleCodetemplateParser.g:2063:3: ruleLiteralValue
             {
              before(grammarAccess.getLiteralAccess().getValueLiteralValueParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -6252,21 +6260,21 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Dollar__EscapedAssignment_1_0"
-    // InternalSingleCodetemplateParser.g:2067:1: rule__Dollar__EscapedAssignment_1_0 : ( ( DollarSignDollarSign ) ) ;
+    // InternalSingleCodetemplateParser.g:2072:1: rule__Dollar__EscapedAssignment_1_0 : ( ( DollarSignDollarSign ) ) ;
     public final void rule__Dollar__EscapedAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSingleCodetemplateParser.g:2071:1: ( ( ( DollarSignDollarSign ) ) )
-            // InternalSingleCodetemplateParser.g:2072:2: ( ( DollarSignDollarSign ) )
+            // InternalSingleCodetemplateParser.g:2076:1: ( ( ( DollarSignDollarSign ) ) )
+            // InternalSingleCodetemplateParser.g:2077:2: ( ( DollarSignDollarSign ) )
             {
-            // InternalSingleCodetemplateParser.g:2072:2: ( ( DollarSignDollarSign ) )
-            // InternalSingleCodetemplateParser.g:2073:3: ( DollarSignDollarSign )
+            // InternalSingleCodetemplateParser.g:2077:2: ( ( DollarSignDollarSign ) )
+            // InternalSingleCodetemplateParser.g:2078:3: ( DollarSignDollarSign )
             {
              before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
-            // InternalSingleCodetemplateParser.g:2074:3: ( DollarSignDollarSign )
-            // InternalSingleCodetemplateParser.g:2075:4: DollarSignDollarSign
+            // InternalSingleCodetemplateParser.g:2079:3: ( DollarSignDollarSign )
+            // InternalSingleCodetemplateParser.g:2080:4: DollarSignDollarSign
             {
              before(grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0()); 
             match(input,DollarSignDollarSign,FOLLOW_2); 
@@ -6337,7 +6345,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "489:1: rule__Variable__Alternatives_2 : ( ( ( rule__Variable__NameAssignment_2_0 ) ) | ( ( rule__Variable__Group_2_1__0 ) ) );";
+            return "494:1: rule__Variable__Alternatives_2 : ( ( ( rule__Variable__NameAssignment_2_0 ) ) | ( ( rule__Variable__Group_2_1__0 ) ) );";
         }
     }
     static final String dfa_7s = "\4\uffff";
@@ -6373,7 +6381,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             this.transition = dfa_12;
         }
         public String getDescription() {
-            return "1266:2: ( rule__Variable__Group_2_1_4__0 )?";
+            return "1271:2: ( rule__Variable__Group_2_1_4__0 )?";
         }
     }
     static final String dfa_13s = "\2\13\2\uffff";
@@ -6402,7 +6410,7 @@ public class InternalSingleCodetemplateParser extends AbstractInternalContentAss
             this.transition = dfa_15;
         }
         public String getDescription() {
-            return "()* loopback of 1510:2: ( rule__Variable__Group_2_1_4_3_1__0 )*";
+            return "()* loopback of 1515:2: ( rule__Variable__Group_2_1_4_3_1__0 )*";
         }
     }
  

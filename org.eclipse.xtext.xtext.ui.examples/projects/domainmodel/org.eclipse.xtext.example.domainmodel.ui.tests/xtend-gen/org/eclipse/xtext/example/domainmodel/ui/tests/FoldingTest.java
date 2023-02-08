@@ -31,7 +31,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void package_declaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -43,7 +43,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void package_declarations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -62,7 +62,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void entitiy() {
     StringConcatenation _builder = new StringConcatenation();
@@ -74,7 +74,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void operation1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -97,7 +97,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void operation2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -122,7 +122,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void complex() {
     StringConcatenation _builder = new StringConcatenation();
@@ -187,7 +187,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void multi_line_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -203,7 +203,7 @@ public class FoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void java_doc() {
     StringConcatenation _builder = new StringConcatenation();

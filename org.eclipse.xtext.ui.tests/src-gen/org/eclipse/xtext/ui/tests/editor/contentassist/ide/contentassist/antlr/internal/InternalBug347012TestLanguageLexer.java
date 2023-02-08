@@ -342,11 +342,11 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug347012TestLanguage.g:2207:9: ( RULE_IDPLAINCHAR ( RULE_IDPLAINCHAR | RULE_DIGIT )* )
-            // InternalBug347012TestLanguage.g:2207:11: RULE_IDPLAINCHAR ( RULE_IDPLAINCHAR | RULE_DIGIT )*
+            // InternalBug347012TestLanguage.g:2212:9: ( RULE_IDPLAINCHAR ( RULE_IDPLAINCHAR | RULE_DIGIT )* )
+            // InternalBug347012TestLanguage.g:2212:11: RULE_IDPLAINCHAR ( RULE_IDPLAINCHAR | RULE_DIGIT )*
             {
             mRULE_IDPLAINCHAR(); 
-            // InternalBug347012TestLanguage.g:2207:28: ( RULE_IDPLAINCHAR | RULE_DIGIT )*
+            // InternalBug347012TestLanguage.g:2212:28: ( RULE_IDPLAINCHAR | RULE_DIGIT )*
             loop1:
             do {
                 int alt1=2;
@@ -395,10 +395,10 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug347012TestLanguage.g:2209:9: ( ( '\\r' '\\n' | '\\r' | '\\n' ) )
-            // InternalBug347012TestLanguage.g:2209:11: ( '\\r' '\\n' | '\\r' | '\\n' )
+            // InternalBug347012TestLanguage.g:2214:9: ( ( '\\r' '\\n' | '\\r' | '\\n' ) )
+            // InternalBug347012TestLanguage.g:2214:11: ( '\\r' '\\n' | '\\r' | '\\n' )
             {
-            // InternalBug347012TestLanguage.g:2209:11: ( '\\r' '\\n' | '\\r' | '\\n' )
+            // InternalBug347012TestLanguage.g:2214:11: ( '\\r' '\\n' | '\\r' | '\\n' )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -422,7 +422,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalBug347012TestLanguage.g:2209:12: '\\r' '\\n'
+                    // InternalBug347012TestLanguage.g:2214:12: '\\r' '\\n'
                     {
                     match('\r'); 
                     match('\n'); 
@@ -430,14 +430,14 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBug347012TestLanguage.g:2209:22: '\\r'
+                    // InternalBug347012TestLanguage.g:2214:22: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // InternalBug347012TestLanguage.g:2209:27: '\\n'
+                    // InternalBug347012TestLanguage.g:2214:27: '\\n'
                     {
                     match('\n'); 
 
@@ -462,10 +462,10 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug347012TestLanguage.g:2211:9: ( ( ' ' | '\\t' )+ )
-            // InternalBug347012TestLanguage.g:2211:11: ( ' ' | '\\t' )+
+            // InternalBug347012TestLanguage.g:2216:9: ( ( ' ' | '\\t' )+ )
+            // InternalBug347012TestLanguage.g:2216:11: ( ' ' | '\\t' )+
             {
-            // InternalBug347012TestLanguage.g:2211:11: ( ' ' | '\\t' )+
+            // InternalBug347012TestLanguage.g:2216:11: ( ' ' | '\\t' )+
             int cnt3=0;
             loop3:
             do {
@@ -519,11 +519,11 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug347012TestLanguage.g:2213:13: ( '\"' ( '\\\\' RULE_ESCAPE | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalBug347012TestLanguage.g:2213:15: '\"' ( '\\\\' RULE_ESCAPE | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalBug347012TestLanguage.g:2218:13: ( '\"' ( '\\\\' RULE_ESCAPE | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalBug347012TestLanguage.g:2218:15: '\"' ( '\\\\' RULE_ESCAPE | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalBug347012TestLanguage.g:2213:19: ( '\\\\' RULE_ESCAPE | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalBug347012TestLanguage.g:2218:19: ( '\\\\' RULE_ESCAPE | ~ ( ( '\\\\' | '\"' ) ) )*
             loop4:
             do {
                 int alt4=3;
@@ -539,7 +539,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalBug347012TestLanguage.g:2213:20: '\\\\' RULE_ESCAPE
+            	    // InternalBug347012TestLanguage.g:2218:20: '\\\\' RULE_ESCAPE
             	    {
             	    match('\\'); 
             	    mRULE_ESCAPE(); 
@@ -547,7 +547,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalBug347012TestLanguage.g:2213:37: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalBug347012TestLanguage.g:2218:37: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -584,10 +584,10 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_NUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug347012TestLanguage.g:2215:13: ( ( ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )? | '.' ( RULE_DIGIT )+ ) )
-            // InternalBug347012TestLanguage.g:2215:15: ( ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )? | '.' ( RULE_DIGIT )+ )
+            // InternalBug347012TestLanguage.g:2220:13: ( ( ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )? | '.' ( RULE_DIGIT )+ ) )
+            // InternalBug347012TestLanguage.g:2220:15: ( ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )? | '.' ( RULE_DIGIT )+ )
             {
-            // InternalBug347012TestLanguage.g:2215:15: ( ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )? | '.' ( RULE_DIGIT )+ )
+            // InternalBug347012TestLanguage.g:2220:15: ( ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )? | '.' ( RULE_DIGIT )+ )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -605,9 +605,9 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalBug347012TestLanguage.g:2215:16: ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )?
+                    // InternalBug347012TestLanguage.g:2220:16: ( RULE_DIGIT )+ ( '.' ( RULE_DIGIT )+ )?
                     {
-                    // InternalBug347012TestLanguage.g:2215:16: ( RULE_DIGIT )+
+                    // InternalBug347012TestLanguage.g:2220:16: ( RULE_DIGIT )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -621,7 +621,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalBug347012TestLanguage.g:2215:16: RULE_DIGIT
+                    	    // InternalBug347012TestLanguage.g:2220:16: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -637,7 +637,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
                         cnt5++;
                     } while (true);
 
-                    // InternalBug347012TestLanguage.g:2215:28: ( '.' ( RULE_DIGIT )+ )?
+                    // InternalBug347012TestLanguage.g:2220:28: ( '.' ( RULE_DIGIT )+ )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -646,10 +646,10 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
                     }
                     switch (alt7) {
                         case 1 :
-                            // InternalBug347012TestLanguage.g:2215:29: '.' ( RULE_DIGIT )+
+                            // InternalBug347012TestLanguage.g:2220:29: '.' ( RULE_DIGIT )+
                             {
                             match('.'); 
-                            // InternalBug347012TestLanguage.g:2215:33: ( RULE_DIGIT )+
+                            // InternalBug347012TestLanguage.g:2220:33: ( RULE_DIGIT )+
                             int cnt6=0;
                             loop6:
                             do {
@@ -663,7 +663,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
 
                                 switch (alt6) {
                             	case 1 :
-                            	    // InternalBug347012TestLanguage.g:2215:33: RULE_DIGIT
+                            	    // InternalBug347012TestLanguage.g:2220:33: RULE_DIGIT
                             	    {
                             	    mRULE_DIGIT(); 
 
@@ -689,10 +689,10 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBug347012TestLanguage.g:2215:47: '.' ( RULE_DIGIT )+
+                    // InternalBug347012TestLanguage.g:2220:47: '.' ( RULE_DIGIT )+
                     {
                     match('.'); 
-                    // InternalBug347012TestLanguage.g:2215:51: ( RULE_DIGIT )+
+                    // InternalBug347012TestLanguage.g:2220:51: ( RULE_DIGIT )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -706,7 +706,7 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // InternalBug347012TestLanguage.g:2215:51: RULE_DIGIT
+                    	    // InternalBug347012TestLanguage.g:2220:51: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -742,8 +742,8 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_DIGIT"
     public final void mRULE_DIGIT() throws RecognitionException {
         try {
-            // InternalBug347012TestLanguage.g:2217:21: ( '0' .. '9' )
-            // InternalBug347012TestLanguage.g:2217:23: '0' .. '9'
+            // InternalBug347012TestLanguage.g:2222:21: ( '0' .. '9' )
+            // InternalBug347012TestLanguage.g:2222:23: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -758,8 +758,8 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_HEX"
     public final void mRULE_HEX() throws RecognitionException {
         try {
-            // InternalBug347012TestLanguage.g:2219:19: ( ( RULE_DIGIT | 'A' .. 'F' | 'a' .. 'f' ) )
-            // InternalBug347012TestLanguage.g:2219:21: ( RULE_DIGIT | 'A' .. 'F' | 'a' .. 'f' )
+            // InternalBug347012TestLanguage.g:2224:19: ( ( RULE_DIGIT | 'A' .. 'F' | 'a' .. 'f' ) )
+            // InternalBug347012TestLanguage.g:2224:21: ( RULE_DIGIT | 'A' .. 'F' | 'a' .. 'f' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f') ) {
                 input.consume();
@@ -782,10 +782,10 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPE"
     public final void mRULE_ESCAPE() throws RecognitionException {
         try {
-            // InternalBug347012TestLanguage.g:2221:22: ( ( 'b' | 't' | 'n' | 'f' | 'v' | 'r' | '\"' | '\\'' | '\\\\' | 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX ) )
-            // InternalBug347012TestLanguage.g:2221:24: ( 'b' | 't' | 'n' | 'f' | 'v' | 'r' | '\"' | '\\'' | '\\\\' | 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX )
+            // InternalBug347012TestLanguage.g:2226:22: ( ( 'b' | 't' | 'n' | 'f' | 'v' | 'r' | '\"' | '\\'' | '\\\\' | 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX ) )
+            // InternalBug347012TestLanguage.g:2226:24: ( 'b' | 't' | 'n' | 'f' | 'v' | 'r' | '\"' | '\\'' | '\\\\' | 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX )
             {
-            // InternalBug347012TestLanguage.g:2221:24: ( 'b' | 't' | 'n' | 'f' | 'v' | 'r' | '\"' | '\\'' | '\\\\' | 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX )
+            // InternalBug347012TestLanguage.g:2226:24: ( 'b' | 't' | 'n' | 'f' | 'v' | 'r' | '\"' | '\\'' | '\\\\' | 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX )
             int alt10=10;
             switch ( input.LA(1) ) {
             case 'b':
@@ -847,70 +847,70 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
 
             switch (alt10) {
                 case 1 :
-                    // InternalBug347012TestLanguage.g:2221:25: 'b'
+                    // InternalBug347012TestLanguage.g:2226:25: 'b'
                     {
                     match('b'); 
 
                     }
                     break;
                 case 2 :
-                    // InternalBug347012TestLanguage.g:2221:29: 't'
+                    // InternalBug347012TestLanguage.g:2226:29: 't'
                     {
                     match('t'); 
 
                     }
                     break;
                 case 3 :
-                    // InternalBug347012TestLanguage.g:2221:33: 'n'
+                    // InternalBug347012TestLanguage.g:2226:33: 'n'
                     {
                     match('n'); 
 
                     }
                     break;
                 case 4 :
-                    // InternalBug347012TestLanguage.g:2221:37: 'f'
+                    // InternalBug347012TestLanguage.g:2226:37: 'f'
                     {
                     match('f'); 
 
                     }
                     break;
                 case 5 :
-                    // InternalBug347012TestLanguage.g:2221:41: 'v'
+                    // InternalBug347012TestLanguage.g:2226:41: 'v'
                     {
                     match('v'); 
 
                     }
                     break;
                 case 6 :
-                    // InternalBug347012TestLanguage.g:2221:45: 'r'
+                    // InternalBug347012TestLanguage.g:2226:45: 'r'
                     {
                     match('r'); 
 
                     }
                     break;
                 case 7 :
-                    // InternalBug347012TestLanguage.g:2221:49: '\"'
+                    // InternalBug347012TestLanguage.g:2226:49: '\"'
                     {
                     match('\"'); 
 
                     }
                     break;
                 case 8 :
-                    // InternalBug347012TestLanguage.g:2221:53: '\\''
+                    // InternalBug347012TestLanguage.g:2226:53: '\\''
                     {
                     match('\''); 
 
                     }
                     break;
                 case 9 :
-                    // InternalBug347012TestLanguage.g:2221:58: '\\\\'
+                    // InternalBug347012TestLanguage.g:2226:58: '\\\\'
                     {
                     match('\\'); 
 
                     }
                     break;
                 case 10 :
-                    // InternalBug347012TestLanguage.g:2221:63: 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX
+                    // InternalBug347012TestLanguage.g:2226:63: 'u' RULE_HEX RULE_HEX RULE_HEX RULE_HEX
                     {
                     match('u'); 
                     mRULE_HEX(); 
@@ -935,8 +935,8 @@ public class InternalBug347012TestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_IDPLAINCHAR"
     public final void mRULE_IDPLAINCHAR() throws RecognitionException {
         try {
-            // InternalBug347012TestLanguage.g:2223:27: ( ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' ) )
-            // InternalBug347012TestLanguage.g:2223:29: ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' )
+            // InternalBug347012TestLanguage.g:2228:27: ( ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' ) )
+            // InternalBug347012TestLanguage.g:2228:29: ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' )
             {
             if ( input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();

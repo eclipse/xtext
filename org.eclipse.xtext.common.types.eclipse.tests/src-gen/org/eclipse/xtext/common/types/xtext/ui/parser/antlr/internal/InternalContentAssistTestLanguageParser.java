@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalContentAssistTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -80,7 +88,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalContentAssistTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalContentAssistTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -88,8 +96,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalContentAssistTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalContentAssistTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalContentAssistTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FOLLOW_1);
@@ -116,7 +124,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalContentAssistTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? ) ;
+    // InternalContentAssistTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -131,13 +139,13 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:77:2: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? ) )
-            // InternalContentAssistTestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? )
+            // InternalContentAssistTestLanguage.g:82:2: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? ) )
+            // InternalContentAssistTestLanguage.g:83:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? )
             {
-            // InternalContentAssistTestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? )
-            // InternalContentAssistTestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )?
+            // InternalContentAssistTestLanguage.g:83:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? )
+            // InternalContentAssistTestLanguage.g:84:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )?
             {
-            // InternalContentAssistTestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )*
+            // InternalContentAssistTestLanguage.g:84:3: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -150,10 +158,10 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalContentAssistTestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
+            	    // InternalContentAssistTestLanguage.g:85:4: (lv_imports_0_0= ruleImport )
             	    {
-            	    // InternalContentAssistTestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
-            	    // InternalContentAssistTestLanguage.g:81:5: lv_imports_0_0= ruleImport
+            	    // InternalContentAssistTestLanguage.g:85:4: (lv_imports_0_0= ruleImport )
+            	    // InternalContentAssistTestLanguage.g:86:5: lv_imports_0_0= ruleImport
             	    {
 
             	    					newCompositeNode(grammarAccess.getModelAccess().getImportsImportParserRuleCall_0_0());
@@ -186,7 +194,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                 }
             } while (true);
 
-            // InternalContentAssistTestLanguage.g:98:3: ( (lv_generateDirective_1_0= ruleGenerateDirective ) )?
+            // InternalContentAssistTestLanguage.g:103:3: ( (lv_generateDirective_1_0= ruleGenerateDirective ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -195,10 +203,10 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt2) {
                 case 1 :
-                    // InternalContentAssistTestLanguage.g:99:4: (lv_generateDirective_1_0= ruleGenerateDirective )
+                    // InternalContentAssistTestLanguage.g:104:4: (lv_generateDirective_1_0= ruleGenerateDirective )
                     {
-                    // InternalContentAssistTestLanguage.g:99:4: (lv_generateDirective_1_0= ruleGenerateDirective )
-                    // InternalContentAssistTestLanguage.g:100:5: lv_generateDirective_1_0= ruleGenerateDirective
+                    // InternalContentAssistTestLanguage.g:104:4: (lv_generateDirective_1_0= ruleGenerateDirective )
+                    // InternalContentAssistTestLanguage.g:105:5: lv_generateDirective_1_0= ruleGenerateDirective
                     {
 
                     					newCompositeNode(grammarAccess.getModelAccess().getGenerateDirectiveGenerateDirectiveParserRuleCall_1_0());
@@ -228,7 +236,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalContentAssistTestLanguage.g:117:3: ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )?
+            // InternalContentAssistTestLanguage.g:122:3: ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -237,10 +245,10 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt3) {
                 case 1 :
-                    // InternalContentAssistTestLanguage.g:118:4: (lv_referenceHolder_2_0= ruleReferenceHolder )
+                    // InternalContentAssistTestLanguage.g:123:4: (lv_referenceHolder_2_0= ruleReferenceHolder )
                     {
-                    // InternalContentAssistTestLanguage.g:118:4: (lv_referenceHolder_2_0= ruleReferenceHolder )
-                    // InternalContentAssistTestLanguage.g:119:5: lv_referenceHolder_2_0= ruleReferenceHolder
+                    // InternalContentAssistTestLanguage.g:123:4: (lv_referenceHolder_2_0= ruleReferenceHolder )
+                    // InternalContentAssistTestLanguage.g:124:5: lv_referenceHolder_2_0= ruleReferenceHolder
                     {
 
                     					newCompositeNode(grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_2_0());
@@ -293,7 +301,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleReferenceHolder"
-    // InternalContentAssistTestLanguage.g:140:1: entryRuleReferenceHolder returns [EObject current=null] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
+    // InternalContentAssistTestLanguage.g:145:1: entryRuleReferenceHolder returns [EObject current=null] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
     public final EObject entryRuleReferenceHolder() throws RecognitionException {
         EObject current = null;
 
@@ -301,8 +309,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:140:56: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
-            // InternalContentAssistTestLanguage.g:141:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
+            // InternalContentAssistTestLanguage.g:145:56: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
+            // InternalContentAssistTestLanguage.g:146:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
             {
              newCompositeNode(grammarAccess.getReferenceHolderRule()); 
             pushFollow(FOLLOW_1);
@@ -329,7 +337,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleReferenceHolder"
-    // InternalContentAssistTestLanguage.g:147:1: ruleReferenceHolder returns [EObject current=null] : ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) ;
+    // InternalContentAssistTestLanguage.g:152:1: ruleReferenceHolder returns [EObject current=null] : ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) ;
     public final EObject ruleReferenceHolder() throws RecognitionException {
         EObject current = null;
 
@@ -341,10 +349,10 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:153:2: ( ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) )
-            // InternalContentAssistTestLanguage.g:154:2: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
+            // InternalContentAssistTestLanguage.g:158:2: ( ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) )
+            // InternalContentAssistTestLanguage.g:159:2: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
             {
-            // InternalContentAssistTestLanguage.g:154:2: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
+            // InternalContentAssistTestLanguage.g:159:2: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
             int alt4=3;
             switch ( input.LA(1) ) {
             case 11:
@@ -371,20 +379,20 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
             switch (alt4) {
                 case 1 :
-                    // InternalContentAssistTestLanguage.g:155:3: (otherlv_0= 'default' ( ( ruleFQN ) ) )
+                    // InternalContentAssistTestLanguage.g:160:3: (otherlv_0= 'default' ( ( ruleFQN ) ) )
                     {
-                    // InternalContentAssistTestLanguage.g:155:3: (otherlv_0= 'default' ( ( ruleFQN ) ) )
-                    // InternalContentAssistTestLanguage.g:156:4: otherlv_0= 'default' ( ( ruleFQN ) )
+                    // InternalContentAssistTestLanguage.g:160:3: (otherlv_0= 'default' ( ( ruleFQN ) ) )
+                    // InternalContentAssistTestLanguage.g:161:4: otherlv_0= 'default' ( ( ruleFQN ) )
                     {
                     otherlv_0=(Token)match(input,11,FOLLOW_5); 
 
                     				newLeafNode(otherlv_0, grammarAccess.getReferenceHolderAccess().getDefaultKeyword_0_0());
                     			
-                    // InternalContentAssistTestLanguage.g:160:4: ( ( ruleFQN ) )
-                    // InternalContentAssistTestLanguage.g:161:5: ( ruleFQN )
+                    // InternalContentAssistTestLanguage.g:165:4: ( ( ruleFQN ) )
+                    // InternalContentAssistTestLanguage.g:166:5: ( ruleFQN )
                     {
-                    // InternalContentAssistTestLanguage.g:161:5: ( ruleFQN )
-                    // InternalContentAssistTestLanguage.g:162:6: ruleFQN
+                    // InternalContentAssistTestLanguage.g:166:5: ( ruleFQN )
+                    // InternalContentAssistTestLanguage.g:167:6: ruleFQN
                     {
 
                     						if (current==null) {
@@ -415,20 +423,20 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistTestLanguage.g:178:3: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
+                    // InternalContentAssistTestLanguage.g:183:3: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
                     {
-                    // InternalContentAssistTestLanguage.g:178:3: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
-                    // InternalContentAssistTestLanguage.g:179:4: otherlv_2= 'custom' ( ( ruleFQN ) )
+                    // InternalContentAssistTestLanguage.g:183:3: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
+                    // InternalContentAssistTestLanguage.g:184:4: otherlv_2= 'custom' ( ( ruleFQN ) )
                     {
                     otherlv_2=(Token)match(input,12,FOLLOW_5); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getReferenceHolderAccess().getCustomKeyword_1_0());
                     			
-                    // InternalContentAssistTestLanguage.g:183:4: ( ( ruleFQN ) )
-                    // InternalContentAssistTestLanguage.g:184:5: ( ruleFQN )
+                    // InternalContentAssistTestLanguage.g:188:4: ( ( ruleFQN ) )
+                    // InternalContentAssistTestLanguage.g:189:5: ( ruleFQN )
                     {
-                    // InternalContentAssistTestLanguage.g:184:5: ( ruleFQN )
-                    // InternalContentAssistTestLanguage.g:185:6: ruleFQN
+                    // InternalContentAssistTestLanguage.g:189:5: ( ruleFQN )
+                    // InternalContentAssistTestLanguage.g:190:6: ruleFQN
                     {
 
                     						if (current==null) {
@@ -459,20 +467,20 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistTestLanguage.g:201:3: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
+                    // InternalContentAssistTestLanguage.g:206:3: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
                     {
-                    // InternalContentAssistTestLanguage.g:201:3: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
-                    // InternalContentAssistTestLanguage.g:202:4: otherlv_4= 'subtype' ( ( ruleFQN ) )
+                    // InternalContentAssistTestLanguage.g:206:3: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
+                    // InternalContentAssistTestLanguage.g:207:4: otherlv_4= 'subtype' ( ( ruleFQN ) )
                     {
                     otherlv_4=(Token)match(input,13,FOLLOW_5); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getReferenceHolderAccess().getSubtypeKeyword_2_0());
                     			
-                    // InternalContentAssistTestLanguage.g:206:4: ( ( ruleFQN ) )
-                    // InternalContentAssistTestLanguage.g:207:5: ( ruleFQN )
+                    // InternalContentAssistTestLanguage.g:211:4: ( ( ruleFQN ) )
+                    // InternalContentAssistTestLanguage.g:212:5: ( ruleFQN )
                     {
-                    // InternalContentAssistTestLanguage.g:207:5: ( ruleFQN )
-                    // InternalContentAssistTestLanguage.g:208:6: ruleFQN
+                    // InternalContentAssistTestLanguage.g:212:5: ( ruleFQN )
+                    // InternalContentAssistTestLanguage.g:213:6: ruleFQN
                     {
 
                     						if (current==null) {
@@ -525,7 +533,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleGenerateDirective"
-    // InternalContentAssistTestLanguage.g:227:1: entryRuleGenerateDirective returns [EObject current=null] : iv_ruleGenerateDirective= ruleGenerateDirective EOF ;
+    // InternalContentAssistTestLanguage.g:232:1: entryRuleGenerateDirective returns [EObject current=null] : iv_ruleGenerateDirective= ruleGenerateDirective EOF ;
     public final EObject entryRuleGenerateDirective() throws RecognitionException {
         EObject current = null;
 
@@ -533,8 +541,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:227:58: (iv_ruleGenerateDirective= ruleGenerateDirective EOF )
-            // InternalContentAssistTestLanguage.g:228:2: iv_ruleGenerateDirective= ruleGenerateDirective EOF
+            // InternalContentAssistTestLanguage.g:232:58: (iv_ruleGenerateDirective= ruleGenerateDirective EOF )
+            // InternalContentAssistTestLanguage.g:233:2: iv_ruleGenerateDirective= ruleGenerateDirective EOF
             {
              newCompositeNode(grammarAccess.getGenerateDirectiveRule()); 
             pushFollow(FOLLOW_1);
@@ -561,7 +569,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleGenerateDirective"
-    // InternalContentAssistTestLanguage.g:234:1: ruleGenerateDirective returns [EObject current=null] : (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) ) ;
+    // InternalContentAssistTestLanguage.g:239:1: ruleGenerateDirective returns [EObject current=null] : (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) ) ;
     public final EObject ruleGenerateDirective() throws RecognitionException {
         EObject current = null;
 
@@ -573,21 +581,21 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:240:2: ( (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) ) )
-            // InternalContentAssistTestLanguage.g:241:2: (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) )
+            // InternalContentAssistTestLanguage.g:245:2: ( (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) ) )
+            // InternalContentAssistTestLanguage.g:246:2: (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) )
             {
-            // InternalContentAssistTestLanguage.g:241:2: (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) )
-            // InternalContentAssistTestLanguage.g:242:3: otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) )
+            // InternalContentAssistTestLanguage.g:246:2: (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) )
+            // InternalContentAssistTestLanguage.g:247:3: otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) )
             {
             otherlv_0=(Token)match(input,14,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGenerateDirectiveAccess().getGenerateKeyword_0());
             		
-            // InternalContentAssistTestLanguage.g:246:3: ( (lv_typeName_1_0= ruleQN ) )
-            // InternalContentAssistTestLanguage.g:247:4: (lv_typeName_1_0= ruleQN )
+            // InternalContentAssistTestLanguage.g:251:3: ( (lv_typeName_1_0= ruleQN ) )
+            // InternalContentAssistTestLanguage.g:252:4: (lv_typeName_1_0= ruleQN )
             {
-            // InternalContentAssistTestLanguage.g:247:4: (lv_typeName_1_0= ruleQN )
-            // InternalContentAssistTestLanguage.g:248:5: lv_typeName_1_0= ruleQN
+            // InternalContentAssistTestLanguage.g:252:4: (lv_typeName_1_0= ruleQN )
+            // InternalContentAssistTestLanguage.g:253:5: lv_typeName_1_0= ruleQN
             {
 
             					newCompositeNode(grammarAccess.getGenerateDirectiveAccess().getTypeNameQNParserRuleCall_1_0());
@@ -637,7 +645,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalContentAssistTestLanguage.g:269:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalContentAssistTestLanguage.g:274:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -645,8 +653,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:269:47: (iv_ruleImport= ruleImport EOF )
-            // InternalContentAssistTestLanguage.g:270:2: iv_ruleImport= ruleImport EOF
+            // InternalContentAssistTestLanguage.g:274:47: (iv_ruleImport= ruleImport EOF )
+            // InternalContentAssistTestLanguage.g:275:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FOLLOW_1);
@@ -673,7 +681,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleImport"
-    // InternalContentAssistTestLanguage.g:276:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) ;
+    // InternalContentAssistTestLanguage.g:281:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -685,21 +693,21 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:282:2: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) )
-            // InternalContentAssistTestLanguage.g:283:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
+            // InternalContentAssistTestLanguage.g:287:2: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) )
+            // InternalContentAssistTestLanguage.g:288:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
             {
-            // InternalContentAssistTestLanguage.g:283:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
-            // InternalContentAssistTestLanguage.g:284:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+            // InternalContentAssistTestLanguage.g:288:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
+            // InternalContentAssistTestLanguage.g:289:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
             {
             otherlv_0=(Token)match(input,15,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
             		
-            // InternalContentAssistTestLanguage.g:288:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
-            // InternalContentAssistTestLanguage.g:289:4: (lv_importedNamespace_1_0= ruleImportedFQN )
+            // InternalContentAssistTestLanguage.g:293:3: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+            // InternalContentAssistTestLanguage.g:294:4: (lv_importedNamespace_1_0= ruleImportedFQN )
             {
-            // InternalContentAssistTestLanguage.g:289:4: (lv_importedNamespace_1_0= ruleImportedFQN )
-            // InternalContentAssistTestLanguage.g:290:5: lv_importedNamespace_1_0= ruleImportedFQN
+            // InternalContentAssistTestLanguage.g:294:4: (lv_importedNamespace_1_0= ruleImportedFQN )
+            // InternalContentAssistTestLanguage.g:295:5: lv_importedNamespace_1_0= ruleImportedFQN
             {
 
             					newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0());
@@ -749,7 +757,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleImportedFQN"
-    // InternalContentAssistTestLanguage.g:311:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
+    // InternalContentAssistTestLanguage.g:316:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
     public final String entryRuleImportedFQN() throws RecognitionException {
         String current = null;
 
@@ -757,8 +765,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:311:51: (iv_ruleImportedFQN= ruleImportedFQN EOF )
-            // InternalContentAssistTestLanguage.g:312:2: iv_ruleImportedFQN= ruleImportedFQN EOF
+            // InternalContentAssistTestLanguage.g:316:51: (iv_ruleImportedFQN= ruleImportedFQN EOF )
+            // InternalContentAssistTestLanguage.g:317:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
             pushFollow(FOLLOW_1);
@@ -785,7 +793,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleImportedFQN"
-    // InternalContentAssistTestLanguage.g:318:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
+    // InternalContentAssistTestLanguage.g:323:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportedFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -797,11 +805,11 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:324:2: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
-            // InternalContentAssistTestLanguage.g:325:2: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // InternalContentAssistTestLanguage.g:329:2: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
+            // InternalContentAssistTestLanguage.g:330:2: (this_FQN_0= ruleFQN (kw= '.*' )? )
             {
-            // InternalContentAssistTestLanguage.g:325:2: (this_FQN_0= ruleFQN (kw= '.*' )? )
-            // InternalContentAssistTestLanguage.g:326:3: this_FQN_0= ruleFQN (kw= '.*' )?
+            // InternalContentAssistTestLanguage.g:330:2: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // InternalContentAssistTestLanguage.g:331:3: this_FQN_0= ruleFQN (kw= '.*' )?
             {
 
             			newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0());
@@ -817,7 +825,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
             			afterParserOrEnumRuleCall();
             		
-            // InternalContentAssistTestLanguage.g:336:3: (kw= '.*' )?
+            // InternalContentAssistTestLanguage.g:341:3: (kw= '.*' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -826,7 +834,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt5) {
                 case 1 :
-                    // InternalContentAssistTestLanguage.g:337:4: kw= '.*'
+                    // InternalContentAssistTestLanguage.g:342:4: kw= '.*'
                     {
                     kw=(Token)match(input,16,FOLLOW_2); 
 
@@ -862,7 +870,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalContentAssistTestLanguage.g:347:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalContentAssistTestLanguage.g:352:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -870,8 +878,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:347:43: (iv_ruleFQN= ruleFQN EOF )
-            // InternalContentAssistTestLanguage.g:348:2: iv_ruleFQN= ruleFQN EOF
+            // InternalContentAssistTestLanguage.g:352:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalContentAssistTestLanguage.g:353:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
             pushFollow(FOLLOW_1);
@@ -898,7 +906,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleFQN"
-    // InternalContentAssistTestLanguage.g:354:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* ) ;
+    // InternalContentAssistTestLanguage.g:359:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -911,11 +919,11 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:360:2: ( (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* ) )
-            // InternalContentAssistTestLanguage.g:361:2: (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* )
+            // InternalContentAssistTestLanguage.g:365:2: ( (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* ) )
+            // InternalContentAssistTestLanguage.g:366:2: (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* )
             {
-            // InternalContentAssistTestLanguage.g:361:2: (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* )
-            // InternalContentAssistTestLanguage.g:362:3: this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )*
+            // InternalContentAssistTestLanguage.g:366:2: (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* )
+            // InternalContentAssistTestLanguage.g:367:3: this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )*
             {
 
             			newCompositeNode(grammarAccess.getFQNAccess().getQNParserRuleCall_0());
@@ -931,7 +939,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
             			afterParserOrEnumRuleCall();
             		
-            // InternalContentAssistTestLanguage.g:372:3: (kw= '$' this_ID_2= RULE_ID )*
+            // InternalContentAssistTestLanguage.g:377:3: (kw= '$' this_ID_2= RULE_ID )*
             loop6:
             do {
                 int alt6=2;
@@ -944,7 +952,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalContentAssistTestLanguage.g:373:4: kw= '$' this_ID_2= RULE_ID
+            	    // InternalContentAssistTestLanguage.g:378:4: kw= '$' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,17,FOLLOW_5); 
 
@@ -990,7 +998,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleQN"
-    // InternalContentAssistTestLanguage.g:390:1: entryRuleQN returns [String current=null] : iv_ruleQN= ruleQN EOF ;
+    // InternalContentAssistTestLanguage.g:395:1: entryRuleQN returns [String current=null] : iv_ruleQN= ruleQN EOF ;
     public final String entryRuleQN() throws RecognitionException {
         String current = null;
 
@@ -998,8 +1006,8 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContentAssistTestLanguage.g:390:42: (iv_ruleQN= ruleQN EOF )
-            // InternalContentAssistTestLanguage.g:391:2: iv_ruleQN= ruleQN EOF
+            // InternalContentAssistTestLanguage.g:395:42: (iv_ruleQN= ruleQN EOF )
+            // InternalContentAssistTestLanguage.g:396:2: iv_ruleQN= ruleQN EOF
             {
              newCompositeNode(grammarAccess.getQNRule()); 
             pushFollow(FOLLOW_1);
@@ -1026,7 +1034,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleQN"
-    // InternalContentAssistTestLanguage.g:397:1: ruleQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalContentAssistTestLanguage.g:402:1: ruleQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1038,11 +1046,11 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContentAssistTestLanguage.g:403:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalContentAssistTestLanguage.g:404:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalContentAssistTestLanguage.g:408:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalContentAssistTestLanguage.g:409:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalContentAssistTestLanguage.g:404:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalContentAssistTestLanguage.g:405:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalContentAssistTestLanguage.g:409:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalContentAssistTestLanguage.g:410:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_8); 
 
@@ -1051,7 +1059,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(this_ID_0, grammarAccess.getQNAccess().getIDTerminalRuleCall_0());
             		
-            // InternalContentAssistTestLanguage.g:412:3: (kw= '.' this_ID_2= RULE_ID )*
+            // InternalContentAssistTestLanguage.g:417:3: (kw= '.' this_ID_2= RULE_ID )*
             loop7:
             do {
                 int alt7=2;
@@ -1064,7 +1072,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalContentAssistTestLanguage.g:413:4: kw= '.' this_ID_2= RULE_ID
+            	    // InternalContentAssistTestLanguage.g:418:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,18,FOLLOW_5); 
 

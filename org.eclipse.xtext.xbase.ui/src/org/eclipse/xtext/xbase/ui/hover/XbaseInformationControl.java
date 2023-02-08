@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -258,9 +258,9 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		else
 			styles = new String[] { "overflow:scroll;" }; //$NON-NLS-1$
 
-		StringBuffer buffer = new StringBuffer(content);
-		HTMLPrinter.insertStyles(buffer, styles);
-		content = buffer.toString();
+		StringBuilder builder = new StringBuilder(content);
+		HTMLPrinter.insertStyles(builder, styles);
+		content = builder.toString();
 
 		/*
 		 * XXX: Should add some JavaScript here that shows something like
@@ -401,11 +401,11 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		GC gc = new GC(fBrowser);
 		Font font = JFaceResources.getFont(fSymbolicFontName);
 		gc.setFont(font);
-		int width = gc.getFontMetrics().getAverageCharWidth();
+		double width = gc.getFontMetrics().getAverageCharacterWidth();
 		int height = gc.getFontMetrics().getHeight();
 		gc.dispose();
 
-		return new Point(widthInChars * width, heightInChars * height);
+		return new Point((int) (widthInChars * width), heightInChars * height);
 	}
 	//------------------ Original implementation
 	/**

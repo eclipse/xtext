@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,21 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.common.types.AbstractXtextTests;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.osgi.framework.Version;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -33,7 +30,7 @@ import com.google.inject.Injector;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public class ContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
+public class ContentAssistTest extends AbstractXtextTests {
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
 		MockJavaProjectProvider.setUp();
@@ -62,23 +59,6 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 						new SharedStateModule()));
 			}
 		};
-	}
-	
-	/**
-	 * The same as with JdtBasedTypeFactory.isJdtGreaterOrEqual(new Version(3.6.0))
-	 * 
-	 */
-	protected boolean isJDT_3_6_orLater() {
-		Version installed = JavaCore.getPlugin().getBundle().getVersion();
-		int minMajor = 3;
-		int minMinor = 6;
-		if (installed.getMajor() < minMajor) {
-			return false;
-		}
-		if (installed.getMajor() == minMajor && installed.getMinor() < minMinor) {
-			return false;
-		}
-		return true;
 	}
 	
 	@Test
@@ -159,13 +139,11 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 	}
 	
 	@Test public void testSubtypeArrayList_01() throws Exception {
-		if (isJDT_3_6_orLater())
-			newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList", "java.util.Arrays.ArrayList");
+		newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList", "java.util.Arrays.ArrayList");
 	}
 	
 	@Test public void testSubtypeArrayList_02() throws Exception {
-		if (isJDT_3_6_orLater())
-			newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList", "Arrays.ArrayList");
+		newBuilder().append("import java.util.* subtype ArrayLis").assertText("ArrayList", "Arrays.ArrayList");
 	}
 	
 	@Test public void testSubtypeHashSet_01() throws Exception {
@@ -192,12 +170,10 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=438191
 	 */
 	@Test public void testSubtypeProposals() throws Exception {
-		if (isJDT_3_6_orLater()) {
-			ICompletionProposal[] proposals = newBuilder().append("import java.util.* subtype I").computeCompletionProposals();
-			for (ICompletionProposal iCompletionProposal : proposals) {
-				String displayString = iCompletionProposal.getDisplayString();
-				assertFalse(displayString, displayString.contains(Iterable.class.getSimpleName()));
-			}
+		ICompletionProposal[] proposals = newBuilder().append("import java.util.* subtype I").computeCompletionProposals();
+		for (ICompletionProposal iCompletionProposal : proposals) {
+			String displayString = iCompletionProposal.getDisplayString();
+			assertFalse(displayString, displayString.contains(Iterable.class.getSimpleName()));
 		}
 	}
 	

@@ -29,7 +29,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
-import org.eclipse.xtext.junit4.internal.InternalBuilderTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;

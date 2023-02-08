@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalEncodingUiTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -65,11 +73,11 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalEncodingUiTestLanguage.g:53:1: entryRuleModel : ruleModel EOF ;
+    // InternalEncodingUiTestLanguage.g:58:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalEncodingUiTestLanguage.g:54:1: ( ruleModel EOF )
-            // InternalEncodingUiTestLanguage.g:55:1: ruleModel EOF
+            // InternalEncodingUiTestLanguage.g:59:1: ( ruleModel EOF )
+            // InternalEncodingUiTestLanguage.g:60:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -95,20 +103,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "ruleModel"
-    // InternalEncodingUiTestLanguage.g:62:1: ruleModel : ( ( rule__Model__WordsAssignment )* ) ;
+    // InternalEncodingUiTestLanguage.g:67:1: ruleModel : ( ( rule__Model__WordsAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEncodingUiTestLanguage.g:66:2: ( ( ( rule__Model__WordsAssignment )* ) )
-            // InternalEncodingUiTestLanguage.g:67:2: ( ( rule__Model__WordsAssignment )* )
+            // InternalEncodingUiTestLanguage.g:71:2: ( ( ( rule__Model__WordsAssignment )* ) )
+            // InternalEncodingUiTestLanguage.g:72:2: ( ( rule__Model__WordsAssignment )* )
             {
-            // InternalEncodingUiTestLanguage.g:67:2: ( ( rule__Model__WordsAssignment )* )
-            // InternalEncodingUiTestLanguage.g:68:3: ( rule__Model__WordsAssignment )*
+            // InternalEncodingUiTestLanguage.g:72:2: ( ( rule__Model__WordsAssignment )* )
+            // InternalEncodingUiTestLanguage.g:73:3: ( rule__Model__WordsAssignment )*
             {
              before(grammarAccess.getModelAccess().getWordsAssignment()); 
-            // InternalEncodingUiTestLanguage.g:69:3: ( rule__Model__WordsAssignment )*
+            // InternalEncodingUiTestLanguage.g:74:3: ( rule__Model__WordsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -121,7 +129,7 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalEncodingUiTestLanguage.g:69:4: rule__Model__WordsAssignment
+            	    // InternalEncodingUiTestLanguage.g:74:4: rule__Model__WordsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Model__WordsAssignment();
@@ -160,11 +168,11 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "entryRuleWord"
-    // InternalEncodingUiTestLanguage.g:78:1: entryRuleWord : ruleWord EOF ;
+    // InternalEncodingUiTestLanguage.g:83:1: entryRuleWord : ruleWord EOF ;
     public final void entryRuleWord() throws RecognitionException {
         try {
-            // InternalEncodingUiTestLanguage.g:79:1: ( ruleWord EOF )
-            // InternalEncodingUiTestLanguage.g:80:1: ruleWord EOF
+            // InternalEncodingUiTestLanguage.g:84:1: ( ruleWord EOF )
+            // InternalEncodingUiTestLanguage.g:85:1: ruleWord EOF
             {
              before(grammarAccess.getWordRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -190,21 +198,21 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "ruleWord"
-    // InternalEncodingUiTestLanguage.g:87:1: ruleWord : ( ( rule__Word__ValueAssignment ) ) ;
+    // InternalEncodingUiTestLanguage.g:92:1: ruleWord : ( ( rule__Word__ValueAssignment ) ) ;
     public final void ruleWord() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEncodingUiTestLanguage.g:91:2: ( ( ( rule__Word__ValueAssignment ) ) )
-            // InternalEncodingUiTestLanguage.g:92:2: ( ( rule__Word__ValueAssignment ) )
+            // InternalEncodingUiTestLanguage.g:96:2: ( ( ( rule__Word__ValueAssignment ) ) )
+            // InternalEncodingUiTestLanguage.g:97:2: ( ( rule__Word__ValueAssignment ) )
             {
-            // InternalEncodingUiTestLanguage.g:92:2: ( ( rule__Word__ValueAssignment ) )
-            // InternalEncodingUiTestLanguage.g:93:3: ( rule__Word__ValueAssignment )
+            // InternalEncodingUiTestLanguage.g:97:2: ( ( rule__Word__ValueAssignment ) )
+            // InternalEncodingUiTestLanguage.g:98:3: ( rule__Word__ValueAssignment )
             {
              before(grammarAccess.getWordAccess().getValueAssignment()); 
-            // InternalEncodingUiTestLanguage.g:94:3: ( rule__Word__ValueAssignment )
-            // InternalEncodingUiTestLanguage.g:94:4: rule__Word__ValueAssignment
+            // InternalEncodingUiTestLanguage.g:99:3: ( rule__Word__ValueAssignment )
+            // InternalEncodingUiTestLanguage.g:99:4: rule__Word__ValueAssignment
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Word__ValueAssignment();
@@ -237,17 +245,17 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__Model__WordsAssignment"
-    // InternalEncodingUiTestLanguage.g:102:1: rule__Model__WordsAssignment : ( ruleWord ) ;
+    // InternalEncodingUiTestLanguage.g:107:1: rule__Model__WordsAssignment : ( ruleWord ) ;
     public final void rule__Model__WordsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEncodingUiTestLanguage.g:106:1: ( ( ruleWord ) )
-            // InternalEncodingUiTestLanguage.g:107:2: ( ruleWord )
+            // InternalEncodingUiTestLanguage.g:111:1: ( ( ruleWord ) )
+            // InternalEncodingUiTestLanguage.g:112:2: ( ruleWord )
             {
-            // InternalEncodingUiTestLanguage.g:107:2: ( ruleWord )
-            // InternalEncodingUiTestLanguage.g:108:3: ruleWord
+            // InternalEncodingUiTestLanguage.g:112:2: ( ruleWord )
+            // InternalEncodingUiTestLanguage.g:113:3: ruleWord
             {
              before(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -278,17 +286,17 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__Word__ValueAssignment"
-    // InternalEncodingUiTestLanguage.g:117:1: rule__Word__ValueAssignment : ( RULE_LEXEME ) ;
+    // InternalEncodingUiTestLanguage.g:122:1: rule__Word__ValueAssignment : ( RULE_LEXEME ) ;
     public final void rule__Word__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEncodingUiTestLanguage.g:121:1: ( ( RULE_LEXEME ) )
-            // InternalEncodingUiTestLanguage.g:122:2: ( RULE_LEXEME )
+            // InternalEncodingUiTestLanguage.g:126:1: ( ( RULE_LEXEME ) )
+            // InternalEncodingUiTestLanguage.g:127:2: ( RULE_LEXEME )
             {
-            // InternalEncodingUiTestLanguage.g:122:2: ( RULE_LEXEME )
-            // InternalEncodingUiTestLanguage.g:123:3: RULE_LEXEME
+            // InternalEncodingUiTestLanguage.g:127:2: ( RULE_LEXEME )
+            // InternalEncodingUiTestLanguage.g:128:3: RULE_LEXEME
             {
              before(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); 
             match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 

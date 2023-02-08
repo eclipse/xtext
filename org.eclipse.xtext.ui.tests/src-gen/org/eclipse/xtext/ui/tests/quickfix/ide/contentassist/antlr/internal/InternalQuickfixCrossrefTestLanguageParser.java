@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -72,11 +80,11 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleMain"
-    // InternalQuickfixCrossrefTestLanguage.g:53:1: entryRuleMain : ruleMain EOF ;
+    // InternalQuickfixCrossrefTestLanguage.g:58:1: entryRuleMain : ruleMain EOF ;
     public final void entryRuleMain() throws RecognitionException {
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:54:1: ( ruleMain EOF )
-            // InternalQuickfixCrossrefTestLanguage.g:55:1: ruleMain EOF
+            // InternalQuickfixCrossrefTestLanguage.g:59:1: ( ruleMain EOF )
+            // InternalQuickfixCrossrefTestLanguage.g:60:1: ruleMain EOF
             {
              before(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -102,20 +110,20 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleMain"
-    // InternalQuickfixCrossrefTestLanguage.g:62:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:67:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
     public final void ruleMain() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:66:2: ( ( ( rule__Main__ElementsAssignment )* ) )
-            // InternalQuickfixCrossrefTestLanguage.g:67:2: ( ( rule__Main__ElementsAssignment )* )
+            // InternalQuickfixCrossrefTestLanguage.g:71:2: ( ( ( rule__Main__ElementsAssignment )* ) )
+            // InternalQuickfixCrossrefTestLanguage.g:72:2: ( ( rule__Main__ElementsAssignment )* )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:67:2: ( ( rule__Main__ElementsAssignment )* )
-            // InternalQuickfixCrossrefTestLanguage.g:68:3: ( rule__Main__ElementsAssignment )*
+            // InternalQuickfixCrossrefTestLanguage.g:72:2: ( ( rule__Main__ElementsAssignment )* )
+            // InternalQuickfixCrossrefTestLanguage.g:73:3: ( rule__Main__ElementsAssignment )*
             {
              before(grammarAccess.getMainAccess().getElementsAssignment()); 
-            // InternalQuickfixCrossrefTestLanguage.g:69:3: ( rule__Main__ElementsAssignment )*
+            // InternalQuickfixCrossrefTestLanguage.g:74:3: ( rule__Main__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -128,7 +136,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalQuickfixCrossrefTestLanguage.g:69:4: rule__Main__ElementsAssignment
+            	    // InternalQuickfixCrossrefTestLanguage.g:74:4: rule__Main__ElementsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Main__ElementsAssignment();
@@ -167,11 +175,11 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalQuickfixCrossrefTestLanguage.g:78:1: entryRuleElement : ruleElement EOF ;
+    // InternalQuickfixCrossrefTestLanguage.g:83:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:79:1: ( ruleElement EOF )
-            // InternalQuickfixCrossrefTestLanguage.g:80:1: ruleElement EOF
+            // InternalQuickfixCrossrefTestLanguage.g:84:1: ( ruleElement EOF )
+            // InternalQuickfixCrossrefTestLanguage.g:85:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -197,21 +205,21 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleElement"
-    // InternalQuickfixCrossrefTestLanguage.g:87:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:92:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:91:2: ( ( ( rule__Element__Group__0 ) ) )
-            // InternalQuickfixCrossrefTestLanguage.g:92:2: ( ( rule__Element__Group__0 ) )
+            // InternalQuickfixCrossrefTestLanguage.g:96:2: ( ( ( rule__Element__Group__0 ) ) )
+            // InternalQuickfixCrossrefTestLanguage.g:97:2: ( ( rule__Element__Group__0 ) )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:92:2: ( ( rule__Element__Group__0 ) )
-            // InternalQuickfixCrossrefTestLanguage.g:93:3: ( rule__Element__Group__0 )
+            // InternalQuickfixCrossrefTestLanguage.g:97:2: ( ( rule__Element__Group__0 ) )
+            // InternalQuickfixCrossrefTestLanguage.g:98:3: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // InternalQuickfixCrossrefTestLanguage.g:94:3: ( rule__Element__Group__0 )
-            // InternalQuickfixCrossrefTestLanguage.g:94:4: rule__Element__Group__0
+            // InternalQuickfixCrossrefTestLanguage.g:99:3: ( rule__Element__Group__0 )
+            // InternalQuickfixCrossrefTestLanguage.g:99:4: rule__Element__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__0();
@@ -244,14 +252,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // InternalQuickfixCrossrefTestLanguage.g:102:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // InternalQuickfixCrossrefTestLanguage.g:107:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:106:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // InternalQuickfixCrossrefTestLanguage.g:107:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // InternalQuickfixCrossrefTestLanguage.g:111:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // InternalQuickfixCrossrefTestLanguage.g:112:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group__0__Impl();
@@ -282,20 +290,20 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:114:1: rule__Element__Group__0__Impl : ( ( rule__Element__DocAssignment_0 )? ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:119:1: rule__Element__Group__0__Impl : ( ( rule__Element__DocAssignment_0 )? ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:118:1: ( ( ( rule__Element__DocAssignment_0 )? ) )
-            // InternalQuickfixCrossrefTestLanguage.g:119:1: ( ( rule__Element__DocAssignment_0 )? )
+            // InternalQuickfixCrossrefTestLanguage.g:123:1: ( ( ( rule__Element__DocAssignment_0 )? ) )
+            // InternalQuickfixCrossrefTestLanguage.g:124:1: ( ( rule__Element__DocAssignment_0 )? )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:119:1: ( ( rule__Element__DocAssignment_0 )? )
-            // InternalQuickfixCrossrefTestLanguage.g:120:2: ( rule__Element__DocAssignment_0 )?
+            // InternalQuickfixCrossrefTestLanguage.g:124:1: ( ( rule__Element__DocAssignment_0 )? )
+            // InternalQuickfixCrossrefTestLanguage.g:125:2: ( rule__Element__DocAssignment_0 )?
             {
              before(grammarAccess.getElementAccess().getDocAssignment_0()); 
-            // InternalQuickfixCrossrefTestLanguage.g:121:2: ( rule__Element__DocAssignment_0 )?
+            // InternalQuickfixCrossrefTestLanguage.g:126:2: ( rule__Element__DocAssignment_0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -304,7 +312,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
             }
             switch (alt2) {
                 case 1 :
-                    // InternalQuickfixCrossrefTestLanguage.g:121:3: rule__Element__DocAssignment_0
+                    // InternalQuickfixCrossrefTestLanguage.g:126:3: rule__Element__DocAssignment_0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Element__DocAssignment_0();
@@ -340,14 +348,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // InternalQuickfixCrossrefTestLanguage.g:129:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
+    // InternalQuickfixCrossrefTestLanguage.g:134:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:133:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
-            // InternalQuickfixCrossrefTestLanguage.g:134:2: rule__Element__Group__1__Impl rule__Element__Group__2
+            // InternalQuickfixCrossrefTestLanguage.g:138:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
+            // InternalQuickfixCrossrefTestLanguage.g:139:2: rule__Element__Group__1__Impl rule__Element__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__1__Impl();
@@ -378,21 +386,21 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:141:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:146:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:145:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
-            // InternalQuickfixCrossrefTestLanguage.g:146:1: ( ( rule__Element__NameAssignment_1 ) )
+            // InternalQuickfixCrossrefTestLanguage.g:150:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
+            // InternalQuickfixCrossrefTestLanguage.g:151:1: ( ( rule__Element__NameAssignment_1 ) )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:146:1: ( ( rule__Element__NameAssignment_1 ) )
-            // InternalQuickfixCrossrefTestLanguage.g:147:2: ( rule__Element__NameAssignment_1 )
+            // InternalQuickfixCrossrefTestLanguage.g:151:1: ( ( rule__Element__NameAssignment_1 ) )
+            // InternalQuickfixCrossrefTestLanguage.g:152:2: ( rule__Element__NameAssignment_1 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_1()); 
-            // InternalQuickfixCrossrefTestLanguage.g:148:2: ( rule__Element__NameAssignment_1 )
-            // InternalQuickfixCrossrefTestLanguage.g:148:3: rule__Element__NameAssignment_1
+            // InternalQuickfixCrossrefTestLanguage.g:153:2: ( rule__Element__NameAssignment_1 )
+            // InternalQuickfixCrossrefTestLanguage.g:153:3: rule__Element__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__NameAssignment_1();
@@ -425,14 +433,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__2"
-    // InternalQuickfixCrossrefTestLanguage.g:156:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
+    // InternalQuickfixCrossrefTestLanguage.g:161:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:160:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
-            // InternalQuickfixCrossrefTestLanguage.g:161:2: rule__Element__Group__2__Impl rule__Element__Group__3
+            // InternalQuickfixCrossrefTestLanguage.g:165:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
+            // InternalQuickfixCrossrefTestLanguage.g:166:2: rule__Element__Group__2__Impl rule__Element__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group__2__Impl();
@@ -463,17 +471,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__2__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:168:1: rule__Element__Group__2__Impl : ( '{' ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:173:1: rule__Element__Group__2__Impl : ( '{' ) ;
     public final void rule__Element__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:172:1: ( ( '{' ) )
-            // InternalQuickfixCrossrefTestLanguage.g:173:1: ( '{' )
+            // InternalQuickfixCrossrefTestLanguage.g:177:1: ( ( '{' ) )
+            // InternalQuickfixCrossrefTestLanguage.g:178:1: ( '{' )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:173:1: ( '{' )
-            // InternalQuickfixCrossrefTestLanguage.g:174:2: '{'
+            // InternalQuickfixCrossrefTestLanguage.g:178:1: ( '{' )
+            // InternalQuickfixCrossrefTestLanguage.g:179:2: '{'
             {
              before(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -500,14 +508,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__3"
-    // InternalQuickfixCrossrefTestLanguage.g:183:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
+    // InternalQuickfixCrossrefTestLanguage.g:188:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:187:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
-            // InternalQuickfixCrossrefTestLanguage.g:188:2: rule__Element__Group__3__Impl rule__Element__Group__4
+            // InternalQuickfixCrossrefTestLanguage.g:192:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
+            // InternalQuickfixCrossrefTestLanguage.g:193:2: rule__Element__Group__3__Impl rule__Element__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group__3__Impl();
@@ -538,20 +546,20 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__3__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:195:1: rule__Element__Group__3__Impl : ( ( rule__Element__ContainedAssignment_3 )* ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:200:1: rule__Element__Group__3__Impl : ( ( rule__Element__ContainedAssignment_3 )* ) ;
     public final void rule__Element__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:199:1: ( ( ( rule__Element__ContainedAssignment_3 )* ) )
-            // InternalQuickfixCrossrefTestLanguage.g:200:1: ( ( rule__Element__ContainedAssignment_3 )* )
+            // InternalQuickfixCrossrefTestLanguage.g:204:1: ( ( ( rule__Element__ContainedAssignment_3 )* ) )
+            // InternalQuickfixCrossrefTestLanguage.g:205:1: ( ( rule__Element__ContainedAssignment_3 )* )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:200:1: ( ( rule__Element__ContainedAssignment_3 )* )
-            // InternalQuickfixCrossrefTestLanguage.g:201:2: ( rule__Element__ContainedAssignment_3 )*
+            // InternalQuickfixCrossrefTestLanguage.g:205:1: ( ( rule__Element__ContainedAssignment_3 )* )
+            // InternalQuickfixCrossrefTestLanguage.g:206:2: ( rule__Element__ContainedAssignment_3 )*
             {
              before(grammarAccess.getElementAccess().getContainedAssignment_3()); 
-            // InternalQuickfixCrossrefTestLanguage.g:202:2: ( rule__Element__ContainedAssignment_3 )*
+            // InternalQuickfixCrossrefTestLanguage.g:207:2: ( rule__Element__ContainedAssignment_3 )*
             loop3:
             do {
                 int alt3=2;
@@ -564,7 +572,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalQuickfixCrossrefTestLanguage.g:202:3: rule__Element__ContainedAssignment_3
+            	    // InternalQuickfixCrossrefTestLanguage.g:207:3: rule__Element__ContainedAssignment_3
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Element__ContainedAssignment_3();
@@ -603,14 +611,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__4"
-    // InternalQuickfixCrossrefTestLanguage.g:210:1: rule__Element__Group__4 : rule__Element__Group__4__Impl rule__Element__Group__5 ;
+    // InternalQuickfixCrossrefTestLanguage.g:215:1: rule__Element__Group__4 : rule__Element__Group__4__Impl rule__Element__Group__5 ;
     public final void rule__Element__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:214:1: ( rule__Element__Group__4__Impl rule__Element__Group__5 )
-            // InternalQuickfixCrossrefTestLanguage.g:215:2: rule__Element__Group__4__Impl rule__Element__Group__5
+            // InternalQuickfixCrossrefTestLanguage.g:219:1: ( rule__Element__Group__4__Impl rule__Element__Group__5 )
+            // InternalQuickfixCrossrefTestLanguage.g:220:2: rule__Element__Group__4__Impl rule__Element__Group__5
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group__4__Impl();
@@ -641,20 +649,20 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__4__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:222:1: rule__Element__Group__4__Impl : ( ( rule__Element__Group_4__0 )* ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:227:1: rule__Element__Group__4__Impl : ( ( rule__Element__Group_4__0 )* ) ;
     public final void rule__Element__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:226:1: ( ( ( rule__Element__Group_4__0 )* ) )
-            // InternalQuickfixCrossrefTestLanguage.g:227:1: ( ( rule__Element__Group_4__0 )* )
+            // InternalQuickfixCrossrefTestLanguage.g:231:1: ( ( ( rule__Element__Group_4__0 )* ) )
+            // InternalQuickfixCrossrefTestLanguage.g:232:1: ( ( rule__Element__Group_4__0 )* )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:227:1: ( ( rule__Element__Group_4__0 )* )
-            // InternalQuickfixCrossrefTestLanguage.g:228:2: ( rule__Element__Group_4__0 )*
+            // InternalQuickfixCrossrefTestLanguage.g:232:1: ( ( rule__Element__Group_4__0 )* )
+            // InternalQuickfixCrossrefTestLanguage.g:233:2: ( rule__Element__Group_4__0 )*
             {
              before(grammarAccess.getElementAccess().getGroup_4()); 
-            // InternalQuickfixCrossrefTestLanguage.g:229:2: ( rule__Element__Group_4__0 )*
+            // InternalQuickfixCrossrefTestLanguage.g:234:2: ( rule__Element__Group_4__0 )*
             loop4:
             do {
                 int alt4=2;
@@ -667,7 +675,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalQuickfixCrossrefTestLanguage.g:229:3: rule__Element__Group_4__0
+            	    // InternalQuickfixCrossrefTestLanguage.g:234:3: rule__Element__Group_4__0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_7);
             	    rule__Element__Group_4__0();
@@ -706,14 +714,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__5"
-    // InternalQuickfixCrossrefTestLanguage.g:237:1: rule__Element__Group__5 : rule__Element__Group__5__Impl ;
+    // InternalQuickfixCrossrefTestLanguage.g:242:1: rule__Element__Group__5 : rule__Element__Group__5__Impl ;
     public final void rule__Element__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:241:1: ( rule__Element__Group__5__Impl )
-            // InternalQuickfixCrossrefTestLanguage.g:242:2: rule__Element__Group__5__Impl
+            // InternalQuickfixCrossrefTestLanguage.g:246:1: ( rule__Element__Group__5__Impl )
+            // InternalQuickfixCrossrefTestLanguage.g:247:2: rule__Element__Group__5__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__5__Impl();
@@ -739,17 +747,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group__5__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:248:1: rule__Element__Group__5__Impl : ( '}' ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:253:1: rule__Element__Group__5__Impl : ( '}' ) ;
     public final void rule__Element__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:252:1: ( ( '}' ) )
-            // InternalQuickfixCrossrefTestLanguage.g:253:1: ( '}' )
+            // InternalQuickfixCrossrefTestLanguage.g:257:1: ( ( '}' ) )
+            // InternalQuickfixCrossrefTestLanguage.g:258:1: ( '}' )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:253:1: ( '}' )
-            // InternalQuickfixCrossrefTestLanguage.g:254:2: '}'
+            // InternalQuickfixCrossrefTestLanguage.g:258:1: ( '}' )
+            // InternalQuickfixCrossrefTestLanguage.g:259:2: '}'
             {
              before(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_5()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -776,14 +784,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group_4__0"
-    // InternalQuickfixCrossrefTestLanguage.g:264:1: rule__Element__Group_4__0 : rule__Element__Group_4__0__Impl rule__Element__Group_4__1 ;
+    // InternalQuickfixCrossrefTestLanguage.g:269:1: rule__Element__Group_4__0 : rule__Element__Group_4__0__Impl rule__Element__Group_4__1 ;
     public final void rule__Element__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:268:1: ( rule__Element__Group_4__0__Impl rule__Element__Group_4__1 )
-            // InternalQuickfixCrossrefTestLanguage.g:269:2: rule__Element__Group_4__0__Impl rule__Element__Group_4__1
+            // InternalQuickfixCrossrefTestLanguage.g:273:1: ( rule__Element__Group_4__0__Impl rule__Element__Group_4__1 )
+            // InternalQuickfixCrossrefTestLanguage.g:274:2: rule__Element__Group_4__0__Impl rule__Element__Group_4__1
             {
             pushFollow(FollowSets000.FOLLOW_8);
             rule__Element__Group_4__0__Impl();
@@ -814,17 +822,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group_4__0__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:276:1: rule__Element__Group_4__0__Impl : ( 'ref' ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:281:1: rule__Element__Group_4__0__Impl : ( 'ref' ) ;
     public final void rule__Element__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:280:1: ( ( 'ref' ) )
-            // InternalQuickfixCrossrefTestLanguage.g:281:1: ( 'ref' )
+            // InternalQuickfixCrossrefTestLanguage.g:285:1: ( ( 'ref' ) )
+            // InternalQuickfixCrossrefTestLanguage.g:286:1: ( 'ref' )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:281:1: ( 'ref' )
-            // InternalQuickfixCrossrefTestLanguage.g:282:2: 'ref'
+            // InternalQuickfixCrossrefTestLanguage.g:286:1: ( 'ref' )
+            // InternalQuickfixCrossrefTestLanguage.g:287:2: 'ref'
             {
              before(grammarAccess.getElementAccess().getRefKeyword_4_0()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -851,14 +859,14 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group_4__1"
-    // InternalQuickfixCrossrefTestLanguage.g:291:1: rule__Element__Group_4__1 : rule__Element__Group_4__1__Impl ;
+    // InternalQuickfixCrossrefTestLanguage.g:296:1: rule__Element__Group_4__1 : rule__Element__Group_4__1__Impl ;
     public final void rule__Element__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:295:1: ( rule__Element__Group_4__1__Impl )
-            // InternalQuickfixCrossrefTestLanguage.g:296:2: rule__Element__Group_4__1__Impl
+            // InternalQuickfixCrossrefTestLanguage.g:300:1: ( rule__Element__Group_4__1__Impl )
+            // InternalQuickfixCrossrefTestLanguage.g:301:2: rule__Element__Group_4__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_4__1__Impl();
@@ -884,21 +892,21 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__Group_4__1__Impl"
-    // InternalQuickfixCrossrefTestLanguage.g:302:1: rule__Element__Group_4__1__Impl : ( ( rule__Element__ReferencedAssignment_4_1 ) ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:307:1: rule__Element__Group_4__1__Impl : ( ( rule__Element__ReferencedAssignment_4_1 ) ) ;
     public final void rule__Element__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:306:1: ( ( ( rule__Element__ReferencedAssignment_4_1 ) ) )
-            // InternalQuickfixCrossrefTestLanguage.g:307:1: ( ( rule__Element__ReferencedAssignment_4_1 ) )
+            // InternalQuickfixCrossrefTestLanguage.g:311:1: ( ( ( rule__Element__ReferencedAssignment_4_1 ) ) )
+            // InternalQuickfixCrossrefTestLanguage.g:312:1: ( ( rule__Element__ReferencedAssignment_4_1 ) )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:307:1: ( ( rule__Element__ReferencedAssignment_4_1 ) )
-            // InternalQuickfixCrossrefTestLanguage.g:308:2: ( rule__Element__ReferencedAssignment_4_1 )
+            // InternalQuickfixCrossrefTestLanguage.g:312:1: ( ( rule__Element__ReferencedAssignment_4_1 ) )
+            // InternalQuickfixCrossrefTestLanguage.g:313:2: ( rule__Element__ReferencedAssignment_4_1 )
             {
              before(grammarAccess.getElementAccess().getReferencedAssignment_4_1()); 
-            // InternalQuickfixCrossrefTestLanguage.g:309:2: ( rule__Element__ReferencedAssignment_4_1 )
-            // InternalQuickfixCrossrefTestLanguage.g:309:3: rule__Element__ReferencedAssignment_4_1
+            // InternalQuickfixCrossrefTestLanguage.g:314:2: ( rule__Element__ReferencedAssignment_4_1 )
+            // InternalQuickfixCrossrefTestLanguage.g:314:3: rule__Element__ReferencedAssignment_4_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__ReferencedAssignment_4_1();
@@ -931,17 +939,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Main__ElementsAssignment"
-    // InternalQuickfixCrossrefTestLanguage.g:318:1: rule__Main__ElementsAssignment : ( ruleElement ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:323:1: rule__Main__ElementsAssignment : ( ruleElement ) ;
     public final void rule__Main__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:322:1: ( ( ruleElement ) )
-            // InternalQuickfixCrossrefTestLanguage.g:323:2: ( ruleElement )
+            // InternalQuickfixCrossrefTestLanguage.g:327:1: ( ( ruleElement ) )
+            // InternalQuickfixCrossrefTestLanguage.g:328:2: ( ruleElement )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:323:2: ( ruleElement )
-            // InternalQuickfixCrossrefTestLanguage.g:324:3: ruleElement
+            // InternalQuickfixCrossrefTestLanguage.g:328:2: ( ruleElement )
+            // InternalQuickfixCrossrefTestLanguage.g:329:3: ruleElement
             {
              before(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -972,17 +980,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__DocAssignment_0"
-    // InternalQuickfixCrossrefTestLanguage.g:333:1: rule__Element__DocAssignment_0 : ( RULE_STRING ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:338:1: rule__Element__DocAssignment_0 : ( RULE_STRING ) ;
     public final void rule__Element__DocAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:337:1: ( ( RULE_STRING ) )
-            // InternalQuickfixCrossrefTestLanguage.g:338:2: ( RULE_STRING )
+            // InternalQuickfixCrossrefTestLanguage.g:342:1: ( ( RULE_STRING ) )
+            // InternalQuickfixCrossrefTestLanguage.g:343:2: ( RULE_STRING )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:338:2: ( RULE_STRING )
-            // InternalQuickfixCrossrefTestLanguage.g:339:3: RULE_STRING
+            // InternalQuickfixCrossrefTestLanguage.g:343:2: ( RULE_STRING )
+            // InternalQuickfixCrossrefTestLanguage.g:344:3: RULE_STRING
             {
              before(grammarAccess.getElementAccess().getDocSTRINGTerminalRuleCall_0_0()); 
             match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
@@ -1009,17 +1017,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__NameAssignment_1"
-    // InternalQuickfixCrossrefTestLanguage.g:348:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:353:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:352:1: ( ( RULE_ID ) )
-            // InternalQuickfixCrossrefTestLanguage.g:353:2: ( RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:357:1: ( ( RULE_ID ) )
+            // InternalQuickfixCrossrefTestLanguage.g:358:2: ( RULE_ID )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:353:2: ( RULE_ID )
-            // InternalQuickfixCrossrefTestLanguage.g:354:3: RULE_ID
+            // InternalQuickfixCrossrefTestLanguage.g:358:2: ( RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:359:3: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1046,17 +1054,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__ContainedAssignment_3"
-    // InternalQuickfixCrossrefTestLanguage.g:363:1: rule__Element__ContainedAssignment_3 : ( ruleElement ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:368:1: rule__Element__ContainedAssignment_3 : ( ruleElement ) ;
     public final void rule__Element__ContainedAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:367:1: ( ( ruleElement ) )
-            // InternalQuickfixCrossrefTestLanguage.g:368:2: ( ruleElement )
+            // InternalQuickfixCrossrefTestLanguage.g:372:1: ( ( ruleElement ) )
+            // InternalQuickfixCrossrefTestLanguage.g:373:2: ( ruleElement )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:368:2: ( ruleElement )
-            // InternalQuickfixCrossrefTestLanguage.g:369:3: ruleElement
+            // InternalQuickfixCrossrefTestLanguage.g:373:2: ( ruleElement )
+            // InternalQuickfixCrossrefTestLanguage.g:374:3: ruleElement
             {
              before(grammarAccess.getElementAccess().getContainedElementParserRuleCall_3_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -1087,21 +1095,21 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rule__Element__ReferencedAssignment_4_1"
-    // InternalQuickfixCrossrefTestLanguage.g:378:1: rule__Element__ReferencedAssignment_4_1 : ( ( RULE_ID ) ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:383:1: rule__Element__ReferencedAssignment_4_1 : ( ( RULE_ID ) ) ;
     public final void rule__Element__ReferencedAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalQuickfixCrossrefTestLanguage.g:382:1: ( ( ( RULE_ID ) ) )
-            // InternalQuickfixCrossrefTestLanguage.g:383:2: ( ( RULE_ID ) )
+            // InternalQuickfixCrossrefTestLanguage.g:387:1: ( ( ( RULE_ID ) ) )
+            // InternalQuickfixCrossrefTestLanguage.g:388:2: ( ( RULE_ID ) )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:383:2: ( ( RULE_ID ) )
-            // InternalQuickfixCrossrefTestLanguage.g:384:3: ( RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:388:2: ( ( RULE_ID ) )
+            // InternalQuickfixCrossrefTestLanguage.g:389:3: ( RULE_ID )
             {
              before(grammarAccess.getElementAccess().getReferencedElementCrossReference_4_1_0()); 
-            // InternalQuickfixCrossrefTestLanguage.g:385:3: ( RULE_ID )
-            // InternalQuickfixCrossrefTestLanguage.g:386:4: RULE_ID
+            // InternalQuickfixCrossrefTestLanguage.g:390:3: ( RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:391:4: RULE_ID
             {
              before(grammarAccess.getElementAccess().getReferencedElementIDTerminalRuleCall_4_1_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 

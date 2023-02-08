@@ -10,6 +10,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalXmlLexer extends Lexer {
     public static final int RULE_ID=9;
@@ -41,8 +49,8 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_TAG_START_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:14:21: ( '<' )
-            // InternalXmlLexer.g:14:23: '<'
+            // InternalXmlLexer.g:19:21: ( '<' )
+            // InternalXmlLexer.g:19:23: '<'
             {
             match('<'); 
 
@@ -61,8 +69,8 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_TAG_END_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:16:19: ( '</' )
-            // InternalXmlLexer.g:16:21: '</'
+            // InternalXmlLexer.g:21:19: ( '</' )
+            // InternalXmlLexer.g:21:21: '</'
             {
             match("</"); 
 
@@ -82,8 +90,8 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_TAG_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:18:16: ( '>' )
-            // InternalXmlLexer.g:18:18: '>'
+            // InternalXmlLexer.g:23:16: ( '>' )
+            // InternalXmlLexer.g:23:18: '>'
             {
             match('>'); 
 
@@ -102,8 +110,8 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_TAG_EMPTY_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:20:22: ( '/>' )
-            // InternalXmlLexer.g:20:24: '/>'
+            // InternalXmlLexer.g:25:22: ( '/>' )
+            // InternalXmlLexer.g:25:24: '/>'
             {
             match("/>"); 
 
@@ -123,8 +131,8 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_ATTR_EQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:22:14: ( '=' )
-            // InternalXmlLexer.g:22:16: '='
+            // InternalXmlLexer.g:27:14: ( '=' )
+            // InternalXmlLexer.g:27:16: '='
             {
             match('='); 
 
@@ -143,10 +151,10 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:24:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalXmlLexer.g:24:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalXmlLexer.g:29:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalXmlLexer.g:29:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalXmlLexer.g:24:11: ( '^' )?
+            // InternalXmlLexer.g:29:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -155,7 +163,7 @@ public class InternalXmlLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalXmlLexer.g:24:11: '^'
+                    // InternalXmlLexer.g:29:11: '^'
                     {
                     match('^'); 
 
@@ -173,7 +181,7 @@ public class InternalXmlLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalXmlLexer.g:24:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalXmlLexer.g:29:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -222,10 +230,10 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:26:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalXmlLexer.g:26:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalXmlLexer.g:31:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalXmlLexer.g:31:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalXmlLexer.g:26:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalXmlLexer.g:31:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -243,10 +251,10 @@ public class InternalXmlLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalXmlLexer.g:26:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalXmlLexer.g:31:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalXmlLexer.g:26:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalXmlLexer.g:31:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -262,7 +270,7 @@ public class InternalXmlLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // InternalXmlLexer.g:26:21: '\\\\' .
+                    	    // InternalXmlLexer.g:31:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -270,7 +278,7 @@ public class InternalXmlLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalXmlLexer.g:26:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalXmlLexer.g:31:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -295,10 +303,10 @@ public class InternalXmlLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalXmlLexer.g:26:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalXmlLexer.g:31:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalXmlLexer.g:26:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalXmlLexer.g:31:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -314,7 +322,7 @@ public class InternalXmlLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalXmlLexer.g:26:54: '\\\\' .
+                    	    // InternalXmlLexer.g:31:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -322,7 +330,7 @@ public class InternalXmlLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalXmlLexer.g:26:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalXmlLexer.g:31:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -365,10 +373,10 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:28:9: ( ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+ )
-            // InternalXmlLexer.g:28:11: ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
+            // InternalXmlLexer.g:33:9: ( ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+ )
+            // InternalXmlLexer.g:33:11: ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
             {
-            // InternalXmlLexer.g:28:11: ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
+            // InternalXmlLexer.g:33:11: ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
             int cnt6=0;
             loop6:
             do {
@@ -422,10 +430,10 @@ public class InternalXmlLexer extends Lexer {
         try {
             int _type = RULE_PCDATA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXmlLexer.g:30:13: ( (~ ( '<' ) )+ )
-            // InternalXmlLexer.g:30:15: (~ ( '<' ) )+
+            // InternalXmlLexer.g:35:13: ( (~ ( '<' ) )+ )
+            // InternalXmlLexer.g:35:15: (~ ( '<' ) )+
             {
-            // InternalXmlLexer.g:30:15: (~ ( '<' ) )+
+            // InternalXmlLexer.g:35:15: (~ ( '<' ) )+
             int cnt7=0;
             loop7:
             do {
@@ -439,7 +447,7 @@ public class InternalXmlLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalXmlLexer.g:30:15: ~ ( '<' )
+            	    // InternalXmlLexer.g:35:15: ~ ( '<' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<=';')||(input.LA(1)>='=' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();

@@ -17,7 +17,7 @@ var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
-var emfRuntimeVersion = "2.20"
+var emfRuntimeVersion = "2.29"
 
 CompositeGeneratorFragment2 {
 	

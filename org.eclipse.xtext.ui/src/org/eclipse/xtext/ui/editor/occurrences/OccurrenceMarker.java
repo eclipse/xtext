@@ -109,6 +109,9 @@ public class OccurrenceMarker {
 	public void joinMarkOccurrenceJob() {
 		try {
 			doMarkOccurrences(editor.getSelectionProvider().getSelection());
+			synchronized (this) {
+				wait(5);
+			}
 			this.markOccurrenceJob.join();
 			Display display = Display.getCurrent();
 			if (display != null) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,7 +13,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
@@ -50,6 +49,7 @@ import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
@@ -296,7 +296,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	}
 
 	protected boolean isSimilarTypeName(String s0, String s1) {
-		double levenshteinDistance = StringUtils.getLevenshteinDistance(s0, s1);
+		double levenshteinDistance = Strings.getLevenshteinDistance(s0, s1);
 		return levenshteinDistance <= 3;
 	}
 

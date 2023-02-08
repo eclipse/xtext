@@ -2,30 +2,29 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Core UI Tests
 Bundle-SymbolicName: org.eclipse.xtext.ui.tests;singleton:=true
-Bundle-Version: 2.26.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Version: 2.30.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext.ui,
- org.eclipse.core.filesystem;bundle-version="1.7.0",
- org.eclipse.ui.workbench.texteditor;bundle-version="3.10.100",
+ org.eclipse.core.filesystem;bundle-version="1.9.300",
+ org.eclipse.ui.workbench.texteditor;bundle-version="3.16.400",
  org.eclipse.ui.ide;bundle-version="3.13.1",
- org.eclipse.jdt.core;bundle-version="3.13.102",
- org.eclipse.jdt.launching;bundle-version="3.9.100",
+ org.eclipse.jdt.core;bundle-version="3.29.0",
+ org.eclipse.jdt.launching;bundle-version="3.19.500",
  org.eclipse.xtext,
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xtext.ui,
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.20.0",
- org.eclipse.emf.common;bundle-version="2.17.0",
- org.eclipse.ui.editors;bundle-version="3.11.0",
- org.eclipse.ui;bundle-version="3.109.0",
+ org.eclipse.emf.ecore;bundle-version="2.26.0",
+ org.eclipse.emf.common;bundle-version="2.24.0",
+ org.eclipse.ui.editors;bundle-version="3.14.300",
+ org.eclipse.ui;bundle-version="3.201.0",
  org.eclipse.xtext.builder,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.ui.ecore,
  org.eclipse.xtext.testlanguages.ui,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.junit;bundle-version="4.12.0";resolution:=optional,
- org.eclipse.core.expressions;bundle-version="3.6.0",
+ org.junit;bundle-version="4.13.2";resolution:=optional,
+ org.eclipse.core.expressions;bundle-version="3.8.100",
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.common.types.ui;resolution:=optional,
  org.eclipse.compare,
@@ -33,8 +32,8 @@ Require-Bundle: org.eclipse.xtext.ui,
 Bundle-Activator: org.eclipse.xtext.ui.tests.internal.TestsActivator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse Xtext
-Import-Package: org.apache.log4j;version="1.2.15",
- org.junit;version="4.12.0"
+Import-Package: org.apache.log4j;version="1.2.24",
+ org.junit;version="4.13.2"
 Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.bracketmatching,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching,

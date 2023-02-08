@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,7 +16,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @deprecated Use org.eclipse.xtext.ui.testing.MockableSelectionProvider instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MockableSelectionProvider implements ISelectionProvider {
 
 	@Override

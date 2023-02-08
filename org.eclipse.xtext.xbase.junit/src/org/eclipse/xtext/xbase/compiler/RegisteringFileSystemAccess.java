@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @since 2.7
  * @deprecated Use org.eclipse.xtext.xbase.testing.RegisteringFileSystemAccess instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class RegisteringFileSystemAccess extends InMemoryFileSystemAccess {
 	/**
 	 * @noreference This class is not intended to be referenced by clients.

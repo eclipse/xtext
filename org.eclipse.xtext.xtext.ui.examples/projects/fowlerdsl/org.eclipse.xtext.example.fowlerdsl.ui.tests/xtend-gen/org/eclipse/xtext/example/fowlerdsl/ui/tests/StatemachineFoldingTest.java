@@ -46,7 +46,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void resetEvents() {
     StringConcatenation _builder = new StringConcatenation();
@@ -62,7 +62,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void commands() {
     StringConcatenation _builder = new StringConcatenation();
@@ -84,7 +84,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void state001() {
     StringConcatenation _builder = new StringConcatenation();
@@ -94,7 +94,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void state002() {
     StringConcatenation _builder = new StringConcatenation();
@@ -110,7 +110,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.newLine();
     this.testFoldingRegions(_builder);
   }
-  
+
   @Test
   public void complex() {
     StringConcatenation _builder = new StringConcatenation();

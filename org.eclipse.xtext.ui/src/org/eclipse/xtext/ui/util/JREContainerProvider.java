@@ -43,7 +43,7 @@ public class JREContainerProvider {
 	/**
 	 * @since 2.7
 	 */
-	public static final String PREFERRED_BREE = "JavaSE-1.8";
+	public static final String PREFERRED_BREE = "JavaSE-11";
 	private static IVMInstall defaultVMInstall = null;
 	private static boolean defaultVMinitialized = false;
 
@@ -83,6 +83,7 @@ public class JREContainerProvider {
 	/**
 	 * @return JRE container path {@link IPath} for standard VM "J2SE-1.5"
 	 */
+	@Deprecated(since = "2.30", forRemoval = true) 
 	protected static IPath newJRE15ContainerPath() {
 		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, JavaVersion.JAVA5.getBree());
 	}
@@ -105,12 +106,11 @@ public class JREContainerProvider {
 	}
 
 	public static IClasspathEntry getJREContainerEntry(IJavaProject javaProject) throws JavaModelException {
-		IClasspathEntry defaultJREContainerEntry = getDefaultJREContainerEntry();
-
+		IPath defaultJREContainerPathPrefix = JavaRuntime.newDefaultJREContainerPath().append(StandardVMType.ID_STANDARD_VM_TYPE);
 		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
 		for (IClasspathEntry classpathEntry : rawClasspath) {
 			int entryKind = classpathEntry.getEntryKind();
-			if (entryKind == IClasspathEntry.CPE_CONTAINER && defaultJREContainerEntry.getPath().isPrefixOf(classpathEntry.getPath())) {
+			if (entryKind == IClasspathEntry.CPE_CONTAINER && defaultJREContainerPathPrefix.isPrefixOf(classpathEntry.getPath())) {
 				return classpathEntry;
 			}
 		}

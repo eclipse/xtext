@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -86,7 +86,7 @@ import com.google.inject.Provider;
  * @noextend This class is not intended to be subclassed by clients.
  * @deprecated Use org.eclipse.xtext.xbase.testing.CompilationTestHelper instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CompilationTestHelper {
 	
 	private final static Logger LOG = Logger.getLogger(CompilationTestHelper.class);

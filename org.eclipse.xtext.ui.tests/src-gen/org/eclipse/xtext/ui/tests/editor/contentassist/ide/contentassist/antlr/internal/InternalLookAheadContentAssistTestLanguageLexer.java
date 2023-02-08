@@ -228,10 +228,10 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:920:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalLookAheadContentAssistTestLanguage.g:920:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLookAheadContentAssistTestLanguage.g:925:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalLookAheadContentAssistTestLanguage.g:925:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalLookAheadContentAssistTestLanguage.g:920:11: ( '^' )?
+            // InternalLookAheadContentAssistTestLanguage.g:925:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -240,7 +240,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalLookAheadContentAssistTestLanguage.g:920:11: '^'
+                    // InternalLookAheadContentAssistTestLanguage.g:925:11: '^'
                     {
                     match('^'); 
 
@@ -258,7 +258,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalLookAheadContentAssistTestLanguage.g:920:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLookAheadContentAssistTestLanguage.g:925:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -307,10 +307,10 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:922:10: ( ( '0' .. '9' )+ )
-            // InternalLookAheadContentAssistTestLanguage.g:922:12: ( '0' .. '9' )+
+            // InternalLookAheadContentAssistTestLanguage.g:927:10: ( ( '0' .. '9' )+ )
+            // InternalLookAheadContentAssistTestLanguage.g:927:12: ( '0' .. '9' )+
             {
-            // InternalLookAheadContentAssistTestLanguage.g:922:12: ( '0' .. '9' )+
+            // InternalLookAheadContentAssistTestLanguage.g:927:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -324,7 +324,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalLookAheadContentAssistTestLanguage.g:922:13: '0' .. '9'
+            	    // InternalLookAheadContentAssistTestLanguage.g:927:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -356,10 +356,10 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:924:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalLookAheadContentAssistTestLanguage.g:924:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLookAheadContentAssistTestLanguage.g:929:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalLookAheadContentAssistTestLanguage.g:929:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalLookAheadContentAssistTestLanguage.g:924:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLookAheadContentAssistTestLanguage.g:929:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -377,10 +377,10 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalLookAheadContentAssistTestLanguage.g:924:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalLookAheadContentAssistTestLanguage.g:929:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalLookAheadContentAssistTestLanguage.g:924:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalLookAheadContentAssistTestLanguage.g:929:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -396,7 +396,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalLookAheadContentAssistTestLanguage.g:924:21: '\\\\' .
+                    	    // InternalLookAheadContentAssistTestLanguage.g:929:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -404,7 +404,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLookAheadContentAssistTestLanguage.g:924:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalLookAheadContentAssistTestLanguage.g:929:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -429,10 +429,10 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalLookAheadContentAssistTestLanguage.g:924:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalLookAheadContentAssistTestLanguage.g:929:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalLookAheadContentAssistTestLanguage.g:924:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalLookAheadContentAssistTestLanguage.g:929:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -448,7 +448,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalLookAheadContentAssistTestLanguage.g:924:54: '\\\\' .
+                    	    // InternalLookAheadContentAssistTestLanguage.g:929:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -456,7 +456,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLookAheadContentAssistTestLanguage.g:924:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalLookAheadContentAssistTestLanguage.g:929:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -499,12 +499,12 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:926:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalLookAheadContentAssistTestLanguage.g:926:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalLookAheadContentAssistTestLanguage.g:931:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalLookAheadContentAssistTestLanguage.g:931:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalLookAheadContentAssistTestLanguage.g:926:24: ( options {greedy=false; } : . )*
+            // InternalLookAheadContentAssistTestLanguage.g:931:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -529,7 +529,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalLookAheadContentAssistTestLanguage.g:926:52: .
+            	    // InternalLookAheadContentAssistTestLanguage.g:931:52: .
             	    {
             	    matchAny(); 
 
@@ -559,12 +559,12 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:928:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalLookAheadContentAssistTestLanguage.g:928:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalLookAheadContentAssistTestLanguage.g:933:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalLookAheadContentAssistTestLanguage.g:933:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalLookAheadContentAssistTestLanguage.g:928:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalLookAheadContentAssistTestLanguage.g:933:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -577,7 +577,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalLookAheadContentAssistTestLanguage.g:928:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalLookAheadContentAssistTestLanguage.g:933:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -597,7 +597,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalLookAheadContentAssistTestLanguage.g:928:40: ( ( '\\r' )? '\\n' )?
+            // InternalLookAheadContentAssistTestLanguage.g:933:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -606,9 +606,9 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalLookAheadContentAssistTestLanguage.g:928:41: ( '\\r' )? '\\n'
+                    // InternalLookAheadContentAssistTestLanguage.g:933:41: ( '\\r' )? '\\n'
                     {
-                    // InternalLookAheadContentAssistTestLanguage.g:928:41: ( '\\r' )?
+                    // InternalLookAheadContentAssistTestLanguage.g:933:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -617,7 +617,7 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalLookAheadContentAssistTestLanguage.g:928:41: '\\r'
+                            // InternalLookAheadContentAssistTestLanguage.g:933:41: '\\r'
                             {
                             match('\r'); 
 
@@ -649,10 +649,10 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:930:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalLookAheadContentAssistTestLanguage.g:930:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLookAheadContentAssistTestLanguage.g:935:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalLookAheadContentAssistTestLanguage.g:935:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalLookAheadContentAssistTestLanguage.g:930:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLookAheadContentAssistTestLanguage.g:935:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -706,8 +706,8 @@ public class InternalLookAheadContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookAheadContentAssistTestLanguage.g:932:16: ( . )
-            // InternalLookAheadContentAssistTestLanguage.g:932:18: .
+            // InternalLookAheadContentAssistTestLanguage.g:937:16: ( . )
+            // InternalLookAheadContentAssistTestLanguage.g:937:18: .
             {
             matchAny(); 
 

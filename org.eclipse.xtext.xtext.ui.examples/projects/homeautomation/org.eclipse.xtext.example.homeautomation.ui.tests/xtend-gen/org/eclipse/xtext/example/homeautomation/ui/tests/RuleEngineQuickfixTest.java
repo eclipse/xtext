@@ -29,7 +29,7 @@ public class RuleEngineQuickfixTest extends AbstractQuickfixTest {
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void fix_invalid_rule_device_state() {
     StringConcatenation _builder = new StringConcatenation();

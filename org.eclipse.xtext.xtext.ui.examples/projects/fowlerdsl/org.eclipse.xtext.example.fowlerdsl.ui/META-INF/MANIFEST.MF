@@ -2,17 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Fowler DSL Example - Eclipse UI
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.30.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.compare;bundle-version="2.1.0",
+ org.eclipse.compare;bundle-version="3.8.300",
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.pde.core,
- org.eclipse.ui;bundle-version="3.6.0",
- org.eclipse.ui.editors;bundle-version="3.6.0",
+ org.eclipse.ui;bundle-version="3.201.0",
+ org.eclipse.ui.editors;bundle-version="3.14.300",
  org.eclipse.ui.forms,
  org.eclipse.ui.ide;bundle-version="3.6.0",
  org.eclipse.xtend.lib;bundle-version="2.14.0";resolution:=optional,
@@ -25,7 +25,7 @@ Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.example.fowlerdsl.ui;x-internal:=true,
  org.eclipse.xtext.example.fowlerdsl.ui.contentassist;x-internal:=true,
  org.eclipse.xtext.example.fowlerdsl.ui.folding;x-internal:=true,

@@ -28,7 +28,7 @@ public class HoverTest extends AbstractHoverTest {
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void hover_over_import_statement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -46,7 +46,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("An ordered collection (also known as a <i>sequence</i>");
     this.hasHoverOver(_builder, "java.util.List", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_link_in_javadoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -65,7 +65,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("An ordered collection (also known as a <i>sequence</i>");
     this.hasHoverOver(_builder, "java.util.List", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_java_typed_property() {
     StringConcatenation _builder = new StringConcatenation();
@@ -80,7 +80,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("Property name : Object");
     this.hasHoverOver(_builder, "name", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_java_type() {
     StringConcatenation _builder = new StringConcatenation();
@@ -95,7 +95,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("Class <code>Object</code> is the root of the class hierarchy.");
     this.hasHoverOver(_builder, "Object", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_entity_typed_property() {
     StringConcatenation _builder = new StringConcatenation();
@@ -113,7 +113,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("Property b : Bar");
     this.hasHoverOver(_builder, "b", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_entity_type() {
     StringConcatenation _builder = new StringConcatenation();
@@ -139,7 +139,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("Documentation of the entity Bar.");
     this.hasHoverOver(_builder, "Bar", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_operation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -163,7 +163,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder_1.append("getB() : String");
     this.hasHoverOver(_builder, "getB", _builder_1.toString());
   }
-  
+
   @Test
   public void hover_over_operation2() {
     StringConcatenation _builder = new StringConcatenation();

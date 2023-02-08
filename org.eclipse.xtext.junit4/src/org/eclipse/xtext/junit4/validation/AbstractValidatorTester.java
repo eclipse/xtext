@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated(forRemoval = true, since = "2.30")
 public abstract class AbstractValidatorTester {
 
 	protected Diagnostician diagnostician;

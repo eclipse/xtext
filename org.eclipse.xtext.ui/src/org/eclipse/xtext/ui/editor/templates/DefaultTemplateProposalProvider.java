@@ -15,12 +15,12 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
@@ -48,7 +48,7 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 	private ContextTypeIdHelper helper;
 	
 	@Inject
-	public DefaultTemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry, ContextTypeIdHelper helper) {
+	public DefaultTemplateProposalProvider(TemplateStore templateStore, org.eclipse.jface.text.templates.ContextTypeRegistry registry, ContextTypeIdHelper helper) {
 		this.templateStore = templateStore;
 		this.registry = registry;
 		this.helper = helper;

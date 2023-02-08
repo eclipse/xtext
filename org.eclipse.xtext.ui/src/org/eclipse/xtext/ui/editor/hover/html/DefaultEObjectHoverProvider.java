@@ -94,17 +94,17 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			XtextBrowserInformationControlInput previous) {
 		String html = getHoverInfoAsHtml(element);
 		if (html != null) {
-			StringBuffer buffer = new StringBuffer(html);
+			StringBuilder builder = new StringBuilder(html);
 			ColorRegistry registry = JFaceResources.getColorRegistry();
 			RGB fgRGB = registry.getRGB("org.eclipse.ui.workbench.HOVER_FOREGROUND"); //$NON-NLS-1$
 			RGB bgRGB = registry.getRGB("org.eclipse.ui.workbench.HOVER_BACKGROUND"); //$NON-NLS-1$
 			if (fgRGB != null && bgRGB != null) {
-				HTMLPrinter.insertPageProlog(buffer, 0, fgRGB, bgRGB, getStyleSheet());
+				HTMLPrinter.insertPageProlog(builder, 0, fgRGB, bgRGB, getStyleSheet());
 			} else {
-				HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+				HTMLPrinter.insertPageProlog(builder, 0, getStyleSheet());
 			}
-			HTMLPrinter.addPageEpilog(buffer);
-			html = buffer.toString();
+			HTMLPrinter.addPageEpilog(builder);
+			html = builder.toString();
 			return new XtextBrowserInformationControlInput(previous, element, html, labelProvider);
 		}
 		return null;

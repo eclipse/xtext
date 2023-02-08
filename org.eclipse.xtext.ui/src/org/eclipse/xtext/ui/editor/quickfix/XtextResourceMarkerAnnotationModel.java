@@ -57,6 +57,12 @@ public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotation
 	}
 
 	@Override
+	protected void disconnected() {
+		super.disconnected();
+		this.connected = false;
+	}
+
+	@Override
 	protected void connected() {
 		super.connected();
 		this.connected = true;

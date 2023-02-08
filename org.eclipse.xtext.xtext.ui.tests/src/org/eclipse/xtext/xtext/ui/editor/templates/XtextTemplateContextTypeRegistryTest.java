@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,8 +10,9 @@ package org.eclipse.xtext.xtext.ui.editor.templates;
 
 import java.util.Iterator;
 
+import org.eclipse.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
@@ -40,9 +41,8 @@ public class XtextTemplateContextTypeRegistryTest extends AbstractXtextTests imp
 		return new XtextTemplateContextType();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test public void testTypesAreSorted() {
-		XtextTemplateContextTypeRegistry registry = new XtextTemplateContextTypeRegistry(grammarAccess, this, new ContextTypeIdHelper());
+		ContextTypeRegistry registry = new XtextTemplateContextTypeRegistry(grammarAccess, this, new ContextTypeIdHelper());
 		String prevName = "";
 		Iterator<?> iter = registry.contextTypes();
 		assertTrue(iter.hasNext());

@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -78,7 +86,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFile"
-    // InternalBmTestLanguage.g:64:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
+    // InternalBmTestLanguage.g:69:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
     public final EObject entryRuleFile() throws RecognitionException {
         EObject current = null;
 
@@ -86,8 +94,8 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmTestLanguage.g:64:45: (iv_ruleFile= ruleFile EOF )
-            // InternalBmTestLanguage.g:65:2: iv_ruleFile= ruleFile EOF
+            // InternalBmTestLanguage.g:69:45: (iv_ruleFile= ruleFile EOF )
+            // InternalBmTestLanguage.g:70:2: iv_ruleFile= ruleFile EOF
             {
              newCompositeNode(grammarAccess.getFileRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -114,7 +122,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFile"
-    // InternalBmTestLanguage.g:71:1: ruleFile returns [EObject current=null] : ( (lv_expression_0_0= ruleExpression ) )* ;
+    // InternalBmTestLanguage.g:76:1: ruleFile returns [EObject current=null] : ( (lv_expression_0_0= ruleExpression ) )* ;
     public final EObject ruleFile() throws RecognitionException {
         EObject current = null;
 
@@ -125,10 +133,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmTestLanguage.g:77:2: ( ( (lv_expression_0_0= ruleExpression ) )* )
-            // InternalBmTestLanguage.g:78:2: ( (lv_expression_0_0= ruleExpression ) )*
+            // InternalBmTestLanguage.g:82:2: ( ( (lv_expression_0_0= ruleExpression ) )* )
+            // InternalBmTestLanguage.g:83:2: ( (lv_expression_0_0= ruleExpression ) )*
             {
-            // InternalBmTestLanguage.g:78:2: ( (lv_expression_0_0= ruleExpression ) )*
+            // InternalBmTestLanguage.g:83:2: ( (lv_expression_0_0= ruleExpression ) )*
             loop1:
             do {
                 int alt1=2;
@@ -141,10 +149,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalBmTestLanguage.g:79:3: (lv_expression_0_0= ruleExpression )
+            	    // InternalBmTestLanguage.g:84:3: (lv_expression_0_0= ruleExpression )
             	    {
-            	    // InternalBmTestLanguage.g:79:3: (lv_expression_0_0= ruleExpression )
-            	    // InternalBmTestLanguage.g:80:4: lv_expression_0_0= ruleExpression
+            	    // InternalBmTestLanguage.g:84:3: (lv_expression_0_0= ruleExpression )
+            	    // InternalBmTestLanguage.g:85:4: lv_expression_0_0= ruleExpression
             	    {
 
             	    				newCompositeNode(grammarAccess.getFileAccess().getExpressionExpressionParserRuleCall_0());
@@ -197,7 +205,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExpression"
-    // InternalBmTestLanguage.g:100:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // InternalBmTestLanguage.g:105:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -205,8 +213,8 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmTestLanguage.g:100:51: (iv_ruleExpression= ruleExpression EOF )
-            // InternalBmTestLanguage.g:101:2: iv_ruleExpression= ruleExpression EOF
+            // InternalBmTestLanguage.g:105:51: (iv_ruleExpression= ruleExpression EOF )
+            // InternalBmTestLanguage.g:106:2: iv_ruleExpression= ruleExpression EOF
             {
              newCompositeNode(grammarAccess.getExpressionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -233,7 +241,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpression"
-    // InternalBmTestLanguage.g:107:1: ruleExpression returns [EObject current=null] : (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) ;
+    // InternalBmTestLanguage.g:112:1: ruleExpression returns [EObject current=null] : (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -250,10 +258,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmTestLanguage.g:113:2: ( (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) )
-            // InternalBmTestLanguage.g:114:2: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
+            // InternalBmTestLanguage.g:118:2: ( (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) )
+            // InternalBmTestLanguage.g:119:2: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
             {
-            // InternalBmTestLanguage.g:114:2: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
+            // InternalBmTestLanguage.g:119:2: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -283,7 +291,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt2) {
                 case 1 :
-                    // InternalBmTestLanguage.g:115:3: this_SExpression_0= ruleSExpression
+                    // InternalBmTestLanguage.g:120:3: this_SExpression_0= ruleSExpression
                     {
 
                     			newCompositeNode(grammarAccess.getExpressionAccess().getSExpressionParserRuleCall_0());
@@ -301,7 +309,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:124:3: this_Atom_1= ruleAtom
+                    // InternalBmTestLanguage.g:129:3: this_Atom_1= ruleAtom
                     {
 
                     			newCompositeNode(grammarAccess.getExpressionAccess().getAtomParserRuleCall_1());
@@ -319,10 +327,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBmTestLanguage.g:133:3: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
+                    // InternalBmTestLanguage.g:138:3: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
                     {
-                    // InternalBmTestLanguage.g:133:3: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
-                    // InternalBmTestLanguage.g:134:4: otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']'
+                    // InternalBmTestLanguage.g:138:3: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
+                    // InternalBmTestLanguage.g:139:4: otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']'
                     {
                     otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
@@ -373,7 +381,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSExpression"
-    // InternalBmTestLanguage.g:155:1: entryRuleSExpression returns [EObject current=null] : iv_ruleSExpression= ruleSExpression EOF ;
+    // InternalBmTestLanguage.g:160:1: entryRuleSExpression returns [EObject current=null] : iv_ruleSExpression= ruleSExpression EOF ;
     public final EObject entryRuleSExpression() throws RecognitionException {
         EObject current = null;
 
@@ -381,8 +389,8 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmTestLanguage.g:155:52: (iv_ruleSExpression= ruleSExpression EOF )
-            // InternalBmTestLanguage.g:156:2: iv_ruleSExpression= ruleSExpression EOF
+            // InternalBmTestLanguage.g:160:52: (iv_ruleSExpression= ruleSExpression EOF )
+            // InternalBmTestLanguage.g:161:2: iv_ruleSExpression= ruleSExpression EOF
             {
              newCompositeNode(grammarAccess.getSExpressionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -409,7 +417,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSExpression"
-    // InternalBmTestLanguage.g:162:1: ruleSExpression returns [EObject current=null] : ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) ;
+    // InternalBmTestLanguage.g:167:1: ruleSExpression returns [EObject current=null] : ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) ;
     public final EObject ruleSExpression() throws RecognitionException {
         EObject current = null;
 
@@ -426,14 +434,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmTestLanguage.g:168:2: ( ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) )
-            // InternalBmTestLanguage.g:169:2: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
+            // InternalBmTestLanguage.g:173:2: ( ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) )
+            // InternalBmTestLanguage.g:174:2: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
             {
-            // InternalBmTestLanguage.g:169:2: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
-            // InternalBmTestLanguage.g:170:3: () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
+            // InternalBmTestLanguage.g:174:2: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
+            // InternalBmTestLanguage.g:175:3: () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
             {
-            // InternalBmTestLanguage.g:170:3: ()
-            // InternalBmTestLanguage.g:171:4: 
+            // InternalBmTestLanguage.g:175:3: ()
+            // InternalBmTestLanguage.g:176:4: 
             {
 
             				current = forceCreateModelElement(
@@ -443,7 +451,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBmTestLanguage.g:177:3: ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
+            // InternalBmTestLanguage.g:182:3: ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -461,16 +469,16 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalBmTestLanguage.g:178:4: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
+                    // InternalBmTestLanguage.g:183:4: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
                     {
-                    // InternalBmTestLanguage.g:178:4: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
-                    // InternalBmTestLanguage.g:179:5: otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')'
+                    // InternalBmTestLanguage.g:183:4: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
+                    // InternalBmTestLanguage.g:184:5: otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')'
                     {
                     otherlv_1=(Token)match(input,13,FollowSets000.FOLLOW_6); 
 
                     					newLeafNode(otherlv_1, grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0());
                     				
-                    // InternalBmTestLanguage.g:183:5: ( (lv_element_2_0= ruleExpression ) )*
+                    // InternalBmTestLanguage.g:188:5: ( (lv_element_2_0= ruleExpression ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -483,10 +491,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // InternalBmTestLanguage.g:184:6: (lv_element_2_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:189:6: (lv_element_2_0= ruleExpression )
                     	    {
-                    	    // InternalBmTestLanguage.g:184:6: (lv_element_2_0= ruleExpression )
-                    	    // InternalBmTestLanguage.g:185:7: lv_element_2_0= ruleExpression
+                    	    // InternalBmTestLanguage.g:189:6: (lv_element_2_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:190:7: lv_element_2_0= ruleExpression
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_0_1_0());
@@ -530,16 +538,16 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:208:4: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
+                    // InternalBmTestLanguage.g:213:4: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
                     {
-                    // InternalBmTestLanguage.g:208:4: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
-                    // InternalBmTestLanguage.g:209:5: otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end'
+                    // InternalBmTestLanguage.g:213:4: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
+                    // InternalBmTestLanguage.g:214:5: otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end'
                     {
                     otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_7); 
 
                     					newLeafNode(otherlv_4, grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0());
                     				
-                    // InternalBmTestLanguage.g:213:5: ( (lv_element_5_0= ruleExpression ) )*
+                    // InternalBmTestLanguage.g:218:5: ( (lv_element_5_0= ruleExpression ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -552,10 +560,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalBmTestLanguage.g:214:6: (lv_element_5_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:219:6: (lv_element_5_0= ruleExpression )
                     	    {
-                    	    // InternalBmTestLanguage.g:214:6: (lv_element_5_0= ruleExpression )
-                    	    // InternalBmTestLanguage.g:215:7: lv_element_5_0= ruleExpression
+                    	    // InternalBmTestLanguage.g:219:6: (lv_element_5_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:220:7: lv_element_5_0= ruleExpression
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_1_1_0());
@@ -624,7 +632,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAtom"
-    // InternalBmTestLanguage.g:242:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
+    // InternalBmTestLanguage.g:247:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
     public final EObject entryRuleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -632,8 +640,8 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmTestLanguage.g:242:45: (iv_ruleAtom= ruleAtom EOF )
-            // InternalBmTestLanguage.g:243:2: iv_ruleAtom= ruleAtom EOF
+            // InternalBmTestLanguage.g:247:45: (iv_ruleAtom= ruleAtom EOF )
+            // InternalBmTestLanguage.g:248:2: iv_ruleAtom= ruleAtom EOF
             {
              newCompositeNode(grammarAccess.getAtomRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -660,7 +668,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAtom"
-    // InternalBmTestLanguage.g:249:1: ruleAtom returns [EObject current=null] : ( (lv_value_0_0= ruleVALUE ) ) ;
+    // InternalBmTestLanguage.g:254:1: ruleAtom returns [EObject current=null] : ( (lv_value_0_0= ruleVALUE ) ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -671,14 +679,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmTestLanguage.g:255:2: ( ( (lv_value_0_0= ruleVALUE ) ) )
-            // InternalBmTestLanguage.g:256:2: ( (lv_value_0_0= ruleVALUE ) )
+            // InternalBmTestLanguage.g:260:2: ( ( (lv_value_0_0= ruleVALUE ) ) )
+            // InternalBmTestLanguage.g:261:2: ( (lv_value_0_0= ruleVALUE ) )
             {
-            // InternalBmTestLanguage.g:256:2: ( (lv_value_0_0= ruleVALUE ) )
-            // InternalBmTestLanguage.g:257:3: (lv_value_0_0= ruleVALUE )
+            // InternalBmTestLanguage.g:261:2: ( (lv_value_0_0= ruleVALUE ) )
+            // InternalBmTestLanguage.g:262:3: (lv_value_0_0= ruleVALUE )
             {
-            // InternalBmTestLanguage.g:257:3: (lv_value_0_0= ruleVALUE )
-            // InternalBmTestLanguage.g:258:4: lv_value_0_0= ruleVALUE
+            // InternalBmTestLanguage.g:262:3: (lv_value_0_0= ruleVALUE )
+            // InternalBmTestLanguage.g:263:4: lv_value_0_0= ruleVALUE
             {
 
             				newCompositeNode(grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0());
@@ -725,7 +733,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVALUE"
-    // InternalBmTestLanguage.g:278:1: entryRuleVALUE returns [String current=null] : iv_ruleVALUE= ruleVALUE EOF ;
+    // InternalBmTestLanguage.g:283:1: entryRuleVALUE returns [String current=null] : iv_ruleVALUE= ruleVALUE EOF ;
     public final String entryRuleVALUE() throws RecognitionException {
         String current = null;
 
@@ -733,8 +741,8 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmTestLanguage.g:278:45: (iv_ruleVALUE= ruleVALUE EOF )
-            // InternalBmTestLanguage.g:279:2: iv_ruleVALUE= ruleVALUE EOF
+            // InternalBmTestLanguage.g:283:45: (iv_ruleVALUE= ruleVALUE EOF )
+            // InternalBmTestLanguage.g:284:2: iv_ruleVALUE= ruleVALUE EOF
             {
              newCompositeNode(grammarAccess.getVALUERule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -761,7 +769,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVALUE"
-    // InternalBmTestLanguage.g:285:1: ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) ;
+    // InternalBmTestLanguage.g:290:1: ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) ;
     public final AntlrDatatypeRuleToken ruleVALUE() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -773,10 +781,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmTestLanguage.g:291:2: ( (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) )
-            // InternalBmTestLanguage.g:292:2: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
+            // InternalBmTestLanguage.g:296:2: ( (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) )
+            // InternalBmTestLanguage.g:297:2: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
             {
-            // InternalBmTestLanguage.g:292:2: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
+            // InternalBmTestLanguage.g:297:2: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
             int alt6=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -803,7 +811,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt6) {
                 case 1 :
-                    // InternalBmTestLanguage.g:293:3: this_ID_0= RULE_ID
+                    // InternalBmTestLanguage.g:298:3: this_ID_0= RULE_ID
                     {
                     this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -816,7 +824,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBmTestLanguage.g:301:3: this_INT_1= RULE_INT
+                    // InternalBmTestLanguage.g:306:3: this_INT_1= RULE_INT
                     {
                     this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
@@ -829,7 +837,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBmTestLanguage.g:309:3: this_STRING_2= RULE_STRING
+                    // InternalBmTestLanguage.g:314:3: this_STRING_2= RULE_STRING
                     {
                     this_STRING_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 

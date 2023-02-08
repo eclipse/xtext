@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalOutlineTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -73,11 +81,11 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalOutlineTestLanguage.g:53:1: entryRuleModel : ruleModel EOF ;
+    // InternalOutlineTestLanguage.g:58:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalOutlineTestLanguage.g:54:1: ( ruleModel EOF )
-            // InternalOutlineTestLanguage.g:55:1: ruleModel EOF
+            // InternalOutlineTestLanguage.g:59:1: ( ruleModel EOF )
+            // InternalOutlineTestLanguage.g:60:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -103,20 +111,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "ruleModel"
-    // InternalOutlineTestLanguage.g:62:1: ruleModel : ( ( rule__Model__ElementsAssignment )* ) ;
+    // InternalOutlineTestLanguage.g:67:1: ruleModel : ( ( rule__Model__ElementsAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:66:2: ( ( ( rule__Model__ElementsAssignment )* ) )
-            // InternalOutlineTestLanguage.g:67:2: ( ( rule__Model__ElementsAssignment )* )
+            // InternalOutlineTestLanguage.g:71:2: ( ( ( rule__Model__ElementsAssignment )* ) )
+            // InternalOutlineTestLanguage.g:72:2: ( ( rule__Model__ElementsAssignment )* )
             {
-            // InternalOutlineTestLanguage.g:67:2: ( ( rule__Model__ElementsAssignment )* )
-            // InternalOutlineTestLanguage.g:68:3: ( rule__Model__ElementsAssignment )*
+            // InternalOutlineTestLanguage.g:72:2: ( ( rule__Model__ElementsAssignment )* )
+            // InternalOutlineTestLanguage.g:73:3: ( rule__Model__ElementsAssignment )*
             {
              before(grammarAccess.getModelAccess().getElementsAssignment()); 
-            // InternalOutlineTestLanguage.g:69:3: ( rule__Model__ElementsAssignment )*
+            // InternalOutlineTestLanguage.g:74:3: ( rule__Model__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -129,7 +137,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalOutlineTestLanguage.g:69:4: rule__Model__ElementsAssignment
+            	    // InternalOutlineTestLanguage.g:74:4: rule__Model__ElementsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Model__ElementsAssignment();
@@ -168,11 +176,11 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalOutlineTestLanguage.g:78:1: entryRuleElement : ruleElement EOF ;
+    // InternalOutlineTestLanguage.g:83:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // InternalOutlineTestLanguage.g:79:1: ( ruleElement EOF )
-            // InternalOutlineTestLanguage.g:80:1: ruleElement EOF
+            // InternalOutlineTestLanguage.g:84:1: ( ruleElement EOF )
+            // InternalOutlineTestLanguage.g:85:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -198,21 +206,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "ruleElement"
-    // InternalOutlineTestLanguage.g:87:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // InternalOutlineTestLanguage.g:92:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:91:2: ( ( ( rule__Element__Group__0 ) ) )
-            // InternalOutlineTestLanguage.g:92:2: ( ( rule__Element__Group__0 ) )
+            // InternalOutlineTestLanguage.g:96:2: ( ( ( rule__Element__Group__0 ) ) )
+            // InternalOutlineTestLanguage.g:97:2: ( ( rule__Element__Group__0 ) )
             {
-            // InternalOutlineTestLanguage.g:92:2: ( ( rule__Element__Group__0 ) )
-            // InternalOutlineTestLanguage.g:93:3: ( rule__Element__Group__0 )
+            // InternalOutlineTestLanguage.g:97:2: ( ( rule__Element__Group__0 ) )
+            // InternalOutlineTestLanguage.g:98:3: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // InternalOutlineTestLanguage.g:94:3: ( rule__Element__Group__0 )
-            // InternalOutlineTestLanguage.g:94:4: rule__Element__Group__0
+            // InternalOutlineTestLanguage.g:99:3: ( rule__Element__Group__0 )
+            // InternalOutlineTestLanguage.g:99:4: rule__Element__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__0();
@@ -245,14 +253,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // InternalOutlineTestLanguage.g:102:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // InternalOutlineTestLanguage.g:107:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:106:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // InternalOutlineTestLanguage.g:107:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // InternalOutlineTestLanguage.g:111:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // InternalOutlineTestLanguage.g:112:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group__0__Impl();
@@ -283,21 +291,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // InternalOutlineTestLanguage.g:114:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
+    // InternalOutlineTestLanguage.g:119:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:118:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
-            // InternalOutlineTestLanguage.g:119:1: ( ( rule__Element__NameAssignment_0 ) )
+            // InternalOutlineTestLanguage.g:123:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
+            // InternalOutlineTestLanguage.g:124:1: ( ( rule__Element__NameAssignment_0 ) )
             {
-            // InternalOutlineTestLanguage.g:119:1: ( ( rule__Element__NameAssignment_0 ) )
-            // InternalOutlineTestLanguage.g:120:2: ( rule__Element__NameAssignment_0 )
+            // InternalOutlineTestLanguage.g:124:1: ( ( rule__Element__NameAssignment_0 ) )
+            // InternalOutlineTestLanguage.g:125:2: ( rule__Element__NameAssignment_0 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_0()); 
-            // InternalOutlineTestLanguage.g:121:2: ( rule__Element__NameAssignment_0 )
-            // InternalOutlineTestLanguage.g:121:3: rule__Element__NameAssignment_0
+            // InternalOutlineTestLanguage.g:126:2: ( rule__Element__NameAssignment_0 )
+            // InternalOutlineTestLanguage.g:126:3: rule__Element__NameAssignment_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__NameAssignment_0();
@@ -330,14 +338,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // InternalOutlineTestLanguage.g:129:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
+    // InternalOutlineTestLanguage.g:134:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:133:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
-            // InternalOutlineTestLanguage.g:134:2: rule__Element__Group__1__Impl rule__Element__Group__2
+            // InternalOutlineTestLanguage.g:138:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
+            // InternalOutlineTestLanguage.g:139:2: rule__Element__Group__1__Impl rule__Element__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group__1__Impl();
@@ -368,20 +376,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // InternalOutlineTestLanguage.g:141:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
+    // InternalOutlineTestLanguage.g:146:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:145:1: ( ( ( rule__Element__Group_1__0 )? ) )
-            // InternalOutlineTestLanguage.g:146:1: ( ( rule__Element__Group_1__0 )? )
+            // InternalOutlineTestLanguage.g:150:1: ( ( ( rule__Element__Group_1__0 )? ) )
+            // InternalOutlineTestLanguage.g:151:1: ( ( rule__Element__Group_1__0 )? )
             {
-            // InternalOutlineTestLanguage.g:146:1: ( ( rule__Element__Group_1__0 )? )
-            // InternalOutlineTestLanguage.g:147:2: ( rule__Element__Group_1__0 )?
+            // InternalOutlineTestLanguage.g:151:1: ( ( rule__Element__Group_1__0 )? )
+            // InternalOutlineTestLanguage.g:152:2: ( rule__Element__Group_1__0 )?
             {
              before(grammarAccess.getElementAccess().getGroup_1()); 
-            // InternalOutlineTestLanguage.g:148:2: ( rule__Element__Group_1__0 )?
+            // InternalOutlineTestLanguage.g:153:2: ( rule__Element__Group_1__0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -390,7 +398,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             }
             switch (alt2) {
                 case 1 :
-                    // InternalOutlineTestLanguage.g:148:3: rule__Element__Group_1__0
+                    // InternalOutlineTestLanguage.g:153:3: rule__Element__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Element__Group_1__0();
@@ -426,14 +434,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__2"
-    // InternalOutlineTestLanguage.g:156:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
+    // InternalOutlineTestLanguage.g:161:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:160:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
-            // InternalOutlineTestLanguage.g:161:2: rule__Element__Group__2__Impl rule__Element__Group__3
+            // InternalOutlineTestLanguage.g:165:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
+            // InternalOutlineTestLanguage.g:166:2: rule__Element__Group__2__Impl rule__Element__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__2__Impl();
@@ -464,17 +472,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__2__Impl"
-    // InternalOutlineTestLanguage.g:168:1: rule__Element__Group__2__Impl : ( '{' ) ;
+    // InternalOutlineTestLanguage.g:173:1: rule__Element__Group__2__Impl : ( '{' ) ;
     public final void rule__Element__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:172:1: ( ( '{' ) )
-            // InternalOutlineTestLanguage.g:173:1: ( '{' )
+            // InternalOutlineTestLanguage.g:177:1: ( ( '{' ) )
+            // InternalOutlineTestLanguage.g:178:1: ( '{' )
             {
-            // InternalOutlineTestLanguage.g:173:1: ( '{' )
-            // InternalOutlineTestLanguage.g:174:2: '{'
+            // InternalOutlineTestLanguage.g:178:1: ( '{' )
+            // InternalOutlineTestLanguage.g:179:2: '{'
             {
              before(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -501,14 +509,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__3"
-    // InternalOutlineTestLanguage.g:183:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
+    // InternalOutlineTestLanguage.g:188:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:187:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
-            // InternalOutlineTestLanguage.g:188:2: rule__Element__Group__3__Impl rule__Element__Group__4
+            // InternalOutlineTestLanguage.g:192:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
+            // InternalOutlineTestLanguage.g:193:2: rule__Element__Group__3__Impl rule__Element__Group__4
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__3__Impl();
@@ -539,20 +547,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__3__Impl"
-    // InternalOutlineTestLanguage.g:195:1: rule__Element__Group__3__Impl : ( ( rule__Element__ChildrenAssignment_3 )* ) ;
+    // InternalOutlineTestLanguage.g:200:1: rule__Element__Group__3__Impl : ( ( rule__Element__ChildrenAssignment_3 )* ) ;
     public final void rule__Element__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:199:1: ( ( ( rule__Element__ChildrenAssignment_3 )* ) )
-            // InternalOutlineTestLanguage.g:200:1: ( ( rule__Element__ChildrenAssignment_3 )* )
+            // InternalOutlineTestLanguage.g:204:1: ( ( ( rule__Element__ChildrenAssignment_3 )* ) )
+            // InternalOutlineTestLanguage.g:205:1: ( ( rule__Element__ChildrenAssignment_3 )* )
             {
-            // InternalOutlineTestLanguage.g:200:1: ( ( rule__Element__ChildrenAssignment_3 )* )
-            // InternalOutlineTestLanguage.g:201:2: ( rule__Element__ChildrenAssignment_3 )*
+            // InternalOutlineTestLanguage.g:205:1: ( ( rule__Element__ChildrenAssignment_3 )* )
+            // InternalOutlineTestLanguage.g:206:2: ( rule__Element__ChildrenAssignment_3 )*
             {
              before(grammarAccess.getElementAccess().getChildrenAssignment_3()); 
-            // InternalOutlineTestLanguage.g:202:2: ( rule__Element__ChildrenAssignment_3 )*
+            // InternalOutlineTestLanguage.g:207:2: ( rule__Element__ChildrenAssignment_3 )*
             loop3:
             do {
                 int alt3=2;
@@ -565,7 +573,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalOutlineTestLanguage.g:202:3: rule__Element__ChildrenAssignment_3
+            	    // InternalOutlineTestLanguage.g:207:3: rule__Element__ChildrenAssignment_3
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Element__ChildrenAssignment_3();
@@ -604,14 +612,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__4"
-    // InternalOutlineTestLanguage.g:210:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
+    // InternalOutlineTestLanguage.g:215:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
     public final void rule__Element__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:214:1: ( rule__Element__Group__4__Impl )
-            // InternalOutlineTestLanguage.g:215:2: rule__Element__Group__4__Impl
+            // InternalOutlineTestLanguage.g:219:1: ( rule__Element__Group__4__Impl )
+            // InternalOutlineTestLanguage.g:220:2: rule__Element__Group__4__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__4__Impl();
@@ -637,17 +645,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__4__Impl"
-    // InternalOutlineTestLanguage.g:221:1: rule__Element__Group__4__Impl : ( '}' ) ;
+    // InternalOutlineTestLanguage.g:226:1: rule__Element__Group__4__Impl : ( '}' ) ;
     public final void rule__Element__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:225:1: ( ( '}' ) )
-            // InternalOutlineTestLanguage.g:226:1: ( '}' )
+            // InternalOutlineTestLanguage.g:230:1: ( ( '}' ) )
+            // InternalOutlineTestLanguage.g:231:1: ( '}' )
             {
-            // InternalOutlineTestLanguage.g:226:1: ( '}' )
-            // InternalOutlineTestLanguage.g:227:2: '}'
+            // InternalOutlineTestLanguage.g:231:1: ( '}' )
+            // InternalOutlineTestLanguage.g:232:2: '}'
             {
              before(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -674,14 +682,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__0"
-    // InternalOutlineTestLanguage.g:237:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
+    // InternalOutlineTestLanguage.g:242:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
     public final void rule__Element__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:241:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
-            // InternalOutlineTestLanguage.g:242:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
+            // InternalOutlineTestLanguage.g:246:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
+            // InternalOutlineTestLanguage.g:247:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group_1__0__Impl();
@@ -712,17 +720,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__0__Impl"
-    // InternalOutlineTestLanguage.g:249:1: rule__Element__Group_1__0__Impl : ( '(' ) ;
+    // InternalOutlineTestLanguage.g:254:1: rule__Element__Group_1__0__Impl : ( '(' ) ;
     public final void rule__Element__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:253:1: ( ( '(' ) )
-            // InternalOutlineTestLanguage.g:254:1: ( '(' )
+            // InternalOutlineTestLanguage.g:258:1: ( ( '(' ) )
+            // InternalOutlineTestLanguage.g:259:1: ( '(' )
             {
-            // InternalOutlineTestLanguage.g:254:1: ( '(' )
-            // InternalOutlineTestLanguage.g:255:2: '('
+            // InternalOutlineTestLanguage.g:259:1: ( '(' )
+            // InternalOutlineTestLanguage.g:260:2: '('
             {
              before(grammarAccess.getElementAccess().getLeftParenthesisKeyword_1_0()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -749,14 +757,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__1"
-    // InternalOutlineTestLanguage.g:264:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
+    // InternalOutlineTestLanguage.g:269:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
     public final void rule__Element__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:268:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
-            // InternalOutlineTestLanguage.g:269:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
+            // InternalOutlineTestLanguage.g:273:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
+            // InternalOutlineTestLanguage.g:274:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group_1__1__Impl();
@@ -787,20 +795,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__1__Impl"
-    // InternalOutlineTestLanguage.g:276:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__XrefsAssignment_1_1 )* ) ;
+    // InternalOutlineTestLanguage.g:281:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__XrefsAssignment_1_1 )* ) ;
     public final void rule__Element__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:280:1: ( ( ( rule__Element__XrefsAssignment_1_1 )* ) )
-            // InternalOutlineTestLanguage.g:281:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
+            // InternalOutlineTestLanguage.g:285:1: ( ( ( rule__Element__XrefsAssignment_1_1 )* ) )
+            // InternalOutlineTestLanguage.g:286:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
             {
-            // InternalOutlineTestLanguage.g:281:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
-            // InternalOutlineTestLanguage.g:282:2: ( rule__Element__XrefsAssignment_1_1 )*
+            // InternalOutlineTestLanguage.g:286:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
+            // InternalOutlineTestLanguage.g:287:2: ( rule__Element__XrefsAssignment_1_1 )*
             {
              before(grammarAccess.getElementAccess().getXrefsAssignment_1_1()); 
-            // InternalOutlineTestLanguage.g:283:2: ( rule__Element__XrefsAssignment_1_1 )*
+            // InternalOutlineTestLanguage.g:288:2: ( rule__Element__XrefsAssignment_1_1 )*
             loop4:
             do {
                 int alt4=2;
@@ -813,7 +821,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalOutlineTestLanguage.g:283:3: rule__Element__XrefsAssignment_1_1
+            	    // InternalOutlineTestLanguage.g:288:3: rule__Element__XrefsAssignment_1_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Element__XrefsAssignment_1_1();
@@ -852,14 +860,14 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__2"
-    // InternalOutlineTestLanguage.g:291:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
+    // InternalOutlineTestLanguage.g:296:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
     public final void rule__Element__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:295:1: ( rule__Element__Group_1__2__Impl )
-            // InternalOutlineTestLanguage.g:296:2: rule__Element__Group_1__2__Impl
+            // InternalOutlineTestLanguage.g:300:1: ( rule__Element__Group_1__2__Impl )
+            // InternalOutlineTestLanguage.g:301:2: rule__Element__Group_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_1__2__Impl();
@@ -885,17 +893,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__2__Impl"
-    // InternalOutlineTestLanguage.g:302:1: rule__Element__Group_1__2__Impl : ( ')' ) ;
+    // InternalOutlineTestLanguage.g:307:1: rule__Element__Group_1__2__Impl : ( ')' ) ;
     public final void rule__Element__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:306:1: ( ( ')' ) )
-            // InternalOutlineTestLanguage.g:307:1: ( ')' )
+            // InternalOutlineTestLanguage.g:311:1: ( ( ')' ) )
+            // InternalOutlineTestLanguage.g:312:1: ( ')' )
             {
-            // InternalOutlineTestLanguage.g:307:1: ( ')' )
-            // InternalOutlineTestLanguage.g:308:2: ')'
+            // InternalOutlineTestLanguage.g:312:1: ( ')' )
+            // InternalOutlineTestLanguage.g:313:2: ')'
             {
              before(grammarAccess.getElementAccess().getRightParenthesisKeyword_1_2()); 
             match(input,14,FollowSets000.FOLLOW_2); 
@@ -922,17 +930,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Model__ElementsAssignment"
-    // InternalOutlineTestLanguage.g:318:1: rule__Model__ElementsAssignment : ( ruleElement ) ;
+    // InternalOutlineTestLanguage.g:323:1: rule__Model__ElementsAssignment : ( ruleElement ) ;
     public final void rule__Model__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:322:1: ( ( ruleElement ) )
-            // InternalOutlineTestLanguage.g:323:2: ( ruleElement )
+            // InternalOutlineTestLanguage.g:327:1: ( ( ruleElement ) )
+            // InternalOutlineTestLanguage.g:328:2: ( ruleElement )
             {
-            // InternalOutlineTestLanguage.g:323:2: ( ruleElement )
-            // InternalOutlineTestLanguage.g:324:3: ruleElement
+            // InternalOutlineTestLanguage.g:328:2: ( ruleElement )
+            // InternalOutlineTestLanguage.g:329:3: ruleElement
             {
              before(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -963,17 +971,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__NameAssignment_0"
-    // InternalOutlineTestLanguage.g:333:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalOutlineTestLanguage.g:338:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:337:1: ( ( RULE_ID ) )
-            // InternalOutlineTestLanguage.g:338:2: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:342:1: ( ( RULE_ID ) )
+            // InternalOutlineTestLanguage.g:343:2: ( RULE_ID )
             {
-            // InternalOutlineTestLanguage.g:338:2: ( RULE_ID )
-            // InternalOutlineTestLanguage.g:339:3: RULE_ID
+            // InternalOutlineTestLanguage.g:343:2: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:344:3: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1000,21 +1008,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__XrefsAssignment_1_1"
-    // InternalOutlineTestLanguage.g:348:1: rule__Element__XrefsAssignment_1_1 : ( ( RULE_ID ) ) ;
+    // InternalOutlineTestLanguage.g:353:1: rule__Element__XrefsAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__Element__XrefsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:352:1: ( ( ( RULE_ID ) ) )
-            // InternalOutlineTestLanguage.g:353:2: ( ( RULE_ID ) )
+            // InternalOutlineTestLanguage.g:357:1: ( ( ( RULE_ID ) ) )
+            // InternalOutlineTestLanguage.g:358:2: ( ( RULE_ID ) )
             {
-            // InternalOutlineTestLanguage.g:353:2: ( ( RULE_ID ) )
-            // InternalOutlineTestLanguage.g:354:3: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:358:2: ( ( RULE_ID ) )
+            // InternalOutlineTestLanguage.g:359:3: ( RULE_ID )
             {
              before(grammarAccess.getElementAccess().getXrefsElementCrossReference_1_1_0()); 
-            // InternalOutlineTestLanguage.g:355:3: ( RULE_ID )
-            // InternalOutlineTestLanguage.g:356:4: RULE_ID
+            // InternalOutlineTestLanguage.g:360:3: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:361:4: RULE_ID
             {
              before(grammarAccess.getElementAccess().getXrefsElementIDTerminalRuleCall_1_1_0_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_2); 
@@ -1045,17 +1053,17 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__ChildrenAssignment_3"
-    // InternalOutlineTestLanguage.g:367:1: rule__Element__ChildrenAssignment_3 : ( ruleElement ) ;
+    // InternalOutlineTestLanguage.g:372:1: rule__Element__ChildrenAssignment_3 : ( ruleElement ) ;
     public final void rule__Element__ChildrenAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOutlineTestLanguage.g:371:1: ( ( ruleElement ) )
-            // InternalOutlineTestLanguage.g:372:2: ( ruleElement )
+            // InternalOutlineTestLanguage.g:376:1: ( ( ruleElement ) )
+            // InternalOutlineTestLanguage.g:377:2: ( ruleElement )
             {
-            // InternalOutlineTestLanguage.g:372:2: ( ruleElement )
-            // InternalOutlineTestLanguage.g:373:3: ruleElement
+            // InternalOutlineTestLanguage.g:377:2: ( ruleElement )
+            // InternalOutlineTestLanguage.g:378:3: ruleElement
             {
              before(grammarAccess.getElementAccess().getChildrenElementParserRuleCall_3_0()); 
             pushFollow(FollowSets000.FOLLOW_2);

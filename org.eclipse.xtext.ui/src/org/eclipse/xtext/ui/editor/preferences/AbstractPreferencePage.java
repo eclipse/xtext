@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtext.ui.editor.preferences;
 
 /*******************************************************************************
@@ -268,17 +276,16 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	 * is based on the Project preference store when the page is used as a Properties page. (This is done in
 	 * {@link #doGetPreferenceStore()}).
 	 */
-	@SuppressWarnings("deprecation")
 	private void handleUseProjectSettings() {
 		// Note: uses the pre Eclipse 3.6 way of specifying search scopes (deprecated since 3.6)
 		boolean isUseProjectSettings = useProjectSettingsButton.getSelection();
 		link.setEnabled(!isUseProjectSettings);
 		if (!isUseProjectSettings) {
 			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
-					new InstanceScope(), new ConfigurationScope() });
+					InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
 		} else {
 			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
-					new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
+					new ProjectScope(currentProject()), InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
 			setProjectSpecificValues();
 		}
 		updateFieldEditors(isUseProjectSettings);
