@@ -6,7 +6,6 @@ dependencies {
 	api project(':org.eclipse.xtext.xbase')
 	api "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	api 'junit:junit'
-	optional files('lib/simple.jar')
 	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
 	testImplementation sourceSets.mwe2.output
 }
