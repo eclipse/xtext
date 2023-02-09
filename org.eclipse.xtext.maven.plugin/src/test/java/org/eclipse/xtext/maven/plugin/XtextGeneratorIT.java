@@ -73,7 +73,8 @@ public class XtextGeneratorIT {
 	
 	private static String findMaven() {
 		// TODO add more mavens here
-		String[] mavens = new String[] { System.getProperty("maven.home"), "/opt/local/share/java/maven3/" };
+		String[] mavens = new String[] { System.getProperty("maven.home"), "/opt/local/share/java/maven3/",
+				"/usr/local/" };
 		for (String maven : mavens) {
 			if (new File(maven + "/bin/mvn").exists()) {
 				return maven;
