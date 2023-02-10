@@ -128,7 +128,15 @@ public class AnnotatedTextToString {
 	@Override
 	public String toString() {
 		String contents = getContents();
-		regions.sort(Comparator.comparing((region) -> region.start));
+		/*
+		 * This is used in testing to produce a string comparable with a static
+		 * test reference. Therefore it is important to produce a deterministic
+		 * result. First sort by region start, then end (so we get shorter
+		 * regions first), then by message. The latter is important so that
+		 * regions with the same start and end get ordered deterministically.
+		 */
+		regions.sort(Comparator.comparing((CommentedRegion region) -> region.start).thenComparing((region) -> region.end)
+				.thenComparing((region) -> region.text));
 
 		List<SimpleEntry<Integer, CommentedRegion>> sorted = new ArrayList<>();
 		for (int index = 0; index < regions.size(); index++) {
