@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,25 +8,19 @@
  */
 package org.eclipse.xtext.xbase.lib.util;
 
-import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.common.base.Objects;
-import com.google.common.base.Strings;
-import com.google.common.collect.Iterables;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
+
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.util.ToStringContext;
+
+import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
+import com.google.common.annotations.GwtIncompatible;
+import com.google.common.base.Strings;
 
 /**
  * Helps with the construction of good {@link Object#toString()} representations.
@@ -40,7 +34,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringContext;
  */
 @Beta
 @GwtCompatible
-@SuppressWarnings("all")
 public final class ToStringBuilder {
 	
 	private static ToStringContext toStringContext = ToStringContext.INSTANCE;
@@ -306,7 +299,7 @@ public final class ToStringBuilder {
 
 	@GwtIncompatible("java.lang.reflect.Field")
 	private List<Field> getAllDeclaredFields(final Class<?> clazz) {
-		final ArrayList<Field> result = new ArrayList();
+		final ArrayList<Field> result = new ArrayList<>();
 
 		for(Class<?> current = clazz; current != null; current = current.getSuperclass()) {
 			Field[] declaredFields = current.getDeclaredFields();
