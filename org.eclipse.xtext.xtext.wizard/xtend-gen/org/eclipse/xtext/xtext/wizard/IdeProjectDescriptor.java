@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -349,7 +349,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>3.3.0</version>");
+              _builder.append("<version>3.5.0</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
@@ -631,7 +631,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>3.3.0</version>");
+              _builder.append("<version>3.4.1</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
