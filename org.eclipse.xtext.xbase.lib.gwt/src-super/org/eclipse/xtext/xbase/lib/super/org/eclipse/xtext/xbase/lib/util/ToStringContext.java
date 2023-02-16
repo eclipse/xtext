@@ -13,7 +13,6 @@ import java.util.IdentityHashMap;
 import com.google.common.annotations.GwtCompatible;
 
 @GwtCompatible
-@SuppressWarnings("all")
 class ToStringContext {
 	public final static ToStringContext INSTANCE = new ToStringContext();
 

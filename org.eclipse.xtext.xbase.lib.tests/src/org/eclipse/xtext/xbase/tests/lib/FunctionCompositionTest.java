@@ -20,7 +20,6 @@ import org.junit.Test;
 /**
  * @author efftinge - Initial contribution and API
  */
-@SuppressWarnings("all")
 public class FunctionCompositionTest {
 	
 	private Function2<Integer, Integer, Integer> binaryFun = (Integer e, Integer e2) -> {

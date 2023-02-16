@@ -39,7 +39,6 @@ import org.eclipse.xtext.xbase.lib.internal.UnmodifiableMergingMapView;
  * @author Stephane Galland - Initial contribution and API
  * @since 2.15
  */
-@SuppressWarnings("all")
 @RunWith(Suite.class)
 @SuiteClasses({
 	MapExtensionsTest.ManualTest.class,
@@ -71,7 +70,7 @@ public class MapExtensionsTest {
 									}
 								}
 							}
-							return new UnmodifiableMergingMapView(left, right);
+							return new UnmodifiableMergingMapView<>(left, right);
 						}
 					}).named("Guava-based UnmodifiableMergingMapView tests")
 					.withFeatures(
@@ -163,7 +162,6 @@ public class MapExtensionsTest {
 	
 		@Test
 		public void operator_remove_MapPair_2() {
-			String v = UUID.randomUUID().toString();
 			boolean o;
 	
 			o = operator_remove(this.map, new Pair<String, String>("k2", new String(this.value2)));
@@ -248,7 +246,6 @@ public class MapExtensionsTest {
 	
 		@Test
 		public void operator_minus_MapPair_2() {
-			String v = UUID.randomUUID().toString();
 			Map<String, String> o = operator_minus(this.map, new Pair<String, String>("k2", new String(this.value2)));
 			
 			assertNotNull(o);
