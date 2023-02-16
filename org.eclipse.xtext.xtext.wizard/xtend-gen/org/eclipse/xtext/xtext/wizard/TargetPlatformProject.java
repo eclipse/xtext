@@ -175,6 +175,9 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("<unit id=\"com.google.gson\" version=\"2.10.0.v20221207-1049\"/>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20221112-0806\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
@@ -236,18 +239,6 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2023-03\"/>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("</location>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<unit id=\"com.google.gson\" version=\"2.9.1.v20220915-1632\"/>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</location>");
