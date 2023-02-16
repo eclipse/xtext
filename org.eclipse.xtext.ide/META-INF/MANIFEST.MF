@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.lib,
  org.eclipse.core.runtime;bundle-version="3.24.100";resolution:=optional;x-installation:=greedy,
  org.eclipse.equinox.common;bundle-version="3.16.0",
- org.eclipse.lsp4j;bundle-version="[0.19.0,0.20.0)";resolution:=optional,
- org.eclipse.lsp4j.jsonrpc;bundle-version="[0.19.0,0.20.0)";resolution:=optional,
+ org.eclipse.lsp4j;bundle-version="[0.20.0,0.21.0)";resolution:=optional,
+ org.eclipse.lsp4j.jsonrpc;bundle-version="[0.20.0,0.21.0)";resolution:=optional,
  org.eclipse.emf.ecore.change;bundle-version="[2.14.0,3)",
  com.google.guava
 Import-Package: org.apache.log4j;version="1.2.24"
