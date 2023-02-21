@@ -23,20 +23,20 @@ public class EclipseSourceFolderTest extends AbstractWorkbenchTest {
 	@Test
 	public void testEclipseSourceFolderTrailingPathSeparator() throws CoreException {
 		IProject project = JavaProjectSetupUtil.createJavaProject("aproject").getProject();
-		EclipseSourceFolder sourceFolderWithoutTrailingSpace = new EclipseSourceFolder(
+		EclipseSourceFolder sourceFolderWithoutTrailingSlash = new EclipseSourceFolder(
 			project, "afolder");
-		EclipseSourceFolder sourceFolderWithTrailingSpace = new EclipseSourceFolder(
+		EclipseSourceFolder sourceFolderWithTrailingSlash = new EclipseSourceFolder(
 			project, "afolder/");
 		assertEquals("project P/aproject name afolder (platform:/resource/aproject/afolder/)",
-			sourceFolderWithoutTrailingSpace.toString());
+			sourceFolderWithoutTrailingSlash.toString());
 		// no double trailing path separator
 		// see https://github.com/eclipse/xtext-eclipse/issues/1997
 		assertEquals("project P/aproject name afolder/ (platform:/resource/aproject/afolder/)",
-			sourceFolderWithTrailingSpace.toString());
+			sourceFolderWithTrailingSlash.toString());
 
 		// equals must be based on path
-		assertEquals(sourceFolderWithTrailingSpace, sourceFolderWithoutTrailingSpace);
+		assertEquals(sourceFolderWithTrailingSlash, sourceFolderWithoutTrailingSlash);
 		// hashCode must be based on path
-		assertEquals(sourceFolderWithTrailingSpace.hashCode(), sourceFolderWithoutTrailingSpace.hashCode());
+		assertEquals(sourceFolderWithTrailingSlash.hashCode(), sourceFolderWithoutTrailingSlash.hashCode());
 	}
 }
