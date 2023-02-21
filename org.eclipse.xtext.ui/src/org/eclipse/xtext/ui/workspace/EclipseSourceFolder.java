@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2020, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,6 +11,8 @@ package org.eclipse.xtext.ui.workspace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.workspace.ISourceFolder;
+
+import com.google.common.base.Objects;
 
 public class EclipseSourceFolder implements ISourceFolder {
 
@@ -30,42 +32,32 @@ public class EclipseSourceFolder implements ISourceFolder {
 
 	@Override
 	public URI getPath() {
-		return URI.createPlatformResourceURI("/" + project.getName() + "/" + name + "/", true);
+		final URI result = URI.createPlatformResourceURI("/" + project.getName() + "/" + name, true);
+		if (result.hasTrailingPathSeparator()) {
+			return result;
+		} else {
+			return result.appendSegment("");
+		}
 	}
 
 	@Override
 	public int hashCode() {
-		int prime = 31;
-		int result = 1;
-		result = prime * result + ((project == null) ? 0 : project.hashCode());
-		return prime * result + ((name == null) ? 0 : name.hashCode());
+		return this.getPath().hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EclipseSourceFolder other = (EclipseSourceFolder) obj;
-		if (project == null) {
-			if (other.project != null)
-				return false;
-		} else if (!project.equals(other.project))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+		if (obj instanceof EclipseSourceFolder) {
+			URI path1 = this.getPath();
+			URI path2 = ((EclipseSourceFolder) obj).getPath();
+			return Objects.equal(path1, path2);
+		}
+		return false;
 	}
 
 	@Override
 	public String toString() {
-		return "project " + project + " name " + name;
+		return "project " + project + " name " + name + " (" + getPath() + ")";
 	}
 
 	public IProject getProject() {
