@@ -55,6 +55,7 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
+import com.google.common.hash.HashCode;
 
 /**
  * Abstract base for linking candidates that attempt to resolve features
@@ -74,6 +75,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * resolved feature, e.g. the implicit receiver, whether it's an extension and more.
 	 */
 	protected final IIdentifiableElementDescription description;
+	/**
+	 * A semantic hash over all sibling descriptions. Used to determine if a previously computed result can be reused in a subsequent
+	 * overload resolution attempt. 
+	 */
+	private HashCode allDescriptionsHash;
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	
 	protected AbstractPendingLinkingCandidate(
@@ -93,6 +99,20 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		super(expression, expectation, state);
 		this.description = description;
 		this.pendingLinkingCandidateResolver = pendingLinkingCandidateResolver;
+	}
+	
+	/**
+	 * @since 2.30
+	 */
+	protected void setAllDescriptionsHash(HashCode hashCode) {
+		this.allDescriptionsHash = hashCode;
+	}
+	
+	/**
+	 * @since 2.30
+	 */
+	protected HashCode getAllDescriptionsHash() {
+		return allDescriptionsHash;
 	}
 	
 	/**

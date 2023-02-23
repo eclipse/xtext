@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -54,6 +55,8 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hashing;
 
 /**
  * Base implementation of {@link ITypeComputationState}.
@@ -401,13 +404,15 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				return type;
 			}
 		};
-		Iterable<IEObjectDescription> descriptions = reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
-				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved, featureScopeSession, demandResolvedTypes);
+		List<IIdentifiableElementDescription> descriptions = getDescriptions(featureCall, proxyOrResolved, demandResolvedTypes);
+		HashCode allDescriptionsHash = Hashing.murmur3_128().hashUnencodedChars(descriptions.toString());
 		List<IFeatureLinkingCandidate> resultList = Lists.newArrayList();
 		AbstractPendingLinkingCandidate<?> previouslyResolved = resolvedTypes.forwardLinking(featureCall);
-		for(IEObjectDescription description: descriptions) {
-			IFeatureLinkingCandidate candidate = createCandidate(featureCall, demandComputedTypes, toIdentifiableDescription(description));
-			// TODO apply to constructors, too
+		for(IIdentifiableElementDescription description: descriptions) {
+			IFeatureLinkingCandidate candidate = createCandidate(featureCall, demandComputedTypes, description);
+			if (candidate instanceof AbstractPendingLinkingCandidate<?>) {
+				((AbstractPendingLinkingCandidate<?>) candidate).setAllDescriptionsHash(allDescriptionsHash);
+			}
 			if (matches(previouslyResolved, candidate)) {
 				return Collections.singletonList(candidate);
 			}
@@ -417,6 +422,16 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			resultList.add(new NullFeatureLinkingCandidate(featureCall, this));
 		}
 		return resultList;
+	}
+
+	private List<IIdentifiableElementDescription> getDescriptions(XAbstractFeatureCall featureCall, EObject proxyOrResolved,
+			ForwardingResolvedTypes demandResolvedTypes) {
+		List<IIdentifiableElementDescription> result = new ArrayList<>(8);
+		for(IEObjectDescription description:  reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
+				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved, featureScopeSession, demandResolvedTypes)) {
+			result.add(toIdentifiableDescription(description));
+		}
+		return result;
 	}
 
 	private boolean matches(AbstractPendingLinkingCandidate<?> previouslyResolved, IFeatureLinkingCandidate candidate) {
@@ -430,6 +445,9 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		IIdentifiableElementDescription prevDescription = previouslyResolved.description;
 		IIdentifiableElementDescription description = casted.description;
 		if (!prevDescription.getShadowingKey().equals(description.getShadowingKey())) {
+			return false;
+		}
+		if (!previouslyResolved.getAllDescriptionsHash().equals(casted.getAllDescriptionsHash())) {
 			return false;
 		}
 		if (!prevDescription.getElementOrProxy().equals(description.getElementOrProxy())) {
