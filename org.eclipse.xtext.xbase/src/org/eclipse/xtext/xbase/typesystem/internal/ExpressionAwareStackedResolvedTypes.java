@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,10 +11,12 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
@@ -81,7 +83,7 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 			if (candidate instanceof AbstractPendingLinkingCandidate<?>) {
 				AbstractPendingLinkingCandidate<?> casted = (AbstractPendingLinkingCandidate<?>) candidate;
 				if (casted.description instanceof BucketedEObjectDescription || casted.description instanceof SimpleIdentifiableElementDescription) {
-					forwardLinking().put((XAbstractFeatureCall) expression, casted);
+					forwardLinking().put(expression, casted);
 				}
 			}
 		}
@@ -89,16 +91,42 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	protected boolean canBeForwardResolved() {
-		if (expression instanceof XAbstractFeatureCall 
-				&& basicGetTypeParameters().isEmpty() 
-				&& basicGetTypeParameterHints().isEmpty() 
-				&& basicGetDeclardTypeParameters() == null
+		if (expression instanceof XAbstractFeatureCall && internalCanBeForwardResolved()) {
+			IFeatureLinkingCandidate candidate = this.getFeature((XAbstractFeatureCall)expression);
+			if (candidate != null && candidate.getTypeArguments().isEmpty()) {
+				return true;
+			}
+		} else if (expression instanceof XConstructorCall && internalCanBeForwardResolved()) {
+			IConstructorLinkingCandidate candidate = this.getConstructor((XConstructorCall) expression);
+			if (candidate != null && candidate.getTypeArguments().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean internalCanBeForwardResolved() {
+		boolean result = !hasUnresolvedTypeParameters() 
+				&& basicGetDeclaredTypeParameters() == null
 				&& basicGetReassignedTypes().isEmpty()
 				&& basicGetPropagatedTypes().isEmpty()
 				&& basicGetRefinedTypes().isEmpty()
-				&& basicGetTypes().isEmpty()) {
-			IFeatureLinkingCandidate candidate = this.getFeature((XAbstractFeatureCall)expression);
-			if (candidate != null && candidate.getTypeArguments().isEmpty()) {
+				&& basicGetTypes().isEmpty();
+		if (result) {
+			return true;
+		}
+		return false;
+	}
+
+	protected boolean hasUnresolvedTypeParameters() {
+		if (!basicGetTypeParameterHints().isEmpty()) {
+			return true;
+		}
+		if (basicGetTypeParameters().isEmpty()) {
+			return false;
+		}
+		for(UnboundTypeReference maybeUnbound: basicGetTypeParameters().values()) {
+			if (!maybeUnbound.isResolved()) {
 				return true;
 			}
 		}

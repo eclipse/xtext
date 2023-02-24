@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -169,7 +169,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		 * enclosing context expression. The resolution information can be kept around without repeated attempts
 		 * to resolve the same expression in all contexts again and again.
 		 */
-		final Map<XAbstractFeatureCall, AbstractPendingLinkingCandidate<?>> forwardLinking = new HashMap<>();
+		final Map<XExpression, AbstractPendingLinkingCandidate<?>> forwardLinking = new HashMap<>();
 		
 		ResolvedTypes root;
 		
@@ -289,12 +289,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return getServices().getEarlyExitComputer().getThrownExceptions(obj, this, this.getReferenceOwner());
 	}
 	
-	public Map<XAbstractFeatureCall, AbstractPendingLinkingCandidate<?>> forwardLinking() {
+	public Map<XExpression, AbstractPendingLinkingCandidate<?>> forwardLinking() {
 		return shared.forwardLinking;
 	}
 	
 	public AbstractPendingLinkingCandidate<?> forwardLinking(XAbstractFeatureCall featureCall) {
 		return shared.forwardLinking.get(featureCall);
+	}
+
+	public AbstractPendingLinkingCandidate<?> forwardLinking(XConstructorCall constructorCall) {
+		return shared.forwardLinking.get(constructorCall);
 	}
 	
 	/* @Nullable */
@@ -1381,7 +1385,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	private static <T> Set<T> newHashSet(T seed) {
-		HashSet<T> result = new HashSet<>();
+		Set<T> result = new HashSet<>();
 		result.add(seed);
 		return result;
 	}
@@ -1395,6 +1399,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
+	protected List<JvmTypeParameter> basicGetDeclaredTypeParameters() {
+		return declaredTypeParameters;
+	}
+	
+	/**
+	 * @deprecated use {@link #basicGetDeclaredTypeParameters()} instead.
+	 */
+	/* @Nullable */
+	@Deprecated(forRemoval = true)
 	protected List<JvmTypeParameter> basicGetDeclardTypeParameters() {
 		return declaredTypeParameters;
 	}

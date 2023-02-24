@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -411,10 +411,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		for(IIdentifiableElementDescription description: descriptions) {
 			IFeatureLinkingCandidate candidate = createCandidate(featureCall, demandComputedTypes, description);
 			if (candidate instanceof AbstractPendingLinkingCandidate<?>) {
-				((AbstractPendingLinkingCandidate<?>) candidate).setAllDescriptionsHash(allDescriptionsHash);
-			}
-			if (matches(previouslyResolved, candidate)) {
-				return Collections.singletonList(candidate);
+				AbstractPendingLinkingCandidate<?> casted = (AbstractPendingLinkingCandidate<?>) candidate;
+				casted.setAllDescriptionsHash(allDescriptionsHash);
+				if (matches(previouslyResolved, casted)) {
+					return Collections.singletonList(candidate);
+				}
 			}
 			resultList.add(candidate);
 		}
@@ -424,30 +425,30 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return resultList;
 	}
 
-	private List<IIdentifiableElementDescription> getDescriptions(XAbstractFeatureCall featureCall, EObject proxyOrResolved,
-			ForwardingResolvedTypes demandResolvedTypes) {
+	private List<IIdentifiableElementDescription> getDescriptions(XAbstractFeatureCall featureCall,
+			EObject proxyOrResolved, ForwardingResolvedTypes demandResolvedTypes) {
 		List<IIdentifiableElementDescription> result = new ArrayList<>(8);
-		for(IEObjectDescription description:  reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
-				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved, featureScopeSession, demandResolvedTypes)) {
+		for (IEObjectDescription description : reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
+				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, proxyOrResolved,
+				featureScopeSession, demandResolvedTypes)) {
 			result.add(toIdentifiableDescription(description));
 		}
 		return result;
 	}
 
-	private boolean matches(AbstractPendingLinkingCandidate<?> previouslyResolved, IFeatureLinkingCandidate candidate) {
+	private boolean matches(AbstractPendingLinkingCandidate<?> previouslyResolved, AbstractPendingLinkingCandidate<?> candidate) {
 		if (previouslyResolved == null) {
 			return false;
 		}
 		if (!previouslyResolved.getClass().equals(candidate.getClass())) {
 			return false;
 		}
-		AbstractPendingLinkingCandidate<?> casted = (AbstractPendingLinkingCandidate<?>)candidate;
 		IIdentifiableElementDescription prevDescription = previouslyResolved.description;
-		IIdentifiableElementDescription description = casted.description;
+		IIdentifiableElementDescription description = candidate.description;
 		if (!prevDescription.getShadowingKey().equals(description.getShadowingKey())) {
 			return false;
 		}
-		if (!previouslyResolved.getAllDescriptionsHash().equals(casted.getAllDescriptionsHash())) {
+		if (!previouslyResolved.getAllDescriptionsHash().equals(candidate.getAllDescriptionsHash())) {
 			return false;
 		}
 		if (!prevDescription.getElementOrProxy().equals(description.getElementOrProxy())) {
@@ -469,7 +470,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (left == right) {
 			return true;
 		}
-		if (right == null) {
+		if (left == null || right == null) {
 			return false;
 		}
 		return left.getUniqueIdentifier().equals(right.getUniqueIdentifier());
@@ -588,16 +589,36 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			return Collections.singletonList(result);
 		}
 		EObject proxyOrResolved = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
-		Iterable<IEObjectDescription> descriptions = reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
-				constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, proxyOrResolved, featureScopeSession, resolvedTypes);
+		List<IIdentifiableElementDescription> descriptions = getDescriptions(constructorCall, proxyOrResolved);
+		HashCode allDescriptionsHash = Hashing.murmur3_128().hashUnencodedChars(descriptions.toString());
 		List<IConstructorLinkingCandidate> resultList = Lists.newArrayList();
+		AbstractPendingLinkingCandidate<?> previouslyResolved = resolvedTypes.forwardLinking(constructorCall);
 		for(IEObjectDescription description: descriptions) {
-			resultList.add(createCandidate(constructorCall, toIdentifiableDescription(description)));
+			IConstructorLinkingCandidate candidate = createCandidate(constructorCall, toIdentifiableDescription(description));
+			if (candidate instanceof AbstractPendingLinkingCandidate<?>) {
+				AbstractPendingLinkingCandidate<?> casted = (AbstractPendingLinkingCandidate<?>) candidate;
+				casted.setAllDescriptionsHash(allDescriptionsHash);
+				if (matches(previouslyResolved, casted)) {
+					return Collections.singletonList(candidate);
+				}
+			}
+			resultList.add(candidate);
 		}
 		if (resultList.isEmpty()) {
 			resultList.add(new NullConstructorLinkingCandidate(constructorCall, this));
 		}
 		return resultList;
+	}
+
+	private List<IIdentifiableElementDescription> getDescriptions(XConstructorCall constructorCall,
+			EObject proxyOrResolved) {
+		List<IIdentifiableElementDescription> result = new ArrayList<>(8);
+		for (IEObjectDescription description : reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
+				constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, proxyOrResolved,
+				featureScopeSession, resolvedTypes)) {
+			result.add(toIdentifiableDescription(description));
+		}
+		return result;
 	}
 
 	protected IIdentifiableElementDescription toIdentifiableDescription(IEObjectDescription description) {
