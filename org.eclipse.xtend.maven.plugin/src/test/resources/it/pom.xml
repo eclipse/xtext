@@ -10,7 +10,7 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<xtextVersion>2.30.0-SNAPSHOT</xtextVersion>
 		<!-- The BOM version can be rather fixed for the test projects -->
-		<xtextBOMVersion>2.30.0.RC1</xtextBOMVersion>
+		<xtextBOMVersion>2.30.0.RC2</xtextBOMVersion>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
