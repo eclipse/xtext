@@ -333,7 +333,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA','schema/*',
 								'.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
 								'plugin.xml', 'systembundle.properties', 'profile.list')
-							classifier = 'ls'
+							archiveClassifier = 'ls'
 							append('plugin.properties')
 							mergeServiceFiles()
 						}
