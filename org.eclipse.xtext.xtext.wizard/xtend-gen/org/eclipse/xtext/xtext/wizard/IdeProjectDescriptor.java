@@ -1154,7 +1154,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder_1.append("\'plugin.xml\', \'systembundle.properties\', \'profile.list\')");
               _builder_1.newLine();
               _builder_1.append("\t");
-              _builder_1.append("classifier = \'ls\'");
+              _builder_1.append("archiveClassifier = \'ls\'");
               _builder_1.newLine();
               _builder_1.append("\t");
               _builder_1.append("append(\'plugin.properties\')");
