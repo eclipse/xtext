@@ -2,17 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Pure Xbase Runtime
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.30.0.qualifier
+Bundle-Version: 2.31.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.16.0",
  org.eclipse.emf.ecore,
- org.eclipse.xtext.xbase.lib;bundle-version="2.30.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.31.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.util,
- org.eclipse.xtend.lib;bundle-version="2.30.0",
+ org.eclipse.xtend.lib;bundle-version="2.31.0",
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
  org.objectweb.asm;bundle-version="[9.4.0,9.5.0)";resolution:=optional

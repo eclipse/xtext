@@ -3,12 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Generic IDE Services
 Bundle-Vendor: Eclipse Xtext
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ide;singleton:=true
-Bundle-Version: 2.30.0.qualifier
+Bundle-Version: 2.31.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase;visibility:=reexport,
- org.eclipse.xtext.xbase.lib;bundle-version="2.30.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.31.0",
  org.objectweb.asm;bundle-version="[9.4.0,9.5.0)",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Export-Package: org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr;x-friends:="org.eclipse.xtext.xbase.ui",
