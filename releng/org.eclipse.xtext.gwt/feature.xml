@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.gwt"
       label="%featureName"
-      version="2.30.0.qualifier"
+      version="2.31.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtext.xbase.lib.gwt"
       license-feature="org.eclipse.license"
@@ -23,8 +23,8 @@ SPDX-License-Identifier: EPL-2.0
    </copyright>
 
    <requires>
-      <import plugin="org.eclipse.xtext.xbase.lib" version="2.30.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtext.xbase.lib.source" version="2.30.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtext.xbase.lib" version="2.31.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtext.xbase.lib.source" version="2.31.0" match="equivalent"/>
    </requires>
 
    <plugin

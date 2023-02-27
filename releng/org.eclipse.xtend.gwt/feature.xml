@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtend.gwt"
       label="%featureName"
-      version="2.30.0.qualifier"
+      version="2.31.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtend.lib.gwt"
       license-feature="org.eclipse.license"
@@ -23,8 +23,8 @@ SPDX-License-Identifier: EPL-2.0
    </copyright>
 
    <requires>
-      <import feature="org.eclipse.xtext.gwt" version="2.30.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib" version="2.30.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.gwt" version="2.31.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib" version="2.31.0" match="equivalent"/>
    </requires>
 
    <plugin
