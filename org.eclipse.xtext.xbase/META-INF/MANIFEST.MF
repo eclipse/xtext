@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Model
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.30.0.qualifier
+Bundle-Version: 2.31.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.xbase;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore;bundle-version="2.26.0",
  org.eclipse.emf.common;bundle-version="2.24.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.xtext.xbase.lib;bundle-version="2.30.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.31.0",
  org.eclipse.xtend.lib;bundle-version="2.14.0";visibility:=reexport,
  org.objectweb.asm;bundle-version="[9.4.0,9.5.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-11
