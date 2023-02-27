@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtext.xtext.generator;singleton:=true
-Bundle-Version: 2.30.0.qualifier
+Bundle-Version: 2.31.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Name: Xtext Generator 2
 Bundle-Vendor: Eclipse Xtext
