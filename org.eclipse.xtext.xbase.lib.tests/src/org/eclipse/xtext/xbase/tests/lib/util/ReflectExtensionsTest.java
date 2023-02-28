@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -7,6 +7,8 @@
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.lib.util;
+
+import static org.junit.Assert.*;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
@@ -57,7 +59,41 @@ public class ReflectExtensionsTest {
 		String x = "foo";
 		Assert.assertEquals("o", ext.invoke(x, "substring", 1, 2));
 	}
+	
 
+	@Test
+	public void testInvokeWithStaticMethod() throws Exception {
+		String x = "foo";
+		ext.invoke(x, "join", "a", new String[]{"b", "c"});
+	}
+	
+	@Test
+	public void testInvokeWithPrivateStaticMethod() throws Exception {
+		MyClass x = new MyClass();
+		ext.invoke(x, "doit");
+	}
+	
+	@Test
+	public void testSetWithPrivateStaticField() throws Exception {
+		MyClass x = new MyClass();
+		ext.set(x, "x","doit");
+	}
+	
+	@Test
+	public void testGetWithPrivateStaticField() throws Exception {
+		MyClass x = new MyClass();
+		assertEquals("old", ext.get(x, "x"));
+	}
+	
+	public static class MyClass {
+		@SuppressWarnings("unused")
+		private static String doit() {
+			return "doit";
+		}
+		@SuppressWarnings("unused")
+		private String x = "old";
+	}
+	
 	@Test
 	public void testGet_01() throws Exception {
 		ReflectExtensionsTest x = new ReflectExtensionsTest();
@@ -95,5 +131,6 @@ public class ReflectExtensionsTest {
 		ext.set(x, "privateExt", null);
 		Assert.assertNull(x.privateExt);
 	}
+
 
 }

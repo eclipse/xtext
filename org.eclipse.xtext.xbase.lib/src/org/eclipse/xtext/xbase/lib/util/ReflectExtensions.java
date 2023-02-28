@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.lib.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Preconditions;
@@ -119,8 +120,15 @@ public class ReflectExtensions {
 			}
 		} while(compatible == null && (clazz = clazz.getSuperclass()) != null);
 		if (compatible != null) {
-			if (!compatible.canAccess(receiver))
-				compatible.setAccessible(true);
+			boolean isStatic = Modifier.isStatic(compatible.getModifiers());
+			if (isStatic) {
+				if (!compatible.canAccess(null))
+					compatible.setAccessible(true);
+			}
+			else {
+				if (!compatible.canAccess(receiver))
+					compatible.setAccessible(true);
+			}
 			return compatible.invoke(receiver, arguments);
 		}
 		// not found provoke method not found exception
