@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,7 +18,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 	static val REQUIREJS_VERSION = '2.3.6'
 //	static val REQUIREJS_TEXT_VERSION = '2.0.15'
 	static val JQUERY_VERSION = '3.6.0'
-	static val JETTY_VERSION = '9.4.50.v20221201'
+	static val JETTY_VERSION = '9.4.51.v20230217'
 	static val SLF4J_VERSION = '1.7.33'
 	static val ACE_VERSION = '1.3.3'
 	
