@@ -150,7 +150,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					test {
 						java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»', '«Outlet.MAIN_XTEND_GEN.sourceFolder»']
 						resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
-						xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
+						xtend.outputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
 					}
 				}
 			} else {
@@ -158,7 +158,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					main {
 						java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»', '«Outlet.TEST_XTEND_GEN.sourceFolder»']
 						resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
-						xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
+						xtend.outputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
 					}
 					test {
 						java.srcDirs = []
@@ -175,12 +175,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 				main {
 					java.srcDir '«Outlet.MAIN_SRC_GEN.sourceFolder»'
 					resources.srcDir '«Outlet.MAIN_SRC_GEN.sourceFolder»'
-					xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
+					xtend.outputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
 				}
 				test {
 					java.srcDir '«Outlet.TEST_SRC_GEN.sourceFolder»'
 					resources.srcDir '«Outlet.TEST_SRC_GEN.sourceFolder»'
-					xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
+					xtend.outputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
 				}
 			}
 		«ENDIF»

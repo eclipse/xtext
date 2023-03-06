@@ -325,7 +325,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\']");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append("xtendOutputDir = \'");
+        _builder.append("xtend.outputDir = \'");
         String _sourceFolder_5 = this.sourceFolder(Outlet.TEST_XTEND_GEN);
         _builder.append(_sourceFolder_5, "\t\t\t");
         _builder.append("\'");
@@ -366,7 +366,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\']");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append("xtendOutputDir = \'");
+        _builder.append("xtend.outputDir = \'");
         String _sourceFolder_11 = this.sourceFolder(Outlet.MAIN_XTEND_GEN);
         _builder.append(_sourceFolder_11, "\t\t\t");
         _builder.append("\'");
@@ -418,7 +418,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("xtendOutputDir = \'");
+        _builder.append("xtend.outputDir = \'");
         String _sourceFolder_14 = this.sourceFolder(Outlet.MAIN_XTEND_GEN);
         _builder.append(_sourceFolder_14, "\t\t");
         _builder.append("\'");
@@ -442,7 +442,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("xtendOutputDir = \'");
+        _builder.append("xtend.outputDir = \'");
         String _sourceFolder_17 = this.sourceFolder(Outlet.TEST_XTEND_GEN);
         _builder.append(_sourceFolder_17, "\t\t");
         _builder.append("\'");
