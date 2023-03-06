@@ -4,7 +4,7 @@ buildscript {
 		gradlePluginPortal()
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:3.0.2'
+		classpath 'org.xtext:xtext-gradle-plugin:4.0.0'
 	}
 }
 
