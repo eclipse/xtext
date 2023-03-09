@@ -1,0 +1,14 @@
+grammar org.eclipse.xtext.parsetree.impl.Bug305397 with org.eclipse.xtext.common.Terminals
+
+generate bug305397 "http://www.xtext.org/tests/bug305397"
+
+Model:
+    elements+=Element*
+;
+
+Element : 
+    {Element}
+    (a?='a')? 'element' (name=ID)?
+        elements+=Element*
+    'end'
+;

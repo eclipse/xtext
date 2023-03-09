@@ -1,0 +1,37 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+
+/* SuppressWarnings[InvalidTerminalruleName] */
+grammar org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage hidden(WS, SL_COMMENT) 
+generate backtrackingTestLanguage "http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest" 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Model :
+	(enums+=EnumName)* 
+	(ycs+=Yc)*
+	(abs+=Ab)* 
+	(xbs+=Xb)*
+	(ys+=CharY)*
+	(^as+=CharA)*;
+
+Ab: x=CharA y=Charb;
+Xb: x=CharX y=Charb;
+
+terminal CharA: 'A';
+terminal Charb: 'b';
+terminal CharX: 'X';
+terminal Yc: CharY CharC;
+terminal CharY: 'Y';
+terminal CharC: 'c';
+
+enum EnumName: abc='Abc'|efg="Efg";
+
+terminal WS         : (' '|'\t'|'\r'|'\n')+;
+terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;

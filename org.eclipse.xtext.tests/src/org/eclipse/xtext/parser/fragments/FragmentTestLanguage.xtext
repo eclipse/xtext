@@ -1,0 +1,119 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.fragments.FragmentTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate fragmentTestLanguage "http://www.eclipse.org/2015/tmf/xtext/fragments"
+ 
+ParserRuleFragments: {ParserRuleFragments} 
+  ( '#1' element=PRFNamed
+  | '#2' element=PRFNamed '->' ref=[PRFNamed]
+  | '#3' element=PRFNamedRefFirst
+  | '#4' element=PRFNamedWithAction
+//  | '#5' element=PRFNamedWithActionInFragment
+//  | '#6' element=PRFNamedWithActionInFragment2
+//  | '#7' element=PRFNamedWithActionInFragment3
+  | '#8' element=PRFNamedWithFQN
+  | '#9' element=PRFWithPredicate
+  | '#10' element=PRFNamedRecursive
+  | '#11' element=PRFNamedRecursiveFragment
+  )
+;
+
+PRFNamed: PRFNamedFragment (
+	  ':' ref=[PRFNamed]
+	| '-' PRFNamedRef
+	)?
+;
+
+PRFNamedRecursive returns PRFNamedWithAction:
+	name=ID RecursiveFromFragment
+;
+
+PRFNamedRecursiveFragment returns PRFNamedWithAction:
+	name=ID RecursiveFragment
+;
+
+PRFNamedRefFirst returns PRFNamed:
+	ref=[PRFNamed] '<-' PRFNamedFragment
+;
+
+PRFNamedWithAction returns PRFNamed:
+	PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?
+;
+
+//PRFNamedWithActionInFragment returns PRFNamed:
+//	FragmentWithAction ('-' ref=[PRFNamed])?
+//;
+//
+//PRFNamedWithActionInFragment2 returns PRFNamed:
+//	name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
+//;
+//
+//PRFNamedWithActionInFragment3 returns PRFNamed:
+//	FragmentWithAction3 ('-' ref=[PRFNamed])?
+//;
+
+PRFNamedWithFQN returns PRFNamed:
+	name=FQN ('-' ref=[PRFNamed|FQN2])?
+;
+
+PRFWithPredicate returns PRFNamed:
+	PRFNamedFragment =>('-' PRFNamedRef)?
+;
+
+FQN:
+	ID Suffix? 
+;
+
+FQN2:
+	ID Suffix2*
+;
+
+fragment Suffix:
+	'.' ID Suffix?
+;
+
+fragment Suffix2:
+	'.' ID
+;
+
+//fragment FragmentWithAction returns PRFNamed:
+//	name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+//;
+//
+//fragment FragmentWithAction2 returns PRFNamed:
+//	{PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+//;
+//
+//fragment FragmentWithAction3 returns PRFNamed:
+//	name=ID ({PRFNamedWithAction.prev=current} '->' name=ID (ref2=[PRFNamed])?)* 
+//;
+
+fragment PRFNamedFragment returns PRFNamed:
+	name=ID
+;
+
+fragment PRFNamedRef returns PRFNamed:
+	ref=[PRFNamed]
+;
+fragment RecursiveFromFragment returns PRFNamedWithAction:
+	prev=NamedInParentheses
+;
+
+NamedInParentheses returns PRFNamed:
+	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+;
+
+fragment RecursiveFragment returns PRFNamedWithAction:
+	'(' RecursiveFragment ')' | prev=NamedByAction
+;
+
+NamedByAction returns PRFNamed:
+	{PRFNamed} name=ID
+;

@@ -1,0 +1,12 @@
+
+import foo.bar.sub.*
+
+foo.bar {
+   entity Person {
+     String name
+     Person father
+   }
+   entity Foo {
+     Person bar
+   }
+}

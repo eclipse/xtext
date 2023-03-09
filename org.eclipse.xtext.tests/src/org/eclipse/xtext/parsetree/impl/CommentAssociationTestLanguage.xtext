@@ -1,0 +1,10 @@
+grammar org.eclipse.xtext.parsetree.impl.CommentAssociationTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate commentAssociation "http://www.eclipse.org/xtext/tests/CommentAssociation"
+
+Model: 
+	elements += Element*;
+	
+Element:
+	'element' name = ID ({Element.child = current} 'parent' name=ID)?;
+

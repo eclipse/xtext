@@ -1,0 +1,67 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.testlanguages.GenerateSingleTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+
+Workflow {
+	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
+		platformUri = "${runtimeProject}/.."
+		scanClassPath = true
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+		}
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+		}
+		
+		registerGeneratedEPackage = "org.eclipse.xtext.XtextPackage"
+		registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
+	}
+	
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtime = {
+					manifest = {
+						merge = false
+					}
+				}
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
+		language = { 
+			grammarUri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage2.xtext"
+			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
+		}
+		language = { 
+			grammarUri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage3.xtext"
+			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
+		}
+	}
+}

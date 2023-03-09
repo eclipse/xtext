@@ -1,0 +1,87 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.grammarinheritance.GenerateInheritanceLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+
+Workflow {
+	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
+		platformUri = "${runtimeProject}/../.."
+		scanClassPath = true
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+		}
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+		}
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+		registerGeneratedEPackage = "org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage"
+	}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen/org/eclipse/xtext/grammarinheritance"
+	}
+	
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
+		language = auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				generateStub = true
+			}
+		}
+		language = auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				generateStub = true
+			}
+		}
+		language = auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest3Language.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+	}
+}

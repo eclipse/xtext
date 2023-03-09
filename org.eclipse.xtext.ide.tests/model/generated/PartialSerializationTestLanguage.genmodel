@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
+    modelDirectory="/org.eclipse.xtext.ide.tests/testlang-src-gen" modelPluginID="org.eclipse.xtext.ide.tests"
+    forceOverwrite="true" modelName="PartialSerializationTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
+    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../testlang-src/org/eclipse/xtext/ide/tests/testlanguage/WithTransient.genmodel#//withtransient">
+  <genPackages prefix="PartialSerializationTestLanguage" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
+      disposableProviderFactory="true" fileExtensions="pstl" ecorePackage="PartialSerializationTestLanguage.ecore#/">
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//Model/clazz"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//MandatoryValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//MandatoryValue/name"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//OptionalValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//OptionalValue/name"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ManyOptionalValues"/>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ManyMandatoryValues">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//ManyMandatoryValues/name"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//MandatoryChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//MandatoryChild/child"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//OptionalChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//OptionalChild/child"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//TwoChildLists">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChildLists/directChildren"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChildLists/childsList"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//TwoChilds">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChilds/directChild"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChilds/optChild"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ChildWithSubChilds">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//ChildWithSubChilds/children"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ChildWithSubChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//ChildWithSubChild/subChilds"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//SubChild">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//SubChild/name"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//MandatoryChildList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//MandatoryChildList/children"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//OptionalChildList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//OptionalChildList/children"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//Node">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//Node/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//Node/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//Node/refs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//Node/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//Node/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//EClassRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//EClassRef/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//WithTransientContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//WithTransientContainer/child"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ManyValues">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//ManyValues/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

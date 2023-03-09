@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext/emf-gen" editDirectory="/org.eclipse.xtext.edit/src"
+    editorDirectory="/org.eclipse.xtext.editor/src" modelPluginID="org.eclipse.xtext"
+    forceOverwrite="true" modelName="Xtext" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" copyrightFields="false"
+    editPluginID="org.eclipse.xtext.edit" editorPluginID="org.eclipse.xtext.editor"
+    usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>Xtext.ecore</foreignModel>
+  <genPackages prefix="Xtext" basePackage="org.eclipse" disposableProviderFactory="true"
+      ecorePackage="Xtext.ecore#/">
+    <genClasses ecoreClass="Xtext.ecore#//Grammar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Grammar/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//Grammar/usedGrammars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Grammar/definesHiddenTokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//Grammar/hiddenTokens"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Grammar/metamodelDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Grammar/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//AbstractRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractRule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractRule/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractRule/alternatives"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractRule/annotations"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//AbstractMetamodelDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractMetamodelDeclaration/ePackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractMetamodelDeclaration/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//GeneratedMetamodel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//GeneratedMetamodel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//ReferencedMetamodel"/>
+    <genClasses ecoreClass="Xtext.ecore#//ParserRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ParserRule/definesHiddenTokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//ParserRule/hiddenTokens"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//ParserRule/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ParserRule/fragment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ParserRule/wildcard"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//TypeRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//TypeRef/metamodel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//TypeRef/classifier"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//AbstractElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractElement/cardinality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractElement/predicated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractElement/firstSetPredicated"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Action/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Action/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Action/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Keyword">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Keyword/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//RuleCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//RuleCall/rule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//RuleCall/arguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//RuleCall/explicitlyCalled"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Assignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Assignment/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Assignment/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Assignment/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//CrossReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CrossReference/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CrossReference/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//TerminalRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//TerminalRule/fragment"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//AbstractNegatedToken">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractNegatedToken/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//NegatedToken"/>
+    <genClasses ecoreClass="Xtext.ecore#//UntilToken"/>
+    <genClasses ecoreClass="Xtext.ecore#//Wildcard"/>
+    <genClasses ecoreClass="Xtext.ecore#//EnumRule"/>
+    <genClasses ecoreClass="Xtext.ecore#//EnumLiteralDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//EnumLiteralDeclaration/enumLiteral"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//EnumLiteralDeclaration/literal"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Alternatives"/>
+    <genClasses ecoreClass="Xtext.ecore#//UnorderedGroup"/>
+    <genClasses ecoreClass="Xtext.ecore#//Group">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Group/guardCondition"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//CharacterRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CharacterRange/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CharacterRange/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//CompoundElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompoundElement/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//EOF"/>
+    <genClasses ecoreClass="Xtext.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//NamedArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//NamedArgument/parameter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//NamedArgument/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//NamedArgument/calledByName"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Condition"/>
+    <genClasses ecoreClass="Xtext.ecore#//Conjunction"/>
+    <genClasses ecoreClass="Xtext.ecore#//Negation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Negation/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Disjunction"/>
+    <genClasses ecoreClass="Xtext.ecore#//CompositeCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompositeCondition/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompositeCondition/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//ParameterReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//ParameterReference/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//LiteralCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//LiteralCondition/true"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Annotation/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

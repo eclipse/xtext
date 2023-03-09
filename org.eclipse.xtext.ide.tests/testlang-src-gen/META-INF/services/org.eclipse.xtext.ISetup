@@ -1,0 +1,5 @@
+org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageIdeSetup
+org.eclipse.xtext.ide.tests.testlanguage.ide.IndentationAwareUiTestLanguageIdeSetup
+org.eclipse.xtext.ide.tests.testlanguage.ide.PartialContentAssistTestLanguageIdeSetup
+org.eclipse.xtext.ide.tests.testlanguage.ide.PartialSerializationTestLanguageIdeSetup
+org.eclipse.xtext.ide.tests.testlanguage.ide.RenameTestLanguageIdeSetup

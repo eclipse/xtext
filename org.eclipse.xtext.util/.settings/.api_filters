@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.util" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="guava lowerbound to 14.0" id="927989779">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="com.google.guava"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

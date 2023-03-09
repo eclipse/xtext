@@ -1,0 +1,11 @@
+epatch LIST_SET {
+  resource res0 {
+  left uri "SimpleMM1Instance1.xmi";
+  right uri "SimpleMM1Instance11.xmi";
+  }
+
+  object res0#/ {
+    intlist = [ 2:"6" | 2:"23" ];
+  }
+
+}

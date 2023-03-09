@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: mavenTychoP2J17.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: mavenTychoP2J17.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: mavenTychoP2J17,
+ org.junit;bundle-version="4.13.2",
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Automatic-Module-Name: mavenTychoP2J17.tests

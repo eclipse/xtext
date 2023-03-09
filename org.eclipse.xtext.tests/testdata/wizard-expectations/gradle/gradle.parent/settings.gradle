@@ -1,0 +1,3 @@
+include 'gradle'
+include 'gradle.ide'
+include 'gradle.web'

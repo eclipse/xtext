@@ -1,0 +1,35 @@
+dependencies {
+	api "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
+}
+configurations {
+	mwe2 {
+		extendsFrom compileClasspath
+	}
+}
+
+dependencies {
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
+	mwe2 'org.eclipse.xtext:xtext-antlr-generator'
+}
+
+task generateXtextLanguage(type: JavaExec) {
+	mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+	classpath = configurations.mwe2
+	inputs.file "src/mydsl/GenerateMyDsl.mwe2"
+	inputs.file "src/mydsl/MyDsl.xtext"
+	outputs.dir "src-gen"
+	args += "src/mydsl/GenerateMyDsl.mwe2"
+	args += "-p"
+	args += "rootPath=/${projectDir}/.."
+}
+
+processResources.dependsOn(generateXtextLanguage)
+generateXtext.dependsOn(generateXtextLanguage)
+clean.dependsOn(cleanGenerateXtextLanguage)
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
+//this is an eclipse plugin project
+eclipseClasspath.enabled=false
+cleanEclipseClasspath.enabled=false

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="root"
+    nsURI="http://xtext.org/genmodeltest-v1.0" nsPrefix="root">
+  <eClassifiers xsi:type="ecore:EClass" name="RootClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference1" eType="#//nestedPackage1/NestedClass1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="RootDataType" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="RootEnum">
+    <eLiterals name="literal" value="10"/>
+  </eClassifiers>
+  <eSubpackages name="nestedPackage1" nsURI="http://xtext.org/genmodeltest-nested-v1.0"
+      nsPrefix="nestedPackage1">
+    <eClassifiers xsi:type="ecore:EClass" name="NestedClass1"/>
+  </eSubpackages>
+  <eSubpackages name="noLiterals" nsURI="http://xtext.org/genmodeltest-noliterals-v1.0"
+      nsPrefix="noLiterals">
+    <eClassifiers xsi:type="ecore:EClass" name="NoLitClass">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reference2" eType="#//nestedPackage1/NestedClass1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="NoLitDataType" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="NoLitEnum">
+      <eLiterals name="literal" value="10"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

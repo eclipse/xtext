@@ -20,6 +20,18 @@
 		<module>../org.eclipse.xtend.lib.tests</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtend.lib.gwt.test</module>
+		<module>../org.eclipse.xtext</module>
+		<module>../org.eclipse.xtext.util</module>
+		<module>../org.eclipse.xtext.tests</module>
+		<module>../org.eclipse.xtext.ide</module>
+		<module>../org.eclipse.xtext.ide.tests</module>
+		<module>../org.eclipse.xtext.testing</module>
+		<module>../org.eclipse.xtext.testlanguages</module>
+		<module>../org.eclipse.xtext.testlanguages.ide</module>
+		<module>../org.eclipse.xtext.xtext.ide</module>
+		<module>../org.eclipse.xtext.xtext.bootstrap</module>
+		<module>../org.eclipse.xtext.xtext.generator</module>
+		<module>../org.eclipse.xtext.xtext.wizard</module>
 	</modules>
 
 	<!--

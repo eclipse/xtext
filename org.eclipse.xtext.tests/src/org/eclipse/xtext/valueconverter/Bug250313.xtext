@@ -1,0 +1,35 @@
+/*******************************************************************************
+ * Copyright (c) 2009, 2016 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.valueconverter.Bug250313 with org.eclipse.xtext.common.Terminals
+
+generate bug250313 "http://org.eclipse.xtext.valueconverter.Bug250313"
+
+Model:    ('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) ) 
+		| ('1+' multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+		| ('2' value = STRING) 
+		| ('2+' multiValue += STRING) 
+		| ('3' value = Datatype)
+		| ('3+' multiValue += Datatype)
+		| ('4' value = NestedDatatype)
+		| ('4+' multiValue += NestedDatatype)
+		|
+		  ('content' children = Child);
+
+Datatype: ID '-' ID;
+
+NestedDatatype: ID '+' Datatype?;
+
+Child: Child1 | Child2;
+
+Child1: name=ID;
+
+Child2: name=STRING;
+
+// TODO rename test language to ValueConverterTestLanguage
+// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug

@@ -1,0 +1,67 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SimpleExpressions with org.eclipse.xtext.common.Terminals 
+
+generate simpleExpressions "http://www.eclipse.org/xtext/xtext/generator/parser/antlr/simpleExpressions"
+
+IfCondition:
+  (elseif ?= 'else')? 'if' '(' condition = Expression ')' '{';
+  
+
+Expression returns Expression:
+	AndExpression ( {OrExpression.left = current} '||' right = AndExpression )*
+;
+
+AndExpression returns Expression:
+	Comparison ( {AndExpression.left = current} '&&' right = Comparison )*
+;
+
+Comparison returns Expression:
+	PrefixExpression ( {Comparison.left = current} operator = ('=='|'<='|'>=') right = PrefixExpression)?
+;
+
+PrefixExpression returns Expression:
+	{NotExpression} '!' expression = Atom
+  | Atom
+;
+
+Atom returns Expression:
+	ParenthesizedExpression
+  | NumberLiteral
+  | MethodCall
+  | BooleanLiteral
+;
+
+NumberLiteral:
+	value = INT
+;
+
+BooleanLiteral:
+	{BooleanLiteral} (value?='true' | 'false')
+;
+
+ParenthesizedExpression returns Expression:
+	'(' Expression ')'
+;
+
+MethodCall:
+	value = MethodCallLiteral
+;
+
+MethodCallLiteral:
+	FQN ('(' (Argument (',' Argument )*)? ')' ('.' MethodCallLiteral)? )?
+;
+
+Argument:
+	MethodCallLiteral | INT
+;
+
+FQN:
+	ID ('.' ID)*
+;

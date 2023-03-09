@@ -1,0 +1,71 @@
+/*
+ * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+grammar org.eclipse.xtext.ide.tests.testlanguage.TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate testLanguage "http://www.eclipse.org/xtext/ide/tests/testlanguage/TestLanguage"
+
+Model:
+    elements+=AbstractElement*
+;
+
+PackageDeclaration:
+    'package' name=QualifiedName '{'
+        (elements+=AbstractElement)*
+    '}'
+;
+
+AbstractElement:
+    PackageDeclaration |
+    TypeDeclaration
+;
+
+TypeDeclaration:
+    'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
+       members+=Member*
+    '}'
+;
+
+Member returns Member:
+    Property |
+    Operation
+;
+
+Property:
+    type=Type name=ID
+;
+
+Type :
+    (TypeReference | PrimitiveType) (arrayDiemensions+='['']')*
+;
+
+Operation returns Operation:
+    {Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+        (operationCall=OperationCall)?
+    '}'
+;
+
+OperationCall:
+    operation=[Operation|ID] '(' (params+=INT (',' params+=INT)*)? ')'
+;
+
+Parameter returns Parameter:
+    {Parameter} name=ID ':' type=Type
+;
+
+TypeReference:
+    typeRef=[TypeDeclaration|QualifiedName]
+;
+
+PrimitiveType:
+    name=('string'|'int'|'boolean'|'void')
+;
+
+QualifiedName:
+    ID ('.' ID)*
+;

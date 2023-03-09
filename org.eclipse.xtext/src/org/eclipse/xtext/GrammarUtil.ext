@@ -1,0 +1,113 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+
+import org::eclipse::emf::ecore;
+import org::eclipse::xtext;
+
+extension org::eclipse::xtext::Extensions reexport;
+
+String getFragment(org::eclipse::emf::ecore::EObject object) :
+	JAVA org.eclipse.xtext.EcoreUtil2.getURIFragment(org.eclipse.emf.ecore.EObject);
+	
+String getId(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getLanguageId(org.eclipse.xtext.Grammar);
+	
+String getName(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getName(org.eclipse.xtext.Grammar);
+	
+String getNamespace(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getNamespace(org.eclipse.xtext.Grammar);
+
+String getClasspathRelativePathToXmi(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getClasspathRelativePathToXmi(org.eclipse.xtext.Grammar);
+
+// ***********************************************************************************
+// Containers
+
+Grammar containingGrammar(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.getGrammar(org.eclipse.emf.ecore.EObject); 
+
+AbstractRule containingRule(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingRule(org.eclipse.emf.ecore.EObject);
+	
+ParserRule containingParserRule(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingParserRule(org.eclipse.emf.ecore.EObject);
+	
+EnumRule containingEnumRule(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingEnumRule(org.eclipse.emf.ecore.EObject);
+	 
+Assignment containingAssignment(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
+
+Group containingGroup(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingGroup(org.eclipse.emf.ecore.EObject);
+
+UnorderedGroup containingUnorderedGroup(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingUnorderedGroup(org.eclipse.emf.ecore.EObject);
+		
+List[AbstractElement] elementsBeforeThisInContainingGroup(AbstractElement e) :
+	JAVA org.eclipse.xtext.GrammarUtil.elementsBeforeThisInContainingGroup(org.eclipse.xtext.AbstractElement);
+
+// ***********************************************************************************
+// Containment
+
+List[Action] containedActions(org::eclipse::emf::ecore::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedActions(org.eclipse.emf.ecore.EObject);
+
+List[RuleCall] containedRuleCalls(org::eclipse::emf::ecore::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedRuleCalls(org.eclipse.emf.ecore.EObject);
+
+List[Assignment] containedAssignments(org::eclipse::emf::ecore::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedAssignments(org.eclipse.emf.ecore.EObject);
+	
+List[Keyword] containedKeywords(org::eclipse::emf::ecore::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedKeywords(org.eclipse.emf.ecore.EObject);
+	
+List[AbstractElement] containedAbstractElements(org::eclipse::emf::ecore::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedAbstractElements(org.eclipse.emf.ecore.EObject);
+
+
+// ***********************************************************************************
+// Shortcuts
+	
+Boolean isAssigned(org::eclipse::emf::ecore::EObject this) : 
+	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);
+	
+Boolean isDatatypeRule(ParserRule this) : 
+	JAVA org.eclipse.xtext.GrammarUtil.isDatatypeRule(org.eclipse.xtext.ParserRule);	
+	
+List[TerminalRule] allTerminalRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allTerminalRules(org.eclipse.xtext.Grammar);
+
+List[ParserRule] allParserRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allParserRules(org.eclipse.xtext.Grammar);
+	
+List[EnumRule] allEnumRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allEnumRules(org.eclipse.xtext.Grammar);
+	
+List[AbstractMetamodelDeclaration] allMetamodelDeclarations(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allMetamodelDeclarations(org.eclipse.xtext.Grammar);
+
+List[Grammar] allUsedGrammars(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allUsedGrammars(org.eclipse.xtext.Grammar);
+	
+List[AbstractRule] allRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allRules(org.eclipse.xtext.Grammar);
+	
+EReference eReference(CrossReference this) :
+	JAVA org.eclipse.xtext.GrammarUtil.getReference(org.eclipse.xtext.CrossReference);
+
+Boolean isMultipleCardinality(AbstractElement e) :
+	JAVA org.eclipse.xtext.GrammarUtil.isMultipleCardinality(org.eclipse.xtext.AbstractElement);
+	
+Boolean isOptionalCardinality(AbstractElement e) :
+	JAVA org.eclipse.xtext.GrammarUtil.isOptionalCardinality(org.eclipse.xtext.AbstractElement);
+
+Collection[EPackage] allEPackagesToValidate(Grammar this):
+	JAVA org.eclipse.xtext.GrammarUtil.allEPackagesToValidate(org.eclipse.xtext.Grammar);

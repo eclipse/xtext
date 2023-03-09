@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>*.testlang</string>
+	</array>
+	<key>name</key>
+	<string>testlang</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>keyword.control.testlang</string>
+			<key>match</key>
+			<string>\b(type|string|int|boolean)\b</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.testlang</string>
+</dict>
+</plist>

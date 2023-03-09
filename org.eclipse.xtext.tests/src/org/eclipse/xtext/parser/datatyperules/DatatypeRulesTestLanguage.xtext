@@ -1,0 +1,37 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate datatypeRulesTestLanguage "http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest"
+ 
+CompositeModel:
+  (model+=Model)+; 
+
+Model: 
+  id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
+  
+ModelId returns ecore::EString:
+  ID '.' ID;
+
+NestedModelId :
+  ModelId '.' ModelId;
+  
+Fraction returns ecore::EBigDecimal:
+  INT ('/' INT)?;
+  
+Vector :
+  '(' INT INT ')';
+  
+Dots returns ecore::EString:
+  ( '.' '.' ) | '..';
+
+Double returns ecore::EDouble:
+	'-'? INT? '.' INT ('E' '-'? INT)?;

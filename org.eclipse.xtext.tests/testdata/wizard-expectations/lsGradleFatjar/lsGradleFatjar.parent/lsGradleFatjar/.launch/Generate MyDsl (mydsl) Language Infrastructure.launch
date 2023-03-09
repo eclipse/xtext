@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.buildship.core.launch.runconfiguration">
+<listAttribute key="arguments"/>
+<stringAttribute key="gradle_distribution" value="GRADLE_DISTRIBUTION(WRAPPER)"/>
+<listAttribute key="jvm_arguments"/>
+<booleanAttribute key="show_console_view" value="true"/>
+<booleanAttribute key="show_execution_view" value="true"/>
+<listAttribute key="tasks">
+<listEntry value="build"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;&lt;item path=&quot;/lsGradleFatjar.parent&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/lsGradleFatjar&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/lsGradleFatjar.ide&quot; type=&quot;4&quot;/&gt;&#10;;&lt;/resources&gt;}"/>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:/lsGradleFatjar}"/>
+</launchConfiguration>

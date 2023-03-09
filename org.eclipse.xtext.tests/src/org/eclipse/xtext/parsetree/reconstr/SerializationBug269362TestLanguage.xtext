@@ -1,0 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parsetree.reconstr.SerializationBug269362TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate serializationBug269362TestLanguage "http://www.eclipse.org/2009/tmf/xtext/SerializationBugTest/269362"
+ 
+Model:
+  'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
+;
+

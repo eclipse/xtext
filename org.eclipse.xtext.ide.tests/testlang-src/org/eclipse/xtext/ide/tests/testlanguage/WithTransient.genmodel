@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
+    modelDirectory="/org.eclipse.xtext.ide.tests/testlang-src-gen" modelPluginID="org.eclipse.xtext.ide.tests"
+    forceOverwrite="true" modelName="WithTransient" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="11.0" copyrightFields="false" runtimeVersion="2.29">
+  <foreignModel>WithTransient.ecore</foreignModel>
+  <genPackages prefix="Withtransient" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
+      disposableProviderFactory="true" ecorePackage="WithTransient.ecore#/">
+    <genClasses ecoreClass="WithTransient.ecore#//WithTransient">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WithTransient.ecore#//WithTransient/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute WithTransient.ecore#//WithTransient/packageName"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

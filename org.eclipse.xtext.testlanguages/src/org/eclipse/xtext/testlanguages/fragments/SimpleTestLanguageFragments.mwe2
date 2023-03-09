@@ -1,0 +1,73 @@
+module org.eclipse.xtext.testlanguages.fragments.SimpleTestLanguageFragments
+
+import org.eclipse.xtext.xtext.generator.*
+
+var grammarURI
+var backtrack = false
+var memoize = false
+var classSplitting = true
+
+var jdkLevel = "JDK110"
+
+var parser = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+  	options = auto-inject {
+  		fieldsPerClass = "100"
+  		methodsPerClass = "100"
+  	}
+}
+
+XtextGeneratorLanguage {
+	grammarUri = grammarURI
+
+	// Java API to access grammar elements (required by several other fragments)
+	fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
+
+	// generates Java API for the generated EPackages 
+	fragment = ecore.EMFGeneratorFragment2 auto-inject {
+		emfRuntimeVersion = "2.29"
+	}
+
+	// a custom ResourceFactory for use with EMF 
+	fragment = resourceFactory.ResourceFactoryFragment2 {}
+	fragment = serializer.SerializerFragment2 {
+		generateStub = false
+	}
+
+	// The antlr parser generator fragment.
+	fragment = parser
+
+	// java-based API for validation 
+	fragment = validation.ValidatorFragment2 {
+	}
+
+	// scoping and exporting API
+	// fragment = scoping.ImportURIScopingFragment {}
+	// fragment = exporting.SimpleNamesFragment {}
+
+	// scoping and exporting API 
+	fragment = scoping.ImportNamespacesScopingFragment2 {}
+	fragment = exporting.QualifiedNamesFragment2 {}
+	fragment = builder.BuilderIntegrationFragment2 {}
+
+	// formatter API 
+	fragment = formatting.Formatter2Fragment2 {
+		generateStub=true
+	}
+
+	// labeling API 
+	fragment = ui.labeling.LabelProviderFragment2 {}
+
+	// outline API 
+	fragment = ui.outline.OutlineTreeProviderFragment2 {}
+	fragment = ui.outline.QuickOutlineFragment2 {}
+
+	// quickfix API 
+	fragment = ui.quickfix.QuickfixProviderFragment2 {}
+
+	// content assist API  
+	fragment = ui.contentAssist.ContentAssistFragment2 {}
+
+//    fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {
+//    	options = auto-inject {}
+//    }
+}

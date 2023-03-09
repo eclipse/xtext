@@ -1,0 +1,58 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.serializer.ContextFinderTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate contextFinderTest "http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage"
+
+Model:
+	("#0" model=Model2) |
+	("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)) | 
+	("#2" nestedType=(NestedTypeTest1|NestedTypeTest2)) | 
+	("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)) | 
+	("#4" parentRef=(ParentRefTest1|ParentRefTest2)) | 
+	("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2)) |
+	("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2)) |	
+	("#7" name=STRING nodeExclusion=(NodeExclusion1|NodeExclusion2)) |	
+	("#8" name=STRING nodeExclusionList=(NodeExclusion1List|NodeExclusion2List))	
+	;
+	
+Model2 returns Model: {Model} "model";
+	
+AttributeExclusionTest1 returns AttributeExclusionTest: "kw1" attr1=ID;
+AttributeExclusionTest2 returns AttributeExclusionTest: "kw2" attr2=ID;
+
+NestedTypeTest1 returns NestedTypeTest:	nested=NestedTypeChild1;
+NestedTypeTest2 returns NestedTypeTest:	nested=NestedTypeChild2;
+NestedTypeChild: NestedTypeChild1| NestedTypeChild2;
+NestedTypeChild1: "kw1" val=ID;
+NestedTypeChild2: "kw2" val=ID;
+
+NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
+NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
+
+ParentRefTest1: "kw1" child1=ParentRefTestChild1;
+ParentRefTest2: "kw2" child2=ParentRefTestChild2;
+ParentRefTestChild1 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild1?;
+ParentRefTestChild2 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+
+QuantityExclusionTest1 returns QuantityExclusionTest: "kw1" attr1=ID attr2=ID?;
+QuantityExclusionTest2 returns QuantityExclusionTest: "kw2" attr1=ID? attr2=ID;
+
+ValueExclusionTest1 returns ValueExclusionTest: val=ValueExclusionTestEn1;
+ValueExclusionTest2 returns ValueExclusionTest: val=ValueExclusionTestEn2;
+enum ValueExclusionTestEn0 returns ValueExclusionTestEn: lit0;
+enum ValueExclusionTestEn1 returns ValueExclusionTestEn: lit1;
+enum ValueExclusionTestEn2 returns ValueExclusionTestEn: lit2;
+
+NodeExclusion1 returns NodeExclusion: ref=[Model|ID]; 
+NodeExclusion2 returns NodeExclusion: ref=[Model|STRING];
+
+NodeExclusion1List returns NodeExclusionList: ref+=[Model|ID]+; 
+NodeExclusion2List returns NodeExclusionList: ref+=[Model|STRING]+;

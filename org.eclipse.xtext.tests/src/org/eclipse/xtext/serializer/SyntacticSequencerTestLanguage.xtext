@@ -1,0 +1,124 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2016 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate syntacticsequencertest "http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage"
+
+Model:
+	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative | 
+	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition | 
+	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller | x16=Bug398890;
+
+MandatoryKeywords:
+	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
+
+Exp0:
+	"#2" Addition0;
+
+Addition0 returns Exp0:
+	Prim0 ({Add0.left=current} '+' right=Prim0)*;
+
+Prim0 returns Exp0:
+	{Val0} name=ID;
+
+Exp1:
+	"#3" Addition1;
+
+Addition1 returns Exp1:
+	Prim1 ({Add1.left=current} '+' right=Prim1)*;
+
+Prim1 returns Exp1:
+	{Val1} name=ID | '(' Addition1 ')';
+
+Exp2:
+	"#4" Addition2;
+
+Addition2 returns Exp2:
+	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
+
+Multiplication2 returns Exp2:
+	Prim2 ({Mult2.left=current} '*' right=Prim2)*;
+
+Prim2 returns Exp2:
+	{Val2} name=ID | '(' Addition2 ')';
+
+terminal TERMINAL_ID:
+	'$1' ID;
+
+DatatypeID:
+	ID;
+
+SingleCrossReference:
+	"#5" name=(TERMINAL_ID | ID | "kw5")
+	("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
+	("kw2" ref2=[SingleCrossReference|DatatypeID])?
+	("kw3" ref3=[SingleCrossReference|ID])?
+	("kw4" ref4=[SingleCrossReference])?
+	("kw5" ref5=[SingleCrossReference|"kw5"])?;
+
+BooleanAlternative:
+	"#6" bool=BooleanAlternativeLiteral;
+
+BooleanAlternativeLiteral:
+	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+	
+UnassignedDatatype:
+	"#7" val=ID KW1;
+
+KW1:
+	"kw1" | "matched" INT?;
+	
+OptionalSingleTransition:
+	"#8" KW1? val=ID;
+				
+OptionalManyTransition:
+	"#9" KW1* val=ID;
+				
+MandatoryManyTransition:
+	"#10" KW1+ val=ID;
+				
+AlternativeTransition:
+	"#11" (KW1 | "kw2") val=ID;			
+	
+terminal BOOLEAN_TERMINAL_ID:
+	'%1' ID;
+
+BooleanDatatypeID:
+	ID;
+	
+BooleanValues:
+	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
+
+LongAlternative:
+  '#13' foo=ID 
+    ("kw1" val1+=ID? | 
+     "kw2" val2+=ID? | 
+     "kw3" val3+=ID? | 
+     "kw4" val4+=ID? | 
+     "kw5" val5+=ID? | 
+     "kw6" val6+=ID? | 
+     "kw7" val7+=ID? | 
+     "kw8" val8+=ID?)* 
+  '!';
+  
+ActionOnly:
+	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
+	
+FragmentCaller returns FragmentCallerType:
+	"#15" val1=ID Fragment1 val=ID;
+	
+fragment Fragment1 returns FragmentCallerType:
+	fragVal=ID;
+	
+Bug398890:
+	C_COMMENT_END name=ID
+;	
+	
+terminal C_COMMENT_END: '*/';	

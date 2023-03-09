@@ -1,0 +1,13 @@
+grammar org.eclipse.xtext.linking.Bug313089TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate bug313089 "http://www.eclipse.org/xtext/test/Bug313089TestLanguage"
+
+Foo: 
+	name=ID (bar=Bar|baz=Baz) ref=[Foo];
+	
+Bar:
+	{Bar} name=ID; 
+	
+Baz:
+	'baz' name=ID ({Baz.child=current} 'baz' name=ID)*;
+	

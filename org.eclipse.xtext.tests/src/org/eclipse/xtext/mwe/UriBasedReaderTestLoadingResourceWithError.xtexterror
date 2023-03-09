@@ -1,0 +1,7 @@
+grammar org.eclipse.xtext.mwe.UriBasedReaderTestLoadingResourceWithError
+	with org.eclipse.xtext.mwe.UriBasedReaderTestResourceWithError
+
+generate Model "model/model"
+
+Model: 
+	value = InvalidMain;

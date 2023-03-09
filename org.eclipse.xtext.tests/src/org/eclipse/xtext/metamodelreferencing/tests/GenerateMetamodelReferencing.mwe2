@@ -1,0 +1,75 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.metamodelreferencing.tests.GenerateMetamodelReferencing
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+
+Workflow {
+	bean = StandaloneSetup {
+		scanClassPath = true
+		platformUri="${runtimeProject}/.."
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+		}
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+		}
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel"
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel"
+	}
+	bean = testlanguages.ecore.EcoreSupport {}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen/org/eclipse/xtext/metamodelreferencing/tests"
+	}
+	
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
+		language = {
+			referencedResource = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+			referencedResource = "platform:/resource/${projectName}/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore"
+			referencedResource = "platform:/resource/${projectName}/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore"
+			referencedResource = "platform:/resource/${projectName}/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore"
+			grammarUri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+			}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+	}
+}
