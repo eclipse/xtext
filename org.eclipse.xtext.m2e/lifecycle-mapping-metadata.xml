@@ -1,0 +1,36 @@
+<lifecycleMappingMetadata>
+  <pluginExecutions>
+  	<pluginExecution>
+       <pluginExecutionFilter>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <versionRange>[2.0,)</versionRange>
+        <goals>
+          <goal>compile</goal>
+          <goal>testCompile</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <configurator>
+          <id>org.eclipse.xtext.m2e.binFolderConfigurator</id>
+        </configurator>
+      </action>
+    </pluginExecution>
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <groupId>org.eclipse.xtext</groupId>
+        <artifactId>xtext-maven-plugin</artifactId>
+        <versionRange>[2.4.0,)</versionRange>
+        <goals>
+          <goal>generate</goal>
+          <goal>testGenerate</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+           <configurator>
+             <id>org.eclipse.xtext.m2e.xtextConfigurator</id>
+           </configurator>
+         </action>
+    </pluginExecution>
+  </pluginExecutions>
+</lifecycleMappingMetadata>

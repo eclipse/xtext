@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="noTerminalExtension" nsURI="http://www.eclipse.org/xtext/ui/common/tests/2018/contentAssistNoTerminalExtension"
+    nsPrefix="noTerminalExtension">
+  <eClassifiers xsi:type="ecore:EClass" name="PolygonBasedShape">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" unique="false" upperBound="-1"
+        eType="#//PolygonBasedNodeShape"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PolygonBasedNodeShape">
+    <eLiterals name="octagon" literal="octagon"/>
+    <eLiterals name="oval" value="1" literal="oval"/>
+    <eLiterals name="parallelogram" value="2" literal="parallelogram"/>
+    <eLiterals name="pentagon" value="3" literal="pentagon"/>
+    <eLiterals name="plain" value="4" literal="plain"/>
+    <eLiterals name="plaintext" value="5" literal="plaintext"/>
+    <eLiterals name="point" value="6" literal="point"/>
+    <eLiterals name="polygon" value="7" literal="polygon"/>
+    <eLiterals name="primersite" value="8" literal="primersite"/>
+    <eLiterals name="promoter" value="9" literal="promoter"/>
+    <eLiterals name="proteasesite" value="10" literal="proteasesite"/>
+    <eLiterals name="proteinstab" value="11" literal="proteinstab"/>
+    <eLiterals name="rarrow" value="12" literal="rarrow"/>
+    <eLiterals name="record" value="13" literal="record"/>
+    <eLiterals name="rect" value="14" literal="rect"/>
+    <eLiterals name="rectangle" value="15" literal="rectangle"/>
+    <eLiterals name="restrictionsite" value="16" literal="restrictionsite"/>
+    <eLiterals name="ribosite" value="17" literal="ribosite"/>
+    <eLiterals name="rnastab" value="18" literal="rnastab"/>
+    <eLiterals name="rpromoter" value="19" literal="rpromoter"/>
+  </eClassifiers>
+</ecore:EPackage>

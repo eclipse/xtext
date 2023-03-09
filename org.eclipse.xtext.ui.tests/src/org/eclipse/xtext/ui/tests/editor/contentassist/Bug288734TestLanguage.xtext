@@ -1,0 +1,39 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage
+ 	with org.eclipse.xtext.common.Terminals
+
+generate bug288734TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage"
+
+Model :
+    constants+=TConstant
+;
+    
+TConstant:
+    TStringConstant | TIntegerConstant | TBooleanConstant
+;
+    
+TStringConstant :
+    (annotations+=TAnnotation)*
+    'constant' 'string' name=ID
+;
+
+TIntegerConstant:
+    (annotations+=TAnnotation)*
+    'constant' 'integer' name=ID
+;
+
+TBooleanConstant:
+    (annotations+=TAnnotation)*
+    'constant' 'boolean' name=ID
+;
+
+TAnnotation:
+    '@desc' description=STRING
+; 

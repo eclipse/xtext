@@ -1,0 +1,4 @@
+org.eclipse.xtext.common.types.xtext.ui.ide.ContentAssistTestLanguageIdeSetup
+org.eclipse.xtext.common.types.xtext.ui.ide.RefactoringTestLanguageIdeSetup
+org.eclipse.xtext.common.types.xtext.ui.ide.RefactoringTestLanguage1IdeSetup
+org.eclipse.xtext.common.types.xtext.ui.ide.RefactoringTestLanguage2IdeSetup

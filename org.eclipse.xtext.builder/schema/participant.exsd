@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.xtext.builder" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.xtext.builder" id="participant" name="Xtext Builder Participant"/>
+      </appInfo>
+      <documentation>
+         This extension point is used to define participants for the Xtext Builder. All registered participants will be called subsequently in no particular order.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="participant"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="participant">
+      <annotation>
+         <documentation>
+            A participant for the Xtext Builder.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified name of the Java class implementing &lt;samp&gt;org.eclipse.xtext.builder.IXtextBuilderParticipant
+&lt;/samp&gt;.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.builder.IXtextBuilderParticipant"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="fileExtensions" type="string">
+            <annotation>
+               <documentation>
+                  A comma separated list of file extensions that this participant is interested in. It will not be actived for changes to other files. If left empty, the participant will always be activated.
+
+E.g. &lt;samp&gt;mydsl,myotherdsl&lt;/samp&gt;
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         Xtext 1.0.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         Following is an example of how a builder participant can be registered: 
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.xtext.builder.participant&quot;&gt;
+    &lt;participant
+          class=&quot;org.xtext.example.MyDslBuilderParticipant&quot;/&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+
+A more flexible way uses Google Guice to instantiate the participant for a language &lt;code&gt;org.xtext.example.MyDsl&lt;/code&gt;:
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.xtext.builder.participant&quot;&gt;
+    &lt;participant
+          class=&quot;org.xtext.example.MyDslExecutableExtensionFactory:org.xtext.example.MyDslBuilderParticipant&quot;/&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+
+A builder participant can be restricted to only run on certain file extensions. It will not even be loaded before such a file is encountered.
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.xtext.builder.participant&quot;&gt;
+    &lt;participant
+          class=&quot;org.xtext.example.MyDslExecutableExtensionFactory:org.xtext.example.MyDslBuilderParticipant&quot;
+          fileExtensions=&quot;mydsl,myotherdsl&quot;
+          /&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiinfo"/>
+      </appInfo>
+      <documentation>
+         The value of the class attribute must represent an 
+implementor of &lt;samp&gt;org.eclipse.xtext.builder.IXtextBuilderParticipant&lt;/samp&gt;.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         The Xtext framework itself does not deliver any predefined builder participants.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+This program and the accompanying materials are made available under the
+terms of the Eclipse Public License 2.0 which is available at
+&lt;a href=&quot;http://www.eclipse.org/legal/epl-2.0&quot;&gt;http://www.eclipse.org/legal/epl-2.0&lt;/a&gt;
+
+SPDX-License-Identifier: EPL-2.0
+      </documentation>
+   </annotation>
+
+</schema>

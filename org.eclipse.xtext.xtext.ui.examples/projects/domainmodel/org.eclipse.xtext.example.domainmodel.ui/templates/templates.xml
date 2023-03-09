@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <template name="Package" description="template for a Package"
+        id="org.eclipse.xtext.example.domainmodel.Domainmodel.PackageDeclaration"
+        context="org.eclipse.xtext.example.domainmodel.Domainmodel.PackageDeclaration"
+        enabled="true">package ${name} {
+	${cursor}
+}</template>
+    <template name="Entity" description="template for an Entity"
+        id="org.eclipse.xtext.example.domainmodel.Domainmodel.Entity"
+        context="org.eclipse.xtext.example.domainmodel.Domainmodel.Entity"
+        enabled="true"
+>entity ${name} {
+	${cursor}
+}</template>
+    <template name="Property" description="template for a Property"
+        id="org.eclipse.xtext.example.domainmodel.Domainmodel.Property"
+        context="org.eclipse.xtext.example.domainmodel.Domainmodel.Property"
+        enabled="true">${propertyName} : ${typeName}</template>
+    <template name="Operation" description="template for an Operation"
+        id="org.eclipse.xtext.example.domainmodel.Domainmodel.Operation"
+        context="org.eclipse.xtext.example.domainmodel.Domainmodel.Operation"
+        enabled="true">op ${name} (${paramType1} ${paramName1}) : ${returnType} {
+	${cursor}
+}</template>
+</templates>

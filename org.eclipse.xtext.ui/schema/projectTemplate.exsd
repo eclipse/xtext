@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.xtext.ui" id="projectTemplate" name="Xtext Project Template"/>
+      </appInfo>
+      <documentation>
+         A template for a new project to be selectable by the user in the new project wizard. Only available if the template project wizard is actually used.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="projectTemplateProvider"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="projectTemplateProvider">
+      <annotation>
+         <documentation>
+            Provider for any number of project templates to be selected in the new project wizard.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The class implementing IProjectTemplateProvider that will provide instances of AbstractProjectTemplate. These instances represent templates and will be made available to the user with the template new project wizard.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="grammarName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of the grammar these templates belong to. Determines which wizard displays the templates.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         Xtext 2.14
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         Register a provider for project templates for the example language.
+&lt;pre&gt;
+&lt;extension
+      point=&quot;org.eclipse.xtext.ui.projectTemplate&quot;&gt;
+   &lt;projectTemplateProvider
+         class=&quot;org.xtext.example.mydsl.ui.wizard.MyDslProjectTemplateProvider&quot;
+         grammarName=&quot;org.xtext.example.mydsl.MyDsl&quot;&gt;
+   &lt;/projectTemplateProvider&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+
+From a newly generated template new project wizard.
+      </documentation>
+   </annotation>
+
+
+
+
+</schema>

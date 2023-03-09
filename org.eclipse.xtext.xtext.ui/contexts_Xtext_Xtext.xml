@@ -1,0 +1,12 @@
+<contexts>
+	<context id="newProject_Advanced">
+		<description>
+This is the Advanced Wizard Page.
+Describe meaning of:
+ - Facets
+ - Build System
+<b> - Source Layout</b>
+		
+		</description>
+	</context>
+</contexts>

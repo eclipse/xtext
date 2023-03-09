@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.builder/emf-gen" editDirectory=""
+    editorDirectory="" modelPluginID="org.eclipse.xtext.builder" modelName="BuilderState"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container" testsDirectory=""
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" copyrightFields="false"
+    runtimeVersion="2.29">
+  <foreignModel>BuilderState.ecore</foreignModel>
+  <genPackages prefix="BuilderState" basePackage="org.eclipse.xtext.builder" disposableProviderFactory="true"
+      ecorePackage="BuilderState.ecore#/">
+    <genDataTypes ecoreDataType="BuilderState.ecore#//EURI"/>
+    <genDataTypes ecoreDataType="BuilderState.ecore#//EStringArray"/>
+    <genDataTypes ecoreDataType="BuilderState.ecore#//QualifiedName"/>
+    <genClasses ecoreClass="BuilderState.ecore#//ResourceDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ResourceDescription/URI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//ResourceDescription/exportedObjects"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//ResourceDescription/referenceDescriptions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ResourceDescription/importedNames"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//ResourceDescription/isEmpty"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//ResourceDescription/getExportedObjectsByType">
+        <genParameters ecoreParameter="BuilderState.ecore#//ResourceDescription/getExportedObjectsByType/type"/>
+      </genOperations>
+      <genOperations ecoreOperation="BuilderState.ecore#//ResourceDescription/getExportedObjects">
+        <genParameters ecoreParameter="BuilderState.ecore#//ResourceDescription/getExportedObjects/type"/>
+        <genParameters ecoreParameter="BuilderState.ecore#//ResourceDescription/getExportedObjects/name"/>
+        <genParameters ecoreParameter="BuilderState.ecore#//ResourceDescription/getExportedObjects/ignoreCase"/>
+      </genOperations>
+      <genOperations ecoreOperation="BuilderState.ecore#//ResourceDescription/getExportedObjectsByObject">
+        <genParameters ecoreParameter="BuilderState.ecore#//ResourceDescription/getExportedObjectsByObject/object"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="BuilderState.ecore#//EObjectDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//EObjectDescription/fragment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//EObjectDescription/userData"/>
+    </genClasses>
+    <genClasses ecoreClass="BuilderState.ecore#//UserDataEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//UserDataEntry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//UserDataEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BuilderState.ecore#//ReferenceDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ReferenceDescription/externalFormOfEReference"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BuilderState.ecore#//IEObjectDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderState.ecore#//IEObjectDescription/eClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IEObjectDescription/name"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getEObjectURI"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getEObjectOrProxy"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getUserData">
+        <genParameters ecoreParameter="BuilderState.ecore#//IEObjectDescription/getUserData/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getUserDataKeys"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getQualifiedName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BuilderState.ecore#//IReferenceDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/sourceEObjectUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/targetEObjectUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/indexInList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/containerEObjectURI"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.tests
+Bundle-SymbolicName: org.eclipse.xtext.tests; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.xtext.linking.lazy,
+ org.eclipse.xtext.parser.fragments,
+ org.eclipse.xtext.parser.indentation,
+ org.eclipse.xtext.parser.parameters,
+ org.eclipse.xtext.formatting2.internal,
+ org.eclipse.xtext.formatting2.regionaccess.internal
+Require-Bundle: org.eclipse.xtext.tests,
+ org.eclipse.xtext.xbase.lib
+Import-Package: org.junit.runner;version="4.13.2",
+ org.junit.runner.manipulation;version="4.13.2",
+ org.junit.runner.notification;version="4.13.2",
+ org.junit.runners;version="4.13.2",
+ org.junit.runners.model;version="4.13.2",
+ org.hamcrest.core
+Bundle-Activator: org.eclipse.xtext.ui.internal.XtextGrammarTestLanguageActivator

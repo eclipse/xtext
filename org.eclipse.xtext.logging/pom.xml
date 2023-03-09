@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-eclipse</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<packaging>eclipse-plugin</packaging>
+	<artifactId>org.eclipse.xtext.logging</artifactId>
+	<version>1.2.24-SNAPSHOT</version>
+
+	<properties>
+		<!-- redefines the property for versions of artifacts not in this Git repository,
+			so that it takes the same snapshot version of this project's parent'. -->
+		<xtext-dev-bom-version>${project.parent.version}</xtext-dev-bom-version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<dependency-resolution>
+						<extraRequirements>
+							<requirement>
+								<!-- TODO: this should not be necessary, but somehow Tycho doesn't 
+									handle the 'Import-Package:' directive in MANIFEST.MF properly -->
+								<type>eclipse-plugin</type>
+								<id>org.eclipse.core.runtime</id>
+								<versionRange>3.0.0</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>

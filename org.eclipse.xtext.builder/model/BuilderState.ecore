@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="builderState"
+    nsURI="http://www.eclipse.org/xtext/builderstate/1.0" nsPrefix="builderState">
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.resource.IResourceDescription">
+    <eOperations name="isEmpty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getExportedObjectsByType" upperBound="-1" eType="#//IEObjectDescription">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </eOperations>
+    <eOperations name="getExportedObjects" upperBound="-1" eType="#//IEObjectDescription">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      <eParameters name="name" eType="#//QualifiedName"/>
+      <eParameters name="ignoreCase" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getExportedObjectsByObject" upperBound="-1" eType="#//IEObjectDescription">
+      <eParameters name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" lowerBound="1" eType="#//EURI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exportedObjects" upperBound="-1"
+        eType="#//IEObjectDescription" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceDescriptions"
+        upperBound="-1" eType="#//IReferenceDescription" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNames" upperBound="-1"
+        eType="#//QualifiedName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectDescription" eSuperTypes="#//IEObjectDescription">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragment" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userData" upperBound="-1"
+        eType="#//UserDataEntry" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserDataEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EURI" instanceClassName="org.eclipse.emf.common.util.URI"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EStringArray" instanceTypeName="String[]"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceDescription" eSuperTypes="#//IReferenceDescription">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalFormOfEReference"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="QualifiedName" instanceClassName="org.eclipse.xtext.naming.QualifiedName"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IEObjectDescription" instanceClassName="org.eclipse.xtext.resource.IEObjectDescription"
+      abstract="true" interface="true">
+    <eOperations name="getEObjectURI" eType="#//EURI"/>
+    <eOperations name="getEObjectOrProxy" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eOperations name="getUserData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getUserDataKeys" ordered="false" eType="#//EStringArray"/>
+    <eOperations name="getQualifiedName" eType="#//QualifiedName"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//QualifiedName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IReferenceDescription" instanceClassName="org.eclipse.xtext.resource.IReferenceDescription"
+      abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceEObjectUri" eType="#//EURI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetEObjectUri" eType="#//EURI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="indexInList" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerEObjectURI" eType="#//EURI"/>
+  </eClassifiers>
+</ecore:EPackage>

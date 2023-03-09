@@ -1,0 +1,44 @@
+/*
+ * AUTOBOXING
+ * Xbase supports Java's primitives and also the autoboxing introduced
+ * with Java 1.4.
+ */
+ 
+'string'.length
+// 6 (int)
+
+val Integer i = 'string'.length
+i
+// 6 (Integer)
+
+/*
+ * It does autoboxing even when used in the receiver context.
+ */
+
+'string'.length.toString
+// 6 (String)
+
+ 
+'string'.toCharArray
+// [C@388e28 (char[])
+
+'string'.toCharArray.get(3)
+// i (char)
+
+/*
+ * Arrays are automatically coerced to Lists.
+ */
+val java.util.List<Character> l = 'string'.toCharArray
+l
+// [s, t, r, i, n, g] (List<Character>)
+
+/*
+ * Closure Coercion
+ * A closure can be passed whenever a type is expected which has only defined 
+ * one method in addition to the ones inherited from java.lang.Object
+ */
+val java.util.Comparator<String> comparator = [a,b| a.length.compareTo(b.length)]
+comparator.compare('1', ' 2')
+// -1 (int)
+
+

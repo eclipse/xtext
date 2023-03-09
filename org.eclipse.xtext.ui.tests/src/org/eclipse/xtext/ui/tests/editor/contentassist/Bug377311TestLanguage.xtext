@@ -1,0 +1,21 @@
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage with org.eclipse.xtext.common.Terminals hidden(WS, NewLine)
+
+generate bug377311 "http://www.eclipse.org/xtext/ui/common/tests/2009/bug377311TestLanguage"
+
+Root :
+	childs+=Child*
+;
+
+Child hidden (WS, ID):
+	'child' name=STRING
+;
+
+@Override 
+terminal WS:
+	(' ' | '\t')+
+;
+
+/* SuppressWarnings[InvalidTerminalRuleName] */
+terminal NewLine:
+	('\r'? '\n')
+;

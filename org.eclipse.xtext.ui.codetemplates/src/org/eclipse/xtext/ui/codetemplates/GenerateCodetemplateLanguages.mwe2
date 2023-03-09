@@ -1,0 +1,144 @@
+module org.eclipse.xtext.ui.codetemplates.GenerateCodetemplateLanguages
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+
+var rootPath = ".."
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2015, \${year} itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+
+Workflow {
+	
+	component = XtextGenerator {
+		configuration = {
+			
+			project = StandardProjectConfig {
+				baseName = "org.eclipse.xtext.ui.codetemplates"
+				rootPath = rootPath
+				runtimeTest = {
+					enabled = true
+				}
+				eclipsePlugin = {
+					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = true
+					root = "${rootPath}/org.eclipse.xtext.ui.codetemplates.tests"
+				}
+				createEclipseMetaData = true
+			}
+			code = {
+				preferXtendStubs = false
+				encoding = "UTF-8"
+				lineDelimiter = "\n"
+				fileHeader = fileHeader
+			}
+		}
+		language = StandardLanguage {
+			referencedResource = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel"
+			name = "org.eclipse.xtext.ui.codetemplates.Codetemplates"
+			fileExtensions = "codetemplates"
+
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			
+			parserGenerator = {
+				combinedGrammar = false
+				options = {
+					
+				}
+			}
+			
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.CodetemplatesLexer"
+				runtime = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/parser/antlr/lexer"
+			}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.CodetemplatesHighlightingLexer"
+				highlighting = true
+			}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesContentAssistLexer"
+				contentAssist = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates.ide/src-gen/org/eclipse/xtext/ui/codetemplates/ide/contentassist/antlr/lexer"
+			}
+			
+			generator = {
+				generateStub = false
+			}
+			
+			junitSupport = {
+				generateStub = false
+				skipXbaseTestingPackage = true
+			}
+			
+			renameRefactoring = {
+				useChangeSerializer = false
+			}
+		}
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
+			fileExtensions = "___singlecodetemplate"
+
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			
+			parserGenerator = {
+				combinedGrammar = false
+				options = {
+					
+				}
+			}
+			
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.SingleCodetemplateLexer"
+				runtime = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/parser/antlr/lexer"
+			}
+			
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleCodetemplateHighlightingLexer"
+					highlighting = true
+			}
+			
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleCodetemplateContentAssistLexer"
+				contentAssist = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates.ide/src-gen/org/eclipse/xtext/ui/codetemplates/ide/contentassist/antlr/lexer"
+			}
+			
+			generator = {
+				generateStub = false
+			}
+			
+			codeTemplates = ui.templates.CodetemplatesGeneratorFragment2.Disabled {
+				
+			}
+			
+			junitSupport = {
+				generateStub = false
+				skipXbaseTestingPackage = true
+			}
+		}
+	}
+}

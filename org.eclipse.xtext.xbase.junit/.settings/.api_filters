@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.xbase.junit" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="2.11.0" id="923795461">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="2.9.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="927989779">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/compiler/JavaVersionModule.java" type="org.eclipse.xtext.xbase.compiler.JavaVersionModule">
+        <filter comment="2.11.0" id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.compiler.JavaVersionModule"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.11.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/compiler/SingletonGeneratorConfigModule.java" type="org.eclipse.xtext.xbase.compiler.SingletonGeneratorConfigModule">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.compiler.SingletonGeneratorConfigModule"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.11.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/junit/SynchronizedXtextResourceSetProvider.java" type="org.eclipse.xtext.xbase.junit.SynchronizedXtextResourceSetProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.junit.SynchronizedXtextResourceSetProvider"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.11.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/xbase/compiler/InMemoryJavaCompiler.java" type="org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler">
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="CompilerOptions"/>
+                <message_argument value="InMemoryJavaCompiler"/>
+                <message_argument value="InMemoryJavaCompiler(ClassLoader, CompilerOptions)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

@@ -4,6 +4,7 @@ build/
 .gradle/
 *._trace
 *.xtendbin
+.antlr-generator-*.jar
 org.eclipse.buildship.core.prefs
 .DS_Store
 target

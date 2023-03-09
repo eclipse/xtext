@@ -1,0 +1,471 @@
+package org.eclipse.xtext.ui.tests.quickfix.parser.antlr.internal;
+
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.xtext.ui.tests.quickfix.services.QuickfixCrossrefTestLanguageGrammarAccess;
+
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+
+/*******************************************************************************
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+@SuppressWarnings("all")
+public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternalAntlrParser {
+    public static final String[] tokenNames = new String[] {
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'ref'", "'}'"
+    };
+    public static final int RULE_ID=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_STRING=4;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_INT=6;
+    public static final int T__11=11;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int EOF=-1;
+
+    // delegates
+    // delegators
+
+
+        public InternalQuickfixCrossrefTestLanguageParser(TokenStream input) {
+            this(input, new RecognizerSharedState());
+        }
+        public InternalQuickfixCrossrefTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
+        }
+        
+
+    public String[] getTokenNames() { return InternalQuickfixCrossrefTestLanguageParser.tokenNames; }
+    public String getGrammarFileName() { return "InternalQuickfixCrossrefTestLanguage.g"; }
+
+
+
+     	private QuickfixCrossrefTestLanguageGrammarAccess grammarAccess;
+
+        public InternalQuickfixCrossrefTestLanguageParser(TokenStream input, QuickfixCrossrefTestLanguageGrammarAccess grammarAccess) {
+            this(input);
+            this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
+        }
+
+        @Override
+        protected String getFirstRuleName() {
+        	return "Main";
+       	}
+
+       	@Override
+       	protected QuickfixCrossrefTestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
+
+
+
+
+    // $ANTLR start "entryRuleMain"
+    // InternalQuickfixCrossrefTestLanguage.g:69:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    public final EObject entryRuleMain() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMain = null;
+
+
+        try {
+            // InternalQuickfixCrossrefTestLanguage.g:69:45: (iv_ruleMain= ruleMain EOF )
+            // InternalQuickfixCrossrefTestLanguage.g:70:2: iv_ruleMain= ruleMain EOF
+            {
+             newCompositeNode(grammarAccess.getMainRule()); 
+            pushFollow(FollowSets000.FOLLOW_1);
+            iv_ruleMain=ruleMain();
+
+            state._fsp--;
+
+             current =iv_ruleMain; 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMain"
+
+
+    // $ANTLR start "ruleMain"
+    // InternalQuickfixCrossrefTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    public final EObject ruleMain() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_elements_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalQuickfixCrossrefTestLanguage.g:82:2: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalQuickfixCrossrefTestLanguage.g:83:2: ( (lv_elements_0_0= ruleElement ) )*
+            {
+            // InternalQuickfixCrossrefTestLanguage.g:83:2: ( (lv_elements_0_0= ruleElement ) )*
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
+
+                if ( ((LA1_0>=RULE_STRING && LA1_0<=RULE_ID)) ) {
+                    alt1=1;
+                }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // InternalQuickfixCrossrefTestLanguage.g:84:3: (lv_elements_0_0= ruleElement )
+            	    {
+            	    // InternalQuickfixCrossrefTestLanguage.g:84:3: (lv_elements_0_0= ruleElement )
+            	    // InternalQuickfixCrossrefTestLanguage.g:85:4: lv_elements_0_0= ruleElement
+            	    {
+
+            	    				newCompositeNode(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0());
+            	    			
+            	    pushFollow(FollowSets000.FOLLOW_3);
+            	    lv_elements_0_0=ruleElement();
+
+            	    state._fsp--;
+
+
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getMainRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"elements",
+            	    					lv_elements_0_0,
+            	    					"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
+            	    				afterParserOrEnumRuleCall();
+            	    			
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop1;
+                }
+            } while (true);
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMain"
+
+
+    // $ANTLR start "entryRuleElement"
+    // InternalQuickfixCrossrefTestLanguage.g:105:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    public final EObject entryRuleElement() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleElement = null;
+
+
+        try {
+            // InternalQuickfixCrossrefTestLanguage.g:105:48: (iv_ruleElement= ruleElement EOF )
+            // InternalQuickfixCrossrefTestLanguage.g:106:2: iv_ruleElement= ruleElement EOF
+            {
+             newCompositeNode(grammarAccess.getElementRule()); 
+            pushFollow(FollowSets000.FOLLOW_1);
+            iv_ruleElement=ruleElement();
+
+            state._fsp--;
+
+             current =iv_ruleElement; 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleElement"
+
+
+    // $ANTLR start "ruleElement"
+    // InternalQuickfixCrossrefTestLanguage.g:112:1: ruleElement returns [EObject current=null] : ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' ) ;
+    public final EObject ruleElement() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_doc_0_0=null;
+        Token lv_name_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        Token otherlv_5=null;
+        Token otherlv_6=null;
+        EObject lv_contained_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalQuickfixCrossrefTestLanguage.g:118:2: ( ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' ) )
+            // InternalQuickfixCrossrefTestLanguage.g:119:2: ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' )
+            {
+            // InternalQuickfixCrossrefTestLanguage.g:119:2: ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' )
+            // InternalQuickfixCrossrefTestLanguage.g:120:3: ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}'
+            {
+            // InternalQuickfixCrossrefTestLanguage.g:120:3: ( (lv_doc_0_0= RULE_STRING ) )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
+
+            if ( (LA2_0==RULE_STRING) ) {
+                alt2=1;
+            }
+            switch (alt2) {
+                case 1 :
+                    // InternalQuickfixCrossrefTestLanguage.g:121:4: (lv_doc_0_0= RULE_STRING )
+                    {
+                    // InternalQuickfixCrossrefTestLanguage.g:121:4: (lv_doc_0_0= RULE_STRING )
+                    // InternalQuickfixCrossrefTestLanguage.g:122:5: lv_doc_0_0= RULE_STRING
+                    {
+                    lv_doc_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_4); 
+
+                    					newLeafNode(lv_doc_0_0, grammarAccess.getElementAccess().getDocSTRINGTerminalRuleCall_0_0());
+                    				
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getElementRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"doc",
+                    						lv_doc_0_0,
+                    						"org.eclipse.xtext.common.Terminals.STRING");
+                    				
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalQuickfixCrossrefTestLanguage.g:138:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalQuickfixCrossrefTestLanguage.g:139:4: (lv_name_1_0= RULE_ID )
+            {
+            // InternalQuickfixCrossrefTestLanguage.g:139:4: (lv_name_1_0= RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:140:5: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
+
+            					newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_6); 
+
+            			newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
+            		
+            // InternalQuickfixCrossrefTestLanguage.g:160:3: ( (lv_contained_3_0= ruleElement ) )*
+            loop3:
+            do {
+                int alt3=2;
+                int LA3_0 = input.LA(1);
+
+                if ( ((LA3_0>=RULE_STRING && LA3_0<=RULE_ID)) ) {
+                    alt3=1;
+                }
+
+
+                switch (alt3) {
+            	case 1 :
+            	    // InternalQuickfixCrossrefTestLanguage.g:161:4: (lv_contained_3_0= ruleElement )
+            	    {
+            	    // InternalQuickfixCrossrefTestLanguage.g:161:4: (lv_contained_3_0= ruleElement )
+            	    // InternalQuickfixCrossrefTestLanguage.g:162:5: lv_contained_3_0= ruleElement
+            	    {
+
+            	    					newCompositeNode(grammarAccess.getElementAccess().getContainedElementParserRuleCall_3_0());
+            	    				
+            	    pushFollow(FollowSets000.FOLLOW_6);
+            	    lv_contained_3_0=ruleElement();
+
+            	    state._fsp--;
+
+
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getElementRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"contained",
+            	    						lv_contained_3_0,
+            	    						"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
+            	    					afterParserOrEnumRuleCall();
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop3;
+                }
+            } while (true);
+
+            // InternalQuickfixCrossrefTestLanguage.g:179:3: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( (LA4_0==12) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // InternalQuickfixCrossrefTestLanguage.g:180:4: otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) )
+            	    {
+            	    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_4); 
+
+            	    				newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRefKeyword_4_0());
+            	    			
+            	    // InternalQuickfixCrossrefTestLanguage.g:184:4: ( (otherlv_5= RULE_ID ) )
+            	    // InternalQuickfixCrossrefTestLanguage.g:185:5: (otherlv_5= RULE_ID )
+            	    {
+            	    // InternalQuickfixCrossrefTestLanguage.g:185:5: (otherlv_5= RULE_ID )
+            	    // InternalQuickfixCrossrefTestLanguage.g:186:6: otherlv_5= RULE_ID
+            	    {
+
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getElementRule());
+            	    						}
+            	    					
+            	    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
+
+            	    						newLeafNode(otherlv_5, grammarAccess.getElementAccess().getReferencedElementCrossReference_4_1_0());
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+            otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_2); 
+
+            			newLeafNode(otherlv_6, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_5());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleElement"
+
+    // Delegated rules
+
+
+ 
+
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000032L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000003030L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000003000L});
+    }
+
+
+}

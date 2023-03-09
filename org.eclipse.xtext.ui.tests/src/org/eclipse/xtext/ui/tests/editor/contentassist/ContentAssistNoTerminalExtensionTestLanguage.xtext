@@ -1,0 +1,23 @@
+/*******************************************************************************
+ * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistNoTerminalExtensionTestLanguage hidden(WS)
+
+generate noTerminalExtension "http://www.eclipse.org/xtext/ui/common/tests/2018/contentAssistNoTerminalExtension"
+
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+PolygonBasedShape:
+    shape += PolygonBasedNodeShape+;
+
+enum PolygonBasedNodeShape:
+    octagon | oval |
+    parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite | proteinstab |
+    rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
+    
+terminal WS: (' ')+;

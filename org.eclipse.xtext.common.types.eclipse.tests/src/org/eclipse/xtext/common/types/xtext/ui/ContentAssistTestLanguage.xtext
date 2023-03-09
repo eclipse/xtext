@@ -1,0 +1,40 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate contentAssistTestLanguage "http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist2"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
+Model:
+  imports+=Import*
+  generateDirective=GenerateDirective?
+  referenceHolder=ReferenceHolder?
+;
+  
+ReferenceHolder:
+  (
+    'default' defaultReference=[types::JvmType|FQN]
+  | 'custom' customizedReference=[types::JvmType|FQN]
+  | 'subtype' subtypeReference=[types::JvmType|FQN]
+  )
+;
+
+GenerateDirective:
+	'generate' typeName=QN
+;
+  
+Import:
+	'import' importedNamespace=ImportedFQN
+;
+
+ImportedFQN: FQN '.*'?;
+
+FQN: QN ('$' ID)*;
+
+QN: ID ('.' ID)*;

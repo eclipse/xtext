@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.xtext.ui
+Bundle-SymbolicName: org.eclipse.xtext.xtext.ui
+Bundle-Version: 0.0.1
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui
+Bundle-Activator: org.eclipse.xtext.xtext.ui.internal.Activator

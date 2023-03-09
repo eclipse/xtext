@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
+    modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" modelPluginID="org.eclipse.xtext.ui.tests"
+    forceOverwrite="true" modelName="ParameterizedExpressionsTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
+    copyrightFields="false" runtimeVersion="2.29">
+  <genPackages prefix="ParameterizedExpressionsTestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
+      disposableProviderFactory="true" fileExtensions="parameterizedexpressionstestlanguage"
+      ecorePackage="ParameterizedExpressionsTestLanguage.ecore#/">
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//Statement"/>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//FunctionDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//FunctionDeclaration/generator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//FunctionDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//FunctionDeclaration/body"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//Block/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//ExpressionStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//ExpressionStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//LabelledStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//LabelledStatement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//LabelledStatement/statement"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//IdentifierRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//IdentifierRef/id"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//IndexedAccessExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//IndexedAccessExpression/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//IndexedAccessExpression/index"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//ParameterizedPropertyAccessExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//ParameterizedPropertyAccessExpression/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//ParameterizedPropertyAccessExpression/property"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//ShiftExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//ShiftExpression/lhs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//ShiftExpression/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//ShiftExpression/rhs"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//RelationalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//RelationalExpression/lhs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//RelationalExpression/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//RelationalExpression/rhs"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//AssignmentExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//AssignmentExpression/lhs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//AssignmentExpression/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//AssignmentExpression/rhs"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//YieldExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ParameterizedExpressionsTestLanguage.ecore#//YieldExpression/many"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//YieldExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="ParameterizedExpressionsTestLanguage.ecore#//CommaExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ParameterizedExpressionsTestLanguage.ecore#//CommaExpression/exprs"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

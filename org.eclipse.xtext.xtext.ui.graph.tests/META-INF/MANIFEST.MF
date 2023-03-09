@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Syntax Diagram View Tests
+Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.graph.tests
+Bundle-Version: 2.31.0.qualifier
+Bundle-Vendor: Eclipse Xtext
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.xtext.xtext.ui.graph,
+ org.eclipse.xtext.testing,
+ com.google.inject;bundle-version="5.0.1",
+ org.eclipse.xtext,
+ org.eclipse.draw2d;bundle-version="3.10.100",
+ org.eclipse.xtext.xtext.ui
+Import-Package: org.junit;version="4.13.2",
+ org.junit.runner;version="4.13.2"
+Automatic-Module-Name: org.eclipse.xtext.xtext.ui.graph.tests
