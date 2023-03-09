@@ -1,6 +1,0 @@
-ext.title = 'Xtext JSR-45 Smap Installer'
-description = 'Tool for installing tracing information into class files.'
-
-dependencies {
-	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-}

@@ -11,6 +11,10 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import java.net.URL;
 
 public class EmptyClasspathClassLoader extends ClassLoader {
+	public EmptyClasspathClassLoader() {
+		super(EmptyClasspathClassLoader.class.getClassLoader());
+	}
+
 	@Override
 	public URL getResource(final String name) {
 		if (name.endsWith(".class")) {

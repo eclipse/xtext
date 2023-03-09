@@ -45,32 +45,22 @@ pipeline {
       }
     }
 
-    stage('Gradle Build') {
+    stage('Maven Build') {
       steps {
-        sh './1-gradle-build.sh'
+        sh './maven-build.sh'
       }
     }
-    
-    stage('Maven Build & Test') {
-      stages {
-        stage('Maven Build') {
-          steps {
-            sh './2-maven-build.sh'
-          }
-        }
-        
-        stage('Long Running Tests') {
-          steps {
-            sh './3-gradle-longrunning-tests.sh'
-          }
-        }
+
+    stage('Maven Tycho Build and Test') {
+      steps {
+        sh './tycho-test.sh'
       }
     }
   }
 
   post {
     always {
-      junit testResults: '**/build/test-results/test/*.xml, **/build/test-results/longrunningTest/*.xml'
+      junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
       archiveArtifacts artifacts: 'build/**'

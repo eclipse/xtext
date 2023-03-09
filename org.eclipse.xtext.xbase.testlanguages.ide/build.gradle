@@ -1,8 +1,0 @@
-dependencies {
-	api project(':org.eclipse.xtext.xbase.testlanguages')
-	api "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
-	api project(':org.eclipse.xtext.xbase.ide')
-}
-//this is an eclipse plugin project
-eclipseClasspath.enabled=false
-cleanEclipseClasspath.enabled=false

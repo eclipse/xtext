@@ -1,7 +1,0 @@
-ext.title = 'Xtext Ecore Support'
-description = 'Integration of Ecore files in the Xtext indexing.'
-
-dependencies {
-	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	optional 'org.eclipse.emf:org.eclipse.emf.mwe2.runtime'
-}

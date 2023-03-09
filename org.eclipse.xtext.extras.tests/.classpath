@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="bin/test" path="src">
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-gen">
 		<attributes>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" output="bin/test" path="src-gen">
-		<attributes>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
 			<attribute name="ignore_optional_problems" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="bin/mwe2" path="emf-gen">
+	<classpathentry kind="src" path="emf-gen"/>
+	<classpathentry kind="src" path="generator/src"/>
+	<classpathentry kind="src" path="deprecated"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/">
 		<attributes>
-			<attribute name="gradle_scope" value="mwe2"/>
-			<attribute name="gradle_used_by_scope" value="test,mwe2"/>
-			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="bin/mwe2" path="generator/src">
-		<attributes>
-			<attribute name="gradle_scope" value="mwe2"/>
-			<attribute name="gradle_used_by_scope" value="test,mwe2"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" output="bin/test" path="deprecated">
-		<attributes>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
-	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="output" path="bin/main"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

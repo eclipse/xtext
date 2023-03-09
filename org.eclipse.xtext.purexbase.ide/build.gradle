@@ -1,8 +1,0 @@
-ext.title = 'Pure Xbase Generic Ide'
-description = 'Pure Xbase Generic Ide.'
-
-dependencies {
-	api project(':org.eclipse.xtext.xbase')
-	api project(':org.eclipse.xtext.purexbase')
-	api project(':org.eclipse.xtext.xbase.ide')
-}

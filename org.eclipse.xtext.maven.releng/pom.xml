@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-extras</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.eclipse.xtext.maven.extras.releng</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>..</module>
+		<module>../org.eclipse.xtext.smap</module>
+		<module>../org.eclipse.xtext.common.types</module>
+		<module>../org.eclipse.xtext.ecore</module>
+		<module>../org.eclipse.xtext.xbase</module>
+		<module>../org.eclipse.xtext.xbase.ide</module>
+		<module>../org.eclipse.xtext.xbase.testing</module>
+		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.generator</module>
+		<module>../org.eclipse.xtext.java</module>
+		<!-- This is required by the xtext-maven-plugin IT -->
+		<module>../org.eclipse.xtext.purexbase</module>
+	</modules>
+</project>

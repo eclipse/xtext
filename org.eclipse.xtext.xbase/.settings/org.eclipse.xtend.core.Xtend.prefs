@@ -1,3 +1,5 @@
+//outlet.DEFAULT_OUTPUT.sourceFolder.src/main/java.directory=xtend-gen
+BuilderConfiguration.is_project_specific=true
 eclipse.preferences.version=1
 is_project_specific=true
 org.eclipse.xtend.core.validation.IssueCodes.api_type_inference=ignore
@@ -26,3 +28,6 @@ org.eclipse.xtext.xbase.validation.IssueCodes.unreachable_instance_of=error
 org.eclipse.xtext.xbase.validation.IssueCodes.unused_local_variable=org.eclipse.jdt.core.compiler.problem.unusedLocal\:warning
 org.eclipse.xtext.xbase.validation.IssueCodes.variable_name_discouraged=warning
 outlet.DEFAULT_OUTPUT.cleanupDerived=true
+outlet.DEFAULT_OUTPUT.hideLocalSyntheticVariables=true
+outlet.DEFAULT_OUTPUT.installDslAsPrimarySource=false
+outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true

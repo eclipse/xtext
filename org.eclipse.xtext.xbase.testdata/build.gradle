@@ -1,5 +1,0 @@
-dependencies {
-	api "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
-	api 'com.google.inject:guice'
-	api 'junit:junit'
-}
