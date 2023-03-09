@@ -1,7 +1,0 @@
-group = 'org.eclipse.xtend'
-ext.title = 'Eclipse Xtend Active Annotations Library'
-description = 'The active annotations library for the Xtend programming language.'
-
-dependencies {
-	api project(':org.eclipse.xtext.xbase.lib')
-}

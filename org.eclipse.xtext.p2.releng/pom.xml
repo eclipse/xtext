@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-lib</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.eclipse.xtext.p2.releng</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../org.eclipse.xtext.dev-bom</module>
+		<module>../org.eclipse.xtext.xbase.lib</module>
+		<module>../org.eclipse.xtext.xbase.lib.feature</module>
+		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
+		<module>../org.eclipse.xtext.xbase.lib.tests</module>
+		<module>../org.eclipse.xtend.lib.macro</module>
+		<module>../org.eclipse.xtend.lib</module>
+		<module>../org.eclipse.xtend.lib.feature</module>
+		<module>../org.eclipse.xtend.lib.tests</module>
+		<module>../org.eclipse.xtend.lib.gwt</module>
+		<module>../org.eclipse.xtend.lib.gwt.test</module>
+	</modules>
+
+	<!--
+	TODO:
+	This is a temporary workaround to have a single Jenkins job
+	that first runs all the tests and the creates a p2 repository
+	with signed contents. When enabling this profile, we should
+	not run the "clean" phase, so that test reports generated in the
+	previous maven build are not cleaned.
+	-->
+	<profiles>
+		<profile>
+			<id>buildP2Repository</id>
+			<modules>
+				<module>../org.eclipse.xtext.lib.p2repository</module>
+			</modules>
+		</profile>
+	</profiles>
+</project>

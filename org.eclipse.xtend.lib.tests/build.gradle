@@ -1,7 +1,0 @@
-group = 'org.eclipse.xtend'
-
-dependencies {
-	api project(':org.eclipse.xtext.xbase.lib')
-	api project(':org.eclipse.xtend.lib')
-	api 'junit:junit'
-}
