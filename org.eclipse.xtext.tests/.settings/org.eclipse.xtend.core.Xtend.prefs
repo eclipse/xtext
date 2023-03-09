@@ -1,3 +1,4 @@
+//outlet.DEFAULT_OUTPUT.sourceFolder.src/main/java.directory=xtend-gen
 BuilderConfiguration.is_project_specific=true
 autobuilding=true
 eclipse.preferences.version=1

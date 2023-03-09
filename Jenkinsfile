@@ -45,22 +45,22 @@ pipeline {
       }
     }
 
-    stage('Gradle Build') {
-      steps {
-        sh './1-gradle-build.sh'
-      }
-    }
-    
     stage('Maven Build') {
       steps {
-        sh './2-maven-build.sh'
+        sh './maven-build.sh'
+      }
+    }
+
+    stage('Maven Tycho Build and Test') {
+      steps {
+        sh './tycho-test.sh'
       }
     }
   }
 
   post {
     always {
-      junit testResults: '**/build/test-results/test/*.xml'
+      junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
       archiveArtifacts artifacts: 'build/**'

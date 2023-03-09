@@ -1,8 +1,0 @@
-ext.title = 'Xtext IDE Library'
-description = 'Platform-independent language support.'
-
-dependencies {
-	api project(':org.eclipse.xtext')
-	api 'org.eclipse.emf:org.eclipse.emf.ecore.change'
-	api 'org.eclipse.lsp4j:org.eclipse.lsp4j'
-}

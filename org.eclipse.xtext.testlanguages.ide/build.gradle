@@ -1,4 +1,0 @@
-dependencies {
-	api project(':org.eclipse.xtext.testlanguages')
-	api project(':org.eclipse.xtext.ide')
-}

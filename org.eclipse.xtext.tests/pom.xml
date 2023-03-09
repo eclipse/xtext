@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-core</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.eclipse.xtext.tests</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<name>Xtext Core Runtime Tests</name>
+	<description>Xtext Core Runtime Tests.</description>
+
+	<!--
+	The tests in this project are executed through maven-surefire-plugin
+	(configured in the parent POM).
+	In Tycho 2.7.5, no further configuration is needed besides marking the
+	folders containing tests as test source folders.
+	(you can still force JUnit5 as done below)
+	Moreover, the packaging type must be "eclipse-plugin".
+	-->
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<dependencies>
+					<!-- force to run with JUnit5 -->
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit-platform</artifactId>
+						<version>${maven-surefire-version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>

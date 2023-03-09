@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>xtext-core</name>
-	<comment>Project xtext-core created by Buildship.</comment>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1467961969409</id>
+			<id>1673634292728</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-org.eclipse.xtext.*</arguments>
+				<arguments>1.0-name-matches-false-false-org.eclipse.xtext*</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>

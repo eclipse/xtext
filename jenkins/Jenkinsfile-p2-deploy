@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+
+  tools {
+    maven "apache-maven-3.8.6"
+    jdk "temurin-jdk17-latest"
+  }
+
+  stages {
+    stage('Maven Tycho Build and Sign') {
+      steps {
+        sh './tycho-sign.sh'
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**'
+    }
+  }
+}
