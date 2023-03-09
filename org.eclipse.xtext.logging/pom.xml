@@ -3,20 +3,24 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.tycho.plugin.parent</artifactId>
+		<artifactId>xtext-eclipse</artifactId>
 		<version>2.31.0-SNAPSHOT</version>
-		<relativePath>../releng/org.eclipse.xtext.tycho.plugin.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtext.logging</artifactId>
 	<version>1.2.24-SNAPSHOT</version>
+
+	<properties>
+		<!-- redefines the property for versions of artifacts not in this Git repository,
+			so that it takes the same snapshot version of this project's parent'. -->
+		<xtext-dev-bom-version>${project.parent.version}</xtext-dev-bom-version>
+	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
 				<configuration>
 					<dependency-resolution>
 						<extraRequirements>

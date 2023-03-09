@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>xtext-eclipse</name>
+	<name>org.eclipse.xtext.eclipse.p2repository</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,15 +14,4 @@
 	<natures>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
-	<filteredResources>
-		<filter>
-			<id>1467961296197</id>
-			<name></name>
-			<type>10</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-org.eclipse.xtext.*</arguments>
-			</matcher>
-		</filter>
-	</filteredResources>
 </projectDescription>
