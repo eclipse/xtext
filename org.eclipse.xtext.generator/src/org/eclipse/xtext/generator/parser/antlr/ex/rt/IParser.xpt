@@ -1,0 +1,136 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::generator::parser::antlr::ex::common»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+
+«DEFINE parser(AntlrFragmentHelper helper) FOR Grammar»
+«FILE helper.getParserClassName(this).asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «helper.getParserClassName(this).toJavaPackage()»;
+
+«annotationImports()-»
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import «gaFQName()»;
+
+«classAnnotations()»public class «helper.getParserClassName(this).toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+	
+	@Inject
+	private «gaSimpleName()» grammarAccess;
+	
+	@Override
+	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
+		tokenStream.setInitialHiddenTokens(«FOREACH initialHiddenTokens() AS hidden SEPARATOR ", "»"«hidden»"«ENDFOREACH-»);
+	}
+	
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+	@Override
+	protected org.antlr.runtime.TokenSource createLexer(org.antlr.runtime.CharStream stream) {
+		return new «helper.getTokenSourceClassName(this)»(super.createLexer(stream));
+	}
+
+	/**
+	 * Indentation aware languages do not support partial parsing since the lexer is inherently stateful.
+	 * Override and return {@code true} if your terminal splitting is stateless.
+	 */
+	@Override
+	protected boolean isReparseSupported() {
+		return false;
+	}
+
+«ENDIF-»
+	@Override
+	protected «helper.getInternalParserClassName(this)» createParser(XtextTokenStream stream) {
+		return new «helper.getInternalParserClassName(this)»(stream, getGrammarAccess());
+	}
+	
+	@Override 
+	protected String getDefaultRuleName() {
+		return "«originalElement(allParserRules().first()).name»";
+	}
+	
+	public «gaSimpleName()» getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
+	
+}
+«ENDFILE»
+
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+«FILE helper.getTokenSourceClassName(this).asPath()+".java" SRC-»
+«fileHeader()»
+package «helper.getTokenSourceClassName(this).toJavaPackage()»;
+
+«annotationImports()-»
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtext.parser.antlr.AbstractIndentationTokenSource;
+import «helper.getInternalParserClassName(this)»;
+
+«classAnnotations()»public class «helper.getTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
+	
+	public «helper.getTokenSourceClassName(this).toSimpleName()»(TokenSource delegate) {
+		super(delegate);
+	}
+	
+	@Override
+	protected boolean shouldSplitTokenImpl(Token token) {
+«IF allTerminalRules().exists(r | r.name.toUpperCase() == "WS" )-»
+		// TODO Review assumption
+		return token.getType() == «helper.getInternalParserClassName(this).toSimpleName()».RULE_WS;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+	}
+
+	@Override
+	protected int getBeginTokenType() {
+«LET allTerminalRules().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
+«IF open.size == 1-»
+		// TODO Review assumption
+		return «helper.getInternalParserClassName(this).toSimpleName()».«open.first().ruleName()»;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+«ENDLET-»
+	}
+
+	@Override
+	protected int getEndTokenType() {
+«LET allTerminalRules().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
+«IF close.size == 1-»
+		// TODO Review assumption
+		return «helper.getInternalParserClassName(this).toSimpleName()».«close.first().ruleName()»;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+«ENDLET-»
+	}
+	
+}
+«ENDFILE»
+«ENDIF-»
+«ENDDEFINE»
+

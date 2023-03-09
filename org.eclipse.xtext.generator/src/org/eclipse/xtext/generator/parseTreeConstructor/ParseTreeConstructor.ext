@@ -1,0 +1,40 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+import org::eclipse::xtext::parsetree::reconstr::impl;
+
+extension org::eclipse::xtext::GrammarUtil;
+extension org::eclipse::xtext::generator::Naming;
+extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess; 
+
+String getParseTreeConstructorName(Grammar g):
+	getParseTreeConstructorName(g,getNaming());
+	
+private String getParseTreeConstructorName(Grammar g, Naming n):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getParseTreeConstructorName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
+
+String elementMethodName(AbstractElement ele):
+	ele.containingRule().gaRuleIdentifyer() + "_" + ele.gaElementIdentifyer();
+
+List[AbstractElement] getNestedElementsFromAssignment(Assignment ass):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getNestedElementsFromAssignment(org.eclipse.xtext.Assignment);
+	
+boolean isAssignmentRequired(Assignment ass):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.isAssignmentRequired(org.eclipse.xtext.Assignment);
+	
+boolean crossReferenceExistsWithDifferentTerminal(CrossReference ass):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.crossReferenceExistsWithDifferentTerminal(org.eclipse.xtext.CrossReference);
+	
+List[AbstractElement] calcRootFollowers(Grammar g):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.calcRootFollowers(org.eclipse.xtext.Grammar);
+	
+TreeConstState getTreeConstState(AbstractElement e): 
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getTreeConstState(org.eclipse.xtext.AbstractElement);

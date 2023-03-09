@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/common/JavaVMTypes" 
+       class = "org.eclipse.xtext.common.types.TypesPackage"
+       genModel = "model/JavaVMTypes.genmodel" /> 
+	
+  </extension>
+
+
+
+</plugin>

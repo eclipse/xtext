@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/xbase/Xtype" 
+       class = "org.eclipse.xtext.xtype.XtypePackage"
+       genModel = "model/Xbase.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/xbase/Xbase" 
+       class = "org.eclipse.xtext.xbase.XbasePackage"
+       genModel = "model/Xbase.genmodel" /> 
+	
+  </extension>
+  
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/Xtext/Xbase/XAnnotations" 
+       class = "org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage"
+       genModel = "model/Xbase.genmodel" /> 
+	
+  </extension>
+
+</plugin>

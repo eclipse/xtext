@@ -1,0 +1,119 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008, 2016 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::formatting::FormatterExtensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+
+
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendFormatter»
+		«ELSE»
+			«EXPAND javaFormatter»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+
+«DEFINE javaFormatter FOR Grammar»
+«FILE formatterName().asPath()+".java" SRC-»
+«fileHeader()»
+package «formatterName().toJavaPackage()»;
+
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.util.Pair;
+
+/**
+ * This class contains custom formatting declarations.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#formatting
+ * on how and when to use it.
+ * 
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
+ */
+public class «formatterName().toSimpleName()» extends AbstractDeclarativeFormatter {
+	
+	@Override
+	protected void configureFormatting(FormattingConfig c) {
+		«gaFQName()» f = («gaFQName()») getGrammarAccess();
+		for(Pair<Keyword, Keyword> pair: f.findKeywordPairs("{", "}")) {
+			c.setIndentation(pair.getFirst(), pair.getSecond());
+			c.setLinewrap(1).after(pair.getFirst());
+			c.setLinewrap(1).before(pair.getSecond());
+			c.setLinewrap(1).after(pair.getSecond());
+		}
+		for(Keyword comma: f.findKeywords(",")) {
+			c.setNoLinewrap().before(comma);
+			c.setNoSpace().before(comma);
+			c.setLinewrap().after(comma);
+		}
+		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendFormatter FOR Grammar»
+«FILE formatterName().asPath()+".xtend" SRC-»
+«fileHeader()»
+package «formatterName().toJavaPackage()»
+
+import com.google.inject.Inject
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter
+import org.eclipse.xtext.formatting.impl.FormattingConfig
+import «gaFQName()»
+
+/**
+ * This class contains custom formatting declarations.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#formatting
+ * on how and when to use it.
+ * 
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
+ */
+public class «formatterName().toSimpleName()» extends AbstractDeclarativeFormatter {
+	
+	@Inject extension «gaFQName().toSimpleName()»
+	
+	override protected configureFormatting(FormattingConfig c) {
+		for(pair: findKeywordPairs('{', '}')) {
+			c.setIndentation(pair.first, pair.second)
+			c.setLinewrap(1).after(pair.first)
+			c.setLinewrap(1).before(pair.second)
+			c.setLinewrap(1).after(pair.second)
+		}
+		for(comma: findKeywords(',')) {
+			c.setNoLinewrap().before(comma)
+			c.setNoSpace().before(comma)
+			c.setLinewrap().after(comma)
+		}
+		c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
+		c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
+	}
+}
+«ENDFILE»
+«ENDDEFINE»

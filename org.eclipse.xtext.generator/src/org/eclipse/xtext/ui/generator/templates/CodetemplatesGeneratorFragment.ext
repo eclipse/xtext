@@ -1,0 +1,26 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::generator::Naming;
+extension org::eclipse::xtext::EcoreUtils;
+
+String partialParser(Grammar this):
+	partialParser(this, getNaming());
+	
+String parser(Grammar this):
+	parser(this, getNaming());
+
+private String partialParser(Grammar this, Naming naming):
+	JAVA org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment.getPartialContentAssistParser(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	
+private String parser(Grammar this, Naming naming):
+	JAVA org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment.getContentAssistParser(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

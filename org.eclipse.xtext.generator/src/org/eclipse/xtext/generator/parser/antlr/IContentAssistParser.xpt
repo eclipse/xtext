@@ -1,0 +1,117 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
+
+«DEFINE parser(AntlrOptions options, boolean partialParsing, boolean hasIDE) FOR Grammar»
+«FILE getParserClassName().asPath()+".java" SRC_GEN_IDE-»
+«fileHeader()»
+package «getParserClassName().toJavaPackage()»;
+
+«annotationImports()-»
+import java.util.Collection;
+import java.util.Map;
+import java.util.HashMap;
+
+import org.antlr.runtime.RecognitionException;
+import org.eclipse.xtext.AbstractElement;
+import «getParserSuperClassName(partialParsing, hasIDE)»;
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ELSE-»
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ENDIF-»
+
+import com.google.inject.Inject;
+
+import «gaFQName()»;
+
+«classAnnotations()»public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing, hasIDE).toSimpleName()» {
+	
+	@Inject
+	private «gaSimpleName()» grammarAccess;
+	
+	private Map<AbstractElement, String> nameMappings;
+	
+	@Override
+	protected «getInternalParserClassName()» createParser() {
+		«getInternalParserClassName()» result = new «getInternalParserClassName()»(null);
+		result.setGrammarAccess(grammarAccess);
+		return result;
+	}
+	
+	@Override
+	protected String getRuleName(AbstractElement element) {
+		if (nameMappings == null) {
+			nameMappings = new HashMap<AbstractElement, String>() {
+				private static final long serialVersionUID = 1L;
+				{
+«EXPAND ruleName FOREACH originalElement().allAlternatives().union(originalElement().allGroups()).union(originalElement().allAssignments()).union(originalElement().allUnorderedGroups())-»
+				}
+			};
+		}
+		return nameMappings.get(element);
+	}
+	
+	@Override
+	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
+		try {
+			«getInternalParserClassName()» typedParser = («getInternalParserClassName()») parser;
+			typedParser.«allParserRules().first().originalElement().entryRuleName()»();
+			return typedParser.getFollowElements();
+		} catch(RecognitionException ex) {
+			throw new RuntimeException(ex);
+		}		
+	}
+	
+	@Override
+	protected String[] getInitialHiddenTokens() {
+		return new String[] { «FOREACH initialHiddenTokens() AS hidden SEPARATOR ", "»"«hidden»"«ENDFOREACH-» };
+	}
+	
+	public «gaSimpleName()» getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE ruleName FOR AbstractElement-»
+«ERROR "unsupported type: " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE ruleName FOR Alternatives-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
+«ENDDEFINE»
+
+«DEFINE ruleName FOR Assignment-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
+«ENDDEFINE»
+
+«DEFINE ruleName FOR Group-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»__0");
+«ENDDEFINE»
+
+«DEFINE ruleName FOR UnorderedGroup-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
+«ENDDEFINE»

@@ -1,0 +1,25 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::generator::Naming;
+
+String formatterName(Grammar this):
+	formatterName(this, getNaming());
+
+private String formatterName(Grammar this, Naming naming):
+	JAVA org.eclipse.xtext.generator.formatting.FormatterFragment.getFormatterName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+
+String grammarAccessName(Grammar this):
+	grammarAccessName(this, getNaming());
+
+private String grammarAccessName(Grammar this, Naming naming):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

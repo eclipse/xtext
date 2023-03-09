@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
+    modelDirectory="/org.eclipse.xtext.xbase/emf-gen" editDirectory="" editorDirectory=""
+    modelPluginID="org.eclipse.xtext.xbase" forceOverwrite="true" modelName="Xbase"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" copyrightFields="false"
+    editPluginID="org.eclipse.xtext.xbase.edit" editorPluginID="org.eclipse.xtext.xbase.edit"
+    runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+  <foreignModel>XAnnotations.ecore</foreignModel>
+  <foreignModel>Xtype.ecore</foreignModel>
+  <foreignModel>Xbase.ecore</foreignModel>
+  <genPackages prefix="XAnnotations" basePackage="org.eclipse.xtext.xbase.annotations"
+      ecorePackage="XAnnotations.ecore#/">
+    <genClasses ecoreClass="XAnnotations.ecore#//XAnnotation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/elementValuePairs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/annotationType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotation/value"/>
+    </genClasses>
+    <genClasses ecoreClass="XAnnotations.ecore#//XAnnotationElementValuePair">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotationElementValuePair/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotationElementValuePair/element"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Xtype" basePackage="org.eclipse.xtext" ecorePackage="Xtype.ecore#/">
+    <genDataTypes ecoreDataType="Xtype.ecore#//IJvmTypeReferenceProvider"/>
+    <genClasses ecoreClass="Xtype.ecore#//XFunctionTypeRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XFunctionTypeRef/paramTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XFunctionTypeRef/returnType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//XFunctionTypeRef/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XFunctionTypeRef/instanceContext"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XComputedTypeReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XComputedTypeReference/typeProvider"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XImportSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//XImportSection/importDeclarations"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//XImportDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/wildcard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/extension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/static"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//XImportDeclaration/importedType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/memberName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/importedNamespace"/>
+      <genOperations ecoreOperation="Xtype.ecore#//XImportDeclaration/getImportedName"/>
+      <genOperations ecoreOperation="Xtype.ecore#//XImportDeclaration/getImportedTypeName"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Xbase" basePackage="org.eclipse.xtext" ecorePackage="Xbase.ecore#/">
+    <genClasses image="false" ecoreClass="Xbase.ecore#//XExpression"/>
+    <genClasses ecoreClass="Xbase.ecore#//XIfExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XIfExpression/if"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XIfExpression/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XIfExpression/else"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XIfExpression/conditionalExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XSwitchExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSwitchExpression/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSwitchExpression/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSwitchExpression/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSwitchExpression/declaredParam"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XCasePart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCasePart/case"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCasePart/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCasePart/typeGuard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XCasePart/fallThrough"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XBlockExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBlockExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XVariableDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XVariableDeclaration/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XVariableDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XVariableDeclaration/right"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XVariableDeclaration/writeable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Xbase.ecore#//XAbstractFeatureCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractFeatureCall/feature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractFeatureCall/typeArguments"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractFeatureCall/implicitReceiver"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XAbstractFeatureCall/invalidFeatureIssueCode"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XAbstractFeatureCall/validFeature"/>
+      <genFeatures property="None" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractFeatureCall/implicitFirstArgument"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getConcreteSyntaxFeatureName"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getExplicitArguments"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isExplicitOperationCallOrBuilderSyntax"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getActualReceiver"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/getActualArguments"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isStatic"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isExtension"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isPackageFragment"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isTypeLiteral"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XAbstractFeatureCall/isOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XMemberFeatureCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XMemberFeatureCall/memberCallTarget"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XMemberFeatureCall/memberCallArguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XMemberFeatureCall/explicitOperationCall"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XMemberFeatureCall/explicitStatic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XMemberFeatureCall/nullSafe"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XMemberFeatureCall/typeLiteral"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XMemberFeatureCall/staticWithDeclaringType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XMemberFeatureCall/packageFragment"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XFeatureCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XFeatureCall/featureCallArguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XFeatureCall/explicitOperationCall"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XFeatureCall/typeLiteral"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XFeatureCall/packageFragment"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XConstructorCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XConstructorCall/constructor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XConstructorCall/arguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XConstructorCall/typeArguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/invalidFeatureIssueCode"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/validFeature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/explicitConstructorCall"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/anonymousClassConstructorCall"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XBooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XBooleanLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XNullLiteral"/>
+    <genClasses ecoreClass="Xbase.ecore#//XNumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XNumberLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XStringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XStringLiteral/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Xbase.ecore#//XCollectionLiteral">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCollectionLiteral/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XListLiteral"/>
+    <genClasses ecoreClass="Xbase.ecore#//XSetLiteral"/>
+    <genClasses ecoreClass="Xbase.ecore#//XClosure">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/declaredFormalParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XClosure/explicitSyntax"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/implicitFormalParameters"/>
+      <genOperations ecoreOperation="Xbase.ecore#//XClosure/getFormalParameters"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XCastedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCastedExpression/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCastedExpression/target"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XBinaryOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBinaryOperation/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBinaryOperation/rightOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XBinaryOperation/reassignFirstArgument"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XUnaryOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XUnaryOperation/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XPostfixOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XPostfixOperation/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XForLoopExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XForLoopExpression/forExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XForLoopExpression/eachExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XForLoopExpression/declaredParam"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XBasicForLoopExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBasicForLoopExpression/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBasicForLoopExpression/eachExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBasicForLoopExpression/initExpressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBasicForLoopExpression/updateExpressions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Xbase.ecore#//XAbstractWhileExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractWhileExpression/predicate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAbstractWhileExpression/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XDoWhileExpression"/>
+    <genClasses ecoreClass="Xbase.ecore#//XWhileExpression"/>
+    <genClasses ecoreClass="Xbase.ecore#//XTypeLiteral">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTypeLiteral/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XTypeLiteral/arrayDimensions"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XInstanceOfExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xbase.ecore#//XInstanceOfExpression/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XInstanceOfExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XThrowExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XThrowExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XTryCatchFinallyExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/finallyExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/catchClauses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/resources"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XCatchClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCatchClause/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCatchClause/declaredParam"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAssignment/assignable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XAssignment/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XAssignment/explicitStatic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XAssignment/staticWithDeclaringType"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XReturnExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XReturnExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XSynchronizedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSynchronizedExpression/param"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSynchronizedExpression/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

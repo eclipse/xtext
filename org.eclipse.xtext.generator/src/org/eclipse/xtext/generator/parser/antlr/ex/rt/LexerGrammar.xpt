@@ -1,0 +1,26 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::generator::parser::antlr»
+«IMPORT org::eclipse::xtext::generator::parser::antlr::ex::common»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+
+«DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
+«FILE helper.getLexerGrammarFileName(this).asPath()+".g" SRC_GEN-»
+«EXPAND ParameterizedLexerGrammar::grammar(options, helper, helper.getLexerGrammarFileName(this), helper.getLexerSuperClass(this))»
+«ENDFILE»
+«ENDDEFINE»
+

@@ -1,0 +1,57 @@
+grammar org.eclipse.xtext.purexbase.PureXbase with org.eclipse.xtext.xbase.Xbase
+
+generate pureXbase "http://www.eclipse.org/xtext/purexbase/PureXbase"
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
+Model:
+	importSection=XImportSection? block=SpecialBlockExpression;
+	
+SpecialBlockExpression returns xbase::XBlockExpression:
+	{xbase::XBlockExpression}
+	(expressions+=XExpressionOrVarDeclaration ';'?)*;
+
+@Override
+FeatureCallID:
+	ValidID;
+
+@Override 
+XTryCatchFinallyExpression returns xbase::XExpression:
+	{xbase::XTryCatchFinallyExpression}
+	'try' (
+		'(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
+		expression=XExpression
+		->(
+			catchClauses+=XCatchClause+
+			(=>'finally' finallyExpression=XExpression)?
+		|	'finally' finallyExpression=XExpression
+		)?
+	|
+		expression=XExpression
+		(
+			catchClauses+=XCatchClause+
+			(=>'finally' finallyExpression=XExpression)?
+		|	'finally' finallyExpression=XExpression
+		)
+	)
+;
+
+InitialisedVariableDeclaration returns xbase::XVariableDeclaration:
+	{xbase::XVariableDeclaration}
+	(writeable?='var'|'val')
+	(=>(type=JvmTypeReference name=ValidID) | name=ValidID) '=' right=XExpression
+;
+
+@Override 
+XAssignment returns xbase::XExpression :
+	{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
+	XConditionalExpression (
+		=>({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
+	)?;
+
+XConditionalExpression returns xbase::XExpression :
+	XOrExpression (
+		// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
+		->({xbase::XIfExpression.if=current} conditionalExpression?='?') then=XExpression (->':' else=XExpression)?
+	)?
+;

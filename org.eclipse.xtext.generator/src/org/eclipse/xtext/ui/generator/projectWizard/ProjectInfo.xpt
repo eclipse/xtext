@@ -1,0 +1,28 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE root FOR Grammar»
+«FILE projectInfoClassName().asPath()+".java" SRC_UI-»
+package «projectInfoClassName().toJavaPackage()»;
+
+public class «projectInfoClassName().toSimpleName()» extends org.eclipse.xtext.ui.wizard.DefaultProjectInfo {
+	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+

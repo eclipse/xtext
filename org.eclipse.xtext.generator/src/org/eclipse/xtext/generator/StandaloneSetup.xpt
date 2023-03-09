@@ -1,0 +1,87 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+
+«DEFINE pre(List[String] fileExtensions) FOR Grammar-»
+«FILE setup().asPath()+".java" SRC-»
+«fileHeader()»
+package «setup().toJavaPackage()»;
+
+/**
+ * Initialization support for running Xtext languages 
+ * without equinox extension registry
+ */
+public class «setup().toSimpleName()» extends «setupImpl().toJavaPackage()==setup().toJavaPackage() ? setupImpl().toSimpleName() : setupImpl()»{
+
+	public static void doSetup() {
+		new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+	}
+}
+
+«ENDFILE-»
+«fileHeader()»
+package «setupImpl().toJavaPackage()»;
+
+«annotationImports()-»
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+/**
+ * Generated from StandaloneSetup.xpt!
+ */
+@SuppressWarnings("all")
+«classAnnotations()»public class «setupImpl().toSimpleName()» implements ISetup {
+
+	@Override
+	public Injector createInjectorAndDoEMFRegistration() {
+		«FOREACH usedGrammars AS usedGrammar-»
+		«((Grammar)usedGrammar).setup()».doSetup();
+		«ENDFOREACH-»
+		«IF usedGrammars.isEmpty-»
+		// register default ePackages
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xtextbin", new org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl());
+		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
+		«ENDIF-»
+
+		Injector injector = createInjector();
+		register(injector);
+		return injector;
+	}
+	
+	public Injector createInjector() {
+		return Guice.createInjector(new «guiceModuleRt()»());
+	}
+	
+	public void register(Injector injector) {
+«ENDDEFINE»
+		
+«DEFINE post FOR Grammar»
+	}
+}
+«ENDDEFINE»

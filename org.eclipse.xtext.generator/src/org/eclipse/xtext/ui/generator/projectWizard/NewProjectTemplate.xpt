@@ -1,0 +1,36 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE root(String modelFileExtension) FOR Grammar»
+«FILE newProjectTemplateName().replaceAll('::', '/')+'.xpt' SRC_UI-»
+«OP()»IMPORT «projectInfoClassName().toJavaPackage().replaceAll('\\.', '::')»«CL()»
+
+«OP()»DEFINE main FOR «projectInfoClassName().toSimpleName()»«CL()»
+«OP()»EXPAND model FOR this«CL()»
+«OP()»ENDDEFINE«CL()»
+
+«OP()»DEFINE model FOR «projectInfoClassName().toSimpleName()»«CL()»
+«OP()»FILE "src/model/Model.«modelFileExtension»"-«CL()»
+/*
+ * This is an example model
+ */
+Hello Xtext!
+«OP()»ENDFILE«CL()»
+«OP()»ENDDEFINE«CL()»
+«ENDFILE»
+«ENDDEFINE»

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Ecore Support
+Bundle-SymbolicName: org.eclipse.xtext.ecore;singleton:=true
+Bundle-Version: 2.31.0.qualifier
+Bundle-Vendor: Eclipse Xtext
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.24.100",
+ org.eclipse.xtext;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.xtext.ecore;
+  uses:="org.eclipse.emf.ecore,
+   com.google.inject,
+   org.eclipse.xtext.resource.generic,
+   org.eclipse.xtext.resource.impl,
+   org.eclipse.xtext.naming,
+   org.eclipse.xtext.util,
+   org.eclipse.xtext"
+Import-Package: org.apache.log4j;version="1.2.24"
+Automatic-Module-Name: org.eclipse.xtext.ecore
+Eclipse-SourceReferences: eclipseSourceReferences

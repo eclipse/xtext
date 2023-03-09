@@ -1,0 +1,663 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::emf::ecore»
+«IMPORT org::eclipse::xtext::generator::parser::antlr»
+«IMPORT org::eclipse::xtext::generator::parser::antlr::ex::common»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ex::common::Common»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+«DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
+«FILE helper.getParserGrammarFileName(this).asPath()+".g" SRC_GEN-»
+«fileHeader()»
+parser grammar «helper.getParserGrammarFileName(this).toSimpleName()»;
+
+options {
+	tokenVocab=«helper.getLexerGrammarFileName(this).toSimpleName()»;
+	superClass=AbstractInternalAntlrParser;
+	«IF options.backtrack-»
+	backtrack=true;
+	«ENDIF-»
+	«IF options.memoize-»
+	 memoize=true;
+	«ENDIF-»
+	«IF options.k>=0»
+	 k=«options.k»;
+	«ENDIF»
+}
+
+@header {
+package «helper.getParserGrammarFileName(this).toJavaPackage()»; 
+
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+«IF !allEnumRules().isEmpty-»
+import org.eclipse.emf.common.util.Enumerator;
+«ENDIF-»
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+«IF !allParserRules().allContents().typeSelect(UnorderedGroup).isEmpty && options.backtrack-»
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
+«ENDIF-»
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import «gaFQName()»;
+
+}
+
+@members {
+
+«IF options.backtrack-»
+/*
+  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+*/
+ 
+«ENDIF»
+	private «gaSimpleName()» grammarAccess;
+	 	
+	public «helper.getInternalParserClassName(this).toSimpleName()»(TokenStream input, «gaSimpleName()» grammarAccess) {
+		this(input);
+		this.grammarAccess = grammarAccess;
+		registerRules(grammarAccess.getGrammar());
+	}
+	
+	@Override
+	protected String getFirstRuleName() {
+		return "«originalElement(allParserRules().first()).name»";	
+	} 
+	   	   	
+	@Override
+	protected «gaSimpleName()» getGrammarAccess() {
+		return grammarAccess;
+	}
+}
+
+@rulecatch { 
+	catch (RecognitionException re) { 
+	    recover(input,re); 
+	    appendSkippedTokens();
+	}
+}
+«EXPAND antlrRules(options)»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE antlrRules(AntlrOptions options) FOR Grammar»
+«EXPAND rule(this, options) FOREACH allParserRules()»
+«EXPAND rule(this, options) FOREACH allEnumRules()»
+«ENDDEFINE»
+
+
+«DEFINE rule(Grammar original, AntlrOptions options) FOR ParserRule»
+«IF isCalled(original,this)»
+«IF !originalElement(this).isDatatypeRule()»
+«IF isValidEntryRule()-»
+// Entry rule «entryRuleName()»
+«entryRuleName()» returns [EObject current=null]
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
+	@init { 
+«IF definesHiddenTokens-»
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-» 
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.originalElement().gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
+	}
+«ENDIF-»
+	:
+	{ «EXPAND newCompositeNode» }
+	 iv_«ruleName()»=«ruleName()»«defaultArgumentList()» 
+	 { $current=$iv_«ruleName()».current; } 
+	 EOF 
+;
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
+finally {
+«IF definesHiddenTokens-»
+	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
+}
+«ENDIF-»
+«ENDIF-»
+
+// Rule «originalElement(this).name»
+«ruleName()» «parameterList(false)»returns [EObject current=«IF fragment-»in_current«ELSE»null«ENDIF»] 
+    @init { enterRule(); 
+«IF definesHiddenTokens-»
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.originalElement().gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
+    }
+    @after { leaveRule(); }:
+    «EXPAND ebnf(original, options, true) FOR this.alternatives»
+;
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
+finally {
+«IF definesHiddenTokens-»
+	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
+}
+«ENDIF-»
+«ELSE»
+«IF isValidEntryRule()-»
+// Entry rule «entryRuleName()»
+«entryRuleName()» returns [String current=null] 
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
+	@init { 
+«IF definesHiddenTokens-»
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-» 
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.originalElement().gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF-»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
+	}
+«ENDIF-»
+:
+	{ «EXPAND newCompositeNode» } 
+	 iv_«ruleName()»=«ruleName()»«defaultArgumentList()» 
+	 { $current=$iv_«ruleName()».current.getText(); }  
+	 EOF 
+;
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
+finally {
+«IF definesHiddenTokens-»
+	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
+}
+«ENDIF-»
+«ENDIF-»
+
+// Rule «originalElement(this).name»
+«ruleName()» «parameterList(false)»returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+«IF definesHiddenTokens-»
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.originalElement().gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
+    }
+    @after { leaveRule();
+    }:
+   «EXPAND dataTypeEbnf(original, true) FOR this.alternatives»
+    ;
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
+finally {
+«IF definesHiddenTokens-»
+	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
+}
+«ENDIF-» 
+«ENDIF»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original, AntlrOptions options) FOR EnumRule»
+«IF isCalled(original,this)»
+// Rule «originalElement(this).name»
+«ruleName()» returns [Enumerator current=null] 
+    @init { enterRule(); }
+    @after { leaveRule(); }:
+    «EXPAND ebnf(original, options, true) FOR this.alternatives»;
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR EnumLiteralDeclaration-»
+«IF writeActions-»
+    «localVar()»=«ENDIF»«grammar.getKeywordRuleName(literal.value)»
+«IF writeActions-»	
+    {
+        $current = grammarAccess.«grammarElementAccess(originalElement(this))».getEnumLiteral().getInstance();
+        «EXPAND newLeafNode(localVar())» 
+    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ebnf(Grammar grammar, AntlrOptions options, boolean writeActions) FOR AbstractElement-»
+«IF mustBeParenthesized()»(«EXPAND ebnfPredicate(grammar, options)»«EXPAND ebnf2(grammar, options, writeActions)»)«ELSE»«EXPAND ebnf2(grammar, options, writeActions)»«ENDIF»«cardinality-»
+«ENDDEFINE»
+
+«DEFINE ebnfPredicate(Grammar grammar, AntlrOptions options) FOR AbstractElement-»
+«IF predicated() || firstSetPredicated»(«IF predicated()»«EXPAND ebnf2(grammar, options, false) FOR predicatedElement()»«ELSE»«EXPAND ebnf2(grammar, options, false) FOREACH firstSet() SEPARATOR ' | '»«ENDIF»)=>«ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE dataTypeEbnf(Grammar grammar, boolean writeActions) FOR AbstractElement-»
+«IF mustBeParenthesized()»(«EXPAND dataTypeEbnfPredicate(grammar)»«EXPAND dataTypeEbnf2(grammar, writeActions)»)«ELSE»«EXPAND dataTypeEbnf2(grammar, writeActions)»«ENDIF»«cardinality-»
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnfPredicate(Grammar grammar) FOR AbstractElement-»
+«IF predicated() || firstSetPredicated»(«IF predicated()»«EXPAND dataTypeEbnf2(grammar, false) FOR predicatedElement()»«ELSE»«EXPAND dataTypeEbnf2(grammar, false) FOREACH firstSet() SEPARATOR ' | '»«ENDIF»)=>«ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR Alternatives-»«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR Group-»
+«IF guardCondition!=null-»
+«guardCondition()»(«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements»)
+«ELSE»«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements»«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR UnorderedGroup»
+«IF !writeActions-»
+(«EXPAND dataTypeEbnf(grammar, writeActions) FOREACH elements SEPARATOR '\n    |'»)*
+«ELSE-»
+«LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
+(
+	{ 
+	  getUnorderedGroupHelper().enter(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	}
+	(
+		(
+«FOREACH elements AS element ITERATOR it»
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»);
+	 				}
+«REM»Predicate {true}=> helps to workaround an issue in the Antlr grammar processing«ENDREM»«IF true»«ENDIF-»
+					({true}?=>(«EXPAND dataTypeEbnf2(grammar, writeActions) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	 				}
+ 				)
+			)  «IF !it.lastIteration»|«ENDIF»
+«ENDFOREACH»
+		)«IF mandatoryContent != 0-»+
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.«originalElement().gaRuleElementAccessor()»)}?«ELSE»*«ENDIF»	
+	)
+)
+	{ 
+	  getUnorderedGroupHelper().leave(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	}
+«ENDLET»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR Keyword»
+	«IF writeActions»kw=«ENDIF»«grammar.getKeywordRuleName(value)» 
+«IF writeActions-»
+    {
+        $current.merge(kw);
+        «EXPAND newLeafNode("kw")» 
+    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2(Grammar grammar, boolean writeActions) FOR RuleCall-»
+«IF writeActions-»
+«IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
+    { 
+        «EXPAND newCompositeNode» 
+    }
+«ENDIF-»
+    «localVar()»=«ENDIF»«rule.ruleName()-»«argumentList(!writeActions)»«IF writeActions-»
+    {
+		$current.merge(«localVar()»);
+    }
+«IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
+    { 
+        afterParserOrEnumRuleCall();
+    }
+«ENDIF-»
+«IF TerminalRule.isInstance(rule)»
+    { 
+    «EXPAND newLeafNode(localVar())» 
+    }
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Alternatives-»«EXPAND ebnf(grammar, options, writeActions) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Group-»
+«IF guardCondition!=null-»
+«guardCondition()»(«EXPAND ebnf(grammar, options, writeActions) FOREACH elements»)
+«ELSE»«EXPAND ebnf(grammar, options, writeActions) FOREACH elements»«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR UnorderedGroup»
+«IF !writeActions-»
+(«EXPAND ebnf(grammar, options, writeActions) FOREACH elements SEPARATOR '\n    |'»)*
+«ELSE-»
+«LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
+(
+	{ 
+	  getUnorderedGroupHelper().enter(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	}
+	(
+		(
+«FOREACH elements AS element ITERATOR it»
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»);
+	 				}
+«REM»Predicate {true}=> helps to workaround an issue in the Antlr grammar processing«ENDREM»«IF true»«ENDIF-»
+					({true}?=>(«EXPAND ebnf2(grammar, options, writeActions) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	 				}
+ 				)
+			)  «IF !it.lastIteration»|«ENDIF»
+«ENDFOREACH»
+		)«IF mandatoryContent != 0-»+
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.«originalElement().gaRuleElementAccessor()»)}?«ELSE»*«ENDIF»	
+	)
+)
+	{ 
+	  getUnorderedGroupHelper().leave(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	}
+«ENDLET»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR AbstractElement-»
+«ERROR "crossrefEbnf is not supported for AbstractElement"»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR Alternatives-»
+		(«EXPAND crossrefEbnf(grammar, ref, writeActions) FOREACH elements SEPARATOR '\n    |'»)
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR RuleCall-»
+«EXPAND crossrefEbnf(grammar, ref, this, writeActions) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, boolean writeActions) FOR AbstractRule-»
+«ERROR "crossrefEbnf is not supported for AbstractRule"»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, RuleCall call, boolean writeActions) FOR ParserRule-»
+«IF !originalElement(this).isDatatypeRule()-»
+«ERROR "crossrefEbnf is not supported for ParserRule that is not a datatype rule"»
+«ELSE-»
+«IF writeActions-»
+		{ 
+	        «EXPAND newCompositeNode FOR ref» 
+	    }
+«ENDIF-»
+		«ruleName()-»«call.argumentList(!writeActions)»
+«IF writeActions-»
+		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, RuleCall call, boolean writeActions) FOR EnumRule-»
+«IF writeActions-»
+		{ 
+	        «EXPAND newCompositeNode FOR ref» 
+	    }
+«ENDIF-»
+		«ruleName()-»
+«IF writeActions-»
+		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(Grammar grammar, CrossReference ref, RuleCall call, boolean writeActions) FOR TerminalRule-»
+	«IF writeActions»«ref.containingAssignment().localVar()»=«ENDIF»«ruleName()»
+«IF writeActions-»
+	{
+		«EXPAND newLeafNode(ref.containingAssignment().localVar()) FOR ref» 
+	}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR AbstractElement-»
+		«IF writeActions»«assignment.localVar(this)»=«ENDIF»«EXPAND ebnf(grammar, options, writeActions)»
+«IF writeActions-»
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.«originalElement(assignment).containingParserRule().grammarElementAccess()»);
+	        }
+       		«assignment.setOrAdd()»WithLastConsumed($current, "«assignment.feature»", «
+        		IF assignment.isBoolean()»true«
+        		ELSE»«assignment.localVar(this)»«
+        		ENDIF», «assignment.terminal.toStringLiteral()»);
+	    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Group-»
+«ERROR "assignmentEbnf is not supported for Group"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Assignment-»
+«ERROR "assignmentEbnf is not supported for Assignment"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Action-»
+«ERROR "assignmentEbnf is not supported for Action"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR Alternatives-»
+(
+«EXPAND assignmentEbnf(grammar, assignment, options, writeActions) FOREACH elements SEPARATOR '\n    |'»
+)
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR RuleCall-»
+«EXPAND assignmentEbnf(assignment, this, writeActions) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR AbstractRule-»
+«ERROR "assignmentEbnf is not supported for AbstractRule"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR ParserRule-»
+«IF writeActions-»
+		{ 
+	        «EXPAND newCompositeNode FOR call» 
+	    }
+		«assignment.localVar(call)»=«ENDIF»«ruleName()-»«call.argumentList(!writeActions)-»
+«IF writeActions-»
+		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.«originalElement(assignment).containingParserRule().grammarElementAccess()»);
+	        }
+       		«assignment.setOrAdd()»(
+       			$current, 
+       			"«assignment.feature»",
+        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
+        		«call.toStringLiteral()»);
+	        afterParserOrEnumRuleCall();
+	    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR EnumRule-»
+«IF writeActions-»
+		{ 
+	        «EXPAND newCompositeNode FOR call» 
+	    }
+		«assignment.localVar(call)»=«ENDIF»«ruleName()-»
+«IF writeActions-»
+		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.«originalElement(assignment).containingParserRule().grammarElementAccess()»);
+	        }
+       		«assignment.setOrAdd()»(
+       			$current, 
+       			"«assignment.feature»",
+        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
+        		«call.toStringLiteral()»);
+	        afterParserOrEnumRuleCall();
+	    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Assignment assignment, RuleCall call, boolean writeActions) FOR TerminalRule-»
+«IF writeActions-»
+		«assignment.localVar(call)»=«ENDIF»«ruleName()»
+«IF writeActions-»
+		{
+			«EXPAND newLeafNode(assignment.localVar(call)) FOR call» 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.«originalElement(assignment).containingParserRule().grammarElementAccess()»);
+	        }
+       		«assignment.setOrAdd()»WithLastConsumed(
+       			$current, 
+       			"«assignment.feature»",
+        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
+        		«call.toStringLiteral()»);
+	    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(Grammar grammar, Assignment assignment, AntlrOptions options, boolean writeActions) FOR CrossReference-»
+«IF writeActions-»
+«IF options.backtrack-»
+		{ 
+		  /* */ 
+		}
+«ENDIF-»
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.«originalElement(assignment).containingParserRule().grammarElementAccess()»);
+	        }
+        }
+«ENDIF-»
+		«EXPAND crossrefEbnf(grammar, this, writeActions) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Assignment»
+(
+«EXPAND assignmentEbnf(grammar, this, options, writeActions) FOR terminal»
+)
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR CrossReference»
+«ERROR "ebnf2(Grammar grammar) is not supported for CrossReference"»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Action»
+«IF writeActions-»
+«IF options.backtrack-»
+	{ 
+	  /* */ 
+	}
+«ENDIF-»
+    {
+        $current = forceCreateModelElement«IF feature != null-»And«setOrAdd().toFirstUpper()»«ENDIF»(
+            grammarAccess.«originalElement(this).grammarElementAccess()»,
+            $current);
+    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR Keyword»
+«IF writeActions-»
+	«IF !isAssigned()»«localVar()»=«ENDIF»«ENDIF»«grammar.getKeywordRuleName(value)»
+«IF writeActions-»
+    {
+    	«IF !isAssigned()-»
+    	«EXPAND newLeafNode(localVar())»
+    	«ELSE-»
+        «EXPAND newLeafNode(containingAssignment().localVar(this))»
+        «ENDIF-»  
+    }
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ebnf2(Grammar grammar, AntlrOptions options, boolean writeActions) FOR RuleCall-»
+«IF writeActions-»
+«IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
+«IF options.backtrack-»
+	{ 
+	  /* */ 
+	}
+«ENDIF-»
+    { 
+«IF rule.fragment-»
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.«originalElement(this).containingParserRule().grammarElementAccess()»);
+		}
+«ENDIF-»
+        «EXPAND newCompositeNode» 
+    }
+«IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)originalElement(rule)) && !EnumRule.isInstance(rule))-»
+    «localVar()»=«ENDIF-»«ENDIF-»«IF TerminalRule.isInstance(rule)-»«localVar()»=«ENDIF-»
+«ENDIF-»
+«rule.ruleName()-»«argumentList(!writeActions)-»
+«IF writeActions-»
+«IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
+    {
+«IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)originalElement(rule)) && !EnumRule.isInstance(rule))-»
+        $current = $«localVar()».current;
+«ENDIF-» 
+        afterParserOrEnumRuleCall();
+    }
+«ENDIF-»
+«IF TerminalRule.isInstance(rule)»
+    { 
+    «EXPAND newLeafNode(localVar())» 
+    }
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE newCompositeNode FOR EObject
+    »newCompositeNode(grammarAccess.«grammarElementAccess(originalElement(this))»);«
+ENDDEFINE»
+
+«DEFINE newLeafNode(String token) FOR EObject
+    »newLeafNode(«token», grammarAccess.«grammarElementAccess(originalElement(this))»);«
+ENDDEFINE»
+

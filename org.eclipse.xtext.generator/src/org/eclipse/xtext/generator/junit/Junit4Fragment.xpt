@@ -1,0 +1,149 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::junit::Junit4Fragment»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(Junit4Fragment junit4Fragment) FOR Grammar-»
+«REM»
+«FILE qualifiedTestName().asPath()+".java" SRC_TEST -»
+«fileHeader()»
+package «qualifiedTestName().toJavaPackage()»;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.eclipse.emf.ecore.EObject;
+import «junit4Fragment.testingPackage».InjectWith;
+import «junit4Fragment.testingPackage».XtextRunner;
+import «junit4Fragment.testingPackage».util.ParseHelper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
+
+@RunWith(XtextRunner.class)
+@InjectWith(«qualifiedInjectorProviderName().toSimpleName()».class)
+public class «qualifiedTestName().toSimpleName()» {
+	
+	@Inject
+	private ParseHelper<EObject> parseHelper;
+	
+	@Test
+	public void loadModel() throws Exception {
+		EObject result = parseHelper.parse("Hello Xtext!");
+		assertNotNull(result);
+	}
+
+}
+«ENDFILE»
+«ENDREM»
+
+«FILE qualifiedInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
+«fileHeader()»
+package «qualifiedInjectorProviderName().toJavaPackage()»;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+«annotationImports()-»
+import «junit4Fragment.testingPackage».GlobalRegistries;
+import «junit4Fragment.testingPackage».GlobalRegistries.GlobalStateMemento;
+import «junit4Fragment.testingPackage».IInjectorProvider;
+import «junit4Fragment.testingPackage».IRegistryConfigurator;
+
+«classAnnotations()»public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
+
+	protected GlobalStateMemento stateBeforeInjectorCreation;
+	protected GlobalStateMemento stateAfterInjectorCreation;
+	protected Injector injector;
+
+	static {
+		GlobalRegistries.initializeDefaults();
+	}
+
+	@Override
+	public Injector getInjector()
+	{
+		if (injector == null) {
+			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+			this.injector = internalCreateInjector();
+			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+		}
+		return injector;
+	}
+
+	protected Injector internalCreateInjector() {
+		return new «setup().toSimpleName()»() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(createRuntimeModule());
+			}
+		}.createInjectorAndDoEMFRegistration();
+	}
+
+	protected «guiceModuleRt().toSimpleName()» createRuntimeModule() {
+		// make it work also with Maven/Tycho and OSGI
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+		return new «guiceModuleRt().toSimpleName()»() {
+			@Override
+			public ClassLoader bindClassLoaderToInstance() {
+				return «qualifiedInjectorProviderName().toSimpleName()».class
+						.getClassLoader();
+			}
+		};
+	}
+
+	@Override
+	public void restoreRegistry() {
+		stateBeforeInjectorCreation.restoreGlobalState();
+	}
+
+	@Override
+	public void setupRegistry() {
+		getInjector();
+		stateAfterInjectorCreation.restoreGlobalState();
+	}
+}
+«ENDFILE»
+
+
+«IF getNaming().hasUI()»
+«FILE qualifiedUiInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
+«fileHeader()»
+package «qualifiedUiInjectorProviderName().toJavaPackage()»;
+
+«annotationImports()-»
+import «junit4Fragment.testingPackage».IInjectorProvider;
+
+import com.google.inject.Injector;
+
+«classAnnotations()»public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInjectorProvider {
+
+	@Override
+	public Injector getInjector() {
+		return «activatorName()».getInstance().getInjector("«name»");
+	}
+
+}
+«ENDFILE»
+«ENDIF»
+
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlTests(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="multiRuleenums" nsURI="http://www.eclipse.org/2009/tmf/xtext/MultiRuleEnums"
+    nsPrefix="multiRuleenums">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="a" eType="#//MyEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="b" eType="#//MyEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="c" eType="#//MyEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MyEnum">
+    <eLiterals name="A" literal="A"/>
+    <eLiterals name="B" value="1" literal="B"/>
+    <eLiterals name="C" value="2" literal="C"/>
+    <eLiterals name="D" value="3" literal="D"/>
+    <eLiterals name="E" value="4" literal="E"/>
+  </eClassifiers>
+</ecore:EPackage>

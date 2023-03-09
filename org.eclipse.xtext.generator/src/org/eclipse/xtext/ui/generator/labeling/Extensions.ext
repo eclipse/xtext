@@ -1,0 +1,45 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::generator::Naming; 
+extension org::eclipse::xtext::GrammarUtil;
+
+String eObjectLabelProviderQualifiedName(Grammar grammar) :
+	eObjectLabelProviderQualifiedName(grammar,getNaming());
+	
+String eObjectLabelProviderSuperClassName(Grammar grammar) :
+	usesXbase(grammar) 
+		? "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider" 
+		: "org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider";
+
+String descriptionLabelProviderQualifiedName(Grammar grammar) :
+	descriptionLabelProviderQualifiedName(grammar,getNaming());
+	
+String descriptionLabelProviderSuperClassName(Grammar grammar) :
+	usesXbase(grammar) 
+		? "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider" 
+		: "org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider";
+	
+private String eObjectLabelProviderQualifiedName(Grammar grammar, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getEObjectLabelProviderQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+
+private String descriptionLabelProviderQualifiedName(Grammar grammar, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getDescriptionLabelProviderQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	 
+Boolean usesXbase(Grammar grammar) :
+	JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.doesUseXbase(org.eclipse.xtext.Grammar);
+	
+
+	
+
+	
+	

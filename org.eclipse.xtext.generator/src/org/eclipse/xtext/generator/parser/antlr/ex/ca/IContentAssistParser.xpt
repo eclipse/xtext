@@ -1,0 +1,193 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::generator::parser::antlr»
+«IMPORT org::eclipse::xtext::generator::parser::antlr::ex::common»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+
+«DEFINE parser(boolean partialParsing, AntlrFragmentHelper helper, boolean hasIDE) FOR Grammar»
+«FILE helper.getContentAssistParserClassName(this).asPath()+".java" SRC_GEN_IDE-»
+«fileHeader()»
+package «helper.getContentAssistParserClassName(this).toJavaPackage()»;
+
+«annotationImports()-»
+import java.util.Collection;
+import java.util.Map;
+import java.util.HashMap;
+
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
+«ENDIF-»
+import org.antlr.runtime.RecognitionException;
+import org.eclipse.xtext.AbstractElement;
+import «getParserSuperClassName(partialParsing, hasIDE)»;
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ELSE-»
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+«ENDIF-»
+
+import com.google.inject.Inject;
+
+import «gaFQName()»;
+
+«classAnnotations()»public class «helper.getContentAssistParserClassName(this).toSimpleName()» extends «getParserSuperClassName(partialParsing, hasIDE).toSimpleName()» {
+	
+	@Inject
+	private «gaSimpleName()» grammarAccess;
+	
+	private Map<AbstractElement, String> nameMappings;
+	
+	@Override
+	protected «helper.getInternalContentAssistParserClassName(this)» createParser() {
+		«helper.getInternalContentAssistParserClassName(this)» result = new «helper.getInternalContentAssistParserClassName(this)»(null);
+		result.setGrammarAccess(grammarAccess);
+		return result;
+	}
+	
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+	@Override
+	protected TokenSource createLexer(CharStream stream) {
+		return new «helper.getContentAssistTokenSourceClassName(this)»(super.createLexer(stream));
+	}
+
+«ENDIF-»
+	@Override
+	protected String getRuleName(AbstractElement element) {
+		if (nameMappings == null) {
+			nameMappings = new HashMap<AbstractElement, String>() {
+				private static final long serialVersionUID = 1L;
+				{
+«EXPAND ruleName FOREACH helper.getAllAlternatives(originalElement()).union(helper.getAllGroups(originalElement())).union(helper.getAllAssignments(originalElement())).union(helper.getAllUnorderedGroups(originalElement())).typeSelect(AbstractElement)-»
+				}
+			};
+		}
+		return nameMappings.get(element);
+	}
+	
+	@Override
+	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
+		try {
+			«helper.getInternalContentAssistParserClassName(this)» typedParser = («helper.getInternalContentAssistParserClassName(this)») parser;
+			typedParser.«allParserRules().first().originalElement().entryRuleName()»();
+			return typedParser.getFollowElements();
+		} catch(RecognitionException ex) {
+			throw new RuntimeException(ex);
+		}		
+	}
+	
+	@Override
+	protected String[] getInitialHiddenTokens() {
+		return new String[] { «FOREACH initialHiddenTokens() AS hidden SEPARATOR ", "»"«hidden»"«ENDFOREACH-» };
+	}
+	
+	public «gaSimpleName()» getGrammarAccess() {
+		return this.grammarAccess;
+	}
+	
+	public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
+}
+«ENDFILE»
+
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+«FILE helper.getContentAssistTokenSourceClassName(this).asPath()+".java" SRC_UI-»
+«fileHeader()»
+package «helper.getContentAssistTokenSourceClassName(this).toJavaPackage()»;
+
+«annotationImports()-»
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtext.parser.antlr.AbstractIndentationTokenSource;
+import «helper.getInternalContentAssistParserClassName(this)»;
+
+«classAnnotations()»public class «helper.getContentAssistTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
+	
+	public «helper.getContentAssistTokenSourceClassName(this).toSimpleName()»(TokenSource delegate) {
+		super(delegate);
+	}
+	
+	@Override
+	protected boolean shouldSplitTokenImpl(Token token) {
+«IF allTerminalRules().originalElement().exists(r | r.name.toUpperCase() == "WS" )-»
+		// TODO Review assumption
+		return token.getType() == «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_WS;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+	}
+
+	@Override
+	protected int getBeginTokenType() {
+«LET allTerminalRules().originalElement().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
+«IF open.size == 1-»
+		// TODO Review assumption
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».«open.first().ruleName()»;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+«ENDLET-»
+	}
+
+	@Override
+	protected int getEndTokenType() {
+«LET allTerminalRules().originalElement().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
+«IF close.size == 1-»
+		// TODO Review assumption
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».«close.first().ruleName()»;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+«ENDLET-»
+	}
+	
+	@Override
+	protected boolean shouldEmitPendingEndTokens() {
+		return false;
+	}
+	
+}
+«ENDFILE»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ruleName FOR AbstractElement-»
+«ERROR "unsupported type: " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE ruleName FOR Alternatives-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
+«ENDDEFINE»
+
+«DEFINE ruleName FOR Assignment-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
+«ENDDEFINE»
+
+«DEFINE ruleName FOR Group-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»__0");
+«ENDDEFINE»
+
+«DEFINE ruleName FOR UnorderedGroup-»
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
+«ENDDEFINE»

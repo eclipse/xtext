@@ -1,0 +1,125 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::ui::generator::contentAssist::ContentAssist»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(String superClassName) FOR Grammar»
+	«EXPAND GenProposalProvider(superClassName)»
+	«EXPAND ProposalProvider(superClassName)»
+«ENDDEFINE»
+
+«DEFINE GenProposalProvider(String superClassName) FOR Grammar»
+«FILE getGenProposalProvider().asPath()+".java" SRC_GEN_UI -»
+«fileHeader()»
+package «getGenProposalProvider().toJavaPackage()»;
+
+«annotationImports()-»
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+
+/**
+ * Represents a generated, default implementation of superclass {@link «superClassName»}.
+ * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
+ * with a more concrete subtype. 
+ */
+@SuppressWarnings("all")
+«classAnnotations()»public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
+		
+	«LET getFqFeatureNamesToExclude() AS excludedFqnFeatureNames-»
+	«LET {} AS processedFqnFeatureNames-»
+		«FOREACH containedAssignments() AS assignment-»
+			«LET getFqFeatureName(assignment) AS fqnFeatureName-»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)-»
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
+	public void complete«fqnFeatureName»(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	«LET containingParserRule(assignment).containedAssignments().select(a|a.feature==assignment.feature).terminal AS terminals-»
+	«IF terminals.eClassName().toSet().size>1-»
+	«LET {} AS processedTerminals-»
+		«FOREACH terminals AS terminal-»
+		«IF !processedTerminals.contains(terminal.eClassName())-»
+			«processedTerminals.add(terminal.eClassName())->""-»
+		if (assignment.getTerminal() instanceof «terminal.eClassName()») {
+«EXPAND assignmentTerminal("\t\t\t","assignment.getTerminal()") FOR terminal-»
+		}
+		«ENDIF-»
+		«ENDFOREACH-»
+	«ENDLET-»
+	«ELSE-»
+«EXPAND assignmentTerminal("\t\t","assignment.getTerminal()") FOR assignment.terminal-»
+	«ENDIF-»
+	«ENDLET-»
+	}
+				«ENDIF-»
+			«ENDLET-»
+  	  «ENDFOREACH-»
+    
+  	  «FOREACH rules AS rule-»
+			«LET getFqFeatureName(rule) AS fqnFeatureName-»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)-»
+					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
+	public void complete«fqnFeatureName»(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
+				«ENDIF-»
+			«ENDLET-»
+    	«ENDFOREACH-»
+	«ENDLET-»
+	«ENDLET-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE ProposalProvider(String superClassName) FOR Grammar»
+«FILE getProposalProvider().asPath()+".java" SRC_UI-»
+«fileHeader()»
+package «getProposalProvider().toJavaPackage()»;
+
+/**
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
+ * on how to customize the content assistant.
+ */
+public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR AbstractElement-»
+«indentation»// subclasses may override
+«ENDDEFINE»
+
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR CrossReference-»
+«indentation»lookupCrossReference(((CrossReference)«accessor»), context, acceptor);
+«ENDDEFINE»
+
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR RuleCall-»
+«indentation»completeRuleCall(((RuleCall)«accessor»), context, acceptor);
+«ENDDEFINE»
+
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR Alternatives-»
+«FOREACH elements AS group ITERATOR iter-»
+«EXPAND assignmentTerminal(indentation,"((Alternatives)" + accessor + ").getElements().get(" + iter.counter0 + ")") FOR group-» 
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(String superClassName) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(String superClassName) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(String superClassName) FOR Grammar»«ENDDEFINE»

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Pure Xbase Generic IDE Services
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.31.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.purexbase.ide;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.purexbase,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.eclipse.xtext.purexbase.ide;x-internal:=true,
+ org.eclipse.xtext.purexbase.ide.contentassist.antlr,
+ org.eclipse.xtext.purexbase.ide.contentassist.antlr.internal
+Automatic-Module-Name: org.eclipse.xtext.purexbase.ide
+Eclipse-SourceReferences: eclipseSourceReferences

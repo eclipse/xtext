@@ -1,0 +1,54 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.builder.tests.GenerateBuilderTestLanguages
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
+
+var rootPath = ".."
+
+Workflow {
+	
+    component = XtextGenerator {
+    	configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = "org.eclipse.xtext.builder.standalone.tests"
+				rootPath = rootPath
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = "\n"
+				preferXtendStubs = false
+			}
+		}
+		
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
+			
+			fragment = ecore.EMFGeneratorFragment2 {
+				emfRuntimeVersion = "2.29"
+				jdkLevel = "JDK110"
+			}
+			fragment = grammarAccess.GrammarAccessFragment2 {}
+			fragment = resourceFactory.ResourceFactoryFragment2 {}
+			fragment = serializer.SerializerFragment2 {
+				generateStub = false
+			}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 {
+				options = {
+					classSplitting = true
+				}
+			}
+			fragment = validation.ValidatorFragment2 {
+				generateStub = false
+			}
+			fragment = builder.BuilderIntegrationFragment2 {}
+		}
+	}
+}

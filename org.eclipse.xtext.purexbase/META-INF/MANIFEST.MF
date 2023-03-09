@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Pure Xbase Runtime
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.31.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.purexbase; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.16.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.31.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib;bundle-version="2.31.0",
+ org.eclipse.emf.common,
+ org.eclipse.xtext.common.types,
+ org.objectweb.asm;bundle-version="[9.4.0,9.5.0)";resolution:=optional
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j;version="1.2.24"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.eclipse.xtext.purexbase,
+ org.eclipse.xtext.purexbase.jvmmodel,
+ org.eclipse.xtext.purexbase.parser.antlr,
+ org.eclipse.xtext.purexbase.parser.antlr.internal,
+ org.eclipse.xtext.purexbase.pureXbase,
+ org.eclipse.xtext.purexbase.pureXbase.impl,
+ org.eclipse.xtext.purexbase.pureXbase.util,
+ org.eclipse.xtext.purexbase.services,
+ org.eclipse.xtext.purexbase.validation,
+ org.eclipse.xtext.purexbase.serializer,
+ org.eclipse.xtext.purexbase.scoping,
+ org.eclipse.xtext.purexbase.formatting2
+Automatic-Module-Name: org.eclipse.xtext.purexbase
+Eclipse-SourceReferences: eclipseSourceReferences

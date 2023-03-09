@@ -1,0 +1,252 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::parser::packrat::PackratParserGen»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+«DEFINE root FOR Grammar»
+«EXPAND terminalConsumer FOREACH rules.typeSelect(TerminalRule)»
+«ENDDEFINE»
+
+«DEFINE terminalConsumer FOR TerminalRule»
+«FILE this.fullConsumerClassName().asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «this.consumerPackageName()»;
+
+«annotationImports()-»
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+
+«IF alternatives.allContents().typeSelect(RuleCall).exists(e|!TerminalRule.isInstance(e.rule))-»
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+«ENDIF-»
+«IF alternatives.allContents().typeSelect(RuleCall).exists(e|TerminalRule.isInstance(e.rule))-»
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+«ENDIF-»
+
+«classAnnotations()»public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
+«FOREACH allCalledRules() AS calledRule-»
+
+	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;
+«ENDFOREACH-»
+
+	public «this.consumerClassName()»(ITerminalConsumerConfiguration configuration) {
+		super(configuration);
+	}
+	
+	@Override
+	protected int doConsume() {
+		return «alternatives.consumeMethodName()»() ? ConsumeResult.SUCCESS : ConsumeResult.EMPTY_MATCH;
+	}
+«EXPAND defineConsume FOR alternatives-»
+	
+«FOREACH allCalledRules() AS calledRule-»
+	public void «calledRule.consumerSetterName()»(«calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()») {
+		this.«calledRule.consumerFieldName()» = «calledRule.consumerFieldName()»;
+	}
+	
+«ENDFOREACH-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE defineConsume FOR AbstractElement-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsume FOR Alternatives-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Alternatives parent) FOR AbstractElement-»
+«EXPAND defineConsume FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Alternatives parent) FOR Alternatives-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsume FOR this-»
+«ELSE-»
+«EXPAND defineConsume(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsume FOR Group-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Group parent) FOR AbstractElement-»
+«EXPAND defineConsume FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(Group parent) FOR Group-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsume FOR this-»
+«ELSE-»
+«EXPAND defineConsume(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsume FOR NegatedToken-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume(this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsume FOR UntilToken-»
+«EXPAND defineConsumeDeclaration FOR this-»
+«EXPAND defineConsume FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(NegatedToken parent) FOR AbstractElement-»
+«EXPAND defineConsume FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsume(NegatedToken parent) FOR NegatedToken-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsume FOR this-»
+«ELSE-»
+«EXPAND defineConsume(this) FOR terminal-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeDeclaration FOR AbstractElement-»
+
+	protected boolean «consumeMethodName()»() {
+«IF isQuestionMark()-»
+		do«consumeMethodName().toFirstUpper()»();
+		return true;
+«ELSEIF isStar()-»
+		while(do«consumeMethodName().toFirstUpper()»()) {}
+		return true;
+«ELSEIF isPlus()-»
+		if (do«consumeMethodName().toFirstUpper()»()) {
+			while(do«consumeMethodName().toFirstUpper()»()) {}
+			return true;
+		}
+		return false;
+«ELSE-»
+«EXPAND defineConsumeBody FOR this-»
+«ENDIF-»
+	}
+«IF isQuestionMark() || isStar() || isPlus()-»
+
+	protected boolean do«consumeMethodName().toFirstUpper()»() {
+«EXPAND defineConsumeBody FOR this-»
+	}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR AbstractElement-»
+«ERROR "defineConsumeBody for " + metaType-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Alternatives-»
+«EXPAND defineConsumeBodyInternal FOR this-»
+		return false;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBodyInternal FOR Alternatives-»
+«FOREACH elements AS g-»
+«IF Alternatives.isInstance(g) && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
+«EXPAND defineConsumeBodyInternal FOR (Alternatives)g-»
+«ELSE-»
+		if («g.consumeMethodName()»())
+			return true;
+«ENDIF-»
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR NegatedToken-»
+«EXPAND defineConsumeBodyInternal FOR this-»
+		return false;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBodyInternal FOR NegatedToken-»
+«IF NegatedToken.isInstance(terminal)  && !terminal.isOptionalCardinality() && !terminal.isMultipleCardinality()-»
+«EXPAND defineConsumeBodyInternal FOR (NegatedToken)terminal-»
+«ELSE-»
+		final int marker = mark();
+		if (!eof() && !«terminal.consumeMethodName()»()) {
+			incOffset();
+			return true;
+		}
+		rollbackTo(marker);
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR UntilToken-»
+		final int marker = mark();
+		while(!eof()) {
+			if(«terminal.consumeMethodName()»())
+				return true;
+			incOffset();
+		}
+		rollbackTo(marker);
+		return false;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Group-»
+		final int marker = mark();
+«EXPAND defineConsumeBodyInternal FOR this-»
+		return true;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBodyInternal FOR Group-»
+«FOREACH elements AS token-»
+«IF Group.isInstance(token) && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
+«EXPAND defineConsumeBodyInternal FOR (Group)token-»
+«ELSE-»
+		if (!«token.consumeMethodName()»()) {
+			rollbackTo(marker);
+			return false;
+		}
+«ENDIF-»
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Keyword-»
+«IF value.length == 1-»
+		return readChar('«value.toJavaString()»');
+«ELSE-»
+		return readString("«value.toJavaString()»");
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR Wildcard-»
+		return readAnyChar();
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR CharacterRange-»
+		return readCharBetween('«left.value.toJavaString()»', '«right.value.toJavaString()»');
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody FOR RuleCall-»
+«EXPAND defineConsumeBody(this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(RuleCall call) FOR AbstractRule-»
+«ERROR "defineConsumeBody for " + metaType.name-» 
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(RuleCall call) FOR ParserRule-»
+		return «consumerFieldName()».consume() == SUCCESS;
+«ENDDEFINE»
+
+«DEFINE defineConsumeBody(RuleCall call) FOR TerminalRule-»
+		return «consumerFieldName()».consume() == SUCCESS;
+«ENDDEFINE»

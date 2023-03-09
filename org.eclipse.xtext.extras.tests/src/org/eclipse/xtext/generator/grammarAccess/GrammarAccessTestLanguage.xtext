@@ -1,0 +1,18 @@
+grammar org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage with org.eclipse.xtext.common.Terminals
+
+/* SuppressWarnings[external] */
+import "classpath:/org/eclipse/xtext/generator/grammarAccess/ametamodel.ecore#//asubpackage" as root
+/* SuppressWarnings[external] */
+import "classpath:/org/eclipse/xtext/generator/grammarAccess/ametamodel.ecore#//asubpackage/emptyPackage/subsubpackage" as sub
+
+Root returns root::AModel:
+	(elements += Type)*;
+	
+Type returns root::AType:
+	AType | AnotherType;
+	
+AType returns root::AType:
+	'foo' {root::AType};
+	
+AnotherType returns sub::AnotherType:
+	'bar' {sub::AnotherType};
