@@ -8,6 +8,7 @@ mvn \
   -DskipTests=true \
   clean deploy \
   -P useJenkinsSnapshots \
+  -P javadoc \
   --batch-mode \
   --update-snapshots \
   -Dmaven.repo.local=.m2/repository \
