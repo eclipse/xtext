@@ -46,7 +46,7 @@
 		<profile>
 			<id>buildP2Repository</id>
 			<modules>
-				<module>../org.eclipse.xtext.lib.p2repository</module>
+				<module>../org.eclipse.xtext.p2repository</module>
 			</modules>
 		</profile>
 	</profiles>
