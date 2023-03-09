@@ -1,0 +1,50 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(List[String] modelFileExtensions) FOR Grammar-»«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+
+«REM»Contributed to Ui Plugin because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=264578 «ENDREM»
+«DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
+<!-- adding resource factories -->
+«FOREACH modelFileExtensions AS ext»
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="«executableExtensionFactory()»:org.eclipse.xtext.resource.IResourceFactory"
+			type="«ext»">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="«ext»">
+        </resourceServiceProvider>
+    </extension>
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»
+		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+		«FOREACH modelFileExtensions AS modelFileExtension-»
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", serviceProvider);
+		«ENDFOREACH»
+«ENDDEFINE»
+
+

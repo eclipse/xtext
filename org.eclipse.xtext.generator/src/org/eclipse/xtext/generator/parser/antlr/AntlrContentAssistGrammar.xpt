@@ -1,0 +1,476 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::emf::ecore»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+«DEFINE grammar(AntlrOptions options, boolean hasIDE) FOR Grammar»
+«FILE getGrammarFileName().asPath()+".g" SRC_GEN_IDE-»
+«fileHeader()»
+grammar «getGrammarFileName().toSimpleName()»;
+
+options {
+	superClass=AbstractInternalContentAssistParser;
+	«IF options.backtrack || !allPredicatedElements().isEmpty-»
+	backtrack=true;
+	«ENDIF-»
+	«IF options.memoize-»
+	 memoize=true;
+	«ENDIF-»
+	«IF options.k>=0»
+	 k=«options.k»;
+	«ENDIF»
+}
+
+@lexer::header {
+package «getGrammarFileName().toJavaPackage()»;
+
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+«ELSE-»
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+«ENDIF-»
+}
+
+@parser::header {
+package «getGrammarFileName().toJavaPackage()»; 
+
+import java.io.InputStream;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+«IF hasIDE-»
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
+«ELSE-»
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+«ENDIF-»
+import «gaFQName()»;
+
+}
+
+@parser::members {
+ 
+ 	private «gaSimpleName()» grammarAccess;
+ 	
+    public void setGrammarAccess(«gaSimpleName()» grammarAccess) {
+    	this.grammarAccess = grammarAccess;
+    }
+    
+    @Override
+    protected Grammar getGrammar() {
+    	return grammarAccess.getGrammar();
+    }
+    
+    @Override
+    protected String getValueForTokenName(String tokenName) {
+    	return tokenName;
+    }
+
+}
+
+«EXPAND antlrRules»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE antlrRules FOR Grammar»
+«EXPAND rule(this) FOREACH allParserRules()»
+«EXPAND rule(this) FOREACH allEnumRules()»
+«EXPAND rule(this) FOREACH allAlternatives()»
+«EXPAND rule(this) FOREACH allGroups()»
+«EXPAND rule(this) FOREACH allUnorderedGroups()»
+«EXPAND rule(this) FOREACH allAssignments()»
+«EXPAND rule FOREACH allTerminalRules()»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original) FOR ParserRule»
+«IF isCalled(original,this)»
+«IF isValidEntryRule()-»
+// Entry rule «entryRuleName()»
+«entryRuleName()» 
+«IF definesHiddenTokens-»
+@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+}
+«ENDIF-»
+:
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+	 «ruleName()»
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); } 
+	 EOF 
+;
+«IF definesHiddenTokens-»
+finally {
+	myHiddenTokenState.restore();
+}
+«ENDIF-»
+«ENDIF-»
+
+// Rule «originalElement().name»
+«ruleName()»
+    @init {
+«IF definesHiddenTokens-»  
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-»
+		int stackSize = keepStackSize();
+    }
+	:
+    «EXPAND ebnf FOR this.alternatives»
+;
+finally {
+	restoreStackSize(stackSize);
+«IF definesHiddenTokens-»
+	myHiddenTokenState.restore();
+«ENDIF-» 
+}
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original) FOR EnumRule»
+«IF isCalled(original,this)»
+// Rule «originalElement().name»
+«ruleName()»
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+    «EXPAND ebnf FOR this.alternatives»
+;
+finally {
+	restoreStackSize(stackSize);
+}
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original) FOR Alternatives»
+«IF isCalled(original, containingRule())-»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	«EXPAND ebnf FOREACH elements SEPARATOR '\n    |'»
+;
+finally {
+	restoreStackSize(stackSize);
+}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original) FOR UnorderedGroup»
+«IF isCalled(original, containingRule())-»
+«LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»
+    @init {
+    	int stackSize = keepStackSize();
+		getUnorderedGroupHelper().enter(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+    }
+:
+	«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__0
+	«IF mandatoryContent!=0»
+	{getUnorderedGroupHelper().canLeave(grammarAccess.«originalElement().gaRuleElementAccessor()»)}?
+	«ELSE»?
+	«ENDIF»
+;
+finally {
+	getUnorderedGroupHelper().leave(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	restoreStackSize(stackSize);
+}
+
+«EXPAND ruleImpl FOR this-»
+
+«EXPAND ruleImpl(0) FOR this-»
+«ENDLET-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ruleImpl FOR UnorderedGroup»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__Impl
+	@init {
+		int stackSize = keepStackSize();
+		boolean selected = false;
+    }
+:
+		(
+«FOREACH elements AS element ITERATOR it»
+			( 
+				{getUnorderedGroupHelper().canSelect(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»)}?=>(
+					{ 
+	 				  getUnorderedGroupHelper().select(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»);
+	 				}
+	 				{
+	 				  selected = true;
+	 				}
+					(
+					«IF element.isMultipleCardinality()-»
+					(«ENDIF»
+						{ before(grammarAccess.«element.originalElement().grammarElementAccess()»); }
+						(«EXPAND ebnf2 FOR element»)
+						{ after(grammarAccess.«element.originalElement().grammarElementAccess()»); }
+					«IF element.isMultipleCardinality()-»
+					)
+					(
+						{ before(grammarAccess.«element.originalElement().grammarElementAccess()»); }
+						((«EXPAND ebnf2 FOR element»)=>«EXPAND ebnf2 FOR element»)*
+						{ after(grammarAccess.«element.originalElement().grammarElementAccess()»); }
+					)«ENDIF-»
+					)
+ 				)
+			)  «IF !it.lastIteration»|«ENDIF»
+«ENDFOREACH»
+		)
+;
+finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement().gaRuleElementAccessor()»);
+	restoreStackSize(stackSize);
+}
+«ENDDEFINE»
+
+«DEFINE ruleImpl(int index) FOR UnorderedGroup»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__«index»
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__Impl
+«IF elements.size > index + 1-»
+	«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__«index + 1»?
+«ENDIF-» 
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+«IF elements.size > index + 1-»
+«EXPAND ruleImpl(index+1) FOR this»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original) FOR Assignment»
+«IF isCalled(original, containingRule())-»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	«EXPAND assignmentEbnf FOR terminal»
+;
+finally {
+	restoreStackSize(stackSize);
+}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE rule(Grammar original) FOR Group»
+«IF isCalled(original, containingRule())-»
+«EXPAND ruleImpl(this, 0) FOR elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ruleImpl(Group group, int index) FOR List[AbstractElement]»
+«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index»
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index»__Impl
+«IF size > 1-»
+	«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index + 1»
+«ENDIF-» 
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index»__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+«EXPAND ebnf FOR first()»
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+«IF size > 1-»
+«EXPAND ruleImpl(group, index+1) FOR withoutFirst()»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR EnumLiteralDeclaration-»
+	'«literal.value.toAntlrString()»' 
+«ENDDEFINE»
+
+«DEFINE rule FOR TerminalRule»
+«IF fragment»fragment «ENDIF»«ruleName()» : «toLexerBody()»;
+«ENDDEFINE»
+
+«DEFINE ebnf FOR AbstractElement-»
+«IF !isOptionalCardinality() && isMultipleCardinality()-»
+(
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
+(«EXPAND ebnf2»)
+{ after(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
+)
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
+(«EXPAND ebnf2»)*
+{ after(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
+)
+)
+«ELSE-»
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
+«IF mustBeParenthesized()»(«EXPAND ebnf2»)«ELSE»«EXPAND ebnf2»«ENDIF»«cardinality»
+{ after(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
+)
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE paramConfig FOR AbstractElement-»
+«IF containingRule().alternatives == this && ParserRule.isInstance(containingRule()) && !containingRule().originalElement().parameters.isEmpty-»
+, «containingRule().parameterConfig()-»
+«ENDIF-»
+«ENDDEFINE-»
+
+«DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Alternatives-»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»«ENDDEFINE»
+
+«DEFINE ebnf2 FOR UnorderedGroup-»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Assignment-»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Group»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__0«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR AbstractElement-»
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+«EXPAND ebnf»
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
+)
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR Group-»
+«ERROR "assignmentEbnf is not supported for Group"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR Assignment-»
+«ERROR "assignmentEbnf is not supported for Assignment"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR Action-»
+«ERROR "assignmentEbnf is not supported for Action"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR CrossReference-»
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+«EXPAND crossrefEbnf(this) FOR terminal-»
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
+)
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(CrossReference ref) FOR AbstractElement-»
+«ERROR "crossrefEbnf is not supported for AbstractElement"»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(CrossReference ref) FOR RuleCall-»
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+«EXPAND crossrefEbnf(ref) FOR rule-»
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
+)
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(CrossReference ref) FOR AbstractRule-»
+«ERROR "crossrefEbnf is not supported for AbstractRule"»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(CrossReference ref) FOR ParserRule-»
+«IF !originalElement().isDatatypeRule()-»
+«ERROR "crossrefEbnf is not supported for ParserRule that is not a datatype rule"»
+«ELSE-»
+	«ruleName()-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(CrossReference ref) FOR EnumRule-»
+	«ruleName()-»
+«ENDDEFINE»
+
+«DEFINE crossrefEbnf(CrossReference ref) FOR TerminalRule-»
+	«ruleName()-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR Alternatives-»
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+(«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»)
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
+)
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf FOR RuleCall-»
+(
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+«EXPAND assignmentEbnf(this) FOR rule-»
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
+)
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(RuleCall call) FOR AbstractRule-»
+«ERROR "assignmentEbnf is not supported for AbstractRule"»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(RuleCall call) FOR ParserRule-»
+	«ruleName()-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(RuleCall call) FOR EnumRule-»
+	«ruleName()-»
+«ENDDEFINE»
+
+«DEFINE assignmentEbnf(RuleCall call) FOR TerminalRule-»
+	«ruleName()-»
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR CrossReference»
+«ERROR "ebnf2 is not supported for CrossReference"»
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Action»
+
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Keyword»
+	'«value.toAntlrString()»' 
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR RuleCall-»
+	«rule.ruleName()-»
+«ENDDEFINE»

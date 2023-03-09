@@ -1,0 +1,32 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::emf::ecore;
+
+extension org::eclipse::xtext::generator::Naming; 
+extension org::eclipse::xtext::GrammarUtil;
+
+getProposalProvider(Grammar grammar) :
+	getNaming().basePackageUi(grammar) + ".contentassist." + grammar.name.toSimpleName() + "ProposalProvider";
+
+getGenProposalProvider(Grammar grammar) :
+	getNaming().basePackageUi(grammar) + ".contentassist.Abstract" + grammar.name.toSimpleName() + "ProposalProvider";
+
+String getFqFeatureName(Assignment this):
+	JAVA org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragmentExtensions.getFqFeatureName(org.eclipse.xtext.Assignment);
+	
+String getFqFeatureName(AbstractRule this):
+	JAVA org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragmentExtensions.getFqFeatureName(org.eclipse.xtext.AbstractRule);
+
+String eClassName(EObject e) :
+	JAVA org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment.getClassName(org.eclipse.emf.ecore.EObject);
+
+Set[String] getFqFeatureNamesToExclude(Grammar grammar) :
+	JAVA org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragmentExtensions.getFqFeatureNamesToExclude(org.eclipse.xtext.Grammar);

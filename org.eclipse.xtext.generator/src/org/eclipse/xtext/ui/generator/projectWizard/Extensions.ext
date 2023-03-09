@@ -1,0 +1,26 @@
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::GrammarUtil;
+extension org::eclipse::xtext::generator::Naming;
+
+projectInfoClassName(Grammar this) :
+	getNamespace()+".ui.wizard."+getName()+"ProjectInfo";
+
+projectCreatorClassName(Grammar this) :
+	getNamespace()+".ui.wizard."+getName()+"ProjectCreator";
+	
+projectCreatorSuperClassName(Grammar this, boolean isPluginProject) :
+	"org.eclipse.xtext.ui.wizard.Abstract" + (isPluginProject?"Plugin":"" ) + "ProjectCreator";
+	
+String newProjectTemplateName(Grammar this) :
+	newProjectTemplateName(this,getNaming());
+	
+private String newProjectTemplateName(Grammar this, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment.getNewProjectTemplateName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+
+projectWizardClassName(Grammar this) :
+	getNamespace()+".ui.wizard."+getName()+"NewProjectWizard";
+
+OP() : "«";
+CL() : "»";

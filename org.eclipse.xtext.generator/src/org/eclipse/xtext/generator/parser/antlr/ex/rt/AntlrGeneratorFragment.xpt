@@ -1,0 +1,28 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»
+	«EXPAND IParser::parser(helper)»
+	«EXPAND LexerGrammar::grammar(options, helper)»
+	«EXPAND ParserGrammar::grammar(options, helper)»
+	«EXPAND org::eclipse::xtext::generator::parser::antlr::AntlrTokenFileProvider::file(helper.getParserGrammarFileName(this))»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»

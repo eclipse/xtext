@@ -1,0 +1,8 @@
+import org::eclipse::xtext::generator;
+
+bindMethodName(Binding this) :
+	((!value.provider && value.statements.isEmpty)?'bind':((value.statements.isEmpty)?'provide':'configure'))
+		+simpleMethodName(key.type)+(value.expression!=null?(!value.provider?'ToInstance':''):'');
+	
+private simpleMethodName(String qn) :
+	qn.replaceAll('<','\\.').replaceAll('>','\\.').split('\\.').select(e|e.matches('[A-Z].*')).toString('$');

@@ -1,0 +1,104 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008-2010 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE root(String generatorProjectName, String templateEncoding, boolean pluginProject) FOR Grammar»
+«FILE projectCreatorClassName().asPath()+".java" SRC_GEN_UI-»
+package «projectCreatorClassName().toJavaPackage()»;
+
+import java.util.List;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.xpand2.XpandExecutionContextImpl;
+import org.eclipse.xpand2.XpandFacade;
+import org.eclipse.xpand2.output.Outlet;
+import org.eclipse.xpand2.output.OutputImpl;
+«IF !pluginProject-»
+import org.eclipse.xtext.ui.util.ProjectFactory;
+«ENDIF-»
+
+import com.google.common.collect.ImmutableList;
+«IF !pluginProject-»
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+«ELSE-»
+import com.google.common.collect.Lists;
+«ENDIF-»
+
+public class «projectCreatorClassName().toSimpleName()» extends «projectCreatorSuperClassName(pluginProject)» {
+
+	protected static final String DSL_GENERATOR_PROJECT_NAME = "«generatorProjectName»";
+
+	protected static final String SRC_ROOT = "src";
+	protected static final String SRC_GEN_ROOT = "src-gen";
+	protected final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
+«IF !pluginProject-»
+
+	@Inject
+	private Provider<ProjectFactory> projectFactoryProvider;
+	
+	@Override
+	protected ProjectFactory createProjectFactory() {
+		return projectFactoryProvider.get();
+	}
+«ENDIF-»
+
+	@Override
+	protected «projectInfoClassName().toSimpleName()» getProjectInfo() {
+		return («projectInfoClassName().toSimpleName()») super.getProjectInfo();
+	}
+	
+	@Override
+	protected String getModelFolderName() {
+		return SRC_ROOT;
+	}
+	
+	@Override
+	protected List<String> getAllFolders() {
+        return SRC_FOLDER_LIST;
+    }
+«IF pluginProject-»
+
+    @Override
+	protected List<String> getRequiredBundles() {
+		List<String> result = Lists.newArrayList(super.getRequiredBundles());
+		result.add(DSL_GENERATOR_PROJECT_NAME);
+		return result;
+	}
+«ENDIF-»
+
+	@Override
+	protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
+		OutputImpl output = new OutputImpl();
+		output.addOutlet(new Outlet(false, getEncoding(), null, true, project.getLocation().makeAbsolute().toOSString()));
+
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
+		execCtx.getResourceManager().setFileEncoding("«templateEncoding»");
+		execCtx.registerMetaModel(new JavaBeansMetaModel());
+
+		XpandFacade facade = XpandFacade.create(execCtx);
+		facade.evaluate("«newProjectTemplateName()»::main", getProjectInfo());
+
+		project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+	}
+
+}«ENDFILE»
+«ENDDEFINE»

@@ -1,0 +1,128 @@
+grammar org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlr with org.eclipse.xtext.common.Terminals hidden(WS, ML_COMMENT, SL_COMMENT, EMPTY_PAREN) 
+
+generate simpleAntlr "http://www.eclipse.org/xtext/generator/parser/antlr/simpleAntlr"
+
+AntlrGrammar:
+  'grammar' name=ID ';'
+  options = Options?
+  rules+=Rule*;
+  
+Options: {Options}
+  'options' '{'
+     optionValues+=OptionValue+
+  '}'
+;
+
+OptionValue:
+  key=ID '=' value=IdOrInt ';'
+;
+
+IdOrInt:
+  ID | INT
+;
+
+Rule:
+  ^fragment?='fragment'? name = ID ('[' parameters+=Parameter (',' parameters+=Parameter)* ']')? ':'
+    body=Alternatives
+  ';'
+;
+
+Parameter:
+	type=ID name=ID
+;
+
+Alternatives returns RuleElement:
+  Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
+;
+
+Group returns RuleElement:
+  Guarded | Atom ({Group.elements+=current} elements+=Atom+)?
+;
+
+Atom returns RuleElement:
+    (OtherElement ({ElementWithCardinality.element=current} cardinality=('+'|'*'|'?'))?)
+  | RuleOptions
+;
+
+OtherElement returns RuleElement:
+  {NegatedElement} '~' element=(Parenthesized | Literal)
+  | Predicated
+  | Parenthesized
+  | Literal ({UntilElement.left=current} '..' right=Literal)?
+;
+
+Guarded returns RuleElement:
+	'{' guard=OrExpression '}' '?' '=>' guarded=Parenthesized 
+;
+
+OrExpression returns Expression:
+	AndExpression ({OrExpression.left=current} '||' right=AndExpression)*
+;
+
+AndExpression returns Expression:
+	NotExpression ({AndExpression.left=current} '&&' right=NotExpression)*
+;
+
+NotExpression returns Expression:
+	PrimaryExpression | {NotExpression} '!' value=NotExpression
+;
+
+PrimaryExpression returns Expression:
+	ParenthesizedExpression | ReferenceOrLiteral
+;
+
+ParenthesizedExpression returns Expression:
+	OPEN OrExpression ')'
+;
+
+ReferenceOrLiteral:
+	name=QName
+;
+
+Parenthesized returns RuleElement:
+  OPEN Alternatives ')' 
+;
+
+Predicated:
+  OPEN OPEN predicate=Alternatives ')' '=>' element=OtherElement ')'
+;
+
+RuleOptions:
+    options=Options ':' element=Atom
+  | {Skip} '{' 'skip();' '}' 
+;
+
+Literal returns RuleElement:
+    RuleCall
+  | Keyword
+  | Wildcard
+;
+
+RuleCall:
+  rule=ID ('[' arguments+=OrExpression (',' arguments+=OrExpression)* ']')? 
+;
+
+QName:
+	ID ('.' ID)?
+;
+
+Keyword:
+  value=STRING 
+;
+
+Wildcard:
+  {Wildcard} '.' 
+;
+
+terminal EMPTY_PAREN:
+  OPEN ')'
+;
+
+terminal OPEN:
+  '(' WS*
+;
+
+@Override 
+terminal ID:
+	'$'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*	
+;

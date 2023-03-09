@@ -1,0 +1,769 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::packrat::PackratParserGen»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+«DEFINE root FOR Grammar»
+«EXPAND nonTerminalConsumer FOREACH rules.typeSelect(ParserRule)»
+«EXPAND nonTerminalConsumer FOREACH rules.typeSelect(EnumRule)»
+«ENDDEFINE»
+
+«DEFINE nonTerminalConsumer FOR AbstractRule»
+«FILE this.fullConsumerClassName().asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «this.consumerPackageName()»;
+
+import org.eclipse.emf.ecore.EClassifier;
+
+import org.eclipse.xtext.AbstractRule;
+«FOREACH allContents().typeSelect(AbstractElement).collect(e|getJavaTypeName(e)).toSet().sortBy(e|e) AS name-»
+import «name»;
+«ENDFOREACH-»
+
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
+«IF allContents().typeSelect(RuleCall).exists(e|!TerminalRule.isInstance(e.rule))-»
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
+«ENDIF-»
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+«IF allDelimited().exists(e|Keyword.isInstance(e))-»
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+«ENDIF-»
+«IF allDelimited().exists(e|RuleCall.isInstance(e))-»
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+«ENDIF-»
+
+«annotationImports()-»
+import «this.containingGrammar().grammarAccess()».«name»Elements;
+
+«classAnnotations()»public final class «this.consumerClassName().toSimpleName()» extends NonTerminalConsumer {
+
+	private «this.name»Elements rule;	
+«FOREACH allCalledRules() AS calledRule-»
+
+	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;
+«ENDFOREACH-»
+«EXPAND defineConsumerField FOR alternatives-»
+«EXPAND delimiterField FOREACH allDelimited()-»
+«EXPAND defineConsumerClass FOR alternatives-»
+
+	public «this.consumerClassName().toSimpleName()»(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+		super(configuration, hiddenTokens);
+«EXPAND delimiterFieldInit FOREACH allDelimited()-»
+	}
+	
+	@Override
+	protected int doConsume() throws Exception {
+		return «alternatives.consumerFieldName()».consume();
+	}
+
+	public «this.name»Elements getRule() {
+		return rule;
+	}
+	
+	public void setRule(«this.name»Elements rule) {
+		this.rule = rule;
+		
+«EXPAND assignConsumerField FOR alternatives-»
+	}
+	
+	@Override
+	protected AbstractRule getGrammarElement() {
+		return getRule().getRule();
+	}
+
+	@Override
+	protected EClassifier getDefaultType() {
+		return getGrammarElement().getType().getClassifier();
+	}
+	
+«FOREACH allCalledRules() AS calledRule-»
+	public void «calledRule.consumerSetterName()»(«calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()») {
+		this.«calledRule.consumerFieldName()» = «calledRule.consumerFieldName()»;
+	}
+	
+«ENDFOREACH-»
+«EXPAND delimiterFieldAccessors FOREACH allDelimited()-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE delimiterField FOR AbstractElement-»
+«ERROR "delimiterField for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE delimiterField FOR RuleCall-»
+
+	private ISequenceMatcher «delimiterFieldName()»;
+«ENDDEFINE»
+
+«DEFINE delimiterField FOR Keyword-»
+
+	private ICharacterClass «delimiterFieldName()»;
+«ENDDEFINE»
+
+«DEFINE delimiterFieldInit FOR AbstractElement-»
+«ERROR "delimiterFieldInit for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE delimiterFieldInit FOR RuleCall-»
+		«delimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
+«ENDDEFINE»
+
+«DEFINE delimiterFieldInit FOR Keyword-»
+		«delimiterFieldName()» = ICharacterClass.Factory.nullClass();
+«ENDDEFINE»
+
+«DEFINE delimiterFieldAccessors FOR AbstractElement-»
+«ERROR "delimiterFieldAccessors for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE delimiterFieldAccessors FOR RuleCall-»
+	public ISequenceMatcher get«delimiterFieldName().toFirstUpper()»() {
+		return «delimiterFieldName()»;
+	}
+	
+	public void set«delimiterFieldName().toFirstUpper()»(ISequenceMatcher matcher) {
+		«delimiterFieldName()» = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+«ENDDEFINE»
+
+«DEFINE delimiterFieldAccessors FOR Keyword-»
+	public ICharacterClass get«delimiterFieldName().toFirstUpper()»() {
+		return «delimiterFieldName()»;
+	}
+	
+	public void set«delimiterFieldName().toFirstUpper()»(ICharacterClass characterClass) {
+		«delimiterFieldName()» = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+«ENDDEFINE»
+
+«REM»
+	IElementConsumer fields
+«ENDREM»
+
+«DEFINE defineConsumerField FOR AbstractElement-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField FOR Alternatives-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Alternatives parent) FOR AbstractElement-»
+«EXPAND defineConsumerField FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Alternatives parent) FOR Alternatives-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsumerField FOR this-»
+«ELSE-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField FOR Group-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField FOR UnorderedGroup-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Group parent) FOR AbstractElement-»
+«EXPAND defineConsumerField FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Group parent) FOR Group-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsumerField FOR this-»
+«ELSE-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField FOR Assignment-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerField(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerField(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, CrossReference crossRef) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerField(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, CrossReference parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment) FOR Action-»
+«ERROR "actions are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment) FOR Group-»
+«ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsumerFieldDeclaration FOR AbstractElement-»
+
+	private IElementConsumer «consumerFieldName()»;
+«ENDDEFINE»
+
+«REM»
+	IElementConsumer implementations
+«ENDREM»
+
+«DEFINE defineConsumerClass FOR AbstractElement-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass FOR Alternatives-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Alternatives parent) FOR AbstractElement-»
+«EXPAND defineConsumerClass FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Alternatives parent) FOR Alternatives-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsumerClass FOR this-»
+«ELSE-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass FOR Group-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Group parent) FOR AbstractElement-»
+«EXPAND defineConsumerClass FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Group parent) FOR Group-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsumerClass FOR this-»
+«ELSE-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass FOR UnorderedGroup-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass FOR Assignment-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass(this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, CrossReference parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClass(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, CrossReference parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClass(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR Action-»
+«ERROR "actions are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR Group-»
+«ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClassDeclaration FOR AbstractElement-»
+«EXPAND defineConsumerClassDeclarationImpl-»
+«EXPAND consumerClassBody-»
+	}
+«ENDDEFINE»
+
+«DEFINE defineConsumerClassDeclaration(Assignment assignment) FOR AbstractElement-»
+«EXPAND defineConsumerClassDeclarationImpl-»
+«EXPAND consumerClassBody(assignment)-»
+	}
+«ENDDEFINE»
+
+«DEFINE defineConsumerClassDeclarationImpl FOR AbstractElement-»
+
+	protected class «consumerFieldName().toFirstUpper()» extends «EXPAND parentConsumerClassName-» {
+		
+		protected «consumerFieldName().toFirstUpper()»(final «getJavaTypeName(this).toSimpleName()» «getJavaTypeName(this).toSimpleName().toFirstLower()») {
+			super(«getJavaTypeName(this).toSimpleName().toFirstLower()»);
+		}
+		
+«ENDDEFINE»
+
+«DEFINE parentConsumerClassName FOR AbstractElement-»
+«IF isQuestionMark()-»
+Optional«ELSEIF isPlus()-»
+MandatoryLoop«ELSEIF isStar()-»
+Loop«ENDIF-»
+«EXPAND parentConsumerClassNameImpl-»
+«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR AbstractElement-»
+ElementConsumer<«getJavaTypeName(this).toSimpleName()»>«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR Alternatives-»
+AlternativesConsumer«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR Assignment-»
+AssignmentConsumer«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR Group-»
+GroupConsumer«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR UnorderedGroup-»
+UnorderedGroupConsumer«ENDDEFINE»
+
+«REM»
+	consumerClassBody for unassigned elements
+«ENDREM»
+
+«DEFINE consumerClassBody FOR AbstractElement-»
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+«EXPAND doConsumeBody-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR Alternatives-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR Assignment-»
+		@Override
+		protected IElementConsumer getConsumer() {
+			return «terminal.consumerFieldName()-»;
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR Group-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR UnorderedGroup-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR AbstractElement-»
+«ERROR "doConsumeBody is not defined for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Alternatives-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Group-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR UnorderedGroup-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Assignment-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Action-»
+			consumeAction(getElement(), «operator == "+="»);
+			return SUCCESS;
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Keyword-»
+			return consumeKeyword(getElement(), null, false, false, get«delimiterFieldName().toFirstUpper()»(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR EnumLiteralDeclaration-»
+			return consumeEnum(getElement(), get«literal.delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR RuleCall-»
+«EXPAND doConsumeBody(this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR AbstractRule-»
+«ERROR "doConsumeBody for " + metaType.name-» 
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR TerminalRule-»
+			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR ParserRule-»
+			return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getElement(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR EnumRule-»
+			return consumeNonTerminal(«consumerFieldName()», null, false, false, false, getElement(), optional);
+«ENDDEFINE»
+
+«REM»
+	consumerClassBody for assigned elements
+«ENDREM»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR AbstractElement-»
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+«EXPAND doConsumeBody(assignment)-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR Alternatives-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR Assignment-»
+		@Override
+		protected IElementConsumer getConsumer() {
+			return «terminal.consumerFieldName()-»;
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR Group-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR AbstractElement-»
+«ERROR "doConsumeBody is not defined for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR Alternatives-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR Keyword-»
+			return consumeKeyword(getElement(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR RuleCall-»
+«EXPAND doConsumeBody(assignment, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR AbstractRule-»
+«ERROR "doConsumeBody for " + metaType.name-» 
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR TerminalRule-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR ParserRule-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR EnumRule-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», false, «assignment.isBoolean()», getElement(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR CrossReference-»
+«EXPAND doConsumeBody(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR AbstractElement-»
+«ERROR "doConsumeBody(Assignment, CrossReference) for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR RuleCall-»
+«EXPAND doConsumeBody(assignment, reference, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR Alternatives-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR AbstractRule-»
+«ERROR "doConsumeBody(Assignment, CrossReference) for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR TerminalRule-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR ParserRule-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR EnumRule-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», false, «assignment.isBoolean()», getElement(), optional);
+«ENDDEFINE»
+
+«REM»
+	acceptConsumers 
+«ENDREM»
+
+«DEFINE acceptConsumers FOR Alternatives-»
+«EXPAND acceptConsumers(this) FOR this-»
+«ENDDEFINE»
+
+«DEFINE acceptConsumers(Alternatives start) FOR Alternatives-»
+«FOREACH elements AS g-»
+«IF Alternatives.isInstance(g) && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
+«EXPAND acceptConsumers(start) FOR (Alternatives) g-»
+«ELSE-»
+			acceptor.accept(«g.consumerFieldName()»);
+«ENDIF-»
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE acceptConsumers FOR Group-»
+«EXPAND acceptConsumers(this) FOR this-»
+«ENDDEFINE»
+
+«DEFINE acceptConsumers(Group start) FOR Group-»
+«FOREACH elements AS token-»
+«IF Group.isInstance(token) && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
+«EXPAND acceptConsumers(start) FOR (Group)token-»
+«ELSE-»
+			acceptor.accept(«token.consumerFieldName()»);
+«ENDIF-»
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE acceptConsumers FOR UnorderedGroup-»
+«FOREACH elements AS token-»
+			acceptor.accept(«token.consumerFieldName()»);
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«REM»
+	IElementConsumer fields
+«ENDREM»
+
+«DEFINE assignConsumerField FOR AbstractElement-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField FOR Alternatives-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Alternatives parent) FOR AbstractElement-»
+«EXPAND assignConsumerField FOR this-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Alternatives parent) FOR Alternatives-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND assignConsumerField FOR this-»
+«ELSE-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField FOR Group-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Group parent) FOR AbstractElement-»
+«EXPAND assignConsumerField FOR this-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Group parent) FOR Group-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND assignConsumerField FOR this-»
+«ELSE-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField FOR UnorderedGroup-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField FOR Assignment-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField(this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND assignConsumerField FOR this-»
+«EXPAND assignConsumerField(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND assignConsumerField(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND assignConsumerField(assignment, this) FOREACH elements-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR Action-»
+«ERROR "actions are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR Group-»
+«ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR UnorderedGroup-»
+«ERROR "unordered groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE assignConsumerFieldImpl FOR AbstractElement-»
+		«consumerFieldName()» = new «consumerFieldName().toFirstUpper()»(rule.«gaElementAccessor()»);
+«ENDDEFINE»

@@ -1,0 +1,41 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+
+«DEFINE generate(String generatorProjectName, String modelFileExtension, boolean pluginProject, String templateEncoding) FOR Grammar»
+	«EXPAND ProjectInfo::root»
+	«EXPAND NewProjectWizard::root»
+	«EXPAND NewProjectTemplate::root(modelFileExtension)»
+	«EXPAND ProjectCreator::root(generatorProjectName, templateEncoding, pluginProject)»	
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="«executableExtensionFactory()»:«projectWizardClassName()»"
+            id="«projectWizardClassName()»"
+            name="«getName()» Project"
+            project="true">
+      </wizard>
+   </extension>
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»«ENDDEFINE»

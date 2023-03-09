@@ -1,0 +1,358 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::parsetree::reconstr::impl»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parseTreeConstructor::ParseTreeConstructor»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+
+
+«DEFINE root(String lineDelimiter) FOR Grammar»
+«FILE getParseTreeConstructorName().asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «getParseTreeConstructorName().toJavaPackage()»;
+
+«annotationImports()-»
+import org.eclipse.emf.ecore.*;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
+
+import «gaFQName()»;
+
+import com.google.inject.Inject;
+
+@SuppressWarnings("all")
+«classAnnotations()»public class «getParseTreeConstructorName().toSimpleName()» extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
+		
+	@Inject
+	private «gaSimpleName()» grammarAccess;
+	
+	@Override
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IEObjectConsumer inst) {
+		super(inst);
+	}
+	
+	@Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+«FOREACH calcRootFollowers() AS e ITERATOR i-»
+			case «i.counter0»: return new «e.elementMethodName()»(this, this, «i.counter0», inst);
+«ENDFOREACH-»
+			default: return null;
+		}	
+	}	
+}
+	
+«EXPAND rule(lineDelimiter) FOREACH allParserRules()-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rule(String lineDelimiter) FOR ParserRule-»
+«IF !isDatatypeRule()»
+/************ begin Rule «name» ****************
+ *
+«grammarFragmentToStr(" * ", lineDelimiter)»
+ *
+ **/
+«EXPAND element(lineDelimiter) FOR alternatives-»
+
+/************ end Rule «name» ****************/
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE constructor FOR AbstractElement-»
+	public «elementMethodName()»(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public «getJavaTypeName().toSimpleName()» getGrammarElement() {
+		return grammarAccess.«gaRuleElementAccessor()»;
+	}
+
+«EXPAND createFollowerMethod FOR getTreeConstState()-»
+«ENDDEFINE»
+
+«DEFINE typeCheckInline FOR AbstractElement-»
+«IF !getTreeConstState().typesToCheck.isEmpty-»
+		if(«FOREACH getTreeConstState().typesToCheck AS e SEPARATOR " && \n\t\t   "»getEObject().eClass() != grammarAccess.«e.gaTypeAccessor()».getClassifier()«ENDFOREACH»)
+			return null;
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE typeCheckTryConsume FOR AbstractElement-»
+«IF !getTreeConstState().typesToCheck.isEmpty-»
+    @Override
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		return eObjectConsumer;
+	}
+
+«ENDIF-»
+«ENDDEFINE»
+
+
+«DEFINE createFollowerMethod FOR TreeConstState-»
+«IF enabledOutgoing.size > 0 || endState-»
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+«FOREACH enabledOutgoing AS e-»
+			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "lastRuleCallOrigin"», this, «e.precedence», inst);
+«ENDFOREACH-»
+«IF endState && !enabledOutgoing.exists(e|e.ruleCall)-»
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index«enabledOutgoing.size > 0 ? (" - " + enabledOutgoing.size) : ""», inst);
+«ELSE-»
+			default: return null;
+«ENDIF-»			
+		}	
+	}
+
+«ENDIF-»
+«ENDDEFINE»
+
+
+«DEFINE createFollowerAfterReturnMethod(boolean isAss) FOR TreeConstState-»
+«IF enabledOutgoing.exists(e|e.ruleCall)-»
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+«IF isAss-»
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+«ENDIF-»
+		switch(index) {
+«FOREACH enabledOutgoingAfterReturn AS e-»
+			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "lastRuleCallOrigin"», next, actIndex, «isAss ? "consumed" : "inst"»);
+«ENDFOREACH-»
+«IF endState-»
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index«enabledOutgoingAfterReturn.size > 0 ? (" - " + enabledOutgoingAfterReturn.size) : ""», «isAss ? "consumed" : "inst"»);
+«ELSE-»
+			default: return null;
+«ENDIF-»
+		}	
+	}	
+«ENDIF-»
+«ENDDEFINE»
+
+
+
+«DEFINE element(String lineDelimiter) FOR AbstractElement»
+«ERROR "unhandled element " + metaType.name + " in " + elementMethodName()» 
+«ENDDEFINE»
+
+
+
+
+
+«REM» ************ Groups ************* «ENDREM»
+
+«DEFINE element(String lineDelimiter) FOR Group»
+«grammarFragmentToStr("// ", lineDelimiter)»
+protected class «elementMethodName()» extends GroupToken {
+	
+«EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
+}
+«EXPAND element(lineDelimiter) FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«ENDDEFINE»
+
+«REM» ************ Unordered Groups ************* «ENDREM»
+
+«DEFINE element(String lineDelimiter) FOR UnorderedGroup»
+«grammarFragmentToStr("// ", lineDelimiter)»
+protected class «elementMethodName()» extends UnorderedGroupToken {
+	
+«EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
+}
+«EXPAND element(lineDelimiter) FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«ENDDEFINE»
+
+
+«REM» ************ Alternatives ************* «ENDREM»
+
+«DEFINE element(String lineDelimiter) FOR Alternatives»
+«grammarFragmentToStr("// ", lineDelimiter)»
+protected class «elementMethodName()» extends AlternativesToken {
+
+«EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
+}
+«EXPAND element(lineDelimiter) FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«ENDDEFINE»
+
+
+
+«REM» ************ RuleCall ************* «ENDREM»
+
+«DEFINE element(String lineDelimiter) FOR RuleCall»
+«grammarFragmentToStr("// ", lineDelimiter)»
+«IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
+protected class «elementMethodName()» extends RuleCallToken {
+	
+«EXPAND constructor-»
+    @Override
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+«EXPAND createFollowerAfterReturnMethod(false) FOR getTreeConstState()-»
+}
+«ELSE-»
+protected class «elementMethodName()» extends UnassignedTextToken {
+
+«EXPAND constructor-»
+}
+«ENDIF-»
+«ENDDEFINE»
+
+
+«REM» ************ Assignment ************* «ENDREM»
+
+«DEFINE assignmentCreate FOR AbstractElement-»
+«ERROR "doing nothing for " + metaType»
+«ENDDEFINE»
+
+«DEFINE assignmentCreate FOR Keyword-»
+«IF containingAssignment().operator == '?='-»
+		if(Boolean.TRUE.equals(value)) { // «metaType.name»
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.«gaRuleElementAccessor()»;
+			return obj;
+		}
+«ELSE-»
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.«gaRuleElementAccessor()»;
+			return obj;
+		}
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentCreate FOR CrossReference-»
+		if(value instanceof EObject) { // «metaType.name»
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())«IF crossReferenceExistsWithDifferentTerminal()» && crossRefSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», (EObject)value , null)«ENDIF») {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.«gaRuleElementAccessor()»; 
+				return obj;
+			}
+		}
+«ENDDEFINE»
+
+«DEFINE assignmentCreate FOR RuleCall-»
+«IF calledParserRule()!=null-»
+«IF !isDatatypeRule(calledParserRule())-»
+		if(value instanceof EObject) { // «metaType.name»
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.«gaRuleElementAccessor()»; 
+				consumed = obj;
+				return param;
+			}
+		}
+«ELSE-»
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.«gaRuleElementAccessor()»;
+			return obj;
+		}
+«ENDIF-»
+«ELSEIF calledEnumRule()!=null-»
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.«gaRuleElementAccessor()»;
+			return obj;
+		}
+«ELSE-»
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.«gaRuleElementAccessor()»;
+			return obj;
+		}
+«ENDIF-»
+«ENDDEFINE»
+
+
+«DEFINE element(String lineDelimiter) FOR Assignment»
+«grammarFragmentToStr("// ", lineDelimiter)»
+protected class «elementMethodName()» extends AssignmentToken  {
+	
+«EXPAND constructor-»
+    @Override	
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		if((value = eObjectConsumer.getConsumable("«feature»",«IF isAssignmentRequired()»true«ELSE»false«ENDIF»)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("«feature»");
+		«EXPAND assignmentCreate FOREACH getNestedElementsFromAssignment()-»
+		return null;
+	}
+
+«EXPAND createFollowerAfterReturnMethod(true) FOR getTreeConstState()-»
+}
+«ENDDEFINE»
+
+
+
+«REM» ************ Action ************* «ENDREM»
+
+«DEFINE element(String lineDelimiter) FOR Action»
+«grammarFragmentToStr("// ", lineDelimiter)»
+protected class «elementMethodName()» extends ActionToken  {
+
+«EXPAND constructor-»	
+«IF feature == null || feature == ""-»
+    @Override
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+«ELSE-»
+    @Override
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		Object val = eObjectConsumer.getConsumable("«feature»", false);
+		if(val == null) return null;
+		if(!eObjectConsumer.isConsumedWithLastConsumtion("«feature»")) return null;
+		return createEObjectConsumer((EObject) val);
+	}
+«ENDIF-»	
+}
+«ENDDEFINE»
+
+
+
+«REM» ************ Keyword ************* «ENDREM»
+
+«DEFINE element(String lineDelimiter) FOR Keyword»
+«grammarFragmentToStr("// ", lineDelimiter)»
+protected class «elementMethodName()» extends KeywordToken  {
+	
+«EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
+}
+«ENDDEFINE»
+
+

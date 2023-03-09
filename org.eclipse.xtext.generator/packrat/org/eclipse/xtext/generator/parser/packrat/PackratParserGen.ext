@@ -1,0 +1,126 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+import org::eclipse::emf::ecore;
+
+extension org::eclipse::xtext::GrammarUtil reexport;
+extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess;
+extension org::eclipse::xtext::generator::Naming;
+extension org::eclipse::xtext::EcoreUtils;
+
+cached String getParserClassName(Grammar this) :
+	getParserClassName(this,getNaming());
+private String getParserClassName(Grammar this, Naming naming) :
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getGeneratedParser(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
+
+cached String consumeMethodName(AbstractElement this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getConsumeMethodName(org.eclipse.xtext.AbstractElement);
+
+cached String delimiterFieldName(AbstractElement this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getDelimiterFieldName(org.eclipse.xtext.AbstractElement);
+
+cached String consumerFieldName(AbstractElement this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getConsumerFieldName(org.eclipse.xtext.AbstractElement);
+	
+cached String globalDelimiterFieldName(AbstractElement this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getGlobalDelimiterFieldName(org.eclipse.xtext.AbstractElement);
+			
+cached String consumerClassName(AbstractRule this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getConsumerClassName(org.eclipse.xtext.AbstractRule);
+	
+cached String getParserConfigurationClassName(Grammar this) :
+	runtimePack()+".parser.packrat."+name.toSimpleName()+"ParserConfiguration";
+	
+cached String getDelimiterClassName(Grammar this) :
+	runtimePack()+".parser.packrat."+name.toSimpleName()+"Delimiters";
+
+cached String consumerInterfaceName(AbstractRule this):
+	"UNSUPPORTED_RULETYPE_" + metaType.name;
+
+cached String consumerInterfaceName(ParserRule this):
+	"INonTerminalConsumer";
+
+cached String consumerInterfaceName(EnumRule this):
+	"INonTerminalConsumer";
+	
+cached String consumerInterfaceName(TerminalRule this):
+	"ITerminalConsumer";
+				
+cached String consumerFieldName(AbstractRule this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getConsumerFieldName(org.eclipse.xtext.AbstractRule);
+
+String consumerSetterName(AbstractRule this):
+	"set" + consumerFieldName().toFirstUpper();
+	
+String consumerGetterName(AbstractRule this):
+	"get" + consumerFieldName().toFirstUpper();
+	
+String consumerPackageName(AbstractRule this):
+	containingGrammar().getNamespace() + ".parser.packrat.consumers";	
+
+String fullConsumerClassName(AbstractRule this):
+    consumerPackageName() + "." + consumerClassName();
+    
+String grammarAccess(Grammar this):
+    gaFQName();
+    
+String toJavaString(String this):
+	JAVA org.eclipse.xtext.util.Strings.convertToJavaString(java.lang.String);
+   
+/* boolean canBeFollowedByIdentifier(Keyword this):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword); */
+
+cached List[String] conflictingKeywords(AbstractElement this, Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getConflictingKeywords(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
+
+cached List[AbstractRule] conflictingLexerRules(Keyword this, Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.getConflictingLexerRules(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
+
+cached AbstractElement sameConflicts(AbstractElement this, Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.findFirstWithSameConflicts(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
+
+cached Keyword sameConflicts(Keyword this, Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.packrat.PackratParserGenUtil.findFirstKeywordWithSameConflicts(org.eclipse.xtext.Keyword, org.eclipse.xtext.Grammar);
+		
+boolean isPlus(AbstractElement this):
+	!isOptionalCardinality() && isMultipleCardinality();
+
+boolean isStar(AbstractElement this):
+	isOptionalCardinality() && isMultipleCardinality();
+	
+boolean isQuestionMark(AbstractElement this):
+	isOptionalCardinality() && !isMultipleCardinality();
+	
+int indexInGroup(AbstractElement element, Group parent):
+    parent.elements.flattendGroupElements().indexOf(element);
+    
+cached List[AbstractElement] flattendGroupElements(Group this):
+	if(!isOptionalCardinality() && !isMultipleCardinality()) then elements.flattendGroupElements() else this;
+
+List[AbstractElement] flattendGroupElements(AbstractElement this):
+	this;
+		
+int indexInAlternatives(AbstractElement element, Alternatives parent):
+    parent.elements.flattendAlternativesElements().indexOf(element);
+    
+cached List[AbstractElement] flattendAlternativesElements(Alternatives this):
+	if(!isOptionalCardinality() && !isMultipleCardinality()) then elements.flattendAlternativesElements() else this;
+
+List[AbstractElement] flattendAlternativesElements(AbstractElement this):
+	{this};
+	
+cached List[AbstractElement] allDelimited(AbstractRule this):
+	containedRuleCalls().select(e|TerminalRule.isInstance(e.rule)).
+		union(allContents().typeSelect(Keyword))
+	.toSet().sortBy(e|e.globalDelimiterFieldName());
+	
+cached List[AbstractRule] allCalledRules(AbstractRule this):
+	containedRuleCalls().rule.toSet().sortBy(e|e.consumerFieldName());

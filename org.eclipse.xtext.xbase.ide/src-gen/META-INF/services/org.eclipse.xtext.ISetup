@@ -1,0 +1,3 @@
+org.eclipse.xtext.xbase.ide.XtypeIdeSetup
+org.eclipse.xtext.xbase.ide.XbaseIdeSetup
+org.eclipse.xtext.xbase.annotations.ide.XbaseWithAnnotationsIdeSetup

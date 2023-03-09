@@ -1,0 +1,183 @@
+module org.eclipse.xtext.xbase.testlanguages.GenerateXbaseTestLanguages
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
+
+var rootPath = ".."
+var generateEclipse = true
+var eclipsePath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.testlanguages.ui"
+var uiTestPath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.ui.tests"
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2011, \${year} itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = rootPath
+	}
+	
+    component = XtextGenerator {
+    	configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = "org.eclipse.xtext.xbase.testlanguages"
+				rootPath = rootPath
+				
+				runtimeTest = {
+					enabled = true
+					root = "${rootPath}/org.eclipse.xtext.xbase.testlanguages"
+				}
+				
+				genericIde = {
+					enabled = true
+					root = "${rootPath}/org.eclipse.xtext.xbase.testlanguages.ide"
+				}
+				
+				eclipsePlugin = {
+					enabled = generateEclipse
+					root = eclipsePath
+				}
+				
+				eclipsePluginTest= {
+					enabled = generateEclipse
+					root = uiTestPath
+				}
+				
+				createEclipseMetaData = true
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = "\n"
+				preferXtendStubs = false
+				fileHeader = fileHeader
+			}
+		}
+    	
+    	language = {
+    		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/XImportSectionTestLang.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
+    
+    		fragment = grammarAccess.GrammarAccessFragment2 {}
+    		fragment = ecore.EMFGeneratorFragment2 {}
+    		fragment = serializer.SerializerFragment2 {
+    			generateStub = false
+    		}
+    		fragment = resourceFactory.ResourceFactoryFragment2 {}
+    		fragment = parser.antlr.XtextAntlrGeneratorFragment2 {}
+    		fragment = validation.ValidatorFragment2 {
+    			generateStub = false
+			}
+    		fragment = scoping.ImportNamespacesScopingFragment2 {
+    			generateStub = false
+			}
+    		fragment = exporting.QualifiedNamesFragment2 {}
+    		fragment = builder.BuilderIntegrationFragment2 {}
+    		fragment = generator.GeneratorFragment2 {}
+    		fragment = formatting.Formatter2Fragment2 {
+    			generateStub = false
+			}
+    		fragment = junit.JUnitFragment {
+    			generateStub = false
+    		}
+    		fragment = types.TypesGeneratorFragment2 {}
+    		fragment = xbase.XbaseGeneratorFragment2 {
+    			generateXtendInferrer = false
+    		}
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = false
+    			}
+    		}
+    	}
+
+    	language = {
+    		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/ContentAssistFragmentTestLang.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
+    
+    		fragment = grammarAccess.GrammarAccessFragment2 {}
+    		fragment = ecore.EMFGeneratorFragment2 {}
+    		fragment = serializer.SerializerFragment2 {
+    			generateStub = false
+    		}
+    		fragment = resourceFactory.ResourceFactoryFragment2 {}
+    		fragment = parser.antlr.XtextAntlrGeneratorFragment2 {}
+    		fragment = validation.ValidatorFragment2 {
+    			generateStub = false
+			}
+    		fragment = scoping.ImportNamespacesScopingFragment2 {
+    			generateStub = false
+			}
+    		fragment = exporting.QualifiedNamesFragment2 {}
+    		fragment = builder.BuilderIntegrationFragment2 {}
+    		fragment = junit.JUnitFragment {
+    			generateStub = false
+    		}
+    		fragment = types.TypesGeneratorFragment2 {}
+    		fragment = xbase.XbaseGeneratorFragment2 {
+    			generateXtendInferrer = false
+    		}
+    		
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = false
+    			}
+    		}
+    	}
+    	
+    	language = {
+    		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/bug462047/Bug462047Lang.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
+    
+    		fragment = grammarAccess.GrammarAccessFragment2 {}
+    		fragment = ecore.EMFGeneratorFragment2 {}
+    		fragment = serializer.SerializerFragment2 {
+    			generateStub = false
+    		}
+    		fragment = resourceFactory.ResourceFactoryFragment2 {}
+    		fragment = parser.antlr.XtextAntlrGeneratorFragment2 {}
+    		fragment = validation.ValidatorFragment2 {
+    			generateStub = false
+			}
+    		fragment = scoping.ImportNamespacesScopingFragment2 {
+    			generateStub = false
+			}
+    		fragment = exporting.QualifiedNamesFragment2 {}
+    		fragment = builder.BuilderIntegrationFragment2 {}
+    		fragment = generator.GeneratorFragment2 {}
+    		fragment = junit.JUnitFragment {
+    			generateStub = false
+    		}
+    		fragment = types.TypesGeneratorFragment2 {}
+    		fragment = xbase.XbaseGeneratorFragment2 {
+    			generateXtendInferrer = false
+    		}
+    		
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = false
+    			}
+    		}
+    	}
+    }
+}
+

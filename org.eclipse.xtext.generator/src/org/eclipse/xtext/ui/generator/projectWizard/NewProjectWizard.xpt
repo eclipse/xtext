@@ -1,0 +1,67 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+
+«DEFINE root FOR Grammar»
+«FILE projectWizardClassName().asPath()+".java" SRC_GEN_UI-»
+package «projectWizardClassName().toJavaPackage()»;
+
+import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
+import org.eclipse.xtext.ui.wizard.IProjectCreator;
+import com.google.inject.Inject;
+
+public class «projectWizardClassName().toSimpleName()» extends org.eclipse.xtext.ui.wizard.XtextNewProjectWizard {
+
+	private WizardNewProjectCreationPage mainPage;
+
+	@Inject
+	public «projectWizardClassName().toSimpleName()»(IProjectCreator projectCreator) {
+		super(projectCreator);
+		setWindowTitle("New «getName()» Project");
+	}
+
+	/**
+	 * Use this method to add pages to the wizard.
+	 * The one-time generated version of this class will add a default new project page to the wizard.
+	 */
+	@Override
+	public void addPages() {
+		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");
+		mainPage.setTitle("«getName()» Project");
+		mainPage.setDescription("Create a new «getName()» project.");
+		addPage(mainPage);
+	}
+
+	/**
+	 * Use this method to read the project settings from the wizard pages and feed them into the project info class.
+	 */
+	@Override
+	protected IExtendedProjectInfo getProjectInfo() {
+		«projectInfoClassName()» projectInfo = new «projectInfoClassName()»();
+		projectInfo.setProjectName(mainPage.getProjectName());
+		if (!mainPage.useDefaults()) {
+			projectInfo.setLocationPath(mainPage.getLocationPath());
+		}
+		return projectInfo;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+

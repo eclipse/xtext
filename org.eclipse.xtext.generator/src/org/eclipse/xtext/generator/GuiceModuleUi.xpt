@@ -1,0 +1,62 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+«IMPORT org::eclipse::xtext::generator»
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(String superClassName, Set[Binding] bindings) FOR Grammar»
+«EXPAND guiceModuleUi»
+
+«FILE guiceModuleUiGenerated().asPath()+".java" SRC_GEN_UI»
+«fileHeader()»
+package «guiceModuleUiGenerated().toJavaPackage()»;
+
+«annotationImports()-»
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
+/**
+ * Manual modifications go to {«guiceModuleUi()»}
+ */
+@SuppressWarnings("all")
+«classAnnotations()»public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «superClassName» {
+	
+	public «guiceModuleUiGenerated().toSimpleName()»(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+	
+	«EXPAND GuiceModuleRt::bindingMethod FOREACH bindings»
+
+}
+«ENDFILE»	
+
+
+«ENDDEFINE»
+
+	
+«DEFINE guiceModuleUi FOR Grammar»
+«FILE guiceModuleUi().asPath()+'.java' SRC_UI -»
+«fileHeader()»
+package «guiceModuleUi().toJavaPackage()»;
+
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
+/**
+ * Use this class to register components to be used within the IDE.
+ */
+public class «guiceModuleUi().toSimpleName()» extends «guiceModuleUiGenerated()» {
+	public «guiceModuleUi().toSimpleName()»(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+}
+«ENDFILE»
+«ENDDEFINE»

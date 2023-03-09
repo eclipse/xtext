@@ -1,0 +1,98 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::validation::JavaValidatorFragment»
+
+
+«DEFINE generate(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
+«FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «getValidatorName("Abstract").toJavaPackage()»;
+ 
+«annotationImports()-»
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EPackage;
+«IF !composedChecks.isEmpty-»
+import org.eclipse.xtext.validation.ComposedChecks;
+«ENDIF-»
+
+«IF !composedChecks.isEmpty-»
+@ComposedChecks(validators= {«FOREACH composedChecks AS validator SEPARATOR ", "-»«validator».class«ENDFOREACH-»})
+«ENDIF-»
+«classAnnotations()»public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName» {
+
+   	«EXPAND Common::getEPackages(packageQNames)-»
+
+}
+«ENDFILE»
+
+«FILE getValidatorName("").asPath()+".java" SRC-»
+«fileHeader()»
+package «getValidatorName("").toJavaPackage()»;
+
+/**
+ * This class contains custom validation rules. 
+ *
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
+ */
+public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Abstract")» {
+
+//	@Check
+//	public void checkGreetingStartsWithCapital(Greeting greeting) {
+//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
+//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
+//		}
+//	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE addToPluginXmlRt(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
+«ENDDEFINE»
+
+
+«DEFINE addToPluginXmlUi(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
+    <!-- marker definitions for «name» -->
+    <extension
+            id="«name.toSimpleName().toLowerCase()».check.fast"
+            name="«name.toSimpleName()» Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="«name.toSimpleName().toLowerCase()».check.normal"
+            name="«name.toSimpleName()» Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="«name.toSimpleName().toLowerCase()».check.expensive"
+            name="«name.toSimpleName()» Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+«ENDDEFINE»
+
+
+«DEFINE addToStandaloneSetup(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
+«ENDDEFINE»
+

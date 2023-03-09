@@ -1,0 +1,97 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+«IMPORT org::eclipse::xtext::generator»
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::ModuleExtensions»
+
+«DEFINE generate(String superClassName, Set[Binding] bindings, List[String] fileExtensions) FOR Grammar»
+«EXPAND guiceModuleRt»
+
+«FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «guiceModuleRtGenerated().toJavaPackage()»;
+
+«annotationImports()-»
+import java.util.Properties;
+
+import org.eclipse.xtext.Constants;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
+/**
+ * Manual modifications go to {«guiceModuleRt()»}
+ */
+@SuppressWarnings("all")
+«classAnnotations()»public abstract class «guiceModuleRtGenerated().toSimpleName()» extends «superClassName» {
+
+	protected Properties properties = null;
+
+	@Override
+	public void configure(Binder binder) {
+		properties = tryBindProperties(binder, "«name.replaceAll("\\.","/")».properties");
+		super.configure(binder);
+	}
+	
+	public void configureLanguageName(Binder binder) {
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("«name»");
+	}
+	
+	public void configureFileExtensions(Binder binder) {
+		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
+			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("«fileExtensions.toString(",")»");
+	}
+	«EXPAND bindingMethod FOREACH bindings»
+}
+«ENDFILE»	
+«ENDDEFINE»
+
+	
+«DEFINE guiceModuleRt FOR Grammar»
+«FILE guiceModuleRt().asPath()+'.java' SRC -»
+«fileHeader()»
+package «guiceModuleRt().toJavaPackage()»;
+
+/**
+ * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ */
+public class «guiceModuleRt().toSimpleName()» extends «guiceModuleRtGenerated()» {
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE bindingMethod FOR Binding»
+«IF !value.provider && value.statements.isEmpty-»
+	// contributed by «contributedBy»
+	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF-»
+	public «IF value.expression==null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName(this)»() {
+		return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+	}
+«ELSEIF value.statements.isEmpty-»
+	// contributed by «contributedBy»
+	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF-»
+	public «IF value.expression==null»Class<? extends com.google.inject.Provider<«key.type»>>«ELSE»com.google.inject.Provider<«key.type»>«ENDIF» «bindMethodName(this)»() {
+		return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+	}
+«ELSE-»
+	// contributed by «contributedBy»
+	public void «bindMethodName(this)»(com.google.inject.Binder binder) {
+«FOREACH value.statements AS statement-»
+		«statement»«IF !statement.endsWith(";")-»;«ENDIF»
+«ENDFOREACH-»
+	}
+«ENDIF-»
+«ENDDEFINE»

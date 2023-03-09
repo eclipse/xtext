@@ -1,0 +1,63 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::generator::Naming;
+
+String getParserSuperClassName(boolean partialParsing, boolean hasIDE) :
+	hasIDE 
+	?
+		(partialParsing
+		? "org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractPartialContentAssistParser"
+		: "org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser")
+	:
+		(partialParsing
+		? "org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractPartialContentAssistParser"
+	    : "org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser");
+
+String getParserClassName(Grammar grammar) :
+	getParserClassName(grammar, getNaming());
+	
+String getInternalParserClassName(Grammar grammar) :
+	getInternalParserClassName(grammar, getNaming());
+
+String getInternalLexerClassName(Grammar grammar) :
+	getInternalLexerClassName(grammar, getNaming());
+	
+String getGrammarFileName(Grammar grammar) :
+	getGrammarFileName(grammar, getNaming());
+
+private String getParserClassName(Grammar grammar, Naming naming) :
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getParserClassName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	
+private String getInternalParserClassName(Grammar grammar, Naming naming) :
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getInternalParserClassName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+
+private String getInternalLexerClassName(Grammar grammar, Naming naming) :
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getInternalLexerClassName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	
+private String getGrammarFileName(Grammar grammar, Naming naming) :
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getGrammarFileName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	
+Collection[Alternatives] allAlternatives(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllAlternatives(org.eclipse.xtext.Grammar);
+	
+Collection[Group] allGroups(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllGroups(org.eclipse.xtext.Grammar);
+
+Collection[UnorderedGroup] allUnorderedGroups(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllUnorderedGroups(org.eclipse.xtext.Grammar);
+
+Collection[Assignment] allAssignments(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllAssignments(org.eclipse.xtext.Grammar);
+	
+Collection[AbstractElement] allPredicatedElements(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment.getAllPredicatedElements(org.eclipse.xtext.Grammar);

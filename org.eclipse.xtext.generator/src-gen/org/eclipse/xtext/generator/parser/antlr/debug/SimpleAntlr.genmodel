@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator/src-gen" editDirectory="/org.eclipse.xtext.generator.edit/src"
+    editorDirectory="/org.eclipse.xtext.generator.editor/src" modelPluginID="org.eclipse.xtext.generator"
+    forceOverwrite="true" modelName="SimpleAntlr" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="11.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.edit"
+    editorPluginID="org.eclipse.xtext.generator.editor" runtimeVersion="2.29">
+  <genPackages prefix="SimpleAntlr" basePackage="org.eclipse.xtext.generator.parser.antlr.debug"
+      disposableProviderFactory="true" ecorePackage="SimpleAntlr.ecore#/">
+    <genClasses ecoreClass="SimpleAntlr.ecore#//AntlrGrammar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//AntlrGrammar/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//AntlrGrammar/options"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//AntlrGrammar/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Options">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Options/optionValues"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//OptionValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//OptionValue/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//OptionValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Rule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Rule/fragment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Rule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Rule/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Rule/body"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Parameter/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//RuleElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleElement/guard"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleElement/guarded"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Expression"/>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//ReferenceOrLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//ReferenceOrLiteral/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Predicated">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Predicated/predicate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Predicated/element"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//RuleOptions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleOptions/options"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleOptions/element"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//RuleCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//RuleCall/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//RuleCall/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Keyword">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//Keyword/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Wildcard"/>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Alternatives">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Alternatives/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Group">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//Group/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//ElementWithCardinality">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//ElementWithCardinality/element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleAntlr.ecore#//ElementWithCardinality/cardinality"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//NegatedElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//NegatedElement/element"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//UntilElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//UntilElement/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//UntilElement/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//OrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//OrExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//OrExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//AndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//AndExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//AndExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//NotExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//NotExpression/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Skip"/>
+  </genPackages>
+</genmodel:GenModel>

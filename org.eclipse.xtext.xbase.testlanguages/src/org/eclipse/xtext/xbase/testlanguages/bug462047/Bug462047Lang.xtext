@@ -1,0 +1,11 @@
+grammar org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047Lang with org.eclipse.xtext.xbase.Xbase
+
+generate bug462047 "xbase.bug462047"
+
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
+Bug462047Root:
+	elements+=Bug462047Element*;
+	
+Bug462047Element:
+	'element' name=ID ('ref' ref=[types::JvmGenericType|QualifiedName])?;

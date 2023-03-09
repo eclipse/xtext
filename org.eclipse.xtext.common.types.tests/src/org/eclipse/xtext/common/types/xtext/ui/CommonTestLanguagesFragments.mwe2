@@ -1,0 +1,32 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.common.types.xtext.ui.CommonTestLanguagesFragments
+
+import org.eclipse.xtext.xtext.generator.*
+
+CompositeGeneratorFragment2 {
+	fragment = ecore.EMFGeneratorFragment2 {
+		emfRuntimeVersion = "2.29"
+	}
+	fragment = grammarAccess.GrammarAccessFragment2 {}
+	fragment = resourceFactory.ResourceFactoryFragment2 {}
+	fragment = serializer.SerializerFragment2 {
+		generateStub = false
+	}
+	fragment = scoping.ImportNamespacesScopingFragment2 {}
+	fragment = exporting.QualifiedNamesFragment2 {}
+	fragment = types.TypesGeneratorFragment2 {}
+	fragment = parser.antlr.XtextAntlrGeneratorFragment2 {
+		options = {
+			classSplitting = true
+			backtrack = false
+			memoize = false
+		}
+	}
+}

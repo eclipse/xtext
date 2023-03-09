@@ -1,0 +1,109 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::generator::parser::antlr::ex::common»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::ex::common::Common»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
+
+
+«DEFINE grammar(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, AntlrFragmentHelper helper, String lexerGrammarFileName, String superclass) FOR Grammar»
+«fileHeader()»
+lexer grammar «lexerGrammarFileName.toSimpleName()»;
+
+«IF options.backtrackLexer-»
+options {
+	backtrack=true;
+	memoize=true;
+}
+
+tokens {
+«FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw-»
+	«getKeywordRuleName(kw)»;
+«ENDFOREACH-»
+«FOREACH allTerminalRules() AS rule-»
+	«rule.ruleName()»;
+«ENDFOREACH-»
+}
+«ENDIF-»
+
+@header {
+package «lexerGrammarFileName.toJavaPackage()»;
+
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+import «superclass»;
+}
+
+«IF options.backtrackLexer-»
+«EXPAND backtrackingAntlrRules(helper)»
+«ELSE-»
+«EXPAND antlrRules(options, helper)»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE antlrRules(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
+«EXPAND keywords(options)»
+«EXPAND rule(helper) FOREACH allTerminalRules()»
+«ENDDEFINE»
+
+«DEFINE keywords(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options) FOR Grammar»
+«FOREACH allKeywords() AS kw»
+«getKeywordRuleName(kw)» : «kw.toAntlrKeywordRule(options)»;
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE rule(AntlrFragmentHelper helper) FOR TerminalRule»
+«IF !helper.isSyntheticTerminalRule(this)-»
+«IF fragment»fragment «ENDIF»«ruleName()» : «toLexerBody()»;
+«ELSE-»
+fragment «ruleName()» : ;
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE backtrackingAntlrRules(AntlrFragmentHelper helper) FOR Grammar»
+«EXPAND backtrackingKeywords(helper)»
+// Rules duplicated to allow inter-rule references
+«EXPAND backtrackingRule(helper) FOREACH allTerminalRules()»
+«ENDDEFINE»
+
+«DEFINE backtrackingKeywords(AntlrFragmentHelper helper) FOR Grammar»
+SYNTHETIC_ALL_KEYWORDS :
+«FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw ITERATOR it-»
+	(FRAGMENT_«getKeywordRuleName(kw)»)=> FRAGMENT_«getKeywordRuleName(kw)» {$type = «getKeywordRuleName(kw)»; } «IF !it.lastIteration || !allTerminalRules().isEmpty»|
+	«ENDIF-» 
+«ENDFOREACH-»
+«FOREACH allTerminalRules() AS rule ITERATOR  it-»
+«IF !helper.isSyntheticTerminalRule(rule) && !rule.fragment-»
+	(FRAGMENT_«rule.ruleName()»)=> FRAGMENT_«rule.ruleName()» {$type = «rule.ruleName()»; } «IF !it.lastIteration»|
+«ENDIF-»
+«ENDIF-»
+«ENDFOREACH»;
+«FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw»
+fragment FRAGMENT_«getKeywordRuleName(kw)» : '«kw.toAntlrString()»';
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE backtrackingRule(AntlrFragmentHelper helper) FOR TerminalRule»
+«IF !helper.isSyntheticTerminalRule(this)-»
+«IF fragment-»
+fragment «ruleName()» : «toLexerBody()»;
+«ELSE-»
+fragment «ruleName()» : FRAGMENT_«ruleName()»;
+fragment FRAGMENT_«ruleName()» : «toLexerBody()»;
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+

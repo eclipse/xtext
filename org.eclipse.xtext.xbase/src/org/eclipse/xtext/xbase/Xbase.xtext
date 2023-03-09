@@ -1,0 +1,337 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.xbase.Xbase with org.eclipse.xtext.xbase.Xtype
+
+import "http://www.eclipse.org/xtext/xbase/Xbase"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+XExpression returns XExpression :
+	XAssignment;
+
+XAssignment returns XExpression :
+	{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
+	XOrExpression (
+		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
+	)?;
+
+OpSingleAssign:
+	'='
+;
+
+OpMultiAssign:
+	'+=' | '-=' | '*=' | '/=' | '%=' |
+	'<' '<' '=' |
+	'>' '>'? '>=';
+
+XOrExpression returns XExpression:
+	XAndExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr]) rightOperand=XAndExpression)*;
+
+OpOr:
+	'||';
+
+XAndExpression returns XExpression:
+	XEqualityExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd]) rightOperand=XEqualityExpression)*;
+
+OpAnd:
+	'&&';
+
+XEqualityExpression returns XExpression:
+	XRelationalExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
+	rightOperand=XRelationalExpression)*;
+
+OpEquality:
+	'==' | '!=' | '===' | '!==';
+
+XRelationalExpression returns XExpression:
+	XOtherOperatorExpression
+	(=>({XInstanceOfExpression.expression=current} 'instanceof') type=JvmTypeReference |
+	 =>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
+
+OpCompare:
+	'>=' | '<' '=' | '>' | '<' ;
+
+XOtherOperatorExpression returns XExpression:
+	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
+	rightOperand=XAdditiveExpression)*;
+
+OpOther:
+	  '->'
+	| '..<'
+	| '>' '..'
+	| '..'
+	| '=>'
+	| '>' (=>('>' '>') | '>')
+	| '<' (=>('<' '<') | '<' | '=>')
+	| '<>'
+	| '?:';
+
+XAdditiveExpression returns XExpression:
+	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
+	rightOperand=XMultiplicativeExpression)*;
+
+OpAdd:
+	'+' | '-';
+
+XMultiplicativeExpression returns XExpression:
+	XUnaryOperation (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti]) rightOperand=XUnaryOperation)*;
+
+OpMulti:
+	'*' | '**' | '/' | '%';
+
+XUnaryOperation returns XExpression:
+	{XUnaryOperation} feature=[types::JvmIdentifiableElement|OpUnary] operand=XUnaryOperation
+	| XCastedExpression;
+
+OpUnary:
+	"!" | "-" | "+";
+
+XCastedExpression returns XExpression:
+	XPostfixOperation (=>({XCastedExpression.target=current} 'as') type=JvmTypeReference)*
+;
+
+XPostfixOperation returns XExpression:
+	XMemberFeatureCall =>({XPostfixOperation.operand=current} feature=[types::JvmIdentifiableElement|OpPostfix])?
+;
+
+OpPostfix:
+	"++" | "--"
+;
+
+XMemberFeatureCall returns XExpression:
+	XPrimaryExpression
+	(=>({XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::"))
+		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+		feature=[types::JvmIdentifiableElement|IdOrSuper] (
+			=>explicitOperationCall?='('
+				(
+				    memberCallArguments+=XShortClosure
+				  | memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
+				)?
+			')')?
+			memberCallArguments+=XClosure?
+		)*;
+
+XPrimaryExpression returns XExpression:
+	XConstructorCall |
+	XBlockExpression |
+	XSwitchExpression |
+	XSynchronizedExpression |
+	XFeatureCall |
+	XLiteral |
+	XIfExpression |
+	XForLoopExpression |
+	XBasicForLoopExpression |
+	XWhileExpression |
+	XDoWhileExpression |
+	XThrowExpression |
+	XReturnExpression |
+	XTryCatchFinallyExpression |
+	XParenthesizedExpression;
+
+XLiteral returns XExpression:
+	XCollectionLiteral |
+	XClosure |
+	XBooleanLiteral |
+	XNumberLiteral |
+	XNullLiteral |
+	XStringLiteral |
+	XTypeLiteral
+;
+
+XCollectionLiteral:
+	XSetLiteral | XListLiteral
+;
+
+XSetLiteral:
+	{XSetLiteral} '#' '{' (elements+=XExpression (',' elements+=XExpression )*)? '}'
+;
+
+XListLiteral:
+	{XListLiteral} '#' '[' (elements+=XExpression (',' elements+=XExpression )*)? ']'
+;
+
+XClosure returns XExpression:
+	=>({XClosure}
+	'[')
+		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')?
+		expression=XExpressionInClosure
+	']';
+
+XExpressionInClosure returns XExpression:
+	{XBlockExpression}
+	(expressions+=XExpressionOrVarDeclaration ';'?)*
+;
+
+XShortClosure returns XExpression:
+	=>({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|') expression=XExpression;
+
+XParenthesizedExpression returns XExpression:
+	'(' XExpression ')';
+
+XIfExpression returns XExpression:
+	{XIfExpression}
+	'if' '(' if=XExpression ')'
+	then=XExpression
+	(=>'else' else=XExpression)?;
+
+XSwitchExpression returns XExpression:
+	{XSwitchExpression}
+	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
+		| =>(declaredParam=JvmFormalParameter ':')? switch=XExpression) '{'
+	(cases+=XCasePart)*
+	('default' ':' default=XExpression )?
+	'}';
+
+XCasePart:
+	{XCasePart}
+	typeGuard=JvmTypeReference? ('case' case=XExpression)?
+		(':' then=XExpression | fallThrough?=',') ;
+
+XForLoopExpression returns XExpression:
+	=>({XForLoopExpression}
+	'for' '(' declaredParam=JvmFormalParameter ':') forExpression=XExpression ')'
+		eachExpression=XExpression;
+
+XBasicForLoopExpression returns XExpression:
+	{XBasicForLoopExpression}
+	'for' '('(initExpressions+=XExpressionOrVarDeclaration (',' initExpressions+=XExpressionOrVarDeclaration)*)? ';'
+		expression=XExpression? ';'
+		(updateExpressions+=XExpression (',' updateExpressions+=XExpression)*)? ')'
+		eachExpression=XExpression;
+
+XWhileExpression returns XExpression:
+	{XWhileExpression}
+	'while' '(' predicate=XExpression ')'
+		body=XExpression;
+
+XDoWhileExpression returns XExpression:
+	{XDoWhileExpression}
+	'do'
+		body=XExpression
+	'while' '(' predicate=XExpression ')';
+
+XBlockExpression returns XExpression:
+	{XBlockExpression}
+	'{'
+		(expressions+=XExpressionOrVarDeclaration ';'?)*
+	'}';
+
+XExpressionOrVarDeclaration returns XExpression:
+	XVariableDeclaration | XExpression;
+
+XVariableDeclaration returns XExpression:
+	{XVariableDeclaration}
+	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
+
+JvmFormalParameter returns types::JvmFormalParameter:
+	(parameterType=JvmTypeReference)? name=ValidID;
+
+FullJvmFormalParameter returns types::JvmFormalParameter:
+	parameterType=JvmTypeReference name=ValidID;
+
+XFeatureCall returns XExpression:
+	{XFeatureCall}
+	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	feature=[types::JvmIdentifiableElement|IdOrSuper]
+	(=>explicitOperationCall?='('
+		(
+		    featureCallArguments+=XShortClosure
+		  | featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
+		)?
+	')')?
+	featureCallArguments+=XClosure?;
+
+FeatureCallID:
+	ValidID | 'extends' | 'static' | 'import' | 'extension'
+;
+
+IdOrSuper :
+	FeatureCallID | 'super'
+;
+
+XConstructorCall returns XExpression:
+	{XConstructorCall}
+	'new' constructor=[types::JvmConstructor|QualifiedName]
+	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	(=>explicitConstructorCall?='('
+		(
+		    arguments+=XShortClosure
+		  | arguments+=XExpression (',' arguments+=XExpression)*
+		)?
+	')')?
+	arguments+=XClosure?;
+
+XBooleanLiteral returns XExpression :
+	{XBooleanLiteral} ('false' | isTrue?='true');
+
+XNullLiteral returns XExpression :
+	{XNullLiteral} 'null';
+
+XNumberLiteral returns XExpression :
+	{XNumberLiteral} value=Number;
+
+XStringLiteral returns XExpression:
+	{XStringLiteral} value=STRING;
+
+XTypeLiteral returns XExpression :
+	{XTypeLiteral} 'typeof' '(' type=[types::JvmType|QualifiedName] (arrayDimensions+=ArrayBrackets)* ')'
+;
+
+XThrowExpression returns XExpression :
+	{XThrowExpression} 'throw' expression=XExpression;
+
+XReturnExpression returns XExpression :
+	{XReturnExpression} 'return' (->expression=XExpression)?;
+
+XTryCatchFinallyExpression returns XExpression:
+	{XTryCatchFinallyExpression}
+	'try'
+		expression=XExpression
+	(
+		catchClauses+=XCatchClause+
+		(=>'finally' finallyExpression=XExpression)?
+	|	'finally' finallyExpression=XExpression
+	);
+
+XSynchronizedExpression returns XExpression:
+	=>({XSynchronizedExpression}
+	'synchronized' '(') param=XExpression ')' expression=XExpression;
+
+XCatchClause :
+	=>'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
+
+
+@Override
+QualifiedName:
+	ValidID (=>'.' ValidID)*;
+
+Number hidden():
+	HEX | (INT | DECIMAL) ('.' (INT | DECIMAL))?;
+
+/**
+ * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
+ * which makes downstream grammars break on classloading, when a rule is removed.
+ */
+StaticQualifier:
+	(ValidID '::')+
+;
+
+terminal HEX:
+	('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F'|'_')+
+	('#' (('b'|'B')('i'|'I') | ('l'|'L')))?;
+
+terminal INT returns ecore::EInt:
+	'0'..'9' ('0'..'9'|'_')*;
+
+terminal DECIMAL:
+	INT
+	(('e'|'E') ('+'|'-')? INT)?
+	(('b'|'B')('i'|'I'|'d'|'D') | ('l'|'L'|'d'|'D'|'f'|'F'))?;

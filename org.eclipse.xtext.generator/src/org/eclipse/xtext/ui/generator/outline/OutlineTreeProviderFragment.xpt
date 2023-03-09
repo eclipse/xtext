@@ -1,0 +1,64 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::ui::generator::outline::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendOutlineTreeProvider»
+		«ELSE»
+			«EXPAND javaOutlineTreeProvider»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE javaOutlineTreeProvider FOR Grammar»
+ «FILE qualifiedName().asPath()+".java" SRC_UI -»
+«fileHeader()»
+package «qualifiedName().toJavaPackage()»;
+
+/**
+ * Customization of the default outline structure.
+ *
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline
+ */
+public class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
+	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendOutlineTreeProvider FOR Grammar»
+ «FILE qualifiedName().asPath()+".xtend" SRC_UI -»
+«fileHeader()»
+package «qualifiedName().toJavaPackage()»
+
+/**
+ * Customization of the default outline structure.
+ *
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline
+ */
+class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
+	
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»

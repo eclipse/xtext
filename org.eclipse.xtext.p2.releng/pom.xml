@@ -20,6 +20,7 @@
 		<module>../org.eclipse.xtend.lib.tests</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtend.lib.gwt.test</module>
+		<!-- xtext-core -->
 		<module>../org.eclipse.xtext</module>
 		<module>../org.eclipse.xtext.util</module>
 		<module>../org.eclipse.xtext.tests</module>
@@ -32,6 +33,27 @@
 		<module>../org.eclipse.xtext.xtext.bootstrap</module>
 		<module>../org.eclipse.xtext.xtext.generator</module>
 		<module>../org.eclipse.xtext.xtext.wizard</module>
+		<!-- xtext-extras -->
+		<module>../org.eclipse.xtext.smap</module>
+		<module>../org.eclipse.xtext.common.types</module>
+		<module>../org.eclipse.xtext.ecore</module>
+		<module>../org.eclipse.xtext.xbase</module>
+		<module>../org.eclipse.xtext.xbase.ide</module>
+		<module>../org.eclipse.xtext.xbase.testing</module>
+		<module>../org.eclipse.xtext.xbase.testlanguages</module>
+		<module>../org.eclipse.xtext.xbase.testlanguages.ide</module>
+		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.xbase.testdata</module>
+		<module>../org.eclipse.xtext.generator</module>
+		<module>../org.eclipse.xtext.java</module>
+		<module>../org.eclipse.xtext.purexbase</module>
+		<module>../org.eclipse.xtext.purexbase.ide</module>
+		<module>../org.eclipse.xtext.purexbase.tests</module>
+		<module>../org.eclipse.xtext.xbase.tests</module>
+		<module>../org.eclipse.xtext.java.tests</module>
+		<module>../org.eclipse.xtext.extras.tests</module>
+		<module>../org.eclipse.xtext.builder.standalone.tests</module>
+		<module>../org.eclipse.xtext.common.types.tests</module>
 	</modules>
 
 	<!--

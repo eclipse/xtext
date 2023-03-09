@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Builder Standalone Tests
+Bundle-SymbolicName: org.eclipse.xtext.builder.standalone.tests;singleton:=true
+Bundle-Version: 2.31.0.qualifier
+Bundle-Vendor: Eclipse Xtext
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.builder.standalone,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xbase.testlanguages,
+ org.eclipse.xtext.xtext.generator;bundle-version="2.30.0",
+ org.aopalliance;bundle-version="1.0.0"
+Export-Package: org.eclipse.xtext.builder.standalone,
+ org.eclipse.xtext.builder.standalone.incremental;x-internal:=true,
+ org.eclipse.xtext.builder.tests,
+ org.eclipse.xtext.builder.tests.builderTestLanguage,
+ org.eclipse.xtext.builder.tests.builderTestLanguage.impl,
+ org.eclipse.xtext.builder.tests.builderTestLanguage.util,
+ org.eclipse.xtext.builder.tests.parser.antlr,
+ org.eclipse.xtext.builder.tests.parser.antlr.internal,
+ org.eclipse.xtext.builder.tests.serializer,
+ org.eclipse.xtext.builder.tests.services,
+ org.eclipse.xtext.builder.tests.validation
+Import-Package: org.apache.log4j,
+ org.junit;version="4.13.2",
+ org.junit.runner;version="4.13.2",
+ org.junit.runners;version="4.13.2"
+Automatic-Module-Name: org.eclipse.xtext.builder.standalone.tests

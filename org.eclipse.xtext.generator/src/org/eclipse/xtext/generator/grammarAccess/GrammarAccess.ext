@@ -1,0 +1,279 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::emf::ecore;
+import org::eclipse::xtext::generator;
+
+/**
+ * @author Moritz Eysholdt
+ */
+extension org::eclipse::xtext::generator::Naming;
+extension org::eclipse::xtext::GrammarUtil;
+
+// ******************************************************************************
+// ***  this API can be used by other templates to generate code             ****
+// ***  that has hard references to grammar rules/elements                   ****
+// ******************************************************************************
+
+/**
+ * Returns the invokation of the element accessor method as full qualified Java statement.
+ * Example: return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates()
+ * @param ele the element
+ * @return The java statement
+ */	
+String gaFullAccessor(AbstractElement ele):
+	ele.containingGrammar().gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor();
+	
+/**
+ * Converts an arbitary string to a valid Java identifier
+ * The string is being split up along the the caracters that are not valid as java 
+ * identifier. The first character of each segments is made upper case which 
+ * leads to a camel-case style.
+ * @param text the string
+ * @param uppercaseFirst whether the first character of the returned identifier should be uppercase or lowercase
+ * @return the java identifier
+ */
+String toJavaIdentifier(String text, boolean uppercaseFirst):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.toJavaIdentifier(java.lang.String, java.lang.Boolean);
+	
+/** 
+ * Creates an identifier for a Rule which is a valid Java identifier and unique within 
+ * the Rule's grammar including its super grammars.
+ * @param rule the Rule
+ * @return the identifier
+ */
+String gaRuleIdentifyer(AbstractRule this):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getUniqueRuleName(org.eclipse.xtext.AbstractRule);
+	
+/** 
+ * Creates an identifier for a Rule which is a valid Java identifier and unique within 
+ * the Rule's grammar (excluding its super grammars).
+ * @param rule the Rule
+ * @return the identifier
+ */
+String gaBaseRuleIdentifier(AbstractRule rule):
+	rule.name.toJavaIdentifier(true);
+	
+/**
+ * Creates an identifier for an AbstractElement which is a valid Java identifier and
+ * which is unique whithin the element's rule. The identifier tries to be as 
+ * human-readable as possible.
+ * @param element the element
+ * @return the element's identifier
+ */
+String gaElementIdentifyer(AbstractElement element):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getUniqueElementName(org.eclipse.xtext.AbstractElement);
+
+/**
+ * Returns the full qulified Java class name of a GrammarAccess implementation for a grammar.
+ * @param grammar 
+ * @return the GrammarAccess' full qualified Java class name
+ */
+String gaFQName(Grammar grammar):
+	gaFQName(grammar,getNaming());
+	
+private String gaFQName(Grammar grammar, Naming naming):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	
+/**
+ * Returns the simple Java class name of a GrammarAccess implementation for a Grammar.
+ * The simple class name is defined as the class' name without any package names.
+ * @param grammar the grammar
+ * @return the GrammarAccess' simple class name
+ */
+String gaSimpleName(Grammar grammar):
+	gaFQName(grammar).toSimpleName();
+	
+/**
+ * Returns the method name for accessing a rule via a GrammarAccess implementation.
+ * @param rule the rule for which the accessor method is needed
+ * @return the method's name.
+ */
+String gaRuleAccessMethodName(AbstractRule rule):
+	"get" + rule.gaRuleIdentifyer() + "Rule";
+
+/**
+ * Returns the method name for accessing a rule via a GrammarAccess implementation.
+ * @param rule the rule for which the accessor method is needed
+ * @return the method's name.
+ */
+String gaBaseRuleAccessMethodName(AbstractRule rule):
+	"get" + rule.gaBaseRuleIdentifier() + "Rule";
+		
+/**
+ * Returns the method name for accessing a rule's content via a ParseRuleAccess implementation.
+ * @param rule the rule for which the accessor method is needed
+ * @return the method's name.
+ */
+String gaRuleElementsMethodName(AbstractRule rule):
+	"get" + rule.gaRuleIdentifyer() + "Access";
+
+/**
+ * Returns the method name for accessing a rule's content via a ParseRuleAccess implementation.
+ * @param rule the rule for which the accessor method is needed
+ * @return the method's name.
+ */
+String gaBaseRuleElementsMethodName(AbstractRule rule):
+	"get" + rule.gaBaseRuleIdentifier() + "Access";
+
+/**
+ * Returns the method name for accessing an element via a GrammarAccess implementation.
+ * @param element the element for which the accesor method is needed
+ * @return the method's name.
+ */
+String gaElementAccessMethodeName(AbstractElement element):
+	"get" + element.gaElementIdentifyer();
+
+/**
+ * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
+ * a facade for each parser rule, which contains the methods for accessing the rule's elements.
+ * @param rule
+ * @return the simple class name
+ */	
+String gaRuleAccessorClassName(AbstractRule rule):
+	rule.gaRuleIdentifyer() + "Elements";
+
+/**
+ * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
+ * a facade for each parser rule, which contains the methods for accessing the rule's elements.
+ * @param rule
+ * @return the simple class name
+ */	
+String gaBaseRuleAccessorClassName(AbstractRule rule):
+	rule.gaBaseRuleIdentifier() + "Elements";
+	
+/**
+ * Returns the invokation of the rule accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaRuleAccessor(AbstractRule rule):
+	rule.gaRuleAccessMethodName() + "()";
+
+/**
+ * Returns the invokation of the rule accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaBaseRuleAccessor(AbstractRule rule):
+	rule.gaBaseRuleAccessMethodName() + "()";
+	
+/**
+ * Returns the invokation of the rule's content accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaElementsAccessor(AbstractRule rule):
+	rule.gaRuleElementsMethodName() + "()";
+
+/**
+ * Returns the invokation of the rule's content accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaBaseElementsAccessor(AbstractRule rule):
+	rule.gaBaseRuleElementsMethodName() + "()";
+	
+/**
+ * Returns the invokation of the element accessor method as Java statement.
+ * The called method is implemented by the rule's facade.
+ * Example: ele1AssignmentStates()
+ * @param ele the element
+ * @return The java statement
+ */	
+String gaElementAccessor(AbstractElement ele):
+	ele.gaElementAccessMethodeName() + "()";
+	
+/**
+ * Returns the invokation of the element accessor method for a GrammarAccess 
+ * as Java statement.
+ * Example: prStatemachine().ele1AssignmentStates()
+ * @param ele the element
+ * @return The java statement
+ */	
+String gaRuleElementAccessor(AbstractElement ele):
+	ele.containingRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
+	
+/**
+ * Returns the invokation of an element or rule accessor, including the .getType() call.
+ * Example1: getFooRule().getType()
+ * Example2: getBarRule().getFooAction().getType()
+ */
+String gaTypeAccessor(TypeRef ele):
+	switch {
+	case AbstractElement.isInstance(ele.eContainer()):
+		((AbstractElement)ele.eContainer()).gaRuleElementAccessor() + ".getType()"
+	case AbstractRule.isInstance(ele.eContainer()):
+		((AbstractRule)ele.eContainer()).gaRuleAccessor() + ".getType()"
+		default: "<error: unknown type "+ele.eContainer().metaType+">"
+	};
+	
+/**
+ * Returns the invokation of an element or rule accessor.
+ * Example1: getFooRule()
+ * Example2: getBarRule().getFooAction()
+ */
+String gaAccessor(EObject ele):
+	switch {
+	case AbstractElement.isInstance(ele):
+		((AbstractElement)ele).gaRuleElementAccessor()
+	case AbstractRule.isInstance(ele):
+		((AbstractRule)ele).gaRuleAccessor() 
+		default: "<error: unknown type "+ele.metaType+">"
+	};
+	
+/*
+ *
+ */
+String grammarFragmentToStr(EObject ele, String prefix, String lineDelimiter):	
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject, java.lang.String, java.lang.String);
+
+
+
+// ******************************************************************************
+// ***  the API below is private. Only GrammarAccess.xpt is allowed to use it ***
+// ******************************************************************************
+
+String gaGrammarAccessLocalVarName(Grammar g):
+	"ga" + g.getName();
+	
+String gaElementAccessorLocalVarName(AbstractElement ele):
+	"c" + ele.gaElementIdentifyer();
+	
+String gaRuleAccessorLocalVarName(AbstractRule rule):
+	"unknownRule" + rule.gaRuleIdentifyer();
+
+String gaRuleAccessorLocalVarName(ParserRule rule):
+	"p" + rule.gaRuleIdentifyer();
+
+String gaRuleAccessorLocalVarName(TerminalRule rule):
+	"t" + rule.gaRuleIdentifyer();
+	
+String gaRuleAccessorLocalVarName(EnumRule rule):
+	"e" + rule.gaRuleIdentifyer();
+	
+String getClassName(EObject obj):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
+	
+List[Grammar] effectivelyUsedGrammars(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getEffectivelyUsedGrammars(org.eclipse.xtext.Grammar);
+
+String loadElementParentStatement(AbstractElement ele):
+	if (AbstractElement.isInstance(ele.eContainer())) then
+		((AbstractElement)ele.eContainer()).gaElementAccessorLocalVarName() 
+	else "rule";
+
+String loadElementStatement(AbstractElement ele):
+	"(" + ele.getClassName() + ")" + 
+	ele.loadElementParentStatement() + 
+	".eContents().get("+ele.eContainer().eContents().indexOf(ele)+")";
+
+	
+	
+	

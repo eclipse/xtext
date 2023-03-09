@@ -1,0 +1,3 @@
+org.eclipse.xtext.xbase.testlanguages.ide.XImportSectionTestLangIdeSetup
+org.eclipse.xtext.xbase.testlanguages.ide.ContentAssistFragmentTestLangIdeSetup
+org.eclipse.xtext.xbase.testlanguages.bug462047.ide.Bug462047LangIdeSetup

@@ -1,0 +1,36 @@
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+	
+«DEFINE file(String activatorName) FOR Grammar»
+«FILE executableExtensionFactory().asPath()+".java" SRC_GEN_UI-»
+«fileHeader()»
+package «executableExtensionFactory().toJavaPackage()»;
+
+«annotationImports()-»
+import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
+import org.osgi.framework.Bundle;
+
+import com.google.inject.Injector;
+
+import «activatorName»;
+
+/**
+ * This class was generated. Customizations should only happen in a newly
+ * introduced subclass. 
+ */
+«classAnnotations()»public class «executableExtensionFactory().toSimpleName()» extends AbstractGuiceAwareExecutableExtensionFactory {
+
+	@Override
+	protected Bundle getBundle() {
+		return «activatorName.toSimpleName()».getInstance().getBundle();
+	}
+	
+	@Override
+	protected Injector getInjector() {
+		return «activatorName.toSimpleName()».getInstance().getInjector(«activatorName.toSimpleName()».«name.toUpperCase().replaceAll('\\.', '_')»);
+	}
+	
+}
+«ENDFILE»
+«ENDDEFINE»

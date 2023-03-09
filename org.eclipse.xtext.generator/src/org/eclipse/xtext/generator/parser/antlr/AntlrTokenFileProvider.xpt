@@ -1,0 +1,41 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::Parser»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE file FOR Grammar»
+«EXPAND file(getGrammarFileName())»
+«ENDDEFINE»
+
+«DEFINE file(String grammarFileName) FOR Grammar»
+«FILE getAntlrTokenFileProviderClassName().asPath()+".java" SRC_GEN-»
+«fileHeader()»
+package «getAntlrTokenFileProviderClassName().toJavaPackage()»;
+
+«annotationImports()-»
+import java.io.InputStream;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+
+«classAnnotations()»public class «getAntlrTokenFileProviderClassName().toSimpleName()» implements IAntlrTokenFileProvider {
+	
+	@Override
+	public InputStream getAntlrTokenFile() {
+		ClassLoader classLoader = getClass().getClassLoader();
+    	return classLoader.getResourceAsStream("«grammarFileName.asPath()».tokens");
+	}
+}
+«ENDFILE»
+«ENDDEFINE»

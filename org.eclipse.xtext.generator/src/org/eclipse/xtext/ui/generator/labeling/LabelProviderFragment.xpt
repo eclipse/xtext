@@ -1,0 +1,150 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::ui::generator::labeling::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendEObjectLabelProvider»
+			«EXPAND xtendDescriptionLabelProvider»
+		«ELSE»
+			«EXPAND eObjectLabelProvider»
+			«EXPAND descriptionLabelProvider»
+		«ENDIF»
+	«ENDIF» 
+«ENDDEFINE»
+
+«DEFINE eObjectLabelProvider FOR Grammar-»
+«FILE eObjectLabelProviderQualifiedName().asPath()+".java" SRC_UI -»
+«fileHeader()»
+package «eObjectLabelProviderQualifiedName().toJavaPackage()»;
+
+import com.google.inject.Inject;
+
+/**
+ * Provides labels for EObjects.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+ */
+public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
+
+	@Inject
+	public «eObjectLabelProviderQualifiedName().toSimpleName()»(org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider delegate) {
+		super(delegate);
+	}
+
+	// Labels and icons can be computed like this:
+	
+//	String text(Greeting ele) {
+//		return "A greeting to " + ele.getName();
+//	}
+//
+//	String image(Greeting ele) {
+//		return "Greeting.gif";
+//	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendEObjectLabelProvider FOR Grammar-»
+«FILE eObjectLabelProviderQualifiedName().asPath()+".xtend" SRC_UI -»
+«fileHeader()»
+package «eObjectLabelProviderQualifiedName().toJavaPackage()»
+
+import com.google.inject.Inject
+
+/**
+ * Provides labels for EObjects.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+ */
+class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabelProviderSuperClassName()» {
+
+	@Inject
+	new(org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider delegate) {
+		super(delegate);
+	}
+
+	// Labels and icons can be computed like this:
+	
+//	def text(Greeting ele) {
+//		'A greeting to ' + ele.name
+//	}
+//
+//	def image(Greeting ele) {
+//		'Greeting.gif'
+//	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE descriptionLabelProvider FOR Grammar-»
+«FILE descriptionLabelProviderQualifiedName().asPath()+".java" SRC_UI -»
+«fileHeader()»
+package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
+
+/**
+ * Provides labels for IEObjectDescriptions and IResourceDescriptions.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+ */
+public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
+
+	// Labels and icons can be computed like this:
+	
+//	String text(IEObjectDescription ele) {
+//	   return ele.getName().toString();
+//	}
+//	 
+//  String image(IEObjectDescription ele) {
+//     return ele.getEClass().getName() + ".gif";
+//  }	 
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE xtendDescriptionLabelProvider FOR Grammar-»
+«FILE descriptionLabelProviderQualifiedName().asPath()+".xtend" SRC_UI -»
+«fileHeader()»
+package «descriptionLabelProviderQualifiedName().toJavaPackage()»
+
+//import org.eclipse.xtext.resource.IEObjectDescription
+
+/**
+ * Provides labels for IEObjectDescriptions and IResourceDescriptions.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+ */
+class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «descriptionLabelProviderSuperClassName()» {
+
+	// Labels and icons can be computed like this:
+	
+//	override text(IEObjectDescription ele) {
+//		ele.name.toString
+//	}
+//	 
+//	override image(IEObjectDescription ele) {
+//		ele.EClass.name + '.gif'
+//	}	 
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»

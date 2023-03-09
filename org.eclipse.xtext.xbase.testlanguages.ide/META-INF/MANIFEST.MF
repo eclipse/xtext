@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xbase Xtext Testlanguages for UI and Runtime - Generic Ide
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.31.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.xbase.testlanguages.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.xbase.testlanguages,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.eclipse.xtext.xbase.testlanguages.bug462047.ide,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.ide.contentassist.antlr,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.xbase.testlanguages.ide,
+ org.eclipse.xtext.xbase.testlanguages.ide.contentassist.antlr,
+ org.eclipse.xtext.xbase.testlanguages.ide.contentassist.antlr.internal
+Automatic-Module-Name: org.eclipse.xtext.xbase.testlanguages.ide
