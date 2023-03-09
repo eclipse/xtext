@@ -62,7 +62,6 @@ echo mvn -B -f org.eclipse.xtext.maven.releng ${MVN_ARGS[@]} $@
 mvn -B \
   -f org.eclipse.xtext.maven.releng \
   clean deploy \
-  -P eclipse-sign \
   -DaltDeploymentRepository=local::default::file:./build/maven-repository \
   ${MVN_ARGS[@]} \
   $@
