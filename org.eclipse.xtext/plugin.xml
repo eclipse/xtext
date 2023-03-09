@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ </copyright>
+-->
+
+<plugin>
+   <extension-point id="content_resourceServiceProvider" name="Content Handler Resource Service Provider Registration" schema="schema/content_resourceServiceProvider.exsd"/>
+   <extension-point id="extension_resourceServiceProvider" name="URI Extenion Resource Service Provider Registration" schema="schema/extension_resourceServiceProvider.exsd"/>
+   <extension-point id="protocol_resourceServiceProvider" name="URI Protocol (Scheme) Resource Service Provider Registration" schema="schema/protocol_resourceServiceProvider.exsd"/>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2008/Xtext" 
+       class = "org.eclipse.xtext.XtextPackage"
+       genModel = "org/eclipse/xtext/Xtext.genmodel" /> 
+  </extension>
+
+
+</plugin>

@@ -1,0 +1,65 @@
+/*******************************************************************************
+ * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage
+with org.eclipse.xtext.common.Terminals
+
+generate regionaccesstestlanguage "http://formatter2/regionaccesstestlanguage"
+
+Root:
+	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")? mixed=Mixed | "8" ValueList;
+
+Simple:
+	"1" name=ID;
+
+Delegation:
+	"2" delegate=Delegate;
+
+Unassigned:
+	"3" Delegate;
+
+PrefixedUnassigned:
+	"4" delegate=PrefixedDelegate;
+
+PrefixedDelegate:
+	"prefix" Delegate;
+
+Delegate:
+	name=ID;
+
+Expression:
+	Primary ({Add.left=current} "+" right=Primary)*;
+
+Primary returns Expression:
+	{Named} name=ID | Parenthesized;
+
+Parenthesized returns Expression:
+	"(" Expression ")";
+
+Mixed:
+	"("
+	("unassigned" (ID | Datatype))?
+	({Action} ("fragment" Fragment)? |
+	Mixed |
+	(name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed|ID] | lit=Enum))
+	")"
+	({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+
+Datatype:
+	"datatype" (Datatype | ID);
+	
+fragment Fragment returns Mixed:
+	fragName=ID | "child" mixed=Mixed | "recursion" Fragment;
+
+enum Enum:
+	lit1 | lit2;
+	
+ValueList:
+	{ValueList} name+=ID*
+;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtext.generator/src-gen" editDirectory="/org.eclipse.xtext.xtext.generator.edit/src"
+    editorDirectory="/org.eclipse.xtext.xtext.generator.editor/src" modelPluginID="org.eclipse.xtext.xtext.generator"
+    forceOverwrite="true" modelName="SimpleExpressions" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="11.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtext.generator.edit"
+    editorPluginID="org.eclipse.xtext.xtext.generator.editor" runtimeVersion="2.29">
+  <genPackages prefix="SimpleExpressions" basePackage="org.eclipse.xtext.xtext.generator.parser.antlr.splitting"
+      disposableProviderFactory="true" ecorePackage="SimpleExpressions.ecore#/">
+    <genClasses ecoreClass="SimpleExpressions.ecore#//IfCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressions.ecore#//IfCondition/elseif"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//IfCondition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//Expression"/>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressions.ecore#//NumberLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressions.ecore#//BooleanLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//MethodCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressions.ecore#//MethodCall/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//OrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//OrExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//OrExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//AndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//AndExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//AndExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//Comparison">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//Comparison/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressions.ecore#//Comparison/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//Comparison/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressions.ecore#//NotExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressions.ecore#//NotExpression/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

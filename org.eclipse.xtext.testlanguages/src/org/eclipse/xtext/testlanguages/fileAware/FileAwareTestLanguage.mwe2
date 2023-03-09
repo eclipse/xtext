@@ -1,0 +1,25 @@
+module org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage
+
+import org.eclipse.xtext.testlanguages.fragments.*
+
+org.eclipse.xtext.xtext.generator.StandardLanguage {
+	
+	name = "org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage"
+
+	serializer = {
+		generateStub = false
+	}
+
+	formatter = {
+		generateStub = true
+	}
+	
+	junitSupport = {
+		generateStub = false
+		skipXbaseTestingPackage = true
+	}
+	
+	renameRefactoring = {
+		useChangeSerializer = true
+	} 
+}

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Language IDE Support
+Bundle-SymbolicName: org.eclipse.xtext.xtext.ide;singleton:=true
+Bundle-Version: 2.31.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Eclipse Xtext
+Require-Bundle: org.eclipse.xtext.ide;bundle-version="2.11.0"
+Import-Package: org.apache.log4j;version="1.2.24"
+Export-Package: org.eclipse.xtext.xtext.ide;x-friends:="org.eclipse.xtext.xtext.ui",
+ org.eclipse.xtext.xtext.ide.contentassist.antlr;x-friends:="org.eclipse.xtext.xtext.ui",
+ org.eclipse.xtext.xtext.ide.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xtext.ui"
+Automatic-Module-Name: org.eclipse.xtext.xtext.ide
+Eclipse-SourceReferences: eclipseSourceReferences

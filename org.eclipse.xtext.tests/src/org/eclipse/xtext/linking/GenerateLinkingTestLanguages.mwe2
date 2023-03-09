@@ -1,0 +1,114 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.linking.GenerateLinkingTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/linking"
+	}
+	
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtimeTest = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug287988TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug289059TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug313089TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext"
+			fragment = xtext.generator.CompositeGeneratorFragment2 {
+				fragment = @TestLanguagesFragments {
+				}
+				fragment = scoping.ImportNamespacesScopingFragment2 {
+				}
+			}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug362902.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = xtext.generator.scoping.ImportNamespacesScopingFragment2 {
+				ignoreCase = true
+			}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = xtext.generator.scoping.ImportNamespacesScopingFragment2 {
+				ignoreCase = true
+			}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = tests.ImportURIScopingFragment2 {
+				ignoreCase = true
+			}
+		}
+		language = { 
+			grammarUri = "classpath:/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
+			referencedResource = "platform:/resource/${projectName}/src/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.genmodel"
+			fragment = junit.JUnitFragment {
+				generateStub = false
+			}
+			fragment = @TestLanguagesFragments {}
+		}
+	}
+}

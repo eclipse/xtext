@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>xtext-lib</name>
+	<name>xtext-parent</name>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -15,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1467961987520</id>
+			<id>0</id>
 			<name></name>
 			<type>10</type>
 			<matcher>

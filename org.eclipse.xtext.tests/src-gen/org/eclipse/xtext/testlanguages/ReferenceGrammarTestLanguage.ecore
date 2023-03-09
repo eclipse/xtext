@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="referenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar"
+    nsPrefix="referenceGrammar">
+  <eClassifiers xsi:type="ecore:EClass" name="Spielplatz">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groesse" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beschreibung" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kinder" upperBound="-1"
+        eType="#//Kind" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="erzieher" upperBound="-1"
+        eType="#//Erwachsener" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spielzeuge" upperBound="-1"
+        eType="#//Spielzeug" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="familie" upperBound="-1"
+        eType="#//Familie" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Kind" eSuperTypes="#//Person"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Erwachsener" eSuperTypes="#//Person"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Spielzeug">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farbe" eType="#//Farbe"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Farbe">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wert" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Familie">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mutter" eType="#//Erwachsener"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vater" eType="#//Erwachsener"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kinder" unique="false"
+        upperBound="-1" eType="#//Kind"/>
+  </eClassifiers>
+</ecore:EPackage>

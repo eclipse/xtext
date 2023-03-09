@@ -1,0 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2016 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.linking.IgnoreCaseImportsTestLanguage with org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage
+
+generate ignoreCaseImportsTest "http://eclipse.org/xtext/ignoreCaseImportsTestLanguage"
+
+@Override 
+Model:
+	imports += Import*
+	elements += Element+
+;
+
+Import:
+	importURI = STRING
+;
+

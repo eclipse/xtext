@@ -1,0 +1,273 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2017 itemis AG and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.Xtext with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/2008/Xtext"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Grammar:
+	'grammar' name=GrammarID ('with' usedGrammars+=[Grammar|GrammarID] (',' usedGrammars+=[Grammar|GrammarID])*)?
+	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')?
+	metamodelDeclarations+=AbstractMetamodelDeclaration*
+	(rules+=AbstractRule)+
+;
+
+GrammarID returns ecore::EString:
+	ValidID ('.' ValidID)*;
+
+AbstractRule : ParserRule | TerminalRule | EnumRule;
+
+AbstractMetamodelDeclaration :
+	GeneratedMetamodel | ReferencedMetamodel;
+
+// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+// generated metamodels have to have different aliases
+GeneratedMetamodel :
+	'generate' name=ValidID ePackage=[ecore::EPackage|STRING] ('as' alias=ValidID)?;
+
+// referenced metamodels may share aliases with other referenced metamodels
+// and with generated metamodels
+ReferencedMetamodel :
+	'import' ePackage=[ecore::EPackage|STRING] ('as' alias=ValidID)?;
+
+//fragment Alias returns AbstractMetamodelDeclaration:
+//	'as' alias=ValidID
+//;
+
+Annotation returns Annotation:
+	'@' name = ID
+;
+
+ParserRule :
+	(annotations += Annotation)*
+	(
+	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?)
+	| RuleNameAndParams ('returns' type=TypeRef)?
+	)
+	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':'
+		alternatives=Alternatives
+	';'
+;
+
+fragment RuleNameAndParams returns ParserRule:
+	name=ValidID ('<' (parameters+=Parameter (',' parameters+=Parameter)*)? '>')?
+;
+
+Parameter:
+	name=ID
+;
+
+TypeRef :
+	(metamodel=[AbstractMetamodelDeclaration] '::')? classifier=[ecore::EClassifier]
+;
+
+Alternatives returns AbstractElement:
+	ConditionalBranch ({Alternatives.elements+=current} ('|' elements+=ConditionalBranch)+)?
+;
+
+ConditionalBranch returns AbstractElement:
+	  UnorderedGroup
+	| {Group} '<' guardCondition=Disjunction '>' (elements+=AbstractToken)+
+;
+
+UnorderedGroup returns AbstractElement:
+	Group ({UnorderedGroup.elements+=current} ('&' elements+=Group)+)?
+;
+
+Group returns AbstractElement:
+	AbstractToken ({Group.elements+=current} (elements+=AbstractToken)+)?
+;
+
+AbstractToken returns AbstractElement:
+	AbstractTokenWithCardinality |
+	Action
+;
+
+/* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */
+AbstractTokenWithCardinality returns AbstractElement:
+	(Assignment | AbstractTerminal) cardinality=('?'|'*'|'+')?
+;
+
+Action returns Action:
+	'{' type=TypeRef ('.' feature=ValidID operator=('='|'+=') 'current')? '}'
+;
+
+AbstractTerminal returns AbstractElement:
+	Keyword |
+	RuleCall |
+	ParenthesizedElement |
+	// Keyword and RuleCall are used inside of Assignable terminal
+	// As we do not want to be able to write name==>ID
+	// the rules for Keyword and RuleCall have been copied
+	PredicatedKeyword |
+	PredicatedRuleCall |
+	// We have to make this one explicit since the ParenthesizedElement does not
+	// create an object but we have to set the predicated flag
+	PredicatedGroup
+;
+
+Keyword :
+	value=STRING
+;
+
+RuleCall :
+	rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
+;
+
+NamedArgument:
+	( parameter=[Parameter|ID] calledByName?= '=')?
+	( value=Disjunction )
+;
+
+LiteralCondition:
+	{LiteralCondition} (true?='true' | 'false')
+;
+
+Disjunction returns Condition:
+	Conjunction ({Disjunction.left=current} '|' right=Conjunction)*
+;
+
+Conjunction returns Condition:
+	Negation ({Conjunction.left=current} '&' right=Negation)*
+;
+
+Negation returns Condition:
+	Atom | {Negation} '!' value=Negation
+;
+
+Atom returns Condition:
+	ParameterReference | ParenthesizedCondition | LiteralCondition
+;
+
+ParenthesizedCondition returns Condition:
+	'(' Disjunction ')'
+;
+
+ParameterReference:
+	parameter=[Parameter|ID]
+;
+
+TerminalRuleCall returns RuleCall:
+	rule=[AbstractRule|RuleID]
+;
+
+RuleID returns ecore::EString:
+	ValidID ('::' ValidID)*
+;
+
+ValidID returns ecore::EString:
+	ID | 'true' | 'false'
+;
+
+PredicatedKeyword returns Keyword:
+	(predicated?='=>' | firstSetPredicated?='->') value=STRING
+;
+
+PredicatedRuleCall returns RuleCall:
+	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
+;
+
+Assignment returns Assignment:
+	(predicated?='=>' | firstSetPredicated?='->')? feature=ValidID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+;
+
+AssignableTerminal returns AbstractElement:
+	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
+;
+
+ParenthesizedAssignableElement returns AbstractElement:
+	'(' AssignableAlternatives ')'
+;
+
+AssignableAlternatives returns AbstractElement:
+	AssignableTerminal ({Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+)?
+;
+
+CrossReference :
+	'[' type=TypeRef ('|' ^terminal=CrossReferenceableTerminal )? ']'
+;
+
+CrossReferenceableTerminal returns AbstractElement:
+	Keyword | RuleCall
+;
+
+ParenthesizedElement returns AbstractElement:
+	'(' Alternatives ')'
+;
+
+PredicatedGroup returns Group:
+	(predicated?='=>' | firstSetPredicated?='->') '(' elements+=Alternatives ')'
+;
+
+TerminalRule :
+	(annotations += Annotation)*
+	'terminal' (^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?) ':'
+		alternatives=TerminalAlternatives
+	';'
+;
+
+TerminalAlternatives returns AbstractElement:
+	TerminalGroup ({Alternatives.elements+=current} ('|' elements+=TerminalGroup)+)?
+;
+
+TerminalGroup returns AbstractElement:
+	TerminalToken ({Group.elements+=current} (elements+=TerminalToken)+)?
+;
+
+/* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */
+TerminalToken returns AbstractElement:
+	TerminalTokenElement cardinality=('?'|'*'|'+')?
+;
+
+TerminalTokenElement returns AbstractElement:
+	CharacterRange | TerminalRuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF
+;
+
+ParenthesizedTerminalElement returns AbstractElement:
+	'(' TerminalAlternatives ')'
+;
+
+AbstractNegatedToken:
+	NegatedToken | UntilToken
+;
+
+NegatedToken:
+	'!' ^terminal=TerminalTokenElement
+;
+
+UntilToken:
+	'->' ^terminal=TerminalTokenElement
+;
+
+Wildcard:
+	{Wildcard} '.'
+;
+
+^EOF:
+	{^EOF} 'EOF'
+;
+
+CharacterRange returns AbstractElement:
+	Keyword ( {CharacterRange.left=current} '..' right=Keyword)?
+;
+
+EnumRule:
+	(annotations += Annotation)*
+	'enum' name=ValidID ('returns' type=TypeRef)? ':'
+		alternatives=EnumLiterals
+	';'
+;
+
+EnumLiterals returns AbstractElement:
+	EnumLiteralDeclaration ({Alternatives.elements+=current} ('|' elements+=EnumLiteralDeclaration)+)?
+;
+
+EnumLiteralDeclaration:
+	enumLiteral=[ecore::EEnumLiteral|ValidID] ('=' literal=Keyword)?
+;

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: eclipsePluginP2.ui.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: eclipsePluginP2.ui.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: eclipsePluginP2.ui,
+ org.junit;bundle-version="4.13.2",
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.ui.testing
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: eclipsePluginP2.ui.tests

@@ -1,0 +1,22 @@
+/**
+ * A language that constrains namespaces to model file paths. 
+ */
+grammar org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate fileAware "http://www.eclipse.org/xtext/testlanguage/FileAware"
+
+PackageDeclaration:
+	'package' name=QualifiedName
+	imports+=Import*
+	contents+=Element*;
+
+Import:
+	'import' element=[Element|QualifiedName];
+	
+Element:
+	'element' name=ID '{'
+		(contents+=Element | 'ref' ref+=[Element|QualifiedName])*
+	'}';
+	
+QualifiedName:
+	ID ('.' ID)*;

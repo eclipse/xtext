@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: lsMavenTychoFatjar.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: lsMavenTychoFatjar.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: lsMavenTychoFatjar,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: lsMavenTychoFatjar.ide

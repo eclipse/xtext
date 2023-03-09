@@ -1,0 +1,71 @@
+/*******************************************************************************
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+package org.eclipse.xtext.xtext.generator.model
+
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.xtext.generator.CodeConfig
+import com.google.inject.Inject
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
+import com.google.inject.Injector
+import org.apache.log4j.Logger
+
+/**
+ * Configuration object for plugin.xml files for use in Eclipse.
+ */
+@Accessors
+class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
+	
+	static val Logger LOG = Logger.getLogger(PluginXmlAccess)
+	
+	@Inject CodeConfig codeConfig
+	
+	new() {
+		this.path = 'plugin.xml'
+	}
+	
+	val List<CharSequence> entries = newArrayList
+	
+	override setContent(StringConcatenationClient content) {
+		throw new UnsupportedOperationException("cannot directly set contents on a plugin.xml. Use entries property instead");
+	}
+	
+	override getContent() '''
+		<?xml version="1.0" encoding="«codeConfig.encoding?:'UTF-8'»"?>
+		<?eclipse version="3.0"?>
+		<plugin>
+			«FOR entry : entries»
+				«entry»
+			«ENDFOR»
+		</plugin>
+	'''
+	
+	/**
+	 * Merge the contents of the given plugin.xml into this one.
+	 */
+	def merge(PluginXmlAccess other) {
+		if (this.path != other.path) {
+			LOG.warn('Merging plugin.xml files with different paths: ' + this.path + ', ' + other.path)
+		}
+		this.entries.addAll(other.entries)
+	}
+	
+	override writeTo(IFileSystemAccess2 fileSystemAccess) {
+		if (!entries.isEmpty) {
+			super.writeTo(fileSystemAccess)
+		}
+	}
+	
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
+	}
+	
+}

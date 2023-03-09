@@ -1,0 +1,43 @@
+/**
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
+package org.eclipse.xtext.index.indexTestLanguage;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Entity</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.Entity#getProperties <em>Properties</em>}</li>
+ * </ul>
+ *
+ * @see org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage#getEntity()
+ * @model
+ * @generated
+ */
+public interface Entity extends Type
+{
+  /**
+   * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.index.indexTestLanguage.Property}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Properties</em>' containment reference list.
+   * @see org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage#getEntity_Properties()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Property> getProperties();
+
+} // Entity

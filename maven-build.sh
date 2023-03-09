@@ -8,7 +8,6 @@ mvn \
   -DskipTests=true \
   clean deploy \
   -P useJenkinsSnapshots \
-  -P eclipse-sign \
   --batch-mode \
   --update-snapshots \
   -Dmaven.repo.local=.m2/repository \

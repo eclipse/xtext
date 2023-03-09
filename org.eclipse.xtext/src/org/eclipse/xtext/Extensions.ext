@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+
+import org::eclipse::xtext;
+
+extension org::eclipse::xtext::GrammarUtil reexport;
+extension org::eclipse::xtext::EcoreUtils;
+
+// ***********************************************************************************
+// Shortcuts
+	 
+ParserRule calledParserRule(RuleCall this) :
+	if ParserRule.isInstance(rule) then rule;
+
+EnumRule calledEnumRule(RuleCall this) :
+	if EnumRule.isInstance(rule) then rule;
+		
+boolean isKeywordAssignment(Assignment a) :
+	Keyword.isInstance(a.terminal) || 
+	a.allContents().forAll(e | !(RuleCall.isInstance(e)));
+
+boolean isRuleAssignment(Assignment a) :
+	RuleCall.isInstance(a.terminal);
+
+boolean isParserRuleAssignment(Assignment a) :
+	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null;
+
+boolean isEnumRuleAssignment(Assignment a) :
+	a.isRuleAssignment() && ((RuleCall) a.terminal).calledEnumRule() != null;
+	
+Boolean isBoolean(Assignment a) :
+	a.operator == "?="
+;
+
+Boolean isMultiple(Assignment a) :
+	a.operator == "+="
+;
+
+boolean isQualified(String name) :	
+	name.contains("::")
+;
+
+String getAlias(String fqn) :
+	isQualified(fqn) ? fqn.split("::").first() : null
+;

@@ -1,0 +1,24 @@
+plugins {
+	id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+dependencies {
+	api project(':lsGradleFatjar')
+	api "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+}
+
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
+
+shadowJar {
+	from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output)
+	configurations = [project.configurations.runtimeClasspath]
+	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA','schema/*',
+		'.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
+		'plugin.xml', 'systembundle.properties', 'profile.list')
+	archiveClassifier = 'ls'
+	append('plugin.properties')
+	mergeServiceFiles()
+}

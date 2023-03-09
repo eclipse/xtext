@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="multiinheritancetest" nsURI="http://multiinheritancetest" nsPrefix="multiinheritancetest">
+  <eClassifiers xsi:type="ecore:EClass" name="ParentA">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeInParentA" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentB">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="someContainment" eType="#//ParentA"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildA" eSuperTypes="#//ParentA #//ParentB">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ParentA"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildB" eSuperTypes="#//ParentA #//ParentB">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ParentB"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildC" eSuperTypes="#//ParentA #//ParentB">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ChildA"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

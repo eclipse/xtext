@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
+    modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
+    modelName="GenModelAccessTest" importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0"
+    copyrightFields="false" runtimeVersion="2.29">
+  <foreignModel>GenModelAccessTest.ecore</foreignModel>
+  <genPackages prefix="Root" basePackage="org.eclipse.xtext.generator.ecore.genmodelaccess"
+      disposableProviderFactory="true" ecorePackage="GenModelAccessTest.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="GenModelAccessTest.ecore#//RootEnum">
+      <genEnumLiterals ecoreEnumLiteral="GenModelAccessTest.ecore#//RootEnum/literal"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="GenModelAccessTest.ecore#//RootDataType"/>
+    <genClasses ecoreClass="GenModelAccessTest.ecore#//RootClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GenModelAccessTest.ecore#//RootClass/attribute1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference GenModelAccessTest.ecore#//RootClass/reference1"/>
+    </genClasses>
+    <nestedGenPackages prefix="NestedPackage1" basePackage="org.eclipse.xtext.generator.ecore.genmodelaccess"
+        disposableProviderFactory="true" ecorePackage="GenModelAccessTest.ecore#//nestedPackage1">
+      <genClasses ecoreClass="GenModelAccessTest.ecore#//nestedPackage1/NestedClass1"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="NoLiterals" basePackage="org.eclipse.xtext.generator.ecore.genmodelaccess"
+        disposableProviderFactory="true" literalsInterface="false" ecorePackage="GenModelAccessTest.ecore#//noLiterals">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="GenModelAccessTest.ecore#//noLiterals/NoLitEnum">
+        <genEnumLiterals ecoreEnumLiteral="GenModelAccessTest.ecore#//noLiterals/NoLitEnum/literal"/>
+      </genEnums>
+      <genDataTypes ecoreDataType="GenModelAccessTest.ecore#//noLiterals/NoLitDataType"/>
+      <genClasses ecoreClass="GenModelAccessTest.ecore#//noLiterals/NoLitClass">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GenModelAccessTest.ecore#//noLiterals/NoLitClass/attribute2"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference GenModelAccessTest.ecore#//noLiterals/NoLitClass/reference2"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

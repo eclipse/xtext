@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partialParserTestLanguage" nsURI="http://example.xtext.org/PartialParserTestLanguage"
+    nsPrefix="partialParserTestLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="SomeContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nested" upperBound="-1"
+        eType="#//Nested" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
+        eType="#//Content" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Nested">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nested" upperBound="-1"
+        eType="#//SomeContainer" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Content"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Children" eSuperTypes="#//Content">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Child" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Child">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Named"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractChildren" eSuperTypes="#//Content">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abstractChildren" upperBound="-1"
+        eType="#//AbstractChild" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Named"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FirstConcrete" eSuperTypes="#//AbstractChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedContainer" eType="#//SomeContainer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecondConcrete" eSuperTypes="#//AbstractChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedChildren" unique="false"
+        upperBound="-1" eType="#//Child"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Named">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

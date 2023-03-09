@@ -1,0 +1,28 @@
+sourceSets {
+	main {
+		java.srcDir 'src/main/xtext-gen'
+		resources.srcDir 'src/main/xtext-gen'
+		xtend.outputDir = 'src/main/xtend-gen'
+	}
+	test {
+		java.srcDir 'src/test/xtext-gen'
+		resources.srcDir 'src/test/xtext-gen'
+		xtend.outputDir = 'src/test/xtend-gen'
+	}
+}
+
+jar {
+	from('model') {
+		into('model')
+	}
+	from(sourceSets.main.allSource) {
+		include '**/*.xtext'
+	}
+	manifest {
+		attributes 'Bundle-SymbolicName': project.name
+	}
+}
+
+plugins.withId('war') {
+	webAppDirName = "src/main/webapp"
+}

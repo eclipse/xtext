@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="serializationerror" nsURI="http://www.eclipse.org/2009/tmf/xtext/serializationerror"
+    nsPrefix="serializationerror">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//Test" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Test"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoRequired" eSuperTypes="#//Test">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="one" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="two" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoOptions" eSuperTypes="#//Test">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="one" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="two" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Indent" eSuperTypes="#//Test">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="req" eType="#//TwoRequired"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opt" eType="#//TwoOptions"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indent" upperBound="-1"
+        eType="#//Indent" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,762 @@
+/*******************************************************************************
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+package org.eclipse.xtext.xtext.generator.ecore
+
+import com.google.common.collect.Sets
+import com.google.common.io.CharStreams
+import com.google.inject.Inject
+import com.google.inject.Injector
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.nio.charset.Charset
+import java.util.Collection
+import java.util.Collections
+import java.util.List
+import java.util.Map
+import java.util.Properties
+import java.util.Set
+import org.apache.log4j.Logger
+import org.eclipse.emf.codegen.ecore.generator.Generator
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
+import org.eclipse.emf.codegen.ecore.genmodel.GenRuntimeVersion
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter
+import org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl
+import org.eclipse.emf.codegen.ecore.genmodel.impl.GenPackageImpl
+import org.eclipse.emf.codegen.merge.java.JControlModel
+import org.eclipse.emf.common.util.BasicMonitor
+import org.eclipse.emf.common.util.Diagnostic
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EClassifier
+import org.eclipse.emf.ecore.EFactory
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.emf.ecore.EcorePackage
+import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.ecore.impl.EClassImpl
+import org.eclipse.emf.ecore.plugin.EcorePlugin
+import org.eclipse.emf.ecore.resource.ContentHandler
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.resource.URIConverter
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.ecore.xmi.XMLResource
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage
+import org.eclipse.emf.mwe.utils.GenModelHelper
+import org.eclipse.emf.mwe2.ecore.CvsIdFilteringGeneratorAdapterFactoryDescriptor
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.GeneratedMetamodel
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
+
+import static org.eclipse.xtext.GrammarUtil.*
+
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+
+class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
+	
+	static val Logger LOG = Logger.getLogger(EMFGeneratorFragment2)
+	
+	@Inject CodeConfig codeConfig
+	
+	/**
+	 * The java package into which the generated Java classes shall be placed.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String basePackage
+	
+	/**
+	 * Sets the ID of the generated EMF model plug-in. Only needed if you want to generate the EMF code into a separate plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String modelPluginID
+	
+	/**
+	 * Sets the target directory for the generated EMF model code. Only needed if you want to generate the EMF code into
+	 * a separate plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String javaModelDirectory
+	
+	/**
+	 * Whether EMF edit code shall be generated.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean generateEdit = false
+	
+	/**
+	 * The plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editPluginID
+	
+	/**
+	 * The target directory for the generated EMF edit code. Only needed if you want to generate an EMF edit plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editDirectory
+	
+	/**
+	 * Whether EMF editor code shall be generated.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean generateEditor = false
+	
+	/**
+	 * The plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editorPluginID
+	
+	/**
+	 * The target directory for the generated EMF editor code. Only needed if you want to generate an EMF editor plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editorDirectory
+	
+	/**
+	 * If an existing EMF GenModel should be used, set the path to that file in this property.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String genModel
+	
+	/**
+	 * Whether the Java class generation should be skipped. If <code>true</code> only the ecore file is generated.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean skipGenerate = false
+
+	/**
+	 * Whether the build.properties should be updated. Skipped if the model code is generated into a separate
+	 * plugin or if no manifest is configured for the runtime project (see {@code WizardConfig#createEclipseMetaData}).
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean updateBuildProperties = true
+	
+	/**
+	 * Whether to use a qualified name for the xmi files, e.g.
+	 * <code>org_eclipse_xtext_Xtext.ecore</code> rather than <code>Xtext.ecore</code>.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean longFileNames = false
+	
+	/**
+	 * The generated package implementation uses 'load initialization' if it becomes very large, which means
+	 * that an additional ecore file is generated and the package content is loaded at runtime from that file.
+	 * This is to prevent the compiled class file from becoming too large. Set this property to true in order
+	 * to suppress this behavior.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean suppressLoadInitialization = false
+
+	/* Default to 2.29 if available, otherwise #get will return null */
+	GenRuntimeVersion emfRuntimeVersion = GenRuntimeVersion.get(GenRuntimeVersion.EMF229_VALUE)
+	GenJDKLevel jdkLevel = GenJDKLevel.JDK110_LITERAL
+	String rootExtendsClass = 'org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container'
+	
+	/**
+	 * Sets the target EMF runtime version to generate for to the specified value.
+	 * Defaults to 2.29.
+	 */
+	def void setEmfRuntimeVersion(String emfRuntimeVersion) {
+		this.emfRuntimeVersion = GenRuntimeVersion.get(emfRuntimeVersion)
+		if (this.emfRuntimeVersion === null)
+			LOG.warn('Illegal EMF runtime version: ' + emfRuntimeVersion)
+	}
+	
+	/**
+	 * Set the JDK compatibility level. The following values are valid:
+	 * <ul>
+	 *   <li>"JDK14"</li>
+	 *   <li>"JDK50"</li>
+	 *   <li>"JDK60"</li>
+	 *   <li>"JDK70"</li>
+	 *   <li>"JDK80"</li>
+	 *   <li>"JDK110"</li>
+	 *   <li>"JDK170"</li>
+	 * </ul>
+	 * The default level is "JDK110".
+	 */
+	def void setJdkLevel(String jdkLevel) {
+		this.jdkLevel = GenJDKLevel.getByName(jdkLevel)
+		if (this.jdkLevel === null)
+			LOG.warn('Illegal JDK level: ' + jdkLevel)
+	}
+	
+	/**
+	 * Sets the BaseClass for the EClasses in the inferred GenModel.
+	 * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container}.
+	 * 
+	 * @since 2.16
+	 */
+	def void setRootExtendsClass(String rootExtendsClass) {
+		this.rootExtendsClass = rootExtendsClass
+	}
+	
+	boolean bindEPackageAndEFactory = false
+	
+	/**
+	 * If set generated {@link EPackage} and {@link EFactory} interfaces are bound to their <code>eINSTANCE</code> instance.
+	 * @since 2.11
+	 */
+	def void setBindEPackageAndEFactory (boolean bindEPackageAndEFactory) {
+		this.bindEPackageAndEFactory = bindEPackageAndEFactory
+	}
+	
+	protected def String getModelPluginID() {
+		modelPluginID ?: projectConfig.runtime.name
+	}
+	
+	protected def String getJavaModelDirectory() {
+		if (javaModelDirectory !== null)
+			return javaModelDirectory
+		val srcGenPath = projectConfig.runtime.srcGen.path
+		val rootPath = projectConfig.runtime.root.path
+		if (!rootPath.nullOrEmpty && srcGenPath.startsWith(rootPath))
+			return '/' + getModelPluginID + srcGenPath.substring(rootPath.length)
+		throw new RuntimeException(
+			'Could not derive the Java model directory from the project configuration. Please set the property \'javaModelDirectory\' explicitly.')
+	}
+
+	protected def String getModelName(Grammar grammar) {
+		if (longFileNames)
+			grammar.name.replace('.', '_')
+		else
+			getSimpleName(grammar)
+	}
+	
+	protected def String getEcoreFilePath(Grammar grammar) {
+		val ecoreModelFolder = projectConfig.runtime.ecoreModelFolder
+		'/' + getModelPluginID + '/' + ecoreModelFolder + '/' + grammar.modelName + '.ecore'
+	}
+	
+	protected def URI getEcoreFileUri(Grammar grammar) {
+		URI.createPlatformResourceURI(grammar.ecoreFilePath, true)
+	}
+	
+	protected def String getGenModelPath(Grammar grammar) {
+		genModel ?: {
+			val ecoreModelFolder = projectConfig.runtime.ecoreModelFolder
+			'/' + getModelPluginID + '/' + ecoreModelFolder + '/' + grammar.modelName + '.genmodel'
+		}
+	}
+
+	protected def URI getGenModelUri(Grammar grammar) {
+		URI.createPlatformResourceURI(grammar.genModelPath, true)
+	}
+	
+	protected def String getRelativePath(String pathInRoot) {
+		val projectPath = '/' + projectConfig.runtime.name
+		if (pathInRoot.startsWith(projectPath))
+			pathInRoot.substring(projectPath.length + 1)
+		else
+			pathInRoot
+	}
+
+	protected def String getEditPluginID() {
+		editPluginID ?: getModelPluginID + '.edit'
+	}
+	
+	protected def String getEditDirectory() {
+		editDirectory ?: '/' + getEditPluginID + '/src'
+	}
+
+	protected def String getEditorPluginID() {
+		editorPluginID ?: getModelPluginID + '.editor'
+	}
+
+	protected def String getEditorDirectory() {
+		editorDirectory ?: getEditorPluginID + '/src'
+	}
+	
+	protected def String getBasePackage(Grammar grammar) {
+		basePackage ?: getNamespace(grammar)
+	}
+	
+	override initialize(Injector injector) {
+		super.initialize(injector)
+		if (!Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.containsKey('genmodel'))
+			Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put('genmodel', new EcoreResourceFactoryImpl)
+		GenModelPackage.eINSTANCE.getGenAnnotation()
+	}
+	
+	override generate() {
+		if (grammar.metamodelDeclarations.filter(GeneratedMetamodel).empty) {
+			return
+		}
+		
+		try {
+			// Create a clone of the grammar that can be safely modified
+			val clonedGrammar = cloneGrammarIntoNewResourceSet(grammar)
+			val workingResourceSet = clonedGrammar.eResource.resourceSet
+			
+			// Collect all the copies of the generated EPackages of this grammar
+			val generatedPackages = clonedGrammar.metamodelDeclarations.filter(GeneratedMetamodel).map[EPackage].toList
+			
+			// Register the to-be-used genmodel if it was explicitly set
+			if (genModel !== null)
+				registerUsedGenModel(workingResourceSet.URIConverter, clonedGrammar)
+			
+			// Just to make sure that we really have a generated package and not only a meta model declaration
+			if (!generatedPackages.empty) {
+				// Create an index for all EPackages that are used by the generated packages
+				val usedEPackages = findAllUsedEPackages(generatedPackages)
+				
+				// Try to find the ecore files for the potentially installed packages 
+				val loadedEPackages = findEPackagesInGenPackages(usedEPackages.keySet, workingResourceSet)
+				
+				// Map the elements from the installed version to the file-version
+				val eNamedElementMapping = createENamedElementMapping(usedEPackages, loadedEPackages)
+				
+				// Replace all the references to installed elements with their loaded equivalent
+				replaceReferencesInGeneratedPackages(generatedPackages, eNamedElementMapping)
+				
+				// Put all the generated packages into a single resource
+				val ePackageResource = createResourceForEPackages(clonedGrammar, generatedPackages, workingResourceSet)
+				
+				if (!skipGenerate) {
+					LOG.info('''Generating EMF model«IF generateEdit»«IF generateEditor», edit«ELSE» and edit«ENDIF»«ENDIF»«IF generateEditor» and editor«ENDIF» code''')
+					
+					// Obtain the genmodel - either load the given resource (this.genModel) or create a new one
+					val genModel = getSaveAndReconcileGenModel(clonedGrammar, generatedPackages, workingResourceSet)
+					
+					// Make sure everything is set
+					genModel.reconcile()
+					
+					// Execute the emf generator
+					doGenerate(genModel)
+					
+					addProjectContributions(clonedGrammar, generatedPackages, workingResourceSet)
+					
+					// Register generated EPackage and EFactory instances in the runtime module
+					if (bindEPackageAndEFactory) {
+						for (pkg: generatedPackages) {
+							val genPkg = getGenPackage(pkg, genModel.eResource.resourceSet)
+							
+							new GuiceModuleAccess.BindingFactory()
+								.addTypeToInstance(genPkg.qualifiedPackageInterfaceName.typeRef, '''«genPkg.packageInterfaceName».eINSTANCE''')
+								.addTypeToInstance(genPkg.qualifiedFactoryInterfaceName.typeRef, '''«genPkg.factoryInterfaceName».eINSTANCE''')
+								.contributeTo(language.runtimeGenModule)
+						}
+					}
+				}
+				
+				// Finally save the ecore packages to the file system
+				saveResource(ePackageResource)
+			}
+			
+			updateBuildProperties()
+		} catch (Exception e) {
+			LOG.error('Failed to execute EMF generator', e)
+		}
+	}
+	
+	protected def void addProjectContributions(Grammar grammar, List<EPackage> generatedPackages, ResourceSet rs) {
+		if (projectConfig.runtime.pluginXml !== null) {
+			projectConfig.runtime.pluginXml.entries += '''
+				<extension point="org.eclipse.emf.ecore.generated_package">
+					«FOR pack : generatedPackages»
+						<package
+							uri = "«pack.nsURI»"
+							class = "«pack.getGenPackage(rs).qualifiedPackageInterfaceName»"
+							genModel = "«grammar.genModelPath.relativePath»" />
+					«ENDFOR»
+				</extension>
+			'''
+		}
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.requiredBundles.addAll('org.eclipse.emf.ecore', 'org.eclipse.emf.common')
+		}
+		for (pack : generatedPackages) {
+			val genPackage = pack.getGenPackage(rs)
+			if (projectConfig.runtime.manifest !== null && modelPluginID === null) {
+				projectConfig.runtime.manifest.exportedPackages.addAll(
+					genPackage.interfacePackageName,
+					genPackage.classPackageName,
+					genPackage.utilitiesPackageName
+				)
+			}
+			language.runtimeGenSetup.registrations.add('''
+				if (!«EPackage».Registry.INSTANCE.containsKey("«pack.nsURI»")) {
+					«EPackage».Registry.INSTANCE.put("«pack.nsURI»", «new TypeReference(genPackage.qualifiedPackageInterfaceName)».eINSTANCE);
+				}
+			''')
+		}
+	}
+	
+	/**
+	 * Create a clone of the original grammar. The clone will not refer to a node model.
+	 */
+	private def Grammar cloneGrammarIntoNewResourceSet(Grammar original) {
+		val originalResource = original.eResource
+		val clonedResourceSet = EcoreUtil2.clone(new XtextResourceSet, originalResource.resourceSet)
+		val clonedResource = clonedResourceSet.getResource(originalResource.URI, false)
+		return clonedResource.contents.head as Grammar
+	}
+	
+	private def void registerUsedGenModel(URIConverter converter, Grammar grammar) {
+		val genModelUri = grammar.genModelUri
+		if (converter.exists(genModelUri, null)) {
+			try {
+				new GenModelHelper().registerGenModel(new XtextResourceSet, genModelUri)
+			} catch (Exception e) {
+				LOG.error('Failed to register GenModel', e);
+			}
+		}
+	}
+	
+	private def Map<String, EPackage> findAllUsedEPackages(List<EPackage> generatedPackages) {
+		val result = newHashMap
+		val packageContentIterator = EcoreUtil.<EObject>getAllContents(generatedPackages)
+		while (packageContentIterator.hasNext) {
+			val current = packageContentIterator.next
+			for (referenced : current.eCrossReferences) {
+				if (referenced.eIsProxy)
+					throw new RuntimeException('Unresolved proxy: ' + referenced + ' in ' + current)
+				if (referenced instanceof EClassifier) {
+					val referencedPackage = referenced.EPackage
+					if (!generatedPackages.contains(referencedPackage))
+						result.put(referencedPackage.nsURI, referencedPackage)
+				}
+			}
+		}
+		return result
+	}
+	
+	private def Map<String, EPackage> findEPackagesInGenPackages(Collection<String> packageNsURIs, ResourceSet resourceSet) {
+		val result = <String, EPackage>newHashMap
+		for (nsURI : packageNsURIs) {
+			val resource = getGenModelResource(null, nsURI, resourceSet)
+			if (resource !== null) {
+				val loadedGenModel = resource.contents.filter(GenModel).head
+				if (loadedGenModel !== null) {
+					val genPackage = findGenPackageByNsURI(loadedGenModel, nsURI)
+					result.put(nsURI, genPackage.getEcorePackage)
+				}
+			}
+		}
+		return result
+	}
+	
+	private def GenPackage findGenPackageByNsURI(GenModel genModel, String nsURI) {
+		val allGenPackages = genModel.getAllGenUsedAndStaticGenPackagesWithClassifiers
+		for (genPackage: allGenPackages) {
+			val ecorePackage = genPackage.getEcorePackage
+			if (ecorePackage === null || ecorePackage.eIsProxy)
+				throw new RuntimeException('Unresolved proxy: ' + ecorePackage + ' in ' + genModel.eResource.URI)
+			if (nsURI == ecorePackage.nsURI)
+				return genPackage
+		}
+		throw new RuntimeException('No GenPackage for NsURI ' + nsURI + ' found in ' + genModel.eResource.URI)
+	}
+
+	private def Map<EObject, EObject> createENamedElementMapping(Map<String, EPackage> usedEPackages,
+			Map<String, EPackage> loadedEPackages) {
+		val result = newHashMap
+		for (entry : usedEPackages.entrySet) {
+			putMappingData(result, entry.value, loadedEPackages.get(entry.key))
+		}
+		return result
+	}
+
+	private def void putMappingData(Map<EObject, EObject> result, EPackage usedEPackage, EPackage loadedEPackage) {
+		if (loadedEPackage !== null && usedEPackage != loadedEPackage) {
+			result.put(usedEPackage, loadedEPackage)
+			for (usedClassifier : usedEPackage.EClassifiers) {
+				val loadedClassifier = loadedEPackage.getEClassifier(usedClassifier.name)
+				if (loadedClassifier === null)
+					throw new RuntimeException("Cannot find classifier '" + usedClassifier.name + "' in loaded EPackage from " + loadedEPackage.eResource.URI)
+				result.put(usedClassifier, loadedClassifier)
+			}
+			for (usedNestedPackage : usedEPackage.ESubpackages) {
+				val loadedNestedPackage = loadedEPackage.ESubpackages.findFirst[name == usedNestedPackage.name]
+				if (loadedNestedPackage !== null)
+					putMappingData(result, usedNestedPackage, loadedNestedPackage)
+			}
+		}
+	}
+
+	private def void replaceReferencesInGeneratedPackages(List<EPackage> generatedPackages,
+			Map<EObject, EObject> eNamedElementMapping) {
+		val packageContentIterator = EcoreUtil.<EObject>getAllContents(generatedPackages)
+		while (packageContentIterator.hasNext) {
+			val current = packageContentIterator.next
+			val crossReferenceFeatures = (current.eClass.EAllStructuralFeatures as EClassImpl.FeatureSubsetSupplier).crossReferences
+			if (crossReferenceFeatures !== null) {
+				for (crossReferenceFeature : crossReferenceFeatures) {
+					if (crossReferenceFeature.isChangeable) {
+						val reference = crossReferenceFeature as EReference
+						if (reference.isMany) {
+							val values = current.eGet(reference) as List<EObject>
+							for (value : values) {
+								if (eNamedElementMapping.containsKey(value))
+									EcoreUtil.replace(current, reference, value, eNamedElementMapping.get(value))
+							}
+						} else {
+							val value = current.eGet(reference) as EObject
+							if (eNamedElementMapping.containsKey(value))
+								EcoreUtil.replace(current, reference, value, eNamedElementMapping.get(value))
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	protected def Resource createResourceForEPackages(Grammar grammar, List<EPackage> packs, ResourceSet rs) {
+		val ecoreFileUri = grammar.ecoreFileUri
+		val existing = rs.getResource(ecoreFileUri, false)
+		if (existing !== null) {
+			existing.unload()
+			rs.resources.remove(existing)
+		}
+		val ecoreFile = rs.createResource(ecoreFileUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE)
+		ecoreFile.contents.addAll(packs)
+		return ecoreFile
+	}
+	
+	protected def GenModel getSaveAndReconcileGenModel(Grammar grammar, List<EPackage> packs, ResourceSet rs) {
+		val genModel = getGenModel(rs, grammar)
+		genModel.initialize(packs)
+		for (genPackage : genModel.getGenPackages) {
+			genPackage.basePackage = grammar.basePackage
+			if (suppressLoadInitialization)
+				genPackage.loadInitialization = false
+			if (!language.fileExtensions.isEmpty && packs.contains(genPackage.getEcorePackage))
+				genPackage.fileExtensions = language.fileExtensions.join(',')
+		}
+		val referencedEPackages = getReferencedEPackages(packs)
+		val usedGenPackages = getGenPackagesForPackages(genModel, referencedEPackages)
+		reconcileMissingGenPackagesInUsedModels(usedGenPackages)
+		genModel.usedGenPackages.addAll(usedGenPackages)
+		saveResource(genModel.eResource)
+		new GenModelHelper().registerGenModel(genModel)
+		return genModel
+	}
+	/**
+	 * @since 2.14
+	 */
+	protected def void reconcileMissingGenPackagesInUsedModels(List<GenPackage> usedGenPackages) {
+		val processedModels = Sets.newHashSetWithExpectedSize(usedGenPackages.size)
+		for (usedGenPackage : usedGenPackages) {
+			val genModel = usedGenPackage.genModel
+			if (processedModels.add(genModel)) {
+				val missingPackages = genModel.missingPackages
+				val missingGenPackages = getGenPackagesForPackages(genModel, missingPackages)
+				genModel.usedGenPackages.addAll(missingGenPackages)
+			}
+		}
+	}
+
+	protected def GenModel getGenModel(ResourceSet rs, Grammar grammar) {
+		val genModelUri = grammar.genModelUri
+		val resource = rs.getResource(genModelUri, false)
+		if (resource !== null) {
+			resource.unload()
+			rs.resources.remove(resource)
+		}
+		val genModelFile = rs.createResource(genModelUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE)
+		var GenModel genModel
+		if (rs.URIConverter.exists(genModelUri, null)) {
+			genModelFile.load(null)
+			if (genModelUri.hasFragment) {
+				genModel = genModelFile.getEObject(genModelUri.fragment) as GenModel
+			} else {
+				genModel = genModelFile.contents.head as GenModel
+			}
+		} else {
+			// The name of the additional ecore file used for load initialization is hard-coded in GenPackageImpl.
+			// We want to override it to avoid validation of that file, which uses NS URIs for references.
+			genModel = new GenModelImpl {
+				override createGenPackage() {
+					return new GenPackageImpl {
+						override getSerializedPackageFilename() {
+							name + '.loadinitialization_ecore'
+						}
+					}
+				}
+			}
+			genModel.modelName = grammar.modelName
+			genModel.modelPluginID = getModelPluginID
+			genModel.modelDirectory = getJavaModelDirectory
+			if (generateEdit) {
+				genModel.editPluginID = getEditPluginID
+				genModel.editDirectory = getEditDirectory
+			}
+			if (generateEditor) {
+				genModel.editorPluginID = getEditorPluginID
+				genModel.editorDirectory = getEditorDirectory
+			}
+			genModel.validateModel = false
+			genModel.forceOverwrite = true
+			genModel.facadeHelperClass = null
+			genModel.bundleManifest = true
+			genModel.updateClasspath = false
+			genModel.complianceLevel = jdkLevel
+			genModel.runtimeVersion = emfRuntimeVersion
+			genModel.rootExtendsClass = rootExtendsClass
+			genModel.lineDelimiter = codeConfig.lineDelimiter
+			if (codeConfig.fileHeader !== null) {
+				genModel.copyrightText = codeConfig.fileHeader.trimMultiLineComment
+			}
+		}
+		genModelFile.contents.add(genModel)
+		return genModel
+	}
+	
+	def String trimMultiLineComment(String string) {
+		return string.replace(' * ','').replaceAll("/\\*+\\s*|\\s*\\*+/", "").replaceAll('(?m)^ \\*$','').trim
+	}
+	
+	protected def Set<EPackage> getReferencedEPackages(List<EPackage> packs) {
+		val result = newHashSet
+		for (pkg : packs) {
+			val iterator = pkg.eAllContents
+			while (iterator.hasNext) {
+				val obj = iterator.next
+				for (crossRef : obj.eCrossReferences) {
+					if (crossRef.eIsProxy)
+						LOG.error("Proxy '" + (crossRef as InternalEObject).eProxyURI + "' could not be resolved")
+					else {
+						val p = EcoreUtil2.getContainerOfType(crossRef, EPackage)
+						if (p !== null)
+							result.add(p)
+					}
+				}
+			}
+		}
+		result.removeAll(packs)
+		// The following GenModels are handled by the EMF generator as implemented in
+		// org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl.findGenPackage(EPackage)
+		result.remove(EcorePackage.eINSTANCE)
+		result.remove(XMLTypePackage.eINSTANCE)
+		result.remove(XMLNamespacePackage.eINSTANCE)
+		return result
+	}
+
+	protected def List<GenPackage> getGenPackagesForPackages(GenModel existingGenModel, Collection<EPackage> packs) {
+		val result = <GenPackage>newArrayList
+		for (EPackage pkg : packs) {
+			if (!existingGenModel.genPackages.exists[getEcorePackage?.nsURI == pkg.nsURI])
+				result.add(getGenPackage(pkg, existingGenModel.eResource.resourceSet))
+		}
+		Collections.sort(result, [ o1, o2 |
+			EcoreUtil.getURI(o1).toString.compareTo(EcoreUtil.getURI(o2).toString)
+		])
+		return result
+	}
+	/**
+	 * @since 2.14
+	 */
+	protected def void saveResource(Resource resource) {
+		val saveOptions = newHashMap
+		saveOptions.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.AbsoluteCrossBundleAware {
+			override deresolve(URI uri) {
+				if (!uri.isPlatform) {
+					for (entry : EcorePlugin.platformResourceMap.entrySet) {
+						val newPrefix = URI.createURI('platform:/resource/' + entry.key + '/')
+						val uri2 = uri.replacePrefix(entry.value, newPrefix)
+						if (uri2 !== null)
+							return super.deresolve(uri2)
+					}
+				}
+				return super.deresolve(uri)
+			}
+		})
+		saveOptions.put(Resource.OPTION_LINE_DELIMITER, codeConfig.lineDelimiter)
+		resource.save(saveOptions)
+	}
+	
+	protected def void doGenerate(GenModel genModel) {
+		val generator = new Generator {
+			override getJControlModel() {
+				if (jControlModel === null) {
+					jControlModel = new JControlModel
+					jControlModel.initialize(null, options.mergeRulesURI)
+				}
+				return jControlModel
+			}
+		}
+		generator.getAdapterFactoryDescriptorRegistry.addDescriptor(GenModelPackage.eNS_URI,
+				new CvsIdFilteringGeneratorAdapterFactoryDescriptor(codeConfig.lineDelimiter))
+		genModel.canGenerate = true
+		generator.input = genModel
+		val diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new BasicMonitor)
+		
+		if (diagnostic.severity != Diagnostic.OK)
+			LOG.warn(diagnostic)
+		
+		if (generateEdit) {
+			val editDiag = generator.generate(genModel, GenBaseGeneratorAdapter.EDIT_PROJECT_TYPE, new BasicMonitor)
+			if (editDiag.severity != Diagnostic.OK)
+				LOG.warn(editDiag)
+		}
+		
+		if (generateEditor) {
+			val editorDiag = generator.generate(genModel, GenBaseGeneratorAdapter.EDITOR_PROJECT_TYPE, new BasicMonitor)
+			if (editorDiag.severity != Diagnostic.OK)
+				LOG.warn(editorDiag)
+		}
+	}
+
+	private def void updateBuildProperties() {
+		if (!updateBuildProperties || modelPluginID !== null || projectConfig.runtime.manifest === null)
+			return;
+		val buildPropertiesPath = projectConfig.runtime.root.path + '/build.properties'
+		val buildPropertiesFile = new File(buildPropertiesPath)
+		if (buildPropertiesFile.exists) {
+			val modelContainer = projectConfig.runtime.ecoreModelFolder
+			val buildProperties = new Properties
+			val charset = Charset.forName(codeConfig.encoding)
+			val reader = new InputStreamReader(new FileInputStream(buildPropertiesFile), charset)
+			var existingContent = try {
+				CharStreams.toString(reader)
+			} finally {
+				reader.close()
+			}
+			buildProperties.load(new StringInputStream(existingContent, 'ISO-8859-1'))
+			val binIncludes = buildProperties.getProperty('bin.includes')
+			var changed = false
+			if (binIncludes === null) {
+				existingContent += 'bin.includes = ' + modelContainer + '/' + Strings.newLine + '               '
+				changed = true
+			} else if (!binIncludes.contains(modelContainer)) {
+				existingContent = existingContent.replace('bin.includes = ',
+					'bin.includes = ' + modelContainer + '/,\\' + Strings.newLine + '               ')
+				changed = true
+			}
+			if (changed) {
+				val writer = new OutputStreamWriter(new FileOutputStream(buildPropertiesFile), charset)
+				try {
+					writer.write(existingContent)
+				} finally {
+					writer.close()
+				}
+			}
+		}
+	}
+
+}

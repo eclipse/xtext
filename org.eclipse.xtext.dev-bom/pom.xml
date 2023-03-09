@@ -120,9 +120,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/eclipse/xtext-lib.git</connection>
-		<developerConnection>scm:git:https://github.com/eclipse/xtext-lib.git</developerConnection>
-		<url>git@github.com:eclipse/xtext-lib.git</url>
+		<connection>scm:git:https://github.com/xtext/xtext-monorepo.git</connection>
+		<developerConnection>scm:git:https://github.com/xtext/xtext-monorepo.git</developerConnection>
+		<url>git@github.com:xtext/xtext-monorepo.git</url>
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>

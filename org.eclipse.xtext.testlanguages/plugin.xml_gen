@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"
+			class = "org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage"
+			genModel = "model/generated/BeeLangTestLanguage.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.eclipse.org/2013/tmf/xtext/NoJdtTestLanguage"
+			class = "org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage"
+			genModel = "model/generated/NoJdtTestLanguage.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.eclipse.org/2008/testlanguages/xtextgrammar"
+			class = "org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.XtextGrammarTestPackage"
+			genModel = "model/generated/XtextGrammarTestLanguage.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.eclipse.org/xtext/testlanguage/FileAware"
+			class = "org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage"
+			genModel = "model/generated/FileAwareTestLanguage.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.eclipse.org/xtext/testlanguage/NestedRefs"
+			class = "org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs.NestedRefsPackage"
+			genModel = "model/generated/NestedRefsTestLanguage.genmodel" />
+	</extension>
+</plugin>

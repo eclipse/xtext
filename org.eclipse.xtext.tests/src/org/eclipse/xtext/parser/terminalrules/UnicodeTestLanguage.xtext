@@ -1,0 +1,20 @@
+grammar org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate unicode "http://www.xtext.org/tests/parser/terminalrules/Unicode"
+
+Model:
+	strings += AbstractString*;
+	
+AbstractString:
+	GString | QuotedString;
+	
+GString:
+	name=GERMAN_STRING;
+
+QuotedString:
+	name=STRING;
+	
+terminal GERMAN_STRING:
+	('A'..'Z' | 'a'..'z' 
+	  | '\u00c4' | '\u00d6' | '\u00dc' | '\u00e4' | '\u00f6' | '\u00fc' | '\u1E9E'
+	)*;

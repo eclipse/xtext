@@ -1,0 +1,130 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate csvalidationtest "http://www.eclipse.org/2009/tmf/xtext/csvalidationtest"
+
+Model:
+	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities |
+	x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 | 
+	x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 | 
+	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
+	x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion | x28=Heuristic1;	
+	
+SimpleGroup:
+	"#1" val1=ID val2=ID;
+	
+SimpleAlternative:
+	"#2" ("kw1" val1=ID | "kw2" val2=ID);
+	
+SimpleMultiplicities:
+	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
+	
+GroupMultiplicities:
+	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
+	
+AlternativeMultiplicities:
+	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | ("kw5" val7+=ID))*;
+	
+AssignedAction:
+	"#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
+	
+AssignedActionSecond returns AssignedAction:
+	"#7" val1=ID "kw1" val2=ID;
+	
+UnassignedAction1:
+	{UnassignedAction1} "#8" val1=ID val2=ID?;
+	
+UnassignedAction2:
+	{UnassignedAction2Sub} "#9" val1=ID val2=ID?;
+	
+UnassignedAction3:
+	"#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
+
+UnassignedRuleCall1:
+	"#11" UnassignedRuleCall1Sub val2=ID;
+	
+UnassignedRuleCall1Sub:
+	val1=ID;
+	
+UnassignedRuleCall2:
+	"#12" UnassignedRuleCall2Sub val2=ID;
+	
+UnassignedRuleCall2Sub:
+	{UnassignedRuleCall2SubAction};
+	
+Combination1:
+	"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
+	
+Combination2:
+	"#14" val1=ID (("kw1" val2=ID) | (val3+=ID val4+=ID)*);
+	
+/* SuppressWarnings[noInstantiation, potentialOverride] */
+Combination3:
+	"#15" (val1=ID | val2=INT | val3=STRING)*;
+	
+Combination4:
+	"#16" ("group" val1+=ID val2+=ID val3+=ID)+;
+	
+List1:
+	"#17" val1+=ID ("," val1+=ID)*;
+	
+/* SuppressWarnings[noInstantiation] */
+List2:
+	"#18" (val1+=ID ("," val1+=ID)*)?;
+	
+List3:
+	"#19" (val1+=ID ("," val1+=ID)*) | ("kw3" val2=ID);
+	
+List4:
+	"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
+	
+List5:
+	"#21" ((val1+=ID ("," val1+=ID)* "kw3" val2=ID) | val3=ID);
+	
+AltList1:
+	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
+	
+AltList2:
+	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);  
+	
+/* SuppressWarnings[noInstantiation] */
+TransientObject:
+	"#24" (val1=ID nested=TransientObjectSub)?;
+	
+TransientObjectSub:
+	val2=ID val3=ID;
+	
+/* SuppressWarnings[noInstantiation] */
+TransientSerializeables1:
+	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+	
+enum TransientSerializeables1Enum:
+	lit1 | lit2;
+	
+/* SuppressWarnings[noInstantiation, potentialOverride] */
+StaticSimplification:
+	"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
+	
+TwoVersion:
+	"#27" (TwoVersionNo1 | TwoVersionNo2);
+	
+TwoVersionNo1 returns TwoVersion:
+	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?; 
+	
+TwoVersionNo2 returns TwoVersion:
+	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
+	"extra" extra1=ID? ((extra2=ID extra3=ID) | "two" extra4=ID)?; 
+	
+/* SuppressWarnings[noInstantiation] */
+Heuristic1:
+	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
+
+ 

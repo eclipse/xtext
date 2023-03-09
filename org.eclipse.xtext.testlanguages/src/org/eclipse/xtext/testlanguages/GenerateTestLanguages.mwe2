@@ -1,0 +1,58 @@
+module org.eclipse.xtext.testlanguages.GenerateTestLanguages
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+
+var rootPath = ".."
+var eclipsePath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.testlanguages.ui"
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2010, \${year} itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+ 
+Workflow {
+
+	component = XtextGenerator {
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = "org.eclipse.xtext.testlanguages"
+				rootPath = rootPath
+				
+				runtimeTest = {
+					enabled = true
+					root = "${rootPath}/org.eclipse.xtext.testlanguages"	
+				}
+
+				eclipsePlugin = {
+					enabled = true
+					root = eclipsePath	
+				}
+				eclipsePluginTest = {
+					enabled = true
+					root = eclipsePath	
+				}
+				
+				createEclipseMetaData = true
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = "\n"
+				preferXtendStubs = false
+				fileHeader = fileHeader
+			}
+		}
+
+		language = @backtracking.BeeLangTestLanguage {}
+		language = @backtracking.SimpleBeeLangTestLanguage {}
+		language = @backtracking.ExBeeLangTestLanguage {}
+		language = @noJdt.NoJdtTestLanguage {}
+		language = @xtextgrammar.XtextGrammarTestLanguage {}
+		language = @fileAware.FileAwareTestLanguage {}
+		language = @nestedRefs.NestedRefsTestLanguage {}
+	}
+}
