@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>sample-auto.parent</artifactId>
+		<version>IT-SNAPSHOT</version>
+	</parent>
+	<artifactId>sample-auto.emf</artifactId>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets combine.children="append">
+						<fileset>
+							<directory>${basedir}/../sample-auto.emf/xcore-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../sample-auto.emf.edit/xcore-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-maven-plugin</artifactId>
+				<configuration>
+					<languages>
+						<language>
+							<setup>org.eclipse.xtext.ecore.EcoreSupport</setup>
+						</language>
+						<language>
+							<setup>org.eclipse.emf.codegen.ecore.xtext.GenModelSupport</setup>
+						</language>
+						<language>
+							<setup>org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup</setup>
+							<outputConfigurations>
+								<outputConfiguration>
+
+									<outputDirectory>${project.basedir}/xcore-gen</outputDirectory>
+
+								</outputConfiguration>
+							</outputConfigurations>
+
+						</language>
+					</languages>
+					<!-- This should be in sync with build-helper-maven-plugin//sources, 
+						except for /model directory -->
+					<sourceRoots>
+						<root>${basedir}/src</root>
+						<root>${basedir}/emf-gen</root>
+						<!-- Note that we include the /model path here although it's not part 
+							of the source directories in Eclipse or Maven -->
+						<root>${basedir}/model</root>
+					</sourceRoots>
+					<javaSourceVersion>11</javaSourceVersion>
+					<autoFillPlatformResourceMap>true</autoFillPlatformResourceMap>
+				</configuration>
+				<dependencies>
+
+					<dependency>
+						<groupId>org.eclipse.platform</groupId>
+						<artifactId>org.eclipse.text</artifactId>
+						<version>${eclipse-text-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.platform</groupId>
+						<artifactId>org.eclipse.core.resources</artifactId>
+						<version>${core-resources-version}</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.ecore</artifactId>
+						<version>${xtext-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.xbase</artifactId>
+						<version>${xtext-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.common.types</artifactId>
+						<version>${xtext-version}</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
+						<version>${ecore-xtext-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.common</artifactId>
+						<version>${emf-common-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.ecore</artifactId>
+						<version>${emf-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+						<version>${emf-xmi-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.codegen</artifactId>
+						<version>${emf-codegen-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+						<version>${emf-codegen-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.ecore.xcore</artifactId>
+						<version>${ecore-xcore-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
+						<version>${ecore-xcore-lib-version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>add-source</goal>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>xcore-gen</source>
+							</sources>
+							<resources>
+								<resource>
+									<directory>xcore-gen</directory>
+									<excludes>
+										<exclude>**/*.java</exclude>
+										<exclude>**/*.g</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
