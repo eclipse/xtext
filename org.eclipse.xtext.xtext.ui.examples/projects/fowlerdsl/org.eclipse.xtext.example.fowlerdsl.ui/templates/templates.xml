@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template
+		name="Transition" 
+		description="Template for a Transition"
+		id="org.eclipse.xtext.example.fowlerdsl.Statemachine.Transition"
+		context="org.eclipse.xtext.example.fowlerdsl.Statemachine.Transition"
+		enabled="true"
+	>${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')}</template>
+</templates>

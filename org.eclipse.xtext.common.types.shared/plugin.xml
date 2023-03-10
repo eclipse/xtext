@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.xtext.protocol_resourceServiceProvider">
+      <resourceServiceProvider
+            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+            protocolName="java">
+      </resourceServiceProvider>
+   </extension>
+
+	<extension
+	       point="org.eclipse.jdt.ui.queryParticipants">
+	    <queryParticipant
+	          class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.ui.query.QueryParticipant"
+	          id="org.eclipse.xtext.common.types.ui.query.QueryParticipant"
+	          name="%queryParticipant_name"
+	          nature="org.eclipse.jdt.core.javanature">
+	    </queryParticipant>
+	 </extension>
+	 
+	 <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant"
+            id="org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant"
+            name="Xtext JDT rename participant">
+         <enablement>
+         	<with variable="element">
+        		<instanceof value="org.eclipse.jdt.core.IMember"/>
+        	</with>
+        </enablement>
+      </renameParticipant>
+   </extension>
+   
+   
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.ui.navigation.LinkToOriginDetector"
+            description="Navigates to the source element if the selected type was generated."
+            id="org.eclipse.xtext.builder.navigation.linkToOrigin"
+            name="Source element for generated code"
+            targetId="org.eclipse.jdt.ui.javaCode">
+      </hyperlinkDetector>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+      <module
+            class="org.eclipse.xtext.common.types.shared.CommonTypesContribution">
+      </module>
+   </extension>
+   
+</plugin>

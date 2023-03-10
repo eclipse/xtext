@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext JUnit4 Support Tests
+Bundle-SymbolicName: org.eclipse.xtext.junit4.tests
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.31.0.qualifier
+Require-Bundle: org.junit,
+ org.eclipse.xtext.junit4,
+ com.google.inject;bundle-version="5.0.1",
+ org.eclipse.xtext
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.eclipse.xtext.junit4.tests
+Export-Package: org.eclipse.xtext.junit4;x-internal:=true

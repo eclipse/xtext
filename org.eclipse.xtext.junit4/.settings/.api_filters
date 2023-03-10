@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.junit4" version="2">
+    <resource path="src/org/eclipse/xtext/junit4/GlobalRegistries.java" type="org.eclipse.xtext.junit4.GlobalRegistries">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="CompositeEValidator"/>
+                <message_argument value="GlobalRegistries"/>
+                <message_argument value="getCopyAndClearContents()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/junit4/ui/AbstractDamagerRepairerTest.java" type="org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest">
+        <filter comment="Need to call @noreference constructor here" id="640708718">
+            <message_arguments>
+                <message_argument value="XtextDocument(DocumentTokenSource, ITextEditComposer, OutdatedStateManager, OperationCanceledManager)"/>
+                <message_argument value="AbstractDamagerRepairerTest"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/junit4/build/AbstractIncrementalBuilderTest.java" type="org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest">
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="IncrementalBuilder"/>
+                <message_argument value="AbstractIncrementalBuilderTest"/>
+                <message_argument value="incrementalBuilder"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="IndexState"/>
+                <message_argument value="AbstractIncrementalBuilderTest"/>
+                <message_argument value="indexState"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="BuildRequest"/>
+                <message_argument value="AbstractIncrementalBuilderTest"/>
+                <message_argument value="newBuildRequest(ProceduresProcedure1&lt;? super BuildRequest&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="IndexState"/>
+                <message_argument value="AbstractIncrementalBuilderTest"/>
+                <message_argument value="build(BuildRequest)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="BuildRequest"/>
+                <message_argument value="AbstractIncrementalBuilderTest"/>
+                <message_argument value="build(BuildRequest)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

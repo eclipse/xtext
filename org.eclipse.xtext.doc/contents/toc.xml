@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc topic="contents/index.html" label="Xtext Documentation">
+	<topic href="contents/102_domainmodelwalkthrough.html" label="Getting Started">
+		<topic href="contents/102_domainmodelwalkthrough.html" label="15 Minutes Tutorial">
+			<topic href="contents/102_domainmodelwalkthrough.html#create-a-new-xtext-project" label="Create A New Xtext Project">
+			</topic>
+			<topic href="contents/102_domainmodelwalkthrough.html#write-the-grammar" label="Write The Grammar">
+			</topic>
+			<topic href="contents/102_domainmodelwalkthrough.html#generate-language-artifacts" label="Generate Language Artifacts">
+			</topic>
+			<topic href="contents/102_domainmodelwalkthrough.html#run-generated-plugin" label="Run the Generated Eclipse Plug-in">
+			</topic>
+			<topic href="contents/102_domainmodelwalkthrough.html#add-imports" label="Second Iteration: Adding Packages and Imports">
+			</topic>
+		</topic>
+		<topic href="contents/103_domainmodelnextsteps.html" label="15 Minutes Tutorial - Extended">
+			<topic href="contents/103_domainmodelnextsteps.html#tutorial-code-generation" label="Writing a Code Generator With Xtend">
+			</topic>
+			<topic href="contents/103_domainmodelnextsteps.html#tutorial-validation" label="Creating Custom Validation Rules">
+			</topic>
+			<topic href="contents/103_domainmodelnextsteps.html#tutorial-unit-tests" label="Unit Testing the Language">
+			</topic>
+		</topic>
+		<topic href="contents/104_jvmdomainmodel.html" label="Five simple steps to your JVM language">
+			<topic href="contents/104_jvmdomainmodel.html#domain-model-step1" label="Step One: Create A New Xtext Project">
+			</topic>
+			<topic href="contents/104_jvmdomainmodel.html#domain-model-step2" label="Step Two: Write the Grammar">
+			</topic>
+			<topic href="contents/104_jvmdomainmodel.html#domain-model-step3" label="Step Three: Generate Language Artifacts">
+			</topic>
+			<topic href="contents/104_jvmdomainmodel.html#domain-model-step4" label="Step Four: Define the Mapping to JVM Concepts">
+			</topic>
+			<topic href="contents/104_jvmdomainmodel.html#domain-model-step5" label="Step Five : Try the Editor!">
+			</topic>
+		</topic>
+	</topic>
+	<topic href="contents/301_grammarlanguage.html" label="Reference Documentation">
+		<topic href="contents/301_grammarlanguage.html" label="The Grammar Language">
+			<topic href="contents/301_grammarlanguage.html#syntax" label="The Syntax">
+				<topic href="contents/301_grammarlanguage.html#language-declaration" label="Language Declaration">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#package-declarations" label="EPackage Declarations">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#terminal-rules" label="Terminal Rules">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#parser-rules" label="Parser Rules">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#hidden-terminals" label="Hidden Terminal Symbols">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#datatype-rules" label="Data Type Rules">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#enum-rules" label="Enum Rules">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#grammar-annotations" label="Grammar Annotations">
+				</topic>
+			</topic>
+			<topic href="contents/301_grammarlanguage.html#metamodel-inference" label="Ecore Model Inference">
+				<topic href="contents/301_grammarlanguage.html#type-and-package-generation" label="Type and Package Generation">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#feature-and-type-hierarchy-generation" label="Feature and Type Hierarchy Generation">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#enum-literal-generation" label="Enum Literal Generation">
+				</topic>
+				<topic href="contents/301_grammarlanguage.html#error-conditions" label="Error Conditions">
+				</topic>
+			</topic>
+			<topic href="contents/301_grammarlanguage.html#grammar-mixins" label="Grammar Mixins">
+				<topic href="contents/301_grammarlanguage.html#common-terminals" label="Common Terminals">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/302_configuration.html" label="Configuration">
+			<topic href="contents/302_configuration.html#short-intro-to-mwe" label="A Short Introduction to MWE2">
+			</topic>
+			<topic href="contents/302_configuration.html#generator" label="The Language Generator">
+				<topic href="contents/302_configuration.html#project-configuration" label="Project Configuration">
+				</topic>
+				<topic href="contents/302_configuration.html#other-general-configuration" label="Other General Configuration">
+				</topic>
+				<topic href="contents/302_configuration.html#language-configuration" label="Language Configuration">
+				</topic>
+				<topic href="contents/302_configuration.html#importing-metamodels" label="Importing Existing Metamodels">
+				</topic>
+			</topic>
+			<topic href="contents/302_configuration.html#dependency-injection" label="Dependency Injection">
+				<topic href="contents/302_configuration.html#guicemodules" label="The Module API">
+				</topic>
+				<topic href="contents/302_configuration.html#obtaining-an-injector" label="Obtaining an Injector">
+				</topic>
+			</topic>
+			<topic href="contents/302_configuration.html#logging" label="Logging">
+			</topic>
+		</topic>
+		<topic href="contents/303_runtime_concepts.html" label="Language Implementation">
+			<topic href="contents/303_runtime_concepts.html#code-generation" label="Code Generation">
+				<topic href="contents/303_runtime_concepts.html#igenerator2" label="IGenerator2">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#output-configurations" label="Output Configurations">
+				</topic>
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#validation" label="Validation">
+				<topic href="contents/303_runtime_concepts.html#automatic-validation" label="Automatic Validation">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#custom-validation" label="Custom Validation">
+				</topic>
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#linking" label="Linking">
+				<topic href="contents/303_runtime_concepts.html#lazy-linking" label="Lazy Linking">
+				</topic>
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#scoping" label="Scoping">
+				<topic href="contents/303_runtime_concepts.html#global-scopes" label="Global Scopes and Resource Descriptions">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#local-scoping" label="Local Scoping">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#namespace-imports" label="Imported Namespace Aware Scoping">
+				</topic>
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#value-converter" label="Value Converter">
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#serialization" label="Serialization">
+				<topic href="contents/303_runtime_concepts.html#serialization-contract" label="The Contract">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#roles-of-the-semantic-model-and-the-node-model-during-serialization" label="Roles of the Semantic Model and the Node Model During Serialization">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#parse-tree-constructor" label="Parse Tree Constructor">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#save-options" label="Options">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#comment-associater" label="Preserving Comments from the Node Model">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#transient-values" label="Transient Values">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#unassigned-text" label="Unassigned Text">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#cross-reference-serializer" label="Cross-Reference Serializer">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#hidden-token-merger" label="Merge White Space">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#token-stream" label="Token Stream">
+				</topic>
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#formatting" label="Formatting">
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#encoding" label="Character Encoding">
+				<topic href="contents/303_runtime_concepts.html#encoding-at-language-design-time" label="Encoding at Language Design Time">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#encoding-at-language-runtime" label="Encoding at Language Runtime">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#encoding-of-an-xtextresource" label="Encoding of an XtextResource">
+				</topic>
+			</topic>
+			<topic href="contents/303_runtime_concepts.html#testing" label="Unit Testing">
+				<topic href="contents/303_runtime_concepts.html#creating-a-simple-test-class" label="Creating a Simple Test Class">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#testing-the-parser" label="Testing the Parser">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#test-validators" label="Testing the Validator">
+				</topic>
+				<topic href="contents/303_runtime_concepts.html#testing-multiple-languages" label="Testing Multiple Languages">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/305_xbase.html" label="Integration with Java">
+			<topic href="contents/305_xbase.html#jvmtypes" label="Referring to Java Elements using JVM Types">
+				<topic href="contents/305_xbase.html#customization-points" label="Customization Points">
+				</topic>
+			</topic>
+			<topic href="contents/305_xbase.html#xbase-java-references" label="Referring to Java Types Using Xbase">
+			</topic>
+			<topic href="contents/305_xbase.html#xbase-inferred-type" label="Inferring a JVM Model">
+				<topic href="contents/305_xbase.html#linking-and-indexing" label="Linking and Indexing">
+				</topic>
+			</topic>
+			<topic href="contents/305_xbase.html#xbase-expressions" label="Using Xbase Expressions">
+				<topic href="contents/305_xbase.html#making-your-grammar-refer-to-xbase" label="Making Your Grammar Refer To Xbase">
+				</topic>
+				<topic href="contents/305_xbase.html#using-the-xbase-interpreter" label="Using the Xbase Interpreter">
+				</topic>
+			</topic>
+			<topic href="contents/305_xbase.html#xbase-language-ref-introduction" label="Xbase Language Reference">
+				<topic href="contents/305_xbase.html#xbase-language-ref-syntax" label="Lexical Syntax">
+				</topic>
+				<topic href="contents/305_xbase.html#xbase-language-ref-types" label="Types">
+				</topic>
+				<topic href="contents/305_xbase.html#xbase-language-ref-expressions" label="Expressions">
+				</topic>
+				<topic href="contents/305_xbase.html#xbase-language-ref-library-extension" label="Extension Methods">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/307_special_languages.html" label="Typical Language Configurations">
+			<topic href="contents/307_special_languages.html#case-insensitive-languages" label="Case Insensitive Languages">
+			</topic>
+			<topic href="contents/307_special_languages.html#whitespace-aware-languages" label="Whitespace-Aware Languages">
+			</topic>
+			<topic href="contents/307_special_languages.html#java-independent-languages" label="Languages Independent of JDT">
+			</topic>
+			<topic href="contents/307_special_languages.html#expressions" label="Parsing Expressions with Xtext">
+				<topic href="contents/307_special_languages.html#construction-of-an-ast" label="Construction of an AST">
+				</topic>
+				<topic href="contents/307_special_languages.html#associativity" label="Associativity">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/308_emf_integration.html" label="Integration with EMF">
+			<topic href="contents/308_emf_integration.html#model-metamodel" label="Model, Ecore Model, and Ecore">
+			</topic>
+			<topic href="contents/308_emf_integration.html#emf-codegen" label="EMF Code Generation">
+			</topic>
+			<topic href="contents/308_emf_integration.html#xtext-resource" label="XtextResource Implementation">
+			</topic>
+			<topic href="contents/308_emf_integration.html#fragment-provider" label="Referencing From EMF">
+			</topic>
+			<topic href="contents/308_emf_integration.html#gmf-integration" label="Integration with GMF Editors">
+				<topic href="contents/308_emf_integration.html#gmf-integration-stage1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text">
+				</topic>
+				<topic href="contents/308_emf_integration.html#gmf-integration-stage2" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels">
+				</topic>
+				<topic href="contents/308_emf_integration.html#gmf-integration-stage3" label="Stage 3: A Popup Xtext Editor (experimental)">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/310_eclipse_support.html" label="Eclipse Support">
+			<topic href="contents/310_eclipse_support.html#label-provider" label="Label Provider">
+				<topic href="contents/310_eclipse_support.html#eobject-label-provider" label="Label Providers For EObjects">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#description-label-provider" label="Label Providers For Index Entries">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#content-assist" label="Content Assist">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#quick-fixes" label="Quick Fixes">
+				<topic href="contents/310_eclipse_support.html#multi-quickfixes" label="Multi-Quickfixes">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#quick-fixes-for-linking-errors-and-syntax-errors" label="Quick Fixes for Linking Errors and Syntax Errors">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#autoediting" label="Auto Editing">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#templates" label="Template Proposals">
+				<topic href="contents/310_eclipse_support.html#cross-reference-template-variable-resolver" label="Cross Reference Template Variable Resolver">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#enumeration-template-variable-resolver" label="Enumeration Template Variable Resolver">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#outline" label="Outline View">
+				<topic href="contents/310_eclipse_support.html#influencing-the-outline-structure" label="Influencing the outline structure">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#styling-the-outline" label="Styling the outline">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#filtering-actions" label="Filtering actions">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#sorting-actions" label="Sorting actions">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#quick-outline" label="Quick Outline">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#folding" label="Folding">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#hyperlinking" label="Hyperlinking">
+				<topic href="contents/310_eclipse_support.html#location-provider" label="Location Provider">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#customizing-available-hyperlinks" label="Customizing Available Hyperlinks">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#hovering" label="Hovering">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#maroccurrences" label="Mark Occurrences">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#findreferences" label="Find References">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#highlighting" label="Syntax Coloring">
+				<topic href="contents/310_eclipse_support.html#lexical-highlighting" label="Lexical Highlighting">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#semantic-highlighting" label="Semantic Highlighting">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#refactoring" label="Rename Refactoring">
+				<topic href="contents/310_eclipse_support.html#customizing" label="Customizing">
+				</topic>
+				<topic href="contents/310_eclipse_support.html#rename-participants" label="Rename Participants">
+				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#projectwizard" label="Project Wizard">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#file-wizard" label="File Wizard">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#code-mining" label="Code Mining">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#ui-testing" label="UI Testing">
+			</topic>
+		</topic>
+		<topic href="contents/330_web_support.html" label="Web Editor Support">
+			<topic href="contents/330_web_support.html#client" label="The Client">
+				<topic href="contents/330_web_support.html#javascript-api" label="JavaScript API">
+				</topic>
+				<topic href="contents/330_web_support.html#options" label="Options">
+				</topic>
+				<topic href="contents/330_web_support.html#getting-text-content" label="Getting the Text Content">
+				</topic>
+				<topic href="contents/330_web_support.html#operation-modes" label="Operation Modes">
+				</topic>
+				<topic href="contents/330_web_support.html#syntax-highlighting" label="Syntax Highlighting">
+				</topic>
+				<topic href="contents/330_web_support.html#invoking-services" label="Invoking Services">
+				</topic>
+				<topic href="contents/330_web_support.html#options-reference" label="Full List of Options">
+				</topic>
+			</topic>
+			<topic href="contents/330_web_support.html#server" label="The Server">
+				<topic href="contents/330_web_support.html#content-assist" label="Content Assist">
+				</topic>
+				<topic href="contents/330_web_support.html#semantic-highlighting" label="Semantic Highlighting">
+				</topic>
+				<topic href="contents/330_web_support.html#mark-occurrences" label="Mark Occurrences">
+				</topic>
+				<topic href="contents/330_web_support.html#hover-info" label="Hover Information">
+				</topic>
+				<topic href="contents/330_web_support.html#persistence" label="Persistence">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/340_lsp_support.html" label="LSP Support">
+			<topic href="contents/340_lsp_support.html#getting-started-eclipse" label="Getting Started in Eclipse">
+			</topic>
+			<topic href="contents/340_lsp_support.html#getting-started-intellij" label="Getting Started in IntelliJ IDEA">
+			</topic>
+			<topic href="contents/340_lsp_support.html#further-lsp-clients" label="Further LSP Clients">
+			</topic>
+			<topic href="contents/340_lsp_support.html#language-features" label="Language Features">
+			</topic>
+			<topic href="contents/340_lsp_support.html#unit-testing" label="Unit Testing">
+			</topic>
+		</topic>
+		<topic href="contents/350_continuous_integration.html" label="Continuous Integration (with Maven)">
+			<topic href="contents/350_continuous_integration.html#an-overview-of-the-example-projects" label="An overview of the example projects">
+			</topic>
+			<topic href="contents/350_continuous_integration.html#tycho-build" label="Building an Xtext language with Maven and Tycho">
+				<topic href="contents/350_continuous_integration.html#the-parent-project-mymavenizedherolanguageparent" label="The parent project (my.mavenized.herolanguage.parent)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-update-site-project-mymavenizedherolanguageupdatesite" label="The update site project (my.mavenized.herolanguage.updatesite)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-feature-project-mymavenizedherolanguagesdk" label="The feature project (my.mavenized.herolanguage.sdk)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-core-language-project-mymavenizedherolanguage" label="The core language project (my.mavenized.herolanguage)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-ui-language-project-mymavenizedherolanguageui" label="The ui language project (my.mavenized.herolanguage.ui)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-tests-language-project-mymavenizedherolanguagetests" label="The tests language project (my.mavenized.herolanguage.tests)">
+				</topic>
+			</topic>
+			<topic href="contents/350_continuous_integration.html#standalone-build" label="Integration in Standard Maven Builds">
+			</topic>
+			<topic href="contents/350_continuous_integration.html#maven-tycho-hints" label="Maven Tycho Hints">
+			</topic>
+		</topic>
+	</topic>
+</toc>

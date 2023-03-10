@@ -1,0 +1,27 @@
+grammar org.eclipse.xtext.ui.codetemplates.SingleCodetemplate with org.eclipse.xtext.ui.codetemplates.Codetemplates
+
+import "http://www.eclipse.org/xtext/codetemplate/Codetemplates"
+import "http://www.eclipse.org/2008/Xtext" as xtext
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+@Override 
+Codetemplates:
+  'templates' 'for' language=[xtext::Grammar|FQN]
+  templates+=Codetemplate;
+  
+@Override 
+Codetemplate:
+  name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) 
+  body = TemplateBodyWithQuotes
+  ; 
+  
+@Override 
+TemplateBodyWithQuotes returns TemplateBody hidden():
+  '>>' // EOL
+  TemplateBody
+;
+
+@Override 
+LiteralValue hidden():
+  (WS | ANY_OTHER | ID)+
+;

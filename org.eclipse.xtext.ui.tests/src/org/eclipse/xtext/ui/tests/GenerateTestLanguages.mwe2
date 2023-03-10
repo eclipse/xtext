@@ -1,0 +1,346 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.ui.tests.GenerateTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.ui.*
+
+var projectName = "org.eclipse.xtext.ui.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2010, \${year} itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+
+Workflow {
+	component = XtextGenerator {
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtime = {
+					manifest = {
+						merge = false
+					}
+					pluginXml = {}
+				}
+				runtimeTest = {
+					enabled = true
+					manifest = {
+						merge = false
+					}
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+				genericIde = {
+					enabled = true
+					root = runtimeProject
+					name = projectName
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+					pluginXml = {}
+				}
+				eclipsePlugin = {
+					enabled = true
+					root = runtimeProject
+					name = projectName
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+					pluginXml = {}
+				}
+				eclipsePluginTest = {
+					enabled = true
+					root = runtimeProject
+					name = projectName
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+				fileHeader = fileHeader
+			}
+		}
+
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/linking/ImportUriUiTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoContextsTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug291022TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug303200TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
+				backtrack=true
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug304681TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug309949TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug360834TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug347012TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug381381TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/GH341TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/BacktrackingContentAssistTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsWithConversionTimeout {
+				backtrack=true
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistNoTerminalExtensionTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DatatypeRuleTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/LookAheadContentAssistTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DomainModelTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguageEx.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoParametersTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParameterizedExpressionsTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+			fragment = builder.BuilderIntegrationFragment2 {}
+			fragment = scoping.ImportNamespacesScopingFragment2 {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/parser/keywords/KeywordsUiTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			referencedResource = "platform:/resource/org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/enumrules/enumsUi.genmodel"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/TestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
+				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
+				fragment = scoping.ImportNamespacesScopingFragment2 {}
+				fragment = exporting.QualifiedNamesFragment2 {}
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/FoldingTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder {}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
+				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+				fragment = validation.ValidatorFragment2 {}
+				fragment = quickfix.QuickfixProviderFragment2 {}
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
+				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
+				fragment = scoping.ImportNamespacesScopingFragment2 {}
+				fragment = exporting.QualifiedNamesFragment2 {}
+				fragment = ui.refactoring.RefactorElementNameFragment2 {}
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
+				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
+				fragment = scoping.ImportNamespacesScopingFragment2 {}
+				fragment = exporting.QualifiedNamesFragment2 {}
+				fragment = refactoring.RefactorElementNameFragment2 {}
+			}
+		}
+		language = {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug377311TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.ui.tests.xmleditor.Bug678XmlTestLanguage"
+			fileExtensions = "simplexml"
+
+			parserGenerator = {
+				/*
+				 * By default, Xtext generates a unified ANTLR lexer/parser from the grammar.
+				 * Setting the combinedGrammar flag to false ensures that a separate lexer
+				 * and a separate parser are generated. This enables us to override the lexer.
+				 */
+				combinedGrammar = false
+			}
+
+			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the runtime module to use the runtime lexer
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
+				// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlRuntimeLexer"
+				runtime = true
+				antlrParam = "-lib"
+				// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
+			}
+
+			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the ui module to use the content assistant lexer
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
+				// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlContentAssistLexer"
+				contentAssist = true
+				antlrParam = "-lib"
+				// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/ide/contentassist/antlr/lexer"
+			}
+
+			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the ui module to use the hightlighting lexer
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
+				// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlHighlightingLexer"
+				highlighting = true
+				antlrParam = "-lib"
+				// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
+			}
+
+			generator = { generateStub = false }
+			junitSupport = { generateStub = false }
+			labelProvider = { generateStub = false }
+			outline = { generateStub = false }
+			quickFixProvider = { generateStub = false }
+			scopeProvider = { generateStub = false }
+			serializer = { generateStub = false }
+			validator = { generateStub = false }
+		}
+	}
+}

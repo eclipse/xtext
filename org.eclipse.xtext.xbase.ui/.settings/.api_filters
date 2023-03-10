@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.xbase.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="version will be generated during buckminster build" id="927989779">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="org.eclipse.xtext.xbase"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/xbase/ui/internal/XtypeActivator.java" type="org.eclipse.xtext.xbase.ui.internal.XtypeActivator">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="XbaseRuntimeModule()"/>
+                <message_argument value="XtypeActivator"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hover/XbaseHoverProvider.java" type="org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="IXtextBrowserInformationControl"/>
+                <message_argument value="XbaseHoverProvider"/>
+                <message_argument value="getInput()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hover/XbaseHoverProvider.java" type="org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider$OpenDeclarationAction">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="IXtextBrowserInformationControl"/>
+                <message_argument value="OpenDeclarationAction"/>
+                <message_argument value="getInput()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hover/XbaseHoverProvider.java" type="org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider$ShowInJavadocViewAction">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="IXtextBrowserInformationControl"/>
+                <message_argument value="ShowInJavadocViewAction"/>
+                <message_argument value="getInput()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hover/XbaseInformationControl.java" type="org.eclipse.xtext.xbase.ui.hover.XbaseInformationControl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="IXtextBrowserInformationControl"/>
+                <message_argument value="XbaseInformationControl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/jvmmodel/findrefs/JdtReferenceFinder.java" type="org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JdtReferenceFinder">
+        <filter id="572522506">
+            <message_arguments>
+                <message_argument value="ElementQuerySpecification"/>
+                <message_argument value="JdtReferenceFinder"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/quickfix/JavaTypeQuickfixes.java" type="org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="JdtTypeRelevance"/>
+                <message_argument value="JavaTypeQuickfixes"/>
+                <message_argument value="getRelevance(String, String)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

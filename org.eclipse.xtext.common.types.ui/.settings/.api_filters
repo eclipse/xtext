@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.common.types.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="927989779">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="org.eclipse.xtext.common.types"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/IJdtTypeProvider.java" type="org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IJvmTypeProvider"/>
+                <message_argument value="IJdtTypeProvider"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtBasedTypeFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="ITypeFactory&lt;TypeData, Type&gt;"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+            </message_arguments>
+        </filter>
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="OptionsAware&lt;TypeData, Type&gt;"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TypeResource"/>
+                <message_argument value="JdtBasedTypeFactory"/>
+                <message_argument value="createType(IType, TypeResource, Map&lt;?,?&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtTypeMirror.java" type="org.eclipse.xtext.common.types.access.jdt.JdtTypeMirror">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractClassMirror"/>
+                <message_argument value="JdtTypeMirror"/>
+            </message_arguments>
+        </filter>
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="IMirrorOptionsAware"/>
+                <message_argument value="JdtTypeMirror"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TypeResource"/>
+                <message_argument value="JdtTypeMirror"/>
+                <message_argument value="initialize(TypeResource)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TypeResource"/>
+                <message_argument value="JdtTypeMirror"/>
+                <message_argument value="initialize(TypeResource, Map&lt;?,?&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="ITypeFactory&lt;TypeData, Type&gt;"/>
+                <message_argument value="JdtTypeMirror"/>
+                <message_argument value="JdtTypeMirror(IType, ITypeFactory&lt;IType,JvmDeclaredType&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="ITypeFactory&lt;TypeData, Type&gt;"/>
+                <message_argument value="JdtTypeMirror"/>
+                <message_argument value="JdtTypeMirror(IType, ITypeFactory&lt;IType,JvmDeclaredType&gt;, TypeResourceServices)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="TypeResourceServices"/>
+                <message_argument value="JdtTypeMirror"/>
+                <message_argument value="JdtTypeMirror(IType, ITypeFactory&lt;IType,JvmDeclaredType&gt;, TypeResourceServices)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtTypeProvider.java" type="org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractJvmTypeProvider"/>
+                <message_argument value="JdtTypeProvider"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtTypeProviderFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractTypeProviderFactory"/>
+                <message_argument value="JdtTypeProviderFactory"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/TypeURIHelper.java" type="org.eclipse.xtext.common.types.access.jdt.TypeURIHelper">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="InternalURIHelperConstants"/>
+                <message_argument value="TypeURIHelper"/>
+            </message_arguments>
+        </filter>
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="URIHelperConstants"/>
+                <message_argument value="TypeURIHelper"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/util/jdt/JavaElementFinder.java" type="org.eclipse.xtext.common.types.util.jdt.JavaElementFinder$Implementation">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="TypesSwitch&lt;T&gt;"/>
+                <message_argument value="Implementation"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtBasedConstructorScope.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtBasedConstructorScope">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractConstructorScope"/>
+                <message_argument value="JdtBasedConstructorScope"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtBasedSimpleTypeScope.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractTypeScope"/>
+                <message_argument value="JdtBasedSimpleTypeScope"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtBasedSimpleTypeScopeProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractTypeScopeProvider"/>
+                <message_argument value="JdtBasedSimpleTypeScopeProvider"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="AbstractConstructorScope"/>
+                <message_argument value="JdtBasedSimpleTypeScopeProvider"/>
+                <message_argument value="createConstructorScope(IJvmTypeProvider, Predicate&lt;IEObjectDescription&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IJvmTypeProvider"/>
+                <message_argument value="JdtBasedSimpleTypeScopeProvider"/>
+                <message_argument value="createConstructorScope(IJvmTypeProvider, Predicate&lt;IEObjectDescription&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IJvmTypeProvider"/>
+                <message_argument value="JdtBasedSimpleTypeScopeProvider"/>
+                <message_argument value="createTypeScope(IJvmTypeProvider, Predicate&lt;IEObjectDescription&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtHoverProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider$JavadocHoverWrapper">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="JavadocHover"/>
+                <message_argument value="JavadocHoverWrapper"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtIndexedJvmTypeAccess.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtIndexedJvmTypeAccess">
+        <filter comment="It's ok to extend a class from here" id="576720909">
+            <message_arguments>
+                <message_argument value="IndexedJvmTypeAccess"/>
+                <message_argument value="JdtIndexedJvmTypeAccess"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtTypesProposalProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider">
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IJvmTypeProvider"/>
+                <message_argument value="JdtTypesProposalProvider"/>
+                <message_argument value="createTypeProposal(String, int, boolean, ICompletionProposalFactory, ContentAssistContext, ICompletionProposalAcceptor, IJvmTypeProvider, IValueConverter&lt;String&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/common/types/xtext/ui/ProjectAwareResourceDescriptionsProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractProjectAwareResourceDescriptionsProvider"/>
+                <message_argument value="ProjectAwareResourceDescriptionsProvider"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

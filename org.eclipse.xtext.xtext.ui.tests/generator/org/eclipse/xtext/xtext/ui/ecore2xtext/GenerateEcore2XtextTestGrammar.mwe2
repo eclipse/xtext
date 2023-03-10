@@ -1,0 +1,27 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.xtext.ui.ecore2xtext.GenerateEcore2XtextTestGrammar
+
+import org.eclipse.emf.mwe.utils.*
+
+var projectName = "org.eclipse.xtext.xtext.ui.tests"
+var runtimeProject = "../${projectName}"
+var src = "${runtimeProject}/src"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	} 
+	
+	component = Ecore2XtextGenerator {
+		genPath = "${src}"
+		ecoreFile = "org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.ecore"
+		rootElement = "Root"
+	}	
+}

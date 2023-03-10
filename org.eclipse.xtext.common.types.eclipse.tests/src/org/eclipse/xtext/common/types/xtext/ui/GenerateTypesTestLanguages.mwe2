@@ -1,0 +1,93 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.common.types.xtext.ui.GenerateTypesTestLanguages
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+
+var rootPath = ".."
+var projectName = "org.eclipse.xtext.common.types.eclipse.tests"
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2010, \${year} itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+
+Workflow {
+	
+	component = XtextGenerator {
+		configuration = {
+			project = StandardProjectConfig {
+				baseName = "${projectName}"
+				rootPath = rootPath
+				runtime = {
+					name = "${projectName}"
+					enabled = true
+				}
+				genericIde = {
+					name = "${projectName}"
+					enabled = true
+				}
+				runtimeTest = {
+					name = "${projectName}"
+					enabled = true
+				}
+				eclipsePlugin = {
+					name = "${projectName}"
+					enabled = true
+				}
+				eclipsePluginTest = {
+					name = "${projectName}"
+					enabled = true
+				}
+				createEclipseMetaData = true
+			}
+			code = {
+				encoding = "ISO-8859-1"
+				lineDelimiter = "\n"
+				fileHeader = fileHeader
+				preferXtendStubs = false
+			}
+		}
+		language = {
+			name = "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage"
+			referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+			fileExtensions = "typesAssistTest"
+			fragment = ecore.EMFGeneratorFragment2 auto-inject {}
+			fragment = @org.eclipse.xtext.common.types.xtext.ui.CommonTestLanguagesFragments {}
+		}
+		language = {
+			name = "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage"
+			referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+			fileExtensions = "typesRefactoring"
+			fragment = ecore.EMFGeneratorFragment2 auto-inject {}
+			fragment = @org.eclipse.xtext.common.types.xtext.ui.CommonTestLanguagesFragments {}
+		}
+		language = {
+			name = "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1"
+			referencedResource = "platform:/resource/org.eclipse.xtext.common.types.eclipse.tests/src/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage.xtext"
+			fileExtensions = "typesRefactoring1"
+			fragment = ui.refactoring.RefactorElementNameFragment2 {}
+			fragment = @org.eclipse.xtext.common.types.xtext.ui.CommonTestLanguagesFragments {}
+		}
+		language = {
+			name = "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2"
+			referencedResource = "platform:/resource/org.eclipse.xtext.common.types.eclipse.tests/src/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage.xtext"
+			fileExtensions = "typesRefactoring2"
+			fragment = @org.eclipse.xtext.common.types.xtext.ui.CommonTestLanguagesFragments {}
+			fragment = ui.refactoring.RefactorElementNameFragment2 {
+				useJdtRefactoring = true
+			}
+		}
+	}
+}

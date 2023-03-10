@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.xtext.ui" version="2">
+    <resource path="src/org/eclipse/xtext/xtext/ui/wizard/project/XtextProjectCreator.java" type="org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator$DescriptorBasedContributor">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="IProjectFactoryContributor"/>
+                <message_argument value="DescriptorBasedContributor"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xtext/ui/wizard/project/XtextProjectCreator.java" type="org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator$GradleContributor">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="IProjectFactoryContributor"/>
+                <message_argument value="GradleContributor"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

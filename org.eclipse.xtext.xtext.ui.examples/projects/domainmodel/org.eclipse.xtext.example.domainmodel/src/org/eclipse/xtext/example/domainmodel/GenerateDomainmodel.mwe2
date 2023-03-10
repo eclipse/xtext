@@ -1,0 +1,73 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.example.domainmodel.GenerateDomainmodelLanguage
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+import org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
+
+var rootPath = ".."
+
+Workflow {
+
+	component = XtextGenerator {
+		configuration = {
+			project = StandardProjectConfig {
+				baseName = "org.eclipse.xtext.example.domainmodel"
+				rootPath = rootPath
+				runtimeTest = {
+					enabled = true
+				}
+				eclipsePlugin = {
+					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = true
+				}
+				createEclipseMetaData = true
+			}
+			code = {
+				preferXtendStubs = false
+				encoding = "UTF-8"
+				fileHeader = 
+"/**
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */"
+			}
+		}
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.example.domainmodel.Domainmodel"
+			fileExtensions = "dmodel"
+
+			serializer = {
+				generateStub = true
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				generateDeprecationValidation = false
+			}
+			formatter = {
+				generateStub = true
+				generateXtendStub = false
+			}
+			generator = {
+				generateStub = false
+			}
+	 		fragment = CodeMiningFragment {
+				generateStub = true
+				generateXtendStub = false
+			}
+		}
+	}
+}

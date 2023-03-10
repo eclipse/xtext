@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<feature id="org.eclipse.xtext.example.domainmodel.feature" version="0.0.0">
+		<category name="xtext.examples"/>
+	</feature>
+	<!--<feature id="org.eclipse.xtext.example.domainmodel.feature.source" version="0.0.0">
+		<category name="xtext.examples"/>
+	</feature>-->
+	<category-def name="xtext.examples" label="Xtext Examples"/>
+</site>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="2.11.0 api" id="923795461">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="2.10.0"/>
+            </message_arguments>
+        </filter>
+        <filter comment="version will be generated during buckminster build" id="927989779">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="org.eclipse.xtext"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/IDirtyResource.java" type="org.eclipse.xtext.ui.editor.IDirtyResource$ICurrentStateProvidingExtension">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="ResourceStorageLoadable"/>
+                <message_argument value="ICurrentStateProvidingExtension"/>
+                <message_argument value="getResourceStorageLoadable()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="ProjectionViewer"/>
+                <message_argument value="XtextSourceViewer"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControl.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControl">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="BrowserInformationControl"/>
+                <message_argument value="XtextBrowserInformationControl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControlInput.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="BrowserInformationControlInput"/>
+                <message_argument value="XtextBrowserInformationControlInput"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/info/ResourceWorkingCopyFileEditorInput.java" type="org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="FileEditorInput"/>
+                <message_argument value="ResourceWorkingCopyFileEditorInput"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/model/JarFileMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.model.JarFileMarkerAnnotationModel">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="ResourceMarkerAnnotationModel"/>
+                <message_argument value="JarFileMarkerAnnotationModel"/>
+            </message_arguments>
+        </filter>
+        <filter id="643850349">
+            <message_arguments>
+                <message_argument value="SourceRelativeURI"/>
+                <message_argument value="JarFileMarkerAnnotationModel"/>
+                <message_argument value="JarFileMarkerAnnotationModel(IResource, SourceRelativeURI)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="ResourceMarkerAnnotationModel"/>
+                <message_argument value="XtextResourceMarkerAnnotationModel"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/refactoring/impl/EditorDocumentChange.java" type="org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="TextChange"/>
+                <message_argument value="EditorDocumentChange"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/DefaultResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="IResourceServiceProviderExtension"/>
+                <message_argument value="DefaultResourceUIServiceProvider"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="IReferenceUpdater"/>
+                <message_argument value="DefaultResourceUIServiceProvider"/>
+                <message_argument value="getReferenceUpdater()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/IResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.IResourceUIServiceProvider">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="IReferenceUpdater"/>
+                <message_argument value="IResourceUIServiceProvider"/>
+                <message_argument value="getReferenceUpdater()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/validation/AbstractValidatorConfigurationBlock.java" type="org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="OptionsConfigurationBlock"/>
+                <message_argument value="AbstractValidatorConfigurationBlock"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/validation/ValidatorPreferencePage.java" type="org.eclipse.xtext.ui.validation.ValidatorPreferencePage">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="PropertyAndPreferencePage"/>
+                <message_argument value="ValidatorPreferencePage"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/ui/editor/bracketmatching/BracePairMatcher.java" type="org.eclipse.xtext.ui.editor.bracketmatching.BracePairMatcher">
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IBracePairProvider"/>
+                <message_argument value="BracePairMatcher"/>
+                <message_argument value="getChars(IBracePairProvider)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IBracePairProvider"/>
+                <message_argument value="BracePairMatcher"/>
+                <message_argument value="setBracePairProvider(IBracePairProvider)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/ui/workspace/EclipseProjectConfig.java" type="org.eclipse.xtext.ui.workspace.EclipseProjectConfig">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="UriUtil"/>
+                <message_argument value="EclipseProjectConfig"/>
+                <message_argument value="isPrefixOf(URI, URI)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

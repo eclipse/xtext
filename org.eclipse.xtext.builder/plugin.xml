@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.10 2010/02/24 12:18:05 sefftinge Exp $
+-->
+
+<plugin>
+   <extension-point id="participant" name="Xtext Builder Participant" schema="schema/participant.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/xtext/builderstate/1.0"
+            class="org.eclipse.xtext.builder.builderState.BuilderStatePackage"
+            genModel="model/BuilderState.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/xtext/trace/debug/1.0"
+            class="org.eclipse.xtext.builder.trace.TracePackage"
+            genModel="model/Trace.genmodel"/>
+   </extension>
+   <extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.builder.trace.TraceResourceFactory"
+			type="_trace">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.eclipse.xtext.builder.trace.TraceEditorID"
+            name="Trace file viewer"
+            icon="platform:/plugin/org.eclipse.emf.edit/icons/full/obj16/ModelFile.gif"
+            class="org.eclipse.xtext.builder.trace.TraceEditor"
+            extensions="_trace"
+            contributorClass="org.eclipse.emf.ecore.presentation.EcoreActionBarContributor$Reflective">
+         <contentTypeBinding contentTypeId="org.eclipse.emf.ecore.xmi"/>
+      </editor>
+   </extension>
+   <extension
+    point="org.eclipse.core.contenttype.contentTypes">
+	  <file-association
+	      content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+	      file-extensions="_trace"
+	      file-names="*"/>
+	</extension>
+   <extension
+         id="derivedresource"
+         name="Derived Resource"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.marker"/>
+      <persistent value="true"/> 
+      <attribute name="source"/>
+      <attribute name="generator"/>
+   </extension>
+   <extension
+         id="traceFilePath"
+         name="Trace File Path"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.marker"/>
+      <persistent value="true"/> 
+      <attribute name="path"/>
+      <attribute name="generatorName"/>
+   </extension>
+   <extension
+        point="org.eclipse.ui.console.consoleFactories">
+     <consoleFactory
+           class="org.eclipse.xtext.builder.debug.XtextBuildConsole$Factory"
+           icon="icons/console.png"
+           label="Xtext Build">
+     </consoleFactory>
+  </extension>
+   <extension
+         point="org.eclipse.ui.console.consolePageParticipants">
+      <consolePageParticipant
+            class="org.eclipse.xtext.builder.debug.XtextBuildConsolePageParticipant"
+            id="org.eclipse.xtext.builder.debug.xtextbuildconsolepageparticipant">
+         <enablement>
+            <test property="org.eclipse.ui.console.consoleTypeTest" value="xtextBuildConsole"/>
+         </enablement>
+      </consolePageParticipant>
+   </extension>
+   
+</plugin>

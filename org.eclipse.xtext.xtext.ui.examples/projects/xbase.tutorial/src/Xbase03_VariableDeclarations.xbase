@@ -1,0 +1,44 @@
+/*
+ * Xbase variable declarations look a bit different to those in Java.
+ * 
+ */
+ 
+val x = 'A final value'
+x
+// A final value (String)
+var y = 'A non-final variable'
+y
+// A non-final variable (String)
+
+
+//x = 'not allowed'
+y = 'can be modified'
+// can be modified (String)
+
+/*
+ * The type can be specified optionally
+ */
+ 
+val String s = "my String"
+s
+// my String (String)
+
+/*
+ * Generally, variable Declarations are only allowed within a block. In
+ * this language (pure xbase) the whole script is one block expression, 
+ * which is why variable declarations are allowed without curly braces.
+ * 
+ * A block expression is just a list of expressions which are all 
+ * executed. The result and the type are computed from the last 
+ * expression. They can be used in a deeply nested fashion.
+ */
+
+{
+	{
+		{
+			val s1 = 'foo'
+			s + s1
+		}
+	}
+}
+// my Stringfoo (String)

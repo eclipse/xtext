@@ -1,0 +1,36 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage
+ 	with org.eclipse.xtext.common.Terminals
+
+generate contentAssistContextTest "http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest"
+
+FirstLevel :
+	(secondLevelA+=SecondLevelA)*
+	(secondLevelB+=SecondLevelB)*;
+	
+SecondLevelA :
+	(thirdLevelA1+=ThirdLevelA1)+
+	(thirdLevelA2+=ThirdLevelA2)+;
+	
+SecondLevelB :
+	(thirdLevelB1+=ThirdLevelB1)+
+	(thirdLevelB2+=ThirdLevelB2)+;
+	
+ThirdLevelA1:
+	'A1' {ThirdLevelA1} name=ID?;
+	
+ThirdLevelA2:
+	'A2' {ThirdLevelA2} name=ID?;
+	
+ThirdLevelB1:
+	'B1' {ThirdLevelB1} name=ID?;
+	
+ThirdLevelB2:
+	'B2' {ThirdLevelB2} name=ID?;

@@ -1,0 +1,24 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.ui.tests.*
+
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+var emfRuntimeVersion = "2.29"
+
+CompositeGeneratorFragment2 {
+	fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments auto-inject {}
+	fragment = validation.ValidatorFragment2 {}
+	fragment = builder.BuilderIntegrationFragment2 {}
+}

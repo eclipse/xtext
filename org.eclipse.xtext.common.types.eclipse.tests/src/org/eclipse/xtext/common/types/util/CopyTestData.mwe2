@@ -1,0 +1,47 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.common.types.util.CopyTestData
+
+var eclipsePath
+var xbasePath
+var commonPath
+var javaPath
+var binPath = "${eclipsePath}/bin"
+var packagePath = "org/eclipse/xtext/common/types/testSetups"
+var srcPath = "${eclipsePath}/testdata/${packagePath}"
+
+var typeProvider = "org/eclipse/xtext/common/types/access/impl/AbstractTypeProviderTest.java"
+var testDataJar = "org/eclipse/xtext/common/types/testSetups/testData.jar" 
+
+Workflow {
+	component = CopyJavaToText {
+		path = srcPath
+	}
+	component = CreateJar {
+		binPath = binPath
+		packagePath = packagePath
+		targetDir = srcPath
+	}
+	component = CopyDirectory {
+		sourcePath = "${eclipsePath}/testdata/${testDataJar}"
+		targetPath = "${commonPath}/tests/${testDataJar}"
+	}
+	component = CopyDirectory {
+		sourcePath = "${eclipsePath}/tests/${typeProvider}"
+		targetPath = "${commonPath}/tests/${typeProvider}"
+	}
+	component = CopyDirectory {
+		sourcePath = "${eclipsePath}/tests/${typeProvider}"
+		targetPath = "${javaPath}/src/${typeProvider}"
+	}
+	component = CopyDirectory {
+		sourcePath = "${eclipsePath}/testdata/org/eclipse/xtext/common/types/testSetups"
+		targetPath = "${xbasePath}/src/org/eclipse/xtext/common/types/testSetups"
+	}
+}

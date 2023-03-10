@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.m2e.core.lifecycleMappingMetadataSource">
+   </extension>
+   <extension
+        point="org.eclipse.m2e.core.projectConfigurators">
+     <configurator
+           class="org.eclipse.xtext.m2e.XtextProjectConfigurator"
+           id="org.eclipse.xtext.m2e.xtextConfigurator"
+           name="Xtext Project Configurator">
+     </configurator>
+     <configurator
+           class="org.eclipse.xtext.m2e.BinFolderConfigurator"
+           id="org.eclipse.xtext.m2e.binFolderConfigurator"
+           name="Bin Folder Configurator"
+           runsAfter="org.eclipse.m2e.jdt.javaConfigurator">
+     </configurator>
+  </extension>
+  <extension
+         point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+      <module
+            class="org.eclipse.xtext.m2e.IgnoreMavenTargetModule">
+      </module>
+   </extension>
+</plugin>

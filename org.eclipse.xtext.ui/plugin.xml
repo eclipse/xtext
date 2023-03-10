@@ -1,0 +1,1179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="searchFilter" name="Xtext EObject Search Filter" schema="schema/searchFilter.exsd"/>
+   <extension-point id="resourceRelocationStrategy" name="Xtext ResoureRelocation Strategy" schema="schema/resourceRelocationStrategy.exsd"/>
+   <extension-point id="projectTemplate" name="Xtext Project Template" schema="schema/projectTemplate.exsd"/>
+   <extension-point id="fileTemplate" name="Xtext File Template" schema="schema/fileTemplate.exsd"/>
+   <extension point="org.eclipse.ui.keywords">
+      <keyword
+            id="org.eclipse.xtext.ui.keyword.editor"
+            label="Editor">
+      </keyword>
+      <keyword
+            id="org.eclipse.xtext.ui.keyword.syntax_coloring"
+            label="Syntax">
+      </keyword>
+   </extension>
+   <extension point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="isActiveEditorAnInstanceOfXtextEditor">
+         <with
+               variable="activePart">
+            <adapt
+                  type="org.eclipse.xtext.ui.editor.XtextEditor">
+            </adapt>
+         </with>
+      </definition>
+      <definition
+            id="isXtextEditorActive">
+         <with
+               variable="activeEditor">
+            <adapt
+                  type="org.eclipse.xtext.ui.editor.XtextEditor">
+            </adapt>
+         </with>
+      </definition>
+   </extension>
+   
+   <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=QuickAssist">
+         <menu
+               id="xtext.ui.SourceMenu"
+               label="Source"
+               mnemonic="&amp;Source">
+            <command
+                  commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="isActiveEditorAnInstanceOfXtextEditor">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.xtext.ui.FormatAction"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="isActiveEditorAnInstanceOfXtextEditor">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="isActiveEditorAnInstanceOfXtextEditor">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <separator
+                  name="xtext.ui.ImportsSeparator"
+                  visible="true">
+            </separator>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="%XtextContext_description"
+            id="org.eclipse.xtext.ui.XtextEditorScope"
+            name="%XtextContext_name"
+            parentId="org.eclipse.ui.textEditorScope">
+      </context>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="%FormatCommand_name"
+            description="%FormatCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.FormatAction">
+      </command>
+      <command
+            name="%ToggleCommentCommand_name"
+            description="%ToggleCommentCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.ToggleCommentAction">
+      </command>
+      <command
+            name="%GoToMatchingBracketCommand_name"
+            description="%GoToMatchingBracketCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
+      </command>
+      <!-- find references -->
+	  <command 
+			id="org.eclipse.xtext.ui.editor.FindReferences"
+            categoryId="org.eclipse.ui.category.navigate"
+			name="%FindReferencesCommand_name"
+			description="%FindReferencesCommand_description">
+	  </command>
+	  <!-- hyperlinking -->
+	  <command
+			id="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+            categoryId="org.eclipse.ui.category.navigate"
+			name="%OpenDeclarationCommand_name"
+			description="%OpenDeclarationCommand_description">
+      </command>
+      <!-- refactoring -->
+      <command
+            id="org.eclipse.xtext.ui.refactoring.RenameElement"
+            categoryId="org.eclipse.xtext.ui.category.refactoring"
+            name="%RenameElementCommand_name"
+            description="%RenameElementCommand_description">
+      </command>
+      <!-- text selection -->
+      <command
+            name="%SelectEnclosingCommand_name"
+            description="%SelectEnclosingCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.enclosing">
+      </command>
+      <command
+            name="%SelectPreviousCommand_name"
+            description="%SelectPreviousCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.previous">
+      </command>
+      <command
+            name="%SelectNextCommand_name"
+            description="%SelectNextCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.next">
+      </command>
+      <command
+            name="%SelectLastCommand_name"
+            description="%SelectLastCommand_description"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.editor.select.last">
+      </command>
+      <command
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            description="%OpenGeneratedFile_description"
+            id="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+            name="%OpenGeneratedFile_name">
+      </command>
+      <!-- categories -->
+      <category
+            description="%XtextCommandCategory_description"
+            id="org.eclipse.xtext.ui.category.XtextEditor"
+            name="%XtextCommandCategory_name">
+      </category>
+      <category
+            name="%category.refactoring.name"
+            description="%category.refactoring.description"
+            id="org.eclipse.xtext.ui.category.refactoring">
+      </category>
+   </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+    <propertyTester
+      id="org.eclipse.xtext.ui.editor.XtextEditorPropertyTester"
+      type="org.eclipse.ui.IEditorPart"
+      namespace="org.eclipse.xtext.ui.editor.XtextEditor"
+      properties="languageName"
+      class="org.eclipse.xtext.ui.editor.XtextEditorPropertyTester">
+    </propertyTester>
+  </extension>
+  <extension
+      point="org.eclipse.ui.bindings">
+    <key sequence="M1+M2+F"
+      contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      commandId="org.eclipse.xtext.ui.FormatAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+7"
+      contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+/"
+      contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+C"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+P"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.GotToMatchingBracketAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <!-- text selection -->
+    <!--  win32:  M1=CTRL,    M2=SHIFT, M3=ALT, M4=-
+         carbon: M1=COMMAND, M2=SHIFT, M3=ALT, M4=CTRL -->
+      <key sequence="M2+M3+ARROW_UP"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.enclosing"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="M2+M3+ARROW_UP"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="CTRL+SHIFT+ARROW_UP"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.enclosing"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key sequence="M2+M3+ARROW_RIGHT"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.next"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="M2+M3+ARROW_RIGHT"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="CTRL+SHIFT+ARROW_RIGHT"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.next"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key sequence="M2+M3+ARROW_LEFT"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.previous"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="M2+M3+ARROW_LEFT"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="CTRL+SHIFT+ARROW_LEFT"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.previous"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key sequence="M2+M3+ARROW_DOWN"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.last"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="M2+M3+ARROW_DOWN"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key platform="carbon"
+            sequence="CTRL+SHIFT+ARROW_DOWN"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            commandId="org.eclipse.xtext.ui.editor.select.last"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+  </extension>
+  <extension
+         id="check"
+         name="Xtext Check"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.emf.ecore.diagnostic"/>
+      <persistent value="true"/>
+      <!-- see org.eclipse.xtext.validation.Issue.CODE_KEY -->
+      <attribute name="CODE_KEY"/>
+      <!-- see org.eclipse.xtext.validation.Issue.DATA_KEY -->
+      <attribute name="DATA_KEY"/>
+      <!-- see org.eclipse.xtext.validation.Issue.COLUMN_KEY -->
+      <attribute name="COLUMN_KEY"/>
+      <!-- see org.eclipse.xtext.validation.Issue.URI_KEY -->
+      <attribute name="URI_KEY"/>
+      <!-- see org.eclipse.xtext.ui.editor.validation.MarkerCreator.FIXABLE_KEY -->
+      <attribute name="FIXABLE_KEY"/>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.check.fast"
+         name="Xtext Check (fast)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.check"/>
+      <persistent value="true"/>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.check.normal"
+         name="Xtext Check (normal)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.check"/>
+      <persistent value="true"/>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.check.expensive"
+         name="Xtext Check (expensive)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.check"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
+         id="org.eclipse.xtext.ui.marker"
+         name="Xtext Marker"
+         point="org.eclipse.core.resources.markers">
+      <persistent value="true"/>
+   </extension>
+   <extension
+         id="org.eclipse.xtext.ui.task"
+         name="Xtext Task"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.marker"/>
+      <super type="org.eclipse.core.resources.taskmarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
+      point="org.eclipse.ui.editors.annotationTypes">
+      <type
+      	name="org.eclipse.xtext.ui.editor.error"
+      	markerType="org.eclipse.emf.ecore.diagnostic"
+      	markerSeverity="2"
+        super="org.eclipse.ui.workbench.texteditor.error">
+      </type>
+      <type
+      	name="org.eclipse.xtext.ui.editor.warning"
+      	markerType="org.eclipse.emf.ecore.diagnostic"
+      	markerSeverity="1"
+        super="org.eclipse.ui.workbench.texteditor.warning">
+      </type>
+      <type
+      	name="org.eclipse.xtext.ui.editor.info"
+      	markerType="org.eclipse.emf.ecore.diagnostic"
+      	markerSeverity="0"
+        super="org.eclipse.ui.workbench.texteditor.info">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationImageProvider="org.eclipse.xtext.ui.editor.model.XtextMarkerAnnotationImageProvider"
+            annotationType="org.eclipse.xtext.ui.editor.error"
+            includeOnPreferencePage="true"
+            symbolicIcon="error">
+      </specification>
+      <specification
+            annotationImageProvider="org.eclipse.xtext.ui.editor.model.XtextMarkerAnnotationImageProvider"
+            annotationType="org.eclipse.xtext.ui.editor.warning"
+            includeOnPreferencePage="true"
+            symbolicIcon="warning">
+      </specification>
+      <specification
+            annotationImageProvider="org.eclipse.xtext.ui.editor.model.XtextMarkerAnnotationImageProvider"
+            annotationType="org.eclipse.xtext.ui.editor.info"
+            includeOnPreferencePage="true"
+            symbolicIcon="info">
+      </specification>
+   </extension>
+   
+	<extension point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+SHIFT+G"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+		</key>
+	</extension>
+	
+	<!-- F3 / Hyperlinking stuff -->
+	<extension
+		point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="F3"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+		</key>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command
+         commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+         id="xtext.ui.openDeclaration"
+         style="push">
+				<visibleWhen 
+					checkEnabled="false">
+ 					<reference 
+ 						definitionId="isActiveEditorAnInstanceOfXtextEditor">
+ 					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+    <extension point="org.eclipse.ui.bindings">
+      <key 
+      	sequence="M1+O" 
+      	commandId= "org.eclipse.xtext.ui.editor.outline.QuickOutline" 
+      	schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
+      	contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+    </extension>
+    <!-- mark occurences -->
+	<extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+         name="org.eclipse.xtext.ui.editor.defaultOccurrenceAnnotation">
+      </type>
+      <type
+            name="org.eclipse.xtext.ui.editor.declarationAnnotation"
+            super="org.eclipse.xtext.ui.editor.defaultOccurrenceAnnotation">
+      </type>
+    </extension>
+    <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+    	  <specification
+            annotationType="org.eclipse.xtext.ui.editor.defaultOccurrenceAnnotation"
+            label="%OccurrenceAnnotation_label"
+            icon="/icons/obj16/searchm_obj.gif"
+            textPreferenceKey="occurrenceIndication"
+            textPreferenceValue="false"
+            highlightPreferenceKey="occurrenceHighlighting"
+            highlightPreferenceValue="true"
+            contributesToHeader="false"
+            overviewRulerPreferenceKey="occurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            verticalRulerPreferenceKey="occurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="false"
+            colorPreferenceKey="occurrenceIndicationColor"
+            colorPreferenceValue="212,212,212"
+            presentationLayer="4"
+            showInNextPrevDropdownToolbarActionKey="showOccurrenceInNextPrevDropdownToolbarAction"
+            showInNextPrevDropdownToolbarAction="true"
+            isGoToNextNavigationTargetKey="isOccurrenceGoToNextNavigationTarget"
+	        isGoToNextNavigationTarget="false"
+            isGoToPreviousNavigationTargetKey="isOccurrenceGoToPreviousNavigationTarget"
+	        isGoToPreviousNavigationTarget="false"
+            textStylePreferenceKey="occurrenceTextStyle"
+            textStylePreferenceValue="NONE">
+	    </specification>
+       <specification
+        	annotationType="org.eclipse.xtext.ui.editor.declarationAnnotation"
+            label="%DeclarationAnnotation_label"
+            textPreferenceKey="writeOccurrenceIndication"
+            textPreferenceValue="false"
+            highlightPreferenceKey="writeOccurrenceHighlighting"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="writeOccurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            verticalRulerPreferenceKey="writeOccurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="false"
+            colorPreferenceKey="writeOccurrenceIndicationColor"
+            colorPreferenceValue="240,216,168"
+            presentationLayer="4"
+            textStylePreferenceKey="writeOccurrenceTextStyle"
+            textStylePreferenceValue="NONE">
+       </specification>
+	</extension>
+	
+	<!-- Refactoring -->
+	<extension point="org.eclipse.ui.bindings">
+        <key 
+            sequence="M2+M3+R"
+            commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+        <key
+            sequence="COMMAND+ALT+R"
+            commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="carbon"/>
+        <key
+      	    sequence="M2+M3+R"
+      	    commandId=""
+      	    schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+      	    contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      	    platform="carbon"/>
+      	<key 
+      		sequence="SHIFT+ALT+R"
+      		commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+      		schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+      		contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      		platform="win32"/>
+        <key
+            sequence="M2+M3+R"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="win32"/>
+        <key
+            sequence="SHIFT+ALT+R"
+            commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="gtk"/>
+        <key
+            sequence="M2+M3+R"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="gtk"/>
+    </extension>
+
+	<extension
+         point="org.eclipse.ui.contexts">
+      <context
+            name="%context.editingText.name"
+            description="%context.editingText.description"
+            id="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            parentId="org.eclipse.ui.contexts.dialogAndWindow">
+      </context>
+   </extension>
+
+	<extension
+	     point="org.eclipse.ui.bindings">
+      <!--  win32:  M1=CTRL,    M2=SHIFT, M3=ALT, M4=-
+            carbon: M1=COMMAND, M2=SHIFT, M3=ALT, M4=CTRL -->
+      
+	  <key
+	        commandId="org.eclipse.ui.edit.text.delete.line"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+D"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.delete.line.to.end"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+M2+DEL"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.findNext"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+K"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.findPrevious"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+M2+K"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.findIncremental"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+J"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.findIncrementalReverse"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+M2+J"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.line"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+L"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.scroll.lineUp"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="CTRL+ARROW_UP"/>	<!-- hardcode CTRL to avoid overwriting Command+UP on carbon -->
+	  <key
+	        commandId="org.eclipse.ui.edit.text.scroll.lineDown"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="CTRL+ARROW_DOWN"/>	<!-- hardcode CTRL to avoid overwriting Command+DOWN on carbon -->
+	  <key
+	        commandId="org.eclipse.ui.edit.text.toggleOverwrite"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="INSERT"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.showRulerContextMenu"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+F10"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.smartEnter"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        sequence="M2+CR"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+M2+CR"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.smartEnterInverse"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M3+ARROW_UP"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.moveLineUp"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M3+ARROW_DOWN"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.moveLineDown"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+M3+ARROW_UP"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.copyLineUp"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+M3+ARROW_DOWN"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.copyLineDown"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.join.lines"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+M3+J"/>
+	  <!-- disable the key binding for Carbon as it conflicts with another one in the SDK -->
+	  <key
+            platform="carbon"
+	        commandId=""
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	        sequence="M1+M3+J"/>
+	  <key
+	        sequence="M1+M2+X"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.upperCase"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+M2+Y"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.lowerCase"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.goto.wordNext"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.lineEnd"
+	        sequence="END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId=""
+            platform="carbon"
+	        sequence="M1+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.lineEnd"
+            platform="carbon"
+	        sequence="M1+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.select.lineEnd"
+	        sequence="M2+END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId=""
+            platform="carbon"
+	        sequence="M2+END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.select.lineEnd"
+            platform="carbon"
+	        sequence="M1+M2+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.select.textEnd"
+            platform="carbon"
+	        sequence="M2+END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.textEnd"
+	        sequence="M1+END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId=""
+            platform="carbon"
+	        sequence="END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.textEnd"
+            platform="carbon"
+	        sequence="END"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="ALT+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.goto.wordNext"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.goto.wordPrevious"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.lineStart"
+	        sequence="HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId=""
+            platform="carbon"
+	        sequence="M1+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.lineStart"
+            platform="carbon"
+	        sequence="M1+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.select.lineStart"
+	        sequence="M2+HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId=""
+            platform="carbon"
+	        sequence="M2+HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.select.lineStart"
+            platform="carbon"
+	        sequence="M1+M2+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.select.textStart"
+            platform="carbon"
+	        sequence="M2+HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.textStart"
+	        sequence="M1+HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId=""
+            platform="carbon"
+	        sequence="HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.goto.textStart"
+            platform="carbon"
+	        sequence="HOME"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="ALT+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.goto.wordPrevious"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+DEL"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.deleteNextWord"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="M1+DEL"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId=""
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="ALT+DEL"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.deleteNextWord"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+BS"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.deletePreviousWord"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="M1+BS"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId=""
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="ALT+BS"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.deletePreviousWord"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+M2+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.select.wordNext"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="M1+M2+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId=""
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="ALT+SHIFT+ARROW_RIGHT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.select.wordNext"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+	        sequence="M1+M2+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.select.wordPrevious"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="M1+M2+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId=""
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	  <key
+            platform="carbon"
+	        sequence="ALT+SHIFT+ARROW_LEFT"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+	        commandId="org.eclipse.ui.edit.text.select.wordPrevious"
+	        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.toggleInsertMode"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="M1+M2+INSERT"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            sequence="F2"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            commandId="org.eclipse.ui.edit.text.showInformation"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            sequence="M2+M3+A"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            commandId="org.eclipse.ui.edit.text.toggleBlockSelectionMode"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            platform="carbon"
+            sequence="M2+M3+A"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            platform="carbon"
+            sequence="COMMAND+ALT+A"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            commandId="org.eclipse.ui.edit.text.toggleBlockSelectionMode"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+            
+      <key
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="M3+/"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <!-- Alt+/ does not work on carbon - use Ctrl+. instead. 
+             org.eclipse.ui.navigate.next uses M1+. -->
+      <key
+            platform="carbon"
+            commandId=""
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="M3+/"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            platform="carbon"
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="M4+."
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+
+      <!-- In the Chinese language M3+/ is already reserved for content assist -->
+      <key   
+            locale="zh"  
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"   
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"   
+            sequence="M3+/"/> 
+      <key
+            locale="zh"
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+/"/>
+
+      <!-- In the Japanese language on GTK M3+/ is already reserved for content assist -->
+      <key   
+            locale="ja"
+            platform="gtk"  
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"   
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"   
+            sequence="M3+/"/> 
+      <key
+            locale="ja"
+            platform="gtk"  
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+/"/>
+
+      <!-- In the Korean language M3+/ on GTK is already reserved for content assist -->
+      <key   
+            locale="ko"  
+            platform="gtk"  
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"   
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"   
+            sequence="M3+/"/> 
+      <key
+            locale="ko"
+            platform="gtk"  
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+/"/>
+            
+      <!-- In the Japanese language on Motif M3+/ is already reserved for content assist -->
+      <key   
+            locale="ja"
+            platform="motif"  
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"   
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"   
+            sequence="M3+/"/> 
+      <key
+            locale="ja"
+            platform="motif"  
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+/"/>
+
+      <!-- In the Korean language M3+/ on Motif is already reserved for content assist -->
+      <key   
+            locale="ko"  
+            platform="motif"  
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"   
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"   
+            sequence="M3+/"/> 
+      <key
+            locale="ko"
+            platform="motif"  
+            commandId="org.eclipse.ui.edit.text.hippieCompletion"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+/"/>
+      
+      <!-- emacs key bindings -->
+      <key
+            commandId="org.eclipse.ui.edit.text.cut.line.to.beginning"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+0 CTRL+K"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.cut.line.to.beginning"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC 0 CTRL+K"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.cut.line.to.end"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+K"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.set.mark"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+SPACE"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.set.mark"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+2"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.clear.mark"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+G"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.swap.mark"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+X CTRL+X"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.findIncremental"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+S"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.findIncrementalReverse"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+R"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.lineUp"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+P"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.lineDown"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+N"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.lineStart"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+A"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.lineEnd"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+E"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.line"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+X G"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.columnPrevious"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+B"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.columnNext"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+F"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.pageUp"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+V"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.pageUp"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC V"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.pageDown"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+V"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.wordPrevious"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+B"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.wordPrevious"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC B"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.wordNext"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+F"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.wordNext"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC F"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textStart"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+&lt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textStart"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+SHIFT+&lt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textStart"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC &lt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textStart"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC SHIFT+&lt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textStart"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+X ["
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textEnd"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+&gt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textEnd"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+SHIFT+&gt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textEnd"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC &gt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textEnd"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC SHIFT+&gt;"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.goto.textEnd"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+X ]"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.scroll.lineUp"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+Z"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.scroll.lineUp"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC Z"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.scroll.lineDown"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+Z"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.deleteNext"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="CTRL+D"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.deletePreviousWord"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+BS"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.deletePreviousWord"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC BS"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.deleteNextWord"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ALT+D"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+      <key
+            commandId="org.eclipse.ui.edit.text.deleteNextWord"
+            contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+            sequence="ESC D"
+            schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"/>
+	  <key
+	        commandId="org.eclipse.ui.edit.text.recenter"
+	        contextId="org.eclipse.xtext.ui.embeddedTextEditorScope"
+			schemeId="org.eclipse.ui.emacsAcceleratorConfiguration"
+	        sequence="CTRL+L"/>
+   </extension>
+ <extension
+       point="org.eclipse.emf.ecore.extension_parser">
+    <parser
+          class="org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl"
+          type="xtextbin">
+    </parser>
+ </extension>
+	<extension point="org.eclipse.e4.ui.css.swt.theme">	
+      <stylesheet uri="css/e4-dark_xtext_syntaxhighlighting.css">	
+         <themeid	
+               refid="org.eclipse.e4.ui.css.theme.e4_dark">	
+         </themeid>	
+	  </stylesheet>	
+   </extension>
+</plugin>

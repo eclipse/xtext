@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="overridingGuiceModule" name="overridingGuiceModule" schema="schema/overridingGuiceModule.exsd"/>
+   <extension-point id="sharedStateContributingModule" name="sharedStateContributingModule" schema="schema/sharedStateContributingModule.exsd"/>
+   <extension
+        id="xtextBuilder"
+        name="%XtextBuilder.name"
+        point="org.eclipse.core.resources.builders">
+     <builder
+           hasNature="true">
+        <run
+              class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory">
+             <parameter name="guicekey" value="org.eclipse.core.resources.IncrementalProjectBuilder"/>
+        </run>
+     </builder>
+  </extension>
+  <extension
+        id="xtextNature"
+        name="%XtextNature.name"
+        point="org.eclipse.core.resources.natures">
+     <runtime>
+        	<run
+              class="org.eclipse.xtext.builder.nature.XtextNature">
+      	</run>
+     </runtime>
+     <builder
+           id="org.eclipse.xtext.ui.shared.xtextBuilder">
+     </builder>
+  </extension>
+  <extension point="org.eclipse.ui.menus">
+       <menuContribution
+            locationURI="menu:navigate?after=open.ext4">
+         <command commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"/>
+      </menuContribution>
+      <menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command
+         		commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand"
+         		style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+       <menuContribution locationURI="popup:#CompilationUnitEditorContext?after=OpenEditor">
+			<command commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand" style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+       <menuContribution locationURI="popup:#ClassFileEditorContext?after=OpenEditor">
+			<command commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand" style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+       <menuContribution locationURI="menu:navigate?after=open.ext">
+			<command commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand" style="push">
+      			<visibleWhen checkEnabled="false">
+      				<with variable="activeEditor">
+						<test property="org.eclipse.xtext.ui.shared.canOpenSourceFile" value="true"/>
+	      			</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+        <menuContribution
+            locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+         <command
+               commandId="org.eclipse.xtext.ui.shared.AddXtextNatureCommand"
+               style="push">
+            <visibleWhen>
+                <iterate
+                        operator="or"
+                        ifEmpty="false">
+                    <adapt
+                        type="org.eclipse.core.resources.IProject">
+                        <not>
+                            <test
+                                forcePluginActivation="true"
+                                property="org.eclipse.core.resources.projectNature"
+                                value="org.eclipse.xtext.ui.shared.xtextNature">
+                            </test>
+                        </not>
+                    </adapt>
+                </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.xtext.ui.shared.RemoveXtextNatureCommand"
+               style="push">
+            <visibleWhen>
+                <iterate
+                        operator="or"
+                        ifEmpty="false">
+                    <adapt
+                        type="org.eclipse.core.resources.IProject">
+	                        <test
+	                            forcePluginActivation="true"
+	                            property="org.eclipse.core.resources.projectNature"
+	                            value="org.eclipse.xtext.ui.shared.xtextNature">
+	                        </test>
+                    </adapt>
+                </iterate>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+        point="org.eclipse.ui.ide.projectNatureImages">
+     <image
+           icon="icons/nature_overlay.png"
+           id="org.eclipse.xtext.builder.nature.overlay"
+           natureId="org.eclipse.xtext.ui.shared.xtextNature">
+     </image>
+   </extension>
+   <!-- open Xtext element -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="%OpenModelElementCommand.description"
+            id="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"
+            name="%OpenModelElementCommand.name">
+      </command>
+      <command
+            description="%OpenSourceFileCommand.description"
+            categoryId="org.eclipse.ui.category.navigate"
+            id="org.eclipse.xtext.ui.shared.OpenSourceFileCommand"
+            name="%OpenSourceFileCommand.name">
+      </command>
+     <command
+           categoryId="org.eclipse.ui.category.project"
+           id="org.eclipse.xtext.ui.shared.AddXtextNatureCommand"
+           name="%XtextNatureAddCommand.label">
+     </command>
+     <command
+           categoryId="org.eclipse.ui.category.project"
+           id="org.eclipse.xtext.ui.shared.RemoveXtextNatureCommand"
+           name="%XtextNatureRemoveCommand.label">
+     </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SHIFT+F3">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.search.OpenXtextElementHandler"
+            commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand">
+      </handler>
+      <handler
+            class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.shared.internal.OpenSourceFileHandler"
+            commandId="org.eclipse.xtext.ui.shared.OpenSourceFileCommand">
+      </handler>
+      <handler
+             class="org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand"
+             commandId="org.eclipse.xtext.ui.shared.AddXtextNatureCommand">
+         <activeWhen>
+            <iterate
+                    operator="or"
+                    ifEmpty="false">
+                <adapt
+                    type="org.eclipse.core.resources.IProject">
+                    <not>
+                        <test
+                                forcePluginActivation="true"
+                                property="org.eclipse.core.resources.projectNature"
+                                value="org.eclipse.xtext.ui.shared.xtextNature">
+                        </test>
+                    </not>
+                </adapt>
+            </iterate>
+         </activeWhen>
+      </handler>
+      <handler
+             class="org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand"
+             commandId="org.eclipse.xtext.ui.shared.RemoveXtextNatureCommand">
+         <activeWhen>
+            <iterate
+                    operator="or"
+                    ifEmpty="false">
+                <adapt
+                    type="org.eclipse.core.resources.IProject">
+                        <test
+                                forcePluginActivation="true"
+                                property="org.eclipse.core.resources.projectNature"
+                                value="org.eclipse.xtext.ui.shared.xtextNature">
+                        </test>
+                </adapt>
+            </iterate>
+         </activeWhen>
+      </handler>
+   </extension>
+ 	<extension point="org.eclipse.search.searchResultViewPages">
+    	<viewPage
+          class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage"
+          icon="icons/searchpage.gif"
+          id="org.eclipse.xtext.ui.editor.findref.SearchViewPage"
+          searchResultClass="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult">
+    	</viewPage>
+ 	</extension>
+ 	<extension
+         point="org.eclipse.jdt.core.compilationParticipant">
+      <compilationParticipant
+            class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.builder.smap.DebugSourceInstallingCompilationParticipant"
+            createsProblems="false"
+            id="org.eclipse.xtext.common.types.shared.smapCompilationParticipant"
+            modifiesEnvironment="false"
+            requiredSourceLevel="1.4">
+      </compilationParticipant>
+   </extension>
+  <extension
+        point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+     <module
+           class="org.eclipse.xtext.ui.shared.internal.DefaultSharedContribution">
+     </module>
+  </extension>
+  <extension
+        point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+     <module
+           class="org.eclipse.xtext.ui.shared.internal.SharedContributionWithJDT">
+     </module>
+  </extension>
+  <extension
+        point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+           class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.shared.internal.OpenSourceFilePropertyTester"
+           id="org.eclipse.xtext.ui.shared.OpenSourceFilePropertyTester"
+           namespace="org.eclipse.xtext.ui.shared"
+           properties="canOpenSourceFile"
+           type="org.eclipse.ui.IEditorPart">
+     </propertyTester>
+  </extension>
+   <extension
+       point="org.eclipse.ltk.core.refactoring.moveParticipants">
+    <moveParticipant
+          class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring2.participant.XtextMoveResourceParticipant"
+          id="org.eclipse.xtext.ui.shared.refactoring.moveResourceParticipant"
+          name="Xtext Move Resource Participant">
+       <enablement></enablement>
+    </moveParticipant>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+      	  class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring2.participant.XtextRenameResourceParticipant"
+          id="org.eclipse.xtext.ui.shared.refactoring.renameResourceParticipant"
+          name="Xtext Rename Resource Participant">
+       <enablement></enablement>
+      </renameParticipant>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.copyParticipants">
+      <copyParticipant
+      	  class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring2.participant.XtextCopyResourceParticipant"
+          id="org.eclipse.xtext.ui.shared.refactoring.copyResourceParticipant"
+          name="Xtext Copy Resource Participant">
+       <enablement></enablement>
+      </copyParticipant>
+   </extension>
+</plugin>

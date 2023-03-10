@@ -165,4 +165,170 @@
 		<category name="xtext-extras"/>
 	</bundle>
 	<category-def name="xtext-extras" label="Xtext-extras"/>
+	<bundle id="org.eclipse.xtext.activities" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.activities.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.builder" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.builder.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.buildship" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.buildship.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.edit" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.edit.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.shared" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.shared.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.shared.jdt38" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.shared.jdt38.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.common.types.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.doc" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.junit4" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.junit4.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.testing" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.testing.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.logging" version="1.2.24.qualifier">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.logging.source" version="1.2.24.qualifier">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.m2e" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.m2e.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.purexbase.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.purexbase.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.testlanguages.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.testlanguages.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codemining" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codemining.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codetemplates" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codetemplates.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codetemplates.ide" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codetemplates.ide.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codetemplates.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.codetemplates.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.ecore" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.ecore.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.shared" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.ui.shared.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.junit" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.junit.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.ui.testing" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.ui.testing.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ui" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ui.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ui.examples" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ui.examples.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ui.graph" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ui.graph.source" version="0.0.0">
+		<category name="Xtext" />
+	</bundle>
+	<category-def name="Xtext" label="Xtext" />
 </site>

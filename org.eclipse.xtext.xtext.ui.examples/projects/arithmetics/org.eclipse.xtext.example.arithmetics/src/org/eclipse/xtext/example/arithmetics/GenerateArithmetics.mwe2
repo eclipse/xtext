@@ -1,0 +1,71 @@
+/*******************************************************************************
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtext.example.arithmetics.GenerateArithmetics
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+import org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
+
+var rootPath = ".."
+
+Workflow {
+
+	component = XtextGenerator {
+		configuration = {
+			project = StandardProjectConfig {
+				baseName = "org.eclipse.xtext.example.arithmetics"
+				rootPath = rootPath
+				runtimeTest = {
+					enabled = true
+				}
+				eclipsePlugin = {
+					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = true
+				}
+				createEclipseMetaData = true
+			}
+			code = {
+				preferXtendStubs = false
+				encoding = "UTF-8"
+				fileHeader =
+"/*******************************************************************************
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+			}
+		}
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.example.arithmetics.Arithmetics"
+			fileExtensions = "calc"
+
+			generator = null
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				generateDeprecationValidation = false
+			}
+			fragment = CodeMiningFragment {
+				generateStub = true
+				generateXtendStub = false
+			}
+			junitSupport = {
+				generateXtendStub = false
+				skipXbaseTestingPackage = true
+			}
+		}
+	}
+}

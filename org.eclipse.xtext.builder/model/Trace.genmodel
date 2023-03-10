@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.builder/emf-gen" modelPluginID="org.eclipse.xtext.builder"
+    modelName="Trace" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" copyrightFields="false"
+    runtimeVersion="2.29">
+  <foreignModel>Trace.ecore</foreignModel>
+  <genPackages prefix="Trace" basePackage="org.eclipse.xtext.builder" disposableProviderFactory="true"
+      ecorePackage="Trace.ecore#/">
+    <genDataTypes ecoreDataType="Trace.ecore#//URI"/>
+    <genClasses ecoreClass="Trace.ecore#//DebugTraceRegion">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myLineNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myEndLineNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/nestedRegions"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myEndOffset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/associations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/useForDebugging"/>
+    </genClasses>
+    <genClasses ecoreClass="Trace.ecore#//DebugLocationData">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/offset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/lineNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/endLineNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/path"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/endOffset"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

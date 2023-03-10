@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+	<extension
+            point="org.eclipse.ui.editors">
+        <editor
+              class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="xtext,xtext2"
+              icon="icons/editor.gif"
+              id="org.eclipse.xtext.Xtext"
+              name="%Xtext_Editor">
+        </editor>
+    </extension>
+	<extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.Xtext.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.Xtext.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+                        value="org.eclipse.xtext.Xtext"
+                        forcePluginActivation="true"/>
+                </with>
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.Xtext"
+            name="%Xtext_Language_Root_Preferences">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.Xtext"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.Xtext.coloring"
+            name="%Syntax_Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.Xtext"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.Xtext.templates"
+            name="%Templates">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.Xtext"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+            id="org.eclipse.xtext.Xtext.validator.preferencePage"
+            name="%Errors_Warnings">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+              class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+              id="org.eclipse.xtext.Xtext.validator.propertyPage"
+              name="Xtext">
+           <keywordReference
+                 id="org.eclipse.xtext.ui.keyword_Xtext">
+           </keywordReference>
+           <enabledWhen>
+              <adapt
+                    type="org.eclipse.core.resources.IProject">
+              </adapt>
+           </enabledWhen>
+           <filter
+                 name="projectNature"
+                 value="org.eclipse.xtext.ui.shared.xtextNature">
+           </filter>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.keyword_Xtext"
+            label="%Xtext_keyword"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.Xtext.validate"
+            name="%Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.Xtext.validate"
+                 style="push"
+                 tooltip="%ExpensiveValidation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="xtext">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="xtext">
+        </resourceServiceProvider>
+    </extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="xtext2">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="xtext2">
+        </resourceServiceProvider>
+    </extension>
+
+	<!-- Wizards -->
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category
+			name="%Xtext_Wizard_Category"
+			id="org.eclipse.xtext.projectwiz">
+		</category>
+		<wizard
+			category="org.eclipse.xtext.projectwiz"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+			icon="icons/new_xproj.gif"
+			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+			name="%Xtext_Project"
+			project="true">
+			<description>
+            	%NewXtext_Project.description
+         	</description>
+		</wizard>
+		<wizard
+			category="org.eclipse.xtext.projectwiz"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
+			icon="icons/new_xproj.gif"
+			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
+			name="%Xtext_Project_From_Ecore"
+			project="true">
+			<description>
+            	%NewXtext_Project_From_Ecore.description
+         	</description>
+		</wizard>
+	</extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            category="org.eclipse.ui.externaltools"
+            class="org.eclipse.xtext.xtext.launcher.GenerateArtifactsLaunchShortcut"
+            icon="icons/launch.gif"
+            id="org.eclipse.xtext.xtext.launcher.GenerateArtifactsLaunchShortcut"
+            label="%shortcut.label"
+            modes="run, debug">
+        <contextualLaunch>
+           <enablement>
+             <with variable="selection">
+				<iterate>
+					<and>
+						<adapt type="org.eclipse.core.resources.IResource">
+							<test property="org.eclipse.core.resources.name" value="*.xtext"/>
+						</adapt>
+						<test property="org.eclipse.xtext.xtext.launcher.workflowavailable" />
+					</and>
+				</iterate>
+			</with>
+           </enablement>
+           <contextLabel
+              mode="run"
+              label="%contextLabel.run.label"/>
+          <contextLabel
+              mode="debug"
+              label="%contextLabel.debug.label"/>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.eclipse.xtext.xtext.launcher.WorkflowPropertyTester"
+            id="org.eclipse.xtext.xtext.launcher.WorkflowPropertyTester"
+            namespace="org.eclipse.xtext.xtext.launcher"
+            properties="workflowavailable"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			categoryId="org.eclipse.ui.category.navigate"
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="%QuickOutline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="%QuickOutline_tooltip">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.xtext.Xtext.compare.contentViewers"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xtext,xtext2">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.xtext.Xtext.compare.contentMergeViewers"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xtext,xtext2" label="Xtext Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.xtext.Xtext.editors.documentProviders"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="xtext,xtext2">
+    </provider>
+  </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="xtext"
+            type="text">
+    </fileTypes>
+    <fileTypes
+            extension="xtext2"
+            type="text">
+    </fileTypes>
+  </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+    <extension
+          point="org.eclipse.ltk.core.refactoring.renameParticipants">
+       <renameParticipant
+             class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant"
+             id="org.eclipse.xtext.xtext.ui.ecoreRenameParticipant"
+             name="Ecore Rename Participant">
+          <enablement>
+             <with
+                   variable="processorIdentifier">
+                <equals
+                      value="org.eclipse.xtext.Xtext.ui.refactoring.Processor"/>
+             </with>
+          </enablement>
+       </renameParticipant>
+       <renameParticipant
+             class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.OverridingRuleRefactoringParticipant"
+             id="org.eclipse.xtext.xtext.ui.ecoreRenameParticipant"
+             name="Ecore Rename Participant">
+          <enablement>
+             <with
+                   variable="processorIdentifier">
+                <equals
+                      value="org.eclipse.xtext.Xtext.ui.refactoring.Processor"/>
+             </with>
+          </enablement>
+       </renameParticipant>
+    </extension>
+
+    <!-- marker definitions for org.eclipse.xtext.Xtext -->
+    <extension
+            id="xtext.check.fast"
+            name="%Grammar_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xtext.check.normal"
+            name="%Grammar_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="xtext.check.expensive"
+            name="%Grammar_Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+    <!-- quickfix marker resolution generator for org.eclipse.xtext.Xtext -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.xtext.ui.xtext.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.xtext.ui.xtext.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.xtext.ui.xtext.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+	<extension point="org.eclipse.e4.ui.css.swt.theme">
+      <stylesheet uri="css/e4-dark_xtext_grammar_syntaxhighlighting.css">
+         <themeid
+               refid="org.eclipse.e4.ui.css.theme.e4_dark">
+         </themeid>
+	  </stylesheet>
+   </extension>
+ <extension
+       point="org.eclipse.help.contexts">
+    <contexts
+          file="contexts_Xtext_Xtext.xml">
+    </contexts>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <view
+          class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyViewPart"
+          icon="icons/editor.gif"
+          id="org.eclipse.xtext.ui.XtextCallHierarchy"
+          name="%CallHierarchy"
+          restorable="true"
+          category="org.eclipse.xtext.viewCategory">
+    </view>
+ </extension>
+ <extension
+       point="org.eclipse.ui.commands">
+    <command
+          id="org.eclipse.xtext.ui.editor.OpenCallHierarchy"
+          categoryId="org.eclipse.ui.category.navigate"
+          name="%OpenCallHierarchyCommand_name"
+          description="%OpenCallHierarchyCommand_description">
+    </command>
+ </extension>
+ <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+       <command
+             commandId="org.eclipse.xtext.ui.editor.OpenCallHierarchy"
+             id="xtext.ui.OpenCallHierarchy"
+			 style="push">
+          <visibleWhen
+                checkEnabled="false">
+             <reference
+                   definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+             </reference>
+          </visibleWhen>
+       </command>
+    </menuContribution>
+ </extension>
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hierarchy.OpenCallHierarchyHandler"
+          commandId="org.eclipse.xtext.ui.editor.OpenCallHierarchy">
+       <activeWhen>
+          <reference
+                definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+          </reference>
+       </activeWhen>
+    </handler>
+ </extension>
+ <extension
+       point="org.eclipse.ui.contexts">
+    <context
+       description="%XtextGrammarContext_description"
+       id="org.eclipse.xtext.xtext.ui.XtextEditorScope"
+       name="%XtextGrammarContext_name"
+       parentId="org.eclipse.xtext.ui.XtextEditorScope">
+    </context>
+ </extension>
+ <extension
+       point="org.eclipse.ui.bindings">
+    <key
+       commandId="org.eclipse.xtext.ui.editor.OpenCallHierarchy"
+       contextId="org.eclipse.xtext.xtext.ui.XtextEditorScope"
+       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+       sequence="CTRL+ALT+H">
+    </key>
+ </extension>
+
+</plugin>

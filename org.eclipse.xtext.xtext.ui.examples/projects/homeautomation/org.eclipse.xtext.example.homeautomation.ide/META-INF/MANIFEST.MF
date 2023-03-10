@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Homeautomation Example - Generic IDE
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.31.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.example.homeautomation,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.eclipse.xtext.example.homeautomation.ide;x-internal:=true,
+ org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr,
+ org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.lexer
+Automatic-Module-Name: org.eclipse.xtext.example.homeautomation.ide
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+<!-- explicitly added below -->
+
+  <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderProvider"
+           uriExtension="TestResourceServiceProviderProvider">
+     </resourceServiceProvider>
+     <resourceServiceProvider
+           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderExecutableExtensionFactory:foo"
+           uriExtension="TestResourceServiceProviderExecutableExtensionFactory">
+     </resourceServiceProvider>
+  </extension>
+  
+</plugin>

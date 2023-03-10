@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug332217TestLanguage" nsURI="http://www.eclipse.org/xtext/ui/common/tests/2011/bug332217TestLanguage"
+    nsPrefix="bug332217TestLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//TableView" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyPathPart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDescription">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//PropertyPathPart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//TypeDescription"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectReference" eSuperTypes="#//Expression #//ScalarExpression #//CollectionExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="#//PropertyPathPart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//ObjectReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScalarExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Expression #//ScalarExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringFunction" eSuperTypes="#//Expression #//ScalarExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteral" eSuperTypes="#//Expression #//CollectionExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//ScalarExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionFunction" eSuperTypes="#//Expression #//CollectionExpression"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="TableViewStyle">
+    <eLiterals name="Plain" literal="Plain"/>
+    <eLiterals name="Grouped" value="1" literal="Grouped"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TableView">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="#//Parameter"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="titleImage" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="#//TableViewStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sections" upperBound="-1"
+        eType="#//Section" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewContentElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterator" eType="#//CollectionIterator"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Section" eSuperTypes="#//ViewContentElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="title" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cells" upperBound="-1"
+        eType="#//Cell" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cell" eSuperTypes="#//ViewContentElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//CellType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="details" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="image" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//ViewAction"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessory" eType="#//CellAccessory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CellType">
+    <eLiterals name="default" literal="Default"/>
+    <eLiterals name="value1" value="1" literal="Value1"/>
+    <eLiterals name="value2" value="2" literal="Value2"/>
+    <eLiterals name="subtitle" value="3" literal="Subtitle"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CellAccessory">
+    <eLiterals name="None" literal="None"/>
+    <eLiterals name="Link" value="1" literal="Link"/>
+    <eLiterals name="Detail" value="2" literal="Detail"/>
+    <eLiterals name="Check" value="3" literal="Check"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionIterator" eSuperTypes="#//PropertyPathPart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collection" eType="#//CollectionExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Selector" eSuperTypes="#//ViewAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalOpen" eSuperTypes="#//ViewAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="url" eType="#//ScalarExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringConcat" eSuperTypes="#//StringFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//ScalarExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringReplace" eSuperTypes="#//StringFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="replacement" eType="#//ScalarExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringUrlConform" eSuperTypes="#//StringFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ScalarExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringSplit" eSuperTypes="#//CollectionFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ScalarExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delimiter" eType="#//ScalarExpression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

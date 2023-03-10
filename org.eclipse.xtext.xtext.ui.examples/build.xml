@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     May 25, 2010 10:34:57 AM
+
+     This ant script creates a zip file for each of Xtext's example projects.
+     If the examples would not be zipped the resulting file namens would be too long to be
+     handled my MS Windows. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=301858
+
+     Moritz Eysholdt - Initial Contribution
+     Karsten Thoms -issue#501
+     ====================================================================== -->
+<project name="project" default="zip_all_examples">
+
+	<property name="source" location="projects" />
+	<property name="target_xtext" location="contents" />
+
+	<macrodef name="zip_example">
+		<attribute name="name" default="default" />
+		<attribute name="subdir" default="default" />
+		<attribute name="target" default="${target_xtext}" />
+		<sequential>
+			<delete file="@{target}/@{name}.zip" />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{subdir}/@{name}" excludes="bin,bin/**,target/**,**/*._trace,**/*.smap,.antlr-generator*.jar,plugin.xml_gen" />
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="zip_tutorial">
+		<attribute name="name" default="default" />
+		<attribute name="target" default="${target_xtext}" />
+		<sequential>
+			<delete file="@{target}/@{name}.zip" />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}/initial" excludes="**/J*.pdf"/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="zip_conference_tutorial">
+		<attribute name="initial" default="initial" />
+		<attribute name="tutorial" default="org.eclipse.xtext.example.tutorial" />
+		<attribute name="conference" default="tutorial" />
+		<attribute name="target" default="${target_xtext}" />
+		<sequential>
+			<delete file="@{target}/../../@{conference}.zip" />
+			<zip destfile="@{target}/../../@{conference}.zip">
+				<zipfileset dir="${source}/@{tutorial}/@{initial}" prefix="@{tutorial}" excludes="**/Tutorial.pdf"/>
+				<zipfileset dir="${source}/@{tutorial}.tests/@{initial}" prefix="@{tutorial}.tests" excludes="**/*._trace"/>
+				<zipfileset dir="${source}/@{tutorial}.ui/@{initial}" prefix="@{tutorial}.ui"/>
+			</zip>
+		</sequential>
+	</macrodef>
+
+	<target name="zip_all_examples">
+		<!-- run task "generate_self" to compose the list below -->
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.tests" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.ide" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.ui" />
+		<zip_example subdir="arithmetics"    name="org.eclipse.xtext.example.arithmetics.ui.tests" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.ide" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.tests" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.ui" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.ui.tests" />
+		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.releng" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ide" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.tests" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ui" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ui.tests" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.tests" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ide" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ui" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ui.tests" />
+		<zip_example subdir="."              name="xbase.tutorial" />
+	</target>
+
+	<target name="generate_self">
+		<exec executable="bash">
+			<arg value="-c" />
+			<arg value="for i in `ls ${source}`; do echo &quot;&lt;zip_example name=\&quot;$i\&quot; /&gt;&quot;; done" />
+		</exec>
+	</target>
+
+</project>
