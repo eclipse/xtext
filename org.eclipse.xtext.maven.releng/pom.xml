@@ -38,5 +38,14 @@
 		<module>../org.eclipse.xtext.java</module>
 		<!-- This is required by the xtext-maven-plugin IT -->
 		<module>../org.eclipse.xtext.purexbase</module>
+		<!-- xtext-web -->
+		<module>../org.eclipse.xtext.web</module>
+		<module>../org.eclipse.xtext.web.example.statemachine</module>
+		<module>../org.eclipse.xtext.web.example.statemachine.ide</module>
+		<module>../org.eclipse.xtext.xbase.web</module>
+		<module>../org.eclipse.xtext.web.example.entities</module>
+		<module>../org.eclipse.xtext.web.example.entities.ide</module>
+		<module>../org.eclipse.xtext.web.servlet</module>
+		<module>../org.eclipse.xtext.web.example.jetty</module>
 	</modules>
 </project>
