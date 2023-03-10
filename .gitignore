@@ -5,3 +5,5 @@ build/
 *._trace
 *.xtendbin
 org.eclipse.buildship.core.prefs
+*.DS_Store
+target

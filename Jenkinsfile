@@ -42,19 +42,19 @@ pipeline {
       }
     }
 
-    stage('Gradle Build') {
+    stage('Maven Build') {
       steps {
-        sh './1-gradle-build.sh'
+        sh './maven-build.sh'
       }
     }
   }
 
   post {
     always {
-      junit testResults: '**/build/test-results/test/*.xml'
+      junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
-      archiveArtifacts artifacts: 'build/maven-repository/**, org.eclipse.xtext.web.example.jetty/build/libs/test-files.zip'
+      archiveArtifacts artifacts: 'build/maven-repository/**, org.eclipse.xtext.web.example.jetty/target/libs/test-files.zip'
     }
     cleanup {
       script {

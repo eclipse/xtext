@@ -1,6 +1,0 @@
-apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-
-dependencies {
-	api project(':org.eclipse.xtext.web.example.statemachine')
-	api "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
-}

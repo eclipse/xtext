@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest'] # 'windows-latest' gets stuck on 'r.js'
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: 'Check out repository'
+        uses: actions/checkout@v3
+
+      - name: 'Set up Java'
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+
+      - name: 'Cache Maven packages'
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: 'Build and test'
+        run: mvn -PuseJenkinsSnapshots clean verify
+        working-directory: org.eclipse.xtext.maven.releng

@@ -1,6 +1,0 @@
-apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-
-dependencies {
-	api project(':org.eclipse.xtext.web.example.entities')
-	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
-}
