@@ -3,13 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.eclipse.xtend</groupId>
-		<artifactId>org.eclipse.xtend.tycho.parent</artifactId>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-xtend</artifactId>
 		<version>2.31.0-SNAPSHOT</version>
-		<relativePath>../releng/org.eclipse.xtend.tycho.parent</relativePath>
 	</parent>
-	<packaging>eclipse-plugin</packaging>
+	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.ide</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<name>Xtend IDE</name>
 
 	<properties>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
@@ -18,6 +20,10 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>

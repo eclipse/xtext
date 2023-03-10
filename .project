@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>xtext-xtend</name>
-	<comment>Project xtext-xtend created by Buildship.</comment>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1467961783301</id>
+			<id>1674841737238</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-org.eclipse.xtend.*</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1674841737248</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-org.eclipse.xtext.*</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>

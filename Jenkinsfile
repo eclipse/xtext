@@ -11,10 +11,10 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['latest', 'r202203', 'r202206', 'r202209', 'r202212'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
-       'temurin-jdk11-latest', 'temurin-jdk17-latest'
+       'temurin-jdk17-latest', 'temurin-jdk11-latest'
     ])
     booleanParam(
       name: 'TRIGGER_DOWNSTREAM_BUILD', 
@@ -66,31 +66,22 @@ pipeline {
       }
     }
 
-    stage('Gradle Build') {
-      steps {
-        sh '''
-          JAVA_OPTS="-Xmx1500m"
-          ./1-gradle-build.sh
-        '''
-      }
-    }
-
     stage('Maven Build & Test') {
       stages { // TODO use of parallel { here kills Tycho process with OOM
         stage('Maven Plugin Build') {
           steps {
             sh '''
               export MAVEN_OPTS="-Xmx1500m"
-              ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=/home/jenkins/.m2/repository
+              ./maven-build.sh
             '''
           } // END steps
         } // END stage
-        stage('Maven Tycho Build') {
+        stage('Maven Tycho Build and Test') {
           steps {
             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
             sh """
               export MAVEN_OPTS=-Xmx1500m 
-              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=/home/jenkins/.m2/repository
+              ./tycho-test.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=/home/jenkins/.m2/repository
             """
             }
           }// END steps
@@ -101,7 +92,7 @@ pipeline {
 
   post {
     always {
-      junit testResults: '**/target/surefire-reports/*.xml, **/build/test-results/test/*.xml'
+      junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
@@ -118,7 +109,7 @@ pipeline {
       }
     }
     unsuccessful {
-      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
+      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
       script {

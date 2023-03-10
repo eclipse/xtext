@@ -20,7 +20,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ContentAssistTest.class,
 	ContentAssistInElseBlockTest.class,
 	ContentAssistInLambdaTest.class,
-	ContentAssistInLambdaTest2.class,
+	ContentAssistInLambda2Test.class,
 	ImplementSuperMemberAssistTest.class,
 	ImportingTypesProposalTests.class,
 	ContentAssistPrioritiesTest.class,

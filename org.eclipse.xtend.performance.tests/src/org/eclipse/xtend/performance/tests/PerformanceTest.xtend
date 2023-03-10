@@ -44,7 +44,7 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@AfterClass
 	def static void deleteTestProject() {
-		PerformanceTestProjectSetup::tearDown		
+		PerformanceTestProjectSetup::tearDown
 	}
 	
 	@Test 

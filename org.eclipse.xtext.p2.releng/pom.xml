@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-xtend</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.eclipse.xtext.p2.releng</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../org.eclipse.xtend.tycho.tests.parent</module>
+		<module>../org.eclipse.xtend.core</module>
+		<module>../org.eclipse.xtend.ide.common</module>
+		<module>../org.eclipse.xtend.ide</module>
+		<module>../org.eclipse.xtend.ide.tests.data</module>
+		<module>../org.eclipse.xtend.doc</module>
+		<module>../org.eclipse.xtend.examples</module>
+		<module>../org.eclipse.xtend.m2e</module>
+		<module>../org.eclipse.xtend.standalone</module>
+		<module>../org.eclipse.xtend.core.tests</module>
+		<module>../org.eclipse.xtend.ide.tests</module>
+		<module>../org.eclipse.xtend.performance.tests</module>
+		<module>../org.eclipse.xtend.swtbot</module>
+		<module>../org.eclipse.xtend.ide.swtbot.tests</module>
+	</modules>
+
+	<!--
+	TODO:
+	This is a temporary workaround to have a single Jenkins job
+	that first runs all the tests and the creates a p2 repository
+	with signed contents. When enabling this profile, we should
+	not run the "clean" phase, so that test reports generated in the
+	previous maven build are not cleaned.
+	-->
+	<profiles>
+		<profile>
+			<id>buildP2Repository</id>
+			<modules>
+				<module>../org.eclipse.xtend.p2repository</module>
+			</modules>
+		</profile>
+	</profiles>
+
+</project>

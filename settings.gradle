@@ -1,5 +1,0 @@
-rootProject.name = 'xtext-xtend'
-
-include 'org.eclipse.xtend.core'
-include 'org.eclipse.xtend.ide.common'
-include 'org.eclipse.xtend.core.tests'
