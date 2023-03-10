@@ -41,13 +41,14 @@ pipeline {
         dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
         sh '''
           mvn \
-            -f org.eclipse.xtext.maven.parent/pom.xml \
+            -f org.eclipse.xtext.maven.releng/pom.xml \
             --batch-mode \
             --update-snapshots \
             -fae \
             -PuseJenkinsSnapshots \
             -Dmaven.test.failure.ignore=true \
             -Dmaven.repo.local=${WORKSPACE}/.m2/repository \
+            -DaltDeploymentRepository=local::default::file:./build/maven-repository \
             -DJENKINS_URL=$JENKINS_URL \
             -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
             clean deploy

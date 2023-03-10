@@ -3,42 +3,31 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.eclipse.xtext</groupId>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-maven</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>org.eclipse.xtext.maven.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.31.0-SNAPSHOT</version>
+
+	<url>https://www.eclipse.org/Xtext/</url>
+	<name>Xtext Maven Plugin Parent POM</name>
+	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, LSP and your favorite web browser.</description>
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
 		<maven.version>3.6.0</maven.version>
-		<tycho-version>2.7.5</tycho-version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.eclipse.xtext</groupId>
-				<artifactId>xtext-dev-bom</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<modules>
-		<module>../org.eclipse.xtext.maven.plugin</module>
-	</modules>
-	
 	<build>
 		<extensions>
 			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
@@ -133,7 +122,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.5.0</version>
+					<version>3.4.1</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-plugin-plugin</artifactId>
@@ -319,160 +308,5 @@
 			</repositories>
 		</profile>
 	</profiles>
-	
-	<distributionManagement>
-		<repository>
-			<id>local-repo</id>
-			<url>file:${root-dir}/build/maven-repository</url>
-		</repository>
-		<snapshotRepository>
-			<id>local-repo</id>
-			<url>file:${root-dir}/build/maven-repository</url>
-		</snapshotRepository>
-	</distributionManagement>
 
-	<scm>
-		<connection>scm:git:https://github.com/eclipse/xtext-maven.git</connection>
-		<developerConnection>scm:git:https://github.com/eclipse/xtext-maven.git</developerConnection>
-		<url>https://github.com/eclipse/xtext-maven.git</url>
-	</scm>
-	
-	<licenses>
-		<license>
-			<name>Eclipse Public License 2.0</name>
-			<url>http://www.eclipse.org/legal/epl-2.0</url>
-		</license>
-	</licenses>
-	
-	<url>https://www.eclipse.org/Xtext/</url>
-	<name>Xtext Maven Plugin Parent POM</name>
-	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, LSP and your favorite web browser.</description>
-	
-	<developers>
-		<developer>
-			<id>sven.efftinge</id>
-			<name>Sven Efftinge</name>
-			<email>sven.efftinge@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-			<roles>
-				<role>project lead</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>sebastian.benz</id>
-			<name>Sebastian Benz</name>
-		</developer>
-		<developer>
-			<id>lorenzo.bettini</id>
-			<name>Lorenzo Bettini</name>
-			<email>lorenzo.bettini@gmail.com</email>
-			<organization>DISIA, University Firenze</organization>
-		</developer>
-		<developer>
-			<id>michael.clay</id>
-			<name>Michael Clay</name>
-			<email>michael.clay@codeworkz.at</email>
-			<organization>Codeworkz</organization>
-		</developer>
-		<developer>
-			<id>arne.deutsch</id>
-			<name>Arne Deutsch</name>
-			<email>arne.deutsch@itemis.de</email>
-			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>christian.dietrich</id>
-			<name>Christian Dietrich</name>
-			<email>christian.dietrich@itemis.de</email>
-			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>moritz.eysholdt</id>
-			<name>Moritz Eysholdt</name>
-			<email>moritz.eysholdt@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-		</developer>
-		<developer>
-			<id>dennis.huebner</id>
-			<name>Dennis Hübner</name>
-			<email>dennis.huebner@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-		</developer>
-		<developer>
-			<id>jan.koehnlein</id>
-			<name>Jan Köhnlein</name>
-			<email>jan.koehnlein@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-		</developer>
-		<developer>
-			<id>anton.kosyakov</id>
-			<name>Anton Kosyakov</name>
-			<email>anton.kosyakov@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-		</developer>
-		<developer>
-			<id>tamas.miklossy</id>
-			<name>Tamas Miklossy</name>
-			<email>miklossy@itemis.de</email>
-			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>stefan.oehme</id>
-			<name>Stefan Oehme</name>
-		</developer>
-		<developer>
-			<id>holger.schill</id>
-			<name>Holger Schill</name>
-			<email>holger.schill@itemis.de</email>
-			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>christian.schneider</id>
-			<name>Christian Schneider</name>
-			<email>christian.schneider@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-		</developer>
-		<developer>
-			<id>miro.spoenemann</id>
-			<name>Miro Spönemann</name>
-			<email>miro.spoenemann@typefox.io</email>
-			<organization>TypeFox</organization>
-			<organizationUrl>http://typefox.io</organizationUrl>
-		</developer>
-		<developer>
-			<id>karsten.thoms</id>
-			<name>Karsten Thoms</name>
-			<email>karsten.thoms@itemis.de</email>
-			<organization>itemis</organization>
-			<organizationUrl>http://www.itemis.com</organizationUrl>
-		</developer>
-		<developer>
-			<id>knut.wannheden</id>
-			<name>Knut Wannheden</name>
-			<email>knut.wannheden@paranor.ch</email>
-			<organization>Paranor</organization>
-		</developer>
-		<developer>
-			<id>sebastian.zarnekow</id>
-			<name>Sebastian Zarnekow</name>
-			<email>sebastian.Zarnekow@gmail.com</email>
-		</developer>
-		<developer>
-			<id>titouan.vervack</id>
-			<name>Titouan Vervack</name>
-			<email>titouan.vervack@sigasi.com</email>
-			<organization>Sigasi</organization>
-			<organizationUrl>https://www.sigasi.com</organizationUrl>
-		</developer>
-	</developers>
 </project>
