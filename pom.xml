@@ -515,7 +515,7 @@
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<!-- MJAVADOC-620 – Maven Javadoc Plugin fails to resolve the dependencies 
 						when used with Java 11 -->
-					<version>3.2.0</version>
+					<version>3.5.0</version>
 					<configuration>
 						<detectOfflineLinks>false</detectOfflineLinks>
 						<detectJavaApiLink>false</detectJavaApiLink>
