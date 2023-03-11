@@ -33,6 +33,11 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: Show Maven version
+        run: |
+          which mvn
+          mvn -version
+
       - name: Build and test (headless with xvfb in Linux)
         run: xvfb-run mvn clean verify -PuseJenkinsSnapshots
         if: matrix.os == 'ubuntu-latest'
@@ -62,6 +67,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-maven
+
+      - name: Show Maven version
+        run: |
+          which mvn
+          mvn -version
 
       - name: Build Maven artifacts
         run: mvn clean verify -PuseJenkinsSnapshots

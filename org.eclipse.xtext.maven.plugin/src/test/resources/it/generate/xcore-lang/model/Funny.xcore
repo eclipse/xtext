@@ -1,0 +1,26 @@
+@GenModel(modelDirectory="./src-gen")
+
+package org.eclipse.xcoretest
+
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xcore.test.MyClass1
+import org.eclipse.xcore.test.MyClass3
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.xbase.XExpression
+
+class MyClass2 {
+	String name2
+	contains EObject[] eObjs
+	refers JvmType types
+	contains XExpression value
+	
+	op void doSomething() {
+		MyClass1.log
+		MyClass3.log
+	}
+}
+
+enum MyEnum {
+  MyFirstLiteral = -7,
+  MySecondLiteral = 137
+}

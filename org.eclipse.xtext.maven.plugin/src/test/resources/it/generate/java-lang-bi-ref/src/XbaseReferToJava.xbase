@@ -1,0 +1,2 @@
+val JavaClazz jc = null
+jc.useXbaseType(this)
