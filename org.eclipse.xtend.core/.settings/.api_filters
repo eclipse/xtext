@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtend.core" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="version will be generated during buckminster build" id="927989779">
+            <message_arguments>
+                <message_argument value="2.11.0"/>
+                <message_argument value="org.eclipse.xtext.common.types"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/AnonymousClass.java" type="org.eclipse.xtend.core.xtend.AnonymousClass">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="XExpression"/>
+                <message_argument value="AnonymousClass"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichString.java" type="org.eclipse.xtend.core.xtend.RichString">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="XBlockExpression"/>
+                <message_argument value="RichString"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichStringForLoop.java" type="org.eclipse.xtend.core.xtend.RichStringForLoop">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="XForLoopExpression"/>
+                <message_argument value="RichStringForLoop"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichStringIf.java" type="org.eclipse.xtend.core.xtend.RichStringIf">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="XExpression"/>
+                <message_argument value="RichStringIf"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/RichStringLiteral.java" type="org.eclipse.xtend.core.xtend.RichStringLiteral">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="XStringLiteral"/>
+                <message_argument value="RichStringLiteral"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtend/core/xtend/XtendVariableDeclaration.java" type="org.eclipse.xtend.core.xtend.XtendVariableDeclaration">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="XVariableDeclaration"/>
+                <message_argument value="XtendVariableDeclaration"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/compiler/batch/XtendBatchCompiler.java" type="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="OutputConfigurationAdapter(Map&lt;String,Set&lt;OutputConfiguration&gt;&gt;)"/>
+                <message_argument value="XtendBatchCompiler"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="UriUtil"/>
+                <message_argument value="XtendBatchCompiler"/>
+                <message_argument value="createFolderURI(File)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="FileProjectConfig"/>
+                <message_argument value="XtendBatchCompiler"/>
+                <message_argument value="getProjectConfig()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="XtendFile"/>
+                <message_argument value="XtendBatchCompiler"/>
+                <message_argument value="getXtendFile(Resource)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/jvmmodel/IXtendJvmAssociations.java" type="org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations$Impl">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="JvmModelAssociator"/>
+                <message_argument value="Impl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/core/jvmmodel/XtendJvmModelInferrer.java" type="org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer">
+        <filter comment="Xtend may implement interfaces from Xbase" id="574664731">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer.infer(EObject, IJvmDeclaredTypeAcceptor, boolean)"/>
+                <message_argument value="IJvmDeclaredTypeAcceptor"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/AbstractFileSystemSupport.java" type="org.eclipse.xtend.core.macro.AbstractFileSystemSupport">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableFileSystemSupport"/>
+                <message_argument value="AbstractFileSystemSupport"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/CodeGenerationContextImpl.java" type="org.eclipse.xtend.core.macro.CodeGenerationContextImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="CodeGenerationContext"/>
+                <message_argument value="CodeGenerationContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/FileLocationsImpl.java" type="org.eclipse.xtend.core.macro.FileLocationsImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="FileLocations"/>
+                <message_argument value="FileLocationsImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/ParallelFileSystemSupport.java" type="org.eclipse.xtend.core.macro.ParallelFileSystemSupport">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableFileSystemSupport"/>
+                <message_argument value="ParallelFileSystemSupport"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/RegisterGlobalsContextImpl.java" type="org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="RegisterGlobalsContext"/>
+                <message_argument value="RegisterGlobalsContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/TransformationContextImpl.java" type="org.eclipse.xtend.core.macro.TransformationContextImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TransformationContext"/>
+                <message_argument value="TransformationContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/ValidationContextImpl.java" type="org.eclipse.xtend.core.macro.ValidationContextImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ValidationContext"/>
+                <message_argument value="ValidationContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AbstractNamedElementImpl.java" type="org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="NamedElement"/>
+                <message_argument value="AbstractNamedElementImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AnnotationReferenceBuildContextImpl.java" type="org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReferenceBuildContext"/>
+                <message_argument value="AnnotationReferenceBuildContextImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AnnotationReferenceProviderImpl.java" type="org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReferenceProvider"/>
+                <message_argument value="AnnotationReferenceProviderImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/AssociatorImpl.java" type="org.eclipse.xtend.core.macro.declaration.AssociatorImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="Associator"/>
+                <message_argument value="AssociatorImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ChangeListenerAddingFileSystemSupport.java" type="org.eclipse.xtend.core.macro.declaration.ChangeListenerAddingFileSystemSupport">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableFileSystemSupport"/>
+                <message_argument value="ChangeListenerAddingFileSystemSupport"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/CompilationUnitImpl.java" type="org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="CompilationUnit"/>
+                <message_argument value="CompilationUnitImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ExpressionImpl.java" type="org.eclipse.xtend.core.macro.declaration.ExpressionImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="Expression"/>
+                <message_argument value="ExpressionImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/InferredTypeReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeReference"/>
+                <message_argument value="InferredTypeReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmAnnotationReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReference"/>
+                <message_argument value="JvmAnnotationReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmAnnotationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeDeclaration"/>
+                <message_argument value="JvmAnnotationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmAnnotationTypeElementDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeElementDeclaration"/>
+                <message_argument value="JvmAnnotationTypeElementDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmClassDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ClassDeclaration"/>
+                <message_argument value="JvmClassDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmConstructorDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ConstructorDeclaration"/>
+                <message_argument value="JvmConstructorDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmEnumerationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationTypeDeclaration"/>
+                <message_argument value="JvmEnumerationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmEnumerationValueDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationValueDeclaration"/>
+                <message_argument value="JvmEnumerationValueDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmFieldDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="FieldDeclaration"/>
+                <message_argument value="JvmFieldDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmInterfaceDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="InterfaceDeclaration"/>
+                <message_argument value="JvmInterfaceDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmMemberDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MemberDeclaration"/>
+                <message_argument value="JvmMemberDeclarationImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmMethodDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MethodDeclaration"/>
+                <message_argument value="JvmMethodDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ParameterDeclaration"/>
+                <message_argument value="JvmParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/JvmTypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTarget"/>
+                <message_argument value="JvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeParameterDeclaration"/>
+                <message_argument value="JvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmAnnotationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmAnnotationTypeDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableAnnotationTypeDeclaration"/>
+                <message_argument value="MutableJvmAnnotationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmAnnotationTypeElementDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmAnnotationTypeElementDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableAnnotationTypeElementDeclaration"/>
+                <message_argument value="MutableJvmAnnotationTypeElementDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmClassDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableClassDeclaration"/>
+                <message_argument value="MutableJvmClassDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmConstructorDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmConstructorDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableConstructorDeclaration"/>
+                <message_argument value="MutableJvmConstructorDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmEnumerationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmEnumerationTypeDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableEnumerationTypeDeclaration"/>
+                <message_argument value="MutableJvmEnumerationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmEnumerationValueDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmEnumerationValueDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableEnumerationValueDeclaration"/>
+                <message_argument value="MutableJvmEnumerationValueDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmFieldDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableFieldDeclaration"/>
+                <message_argument value="MutableJvmFieldDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmInterfaceDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmInterfaceDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableInterfaceDeclaration"/>
+                <message_argument value="MutableJvmInterfaceDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmMethodDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableMethodDeclaration"/>
+                <message_argument value="MutableJvmMethodDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableParameterDeclaration"/>
+                <message_argument value="MutableJvmParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/MutableJvmTypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.MutableJvmTypeParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableAnnotationTarget"/>
+                <message_argument value="MutableJvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MutableTypeParameterDeclaration"/>
+                <message_argument value="MutableJvmTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/PrimitiveTypeImpl.java" type="org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="PrimitiveType"/>
+                <message_argument value="PrimitiveTypeImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ProblemImpl.java" type="org.eclipse.xtend.core.macro.declaration.ProblemImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="Problem"/>
+                <message_argument value="ProblemImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/ProblemSupportImpl.java" type="org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ProblemSupport"/>
+                <message_argument value="ProblemSupportImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TracabilityImpl.java" type="org.eclipse.xtend.core.macro.declaration.TracabilityImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="Tracability"/>
+                <message_argument value="TracabilityImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeLookupImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeLookupImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="SourceTypeLookup"/>
+                <message_argument value="TypeLookupImpl"/>
+            </message_arguments>
+        </filter>
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeLookup"/>
+                <message_argument value="TypeLookupImpl"/>
+            </message_arguments>
+        </filter>
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="UpstreamTypeLookup"/>
+                <message_argument value="TypeLookupImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeParameterDeclaration"/>
+                <message_argument value="TypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeReference"/>
+                <message_argument value="TypeReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/TypeReferenceProviderImpl.java" type="org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeReferenceProvider"/>
+                <message_argument value="TypeReferenceProviderImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/UnknownType.java" type="org.eclipse.xtend.core.macro.declaration.UnknownType">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="Type"/>
+                <message_argument value="UnknownType"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/VoidTypeImpl.java" type="org.eclipse.xtend.core.macro.declaration.VoidTypeImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="VoidType"/>
+                <message_argument value="VoidTypeImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationReferenceImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationReference"/>
+                <message_argument value="XtendAnnotationReferenceImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationTargetImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationTargetImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTarget"/>
+                <message_argument value="XtendAnnotationTargetImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeDeclaration"/>
+                <message_argument value="XtendAnnotationTypeDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendAnnotationTypeElementDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeElementDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="AnnotationTypeElementDeclaration"/>
+                <message_argument value="XtendAnnotationTypeElementDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendClassDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ClassDeclaration"/>
+                <message_argument value="XtendClassDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendConstructorDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ConstructorDeclaration"/>
+                <message_argument value="XtendConstructorDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendEnumerationDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendEnumerationDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationTypeDeclaration"/>
+                <message_argument value="XtendEnumerationDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendEnumerationValueDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendEnumerationValueDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="EnumerationValueDeclaration"/>
+                <message_argument value="XtendEnumerationValueDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendFieldDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="FieldDeclaration"/>
+                <message_argument value="XtendFieldDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendInterfaceDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendInterfaceDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="InterfaceDeclaration"/>
+                <message_argument value="XtendInterfaceDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendMemberDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MemberDeclaration"/>
+                <message_argument value="XtendMemberDeclarationImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendMethodDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="MethodDeclaration"/>
+                <message_argument value="XtendMethodDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="ParameterDeclaration"/>
+                <message_argument value="XtendParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendTypeDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeDeclaration"/>
+                <message_argument value="XtendTypeDeclarationImpl&lt;T&gt;"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtend/core/macro/declaration/XtendTypeParameterDeclarationImpl.java" type="org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="TypeParameterDeclaration"/>
+                <message_argument value="XtendTypeParameterDeclarationImpl"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

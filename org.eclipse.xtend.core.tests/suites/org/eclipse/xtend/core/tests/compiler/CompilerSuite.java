@@ -1,0 +1,130 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+package org.eclipse.xtend.core.tests.compiler;
+
+import org.eclipse.xtend.core.tests.annotations.AnnotationsCompilerTest;
+import org.eclipse.xtend.core.tests.compiler.batch.BatchCompilerTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@RunWith(Suite.class)
+@SuiteClasses({
+	AccessorsCompilerTest.class,
+	AnnotationCompilerTest.class,
+	AnnotationsCompilerTest.class,
+	AnnotationValueCompilerTest.class,
+	AnonymousClassCompilerTest.class,
+	AutocastCompilerTest.class,
+	CompilerTest.class,
+	CompilerBugTest.class,
+	CompilerBug342021Test.class,
+	CompilerBug381162Test.class,
+	CompilerBug383534Test.class,
+	CompilerBug404051Test.class,
+	CompilerBug405825Test.class,
+	CompilerBug406066Test.class,
+	CompilerBug406425Test.class,
+	CompilerBug406549Test.class,
+	CompilerBug410555Test.class,
+	CompilerBug410556Test.class,
+	CompilerBug410767Test.class,
+	CompilerBug410797Test.class,
+	CompilerBug412894Test.class,
+	CompilerBug413138Test.class,
+	CompilerBug416305Test.class,
+	CompilerBug417522Test.class,
+	CompilerBug418364Test.class,
+	CompilerBug419050Test.class,
+	CompilerBug419688Test.class,
+	CompilerBug421999Test.class,
+	CompilerBug422864Test.class,
+	CompilerBug423631Test.class,
+	CompilerBug423907Test.class,
+	CompilerBug424329Test.class,
+	CompilerBug424763Test.class,
+	CompilerBug424839Test.class,
+	CompilerBug427637Test.class,
+	CompilerBug427660Test.class,
+	CompilerBug428063Test.class,
+	CompilerBug429376Test.class,
+	CompilerBug430484Test.class,
+	CompilerBug432193Test.class,
+	CompilerBug434424Test.class,
+	CompilerBug435133Test.class,
+	CompilerBug435473Test.class,
+	CompilerBug436230Test.class,
+	CompilerBug436302Test.class,
+	CompilerBug436886Test.class,
+	CompilerBug437678Test.class,
+	CompilerBug438483Test.class,
+	CompilerBug439989Test.class,
+	CompilerBug440196Test.class,
+	CompilerBug440902Test.class,
+	CompilerBug440906Test.class,
+	CompilerBug441096Test.class,
+	CompilerBug441099Test.class,
+	CompilerBug441580Test.class,
+	CompilerBug445487Test.class,
+	CompilerBug447516Test.class,
+	CompilerBug448221Test.class,
+	CompilerBug451814Test.class,
+	CompilerBug452821Test.class,
+	CompilerBug455317Test.class,
+	CompilerBug456883Test.class,
+	CompilerBug457333Test.class,
+	CompilerBug457346Test.class,
+	CompilerBug457539Test.class,
+	CompilerBug458612Test.class,
+	CompilerBug459920Test.class,
+	CompilerBug460691Test.class,
+	CompilerBug460963Test.class,
+	CompilerBug461568Test.class,
+	CompilerBug461923Test.class,
+	CompilerBug462260Test.class,
+	CompilerBug462845Test.class,
+	CompilerBug464264Test.class,
+	CompilerBug465058Test.class,
+	CompilerBug465649Test.class,
+	CompilerBug470768Test.class,
+	CompilerBug471631Test.class,
+	CompilerBug472142Test.class,
+	CompilerBug472602Test.class,
+	CompilerBugDependentTypeParametersTest.class,
+	CompilerBugInheritedDispatchTest.class,
+	CompilerBugProtectedVisibilityTest.class,
+	CompilerTraceTest.class,
+	CompoundAssignmentOperatorCompilerTest.class,
+	ConfiguredCompilerTest.class,
+	DispatchCompilerTest.class,
+	ExtensionsCompilerTest.class,
+	OldDataCompilerTest.class,
+	NewDataCompilerTest.class,
+	AccessorsCompilerTest.class,
+	ToStringCompilerTest.class,
+	EqualsHashCodeCompilerTest.class,
+	DelegateCompilerTest.class,
+	FinalFieldsConstructorCompilerTest.class,
+	Java8OverloadCompilerTest.class,
+	NestedClassCompilerTest.class,
+	OverloadedExtensionCompilerTest.class,
+	ParameterizedTypeCompilerTest.class,
+	ParameterizedInnerTypesCompilerTest.class,
+	PostfixOperatorCompilerTest.class,
+	PropertyCompilerTest.class,
+	BatchCompilerTest.class,
+	XtendCompilerTest.class,
+	XtendCompilerErrorHandlingTest.class,
+	XbaseIntegrationTest.class
+})
+public class CompilerSuite {
+}

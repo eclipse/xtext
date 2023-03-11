@@ -1,0 +1,67 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>Hello World</title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="getting-started">Hello World</h1>
+
+<p>The first thing you want to see in any language is a <em>Hello World</em> example. In Xtend, that reads as</p>
+
+<pre><code class="language-xtend">class HelloWorld {
+  def static void main(String[] args) {
+    println("Hello World")
+  }
+}
+</code></pre>
+
+<p>You see that Xtend looks quite similar to Java. At a first glance the main difference seems to be the <code>def</code> keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. Admittedly <em>Hello World</em> programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things as you will learn in a second.</p>
+
+<p>An Xtend class resides in a plain Eclipse Java project. As soon as the SDK is installed, Eclipse will automatically translate all the classes to Java source code. By default you will find it in a source folder <em>xtend-gen</em>. The hello world example is translated to the following Java code:</p>
+
+<pre><code class="language-java">// Generated Java Source Code
+import org.eclipse.xtext.xbase.lib.InputOutput;
+
+public class HelloWorld {
+  public static void main(final String[] args) {
+    InputOutput.&lt;String&gt;println("Hello World");
+  }
+}
+</code></pre>
+
+<p>The only surprising fact in the generated Java code may be the referenced library class <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java">InputOutput</a>. It is part of the runtime library and a nice utility that is quite handy when used in expressions.</p>
+
+<p>You can put an Xtend class into a source folder of any Java project within Eclipse or any Maven project. If the project is not yet configured properly, Eclipse will complain about the missing library. The xtend.lib has to be on the class path. The IDE will provide a quick fix to add it.</p>
+
+<p>The next thing you might want to do is materializing one of the example projects into your workspace. Right click anywhere in the <em>Navigator</em> view in Eclipse and select <em>New → Example…</em>.</p>
+
+<p>In the upcoming dialog you will find two examples for Xtend:</p>
+
+<ul>
+  <li>
+    <p><em>Xtend Introductory Examples</em> contains a couple of example code snippets illustrating certain aspects and strengths of Xtend. For instance it shows how to build an API which allows to write code like this:</p>
+
+    <pre><code class="language-xtend">assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)
+</code></pre>
+
+    <p>The <em>Movies</em> example explained in detail <a href="102_moviesexample.html">in the next section</a> is also included there.</p>
+  </li>
+  <li>
+    <p><em>Xtend Solutions For Euler</em> contains solutions to some of the problems you will find at <a href="http://projecteuler.net/">Project Euler</a>. These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved with this expression :</p>
+
+    <pre><code class="language-xtend">(1..999).filter[ i | i % 3 == 0 || i % 5 == 0 ].reduce[ i1, i2 | i1 + i2 ]
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong><a href="102_moviesexample.html">Next Chapter: The Movies Example</a></strong></p>
+
+
+</body>
+</html>

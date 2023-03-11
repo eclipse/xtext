@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>Java Interoperability</title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="types">Java Interoperability</h1>
+
+<p>Xtend, like Java, is a statically typed language. In fact it completely supports Java’s type system, including the primitive types like <code>int</code> or <code>boolean</code>, arrays and all the Java classes, interfaces, enums and annotations that reside on the class path.</p>
+
+<p>Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as defined in <a href="http://docs.oracle.com/javase/specs/jls/se6/html/conversions.html">the Java Language Specification</a>.</p>
+
+<p>Resembling and supporting every aspect of Java’s type system ensures that there is no impedance mismatch between Java and Xtend. This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles. As a bonus, if you know Java’s type system and are familiar with Java’s generic types, you already know the most complicated part of Xtend.</p>
+
+<p>The default behavior of the Xtend-to-Java compiler is to generate Java code with the same language version compatibility as specified for the Java compiler in the respective project. This can be changed in the global preferences or in the project properties on the <em>Xtend → Compiler</em> page (since 2.8). Depending on which Java language version is chosen, Xtend might generate different but equivalent code. For example, <a href="203_xtend_expressions.html#lambdas">lambda expressions</a> are translated to Java lambdas if the compiler is set to Java 8, while for lower Java versions anonymous classes are generated.</p>
+
+<h2 id="local-type-inference">Type Inference</h2>
+
+<p>One of the problems with Java is that you are forced to write type signatures over and over again. That is why so many people do not like static typing. But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is statically typed just like Java, you rarely have to write types down because they can be computed from the context.</p>
+
+<p>Consider the following Java variable declaration:</p>
+
+<pre><code class="language-java">final LinkedList&lt;String&gt; list = new LinkedList&lt;String&gt;();
+</code></pre>
+
+<p>The type name written for the constructor call must be repeated to declare the variable type. In Xtend the variable type can be inferred from the initialization expression:</p>
+
+<pre><code class="language-xtend">val list = new LinkedList&lt;String&gt;
+</code></pre>
+
+<h2 id="conversion-rules">Conversion Rules</h2>
+
+<p>In addition to Java’s autoboxing to convert primitives to their corresponding wrapper types (e.g. <code>int</code> is automatically converted to <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html">Integer</a> when needed), there are additional conversion rules in Xtend.</p>
+
+<p>Arrays are automatically converted to <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html"><code>List&lt;ComponentType&gt;</code></a> and vice versa. That is you can write the following:</p>
+
+<pre><code class="language-xtend">def toList(String[] array) {
+  val List&lt;String&gt; asList = array
+  return asList
+}
+</code></pre>
+
+<p>Subsequent changes to the array are reflected by the list and vice versa. Arrays of primitive types are converted to lists of their respective wrapper types.</p>
+
+<p>The conversion works the other way round, too. In fact, all subtypes of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> are automatically converted to arrays on demand.</p>
+
+<p>Another very useful conversion applies to lambda expressions. A lambda expression usually is of one of the types declared in <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Functions</a> or <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedures</a>. However, if the expected type is an interface or a class with a single abstract method declaration, a lambda expression is automatically converted to that type. This allows to use lambda expressions with many existing Java libraries. See <a href="203_xtend_expressions.html#closure-types">Lambda Expression Typing</a> for more details.</p>
+
+<hr />
+
+<p><strong><a href="202_xtend_classes_members.html">Next Chapter: Classes and Members</a></strong></p>
+
+
+</body>
+</html>

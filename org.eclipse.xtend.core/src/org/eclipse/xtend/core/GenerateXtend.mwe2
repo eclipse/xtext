@@ -1,0 +1,155 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+module org.eclipse.xtend.core.GenerateXtend
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.generator.parser.antlr.*
+import org.eclipse.xtext.resource.XtextResourceSet 
+
+var rootPath = ".."
+var baseName = "org.eclipse.xtend"
+var runtimeProjectName = "org.eclipse.xtend.core"
+var projectPath = "${rootPath}/${runtimeProjectName}"
+
+var file.extensions = "xtend"
+
+var lineDelimiter = "\n"
+var backtrack = false
+var memoize = false
+var skipUnusedRules = true
+var stripAllComments = true
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2010, \${year} itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/"
+
+Workflow {
+
+	component = parser.JFlexLoader : jFlexMain {}
+
+	component = XtextGenerator auto-inject {
+		configuration = parser.XtendGeneratorModule {
+			project = StandardProjectConfig auto-inject {
+				runtime = {
+					name = runtimeProjectName
+				}
+				eclipsePlugin = {
+					enabled = true
+					name = "org.eclipse.xtend.ide"
+				}
+				genericIde = {
+					enabled = true
+					name = "org.eclipse.xtend.ide.common"
+				}
+				createEclipseMetaData = true
+			}
+			code = {
+				encoding = "ISO-8859-1"
+				lineDelimiter = lineDelimiter
+				fileHeader = fileHeader
+				preferXtendStubs = false
+			}
+		}
+		language = {
+			resourceSet = XtextResourceSet : resourceSet {}
+			referencedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+			referencedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+			name = "org.eclipse.xtend.core.Xtend"
+			fileExtensions = file.extensions
+			guiceModule = parser.XtendLanguageGeneratorModule {}
+			
+			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
+			fragment = serializer.SerializerFragment2 {
+				// generateDebugData = true
+			}
+			fragment = resourceFactory.ResourceFactoryFragment2 {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+				removeBacktrackingGuards = true
+				lookaheadThreshold = '5'
+				partialParsing = true
+				debugGrammar = true
+				options = auto-inject {}
+			}
+			fragment = validation.ValidatorFragment2 {
+				generatePropertyPage = false
+				generateDeprecationValidation = false
+			}
+			fragment = formatting.Formatter2Fragment2 {
+				generateXtendStub = true
+			}
+			fragment = generator.GeneratorFragment2 {}
+			fragment = scoping.ImportNamespacesScopingFragment2 {}
+			fragment = builder.BuilderIntegrationFragment2 {}
+
+			fragment = ui.quickfix.QuickfixProviderFragment2 {}
+
+			fragment = ui.labeling.LabelProviderFragment2 {
+				generateStub = false
+			}
+
+			fragment = ui.outline.OutlineTreeProviderFragment2 {}
+
+			fragment = ui.outline.QuickOutlineFragment2 {}
+
+			fragment = ui.compare.CompareFragment2 {}
+
+			fragment = ui.contentAssist.ContentAssistFragment2 {}
+
+			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
+				useJdtRefactoring = true
+			}
+			
+			fragment = types.TypesGeneratorFragment2 {}
+			fragment = xbase.XbaseGeneratorFragment2 {
+				generateXtendInferrer = false
+			}
+
+			fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
+
+			fragment = parser.JFlexGeneratorFragment2 auto-inject {
+				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+			}
+	
+			fragment = parser.JFlexGeneratorFragment2 auto-inject {
+				ui = true
+				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+			}
+			
+		}
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${projectPath}/emf-gen"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator auto-inject {
+		genModel = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+		srcPath ="platform:/resource/${runtimeProjectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator auto-inject {
+		genModel = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+		srcPath ="platform:/resource/${runtimeProjectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+	}
+}
