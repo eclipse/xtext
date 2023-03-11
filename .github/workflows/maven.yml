@@ -63,6 +63,11 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-maven
 
+      - name: Show Maven version
+        run: |
+          which mvn
+          mvn -version
+
       - name: Build Maven artifacts
         run: mvn clean verify -PuseJenkinsSnapshots
         working-directory: org.eclipse.xtext.maven.releng
