@@ -34,12 +34,6 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
 
-		<!-- 
-		  Maven repository initially produced by gradle upstream build.
-		  Used to grab the upstream maven artifacts like org.eclipse.xtend.core
-		  and also to deploy the artifacts produced in this build.
-		 -->
-		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
 		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
@@ -165,10 +159,6 @@
 				<plugin>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>3.2.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
 				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->

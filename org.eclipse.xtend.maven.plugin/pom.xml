@@ -9,11 +9,13 @@
 	</parent>
 	<artifactId>xtend-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	
+
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
+		<!-- The local Maven repository for our IT tests -->
+		<localMavenRepositoryPath>${project.basedir}/target/.m2test</localMavenRepositoryPath>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -152,7 +154,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>create-jar</id>
+						<id>create-IT-SNAPSHOT-jar</id>
 						<phase>pre-integration-test</phase>
 						<configuration>
 							<skip>${maven.test.skip}</skip>
@@ -175,7 +177,7 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>touch-jar</id>
+						<id>touch-IT-SNAPSHOT-jar</id>
 						<phase>pre-integration-test</phase>
 						<configuration>
 							<target>
@@ -190,21 +192,39 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-invoker-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install dependencies in local test repo</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>install IT-SNAPSHOT-jar in local test repo</id>
 						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<skip>${maven.test.skip}</skip>
 							<file>${project.build.directory}/${project.build.finalName}-it.jar</file>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>${project.artifactId}</artifactId>
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
+							<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 						</configuration>
 					</execution>
 				</executions>
@@ -212,11 +232,10 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>-Xmx1024m -DgradleMavenRepo=${gradleMavenRepo}</argLine>
+					<argLine>-Xmx1024m</argLine>
 					<systemPropertyVariables>
-						<gradleMavenRepo>${gradleMavenRepo}</gradleMavenRepo>
 						<testSettingsXML>${project.basedir}/src/test/resources/settings.xml</testSettingsXML>
-						<testMavenRepo>${project.basedir}/target/.m2test</testMavenRepo>
+						<testMavenRepo>${localMavenRepositoryPath}</testMavenRepo>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>
