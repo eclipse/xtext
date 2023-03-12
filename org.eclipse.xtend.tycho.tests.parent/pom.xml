@@ -69,32 +69,32 @@
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.apache.felix.scr</id>
-								<versionRange>1.0.0</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.equinox.event</id>
-								<versionRange>1.0.0</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.pde.ui</id>
-								<versionRange>1.0.0</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 							<requirement>
 								<type>eclipse-feature</type>
 								<id>org.eclipse.platform</id>
-								<versionRange>3.6</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 							<requirement>
 								<type>eclipse-feature</type>
 								<id>org.eclipse.jdt</id>
-								<versionRange>1.0.0</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.xtext.common.types.shared.jdt38</id>
-								<versionRange>1.0.0</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 							<requirement>
 								<type>eclipse-plugin</type>
