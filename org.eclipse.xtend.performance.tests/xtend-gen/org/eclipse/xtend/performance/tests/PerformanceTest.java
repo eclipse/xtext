@@ -24,6 +24,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -44,6 +45,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
   @BeforeClass
   public static void createTestProject() {
     try {
+      TargetPlatformUtil.setTargetPlatform(PerformanceTest.class);
       PerformanceTestProjectSetup.setUp();
       IResourcesSetupUtil.waitForBuild();
       PerformanceTest.assertNoErrorsInWorkspace();

@@ -27,6 +27,7 @@ import org.junit.Test
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,6 +38,11 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@BeforeClass
 	def static void createTestProject() {
+		// manually setting the TP allows the Tycho build to succeed
+		// otherwise, the required bundles taken from the workspace
+		// have a wrong layout in "Plug-in Dependencies", and their
+		// classes cannot be resolved
+		TargetPlatformUtil.setTargetPlatform(PerformanceTest)
 		PerformanceTestProjectSetup::setUp
 		waitForBuild();
 		assertNoErrorsInWorkspace();
