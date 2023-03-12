@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+<target name="xtext-latest" sequenceNumber="6">
+<locations>
+
+	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.lib" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-lib/job/lb_2052_maven_tycho/lastStableBuild/artifact/build/p2-repository/"/>
+	</location>
+	
+	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xtext" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.testing" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.util" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.generator" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.wizard" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.testlanguages" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.testlanguages.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-core/job/lb_2052_maven_tycho/lastStableBuild/artifact/build/p2-repository/"/>
+	</location>
+	
+	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xtext.builder.standalone" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ecore" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.generator" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.java" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.purexbase" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.purexbase.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.smap" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.testing" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/lb_2052_maven_tycho/lastStableBuild/artifact/build/p2-repository/"/>
+	</location>
+	
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xtext.doc" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.activities" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.builder" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.buildship" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types.edit" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types.shared" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types.shared.jdt38" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.junit4" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.logging" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.m2e" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.purexbase.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codemining" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codetemplates" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codetemplates.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codetemplates.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.ecore" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.shared" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.testing" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.junit" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.ui.examples" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.ui.graph" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.ui.testing" version="0.0.0"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-eclipse/job/lb_2052_maven_tycho/lastStableBuild/artifact/build/p2-repository/"/>
+	</location>
+	
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xtend.core" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.doc" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.examples" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.ide.common" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.m2e" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.standalone" version="0.0.0"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-xtend/job/lb_2052_maven_tycho/lastStableBuild/artifact/build/p2-repository/"/>
+	</location>
+	
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="com.google.guava" version="30.1.0.v20221112-0806"/>
+		<unit id="com.google.guava.source" version="30.1.0.v20221112-0806"/>
+		<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
+		<unit id="com.google.inject.source" version="5.0.1.v20221112-0806"/>
+		<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
+		<unit id="javax.inject.source" version="1.0.0.v20220405-0441"/>
+		<unit id="org.apache.log4j" version="1.2.24.v20221221-2012"/>
+		<unit id="org.apache.log4j.source" version="1.2.24.v20221221-2012"/>
+		<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
+		<unit id="org.antlr.runtime.source" version="3.2.0.v20220404-1927"/>
+		<unit id="org.junit" version="0.0.0"/>
+		<unit id="org.junit.source" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api.source" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine.source" version="0.0.0"/>
+		<unit id="org.junit.platform.commons" version="0.0.0"/>
+		<unit id="org.junit.platform.commons.source" version="0.0.0"/>
+		<unit id="org.junit.platform.engine" version="0.0.0"/>
+		<unit id="org.junit.platform.engine.source" version="0.0.0"/>
+		<unit id="org.junit.platform.launcher" version="0.0.0"/>
+		<unit id="org.junit.platform.launcher.source" version="0.0.0"/>
+		<unit id="org.junit.platform.runner" version="0.0.0"/>
+		<unit id="org.junit.platform.runner.source" version="0.0.0"/>
+		<unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
+		<unit id="org.aopalliance.source" version="1.0.0.v20220404-1927"/>
+		<unit id="org.opentest4j" version="0.0.0"/>
+		<unit id="org.opentest4j.source" version="0.0.0"/>
+		<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
+		<unit id="org.objectweb.asm.source" version="9.4.0.v20221107-1714"/>
+		<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
+		<unit id="io.github.classgraph.source" version="4.8.149.v20220915-0556"/>
+		<repository location="https://download.eclipse.org/tools/orbit/downloads/2023-03"/>
+	</location>
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
+		<unit id="com.google.gson.source" version="2.9.1.v20220915-1632"/>
+		<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
+	</location>
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
+		<unit id="com.google.guava" version="0.0.0"/>
+		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.buildship.feature.group" version="0.0.0"/>
+		<repository location="https://download.eclipse.org/releases/2022-03"/>
+	</location>
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xpand" version="0.0.0"/>
+		<unit id="org.eclipse.xpand.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtend" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.typesystem.emf.source" version="0.0.0"/>
+		<repository location="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315/"/>
+	</location>
+	
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
+		<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.29"/>
+	</location>
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/"/>
+		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
+	</location>
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
+		<repository location="https://download.eclipse.org/cbi/updates/license/"/>
+	</location>
+</locations>
+</target>

@@ -8,7 +8,7 @@ pipeline {
   parameters {
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
-       'temurin-jdk11-latest', 'temurin-jdk17-latest'
+       'temurin-jdk17-latest', 'temurin-jdk11-latest'
     ])
   }
 
@@ -69,17 +69,18 @@ pipeline {
       }
     }
 
-    stage('Maven Build') {
+    stage('Maven Tycho P2 Repo and Sign') {
       steps {
         sh '''
           mvn \
-            -f releng \
+            -f org.eclipse.xtext.p2.releng \
+            clean package \
+            -PuseJenkinsSnapshots \
+            -P eclipse-sign,buildP2Repository \
             --batch-mode \
             --update-snapshots \
             -fae \
-            -Dmaven.repo.local=$WORKSPACE/.m2/repository \
-            -Dtycho.disableP2Mirrors=true \
-            clean install
+            -Dmaven.repo.local=$WORKSPACE/.m2/repository
         '''
       }
     }

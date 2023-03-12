@@ -7,3 +7,4 @@ build/
 org.eclipse.buildship.core.prefs
 .DS_Store
 locations.properties
+target

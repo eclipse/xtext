@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-parent</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>org.eclipse.xtext.sdk.p2-repository</artifactId>
+	<packaging>eclipse-repository</packaging>
+
+	<properties>
+		<!-- 
+			Version qualifier of the target zip file 
+			Usually this is the same as the (snaphsot) project version
+			but for releases it is set to the release version.
+		-->
+		<zipFileVersion>2.31.0-SNAPSHOT</zipFileVersion>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble-repository</goal>
+						</goals>
+						<configuration>
+							<repositoryName>Xtext</repositoryName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/../build</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<copy todir="${basedir}/../build/p2-repository/">
+									<fileset dir="${basedir}/target/repository/" />
+								</copy>
+								<copy
+									file="${basedir}/target/org.eclipse.xtext.sdk.p2-repository-2.31.0-SNAPSHOT.zip"
+									tofile="${basedir}/../build/org.eclipse.xtext.sdk.p2-repository-${zipFileVersion}.zip">
+								</copy>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-parent</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.eclipse.xtext.p2.releng</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../org.eclipse.xtext.docs.feature</module>
+		<module>../org.eclipse.xtext.examples.feature</module>
+		<module>../org.eclipse.xtext.generator.feature</module>
+		<module>../org.eclipse.xtext.redist.feature</module>
+		<module>../org.eclipse.xtext.runtime.feature</module>
+		<module>../org.eclipse.xtext.sdk.feature</module>
+		<module>../org.eclipse.xtext.ui.feature</module>
+		<module>../org.eclipse.xtext.xbase.feature</module>
+		<module>../org.eclipse.xtext.xtext.ui.feature</module>
+		<module>../org.eclipse.xtext.xtext.ui.graph.feature</module>
+		<module>../org.eclipse.xtend.sdk.feature</module>
+		<module>../org.eclipse.xtext.sdk.p2-repository</module>
+		<module>../org.eclipse.emf.mwe2.language.sdk.dummy</module>
+	</modules>
+
+</project>
