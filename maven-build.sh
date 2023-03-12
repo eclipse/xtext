@@ -17,8 +17,7 @@ MVN_ARGS=(\
   -DJENKINS_URL=$JENKINS_URL \
   -DWORKSPACE=$WORKSPACE \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
-  -Dit-archetype-tests-skip=true \
-  -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ \
+  -Dit-archetype-tests-skip=true
 )
 
 # args parsing inspired by https://gist.github.com/jehiah/855086
@@ -55,7 +54,7 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
-MVN_ARGS+=(-Pjavadoc)
+# MVN_ARGS+=(-Pjavadoc)
 
 echo mvn -B -f org.eclipse.xtext.maven.releng ${MVN_ARGS[@]} $@
 

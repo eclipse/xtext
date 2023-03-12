@@ -26,22 +26,17 @@ public class MavenVerifierUtil {
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(MavenVerifierUtil.class, pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		System.out.println("gradle: " + System.getProperty("gradleMavenRepo"));
-		for (Object iterable_element : System.getProperties().keySet()) {
-			System.out.println(iterable_element + "=" + System.getProperty(iterable_element.toString()));
-		}
-		
-		String gradleMavenRepo = System.getProperty("gradleMavenRepo");
-		Assert.assertNotNull("gradleMavenRepo is null", gradleMavenRepo);
-		verifier.setSystemProperty("gradleMavenRepo", gradleMavenRepo);
-		
-		verifier.setSystemProperty("nonTestMavenRepo", System.getProperty("maven.repo.local"));
-		verifier.setSystemProperty("WORKSPACE", System.getProperty("WORKSPACE"));
-		
+
 		String testMavenRepo = System.getProperty("testMavenRepo");
-		Assert.assertNotNull("testMavenRepo is null", testMavenRepo);
+		Assert.assertNotNull(
+			"Required property 'testMavenRepo' is null!\n"
+			+ "If you run these tests from Eclipse, first run the Maven launch\n"
+			+ "'pre-integration-test.launch'\n"
+			+ "then use the JUnit launch\n"
+			+ "'Run ITs from Eclipse.launch'.",
+			testMavenRepo);
 		verifier.setLocalRepo(testMavenRepo);
-		
+
 		verifier.setDebug(true);
 		String testSettingsXML = System.getProperty("testSettingsXML");
 		if (testSettingsXML != null) {
@@ -72,7 +67,10 @@ public class MavenVerifierUtil {
 
 	private static String findMaven() {
 		// TODO add more mavens here
-		String[] mavens = new String[] { System.getProperty("maven.home"), "/opt/local/share/java/maven3/" };
+		String[] mavens = new String[] { System.getProperty("maven.home"),
+				"/opt/local/share/java/maven3/",
+				"/usr/local/", "/usr/",
+				"/opt/homebrew/"};
 		for (String maven : mavens) {
 			if (new File(maven + "/bin/mvn").exists()) {
 				return maven;
