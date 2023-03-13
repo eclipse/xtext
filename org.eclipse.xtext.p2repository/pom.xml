@@ -22,6 +22,21 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble-repository</goal>
+						</goals>
+						<configuration>
+							<repositoryName>Xtext</repositoryName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -36,7 +51,7 @@
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 								<copy
-									file="${basedir}/target/repository/org.eclipse.xtext.p2repository-2.31.0-SNAPSHOT.zip"
+									file="${basedir}/target/org.eclipse.xtext.p2repository-2.31.0-SNAPSHOT.zip"
 									tofile="${root-dir}/build/org.eclipse.xtext.p2repository-${zipFileVersion}.zip">
 								</copy>
 							</target>
