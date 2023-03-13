@@ -108,6 +108,19 @@
 		<module>../org.eclipse.xtend.performance.tests</module>
 		<module>../org.eclipse.xtend.swtbot</module>
 		<module>../org.eclipse.xtend.ide.swtbot.tests</module>
+		<!-- xtext-umbrella -->
+		<module>../org.eclipse.xtext.docs.feature</module>
+		<module>../org.eclipse.xtext.examples.feature</module>
+		<module>../org.eclipse.xtext.generator.feature</module>
+		<module>../org.eclipse.xtext.redist.feature</module>
+		<module>../org.eclipse.xtext.runtime.feature</module>
+		<module>../org.eclipse.xtext.sdk.feature</module>
+		<module>../org.eclipse.xtext.ui.feature</module>
+		<module>../org.eclipse.xtext.xbase.feature</module>
+		<module>../org.eclipse.xtext.xtext.ui.feature</module>
+		<module>../org.eclipse.xtext.xtext.ui.graph.feature</module>
+		<module>../org.eclipse.xtend.sdk.feature</module>
+		<module>../org.eclipse.emf.mwe2.language.sdk.dummy</module>
 	</modules>
 
 	<!--

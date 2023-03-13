@@ -1,0 +1,349 @@
+pipeline {
+  agent {
+    kubernetes {
+      inheritFrom 'centos-8'
+    }
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'15'))
+    disableConcurrentBuilds()
+    timeout(time: 120, unit: 'MINUTES')
+  }
+
+  // https://jenkins.io/doc/book/pipeline/syntax/#triggers
+  triggers {
+    cron('50 21 * * *') // nightly at 21:50
+  }
+
+  parameters {
+    choice(name: 'RELEASE_TYPE', choices: ['Integration', 'Beta', 'M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
+      '''
+        Kind of release to build. The chosen value is dependent on the parameter BUILD_TYPE. Use value:
+          <ul>
+            <li><tt>Integration</tt>: Continuous Build</li>
+            <li><tt>GA</tt>: Release Build</li>
+            <li>Any other: Stable/Milestone Build</tt></li>
+          </ul>
+      ''')
+    string      (name: 'BRANCH_TO_DEPLOY', defaultValue: 'master', description: 'From which Git branch should the release be created (master for snapshot deployments)?')
+    booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS', defaultValue: true, description: 'Whether to sign jars using the Eclipse web service')
+    booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS', defaultValue: false, description: 'Whether to pack jars using pack200 (do not check unless you know what you are doing)')
+  }
+
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
+    KEYRING = credentials('secret-subkeys.asc')
+    SCRIPTS = "$WORKSPACE/umbrella/releng/jenkins/sign-and-deploy/scripts"
+    GITHUB_API_CREDENTIALS_ID = 'github-bot-token'
+    GRADLE_USER_HOME = "$WORKSPACE/.gradle" // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=564559
+  }
+
+  tools {
+    jdk "temurin-jdk8-latest"
+  }
+
+  stages {
+    stage('Prepare') {
+      steps {
+        sh "pwd && ls -la"
+        dir('publishing') {
+          git branch: 'master', changelog: false, poll: false, url: 'https://github.com/xtext/publishing.git'
+        }
+        sh "pwd && ls -la"
+      }
+    }
+
+    stage('Clean up old milestones') {
+      when {
+        environment name: 'RELEASE_TYPE', value: 'M1'
+      }
+      steps {
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh '''
+            # Remove old milestones from update site
+            # Intentionally leave composite*.xml files, as they will be updated at the end.
+            # Intentionally leave p2.index file so that we don't have to recreate it.
+            ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/S*"
+            # Remove old milestones from drop location
+            ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops/*/S*"
+          '''
+        }
+      }
+    }
+
+    stage('Determine Xtext version') {
+      steps {
+        withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
+          dir('publishing') {
+            sh('curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_TO_DEPLOY | jq -r ".content" | base64 -d | grep -Po "version = \\\'\\K([^\\\']*)(?=\\\')" > version.txt')
+            sh("cat version.txt")
+          } // END dir
+        } // END withCredentials
+      } // END steps
+    } // END stage
+
+    stage('Sign & Upload to OSSRH') {
+      steps {
+        // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
+        dir('publishing') {
+        withCredentials([string(credentialsId: 'gpg_passphrase', variable: 'GPG_PASSPHRASE')]) {
+          sh '''
+            XTEXT_VERSION=$(cat version.txt)
+            echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
+            gpg --version
+            gpg --batch --import "${KEYRING}"
+
+            for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
+            do
+              echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
+            done
+
+            ./gradlew -info \
+              --warning-mode all \
+              --refresh-dependencies \
+              -PJENKINS_URL=$JENKINS_URL \
+              -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
+              -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
+              -Posspub.version=$XTEXT_VERSION \
+              -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
+              -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+              -Posspub.branch=$BRANCH_TO_DEPLOY \
+              -Psigning.secretKeyRingFile=/home/jenkins/.gnupg/secring.gpg \
+              -Psigning.keyId=D1AE0CFD \
+              -Psigning.gnupg.passphrase=$GPG_PASSPHRASE \
+              clean publishMavenXtext publishEclipseXtext
+          '''
+          } // END withCredentials
+        } // END dir
+      }
+    }
+    
+    stage('Deploy to Eclipse project storage') {
+      steps {
+        dir('publishing') {
+        sh '''
+          #
+          # STEP 1: Get property values from publisher.properties/promote.properties
+          #
+          XTEXT_VERSION=$(cat version.txt)
+          VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
+          BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
+          BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
+          case "$BUILD_TYPE" in
+            N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
+            S) ZIP_NAME=tmf-xtext-Update-$XTEXT_VERSION.zip ;;
+            R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
+          esac
+          
+          #
+          # STEP 2: Zip the repository
+          #
+          cd build-result/p2.repository
+            zip -r $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME .
+            md5sum --binary $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME > $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5
+          cd $WORKSPACE/publishing
+          
+        '''
+        } // END dir
+        
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+        dir('publishing') {
+          sh '''
+          XTEXT_VERSION=$(cat version.txt)
+          VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
+          BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
+          if [ -z "$BUILD_ID" ]
+          then
+            echo "ERROR: \$BUILD_ID is empty."
+            exit 1
+          fi
+          BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
+          case "$BUILD_TYPE" in
+            N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
+            S) ZIP_NAME=tmf-xtext-Update-$XTEXT_VERSION.zip ;;
+            R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
+          esac
+          
+          #
+          # STEP 3: Upload zip und .md5
+          #
+          TARGET_DROP_PATH=$DOWNLOAD_AREA/$VERSION/$BUILD_ID
+          # ensure target directory exists
+          ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $TARGET_DROP_PATH"
+          scp $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:$TARGET_DROP_PATH
+          
+          #
+          # STEP 4: Unpack zip to p2 repository location
+          #
+          case "$BUILD_TYPE" in
+            N) # Nightly site => clear content
+              REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/nightly"
+              ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH/** && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+            S) # Stable
+              REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/$BUILD_ID"
+              ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH && mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+            R) # Release
+              REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/releases/$VERSION"
+              ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH && mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+          esac
+
+          #
+          # STEP 5: Recreate compositeArtifacts.xml & compositeContent.xml
+          #
+          case "$BUILD_TYPE" in
+            S) # Stable
+              ssh genie.xtext@projects-storage.eclipse.org 'cat | /bin/bash /dev/stdin' "milestones" < $SCRIPTS/create_composite_update_site.sh ;;
+            R) # Release
+              ssh genie.xtext@projects-storage.eclipse.org 'cat | /bin/bash /dev/stdin' "releases" < $SCRIPTS/create_composite_update_site.sh ;;
+          esac
+
+          #
+          # STEP 6: Store additional info into promote.properties
+          #
+          REPOSITORY_URL="$(echo $REPOSITORY_PATH | sed -e 's?/home/data/httpd/?https://?')"
+          echo "repository.url=$REPOSITORY_URL" >> build-result/promote.properties
+          '''
+        } // END dir
+        } // END sshagent
+      }
+    }
+
+    stage('Update SimRel') {
+      when {
+        anyOf {
+          environment name: 'RELEASE_TYPE', value: 'M1'
+          environment name: 'RELEASE_TYPE', value: 'M2'
+          environment name: 'RELEASE_TYPE', value: 'M3'
+          environment name: 'RELEASE_TYPE', value: 'RC1'
+          environment name: 'RELEASE_TYPE', value: 'RC2'
+          environment name: 'RELEASE_TYPE', value: 'GA'
+        }
+      }
+      steps {
+        script {
+          sh "cat publishing/build-result/promote.properties" // debug
+          env.REPOSITORY_URL=sh returnStdout: true, script: '$SCRIPTS/get_property.sh publishing/build-result/promote.properties repository.url'
+          env.XTEXT_FEATURE_VERSION=sh returnStdout: true, script: "ls publishing/build-result/p2.repository/features/org.eclipse.xtext.sdk_*.jar | sed -e 's|.*_\\(.*\\)\\.jar|\\1|'"
+          echo "Triggering SimRel-Update with: RELEASE_TYPE=${env.RELEASE_TYPE}; XTEXT_REPOSITORY_URL=${env.REPOSITORY_URL}; XTEXT_VERSION=${env.XTEXT_FEATURE_VERSION}"
+          build job: 'releng/release-simrel-update',
+            parameters: [
+              string(name: 'RELEASE_TYPE', value: "${env.RELEASE_TYPE}"),
+              string(name: 'XTEXT_REPOSITORY_URL', value: "${env.REPOSITORY_URL}"),
+              string(name: 'XTEXT_VERSION', value: "${env.XTEXT_FEATURE_VERSION}")
+            ],
+          wait: false // Do not fail if releng/release-simrel-update fails, so we only need to rebuild downstream
+        } // script
+      } // steps
+    } // stage
+
+    stage('Prepare Next Xtext Version') {
+      when {
+        expression { params.RELEASE_TYPE == 'GA' }
+      }
+      steps {
+        script {
+          env.XTEXT_VERSION=sh (returnStdout: true, script: '$SCRIPTS/get_property.sh publishing/build-result/publisher.properties version').trim()
+          env.NEW_XTEXT_VERSION = getNewXtextVersion(env.XTEXT_VERSION, "minor")
+          echo "Triggering Xtext version update ${env.XTEXT_VERSION} -> ${env.NEW_XTEXT_VERSION}"
+          build job: 'releng/bot-updates',
+            parameters: [
+              string(name: 'UPDATE_TYPE', value: "XTEXT_VERSION"),
+              string(name: 'UPDATE_VALUE', value: "${env.NEW_XTEXT_VERSION}"),
+            ],
+          wait: false // Do not fail if releng/release-simrel-update fails, so we only need to rebuild downstream
+        } // script
+      } // steps
+    } // stage
+
+    stage('Remove Release Branches') {
+      when {
+        beforeInput true
+        allOf {
+          expression { params.RELEASE_TYPE != 'Integration' }
+          expression { params.BRANCH_TO_DEPLOY != 'master' }
+        }
+      }
+      input {
+        message "Only continue after ensuring OSSRH staging repositories are closed an promoted"
+        ok "Delete Branches!"
+      }
+      steps {
+        sshagent(['github-bot-ssh']) {
+          // Need to be in any git dir for this to work
+          dir('umbrella') {
+            sh '''
+              git push git@github.com:eclipse/xtext-lib.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-core.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-extras.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-eclipse.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-web.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-maven.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-xtend.git --delete $BRANCH_TO_DEPLOY
+              git push git@github.com:eclipse/xtext-umbrella.git --delete $BRANCH_TO_DEPLOY
+            '''
+          }
+        }
+      }
+    }
+  } // END stages
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'publishing/build-result/**'
+    }
+    cleanup {
+      script {
+        def curResult = currentBuild.currentResult
+        def lastResult = 'NEW'
+        if (currentBuild.previousBuild != null) {
+          lastResult = currentBuild.previousBuild.result
+        }
+
+        if (curResult != 'SUCCESS' || lastResult != 'SUCCESS') {
+          def color = ''
+          switch (curResult) {
+            case 'SUCCESS':
+              color = '#00FF00'
+              break
+            case 'UNSTABLE':
+              color = '#FFFF00'
+              break
+            case 'FAILURE':
+              color = '#FF0000'
+              break
+            default: // e.g. ABORTED
+              color = '#666666'
+          }
+
+          slackSend (
+            message: "${lastResult} => ${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}>",
+            botUser: true,
+            channel: 'xtext-builds',
+            color: "${color}"
+          )
+        }
+      }
+    }
+  }
+
+}
+
+/**
+ * Takes a version string and increments a segment of it by 1
+ * @param version Version in format MAJOR.MINOR.MICRO
+ * @param segmentToIncrement One of 'major','minor','micro'
+ */
+def getNewXtextVersion (String version, String segmentToIncrement) {
+    String[] segments = version.split("\\.")
+    int major = Integer.parseInt(segments[0])
+    int minor = Integer.parseInt(segments[1])
+    int micro = Integer.parseInt(segments[2])
+    if ("major".equals(segmentToIncrement)) {
+        major++
+    } else if ("minor".equals(segmentToIncrement)) {
+        minor++
+    } else if ("micro".equals(segmentToIncrement)) {
+        micro++
+    }
+    return major + "." + minor + "." + micro
+}

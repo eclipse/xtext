@@ -1,0 +1,269 @@
+pipeline {
+  agent {
+    kubernetes {
+      inheritFrom 'centos-8'
+    }
+  }
+    
+  parameters {
+    string(name: 'SOURCE_BRANCH', defaultValue: 'master', description: 'Source Git Branch')
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'1'))
+    disableConcurrentBuilds()
+  }
+
+  triggers { // https://jenkins.io/doc/book/pipeline/syntax/#triggers
+    cron('H H(2-6) * * 1-5') // once a day in the night on weekdays
+  }
+
+  environment {
+    GITHUB_API_CREDENTIALS_ID = 'github-bot-token'
+  }
+
+  stages {
+    stage('Check') {
+      steps {
+        withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
+        script {
+          def upToDate      = true
+          def SOURCE_BRANCH = "${params.SOURCE_BRANCH}"
+          
+          def writeJUnitReport = {results, fileName ->
+            sh """
+              echo \"<?xml version='1.0' encoding='UTF-8'?>\" > ${fileName}
+              echo \"<testsuites>\" >> ${fileName}
+            """
+            
+            // OPEN TESTSUITE
+            results
+              .groupBy { it[0] }
+              .each { entry -> 
+                def resultsForKey = entry.value
+                def numberOfFailures = resultsForKey.count { result -> result[2]!=result[3] }
+                sh """
+                  echo \"  <testsuite name='${entry.key}' tests='${resultsForKey.size()}' failures='${numberOfFailures}'>\" >> ${fileName}
+                """
+                // iterate over all entries with the current test suite key
+                resultsForKey.each {
+                  def checkCategory  = it[0]
+                  def checkName      = it[1]
+                  def currentVersion = it[2]
+                  def latestVersion  = it[3]
+
+                  sh "echo \"    <testcase name='${checkName}'>\" >> ${fileName}"
+                  if (currentVersion!=latestVersion) {
+                    sh "echo \"      <failure message='UPDATE AVAILABLE ${currentVersion} -> ${latestVersion}'></failure>\" >> ${fileName}"
+                  }
+                  
+                  sh "echo \"      <system-out>LATEST AVAILABLE VERSION: ${latestVersion}</system-out>\" >> ${fileName}"
+                  sh "echo \"    </testcase>\" >> ${fileName}"
+                }
+                sh "echo \"  </testsuite>\" >> ${fileName}"
+            } // END each
+            sh """
+              echo \"</testsuites>\" >> ${fileName}
+              cat ${fileName}
+              pwd
+              find . 
+            """
+          }
+          
+          def results = [] // 0: Category(Class), 1: Check; 2: Current Version used by Xtext; 3: Latest Available Version
+          results.add([
+            'versions.versions_gradle',
+            'Xtext Bootstrap Version',
+            getVersionFromGradleVersions('xtext_bootstrap',SOURCE_BRANCH),
+            getLatestArtifactVersion('org.eclipse.xtend','xtend-maven-plugin')
+          ])
+          results.add([
+            'versions.Gradle',
+            'xtext-gradle-plugin',
+            getXtextGradlePluginVersion(SOURCE_BRANCH),
+            getLatestFromGradlePluginPortal('org.xtext.builder')
+          ])
+          
+          // CHECK BOM
+          // The version properties in the BOM without the '-version' suffix
+          // For Eclipse platform artifact versions there is a common pattern
+          def eclipsePlatformProperties = [
+            'core.commands','core.contenttype','core.expressions','core.filesystem','core.jobs','core.resources','core.runtime',
+            'core.variables','debug.core','equinox.app','equinox.common','equinox.preferences','equinox.registry',
+            'osgi','text'
+          ]
+          eclipsePlatformProperties.each {
+            results.add([
+              'versions.BOM',
+              "org.eclipse.${it}",
+              getVersionFromBOM("org.eclipse.platform:org.eclipse.${it}", SOURCE_BRANCH),
+              getLatestArtifactVersion('org.eclipse.platform',"org.eclipse.${it}")
+            ])
+          }
+          // JDT
+          ['jdt.core','jdt.compiler.apt','jdt.compiler.tool','jdt.launching','jdt.debug'].each {
+            results.add([
+              'versions.BOM',
+              "org.eclipse.${it}",
+              getVersionFromBOM("org.eclipse.jdt:org.eclipse.${it}", SOURCE_BRANCH),
+              getLatestArtifactVersion('org.eclipse.jdt',"org.eclipse.${it}")
+            ])
+          }
+          // EMF
+          ['emf.codegen','emf.codegen.ecore','emf.common','emf.ecore','emf.ecore.change','emf.ecore.xmi'].each {
+            results.add([
+              'versions.BOM',
+              "org.eclipse.${it}",
+              getVersionFromBOM("org.eclipse.emf:org.eclipse.${it}", SOURCE_BRANCH),
+              getLatestArtifactVersion('org.eclipse.emf',"org.eclipse.${it}")
+            ])
+          }
+          results.add([
+            'versions.BOM',
+            'javax.annotation-api',
+            getVersionFromBOM('javax.annotation:javax.annotation-api', SOURCE_BRANCH),
+            getLatestArtifactVersion('javax.annotation','javax.annotation-api')
+          ])
+          
+          /*
+          results.add([
+            'versions.BOM',
+            'org.eclipse.lsp4j',
+            getVersionFromBOM('org.eclipse.lsp4j:org.eclipse.lsp4j', SOURCE_BRANCH),
+            getLatestArtifactVersion('org.eclipse.lsp4j','org.eclipse.lsp4j')
+          ])
+          */
+          
+          // MAVEN PLUGINS
+          results.add([
+            'Maven Plugins',
+            'Eclipse Tycho',
+            getXtextTychoVersion(SOURCE_BRANCH),
+            getLatestArtifactVersion('org.eclipse.tycho','tycho-maven-plugin')
+          ])
+
+          // Gradle Version
+          results.add([
+            'versions.Gradle',
+            'Gradle',
+            getXtextGradleVersion(SOURCE_BRANCH),
+            getLatestReleaseFromGitHubRepository('gradle','gradle')
+          ])
+          
+          // Use org.eclipse.xtext.maven.parent as reference for Maven plugins
+          // List all Maven plugin artifactIds in that POM
+          def standardMavenPluginArtifactIds = ['maven-antrun-plugin','maven-compiler-plugin','maven-deploy-plugin','maven-enforcer-plugin','maven-install-plugin','maven-javadoc-plugin','maven-plugin-plugin','maven-source-plugin','maven-surefire-plugin']
+          standardMavenPluginArtifactIds.each {
+            sleep(time:3, unit:"SECONDS")
+            results.add([
+              'Maven Plugins',
+              it,
+              getArtifactVersionFromPOM(SOURCE_BRANCH, it),
+              getLatestArtifactVersion('org.apache.maven.plugins',it)
+            ])
+          }
+
+          sh "mkdir target" // make sure target directory exists
+          writeJUnitReport(results,"target/report.xml")
+        } // END script
+        } // END withCredentials
+        step([$class: 'JUnitResultArchiver', testResults: "target/report.xml"])
+      } // END steps
+    } // END stage
+  } // stages
+
+  // TODO Send messages when status changes
+  post {
+    always {
+      archiveArtifacts artifacts: 'target/**'
+    }
+  }
+}
+
+
+//curl -sS https://plugins.gradle.org/plugin/org.xtext.builder | grep -oP '(?<=Version ).+(?= \\(latest)'
+def getLatestFromGradlePluginPortal(name) {
+  return sh (script: "curl -sS https://plugins.gradle.org/plugin/${name} |grep -Po '(?<=Version ).+(?= \\(latest)'", returnStdout: true).trim()
+}
+
+def getLatestArtifactVersion(groupId, artifactId) {
+  return sh (script: "curl -sS https://search.maven.org/solrsearch/select?q=g:\"${groupId}\"+AND+a:\"${artifactId}\" |grep -Po 'latestVersion.:.\\K[^\"]*'", returnStdout: true).trim()
+}
+
+def getLatestReleaseFromGitHubRepository (owner, repository) {
+  env.OWNER_REF="${owner}"
+  env.REPOSITORY_REF="${repository}"
+  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/$OWNER_REF/$REPOSITORY_REF/releases/latest | grep -Po \'\"name\"[^\\d]*\\K[\\d\\.]*\'', returnStdout: true).trim()
+}
+
+/**
+ * Fetch the latest Orbit repository URL
+ * @param buildType R=Release, S=Stable, I=Integration
+ */
+def getLatestOrbitUrl (buildType) {
+  assert ['R','S','I'].contains(buildType)
+  def repoID= sh (script: "curl -sS https://download.eclipse.org/tools/orbit/downloads/ |grep -m1 -Po 'drops/\\K${buildType}\\d+'", returnStdout: true).trim()
+  def repoURL = "http://download.eclipse.org/tools/orbit/downloads/drops/${repoID}/repository"
+  return repoURL
+}
+
+def getXtextTychoVersion (branch) {
+  env.BRANCH_REF = "${branch}"
+  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-eclipse/contents/releng/org.eclipse.xtext.tycho.parent/pom.xml?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "<tycho-version>\\K[^<]*"', returnStdout: true).trim()
+}
+
+def getXtextGradlePluginVersion (branch) {
+  env.BRANCH_REF="${branch}"
+  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "xtext_gradle_plugin[^\\d]*\\K[\\d\\.]*"', returnStdout: true).trim()
+}
+
+/**
+ * Get a version from 'versions.gradle' file
+ * @param id Version identifier from ext.versions, e.g. 'xtext_gradle_plugin'
+ * @param branch (Optional) Branch on GH repository to check
+ * @param repository (Optional) Xtext repository name on GH
+ */
+def getVersionFromGradleVersions (id,branch='master',repository='xtext-lib') {
+  env.BRANCH_REF="${branch}"
+  env.REPOSITORY_REF="${repository}"
+  env.ID_REF="${id}"
+  def result =  sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/$REPOSITORY_REF/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "$ID_REF[^\\d]*\\K[^\']*"', returnStdout: true).trim()
+  return result
+}
+
+/**
+ * Grep an artifact version from a remote pom.xml file.
+ * It is assumed that the version tag is in the line following the artifactId tag.
+ */
+def getArtifactVersionFromPOM (branch, artifactId) {
+  // first grep for <artifactId> and the line after
+  // then grep the result for <version> tag 
+  env.BRANCH_REF="${branch}"
+  env.ARTIFACT_ID="${artifactId}" // dont know how to make this shit better
+  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-maven/contents/org.eclipse.xtext.maven.parent/pom.xml?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep "<artifactId>$ARTIFACT_ID</artifactId>" -A 1 |grep -Po "<version>\\K[^<]*"', returnStdout: true).trim()
+}
+
+def getXtextGradleVersion (branch) {
+  env.BRANCH_REF="${branch}"
+  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/wrapper/gradle-wrapper.properties?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "distributionUrl=.*/gradle-\\K[\\d\\.]*"', returnStdout: true).trim()
+}
+
+def getXtextBootstrapVersion (branch) {
+  env.BRANCH_REF="${branch}"
+  def result = sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "xtext_bootstrap[^\\d]*\\K[\\d\\.]*"', returnStdout: true).trim()
+  return result
+}
+
+/**
+ * Get a version configured in Xtext's dev-bom BOM.
+ * @param branch (Optional) Branch on GH repository to check
+ * @param id groupId:artifactId. For example 'org.eclipse.platform:org.eclipse.core.commands'
+ */
+
+def getVersionFromBOM (id, branch='master') {
+  env.BRANCH_REF="${branch}"
+  sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/org.eclipse.xtext.dev-bom/build.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d > av.txt')
+  def result = sh (script: "cat av.txt | grep -Po 'api \\\"${id}:\\K[^\"]*'", returnStdout: true).trim()
+  // DID NOT FIND ANOTHER WAY TO GET STUPID INTERPOLATION RUNNING WHEN JUST USING ID AND ADD THE GREP DIRECTLY BELOW
+  return result
+}
