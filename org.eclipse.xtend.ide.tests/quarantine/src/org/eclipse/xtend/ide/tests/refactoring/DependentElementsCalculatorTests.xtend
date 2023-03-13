@@ -1,0 +1,69 @@
+/*******************************************************************************
+ * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+package org.eclipse.xtend.ide.tests.refactoring
+
+import com.google.inject.Inject
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
+import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator
+import org.junit.Test
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.eclipse.core.runtime.NullProgressMonitor
+
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
+	
+	@Inject IDependentElementsCalculator dependentElementsCalculator;
+	
+	@Inject extension IXtendJvmAssociations associations;
+	
+	@Inject WorkbenchTestHelper testHelper;
+	
+	@Test def testDependentElements() {
+		val file = testHelper.xtendFile('Foo', '''
+			class Foo {
+				def Foo foo() {
+					new Foo()
+				}
+			}
+		''')
+		val fooClass = file.xtendTypes.get(0) as XtendClass
+		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooClass, new NullProgressMonitor)
+		assertEquals(3, dependentElementURIs.size);
+		val fooFunction = fooClass.members.get(0) as XtendFunction
+		newArrayList(fooFunction, fooClass.inferredType, fooClass.inferredConstructor)
+			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
+	}
+	
+	@Test def testPolymorphicDispatch() {
+		val fooFile = testHelper.xtendFile('Foo', '''
+			class Foo {
+				def dispatch foo(Number it) {
+				}
+				def dispatch foo(String it) {
+				}
+			}
+		''');
+		IResourcesSetupUtil::waitForBuild
+		val fooClass = fooFile.xtendTypes.get(0) as XtendClass
+		val fooMethod1 = fooClass.members.get(1)
+		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, new NullProgressMonitor)
+		assertEquals(5, dependentElementURIs.size);
+		(fooClass.members + fooClass.inferredType.members).filter[!(it instanceof JvmConstructor)].toList
+			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
+	}
+}

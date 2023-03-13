@@ -1,0 +1,35 @@
+WS=[\ \n\r\t]+
+ANY_OTHER=.
+
+ID="^"? ( [:jletter:] | {UNICODE_ESCAPE} ) ( [:jletterdigit:] | {UNICODE_ESCAPE} )*
+UNICODE_ESCAPE=\\ "u" ( {HEX_DIGIT} ( {HEX_DIGIT} ( {HEX_DIGIT} {HEX_DIGIT}? )? )? )?
+HEX_DIGIT = [0-9A-Fa-f]
+
+ML_COMMENT="/*" ~"*/"
+COMMENT_ERROR_PATTERN="/*" [^*]* ("*"+ [^/*] [^*]*)* "*"?
+SL_COMMENT="/""/"[^\r\n]*(\r?\n)?
+
+DIGIT = [0-9]
+DIGIT_OR_UNDERSCORE = [_0-9]
+INT = {DIGIT} | {DIGIT} {DIGIT_OR_UNDERSCORE}*
+HEX_DIGIT_OR_UNDERSCORE = [_0-9A-Fa-f]
+
+DECIMAL_ERROR_PATTERN = {INT} (([eE] ([^0-9] | [bB])) ([bB][^iIdD])? | ([bB][^iIdD]))
+DECIMAL = {INT} ([eE] [+-]? {INT})? ([bB][iIdD] | [lLdDfF])?
+HEX = 0 [Xx] ( {HEX_DIGIT_OR_UNDERSCORE}+ ("#" ([bB][iI] | [lL] ))? )?
+			 
+STRING=("'"([^\\\']|{ESCAPE_SEQUENCE})*"'"?)|(\"([^\\\"]|{ESCAPE_SEQUENCE})*\"?)
+ESCAPE_SEQUENCE=\\{ANY_OTHER}
+
+RICH_TEXT_START="'''" {IN_RICH_STRING}? {RICH_TEXT_DELIM}
+RICH_TEXT_INBETWEEN="╗" {IN_RICH_STRING}? {RICH_TEXT_DELIM}
+RICH_TEXT="'''" {IN_RICH_STRING}? {RICH_TEXT_FINISH}?
+RICH_TEXT_END="╗" {IN_RICH_STRING}? {RICH_TEXT_FINISH}?
+
+COMMENT_RICH_TEXT_INBETWEEN="лл"[^\r\n]*("\r"?"\n"{IN_RICH_STRING}? {RICH_TEXT_DELIM})
+COMMENT_RICH_TEXT_END="лл"[^\r\n]*(("\r"?"\n"{IN_RICH_STRING}? {RICH_TEXT_FINISH}?))
+
+IN_RICH_STRING=([^л\']|("'""'"?[^л\']))+
+
+RICH_TEXT_DELIM=("'""'"?)?"л"
+RICH_TEXT_FINISH="'"("'"("'")?)?

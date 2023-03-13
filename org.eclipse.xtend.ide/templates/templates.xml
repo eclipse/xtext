@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<templates>
+<template
+    name="def"
+    description="public method"
+    id="def"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">def ${name}(${params}) {
+	${cursor}
+}</template>
+<template
+    name="protecteddef"
+    description="protected method"
+    id="protected_def"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">protected def ${name}(${params}) {
+	${cursor}
+}</template>
+<template
+    name="privatedef"
+    description="private method"
+    id="private_def"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">private def ${name}(${params}) {
+	${cursor}
+}</template>
+<template
+    name="main"
+    description="main method"
+    id="main"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">def static void main(String[] args) {
+	${cursor}
+}</template>
+<template
+    name="create"
+    description="create method"
+    id="create"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">def create ${constructor} ${name}(${params}) {
+	${cursor}
+}</template>
+<template
+    name="val"
+    description="unmodifiable field"
+    id="field_val"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">val ${name} = ${cursor}</template>
+<template
+    name="const"
+    description="private constant"
+    id="static_val"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">static val ${name} = ${cursor}</template>
+<template
+    name="protectedconst"
+    description="protected constant"
+    id="protected_static_val"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">protected static val ${name} = ${cursor}</template>
+<template
+    name="publicconst"
+    description="public constant"
+    id="public_static_val"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">public static val ${name} = ${cursor}</template>
+<template
+    name="if"
+    description="if expression"
+    id="if"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">if (${condition}) {
+	${line_selection}${cursor}
+}</template>
+<template
+    name="ifelse"
+    description="if-else expression"
+    id="if_else"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">if (${condition}) {
+	${line_selection}${cursor}
+} else {
+	
+}</template>
+<template
+    name="instanceof"
+    description="type test and autocast"
+    id="instanceof"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">if (${value} instanceof ${type}) {
+	${cursor}
+}</template>
+<template
+    name="for"
+    description="for loop over an Iterable"
+    id="iterable_for"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">for (${element} : ${iterable}) {
+	${line_selection}${cursor}
+}</template>
+<template
+    name="while"
+    description="while loop with condition"
+    id="while"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">while (${condition}) {
+	${line_selection}${cursor}
+}</template>
+<template
+    name="do"
+    description="do-while loop with condition"
+    id="do_while"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">do {
+	${line_selection}${cursor}
+} while (${condition})</template>
+<template
+    name="switch"
+    description="switch expression"
+    id="switch"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">switch (${key}) {
+	case ${value}: {
+		${cursor}
+	}
+	default: {
+		
+	}
+}</template>
+<template
+    name="try"
+    description="try-catch block"
+    id="try_catch"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">try {
+	${line_selection}${cursor}
+} catch (${Exception} ${exception}) {
+	
+}</template>
+<template
+    name="synchronized"
+    description="synchronized expression"
+    id="synchronized"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">synchronized (${mutex}) {
+	${line_selection}${cursor}
+}</template>
+<template
+    name="sysout"
+    description="print to standard output"
+    id="sysout"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">println(${word_selection}${cursor})</template>
+<template
+    name="syserr"
+    description="print to standard error stream"
+    id="syserr"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">System.err.println(${word_selection}${cursor})</template>
+<template
+    name="val"
+    description="unmodifiable local variable"
+    id="local_val"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">val ${name} = ${cursor}</template>
+<template
+    name="var"
+    description="modifiable local variable"
+    id="local_var"
+    context="org.eclipse.xtext.xbase.Xbase.XExpression"
+    enabled="true"
+    autoinsert="false">var ${name} = ${cursor}</template>
+
+<template
+    name="test"
+    description="JUnit test method"
+    id="junit4_test"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">${Test:Import(org.junit.Test)}@Test
+def void ${testName}() {
+	${cursor}
+}</template>
+
+<template
+    name="inject"
+    description="Guice injected field"
+    id="field_inject"
+    context="org.eclipse.xtend.core.Xtend.Member"
+    enabled="true"
+    autoinsert="false">${Inject:Import(com.google.inject.Inject)}@Inject ${type:CrossReference(JvmParameterizedTypeReference.type)} ${name}</template>
+
+<template
+    name="IF"
+    description="template condition"
+    id="richstring_if"
+    context="org.eclipse.xtend.core.Xtend.RichStringPart"
+    enabled="true"
+    autoinsert="false">IF ${condition}»
+	${cursor}
+«ENDIF</template>
+<template
+    name="FOR"
+    description="template loop"
+    id="richstring_for"
+    context="org.eclipse.xtend.core.Xtend.RichStringPart"
+    enabled="true"
+    autoinsert="false">FOR ${element} : ${iterable}»
+	${cursor}
+«ENDFOR</template>
+</templates>

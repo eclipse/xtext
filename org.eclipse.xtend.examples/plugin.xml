@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtend.ui.Examples"
+			name="%XtendExamples_category"
+			parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtend.project.Examples"
+			name="%XtendExamples_category2"
+			parentCategory="org.eclipse.xtend.ide.wizards" />
+	</extension>
+
+	<!-- ========= org.eclipse.xtext.example.xtend.tutorial ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard id="org.eclipse.xtend.examples.NewXtendTutorial"
+			name="%XtendTutorial_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard id="org.eclipse.xtend.examples.NewXtendTutorial"
+			name="%XtendTutorial_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.xtend.ide.wizards/org.eclipse.xtend.project.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.xtend.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
+			<projectDescriptor name="xtend-examples" contentURI="contents/xtend-examples.zip" description="%XtendTutorial_description"/>
+			<fileToOpen location="xtend-examples/src/example1/HelloWorld.xtend"/>
+			<fileToOpen location="xtend-examples/src/example2/BasicExpressions.xtend"/>
+			<fileToOpen location="xtend-examples/src/example3/BottleSong.xtend"/>
+			<fileToOpen location="xtend-examples/src/example4/HtmlBuilder.xtend"/>
+			<fileToOpen location="xtend-examples/src/example5/Units.xtend"/>
+			<fileToOpen location="xtend-examples/src/example6/Movies.xtend"/>
+		</example>
+	</extension>
+
+	<!-- ========== org.eclipse.xtext.examples.NewXtendEuler ========== -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard id="org.eclipse.xtend.examples.NewXtendEuler"
+			name="%XtendEuler_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendEuler_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard id="org.eclipse.xtend.examples.NewXtendEuler"
+			name="%XtendEuler_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.xtend.ide.wizards/org.eclipse.xtend.project.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendEuler_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.xtend.examples.NewXtendEuler" pageImage="icons/genproject.gif">
+			<projectDescriptor name="xtend-euler" contentURI="contents/xtend-euler.zip" description="%XtendEuler_description"/>
+			<fileToOpen location="xtend-euler/src/euler/Solution_001.xtend"/>
+		</example>
+	</extension>
+
+	<!-- ========== org.eclipse.xtext.examples.NewXtendAnnotation ========== -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard id="org.eclipse.xtend.examples.NewXtendAnnotation"
+			name="%XtendAnnotation_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendAnnotation_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard id="org.eclipse.xtend.examples.NewXtendAnnotation"
+			name="%XtendAnnotation_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.xtend.ide.wizards/org.eclipse.xtend.project.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendAnnotation_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.xtend.examples.NewXtendAnnotation" pageImage="icons/genproject.gif">
+			<projectDescriptor name="xtend-annotation-examples" contentURI="contents/xtend-annotation-examples.zip" description="%XtendAnnotation_description"/>
+			<projectDescriptor name="xtend-annotation-examples-client" contentURI="contents/xtend-annotation-examples-client.zip" description="%XtendAnnotation_description"/>
+			<fileToOpen location="xtend-annotation-examples-client/src/observables/ObservableExample.xtend"/>
+			<fileToOpen location="xtend-annotation-examples/src/observables/Observable.xtend"/>
+			<fileToOpen location="xtend-annotation-examples/src/observables/ObservablesTest.xtend"/>
+		</example>
+	</extension>
+</plugin>

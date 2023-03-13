@@ -1,0 +1,113 @@
+/*******************************************************************************
+ * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+package org.eclipse.xtend.core.macro
+
+import com.google.inject.Singleton
+import java.io.Closeable
+import java.io.IOException
+import java.net.URL
+import java.net.URLClassLoader
+import org.apache.log4j.Logger
+import org.eclipse.emf.common.notify.Notifier
+import org.eclipse.emf.common.notify.impl.AdapterImpl
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.internal.AlternateJdkLoader
+
+@Singleton
+class ProcessorInstanceForJvmTypeProvider {
+	static val logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider)
+	
+	@Accessors static class ProcessorClassloaderAdapter extends AdapterImpl {
+		var ClassLoader classLoader
+		
+		new(ClassLoader classLoader) {
+			this.classLoader = classLoader
+		}
+
+		override isAdapterForType(Object type) {
+			type == ProcessorClassloaderAdapter
+		}
+		
+		override unsetTarget(Notifier oldTarget) {
+			discard()
+		}
+		
+		override setTarget(Notifier newTarget) {
+			if (newTarget===null) {
+				discard()
+			}
+		}
+		
+		def discard() {
+			if (classLoader instanceof Closeable) {
+				try {
+					(classLoader as Closeable).close
+					classLoader = null
+				} catch (IOException e) {
+					logger.error(e.message, e)
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * @return an instance of the given JvmType
+	 */
+	def Object getProcessorInstance(JvmType type) {
+		try {
+			val loadClass = type.classLoader?.loadClass(type.identifier)
+			return loadClass?.getDeclaredConstructor()?.newInstance
+		} catch (Exception e) {
+			throw new IllegalStateException("Problem during instantiation of "+type.identifier+" : "+e.getMessage, e);
+		}
+	}
+	
+	def getClassLoader(EObject ctx) {
+		val resourceSet = ctx.eResource.resourceSet
+		val adapter = resourceSet.eAdapters.filter(ProcessorClassloaderAdapter).head
+		if (adapter !== null) {
+			return adapter.getClassLoader
+		}
+		switch resourceSet {
+			XtextResourceSet : {
+				val classLoaderCtx = resourceSet.classpathURIContext
+				val jvmTypeLoader = switch classLoaderCtx {
+					ClassLoader : classLoaderCtx
+					Class<?> : classLoaderCtx.classLoader
+				}
+				val processorClassLoader = if (jvmTypeLoader instanceof URLClassLoader) {
+					val urls = <URL>newArrayList
+					urls += jvmTypeLoader.URLs
+					val bootClassloader = jvmTypeLoader.parent
+					if (bootClassloader instanceof AlternateJdkLoader) {
+						urls += bootClassloader.URLs
+					}
+					// TODO check this list
+					val filtered = new FilteringClassLoader(TransformationContext.classLoader, #["org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib", "org.eclipse.xtend2.lib", "com.google.common"])
+					new URLClassLoader(urls, filtered)
+				} else {
+					jvmTypeLoader
+				}
+				if (processorClassLoader !== null) {
+					resourceSet.eAdapters += new ProcessorClassloaderAdapter(processorClassLoader)
+					return processorClassLoader
+				}
+			}
+		}
+		logger.info("No class loader configured. Trying with this class classloader.")
+		return class.classLoader
+	}
+}

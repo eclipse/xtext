@@ -56,7 +56,7 @@ pipeline {
 
     stage('Maven Build & Test') {
       stages { // TODO use of parallel { here kills Tycho process with OOM
-        stage('Maven Plugin Build') {
+        stage('Maven Build and Test') {
           steps {
             sh '''
               export MAVEN_OPTS="-Xmx1500m"

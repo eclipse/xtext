@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtend" nsURI="http://www.eclipse.org/xtend" nsPrefix="xtend">
+  <eClassifiers xsi:type="ecore:EClass" name="XtendFile">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importSection" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore#//XImportSection"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtendTypes" upperBound="-1"
+        eType="#//XtendTypeDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendClass" eSuperTypes="#//XtendTypeDeclaration">
+    <eOperations name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isStrictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeParameter"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendAnnotationTarget" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore#//XAnnotation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendMember" eSuperTypes="#//XtendAnnotationTarget">
+    <eOperations name="getVisibility" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmVisibility"/>
+    <eOperations name="getDeclaredVisibility" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmVisibility"/>
+    <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isFinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationInfo" eType="#//XtendAnnotationTarget"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifiers" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="#//XtendTypeDeclaration"
+        eOpposite="#//XtendTypeDeclaration/members"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendFunction" eSuperTypes="#//XtendExecutable">
+    <eOperations name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isOverride" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isDispatch" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isStrictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isNative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isSynchonized" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createExtensionInfo" eType="#//CreateExtensionInfo"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendField" eSuperTypes="#//XtendMember">
+    <eOperations name="isExtension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isVolatile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isTransient" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendParameter" eSuperTypes="#//XtendAnnotationTarget">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varArg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichString" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RichStringLiteral" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XStringLiteral"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RichStringForLoop" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XForLoopExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="separator" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="before" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="after" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichStringIf" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseIfs" upperBound="-1"
+        eType="#//RichStringElseIf" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichStringElseIf">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreateExtensionInfo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createExpression" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="it"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendConstructor" eSuperTypes="#//XtendExecutable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendTypeDeclaration" eSuperTypes="#//XtendMember">
+    <eOperations name="isAnonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isLocal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//XtendMember" containment="true" eOpposite="#//XtendMember/declaringType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendAnnotationType" eSuperTypes="#//XtendTypeDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendInterface" eSuperTypes="#//XtendTypeDeclaration">
+    <eOperations name="isStrictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeParameter"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendEnum" eSuperTypes="#//XtendTypeDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendEnumLiteral" eSuperTypes="#//XtendMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendVariableDeclaration" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XVariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendFormalParameter" eSuperTypes="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendExecutable" abstract="true" eSuperTypes="#//XtendMember">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exceptions" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeParameter"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//XtendParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnonymousClass" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression #//XtendTypeDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constructorCall" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XConstructorCall"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -93,6 +93,21 @@
 		<module>../org.eclipse.xtext.xbase.ui.tests</module>
 		<module>../org.eclipse.xtext.xtext.ui.graph.tests</module>
 		<module>../org.eclipse.xtext.xtext.ui.tests</module>
+		<!-- xtext-xtend -->
+		<module>../org.eclipse.xtend.tycho.tests.parent</module>
+		<module>../org.eclipse.xtend.core</module>
+		<module>../org.eclipse.xtend.ide.common</module>
+		<module>../org.eclipse.xtend.ide</module>
+		<module>../org.eclipse.xtend.ide.tests.data</module>
+		<module>../org.eclipse.xtend.doc</module>
+		<module>../org.eclipse.xtend.examples</module>
+		<module>../org.eclipse.xtend.m2e</module>
+		<module>../org.eclipse.xtend.standalone</module>
+		<module>../org.eclipse.xtend.core.tests</module>
+		<module>../org.eclipse.xtend.ide.tests</module>
+		<module>../org.eclipse.xtend.performance.tests</module>
+		<module>../org.eclipse.xtend.swtbot</module>
+		<module>../org.eclipse.xtend.ide.swtbot.tests</module>
 	</modules>
 
 	<!--

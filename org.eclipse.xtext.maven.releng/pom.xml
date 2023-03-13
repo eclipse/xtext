@@ -50,5 +50,11 @@
 		<!-- xtext-maven -->
 		<module>../org.eclipse.xtext.maven.parent</module>
 		<module>../org.eclipse.xtext.maven.plugin</module>
+		<!-- xtext-xtend -->
+		<module>../org.eclipse.xtend.maven.parent</module>
+		<module>../org.eclipse.xtend.core</module>
+		<module>../org.eclipse.xtend.ide.common</module>
+		<module>../org.eclipse.xtend.maven.plugin</module>
+		<module>../org.eclipse.xtend.maven.archetype</module>
 	</modules>
 </project>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
+    modelDirectory="/org.eclipse.xtend.core/emf-gen" modelPluginID="org.eclipse.xtend.core"
+    modelName="RichStrings" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" copyrightFields="false"
+    runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase Xtend.genmodel#//xtend platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+  <foreignModel>RichStrings.ecore</foreignModel>
+  <genPackages prefix="ProcessedRichString" basePackage="org.eclipse.xtend.core" disposableProviderFactory="true"
+      fileExtensions="__richstrings" ecorePackage="RichStrings.ecore#/">
+    <genClasses ecoreClass="RichStrings.ecore#//ProcessedRichString">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ProcessedRichString/richString"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ProcessedRichString/lines"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//Line">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RichStrings.ecore#//Line/parts"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference RichStrings.ecore#//Line/richString"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//LinePart">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference RichStrings.ecore#//LinePart/line"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//Literal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//Literal/literal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RichStrings.ecore#//Literal/offset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RichStrings.ecore#//Literal/length"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//LineBreak"/>
+    <genClasses ecoreClass="RichStrings.ecore#//ForLoopStart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ForLoopStart/loop"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ForLoopStart/end"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//ForLoopEnd">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ForLoopEnd/start"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//PrintedExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//PrintedExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//IfConditionStart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//IfConditionStart/richStringIf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//IfConditionStart/elseStart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//IfConditionStart/elseIfConditions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//IfConditionStart/endIf"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//ElseIfCondition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ElseIfCondition/richStringElseIf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ElseIfCondition/ifConditionStart"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//ElseStart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ElseStart/ifConditionStart"/>
+    </genClasses>
+    <genClasses ecoreClass="RichStrings.ecore#//EndIf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//EndIf/ifConditionStart"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

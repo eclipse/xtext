@@ -1,0 +1,1572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="xtend"
+			icon="icons/xtend_file.png"
+			id="org.eclipse.xtend.core.Xtend"
+			matchingStrategy="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
+			name="Xtend Editor"
+			symbolicFontName="org.eclipse.xtend.ui.editors.textfont">
+		</editor>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="org.eclipse.xtend.core.Xtend.validate">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<!-- copy qualified name -->
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
+				<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened" />
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="org.eclipse.xtend.core.Xtend.XtextEditor.opened" />
+					<iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.eclipse.xtend.core.Xtend.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtend.core.Xtend"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+		<definition id="org.eclipse.xtend.core.Xtend.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.eclipse.xtend.core.Xtend"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtend.core.Xtend"
+			name="Xtend">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtend.core.Xtend.templates"
+			name="Templates">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.refactoring"
+			name="Refactoring">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.formatting.preferences.FormatterPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.formatter"
+			name="Formatter">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+			<keywordReference id="org.eclipse.jdt.ui.formatter"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+			<keywordReference id="org.eclipse.jdt.ui.severities"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtend.core.Xtend"
+			name="Xtend">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.formatting.preferences.FormatterPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.formatter.propertyPage"
+			name="Formatter">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+			<enabledWhen>
+				<adapt
+					type="org.eclipse.core.resources.IProject">
+				</adapt>
+			</enabledWhen>
+			<filter
+				name="projectNature"
+				value="org.eclipse.xtext.ui.shared.xtextNature">
+			</filter>
+			<keywordReference id="org.eclipse.jdt.ui.formatter"/>
+		</page>
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.validator.propertyPage"
+			name="Errors/Warnings">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+			<enabledWhen>
+				<adapt
+					type="org.eclipse.core.resources.IProject">
+				</adapt>
+			</enabledWhen>
+			<filter
+				name="projectNature"
+				value="org.eclipse.xtext.ui.shared.xtextNature">
+			</filter>
+			<keywordReference id="org.eclipse.jdt.ui.formatter"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtend.ide.keyword_Xtend"
+			label="Xtend"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Trigger expensive validation"
+			id="org.eclipse.xtend.core.Xtend.validate"
+			name="Validate">
+		</command>
+		<!-- copy qualified name -->
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="org.eclipse.xtend.core.Xtend.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="xtend"
+			id="org.eclipse.xtend.core.Xtend.contenttype"
+			name="Xtend File"
+			priority="normal">
+		</content-type>
+	</extension>
+	<!-- adding resource factories -->
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="xtend">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="xtend">
+		</resourceServiceProvider>
+	</extension>
+	<!-- marker definitions for org.eclipse.xtend.core.Xtend -->
+	<extension
+			id="xtend.check.fast"
+			name="Xtend Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="xtend.check.normal"
+			name="Xtend Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="xtend.check.expensive"
+			name="Xtend Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
+	<!-- quickfix marker resolution generator for org.eclipse.xtend.core.Xtend -->
+	<extension
+			point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xtend.ide.xtend.check.fast">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xtend.ide.xtend.check.normal">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xtend.ide.xtend.check.expensive">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+	</extension>
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=xtend.ide.OpenCallHierarchy">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				id="xtend.ide.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="org.eclipse.xtend.core.Xtend.compare.contentViewers"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="xtend">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtend.core.Xtend.contenttype"
+			contentViewerId="org.eclipse.xtend.core.Xtend.compare.contentViewers" />
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="org.eclipse.xtend.core.Xtend.compare.contentMergeViewers"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="xtend" label="Xtend Compare">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtend.core.Xtend.contenttype"
+			contentMergeViewerId="org.eclipse.xtend.core.Xtend.compare.contentMergeViewers" />
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="org.eclipse.xtend.core.Xtend.editors.documentProviders"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="xtend">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="xtend"
+			type="text">
+		</fileTypes>
+	</extension>
+	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- Type Hierarchy  -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
+			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
+			commandId="org.eclipse.xtext.xbase.ui.organizeImports">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- Editor Menu -->
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="xtend.ide.OpenGeneratedCode"
+				style="push">
+				<visibleWhen
+					checkEnabled="false">
+					<reference
+						definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=xtend.ide.OpenGeneratedCode">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
+				id="xtend.ide.OpenTypeHierachy"
+				style="push"
+				tooltip="Open Type Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution
+			locationURI="menu:#xtext.ui.SourceMenu?after=xtext.ui.ImportsSeparator">
+			<command
+				commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+				style="push"
+				tooltip="Organize Imports">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=xtend.ide.QuickOutline">
+			<command commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy"
+				style="push"
+				tooltip="Quick Type Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<!-- Call Hierachy -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=xtend.ide.OpenTypeHierachy">
+			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+				id="xtend.ide.OpenCallHierarchy"
+				style="push"
+				tooltip="Open Call Hierarchy">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
+			adaptableType="org.eclipse.xtend.ide.editor.XtendEditor">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
+		</factory>
+	</extension>
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.eclipse.xtend.core.Xtend"
+			id="org.eclipse.xtend.core.Xtend.ide.rulerActions">
+			<action
+				label="Not Used"
+				class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				style="push"
+				actionID="RulerDoubleClick"
+				id="org.eclipse.xtend.core.Xtend.doubleClickBreakpointAction"/>
+		</editorContribution>
+	</extension>
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution
+			targetID="org.eclipse.xtend.core.Xtend.RulerContext"
+			id="org.eclipse.xtend.core.Xtend.ide.RulerPopupActions">
+			<action
+				label="Breakpoint Properties"
+				helpContextId="breakpoint_properties_action_context"
+				class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
+				menubarPath="group.properties"
+				id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.openBreapointPropertiesAction">
+			</action>
+			<action
+				label="Not used"
+				class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+				menubarPath="debug"
+				id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.enableDisableBreakpointAction">
+			</action>
+			<action
+				label="Toggle Breakpoint"
+				class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				menubarPath="debug"
+				id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.toggleBreakpointAction">
+			</action>
+		</viewerContribution>
+	</extension>
+	<!-- Introduce Local Variable Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableHandler"
+			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- Manual extensions -->
+
+	<!-- builder -->
+	<extension
+		point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="xtend">
+		</participant>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.compiler.preferencePage"
+			name="Compiler">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			category="org.eclipse.xtend.core.Xtend"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.eclipse.xtend.core.Xtend.compiler.propertyPage"
+			name="Compiler">
+			<keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.searchFilter">
+		<filter
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.search.XtendSearchFilter">
+		</filter>
+	</extension>
+
+	<extension point="org.eclipse.ui.commands">
+		<command
+			description="Inserts an opening french quote"
+			id="org.eclipse.xtend.ide.insertLeftGuillemet"
+			name="Insert left guillemet"/>
+		<command
+			description="Inserts an closing french quote"
+			id="org.eclipse.xtend.ide.insertRightGuillemet"
+			name="Insert right guillemet"/>
+		<command
+			name="%JavaApplicationShortcut.description.debug"
+			description="%JavaApplicationShortcut.description.debug"
+			categoryId="org.eclipse.debug.ui.category.run"
+			id="org.eclipse.xtend.ide.launching.localJavaShortcut.debug">
+		</command>
+		<command
+			name="%JavaApplicationShortcut.description.run"
+			description="%JavaApplicationShortcut.description.run"
+			categoryId="org.eclipse.debug.ui.category.run"
+			id="org.eclipse.xtend.ide.launching.localJavaShortcut.run">
+		</command>
+		<command
+			name="%JUnitShortcut.description.run"
+			description="%JUnitShortcut.description.run"
+			categoryId="org.eclipse.debug.ui.category.run"
+			id="org.eclipse.xtend.ide.launching.junitShortcut.run">
+		</command>
+		<command
+			name="%JUnitShortcut.description.debug"
+			description="%JUnitShortcut.description.debug"
+			categoryId="org.eclipse.debug.ui.category.run"
+			id="org.eclipse.xtend.ide.launching.junitShortcut.debug">
+		</command>
+		<command
+			name="%JUnitApplicationShortcut.description.run"
+			description="%JUnitApplicationShortcut.description.run"
+			categoryId="org.eclipse.debug.ui.category.run"
+			id="org.eclipse.xtend.ide.launching.junitPdeShortcut.run">
+		</command>
+		<command
+			name="%JUnitApplicationShortcut.description.debug"
+			description="%JUnitApplicationShortcut.description.debug"
+			categoryId="org.eclipse.debug.ui.category.run"
+			id="org.eclipse.xtend.ide.launching.junitPdeShortcut.debug">
+		</command>
+	</extension>
+	<extension
+		point="org.eclipse.ui.contexts">
+		<context
+			description="%XtendContext_description"
+			id="org.eclipse.xtend.ide.XtendEditorScope"
+			name="%XtendContext_name"
+			parentId="org.eclipse.xtext.ui.XtextEditorScope">
+		</context>
+	</extension>
+	<extension
+		point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+&lt;"
+			commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
+		</key>
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+&gt;"
+			commandId="org.eclipse.xtend.ide.insertRightGuillemet">
+		</key>
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M4+&lt;"
+			commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
+		</key>
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M4+&gt;"
+			commandId="org.eclipse.xtend.ide.insertRightGuillemet">
+		</key>
+<!--
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			sequence="M1+M2+T"
+			commandId="org.eclipse.jdt.ui.navigate.open.type"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+		</key>
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			sequence="M1+M2+H"
+			commandId="org.eclipse.jdt.ui.navigate.open.type.in.hierarchy"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+		</key>
+-->
+
+		<!--
+			known bug in JDT:
+			Launch using shortcut key Alt+Shift+X doesn't work until launch actions are loaded
+			https://bugs.eclipse.org/bugs/show_bug.cgi?id=218881
+		-->
+
+		<!-- run Java application -->
+		<key
+			commandId="org.eclipse.xtend.ide.launching.localJavaShortcut.debug"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M3+M4+D J"/>
+		<!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M3+M4+D J"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.localJavaShortcut.debug"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M3+M4+D J"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.localJavaShortcut.run"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+X J"/>
+		<key
+			platform="carbon"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+X J"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.localJavaShortcut.run"
+			platform="carbon"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M3+X J"/>
+
+		<!-- run JUnit test -->
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitShortcut.debug"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+D T"/>
+		<!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+D T"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitShortcut.debug"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M3+M4+D T"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitShortcut.run"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+X T"/>
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+X T"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitShortcut.run"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M3+X T"/>
+
+		<!-- run JUnit Plug-In test -->
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitPdeShortcut.debug"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+D P"/>
+		<!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+D P"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitPdeShortcut.debug"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M3+M4+D P"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitPdeShortcut.run"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+X P"/>
+		<key
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M2+M3+X P"/>
+		<key
+			commandId="org.eclipse.xtend.ide.launching.junitPdeShortcut.run"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			platform="carbon"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M3+X P"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.edit.InsertStringHandler$LeftGuillemet"
+			commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.edit.InsertStringHandler$RightGuillemet"
+			commandId="org.eclipse.xtend.ide.insertRightGuillemet">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- make CTRL-SHIFT-T etc. work -->
+	<extension
+		point="org.eclipse.ui.actionSetPartAssociations">
+		<actionSetPartAssociation
+			targetID="org.eclipse.jdt.ui.JavaActionSet">
+			<part id="org.eclipse.xtend.core.Xtend">
+			</part>
+		</actionSetPartAssociation>
+	</extension>
+	<extension
+		id="org.eclipse.xtend.ide.wizard"
+		name="newXtendClass"
+		point="org.eclipse.ui.newWizards">
+		<category
+			id="org.eclipse.xtend.ide.wizards"
+			name="Xtend">
+		</category>
+		<wizard
+			category="org.eclipse.xtend.ide.wizards"
+			icon="icons/Xtend-Icon-16w.png"
+			id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard"
+			name="%NewXtendClass.label">
+			<class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendClassWizard" />
+			</class>
+			<description>
+				%NewXtendClass.description
+			</description>
+		</wizard>
+		<wizard
+			category="org.eclipse.xtend.ide.wizards"
+			icon="icons/Xtend-Icon-16w.png"
+			id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard"
+			name="%NewXtendInterface.label">
+			<class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard" />
+			</class>
+			<description>
+				%NewXtendInterface.description
+			</description>
+		</wizard>
+		<wizard
+			category="org.eclipse.xtend.ide.wizards"
+			icon="icons/Xtend-Icon-16w.png"
+			id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard"
+			name="%NewXtendEnum.label">
+			<class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard" />
+			</class>
+			<description>
+				%NewXtendEnum.description
+			</description>
+		</wizard>
+		<wizard
+			category="org.eclipse.xtend.ide.wizards"
+			icon="icons/Xtend-Icon-16w.png"
+			id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard"
+			name="%NewXtendAnnotation.label">
+			<class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard" />
+			</class>
+			<description>
+				%NewXtendAnnotation.description
+			</description>
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+	<perspectiveExtension
+		targetID="org.eclipse.jdt.ui.JavaPerspective">
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard">
+		</newWizardShortcut>
+	</perspectiveExtension>
+	<perspectiveExtension
+		targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard">
+		</newWizardShortcut>
+		</perspectiveExtension>
+		<perspectiveExtension
+			targetID="org.eclipse.pde.ui.PDEPerspective">
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard">
+		</newWizardShortcut>
+		<newWizardShortcut
+			id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard">
+		</newWizardShortcut>
+		</perspectiveExtension>
+	</extension>
+
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.ui.IFileEditorInput">
+			<adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.ui.IEditorPart">
+			<adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.core.resources.IResource">
+			<adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
+			<adapter type="org.eclipse.jdt.core.IJavaElement"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.ui.IFileEditorInput">
+			<adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.ui.IEditorPart">
+			<adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.core.resources.IResource">
+			<adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
+		</factory>
+		<factory
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+			adaptableType="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch">
+			<adapter type="org.eclipse.jdt.core.IJavaElement"/>
+		</factory>
+	</extension>
+
+	<extension
+		point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+			label="%JUnitShortcut.label"
+			icon="$nl$/icons/julaunch.gif"
+			helpContextId="org.eclipse.jdt.junit.launch_shortcut"
+			class="org.eclipse.xtext.xbase.ui.launching.JUnitLaunchShortcut"
+			modes="run, debug"
+			id="org.eclipse.xtend.ide.launching.junitShortcut">
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1"/>
+						<iterate>
+							<and>
+								<not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+								<adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
+									<adapt type="org.eclipse.jdt.core.IJavaElement">
+										<test property="org.eclipse.jdt.core.isInJavaProject"/>
+										<or>
+											<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+											<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.junit.jupiter.api.Test"/>
+										</or>
+										<test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+									</adapt>
+								</adapt>
+							</and>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+				id="org.eclipse.jdt.junit.launchconfig">
+			</configurationType>
+			<description
+				description="%DebugJUnitLaunchShortcut.description"
+				mode="debug">
+			</description>
+			<description
+				description="%RunJUnitLaunchShortcut.description"
+				mode="run">
+			</description>
+		</shortcut>
+	</extension>
+	<extension
+		point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+			class="org.eclipse.xtext.xbase.ui.launching.JUnitPDELaunchShortcut"
+			icon="$nl$/icons/julaunchpgn.gif"
+			id="org.eclipse.xtend.ide.launching.junitPdeShortcut"
+			label="%launcher.junit.name"
+			modes="run, debug">
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1"/>
+						<iterate>
+							<and>
+								<not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+								<adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
+									<adapt type="org.eclipse.jdt.core.IJavaElement">
+										<test property="org.eclipse.jdt.core.isInJavaProjectWithNature" value="org.eclipse.pde.PluginNature"/>
+											<or>
+												<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+												<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.junit.jupiter.api.Test"/>
+											</or>
+										<test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+									</adapt>
+								</adapt>
+							</and>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+				id="org.eclipse.pde.ui.JunitLaunchConfig">
+			</configurationType>
+			<description
+				description="%RunJUnitPluginLaunchShortcut.description"
+				mode="run">
+			</description>
+			<description
+				description="%DebugJUnitPluginLaunchShortcut.description"
+				mode="debug">
+			</description>
+		</shortcut>
+	</extension>
+	<extension
+		point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+			class="org.eclipse.xtext.xbase.ui.launching.JavaApplicationLaunchShortcut"
+			description="%JavaLaunchShortcut.description"
+			helpContextId="org.eclipse.jdt.debug.ui.shortcut_local_java_application"
+			icon="$nl$/icons/full/etool16/java_app.gif"
+			id="org.eclipse.xtend.ide.launching.localJavaShortcut"
+			label="%JavaApplicationShortcut.label"
+			modes="run, debug">
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1"/>
+						<iterate>
+							<and>
+								<not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+								<adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch">
+									<and>
+										<adapt type="org.eclipse.jdt.core.IJavaElement">
+											<test property="org.eclipse.jdt.core.isInJavaProject"/>
+										</adapt>
+										<or>
+											<test property="org.eclipse.jdt.launching.hasMain"/>
+											<test property="org.eclipse.jdt.launching.isContainer"/>
+											<test property="org.eclipse.jdt.launching.isPackageFragment"/>
+											<test property="org.eclipse.jdt.launching.isPackageFragmentRoot"/>
+										</or>
+									</and>
+								</adapt>
+							</and>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+				id="org.eclipse.jdt.launching.localJavaApplication">
+			</configurationType>
+			<description
+				description="%JavaApplicationShortcut.description.run"
+				mode="run">
+			</description>
+			<description
+				description="%JavaApplicationShortcut.description.debug"
+				mode="debug">
+			</description>
+		</shortcut>
+	</extension>
+	<extension point="org.eclipse.jdt.core.classpathContainerInitializer">
+		<classpathContainerInitializer
+			id="org.eclipse.xtend.XTEND_CONTAINER"
+			class="org.eclipse.xtend.ide.buildpath.XtendContainerInitializer"/>
+	</extension>
+	<extension
+		point="org.eclipse.jdt.ui.classpathContainerPage">
+		<classpathContainerPage
+			name="%XtendLibrary_name"
+			class="org.eclipse.xtend.ide.buildpath.XtendContainerWizardPage"
+			id="org.eclipse.xtend.XTEND_CONTAINER">
+		</classpathContainerPage>
+	</extension>
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.eclipse.xtext.ui.overrideIndicator"></type>
+	</extension>
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification
+			annotationType="org.eclipse.xtext.ui.overrideIndicator"
+			label="%OverrideIndicator.label"
+			icon="$nl$/icons/full/ovr16/over_co.gif"
+			annotationImageProvider="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.editor.OverrideIndicatorImageProvider"
+				textPreferenceKey="overrideIndicator"
+			textPreferenceValue="false"
+			highlightPreferenceKey="overrideIndicatorHighlighting"
+			highlightPreferenceValue="false"
+			contributesToHeader="false"
+			overviewRulerPreferenceKey="overrideIndicatorInOverviewRuler"
+			overviewRulerPreferenceValue="false"
+			verticalRulerPreferenceKey="overrideIndicatorInVerticalRuler"
+			verticalRulerPreferenceValue="true"
+			colorPreferenceKey="overrideIndicatorColor"
+			colorPreferenceValue="180,207,205"
+			presentationLayer="3"
+			showInNextPrevDropdownToolbarActionKey="showoverrideIndicatorInNextPrevDropdownToolbarAction"
+			showInNextPrevDropdownToolbarAction="false"
+			isGoToNextNavigationTargetKey="isOverrideIndicatorGoToNextNavigationTarget"
+			isGoToNextNavigationTarget="false"
+			isGoToPreviousNavigationTargetKey="isOverrideIndicatorGoToPreviousNavigationTarget"
+			isGoToPreviousNavigationTarget="false"
+			textStylePreferenceKey="overrideIndicatorTextStyle"
+			textStylePreferenceValue="SQUIGGLES">
+		</specification>
+	</extension>
+
+	<extension point="org.eclipse.ui.views">
+		<category
+			name="%viewCategoryName" id="org.eclipse.xtend.ide"/>
+		<view
+			category="org.eclipse.xtend.ide"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.view.DerivedSourceView"
+			icon="icons/generated_code_view.png"
+			id="org.eclipse.xtend.ide.view.DerivedSourceView"
+			name="%DerivedSourceView">
+		</view>
+	</extension>
+
+	<extension
+		point="org.eclipse.ui.themes">
+		<themeElementCategory label="%xtendPresentation.label" id="org.eclipse.xtend.ui.presentation"/>
+		<fontDefinition
+			label="%xtendEditorFontDefiniton.label"
+			defaultsTo="org.eclipse.jface.textfont"
+			categoryId="org.eclipse.xtend.ui.presentation"
+			id="org.eclipse.xtend.ui.editors.textfont">
+			<description>
+				%xtendEditorFontDefintion.description
+			</description>
+		</fontDefinition>
+		<colorDefinition
+			label="%DerivedSourceViewBackgroundColor.label"
+			categoryId="org.eclipse.xtend.ui.presentation"
+			value="COLOR_INFO_BACKGROUND"
+			id="org.eclipse.xtend.ui.DerivedSourceView.backgroundColor">
+		<description>
+			%DerivedSourceViewBackgroundColor.description
+		</description>
+		</colorDefinition>
+	</extension>
+	<extension
+		point="org.eclipse.ltk.core.refactoring.renameParticipants">
+		<renameParticipant
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.XtendFileRenameParticipant"
+			id="org.eclipse.xtend.ide.resourceRenameParticipant"
+			name="Xtend File Rename Participant">
+			<enablement>
+				<adapt
+					type="org.eclipse.core.resources.IFile">
+					<test
+						property="org.eclipse.core.resources.extension"
+						value="xtend">
+					</test>
+				</adapt>
+			</enablement>
+		</renameParticipant>
+	</extension>
+
+	<extension point="org.eclipse.ui.commands">
+	<!-- extract method refactoring -->
+		<command
+			id="org.eclipse.xtend.ide.refactoring.ExtractMethod"
+			name="%ExtractMethodRefactoring_name"
+			description="%ExtractMethodRefactoring_description">
+		</command>
+		<!-- import static method -->
+		<command
+			id="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
+			name="%ImportStaticMethod_name"
+			description="%ImportStaticMethod_description">
+		</command>
+		<command
+			id="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod"
+			name="%ImportStaticExtensionMethod_name"
+			description="%ImportStaticExtensionMethod_description">
+		</command>
+	</extension>
+
+	<extension point="org.eclipse.ui.bindings">
+		<key
+			sequence="M2+M3+M"
+			commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+		<key
+			sequence="COMMAND+ALT+M"
+			commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			platform="carbon"/>
+		<key
+			sequence="M2+M3+M"
+			commandId=""
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			platform="carbon"/>
+		<key
+			sequence="SHIFT+ALT+M"
+			commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			platform="win32"/>
+		<key
+			sequence="M2+M3+M"
+			commandId=""
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			platform="win32"/>
+		<key
+			sequence="SHIFT+ALT+M"
+			commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			platform="gtk"/>
+		<key
+			sequence="M2+M3+M"
+			commandId=""
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			platform="gtk"/>
+		<key
+			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M2+M">
+		</key>
+		<key
+			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod"
+			contextId="org.eclipse.xtend.ide.XtendEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M2+M3+M">
+		</key>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.ExtractMethodHandler"
+			commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethodHandler"
+			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethodHandler"
+			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=xtext.ui.SourceMenu">
+			<menu
+				id="xtend.ide.RefactorMenu"
+				label="Refactor"
+				mnemonic="Refac&amp;tor">
+				<command
+					commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+					style="push">
+					<visibleWhen
+						checkEnabled="false">
+						<reference
+							definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+						</reference>
+					</visibleWhen>
+				</command>
+				<separator
+					name="xtend.ide.ExtractSeparator"
+					visible="true">
+				</separator>
+				<command
+					commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod"
+					style="push">
+					<visibleWhen
+						checkEnabled="false">
+						<reference
+							definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+						</reference>
+					</visibleWhen>
+				</command>
+				<command
+					commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+					style="push">
+					<visibleWhen
+						checkEnabled="false">
+						<reference
+							definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+						</reference>
+					</visibleWhen>
+				</command>
+				<command
+					commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
+					style="push">
+					<visibleWhen
+						checkEnabled="false">
+						<reference
+							definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+						</reference>
+					</visibleWhen>
+				</command>
+				<command
+					commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod"
+					style="push">
+					<visibleWhen
+						checkEnabled="false">
+						<reference
+							definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+						</reference>
+					</visibleWhen>
+				</command>
+			</menu>
+			<separator
+				name="xtend.ide.referencesSeparator"
+				visible="true">
+			</separator>
+		</menuContribution>
+		<menuContribution
+				locationURI="popup:#TextEditorContext?endof=group.find">
+			<command
+				commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen
+					checkEnabled="false">
+					<reference
+						definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution
+				locationURI="popup:#TextEditorContext?before=group.find">
+			<separator
+				name="org.eclipse.xtend.ide.separator4"
+				visible="true">
+			</separator>
+			<separator
+				name="org.eclipse.xtend.ide.separator5"
+				visible="true">
+			</separator>
+		</menuContribution>
+	</extension>
+	<extension
+		point="org.eclipse.ui.console.consolePatternMatchListeners">
+		<consolePatternMatchListener
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.hyperlinking.ConsoleHyperlinking"
+			id="org.eclipse.xtend.ide.hyperlinking.ConsoleHyperlinking"
+			regex="(?&lt;=\()\w+\.xtend(:\d+)">
+			<enablement>
+				<or>
+					<test property="org.eclipse.ui.console.consoleTypeTest" value="javaStackTraceConsole"/>
+					<test property="org.eclipse.debug.ui.processTypeTest" value="java"/>
+					<test property="org.eclipse.debug.ui.processTypeTest" value="org.eclipse.ant.ui.antProcess"/>
+				</or>
+			</enablement>
+		</consolePatternMatchListener>
+	</extension>
+	<!-- Open implementation -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
+			commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.MultiOrganizeImportsHandler"
+			commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports">
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			allPopups="true"
+			locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?before=org.eclipse.jdt.ui.refactoring.menu">
+			<menu
+				id="org.eclipse.jdt.ui.source.menu"
+				label="Source">
+				<command
+					commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports"
+					label="Organize Xtend Imports"
+					style="push">
+					<visibleWhen>
+						<with variable="selection">
+							<iterate ifEmpty="false" operator="or">
+								<reference definitionId="org.eclipse.xtend.fileDef"/>
+							</iterate>
+						</with>
+					</visibleWhen>
+				</command>
+			</menu>
+		</menuContribution>
+		<menuContribution
+			locationURI="menu:navigate?after=open.ext4">
+			<command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution
+			allPopups="false"
+			locationURI="popup:org.eclipse.jdt.ui.source.menu?endof=importGroup">
+			<command
+				commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports"
+				label="Organize Xtend Imports"
+				style="push">
+				<visibleWhen>
+					<and>
+						<with variable="selection">
+							<iterate
+								ifEmpty="false"
+								operator="or">
+								<or>
+									<adapt type="org.eclipse.jdt.core.IJavaProject"/>
+									<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+									<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>
+									<adapt type="org.eclipse.ui.IWorkingSet"/>
+									<reference definitionId="org.eclipse.xtend.fileDef"/>
+								</or>
+							</iterate>
+						</with>
+						<with
+							variable="activePartId">
+							<equals
+								value="org.eclipse.jdt.ui.PackageExplorer">
+							</equals>
+						</with>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.e4.ui.css.swt.theme">
+		<stylesheet uri="css/e4-dark_xtend_syntaxhighlighting.css">
+			<themeid refid="org.eclipse.e4.ui.css.theme.e4_dark"/>
+		</stylesheet>
+		<stylesheet uri="css/e4-default_xtend_syntaxhighlighting.css">
+			<themeid refid="org.eclipse.e4.ui.css.theme.e4_default"/>
+		</stylesheet>
+	</extension>
+	<extension
+		point="org.eclipse.core.expressions.definitions">
+		<definition
+			id="org.eclipse.xtend.fileDef">
+			<adapt type="org.eclipse.core.resources.IResource">
+				<test property="org.eclipse.core.resources.extension"
+					value="xtend">
+				</test>
+			</adapt>
+		</definition>
+	</extension>
+	<extension
+		point="org.eclipse.core.runtime.adapters">
+		<factory
+			adaptableType="org.eclipse.xtend.ide.editor.XtendEditor"
+			class="org.eclipse.xtend.ide.editor.XtendEditorAdapterFactory">
+			<adapter
+				type="org.eclipse.ui.part.IShowInTargetList">
+			</adapter>
+		</factory>
+	</extension>
+	<extension
+		point="org.eclipse.ui.navigator.navigatorContent">
+		<commonWizard
+			type="new"
+			wizardId="org.eclipse.xtend.ide.wizards.NewXtendClassWizard"
+			menuGroupId="org.eclipse.jdt.ui.java">
+			<enablement></enablement>
+		</commonWizard>
+		<commonWizard
+			type="new"
+			wizardId="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard"
+			menuGroupId="org.eclipse.jdt.ui.java">
+			<enablement></enablement>
+		</commonWizard>
+		<commonWizard
+			type="new"
+			wizardId="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard"
+			menuGroupId="org.eclipse.jdt.ui.java">
+			<enablement></enablement>
+		</commonWizard>
+		<commonWizard
+			type="new"
+			wizardId="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard"
+			menuGroupId="org.eclipse.jdt.ui.java">
+			<enablement></enablement>
+		</commonWizard>
+	</extension>
+</plugin>

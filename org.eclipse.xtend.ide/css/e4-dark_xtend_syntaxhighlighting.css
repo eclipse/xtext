@@ -1,0 +1,48 @@
+IEclipsePreferences#org-eclipse-xtend-core-Xtend:xtext-xtend-ide-theme { /* 'xtext-xtend-ide-theme' is a pseudo attribute added to allow contributions without replacing this node, see Bug 466075 */
+
+	preferences:
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.default.color=129,162,190'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.keyword.color=178,147,187'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.keyword.style=1' /* SWT.BOLD */
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.string.color=181,189,104'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.punctuation.color=206,209,207'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.comment.color=90,127,74'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.number.color=222,147,95'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.error.color=129,162,190'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.task.color=129,162,190'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.task.style=1' /* SWT.BOLD */
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.abstract.class.color=240,198,116'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.abstract.method.invocation.color=129,162,190'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.annotation.color=128,128,128'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.annotation.style=2'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.class.color=240,198,116'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.deprecated.members.color=0,0,0'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.deprecated.members.style=536870912' /* TextAttribute.STRIKETHROUGH */
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.enum.color=240,198,116'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.enum.style=2'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.extension.method.invacation.color=161,202,237'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.extension.method.invacation.style=2'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.field.color=129,162,190'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.interface.color=240,198,116'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.local.final.variable.color=204,102,102'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.local.final.variable.declaration.color=204,102,102'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.local.variable.color=204,102,102'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.local.variable.declaration.color=204,102,102'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.method.color=129,162,190'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.parameter.variable.color=204,102,102'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.static.final.field.color=222,147,95'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.static.final.field.style=3' /* SWT.BOLD|SWT.ITALIC */
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.static.method.invocation.color=161,202,237'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.static.method.invocation.style=2' /* SWT.ITALIC */
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.type.argument.color=222,147,95'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.type.variable.color=222,147,95'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.active.annotation.color=128,128,128'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.multi.line.comment.color=90,127,74'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.single.line.comment.color=90,127,74'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.richText.color=195,187,184'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.richText.bgColor=75,78,85'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.richText.delimiter.color=181,189,104'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.insignificant.template.text.color=181,189,104'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.potential.line.break.color=128,128,128'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xtend.template.line.break.color=128,128,128'
+}
