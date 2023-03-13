@@ -1,0 +1,235 @@
+
+pipeline {
+  agent {
+    kubernetes {
+      inheritFrom 'centos-8'
+    }
+  }
+
+  // for testing shell commands use
+  //    docker run -it -v $(pwd):/xtext docker.io/eclipsecbi/jiro-agent-centos-8:remoting-4.5 bash
+  // execute from the directory that contains the xtext git repos below
+  parameters {
+      string(name: 'SOURCE_BRANCH', defaultValue: 'master', description: 'Source branch for checkout & create the release branches from')
+      choice(name: 'RELEASE', choices: ['M1','M2','M3','RC1','RC2','GA','Beta'], description: 'Type of release to build')
+      booleanParam(name: 'VERBOSE', defaultValue: false, description: 'Print additional verbose output (e.g. git diff)')
+      booleanParam(name: 'DRY_RUN', defaultValue: false, description: 'Dry run mode. Performs all actions, but does not push them. Changes are only printed out.')
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'5'))
+    timeout(time: 60, unit: 'MINUTES')
+    timestamps()
+  }
+  
+  environment {
+    releaseType="${params.RELEASE}"
+    baseGitURL='git@github.com:eclipse'
+    repositoryNames = 'xtext-lib,xtext-core,xtext-extras,xtext-eclipse,xtext-xtend,xtext-maven,xtext-web,xtext-umbrella'
+    GENIE_XTEXT_CREDENTIALS = 'github-bot-ssh'
+    GITHUB_API_CREDENTIALS_ID = 'github-bot-token'
+  }
+
+  stages {
+    stage('Prepare') {
+      steps {
+        // checkout xtext-umbrella
+        checkout scm
+        withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
+        script {
+          env.xtextVersion = getCurrentXtextVersion(params.SOURCE_BRANCH)
+          // for stable releases append the release qualifier
+          if (params.RELEASE != 'GA') {
+            env.xtextVersion += "."+params.RELEASE
+          }
+          env.tagName="v${xtextVersion}"
+          env.branchName="${params.RELEASE != 'GA' ? 'milestone_'+xtextVersion : 'release_'+xtextVersion}"
+
+          if (!xtextVersion.startsWith('2.')) {
+            currentBuild.result = 'ABORTED'
+            error('XTEXT_VERSION '+xtextVersion+' invalid')
+          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} ${xtextVersion}";
+          if (params.DRY_RUN) {
+            currentBuild.displayName += " (Dry Run)"
+          }
+
+          println "xtext version to be released ${xtextVersion}"
+          println "branch to be created ${branchName}"
+          println "tag to be created ${tagName}"
+          sshagent([CREDENTIAL_ID_GENIE_XTEXT_GITHUB]) {
+            wrap([$class: 'BuildUser']) {
+              repositoryNames.split(',').each {
+                sh """
+                  git clone -b ${params.SOURCE_BRANCH} --depth 1 ${baseGitURL}/${it}.git
+                  cd ${it}
+                  git config user.name "${env.BUILD_USER}"
+                  git config user.email "${env.BUILD_USER_EMAIL}"
+                  git checkout -b ${branchName}
+                  cd ..
+                """
+              }
+            }
+          } // END sshagent
+        } // END script
+        } // END withCredentials
+      } // END steps
+    } // END stage
+    
+    stage('Modify') {
+      steps {
+        script {
+          repositoryNames.split(',').each {
+            print "##### Preparing $it ########"
+            dir(it) {
+              modifyFiles (it, xtextVersion, branchName)
+            }
+          }
+        } // END script
+      } // END steps
+    } // END stage
+
+
+    stage('Commit & Push') {
+      steps {
+        script {
+          repositoryNames.split(',').each {
+            dir (it) {
+              // Avoid commit when no change has happened. This would make the pipeline fail.
+              sh label: "Commit changes", script: """
+                echo "#### Commit changes for ${it} ####"
+                git diff-index --quiet HEAD || git commit --signoff -a --allow-empty -m '[release] version $xtextVersion'
+                git tag --force -a ${tagName} -m 'release ${tagName}'
+              """
+              if (params.DRY_RUN || params.VERBOSE) {
+                sh "git diff ${params.SOURCE_BRANCH}..${branchName}"
+              }
+            }
+          }
+          if (!params.DRY_RUN) {
+            sshagent([GENIE_XTEXT_CREDENTIALS]) {
+              repositoryNames.split(',').each {
+                dir (it) {
+                  sh """
+                    git push --force --tags origin ${branchName}
+                  """
+                }
+              }
+            }
+            slackSend message: "RELEASE BRANCH '${branchName}' PREPARED.", botUser: true, channel: 'xtext-builds', color: '#00FF00'
+          }
+        } // END script
+      } // END steps
+    } // END stage
+  } // END stages
+
+} // END pipeline
+
+
+/**
+ * Retrieve the Xtext version from 'versions.gradle' of the branch from xtext-lib
+ */
+def getCurrentXtextVersion (branch) {
+  env.BRANCH_REF="${branch}"
+  version = sh (returnStdout: true, 
+    script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_REF| jq -r ".content" | base64 -d | grep -Po "version = \\\'\\K([^\\\']*)(?=\\\')"')  
+  version = version.replace('-SNAPSHOT','').trim()
+  return version
+}
+
+def modifyFiles (repoId, xtextVersion, branchName) {
+  switch (repoId) {
+    case 'xtext-lib' :
+      gradleVersionUpdate(xtextVersion)
+      changePomDependencyVersion('releng/pom.xml', xtextVersion)
+      break
+    case 'xtext-core' :
+      gradleVersionUpdate(xtextVersion)
+      changePomDependencyVersion('releng/pom.xml', xtextVersion)
+      setTagValue('releng/pom.xml', 'upstreamBranch', branchName)
+      break
+    case 'xtext-extras' :
+      gradleVersionUpdate(xtextVersion)
+      changePomDependencyVersion('releng/pom.xml', xtextVersion)
+      setTagValue('releng/pom.xml', 'upstreamBranch', branchName)
+      break
+    case 'xtext-eclipse' :
+      adjustTargetRepoUrls('releng', branchName)
+      break
+    case 'xtext-web' :
+      gradleVersionUpdate(xtextVersion)
+      break
+    case 'xtext-maven' :
+      pomVersionUpdate('org.eclipse.xtext.maven.parent/pom.xml', xtextVersion)
+      pomVersionUpdate('org.eclipse.xtext.maven.plugin/pom.xml', xtextVersion)
+      setTagValue('org.eclipse.xtext.maven.parent/pom.xml', 'upstreamBranch', branchName)
+      setTagValue('org.eclipse.xtext.maven.plugin/src/test/resources/it/generate/pom.xml', 'upstreamBranch', branchName)
+      setTagValue('org.eclipse.xtext.maven.plugin/src/test/resources/it/generate/pom.xml', 'xtext-version', xtextVersion)
+      break
+    case 'xtext-xtend' :
+      adjustTargetRepoUrls('releng', branchName)
+      gradleVersionUpdate(xtextVersion)
+      pomVersionUpdate('maven-pom.xml', xtextVersion)
+      pomVersionUpdate('org.eclipse.xtend.maven.archetype/pom.xml', xtextVersion)
+      pomVersionUpdate('org.eclipse.xtend.maven.plugin/pom.xml', xtextVersion)
+      pomVersionUpdate('releng/org.eclipse.xtend.maven.parent/pom.xml', xtextVersion)
+      setTagValue('releng/org.eclipse.xtend.maven.parent/pom.xml', 'upstreamBranch', branchName)
+      setTagValue('org.eclipse.xtend.maven.plugin/src/test/resources/it/pom.xml', 'xtextVersion', xtextVersion)
+      adjustTargetRepoUrls('releng', branchName)
+      break
+    case 'xtext-umbrella' :
+      adjustTargetRepoUrls('releng', branchName)
+      setTagValue('releng/org.eclipse.xtext.sdk.p2-repository/pom.xml', 'zipFileVersion', xtextVersion)
+      adjustTargetRepoUrls('releng', branchName)
+      break
+  }
+}
+
+def void gradleVersionUpdate(xtext_version) {
+  sh label: "gradle/versions.gradle: Updating version", script: """
+    sed -ie "s|^version.*|version = '${xtext_version}'|" gradle/versions.gradle
+  """
+}
+
+/**
+ * Replace SNAPSHOT versions in the dependencies section of a POM.
+ * The first version occurance (project version) must be skipped, the version should stay as SNAPSHOT.
+ * This is done by starting the replacement range from line 10 on. The range ends with the <build> tag.
+ */
+def void changePomDependencyVersion (file, xtext_version) {
+  sh label: "${file}: Update snapshot dependencies to ${xtext_version}", script: """
+    sed -i -E '10,/<build>/s|<version>([0-9\\.]+)-SNAPSHOT</version>|<version>${xtext_version}</version>|' ${file}
+  """
+}
+
+/**
+ * Replace SNAPSHOT project version. The project version is the first occurance of a <version> tag.
+ * The search range is therefore from beginning (0) to the closing </version> tag.
+ * The version tag can be either in the parent section, or on project level.
+ */
+def void pomVersionUpdate (file, xtext_version) {
+  sh label: "${file}: Update POM version to ${xtext_version}", script: """
+    sed -i -E '0,/<\\/version>/s|<version>([0-9\\.]+)-SNAPSHOT</version>|<version>${xtext_version}</version>|' ${file}
+  """
+}
+
+/**
+ * Updates the value of an XML tag.
+ */
+def void setTagValue (file, tagName, tagValue) {
+  sh label: "${file}: Update tag '${tagName}' to '${tagValue}'", script: """
+    sed -i -E 's|<${tagName}>(.+)</${tagName}>|<${tagName}>${tagValue}</${tagName}>|' ${file}
+  """
+}
+
+/**
+ * Updates target repository urls in .target files. Search for .target files below the given
+ * baseDir. Then for all Xtext repository URL replace the branch specifier 
+ */
+def adjustTargetRepoUrls (basedir, targetBranch) {
+  sh label: "Update repository URLs in target definitions", script: """
+    find ${basedir} -name '*.target' -type f | while read targetdef; do
+      sed -i -E 's|xtext-([^/]*)/job/[^/]*|xtext-\\1/job/${targetBranch}|' \$targetdef
+    done
+  """
+}

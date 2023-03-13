@@ -1,0 +1,73 @@
+pipeline {
+  agent {
+    kubernetes {
+      inheritFrom 'centos-8'
+    }
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'15'))
+    disableConcurrentBuilds()
+    timeout(time: 15, unit: 'MINUTES')
+  }
+
+  // https://jenkins.io/doc/book/pipeline/syntax/#triggers
+  triggers {
+    cron('30 21 * * *') // nightly at 21:30
+  }
+  
+  parameters {
+    string      (name: 'NUMBER_OF_DROPS_TO_KEEP', defaultValue: '4', description: 'How many nightly drops should be kept?')
+    booleanParam(name: 'DRY_RUN', description: 'If set the job does not perform file changes')
+  }
+  
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
+  }
+
+  stages {
+    stage('Cleanup Nightly Drops') {
+      steps {
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          // Cleanup nightly builds except for the NUMBER_OF_DROPS_TO_KEEP recent ones
+          sh '''
+              # ENV variables and subshells need to be escaped in order to be evaluated remotely.
+              # Exceptions are ENV variables filled by Jenkins locally:
+              #   * NUMBER_OF_DROPS_TO_KEEP
+              #   * DOWNLOAD_AREA
+              #   * DRY_RUN
+              # 
+              # IMPORTANT:
+              # It's important to use tabs, *not* spaces in this script!
+							ssh genie.xtext@projects-storage.eclipse.org /bin/bash <<-EOF
+								# set -x # <- Uncomment for debug
+								# find most recent NUMBER_OF_DROPS_TO_KEEP directories
+								#   - search for directories with names starting with 'N'
+								#   - sort by name. This includes Xtext version and build timestamp, so sorting the list reverse will
+								#     result in a list of paths with newest timestamp in front.
+								#   - use 'head' to get only the first N lines for TO_KEEP, and 'tail' for TO_DELETE 
+								TO_KEEP=\\$(find $DOWNLOAD_AREA -type d -name N* | sort --reverse | head -n $NUMBER_OF_DROPS_TO_KEEP)
+								# find all N* directories older than the first NUMBER_OF_DROPS_TO_KEEP
+								TO_DELETE=\\$(find $DOWNLOAD_AREA -type d -name N* | sort --reverse | tail -n +\\$(($NUMBER_OF_DROPS_TO_KEEP + 1)))
+
+								echo "Keep $NUMBER_OF_DROPS_TO_KEEP most recent builds.\n"
+								echo "    Keeping:\n\\$TO_KEEP"
+								echo "    Removing:\n\\$TO_DELETE"
+
+								for DIR in \\$TO_DELETE
+								do
+										if [ "$DRY_RUN" == "true" ]; then
+											echo "*** DRY RUN *** Deleting \\$DIR"
+										else
+											rm -rf \\$DIR
+										fi
+								done
+							EOF
+            '''
+        } 
+      }
+    }
+
+  }
+
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.emf.mwe2.language.sdk"
+      version="2.14.0.v20221117-1134"
+      label="Dummy Feature"
+      provider-name="Eclipse Xtext">
+
+   <description>
+      Dummy feature to satisfy Tycho's hunger for dependency resolution.
+   </description>
+
+</feature>
