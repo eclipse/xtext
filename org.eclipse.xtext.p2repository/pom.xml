@@ -9,12 +9,14 @@
 	<artifactId>org.eclipse.xtext.p2repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 
-	<!--
-	TODO: if we switch to a single Git repository this should be merged into the main p2 repository
-	-->
-
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
+		<!-- 
+			Version qualifier of the target zip file 
+			Usually this is the same as the (snaphsot) project version
+			but for releases it is set to the release version.
+		-->
+		<zipFileVersion>2.31.0-SNAPSHOT</zipFileVersion>
 	</properties>
 
 	<build>
@@ -32,6 +34,10 @@
 							<target>
 								<copy todir="${root-dir}/build/p2-repository">
 									<fileset dir="${basedir}/target/repository/" />
+								</copy>
+								<copy
+									file="${basedir}/target/repository/org.eclipse.xtext.p2repository-2.31.0-SNAPSHOT.zip"
+									tofile="${root-dir}/build/org.eclipse.xtext.p2repository-${zipFileVersion}.zip">
 								</copy>
 							</target>
 						</configuration>
