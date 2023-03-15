@@ -8,7 +8,6 @@
 	<version>IT-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>

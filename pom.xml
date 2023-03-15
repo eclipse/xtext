@@ -148,7 +148,6 @@
 
 		<root-dir>${basedir}/..</root-dir>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
-		<upstreamBranch>master</upstreamBranch>
 
 		<target-platform-classifier>xtext-latest</target-platform-classifier>
 
