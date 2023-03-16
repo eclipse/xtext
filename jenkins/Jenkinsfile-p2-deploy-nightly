@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo'
+    REPOSITORY_PATH="${DOWNLOAD_AREA}/updates/nightly"
+  }
+
+  tools {
+    maven "apache-maven-3.8.6"
+    jdk "temurin-jdk17-latest"
+  }
+
+  stages {
+    stage('Echo') {
+      steps {
+        sh 'echo ${REPOSITORY_PATH}'
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**'
+    }
+  }
+}
