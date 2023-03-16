@@ -38,6 +38,7 @@
 		<module>../org.eclipse.xtext.java</module>
 		<!-- This is required by the xtext-maven-plugin IT -->
 		<module>../org.eclipse.xtext.purexbase</module>
+		<module>../org.eclipse.xtext.purexbase.ide</module>
 		<!-- xtext-web -->
 		<module>../org.eclipse.xtext.web</module>
 		<module>../org.eclipse.xtext.web.example.statemachine</module>
