@@ -8,7 +8,6 @@
 	<version>IT-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -135,18 +134,6 @@
 			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
-			<id>xtext-lib-from-jenkins</id>
-			<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
-		</repository>
-		<repository>
-			<id>xtext-core-from-jenkins</id>
-			<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
-		</repository>
-		<repository>
-			<id>xtext-extras-from-jenkins</id>
-			<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
-		</repository>
-		<repository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</repository>
@@ -165,18 +152,6 @@
 		<pluginRepository>
 			<id>lsp4j-from-jenkins</id>
 			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>xtext-lib-from-jenkins</id>
-			<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>xtext-core-from-jenkins</id>
-			<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>xtext-extras-from-jenkins</id>
-			<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>central snapshots</id>
