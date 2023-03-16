@@ -12,9 +12,15 @@ pipeline {
   }
 
   stages {
-    stage('Echo') {
+    stage('Prepare repository path') {
       steps {
-        sh 'echo ${REPOSITORY_PATH}'
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh '''
+            echo ${REPOSITORY_PATH}
+            ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $REPOSITORY_PATH"
+            ssh genie.xtext@projects-storage.eclipse.org "ls -l $REPOSITORY_PATH"
+          '''
+        }
       }
     }
   }
