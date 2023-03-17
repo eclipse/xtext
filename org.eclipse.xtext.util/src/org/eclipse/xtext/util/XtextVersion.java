@@ -110,7 +110,7 @@ public class XtextVersion {
 		try (InputStream is = new URL (baseURL + "META-INF/MANIFEST.MF").openStream()) {
 			Manifest manifest = new Manifest(is);
 			String version = manifest.getMainAttributes().getValue("Maven-Version");
-			if ("unspecified".equals(version)) {
+			if (version == null) {
 				version = manifest.getMainAttributes().getValue("Bundle-Version");
 				if (version.endsWith(".qualifier")) {
 					return version.replace(".qualifier", "-SNAPSHOT");

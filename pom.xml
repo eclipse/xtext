@@ -151,6 +151,11 @@
 
 		<target-platform-classifier>xtext-latest</target-platform-classifier>
 
+		<!-- This is used to generate the Maven-version entry in
+			the packaged MANIFEST.MF of org.eclipse.xtext.util to
+			retrieve at run-time the current Xtext version -->
+		<mavenVersionManifestEntry>${project.version}</mavenVersionManifestEntry>
+
 		<!--
 		TODO: if we switch to a single Git repository, this should be changed
 		-->
@@ -205,6 +210,31 @@
 				<module>org.eclipse.xtext.p2.releng</module>
 				<module>org.eclipse.xtext.maven.releng</module>
 			</modules>
+		</profile>
+		<profile>
+			<!-- Activate it when performing a release, so that
+				the Maven-version entry in the packaged MANIFEST.MF
+				of org.eclipse.xtext.util will be the version without
+				the -SNAPSHOT -->
+			<id>p2-release</id>
+			<properties>
+				<mavenVersionManifestEntry>${unqualifiedVersion}</mavenVersionManifestEntry>
+			</properties>
+		</profile>
+		<profile>
+			<!-- Activate it when performing a milestone release, so that
+				the Maven-version entry in the packaged MANIFEST.MF
+				of org.eclipse.xtext.util will be the version without
+				the -SNAPSHOT but with the milestone number.
+
+				IMPORTANT: you must also pass the milestone identifier, e.g., M1
+				with the property mavenVersionMilestone, e.g.,
+				-DmavenVersionMilestone=M1
+			-->
+			<id>p2-milestone</id>
+			<properties>
+				<mavenVersionManifestEntry>${unqualifiedVersion}.${mavenVersionMilestone}</mavenVersionManifestEntry>
+			</properties>
 		</profile>
 		<profile>
 			<id>useJenkinsSnapshots</id>
