@@ -39,11 +39,9 @@
 		<plugins>
 			<plugin>
 				<!--
-				Generate the Maven-version entry in
-				the packaged MANIFEST.MF to
+				Generate the Maven-version entry in the packaged MANIFEST.MF to
 				retrieve at run-time the current Xtext version.
-				See XtextVersion.java and the profiles in the parent POM
-				p2-release and p2-milestone
+				See XtextVersion.java.
 				-->
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>

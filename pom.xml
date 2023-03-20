@@ -215,29 +215,46 @@
 			</modules>
 		</profile>
 		<profile>
-			<!-- Activate it when performing a release, so that
-				the Maven-version entry in the packaged MANIFEST.MF
-				of org.eclipse.xtext.util will be the version without
-				the -SNAPSHOT -->
+			<!-- Activate it when performing a release or milestone, so that
+				Tycho won't complain about different versions in OSGI and POM -->
 			<id>p2-release</id>
-			<properties>
-				<mavenVersionManifestEntry>${unqualifiedVersion}</mavenVersionManifestEntry>
-			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-packaging-plugin</artifactId>
+						<configuration>
+							<strictVersions>false</strictVersions>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
-			<!-- Activate it when performing a milestone release, so that
-				the Maven-version entry in the packaged MANIFEST.MF
-				of org.eclipse.xtext.util will be the version without
-				the -SNAPSHOT but with the milestone number.
-
-				IMPORTANT: you must also pass the milestone identifier, e.g., M1
-				with the property mavenVersionMilestone, e.g.,
-				-DmavenVersionMilestone=M1
-			-->
-			<id>p2-milestone</id>
-			<properties>
-				<mavenVersionManifestEntry>${unqualifiedVersion}.${mavenVersionMilestone}</mavenVersionManifestEntry>
-			</properties>
+			<id>replace-qualifier-with-timestamp</id>
+			<build>
+				<plugins>
+					<!-- meant to be called explicitly via the goal syntax:
+						build-helper:timestamp-property@timestamp -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>timestamp</id>
+								<goals>
+									<goal>timestamp-property</goal>
+								</goals>
+								<phase>none</phase>
+								<configuration>
+									<name>computedTimestamp</name>
+									<pattern>${timestamp-pattern}</pattern>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>useJenkinsSnapshots</id>
