@@ -151,6 +151,9 @@
 
 		<target-platform-classifier>xtext-latest</target-platform-classifier>
 
+		<!-- timestamp format for replacing qualifier in OSGI MANIFEST/feature -->
+		<timestamp-pattern>'v'yyyyMMdd-HHmm</timestamp-pattern>
+
 		<!-- This is used to generate the Maven-version entry in
 			the packaged MANIFEST.MF of org.eclipse.xtext.util to
 			retrieve at run-time the current Xtext version -->
@@ -654,7 +657,7 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<format>'v'yyyyMMdd-HHmm</format>
+					<format>${timestamp-pattern}</format>
 					<!-- required to have valid consumable Maven artifacts
 						https://github.com/eclipse/tycho/issues/781 -->
 					<skipPomGeneration>true</skipPomGeneration>
