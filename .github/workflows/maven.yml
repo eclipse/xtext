@@ -41,12 +41,12 @@ jobs:
       - name: Build and test (headless with xvfb in Linux)
         run: xvfb-run mvn clean verify -PuseJenkinsSnapshots -PbuildP2Repository
         if: matrix.os == 'ubuntu-latest'
-        working-directory: org.eclipse.xtext.p2.releng
+        working-directory: org.eclipse.xtext.full.releng
 
       - name: Build and test (in other OSes)
         run: mvn clean verify -PuseJenkinsSnapshots
         if: matrix.os != 'ubuntu-latest'
-        working-directory: org.eclipse.xtext.p2.releng
+        working-directory: org.eclipse.xtext.full.releng
 
   build-maven-artifacts:
     runs-on: ubuntu-latest
