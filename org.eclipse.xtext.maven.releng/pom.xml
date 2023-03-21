@@ -8,6 +8,8 @@
 	<artifactId>org.eclipse.xtext.maven.releng</artifactId>
 	<packaging>pom</packaging>
 
+	<description>Builds only Maven artifacts and associated tests</description>
+
 	<modules>
 		<module>..</module>
 		<module>../org.eclipse.xtext.dev-bom</module>
