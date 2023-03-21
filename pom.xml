@@ -330,6 +330,9 @@
 			</properties>
 			<build>
 				<plugins>
+					<!--
+					For the moment we do without
+					see https://github.com/xtext/xtext-monorepo/issues/14
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -340,6 +343,7 @@
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
+					-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
