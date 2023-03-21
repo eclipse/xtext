@@ -59,7 +59,7 @@ pipeline {
         wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
         sh """
           export MAVEN_OPTS=-Xmx1500m 
-          ./full-build.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=/home/jenkins/.m2/repository
+          ./full-build.sh --tp=${selectedTargetPlatform()}
         """
         }
       }// END steps

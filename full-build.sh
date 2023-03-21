@@ -3,17 +3,18 @@ if [ -z "$JENKINS_URL" ]; then
   # if not set in environment use default
   JENKINS_URL=https://ci.eclipse.org/xtext/
 fi
-
-# Use TARGET_PLATFORM from environment and 'r202203' as default.
-# Overridable by 'tp' command-line arg
-if [ -z "$TARGET_PLATFORM" ]; then
-  TARGET_PLATFORM=r202203
+if [ -z "$WORKSPACE" ]; then
+  # if not set in environment use default
+  WORKSPACE=$(pwd)
 fi
+
 
 MVN_ARGS=(\
   --update-snapshots \
   --fae \
+  -Dmaven.test.failure.ignore=true \
   -DJENKINS_URL=$JENKINS_URL \
+  -DWORKSPACE=$WORKSPACE \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
   -Dit-archetype-tests-skip=true \
 )
@@ -59,7 +60,7 @@ MVN_ARGS+=(-PuseJenkinsSnapshots)
 MVN_ARGS+=(-PbuildP2Repository)
 MVN_ARGS+=(-P$TARGET_PLATFORM)
 
-echo mvn -B -f org.eclipse.xtext.p2.releng ${MVN_ARGS[@]} $@
+echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 
 echo "Using target platform '$TARGET_PLATFORM'"
 mvn -B \
