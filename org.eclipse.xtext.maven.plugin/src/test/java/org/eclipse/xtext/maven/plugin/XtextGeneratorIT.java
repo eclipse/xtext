@@ -195,7 +195,7 @@ public class XtextGeneratorIT {
 
 	@Test
 	public void xcore() throws Exception {
-		Verifier verifier = verifyErrorFreeLog("xcore-lang", true, "clean", "verify");
+		Verifier verifier = verifyErrorFreeLog("xcore-lang", false, "clean", "verify");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.verifyFilePresent(
 				verifier.getBasedir() + "/target/xtext-temp/stub-classes/org/eclipse/xcoretest/MyClass2.class");
@@ -205,12 +205,12 @@ public class XtextGeneratorIT {
 
 	@Test
 	public void xcoreMapping() throws Exception {
-		verifyErrorFreeLog("xcore-mapping", true, "clean", "verify");
+		verifyErrorFreeLog("xcore-mapping", false, "clean", "verify");
 	}
 
 	@Test
 	public void xcoreAutoMapping() throws Exception {
-		verifyErrorFreeLog("xcore-auto-mapping", true, "clean", "verify");
+		verifyErrorFreeLog("xcore-auto-mapping", false, "clean", "verify");
 	}
 
 	@Test
