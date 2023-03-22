@@ -11,7 +11,6 @@ fi
 
 MVN_ARGS=(\
   --update-snapshots \
-  --fae \
   -Dmaven.test.failure.ignore=true \
   -DJENKINS_URL=$JENKINS_URL \
   -DWORKSPACE=$WORKSPACE \
