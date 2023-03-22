@@ -170,6 +170,7 @@
 				<artifactId>maven-invoker-plugin</artifactId>
 				<version>3.5.0</version>
 				<configuration>
+					<extraArtifacts>org.eclipse.xtext:xtext-dev-bom:${project.version}:pom</extraArtifacts>
 					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 				</configuration>
 				<executions>

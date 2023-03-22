@@ -128,36 +128,12 @@
 		</pluginManagement>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>lsp4j-from-jenkins</id>
-			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
-		</repository>
-		<repository>
-			<id>central snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<id>it-repo</id>
-			<url>file://${maven.repo.local}</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>lsp4j-from-jenkins</id>
 			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
-			<id>central snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</pluginRepository>
-		<pluginRepository>
 			<id>it-repo</id>
 			<url>file://${maven.repo.local}</url>
 			<releases>
@@ -167,5 +143,43 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+			<id>central-real</id>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
 	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>lsp4j-from-jenkins</id>
+			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>it-repo</id>
+			<url>file://${maven.repo.local}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>central</id>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+	</repositories>
 </project>
