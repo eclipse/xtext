@@ -11,7 +11,6 @@ fi
 
 MVN_ARGS=(\
   --update-snapshots \
-  -Dmaven.test.failure.ignore=true \
   -DJENKINS_URL=$JENKINS_URL \
   -DWORKSPACE=$WORKSPACE \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
