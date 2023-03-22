@@ -11,7 +11,12 @@
 	<packaging>maven-plugin</packaging>
 	<name>Xtext Maven Plugin</name>
 	<url>http://www.eclipse.org/Xtext/</url>
-	
+
+	<properties>
+		<!-- The local Maven repository for our IT tests -->
+		<localMavenRepositoryPath>${project.basedir}/target/.m2test</localMavenRepositoryPath>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -161,6 +166,23 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-invoker-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install dependencies in local test repo</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
 					<execution>
@@ -170,14 +192,13 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<skip>${maven.test.skip}</skip>
 							<file>${project.build.directory}/${project.build.finalName}-it.jar</file>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>${project.artifactId}</artifactId>
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
-							<installAtEnd>false</installAtEnd>
+							<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 						</configuration>
 					</execution>
 				</executions>
@@ -198,7 +219,7 @@
 								<include>**/*IT.java</include>
 							</includes>
 							<systemPropertyVariables>
-								<testProjectDir>${project.build.directory}</testProjectDir>
+								<testMavenRepo>${localMavenRepositoryPath}</testMavenRepo>
 							</systemPropertyVariables>
 						</configuration>
 					</execution>
