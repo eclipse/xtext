@@ -134,6 +134,16 @@
 			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</pluginRepository>
+		<pluginRepository>
 			<id>it-repo</id>
 			<url>file://${maven.repo.local}</url>
 			<releases>
@@ -159,6 +169,16 @@
 		<repository>
 			<id>lsp4j-from-jenkins</id>
 			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 		<repository>
 			<id>it-repo</id>

@@ -12,6 +12,7 @@
 
 	<modules>
 		<module>..</module>
+		<module>../org.eclipse.xtext.nodeploy.parent</module>
 		<module>../org.eclipse.xtext.dev-bom</module>
 		<module>../org.eclipse.xtext.xbase.lib</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
@@ -33,6 +34,7 @@
 		<module>../org.eclipse.xtext.xtext.ide</module>
 		<module>../org.eclipse.xtext.xtext.generator</module>
 		<module>../org.eclipse.xtext.xtext.wizard</module>
+		<!-- This is required by the xtext-maven-plugin IT -->
 		<module>../org.eclipse.xtext.testlanguages</module>
 
 		<!-- xtext-core -->
@@ -51,6 +53,7 @@
 		<module>../org.eclipse.xtext.builder.standalone</module>
 		<module>../org.eclipse.xtext.generator</module>
 		<module>../org.eclipse.xtext.java</module>
+		<!-- This is required by the xtext-maven-plugin IT -->
 		<module>../org.eclipse.xtext.purexbase</module>
 		<module>../org.eclipse.xtext.purexbase.ide</module>
 
