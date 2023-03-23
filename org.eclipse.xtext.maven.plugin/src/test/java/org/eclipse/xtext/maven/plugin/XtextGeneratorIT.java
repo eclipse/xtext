@@ -73,8 +73,10 @@ public class XtextGeneratorIT {
 	
 	private static String findMaven() {
 		// TODO add more mavens here
-		String[] mavens = new String[] { System.getProperty("maven.home"), "/opt/local/share/java/maven3/",
-				"/usr/local/", "/usr/" };
+		String[] mavens = new String[] { System.getProperty("maven.home"),
+				"/opt/local/share/java/maven3/",
+				"/usr/local/", "/usr/",
+				"/opt/homebrew/"};
 		for (String maven : mavens) {
 			if (new File(maven + "/bin/mvn").exists()) {
 				return maven;
@@ -193,7 +195,7 @@ public class XtextGeneratorIT {
 
 	@Test
 	public void xcore() throws Exception {
-		Verifier verifier = verifyErrorFreeLog("xcore-lang", true, "clean", "verify");
+		Verifier verifier = verifyErrorFreeLog("xcore-lang", false, "clean", "verify");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.verifyFilePresent(
 				verifier.getBasedir() + "/target/xtext-temp/stub-classes/org/eclipse/xcoretest/MyClass2.class");
@@ -203,12 +205,12 @@ public class XtextGeneratorIT {
 
 	@Test
 	public void xcoreMapping() throws Exception {
-		verifyErrorFreeLog("xcore-mapping", true, "clean", "verify");
+		verifyErrorFreeLog("xcore-mapping", false, "clean", "verify");
 	}
 
 	@Test
 	public void xcoreAutoMapping() throws Exception {
-		verifyErrorFreeLog("xcore-auto-mapping", true, "clean", "verify");
+		verifyErrorFreeLog("xcore-auto-mapping", false, "clean", "verify");
 	}
 
 	@Test
@@ -280,6 +282,15 @@ public class XtextGeneratorIT {
 		if (debug) {
 			verifier.setMavenDebug(debug);
 		}
+		String testMavenRepo = System.getProperty("testMavenRepo");
+		Assert.assertNotNull(
+			"Required property 'testMavenRepo' is null!\n"
+			+ "If you run these tests from Eclipse, first run the Maven launch\n"
+			+ "'pre-integration-test.launch'\n"
+			+ "then use the JUnit launch\n"
+			+ "'Run ITs from Eclipse.launch'.",
+			testMavenRepo);
+		verifier.setLocalRepo(testMavenRepo);
 		return verifier;
 	}
 
