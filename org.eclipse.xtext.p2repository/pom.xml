@@ -110,7 +110,6 @@
 									<argument>-azvc</argument>
 									<!-- exclude subdirectories -->
 									<argument>--exclude=*/</argument>
-									<argument>${dry-run}</argument>
 									<argument>-e ssh</argument>
 									<argument>${rsync-remote-source}</argument>
 									<argument>${rsync-local-source}</argument>
@@ -127,7 +126,6 @@
 								<executable>rsync</executable>
 								<arguments>
 									<argument>-azvc</argument>
-									<argument>${dry-run}</argument>
 									<argument>-e ssh</argument>
 									<argument>${rsync-local-source}</argument>
 									<argument>${rsync-remote-source}</argument>
@@ -147,7 +145,6 @@
 								<arguments>
 									<argument>-azvc</argument>
 									<argument>--delete</argument>
-									<argument>${dry-run}</argument>
 									<argument>-e ssh</argument>
 									<argument>${rsync-local-source}</argument>
 									<argument>${rsync-remote-source}</argument>
