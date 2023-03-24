@@ -55,11 +55,9 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
-MVN_ARGS+=(-P$TARGET_PLATFORM)
 
 echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 
-echo "Using target platform '$TARGET_PLATFORM'"
 mvn -B \
   -f org.eclipse.xtext.full.releng \
   clean deploy \
