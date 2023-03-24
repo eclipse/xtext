@@ -63,6 +63,119 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<executions>
+						<!-- sets the following properties 
+						parsedVersion.majorVersion
+						parsedVersion.minorVersion
+						parsedVersion.incrementalVersion
+						-->
+						<execution>
+							<id>parse-version</id>
+							<goals>
+								<goal>parse-version</goal>
+							</goals>
+							<phase>none</phase>
+						</execution>
+						<execution>
+							<id>timestamp-replacement</id>
+							<goals>
+								<goal>regex-property</goal>
+							</goals>
+							<phase>none</phase>
+							<configuration>
+								<name>processedTimestamp</name>
+								<value>${buildQualifier}</value>
+								<regex>v(\d+)-(\d+)</regex>
+								<replacement>$1$2</replacement>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>rsync-update</id>
+							<phase>none</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>rsync</executable>
+								<arguments>
+									<argument>-azvc</argument>
+									<!-- exclude subdirectories -->
+									<argument>--exclude=*/</argument>
+									<argument>${dry-run}</argument>
+									<argument>-e ssh</argument>
+									<argument>${rsync-remote-source}</argument>
+									<argument>${rsync-local-source}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<execution>
+							<id>rsync-commit</id>
+							<phase>none</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>rsync</executable>
+								<arguments>
+									<argument>-azvc</argument>
+									<argument>${dry-run}</argument>
+									<argument>-e ssh</argument>
+									<argument>${rsync-local-source}</argument>
+									<argument>${rsync-remote-source}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<execution>
+							<!-- this will delete files on the destination that are
+								not present locally -->
+							<id>rsync-replace</id>
+							<phase>none</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>rsync</executable>
+								<arguments>
+									<argument>-azvc</argument>
+									<argument>--delete</argument>
+									<argument>${dry-run}</argument>
+									<argument>-e ssh</argument>
+									<argument>${rsync-local-source}</argument>
+									<argument>${rsync-remote-source}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-repository</id>
+							<phase>none</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${current-release-directory}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${project.build.directory}/repository</directory>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -91,4 +204,42 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<profiles>
+		<profile>
+			<!-- Activate this profile to override the current snapshot version -->
+			<id>release-snapshot</id>
+			<properties>
+				<remote-subdir>updates/nightly</remote-subdir>
+				<!-- no subdirectory with qualifier -->
+				<current-release-directory>${releases-directory}</current-release-directory>
+			</properties>
+			<build>
+				<plugins>
+					<!-- note that we don't first run rsync-update, so the result
+						will be a complete override of the destination directory.
+						We don't even create a composite update site -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>rsync-replace</id>
+								<phase>verify</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-repository</id>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

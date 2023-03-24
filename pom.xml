@@ -163,6 +163,24 @@
 		TODO: if we switch to a single Git repository, this should be changed
 		-->
 		<tycho.scmUrl>scm:git:https://github.com/xtext/xtext-monorepo.git</tycho.scmUrl>
+
+		<!-- Required properties for releasing -->
+		<ssh-uri>genie.xtext@projects-storage.eclipse.org</ssh-uri>
+		<remote-dir>/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo</remote-dir>
+		<!-- this can be set in profiles with, e.g., releases, milestones, nightly, etc. -->
+		<remote-subdir>updates/nightly</remote-subdir>
+
+		<!-- pass -Ddry-run="-n" to run rsync in dry run mode -->
+		<dry-run></dry-run>
+		<!-- IMPORTANT: don't forget the final / required to make rsync work -->
+		<rsync-remote-source>${ssh-uri}:${remote-dir}/${remote-subdir}/</rsync-remote-source>
+		<rsync-local-source>${project.build.directory}/checkout/</rsync-local-source>
+
+		<releases-directory>${rsync-local-source}</releases-directory>
+		<current-release-subdirectory>${qualifiedVersion}</current-release-subdirectory>
+		<current-release-directory>${releases-directory}/${current-release-subdirectory}</current-release-directory>
+
+		<site.label>TMF Xtext Update Site</site.label>
 	</properties>
 
 	<dependencyManagement>

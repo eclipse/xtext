@@ -1,0 +1,43 @@
+pipeline {
+  agent any
+
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo'
+    REPOSITORY_PATH="${DOWNLOAD_AREA}/updates/nightly"
+  }
+
+  tools {
+    maven "apache-maven-3.8.6"
+    jdk "temurin-jdk17-latest"
+  }
+
+  stages {
+    stage('Prepare download area') {
+      steps {
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh '''
+            echo ${REPOSITORY_PATH}
+            ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $REPOSITORY_PATH"
+          '''
+        }
+      }
+    }
+    stage('Maven Tycho Build, Sign, Deploy') {
+      steps {
+        withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
+          sh 'gpg --batch --import "${KEYRING}"'
+          sh 'for fpr in $(gpg --list-keys --with-colons  | awk -F: \'/fpr:/ {print $10}\' | sort -u); do echo -e "5\ny\n" |  gpg --batch --command-fd 0 --expert --edit-key ${fpr} trust; done'
+        }
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh './full-deploy.sh -Peclipse-sign,sonatype-oss-release,release-snapshot'
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**'
+    }
+  }
+}
