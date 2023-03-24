@@ -171,7 +171,7 @@
 		<remote-subdir>updates/nightly</remote-subdir>
 
 		<!-- pass -Ddry-run="-n" to run rsync in dry run mode -->
-		<dry-run>-n</dry-run>
+		<dry-run></dry-run>
 		<!-- IMPORTANT: don't forget the final / required to make rsync work -->
 		<rsync-remote-source>${ssh-uri}:${remote-dir}/${remote-subdir}/</rsync-remote-source>
 		<rsync-local-source>${project.build.directory}/checkout/</rsync-local-source>
