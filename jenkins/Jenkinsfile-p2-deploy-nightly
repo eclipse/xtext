@@ -1,0 +1,39 @@
+pipeline {
+  agent any
+
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo'
+    REPOSITORY_PATH="${DOWNLOAD_AREA}/updates/nightly"
+  }
+
+  tools {
+    maven "apache-maven-3.8.6"
+    jdk "temurin-jdk17-latest"
+  }
+
+  stages {
+    stage('Maven Tycho Build and Sign') {
+      steps {
+        sh './tycho-sign.sh'
+      }
+    }
+    stage('Copy to download area') {
+      steps {
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh '''
+            echo ${REPOSITORY_PATH}
+            ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH"
+            ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $REPOSITORY_PATH"
+            scp -o BatchMode=yes -r build/p2-repository/* genie.xtext@projects-storage.eclipse.org:$REPOSITORY_PATH/
+          '''
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**'
+    }
+  }
+}

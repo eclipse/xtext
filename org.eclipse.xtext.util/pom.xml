@@ -34,4 +34,25 @@
 			<artifactId>guice</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!--
+				Generate the Maven-version entry in the packaged MANIFEST.MF to
+				retrieve at run-time the current Xtext version.
+				See XtextVersion.java.
+				-->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Maven-version>${mavenVersionManifestEntry}</Maven-version>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

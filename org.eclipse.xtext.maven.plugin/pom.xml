@@ -11,7 +11,12 @@
 	<packaging>maven-plugin</packaging>
 	<name>Xtext Maven Plugin</name>
 	<url>http://www.eclipse.org/Xtext/</url>
-	
+
+	<properties>
+		<!-- The local Maven repository for our IT tests -->
+		<localMavenRepositoryPath>${project.basedir}/target/.m2test</localMavenRepositoryPath>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -110,6 +115,21 @@
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Needed by some of our IT projects:
+			In the Maven invoker plugin below, we force the installation of test artifacts
+			so that we are self-contained in ITs concerning our artifacts. -->
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.purexbase</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -161,6 +181,35 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-invoker-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<extraArtifacts>
+						<!-- our BOM is not a dependency (it's just imported), thus, we must
+							install it explicitly in the local maven repository -->
+						<extraArtifact>org.eclipse.xtext:xtext-dev-bom:${project.version}:pom</extraArtifact>
+						<!-- Force the installation of other artifacts needed by the IT projects,
+							so that we are self-contained in ITs concerning our artifacts.
+							IMPORTANT: we need the JARs so what follows must also be a (test scope)
+							dependency in this POM, see above. -->
+						<extraArtifact>org.eclipse.xtext:org.eclipse.xtext.xbase:${project.version}:jar</extraArtifact>
+						<extraArtifact>org.eclipse.xtext:org.eclipse.xtext.purexbase:${project.version}:jar</extraArtifact>
+						<extraArtifact>org.eclipse.xtext:org.eclipse.xtext.testlanguages:${project.version}:jar</extraArtifact>
+					</extraArtifacts>
+					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install dependencies in local test repo</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
 					<execution>
@@ -170,14 +219,13 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<skip>${maven.test.skip}</skip>
 							<file>${project.build.directory}/${project.build.finalName}-it.jar</file>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>${project.artifactId}</artifactId>
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
-							<installAtEnd>false</installAtEnd>
+							<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 						</configuration>
 					</execution>
 				</executions>
@@ -198,7 +246,7 @@
 								<include>**/*IT.java</include>
 							</includes>
 							<systemPropertyVariables>
-								<testProjectDir>${project.build.directory}</testProjectDir>
+								<testMavenRepo>${localMavenRepositoryPath}</testMavenRepo>
 							</systemPropertyVariables>
 						</configuration>
 					</execution>

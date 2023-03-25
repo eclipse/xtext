@@ -2,8 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>xtext-parent</artifactId>
+		<artifactId>org.eclipse.xtext.nodeploy.parent</artifactId>
 		<version>2.31.0-SNAPSHOT</version>
+		<relativePath>../org.eclipse.xtext.nodeploy.parent</relativePath>
 	</parent>
 	<artifactId>org.eclipse.xtext.web.example.statemachine</artifactId>
 	<packaging>jar</packaging>

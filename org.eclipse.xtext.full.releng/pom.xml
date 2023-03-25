@@ -1,0 +1,162 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-parent</artifactId>
+		<version>2.31.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>org.eclipse.xtext.full.releng</artifactId>
+	<packaging>pom</packaging>
+
+	<description>Builds everything</description>
+
+	<modules>
+		<module>..</module>
+		<module>../org.eclipse.xtext.nodeploy.parent</module>
+		<module>../org.eclipse.xtext.dev-bom</module>
+		<module>../org.eclipse.xtext.xbase.lib</module>
+		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
+		<module>../org.eclipse.xtend.lib.macro</module>
+		<module>../org.eclipse.xtend.lib</module>
+		<module>../org.eclipse.xtend.lib.gwt</module>
+
+		<module>../org.eclipse.xtext.xbase.lib.feature</module>
+		<module>../org.eclipse.xtext.xbase.lib.tests</module>
+		<module>../org.eclipse.xtend.lib.feature</module>
+		<module>../org.eclipse.xtend.lib.tests</module>
+		<module>../org.eclipse.xtend.lib.gwt.test</module>
+
+		<!-- xtext-core -->
+		<module>../org.eclipse.xtext</module>
+		<module>../org.eclipse.xtext.util</module>
+		<module>../org.eclipse.xtext.ide</module>
+		<module>../org.eclipse.xtext.testing</module>
+		<module>../org.eclipse.xtext.xtext.ide</module>
+		<module>../org.eclipse.xtext.xtext.generator</module>
+		<module>../org.eclipse.xtext.xtext.wizard</module>
+		<!-- This is required by the xtext-maven-plugin IT -->
+		<module>../org.eclipse.xtext.testlanguages</module>
+
+		<!-- xtext-core -->
+		<module>../org.eclipse.xtext.tests</module>
+		<module>../org.eclipse.xtext.ide.tests</module>
+		<module>../org.eclipse.xtext.testlanguages.ide</module>
+		<module>../org.eclipse.xtext.xtext.bootstrap</module>
+
+		<!-- xtext-extras -->
+		<module>../org.eclipse.xtext.smap</module>
+		<module>../org.eclipse.xtext.common.types</module>
+		<module>../org.eclipse.xtext.ecore</module>
+		<module>../org.eclipse.xtext.xbase</module>
+		<module>../org.eclipse.xtext.xbase.ide</module>
+		<module>../org.eclipse.xtext.xbase.testing</module>
+		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.generator</module>
+		<module>../org.eclipse.xtext.java</module>
+		<!-- This is required by the xtext-maven-plugin IT -->
+		<module>../org.eclipse.xtext.purexbase</module>
+		<module>../org.eclipse.xtext.purexbase.ide</module>
+
+		<!-- xtext-extras -->
+		<module>../org.eclipse.xtext.xbase.testlanguages</module>
+		<module>../org.eclipse.xtext.xbase.testlanguages.ide</module>
+		<module>../org.eclipse.xtext.xbase.testdata</module>
+		<module>../org.eclipse.xtext.purexbase.tests</module>
+		<module>../org.eclipse.xtext.xbase.tests</module>
+		<module>../org.eclipse.xtext.java.tests</module>
+		<module>../org.eclipse.xtext.extras.tests</module>
+		<module>../org.eclipse.xtext.builder.standalone.tests</module>
+		<module>../org.eclipse.xtext.common.types.tests</module>
+
+		<!-- xtext-eclipse -->
+		<module>../org.eclipse.xtext.tycho.tests.parent</module>
+		<module>../org.eclipse.xtext.logging</module>
+		<module>../org.eclipse.xtext.activities</module>
+		<module>../org.eclipse.xtext.builder</module>
+		<module>../org.eclipse.xtext.buildship</module>
+		<module>../org.eclipse.xtext.ui</module>
+		<module>../org.eclipse.xtext.ui.codemining</module>
+		<module>../org.eclipse.xtext.common.types.eclipse.tests</module>
+		<module>../org.eclipse.xtext.common.types.ui</module>
+		<module>../org.eclipse.xtext.common.types.edit</module>
+		<module>../org.eclipse.xtext.common.types.shared</module>
+		<module>../org.eclipse.xtext.common.types.shared.jdt38</module>
+		<module>../org.eclipse.xtext.m2e</module>
+		<module>../org.eclipse.xtext.ui.shared</module>
+		<module>../org.eclipse.xtext.xbase.ui</module>
+		<module>../org.eclipse.xtext.ui.codetemplates</module>
+		<module>../org.eclipse.xtext.ui.codetemplates.ide</module>
+		<module>../org.eclipse.xtext.ui.codetemplates.ui</module>
+		<module>../org.eclipse.xtext.ui.ecore</module>
+		<module>../org.eclipse.xtext.junit4</module>
+		<module>../org.eclipse.xtext.ui.testing</module>
+		<module>../org.eclipse.xtext.xbase.junit</module>
+		<module>../org.eclipse.xtext.xtext.ui</module>
+		<module>../org.eclipse.xtext.xtext.ui.graph</module>
+		<module>../org.eclipse.xtext.purexbase.ui</module>
+		<module>../org.eclipse.xtext.doc</module>
+		<module>../org.eclipse.xtext.xtext.ui.examples</module>
+		<module>../org.eclipse.xtext.builder.tests</module>
+		<module>../org.eclipse.xtext.junit4.tests</module>
+		<module>../org.eclipse.xtext.ui.codetemplates.tests</module>
+		<module>../org.eclipse.xtext.eclipse.tests</module>
+		<module>../org.eclipse.xtext.ui.tests</module>
+		<module>../org.eclipse.xtext.testlanguages.ui</module>
+		<module>../org.eclipse.xtext.xbase.testlanguages.ui</module>
+		<module>../org.eclipse.xtext.xbase.ui.testing</module>
+		<module>../org.eclipse.xtext.xbase.ui.tests</module>
+		<module>../org.eclipse.xtext.xtext.ui.graph.tests</module>
+		<module>../org.eclipse.xtext.xtext.ui.tests</module>
+
+		<!-- xtext-web -->
+		<module>../org.eclipse.xtext.web</module>
+		<module>../org.eclipse.xtext.web.example.statemachine</module>
+		<module>../org.eclipse.xtext.web.example.statemachine.ide</module>
+		<module>../org.eclipse.xtext.xbase.web</module>
+		<module>../org.eclipse.xtext.web.example.entities</module>
+		<module>../org.eclipse.xtext.web.example.entities.ide</module>
+		<module>../org.eclipse.xtext.web.servlet</module>
+		<module>../org.eclipse.xtext.web.example.jetty</module>
+
+		<!-- xtext-maven -->
+		<module>../org.eclipse.xtext.maven.parent</module>
+		<module>../org.eclipse.xtext.maven.plugin</module>
+
+		<!-- xtext-xtend -->
+		<module>../org.eclipse.xtend.maven.parent</module>
+		<module>../org.eclipse.xtend.core</module>
+		<module>../org.eclipse.xtend.ide.common</module>
+		<module>../org.eclipse.xtend.maven.plugin</module>
+		<module>../org.eclipse.xtend.maven.archetype</module>
+
+		<!-- xtext-xtend -->
+		<module>../org.eclipse.xtend.tycho.tests.parent</module>
+		<module>../org.eclipse.xtend.ide</module>
+		<module>../org.eclipse.xtend.ide.tests.data</module>
+		<module>../org.eclipse.xtend.doc</module>
+		<module>../org.eclipse.xtend.examples</module>
+		<module>../org.eclipse.xtend.m2e</module>
+		<module>../org.eclipse.xtend.standalone</module>
+		<module>../org.eclipse.xtend.core.tests</module>
+		<module>../org.eclipse.xtend.ide.tests</module>
+		<module>../org.eclipse.xtend.performance.tests</module>
+		<module>../org.eclipse.xtend.swtbot</module>
+		<module>../org.eclipse.xtend.ide.swtbot.tests</module>
+
+		<!-- xtext-umbrella -->
+		<module>../org.eclipse.xtext.docs.feature</module>
+		<module>../org.eclipse.xtext.examples.feature</module>
+		<module>../org.eclipse.xtext.generator.feature</module>
+		<module>../org.eclipse.xtext.redist.feature</module>
+		<module>../org.eclipse.xtext.runtime.feature</module>
+		<module>../org.eclipse.xtext.sdk.feature</module>
+		<module>../org.eclipse.xtext.ui.feature</module>
+		<module>../org.eclipse.xtext.xbase.feature</module>
+		<module>../org.eclipse.xtext.xtext.ui.feature</module>
+		<module>../org.eclipse.xtext.xtext.ui.graph.feature</module>
+		<module>../org.eclipse.xtend.sdk.feature</module>
+		<module>../org.eclipse.emf.mwe2.language.sdk.dummy</module>
+		<module>../org.eclipse.xtext.p2repository</module>
+	</modules>
+
+</project>
