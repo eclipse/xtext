@@ -45,6 +45,11 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

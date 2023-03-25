@@ -130,7 +130,7 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 
 		<build-helper-maven-plugin-version>3.3.0</build-helper-maven-plugin-version>
-		<maven-surefire-version>3.0.0-M8</maven-surefire-version>
+		<maven-surefire-version>3.0.0</maven-surefire-version>
 
 		<!--
 		This assumes that the child project has the same version as the parent.

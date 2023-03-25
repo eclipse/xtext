@@ -40,7 +40,7 @@ while [ "$1" != "" ]; do
       MVN_ARGS+=" -Dmaven.repo.local=$VALUE"
       ;;
     --tp)
-      TARGET_PLATFORM=($VALUE)
+      MVN_ARGS+=" -Dtarget-platform-classifier=xtext-$VALUE"
       ;;
     *)
       # append any additionally passed arg
@@ -55,11 +55,10 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
-MVN_ARGS+=(-P$TARGET_PLATFORM)
 
 echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 
-echo "Using target platform '$TARGET_PLATFORM'"
+#echo "Using target platform '$TARGET_PLATFORM'"
 mvn -B \
   -f org.eclipse.xtext.full.releng \
   clean deploy \
