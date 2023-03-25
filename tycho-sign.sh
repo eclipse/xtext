@@ -9,7 +9,7 @@ mvn \
   -f org.eclipse.xtext.p2.releng \
   package \
   -P useJenkinsSnapshots \
-  -P eclipse-sign,buildP2Repository \
+  -P eclipse-sign \
   --batch-mode \
   --update-snapshots \
   -Dmaven.repo.local=.m2/repository \

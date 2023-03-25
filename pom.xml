@@ -163,6 +163,22 @@
 		TODO: if we switch to a single Git repository, this should be changed
 		-->
 		<tycho.scmUrl>scm:git:https://github.com/xtext/xtext-monorepo.git</tycho.scmUrl>
+
+		<!-- Required properties for releasing -->
+		<ssh-uri>genie.xtext@projects-storage.eclipse.org</ssh-uri>
+		<remote-dir>/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo</remote-dir>
+		<!-- this can be set in profiles with, e.g., releases, milestones, nightly, etc. -->
+		<remote-subdir>updates/nightly</remote-subdir>
+
+		<!-- IMPORTANT: don't forget the final / required to make rsync work -->
+		<rsync-remote-source>${ssh-uri}:${remote-dir}/${remote-subdir}/</rsync-remote-source>
+		<rsync-local-source>${project.build.directory}/checkout/</rsync-local-source>
+
+		<releases-directory>${rsync-local-source}</releases-directory>
+		<current-release-subdirectory>${qualifiedVersion}</current-release-subdirectory>
+		<current-release-directory>${releases-directory}/${current-release-subdirectory}</current-release-directory>
+
+		<site.label>TMF Xtext Update Site</site.label>
 	</properties>
 
 	<dependencyManagement>
@@ -330,6 +346,9 @@
 			</properties>
 			<build>
 				<plugins>
+					<!--
+					For the moment we do without
+					see https://github.com/xtext/xtext-monorepo/issues/14
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -340,6 +359,7 @@
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
+					-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
