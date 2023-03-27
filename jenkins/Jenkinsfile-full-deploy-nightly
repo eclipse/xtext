@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo'
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext'
     REPOSITORY_PATH="${DOWNLOAD_AREA}/updates/nightly"
   }
 
