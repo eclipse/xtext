@@ -748,137 +748,84 @@
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Xbase/Xtend Libs"
+          name="Features"
           id="">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.xbase.lib"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="Core">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="Extras">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.xbase"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="Maven">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.maven.plugin"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="Web"
-          id="">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.web"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="Eclipse">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.tycho.parent"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Eclipse Features">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="xtext-umbrella"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
+              xsi:type="workingsets:ExclusionPredicate"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Eclipse Examples">
+          name="Tests">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.tycho.parent"/>
+              xsi:type="workingsets:ExclusionPredicate"/>
           <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*\.example\..*"/>
+              xsi:type="predicates:OrPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*\.tests(\..*)?"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*\.testdata(\..*)?"/>
+          </operand>
         </predicate>
       </workingSet>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Xtend">
+          name="Examples">
+        <predicate
+            xsi:type="predicates:OrPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*example.*"/>
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*tutorial*"/>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask"
+        id="xtext.working.sets">
+      <workingSet
+          name="Releng">
+        <predicate
+            xsi:type="predicates:OrPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*parent"/>
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*\.releng"/>
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*repository"/>
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*bom"/>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="Main Projects">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtend.core"/>
-          <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//@projects[name='complete']/@setupTasks.6/@workingSets[name='Examples'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Features'] //'xtext.working.sets'/@workingSets[name='Releng'] //@projects[name='complete']/@setupTasks.5/@workingSets[name='Tests']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -892,32 +839,6 @@
         id="clean-xtext-lib-complete"
         refresh="true"
         clean="true"/>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask"
-        id="xtext.working.sets">
-      <workingSet
-          name="Root Projects"
-          id="">
-        <predicate
-            xsi:type="predicates:OrPredicate">
-          <operand
-              xsi:type="predicates:FilePredicate"
-              filePattern="settings.gradle"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="xtext-eclipse"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Releng">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.tycho.parent"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
     <stream
         name="main"/>
     <description>All Projects</description>
