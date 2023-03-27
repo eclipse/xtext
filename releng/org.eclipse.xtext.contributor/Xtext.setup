@@ -634,7 +634,7 @@
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.xtext"
-        remoteURI="xtext/xtext-monorepo"
+        remoteURI="eclipse/xtext"
         checkoutBranch="${xtext.git.branch}">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
@@ -885,7 +885,7 @@
     <setupTask
         xsi:type="setup:EclipseIniTask"
         option="-Doomph.redirection.xtext"
-        value="=https://raw.githubusercontent.com/xtext/xtext-monorepo/main/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
+        value="=https://raw.githubusercontent.com/eclipse/xtext/main/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
         vm="true"/>
     <setupTask
         xsi:type="projects:ProjectsBuildTask"
