@@ -94,6 +94,11 @@
 						</execution>
 					</executions>
 				</plugin>
+				<!--
+				If you need to do a "dry-run" for rsync,
+				add the following argument line as the second one:
+				<argument>-n</argument>
+				-->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
