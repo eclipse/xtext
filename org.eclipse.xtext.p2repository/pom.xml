@@ -150,7 +150,6 @@
 								<arguments>
 									<argument>-azvc</argument>
 									<argument>--delete</argument>
-									<argument>-n</argument>
 									<argument>-e ssh</argument>
 									<argument>${rsync-local-source}</argument>
 									<argument>${rsync-remote-source}</argument>
