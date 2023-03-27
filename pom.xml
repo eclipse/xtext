@@ -166,7 +166,7 @@
 
 		<!-- Required properties for releasing -->
 		<ssh-uri>genie.xtext@projects-storage.eclipse.org</ssh-uri>
-		<remote-dir>/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/monorepo</remote-dir>
+		<remote-dir>/home/data/httpd/download.eclipse.org/modeling/tmf/xtext</remote-dir>
 		<!-- this can be set in profiles with, e.g., releases, milestones, nightly, etc. -->
 		<remote-subdir>updates/nightly</remote-subdir>
 
