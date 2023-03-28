@@ -86,7 +86,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.xtext"
-      value="https://download.eclipse.org/modeling/tmf/xtext/monorepo/updates/nightly/"
+      value="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly"
       label="Xtext p2 Respository URL"/>
   <setupTask
       xsi:type="setup:VariableTask"
