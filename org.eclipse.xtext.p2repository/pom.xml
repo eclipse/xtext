@@ -152,7 +152,6 @@
 								<arguments>
 									<argument>-azvc</argument>
 									<argument>-e ssh</argument>
-									<argument>-n</argument>
 									<argument>${rsync-local-zip-source}</argument>
 									<argument>${rsync-remote-zip-source}</argument>
 								</arguments>
