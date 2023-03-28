@@ -255,7 +255,7 @@
 				<!-- no subdirectory with qualifier for update site -->
 				<current-release-directory>${releases-directory}</current-release-directory>
 				<current-release-zip-subdirectory>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}/N${processedTimestamp}</current-release-zip-subdirectory>
-				<zipFinalName>${project.artifactId}-N${processedTimestamp}</zipFinalName>
+				<zipFinalName>tmf-xtext-Update-N${processedTimestamp}</zipFinalName>
 			</properties>
 			<build>
 				<plugins>
