@@ -116,9 +116,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/xtext/xtext-monorepo.git</connection>
-		<developerConnection>scm:git:https://github.com/xtext/xtext-monorepo.git</developerConnection>
-		<url>git@github.com:xtext/xtext-monorepo.git</url>
+		<connection>scm:git:https://github.com/eclipse/xtext.git</connection>
+		<developerConnection>scm:git:https://github.com/eclipse/xtext.git</developerConnection>
+		<url>git@github.com:eclipse/xtext.git</url>
 	</scm>
 
 	<properties>
@@ -159,10 +159,7 @@
 			retrieve at run-time the current Xtext version -->
 		<mavenVersionManifestEntry>${project.version}</mavenVersionManifestEntry>
 
-		<!--
-		TODO: if we switch to a single Git repository, this should be changed
-		-->
-		<tycho.scmUrl>scm:git:https://github.com/xtext/xtext-monorepo.git</tycho.scmUrl>
+		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext.git</tycho.scmUrl>
 
 		<!-- Required properties for releasing -->
 		<ssh-uri>genie.xtext@projects-storage.eclipse.org</ssh-uri>
@@ -193,10 +190,6 @@
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-dev-bom</artifactId>
-				<!--
-				TODO: update it
-				The dev BOM should be in the same Git repository of this one
-				-->
 				<version>${xtext-dev-bom-version}</version>
 				<type>pom</type>
 				<scope>import</scope>
