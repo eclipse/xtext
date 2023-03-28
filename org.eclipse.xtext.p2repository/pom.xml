@@ -12,12 +12,7 @@
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
-		<!-- 
-			Version qualifier of the target zip file 
-			Usually this is the same as the (snaphsot) project version
-			but for releases it is set to the release version.
-		-->
-		<zipFileVersion>2.31.0-SNAPSHOT</zipFileVersion>
+		<zipFinalName>${project.artifactId}-${qualifiedVersion}</zipFinalName>
 	</properties>
 
 	<build>
@@ -25,17 +20,10 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-repository-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>assemble-repository</goal>
-						</goals>
-						<configuration>
-							<repositoryName>Xtext</repositoryName>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+					<finalName>${zipFinalName}</finalName>
+					<repositoryName>Xtext</repositoryName>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -52,8 +40,8 @@
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 								<copy
-									file="${basedir}/target/org.eclipse.xtext.p2repository-2.31.0-SNAPSHOT.zip"
-									tofile="${root-dir}/build/org.eclipse.xtext.p2repository-${zipFileVersion}.zip">
+									file="${basedir}/target/${zipFinalName}.zip"
+									tofile="${root-dir}/build/${zipFinalName}.zip">
 								</copy>
 							</target>
 						</configuration>
@@ -94,15 +82,31 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--
-				If you need to do a "dry-run" for rsync,
-				add the following argument line as the second one:
-				<argument>-n</argument>
-				-->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
 					<executions>
+						<execution>
+							<id>md5sum</id>
+							<phase>none</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>md5sum</executable>
+								<arguments>
+									<argument>--binary</argument>
+									<argument>./${zipFinalName}.zip</argument>
+								</arguments>
+								<workingDirectory>${project.build.directory}</workingDirectory>
+								<outputFile>${project.build.directory}/${zipFinalName}.zip.md5</outputFile>
+							</configuration>
+						</execution>
+						<!--
+						If you need to do a "dry-run" for rsync,
+						add the following argument line as the second one:
+						<argument>-n</argument>
+						-->
 						<execution>
 							<id>rsync-update</id>
 							<phase>none</phase>
@@ -134,6 +138,22 @@
 									<argument>-e ssh</argument>
 									<argument>${rsync-local-source}</argument>
 									<argument>${rsync-remote-source}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<execution>
+							<id>rsync-commit-zip</id>
+							<phase>none</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>rsync</executable>
+								<arguments>
+									<argument>-azvc</argument>
+									<argument>-e ssh</argument>
+									<argument>${rsync-local-zip-source}</argument>
+									<argument>${rsync-remote-zip-source}</argument>
 								</arguments>
 							</configuration>
 						</execution>
@@ -176,6 +196,25 @@
 								</resources>
 							</configuration>
 						</execution>
+						<execution>
+							<id>copy-zipped-repository</id>
+							<phase>none</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${current-release-zip-directory}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${project.build.directory}</directory>
+										<includes>
+											<include>*.zip</include>
+											<include>*.md5</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
 					</executions>
 				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
@@ -213,11 +252,27 @@
 			<id>release-snapshot</id>
 			<properties>
 				<remote-subdir>updates/nightly</remote-subdir>
-				<!-- no subdirectory with qualifier -->
+				<!-- no subdirectory with qualifier for update site -->
 				<current-release-directory>${releases-directory}</current-release-directory>
+				<current-release-zip-subdirectory>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}/N${processedTimestamp}</current-release-zip-subdirectory>
+				<zipFinalName>${project.artifactId}-N${processedTimestamp}</zipFinalName>
 			</properties>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>parse-version</id>
+								<phase>validate</phase>
+							</execution>
+							<execution>
+								<id>timestamp-replacement</id>
+								<phase>validate</phase>
+							</execution>
+						</executions>
+					</plugin>
 					<!-- note that we don't first run rsync-update, so the result
 						will be a complete override of the destination directory.
 						We don't even create a composite update site -->
@@ -226,7 +281,15 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<executions>
 							<execution>
+								<id>md5sum</id>
+								<phase>package</phase>
+							</execution>
+							<execution>
 								<id>rsync-replace</id>
+								<phase>verify</phase>
+							</execution>
+							<execution>
+								<id>rsync-commit-zip</id>
 								<phase>verify</phase>
 							</execution>
 						</executions>
@@ -236,6 +299,10 @@
 						<executions>
 							<execution>
 								<id>copy-repository</id>
+								<phase>package</phase>
+							</execution>
+							<execution>
+								<id>copy-zipped-repository</id>
 								<phase>package</phase>
 							</execution>
 						</executions>

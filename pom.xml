@@ -169,14 +169,21 @@
 		<remote-dir>/home/data/httpd/download.eclipse.org/modeling/tmf/xtext</remote-dir>
 		<!-- this can be set in profiles with, e.g., releases, milestones, nightly, etc. -->
 		<remote-subdir>updates/nightly</remote-subdir>
+		<remote-zip-subdir>downloads/drops</remote-zip-subdir>
 
 		<!-- IMPORTANT: don't forget the final / required to make rsync work -->
 		<rsync-remote-source>${ssh-uri}:${remote-dir}/${remote-subdir}/</rsync-remote-source>
+		<rsync-remote-zip-source>${ssh-uri}:${remote-dir}/${remote-zip-subdir}/</rsync-remote-zip-source>
 		<rsync-local-source>${project.build.directory}/checkout/</rsync-local-source>
+		<rsync-local-zip-source>${project.build.directory}/zip/</rsync-local-zip-source>
 
 		<releases-directory>${rsync-local-source}</releases-directory>
 		<current-release-subdirectory>${qualifiedVersion}</current-release-subdirectory>
 		<current-release-directory>${releases-directory}/${current-release-subdirectory}</current-release-directory>
+
+		<releases-zip-directory>${rsync-local-zip-source}</releases-zip-directory>
+		<current-release-zip-subdirectory>${qualifiedVersion}</current-release-zip-subdirectory>
+		<current-release-zip-directory>${releases-zip-directory}/${current-release-zip-subdirectory}</current-release-zip-directory>
 
 		<site.label>TMF Xtext Update Site</site.label>
 	</properties>
