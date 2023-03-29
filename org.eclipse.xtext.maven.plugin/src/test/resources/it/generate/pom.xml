@@ -45,7 +45,27 @@
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>org.eclipse.xtext</artifactId>
+				<version>${xtext-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>org.eclipse.xtext.ecore</artifactId>
+				<version>${xtext-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>org.eclipse.xtext.util</artifactId>
+				<version>${xtext-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>org.eclipse.xtext.xbase</artifactId>
+				<version>${xtext-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
 				<version>${xtext-version}</version>
 			</dependency>
 			<dependency>
@@ -137,10 +157,6 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>lsp4j-from-jenkins</id>
-			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
-		</pluginRepository>
-		<pluginRepository>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -155,13 +171,14 @@
 			<url>file://${maven.repo.local}</url>
 			<releases>
 				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<id>central-real</id>
+			<id>central</id>
 			<url>https://repo.maven.apache.org/maven2</url>
 			<releases>
 				<enabled>true</enabled>
@@ -174,10 +191,6 @@
 	</pluginRepositories>
 	<repositories>
 		<repository>
-			<id>lsp4j-from-jenkins</id>
-			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
-		</repository>
-		<repository>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -192,9 +205,10 @@
 			<url>file://${maven.repo.local}</url>
 			<releases>
 				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
