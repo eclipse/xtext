@@ -41,7 +41,7 @@
 								</copy>
 								<copy
 									file="${basedir}/target/${zipFinalName}.zip"
-									tofile="${root-dir}/build/${zipFinalName}.zip">
+									tofile="${root-dir}/build/${project.artifactId}-${project.version}.zip">
 								</copy>
 							</target>
 						</configuration>
