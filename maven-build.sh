@@ -41,6 +41,9 @@ while [ "$1" != "" ]; do
     --local-repository)
       MVN_ARGS+=" -Dmaven.repo.local=$VALUE"
       ;;
+    --tp)
+      MVN_ARGS+=" -Dtarget-platform-classifier=xtext-$VALUE"
+      ;;
     *)
       # append any additionally passed arg
       if [ -z "$VALUE" ]; then

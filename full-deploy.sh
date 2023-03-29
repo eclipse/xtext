@@ -40,7 +40,7 @@ while [ "$1" != "" ]; do
       MVN_ARGS+=" -Dmaven.repo.local=$VALUE"
       ;;
     --tp)
-      TARGET_PLATFORM=($VALUE)
+      MVN_ARGS+=" -Dtarget-platform-classifier=xtext-$VALUE"
       ;;
     *)
       # append any additionally passed arg
