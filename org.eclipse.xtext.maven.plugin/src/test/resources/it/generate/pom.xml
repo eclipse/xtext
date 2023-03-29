@@ -12,7 +12,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<xtext-version>2.31.0-SNAPSHOT</xtext-version>
+		<!-- The @...@ will be replaced during resource filtering with
+			the current version of our project -->
+		<xtext-version>@project.version@</xtext-version>
 		<tycho-version>2.7.5</tycho-version>
 		<eclipse-text-version>3.12.200</eclipse-text-version>
 		<core-resources-version>3.18.0</core-resources-version>
