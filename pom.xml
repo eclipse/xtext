@@ -228,6 +228,7 @@
 			<modules>
 				<module>org.eclipse.xtext.p2.releng</module>
 				<module>org.eclipse.xtext.maven.releng</module>
+				<module>org.eclipse.xtext.full.releng</module>
 			</modules>
 		</profile>
 		<profile>
