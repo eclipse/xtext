@@ -469,6 +469,20 @@
 
 	<profiles>
 		<profile>
+			<!-- This is used only for updating versions in test children projects
+				versions:set will scan automatically also these modules
+				even if this profile is not active.
+
+				Don't run a build with this profile explicitly -->
+			<id>update-versions</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<modules>
+				<module>..</module>
+			</modules>
+		</profile>
+		<profile>
 			<id>sonatype-oss-release</id>
 			<build>
 				<plugins>
