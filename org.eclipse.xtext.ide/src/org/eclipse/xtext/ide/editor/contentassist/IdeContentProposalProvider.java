@@ -96,7 +96,7 @@ public class IdeContentProposalProvider {
 					} else {
 						proposal = assignment.getFeature();
 					}
-					ContentAssistEntry entry = proposalCreator.createProposal(proposal, context,
+					ContentAssistEntry entry = getProposalCreator().createProposal(proposal, context,
 							(ContentAssistEntry it) -> {
 								if ("STRING".equals(rule.getName())) {
 									it.getEditPositions()
@@ -108,7 +108,7 @@ public class IdeContentProposalProvider {
 								}
 								it.setDescription(rule.getName());
 							});
-					acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry));
+					acceptor.accept(entry, getProposalPriorities().getDefaultPriority(entry));
 				}
 			}
 		}
@@ -120,7 +120,7 @@ public class IdeContentProposalProvider {
 			ContentAssistEntry entry = proposalCreator.createProposal(keyword.getValue(), context,
 					ContentAssistEntry.KIND_KEYWORD, null);
 			if (entry != null) {
-				acceptor.accept(entry, proposalPriorities.getKeywordPriority(keyword.getValue(), entry));
+				acceptor.accept(entry, getProposalPriorities().getKeywordPriority(keyword.getValue(), entry));
 			}
 		}
 	}
@@ -140,8 +140,8 @@ public class IdeContentProposalProvider {
 			EReference eReference = GrammarUtil.getReference(reference, ((EClass) type));
 			EObject currentModel = context.getCurrentModel();
 			if (eReference != null && currentModel != null) {
-				IScope scope = scopeProvider.getScope(currentModel, eReference);
-				crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor,
+				IScope scope = getScopeProvider().getScope(currentModel, eReference);
+				getCrossrefProposalProvider().lookupCrossReference(scope, reference, context, acceptor,
 						getCrossrefFilter(reference, context));
 			}
 		}
