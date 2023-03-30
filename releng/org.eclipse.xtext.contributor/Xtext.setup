@@ -67,6 +67,9 @@
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
     <choice
+        value="2023-06"
+        label="Eclipse 2023-06 - 4.28"/>
+    <choice
         value="2023-03"
         label="Eclipse 2023-03 - 4.27"/>
     <choice
@@ -602,7 +605,7 @@
         <repository
             url="${p2.antlr-gen}"/>
         <repository
-            url="${p2.m2e}/2.1.2"/>
+            url="${p2.m2e}/2.2.1"/>
         <repository
             url="${p2.swtbot}"/>
         <repository
@@ -616,7 +619,40 @@
         <repository
             url="${p2.buildship}"/>
         <repository
-            url="${p2.webtools}/2022-12"/>
+            url="${p2.webtools}/2023-03"/>
+        <repository
+            url="${p2.lsp4j}"/>
+        <repository
+            url="${p2.cbi.analyzer}"/>
+        <repository
+            url="${p2.egit}"/>
+        <repository
+            url="${p2.license}"/>
+      </repositoryList>
+      <repositoryList
+          name="2023-06">
+        <repository
+            url="https://download.eclipse.org/eclipse/updates/4.28-I-builds"/>
+        <repository
+            url="${p2.mwe2}"/>
+        <repository
+            url="${p2.antlr-gen}"/>
+        <repository
+            url="${p2.m2e}/2.2.1"/>
+        <repository
+            url="${p2.swtbot}"/>
+        <repository
+            url="${p2.orbit}"/>
+        <repository
+            url="${p2.emf}"/>
+        <repository
+            url="${p2.gef-classic}"/>
+        <repository
+            url="${p2.xpand}"/>
+        <repository
+            url="${p2.buildship}"/>
+        <repository
+            url="${p2.webtools}/2023-03"/>
         <repository
             url="${p2.lsp4j}"/>
         <repository
