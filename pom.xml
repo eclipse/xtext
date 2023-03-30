@@ -216,7 +216,7 @@
 
 	<profiles>
 		<profile>
-			<!-- This is used only for updating versions in test children projects
+			<!-- This is used only for updating versions in children projects
 				versions:set will scan automatically also these modules
 				even if this profile is not active.
 
@@ -226,8 +226,6 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>org.eclipse.xtext.p2.releng</module>
-				<module>org.eclipse.xtext.maven.releng</module>
 				<module>org.eclipse.xtext.full.releng</module>
 			</modules>
 		</profile>
