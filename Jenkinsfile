@@ -11,17 +11,12 @@ pipeline {
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
        'temurin-jdk11-latest', 'temurin-jdk17-latest'
     ])
-    booleanParam(
-      name: 'TRIGGER_DOWNSTREAM_BUILD', 
-      defaultValue: (env.BRANCH_NAME.startsWith('milestone')||env.BRANCH_NAME.startsWith('release')), 
-      description: 'Should downstream jobs for the same branch be triggered on successful build?'
-    )
   }
 
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'main' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=temurin-jdk17-latest;TRIGGER_DOWNSTREAM_BUILD=true
-      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=temurin-jdk17-latest
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest
       ''' : '')
   }
 
@@ -79,17 +74,6 @@ pipeline {
     }
     success {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
-      script {
-        if (params.TRIGGER_DOWNSTREAM_BUILD==true) {
-          DOWNSTREAM_JOBS.split(',').each {
-            def downstreamUrl = new URL("${env.JENKINS_URL}/job/$it/job/${env.BRANCH_NAME}")
-            def boolean downstreamJobExists = sh(script: "curl -L -s -o /dev/null -I -w '%{http_code}' ${downstreamUrl}", returnStdout: true) == "200"
-            if (downstreamJobExists) {
-              build job: "$it/${env.BRANCH_NAME}", wait: false, parameters: [booleanParam(name: 'TRIGGER_DOWNSTREAM_BUILD', value: "${params.TRIGGER_DOWNSTREAM_BUILD}"), string(name: 'JDK_VERSION', value: "${params.JDK_VERSION}")]
-            }
-          }
-        }
-      }
     }
     unsuccessful {
       archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
