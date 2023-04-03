@@ -56,7 +56,7 @@ Apache Commons Lang (2.4)
 * License: Apache License, 2.0
 
 
-Apache Log4j (1.2.17)
+Apache Log4j (1.2.24)
 
 * License: Apache License 2.0
 
@@ -64,7 +64,7 @@ args4j (2.33)
 
 * License: MIT License
 
-ASM (9.4)
+ASM (9.5)
 
 * License: BSD-3-Clause
 
@@ -86,7 +86,7 @@ Google Guice / Inject Core API (5.0.1)
 
 * License: Apache License, 2.0
 
-Gradle Wrapper (7.4)
+Gradle Wrapper (8.x)
 
 * License: Apache License, 2.0
 
@@ -94,7 +94,7 @@ guava gwt (30.1)
 
 * License: Apache License, 2.0
 
-JUnit (5.9.1)
+JUnit (5.9.2)
 
 * License: EPL-2.0
 

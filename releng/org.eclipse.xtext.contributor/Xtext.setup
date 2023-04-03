@@ -711,25 +711,28 @@
             name="org.junit"
             versionRange="[4.13.2,4.14.0)"/>
         <requirement
-            name="org.junit.jupiter.api"
+            name="junit-jupiter-api"
             versionRange="[5.1.0,6.0.0)"/>
         <requirement
-            name="org.junit.jupiter.engine"
+            name="junit-jupiter-engine"
             versionRange="[5.1.0,6.0.0)"/>
         <requirement
-            name="org.junit.platform.commons"
+            name="junit-vintage-engine"
+            versionRange="[5.1.0,6.0.0)"/>
+        <requirement
+            name="junit-platform-commons"
             versionRange="[1.1.0,2.0.0)"/>
         <requirement
-            name="org.junit.platform.engine"
+            name="junit-platform-engine"
             versionRange="[1.1.0,2.0.0)"/>
         <requirement
-            name="org.junit.platform.launcher"
+            name="junit-platform-launcher"
             versionRange="[1.1.0,2.0.0)"/>
         <requirement
-            name="org.junit.platform.runner"
+            name="junit-platform-runner"
             versionRange="[1.1.0,2.0.0)"/>
         <requirement
-            name="org.junit.platform.suite.api"
+            name="junit-platform-suite-api"
             versionRange="[1.1.0,2.0.0)"/>
         <requirement
             name="org.opentest4j"
