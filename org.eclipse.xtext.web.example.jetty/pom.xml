@@ -9,6 +9,10 @@
 	<artifactId>org.eclipse.xtext.web.example.jetty</artifactId>
 	<packaging>war</packaging>
 
+	<properties>
+		<jetty-version>9.4.51.v20230217</jetty-version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
@@ -67,13 +71,13 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-annotations</artifactId>
-			<version>9.4.51.v20230217</version>
+			<version>${jetty-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-rewrite</artifactId>
-			<version>9.4.51.v20230217</version>
+			<version>${jetty-version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
