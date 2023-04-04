@@ -16,9 +16,9 @@
 			the current version of our project -->
 		<xtext-version>@project.version@</xtext-version>
 		<tycho-version>2.7.5</tycho-version>
-		<eclipse-text-version>3.12.200</eclipse-text-version>
-		<core-resources-version>3.18.0</core-resources-version>
-		<core-runtime-version>3.26.0</core-runtime-version>
+		<eclipse-text-version>3.12.300</eclipse-text-version>
+		<core-resources-version>3.18.200</core-resources-version>
+		<core-runtime-version>3.26.100</core-runtime-version>
 		<emf-common-version>2.24.0</emf-common-version>
 		<emf-ecore-version>2.26.0</emf-ecore-version>
 		<emf-edit-version>2.17.0</emf-edit-version>
@@ -29,9 +29,8 @@
 		<ecore-xcore-version>1.20.0</ecore-xcore-version>
 		<ecore-xcore-lib-version>1.6.0</ecore-xcore-lib-version>
 		<ecore-xtext-version>1.6.0</ecore-xtext-version>
-		<jdt-core-version>3.31.0</jdt-core-version>
-		<jdt-compiler-apt-version>1.4.200</jdt-compiler-apt-version>
-		<platform-osgi-version>3.18.100</platform-osgi-version>
+		<jdt-core-version>3.33.0</jdt-core-version>
+		<platform-osgi-version>3.18.300</platform-osgi-version>
 	</properties>
 
 	<dependencyManagement>
