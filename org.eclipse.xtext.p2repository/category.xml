@@ -6,6 +6,9 @@
    <feature id="org.eclipse.xtend.sdk" version="0.0.0">
       <category name="Xtext"/>
    </feature>
+   <feature id="org.eclipse.xtend.lib" version="0.0.0">
+      <category name="Xtext"/>
+   </feature>
    <feature id="org.eclipse.xtext.generator" version="0.0.0">
       <category name="Xtext"/>
    </feature>
