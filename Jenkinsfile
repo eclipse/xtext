@@ -6,15 +6,14 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'r202406', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['latest', 'r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'r202406'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
-    choice(name: 'JDK_VERSION', choices: [ '11', '17' ], description: 'Which JDK version should be used?')
+    choice(name: 'JDK_VERSION', choices: ['17', '11'], description: 'Which JDK version should be used?')
   }
 
   triggers {
-    parameterizedCron(env.BRANCH_NAME == 'main' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=17
-      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
+    parameterizedCron(env.BRANCH_NAME == 'cd_tycho50' ? '''
+      H H(13-14) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
       ''' : '')
   }
 
@@ -63,7 +62,7 @@ pipeline {
       steps {
         xvnc(useXauthority: true) {
           sh """
-            ./full-build.sh --tp=${selectedTargetPlatform()} \
+            ./full-build.sh -Dsurefire.timeout=3000 --tp=${selectedTargetPlatform()} \
               ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
           """
         }
@@ -94,7 +93,7 @@ pipeline {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log'
     }
     unsuccessful {
-      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log, **/hs_err_pid*.log'
+      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log, **/hs_err_pid*.log, **/target/surefire-reports/*'
     }
     cleanup {
       script {
