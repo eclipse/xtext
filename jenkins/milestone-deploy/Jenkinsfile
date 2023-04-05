@@ -1,0 +1,50 @@
+pipeline {
+  agent any
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'15'))
+    disableConcurrentBuilds()
+    timeout(time: 120, unit: 'MINUTES')
+  }
+
+  parameters {
+    choice(name: 'RELEASE_TYPE', choices: ['M0', 'M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
+      '''
+        Kind of milestone release to build.
+      ''')
+  }
+
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext'
+    REPOSITORY_PATH="${DOWNLOAD_AREA}/updates/milestones"
+  }
+
+  tools {
+    maven "apache-maven-3.8.6"
+    jdk "temurin-jdk17-latest"
+  }
+
+  stages {
+    stage('Prepare download area') {
+      steps {
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh '''
+            echo ${REPOSITORY_PATH}
+            ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $REPOSITORY_PATH"
+          '''
+        }
+      }
+    }
+    stage('Prepare versions for Milestone') {
+      steps {
+        sh './scripts/prepare-for-milestone.sh ${RELEASE_TYPE}'
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**'
+    }
+  }
+}
