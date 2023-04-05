@@ -107,7 +107,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 					<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
 					<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-					<repository location="https://download.eclipse.org/tools/orbit/downloads/2023-06"/>
+					<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
 				</location>
 			</locations>
 		</target>

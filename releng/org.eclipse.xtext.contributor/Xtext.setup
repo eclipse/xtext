@@ -94,7 +94,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="https://download.eclipse.org/tools/orbit/downloads/2023-06"/>
+      value="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
