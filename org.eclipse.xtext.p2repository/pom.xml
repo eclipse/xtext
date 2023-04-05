@@ -407,6 +407,10 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<executions>
 							<execution>
+								<id>md5sum</id>
+								<phase>package</phase>
+							</execution>
+							<execution>
 								<id>rsync-update</id>
 								<phase>prepare-package</phase>
 							</execution>
