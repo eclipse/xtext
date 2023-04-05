@@ -19,7 +19,7 @@
   }
 </code></pre>
 
-<p>If <code>fileContentsToString()</code> throws an <a href="http://docs.oracle.com/javase/8/docs/api/java/io/IOException.html">IOException</a>, it is caught and the string <code>'dummy data'</code> is assigned to the value <code>data</code>. Expressions can appear as <a href="202_xtend_classes_members.html#fields">initializers of fields</a>, the body of constructors or methods and as values in annotations. A method body can either be a <a href="203_xtend_expressions.html#blocks">block expression</a> or a <a href="203_xtend_expressions.html#templates">template expression</a>.</p>
+<p>If <code>fileContentsToString()</code> throws an <a href="http://docs.oracle.com/javase/11/docs/api/java/io/IOException.html">IOException</a>, it is caught and the string <code>'dummy data'</code> is assigned to the value <code>data</code>. Expressions can appear as <a href="202_xtend_classes_members.html#fields">initializers of fields</a>, the body of constructors or methods and as values in annotations. A method body can either be a <a href="203_xtend_expressions.html#blocks">block expression</a> or a <a href="203_xtend_expressions.html#templates">template expression</a>.</p>
 
 <h2 id="xtend-expressions-literals">Literals</h2>
 
@@ -27,7 +27,7 @@
 
 <h3 id="string-literals">String Literals</h3>
 
-<p>A string literal is of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>. String literals are enclosed in a pair of single quotes or double quotes. Single quotes are more common because the signal-to-noise ration is better, but generally you should use the terminals which are least likely to occur in the string value. Special characters can be quoted with a backslash or defined using unicode notation. Contrary to Java, strings can span multiple lines.</p>
+<p>A string literal is of type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a>. String literals are enclosed in a pair of single quotes or double quotes. Single quotes are more common because the signal-to-noise ration is better, but generally you should use the terminals which are least likely to occur in the string value. Special characters can be quoted with a backslash or defined using unicode notation. Contrary to Java, strings can span multiple lines.</p>
 
 <pre><code class="language-xtend">'Hello World !'
 "Hello World !"
@@ -40,14 +40,14 @@
 
 <h3 id="character-literals">Character Literals</h3>
 
-<p>Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive <code>char</code> or the wrapper type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Character.html">Character</a> is expected, the compiler will treat the literal as such a value or instance.</p>
+<p>Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive <code>char</code> or the wrapper type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Character.html">Character</a> is expected, the compiler will treat the literal as such a value or instance.</p>
 
 <pre><code class="language-xtend">val char c = 'c'
 </code></pre>
 
 <h3 id="number-literals">Number Literals</h3>
 
-<p>Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a <a href="203_xtend_expressions.html#operators">unary operator</a> with one argument (the positive number literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal creates an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal numbers</p>
+<p>Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a <a href="203_xtend_expressions.html#operators">unary operator</a> with one argument (the positive number literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal creates an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or a <a href="http://docs.oracle.com/javase/11/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal numbers</p>
 
 <pre><code class="language-xtend">42
 1_234_567_890 
@@ -59,7 +59,7 @@
 0xbeef_beef_beef_beef_beef#BI // BigInteger
 </code></pre>
 
-<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or none), a <code>float</code> (suffix <code>F</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> you have to specify both, the integral and the fractional part of the mantissa. There are only decimal floating-point literals.</p>
+<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or none), a <code>float</code> (suffix <code>F</code>) or a <a href="http://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> you have to specify both, the integral and the fractional part of the mantissa. There are only decimal floating-point literals.</p>
 
 <pre><code class="language-xtend">42d     // double
 0.42e2  // implicit double
@@ -99,7 +99,7 @@
 
 <h3 id="collection-literals">Collection Literals</h3>
 
-<p>The methods in <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java">CollectionLiterals</a> are automatically imported so it’s very easy and convenient to create instances of the various collection types the JDK offers.</p>
+<p>The methods in <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java">CollectionLiterals</a> are automatically imported so it’s very easy and convenient to create instances of the various collection types the JDK offers.</p>
 
 <pre><code class="language-xtend">val myList = newArrayList('Hello', 'World')
 val myMap = newLinkedHashMap('a' -&gt; 1, 'b' -&gt; 2) 
@@ -127,7 +127,7 @@ val myMap = newLinkedHashMap('a' -&gt; 1, 'b' -&gt; 2)
 
 <h3 id="arrays">Arrays</h3>
 
-<p>Java arrays can be created either using a <a href="203_xtend_expressions.html#collection-literals">literal</a> as described in the previous section, or if it should be a new array with a fixed size, one of the methods from <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java">ArrayLiterals</a> can be used. The generic <code>newArrayOfSize(int)</code> method works for all reference types, while there is a specific factory method for each primitive type.</p>
+<p>Java arrays can be created either using a <a href="203_xtend_expressions.html#collection-literals">literal</a> as described in the previous section, or if it should be a new array with a fixed size, one of the methods from <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java">ArrayLiterals</a> can be used. The generic <code>newArrayOfSize(int)</code> method works for all reference types, while there is a specific factory method for each primitive type.</p>
 
 <p>Example:</p>
 
@@ -161,7 +161,7 @@ val List&lt;Integer&gt; myList = myArray
 
 <h2 id="operators">Infix Operators and Operator Overloading</h2>
 
-<p>There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java">BigDecimalExtensions</a> that defines operators for <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html">BigDecimals</a>. The following code is therefore perfectly valid:</p>
+<p>There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java">BigDecimalExtensions</a> that defines operators for <a href="http://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimals</a>. The following code is therefore perfectly valid:</p>
 
 <pre><code class="language-xtend">val x = 2.71BD
 val y = 3.14BD
@@ -343,7 +343,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 
 <h3 id="short-circuit-boolean-operators">Short-Circuit Boolean Operators</h3>
 
-<p>If the operators <code>||</code>, <code>&amp;&amp;</code>, and <code>?:</code> are bound to the library methods <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java"><code>BooleanExtensions.operator_and(boolean l, boolean r)</code></a>, <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java"><code>BooleanExtensions.operator_or(boolean l, boolean r)</code></a> resp. <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java"><code>&lt;T&gt; T operator_elvis(T first, T second)</code></a> the operation is inlined and evaluated in short circuit mode. That means that the right hand operand might not be evaluated at all in the following cases:</p>
+<p>If the operators <code>||</code>, <code>&amp;&amp;</code>, and <code>?:</code> are bound to the library methods <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java"><code>BooleanExtensions.operator_and(boolean l, boolean r)</code></a>, <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java"><code>BooleanExtensions.operator_or(boolean l, boolean r)</code></a> resp. <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java"><code>&lt;T&gt; T operator_elvis(T first, T second)</code></a> the operation is inlined and evaluated in short circuit mode. That means that the right hand operand might not be evaluated at all in the following cases:</p>
 
 <ol>
   <li>in the case of <code>||</code> the operand on the right hand side is not evaluated if the left operand evaluates to <code>true</code>.</li>
@@ -552,7 +552,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <h2 id="blocks">Blocks</h2>
 
-<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block’s last expression.</p>
+<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block’s last expression.</p>
 
 <p>A block expression is surrounded by curly braces. The expressions in a block can be terminated by an optional semicolon.</p>
 
@@ -779,7 +779,7 @@ val AbstractIterator&lt;String&gt; lineIterator = [|
 <pre><code class="language-xtend">val toUpperCaseFunction = [ String s | s.toUpperCase ] // inferred type is (String)=&gt;String
 </code></pre>
 
-<p>The type will be one of the inner types found in <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Functions</a> or <a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedures</a>. It is a procedure if the return type is <code>void</code>, otherwise it is a function.</p>
+<p>The type will be one of the inner types found in <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Functions</a> or <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedures</a>. It is a procedure if the return type is <code>void</code>, otherwise it is a function.</p>
 
 <p>Xtend supports a shorthand syntax for function types. Instead of writing <code>Function1&lt;? super String,? extends String&gt;</code> which is what you will find in the generated Java code, you can simply write <code>(String)=&gt;String</code>.</p>
 
@@ -914,7 +914,7 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 <pre><code class="language-xtend">for (T1 variable : arrayOrIterable) expression
 </code></pre>
 
-<p>is used to execute a certain expression for each element of an array or an instance of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated.</p>
+<p>is used to execute a certain expression for each element of an array or an instance of <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated.</p>
 
 <p>The type of a for loop is <code>void</code>. The type of the local variable can be inferred from the iterable or array that is processed.</p>
 
@@ -991,7 +991,7 @@ do doSideEffect("foo") while ((i=i+1)&lt;max)
 
 <h2 id="xtend-expressions-throw">Throwing Exceptions</h2>
 
-<p>Throwing <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html">Throwable</a>s up the call stack has the same semantics and syntax as in Java.</p>
+<p>Throwing <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Throwable.html">Throwable</a>s up the call stack has the same semantics and syntax as in Java.</p>
 
 <pre><code class="language-xtend">{
 ...
@@ -1205,7 +1205,7 @@ if (myList.isEmpty)
 
 <h3 id="template-type">Typing</h3>
 
-<p>The template expression is of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/CharSequence.html">CharSequence</a>. It is automatically converted to <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> if that is the expected target type.</p>
+<p>The template expression is of type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/CharSequence.html">CharSequence</a>. It is automatically converted to <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a> if that is the expected target type.</p>
 
 <h3 id="whitespace-handling">White Space Handling</h3>
 
