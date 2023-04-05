@@ -423,6 +423,10 @@
 								<id>copy-repository</id>
 								<phase>package</phase>
 							</execution>
+							<execution>
+								<id>copy-zipped-repository</id>
+								<phase>package</phase>
+							</execution>
 						</executions>
 					</plugin>
 					<plugin>
