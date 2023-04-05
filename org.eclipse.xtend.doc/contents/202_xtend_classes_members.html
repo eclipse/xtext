@@ -64,7 +64,7 @@ import static org.junit.Assert.*
 
 <p>Abstract classes are defined using the <code>abstract</code> modifier as in Java. See also <a href="202_xtend_classes_members.html#abstract-methods">abstract methods</a>.</p>
 
-<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a> is used.</p>
+<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Object.html">Object</a> is used.</p>
 
 <p>The most simple class looks like this:</p>
 
@@ -298,7 +298,7 @@ def dispatch printTypes(Integer x, Number y) {
 }
 </code></pre>
 
-<p>The code is compiled in a way that a <code>null</code> reference is never a match. <code>null</code> values can be handled by dispatch cases that use the parameter type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Void.html">Void</a>.</p>
+<p>The code is compiled in a way that a <code>null</code> reference is never a match. <code>null</code> values can be handled by dispatch cases that use the parameter type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Void.html">Void</a>.</p>
 
 <pre><code class="language-xtend">def dispatch printType(Number x) { 
   "it's some number" 
@@ -488,14 +488,14 @@ listOfStrings.map[ toUpperCase ] // calls ListExtensions.&lt;T, R&gt;map(List&lt
 <p>Have a look at the JavaDoc to learn about the available functionality:</p>
 
 <ul>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java">ObjectExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java">IterableExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java">MapExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">ListExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java">CollectionExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java">BooleanExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">IntegerExtensions</a></li>
-  <li><a href="https://github.com/eclipse/xtext-lib/blob/master/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java">FunctionExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java">ObjectExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java">IterableExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java">MapExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java">ListExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java">CollectionExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java">BooleanExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java">IntegerExtensions</a></li>
+  <li><a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java">FunctionExtensions</a></li>
 </ul>
 
 <h3 id="local-extension-methods">Local Extension Methods</h3>
