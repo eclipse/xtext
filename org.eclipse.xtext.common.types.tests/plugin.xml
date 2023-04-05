@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <?eclipse version="3.0"?>
-<plugin>
+<plugin
+   id="org.eclipse.xtext.common.types.tests"
+>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
 			uri = "http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist"
