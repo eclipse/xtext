@@ -388,22 +388,13 @@
 			<id>release-milestone</id>
 			<properties>
 				<remote-subdir>updates/milestones</remote-subdir>
-				<current-release-subdirectory>S${processedTimestamp}</current-release-subdirectory>
+				<!-- Note that for versions of milestones ${qualifiedVersion} == ${project.version} -->
+				<current-release-subdirectory>${qualifiedVersion}</current-release-subdirectory>
 				<zipFinalName>tmf-xtext-Update-${qualifiedVersion}</zipFinalName>
 				<site.label>TMF Xtext Update Site (Milestones)</site.label>
 			</properties>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>build-helper-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>timestamp-replacement</id>
-								<phase>validate</phase>
-							</execution>
-						</executions>
-					</plugin>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>exec-maven-plugin</artifactId>
