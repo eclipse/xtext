@@ -9,16 +9,16 @@
 		"test": "mocha -u tdd --reporter dot src/test/js/*.js",
 		"optimize": "npm run optimizeAce && npm run optimizeOrion && npm run optimizeCodeMirror",
 		"optimizeAce": "npm run optimizeAceJs && npm run optimizeAceJsMin && npm run optimizeAceCss",
-		"optimizeAceJs":"r.js -o src/main/js/requirejs-ace-config.js logLevel=2 out=build/opt-resources/xtext-ace.js optimize=none",
-		"optimizeAceJsMin": "r.js -o src/main/js/requirejs-ace-config.js logLevel=2 out=build/opt-resources/xtext-ace.min.js optimize=uglify preserveLicenseComments=false",
-		"optimizeAceCss": "r.js -o logLevel=2 cssIn=src/main/css/xtext/xtext-ace.css out=build/opt-resources/xtext-ace.css",
+		"optimizeAceJs":"node node_modules/requirejs/bin/r.js -o src/main/js/requirejs-ace-config.js logLevel=2 out=build/opt-resources/xtext-ace.js optimize=none",
+		"optimizeAceJsMin": "node node_modules/requirejs/bin/r.js -o src/main/js/requirejs-ace-config.js logLevel=2 out=build/opt-resources/xtext-ace.min.js optimize=uglify preserveLicenseComments=false",
+		"optimizeAceCss": "node node_modules/requirejs/bin/r.js -o logLevel=2 cssIn=src/main/css/xtext/xtext-ace.css out=build/opt-resources/xtext-ace.css",
 		"optimizeOrion": "npm run optimizeOrionJs && npm run optimizeOrionJsMin && npm run optimizeOrionCss",
-		"optimizeOrionJs":"r.js -o src/main/js/requirejs-orion-config.js logLevel=2 out=build/opt-resources/xtext-orion.js optimize=none",
-		"optimizeOrionJsMin": "r.js -o src/main/js/requirejs-orion-config.js logLevel=2 out=build/opt-resources/xtext-orion.min.js optimize=uglify preserveLicenseComments=false",
-		"optimizeOrionCss": "r.js -o logLevel=2 cssIn=src/main/css/xtext/xtext-orion.css out=build/opt-resources/xtext-orion.css",
+		"optimizeOrionJs":"node node_modules/requirejs/bin/r.js -o src/main/js/requirejs-orion-config.js logLevel=2 out=build/opt-resources/xtext-orion.js optimize=none",
+		"optimizeOrionJsMin": "node node_modules/requirejs/bin/r.js -o src/main/js/requirejs-orion-config.js logLevel=2 out=build/opt-resources/xtext-orion.min.js optimize=uglify preserveLicenseComments=false",
+		"optimizeOrionCss": "node node_modules/requirejs/bin/r.js -o logLevel=2 cssIn=src/main/css/xtext/xtext-orion.css out=build/opt-resources/xtext-orion.css",
 		"optimizeCodeMirror": "npm run optimizeCodeMirrorJs && npm run optimizeCodeMirrorJsMin && npm run optimizeCodeMirrorCss",
-		"optimizeCodeMirrorJs":"r.js -o src/main/js/requirejs-codemirror-config.js logLevel=2 out=build/opt-resources/xtext-codemirror.js optimize=none",
-		"optimizeCodeMirrorJsMin": "r.js -o src/main/js/requirejs-codemirror-config.js logLevel=2 out=build/opt-resources/xtext-codemirror.min.js optimize=uglify preserveLicenseComments=false",
-		"optimizeCodeMirrorCss": "r.js -o logLevel=2 cssIn=src/main/css/xtext/xtext-codemirror.css out=build/opt-resources/xtext-codemirror.css"
+		"optimizeCodeMirrorJs":"node node_modules/requirejs/bin/r.js -o src/main/js/requirejs-codemirror-config.js logLevel=2 out=build/opt-resources/xtext-codemirror.js optimize=none",
+		"optimizeCodeMirrorJsMin": "node node_modules/requirejs/bin/r.js -o src/main/js/requirejs-codemirror-config.js logLevel=2 out=build/opt-resources/xtext-codemirror.min.js optimize=uglify preserveLicenseComments=false",
+		"optimizeCodeMirrorCss": "node node_modules/requirejs/bin/r.js -o logLevel=2 cssIn=src/main/css/xtext/xtext-codemirror.css out=build/opt-resources/xtext-codemirror.css"
 	}
 }
