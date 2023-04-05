@@ -418,6 +418,10 @@
 								<id>rsync-commit</id>
 								<phase>verify</phase>
 							</execution>
+							<execution>
+								<id>rsync-commit-zip</id>
+								<phase>verify</phase>
+							</execution>
 						</executions>
 					</plugin>
 					<plugin>
