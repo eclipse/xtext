@@ -13,6 +13,8 @@
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
 		<zipFinalName>${project.artifactId}-${qualifiedVersion}</zipFinalName>
+		<!-- Used for tycho-eclipserun-plugin -->
+		<eclipse-version>2023-03</eclipse-version>
 	</properties>
 
 	<build>
@@ -217,6 +219,75 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-eclipserun-plugin</artifactId>
+					<configuration>
+						<repositories>
+							<repository>
+								<id>${eclipse-version}</id>
+								<layout>p2</layout>
+								<url>https://download.eclipse.org/releases/${eclipse-version}</url>
+							</repository>
+						</repositories>
+						<dependencies>
+							<dependency>
+								<artifactId>org.eclipse.ant.core</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.apache.ant</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
+								<type>eclipse-feature</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
+								<type>eclipse-feature</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.osgi.compatibility.state</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.rcp</artifactId>
+								<type>eclipse-feature</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.core.net</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+						</dependencies>
+					</configuration>
+					<executions>
+						<!-- add our new child repository -->
+						<execution>
+							<id>add-p2-composite-repository</id>
+							<phase>none</phase>
+							<goals>
+								<goal>eclipse-run</goal>
+							</goals>
+							<configuration>
+								<applicationsArgs>
+									<args>-application</args>
+									<args>org.eclipse.ant.core.antRunner</args>
+									<args>-buildfile</args>
+									<args>packaging-p2composite.ant</args>
+									<args>p2.composite.add</args>
+									<args>-Dsite.label="${site.label}"</args>
+									<args>-Dcomposite.base.dir=${rsync-local-source}</args>
+									<args>-Dcomposite.child.dir=${current-release-subdirectory}</args>
+								</applicationsArgs>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -303,6 +374,64 @@
 							</execution>
 							<execution>
 								<id>copy-zipped-repository</id>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<!-- Activate this profile to perform a milestone release -->
+			<id>release-milestone</id>
+			<properties>
+				<remote-subdir>updates/milestones</remote-subdir>
+				<current-release-subdirectory>S${processedTimestamp}</current-release-subdirectory>
+				<zipFinalName>tmf-xtext-Update-${qualifiedVersion}</zipFinalName>
+				<site.label>TMF Xtext Update Site (Milestones)</site.label>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>timestamp-replacement</id>
+								<phase>validate</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>rsync-update</id>
+								<phase>prepare-package</phase>
+							</execution>
+							<execution>
+								<id>rsync-commit</id>
+								<phase>verify</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-repository</id>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-eclipserun-plugin</artifactId>
+						<executions>
+							<!-- add our new child repository -->
+							<execution>
+								<id>add-p2-composite-repository</id>
 								<phase>package</phase>
 							</execution>
 						</executions>

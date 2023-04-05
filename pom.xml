@@ -230,9 +230,9 @@
 			</modules>
 		</profile>
 		<profile>
-			<!-- Activate it when performing a release or milestone, so that
+			<!-- Activate it when performing a milestone release, so that
 				Tycho won't complain about different versions in OSGI and POM -->
-			<id>p2-release</id>
+			<id>release-milestone</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -549,6 +549,11 @@
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-eclipserun-plugin</artifactId>
 					<version>${tycho-version}</version>
 				</plugin>
 				<plugin>
