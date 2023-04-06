@@ -114,7 +114,7 @@
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
-					<version>IT-SNAPSHOT</version>
+					<version>${xtextVersion}</version>
 					<executions>
 						<execution>
 							<goals>
