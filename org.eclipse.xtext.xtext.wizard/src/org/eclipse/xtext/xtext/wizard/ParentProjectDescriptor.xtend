@@ -383,11 +383,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
 									<artifactId>maven-surefire-plugin</artifactId>
-									<version>2.22.1</version>
-									<configuration>
-										<!-- workaround for https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
-										<useSystemClassLoader>false</useSystemClassLoader>
-									</configuration>
+									<version>3.0.0</version>
 								</plugin>
 							«ENDIF»
 							<plugin>
