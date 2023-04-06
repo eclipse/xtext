@@ -145,6 +145,25 @@
 	<build>
 		<plugins>
 			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>src/test/resources</directory>
+							<filtering>true</filtering>
+						</resource>
+					</resources>
+					<useDefaultDelimiters>false</useDefaultDelimiters>
+					<!-- The default delimiter ${*} must NOT be used, otherwise,
+						properties like ${project.basedir} in our IT projects will be
+						replaced with absolute paths pointing to the original sources,
+						breaking the tests -->
+					<delimiters>
+						<delimiter>@</delimiter>
+					</delimiters>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<configuration>
 					<goalPrefix>xtend</goalPrefix>
@@ -196,6 +215,11 @@
 				<artifactId>maven-invoker-plugin</artifactId>
 				<version>3.5.0</version>
 				<configuration>
+					<extraArtifacts>
+						<!-- our BOM is not a dependency (it's just imported), thus, we must
+							install it explicitly in the local maven repository -->
+						<extraArtifact>org.eclipse.xtext:xtext-dev-bom:${project.version}:pom</extraArtifact>
+					</extraArtifacts>
 					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 				</configuration>
 				<executions>
