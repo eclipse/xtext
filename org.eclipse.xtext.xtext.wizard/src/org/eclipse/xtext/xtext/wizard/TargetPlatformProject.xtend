@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.JUnitVersion
+import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class TargetPlatformProject extends ProjectDescriptor {
@@ -60,7 +61,11 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-					<repository location="https://download.eclipse.org/releases/2023-03"/>
+					«IF config.javaVersion.isAtLeast(JavaVersion.JAVA17)»
+						<repository location="https://download.eclipse.org/releases/2023-06"/>
+					«ELSE»
+						<repository location="https://download.eclipse.org/releases/2023-03"/>
+					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
@@ -102,7 +107,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 					<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
 					<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-					<repository location="https://download.eclipse.org/tools/orbit/downloads/2023-03"/>
+					<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
 				</location>
 			</locations>
 		</target>
