@@ -105,7 +105,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="junit-vintage-engine" version="5.9.2"/>
 						<unit id="org.opentest4j" version="1.2.0"/>
 					«ENDIF»
-					<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
+					<unit id="org.objectweb.asm" version="9.5.0"/>
 					<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
 					<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
 				</location>

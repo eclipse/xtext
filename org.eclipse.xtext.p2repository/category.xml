@@ -34,8 +34,8 @@
    <bundle id="org.aopalliance.source" version="1.0.0.qualifier"/>
    <bundle id="org.junit" version="4.13.2.qualifier"/>
    <bundle id="org.junit.source" version="4.13.2.qualifier"/>
-   <bundle id="org.objectweb.asm" version="9.4.0.qualifier"/>
-   <bundle id="org.objectweb.asm.source" version="9.4.0.qualifier"/>
+   <bundle id="org.objectweb.asm" version="9.5.0.qualifier"/>
+   <bundle id="org.objectweb.asm.source" version="9.5.0.qualifier"/>
    <bundle id="io.github.classgraph" version="4.8.149.qualifier"/>
    <bundle id="io.github.classgraph.source" version="4.8.149.qualifier"/>
 
