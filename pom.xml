@@ -7,6 +7,9 @@
 	<version>2.31.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>Xtext Parent POM</name>
+	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, LSP and your favorite web browser.</description>
+
 	<url>https://www.eclipse.org/Xtext/</url>
 	<licenses>
 		<license>
