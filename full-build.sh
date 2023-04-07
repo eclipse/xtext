@@ -55,7 +55,7 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
-MVN_ARGS+=(-Dsurefire.rerunFailingTestsCount=2)
+MVN_ARGS+=(-Dsurefire.rerunFailingTestsCount=3)
 
 echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 
