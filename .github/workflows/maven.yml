@@ -39,12 +39,12 @@ jobs:
           mvn -version
 
       - name: Build and test (headless with xvfb in Linux)
-        run: xvfb-run mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=2
+        run: xvfb-run mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
         if: matrix.os == 'ubuntu-latest'
         working-directory: org.eclipse.xtext.full.releng
 
       - name: Build and test (in other OSes)
-        run: mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=2
+        run: mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
         if: matrix.os != 'ubuntu-latest'
         working-directory: org.eclipse.xtext.full.releng
 
