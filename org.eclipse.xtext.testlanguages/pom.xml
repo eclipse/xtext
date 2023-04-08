@@ -14,4 +14,13 @@
 	<name>Common Xtext Testlanguages - Runtime</name>
 	<description>Common Xtext Testlanguages for UI and Runtime - Runtime</description>
 
+	<dependencies>
+		<!-- Since this project is used by IT projects in xtext-maven-plugin,
+			we specify this Maven dependency explicitly -->
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testing</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>

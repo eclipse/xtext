@@ -50,6 +50,7 @@
 			<include name="org.eclipse.xtend.lib.macro-*.jar" />
 			<include name="org.eclipse.xtend.core-*.jar" />
 			<include name="org.objectweb.asm*.jar" />
+			<include name="asm-*.jar" />
 			<exclude name="*.source*.jar" />
 			<exclude name="*.gwt*.jar" />
 		</fileset>

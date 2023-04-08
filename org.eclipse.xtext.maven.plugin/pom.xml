@@ -134,51 +134,29 @@
 	<build>
 		<plugins>
 			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<resources>
+						<resource>
+							<directory>src/test/resources</directory>
+							<filtering>true</filtering>
+						</resource>
+					</resources>
+					<useDefaultDelimiters>false</useDefaultDelimiters>
+					<!-- The default delimiter ${*} must NOT be used, otherwise,
+						properties like ${project.basedir} in our IT projects will be
+						replaced with absolute paths pointing to the original sources,
+						breaking the tests -->
+					<delimiters>
+						<delimiter>@</delimiter>
+					</delimiters>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<configuration>
 					<goalPrefix>xtext</goalPrefix>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>create-jar</id>
-						<phase>pre-integration-test</phase>
-						<configuration>
-							<skip>${maven.test.skip}</skip>
-							<target name="create-jar">
-								<property name="src.jar"
-									value="${project.build.directory}/${project.build.finalName}.jar" />
-								<property name="it.jar.name" value="${project.build.finalName}-it" />
-								<property name="it.jar.directory"
-									value="${project.build.directory}/${it.jar.name}" />
-								<unzip src="${src.jar}" dest="${it.jar.directory}" />
-								<replaceregexp file="${it.jar.directory}/META-INF/maven/plugin.xml"
-									match="&lt;version&gt;(.*)&lt;/version&gt;" replace="&lt;version&gt;IT-SNAPSHOT&lt;/version&gt;"
-									byline="false" />
-								<jar destfile="${project.build.directory}/${it.jar.name}.jar"
-									basedir="${it.jar.directory}" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<phase>pre-integration-test</phase>
-						<id>touch-jar</id>
-						<configuration>
-							<target name="touch-jar">
-								<property name="it.jar.name" value="${project.build.finalName}-it" />
-								<touch file="${project.build.directory}/${it.jar.name}.jar" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -206,27 +184,6 @@
 						<goals>
 							<goal>install</goal>
 						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-install-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>self</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<file>${project.build.directory}/${project.build.finalName}-it.jar</file>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.artifactId}</artifactId>
-							<version>IT-SNAPSHOT</version>
-							<packaging>maven-plugin</packaging>
-							<pomFile>pom.xml</pomFile>
-							<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

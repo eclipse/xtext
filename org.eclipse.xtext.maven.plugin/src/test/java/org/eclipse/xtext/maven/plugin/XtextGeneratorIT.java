@@ -248,6 +248,8 @@ public class XtextGeneratorIT {
 		Verifier verifier = newVerifier(pathToTestProject);
 		if (updateSnapshots) {
 			verifier.addCliOption("-U");
+		} else {
+			verifier.addCliOption("--no-snapshot-updates");
 		}
 		for (String goal : goals) {
 			verifier.executeGoal(goal);

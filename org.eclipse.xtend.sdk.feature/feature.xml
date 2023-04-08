@@ -26,13 +26,13 @@ SPDX-License-Identifier: EPL-2.0
       %license
    </license>
 
+   <includes
+         id="org.eclipse.xtend.lib"
+         version="0.0.0"/>
+
    <requires>
       <import feature="org.eclipse.xtext.ui" version="2.31.0" match="equivalent"/>
       <import feature="org.eclipse.xtext.xbase.lib" version="2.31.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib" version="2.31.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.macro" version="2.31.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.source"/>
-      <import plugin="org.eclipse.xtend.lib.macro.source"/>
       <import plugin="com.google.guava" version="30.1.0" match="compatible"/>
       <import plugin="io.github.classgraph" version="4.8.149" match="compatible"/>
       <import plugin="org.apache.log4j" version="1.2.24" match="equivalent"/>

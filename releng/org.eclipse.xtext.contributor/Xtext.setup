@@ -107,7 +107,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.lsp4j"
-      value="https://download.eclipse.org/lsp4j/updates/releases/0.20.0"/>
+      value="https://download.eclipse.org/lsp4j/updates/releases/0.20.1"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
@@ -453,7 +453,7 @@
           name="org.eclipse.lsp4j.sdk.feature.group"/>
       <requirement
           name="org.objectweb.asm"
-          versionRange="[9.4.0,9.5.0)"/>
+          versionRange="[9.5.0,9.6.0)"/>
       <requirement
           name="io.github.classgraph"
           versionRange="[4.8.149,4.9.0)"/>
