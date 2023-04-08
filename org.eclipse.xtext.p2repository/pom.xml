@@ -137,7 +137,6 @@
 								<executable>rsync</executable>
 								<arguments>
 									<argument>-azvc</argument>
-									<argument>-n</argument>
 									<argument>-e ssh</argument>
 									<argument>${rsync-local-source}</argument>
 									<argument>${rsync-remote-source}</argument>
@@ -154,7 +153,6 @@
 								<executable>rsync</executable>
 								<arguments>
 									<argument>-azvc</argument>
-									<argument>-n</argument>
 									<argument>-e ssh</argument>
 									<argument>${rsync-local-zip-source}</argument>
 									<argument>${rsync-remote-zip-source}</argument>
