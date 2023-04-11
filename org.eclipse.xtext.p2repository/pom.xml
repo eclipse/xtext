@@ -59,7 +59,7 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<executions>
-						<!-- sets the following properties 
+						<!-- sets the following properties
 						parsedVersion.majorVersion
 						parsedVersion.minorVersion
 						parsedVersion.incrementalVersion
@@ -316,6 +316,23 @@
 			</properties>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-gpg-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>pgp-sign</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>sign-p2-artifacts</goal>
+								</goals>
+								<configuration>
+									<skipIfJarsigned>true</skipIfJarsigned>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>build-helper-maven-plugin</artifactId>
