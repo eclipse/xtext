@@ -40,17 +40,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
         if: ${{ env.BASE_REPO != env.PR_HEAD_REPO }}
 
-      - name: Show Maven version
-        run: |
-          which mvn
-          mvn -version
-
-      - name: Build and test (headless with xvfb in Linux)
-        run: xvfb-run mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
-        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO && matrix.os == 'ubuntu-latest' }}
-        working-directory: org.eclipse.xtext.full.releng
-
-      - name: Build and test (in other OSes)
-        run: mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
-        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO && matrix.os != 'ubuntu-latest' }}
-        working-directory: org.eclipse.xtext.full.releng
+      - name: Build and test
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: mvn clean verify --show-version -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
+          working-directory: org.eclipse.xtext.full.releng
+        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO }}

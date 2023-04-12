@@ -35,16 +35,16 @@ pipeline {
     stage('Initialize') {
       steps {
         checkout scm
-        
+
         script {
           currentBuild.displayName = String.format("#%s(JDK%s,Eclipse%s)", BUILD_NUMBER, javaVersion(), eclipseVersion())
         }
-        
+
         sh '''
             if [ -f "/sys/fs/cgroup/memory/memory.limit_in_bytes" ]; then
                 echo "Available memory: $(cat /sys/fs/cgroup/memory/memory.limit_in_bytes | numfmt --to iec --format '%f')"
             fi
-            
+
             sed_inplace() {
                 if [[ "$OSTYPE" == "darwin"* ]]; then
                     sed -i '' "$@"
@@ -57,12 +57,12 @@ pipeline {
     }
 
     stage('Maven/Tycho Build & Test') {
+      environment {
+        MAVEN_OPTS = "-Xmx1500m"
+      }
       steps {
-        wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
-        sh """
-          export MAVEN_OPTS=-Xmx1500m 
-          ./full-build.sh --tp=${selectedTargetPlatform()}
-        """
+        xvnc(useXauthority: true) {
+          sh "./full-build.sh --tp=${selectedTargetPlatform()}"
         }
       }// END steps
     } // END stage
@@ -138,7 +138,7 @@ def eclipseVersion() {
     def targetDate = java.time.LocalDate.parse(targetPlatform.substring(1)+"01", df)
     long monthsBetween = java.time.temporal.ChronoUnit.MONTHS.between(baseDate, targetDate);
     return "4."+ (8+(monthsBetween/3))
-  } 
+  }
 }
 
 /**
@@ -150,7 +150,7 @@ def selectedTargetPlatform() {
     def tp = params.TARGET_PLATFORM
     def isUpstream = isTriggeredByUpstream()
     def javaVersion = javaVersion()
-    
+
     if (isTriggeredByUpstream() && javaVersion>=17) {
         println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
         return 'latest'
