@@ -1,9 +1,16 @@
-name: Build
+name: Build External PR
 
 on:
-  push:
+  pull_request:
     paths-ignore:
       - '**.md'
+
+env:
+  # Base for the PR
+  BASE_REPO: ${{ github.event.pull_request.base.repo.clone_url }}
+
+  # Repository of PR
+  PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.clone_url }}
 
 jobs:
   build:
@@ -16,12 +23,14 @@ jobs:
     steps:
       - name: 'Check out repository'
         uses: actions/checkout@v3
+        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO }}
 
       - name: 'Set up Java'
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'temurin'
+        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO }}
 
       - name: 'Cache Maven packages'
         uses: actions/cache@v3
@@ -29,6 +38,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-m2
+        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO }}
 
       - name: Show Maven version
         run: |
@@ -37,39 +47,10 @@ jobs:
 
       - name: Build and test (headless with xvfb in Linux)
         run: xvfb-run mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
-        if: matrix.os == 'ubuntu-latest'
+        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO && matrix.os == 'ubuntu-latest' }}
         working-directory: org.eclipse.xtext.full.releng
 
       - name: Build and test (in other OSes)
         run: mvn clean verify -PuseJenkinsSnapshots -Dsurefire.rerunFailingTestsCount=3
-        if: matrix.os != 'ubuntu-latest'
+        if: ${{ env.BASE_REPO != env.PR_HEAD_REPO && matrix.os != 'ubuntu-latest' }}
         working-directory: org.eclipse.xtext.full.releng
-
-  build-maven-artifacts:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 'Check out repository'
-        uses: actions/checkout@v3
-
-      - name: 'Set up Java'
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'temurin'
-
-      - name: 'Cache Maven packages'
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '**/*.target') }}
-          restore-keys: ${{ runner.os }}-maven
-
-      - name: Show Maven version
-        run: |
-          which mvn
-          mvn -version
-
-      - name: Build Maven artifacts
-        run: mvn clean verify -PuseJenkinsSnapshots
-        working-directory: org.eclipse.xtext.maven.releng
