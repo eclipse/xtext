@@ -1,21 +1,9 @@
 #!/usr/bin/env bash
-if [ -z "$JENKINS_URL" ]; then
-  # if not set in environment use default
-  JENKINS_URL=https://ci.eclipse.org/xtext/
-fi
-if [ -z "$WORKSPACE" ]; then
-  # if not set in environment use default
-  WORKSPACE=$(pwd)
-fi
-
 
 MVN_ARGS=(\
-  --update-snapshots \
   --fae \
   -Dmaven.test.failure.ignore=true \
   -Declipse.p2.mirrors=false \
-  -DJENKINS_URL=$JENKINS_URL \
-  -DWORKSPACE=$WORKSPACE \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
   -Dit-archetype-tests-skip=true \
 )

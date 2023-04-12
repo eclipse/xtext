@@ -125,7 +125,7 @@
 	</scm>
 
 	<properties>
-		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>	
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<tycho-version>3.0.4</tycho-version>
 
 		<maven.compiler.source>11</maven.compiler.source>
@@ -151,7 +151,6 @@
 		<xtend-maven-plugin-version>2.31.0.M0</xtend-maven-plugin-version>
 
 		<root-dir>${basedir}/..</root-dir>
-		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 
 		<target-platform-classifier>xtext-latest</target-platform-classifier>
 
@@ -280,7 +279,7 @@
 			<repositories>
 				<repository>
 					<id>lsp4j-from-jenkins</id>
-					<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository</url>
+					<url>https://ci.eclipse.org/xtext/job/lsp4j/lastStableBuild/artifact/build/maven-repository</url>
 				</repository>
 				<!-- Disable sonatype snapshots -->
 				<repository>
@@ -582,7 +581,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<!-- MJAVADOC-620 – Maven Javadoc Plugin fails to resolve the dependencies 
+					<!-- MJAVADOC-620 – Maven Javadoc Plugin fails to resolve the dependencies
 						when used with Java 11 -->
 					<version>3.5.0</version>
 					<configuration>

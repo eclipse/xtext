@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
-if [ -z "$JENKINS_URL" ]; then
-  # if not set in environment use default
-  JENKINS_URL=https://ci.eclipse.org/xtext/
-fi
-if [ -z "$WORKSPACE" ]; then
-  # if not set in environment use default
-  WORKSPACE=$(pwd)
-fi
-
 
 MVN_ARGS=(\
-  --update-snapshots \
-  -DJENKINS_URL=$JENKINS_URL \
-  -DWORKSPACE=$WORKSPACE \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
   -Dit-archetype-tests-skip=true \
 )
@@ -55,7 +43,6 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
-MVN_ARGS+=(-Dsurefire.rerunFailingTestsCount=3)
 
 echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 

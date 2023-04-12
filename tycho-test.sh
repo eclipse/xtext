@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-if [ -z "$JENKINS_URL" ]; then
-  # if not set in environment use default
-  JENKINS_URL=https://ci.eclipse.org/xtext/
-fi
 
 # Use TARGET_PLATFORM from environment and 'r202203' as default.
 # Overridable by 'tp' command-line arg
@@ -11,9 +7,7 @@ if [ -z "$TARGET_PLATFORM" ]; then
 fi
 
 MVN_ARGS=(\
-  --update-snapshots \
   --fae \
-  -DJENKINS_URL=$JENKINS_URL \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
 )
 

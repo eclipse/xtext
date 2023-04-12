@@ -101,7 +101,6 @@ pipeline {
             ./gradlew -info \
               --warning-mode all \
               --refresh-dependencies \
-              -PJENKINS_URL=$JENKINS_URL \
               -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
               -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
               -Posspub.version=$XTEXT_VERSION \
@@ -117,7 +116,7 @@ pipeline {
         } // END dir
       }
     }
-    
+
     stage('Deploy to Eclipse project storage') {
       steps {
         dir('publishing') {
@@ -134,7 +133,7 @@ pipeline {
             S) ZIP_NAME=tmf-xtext-Update-$XTEXT_VERSION.zip ;;
             R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
           esac
-          
+
           #
           # STEP 2: Zip the repository
           #
@@ -142,10 +141,10 @@ pipeline {
             zip -r $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME .
             md5sum --binary $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME > $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5
           cd $WORKSPACE/publishing
-          
+
         '''
         } // END dir
-        
+
         sshagent(['projects-storage.eclipse.org-bot-ssh']) {
         dir('publishing') {
           sh '''
@@ -163,7 +162,7 @@ pipeline {
             S) ZIP_NAME=tmf-xtext-Update-$XTEXT_VERSION.zip ;;
             R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
           esac
-          
+
           #
           # STEP 3: Upload zip und .md5
           #
@@ -171,7 +170,7 @@ pipeline {
           # ensure target directory exists
           ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $TARGET_DROP_PATH"
           scp $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:$TARGET_DROP_PATH
-          
+
           #
           # STEP 4: Unpack zip to p2 repository location
           #
