@@ -33,8 +33,6 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
-
-		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
 	<dependencyManagement>
@@ -46,7 +44,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<extensions>
 			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
@@ -159,7 +157,7 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>3.2.1</version>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
