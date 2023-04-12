@@ -127,6 +127,7 @@
 
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.release>11</maven.compiler.release>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 
 		<build-helper-maven-plugin-version>3.3.0</build-helper-maven-plugin-version>
