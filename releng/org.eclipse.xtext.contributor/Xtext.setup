@@ -789,21 +789,20 @@
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="workingsets:ExclusionPredicate"/>
+              xsi:type="predicates:LocationPredicate"
+              pattern="${git.clone.xtext.location|path}/.*"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
         </predicate>
       </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
           name="Tests">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="workingsets:ExclusionPredicate"/>
+              xsi:type="predicates:LocationPredicate"
+              pattern="${git.clone.xtext.location|path}/.*"/>
           <operand
               xsi:type="predicates:OrPredicate">
             <operand
@@ -815,53 +814,58 @@
           </operand>
         </predicate>
       </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
           name="Examples">
         <predicate
-            xsi:type="predicates:OrPredicate">
+            xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*example.*"/>
+              xsi:type="predicates:LocationPredicate"
+              pattern="${git.clone.xtext.location|path}/.*"/>
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*tutorial*"/>
+              xsi:type="predicates:OrPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*example.*"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*tutorial*"/>
+          </operand>
         </predicate>
       </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask"
-        id="xtext.working.sets">
       <workingSet
           name="Releng">
         <predicate
-            xsi:type="predicates:OrPredicate">
+            xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*parent"/>
+              xsi:type="predicates:LocationPredicate"
+              pattern="${git.clone.xtext.location|path}/.*"/>
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*\.releng"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*repository"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*bom"/>
+              xsi:type="predicates:OrPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*parent"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*\.releng"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*repository"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*bom"/>
+          </operand>
         </predicate>
       </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
           name="Main Projects">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
+              xsi:type="predicates:LocationPredicate"
+              pattern="${git.clone.xtext.location|path}/.*"/>
+          <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='complete']/@setupTasks.6/@workingSets[name='Examples'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Features'] //'xtext.working.sets'/@workingSets[name='Releng'] //@projects[name='complete']/@setupTasks.5/@workingSets[name='Tests']"/>
+              excludedWorkingSet="//@projects[name='complete']/@setupTasks.4/@workingSets[name='Examples'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Features'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Releng'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Tests']"/>
         </predicate>
       </workingSet>
     </setupTask>
