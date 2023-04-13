@@ -8,17 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing.tests;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.Assert.*;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -75,7 +72,6 @@ public abstract class AbstractJUnitIntegrationTest {
 		}
 	}
 	
-	@AfterAll
 	@AfterClass
 	public static void resetStaticBooleans() {
 		injectorCreated = false;
@@ -84,7 +80,6 @@ public abstract class AbstractJUnitIntegrationTest {
 	}
 	
 	@Before
-	@BeforeEach
 	public final void beforeShouldBeExecutedAfterTheRegistriesAreInitialized(){
 		assertTrue(registrySaved);
 		assertTrue(injectorCreated);
@@ -94,7 +89,6 @@ public abstract class AbstractJUnitIntegrationTest {
 	public abstract void shouldSaveRegistriesBeforeCreatingAnInjector();
 	
 	@After
-	@AfterEach
 	public final void afterShouldBeExecutedBeforeTheRegistriesAreRestored(){
 		assertFalse(registryRestored);
 	}

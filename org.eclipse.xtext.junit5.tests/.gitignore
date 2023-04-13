@@ -1,0 +1,3 @@
+!src/org/eclipse/xtext/build
+!xtend-gen/org/eclipse/xtext/build
+.antlr-generator-*.jar

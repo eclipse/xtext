@@ -10,8 +10,6 @@ package org.eclipse.xtext.testing.tests.junit5;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
-import org.eclipse.xtext.testing.tests.AbstractJUnitIntegrationTest;
-import org.eclipse.xtext.testing.tests.XtextRunnerTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

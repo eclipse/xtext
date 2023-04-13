@@ -1,29 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Testing Infrastructure
-Bundle-SymbolicName: org.eclipse.xtext.testing;singleton:=true
+Bundle-Name: Xtext Testing Infrastructure Junit 5 tests
+Bundle-SymbolicName: org.eclipse.xtext.testing.junit5.tests;singleton:=true
 Bundle-Version: 2.31.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtext.testing,
- org.eclipse.xtext.testing.builder,
- org.eclipse.xtext.testing.extensions,
- org.eclipse.xtext.testing.formatter,
- org.eclipse.xtext.testing.internal;x-internal:=true,
- org.eclipse.xtext.testing.logging,
- org.eclipse.xtext.testing.serializer,
- org.eclipse.xtext.testing.smoketest,
- org.eclipse.xtext.testing.smoketest.internal;x-internal:=true,
- org.eclipse.xtext.testing.smoketest.processors,
- org.eclipse.xtext.testing.util,
- org.eclipse.xtext.testing.validation
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.ide;visibility:=reexport,
  org.eclipse.lsp4j;resolution:=optional,
  org.eclipse.lsp4j.jsonrpc;resolution:=optional,
  org.junit;bundle-version="4.13.2",
- org.eclipse.xtend.lib
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.testing
 Import-Package: org.apache.log4j;version="1.2.24",
  org.apache.log4j.spi;version="1.2.24",
  org.junit.jupiter.api;version="[5.1.0,6.0.0)",

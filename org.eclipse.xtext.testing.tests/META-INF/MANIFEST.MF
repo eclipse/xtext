@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Testing Infrastructure tests
+Bundle-SymbolicName: org.eclipse.xtext.testing.tests;singleton:=true
+Bundle-Version: 2.31.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: Eclipse Xtext
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.ide;visibility:=reexport,
+ org.eclipse.lsp4j;resolution:=optional,
+ org.eclipse.lsp4j.jsonrpc;resolution:=optional,
+ org.junit;bundle-version="4.13.2",
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.testing
+Import-Package: org.apache.log4j;version="1.2.24",
+ org.apache.log4j.spi;version="1.2.24"
+Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.xtext.testing
+Eclipse-SourceReferences: eclipseSourceReferences
