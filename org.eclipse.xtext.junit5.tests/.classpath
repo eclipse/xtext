@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" output="target/test-classes" path="src">
+	<classpathentry kind="src" path="src">
 		<attributes>
 			<attribute name="test" value="true"/>
 		</attributes>
