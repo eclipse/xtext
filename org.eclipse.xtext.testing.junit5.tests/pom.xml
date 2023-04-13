@@ -11,4 +11,11 @@
 
 	<name>Junit 5 Tests for Xtext Testing Library</name>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testing</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>

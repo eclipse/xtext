@@ -12,4 +12,11 @@
 	<name>Xtext Core Runtime JUnit5 Tests</name>
 	<description>Xtext Core Runtime Junit5 Tests.</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>
