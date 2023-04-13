@@ -32,6 +32,13 @@
 			<artifactId>org.eclipse.xtext.xtext.wizard</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- That's require to let maven-surefire-plugin
+		auto detect provider org.apache.maven.surefire.junit4.JUnit4Provider-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -39,18 +46,6 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<dependencies>
-					<!-- force to run with JUnit5 -->
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit-platform</artifactId>
-						<version>${maven-surefire-version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
