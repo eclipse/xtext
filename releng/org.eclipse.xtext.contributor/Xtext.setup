@@ -829,6 +829,9 @@
             <operand
                 xsi:type="predicates:NamePredicate"
                 pattern=".*tutorial*"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*euler"/>
           </operand>
         </predicate>
       </workingSet>
