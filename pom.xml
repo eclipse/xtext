@@ -552,6 +552,15 @@
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho-version}</version>
+					<configuration>
+						<!--
+						The Tycho Surefire Plugin excludes nested classes by default: https://tycho.eclipseprojects.io/doc/latest/tycho-surefire-plugin/test-mojo.html#excludes
+						By removing all default exclusions the nested classes get executed too, JUnit 4 and JUnit 5.
+						-->
+						<excludes>
+							<exclude />
+						</excludes>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
