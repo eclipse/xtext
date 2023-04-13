@@ -785,24 +785,25 @@
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
           name="Features"
-          id="">
+          id="ws-features">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:LocationPredicate"
-              pattern="${git.clone.xtext.location|path}/.*"/>
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
         </predicate>
       </workingSet>
       <workingSet
-          name="Tests">
+          name="Tests"
+          id="ws-tests">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:LocationPredicate"
-              pattern="${git.clone.xtext.location|path}/.*"/>
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext"/>
           <operand
               xsi:type="predicates:OrPredicate">
             <operand
@@ -815,12 +816,13 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="Examples">
+          name="Examples"
+          id="ws-examples">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:LocationPredicate"
-              pattern="${git.clone.xtext.location|path}/.*"/>
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext"/>
           <operand
               xsi:type="predicates:OrPredicate">
             <operand
@@ -836,48 +838,38 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="Releng">
+          name="Releng"
+          id="ws-releng">
         <predicate
-            xsi:type="predicates:OrPredicate">
+            xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:AndPredicate">
-            <operand
-                xsi:type="predicates:LocationPredicate"
-                pattern="${git.clone.xtext.location|path}/.*"/>
-            <operand
-                xsi:type="predicates:OrPredicate">
-              <operand
-                  xsi:type="predicates:NamePredicate"
-                  pattern=".*parent"/>
-              <operand
-                  xsi:type="predicates:NamePredicate"
-                  pattern=".*\.releng"/>
-              <operand
-                  xsi:type="predicates:NamePredicate"
-                  pattern=".*repository"/>
-              <operand
-                  xsi:type="predicates:NamePredicate"
-                  pattern=".*bom"/>
-            </operand>
-          </operand>
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext"/>
           <operand
-              xsi:type="predicates:AndPredicate">
-            <operand
-                xsi:type="predicates:LocationPredicate"
-                pattern="${git.clone.xtext.location|path}/*"/>
+              xsi:type="predicates:OrPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
                 pattern=".*parent"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*\.releng"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*repository"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern=".*bom"/>
           </operand>
         </predicate>
       </workingSet>
       <workingSet
-          name="Main Projects">
+          name="Main Projects"
+          id="ws-main-projects">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:LocationPredicate"
-              pattern="${git.clone.xtext.location|path}/.*"/>
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@projects[name='complete']/@setupTasks.4/@workingSets[name='Examples'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Features'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Releng'] //@projects[name='complete']/@setupTasks.4/@workingSets[name='Tests']"/>
