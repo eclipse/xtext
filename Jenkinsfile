@@ -7,16 +7,13 @@ pipeline {
 
   parameters {
     choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'latest'], description: 'Which Target Platform should be used?')
-    // see https://wiki.eclipse.org/Jenkins#JDK
-    choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
-       'temurin-jdk11-latest', 'temurin-jdk17-latest'
-    ])
+    choice(name: 'JDK_VERSION', choices: [ '11', '17' ], description: 'Which JDK version should be used?')
   }
 
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'main' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=temurin-jdk17-latest
-      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest
+      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=17
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
       ''' : '')
   }
 
@@ -28,7 +25,8 @@ pipeline {
 
   tools {
      maven "apache-maven-3.8.6"
-     jdk "${params.JDK_VERSION}"
+     // see https://wiki.eclipse.org/Jenkins#JDK
+     jdk "temurin-jdk17-latest"
   }
 
   stages {
@@ -59,10 +57,29 @@ pipeline {
     stage('Maven/Tycho Build & Test') {
       environment {
         MAVEN_OPTS = "-Xmx1500m"
+        JAVA_HOME_11_X64 = tool(type:'jdk', name:'temurin-jdk11-latest')
+        JAVA_HOME_17_X64 = tool(type:'jdk', name:'temurin-jdk17-latest')
       }
       steps {
         xvnc(useXauthority: true) {
-          sh "./full-build.sh --tp=${selectedTargetPlatform()} ${javaVersionBasedProperties()}"
+          //TODO: remove the following test print out
+          sh '''
+            echo 'JAVA_HOME_11_X64=${JAVA_HOME_11_X64}'
+            echo 'JAVA_HOME_17_X64=${JAVA_HOME_17_X64}'
+            echo 'Predefined Jenkins Toolchain content'
+            cat ~/.m2e/toolchains.xml
+          '''
+          script {
+            def mavenSurfireJDKToolchain = params.JDK_VERSION
+            def tychoSurefireJDK = params.JDK_VERSION == '17' ? 'SYSTEM' : 'BREE'
+            sh """
+              ./full-build.sh --tp=${selectedTargetPlatform()} \
+                -Pstrict-jdk
+                --toolchains releng/toolchains.xml
+                -Dmaven.surefire.runtimeJDK=${mavenSurfireJDKToolchain} \
+                -Dtycho.surefire.runtimeJDK=${tychoSurefireJDK}
+            """
+          }
         }
       }// END steps
     } // END stage
@@ -116,7 +133,7 @@ pipeline {
 
 /** return the Java version as Integer (8, 11, ...) */
 def javaVersion() {
-  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
+  return Integer.parseInt(params.JDK_VERSION)
 }
 
 /** returns true when this build was triggered by an upstream build */
@@ -161,20 +178,3 @@ def selectedTargetPlatform() {
         return tp
     }
 }
-
-/**
- * Tycho 3 requires Java 17.
- * If the build uses Java version 11, we return the proper tycho-version override.
- * Otherwise, we return an empty string.
- */
-def javaVersionBasedProperties() {
-    def javaVersion = javaVersion()
-
-    if (javaVersion<17) {
-        println("Switching to Tycho 2.7.5 with Java ${javaVersion}")
-        return '-Dtycho-version=2.7.5'
-    } else {
-        return ''
-    }
-}
-
