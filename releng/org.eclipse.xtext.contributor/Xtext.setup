@@ -838,24 +838,36 @@
       <workingSet
           name="Releng">
         <predicate
-            xsi:type="predicates:AndPredicate">
+            xsi:type="predicates:OrPredicate">
           <operand
-              xsi:type="predicates:LocationPredicate"
-              pattern="${git.clone.xtext.location|path}/.*"/>
+              xsi:type="predicates:AndPredicate">
+            <operand
+                xsi:type="predicates:LocationPredicate"
+                pattern="${git.clone.xtext.location|path}/.*"/>
+            <operand
+                xsi:type="predicates:OrPredicate">
+              <operand
+                  xsi:type="predicates:NamePredicate"
+                  pattern=".*parent"/>
+              <operand
+                  xsi:type="predicates:NamePredicate"
+                  pattern=".*\.releng"/>
+              <operand
+                  xsi:type="predicates:NamePredicate"
+                  pattern=".*repository"/>
+              <operand
+                  xsi:type="predicates:NamePredicate"
+                  pattern=".*bom"/>
+            </operand>
+          </operand>
           <operand
-              xsi:type="predicates:OrPredicate">
+              xsi:type="predicates:AndPredicate">
+            <operand
+                xsi:type="predicates:LocationPredicate"
+                pattern="${git.clone.xtext.location|path}/*"/>
             <operand
                 xsi:type="predicates:NamePredicate"
                 pattern=".*parent"/>
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern=".*\.releng"/>
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern=".*repository"/>
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern=".*bom"/>
           </operand>
         </predicate>
       </workingSet>
