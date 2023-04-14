@@ -22,7 +22,6 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.eclipse.xtext.maven.trace.ClassFileDebugSourceExtractor;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -58,19 +57,20 @@ public class XtextGeneratorIT {
 	}
 
 	private static File extractTestRoot() throws IOException {
+		// it's best to pass a subdirectory of the target folder for "maven.test.tmpdir":
+		// that will be the directory where our IT projects will be copied and where
+		// the Maven build will be executed.
+		// This will make their inspection afterward (the log.txt file) easier.
+		// For this reason, we delete that directory here, but NOT after the tests.
 		String tempDirPath = System.getProperty("maven.test.tmpdir", System.getProperty("java.io.tmpdir"));
 		File tempDir = new File(tempDirPath);
 		File testDir = new File(tempDir, ROOT);
 		FileUtils.deleteDirectory(testDir);
+		System.out.println("IT projects will be executed from " + testDir);
 		testDir = ResourceExtractor.extractResourcePath(XtextGeneratorIT.class, ROOT, tempDir, true);
 		return testDir;
 	}
-	
-	@AfterClass
-	static public void tearDownOnce() throws IOException, VerificationException {
-		FileUtils.deleteDirectory(testDir);
-	}
-	
+
 	private static String findMaven() {
 		// TODO add more mavens here
 		String[] mavens = new String[] { System.getProperty("maven.home"),
