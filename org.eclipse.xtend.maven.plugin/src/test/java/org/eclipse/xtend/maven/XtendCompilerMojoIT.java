@@ -21,8 +21,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.google.common.base.Objects;
-
 public class XtendCompilerMojoIT {
 
 	private static String ROOT = "/it/compile";
@@ -263,8 +261,7 @@ public class XtendCompilerMojoIT {
 		try {
 			System.out.println("Exec:" + Arrays.toString(cmd));
 			final Process proc = Runtime.getRuntime().exec(cmd);
-			int _waitFor = proc.waitFor();
-			return (_waitFor == 0);
+			return proc.waitFor() == 0;
 		} catch (final Exception e) {
 			return false;
 		}
@@ -273,21 +270,12 @@ public class XtendCompilerMojoIT {
 
 	private boolean isSymlink(final File file) throws IOException {
 		File canon = null;
-		String _parent = file.getParent();
-		boolean _equals = Objects.equal(_parent, null);
-		if (_equals) {
+		if (file.getParent() == null) {
 			canon = file;
 		} else {
-			File _parentFile = file.getParentFile();
-			File canonDir = _parentFile.getCanonicalFile();
-			String _name = file.getName();
-			File _file = new File(canonDir, _name);
-			canon = _file;
+			canon = new File(file.getParentFile().getCanonicalFile(), file.getName());
 		}
-		File _canonicalFile = canon.getCanonicalFile();
-		File _absoluteFile = canon.getAbsoluteFile();
-		boolean _equals_1 = _canonicalFile.equals(_absoluteFile);
-		return (!_equals_1);
+		return !canon.getCanonicalFile().equals(canon.getAbsoluteFile());
 	}
 
 	public void assertFileContainsUTF16(Verifier verifier, String file, String contained) throws VerificationException {
