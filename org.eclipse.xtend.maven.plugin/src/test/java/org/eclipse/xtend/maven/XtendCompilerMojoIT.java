@@ -212,7 +212,7 @@ public class XtendCompilerMojoIT {
 		// then copy the project containing the target folders for the symlinks
 		// note we use a project not used in any other tests, so that we won't risk
 		// to remove the contents of an already tested project
-		String root = MavenVerifierUtil.extractResourcePath(ROOT + "/multisources-to-link")
+		String root = MavenVerifierUtil.copyProjectToTempDir(ROOT + "/multisources-to-link")
 				.getParent();
 		File link = new File(root + "/symlinks/src/main/java");
 		File link2 = new File(root + "/symlinks/src/test/java");

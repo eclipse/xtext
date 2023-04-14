@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2016, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,6 +20,7 @@ import org.junit.Assert;
 
 /**
  * @author dhuebner
+ * @author Lorenzo Bettini - refactoring
  *
  */
 public class MavenVerifierUtil {
@@ -38,7 +39,7 @@ public class MavenVerifierUtil {
 	private static File localRepoDir;
 
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
-		File testDir = extractResourcePath(pathToTestProject);
+		File testDir = copyProjectToTempDir(pathToTestProject);
 		return createVerifier(testDir);
 	}
 
@@ -77,7 +78,7 @@ public class MavenVerifierUtil {
 		return verifier;
 	}
 
-	public static File extractResourcePath(String pathToTestProject) throws IOException {
+	public static File copyProjectToTempDir(String pathToTestProject) throws IOException {
 		File tempDir = getTempDir();
 		File testDir = new File(tempDir, pathToTestProject);
 		FileUtils.deleteDirectory(testDir);
