@@ -16,7 +16,6 @@ import java.util.Arrays;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -210,13 +209,18 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void readSymlinks() throws Exception {
-		String root = ResourceExtractor.simpleExtractResources(getClass(), ROOT).getAbsolutePath();
+		// first copy the project under test
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/symlinks");
+		// then copy the project containing the target folders for the symlinks
+		// note we use a project not used in any other tests, so that we won't risk
+		// to remove the contents of an already tested project
+		String root = MavenVerifierUtil.extractResourcePath(ROOT + "/multisources-to-link")
+				.getParent();
 		File link = new File(root + "/symlinks/src/main/java");
 		File link2 = new File(root + "/symlinks/src/test/java");
-		createSymLink(root + "/multisources/src/main/java/", link.getAbsolutePath());
-		createSymLink(root + "/multisources/src/test/java/", link2.getAbsolutePath());
+		createSymLink(root + "/multisources-to-link/src/main/java/", link.getAbsolutePath());
+		createSymLink(root + "/multisources-to-link/src/test/java/", link2.getAbsolutePath());
 		try {
-			Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/symlinks");
 			verifier.setDebug(true);
 			verifier.executeGoal("test");
 			verifier.verifyErrorFreeLog();
