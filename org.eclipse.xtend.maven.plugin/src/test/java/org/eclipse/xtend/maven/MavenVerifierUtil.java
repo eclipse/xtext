@@ -26,6 +26,8 @@ public class MavenVerifierUtil {
 
 	private final static boolean debug = Boolean.getBoolean("xtend.it.tests.debug");
 
+	public static final String IT_ROOT = "/it";
+
 	/**
 	 * This is the local Maven repository (typically ~/.m2/repository) that we
 	 * will pass to the parent POM of IT projects through the property "local-central".
@@ -37,7 +39,11 @@ public class MavenVerifierUtil {
 
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = extractResourcePath(pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath(), true);
+		return createVerifier(testDir);
+	}
+
+	private static Verifier createVerifier(File baseDir) throws VerificationException {
+		Verifier verifier = new Verifier(baseDir.getAbsolutePath(), true);
 
 		String testMavenRepo = System.getProperty("testMavenRepo");
 		Assert.assertNotNull(
@@ -51,7 +57,7 @@ public class MavenVerifierUtil {
 
 		String localCentralRepository = System.getProperty("maven.repo.local",
 				System.getProperty("user.home") + "/.m2/repository");
-		localRepoDir = new File( localCentralRepository );
+		localRepoDir = new File(localCentralRepository);
 
 		verifier.setSystemProperty("local-central", localRepoDir.toString());
 
@@ -72,6 +78,15 @@ public class MavenVerifierUtil {
 	}
 
 	public static File extractResourcePath(String pathToTestProject) throws IOException {
+		File tempDir = getTempDir();
+		File testDir = new File(tempDir, pathToTestProject);
+		FileUtils.deleteDirectory(testDir);
+
+		testDir = ResourceExtractor.extractResourcePath(MavenVerifierUtil.class, pathToTestProject, tempDir, true);
+		return testDir;
+	}
+
+	public static File getTempDir() {
 		// it's best to pass a subdirectory of the target folder for "maven.test.tmpdir":
 		// that will be the directory where our IT projects will be copied and where
 		// the Maven build will be executed.
@@ -79,11 +94,7 @@ public class MavenVerifierUtil {
 		// For this reason, we delete that directory here, but NOT after the tests.
 		String tempDirPath = System.getProperty("maven.test.tmpdir", System.getProperty("java.io.tmpdir"));
 		File tempDir = new File(tempDirPath);
-		File testDir = new File(tempDir, pathToTestProject);
-		FileUtils.deleteDirectory(testDir);
-
-		testDir = ResourceExtractor.extractResourcePath(MavenVerifierUtil.class, pathToTestProject, tempDir, true);
-		return testDir;
+		return tempDir;
 	}
 
 	public static void checkMavenExecutable(String verifierRoot) throws IOException, VerificationException {
@@ -99,6 +110,15 @@ public class MavenVerifierUtil {
 						+ CommandLineUtils.getSystemEnvVars().getProperty("M2_HOME"));
 			}
 		}
+		// copy the parent POM
+		File tempDir = getTempDir();
+		File pom = ResourceExtractor.extractResourcePath(MavenVerifierUtil.class,
+				IT_ROOT + "/pom.xml", tempDir, true);
+		// and install it
+		Verifier verifier = createVerifier(pom.getParentFile());
+		verifier.setDebug(true);
+		verifier.executeGoal("install");
+		verifier.verifyErrorFreeLog();
 	}
 
 	private static String findMaven() {
