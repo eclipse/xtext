@@ -36,23 +36,7 @@ public class MavenVerifierUtil {
 	private static File localRepoDir;
 
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
-		// it's best to pass a subdirectory of the target folder for "maven.test.tmpdir":
-		// that will be the directory where our IT projects will be copied and where
-		// the Maven build will be executed.
-		// This will make their inspection afterward (the log.txt file) easier.
-		// For this reason, we delete that directory here, but NOT after the tests.
-		String tempDirPath = System.getProperty("maven.test.tmpdir", System.getProperty("java.io.tmpdir"));
-		File tempDir = new File(tempDirPath);
-		File testDir = new File(tempDir, pathToTestProject);
-		FileUtils.deleteDirectory(testDir);
-
-		String localCentralRepository = System.getProperty("maven.repo.local",
-				System.getProperty("user.home") + "/.m2/repository");
-		localRepoDir = new File( localCentralRepository );
-		System.out.println("IT projects will be executed from " + testDir);
-		System.out.println("Local Maven Central Repository " + localRepoDir);
-
-		testDir = ResourceExtractor.extractResourcePath(MavenVerifierUtil.class, pathToTestProject, tempDir, true);
+		File testDir = extractResourcePath(pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath(), true);
 
 		String testMavenRepo = System.getProperty("testMavenRepo");
@@ -64,6 +48,11 @@ public class MavenVerifierUtil {
 			+ "'Run ITs from Eclipse.launch'.",
 			testMavenRepo);
 		verifier.setLocalRepo(testMavenRepo);
+
+		String localCentralRepository = System.getProperty("maven.repo.local",
+				System.getProperty("user.home") + "/.m2/repository");
+		localRepoDir = new File( localCentralRepository );
+
 		verifier.setSystemProperty("local-central", localRepoDir.toString());
 
 		if (debug) {
@@ -82,7 +71,22 @@ public class MavenVerifierUtil {
 		return verifier;
 	}
 
-	static public void checkMavenExecutable(String verifierRoot) throws IOException, VerificationException {
+	public static File extractResourcePath(String pathToTestProject) throws IOException {
+		// it's best to pass a subdirectory of the target folder for "maven.test.tmpdir":
+		// that will be the directory where our IT projects will be copied and where
+		// the Maven build will be executed.
+		// This will make their inspection afterward (the log.txt file) easier.
+		// For this reason, we delete that directory here, but NOT after the tests.
+		String tempDirPath = System.getProperty("maven.test.tmpdir", System.getProperty("java.io.tmpdir"));
+		File tempDir = new File(tempDirPath);
+		File testDir = new File(tempDir, pathToTestProject);
+		FileUtils.deleteDirectory(testDir);
+
+		testDir = ResourceExtractor.extractResourcePath(MavenVerifierUtil.class, pathToTestProject, tempDir, true);
+		return testDir;
+	}
+
+	public static void checkMavenExecutable(String verifierRoot) throws IOException, VerificationException {
 		File mvnExecutable = new File(new Verifier(verifierRoot).getExecutable());
 		if (!mvnExecutable.exists()) {
 			String mavenHome = findMaven();
