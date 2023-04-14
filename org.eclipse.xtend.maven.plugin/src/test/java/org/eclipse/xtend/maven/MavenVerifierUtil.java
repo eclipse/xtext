@@ -15,6 +15,7 @@ import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
+import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Assert;
 
 /**
@@ -23,9 +24,36 @@ import org.junit.Assert;
  */
 public class MavenVerifierUtil {
 
+	private final static boolean debug = Boolean.getBoolean("xtend.it.tests.debug");
+
+	/**
+	 * This is the local Maven repository (typically ~/.m2/repository) that we
+	 * will pass to the parent POM of IT projects through the property "local-central".
+	 * The idea is to use our local Maven repository cache that we filled up to now as a
+	 * "remote" Maven repository when building our IT projects, to speed-up the tests.
+	 * Inspired by https://maven.apache.org/plugins/maven-invoker-plugin/examples/fast-use.html
+	 */
+	private static File localRepoDir;
+
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
-		File testDir = ResourceExtractor.simpleExtractResources(MavenVerifierUtil.class, pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath());
+		// it's best to pass a subdirectory of the target folder for "maven.test.tmpdir":
+		// that will be the directory where our IT projects will be copied and where
+		// the Maven build will be executed.
+		// This will make their inspection afterward (the log.txt file) easier.
+		// For this reason, we delete that directory here, but NOT after the tests.
+		String tempDirPath = System.getProperty("maven.test.tmpdir", System.getProperty("java.io.tmpdir"));
+		File tempDir = new File(tempDirPath);
+		File testDir = new File(tempDir, pathToTestProject);
+		FileUtils.deleteDirectory(testDir);
+
+		String localCentralRepository = System.getProperty("maven.repo.local",
+				System.getProperty("user.home") + "/.m2/repository");
+		localRepoDir = new File( localCentralRepository );
+		System.out.println("IT projects will be executed from " + testDir);
+		System.out.println("Local Maven Central Repository " + localRepoDir);
+
+		testDir = ResourceExtractor.extractResourcePath(MavenVerifierUtil.class, pathToTestProject, tempDir, true);
+		Verifier verifier = new Verifier(testDir.getAbsolutePath(), true);
 
 		String testMavenRepo = System.getProperty("testMavenRepo");
 		Assert.assertNotNull(
@@ -36,17 +64,21 @@ public class MavenVerifierUtil {
 			+ "'Run ITs from Eclipse.launch'.",
 			testMavenRepo);
 		verifier.setLocalRepo(testMavenRepo);
+		verifier.setSystemProperty("local-central", localRepoDir.toString());
 
-		verifier.setDebug(true);
+		if (debug) {
+			verifier.setMavenDebug(debug);
+		}
+
 		String testSettingsXML = System.getProperty("testSettingsXML");
 		if (testSettingsXML != null) {
 			verifier.addCliOption("-s");
 			verifier.addCliOption(testSettingsXML);
 		}
 		verifier.addCliOption("-U");
-		verifier.setMavenDebug(true);
 		// verifier.setDebugJvm(true);
 		// verifier.setForkJvm(false);
+
 		return verifier;
 	}
 

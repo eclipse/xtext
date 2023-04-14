@@ -213,7 +213,7 @@ public class XtendInstallDebugInfoMojoIT {
 			VerificationException {
 		Verifier verifier = newVerifier(pathToTestProject);
 //		verifier.setForkJvm(false);
-		verifier.setDebug(true);
+//		verifier.setDebug(true);
 		verifier.executeGoal(goal);
 		verifier.verifyErrorFreeLog();
 		verifier.resetStreams();
