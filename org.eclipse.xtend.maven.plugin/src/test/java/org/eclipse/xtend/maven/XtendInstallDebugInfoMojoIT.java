@@ -18,7 +18,7 @@ import org.junit.Test;
 
 public class XtendInstallDebugInfoMojoIT {
 
-	private static String ROOT = "/it/install_debug_info";
+	private static String ROOT = MavenVerifierUtil.IT_ROOT + "/install_debug_info";
 	
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {

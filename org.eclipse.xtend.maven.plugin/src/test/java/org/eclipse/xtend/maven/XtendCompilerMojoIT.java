@@ -23,7 +23,7 @@ import org.junit.Test;
 
 public class XtendCompilerMojoIT {
 
-	private static String ROOT = "/it/compile";
+	private static String ROOT = MavenVerifierUtil.IT_ROOT + "/compile";
 	
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
