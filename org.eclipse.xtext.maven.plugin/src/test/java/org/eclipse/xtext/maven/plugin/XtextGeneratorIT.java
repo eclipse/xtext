@@ -36,6 +36,15 @@ public class XtextGeneratorIT {
 	private static String ROOT = "/it/generate";
 	private static File testDir;
 
+	/**
+	 * This is the local Maven repository (typically ~/.m2/repository) that we
+	 * will pass to the parent POM of IT projects through the property "local-central".
+	 * The idea is to use our local Maven repository cache that we filled up to now as a
+	 * "remote" Maven repository when building our IT projects, to speed-up the tests.
+	 * Inspired by https://maven.apache.org/plugins/maven-invoker-plugin/examples/fast-use.html
+	 */
+	private static File localRepoDir;
+
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
 		testDir = extractTestRoot();
@@ -66,7 +75,11 @@ public class XtextGeneratorIT {
 		File tempDir = new File(tempDirPath);
 		File testDir = new File(tempDir, ROOT);
 		FileUtils.deleteDirectory(testDir);
+		String localCentralRepository = System.getProperty("maven.repo.local",
+				System.getProperty("user.home") + "/.m2/repository");
+		localRepoDir = new File( localCentralRepository );
 		System.out.println("IT projects will be executed from " + testDir);
+		System.out.println("Local Maven Central Repository " + localRepoDir);
 		testDir = ResourceExtractor.extractResourcePath(XtextGeneratorIT.class, ROOT, tempDir, true);
 		return testDir;
 	}
@@ -293,6 +306,7 @@ public class XtextGeneratorIT {
 			+ "'Run ITs from Eclipse.launch'.",
 			testMavenRepo);
 		verifier.setLocalRepo(testMavenRepo);
+		verifier.setSystemProperty("local-central", localRepoDir.toString());
 		return verifier;
 	}
 
