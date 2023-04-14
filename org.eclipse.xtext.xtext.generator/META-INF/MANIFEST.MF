@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.xtext;x-installation:=greedy,
  org.eclipse.emf.mwe2.lib;bundle-version="2.14.0";resolution:=optional,
  org.eclipse.equinox.common;bundle-version="3.16.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.29.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.24"
 Export-Package: org.eclipse.xtext.xtext.generator,
@@ -62,5 +61,6 @@ Export-Package: org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.generator.validation,
  org.eclipse.xtext.xtext.generator.web,
  org.eclipse.xtext.xtext.generator.xbase
+DynamicImport-Package: de.itemis.xtext.antlr.toolrunner
 Automatic-Module-Name: org.eclipse.xtext.xtext.generator
 Eclipse-SourceReferences: eclipseSourceReferences
