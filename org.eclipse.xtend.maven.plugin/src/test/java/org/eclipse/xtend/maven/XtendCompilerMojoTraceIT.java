@@ -22,7 +22,6 @@ import org.junit.Test;
 public class XtendCompilerMojoTraceIT {
 
 	private static String ROOT = "/it/compile";
-	private boolean debug = false;
 	
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
@@ -75,8 +74,7 @@ public class XtendCompilerMojoTraceIT {
 
 	private Verifier verifyErrorFreeLog(String pathToTestProject, String goal) throws IOException,
 			VerificationException {
-		Verifier verifier = newVerifier(pathToTestProject, debug);
-		verifier.setMavenDebug(debug);
+		Verifier verifier = newVerifier(pathToTestProject);
 		verifier.executeGoal(goal);
 		verifier.verifyErrorFreeLog();
 		verifier.setDebug(true);
@@ -84,7 +82,7 @@ public class XtendCompilerMojoTraceIT {
 		return verifier;
 	}
 
-	private Verifier newVerifier(String pathToTestProject, boolean debugMode) throws IOException, VerificationException {
+	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		return MavenVerifierUtil.newVerifier(pathToTestProject);
 	}
 }

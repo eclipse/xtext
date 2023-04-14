@@ -51,6 +51,18 @@
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</pluginRepository>
 		<pluginRepository>
+			<!-- See Javadoc of org.eclipse.xtend.maven.MavenVerifierUtil.localRepoDir -->
+			<id>local-central</id>
+			<url>file://${local-central}</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
 			<id>it-repo</id>
 			<url>file://${maven.repo.local}</url>
 			<releases>
@@ -83,6 +95,18 @@
 			</snapshots>
 			<id>sonatype-snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+		<repository>
+			<!-- See Javadoc of org.eclipse.xtend.maven.MavenVerifierUtil.localRepoDir -->
+			<id>local-central</id>
+			<url>file://${local-central}</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<repository>
 			<id>it-repo</id>

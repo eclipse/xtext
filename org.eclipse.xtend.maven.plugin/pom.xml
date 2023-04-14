@@ -14,6 +14,8 @@
 		<root-dir>${basedir}/..</root-dir>
 		<!-- The local Maven repository for our IT tests -->
 		<localMavenRepositoryPath>${project.basedir}/target/.m2test</localMavenRepositoryPath>
+		<!-- The directory where our IT projects will be copied to run their POMs -->
+		<maven.test.tmpdir>${project.basedir}/target/local-test-dir</maven.test.tmpdir>
 	</properties>
 
 	<dependencies>
@@ -198,6 +200,7 @@
 					<systemPropertyVariables>
 						<testSettingsXML>${project.basedir}/src/test/resources/settings.xml</testSettingsXML>
 						<testMavenRepo>${localMavenRepositoryPath}</testMavenRepo>
+						<maven.test.tmpdir>${maven.test.tmpdir}</maven.test.tmpdir>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>
