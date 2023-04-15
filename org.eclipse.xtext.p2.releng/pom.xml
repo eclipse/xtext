@@ -51,6 +51,7 @@
 		<module>../org.eclipse.xtext.purexbase</module>
 		<module>../org.eclipse.xtext.purexbase.ide</module>
 		<module>../org.eclipse.xtext.purexbase.tests</module>
+		<module>../org.eclipse.xtext.purexbase.eclipse.tests</module>
 		<module>../org.eclipse.xtext.xbase.tests</module>
 		<module>../org.eclipse.xtext.java.tests</module>
 		<module>../org.eclipse.xtext.extras.tests</module>
