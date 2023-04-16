@@ -7,6 +7,9 @@
 	<version>2.31.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>Xtext Parent POM</name>
+	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, LSP and your favorite web browser.</description>
+
 	<url>https://www.eclipse.org/Xtext/</url>
 	<licenses>
 		<license>
@@ -217,7 +220,7 @@
 
 	<profiles>
 		<profile>
-			<!-- This is used only for updating versions in test children projects
+			<!-- This is used only for updating versions in children projects
 				versions:set will scan automatically also these modules
 				even if this profile is not active.
 
@@ -227,14 +230,13 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<modules>
-				<module>org.eclipse.xtext.p2.releng</module>
-				<module>org.eclipse.xtext.maven.releng</module>
+				<module>org.eclipse.xtext.full.releng</module>
 			</modules>
 		</profile>
 		<profile>
-			<!-- Activate it when performing a release or milestone, so that
+			<!-- Activate it when performing a milestone release, so that
 				Tycho won't complain about different versions in OSGI and POM -->
-			<id>p2-release</id>
+			<id>release-milestone</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -564,6 +566,11 @@
 					</configuration>
 				</plugin>
 				<plugin>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-eclipserun-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>3.1.0</version>
@@ -724,7 +731,7 @@
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
 		<repository>
-			<id>ossrh</id>
+			<id>ossrh-s01</id>
 			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>

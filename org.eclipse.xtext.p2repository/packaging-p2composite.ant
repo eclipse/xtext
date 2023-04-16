@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<project name="project">
+
+	<!--
+	The idea is to have this directory layout:
+	
+	.
+	├── compositeArtifacts.xml
+	├── compositeContent.xml
+	├── p2.index
+	├── 1.0.0.v20210307-2037
+	│── 1.1.0.v20210307-2104 ...
+	│── 2.0.0.v20210308-1304 ...
+	-->
+
+	<!--
+		site.label						The name/title/label of the created composite site
+		composite.base.dir				The directory of the main composite (default "target")
+		composite.child.dir				The directory name of composite child
+	-->
+	<target name="check.required.properties">
+		<fail unless="site.label">Missing required 'site.label'!</fail>
+		<fail unless="composite.base.dir">Missing required 'composite.base.dir'!</fail>
+		<fail unless="composite.child.dir">Missing required 'composite.child.dir'!</fail>
+	</target>
+
+	<target name="p2.composite.add" depends="check.required.properties">
+		<add.composite.repository.internal
+			composite.repository.location="${composite.base.dir}"
+			composite.repository.name="${site.label}"
+			composite.repository.child="${composite.child.dir}" />
+	</target>
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: add.composite.repository.internal          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="add.composite.repository.internal">
+		<attribute name="composite.repository.location" />
+		<attribute name="composite.repository.name" />
+		<attribute name="composite.repository.child" />
+		<sequential>
+
+			<echo message=" " />
+			<echo message="Composite repository       : @{composite.repository.location}" />
+			<echo message="Composite name             : @{composite.repository.name}" />
+			<echo message="Adding child repository    : @{composite.repository.child}" />
+
+			<p2.composite.repository>
+				<repository
+					compressed="false"
+					location="@{composite.repository.location}"
+					name="@{composite.repository.name}"
+					atomic="false" />
+				<add>
+					<repository location="@{composite.repository.child}" />
+				</add>
+			</p2.composite.repository>
+
+			<echo file="@{composite.repository.location}/p2.index">version=1
+metadata.repository.factory.order=compositeContent.xml,\!
+artifact.repository.factory.order=compositeArtifacts.xml,\!
+</echo>
+
+		</sequential>
+	</macrodef>
+
+</project>
