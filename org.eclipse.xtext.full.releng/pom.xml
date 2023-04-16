@@ -66,6 +66,7 @@
 		<module>../org.eclipse.xtext.xbase.testlanguages.ide</module>
 		<module>../org.eclipse.xtext.xbase.testdata</module>
 		<module>../org.eclipse.xtext.purexbase.tests</module>
+		<module>../org.eclipse.xtext.purexbase.eclipse.tests</module>
 		<module>../org.eclipse.xtext.xbase.tests</module>
 		<module>../org.eclipse.xtext.java.tests</module>
 		<module>../org.eclipse.xtext.extras.tests</module>
