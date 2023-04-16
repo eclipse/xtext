@@ -352,57 +352,6 @@
         url="https://download.eclipse.org/technology/swtbot/releases/latest"/>
     <description>UI testing framework</description>
   </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask">
-    <targlet
-        name="Development Utilities">
-      <requirement
-          name="org.eclipse.cbi.p2repo.analyzers"
-          optional="true"/>
-      <requirement
-          name="org.eclipse.cbi.p2repo.analyzers.common"
-          optional="true"/>
-      <requirement
-          name="de.itemis.xtext.antlr.feature.feature.group"
-          optional="true"/>
-      <repositoryList>
-        <repository
-            url="${p2.cbi.analyzer}"/>
-        <repository
-            url="${p2.antlr-gen}"/>
-      </repositoryList>
-    </targlet>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask"
-      filter="(eclipse.target.platform=2023-06)">
-    <composedTarget>xtext-latest</composedTarget>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask"
-      filter="(eclipse.target.platform=2023-03)">
-    <composedTarget>xtext-r202303</composedTarget>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask"
-      filter="(eclipse.target.platform=2022-12)">
-    <composedTarget>xtext-r202212</composedTarget>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask"
-      filter="(eclipse.target.platform=2022-09)">
-    <composedTarget>xtext-r202209</composedTarget>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask"
-      filter="(eclipse.target.platform=2022-06)">
-    <composedTarget>xtext-r202206</composedTarget>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask"
-      filter="(eclipse.target.platform=2022-03)">
-    <composedTarget>xtext-r202203</composedTarget>
-  </setupTask>
   <project name="complete"
       label="Xtext Complete">
     <setupTask
@@ -534,6 +483,57 @@
               excludedWorkingSet="//@projects[name='complete']/@setupTasks.3/@workingSets[name='Examples'] //@projects[name='complete']/@setupTasks.3/@workingSets[name='Features'] //@projects[name='complete']/@setupTasks.3/@workingSets[name='Releng'] //@projects[name='complete']/@setupTasks.3/@workingSets[name='Tests']"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Development Utilities">
+        <requirement
+            name="org.eclipse.cbi.p2repo.analyzers"
+            optional="true"/>
+        <requirement
+            name="org.eclipse.cbi.p2repo.analyzers.common"
+            optional="true"/>
+        <requirement
+            name="de.itemis.xtext.antlr.feature.feature.group"
+            optional="true"/>
+        <repositoryList>
+          <repository
+              url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+        </repositoryList>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2023-06)">
+      <composedTarget>xtext-latest</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2023-03)">
+      <composedTarget>xtext-r202303</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2022-12)">
+      <composedTarget>xtext-r202212</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2022-09)">
+      <composedTarget>xtext-r202209</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2022-06)">
+      <composedTarget>xtext-r202206</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2022-03)">
+      <composedTarget>xtext-r202203</composedTarget>
     </setupTask>
     <setupTask
         xsi:type="setup:EclipseIniTask"
