@@ -21,6 +21,26 @@
 	Moreover, the packaging type must be "eclipse-plugin".
 	-->
 
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext.wizard</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- That's require to let maven-surefire-plugin
+		auto detect provider org.apache.maven.surefire.junit4.JUnit4Provider-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -30,11 +50,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<failIfNoTests>true</failIfNoTests>
+				</configuration>
 				<dependencies>
-					<!-- force to run with JUnit5 -->
+					<!-- force to run with JUnit4 -->
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit-platform</artifactId>
+						<artifactId>surefire-junit47</artifactId>
 						<version>${maven-surefire-version}</version>
 					</dependency>
 				</dependencies>

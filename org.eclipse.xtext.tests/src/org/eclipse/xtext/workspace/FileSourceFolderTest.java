@@ -10,8 +10,7 @@ package org.eclipse.xtext.workspace;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.StringEndsWith.*;
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.Assert.assertEquals;
 import java.io.File;
 
 import org.junit.Test;

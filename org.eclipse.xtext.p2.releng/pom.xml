@@ -28,7 +28,10 @@
 		<module>../org.eclipse.xtext.tests</module>
 		<module>../org.eclipse.xtext.ide</module>
 		<module>../org.eclipse.xtext.ide.tests</module>
+		<module>../org.eclipse.xtext.junit5.tests</module>
 		<module>../org.eclipse.xtext.testing</module>
+		<module>../org.eclipse.xtext.testing.tests</module>
+		<module>../org.eclipse.xtext.testing.junit5.tests</module>
 		<module>../org.eclipse.xtext.testlanguages</module>
 		<module>../org.eclipse.xtext.testlanguages.ide</module>
 		<module>../org.eclipse.xtext.xtext.ide</module>
