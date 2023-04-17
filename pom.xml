@@ -445,8 +445,7 @@
 				<plugin>
 					<!--
 					This will let Tycho execute tests in "eclipse-plugin" projects
-					as JUnit tests (NOT as plug-in tests). We force the JUnitPlatform
-					to execute all tests (JUnit4 and JUnit5) with the JUnit5 engine.
+					as JUnit tests (NOT as plug-in tests).
 					-->
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
