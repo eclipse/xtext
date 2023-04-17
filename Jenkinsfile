@@ -62,7 +62,7 @@ pipeline {
       }
       steps {
         xvnc(useXauthority: true) {
-          sh "./full-build.sh --tp=${selectedTargetPlatform()}"
+          sh "./full-build.sh --tp=${selectedTargetPlatform()} ${javaVersionBasedProperties()}"
         }
       }// END steps
     } // END stage
@@ -159,6 +159,22 @@ def selectedTargetPlatform() {
         return 'r202203'
     } else {
         return tp
+    }
+}
+
+/**
+ * Tycho 3 requires Java 17.
+ * If the build uses Java version 11, we return the proper tycho-version override.
+ * Otherwise, we return an empty string.
+ */
+def javaVersionBasedProperties() {
+    def javaVersion = javaVersion()
+
+    if (javaVersion<17) {
+        println("Switching to Tycho 2.7.5 with Java ${javaVersion}")
+        return '-Dtycho-version=2.7.5'
+    } else {
+        return ''
     }
 }
 
