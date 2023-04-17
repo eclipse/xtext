@@ -41,11 +41,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.mwe2.language</artifactId>
+			<artifactId>org.eclipse.emf.mwe2.runtime</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.language</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
