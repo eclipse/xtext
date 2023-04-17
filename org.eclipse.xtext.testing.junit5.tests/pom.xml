@@ -11,11 +11,16 @@
 
 	<name>Junit 5 Tests for Xtext Testing Library</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.testing</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<providerHint>junit5</providerHint>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
