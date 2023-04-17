@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing.tests.junit5;
 
-import static org.junit.Assert.assertEquals;
-
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
@@ -29,7 +28,7 @@ public class ComposedInjectAnnotationTest {
 
 	@Test
 	public void didUseComposedInjectAnnotation() {
-		assertEquals(ComposedInject.INJECTED, toBeInjected);
+		Assertions.assertEquals(ComposedInject.INJECTED, toBeInjected);
 	}
 
 }
