@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -282,9 +282,13 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			if (result.getJavaSourceVersion().isAtLeast(JAVA8)) {
 				methodInInterfaceModifierValidator = new ModifierValidator(
 						newArrayList("public", "abstract", "static", "def", "override"), this);
+				fieldInInterfaceModifierValidator = new ModifierValidator(
+					newArrayList("public", "static", "final", "val", "extension"), this);
 			} else {
 				methodInInterfaceModifierValidator = new ModifierValidator(
 						newArrayList("public", "abstract", "def", "override"), this);
+				fieldInInterfaceModifierValidator = new ModifierValidator(
+						newArrayList("public", "static", "final", "val"), this);
 			}
 		}
 		return result;
@@ -2005,9 +2009,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	private final ModifierValidator fieldModifierValidator = new ModifierValidator(
 			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension", "volatile", "transient"), this);
 		
-	private final ModifierValidator fieldInInterfaceModifierValidator = new ModifierValidator(
-			newArrayList("public", "static", "final", "val"), this);
-		
 	private final ModifierValidator constructorModifierValidator = new ModifierValidator(
 			newArrayList(visibilityModifers), this);
 		
@@ -2015,6 +2016,8 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			newArrayList("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override", "strictfp", "native", "synchronized"), this);
 
 	private ModifierValidator methodInInterfaceModifierValidator;
+
+	private ModifierValidator fieldInInterfaceModifierValidator;
 	
 	@Check
 	protected void checkModifiers(XtendClass xtendClass) {
