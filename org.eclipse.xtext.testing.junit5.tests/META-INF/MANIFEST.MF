@@ -10,7 +10,6 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.ide;visibility:=reexport,
  org.eclipse.lsp4j;resolution:=optional,
  org.eclipse.lsp4j.jsonrpc;resolution:=optional,
- org.junit;bundle-version="4.13.2",
  org.eclipse.xtend.lib,
  org.eclipse.xtext.testing
 Import-Package: org.apache.log4j;version="1.2.24",

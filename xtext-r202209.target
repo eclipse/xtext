@@ -59,22 +59,22 @@
 			<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 			<unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
 			<unit id="org.opentest4j" version="0.0.0"/>
-			<unit id="org.apiguardian" version="0.0.0"/>
+			<unit id="org.apiguardian.api" version="0.0.0"/>
 			<unit id="org.objectweb.asm" version="9.5.0"/>
 			<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
 			<unit id="org.slf4j.binding.simple" version="0.0.0"/>
 			<unit id="org.junit" version="4.13.2.v20211018-1956"/>
-			<unit id="org.junit.jupiter.api" version="0.0.0"/>
-			<unit id="org.junit.jupiter.engine" version="0.0.0"/>
-			<unit id="org.junit.jupiter.migrationsupport" version="0.0.0"/>
-			<unit id="org.junit.jupiter.params" version="0.0.0"/>
-			<unit id="org.junit.platform.commons" version="0.0.0"/>
-			<unit id="org.junit.platform.engine" version="0.0.0"/>
-			<unit id="org.junit.platform.launcher" version="0.0.0"/>
-			<unit id="org.junit.platform.runner" version="0.0.0"/>
-			<unit id="org.junit.platform.suite.api" version="0.0.0"/>
-			<unit id="org.junit.platform.suite.commons" version="0.0.0"/>
-			<unit id="org.junit.vintage.engine" version="0.0.0"/>
+			<unit id="junit-jupiter-api" version="0.0.0"/>
+			<unit id="junit-jupiter-engine" version="0.0.0"/>
+			<unit id="junit-jupiter-migrationsupport" version="0.0.0"/>
+			<unit id="junit-jupiter-params" version="0.0.0"/>
+			<unit id="junit-platform-commons" version="0.0.0"/>
+			<unit id="junit-platform-engine" version="0.0.0"/>
+			<unit id="junit-platform-launcher" version="0.0.0"/>
+			<unit id="junit-platform-runner" version="0.0.0"/>
+			<unit id="junit-platform-suite-api" version="0.0.0"/>
+			<unit id="junit-platform-suite-commons" version="0.0.0"/>
+			<unit id="junit-vintage-engine" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
