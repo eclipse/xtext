@@ -64,7 +64,6 @@ SnapshotToSnapshot() {
 	find . -type f -name "pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
 	find . -type f -name "maven-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
 	find . -type f -name "tycho-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "versions.gradle" | xargs_sed_inplace -e "s/version = '${from}-SNAPSHOT'/version = '${to}-SNAPSHOT'/g"
 	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
 	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
 	find . -type f -name "category.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
@@ -132,32 +131,12 @@ checkVersionFormat "$to"
 
 if [ "$bump" == "StoS" ]; then
    echo "# bumping version from Snapshot to Snapshot"
-   directories=$(./allDirectories)
-   for directory in $directories
-   do
-       directory=$(echo $directory | tr -d '\r')
-       echo "Processing $directory"
-       # remember current dir and change to repository directory
-       pushd $(pwd) > /dev/null 
-       cd $directory
-       SnapshotToSnapshot
-       popd &> /dev/null
-       echo
-   done
+   
+   SnapshotToSnapshot
 fi
 
 if [ "$bump" == "BST" ]; then
    echo "# bootstrapping version from $from to $to"
   
-   directories=$(./allDirectories)
-   for directory in $directories
-   do
-       directory=$(echo $directory | tr -d '\r')
-       # remember current dir and change to repository directory
-       pushd $(pwd) > /dev/null 
-       cd $directory
-       VersionBootstrap
-       popd &> /dev/null
-       echo
-   done
+   VersionBootstrap
 fi

@@ -27,15 +27,7 @@ SPDX-License-Identifier: EPL-2.0
 The project maintains the following source code repositories:
 
 * https://github.com/eclipse/xtext
-* https://github.com/eclipse/xtext-core
-* https://github.com/eclipse/xtext-lib
-* https://github.com/eclipse/xtext-extras
-* https://github.com/eclipse/xtext-eclipse
-* https://github.com/eclipse/xtext-web
-* https://github.com/eclipse/xtext-maven
-* https://github.com/eclipse/xtext-gradle
-* https://github.com/eclipse/xtext-xtend
-* https://github.com/eclipse/xtext-umbrella
+* https://github.com/eclipse/xtext-website
 
 ## Third-party Content
 
