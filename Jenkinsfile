@@ -70,14 +70,9 @@ pipeline {
             cat ~/.m2/toolchains.xml
           '''
           script {
-            def mavenSurfireJDKToolchain = params.JDK_VERSION
-            def tychoSurefireJDK = params.JDK_VERSION == '17' ? 'SYSTEM' : 'BREE'
+            def toolChainArgs = params.JDK_VERSION == '17' ? '' : '-Pstrict-jdk --toolchains releng/toolchains.xml'
             sh """
-              ./full-build.sh --tp=${selectedTargetPlatform()} \
-                -Pstrict-jdk
-                --toolchains releng/toolchains.xml
-                -Dmaven.surefire.runtimeJDK=${mavenSurfireJDKToolchain} \
-                -Dtycho.surefire.runtimeJDK=${tychoSurefireJDK}
+              ./full-build.sh --tp=${selectedTargetPlatform()} ${toolChainArgs}
             """
           }
         }
