@@ -442,7 +442,16 @@
 							<groupId>org.eclipse.tycho</groupId>
 							<artifactId>tycho-surefire-plugin</artifactId>
 							<configuration>
-								<useJDK>${tycho.surefire.runtimeJDK}</useJDK>
+								<useJDK>BREE</useJDK>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-compiler-plugin</artifactId>
+							<configuration>
+								<jdkToolchain>
+									<version>${maven.compiler.release}</version>
+								</jdkToolchain>
 							</configuration>
 						</plugin>
 						<plugin>
@@ -450,7 +459,7 @@
 							<artifactId>maven-surefire-plugin</artifactId>
 							<configuration>
 								<jdkToolchain>
-									<version>${maven.surefire.runtimeJDK}</version>
+									<version>${maven.compiler.release}</version>
 								</jdkToolchain>
 							</configuration>
 						</plugin>
