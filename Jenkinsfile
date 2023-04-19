@@ -67,7 +67,7 @@ pipeline {
             echo 'JAVA_HOME_11_X64=${JAVA_HOME_11_X64}'
             echo 'JAVA_HOME_17_X64=${JAVA_HOME_17_X64}'
             echo 'Predefined Jenkins Toolchain content'
-            cat ~/.m2e/toolchains.xml
+            cat ~/.m2/toolchains.xml
           '''
           script {
             def mavenSurfireJDKToolchain = params.JDK_VERSION
