@@ -66,7 +66,7 @@ pipeline {
         xvnc(useXauthority: true) {
           sh """
             ./full-build.sh --tp=${selectedTargetPlatform()} \
-              ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
+              --toolchains releng/toolchains.xml -Pstrict-release-jdk -Dtoolchain.jdk=${javaVersion()}
           """
         }
       }// END steps

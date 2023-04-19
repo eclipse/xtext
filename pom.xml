@@ -402,6 +402,10 @@
 		</profile>
 		<profile>
 			<id>strict-release-jdk</id>
+			<properties>
+				<!-- By default use running java version in test runtimes-->
+				<toolchain.jdk>${maven.compiler.release}</toolchain.jdk>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -419,7 +423,7 @@
 							<toolchains>
 								<jdk>
 									<!-- Toolchain selected by maven/tycho-compiler for compilation and maven/tycho-surefire as JRE of launched test-runtimes-->
-									<version>${maven.compiler.release}</version>
+									<version>${toolchain.jdk}</version>
 								</jdk>
 							</toolchains>
 						</configuration>
