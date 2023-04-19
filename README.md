@@ -8,11 +8,11 @@ More information can be found on [xtext.org](http://xtext.org).
 
 ## Quick Access
 
-- [All Open Pull Requests](https://github.com/search?utf8=✓&q=is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
-- [All Open Issues](https://github.com/search?utf8=✓&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
-- [Good First Issues](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend+label%3A%22good+first+issue%22&type=Issues&ref=advsearch&l=&l=)
-- [All Open Issues of Milestone Release_2.31](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.31+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
-- [All Open Issues of Milestone Release_2.32](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.32+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
+- [All Open Pull Requests](https://github.com/search?utf8=%E2%9C%93&q=is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website+&type=pullrequests)
+- [All Open Issues](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website&type=issues&ref=searchresultsopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website)
+- [Good First Issues](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website+label%3A%22good+first+issue%22&type=issues)
+- [All Open Issues of Milestone Release_2.31](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+milestone%3ARelease_2.31+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website&type=issues)
+- [All Open Issues of Milestone Release_2.32](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+milestone%3ARelease_2.32+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website&type=issues)
 
 
 ## Developer Resources

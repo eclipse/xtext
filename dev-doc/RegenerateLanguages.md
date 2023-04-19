@@ -2,7 +2,7 @@
 
 This document describes the necessary steps to regenerate the test- and production Xtext languages.
 
-1. Execute the following `MWE2` workflows from Eclipse
+1. Execute the following `MWE2` workflows and Java Main-classes from Eclipse
 	```
 	org.eclipse.xtext.tests/src/org/eclipse/xtext/GenerateAllTestLanguages.mwe2
 	org.eclipse.xtext.testlanguages/src/org/eclipse/xtext/testlanguages/GenerateTestLanguages.mwe2
