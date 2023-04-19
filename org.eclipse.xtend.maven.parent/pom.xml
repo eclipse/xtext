@@ -72,20 +72,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerId>jdt</compilerId>
-					<optimize>true</optimize>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-compiler-jdt</artifactId>
-						<version>${tycho-version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
 					<execution>
