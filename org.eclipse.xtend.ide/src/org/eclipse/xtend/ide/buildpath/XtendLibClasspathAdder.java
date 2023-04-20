@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,5 +24,10 @@ public class XtendLibClasspathAdder extends AbstractLibClasspathAdder {
 	@Override
 	protected String[] getBundleIds() {
 		return XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE;
+	}	
+
+	@Override
+	protected String[] getImportedPackages() {
+		return new String[0];
 	}
 }
