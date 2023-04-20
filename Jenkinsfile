@@ -7,13 +7,16 @@ pipeline {
 
   parameters {
     choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'latest'], description: 'Which Target Platform should be used?')
-    choice(name: 'JDK_VERSION', choices: [ '11', '17' ], description: 'Which JDK version should be used?')
+    // see https://wiki.eclipse.org/Jenkins#JDK
+    choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
+       'temurin-jdk11-latest', 'temurin-jdk17-latest'
+    ])
   }
 
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'main' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=17
-      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
+      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=temurin-jdk17-latest
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest
       ''' : '')
   }
 
@@ -25,7 +28,6 @@ pipeline {
 
   tools {
      maven "apache-maven-3.8.6"
-     // see https://wiki.eclipse.org/Jenkins#JDK
      jdk "temurin-jdk17-latest"
   }
 
@@ -62,19 +64,10 @@ pipeline {
       }
       steps {
         xvnc(useXauthority: true) {
-          //TODO: remove the following test print out
-          sh '''
-            echo 'JAVA_HOME_11_X64=${JAVA_HOME_11_X64}'
-            echo 'JAVA_HOME_17_X64=${JAVA_HOME_17_X64}'
-            echo 'Predefined Jenkins Toolchain content'
-            cat ~/.m2/toolchains.xml
-          '''
-          script {
-            def toolChainArgs = params.JDK_VERSION == '17' ? '' : '-Pstrict-jdk --toolchains releng/toolchains.xml'
-            sh """
-              ./full-build.sh --tp=${selectedTargetPlatform()} ${toolChainArgs}
-            """
-          }
+          sh """
+            ./full-build.sh --tp=${selectedTargetPlatform()} \
+              ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
+          """
         }
       }// END steps
     } // END stage
@@ -128,7 +121,7 @@ pipeline {
 
 /** return the Java version as Integer (8, 11, ...) */
 def javaVersion() {
-  return Integer.parseInt(params.JDK_VERSION)
+  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
 }
 
 /** returns true when this build was triggered by an upstream build */
