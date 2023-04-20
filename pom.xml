@@ -186,11 +186,6 @@
 		<current-release-zip-directory>${releases-zip-directory}/${current-release-zip-subdirectory}</current-release-zip-directory>
 
 		<site.label>TMF Xtext Update Site</site.label>
-
-		<!-- By default use running java version in test runtimes-->
-		<maven.surefire.runtimeJDK>${java.specification.version}</maven.surefire.runtimeJDK>
-		<tycho.surefire.runtimeJDK>SYSTEM</tycho.surefire.runtimeJDK>
-
 	</properties>
 
 	<dependencyManagement>
@@ -406,7 +401,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>strict-jdk</id>
+			<id>strict-release-jdk</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -423,48 +418,13 @@
 						<configuration>
 							<toolchains>
 								<jdk>
+									<!-- Toolchain selected by maven/tycho-compiler for compilation and maven/tycho-surefire as JRE of launched test-runtimes-->
 									<version>${maven.compiler.release}</version>
 								</jdk>
 							</toolchains>
 						</configuration>
 					</plugin>
 				</plugins>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>tycho-compiler-plugin</artifactId>
-							<configuration>
-								<useJDK>SYSTEM</useJDK>
-							</configuration>
-						</plugin>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>tycho-surefire-plugin</artifactId>
-							<configuration>
-								<useJDK>SYSTEM</useJDK>
-							</configuration>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-compiler-plugin</artifactId>
-							<configuration>
-								<jdkToolchain>
-									<version>${maven.compiler.release}</version>
-								</jdkToolchain>
-							</configuration>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-surefire-plugin</artifactId>
-							<configuration>
-								<jdkToolchain>
-									<version>${maven.compiler.release}</version>
-								</jdkToolchain>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
 			</build>
 		</profile>
 	</profiles>
