@@ -34,7 +34,8 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.ui.testing,
- org.eclipse.xtext.xbase.testing
+ org.eclipse.xtext.xbase.testing,
+ org.objectweb.asm
 Import-Package: org.apache.log4j;version="1.2.24",
  org.apache.log4j.spi;version="1.2.24",
  org.junit;version="4.13.2",
