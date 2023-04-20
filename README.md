@@ -8,7 +8,7 @@ More information can be found on [xtext.org](http://xtext.org).
 
 ## Quick Access
 
-- [All Open Pull Requests](https://github.com/search?utf8=%E2%9C%93&q=is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website+&type=pullrequests)
+- [All Open Pull Requests](https://github.com/search?utf8=%E2%9C%93&q=is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website+&type=issues)
 - [All Open Issues](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website&type=issues&ref=searchresultsopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website)
 - [Good First Issues](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website+label%3A%22good+first+issue%22&type=issues)
 - [All Open Issues of Milestone Release_2.31](https://github.com/search?utf8=%E2%9C%93&q=is%3Aissue+milestone%3ARelease_2.31+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-website&type=issues)
