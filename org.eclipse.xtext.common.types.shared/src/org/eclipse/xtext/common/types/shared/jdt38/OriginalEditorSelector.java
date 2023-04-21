@@ -35,6 +35,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 import org.eclipse.ui.ide.ResourceUtil;
+import org.eclipse.xtext.common.types.shared.jdt38.StacktraceBasedEditorDecider;
+import org.eclipse.xtext.common.types.shared.jdt38.StacktraceBasedEditorDecider.Decision;
 import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -42,8 +44,6 @@ import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
 import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
-import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider;
-import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;

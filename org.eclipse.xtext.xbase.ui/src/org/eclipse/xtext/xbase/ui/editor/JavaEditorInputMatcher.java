@@ -23,7 +23,7 @@ import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
 import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
-import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
+import org.eclipse.xtext.common.types.shared.jdt38.StacktraceBasedEditorDecider.Decision;
 
 import com.google.inject.Inject;
 
