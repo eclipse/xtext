@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,12 +20,9 @@ public class Junit5LibClasspathAdder extends AbstractLibClasspathAdder {
 
 	public static final IPath JUNIT5_LIBRARY_PATH = new Path("org.eclipse.jdt.junit.JUNIT_CONTAINER/5");
 	public static final String[] BUNDLE_IDS = new String[] { 
-			"org.junit", "org.junit.jupiter.api", "org.junit.jupiter.engine",
-			"org.junit.jupiter.migrationsupport", "org.junit.jupiter.params", 
-			"org.junit.platform.commons", "org.junit.platform.engine",
-			"org.junit.platform.launcher", "org.junit.platform.runner", 
-			"org.junit.platform.suite.api", "org.junit.vintage.engine",
-			"org.hamcrest.core", "org.opentest4j", "org.apiguardian"
+			"org.junit",
+			"org.hamcrest.core",
+			"org.opentest4j"
 	};
 
 	@Override
@@ -36,6 +33,22 @@ public class Junit5LibClasspathAdder extends AbstractLibClasspathAdder {
 	@Override
 	protected String[] getBundleIds() {
 		return BUNDLE_IDS;
+	}
+	
+	@Override
+	protected String[] getImportedPackages() {
+		return new String[] {
+			"org.junit.jupiter.api;version=\"[5.1.0,6.0.0)\"",
+			"org.junit.jupiter.api.condition;version=\"[5.1.0,6.0.0)\"",
+			"org.junit.jupiter.api.extension;version=\"[5.1.0,6.0.0)\"",
+			"org.junit.jupiter.api.function;version=\"[5.1.0,6.0.0)\"",
+			"org.junit.jupiter.api.io;version=\"[5.1.0,6.0.0)\"",
+			"org.junit.jupiter.api.parallel;version=\"[5.1.0,6.0.0)\"",
+			"org.junit.platform.commons.support;version=\"[1.0.0,2.0.0)\";resolution:=optional",
+			"org.junit.platform.engine;version=\"[1.0.0,2.0.0)\"",
+			"org.junit.platform.runner;version=\"[1.0.0,2.0.0)\"",
+			"org.junit.platform.suite.api;version=\"[1.0.0,2.0.0)\""
+		};
 	}
 
 }

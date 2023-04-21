@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -76,6 +76,15 @@ abstract class AbstractJunitLibClasspathAdderTestCase {
 	        val requireBunbles = manifest.mainAttributes.get(MergeableManifest2.REQUIRE_BUNDLE)
 	        for (bundleId : expectedBundleIds)
 	            assertTrue('''require bundle entry «bundleId» is present''', requireBunbles.contains(bundleId))
+	    }
+    }
+    
+    def protected assertImportPackages(String[] expectedImports) {
+    	try (val InputStream contents = project.getFile(new Path('META-INF/MANIFEST.MF')).contents) {
+	        val manifest = new MergeableManifest2(contents)
+	        val importedPackages = manifest.mainAttributes.get(MergeableManifest2.IMPORT_PACKAGE)
+	        for (p : expectedImports)
+	            assertTrue('''require import package «p» is present''', importedPackages.contains(p))
 	    }
     }
     

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -53,6 +53,8 @@ public abstract class AbstractLibClasspathAdder {
 
 	protected abstract String[] getBundleIds();
 
+	protected abstract String[] getImportedPackages();
+	
 	protected boolean addToClasspath(IJavaProject javaProject, IProgressMonitor monitor) throws JavaModelException {
 		IClasspathEntry containerEntry = createContainerClasspathEntry();
 		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
@@ -78,6 +80,7 @@ public abstract class AbstractLibClasspathAdder {
 			try {
 				MergeableManifest2 manifest = createMergableManifest(manifestFile);
 				manifest.addRequiredBundles(getBundleIds());
+				manifest.addImportedPackages(getImportedPackages());
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				output = new BufferedOutputStream(out);
 				manifest.write(output);

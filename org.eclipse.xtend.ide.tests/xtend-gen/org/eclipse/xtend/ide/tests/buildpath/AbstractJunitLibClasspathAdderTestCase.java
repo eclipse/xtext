@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -120,6 +120,35 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
           _builder.append(bundleId);
           _builder.append(" is present");
           Assert.assertTrue(_builder.toString(), requireBunbles.contains(bundleId));
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  protected void assertImportPackages(final String[] expectedImports) {
+    try {
+      try (final InputStream contents = new Function0<InputStream>() {
+        @Override
+        public InputStream apply() {
+          try {
+            IProject _project = AbstractJunitLibClasspathAdderTestCase.this.workbenchHelper.getProject();
+            Path _path = new Path("META-INF/MANIFEST.MF");
+            return _project.getFile(_path).getContents();
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      }.apply()) {
+        final MergeableManifest2 manifest = new MergeableManifest2(contents);
+        final String importedPackages = manifest.getMainAttributes().get(MergeableManifest2.IMPORT_PACKAGE);
+        for (final String p : expectedImports) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("require import package ");
+          _builder.append(p);
+          _builder.append(" is present");
+          Assert.assertTrue(_builder.toString(), importedPackages.contains(p));
         }
       }
     } catch (Throwable _e) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -93,7 +93,7 @@ class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspathAdderT
             .assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
             .assertResolutionLabels('Add JUnit 5 lib to classpath')
             .assertModelAfterQuickfix(content.replace('|', ''))
-       assertRequireBundles(Junit5LibClasspathAdder.BUNDLE_IDS)
+       assertImportPackages(#["org.junit.jupiter.api;version=\"[5.1.0,6.0.0)\""]) // just test 1
     }
     
     
