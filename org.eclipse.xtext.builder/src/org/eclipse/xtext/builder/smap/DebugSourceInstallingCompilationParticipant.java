@@ -152,7 +152,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 							} else {
 								// we need to touch the class file to do a respin of the build
 								// otherwise a needsRebuild request is ignored since no IResourceDelta is available
-								javaClassFile.touch(null);
+								//javaClassFile.touch(null);
 							}
 						} finally {
 							contents.close();
