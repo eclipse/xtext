@@ -41,7 +41,7 @@ Before starting the setup process, make sure that you have both an [Eclipse](htt
 1. On the initial page, click on the *Switch to Advanced Mode* button in the top right.
 1. On the *Product* page, select *Eclipse IDE for Eclipse Committers*.
 1. On the *Projects* page, select the *Xtext* node.
-1. Choose your preferred installation settings on the *Variables* page. Enter credentials for your Eclipse and GitHub account. If you don't have ssh keys registered with Github then make sure that you select `HTTPS (read-only, anonymous)` or `HTTPS (read-write)` for the Github repository entries.
+1. Choose your preferred installation settings on the *Variables* page. Enter credentials for your Eclipse and GitHub accounts. If you don't have an SSH key registered with GitHub then make sure that you select `HTTPS (read-only, anonymous)` or `HTTPS (read-write)` for the GitHub repository entries.
 1. Finish the wizard, drink a cup of coffee, and watch how your Xtext development environment is assembled.
 
 IMPORTANT: if you had previously set up your workspace when Xtext code was split in several Git repositories, please, start completely from scratch (new installation and new clone).
