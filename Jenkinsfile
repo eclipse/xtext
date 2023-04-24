@@ -8,15 +8,13 @@ pipeline {
   parameters {
     choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
-    choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
-       'temurin-jdk11-latest', 'temurin-jdk17-latest'
-    ])
+    choice(name: 'JDK_VERSION', choices: [ '11', '17' ], description: 'Which JDK version should be used?')
   }
 
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'main' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=temurin-jdk17-latest
-      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest
+      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=17
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
       ''' : '')
   }
 
@@ -121,7 +119,7 @@ pipeline {
 
 /** return the Java version as Integer (8, 11, ...) */
 def javaVersion() {
-  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
+  return Integer.parseInt(params.JDK_VERSION)
 }
 
 /** returns true when this build was triggered by an upstream build */
