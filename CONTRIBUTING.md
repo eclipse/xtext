@@ -80,7 +80,7 @@ You're a committer if you have write-access to the Xtext git-repositories.
 There are two ways / sources: 
 
  * All Maven artifacts are published every 24 hours to the [public Sonatype snapshot repository](https://oss.sonatype.org/content/repositories/snapshots/org/eclipse/xtext/) and can be consumed from there.
- * The [Jenkins](https://ci.eclipse.org/xtext) archives the created repositories. So you can find the repository of your choice at: `https://ci.eclipse.org/xtext/job/xtext/job/<git-branch>/(lastSuccessfulBuild|<build-number>)/artifact/build/(maven|p2)-repository/`
+ * The [Jenkins](https://ci.eclipse.org/xtext) archives the created repositories. You can find the repository of your choice at: `https://ci.eclipse.org/xtext/job/xtext/job/<git-branch>/(lastSuccessfulBuild|<build-number>)/artifact/build/(maven|p2)-repository/`
 
 ## Eclipse Contributor Agreement
 
