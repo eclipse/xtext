@@ -8,7 +8,7 @@ Eclipse Bugzilla issues are deprecated for Xtext. However, we still accept them.
 
 ### Milestones
 
-We have one milestone for each Xtext release. Fixed issues should be assigned to the milestone of the nearest release in which the fix will be included. For example, if an issue is fixed on the `maintenance` branch, the corresponding milestone is the next service release (increasing the third version component). If an issue is fixed on the `main` branch, the next major or minor release should be assigned.
+We use a milestone for each Xtext release. Fixed issues should be assigned to the milestone of the upcoming release in which the fix will be included. For example, if an issue is fixed on the `maintenance` branch, the corresponding milestone is the next service release (increasing the patch segment of the version). The next major or minor release should be assigned if an issue is fixed on the `main` branch.
 
 It is possible to assign issues to a milestone before they are fixed, which can be useful for planning. However, make sure someone will actually work on that issue when you do that!
 
