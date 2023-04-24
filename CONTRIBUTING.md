@@ -12,7 +12,7 @@ We use a milestone for each Xtext release. Fixed issues should be assigned to th
 
 It is possible to assign issues to a milestone before they are fixed, which can be useful for planning. However, make sure someone will actually work on that issue when you do that!
 
-The list of issues assigned to a milestone will give a nice overview of new features and fixed bugs after a release has been done, facilitating the creation of release notes and helping users to know when a fix will be available.
+The list of issues assigned to a milestone gives a nice overview of new features and fixed bugs after a release has been done, facilitating the creation of release notes and communicating to users when a fix will be available.
 
 ### Issue Labels
 
