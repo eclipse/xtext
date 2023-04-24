@@ -52,7 +52,7 @@ NOTE for Windows users: after the workspace setup has finished, some files in so
 You need a [GitHub](https://github.com/join) and an [Eclipse](https://accounts.eclipse.org/user/register) account for which you signed the [Eclipse Contributor Agreement](https://accounts.eclipse.org/user/login?destination=user/eca).
 
  1. Make sure there is a GitHub issue for what you want to work on.
- 2. Announce in the comments section that you want to work on the issue. Also describe the solution you want to implement. To improve the chances for your contribution to be accepted, you'll want to wait for the feedback of the committers.
+ 2. Announce in the comments section that you want to work on the issue. Also, describe the solution you want to implement. To improve the chance that your contribution is accepted, you'll want to wait for the feedback of the committers.
  3. Implement your change. Take care to follow the [quality guidelines](QUALITY_GUIDELINES.md) to improve the chance that your contribution is accepted by a committer.
  4. [Sign off](https://git-scm.com/docs/git-commit#git-commit--s) your commits using the same email address you are using for your Eclipse account.
  5. Run the Maven/Gradle build locally to see if everything compiles and all tests pass.
