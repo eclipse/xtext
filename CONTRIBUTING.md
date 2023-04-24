@@ -23,7 +23,7 @@ Issue labels can serve several purposes:
 * Communicate why an issue has not been fixed: `duplicate`, `invalid`, `wontfix`
 * Categorize issues for better overview, e.g. to assign an issue to a specific part of the software. Committers may add categorization labels as required. However, in most cases the `[category]` prefixing in the issue title should be sufficient.
 
-In general we want to keep the number of labels as low as possible in order to avoid contributors to be overwhelmed and to make sure they are actually used. A label is not useful if it's assigned only to a fraction of the issues it belongs to, so it's important for all contributors to use the existing labels consistently.
+In general, we want to keep the number of labels as low as possible to avoid overwhelming contributors and ensure the labels are used. A label is not helpful if it is assigned only to a fraction of the issues it belongs to, and that's why all contributors need to use the existing labels consistently.
 
 ### Workflow
 
