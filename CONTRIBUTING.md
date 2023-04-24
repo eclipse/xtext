@@ -31,7 +31,7 @@ All committers should feel responsible to read incoming issues. When you read a 
 
 * If possible, assign a type and a status.
 * If appropriate, close the issue and explain why it won't be fixed.
-* If the report seems reasonable, a comment with some feedback to the reporter would be nice (e.g. describe wich action is required next, such as to confirm the issue or find a solution for it), especially if the reporter is not a committer.
+* If the report seems reasonable, a comment with some feedback to the reporter would be nice (e.g. describe which action is required next to confirm or solve the issue), especially if the reporter is not a committer.
 * If you are not familiar enough with the topic of the issue, you might find someone who is and delegate the action.
 
 ## Set up your Eclipse Workspace
