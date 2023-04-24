@@ -2,9 +2,7 @@ This page explains common tasks related to working with Xtext's source code.
 
 ## Report an Issue
 
-Please create a GitHub issue in this repository.
-
-Eclipse Bugzilla issues are deprecated for Xtext. However, we still accept them.
+Please create a GitHub issue: https://github.com/eclipse/xtext/issues.
 
 ### Milestones
 
@@ -44,8 +42,6 @@ Before starting the setup process, make sure that you have both an [Eclipse](htt
 1. Choose your preferred installation settings on the *Variables* page. Enter credentials for your Eclipse and GitHub accounts. If you don't have an SSH key registered with GitHub then make sure that you select `HTTPS (read-only, anonymous)` or `HTTPS (read-write)` for the GitHub repository entries.
 1. Finish the wizard, drink a cup of coffee, and watch how your Xtext development environment is assembled.
 
-IMPORTANT: if you had previously set up your workspace when Xtext code was split in several Git repositories, please, start completely from scratch (new installation and new clone).
-
 NOTE for Windows users: after the workspace setup has finished, some files in some `xtend-gen` folders will be detected as "dirty" by Git. That is due to some tests using multi-line strings (not multi-line template strings); unfortunately, we still haven't found a solution to this problem. 
 
 ## Contribute via a Fork
@@ -59,7 +55,7 @@ You need a [GitHub](https://github.com/join) and an [Eclipse](https://accounts.e
  6. Push your changes to your forked repository. It is recommended to create a separate branch, this will make it easier to include the feedback from committers and update your changes.
  7. Create a [pull request](https://help.github.com/articles/using-pull-requests/).
 
-## Contributing for Committers
+## Contribute as a Committer
 You're a committer if you have write-access to the Xtext git-repositories.
 
  1. Make sure there is a GitHub issue for what you want to work on
