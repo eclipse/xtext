@@ -185,6 +185,9 @@
 		<current-release-zip-subdirectory>${qualifiedVersion}</current-release-zip-subdirectory>
 		<current-release-zip-directory>${releases-zip-directory}/${current-release-zip-subdirectory}</current-release-zip-directory>
 
+		<!-- This can be used, for example, to pass the "-n" for dry run -->
+		<additional-rsync-commit-args></additional-rsync-commit-args>
+
 		<site.label>TMF Xtext Update Site</site.label>
 	</properties>
 
