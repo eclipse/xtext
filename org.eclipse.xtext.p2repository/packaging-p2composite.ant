@@ -49,8 +49,7 @@
 				<repository
 					compressed="false"
 					location="@{composite.repository.location}"
-					name="@{composite.repository.name}"
-					atomic="false" />
+					name="@{composite.repository.name}" />
 				<add>
 					<repository location="@{composite.repository.child}" />
 				</add>
