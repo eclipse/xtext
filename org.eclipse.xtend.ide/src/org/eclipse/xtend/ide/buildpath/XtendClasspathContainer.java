@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -87,16 +87,7 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	}
 
 	private IPath binFolderPath(Bundle bundle) {
-		URL binFolderURL = FileLocator.find(bundle, new Path("bin/main"), null); //$NON-NLS-1$
-		if (binFolderURL != null) {
-			try {
-				URL binFolderFileURL = FileLocator.toFileURL(binFolderURL);
-				return new Path(binFolderFileURL.getPath()).makeAbsolute();
-			} catch (IOException e) {
-				LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-		}
-		binFolderURL = FileLocator.find(bundle, new Path("bin"), null);
+		URL binFolderURL = FileLocator.find(bundle, new Path("target/classes"), null); //$NON-NLS-1$
 		if (binFolderURL != null) {
 			try {
 				URL binFolderFileURL = FileLocator.toFileURL(binFolderURL);
