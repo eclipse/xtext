@@ -280,7 +280,7 @@
 									<args>-buildfile</args>
 									<args>packaging-p2composite.ant</args>
 									<args>p2.composite.add</args>
-									<args>-Dsite.label="${site.label}"</args>
+									<args>-Dsite.label=${site.label}</args>
 									<args>-Dcomposite.base.dir=${rsync-local-source}</args>
 									<args>-Dcomposite.child.dir=${current-release-subdirectory}</args>
 								</applicationsArgs>
