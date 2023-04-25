@@ -105,9 +105,11 @@
 							</configuration>
 						</execution>
 						<!--
-						If you need to do a "dry-run" for rsync,
-						add the following argument line as the second one:
-						<argument>-n</argument>
+						Instead of <arguments> single elements, we use <commandlineArgs> to pass
+						the whole command line argument on a single string.
+						This allows us to safely pass empty properties like additional-rsync-commit-args
+						without breaking the command line semantics (that's not possible with empty <argument>.
+						However, the line cannot be split into several lines.
 						-->
 						<execution>
 							<id>rsync-update</id>
@@ -117,14 +119,12 @@
 							</goals>
 							<configuration>
 								<executable>rsync</executable>
-								<arguments>
-									<argument>-azvc</argument>
-									<!-- exclude subdirectories -->
-									<argument>--exclude=*/</argument>
-									<argument>-e ssh</argument>
-									<argument>${rsync-remote-source}</argument>
-									<argument>${rsync-local-source}</argument>
-								</arguments>
+								<!--
+								Exclude subdirectories of subdirectories:
+								we copy locally only the metadata (artifacts/content) of existing child repos.
+								This way, p2 can check the repository is atomic when it updates it
+								-->
+								<commandlineArgs>-azvc --exclude=*/*/ -e ssh ${rsync-remote-source} ${rsync-local-source}</commandlineArgs>
 							</configuration>
 						</execution>
 						<execution>
@@ -135,12 +135,7 @@
 							</goals>
 							<configuration>
 								<executable>rsync</executable>
-								<arguments>
-									<argument>-azvc</argument>
-									<argument>-e ssh</argument>
-									<argument>${rsync-local-source}</argument>
-									<argument>${rsync-remote-source}</argument>
-								</arguments>
+								<commandlineArgs>${additional-rsync-commit-args} -azvc -e ssh ${rsync-local-source} ${rsync-remote-source}</commandlineArgs>
 							</configuration>
 						</execution>
 						<execution>
@@ -151,12 +146,7 @@
 							</goals>
 							<configuration>
 								<executable>rsync</executable>
-								<arguments>
-									<argument>-azvc</argument>
-									<argument>-e ssh</argument>
-									<argument>${rsync-local-zip-source}</argument>
-									<argument>${rsync-remote-zip-source}</argument>
-								</arguments>
+								<commandlineArgs>${additional-rsync-commit-args} -azvc -e ssh ${rsync-local-zip-source} ${rsync-remote-zip-source}</commandlineArgs>
 							</configuration>
 						</execution>
 						<execution>
@@ -169,13 +159,7 @@
 							</goals>
 							<configuration>
 								<executable>rsync</executable>
-								<arguments>
-									<argument>-azvc</argument>
-									<argument>--delete</argument>
-									<argument>-e ssh</argument>
-									<argument>${rsync-local-source}</argument>
-									<argument>${rsync-remote-source}</argument>
-								</arguments>
+								<commandlineArgs>${additional-rsync-commit-args} -azvc --delete -e ssh ${rsync-local-source} ${rsync-remote-source}</commandlineArgs>
 							</configuration>
 						</execution>
 					</executions>
