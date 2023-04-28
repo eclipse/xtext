@@ -89,11 +89,6 @@
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
-      name="p2.antlr-gen"
-      value="https://download.itemis.com/updates/releases/2.1.1"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      type="URI"
       name="p2.cbi.analyzer"
       value="https://download.eclipse.org/cbi/updates/analyzers/4.7"/>
   <setupTask
@@ -494,14 +489,9 @@
         <requirement
             name="org.eclipse.cbi.p2repo.analyzers.common"
             optional="true"/>
-        <requirement
-            name="de.itemis.xtext.antlr.feature.feature.group"
-            optional="true"/>
         <repositoryList>
           <repository
               url="${p2.cbi.analyzer}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
         </repositoryList>
       </targlet>
     </setupTask>
