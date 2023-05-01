@@ -76,10 +76,10 @@ pipeline {
       junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
-      archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
+      archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log'
     }
     unsuccessful {
-      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
+      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log, **/hs_err_pid*.log'
     }
     cleanup {
       script {
