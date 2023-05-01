@@ -437,5 +437,75 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<!-- Activate this profile to perform a final release -->
+			<id>release-release</id>
+			<properties>
+				<remote-subdir>updates/releases</remote-subdir>
+				<!-- Note that for versions of final releases ${qualifiedVersion} == ${project.version} -->
+				<current-release-subdirectory>${qualifiedVersion}</current-release-subdirectory>
+				<zipFinalName>tmf-xtext-Update-${qualifiedVersion}</zipFinalName>
+				<site.label>TMF Xtext Update Site (Releases)</site.label>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-repository-plugin</artifactId>
+						<configuration>
+							<extraArtifactRepositoryProperties>
+								<p2.mirrorsURL>${p2.mirrorsURL}</p2.mirrorsURL>
+							</extraArtifactRepositoryProperties>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>md5sum</id>
+								<phase>package</phase>
+							</execution>
+							<execution>
+								<id>rsync-update</id>
+								<phase>prepare-package</phase>
+							</execution>
+							<execution>
+								<id>rsync-commit</id>
+								<phase>verify</phase>
+							</execution>
+							<execution>
+								<id>rsync-commit-zip</id>
+								<phase>verify</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-repository</id>
+								<phase>package</phase>
+							</execution>
+							<execution>
+								<id>copy-zipped-repository</id>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-eclipserun-plugin</artifactId>
+						<executions>
+							<!-- add our new child repository -->
+							<execution>
+								<id>add-p2-composite-repository</id>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 </project>

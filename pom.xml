@@ -252,6 +252,22 @@
 			</build>
 		</profile>
 		<profile>
+			<!-- Activate it when performing a final release, so that
+				Tycho won't complain about different versions in OSGI and POM -->
+			<id>release-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-packaging-plugin</artifactId>
+						<configuration>
+							<strictVersions>false</strictVersions>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>replace-qualifier-with-timestamp</id>
 			<build>
 				<plugins>
