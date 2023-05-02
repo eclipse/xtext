@@ -35,8 +35,12 @@
 			<include name="org.eclipse.emf.common*.jar" />
 			<include name="org.eclipse.emf.codegen*.jar" />
 			<include name="com.google.guava*.jar" />
+			<include name="*guava*32*.jar" />
 			<include name="com.google.inject*.jar" />
+			<include name="guice*.jar" />
+			<include name="*failureaccess*jar" />
 			<include name="javax.injec*.jar" />
+			<include name="jakarta.inject-api*jar" />
 			<include name="org.eclipse.equinox.common*.jar" />
 			<include name="org.eclipse.jdt.core*.jar" />
 			<include name="org.antlr*.jar" />
@@ -59,6 +63,11 @@
 
 
 	<target name="compiler.init" depends="clean">
+		<!--
+		<pathconvert property="classpathProp" refid="xtend.deps"/>
+
+		<echo>Classpath is ${classpathProp}</echo>
+-->
 		<taskdef name="xtendc" classname="org.eclipse.xtend.core.compiler.batch.XtendCompilerAntTask">
 			<classpath>
 				<path refid="xtend.deps" />

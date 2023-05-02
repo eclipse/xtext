@@ -49,8 +49,10 @@
 			<unit id="org.apache.log4j" version="1.2.24.v20221221-2012"/>
 			<unit id="org.kohsuke.args4j" version="0.0.0"/>
 			<unit id="com.google.gson" version="2.10.1.v20230109-0753"/>
-			<unit id="com.google.guava" version="30.1.0.v20221112-0806"/>
-			<unit id="com.google.inject" version="5.0.1.v20221112-0806" />
+			<unit id="com.google.guava" version="32.0.1.jre"/>
+			<unit id="com.google.guava.failureaccess" version="1.0.1"/>
+			<unit id="com.google.inject" version="7.0.0"/>
+			<unit id="jakarta.inject.jakarta.inject-api" version="2.0.1"/>
 			<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 			<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 			<unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>

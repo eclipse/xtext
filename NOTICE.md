@@ -70,19 +70,19 @@ Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
-Google Guava (30.1)
+Google Guava (32.0.1)
 
 * License: Apache License 2.0
 
-Google Guice / Inject Core API (5.0.1)
+Google Guice / Inject Core API (7.0.0)
 
 * License: Apache License, 2.0
 
-Gradle Wrapper (7.4)
+Gradle Wrapper (8)
 
 * License: Apache License, 2.0
 
-guava gwt (30.1)
+guava gwt (32.0.1)
 
 * License: Apache License, 2.0
 

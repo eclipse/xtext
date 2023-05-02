@@ -32,16 +32,16 @@ public class ProviderModule extends MethodBasedModule {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void bindToClass(LinkedBindingBuilder<Object> bind, Class<?> value) {
-		bind.toProvider((Class<? extends javax.inject.Provider<?>>) value);
+		bind.toProvider((Class<? extends jakarta.inject.Provider<?>>) value);
 	}
 
 	@Override
 	public Type getKeyType() {
 		Type keyType = super.getKeyType();
 		if (!isInstanceOf(keyType, com.google.inject.Provider.class)) {
-			if (isInstanceOf(keyType, javax.inject.Provider.class)) {
+			if (isInstanceOf(keyType, jakarta.inject.Provider.class)) {
 				if (!isClassBinding())
-					throw new IllegalStateException("The method "+getMethod().getName()+" returns javax.inject.Provider, but this kind of binding is allowed only for com.google.inject.Provider.");
+					throw new IllegalStateException("The method "+getMethod().getName()+" returns jakarta.inject.Provider, but this kind of binding is allowed only for com.google.inject.Provider.");
 			} else {
 				throw new IllegalStateException("The method "+getMethod().getName()+" is expected to return a Class<? extends Provider<Something>> or directly Provider<Something>.");
 			}

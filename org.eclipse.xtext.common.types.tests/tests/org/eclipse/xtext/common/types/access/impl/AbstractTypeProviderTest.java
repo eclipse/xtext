@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -3573,7 +3573,10 @@ public abstract class AbstractTypeProviderTest extends Assert {
 				.getOnlyElement(type.findAllFeaturesByName("containsValue"));
 		assertNotNull(containsValue);
 		JvmFormalParameter firstParam = containsValue.getParameters().get(0);
-		assertEquals(0, firstParam.getAnnotations().size());
+		assertEquals(1, firstParam.getAnnotations().size());
+		JvmAnnotationReference annotationReference = firstParam.getAnnotations().get(0);
+		JvmAnnotationType annotationType = annotationReference.getAnnotation();
+		assertEquals("java:/Objects/javax.annotation.CheckForNull", EcoreUtil.getURI(annotationType).trimFragment().toString());
 	}
 
 	@Test

@@ -188,7 +188,10 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"com.google.gson\" version=\"2.10.1.v20230109-0753\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20221112-0806\"/>");
+    _builder.append("<unit id=\"com.google.inject\" version=\"7.0.0\"/>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<unit id=\"jakarta.inject.jakarta.inject-api\" version=\"2.0.1\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20220405-0441\"/>");
