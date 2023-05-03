@@ -62,9 +62,9 @@ SnapshotToSnapshot() {
 	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtend.lib;bundle-version=\"${from}\"/org.eclipse.xtend.lib;bundle-version=\"${to}\"/g"
 	find . -type f -name "MANIFEST.MF_gen" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g"
 	find . -type f -name "pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "maven-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "tycho-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "versions.gradle" | xargs_sed_inplace -e "s/version = '${from}-SNAPSHOT'/version = '${to}-SNAPSHOT'/g"
+	#find . -type f -name "maven-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
+	#find . -type f -name "tycho-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
+	#find . -type f -name "versions.gradle" | xargs_sed_inplace -e "s/version = '${from}-SNAPSHOT'/version = '${to}-SNAPSHOT'/g"
 	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
 	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
 	find . -type f -name "category.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
@@ -131,19 +131,15 @@ fi
 checkVersionFormat "$to"
 
 if [ "$bump" == "StoS" ]; then
-   echo "# bumping version from Snapshot to Snapshot"
-   directories=$(find $(pwd) -maxdepth 1 -type d -name "xtext-*")
-   for directory in $directories
-   do
-       directory=$(echo $directory | tr -d '\r')
-       echo "Processing $directory"
-       # remember current dir and change to repository directory
-       pushd $(pwd) > /dev/null 
-       cd $directory
-       SnapshotToSnapshot
-       popd &> /dev/null
-       echo
-   done
+   echo "# bumping version from Snapshot to Snapshot $(pwd)"
+   directory=$(pwd)
+   directory=$(echo $directory | tr -d '\r')
+   echo "Processing $directory"
+   # remember current dir and change to repository directory
+   pushd $(pwd) > /dev/null 
+   cd $directory
+   SnapshotToSnapshot
+   popd &> /dev/null
 fi
 
 if [ "$bump" == "BST" ]; then
