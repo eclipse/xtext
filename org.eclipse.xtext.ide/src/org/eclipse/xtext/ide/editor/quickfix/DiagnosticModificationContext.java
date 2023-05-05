@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2020, 2023 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,12 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.quickfix;
 
-import javax.inject.Inject;
-
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.server.rename.ChangeConverter2;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
 
 /**
  * @author Heinrich Weichert

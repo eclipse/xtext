@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2021, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,9 +20,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.eclipse.xtext.ISetup;
@@ -42,7 +39,9 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 
 import com.google.common.io.Files;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @since 2.26

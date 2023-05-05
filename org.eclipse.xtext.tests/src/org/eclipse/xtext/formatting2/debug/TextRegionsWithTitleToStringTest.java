@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.debug;
 
-import javax.inject.Provider;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
@@ -25,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author dietrich - Initial contribution and API

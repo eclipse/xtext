@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2020, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,8 +13,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionKind;
 import org.eclipse.lsp4j.Command;
@@ -27,6 +25,7 @@ import org.eclipse.xtext.ide.editor.quickfix.QuickFix;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 
 import com.google.common.annotations.Beta;
+import com.google.inject.Inject;
 
 /**
  * {@link ICodeActionService2} handling quick-fixes annotated with {@link CodeActionKind#QuickFix}.

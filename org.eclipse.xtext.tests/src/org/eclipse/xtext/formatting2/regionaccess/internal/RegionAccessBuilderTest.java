@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,8 +9,6 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.Set;
-
-import javax.inject.Provider;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
@@ -36,6 +34,7 @@ import org.junit.runner.RunWith;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

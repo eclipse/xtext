@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2023 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,11 +11,11 @@ package org.eclipse.xtext.ui.testing;
 import com.google.common.annotations.Beta;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.inject.Provider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;

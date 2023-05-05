@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2021 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2023 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -7,8 +7,6 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.ide.tests.serializer;
-
-import javax.inject.Provider;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

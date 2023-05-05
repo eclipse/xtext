@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,14 +8,15 @@
  */
 package org.eclipse.xtext.ui.tests.xmleditor;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.tests.xmleditor.tests.XmlInjectorProvider;
 import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 @RunWith(XtextRunner.class)
 @InjectWith(XmlInjectorProvider.class)
