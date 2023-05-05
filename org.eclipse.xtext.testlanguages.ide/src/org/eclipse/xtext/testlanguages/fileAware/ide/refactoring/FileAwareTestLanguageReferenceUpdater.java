@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,8 +16,6 @@ import static org.eclipse.xtext.xbase.lib.IterableExtensions.toSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdaterContext;
@@ -29,6 +27,8 @@ import org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwareFactory;
 import org.eclipse.xtext.testlanguages.fileAware.fileAware.Import;
 import org.eclipse.xtext.testlanguages.fileAware.fileAware.PackageDeclaration;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
+
+import com.google.inject.Inject;
 
 public class FileAwareTestLanguageReferenceUpdater extends ReferenceUpdater {
 	@Inject

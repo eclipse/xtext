@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.fileWizard
 
 import com.google.common.annotations.Beta
 import com.google.common.io.ByteStreams
-import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -18,6 +17,7 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.typeRef
+import com.google.inject.Inject
 
 /**
  * Add a new file wizard with an (optional) template selection page.

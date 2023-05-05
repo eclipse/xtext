@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2017, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -25,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Karsten Thoms (karsten.thoms@itemis.de) - Initial contribution and API

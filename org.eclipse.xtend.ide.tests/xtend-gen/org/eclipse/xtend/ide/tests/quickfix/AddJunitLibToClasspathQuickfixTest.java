@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.xtend.ide.buildpath.Junit4LibClasspathAdder;
 import org.eclipse.xtend.ide.buildpath.Junit5LibClasspathAdder;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 itemis AG (http://www.itemis.com) and others.
+ * Copyright (c) 2017, 2023 itemis AG (http://www.itemis.com) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,9 +9,6 @@
 package org.eclipse.xtext.ui.tests.editor.encoding;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -30,7 +27,9 @@ import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author Karsten Thoms - Initial contribution and API

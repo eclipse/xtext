@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.ui.quickfix
 
-import javax.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -19,6 +18,7 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import com.google.inject.Inject
 
 /**
  * Contributes the Quickfix provider stub, either in Xtend or Java language.
