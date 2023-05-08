@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtend.lib"
       label="%featureName"
-      version="2.31.0.qualifier"
+      version="2.31.0.v20230508-1053"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">

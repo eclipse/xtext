@@ -181,79 +181,79 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     this.compilationUnit = compilationUnit;
   }
 
-  public boolean exists(final Path path) {
-    return this.getFileSystemSupport().exists(path);
+  public boolean exists(final Path arg0) {
+    return this.getFileSystemSupport().exists(arg0);
   }
 
-  public String getCharset(final Path path) {
-    return this.getFileSystemSupport().getCharset(path);
+  public String getCharset(final Path arg0) {
+    return this.getFileSystemSupport().getCharset(arg0);
   }
 
-  public Iterable<? extends Path> getChildren(final Path path) {
-    return this.getFileSystemSupport().getChildren(path);
+  public Iterable<? extends Path> getChildren(final Path arg0) {
+    return this.getFileSystemSupport().getChildren(arg0);
   }
 
-  public CharSequence getContents(final Path path) {
-    return this.getFileSystemSupport().getContents(path);
+  public CharSequence getContents(final Path arg0) {
+    return this.getFileSystemSupport().getContents(arg0);
   }
 
-  public InputStream getContentsAsStream(final Path path) {
-    return this.getFileSystemSupport().getContentsAsStream(path);
+  public InputStream getContentsAsStream(final Path arg0) {
+    return this.getFileSystemSupport().getContentsAsStream(arg0);
   }
 
-  public long getLastModification(final Path path) {
-    return this.getFileSystemSupport().getLastModification(path);
+  public long getLastModification(final Path arg0) {
+    return this.getFileSystemSupport().getLastModification(arg0);
   }
 
-  public boolean isFile(final Path path) {
-    return this.getFileSystemSupport().isFile(path);
+  public boolean isFile(final Path arg0) {
+    return this.getFileSystemSupport().isFile(arg0);
   }
 
-  public boolean isFolder(final Path path) {
-    return this.getFileSystemSupport().isFolder(path);
+  public boolean isFolder(final Path arg0) {
+    return this.getFileSystemSupport().isFolder(arg0);
   }
 
-  public URI toURI(final Path path) {
-    return this.getFileSystemSupport().toURI(path);
+  public URI toURI(final Path arg0) {
+    return this.getFileSystemSupport().toURI(arg0);
   }
 
-  public Path getProjectFolder(final Path path) {
-    return this.getFileLocations().getProjectFolder(path);
+  public Path getProjectFolder(final Path arg0) {
+    return this.getFileLocations().getProjectFolder(arg0);
   }
 
-  public Set<Path> getProjectSourceFolders(final Path path) {
-    return this.getFileLocations().getProjectSourceFolders(path);
+  public Set<Path> getProjectSourceFolders(final Path arg0) {
+    return this.getFileLocations().getProjectSourceFolders(arg0);
   }
 
-  public Path getSourceFolder(final Path path) {
-    return this.getFileLocations().getSourceFolder(path);
+  public Path getSourceFolder(final Path arg0) {
+    return this.getFileLocations().getSourceFolder(arg0);
   }
 
-  public Path getTargetFolder(final Path sourceFolder) {
-    return this.getFileLocations().getTargetFolder(sourceFolder);
+  public Path getTargetFolder(final Path arg0) {
+    return this.getFileLocations().getTargetFolder(arg0);
   }
 
-  public AnnotationTypeDeclaration findSourceAnnotationType(final String qualifiedName) {
-    return this.getTypeLookup().findSourceAnnotationType(qualifiedName);
+  public AnnotationTypeDeclaration findSourceAnnotationType(final String arg0) {
+    return this.getTypeLookup().findSourceAnnotationType(arg0);
   }
 
-  public ClassDeclaration findSourceClass(final String qualifiedName) {
-    return this.getTypeLookup().findSourceClass(qualifiedName);
+  public ClassDeclaration findSourceClass(final String arg0) {
+    return this.getTypeLookup().findSourceClass(arg0);
   }
 
-  public EnumerationTypeDeclaration findSourceEnumerationType(final String qualifiedName) {
-    return this.getTypeLookup().findSourceEnumerationType(qualifiedName);
+  public EnumerationTypeDeclaration findSourceEnumerationType(final String arg0) {
+    return this.getTypeLookup().findSourceEnumerationType(arg0);
   }
 
-  public InterfaceDeclaration findSourceInterface(final String qualifiedName) {
-    return this.getTypeLookup().findSourceInterface(qualifiedName);
+  public InterfaceDeclaration findSourceInterface(final String arg0) {
+    return this.getTypeLookup().findSourceInterface(arg0);
   }
 
-  public Type findUpstreamType(final Class<?> clazz) {
-    return this.getTypeLookup().findUpstreamType(clazz);
+  public Type findUpstreamType(final Class<?> arg0) {
+    return this.getTypeLookup().findUpstreamType(arg0);
   }
 
-  public Type findUpstreamType(final String typeName) {
-    return this.getTypeLookup().findUpstreamType(typeName);
+  public Type findUpstreamType(final String arg0) {
+    return this.getTypeLookup().findUpstreamType(arg0);
   }
 }

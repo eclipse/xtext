@@ -118,8 +118,8 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     return this.throwInferredTypeException("isArray").isArray();
   }
 
-  public boolean isAssignableFrom(final TypeReference typeReference) {
-    return this.throwInferredTypeException("isAssignableFrom").isAssignableFrom(typeReference);
+  public boolean isAssignableFrom(final TypeReference arg0) {
+    return this.throwInferredTypeException("isAssignableFrom").isAssignableFrom(arg0);
   }
 
   public boolean isPrimitive() {

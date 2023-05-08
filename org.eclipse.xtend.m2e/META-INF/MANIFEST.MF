@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtend.m2e;singleton:=true
-Bundle-Version: 2.31.0.qualifier
+Bundle-Version: 2.31.0.v20230508-1053
 Bundle-Localization: plugin
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.m2e.core;bundle-version="[1.8.3,3.0.0)";resolution:=optional,

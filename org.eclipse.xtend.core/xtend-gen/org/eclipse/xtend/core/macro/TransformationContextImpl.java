@@ -94,52 +94,52 @@ public class TransformationContextImpl implements TransformationContext {
     this.unit = unit;
   }
 
-  public void addError(final Element element, final String message) {
-    this.getProblemSupport().addError(element, message);
+  public void addError(final Element arg0, final String arg1) {
+    this.getProblemSupport().addError(arg0, arg1);
   }
 
-  public void addWarning(final Element element, final String message) {
-    this.getProblemSupport().addWarning(element, message);
+  public void addWarning(final Element arg0, final String arg1) {
+    this.getProblemSupport().addWarning(arg0, arg1);
   }
 
-  public List<? extends Problem> getProblems(final Element element) {
-    return this.getProblemSupport().getProblems(element);
+  public List<? extends Problem> getProblems(final Element arg0) {
+    return this.getProblemSupport().getProblems(arg0);
   }
 
-  public void validateLater(final Procedure0 validationCallback) {
-    this.getProblemSupport().validateLater(validationCallback);
+  public void validateLater(final Procedure0 arg0) {
+    this.getProblemSupport().validateLater(arg0);
   }
 
-  public MutableAnnotationTypeDeclaration findAnnotationType(final String qualifiedName) {
-    return this.getTypeLookup().findAnnotationType(qualifiedName);
+  public MutableAnnotationTypeDeclaration findAnnotationType(final String arg0) {
+    return this.getTypeLookup().findAnnotationType(arg0);
   }
 
-  public MutableClassDeclaration findClass(final String qualifiedName) {
-    return this.getTypeLookup().findClass(qualifiedName);
+  public MutableClassDeclaration findClass(final String arg0) {
+    return this.getTypeLookup().findClass(arg0);
   }
 
-  public MutableEnumerationTypeDeclaration findEnumerationType(final String qualifiedName) {
-    return this.getTypeLookup().findEnumerationType(qualifiedName);
+  public MutableEnumerationTypeDeclaration findEnumerationType(final String arg0) {
+    return this.getTypeLookup().findEnumerationType(arg0);
   }
 
-  public MutableInterfaceDeclaration findInterface(final String qualifiedName) {
-    return this.getTypeLookup().findInterface(qualifiedName);
+  public MutableInterfaceDeclaration findInterface(final String arg0) {
+    return this.getTypeLookup().findInterface(arg0);
   }
 
-  public Type findTypeGlobally(final Class<?> clazz) {
-    return this.getTypeLookup().findTypeGlobally(clazz);
+  public Type findTypeGlobally(final Class<?> arg0) {
+    return this.getTypeLookup().findTypeGlobally(arg0);
   }
 
-  public Type findTypeGlobally(final String typeName) {
-    return this.getTypeLookup().findTypeGlobally(typeName);
+  public Type findTypeGlobally(final String arg0) {
+    return this.getTypeLookup().findTypeGlobally(arg0);
   }
 
   public TypeReference getAnyType() {
     return this.getTypeReferenceProvider().getAnyType();
   }
 
-  public TypeReference getList(final TypeReference param) {
-    return this.getTypeReferenceProvider().getList(param);
+  public TypeReference getList(final TypeReference arg0) {
+    return this.getTypeReferenceProvider().getList(arg0);
   }
 
   public TypeReference getObject() {
@@ -182,155 +182,155 @@ public class TransformationContextImpl implements TransformationContext {
     return this.getTypeReferenceProvider().getPrimitiveVoid();
   }
 
-  public TypeReference getSet(final TypeReference param) {
-    return this.getTypeReferenceProvider().getSet(param);
+  public TypeReference getSet(final TypeReference arg0) {
+    return this.getTypeReferenceProvider().getSet(arg0);
   }
 
   public TypeReference getString() {
     return this.getTypeReferenceProvider().getString();
   }
 
-  public TypeReference newArrayTypeReference(final TypeReference componentType) {
-    return this.getTypeReferenceProvider().newArrayTypeReference(componentType);
+  public TypeReference newArrayTypeReference(final TypeReference arg0) {
+    return this.getTypeReferenceProvider().newArrayTypeReference(arg0);
   }
 
-  public TypeReference newSelfTypeReference(final Type typeDeclaration) {
-    return this.getTypeReferenceProvider().newSelfTypeReference(typeDeclaration);
+  public TypeReference newSelfTypeReference(final Type arg0) {
+    return this.getTypeReferenceProvider().newSelfTypeReference(arg0);
   }
 
-  public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
-    return this.getTypeReferenceProvider().newTypeReference(clazz, typeArguments);
+  public TypeReference newTypeReference(final Class<?> arg0, final TypeReference... arg1) {
+    return this.getTypeReferenceProvider().newTypeReference(arg0, arg1);
   }
 
-  public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
-    return this.getTypeReferenceProvider().newTypeReference(typeName, typeArguments);
+  public TypeReference newTypeReference(final String arg0, final TypeReference... arg1) {
+    return this.getTypeReferenceProvider().newTypeReference(arg0, arg1);
   }
 
-  public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
-    return this.getTypeReferenceProvider().newTypeReference(typeDeclaration, typeArguments);
+  public TypeReference newTypeReference(final Type arg0, final TypeReference... arg1) {
+    return this.getTypeReferenceProvider().newTypeReference(arg0, arg1);
   }
 
   public TypeReference newWildcardTypeReference() {
     return this.getTypeReferenceProvider().newWildcardTypeReference();
   }
 
-  public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
-    return this.getTypeReferenceProvider().newWildcardTypeReference(upperBound);
+  public TypeReference newWildcardTypeReference(final TypeReference arg0) {
+    return this.getTypeReferenceProvider().newWildcardTypeReference(arg0);
   }
 
-  public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference lowerBound) {
-    return this.getTypeReferenceProvider().newWildcardTypeReferenceWithLowerBound(lowerBound);
+  public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference arg0) {
+    return this.getTypeReferenceProvider().newWildcardTypeReferenceWithLowerBound(arg0);
   }
 
-  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationReference);
+  public AnnotationReference newAnnotationReference(final AnnotationReference arg0) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0);
   }
 
-  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationReference, initializer);
+  public AnnotationReference newAnnotationReference(final AnnotationReference arg0, final Procedure1<AnnotationReferenceBuildContext> arg1) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0, arg1);
   }
 
-  public AnnotationReference newAnnotationReference(final Class<?> annotationClass) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationClass);
+  public AnnotationReference newAnnotationReference(final Class<?> arg0) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0);
   }
 
-  public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationClass, initializer);
+  public AnnotationReference newAnnotationReference(final Class<?> arg0, final Procedure1<AnnotationReferenceBuildContext> arg1) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0, arg1);
   }
 
-  public AnnotationReference newAnnotationReference(final String annotationTypeName) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeName);
+  public AnnotationReference newAnnotationReference(final String arg0) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0);
   }
 
-  public AnnotationReference newAnnotationReference(final String annotationTypeName, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeName, initializer);
+  public AnnotationReference newAnnotationReference(final String arg0, final Procedure1<AnnotationReferenceBuildContext> arg1) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0, arg1);
   }
 
-  public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeDelcaration);
+  public AnnotationReference newAnnotationReference(final Type arg0) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0);
   }
 
-  public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeDelcaration, initializer);
+  public AnnotationReference newAnnotationReference(final Type arg0, final Procedure1<AnnotationReferenceBuildContext> arg1) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(arg0, arg1);
   }
 
-  public boolean exists(final Path path) {
-    return this.getFileSystemSupport().exists(path);
+  public boolean exists(final Path arg0) {
+    return this.getFileSystemSupport().exists(arg0);
   }
 
-  public String getCharset(final Path path) {
-    return this.getFileSystemSupport().getCharset(path);
+  public String getCharset(final Path arg0) {
+    return this.getFileSystemSupport().getCharset(arg0);
   }
 
-  public Iterable<? extends Path> getChildren(final Path path) {
-    return this.getFileSystemSupport().getChildren(path);
+  public Iterable<? extends Path> getChildren(final Path arg0) {
+    return this.getFileSystemSupport().getChildren(arg0);
   }
 
-  public CharSequence getContents(final Path path) {
-    return this.getFileSystemSupport().getContents(path);
+  public CharSequence getContents(final Path arg0) {
+    return this.getFileSystemSupport().getContents(arg0);
   }
 
-  public InputStream getContentsAsStream(final Path path) {
-    return this.getFileSystemSupport().getContentsAsStream(path);
+  public InputStream getContentsAsStream(final Path arg0) {
+    return this.getFileSystemSupport().getContentsAsStream(arg0);
   }
 
-  public long getLastModification(final Path path) {
-    return this.getFileSystemSupport().getLastModification(path);
+  public long getLastModification(final Path arg0) {
+    return this.getFileSystemSupport().getLastModification(arg0);
   }
 
-  public boolean isFile(final Path path) {
-    return this.getFileSystemSupport().isFile(path);
+  public boolean isFile(final Path arg0) {
+    return this.getFileSystemSupport().isFile(arg0);
   }
 
-  public boolean isFolder(final Path path) {
-    return this.getFileSystemSupport().isFolder(path);
+  public boolean isFolder(final Path arg0) {
+    return this.getFileSystemSupport().isFolder(arg0);
   }
 
-  public URI toURI(final Path path) {
-    return this.getFileSystemSupport().toURI(path);
+  public URI toURI(final Path arg0) {
+    return this.getFileSystemSupport().toURI(arg0);
   }
 
-  public Path getProjectFolder(final Path path) {
-    return this.getFileLocations().getProjectFolder(path);
+  public Path getProjectFolder(final Path arg0) {
+    return this.getFileLocations().getProjectFolder(arg0);
   }
 
-  public Set<Path> getProjectSourceFolders(final Path path) {
-    return this.getFileLocations().getProjectSourceFolders(path);
+  public Set<Path> getProjectSourceFolders(final Path arg0) {
+    return this.getFileLocations().getProjectSourceFolders(arg0);
   }
 
-  public Path getSourceFolder(final Path path) {
-    return this.getFileLocations().getSourceFolder(path);
+  public Path getSourceFolder(final Path arg0) {
+    return this.getFileLocations().getSourceFolder(arg0);
   }
 
-  public Path getTargetFolder(final Path sourceFolder) {
-    return this.getFileLocations().getTargetFolder(sourceFolder);
+  public Path getTargetFolder(final Path arg0) {
+    return this.getFileLocations().getTargetFolder(arg0);
   }
 
-  public Element getPrimaryGeneratedJavaElement(final Element source) {
-    return this.getTracability().getPrimaryGeneratedJavaElement(source);
+  public Element getPrimaryGeneratedJavaElement(final Element arg0) {
+    return this.getTracability().getPrimaryGeneratedJavaElement(arg0);
   }
 
-  public Element getPrimarySourceElement(final Element target) {
-    return this.getTracability().getPrimarySourceElement(target);
+  public Element getPrimarySourceElement(final Element arg0) {
+    return this.getTracability().getPrimarySourceElement(arg0);
   }
 
-  public boolean isExternal(final Element element) {
-    return this.getTracability().isExternal(element);
+  public boolean isExternal(final Element arg0) {
+    return this.getTracability().isExternal(arg0);
   }
 
-  public boolean isGenerated(final Element element) {
-    return this.getTracability().isGenerated(element);
+  public boolean isGenerated(final Element arg0) {
+    return this.getTracability().isGenerated(arg0);
   }
 
-  public boolean isSource(final Element element) {
-    return this.getTracability().isSource(element);
+  public boolean isSource(final Element arg0) {
+    return this.getTracability().isSource(arg0);
   }
 
-  public boolean isThePrimaryGeneratedJavaElement(final Element target) {
-    return this.getTracability().isThePrimaryGeneratedJavaElement(target);
+  public boolean isThePrimaryGeneratedJavaElement(final Element arg0) {
+    return this.getTracability().isThePrimaryGeneratedJavaElement(arg0);
   }
 
-  public void setPrimarySourceElement(final MutableElement javaElement, final Element sourceElement) {
-    this.getAssociator().setPrimarySourceElement(javaElement, sourceElement);
+  public void setPrimarySourceElement(final MutableElement arg0, final Element arg1) {
+    this.getAssociator().setPrimarySourceElement(arg0, arg1);
   }
 }

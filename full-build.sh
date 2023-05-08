@@ -50,6 +50,6 @@ echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 mvn -B \
   -f org.eclipse.xtext.full.releng \
   clean deploy \
-  -DaltDeploymentRepository=local::default::file:./build/maven-repository \
+  -Dtycho.strictVersions=false -DaltDeploymentRepository=local::default::file:./build/maven-repository \
   ${MVN_ARGS[@]} \
   $@

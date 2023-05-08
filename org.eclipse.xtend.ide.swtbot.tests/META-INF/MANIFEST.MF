@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend SWT Tests
 Bundle-SymbolicName: org.eclipse.xtend.ide.swtbot.tests
-Bundle-Version: 2.31.0.qualifier
+Bundle-Version: 2.31.0.v20230508-1053
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.apache.log4j;version="1.2.24",

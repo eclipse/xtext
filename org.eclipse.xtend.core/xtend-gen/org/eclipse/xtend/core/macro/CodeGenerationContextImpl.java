@@ -61,103 +61,103 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
     this.unit = unit;
   }
 
-  public Path getProjectFolder(final Path path) {
-    return this.getFileLocations().getProjectFolder(path);
+  public Path getProjectFolder(final Path arg0) {
+    return this.getFileLocations().getProjectFolder(arg0);
   }
 
-  public Set<Path> getProjectSourceFolders(final Path path) {
-    return this.getFileLocations().getProjectSourceFolders(path);
+  public Set<Path> getProjectSourceFolders(final Path arg0) {
+    return this.getFileLocations().getProjectSourceFolders(arg0);
   }
 
-  public Path getSourceFolder(final Path path) {
-    return this.getFileLocations().getSourceFolder(path);
+  public Path getSourceFolder(final Path arg0) {
+    return this.getFileLocations().getSourceFolder(arg0);
   }
 
-  public Path getTargetFolder(final Path sourceFolder) {
-    return this.getFileLocations().getTargetFolder(sourceFolder);
+  public Path getTargetFolder(final Path arg0) {
+    return this.getFileLocations().getTargetFolder(arg0);
   }
 
-  public void delete(final Path path) {
-    this.getFileSystemSupport().delete(path);
+  public void delete(final Path arg0) {
+    this.getFileSystemSupport().delete(arg0);
   }
 
-  public boolean exists(final Path path) {
-    return this.getFileSystemSupport().exists(path);
+  public boolean exists(final Path arg0) {
+    return this.getFileSystemSupport().exists(arg0);
   }
 
-  public String getCharset(final Path path) {
-    return this.getFileSystemSupport().getCharset(path);
+  public String getCharset(final Path arg0) {
+    return this.getFileSystemSupport().getCharset(arg0);
   }
 
-  public Iterable<? extends Path> getChildren(final Path path) {
-    return this.getFileSystemSupport().getChildren(path);
+  public Iterable<? extends Path> getChildren(final Path arg0) {
+    return this.getFileSystemSupport().getChildren(arg0);
   }
 
-  public CharSequence getContents(final Path path) {
-    return this.getFileSystemSupport().getContents(path);
+  public CharSequence getContents(final Path arg0) {
+    return this.getFileSystemSupport().getContents(arg0);
   }
 
-  public InputStream getContentsAsStream(final Path path) {
-    return this.getFileSystemSupport().getContentsAsStream(path);
+  public InputStream getContentsAsStream(final Path arg0) {
+    return this.getFileSystemSupport().getContentsAsStream(arg0);
   }
 
-  public long getLastModification(final Path path) {
-    return this.getFileSystemSupport().getLastModification(path);
+  public long getLastModification(final Path arg0) {
+    return this.getFileSystemSupport().getLastModification(arg0);
   }
 
-  public boolean isFile(final Path path) {
-    return this.getFileSystemSupport().isFile(path);
+  public boolean isFile(final Path arg0) {
+    return this.getFileSystemSupport().isFile(arg0);
   }
 
-  public boolean isFolder(final Path path) {
-    return this.getFileSystemSupport().isFolder(path);
+  public boolean isFolder(final Path arg0) {
+    return this.getFileSystemSupport().isFolder(arg0);
   }
 
-  public void mkdir(final Path path) {
-    this.getFileSystemSupport().mkdir(path);
+  public void mkdir(final Path arg0) {
+    this.getFileSystemSupport().mkdir(arg0);
   }
 
-  public void setContents(final Path path, final CharSequence contents) {
-    this.getFileSystemSupport().setContents(path, contents);
+  public void setContents(final Path arg0, final CharSequence arg1) {
+    this.getFileSystemSupport().setContents(arg0, arg1);
   }
 
-  public void setContentsAsStream(final Path path, final InputStream source) {
-    this.getFileSystemSupport().setContentsAsStream(path, source);
+  public void setContentsAsStream(final Path arg0, final InputStream arg1) {
+    this.getFileSystemSupport().setContentsAsStream(arg0, arg1);
   }
 
-  public URI toURI(final Path path) {
-    return this.getFileSystemSupport().toURI(path);
+  public URI toURI(final Path arg0) {
+    return this.getFileSystemSupport().toURI(arg0);
   }
 
-  public Type findTypeGlobally(final Class<?> clazz) {
-    return this.getGlobalTypeLookup().findTypeGlobally(clazz);
+  public Type findTypeGlobally(final Class<?> arg0) {
+    return this.getGlobalTypeLookup().findTypeGlobally(arg0);
   }
 
-  public Type findTypeGlobally(final String typeName) {
-    return this.getGlobalTypeLookup().findTypeGlobally(typeName);
+  public Type findTypeGlobally(final String arg0) {
+    return this.getGlobalTypeLookup().findTypeGlobally(arg0);
   }
 
-  public Element getPrimaryGeneratedJavaElement(final Element source) {
-    return this.getTracability().getPrimaryGeneratedJavaElement(source);
+  public Element getPrimaryGeneratedJavaElement(final Element arg0) {
+    return this.getTracability().getPrimaryGeneratedJavaElement(arg0);
   }
 
-  public Element getPrimarySourceElement(final Element target) {
-    return this.getTracability().getPrimarySourceElement(target);
+  public Element getPrimarySourceElement(final Element arg0) {
+    return this.getTracability().getPrimarySourceElement(arg0);
   }
 
-  public boolean isExternal(final Element element) {
-    return this.getTracability().isExternal(element);
+  public boolean isExternal(final Element arg0) {
+    return this.getTracability().isExternal(arg0);
   }
 
-  public boolean isGenerated(final Element element) {
-    return this.getTracability().isGenerated(element);
+  public boolean isGenerated(final Element arg0) {
+    return this.getTracability().isGenerated(arg0);
   }
 
-  public boolean isSource(final Element element) {
-    return this.getTracability().isSource(element);
+  public boolean isSource(final Element arg0) {
+    return this.getTracability().isSource(arg0);
   }
 
-  public boolean isThePrimaryGeneratedJavaElement(final Element target) {
-    return this.getTracability().isThePrimaryGeneratedJavaElement(target);
+  public boolean isThePrimaryGeneratedJavaElement(final Element arg0) {
+    return this.getTracability().isThePrimaryGeneratedJavaElement(arg0);
   }
 }
