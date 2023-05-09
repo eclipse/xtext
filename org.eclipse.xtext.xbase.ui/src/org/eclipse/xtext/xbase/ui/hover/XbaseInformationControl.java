@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -503,6 +503,10 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 * @since 3.4
 	 */
 	private final String fSymbolicFontName;
+	
+	private int fDisposeTimeout;
+
+	private Runnable fDisposeTask;
 
 	/*
 	 * @see IInformationControl#setVisible(boolean)
@@ -516,6 +520,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		if (!visible) {
 			super.setVisible(false);
 			setInput(null);
+			startDisposeTimeout(shell.getDisplay());
 			return;
 		}
 
@@ -696,6 +701,33 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	public String toString() {
 		String style = (getShell().getStyle() & SWT.RESIZE) == 0 ? "fixed" : "resizeable"; //$NON-NLS-1$ //$NON-NLS-2$
 		return super.toString() + " -  style: " + style; //$NON-NLS-1$
+	}
+	
+	/**
+	 * Sets a timeout, after which a not visible control will be disposed.
+	 *
+	 * @param disposeTimeout The timeout in milliseconds. Non-positive values result in no timeout,
+	 *            i.e. don't dispose non-visible controls.
+	 */
+	@Override
+	public void setDisposeTimeout(int disposeTimeout) {
+		fDisposeTimeout= disposeTimeout;
+	}
+
+	private void startDisposeTimeout(Display display) {
+		class DisposeTask implements Runnable {
+			@Override
+			public void run() {
+				fDisposeTask= null;
+				if (!isVisible()) {
+					dispose();
+				}
+			}
+		}
+		if (fDisposeTimeout > 0 && fDisposeTask == null) {
+			fDisposeTask= new DisposeTask();
+			display.timerExec(fDisposeTimeout, fDisposeTask);
+		}
 	}
 
 }

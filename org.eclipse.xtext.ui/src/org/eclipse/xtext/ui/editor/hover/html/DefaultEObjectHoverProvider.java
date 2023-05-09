@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2020 Christoph Kulla
+ * Copyright (c) 2010, 2023 Christoph Kulla
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,6 +20,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -370,6 +371,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				ToolBarManager tbm = new ToolBarManager(SWT.FLAT);
 				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: mPreferenceConstants.APPEARANCE_JAVADOC_FONT;
 				IXtextBrowserInformationControl control = new XtextBrowserInformationControl(parent, font, tbm);
+				control.setDisposeTimeout(getDisposeHoverTimeout());
 				configureControl(control, tbm, font);
 				return control;
 			} else {
@@ -445,6 +447,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 						return fInformationPresenterControlCreator;
 					}
 				};
+				iControl.setDisposeTimeout(getDisposeHoverTimeout());
 				addLinkListener(iControl);
 				return iControl;
 			} else {
@@ -547,6 +550,19 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			public IInformationControlCreator getInformationPresenterControlCreator() {
 				return DefaultEObjectHoverProvider.this.getInformationPresenterControlCreator();
 			}};
+	}
+
+	/**
+	 * this method wont have any effect in eclipse versions &lt; 4.28 / 2023-06
+	 * 
+	 * see {@link BrowserInformationControl}.setDisposeTimeout(int)
+	 * 
+	 * @since 2.31
+	 */
+	protected int getDisposeHoverTimeout() {
+		String key = "disposeClosedBrowserHoverTimeout"; //$NON-NLS-1$ // IWorkbenchPreferenceConstants.DISPOSE_CLOSED_BROWSER_HOVER_TIMEOUT
+		int timeout = Platform.getPreferencesService().getInt("org.eclipse.ui", key, -1, null);  //$NON-NLS-1$
+		return timeout;
 	}
 
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover.html;
 
+import org.eclipse.jface.internal.text.html.BrowserInformationControl;
 import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInputChangedListener;
@@ -39,5 +40,12 @@ public interface IXtextBrowserInformationControl extends IInformationControl {
 
 	public void addInputChangeListener(IInputChangedListener inputChangeListener);
 	
+	/**
+	 * this method wont have any effect in eclipse versions &lt; 4.28 / 2023-06
+	 * see {@link BrowserInformationControl}.setDisposeTimeout(int)
+	 * 
+	 * @since 2.31
+	 */
+	public default void setDisposeTimeout(int disposeTimeout) {}
 	
 }
