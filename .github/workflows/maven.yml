@@ -38,8 +38,7 @@ jobs:
       - name: Build and test
         uses: coactions/setup-xvfb@v1
         with: 
-          run: mvn clean verify -PuseJenkinsSnapshots
-          working-directory: org.eclipse.xtext.full.releng
+          run: ./mvnw clean verify -PuseJenkinsSnapshots -f org.eclipse.xtext.full.releng
 
   build-maven-artifacts:
     if: github.event_name != 'pull_request' || github.event.pull_request.base.repo.clone_url != github.event.pull_request.head.repo.clone_url
@@ -63,5 +62,4 @@ jobs:
           restore-keys: ${{ runner.os }}-maven
 
       - name: Build Maven artifacts
-        run: mvn clean verify -PuseJenkinsSnapshots
-        working-directory: org.eclipse.xtext.maven.releng
+        run: ./mvnw clean verify -PuseJenkinsSnapshots -f org.eclipse.xtext.maven.releng
