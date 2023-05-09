@@ -102,11 +102,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							maven {
 								url 'https://oss.sonatype.org/content/repositories/snapshots'
 							}
-«««							«FOR x : #['lib','core','extras','maven','xtend','web']»
-«««								maven {
-«««									url 'https://ci.eclipse.org/xtext/job/xtext-«x»/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/'
-«««								}
-«««							«ENDFOR»
+«««							maven {
+«««								url 'https://ci.eclipse.org/xtext/job/xtext/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/'
+«««							}
 						«ENDIF»
 					}
 
@@ -503,18 +501,16 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<enabled>true</enabled>
 							</snapshots>
 						</repository>
-«««						«FOR x : #['lib','core','extras','maven','xtend','web']»
-«««							<repository>
-«««								<id>xtext-«x»</id>
-«««								<url>https://ci.eclipse.org/xtext/job/xtext-«x»/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
-«««								<releases>
-«««									<enabled>false</enabled>
-«««								</releases>
-«««								<snapshots>
-«««									<enabled>true</enabled>
-«««								</snapshots>
-«««							</repository>
-«««						«ENDFOR»
+						<repository>
+							<id>xtext</id>
+							<url>https://ci.eclipse.org/xtext/job/xtext/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>true</enabled>
+							</snapshots>
+						</repository>
 					«ENDIF»
 				</repositories>
 				<pluginRepositories>
@@ -564,18 +560,16 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<enabled>true</enabled>
 							</snapshots>
 						</pluginRepository>
-«««						«FOR x : #['lib','core','extras','maven','xtend','web']»
-«««							<pluginRepository>
-«««								<id>xtext-«x»-p</id>
-«««								<url>https://ci.eclipse.org/xtext/job/xtext-«x»/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
-«««								<releases>
-«««									<enabled>false</enabled>
-«««								</releases>
-«««								<snapshots>
-«««									<enabled>true</enabled>
-«««								</snapshots>
-«««							</pluginRepository>
-«««						«ENDFOR»
+«««						<pluginRepository>
+«««							<id>xtext-p</id>
+«««							<url>https://ci.eclipse.org/xtext/job/xtext/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+«««							<releases>
+«««								<enabled>false</enabled>
+«««							</releases>
+«««							<snapshots>
+«««								<enabled>true</enabled>
+«««							</snapshots>
+«««						</pluginRepository>
 					«ENDIF»
 					«IF config.needsTychoBuild && tychoVersion.endsWith("-SNAPSHOT")»
 						<pluginRepository>
