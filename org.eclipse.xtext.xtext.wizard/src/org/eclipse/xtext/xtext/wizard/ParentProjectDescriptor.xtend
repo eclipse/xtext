@@ -501,16 +501,16 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<enabled>true</enabled>
 							</snapshots>
 						</repository>
-						<repository>
-							<id>xtext</id>
-							<url>https://ci.eclipse.org/xtext/job/xtext/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
-							<releases>
-								<enabled>false</enabled>
-							</releases>
-							<snapshots>
-								<enabled>true</enabled>
-							</snapshots>
-						</repository>
+ллл						<repository>
+ллл							<id>xtext</id>
+ллл							<url>https://ci.eclipse.org/xtext/job/xtext/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+ллл							<releases>
+ллл								<enabled>false</enabled>
+ллл							</releases>
+ллл							<snapshots>
+ллл								<enabled>true</enabled>
+ллл							</snapshots>
+ллл						</repository>
 					лENDIF╗
 				</repositories>
 				<pluginRepositories>
