@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -330,6 +330,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 				String font = "org.eclipse.jdt.ui.javadocfont";
 				IXtextBrowserInformationControl control = new XbaseInformationControl(parent, font, tbm,
 						xbaseHoverConfiguration);
+				control.setDisposeTimeout(getDisposeHoverTimeout());
 				configureControl(control, tbm, font);
 				return control;
 			} else {
@@ -394,6 +395,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 					}
 				};
 				addLinkListener(iControl);
+				iControl.setDisposeTimeout(getDisposeHoverTimeout());
 				return iControl;
 			} else {
 				return new DefaultInformationControl(parent, tooltipAffordanceString);
