@@ -103,7 +103,16 @@ public class XtextGeneratorIT {
 		Verifier verifier = verifyErrorFreeLog("simple-lang");
 		verifier.verifyFileContentMatches(verifier.getBasedir() + "/src-gen/RefModel.nojdt.txt", "People to greet\\: Test");
 	}
-	
+
+	@Test
+	public void simpleLangWithPluginDependencies() throws Exception {
+		Verifier verifier = verifyErrorFreeLog("simple-lang-plugin-dependencies");
+		verifier.verifyFileContentMatches(verifier.getBasedir() +
+			"/simple-lang-model/src-gen/Model.nojdt.txt", "People to greet\\: maven");
+		verifier.verifyFileContentMatches(verifier.getBasedir() +
+			"/simple-lang-ref-model/src-gen/RefModel.nojdt.txt", "People to greet\\: Test");
+	}
+
 	@Test
 	public void simpleLangIncremental() throws Exception {
 		String project = "simple-lang-incremental";
