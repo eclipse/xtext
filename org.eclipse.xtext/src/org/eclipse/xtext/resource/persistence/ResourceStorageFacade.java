@@ -3,7 +3,7 @@
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.resource.persistence;
@@ -20,6 +20,7 @@ import java.util.Collections;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
@@ -62,10 +63,10 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
 				if (loadable != null)
 					return loadable;
 			}
-			if (resourceSet.getURIConverter().exists(getBinaryStorageURI(resource.getURI()),
-					Collections.emptyMap())) {
-				return createResourceStorageLoadable(resourceSet.getURIConverter()
-						.createInputStream(getBinaryStorageURI(resource.getURI())));
+			URIConverter converter = resourceSet.getURIConverter();
+			URI storageURI = getBinaryStorageURI(resource.getURI());
+			if (converter.exists(storageURI, Collections.emptyMap())) {
+				return createResourceStorageLoadable(converter.createInputStream(storageURI));
 			}
 			return createResourceStorageLoadable(
 					getFileSystemAccess(resource).readBinaryFile(computeOutputPath(resource)));
@@ -73,21 +74,21 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
 			throw new RuntimeIOException(e);
 		}
 	}
-	
+
 	protected boolean doesStorageExist(StorageAwareResource resource) {
 		ResourceSet resourceSet = resource.getResourceSet();
 		ResourceStorageProviderAdapter stateProvider = getResourceStorageProviderAdapter(resourceSet);
 		if (stateProvider != null && stateProvider.getResourceStorageLoadable(resource) != null)
 			return true;
 		// check for next to original location, i.e. jars
-		if (resourceSet.getURIConverter().exists(getBinaryStorageURI(resource.getURI()),
-				Collections.emptyMap()))
+		URIConverter converter = resourceSet.getURIConverter();
+		if (converter.exists(getBinaryStorageURI(resource.getURI()), Collections.emptyMap()))
 			return true;
 		// if it's an archive URI, we don't need to look up the source folder-output folder scheme
 		if (resource.getURI().isArchive())
 			return false;
 		URI uri = getFileSystemAccess(resource).getURI(computeOutputPath(resource));
-		return uri != null && resourceSet.getURIConverter().exists(uri, null);
+		return uri != null && converter.exists(uri, null);
 	}
 
 	@Override
