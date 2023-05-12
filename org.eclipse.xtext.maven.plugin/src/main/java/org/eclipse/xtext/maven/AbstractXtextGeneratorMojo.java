@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,7 +12,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -134,7 +136,17 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	 */
 	@Parameter(defaultValue = "false")
 	private Boolean incrementalXtextBuild = Boolean.FALSE;
-	
+
+	@Parameter( readonly = true, defaultValue = "${plugin.artifacts}" )
+	private List<Artifact> pluginDependencies;
+
+	/**
+	 * This way, a DSL file can refer to other DSL libraries only during compilation,
+	 * by adding a dependency in the plugin section, not in the project.
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean includePluginDependencies;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -164,7 +176,7 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 		builder.setBaseDir(getProject().getBasedir().getAbsolutePath());
 		builder.setLanguages(languages);
 		builder.setEncoding(getEncoding());
-		builder.setClassPathEntries(getClasspathElements());
+		builder.setClassPathEntries(getClasspathEntries());
 		builder.setClassPathLookUpFilter(classPathLookupFilter);
 		builder.setSourceDirs(getSourceRoots());
 		builder.setJavaSourceDirs(javaSourceRoots);
@@ -201,7 +213,7 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 		if (getLog().isDebugEnabled()) {
 			getLog().debug("Source dirs: " + IterableExtensions.join(getSourceRoots(), ", "));
 			getLog().debug("Java source dirs: " + IterableExtensions.join(javaSourceRoots, ", "));
-			getLog().debug("Classpath entries: " + IterableExtensions.join(getClasspathElements(), ", "));
+			getLog().debug("Classpath entries: " + IterableExtensions.join(getClasspathEntries(), ", "));
 		}
 	}
 
@@ -223,6 +235,18 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 				return !Strings.isEmpty(input.trim());
 			}
 		};
+	}
+
+	private Set<String> getClasspathEntries() {
+		Set<String> classpathElements = getClasspathElements();
+		if (isIncludePluginDependencies()) {
+			getLog().info("Including plugin dependencies");
+			List<String> pluginClasspathElements = pluginDependencies.stream()
+					.map(e -> e.getFile().toPath().toString())
+					.collect(Collectors.toList());
+			classpathElements.addAll(pluginClasspathElements);
+		}
+		return classpathElements;
 	}
 
 	/**
@@ -286,5 +310,9 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 				+ "' to Platform Resource Map");
 		final URI uri = URI.createURI(file.toURI().toString());
 		return EcorePlugin.getPlatformResourceMap().put(file.getName(), uri);
+	}
+
+	protected boolean isIncludePluginDependencies() {
+		return includePluginDependencies;
 	}
 }

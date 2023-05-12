@@ -12,14 +12,6 @@
 
 	<artifactId>simple-lang-ref-model</artifactId>
 
-	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>simple-lang-model</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -32,12 +24,18 @@
 							<setup>org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup</setup>
 						</language>
 					</languages>
+					<includePluginDependencies>true</includePluginDependencies>
 				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.testlanguages</artifactId>
 						<version>${xtext-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>${project.groupId}</groupId>
+						<artifactId>simple-lang-model</artifactId>
+						<version>${project.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
