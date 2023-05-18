@@ -69,6 +69,21 @@ pipeline {
         }
       }// END steps
     } // END stage
+
+    stage('Trigger Snapshot Deployment') {
+      when {
+        allOf {
+          expression {
+            currentBuild.getBuildCauses().toString().contains('BranchIndexingCause')
+          }
+          branch 'main'
+        }
+      }
+      steps {
+        build job: "xtext-monorepo-full-deploy-nightly", wait: false
+      }
+    }
+
   } // END stages
 
   post {
