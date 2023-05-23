@@ -296,7 +296,7 @@ public abstract class SourceAttachmentPackageFragmentRootWalker<T> extends Packa
 	 */
 	private String getBundleSymbolicName(Manifest manifest) {
 		String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-		if (name != null) {
+		if (name != null && !name.trim().isEmpty()) {
 			final int indexOf = name.indexOf(';');
 			if (indexOf > 0)
 				name = name.substring(0, indexOf);
