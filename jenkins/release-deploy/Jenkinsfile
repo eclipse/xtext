@@ -1,0 +1,68 @@
+pipeline {
+  agent any
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'15'))
+    disableConcurrentBuilds()
+    timeout(time: 120, unit: 'MINUTES')
+  }
+
+  parameters {
+    booleanParam(name: 'P2_DEPLOY_DRY_RUN', defaultValue: false, description:
+      '''
+        If set, the composite update site is created/updated locally (and archived), but it will
+        not be uploaded to the remote area: rsync will be executed with "--dry-run, -n"
+      ''')
+  }
+
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext'
+    REPOSITORY_PATH="${DOWNLOAD_AREA}/updates/releases"
+  }
+
+  tools {
+    maven "apache-maven-3.8.6"
+    jdk "temurin-jdk17-latest"
+  }
+
+  stages {
+    stage('Prepare download area') {
+      steps {
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh '''
+            echo ${REPOSITORY_PATH}
+            ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $REPOSITORY_PATH"
+          '''
+        }
+      }
+    }
+    stage('Prepare versions for Release') {
+      steps {
+        sh './scripts/prepare-for-release.sh'
+      }
+    }
+    stage('Maven Tycho Build, Sign, Deploy') {
+      steps {
+        withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
+          sh 'gpg --batch --import "${KEYRING}"'
+          sh 'for fpr in $(gpg --list-keys --with-colons  | awk -F: \'/fpr:/ {print $10}\' | sort -u); do echo -e "5\ny\n" |  gpg --batch --command-fd 0 --expert --edit-key ${fpr} trust; done'
+        }
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+          sh """
+          ./full-deploy.sh -Peclipse-sign,sonatype-oss-release,release-release ${rsyncAdditionalArgs()}
+          """
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**, org.eclipse.xtext.p2repository/target/checkout/**'
+    }
+  }
+}
+
+def rsyncAdditionalArgs() {
+  return params.P2_DEPLOY_DRY_RUN ? '-Dadditional-rsync-commit-args="-n"' : ''
+}
