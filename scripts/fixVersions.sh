@@ -3,16 +3,8 @@
 usage ()
 {
   echo "----------------------------------------------------------"
-  echo "Usage   : fixVersions.sh -f <from_version> [-t <to_version>] -b <StoS|StoR|MtoR|RCtoR|BST> "
-  echo "Example : fixVersions.sh -f '2.15.0' -t '2.16.0' -b StoS"
-  echo "Example : fixVersions.sh -f '2.16.0.M1' -t '2.16.0' -b BST"
-  echo "Example : fixVersions.sh -f '2.15.0' -b StoS"
+  echo "Usage   : fixVersions.sh -f <from_version> [-t <to_version>] "
   echo "Note: '-t' is optional, if not given it will be derived from '-f'"
-  echo "Note: StoS - Snapshot version to another Snapshot version
-      StoR - Snapshot version to another Release version
-      MtoR - Milestone version to another Release version
-      RCtoR - RC version to another Release version
-      BST - BootStrap version to another version"
   echo "----------------------------------------------------------"
   exit
 }
@@ -62,34 +54,10 @@ SnapshotToSnapshot() {
 	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtend.lib;bundle-version=\"${from}\"/org.eclipse.xtend.lib;bundle-version=\"${to}\"/g"
 	find . -type f -name "MANIFEST.MF_gen" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g"
 	find . -type f -name "pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "maven-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "tycho-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
 	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
 	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
 	find . -type f -name "category.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
 	find . -type f -name "plugin.xml" | xargs_sed_inplace -e "s/<version>${from}-SNAPSHOT<\/version>/<version>${to}-SNAPSHOT<\/version>/g"
-}
-
-SnapshotToRelease() {
-	echo "# not usable now"
-}
-
-SnapshotToMilestone() {
- 	echo "# not usable now"
-}
-
-MilestoneToRelease() {
-	echo "# not usable now"
-}
-
-RCToRelease() {
-	echo "# not usable now"
-}
-
-
-VersionBootstrap() {
-      find . -type f -name "pom.xml" | xargs_sed_inplace -e "s/<xtend-maven-plugin-version>${from}<\/xtend-maven-plugin-version>/<xtend-maven-plugin-version>${to}<\/xtend-maven-plugin-version>/g"
-      find . -type f -name "versions.gradle" | xargs_sed_inplace -e "s/'xtext_bootstrap': '${from}'/'xtext_bootstrap': '${to}'/g"
 }
 
 if [ $# -lt 2 ] || [ $# -gt 6 ] ; then
@@ -102,8 +70,6 @@ while [ "$1" != "" ]; do
              from=$1 ;;
         -t ) shift 
              to=$1 ;;
-        -b ) shift 
-             bump=$1 ;;
          *)  echo "unknown: option $1" 
              usage
   esac
@@ -112,31 +78,18 @@ done
 
 echo "# from_version: $from"
 echo "# to_version: $to" 
-echo "# bump/bootstrap: $bump" 
 
 checkVersionFormat "$from"
 
 if [ -z "$to" ] ; then
-   if [ "$bump" != "BST" ]; then
-      echo "# 'to_version' is unset or set to the empty string"
-      echo "# deriving 'to_version' from 'from_verison'"
-      deriveToVersion
-   else
-      echo "ERROR# 'to_version' is mandatory for bootstrapping"
-      exit 1
-   fi
+  echo "# 'to_version' is unset or set to the empty string"
+  echo "# deriving 'to_version' from 'from_verison'"
+  deriveToVersion
 fi
 
 checkVersionFormat "$to"
 
-if [ "$bump" == "StoS" ]; then
-   echo "# bumping version from Snapshot to Snapshot"
-   
-   SnapshotToSnapshot
-fi
+echo "# bumping version from Snapshot to Snapshot $(pwd)"
+echo "Processing $(pwd)"
+SnapshotToSnapshot
 
-if [ "$bump" == "BST" ]; then
-   echo "# bootstrapping version from $from to $to"
-  
-   VersionBootstrap
-fi
