@@ -8,7 +8,7 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'RELEASE_TYPE', choices: ['M0', 'M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
+    choice(name: 'RELEASE_TYPE', choices: ['M0', 'M1', 'M2', 'M3', 'RC1', 'RC2'], description:
       '''
         Kind of milestone release to build.
       ''')
