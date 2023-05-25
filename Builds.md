@@ -6,7 +6,7 @@
 
 1. Run the Full Deploy Job
    * For milestones run the [xtext-monorepo-full-deploy-milestone](https://ci.eclipse.org/xtext/job/xtext-monorepo-full-deploy-milestone/) job and select the milestone postfix (M1, M2, ...) as the `RELEASE_TYPE` parameter.
-   * For releases run the [https://ci.eclipse.org/xtext/job/xtext-monorepo-full-deploy-release/](xtext-monorepo-full-deploy-release) Job.
+   * For releases run the [xtext-monorepo-full-deploy-release](https://ci.eclipse.org/xtext/job/xtext-monorepo-full-deploy-release/) Job.
 
 1. Wait for the job to finish  
 Check the Update Site and Drop dirs to contain the new Milestone or Release
@@ -25,7 +25,7 @@ Check the Update Site and Drop dirs to contain the new Milestone or Release
     * Clone / pull `ssh://<gerrituser>@git.eclipse.org:29418/simrel/org.eclipse.simrel.build`
     * Edit `tmf-xtext.aggrcon` and enter new repo path and version numbers.
     * Create a commit
-    * `pit push origin HEAD:refs/for/master`
+    * `git push origin HEAD:refs/for/master`
     * wait for the gerrit job to finish 
     * Approve the created [gerrit review](https://git.eclipse.org/r/q/project:simrel/org.eclipse.simrel.build+status:open)
     * Submit the gerrit review
@@ -86,3 +86,4 @@ Check the Update Site and Drop dirs to contain the new Milestone or Release
 1. TODOs
    * create new target for the current eclipse release once it is out
    * adapt latest target to use new orbit / I-builds / eclipse release alias once available
+   * prepare release notes and website changes for next release
