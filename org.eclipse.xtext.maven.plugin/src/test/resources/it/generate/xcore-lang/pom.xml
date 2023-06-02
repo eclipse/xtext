@@ -97,13 +97,13 @@
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.jdt</groupId>
-						<artifactId>org.eclipse.jdt.core</artifactId>
+						<artifactId>ecj</artifactId>
 						<version>${jdt-core-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.jdt</groupId>
-						<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
-						<version>${jdt-compiler-apt-version}</version>
+						<artifactId>org.eclipse.jdt.core</artifactId>
+						<version>${jdt-core-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
