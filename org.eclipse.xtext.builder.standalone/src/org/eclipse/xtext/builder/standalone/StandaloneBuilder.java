@@ -838,7 +838,7 @@ public class StandaloneBuilder {
 				return;
 			}
 			String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-			if (name != null) {
+			if (name != null && !name.isBlank()) {
 				int indexOf = name.indexOf(";");
 				if (indexOf > 0) {
 					name = name.substring(0, indexOf);
