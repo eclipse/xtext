@@ -13,8 +13,12 @@ import java.io.FileWriter;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.DidChangeWorkspaceFoldersParams;
 import org.eclipse.lsp4j.InitializeParams;
+import org.eclipse.lsp4j.InitializeResult;
+import org.eclipse.lsp4j.NotebookDocumentChangeEvent;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.WorkspaceFoldersChangeEvent;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
@@ -47,16 +51,34 @@ public class WorkspaceFoldersTest extends AbstractTestLangLanguageServerTest {
 	public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
 	@Test
-	public void testInitialize() throws Exception {
+	public void testInitializeWithoutWorkspaceFolders() throws Exception {
+		File rootFolder1 = temporaryFolder.newFolder("root1");
+		String oneUri = writeFile(rootFolder1, "one.testlang", "type Foo { Bar bar }");
+		InitializeResult capabilities = initialize((InitializeParams it) -> {
+			it.setRootPath(rootFolder1.getPath());
+		}, true, true);
+		Assert.assertNull(capabilities.getCapabilities().getWorkspace());
+		Assert.assertEquals(1, getDiagnostics().size());
+		Assert.assertEquals(1, getDiagnostics().get(oneUri).size());
+	}
+
+	@Test
+	public void testInitializeWithWorkspaceFolders() throws Exception {
 		File rootFolder1 = temporaryFolder.newFolder("root1");
 		File rootFolder2 = temporaryFolder.newFolder("root2");
 		writeFile(rootFolder1, "one.testlang", "type Foo { Bar bar }");
 		String twoUri = writeFile(rootFolder2, "two.testlang", "type Bar { Foo foo }");
-		initialize((InitializeParams it) -> {
+		InitializeResult capabilities = initialize((InitializeParams it) -> {
+			ClientCapabilities clientCapabilities = new ClientCapabilities();
+			WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
+			workspaceClientCapabilities.setWorkspaceFolders(true);
+			clientCapabilities.setWorkspace(workspaceClientCapabilities);
+			it.setCapabilities(clientCapabilities);
 			it.setWorkspaceFolders(
 					Lists.newArrayList(new WorkspaceFolder(uriExtensions.toUriString(rootFolder1.toURI()), "root1"),
 							new WorkspaceFolder(uriExtensions.toUriString(rootFolder2.toURI()), "root2")));
 		});
+		Assert.assertEquals(true, capabilities.getCapabilities().getWorkspace().getWorkspaceFolders().getSupported());
 		Assert.assertEquals(2, getDiagnostics().size());
 		Assert.assertEquals(1, getDiagnostics().get(twoUri).size());
 		withBuild(() -> {

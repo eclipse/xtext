@@ -95,6 +95,8 @@ import static extension org.eclipse.xtext.util.Strings.*
 import org.eclipse.lsp4j.WorkspaceSymbol
 import org.eclipse.lsp4j.SemanticTokensParams
 import com.google.common.annotations.Beta
+import org.eclipse.lsp4j.ClientCapabilities
+import org.eclipse.lsp4j.WorkspaceClientCapabilities
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -217,17 +219,30 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 	
 	protected def InitializeResult initialize((InitializeParams)=>void initializer, boolean callInitialized) {
+		initialize(initializer, callInitialized, false)
+	}
+	
+	protected def InitializeResult initialize((InitializeParams)=>void initializer, boolean callInitialized, boolean useRootPath) {
 		val params = new InitializeParams => [
 			processId = 1
 			workspaceFolders = #[
 				new WorkspaceFolder(root.toURI.normalize.toUriString, '')
 			]
 		]
+		if (!useRootPath) {
+			if (params.capabilities === null) {
+				params.capabilities = new ClientCapabilities
+			}
+			if (params.capabilities.workspace === null) {
+				params.capabilities.workspace = new WorkspaceClientCapabilities
+			}
+			params.capabilities.workspace.workspaceFolders = true
+		}
 		initializer?.apply(params)
 		hierarchicalDocumentSymbolSupport = params.capabilities?.textDocument?.documentSymbol?.
 			hierarchicalDocumentSymbolSupport ?: false;
 		val result = languageServer.initialize(params).get
-		if(callInitialized)
+		if (callInitialized)
 			languageServer.initialized(null)
 		return result
 	}

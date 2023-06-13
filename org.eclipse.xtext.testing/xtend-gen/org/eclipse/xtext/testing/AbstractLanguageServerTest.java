@@ -82,6 +82,7 @@ import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.WorkspaceSymbol;
@@ -333,6 +334,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
 
   protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer, final boolean callInitialized) {
+    return this.initialize(initializer, callInitialized, false);
+  }
+
+  protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer, final boolean callInitialized, final boolean useRootPath) {
     try {
       InitializeParams _initializeParams = new InitializeParams();
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
@@ -342,14 +347,31 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setWorkspaceFolders(Collections.<WorkspaceFolder>unmodifiableList(CollectionLiterals.<WorkspaceFolder>newArrayList(_workspaceFolder)));
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
+      if ((!useRootPath)) {
+        ClientCapabilities _capabilities = params.getCapabilities();
+        boolean _tripleEquals = (_capabilities == null);
+        if (_tripleEquals) {
+          ClientCapabilities _clientCapabilities = new ClientCapabilities();
+          params.setCapabilities(_clientCapabilities);
+        }
+        WorkspaceClientCapabilities _workspace = params.getCapabilities().getWorkspace();
+        boolean _tripleEquals_1 = (_workspace == null);
+        if (_tripleEquals_1) {
+          ClientCapabilities _capabilities_1 = params.getCapabilities();
+          WorkspaceClientCapabilities _workspaceClientCapabilities = new WorkspaceClientCapabilities();
+          _capabilities_1.setWorkspace(_workspaceClientCapabilities);
+        }
+        WorkspaceClientCapabilities _workspace_1 = params.getCapabilities().getWorkspace();
+        _workspace_1.setWorkspaceFolders(Boolean.valueOf(true));
+      }
       if (initializer!=null) {
         initializer.apply(params);
       }
       Boolean _elvis = null;
-      ClientCapabilities _capabilities = params.getCapabilities();
+      ClientCapabilities _capabilities_2 = params.getCapabilities();
       TextDocumentClientCapabilities _textDocument = null;
-      if (_capabilities!=null) {
-        _textDocument=_capabilities.getTextDocument();
+      if (_capabilities_2!=null) {
+        _textDocument=_capabilities_2.getTextDocument();
       }
       DocumentSymbolCapabilities _documentSymbol = null;
       if (_textDocument!=null) {

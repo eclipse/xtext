@@ -12,6 +12,7 @@ import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.DocumentSymbolCapabilities;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.xtext.testing.DocumentSymbolConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
@@ -19,6 +20,9 @@ import org.junit.Test;
 public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServerTest {
 	private static final Procedure1<? super InitializeParams> INITIALIZER = (InitializeParams it) -> {
 		ClientCapabilities clientCapabilities = new ClientCapabilities();
+		WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
+		workspaceClientCapabilities.setWorkspaceFolders(true);
+		clientCapabilities.setWorkspace(workspaceClientCapabilities);
 		DocumentSymbolCapabilities documentSymbolCapabilities = new DocumentSymbolCapabilities();
 		documentSymbolCapabilities.setHierarchicalDocumentSymbolSupport(true);
 		TextDocumentClientCapabilities textDocumentClientCapabilities = new TextDocumentClientCapabilities();
