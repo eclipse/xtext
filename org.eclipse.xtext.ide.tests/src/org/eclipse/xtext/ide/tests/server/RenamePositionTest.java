@@ -19,6 +19,7 @@ import org.eclipse.lsp4j.RenameCapabilities;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.Either3;
@@ -103,6 +104,9 @@ public class RenamePositionTest extends AbstractLanguageServerTest {
 		String modelFile = writeFile("MyType.testlang", model);
 		initialize((InitializeParams params) -> {
 			ClientCapabilities clientCapabilities = new ClientCapabilities();
+			WorkspaceClientCapabilities workspaceCapabilities = new WorkspaceClientCapabilities();
+			workspaceCapabilities.setWorkspaceFolders(true);
+			clientCapabilities.setWorkspace(workspaceCapabilities);
 			TextDocumentClientCapabilities textDocumentClientCapabilities = new TextDocumentClientCapabilities();
 			textDocumentClientCapabilities.setRename(new RenameCapabilities(true, false));
 			clientCapabilities.setTextDocument(textDocumentClientCapabilities);

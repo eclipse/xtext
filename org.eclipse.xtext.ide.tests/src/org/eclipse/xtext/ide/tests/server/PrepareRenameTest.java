@@ -210,6 +210,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 		return super.initialize((InitializeParams params) -> {
 			ClientCapabilities clientCapabilities = new ClientCapabilities();
 			WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
+			workspaceClientCapabilities.setWorkspaceFolders(true);
 			clientCapabilities.setWorkspace(workspaceClientCapabilities);
 			TextDocumentClientCapabilities textDocumentClientCapabilities = new TextDocumentClientCapabilities();
 			textDocumentClientCapabilities.setRename(new RenameCapabilities(true, false));

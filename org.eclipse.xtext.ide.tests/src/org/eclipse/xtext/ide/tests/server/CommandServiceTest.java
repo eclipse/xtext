@@ -76,6 +76,7 @@ public class CommandServiceTest extends AbstractTestLangLanguageServerTest {
 		initialize((InitializeParams it) -> {
 			ClientCapabilities clientCapabilities = new ClientCapabilities();
 			WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
+			workspaceClientCapabilities.setWorkspaceFolders(true);
 			workspaceClientCapabilities.setExecuteCommand(new ExecuteCommandCapabilities(true));
 			clientCapabilities.setWorkspace(workspaceClientCapabilities);
 			it.setCapabilities(clientCapabilities);

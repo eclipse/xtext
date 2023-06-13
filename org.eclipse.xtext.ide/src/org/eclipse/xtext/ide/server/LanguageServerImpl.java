@@ -221,7 +221,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		if (initializeParams != null) {
 			throw new IllegalStateException("This language server has already been initialized.");
 		}
-		URI baseDir = getBaseDir(params);
 		if (languagesRegistry.getExtensionToFactoryMap().isEmpty()) {
 			throw new IllegalStateException(
 					"No Xtext languages have been registered. Please make sure you have added the languages\'s setup class in \'/META-INF/services/org.eclipse.xtext.ISetup\'");
@@ -233,16 +232,23 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		result.setCapabilities(createServerCapabilities(params));
 		access.addBuildListener(this);
 		return requestManager.runWrite(() -> {
-			if (workspaceManager.isSupportsWorkspaceFolders()) {
+			if (clientSupportsWorkspaceFolders() && workspaceManager.isSupportsWorkspaceFolders()) {
 				List<WorkspaceFolder> workspaceFolders = params.getWorkspaceFolders();
 				if (workspaceFolders == null)
 					workspaceFolders = Collections.emptyList();
 				workspaceManager.initialize(workspaceFolders, this::publishDiagnostics, CancelIndicator.NullImpl);
 			} else {
+				URI baseDir = getBaseDir(params);
 				workspaceManager.initialize(baseDir, this::publishDiagnostics, CancelIndicator.NullImpl);
 			}
 			return result;
 		}, (cancelIndicator, it) -> it).thenApply(it -> initializeResult = it);
+	}
+
+	protected boolean clientSupportsWorkspaceFolders() {
+		return this.initializeParams.getCapabilities() != null 
+				&& this.initializeParams.getCapabilities().getWorkspace() != null 
+				&& Objects.equal(this.initializeParams.getCapabilities().getWorkspace().getWorkspaceFolders(), Boolean.TRUE);
 	}
 
 	/**

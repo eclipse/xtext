@@ -134,6 +134,7 @@ public class Rename3Test extends AbstractLanguageServerTest {
 		return super.initialize((InitializeParams params) -> {
 			ClientCapabilities clientCapabilities = new ClientCapabilities();
 			WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
+			workspaceClientCapabilities.setWorkspaceFolders(true);
 			WorkspaceEditCapabilities workspaceEditCapabilities = new WorkspaceEditCapabilities();
 			workspaceEditCapabilities.setDocumentChanges(true);
 			workspaceClientCapabilities.setWorkspaceEdit(workspaceEditCapabilities);
