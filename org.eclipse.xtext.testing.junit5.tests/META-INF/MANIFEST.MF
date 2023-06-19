@@ -12,8 +12,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.lsp4j.jsonrpc;resolution:=optional,
  org.eclipse.xtend.lib,
  org.eclipse.xtext.testing,
- com.google.inject;bundle-version="7.0.0";visibility:=reexport,
- com.google.guava;bundle-version="[32.0.1,33.0.0)"
+ com.google.inject;bundle-version="7.0.0";visibility:=reexport
 Import-Package: javax.inject;version="1.0.0",
  jakarta.inject;version="2.0.1",
  org.apache.log4j;version="1.2.24",
