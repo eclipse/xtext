@@ -4,7 +4,7 @@ import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
 
 var rootPath = ".."
-var eclipsePath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.testlanguages.ui"
+var eclipsePath = "${rootPath}/org.eclipse.xtext.testlanguages.ui"
 
 var fileHeader = "/*******************************************************************************
  * Copyright (c) 2010, \${year} itemis AG (http://www.itemis.eu) and others.

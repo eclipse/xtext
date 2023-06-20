@@ -5,8 +5,8 @@ import org.eclipse.xtext.xtext.generator.*
 
 var rootPath = ".."
 var generateEclipse = true
-var eclipsePath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.testlanguages.ui"
-var uiTestPath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.ui.tests"
+var eclipsePath = "${rootPath}/org.eclipse.xtext.xbase.testlanguages.ui"
+var uiTestPath = "${rootPath}/org.eclipse.xtext.xbase.ui.tests"
 
 var fileHeader = "/*******************************************************************************
  * Copyright (c) 2011, \${year} itemis AG (http://www.itemis.eu) and others.
