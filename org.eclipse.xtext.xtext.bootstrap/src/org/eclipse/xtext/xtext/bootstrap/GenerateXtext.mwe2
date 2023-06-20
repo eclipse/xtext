@@ -21,7 +21,7 @@ var baseName = "org.eclipse.xtext"
 var runtimeProjectName = baseName
 var ideProjectName = "${baseName}.xtext.ide"
 var eclipseProjectName = "${baseName}.xtext.ui"
-var eclipseProjectPath = "${rootPath}/../xtext-eclipse/${eclipseProjectName}"
+var eclipseProjectPath = "${rootPath}/${eclipseProjectName}"
 
 var fileHeader = "/*******************************************************************************
  * Copyright (c) 2010, \${year} itemis AG (http://www.itemis.eu) and others.

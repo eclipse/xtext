@@ -32,11 +32,11 @@ Workflow {
 				}
 				eclipsePlugin = {
 					enabled = true
-					root = "../../xtext-eclipse/org.eclipse.xtext.purexbase.ui"
+					root = "../org.eclipse.xtext.purexbase.ui"
 				}
 				eclipsePluginTest = {
 					enabled = true
-					root = "../../xtext-eclipse/org.eclipse.xtext.purexbase.eclipse.tests"
+					root = "../org.eclipse.xtext.purexbase.eclipse.tests"
 				}
 				createEclipseMetaData = true
 			}
