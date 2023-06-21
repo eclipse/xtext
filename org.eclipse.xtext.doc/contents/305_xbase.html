@@ -289,7 +289,7 @@ Property:
 public Object evaluate(XExpression expression, Object thisElement) {
   IEvaluationContext evaluationContext = contextProvider.get();
   // provide initial context and implicit variables
-  evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
+  evaluationContext.newValue(QualifiedName.create("this"), thisElement);
   
   IEvaluationResult result = xbaseInterpreter.evaluate(expression,
     evaluationContext, CancelIndicator.NullImpl);
