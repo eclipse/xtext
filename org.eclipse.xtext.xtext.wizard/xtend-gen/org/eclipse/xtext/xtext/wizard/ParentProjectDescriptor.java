@@ -106,7 +106,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
 
   public String getTychoVersion() {
-    return "3.0.4";
+    return "3.0.5";
   }
 
   public String getTychoVersionJ11() {
