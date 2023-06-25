@@ -11,8 +11,11 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.lsp4j;resolution:=optional,
  org.eclipse.lsp4j.jsonrpc;resolution:=optional,
  org.eclipse.xtend.lib,
- org.eclipse.xtext.testing
-Import-Package: org.apache.log4j;version="1.2.24",
+ org.eclipse.xtext.testing,
+ com.google.inject;bundle-version="7.0.0";visibility:=reexport
+Import-Package: javax.inject;version="1.0.0",
+ jakarta.inject;version="2.0.1",
+ org.apache.log4j;version="1.2.24",
  org.apache.log4j.spi;version="1.2.24",
  org.junit.jupiter.api;version="[5.1.0,6.0.0)",
  org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)",

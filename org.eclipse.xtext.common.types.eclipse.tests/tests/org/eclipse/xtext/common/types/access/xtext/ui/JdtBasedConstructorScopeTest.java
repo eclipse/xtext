@@ -8,12 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.xtext.ui;
 
+import static org.junit.Assume.*;
+
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.xtext.AbstractConstructorScopeTest;
@@ -24,6 +27,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.junit.Before;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -50,6 +54,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	@Test public void testGetContents_01() {
+		assumeTrue(JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,31,0)) >= 0);
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			@Override
@@ -60,6 +65,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	@Test public void testGetContents_02() {
+		assumeTrue(JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,31,0)) >= 0);
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			@Override
@@ -70,6 +76,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	@Test public void testGetContents_03() {
+		assumeTrue(JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,31,0)) >= 0);
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			@Override
@@ -80,6 +87,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	@Test public void testGetContents_04() {
+		assumeTrue(JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,31,0)) >= 0);
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			@Override

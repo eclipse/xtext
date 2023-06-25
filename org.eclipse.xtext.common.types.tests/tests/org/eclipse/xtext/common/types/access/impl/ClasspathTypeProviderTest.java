@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -17,9 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -35,7 +33,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -280,17 +277,6 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	@Override
 	protected String getCollectionParamName() {
 		return "arg0";
-	}
-
-	@Override
-	@Test
-	public void testFindTypeByName_AbstractMultimap_02() {
-		String typeName = "com.google.common.collect.AbstractMultimap";
-		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		JvmOperation containsValue = (JvmOperation) Iterables.getOnlyElement(type.findAllFeaturesByName("containsValue"));
-		assertNotNull(containsValue);
-		JvmFormalParameter firstParam = containsValue.getParameters().get(0);
-		assertEquals(0, firstParam.getAnnotations().size());
 	}
 	
 	@Override
