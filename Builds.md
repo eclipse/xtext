@@ -73,7 +73,7 @@ Check the Update Site and Drop dirs to contain the new Milestone or Release
    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
 
-1. Add / Update [xtext-reference-projects](https://github.com/itemis/xtext-reference-projects/) (for Releases only)
+1. Add / Update [xtext-reference-projects](https://github.com/xtext/xtext-reference-projects/) (for Releases only)
    * should be done in the days after the release
    * import the root (only) into your Xtext dev env
    * adapt the current versions to use the current release in poms/build.gradle/target files.

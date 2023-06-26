@@ -1,6 +1,7 @@
 # Maintenance Tasks
 
 This document describes things that need to be done during a simrel.
+(todo partially outdated)
 
 ## Bump versions
 
@@ -83,9 +84,9 @@ Wait for the builds of the branches, review and merge PRs.
 
 ## Update Xtext Reference Projects
 
-The repository [xtext-reference-projects](https://github.com/itemis/xtext-reference-projects) contains a set of projects that are created by the project wizard, and the Domainmodel example. These projects are built by TravisCI.
+The repository [xtext-reference-projects](https://github.com/xtext/xtext-reference-projects) contains a set of projects that are created by the project wizard, and the Domainmodel example. These projects are built by TravisCI.
 
-After each release a new set of projects should be added. Follow the instructions in the repository's [README](https://github.com/itemis/xtext-reference-projects/blob/master/README.md).
+After each release a new set of projects should be added. Follow the instructions in the repository's [README](https://github.com/xtext/xtext-reference-projects/blob/master/README.md).
 
 ## Marketplace
 
