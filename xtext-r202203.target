@@ -63,7 +63,6 @@
 			<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 			<unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
 			<unit id="org.opentest4j" version="0.0.0"/>
-			<unit id="org.apiguardian" version="0.0.0"/>
 			<unit id="org.objectweb.asm" version="9.5.0"/>
 			<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
 			<unit id="org.slf4j.binding.simple" version="0.0.0"/>
@@ -71,6 +70,7 @@
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
+			<unit id="org.apiguardian" version="0.0.0"/>
 			<unit id="org.junit.jupiter.api" version="0.0.0"/>
 			<unit id="org.junit.jupiter.engine" version="0.0.0"/>
 			<unit id="org.junit.jupiter.migrationsupport" version="0.0.0"/>
