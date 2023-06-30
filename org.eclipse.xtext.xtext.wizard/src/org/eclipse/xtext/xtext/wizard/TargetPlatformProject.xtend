@@ -86,7 +86,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-					<unit id="com.google.gson" version="2.10.1.v20230109-0753"/>
+					<unit id="com.google.gson" version="2.10.1"/>
 					<unit id="com.google.inject" version="7.0.0"/>
 					<unit id="jakarta.inject.jakarta.inject-api" version="2.0.1"/>
 					<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
