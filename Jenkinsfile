@@ -12,8 +12,8 @@ pipeline {
   }
 
   triggers {
-    parameterizedCron(env.BRANCH_NAME == 'cd_tycho40' ? '''
-      H H(12-13) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
+    parameterizedCron(env.BRANCH_NAME == 'cd_tycho50' ? '''
+      H H(13-14) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
       ''' : '')
   }
 
