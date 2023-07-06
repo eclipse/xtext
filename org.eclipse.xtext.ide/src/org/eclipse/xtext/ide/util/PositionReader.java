@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.util;
 
+import static java.lang.Math.*;
+
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.StringReader;
@@ -29,6 +31,8 @@ public class PositionReader extends LineNumberReader {
 
 	/** The marked column, if any. */
 	private int markedColumn;
+	
+	private boolean isCarriageReturnUsed = false;
 
 	/**
 	 * Create a new position reader, using the input string.
@@ -38,10 +42,16 @@ public class PositionReader extends LineNumberReader {
 	 */
 	public PositionReader(final String in) {
 		super(new StringReader(in));
+		
+		isCarriageReturnUsed = in.contains("\r");
 	}
 
 	public Position getPosition() {
-		return new Position(getLineNumber(), column);
+		int col = column;
+		if (isCarriageReturnUsed) {
+			col = max(0, col - getLineNumber());
+		}
+		return new Position(getLineNumber(), col);
 	}
 
 	@Override
