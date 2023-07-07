@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.io.StringReader;
 
 import org.eclipse.lsp4j.Position;
@@ -19,13 +19,20 @@ import com.google.common.annotations.Beta;
 /**
  * A reader that can return a {@link Position} on the current input string.
  *
- * @author Rubén Porras Campo - Initial Contribution and API
+ * @author Ruben Porras Campo - Initial Contribution and API
+ * @author Joao Dinis Ferreira - Correct handling of files with carriage-return line endings
  */
 @Beta
-public class PositionReader extends LineNumberReader {
+public class PositionReader extends BufferedReader {
+
+	/** The current line. */
+	private int line;
 
 	/** The current column. */
 	private int column;
+
+	/** The marked line, if any. */
+	private int markedLine;
 
 	/** The marked column, if any. */
 	private int markedColumn;
@@ -41,19 +48,21 @@ public class PositionReader extends LineNumberReader {
 	}
 
 	public Position getPosition() {
-		return new Position(getLineNumber(), column);
+		return new Position(line, column);
 	}
 
 	@Override
 	public int read() throws IOException {
 		synchronized (lock) {
-			int currentLineNumber = getLineNumber();
 			int c = super.read();
-			if (currentLineNumber != getLineNumber()) {
+
+			if (c == '\n' || (c == '\r' && peek() != '\n')) {
+				line++;
 				column = 0;
-			} else {
+			} else if (c != '\r' && c != -1) {
 				column++;
 			}
+
 			return c;
 		}
 	}
@@ -61,6 +70,13 @@ public class PositionReader extends LineNumberReader {
 	@Override
 	public int read(final char[] cbuf, final int off, final int len) throws IOException {
 		throw new UnsupportedOperationException();
+	}
+
+	private int peek() throws IOException {
+		mark(2);
+		int c = super.read();
+		reset();
+		return c;
 	}
 
 	@Override
@@ -80,6 +96,7 @@ public class PositionReader extends LineNumberReader {
 	public void mark(final int readAheadLimit) throws IOException {
 		synchronized (lock) {
 			super.mark(readAheadLimit);
+			markedLine = line;
 			markedColumn = column;
 		}
 	}
@@ -88,6 +105,7 @@ public class PositionReader extends LineNumberReader {
 	public void reset() throws IOException {
 		synchronized (lock) {
 			super.reset();
+			line = markedLine;
 			column = markedColumn;
 		}
 	}
