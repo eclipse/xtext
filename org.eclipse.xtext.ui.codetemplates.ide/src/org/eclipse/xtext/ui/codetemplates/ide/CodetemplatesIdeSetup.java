@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.Modules2;
 public class CodetemplatesIdeSetup extends CodetemplatesStandaloneSetup {
 
 	@Override
-	public Injector createInjector() {
+	public Injector createAPi() {
 		return Guice.createInjector(Modules2.mixin(new CodetemplatesRuntimeModule(), new CodetemplatesIdeModule()));
 	}
 	
