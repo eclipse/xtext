@@ -70,7 +70,7 @@ Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
-Google Guava (32.1.0)
+Google Guava (32.1.1)
 
 * License: Apache License 2.0
 
@@ -82,7 +82,7 @@ Gradle Wrapper (8)
 
 * License: Apache License, 2.0
 
-guava gwt (32.1.0)
+guava gwt (32.1.1)
 
 * License: Apache License, 2.0
 
