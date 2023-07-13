@@ -1,6 +1,4 @@
-[![Gitter](https://badges.gitter.im/eclipse/xtext.svg)](https://gitter.im/eclipse/xtext?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-[Eclipse Chat](https://chat.eclipse.org/#/room/#xtext:matrix.eclipse.org)
+[![Gitter](https://badges.gitter.im/eclipse/xtext.svg)](https://gitter.im/eclipse/xtext?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Eclipse Chat](https://img.shields.io/matrix/xtext:matrix.eclipse.org)](https://chat.eclipse.org/#/room/#xtext:matrix.eclipse.org)
 
 # Eclipse Xtext™
 
