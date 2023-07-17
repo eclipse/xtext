@@ -24,5 +24,7 @@ jar {
 }
 
 plugins.withId('war') {
-	webAppDirName = "src/main/webapp"
+	war {
+		webAppDirectory = file("src/main/webapp")
+	}
 }

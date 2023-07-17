@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -51,7 +51,7 @@ class PomFile extends TextFile {
 							<version>${project.version}</version>
 						</dependency>
 					«ENDFOR»
-					«FOR dep : project.externalDependencies.map[maven].filter[artifactId !== null]»
+					«FOR dep : project.externalDependencies.map[maven].filter[artifactId !== null].filter[!gradleOnly]»
 						<dependency>
 							<groupId>«dep.groupId»</groupId>
 							<artifactId>«dep.artifactId»</artifactId>

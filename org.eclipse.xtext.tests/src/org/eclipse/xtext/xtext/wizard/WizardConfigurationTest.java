@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -264,7 +264,6 @@ public class WizardConfigurationTest {
 			assertTrue(it.pom().getContent().contains("<source>src-gen</source>"));
 			assertTrue(it.pom().getContent().contains("<directory>src-gen</directory>"));
 		}
-		;
 		for (ProjectDescriptor it : Iterables.filter(plainMavenProjects,
 				(ProjectDescriptor it) -> !(it instanceof TestProjectDescriptor))) {
 			assertTrue(it.pom().getContent().contains("<sourceDirectory>src</sourceDirectory>"));
@@ -280,7 +279,6 @@ public class WizardConfigurationTest {
 			assertFalse(it.pom().getContent().contains("add-source"));
 			assertFalse(it.pom().getContent().contains("add-resource"));
 		}
-		;
 	}
 
 	@Test
@@ -358,27 +356,25 @@ public class WizardConfigurationTest {
 		assertTrue(parentPom.contains("<maven.compiler.source>11</maven.compiler.source>"));
 		assertTrue(parentPom.contains("<maven.compiler.target>11</maven.compiler.target>"));
 		String parentGradle = config.getParentProject().buildGradle().getContent();
-		assertTrue(parentGradle.contains("sourceCompatibility = \'11\'"));
-		assertTrue(parentGradle.contains("targetCompatibility = \'11\'"));
+		assertTrue(parentGradle.contains("sourceCompatibility = JavaVersion.VERSION_11"));
+		assertTrue(parentGradle.contains("targetCompatibility = JavaVersion.VERSION_11"));
 		for (String it : Lists.transform(allJavaProjects(), (ProjectDescriptor it) -> it.manifest())) {
 			assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-11"));
 		}
-		;
 	}
 
 	@Test
 	public void allBuildSystemsUseOtherJava() {
-		config.setJavaVersion(JavaVersion.JAVA7);
+		config.setJavaVersion(JavaVersion.JAVA17);
 		String parentPom = config.getParentProject().pom().getContent();
-		assertTrue(parentPom.contains("<maven.compiler.source>1.7</maven.compiler.source>"));
-		assertTrue(parentPom.contains("<maven.compiler.target>1.7</maven.compiler.target>"));
+		assertTrue(parentPom.contains("<maven.compiler.source>17</maven.compiler.source>"));
+		assertTrue(parentPom.contains("<maven.compiler.target>17</maven.compiler.target>"));
 		String parentGradle = config.getParentProject().buildGradle().getContent();
-		assertTrue(parentGradle.contains("sourceCompatibility = \'1.7\'"));
-		assertTrue(parentGradle.contains("targetCompatibility = \'1.7\'"));
+		assertTrue(parentGradle.contains("sourceCompatibility = JavaVersion.VERSION_17"));
+		assertTrue(parentGradle.contains("targetCompatibility = JavaVersion.VERSION_17"));
 		for (String it : Lists.transform(allJavaProjects(), (ProjectDescriptor it) -> it.manifest())) {
-			assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.7"));
+			assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-17"));
 		}
-		;
 	}
 
 	public List<? extends ProjectDescriptor> allJavaProjects() {

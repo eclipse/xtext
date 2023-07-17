@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -158,7 +158,11 @@ public class PomFile extends TextFile {
             String _artifactId = it.getArtifactId();
             return Boolean.valueOf((_artifactId != null));
           };
-          Iterable<ExternalDependency.MavenCoordinates> _filter = IterableExtensions.<ExternalDependency.MavenCoordinates>filter(IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(this.getProject().getExternalDependencies(), _function), _function_1);
+          final Function1<ExternalDependency.MavenCoordinates, Boolean> _function_2 = (ExternalDependency.MavenCoordinates it) -> {
+            boolean _isGradleOnly = it.isGradleOnly();
+            return Boolean.valueOf((!_isGradleOnly));
+          };
+          Iterable<ExternalDependency.MavenCoordinates> _filter = IterableExtensions.<ExternalDependency.MavenCoordinates>filter(IterableExtensions.<ExternalDependency.MavenCoordinates>filter(IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(this.getProject().getExternalDependencies(), _function), _function_1), _function_2);
           for(final ExternalDependency.MavenCoordinates dep : _filter) {
             _builder.append("\t");
             _builder.append("\t");
