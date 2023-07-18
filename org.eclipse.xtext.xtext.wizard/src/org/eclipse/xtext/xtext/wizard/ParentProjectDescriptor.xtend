@@ -120,8 +120,10 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					group = '«config.baseName»'
 					version = '1.0.0-SNAPSHOT'
 
-					sourceCompatibility = '«javaVersion»'
-					targetCompatibility = '«javaVersion»'
+					java {
+						sourceCompatibility = JavaVersion.VERSION_«javaVersion»
+						targetCompatibility = JavaVersion.VERSION_«javaVersion»
+					}
 
 					configurations.all {
 						exclude group: 'asm'
@@ -198,7 +200,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		}
 
 		plugins.withId('war') {
-			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
+			war {
+				webAppDirectory = file("«Outlet.WEBAPP.sourceFolder»")
+			}
 		}
 	'''
 

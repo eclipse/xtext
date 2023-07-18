@@ -26,8 +26,10 @@ subprojects {
 	group = 'gradle'
 	version = '1.0.0-SNAPSHOT'
 
-	sourceCompatibility = '11'
-	targetCompatibility = '11'
+	java {
+		sourceCompatibility = JavaVersion.VERSION_11
+		targetCompatibility = JavaVersion.VERSION_11
+	}
 
 	configurations.all {
 		exclude group: 'asm'

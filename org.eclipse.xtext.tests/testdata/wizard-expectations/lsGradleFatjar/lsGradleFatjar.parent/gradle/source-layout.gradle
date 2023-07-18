@@ -38,5 +38,7 @@ jar {
 }
 
 plugins.withId('war') {
-	webAppDirName = "WebRoot"
+	war {
+		webAppDirectory = file("WebRoot")
+	}
 }

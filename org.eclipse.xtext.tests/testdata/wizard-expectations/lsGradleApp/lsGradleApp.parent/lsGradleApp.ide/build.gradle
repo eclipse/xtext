@@ -5,5 +5,7 @@ dependencies {
 }
 
 apply plugin: 'application'
-mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
+application {
+	mainClass = "org.eclipse.xtext.ide.server.ServerLauncher"
+}
 

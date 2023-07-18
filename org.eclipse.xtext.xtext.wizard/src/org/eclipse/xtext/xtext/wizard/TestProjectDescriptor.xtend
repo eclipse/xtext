@@ -74,6 +74,12 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 				maven.artifactId = "junit-jupiter-engine"
 				maven.scope = Scope.TESTRUNTIME
 			]
+			deps += new ExternalDependency()=>[
+				maven.groupId = "org.junit.platform"
+				maven.artifactId = "junit-platform-launcher"
+				maven.scope = Scope.TESTRUNTIME
+				maven.gradleOnly = true
+			]
 		}
 		return deps
 	}

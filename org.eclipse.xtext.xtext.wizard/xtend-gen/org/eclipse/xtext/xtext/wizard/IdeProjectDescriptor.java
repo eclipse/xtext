@@ -1105,7 +1105,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("plugins {");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("id \'com.github.johnrengelman.shadow\' version \'7.1.2\'");
+          _builder.append("id \'com.github.johnrengelman.shadow\' version \'8.1.1\'");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();
@@ -1129,7 +1129,12 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder_1.newLine();
             }
           }
-          _builder_1.append("mainClassName = \"org.eclipse.xtext.ide.server.ServerLauncher\"");
+          _builder_1.append("application {");
+          _builder_1.newLine();
+          _builder_1.append("\t");
+          _builder_1.append("mainClass = \"org.eclipse.xtext.ide.server.ServerLauncher\"");
+          _builder_1.newLine();
+          _builder_1.append("}");
           _builder_1.newLine();
           _builder_1.newLine();
           {
@@ -1139,7 +1144,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder_1.append("shadowJar {");
               _builder_1.newLine();
               _builder_1.append("\t");
-              _builder_1.append("from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output)");
+              _builder_1.append("from(project.extensions.findByType(JavaPluginExtension.class).sourceSets.main.output)");
               _builder_1.newLine();
               _builder_1.append("\t");
               _builder_1.append("configurations = [project.configurations.runtimeClasspath]");

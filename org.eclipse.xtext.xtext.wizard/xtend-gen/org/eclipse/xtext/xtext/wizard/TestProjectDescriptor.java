@@ -128,6 +128,19 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       };
       ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_2, _function_2);
       deps.add(_doubleArrow_2);
+      ExternalDependency _externalDependency_3 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_3 = (ExternalDependency it) -> {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.junit.platform");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit-platform-launcher");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setScope(Scope.TESTRUNTIME);
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setGradleOnly(true);
+      };
+      ExternalDependency _doubleArrow_3 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_3, _function_3);
+      deps.add(_doubleArrow_3);
     }
     return deps;
   }
