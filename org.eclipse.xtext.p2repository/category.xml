@@ -20,8 +20,8 @@
    <bundle id="org.eclipse.xtend.typesystem.emf" version="2.2.0.qualifier"/>
    <bundle id="org.eclipse.xtend.typesystem.emf.source" version="2.2.0.qualifier"/>
 
-   <bundle id="com.google.guava" version="32.1.0.qualifier"/>
-   <bundle id="com.google.guava.source" version="32.1.0.qualifier"/>
+   <bundle id="com.google.guava" version="32.1.1.qualifier"/>
+   <bundle id="com.google.guava.source" version="32.1.1.qualifier"/>
    <bundle id="com.google.guava.failureaccess" version="1.0.1.qualifier"/>
    <bundle id="com.google.guava.failureaccess.source" version="1.0.1.qualifier"/>
    <bundle id="com.google.inject" version="7.0.0.qualifier"/>
