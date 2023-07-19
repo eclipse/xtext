@@ -22,5 +22,9 @@ public interface HighlightingStyles {
 	String DEFAULT_ID = "default";
 	String INVALID_TOKEN_ID = "error";
 	String TASK_ID = "task";
+	String TYPE_ID = "type";
+	
+	// LSP modifier
+	String DEFINITION_ID = "definition";
 
 }
