@@ -19,6 +19,7 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * @author Rubén Porras Campo - Initial test
+ * @author Jonathan Pollert - Adjust to LSP specification
  */
 public class SemanticTokensTest extends AbstractTestLangLanguageServerTest {
 	@Test
@@ -34,9 +35,11 @@ public class SemanticTokensTest extends AbstractTestLangLanguageServerTest {
 		it.setModel(model);
 		
 		List<List<Integer>> expectedTokens = new ArrayList<>(); 
-		expectedTokens.add(ImmutableList.of(0,0,4,1,0));
-		expectedTokens.add(ImmutableList.of(3,0,4,1,0));
-		expectedTokens.add(ImmutableList.of(0,9,7,1,0));
+		expectedTokens.add(ImmutableList.of(0,0,4,15,0));
+		expectedTokens.add(ImmutableList.of(0,5,3,1,16));
+		expectedTokens.add(ImmutableList.of(3,0,4,15,0));
+		expectedTokens.add(ImmutableList.of(0,5,3,1,16));
+		expectedTokens.add(ImmutableList.of(0,4,7,15,0));
 		
 		it.setExpected(expectedTokens.stream().flatMap(List::stream).collect(Collectors.toList()));
 		});
