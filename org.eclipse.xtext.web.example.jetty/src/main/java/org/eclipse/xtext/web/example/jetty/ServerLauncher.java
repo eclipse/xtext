@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
+import org.eclipse.jetty.webapp.WebAppConfiguration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
@@ -47,7 +48,7 @@ public class ServerLauncher {
 		webAppContext.setResourceBase("../org.eclipse.xtext.web/src/main/js");
 		webAppContext.setContextPath("/");
 		webAppContext.setConfigurations(new Configuration[] { new AnnotationConfiguration(), new WebXmlConfiguration(),
-				new WebInfConfiguration(), new MetaInfConfiguration() });
+				new WebInfConfiguration(), new MetaInfConfiguration(), new WebAppConfiguration() });
 		webAppContext.setAttribute(MetaInfConfiguration.CONTAINER_JAR_PATTERN,
 				".*/org\\.eclipse\\.xtext\\.web.*,.*/org.webjars.*");
 
