@@ -782,7 +782,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				 * Deploy this class into a servlet container to enable DSL-specific services.
 				 */
 				«IF useServlet3Api»
-					@«new TypeReference("javax.servlet.annotation.WebServlet")»(name = 'XtextServices', urlPatterns = '/xtext-service/*')
+					@«new TypeReference("jakarta.servlet.annotation.WebServlet")»(name = 'XtextServices', urlPatterns = '/xtext-service/*')
 				«ENDIF»
 				class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 					
@@ -813,7 +813,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				 * Deploy this class into a servlet container to enable DSL-specific services.
 				 */
 				«IF useServlet3Api»
-					@«new TypeReference("javax.servlet.annotation.WebServlet")»(name = "XtextServices", urlPatterns = "/xtext-service/*")
+					@«new TypeReference("jakarta.servlet.annotation.WebServlet")»(name = "XtextServices", urlPatterns = "/xtext-service/*")
 				«ENDIF»
 				public class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 					
@@ -821,7 +821,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 					
 					«DisposableRegistry» disposableRegistry;
 					
-					public void init() throws «'javax.servlet.ServletException'.typeRef» {
+					public void init() throws «'jakarta.servlet.ServletException'.typeRef» {
 						super.init();
 						«'com.google.inject.Injector'.typeRef» injector = new «grammar.webSetup»().createInjectorAndDoEMFRegistration();
 						this.disposableRegistry = injector.getInstance(«DisposableRegistry».class);

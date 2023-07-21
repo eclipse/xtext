@@ -1903,7 +1903,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           {
             if (WebIntegrationFragment.this.useServlet3Api) {
               _builder.append("@");
-              TypeReference _typeReference = new TypeReference("javax.servlet.annotation.WebServlet");
+              TypeReference _typeReference = new TypeReference("jakarta.servlet.annotation.WebServlet");
               _builder.append(_typeReference);
               _builder.append("(name = \'XtextServices\', urlPatterns = \'/xtext-service/*\')");
               _builder.newLineIfNotEmpty();
@@ -1996,7 +1996,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           {
             if (WebIntegrationFragment.this.useServlet3Api) {
               _builder.append("@");
-              TypeReference _typeReference = new TypeReference("javax.servlet.annotation.WebServlet");
+              TypeReference _typeReference = new TypeReference("jakarta.servlet.annotation.WebServlet");
               _builder.append(_typeReference);
               _builder.append("(name = \"XtextServices\", urlPatterns = \"/xtext-service/*\")");
               _builder.newLineIfNotEmpty();
@@ -2025,7 +2025,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public void init() throws ");
-          TypeReference _typeRef_1 = TypeReference.typeRef("javax.servlet.ServletException");
+          TypeReference _typeRef_1 = TypeReference.typeRef("jakarta.servlet.ServletException");
           _builder.append(_typeRef_1, "\t");
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
