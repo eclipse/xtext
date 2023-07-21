@@ -685,5 +685,12 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	public JdtBasedTypeFactory getJdtBasedTypeFactory() {
 		return typeFactory;
 	}
+	
+	/**
+	 * @since 2.32
+	 */
+	protected WorkingCopyOwner getWorkingCopyOwner() {
+		return workingCopyOwner;
+	}
 
 }
