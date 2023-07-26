@@ -16,15 +16,19 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.eclipse.jetty.util.log.Slf4jLog;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
+import org.eclipse.jetty.webapp.WebAppConfiguration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 public class ServerLauncher {
 
+	private static final Logger LOG = LoggerFactory.getLogger(ServerLauncher.class);
+	
 	public static void main(String[] args) {
 		Server server = new Server(new InetSocketAddress("localhost", 8080));
 		RewriteHandler rewriteHandler = new RewriteHandler();
@@ -44,37 +48,35 @@ public class ServerLauncher {
 		webAppContext.setResourceBase("../org.eclipse.xtext.web/src/main/js");
 		webAppContext.setContextPath("/");
 		webAppContext.setConfigurations(new Configuration[] { new AnnotationConfiguration(), new WebXmlConfiguration(),
-				new WebInfConfiguration(), new MetaInfConfiguration() });
-		webAppContext.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN,
+				new WebInfConfiguration(), new MetaInfConfiguration(), new WebAppConfiguration() });
+		webAppContext.setAttribute(MetaInfConfiguration.CONTAINER_JAR_PATTERN,
 				".*/org\\.eclipse\\.xtext\\.web.*,.*/org.webjars.*");
 
 		handlerList.setHandlers(new Handler[] { resourceHandler1, resourceHandler2, webAppContext });
 		rewriteHandler.setHandler(handlerList);
-		Slf4jLog log = new Slf4jLog(ServerLauncher.class.getName());
 		try {
 			server.start();
-			log.info("Server started " + server.getURI() + "...");
+			LOG.info("Server started " + server.getURI() + "...");
 			new Thread() {
 
 				public void run() {
 					try {
-						log.info("Press enter to stop the server...");
+						LOG.info("Press enter to stop the server...");
 						int key = System.in.read();
 						if (key != -1) {
 							server.stop();
 						} else {
-							log.warn(
+							LOG.warn(
 									"Console input is not available. In order to stop the server, you need to cancel process manually.");
 						}
 					} catch (Exception e) {
-						log.warn(e);
+						LOG.warn(e.getMessage());
 					}
 				}
-
 			}.start();
 			server.join();
 		} catch (Exception exception) {
-			log.warn(exception.getMessage());
+			LOG.warn(exception.getMessage());
 			System.exit(1);
 		}
 	}
