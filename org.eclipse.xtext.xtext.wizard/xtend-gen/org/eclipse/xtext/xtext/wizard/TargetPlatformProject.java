@@ -200,7 +200,10 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v20220404-1927\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20211018-1956\"/>");
+    _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20230725-0701\"/>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<unit id=\"org.hamcrest.core\" version=\"1.3.0.v20230721-0740\"/>");
     _builder.newLine();
     {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
