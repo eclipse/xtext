@@ -807,5 +807,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		}
 		return installedCoreResourcesVersion.compareTo(version) >= 0;
 	}
+	
+	/**
+	 * @since 2.32
+	 */
+	protected ToBeBuiltComputer getToBeBuiltComputer() {
+		return toBeBuiltComputer;
+	}
 
 }
