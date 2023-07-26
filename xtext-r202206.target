@@ -60,12 +60,13 @@
 			<unit id="jakarta.inject.jakarta.inject-api" version="2.0.1"/>
 			<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 			<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
-			<unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
+			<unit id="org.aopalliance" version="1.0.0.v20230720-0728"/>
 			<unit id="org.opentest4j" version="0.0.0"/>
 			<unit id="org.objectweb.asm" version="9.5.0"/>
 			<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
 			<unit id="org.slf4j.binding.simple" version="0.0.0"/>
-			<unit id="org.junit" version="4.13.2.v20211018-1956"/>
+			<unit id="org.junit" version="4.13.2.v20230725-0701"/>
+			<unit id="org.hamcrest.core" version="1.3.0.v20230721-0740"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>

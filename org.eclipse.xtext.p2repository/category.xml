@@ -38,6 +38,8 @@
    <bundle id="org.aopalliance.source" version="1.0.0.qualifier"/>
    <bundle id="org.junit" version="4.13.2.qualifier"/>
    <bundle id="org.junit.source" version="4.13.2.qualifier"/>
+   <bundle id="org.hamcrest.core" version="1.3.0.qualifier"/>
+   <bundle id="org.hamcrest.core.source" version="1.3.0.qualifier"/>
    <bundle id="org.kohsuke.args4j" version="0.0.0"/>
    <bundle id="org.kohsuke.args4j.source" version="0.0.0"/>
    <bundle id="org.objectweb.asm" version="9.5.0.qualifier"/>
