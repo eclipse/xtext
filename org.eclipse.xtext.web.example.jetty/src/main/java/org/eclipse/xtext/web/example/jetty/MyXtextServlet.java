@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.jetty;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;

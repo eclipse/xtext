@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtext.web.servlet;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
