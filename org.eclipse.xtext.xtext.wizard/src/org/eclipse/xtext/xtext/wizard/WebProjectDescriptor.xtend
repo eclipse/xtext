@@ -18,8 +18,8 @@ class WebProjectDescriptor extends ProjectDescriptor {
 	static val REQUIREJS_VERSION = '2.3.6'
 //	static val REQUIREJS_TEXT_VERSION = '2.0.15'
 	static val JQUERY_VERSION = '3.6.0'
-	static val JETTY_VERSION = '9.4.51.v20230217'
-	static val SLF4J_VERSION = '1.7.33'
+	static val JETTY_VERSION = '11.0.15'
+	static val SLF4J_VERSION = '2.0.5'
 	static val ACE_VERSION = '1.3.3'
 	
 	override getUpstreamProjects() {

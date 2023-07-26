@@ -682,6 +682,9 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				 * Just execute it and point a web browser to http://localhost:8080/
 				 */
 				class «grammar.serverLauncherClass.simpleName» {
+					
+					static final «'org.slf4j.Logger'.typeRef» LOG = «'org.slf4j.LoggerFactory'.typeRef».getLogger(«grammar.serverLauncherClass.simpleName»);
+					
 					def static void main(String[] args) {
 						val server = new «'org.eclipse.jetty.server.Server'.typeRef»(new «'java.net.InetSocketAddress'.typeRef»('localhost', 8080))
 						server.handler = new «'org.eclipse.jetty.webapp.WebAppContext'.typeRef» => [
@@ -692,27 +695,27 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 								new «'org.eclipse.jetty.annotations.AnnotationConfiguration'.typeRef»,
 								new «'org.eclipse.jetty.webapp.WebXmlConfiguration'.typeRef»,
 								new «'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef»,
-								new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»
+								new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»,
+								new «'org.eclipse.jetty.webapp.WebAppConfiguration'.typeRef»
 							]
-							setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*\\.jar')
+							setAttribute(«'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*\\.jar')
 							setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false")
 						]
-						val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 						try {
 							server.start
-							log.info('Server started ' + server.getURI + '...')
+							LOG.info('Server started ' + server.getURI + '...')
 							new Thread[
 								log.info('Press enter to stop the server...')
 								val key = System.in.read
 								if (key != -1) {
 									server.stop
 								} else {
-									log.warn('Console input is not available. In order to stop the server, you need to cancel process manually.')
+									LOG.warn('Console input is not available. In order to stop the server, you need to cancel process manually.')
 								}
 							].start
 							server.join
 						} catch (Exception exception) {
-							log.warn(exception.message)
+							LOG.warn(exception.message)
 							System.exit(1)
 						}
 					}
@@ -725,6 +728,9 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				 * Just execute it and point a web browser to http://localhost:8080/
 				 */
 				public class «grammar.serverLauncherClass.simpleName» {
+					
+					private static final «'org.slf4j.Logger'.typeRef» LOG = «'org.slf4j.LoggerFactory'.typeRef».getLogger(«grammar.serverLauncherClass.simpleName».class);
+					
 					public static void main(String[] args) {
 						«'org.eclipse.jetty.server.Server'.typeRef» server = new «'org.eclipse.jetty.server.Server'.typeRef»(new «'java.net.InetSocketAddress'.typeRef»("localhost", 8080));
 						«'org.eclipse.jetty.webapp.WebAppContext'.typeRef» ctx = new «'org.eclipse.jetty.webapp.WebAppContext'.typeRef»();
@@ -735,37 +741,37 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 							new «'org.eclipse.jetty.annotations.AnnotationConfiguration'.typeRef»(),
 							new «'org.eclipse.jetty.webapp.WebXmlConfiguration'.typeRef»(),
 							new «'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef»(),
-							new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»()
+							new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»(),
+							new «'org.eclipse.jetty.webapp.WebAppConfiguration'.typeRef»()
 						});
-						ctx.setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN,
+						ctx.setAttribute(«'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN,
 							".*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*\\.jar");
 						ctx.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 						server.setHandler(ctx);
-						«'org.eclipse.jetty.util.log.Slf4jLog'.typeRef» log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».class.getName());
 						try {
 							server.start();
-							log.info("Server started " + server.getURI() + "...");
+							LOG.info("Server started " + server.getURI() + "...");
 							new Thread() {
 				
 								public void run() {
 									try {
-										log.info("Press enter to stop the server...");
+										LOG.info("Press enter to stop the server...");
 										int key = System.in.read();
 										if (key != -1) {
 											server.stop();
 										} else {
-											log.warn(
+											LOG.warn(
 													"Console input is not available. In order to stop the server, you need to cancel process manually.");
 										}
 									} catch (Exception e) {
-										log.warn(e);
+										LOG.warn(e.getMessage());
 									}
 								}
 				
 							}.start();
 							server.join();
 						} catch (Exception exception) {
-							log.warn(exception.getMessage());
+							LOG.warn(exception.getMessage());
 							System.exit(1);
 						}
 					}
