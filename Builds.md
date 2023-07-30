@@ -60,6 +60,7 @@ Check the Update Site and Drop dirs to contain the new Milestone or Release
    * Newsgroup / Forum
    * Mailing list
    * Gitter
+   * Ecliape Chat / matrix.eclipse.org
    * Twitter
 
 1. Bump the version number (for Releases only)
