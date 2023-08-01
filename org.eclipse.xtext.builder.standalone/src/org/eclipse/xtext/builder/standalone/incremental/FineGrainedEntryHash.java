@@ -9,11 +9,15 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.IPath;
 
 import com.google.common.hash.HashCode;
+import com.google.common.hash.Hasher;
 
 public class FineGrainedEntryHash implements ClasspathEntryHash {
 	private final Map<IPath, HashCode> classHashes;
@@ -32,6 +36,15 @@ public class FineGrainedEntryHash implements ClasspathEntryHash {
 	 */
 	public Map<IPath, HashCode> classHashes() {
 		return Collections.unmodifiableMap(classHashes);
+	}
+	
+	@Override
+	public String asString() {
+		Stream<Entry<IPath, HashCode>> sorted = classHashes.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey, Comparator.comparing(IPath::toString)));
+		Stream<byte[]> bytes = sorted.map(Map.Entry::getValue).map(HashCode::asBytes);
+		Hasher hasher = BinaryFileHashing.hashFunction().newHasher();
+		bytes.forEachOrdered(hasher::putBytes);
+		return hasher.hash().toString();
 	}
 
 }

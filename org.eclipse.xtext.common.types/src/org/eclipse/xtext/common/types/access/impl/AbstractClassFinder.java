@@ -50,7 +50,14 @@ public abstract class AbstractClassFinder<C> {
 		}
 	}
 
-	 protected abstract C forName(String name, ClassLoader classLoader) throws ClassNotFoundException ;
+	 protected abstract C forName(String name, ClassLoader classLoader) throws ClassNotFoundException;
+	 
+	 /**
+	  * @since 2.35
+	  */
+	 public void clearCache() {
+		 cache.clear();
+	 }
 	
 }
 

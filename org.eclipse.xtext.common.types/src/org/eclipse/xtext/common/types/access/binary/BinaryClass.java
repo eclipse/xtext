@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
@@ -31,6 +32,8 @@ import com.google.common.base.Strings;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class BinaryClass {
+	
+	private static final Logger logger = Logger.getLogger(BinaryClass.class);
 
 	private final String name;
 	private final ClassLoader classLoader;
@@ -67,6 +70,22 @@ public class BinaryClass {
 
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	public URI getLocationURI() {
+		try {
+			URL resource = classLoader.getResource(toClassFile(name));
+			if (resource != null) {
+				return URI.createURI(resource.toString(), true);
+			}
+			return null;
+		} catch(Exception e) {
+			logger.error(e.getMessage(), e);
+			return null;
+		}
 	}
 
 	public byte[] getBytes() {

@@ -12,10 +12,13 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -166,6 +169,57 @@ public class StandaloneBuilderTest {
 	}
 
 	@Test
+	public void testWriteClassPathConfiguration() throws IOException {
+		initBuilder(new TestLanguageConfiguration(false));
+		testBuilder.setSourceDirs(ImmutableList.of("test-data/standalone.with.reference/model"));
+		testBuilder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/",
+				"test-data/model.in.eclipse.project.jar"));
+
+		testBuilder.setTempDir(TMP_DIR);
+		TMP_DIR.mkdir();
+		
+		File configFile = new File(TMP_DIR, "classpath.config");
+		assertFalse(configFile.exists());
+		testBuilder.setClasspathConfigurationLocation(configFile.getAbsolutePath(), "prod", "prod-out");
+
+		assertTrue("Builder launch returned false", testBuilder.launch());
+		assertTrue(configFile.exists());
+		
+		Properties onlyProd = new Properties();
+		try(FileReader reader = new FileReader(configFile, StandardCharsets.UTF_8)) {
+			onlyProd.load(reader);
+		}
+		assertEquals(7, onlyProd.size());
+		
+		testBuilder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/",
+				"test-data/missing.jar"));
+		testBuilder.setClasspathConfigurationLocation(configFile.getAbsolutePath(), "test", "test-out");
+		
+		assertFalse("Builder launch returned true", testBuilder.launch());
+		
+		assertTrue(configFile.exists());
+		
+		Properties alsoTest = new Properties();
+		try(FileReader reader = new FileReader(configFile, StandardCharsets.UTF_8)) {
+			alsoTest.load(reader);
+		}
+		
+		assertTrue(alsoTest.entrySet().containsAll(onlyProd.entrySet()));
+		assertEquals(14, alsoTest.size());
+		
+		testBuilder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/"));
+		testBuilder.setClasspathConfigurationLocation(configFile.getAbsolutePath(), "prod", "prod-out");
+		
+		assertFalse("Builder launch returned true", testBuilder.launch());
+		
+		alsoTest = new Properties();
+		try(FileReader reader = new FileReader(configFile, StandardCharsets.UTF_8)) {
+			alsoTest.load(reader);
+		}
+		assertEquals(12, alsoTest.size());
+	}
+
+	@Test
 	public void testDuplicateSourceEntries() {
 		TestLanguageConfiguration config = new TestLanguageConfiguration(false);
 		config.setJavaSupport(true);
@@ -224,17 +278,17 @@ public class StandaloneBuilderTest {
 	}
 
 	private StandaloneBuilder initBuilder(ILanguageConfiguration config, String... srcDirs) {
-		List<String> patthes = new ArrayList<String>();
+		List<String> pathes = new ArrayList<String>();
 		for (String srcDir : srcDirs) {
-			patthes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
+			pathes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
 		}
-		testBuilder.setSourceDirs(patthes);
+		testBuilder.setSourceDirs(pathes);
 		testBuilder.resetCallStatistic();
-		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(
-				ImmutableList.of(config), getClass().getClassLoader());
+		Map<String, LanguageAccess> languages = new LanguageAccessFactory()
+				.createLanguageAccess(ImmutableList.of(config), getClass().getClassLoader());
 		testBuilder.setBaseDir(PROJECT_DIR.getAbsolutePath());
 		testBuilder.setLanguages(languages);
-		testBuilder.setClassPathEntries(ImmutableList.<String> of());
+		testBuilder.setClassPathEntries(ImmutableList.<String>of());
 		return testBuilder;
 	}
 

@@ -26,5 +26,9 @@ public class CoarseGrainedEntryHash implements ClasspathEntryHash {
 	public byte[] asBytes() {
 		return hashCode.asBytes();
 	}
+	
+	public String asString() {
+		return hashCode.toString();
+	}
 
 }

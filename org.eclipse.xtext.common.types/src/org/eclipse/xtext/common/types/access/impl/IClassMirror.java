@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IMirrorExtension;
 
@@ -15,4 +17,13 @@ import org.eclipse.xtext.common.types.access.IMirrorExtension;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IClassMirror extends IMirror, IMirrorExtension {
+	
+	/**
+	 * Return the location URI of this class mirror. Returns null if none is available.
+	 * @since 2.35
+	 */
+	default URI getLocationURI(Resource resource) {
+		return null;
+	}
+	
 }
