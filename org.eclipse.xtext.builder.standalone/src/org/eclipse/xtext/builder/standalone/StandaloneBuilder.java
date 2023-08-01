@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2020, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,15 +11,20 @@ package org.eclipse.xtext.builder.standalone;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Writer;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,12 +32,17 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.regex.Pattern;
@@ -84,6 +94,7 @@ import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.TailWriter;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -94,6 +105,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -180,6 +192,14 @@ public class StandaloneBuilder {
 	private final Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = new HashMap<>();
 
 	private boolean incremental = false;
+	
+	/**
+	 * Location to which the class-path configuration shall be written. The file format is internal.
+	 * Must be configured along with the {@link #classpathKey}.
+	 */
+	private String classpathConfigurationLocation;
+	private String classpathKey;
+	private String classOutputDirectory;
 
 	public StandaloneBuilder() {
 		try {
@@ -191,6 +211,14 @@ public class StandaloneBuilder {
 
 	public void setIncrementalBuild(boolean enable) {
 		incremental = enable;
+	}
+	
+	public void setClasspathConfigurationLocation(String location, String key, String outputDirectory) {
+		this.classpathConfigurationLocation = location;
+		if (location != null) {
+			this.classpathKey = Objects.requireNonNull(key);
+			this.classOutputDirectory = Objects.requireNonNull(outputDirectory);
+		}
 	}
 
 	public void setTempDir(String pathAsString) {
@@ -229,6 +257,10 @@ public class StandaloneBuilder {
 			}
 
 			forceDebugLog("Collected source models. Took: " + rootStopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
+			
+			if (classpathConfigurationLocation != null) {
+				writeClassPathConfiguration(rootsToTravers, stubsDirectory != null);
+			}
 			
 			XtextResourceSet resourceSet = resourceSetProvider.get();
 			Iterable<String> allClassPathEntries = Iterables.concat(sourceDirs, classPathEntries);
@@ -310,6 +342,57 @@ public class StandaloneBuilder {
 
 			LOG.info("Build took " + rootStopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms.");
 		}
+	}
+
+	private void writeClassPathConfiguration(Iterable<String> modelRoots, boolean classpath) {
+		try {
+			File file = new File(classpathConfigurationLocation);
+			Properties properties = new Properties();
+			if (file.exists()) {
+				try (FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
+					properties.load(reader);
+				}
+			}
+			String prefix = classpathKey + ".";
+			properties.entrySet().removeIf(existing -> {
+				String key = String.valueOf(existing.getKey());
+				return key.startsWith(prefix);
+			});
+			intoProperties(modelRoots, prefix + "model.", properties, true);
+			intoProperties(sourceDirs, prefix + "src.", properties, false);
+			if (classpath) {
+				intoProperties(List.of(classOutputDirectory), prefix + "bin.", properties, false);
+				intoProperties(classPathEntries, prefix + "cp.", properties, true);
+			}
+			try (Writer writer = new TailWriter(new FileWriter(file, StandardCharsets.UTF_8), 1)) {
+				new Properties() {
+					private static final long serialVersionUID = 1L;
+					@Override
+					public Set<Map.Entry<Object, Object>> entrySet() {
+						TreeSet<Map.Entry<Object, Object>> result = new TreeSet<>(
+								Comparator.comparing(e -> String.valueOf(e.getKey())));
+						result.addAll(properties.entrySet());
+						return result;
+					}
+				}.store(writer, null);
+			}
+		} catch (IOException e) {
+			LOG.error("Failed to write class-path configuration", e);
+		}
+	}
+
+	private void intoProperties(Iterable<String> values, String prefix, Properties target, boolean hash) {
+		int i = 0;
+		for(String value: values) {
+			String key = prefix + i;
+			target.put(key, new File(value).getAbsolutePath());
+			if (hash) {
+				IPath path = new Path(value);
+				target.put(key + ".hash", classpathInfos.hashClassesOrJar(path).asString());
+			}
+			i++;
+		}
+		target.put(prefix + "count", String.valueOf(i));
 	}
 
 	private String generateStubs(File stubsDirectory, Set<URI> changedSourceFiles,
@@ -439,10 +522,10 @@ public class StandaloneBuilder {
 		});
 	}
 
-	private HashCode hashClasspath(Iterable<String> filteredClasspath) {
+	private HashCode hashClasspath(Iterable<String> classpathEntries) {
 		NameBasedFilter nameFilter = dslFileNamePattern();
 		List<ForkJoinTask<byte[]>> hashCodes = new ArrayList<>();
-		for (String classpathEntry : filteredClasspath) {
+		for (String classpathEntry : classpathEntries) {
 			IPath path = new Path(classpathEntry);
 			if ("jar".equalsIgnoreCase(path.getFileExtension())) {
 				hashCodes.add(ForkJoinPool.commonPool().submit(() -> {
@@ -988,4 +1071,5 @@ public class StandaloneBuilder {
 	public void setClusteringConfig(ClusteringConfig clusteringConfig) {
 		this.clusteringConfig = clusteringConfig;
 	}
+
 }

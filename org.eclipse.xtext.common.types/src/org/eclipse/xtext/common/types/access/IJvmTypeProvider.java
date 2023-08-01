@@ -51,6 +51,13 @@ public interface IJvmTypeProvider {
 	 */
 	ResourceSet getResourceSet();
 
+	/**
+	 * @since 2.35
+	 */
+	default void clearCache() {
+		// nothing to do by default
+	}
+
 	interface Factory {
 
 		IJvmTypeProvider createTypeProvider(ResourceSet resourceSet);

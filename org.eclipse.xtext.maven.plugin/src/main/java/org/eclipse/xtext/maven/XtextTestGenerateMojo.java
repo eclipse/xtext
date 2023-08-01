@@ -38,7 +38,7 @@ public class XtextTestGenerateMojo extends AbstractXtextGeneratorMojo {
 	public Set<String> getClasspathElements() {
 		Set<String> classpathElementSet = newLinkedHashSet();
 		classpathElementSet.addAll(this.classpathElements);
-		classpathElementSet.remove(getProject().getBuild().getTestOutputDirectory());
+		classpathElementSet.remove(getClassOutputDirectory());
 		return newLinkedHashSet(filter(classpathElementSet, emptyStringFilter()));
 	}
 
@@ -51,6 +51,11 @@ public class XtextTestGenerateMojo extends AbstractXtextGeneratorMojo {
 	
 	protected String tmpDirSuffix() {
 		return "-test";
+	}
+	
+	@Override
+	protected String getClassOutputDirectory() {
+		return getProject().getBuild().getTestOutputDirectory();
 	}
 	
 	/**

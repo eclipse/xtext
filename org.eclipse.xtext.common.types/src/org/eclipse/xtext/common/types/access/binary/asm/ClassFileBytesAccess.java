@@ -60,4 +60,10 @@ public class ClassFileBytesAccess {
 		return result;
 	}
 	
+	/**
+	 * @since 2.35
+	 */
+	public void clearCache() {
+		cache.clear();
+	}
 }

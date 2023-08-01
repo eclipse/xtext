@@ -109,6 +109,11 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
 		public boolean isSealed() {
 			return true;
 		}
+		
+		@Override
+		public URI getLocationURI(Resource resource) {
+			return resource.getURI();
+		}
 	}
 
 	public static final String OPTION_ENCODING = JavaResource.class.getName() + ".DEFAULT_ENCODING";
@@ -307,6 +312,11 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
 		@Override
 		public boolean isSealed() {
 			throw new UnsupportedOperationException("TODO: auto-generated method stub");
+		}
+		
+		@Override
+		public URI getLocationURI(Resource resource) {
+			return resource.getURI();
 		}
 	};
 

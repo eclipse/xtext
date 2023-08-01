@@ -67,6 +67,13 @@ public class CachingDeclaredTypeFactory implements ITypeFactory<BinaryClass, Jvm
 			return delegate.createType(clazz);
 		}
 	}
+	
+	/**
+	 * @since 2.35
+	 */
+	public void clearCache() {
+		typeCache.clear();
+	}
 
 	private JvmDeclaredType get(BinaryClass clazz) {
 		String name = clazz.getName();
