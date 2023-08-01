@@ -143,6 +143,7 @@ import org.eclipse.xtext.util.BufferedCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Pair;
+
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
@@ -654,14 +655,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	@Override
 	public CompletableFuture<List<Either<SymbolInformation, DocumentSymbol>>> documentSymbol(
 			DocumentSymbolParams params) {
-		return requestManager.runRead((cancelIndicator) -> documentSymbol(params, cancelIndicator));
+		return requestManager.runRead((cancelIndicator) -> {
+			List<DocumentSymbol> symbols = documentSymbol(params, cancelIndicator);
+			return Lists.transform(symbols, Either::forRight);
+		});
 	}
 
 	/**
 	 * Compute the symbol information. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected List<Either<SymbolInformation, DocumentSymbol>> documentSymbol(DocumentSymbolParams params,
+	protected List<DocumentSymbol> documentSymbol(DocumentSymbolParams params,
 			CancelIndicator cancelIndicator) {
 		URI uri = getURI(params.getTextDocument());
 		IDocumentSymbolService documentSymbolService = getIDocumentSymbolService(getResourceServiceProvider(uri));
@@ -712,16 +716,18 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 
 	@Override
 	public CompletableFuture<Either<List<? extends SymbolInformation>, List<? extends WorkspaceSymbol>>> symbol(WorkspaceSymbolParams params) {
-		return requestManager.runRead((cancelIndicator) -> symbol(params, cancelIndicator));
+		return requestManager.runRead((cancelIndicator) -> {
+			List<? extends WorkspaceSymbol> symbols = symbol(params, cancelIndicator);
+			return Either.forRight(symbols);
+		});
 	}
 
 	/**
 	 * Compute the symbol information. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected Either<List<? extends SymbolInformation>, List<? extends WorkspaceSymbol>> symbol(WorkspaceSymbolParams params, CancelIndicator cancelIndicator) {
-		return workspaceSymbolService.getSymbols(params.getQuery(), resourceAccess, workspaceManager.getIndex(),
-				cancelIndicator);
+	protected List<? extends WorkspaceSymbol> symbol(WorkspaceSymbolParams params, CancelIndicator cancelIndicator) {
+		return workspaceSymbolService.getSymbols(params.getQuery(), resourceAccess, workspaceManager.getIndex(), cancelIndicator);
 	}
 
 	@Override
