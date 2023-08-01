@@ -229,11 +229,11 @@ public class StandaloneBuilderTest {
 	 *            source dirs from {@value #PROJECT_DIR}
 	 */
 	private StandaloneBuilder initBuilder(ILanguageConfiguration config, String... srcDirs) {
-		List<String> patthes = new ArrayList<String>();
+		List<String> pathes = new ArrayList<String>();
 		for (String srcDir : srcDirs) {
-			patthes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
+			pathes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
 		}
-		testBuilder.setSourceDirs(patthes);
+		testBuilder.setSourceDirs(pathes);
 		testBuilder.resetCallStatistic();
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(
 				ImmutableList.of(config), getClass().getClassLoader());

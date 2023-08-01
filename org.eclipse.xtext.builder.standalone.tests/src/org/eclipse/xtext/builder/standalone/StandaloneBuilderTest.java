@@ -224,17 +224,17 @@ public class StandaloneBuilderTest {
 	}
 
 	private StandaloneBuilder initBuilder(ILanguageConfiguration config, String... srcDirs) {
-		List<String> patthes = new ArrayList<String>();
+		List<String> pathes = new ArrayList<String>();
 		for (String srcDir : srcDirs) {
-			patthes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
+			pathes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
 		}
-		testBuilder.setSourceDirs(patthes);
+		testBuilder.setSourceDirs(pathes);
 		testBuilder.resetCallStatistic();
-		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(
-				ImmutableList.of(config), getClass().getClassLoader());
+		Map<String, LanguageAccess> languages = new LanguageAccessFactory()
+				.createLanguageAccess(ImmutableList.of(config), getClass().getClassLoader());
 		testBuilder.setBaseDir(PROJECT_DIR.getAbsolutePath());
 		testBuilder.setLanguages(languages);
-		testBuilder.setClassPathEntries(ImmutableList.<String> of());
+		testBuilder.setClassPathEntries(ImmutableList.<String>of());
 		return testBuilder;
 	}
 
