@@ -38,7 +38,7 @@ public class XtextGenerateMojo extends AbstractXtextGeneratorMojo {
 	public Set<String> getClasspathElements() {
 		Set<String> classpathElements = newLinkedHashSet();
 		classpathElements.addAll(this.classpathElements);
-		classpathElements.remove(getProject().getBuild().getOutputDirectory());
+		classpathElements.remove(getClassOutputDirectory());
 		classpathElements.remove(getProject().getBuild().getTestOutputDirectory());
 		Set<String> nonEmptyElements = newLinkedHashSet(filter(classpathElements, emptyStringFilter()));
 		return nonEmptyElements;
@@ -49,6 +49,11 @@ public class XtextGenerateMojo extends AbstractXtextGeneratorMojo {
 		for (Language language : getLanguages()) {
 			addCompileSourceRoots(language);
 		}
+	}
+	
+	@Override
+	protected String getClassOutputDirectory() {
+		return getProject().getBuild().getOutputDirectory();
 	}
 	
 	/**
