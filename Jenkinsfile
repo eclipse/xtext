@@ -104,7 +104,7 @@ pipeline {
           lastResult = currentBuild.previousBuild.result
         }
 
-        if (curResult != 'SUCCESS' || lastResult != 'SUCCESS') {
+        if (curResult != 'SUCCESS' || lastResult != 'SUCCESS' | true) {
           def color = ''
           switch (curResult) {
             case 'SUCCESS':
@@ -126,7 +126,8 @@ pipeline {
             channel: 'xtext-builds',
             color: "${color}"
           )
-          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', body: "${lastResult} => ${curResult} <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}>"
+          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}"
         }
       }
     }
