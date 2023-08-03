@@ -141,6 +141,8 @@ pipeline {
           body: "${env.BUILD_NUMBER}"
           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
           body: "${env.BUILD_URL}"
+          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "WTF"
         }
       }
     }
