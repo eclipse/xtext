@@ -62,9 +62,12 @@ pipeline {
       }
       steps {
         xvnc(useXauthority: true) {
+          //sh """
+          //  ./full-build.sh --tp=${selectedTargetPlatform()} \
+          //    ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
+          //"""
           sh """
-            ./full-build.sh --tp=${selectedTargetPlatform()} \
-              ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
+          echo 'Hello'
           """
         }
       }// END steps
@@ -128,6 +131,16 @@ pipeline {
           )
           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
           body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}"
+           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${lastResult} => ${curResult} ${env.BUILD_URL} ${env.JOB_NAME}#${env.BUILD_NUMBER}"
+           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${lastResult} => ${curResult}"
+           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${env.JOB_NAME}"
+          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${env.BUILD_NUMBER}"
+          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${env.BUILD_URL}"
         }
       }
     }
