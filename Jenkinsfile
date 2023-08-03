@@ -151,7 +151,7 @@ pipeline {
           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
           formattedBody: "WTF"*/
            matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
-          body: "WTF", formattedBody: "WTF", format: ""
+          body: "WTF", formattedBody: "<b>WTF</b>", format: "org.matrix.custom.html"
         }
       }
     }
