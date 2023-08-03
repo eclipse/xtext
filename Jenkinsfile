@@ -151,7 +151,10 @@ pipeline {
           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
           formattedBody: "WTF"*/
            matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
-          body: "WTF", formattedBody: "<b>WTF</b>", format: "org.matrix.custom.html"
+          body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}", formattedBody: "<div style='background-color: ${color}'>${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}</div>", format: "org.matrix.custom.html"
+        
+          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+          body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}", formattedBody: "<div style='background-color: ${color}'>${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}</div>"
         }
       }
     }
