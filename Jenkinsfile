@@ -130,8 +130,13 @@ pipeline {
             color: "${color}"
           )
           
-          matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
-          body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}", formattedBody: "<div style='background-color: ${color};'>≈${lastResult} => ${curResult} | <a href='${env.BUILD_URL}' target='_blank'>${env.JOB_NAME}#${env.BUILD_NUMBER}</a></div>"
+          matrixSendMessage 
+            https: true,
+            hostname: 'matrix.eclipse.org',
+            accessTokenCredentialsId: "matrix-token",
+            roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
+            body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}",
+            formattedBody: "<div style='background-color: ${color};'>≈${lastResult} => ${curResult} | <a href='${env.BUILD_URL}' target='_blank'>${env.JOB_NAME}#${env.BUILD_NUMBER}</a></div>"
        }
       }
     }
