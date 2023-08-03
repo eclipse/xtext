@@ -129,6 +129,7 @@ pipeline {
             channel: 'xtext-builds',
             color: "${color}"
           )
+          /*
           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
           body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}"
            matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
@@ -148,7 +149,7 @@ pipeline {
 
 
           matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
-          formattedBody: "WTF"
+          formattedBody: "WTF"*/
            matrixSendMessage https: true, hostname: 'matrix.eclipse.org', accessTokenCredentialsId: "matrix-token", roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org', 
           body: "WTF", formattedBody: "WTF", format: ""
         }
