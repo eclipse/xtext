@@ -125,7 +125,7 @@ pipeline {
             accessTokenCredentialsId: "matrix-token",
             roomId: '!zbliqcdqsggOFDCUoF:matrix.eclipse.org',
             body: "${lastResult} => ${curResult} ${env.BUILD_URL} | ${env.JOB_NAME}#${env.BUILD_NUMBER}",
-            formattedBody: "<div style='color: ${color};'>${lastResult} => ${curResult} | <a href='${env.BUILD_URL}' target='_blank'>${env.JOB_NAME}#${env.BUILD_NUMBER}</a></div>"
+            formattedBody: "<div><font color='${color}'>${lastResult} => ${curResult}</font> | <a href='${env.BUILD_URL}' target='_blank'>${env.JOB_NAME}#${env.BUILD_NUMBER}</a></div>"
         }
       }
     }
