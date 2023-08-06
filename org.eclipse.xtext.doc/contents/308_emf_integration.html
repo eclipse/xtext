@@ -10,7 +10,7 @@
 
 <h1 id="emf-integration">Integration with EMF</h1>
 
-<p>Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools. In this section we introduce the basic concepts of the <a href="http://www.eclipse.org/modeling/emf/">Eclipse Modeling Framework (EMF)</a> in the context of Xtext. If you want to learn more about EMF, we recommend reading the <a href="http://www.eclipse.org/modeling/emf/">EMF book</a>.</p>
+<p>Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools. In this section we introduce the basic concepts of the <a href="https://www.eclipse.org/modeling/emf/">Eclipse Modeling Framework (EMF)</a> in the context of Xtext. If you want to learn more about EMF, we recommend reading the <a href="https://www.eclipse.org/modeling/emf/">EMF book</a>.</p>
 
 <h2 id="model-metamodel">Model, Ecore Model, and Ecore</h2>
 
@@ -26,7 +26,7 @@
 
 <p>The meta-model defines the types of the semantic nodes as Ecore <em>EClasses</em>. EClasses are shown as boxes in the meta-model diagram, so in our example, <em>Model</em>, <em>Type</em>, <em>SimpleType</em>, <em>Entity</em>, and <em>Property</em> are EClasses. An EClass can inherit from other EClasses. Multiple inheritance is allowed in Ecore, but of course cycles are forbidden.</p>
 
-<p>EClasses can have <em>EAttributes</em> for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes <em>name</em> and one EAttribute <em>multi</em>. The domain of values for an EAttribute is defined by its <em>EDataType</em>. Ecore ships with some predefined <em>EDataTypes</em>, which essentially refer to Java primitive types and other immutable classes like <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>. To make a distinction from the Java types, the <em>EDataTypes</em> are prefixed with an <em>E</em>. In our example, that is <em>EString</em> and <em>EBoolean</em>.</p>
+<p>EClasses can have <em>EAttributes</em> for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes <em>name</em> and one EAttribute <em>multi</em>. The domain of values for an EAttribute is defined by its <em>EDataType</em>. Ecore ships with some predefined <em>EDataTypes</em>, which essentially refer to Java primitive types and other immutable classes like <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a>. To make a distinction from the Java types, the <em>EDataTypes</em> are prefixed with an <em>E</em>. In our example, that is <em>EString</em> and <em>EBoolean</em>.</p>
 
 <p>In contrast to EAttributes, <em>EReferences</em> point to other EClasses. The <em>containment</em> flag indicates whether an EReference is a <em>containment reference</em> or a <em>cross-reference</em>. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, <em>cross-references</em> refer to elements that can be contained anywhere else. In the example, <em>elements</em> and <em>properties</em> are containment references, while <em>type</em> and <em>extends</em> are cross-references. For reasons of readability, we skipped the cross-references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross-references.</p>
 
@@ -138,7 +138,7 @@
 
 <p>We do no longer maintain the GMF example code and have removed it from our installation. You can still access the last version of the source code form our <a href="https://github.com/eclipse/xtext-archive/tree/v2.10.0/examples/org.eclipse.xtext.xtext.ui.examples/contents">source code repository</a>.</p>
 
-<p>The <a href="http://www.eclipse.org/modeling/gmp/?project=gmf">Graphical Modeling Framework (GMF)</a> allows to create graphical diagram editors for Ecore models. To illustrate how to build a GMF editor on top of an <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code.</p>
+<p>The <a href="https://www.eclipse.org/modeling/gmp/?project=gmf">Graphical Modeling Framework (GMF)</a> allows to create graphical diagram editors for Ecore models. To illustrate how to build a GMF editor on top of an <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code.</p>
 
 <p>The example consists of a number of plug-ins</p>
 

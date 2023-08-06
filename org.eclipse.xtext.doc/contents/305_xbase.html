@@ -35,7 +35,7 @@ DataType:
   'mapped-to' javaType=[jvmTypes::JvmType|QualifiedName];
 </code></pre>
 
-<p>After regenerating your language, it will be allowed to define a type <code>Date</code> that maps to the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html">Date</a> like this:</p>
+<p>After regenerating your language, it will be allowed to define a type <code>Date</code> that maps to the <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Date.html">Date</a> like this:</p>
 
 <pre><code class="language-javatypesexample">  datatype Date mapped-to java.util.Date
 </code></pre>
@@ -184,7 +184,7 @@ entity Person {
 ...
 </code></pre>
 
-<p>You can use entities instead of Java types or even mix Java types as <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a> with entities such as <em>Person</em>. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em> inherit from <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">JvmGenericType</a>. But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This <em>inferred JVM model</em> is the representation of your concepts in the type system of Xbase.</p>
+<p>You can use entities instead of Java types or even mix Java types as <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html">List</a> with entities such as <em>Person</em>. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em> inherit from <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">JvmGenericType</a>. But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This <em>inferred JVM model</em> is the representation of your concepts in the type system of Xbase.</p>
 
 <p>The main component for the inferred JVM model is the <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a>. It has a single method that takes the root model element as an argument and produces a number of <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java">JvmDeclaredTypes</a>. As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a> to create a hierarchy of JVM elements. The <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">builder</a> helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a> in Xtend. It becomes even simpler if you inherit from the <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">AbstractModelInferrer</a> which traverses the input model and dispatches to its contents until you decide which elements to handle.</p>
 
@@ -289,7 +289,7 @@ Property:
 public Object evaluate(XExpression expression, Object thisElement) {
   IEvaluationContext evaluationContext = contextProvider.get();
   // provide initial context and implicit variables
-  evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
+  evaluationContext.newValue(IFeatureNames.THIS, thisElement);
   
   IEvaluationResult result = xbaseInterpreter.evaluate(expression,
     evaluationContext, CancelIndicator.NullImpl);
@@ -357,7 +357,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 <h4 id="xbase-syntax-comments">Comments</h4>
 
-<p>Xbase comes with two different kinds of comments: Single-line comments and multi-line comments. The syntax is the same as the one known from Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.7">§ 3.7 Comments</a>).</p>
+<p>Xbase comes with two different kinds of comments: Single-line comments and multi-line comments. The syntax is the same as the one known from Java (see <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.7">§ 3.7 Comments</a>).</p>
 
 <h4 id="xbase-syntax-whitespace">White Space</h4>
 
@@ -420,7 +420,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 <h4 id="xbase-types-parameterized-type-reference">Parameterized Type References</h4>
 
-<p>The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please refer to the third edition of the <a href="http://docs.oracle.com/javase/specs/jls/se7/html/index.html">Java Language Specification</a>.</p>
+<p>The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please refer to the third edition of the <a href="https://docs.oracle.com/javase/specs/jls/se7/html/index.html">Java Language Specification</a>.</p>
 
 <p>The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and type arguments.</p>
 
@@ -443,7 +443,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 <p>Arrays cannot be instantiated arbitrarily, but there are a couple of useful library functions that allow to create arrays with a fixed length or an initial value set. Besides this restriction, they can be passed around and they are transparently converted to a List of the component type on demand.</p>
 
-<p>In other words, the return type of a Java method that returns an array of ints (<code>int[]</code>) can be directly assigned to a variable of type <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List&lt;Integer&gt;</a>. Due to type inference this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked with an argument that has the type <code>List&lt;ComponentType&gt;</code> instead.</p>
+<p>In other words, the return type of a Java method that returns an array of ints (<code>int[]</code>) can be directly assigned to a variable of type <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html">List&lt;Integer&gt;</a>. Due to type inference this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked with an argument that has the type <code>List&lt;ComponentType&gt;</code> instead.</p>
 
 <h4 id="xbase-types-function-types">Function Types</h4>
 
@@ -465,7 +465,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 <p>Type conformance rules are used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, the type of the right hand expression needs to conform to the type of the variable.</p>
 
-<p>As Xbase implements the type system of Java it also fully supports the conformance rules defined in the <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html">Java Language Specification</a>.</p>
+<p>As Xbase implements the type system of Java it also fully supports the conformance rules defined in the <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html">Java Language Specification</a>.</p>
 
 <p>Some types in Xbase can be used synonymously even if they do not conform to each other in Java. An example for this are arrays and lists or function types with compatible function parameters. Objects of these types are implicitly converted by Xbase on demand.</p>
 
@@ -489,7 +489,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 <p>String literals can either use <code>'single quotes'</code> or <code>"double quotes"</code> as their enclosing characters. When using double quotes all literals allowed by Java string literals are supported. In addition new line characters are allowed, i.e. in Xbase string literals can span multiple lines. When using single quotes the only difference is that single quotes within the literal have to be escaped while double quotes do not.</p>
 
-<p>See <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5">§ 3.10.5 String Literals</a></p>
+<p>See <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5">§ 3.10.5 String Literals</a></p>
 
 <p>In contrast to Java, equal string literals within the same class do not necessarily refer to the same instance at runtime, especially in the interpreted mode.</p>
 
@@ -510,7 +510,7 @@ jumps over the lazy dog."
 
 <h5 id="xbase-expressions-number-literal">Number Literals</h5>
 
-<p>Xbase supports roughly the same number literals as Java with a few notable differences. As in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal represents an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or even a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal number literals.</p>
+<p>Xbase supports roughly the same number literals as Java with a few notable differences. As in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal represents an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or even a <a href="https://docs.oracle.com/javase/11/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal number literals.</p>
 
 <pre><code class="language-xbase">  42
   1_234_567_890 
@@ -521,7 +521,7 @@ jumps over the lazy dog."
   0xbeef_beef_beef_beef_beef#BI // BigInteger
 </code></pre>
 
-<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or omitted), a <code>float</code> (suffix <code>F</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> sign you have to specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point literals.</p>
+<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or omitted), a <code>float</code> (suffix <code>F</code>) or a <a href="https://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> sign you have to specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point literals.</p>
 
 <pre><code class="language-xbase">  42d     // double
   0.42e2  // implicit double
@@ -570,7 +570,7 @@ jumps over the lazy dog."
 
 <p>Type cast behave the same as in Java, but have a more readable syntax. Type casts bind stronger than any other operator but weaker than feature calls.</p>
 
-<p>The conformance rules for casts are defined in the <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.5">Java Language Specification</a>.</p>
+<p>The conformance rules for casts are defined in the <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.5">Java Language Specification</a>.</p>
 
 <h5 id="examples-5">Examples</h5>
 
@@ -1016,7 +1016,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <p>In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) lambda expressions are auto coerced to expected types if those types declare only one abstract method (methods from <code>java.lang.Object</code> don’t count).</p>
 
-<p>As a result given the method <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collections.html">Collections.sort(List&lt;T&gt;, Comparator&lt;? super T&gt;)</a> is available as an extension method, it can be invoked like this</p>
+<p>As a result given the method <a href="https://docs.oracle.com/javase/11/docs/api/java/util/Collections.html">Collections.sort(List&lt;T&gt;, Comparator&lt;? super T&gt;)</a> is available as an extension method, it can be invoked like this</p>
 
 <pre><code class="language-xbase">newArrayList( 'aaa', 'bb', 'c' ).sort [
   e1, e2 | if ( e1.length &gt; e2.length ) {
@@ -1072,7 +1072,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <h5 id="xbase-expressions-if-type-inference">Typing</h5>
 
-<p>The type of an <code>if</code> expression is calculated from the types <code>T1</code> and <code>T2</code> of the two expressions <code>e1</code> and <code>e2</code>. It uses the rules defined in the <a href="#xbase-types-common-super-type">common super types</a> section, if an explicit <code>else</code> branch is given. If it is ommitted, the type of the <code>if</code> expression is the type <code>T</code> of the expression <code>e</code> of the form <code>if (b) e</code>.</p>
+<p>The type of an <code>if</code> expression is calculated from the types <code>T1</code> and <code>T2</code> of the two expressions <code>e1</code> and <code>e2</code>. It uses the rules defined in the <a href="#xbase-types-common-super-type">common super types</a> section, if an explicit <code>else</code> branch is given. If it is omitted, the type of the <code>if</code> expression is the type <code>T</code> of the expression <code>e</code> of the form <code>if (b) e</code>.</p>
 
 <h5 id="examples-9">Examples</h5>
 
@@ -1095,7 +1095,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 }
 </code></pre>
 
-<p>the main expression <code>e</code> is evaluated first and then each case sequentially. If the switch expression contains a variable declaration using the syntax known from <a href="#xbase-expressions-for-loop">for loops</a>, the value is bound to the given name. Expressions of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> or <code>boolean</code> are not allowed in a switch expression.</p>
+<p>the main expression <code>e</code> is evaluated first and then each case sequentially. If the switch expression contains a variable declaration using the syntax known from <a href="#xbase-expressions-for-loop">for loops</a>, the value is bound to the given name. Expressions of type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Boolean.html">Boolean</a> or <code>boolean</code> are not allowed in a switch expression.</p>
 
 <p>The guard of each case clause is evaluated until the switch value equals the result of the case’s guard expression or if the case’s guard expression evaluates to <code>true</code>. Then the right hand expression of the case evaluated and the result is returned.</p>
 
@@ -1224,9 +1224,9 @@ switch x {
 
 <h4 id="xbase-expressions-for-loop">For Loop</h4>
 
-<p>The for loop <code>for (T1 variable : iterableOfT1) expression</code> is used to execute a certain expression for each element of an array of an instance of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated.</p>
+<p>The for loop <code>for (T1 variable : iterableOfT1) expression</code> is used to execute a certain expression for each element of an array of an instance of <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated.</p>
 
-<p>The type of a for loop is <code>void</code>. The type of the local variable can optionally be inferred from the type of the array or the element type of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> returned by the iterable expression.</p>
+<p>The type of a for loop is <code>void</code>. The type of the local variable can optionally be inferred from the type of the array or the element type of the <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html">Iterable</a> returned by the iterable expression.</p>
 
 <ul>
   <li>
@@ -1316,7 +1316,7 @@ switch x {
 
 <h4 id="xbase-expressions-throw">Throwing Exceptions</h4>
 
-<p>It is possible to throw <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html">Throwable</a>. The syntax is exactly the same as in Java.</p>
+<p>It is possible to throw <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Throwable.html">Throwable</a>. The syntax is exactly the same as in Java.</p>
 
 <pre><code class="language-xbase">{
   ...
@@ -1328,7 +1328,7 @@ switch x {
 
 <h4 id="xbase-expressions-try-catch">Try, Catch, Finally</h4>
 
-<p>The try-catch-finally expression is used to handle exceptional situations. You are not forced to declare checked exceptions. If you don’t catch checked exceptions, they are thrown in a way the compiler does not complain about a missing throws clause, using the sneaky-throw technique introduced by <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>.</p>
+<p>The try-catch-finally expression is used to handle exceptional situations. You are not forced to declare checked exceptions. If you don’t catch checked exceptions, they are thrown in a way the compiler does not complain about a missing throws clause, using the sneaky-throw technique introduced by <a href="https://projectlombok.org/features/SneakyThrows.html">Lombok</a>.</p>
 
 <pre><code class="language-xbase">  try {
     throw new RuntimeException()
@@ -1341,7 +1341,7 @@ switch x {
 
 <h4 id="xbase-expressions-synchronized">Synchronized</h4>
 
-<p>The synchonized expression does the same as it does in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>). The only difference is that in Xbase it is an expression and can therefore be used at more places.</p>
+<p>The synchonized expression does the same as it does in Java (see <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>). The only difference is that in Xbase it is an expression and can therefore be used at more places.</p>
 
 <pre><code class="language-xtend">  synchronized(lock) {
     println("Hello")
@@ -1359,11 +1359,11 @@ switch x {
 
 <p>Languages extending Xbase might want to contribute to the feature scope. Besides that, one can of course change the whole implementation as it seems fit. There is a special hook, which can be used to add so-called extension methods to existing types.</p>
 
-<p>Xbase itself comes with a standard library of such extension methods adding support for various operators for the common types, such as <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>, <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>, etc.</p>
+<p>Xbase itself comes with a standard library of such extension methods adding support for various operators for the common types, such as <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a>, <a href="https://docs.oracle.com/javase/11/docs/api/java/util/List.html">List</a>, etc.</p>
 
 <p>These extension methods are declared in separate Java classes. There are various ways how extension methods can be added. In the simplest case the language designer predefines which extension methods are available. Language users cannot add additional library functions using this mechanism.</p>
 
-<p>Another alternative is to have them looked up by a certain naming convention. Also for more general languages it is possible to let users add extension methods using imports or similar mechanisms. This approach can be seen in the language <a href="https://www.eclipse.org/xtend/">Xtend</a>, where extension methods are lexically imported through static imports or dependency injection.</p>
+<p>Another alternative is to have them looked up by a certain naming convention. Also for more general languages it is possible to let users add extension methods using imports or similar mechanisms. This approach can be seen in the language <a href="https://eclipse.dev/Xtext/xtend/">Xtend</a>, where extension methods are lexically imported through static imports or dependency injection.</p>
 
 <p>The precedence of extension methods is always lower than real member methods, i.e. you cannot override member features. Also the extension methods are not invoked polymorphic. If you have two extension methods on the scope (<code>foo(Object)</code> and <code>foo(String)</code>) the expression <code>(foo as Object).foo</code> would bind and invoke <code>foo(Object)</code>.</p>
 

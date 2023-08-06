@@ -19,7 +19,7 @@
   }
 </code></pre>
 
-<p>If <code>fileContentsToString()</code> throws an <a href="http://docs.oracle.com/javase/11/docs/api/java/io/IOException.html">IOException</a>, it is caught and the string <code>'dummy data'</code> is assigned to the value <code>data</code>. Expressions can appear as <a href="202_xtend_classes_members.html#fields">initializers of fields</a>, the body of constructors or methods and as values in annotations. A method body can either be a <a href="203_xtend_expressions.html#blocks">block expression</a> or a <a href="203_xtend_expressions.html#templates">template expression</a>.</p>
+<p>If <code>fileContentsToString()</code> throws an <a href="https://docs.oracle.com/javase/11/docs/api/java/io/IOException.html">IOException</a>, it is caught and the string <code>'dummy data'</code> is assigned to the value <code>data</code>. Expressions can appear as <a href="202_xtend_classes_members.html#fields">initializers of fields</a>, the body of constructors or methods and as values in annotations. A method body can either be a <a href="203_xtend_expressions.html#blocks">block expression</a> or a <a href="203_xtend_expressions.html#templates">template expression</a>.</p>
 
 <h2 id="xtend-expressions-literals">Literals</h2>
 
@@ -27,7 +27,7 @@
 
 <h3 id="string-literals">String Literals</h3>
 
-<p>A string literal is of type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a>. String literals are enclosed in a pair of single quotes or double quotes. Single quotes are more common because the signal-to-noise ration is better, but generally you should use the terminals which are least likely to occur in the string value. Special characters can be quoted with a backslash or defined using unicode notation. Contrary to Java, strings can span multiple lines.</p>
+<p>A string literal is of type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a>. String literals are enclosed in a pair of single quotes or double quotes. Single quotes are more common because the signal-to-noise ration is better, but generally you should use the terminals which are least likely to occur in the string value. Special characters can be quoted with a backslash or defined using unicode notation. Contrary to Java, strings can span multiple lines.</p>
 
 <pre><code class="language-xtend">'Hello World !'
 "Hello World !"
@@ -40,14 +40,14 @@
 
 <h3 id="character-literals">Character Literals</h3>
 
-<p>Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive <code>char</code> or the wrapper type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Character.html">Character</a> is expected, the compiler will treat the literal as such a value or instance.</p>
+<p>Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive <code>char</code> or the wrapper type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Character.html">Character</a> is expected, the compiler will treat the literal as such a value or instance.</p>
 
 <pre><code class="language-xtend">val char c = 'c'
 </code></pre>
 
 <h3 id="number-literals">Number Literals</h3>
 
-<p>Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a <a href="203_xtend_expressions.html#operators">unary operator</a> with one argument (the positive number literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal creates an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or a <a href="http://docs.oracle.com/javase/11/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal numbers</p>
+<p>Xtend supports roughly the same number literals as Java with a few differences. First, there are no signed number literals. If you put a minus operator in front of a number literal it is treated as a <a href="203_xtend_expressions.html#operators">unary operator</a> with one argument (the positive number literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal creates an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or a <a href="https://docs.oracle.com/javase/11/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal numbers</p>
 
 <pre><code class="language-xtend">42
 1_234_567_890 
@@ -59,7 +59,7 @@
 0xbeef_beef_beef_beef_beef#BI // BigInteger
 </code></pre>
 
-<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or none), a <code>float</code> (suffix <code>F</code>) or a <a href="http://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> you have to specify both, the integral and the fractional part of the mantissa. There are only decimal floating-point literals.</p>
+<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or none), a <code>float</code> (suffix <code>F</code>) or a <a href="https://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> you have to specify both, the integral and the fractional part of the mantissa. There are only decimal floating-point literals.</p>
 
 <pre><code class="language-xtend">42d     // double
 0.42e2  // implicit double
@@ -151,7 +151,7 @@ val List&lt;Integer&gt; myList = myArray
 
 <p>A type cast behaves exactly like casts in Java, but has a slightly more readable syntax. Type casts bind stronger than any other operator but weaker than feature calls.</p>
 
-<p>The conformance rules for casts are defined in the <a href="http://docs.oracle.com/javase/specs/jls/se6/html/conversions.html#5.5">Java Language Specification</a>. Here are some examples:</p>
+<p>The conformance rules for casts are defined in the <a href="https://docs.oracle.com/javase/specs/jls/se6/html/conversions.html#5.5">Java Language Specification</a>. Here are some examples:</p>
 
 <pre><code class="language-xtend">something as MyClass
 42 as Integer
@@ -161,7 +161,7 @@ val List&lt;Integer&gt; myList = myArray
 
 <h2 id="operators">Infix Operators and Operator Overloading</h2>
 
-<p>There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java">BigDecimalExtensions</a> that defines operators for <a href="http://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimals</a>. The following code is therefore perfectly valid:</p>
+<p>There are a couple of common predefined infix operators. These operators are not limited to operations on certain types. Instead an operator-to-method mapping allows to redefine the operators for any type just by implementing the corresponding method signature. As an example, the runtime library contains a class <a href="https://github.com/eclipse/xtext/tree/main/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java">BigDecimalExtensions</a> that defines operators for <a href="https://docs.oracle.com/javase/11/docs/api/java/math/BigDecimal.html">BigDecimals</a>. The following code is therefore perfectly valid:</p>
 
 <pre><code class="language-xtend">val x = 2.71BD
 val y = 3.14BD
@@ -552,7 +552,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 
 <h2 id="blocks">Blocks</h2>
 
-<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block’s last expression.</p>
+<p>The block expression allows to have imperative code sequences. It consists of a sequence of expressions. The value of the last expression in the block is the value of the complete block. The type of a block is also the type of the last expression. Empty blocks return <code>null</code> and have the type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Object.html">Object</a>. <a href="203_xtend_expressions.html#variable-declaration">Variable declarations</a> are only allowed within blocks and cannot be used as a block’s last expression.</p>
 
 <p>A block expression is surrounded by curly braces. The expressions in a block can be terminated by an optional semicolon.</p>
 
@@ -796,7 +796,7 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 
 <h2 id="anonymous-classes">Anonymous Classes</h2>
 
-<p>An anonymous class in Xtend has the very same semantics as in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Specification</a>). Here’s an example:</p>
+<p>An anonymous class in Xtend has the very same semantics as in Java (see <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Specification</a>). Here’s an example:</p>
 
 <pre><code class="language-xtend">val tabListener = new ActionBar.TabListener() {
   override onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -914,7 +914,7 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 <pre><code class="language-xtend">for (T1 variable : arrayOrIterable) expression
 </code></pre>
 
-<p>is used to execute a certain expression for each element of an array or an instance of <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated.</p>
+<p>is used to execute a certain expression for each element of an array or an instance of <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated.</p>
 
 <p>The type of a for loop is <code>void</code>. The type of the local variable can be inferred from the iterable or array that is processed.</p>
 
@@ -991,7 +991,7 @@ do doSideEffect("foo") while ((i=i+1)&lt;max)
 
 <h2 id="xtend-expressions-throw">Throwing Exceptions</h2>
 
-<p>Throwing <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Throwable.html">Throwable</a>s up the call stack has the same semantics and syntax as in Java.</p>
+<p>Throwing <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Throwable.html">Throwable</a>s up the call stack has the same semantics and syntax as in Java.</p>
 
 <pre><code class="language-xtend">{
 ...
@@ -1044,7 +1044,7 @@ if (myList.isEmpty)
 
 <h2 id="xtend-expressions-synchronized">Synchronized</h2>
 
-<p>The synchonized expression does the same as it does in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>). The only difference is that in Xtend it is an expression and can therefore be used at more places.</p>
+<p>The synchonized expression does the same as it does in Java (see <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>). The only difference is that in Xtend it is an expression and can therefore be used at more places.</p>
 
 <pre><code class="language-xtend">synchronized(lock) {
   println("Hello")
@@ -1205,7 +1205,7 @@ if (myList.isEmpty)
 
 <h3 id="template-type">Typing</h3>
 
-<p>The template expression is of type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/CharSequence.html">CharSequence</a>. It is automatically converted to <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a> if that is the expected target type.</p>
+<p>The template expression is of type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/CharSequence.html">CharSequence</a>. It is automatically converted to <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/String.html">String</a> if that is the expected target type.</p>
 
 <h3 id="whitespace-handling">White Space Handling</h3>
 

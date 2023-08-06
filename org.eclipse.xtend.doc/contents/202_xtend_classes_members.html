@@ -64,7 +64,7 @@ import static org.junit.Assert.*
 
 <p>Abstract classes are defined using the <code>abstract</code> modifier as in Java. See also <a href="202_xtend_classes_members.html#abstract-methods">abstract methods</a>.</p>
 
-<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Object.html">Object</a> is used.</p>
+<p>Xtend’s approach to inheritance is conceptually the same as in Java. Single inheritance of classes as well as implementing multiple interfaces is supported. Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. If no super type is specified, <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Object.html">Object</a> is used.</p>
 
 <p>The most simple class looks like this:</p>
 
@@ -168,7 +168,7 @@ import static org.junit.Assert.*
 
 <p>Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare the exceptions thrown in a method’s body using the <code>throws</code> clause as in Java.</p>
 
-<p>If you do not declare checked exceptions in your method but they are possibly thrown in your code, the compiler will throw the checked exception silently (using the sneaky-throw technique introduced by <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>).</p>
+<p>If you do not declare checked exceptions in your method but they are possibly thrown in your code, the compiler will throw the checked exception silently (using the sneaky-throw technique introduced by <a href="https://projectlombok.org/features/SneakyThrows.html">Lombok</a>).</p>
 
 <pre><code class="language-xtend">/*
  * throws an Exception
@@ -216,7 +216,7 @@ def void sneakyThrowException() {
 }
 </code></pre>
 
-<p>Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the <a href="http://docs.oracle.com/javase/specs/jls/se6/html/classes.html#8.4.4">the Java Language Specification</a>.</p>
+<p>Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the <a href="https://docs.oracle.com/javase/specs/jls/se6/html/classes.html#8.4.4">the Java Language Specification</a>.</p>
 
 <h3 id="operator-declaration">Operator Declarations</h3>
 
@@ -298,7 +298,7 @@ def dispatch printTypes(Integer x, Number y) {
 }
 </code></pre>
 
-<p>The code is compiled in a way that a <code>null</code> reference is never a match. <code>null</code> values can be handled by dispatch cases that use the parameter type <a href="http://docs.oracle.com/javase/11/docs/api/java/lang/Void.html">Void</a>.</p>
+<p>The code is compiled in a way that a <code>null</code> reference is never a match. <code>null</code> values can be handled by dispatch cases that use the parameter type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Void.html">Void</a>.</p>
 
 <pre><code class="language-xtend">def dispatch printType(Number x) { 
   "it's some number" 
@@ -440,7 +440,7 @@ def copy(Person p) {
 
 <h2 id="annotations">Annotations</h2>
 
-<p>Annotations are available on classes, fields, methods and parameters. They are prefixed with the <code>@</code> character and accept a number of key-value pairs or a default value for the annotation property named <code>value</code>. Annotation values that expect arrays can handle single values, too. Value arrays are enclosed in array literals <code>#['first', 'second']</code>. The semantics for annotations are exactly like defined in the <a href="http://docs.oracle.com/javase/specs/jls/se6/html/interfaces.html#9.7">Java Language Specification</a>. Here is an example:</p>
+<p>Annotations are available on classes, fields, methods and parameters. They are prefixed with the <code>@</code> character and accept a number of key-value pairs or a default value for the annotation property named <code>value</code>. Annotation values that expect arrays can handle single values, too. Value arrays are enclosed in array literals <code>#['first', 'second']</code>. The semantics for annotations are exactly like defined in the <a href="https://docs.oracle.com/javase/specs/jls/se6/html/interfaces.html#9.7">Java Language Specification</a>. Here is an example:</p>
 
 <pre><code class="language-xtend">@TypeAnnotation("some value")
 class MyClass {
@@ -573,7 +573,7 @@ person.delete  // calls ep.delete(person)
 }
 </code></pre>
 
-<p>Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods, called <a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">default methods</a>, as well as static methods. This is also supported in Xtend (since 2.8): if Java 8 is selected as target language version, interfaces are allowed to declare methods with bodies like in the following example.</p>
+<p>Since version 8 of the Java language, interfaces are allowed to contain non-abstract instance methods, called <a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">default methods</a>, as well as static methods. This is also supported in Xtend (since 2.8): if Java 8 is selected as target language version, interfaces are allowed to declare methods with bodies like in the following example.</p>
 
 <pre><code class="language-xtend">interface MyInterface {
   def doStuff() {
