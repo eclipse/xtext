@@ -20,7 +20,7 @@
 
 <h2 id="tycho-build">Building an Xtext language with Maven and Tycho</h2>
 
-<p>Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed in the form of OSGi bundles. For this kind of builds most people rely on <a href="http://eclipse.org/tycho/">Tycho</a>, which is an OSGi/P2 adapter plug-in for Maven builds. Tycho obtains much information from the OSGi bundle’s manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.</p>
+<p>Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed in the form of OSGi bundles. For this kind of builds most people rely on <a href="https://eclipse.org/tycho/">Tycho</a>, which is an OSGi/P2 adapter plug-in for Maven builds. Tycho obtains much information from the OSGi bundle’s manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.</p>
 
 <h3 id="the-parent-project-mymavenizedherolanguageparent">The parent project (my.mavenized.herolanguage.parent)</h3>
 
@@ -299,7 +299,7 @@ If you add the optional property <code>addOutputDirectoriesToCompileSourceRoots<
 <p>Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the <code>pom.xml</code> using maven <code>&lt;repositories&gt;</code> section. The p2 repositories need to be marked with layout=p2.<br />
 The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_Platform#Target_files">target platform files</a>. This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.</p>
 
-<p>To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project’s repository or the huge <a href="http://download.eclipse.org/releases/photon/">eclipse common</a> composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.</p>
+<p>To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project’s repository or the huge <a href="https://download.eclipse.org/releases/photon/">eclipse common</a> composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.</p>
 
 <table>
   <thead>
@@ -314,217 +314,225 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.31.0/">2.31.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.34.0">2.34.0</a> (2.29.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2023-06">4.28.0</a> (4.23)</td>
-      <td><a href="http://download.eclipse.org/releases/2023-06">2023-06</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.32.0/">2.32.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.35.0">2.35.0</a> (2.29.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.15.0/">2.15.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2023-09">4.29.0</a> (4.23)</td>
+      <td><a href="https://download.eclipse.org/releases/2023-09">2023-09</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.30.0/">2.30.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.33.0">2.33.0</a> (2.29.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2023-03">4.27.0</a> (4.23)</td>
-      <td><a href="http://download.eclipse.org/releases/2023-03">2023-03</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.31.0/">2.31.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.34.0">2.34.0</a> (2.29.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2023-06">4.28.0</a> (4.23)</td>
+      <td><a href="https://download.eclipse.org/releases/2023-06">2023-06</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.29.0/">2.29.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.32">2.32.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-12">4.26.0</a> (4.23)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-12">2022-12</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.30.0/">2.30.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.33.0">2.33.0</a> (2.29.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2023-03">4.27.0</a> (4.23)</td>
+      <td><a href="https://download.eclipse.org/releases/2023-03">2023-03</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.28.0/">2.28.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.31">2.31.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/">2.13.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-09">4.25.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-09">2022-09</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.29.0/">2.29.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.32">2.32.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.14.0/">2.14.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-12">4.26.0</a> (4.23)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-12">2022-12</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0/">2.27.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.30">2.30.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/">2.13.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-06">4.24.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-06">2022-06</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.28.0/">2.28.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.31">2.31.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/">2.13.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-09">4.25.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-09">2022-09</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0/">2.26.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.29">2.29.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.2/">2.12.2</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-03">4.23.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2022-03">2022-03</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.27.0/">2.27.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.30">2.30.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.13.0/">2.13.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-06">4.24.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-06">2022-06</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/">2.25.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.25">2.25.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.1/">2.12.1</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2021-03">4.19.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2021-03">2021-03</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0/">2.26.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.29">2.29.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.2/">2.12.2</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-03">4.23.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2022-03">2022-03</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.24.0/">2.24.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.24">2.24.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.0/">2.12.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-12">4.18.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-12">2020-12</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/">2.25.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.25">2.25.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.1/">2.12.1</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2021-03">4.19.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2021-03">2021-03</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.23.0/">2.23.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.23">2.23.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.3/">2.11.3</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-09">4.17.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-09">2020-09</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.24.0/">2.24.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.24">2.24.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.0/">2.12.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-12">4.18.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-12">2020-12</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.22.0/">2.22.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.22">2.22.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.3/">2.11.3</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-06">4.16.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-06">2020-06</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.23.0/">2.23.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.23">2.23.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.3/">2.11.3</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-09">4.17.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-09">2020-09</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.21.0/">2.21.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.21">2.21.0</a> (2.20.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.2/">2.11.2</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-03">4.15.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-03">2020-03</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.22.0/">2.22.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.22">2.22.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.3/">2.11.3</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-06">4.16.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-06">2020-06</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.20.0/">2.20.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.20">2.20.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.1/">2.11.1</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-12">4.14.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-12">2019-12</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.21.0/">2.21.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.21">2.21.0</a> (2.20.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.2/">2.11.2</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-03">4.15.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2020-03">2020-03</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.19.0/">2.19.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.19">2.19.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.0/">2.11.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-09">4.13.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-09">2019-09</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.20.0/">2.20.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.20">2.20.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.1/">2.11.1</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-12">4.14.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-12">2019-12</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.18.0/">2.18.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.18">2.18.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/">2.10.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-06">4.12.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-06">2019-06</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.19.0/">2.19.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.19">2.19.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.0/">2.11.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-09">4.13.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-09">2019-09</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.17.0/">2.17.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.17">2.17.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/">2.10.0</a> (2.9.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-03">4.11.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2019-03">2019-03</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.18.0/">2.18.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.18">2.18.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/">2.10.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-06">4.12.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-06">2019-06</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.16.0/">2.16.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.16">2.16.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2018-12/201812191000">4.10.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2018-12/201812191000">2018-12</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.17.0/">2.17.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.17">2.17.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/">2.10.0</a> (2.9.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-03">4.11.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2019-03">2019-03</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.15.0/">2.15.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.15">2.15.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2018-09/201809191002">4.9.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/2018-09/201809191002">2018-09</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.16.0/">2.16.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.16">2.16.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2018-12/201812191000">4.10.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2018-12/201812191000">2018-12</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0/">2.14.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.14">2.14.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/photon/201806271001">4.8.0</a> (4.7.3)</td>
-      <td><a href="http://download.eclipse.org/releases/photon/201806271001">Photon</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.15.0/">2.15.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.15">2.15.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/2018-09/201809191002">4.9.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/2018-09/201809191002">2018-09</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0/">2.13.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.13">2.13.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/oxygen/201804111000">4.7.3</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/oxygen/201804111000">Oxygen</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0/">2.14.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.14">2.14.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/photon/201806271001">4.8.0</a> (4.7.3)</td>
+      <td><a href="https://download.eclipse.org/releases/photon/201806271001">Photon</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.12.0/">2.12.0</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.13">2.13.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/oxygen/201804111000">4.7.3</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/oxygen/201804111000">Oxygen</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0/">2.13.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.13">2.13.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/oxygen/201804111000">4.7.3</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/oxygen/201804111000">Oxygen</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.11.0/">2.11.0</a></td>
-      <td><a href="http://download.eclipse.org/releases/neon/201606221000">2.12.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/eclipse/updates/4.6/R-4.6-201606061100">4.6.0</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/neon/201606221000">Neon*</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.12.0/">2.12.0</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/builds/release/2.13">2.13.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/releases/oxygen/201804111000">4.7.3</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/oxygen/201804111000">Oxygen</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0/">2.10.0</a></td>
-      <td><a href="http://download.eclipse.org/releases/neon/201606221000">2.12.0</a> (2.12.0)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/eclipse/updates/4.6/R-4.6-201606061100">4.6.0</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/neon/201606221000">Neon</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.11.0/">2.11.0</a></td>
+      <td><a href="https://download.eclipse.org/releases/neon/201606221000">2.12.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/eclipse/updates/4.6/R-4.6-201606061100">4.6.0</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/neon/201606221000">Neon*</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.1/">2.9.1</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/core/">2.11.1</a> (2.10.2)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.3/">2.8.3</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/">4.5.2</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/mars/">Mars SR2*</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0/">2.10.0</a></td>
+      <td><a href="https://download.eclipse.org/releases/neon/201606221000">2.12.0</a> (2.12.0)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/">2.9.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/eclipse/updates/4.6/R-4.6-201606061100">4.6.0</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/neon/201606221000">Neon</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/">2.8.4</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/core/">2.11.1</a> (2.10.2)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/">2.8.1</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000/">4.5.1</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/mars/">Mars SR1</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.1/">2.9.1</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/updates/2.11.x/core/">2.11.1</a> (2.10.2)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.3/">2.8.3</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/eclipse/updates/4.5/R-4.5.2-201602121500/">4.5.2</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/mars/">Mars SR2*</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.3/">2.8.3</a>, <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.2/">2.8.2</a>, <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.1/">2.8.1</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.11/core/R201506010402/">2.11.0</a> (2.10.2)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.0/">2.8.0</a> (2.7.1)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000/">4.5.0</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/mars/201506241002/">Mars R</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/">2.8.4</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/updates/2.11.x/core/">2.11.1</a> (2.10.2)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/">2.8.1</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000/">4.5.1</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/mars/">Mars SR1</a></td>
     </tr>
     <tr>
-      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/">2.7.3</a></td>
-      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452/">2.10.2</a> (2.10)</td>
-      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021051/mwe2lang/">2.7.0</a> <a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021027/mwe">1.3.4</a> (2.7.0/1.2)</td>
-      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201406030414">2.0.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700">4.4.2</a> (3.6)</td>
-      <td><a href="http://download.eclipse.org/releases/luna/201502271000/">Luna SR2</a></td>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.3/">2.8.3</a>, <a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.2/">2.8.2</a>, <a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.1/">2.8.1</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/updates/2.11/core/R201506010402/">2.11.0</a> (2.10.2)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.0/">2.8.0</a> (2.7.1)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000/">4.5.0</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/mars/201506241002/">Mars R</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/">2.7.3</a></td>
+      <td><a href="https://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452/">2.10.2</a> (2.10)</td>
+      <td><a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021051/mwe2lang/">2.7.0</a> <a href="https://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021027/mwe">1.3.4</a> (2.7.0/1.2)</td>
+      <td><a href="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201406030414">2.0.0</a> (1.4)</td>
+      <td><a href="https://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700">4.4.2</a> (3.6)</td>
+      <td><a href="https://download.eclipse.org/releases/luna/201502271000/">Luna SR2</a></td>
     </tr>
   </tbody>
 </table>
 
-<p>The following is an example target platform definition for Xtext 2.31.0 and Eclipse 4.28 alias 2023-06.</p>
+<p>The following is an example target platform definition for Xtext 2.32.0 and Eclipse 4.29 alias 2023-09.</p>
 
 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
 &lt;?pde version="3.8"?&gt;
@@ -532,7 +540,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
 &lt;locations&gt;
   &lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
     &lt;unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/&gt;
-    &lt;repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.31.0/"/&gt;
+    &lt;repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.32.0/"/&gt;
   &lt;/location&gt;
   &lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
     &lt;unit id="org.eclipse.jdt.feature.group" version="0.0.0"/&gt;
@@ -541,7 +549,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
     &lt;unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/&gt;
-    &lt;repository location="http://download.eclipse.org/releases/2023-06/"/&gt;
+    &lt;repository location="https://download.eclipse.org/releases/2023-09/"/&gt;
   &lt;/location&gt;
 &lt;/locations&gt;
 &lt;/target&gt;

@@ -10,7 +10,7 @@
 
 <h1 id="jvm-domain-model">Five simple steps to your JVM language</h1>
 
-<p>In this tutorial we will basically implement the <a href="https://www.eclipse.org/Xtext/documentation/103_domainmodelnextsteps.html">domain model language</a> again, but this time we will make use of the special JVM support shipped with Xtext. This kind of language is really a sweet spot for DSLs, so feel free to use this as a blueprint and add your project specific features later on.</p>
+<p>In this tutorial we will basically implement the <a href="https://www.eclipse.dev/Xtext/documentation/103_domainmodelnextsteps.html">domain model language</a> again, but this time we will make use of the special JVM support shipped with Xtext. This kind of language is really a sweet spot for DSLs, so feel free to use this as a blueprint and add your project specific features later on.</p>
 
 <p>The revised domain model language supports expressions and cross-links to Java types. It is directly translated to Java source code. The syntax should look very familiar. Here is an example:</p>
 
@@ -312,7 +312,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         boolean isPrelinkingPhase) {
 </code></pre>
 
-    <p>Using the dispatch keyword makes sure that the method is called for instances of type <em>Entity</em> only. Have a look at the Xtend documentation on <a href="http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch">polymorphic dispatch</a> to understand Xtend’s dispatch functions. Extending <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">AbstractModelInferrer</a> makes sure we don’t have to walk the syntax model on our own.</p>
+    <p>Using the dispatch keyword makes sure that the method is called for instances of type <em>Entity</em> only. Have a look at the Xtend documentation on <a href="https://www.eclipse.dev/Xtext/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch">polymorphic dispatch</a> to understand Xtend’s dispatch functions. Extending <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">AbstractModelInferrer</a> makes sure we don’t have to walk the syntax model on our own.</p>
   </li>
   <li>
     <pre><code class="language-xtend">acceptor.accept(element.toClass(element.fullyQualifiedName)) [
@@ -327,7 +327,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     <pre><code class="language-xtend">documentation = element.documentation
 </code></pre>
 
-    <p>Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method <em><a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>.setDocumentation(<a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java">JvmIdentifiableElement</a>, String)</em>, and <code>element.documentation</code> is in fact calling the extension method <em><a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>.getDocumentation(<a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>)</em>. Such extension methods are explained in detail in the <a href="https://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods">Xtend documentation</a>.</p>
+    <p>Here we assign some JavaDoc to the newly created element. The assignment is translated to an invocation of the method <em><a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>.setDocumentation(<a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmIdentifiableElement.java">JvmIdentifiableElement</a>, String)</em>, and <code>element.documentation</code> is in fact calling the extension method <em><a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>.getDocumentation(<a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>)</em>. Such extension methods are explained in detail in the <a href="https://www.eclipse.dev/Xtext/xtend/documentation/202_xtend_classes_members.html#extension-methods">Xtend documentation</a>.</p>
   </li>
   <li>
     <pre><code class="language-xtend">if (element.superType !== null)

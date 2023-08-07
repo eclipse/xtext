@@ -253,14 +253,14 @@ terminal STRING:
     'datatype' name = ID;
 </code></pre>
 
-<p>The syntactic declaration for datatypes starts with a keyword <code>datatype</code> followed by an assignment: <code>name = ID</code>. The left hand side refers to a feature <em>name</em> of the current object (which has the EClass <em>DataType</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former options. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> in this case, the feature <em>name</em> needs to be of type EString as well.</p>
+<p>The syntactic declaration for datatypes starts with a keyword <code>datatype</code> followed by an assignment: <code>name = ID</code>. The left hand side refers to a feature <em>name</em> of the current object (which has the EClass <em>DataType</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former options. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/String.html">EString</a> in this case, the feature <em>name</em> needs to be of type EString as well.</p>
 
 <p>There are three different assignment operators, each with different semantics.</p>
 
 <ol>
   <li>The simple equal sign <code>=</code> is the straightforward assignment, and is used for features which take only one element.</li>
   <li>The <code>+=</code> sign (the add operator) expects a multi-valued feature and adds the value on the right hand side to that feature, which is a list feature.</li>
-  <li>The <code>?=</code> sign (boolean assignment operator) expects a feature of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> and sets it to true if the right hand side was consumed, independently from the concrete value of the right hand side.</li>
+  <li>The <code>?=</code> sign (boolean assignment operator) expects a feature of type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Boolean.html">EBoolean</a> and sets it to true if the right hand side was consumed, independently from the concrete value of the right hand side.</li>
 </ol>
 
 <p>The used assignment operator does not influence the cardinality of the expected symbols on the right hand side.</p>
@@ -538,7 +538,7 @@ Fullname:
     ID ('.' ID)*;
 </code></pre>
 
-<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
+<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
 
 <p><a href="303_runtime_concepts.html#value-converter">Value converters</a> are used to transform the parsed string to the actually returned data type value.</p>
 
@@ -638,7 +638,7 @@ This will generate validations and the possibility to change the severity throug
 <ul>
   <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> in each current return type
     <ul>
-      <li>of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code>?=</code> operator. No further EReferences or EAttributes are generated from such an assignment.</li>
+      <li>of type <a href="https://docs.oracle.com/javase/11/docs/api/java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code>?=</code> operator. No further EReferences or EAttributes are generated from such an assignment.</li>
       <li>for each assignment with the <code>=</code> or <code>+=</code> operator calling a terminal rule or data type rule. Its type is the return type of the called rule.</li>
     </ul>
   </li>

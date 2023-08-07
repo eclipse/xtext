@@ -408,7 +408,7 @@ Workflow {
 
 <h4 id="equinox-setup">Setup within Eclipse-Equinox (OSGi)</h4>
 
-<p>Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a> using the <a href="#guicemodules">modules</a>. In addition an <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html">IExecutableExtensionFactory</a> is generated for each language, which is used to create <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html">IExecutableExtensions</a>. This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.</p>
+<p>Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html">Injector</a> using the <a href="#guicemodules">modules</a>. In addition an <a href="https://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html">IExecutableExtensionFactory</a> is generated for each language, which is used to create <a href="https://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html">IExecutableExtensions</a>. This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.</p>
 
 <p>The only thing you have to do in order to use this factory is to prefix the class with the generated <em>ExecutableExtensionFactory</em> name followed by a colon.</p>
 
@@ -430,7 +430,7 @@ Workflow {
 
 <h2 id="logging">Logging</h2>
 
-<p>Xtext uses <a href="http://logging.apache.org/log4j/">Apache Log4j</a> for logging. It is configured using files named <em>log4j.properties</em>, which are looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all you have to do is putting such a <em>log4j.properties</em> in place and make sure that it is not overridden by other <em>log4j.properties</em> in previous class path entries.</p>
+<p>Xtext uses <a href="https://logging.apache.org/log4j/">Apache Log4j</a> for logging. It is configured using files named <em>log4j.properties</em>, which are looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all you have to do is putting such a <em>log4j.properties</em> in place and make sure that it is not overridden by other <em>log4j.properties</em> in previous class path entries.</p>
 
 <p>In OSGi you provide configuration by creating a fragment for <em>org.apache.log4j</em>. In this case you need to make sure that there is not any second fragment contributing a <em>log4j.properties</em> file.</p>
 

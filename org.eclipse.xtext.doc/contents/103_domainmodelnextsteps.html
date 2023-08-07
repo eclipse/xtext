@@ -14,7 +14,7 @@
 
 <h2 id="tutorial-code-generation">Writing a Code Generator With Xtend</h2>
 
-<p>As soon as you generate the Xtext artifacts from the grammar, a code generator stub is put into the runtime project of your language. Let’s dive into <a href="https://www.eclipse.org/xtend/">Xtend</a> and see how you can integrate your own code generator with Eclipse.</p>
+<p>As soon as you generate the Xtext artifacts from the grammar, a code generator stub is put into the runtime project of your language. Let’s dive into <a href="https://www.eclipse.dev/Xtext/xtend/">Xtend</a> and see how you can integrate your own code generator with Eclipse.</p>
 
 <p>In this lesson you will generate Java Beans for entities that are defined in the domainmodel DSL. For each <em>Entity</em>, a Java class is generated and each <em>Feature</em> will lead to a private field in that class including public getters and setters. For the sake of simplicity, we will use fully qualified names all over the generated code.</p>
 
@@ -271,7 +271,7 @@ public void checkFeatureNameIsUnique(Feature feature) {
     <p><em>Note</em>: When using JUnit 5 the <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/extensions/InjectionExtension.java">InjectionExtension</a> is used instead of the XtextRunner. The Xtext code generator generates the example slightly different, depending on which option you have chosen in the <em>New Xtext Project</em> wizard.</p>
   </li>
   <li>
-    <p>The utility class <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java">ParseHelper</a> allows to parse an arbitrary string into a <em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> leads to concise and readable test cases. You can rewrite the generated test case as follows:</p>
+    <p>The utility class <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java">ParseHelper</a> allows to parse an arbitrary string into a <em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of <a href="https://junit.org/junit4/javadoc/4.13/org/junit/Assert.html">Assert</a> leads to concise and readable test cases. You can rewrite the generated test case as follows:</p>
 
     <pre><code class="language-xtend"> import static org.junit.Assert.*
 
@@ -318,7 +318,7 @@ public void checkFeatureNameIsUnique(Feature feature) {
  }
 </code></pre>
 
-    <p>You can further simplify the code by injecting <code>ParseHelper</code> and <code>ValidationTestHelper</code> as extensions. This feature of Xtend allows to add new methods to a given type without modifying it. You can read more about extension methods in the <a href="https://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods">Xtend documentation</a>. You can rewrite the code as follows:</p>
+    <p>You can further simplify the code by injecting <code>ParseHelper</code> and <code>ValidationTestHelper</code> as extensions. This feature of Xtend allows to add new methods to a given type without modifying it. You can read more about extension methods in the <a href="https://www.eclipse.dev/Xtext/xtend/documentation/202_xtend_classes_members.html#extension-methods">Xtend documentation</a>. You can rewrite the code as follows:</p>
 
     <pre><code class="language-xtend"> @Inject extension ParseHelper&lt;Domainmodel&gt;
 
