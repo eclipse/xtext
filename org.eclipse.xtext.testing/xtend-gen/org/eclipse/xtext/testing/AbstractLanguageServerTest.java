@@ -1331,16 +1331,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       if (_tripleNotEquals) {
         configuration.getAssertSymbols().apply(symbols);
       } else {
-        final Function1<Either<SymbolInformation, DocumentSymbol>, Object> _function = (Either<SymbolInformation, DocumentSymbol> it) -> {
-          Object _xifexpression = null;
-          if (this.hierarchicalDocumentSymbolSupport) {
-            _xifexpression = it.getRight();
-          } else {
-            _xifexpression = it.getLeft();
-          }
-          return _xifexpression;
+        final Function1<Either<SymbolInformation, DocumentSymbol>, DocumentSymbol> _function = (Either<SymbolInformation, DocumentSymbol> it) -> {
+          return it.getRight();
         };
-        final List<Object> unwrappedSymbols = ListExtensions.<Either<SymbolInformation, DocumentSymbol>, Object>map(symbols, _function);
+        final List<DocumentSymbol> unwrappedSymbols = ListExtensions.<Either<SymbolInformation, DocumentSymbol>, DocumentSymbol>map(symbols, _function);
         final String actualSymbols = this.toExpectation(unwrappedSymbols);
         this.assertEquals(configuration.getExpectedSymbols(), actualSymbols);
       }

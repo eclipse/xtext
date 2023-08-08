@@ -653,7 +653,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		if (configuration.getAssertSymbols !== null) {
 			configuration.getAssertSymbols.apply(symbols)
 		} else {
-			val unwrappedSymbols = symbols.map[if (hierarchicalDocumentSymbolSupport) getRight else getLeft]
+			val unwrappedSymbols = symbols.map[getRight]
 			val String actualSymbols = unwrappedSymbols.toExpectation
 			assertEquals(getExpectedSymbols, actualSymbols)
 		}

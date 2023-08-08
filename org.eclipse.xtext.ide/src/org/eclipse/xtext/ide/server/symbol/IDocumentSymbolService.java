@@ -14,8 +14,6 @@ import java.util.List;
 
 import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
-import org.eclipse.lsp4j.SymbolInformation;
-import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.symbol.IDocumentSymbolService.Noop;
 import org.eclipse.xtext.resource.XtextResource;
@@ -40,13 +38,13 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(Noop.class)
 public interface IDocumentSymbolService {
 
-	List<Either<SymbolInformation, DocumentSymbol>> getSymbols(Document document, XtextResource resource,
+	List<DocumentSymbol> getSymbols(Document document, XtextResource resource,
 			DocumentSymbolParams params, CancelIndicator cancelIndicator);
 
 	public static class Noop implements IDocumentSymbolService {
 
 		@Override
-		public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(Document document, XtextResource resource,
+		public List<DocumentSymbol> getSymbols(Document document, XtextResource resource,
 				DocumentSymbolParams params, CancelIndicator cancelIndicator) {
 
 			return emptyList();

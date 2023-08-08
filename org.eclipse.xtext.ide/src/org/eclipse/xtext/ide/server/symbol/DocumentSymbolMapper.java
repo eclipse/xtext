@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ide.server.symbol;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -16,6 +17,7 @@ import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.SymbolTag;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -185,6 +187,9 @@ public class DocumentSymbolMapper {
 			documentSymbol.setSelectionRange(objectSelectionRange);
 		}
 		documentSymbol.setDetail(detailsProvider.getDetails(object));
+		if (deprecationInfoProvider.isDeprecated(object)) {
+			documentSymbol.setTags(List.of(SymbolTag.Deprecated));
+		}
 		documentSymbol.setDeprecated(deprecationInfoProvider.isDeprecated(object));
 		documentSymbol.setChildren(new ArrayList<>());
 		return documentSymbol;

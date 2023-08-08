@@ -22,8 +22,8 @@ import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.ReferenceParams;
-import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.WorkspaceSymbol;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
@@ -31,7 +31,6 @@ import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
-import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -45,10 +44,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
-import com.google.common.collect.Lists;
 import com.google.common.graph.Traverser;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -66,9 +63,6 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class DocumentSymbolService implements IDocumentSymbolService {
-	@Inject
-	private UriExtensions uriExtensions;
-
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
@@ -169,35 +163,22 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 	}
 
 	@Override
-	public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(Document document, XtextResource resource,
+	public List<DocumentSymbol> getSymbols(Document document, XtextResource resource,
 			DocumentSymbolParams params, CancelIndicator cancelIndicator) {
 		return getSymbols(resource, cancelIndicator);
 	}
 
-	public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(XtextResource resource,
-			CancelIndicator cancelIndicator) {
-		String uri = uriExtensions.toUriString(resource.getURI());
-		ArrayList<SymbolInformation> infos = new ArrayList<>();
-		List<DocumentSymbol> rootSymbols = Lists
-				.transform(hierarchicalDocumentSymbolService.getSymbols(resource, cancelIndicator), Either::getRight);
+	public List<DocumentSymbol> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
+		List<DocumentSymbol> infos = new ArrayList<>();
+		List<DocumentSymbol> rootSymbols = hierarchicalDocumentSymbolService.getSymbols(resource, cancelIndicator);
 		for (DocumentSymbol rootSymbol : rootSymbols) {
 			Iterable<DocumentSymbol> symbols = Traverser.forTree(DocumentSymbol::getChildren)
 					.depthFirstPreOrder(rootSymbol);
-			Function1<? super DocumentSymbol, ? extends String> containerNameProvider = (DocumentSymbol symbol) -> {
-				DocumentSymbol firstSymbol = IterableExtensions.findFirst(symbols, (DocumentSymbol it) -> {
-					return it != symbol && !IterableExtensions.isNullOrEmpty(it.getChildren())
-							&& it.getChildren().contains(symbol);
-				});
-				if (firstSymbol != null) {
-					return firstSymbol.getName();
-				}
-				return null;
-			};
 			for (DocumentSymbol s : symbols) {
-				infos.add(createSymbol(uri, s, containerNameProvider));
+				infos.add(s);
 			}
 		}
-		return Lists.transform(infos, Either::forLeft);
+		return infos;
 	}
 
 	protected EObject getContainer(EObject obj) {
@@ -207,21 +188,21 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 	/**
 	 * @since 2.16
 	 */
-	protected SymbolInformation createSymbol(String uri, DocumentSymbol symbol,
+	protected WorkspaceSymbol createSymbol(String uri, DocumentSymbol symbol,
 			Function1<? super DocumentSymbol, ? extends String> containerNameProvider) {
-		SymbolInformation symbolInformation = new SymbolInformation();
-		symbolInformation.setName(symbol.getName());
-		symbolInformation.setKind(symbol.getKind());
-		symbolInformation.setDeprecated(symbol.getDeprecated());
+		WorkspaceSymbol workspaceSymbol = new WorkspaceSymbol();
+		workspaceSymbol.setName(symbol.getName());
+		workspaceSymbol.setKind(symbol.getKind());
+		workspaceSymbol.setTags(symbol.getTags());
 		Location location = new Location();
 		location.setUri(uri);
 		location.setRange(symbol.getSelectionRange());
-		symbolInformation.setLocation(location);
-		symbolInformation.setContainerName(containerNameProvider.apply(symbol));
-		return symbolInformation;
+		workspaceSymbol.setLocation(Either.forLeft(location));
+		workspaceSymbol.setContainerName(containerNameProvider.apply(symbol));
+		return workspaceSymbol;
 	}
 
-	protected SymbolInformation createSymbol(EObject object) {
+	protected WorkspaceSymbol createSymbol(EObject object) {
 		String name = getSymbolName(object);
 		if (name == null) {
 			return null;
@@ -234,10 +215,10 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 		if (location == null) {
 			return null;
 		}
-		SymbolInformation symbol = new SymbolInformation();
+		WorkspaceSymbol symbol = new WorkspaceSymbol();
 		symbol.setName(name);
 		symbol.setKind(kind);
-		symbol.setLocation(location);
+		symbol.setLocation(Either.forLeft(location));
 		return symbol;
 	}
 
@@ -253,13 +234,13 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 		return getDocumentExtensions(object.eResource().getURI()).newLocation(object);
 	}
 
-	public List<? extends SymbolInformation> getSymbols(IResourceDescription resourceDescription, String query,
+	public List<? extends WorkspaceSymbol> getSymbols(IResourceDescription resourceDescription, String query,
 			IReferenceFinder.IResourceAccess resourceAccess, CancelIndicator cancelIndicator) {
-		List<SymbolInformation> symbols = new LinkedList<>();
+		List<WorkspaceSymbol> symbols = new LinkedList<>();
 		for (IEObjectDescription description : resourceDescription.getExportedObjects()) {
 			operationCanceledManager.checkCanceled(cancelIndicator);
 			if (filter(description, query)) {
-				createSymbol(description, resourceAccess, (SymbolInformation symbol) -> {
+				createSymbol(description, resourceAccess, (WorkspaceSymbol symbol) -> {
 					symbols.add(symbol);
 				});
 			}
@@ -272,7 +253,7 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 	}
 
 	protected void createSymbol(IEObjectDescription description, IReferenceFinder.IResourceAccess resourceAccess,
-			Procedure1<? super SymbolInformation> acceptor) {
+			Procedure1<? super WorkspaceSymbol> acceptor) {
 		String name = getSymbolName(description);
 		if (name == null) {
 			return;
@@ -282,12 +263,12 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 			return;
 		}
 		getSymbolLocation(description, resourceAccess, (Location location) -> {
-			SymbolInformation symbol = new SymbolInformation(name, kind, location);
+			WorkspaceSymbol symbol = new WorkspaceSymbol(name, kind, Either.forLeft(location));
 			acceptor.apply(symbol);
 		});
 	}
 
-	protected SymbolInformation createSymbol(IEObjectDescription description) {
+	protected WorkspaceSymbol createSymbol(IEObjectDescription description) {
 		String symbolName = getSymbolName(description);
 		if (symbolName == null) {
 			return null;
@@ -296,7 +277,7 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 		if (symbolKind == null) {
 			return null;
 		}
-		SymbolInformation symbol = new SymbolInformation();
+		WorkspaceSymbol symbol = new WorkspaceSymbol();
 		symbol.setName(symbolName);
 		symbol.setKind(symbolKind);
 		return symbol;

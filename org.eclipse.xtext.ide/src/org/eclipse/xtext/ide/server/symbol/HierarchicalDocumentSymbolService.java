@@ -14,15 +14,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
-import org.eclipse.lsp4j.SymbolInformation;
-import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.validation.NonNull;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
@@ -77,15 +75,14 @@ public class HierarchicalDocumentSymbolService implements IDocumentSymbolService
 	}
 
 	@Override
-	public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(Document document, XtextResource resource,
+	public List<DocumentSymbol> getSymbols(Document document, XtextResource resource,
 			DocumentSymbolParams params, CancelIndicator cancelIndicator) {
 		return getSymbols(resource, cancelIndicator);
 	}
 
-	public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(XtextResource resource,
-			CancelIndicator cancelIndicator) {
-		HashMap<EObject, DocumentSymbol> allSymbols = new HashMap<>();
-		ArrayList<DocumentSymbol> rootSymbols = new ArrayList<>();
+	public List<DocumentSymbol> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
+		Map<EObject, DocumentSymbol> allSymbols = new HashMap<>();
+		List<DocumentSymbol> rootSymbols = new ArrayList<>();
 		Iterator<Object> itr = getAllContents(resource);
 		while (itr.hasNext()) {
 			operationCanceledManager.checkCanceled(cancelIndicator);
@@ -113,8 +110,7 @@ public class HierarchicalDocumentSymbolService implements IDocumentSymbolService
 				}
 			}
 		}
-		return rootSymbols.stream().map(symbol -> Either.<SymbolInformation, DocumentSymbol>forRight(symbol))
-				.collect(Collectors.toList());
+		return rootSymbols;
 	}
 
 	protected Iterator<Object> getAllContents(Resource resource) {
