@@ -95,7 +95,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="jakarta.inject.jakarta.inject-api" version="2.0.1"/>
 					<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 					<unit id="org.junit" version="4.13.2.v20230809-1000"/>
-					<unit id="org.hamcrest.core" version="1.3.0.v20230809-1000"/>
+					<unit id="org.hamcrest.core" version="2.2.0.v20230809-1000"/>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
 						<unit id="org.apiguardian.api" version="0.0.0"/>
 						<unit id="junit-jupiter-api" version="0.0.0"/>
