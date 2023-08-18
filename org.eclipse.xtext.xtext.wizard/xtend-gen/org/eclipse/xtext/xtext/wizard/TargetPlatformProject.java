@@ -185,6 +185,18 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("<repository location=\"https://download.eclipse.org/oomph/simrel-orbit/2023-06\"/>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20220405-0441\"/>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("</location>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"com.google.gson\" version=\"2.10.1\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
@@ -194,16 +206,13 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"jakarta.inject.jakarta.inject-api\" version=\"2.0.1\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20220405-0441\"/>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v20220404-1927\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20230725-0701\"/>");
+    _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20230809-1000\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"org.hamcrest.core\" version=\"1.3.0.v20230721-0740\"/>");
+    _builder.append("<unit id=\"org.hamcrest.core\" version=\"1.3.0.v20230809-1000\"/>");
     _builder.newLine();
     {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();

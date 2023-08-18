@@ -86,13 +86,16 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
+					<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
+				</location>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="com.google.gson" version="2.10.1"/>
 					<unit id="com.google.inject" version="7.0.0"/>
 					<unit id="jakarta.inject.jakarta.inject-api" version="2.0.1"/>
-					<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 					<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
-					<unit id="org.junit" version="4.13.2.v20230725-0701"/>
-					<unit id="org.hamcrest.core" version="1.3.0.v20230721-0740"/>
+					<unit id="org.junit" version="4.13.2.v20230809-1000"/>
+					<unit id="org.hamcrest.core" version="1.3.0.v20230809-1000"/>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
 						<unit id="org.apiguardian.api" version="0.0.0"/>
 						<unit id="junit-jupiter-api" version="0.0.0"/>
