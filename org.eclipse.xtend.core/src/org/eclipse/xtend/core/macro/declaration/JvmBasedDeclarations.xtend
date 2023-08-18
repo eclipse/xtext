@@ -954,6 +954,19 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		return compilationUnit.toParameterDeclaration(param) as MutableParameterDeclaration 
 	}
 	
+	def MutableParameterDeclaration addParameter(int index, String name, TypeReference type) {
+		checkMutable
+		checkJavaIdentifier(name, "name");
+		Preconditions.checkArgument(type !== null, "type cannot be null");
+		if (type.inferred)
+			throw new IllegalArgumentException("Cannot use inferred type as parameter type.")
+		val param = TypesFactory.eINSTANCE.createJvmFormalParameter
+		param.name = name
+		param.parameterType = compilationUnit.toJvmTypeReference(type)
+		delegate.parameters.add(index, param)
+		return compilationUnit.toParameterDeclaration(param) as MutableParameterDeclaration 
+	}
+	
 	override remove() {
 		compilationUnit.jvmModelAssociator.removeLogicalChildAssociation(delegate)
 		super.remove()
