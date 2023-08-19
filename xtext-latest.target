@@ -69,7 +69,8 @@
 			<unit id="slf4j.api" version="0.0.0"/>
 			<unit id="slf4j.simple" version="0.0.0"/>
 			<unit id="org.junit" version="4.13.2.v20230809-1000"/>
-			<unit id="org.hamcrest.core" version="1.3.0.v20230809-1000"/>
+			<unit id="org.hamcrest" version="2.2.0"/>
+			<unit id="org.hamcrest.core" version="2.2.0.v20230809-1000"/>
 			<unit id="junit-jupiter-api" version="0.0.0"/>
 			<unit id="junit-jupiter-engine" version="0.0.0"/>
 			<unit id="junit-jupiter-migrationsupport" version="0.0.0"/>
