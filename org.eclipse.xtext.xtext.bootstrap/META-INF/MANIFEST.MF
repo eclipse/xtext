@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Bootstrap project for the Xtext language
 Bundle-SymbolicName: org.eclipse.xtext.xtext.bootstrap;singleton:=true
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.32.0.qualifier
+Bundle-Version: 2.33.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.xtext.xtext.bootstrap
 Export-Package: org.eclipse.xtext.xtext.bootstrap

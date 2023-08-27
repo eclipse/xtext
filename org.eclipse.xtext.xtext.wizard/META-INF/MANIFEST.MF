@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Wizard
 Bundle-SymbolicName: org.eclipse.xtext.xtext.wizard
-Bundle-Version: 2.32.0.qualifier
+Bundle-Version: 2.33.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: gradlew;x-internal:=true,
@@ -12,7 +12,7 @@ Export-Package: gradlew;x-internal:=true,
 Import-Package: org.apache.log4j;version="1.2.24",
  org.kohsuke.args4j;version="2.33.0",
  org.kohsuke.args4j.spi;version="2.33.0"
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.32.0",
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.33.0",
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.26.0"
