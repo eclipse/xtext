@@ -185,18 +185,6 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/oomph/simrel-orbit/2023-06\"/>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20220405-0441\"/>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("</location>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
-    _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.append("<unit id=\"com.google.gson\" version=\"2.10.1\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");

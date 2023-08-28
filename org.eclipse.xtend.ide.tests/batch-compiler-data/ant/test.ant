@@ -39,7 +39,6 @@
 			<include name="com.google.inject*.jar" />
 			<include name="guice*.jar" />
 			<include name="*failureaccess*jar" />
-			<include name="javax.injec*.jar" />
 			<include name="jakarta.inject-api*jar" />
 			<include name="org.eclipse.equinox.common*.jar" />
 			<include name="org.eclipse.jdt.core*.jar" />
