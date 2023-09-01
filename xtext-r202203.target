@@ -72,7 +72,6 @@
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/oomph/simrel-orbit/2023-06"/>
-			<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 			<unit id="org.apiguardian" version="0.0.0"/>
 			<unit id="org.junit.jupiter.api" version="0.0.0"/>
 			<unit id="org.junit.jupiter.engine" version="0.0.0"/>
