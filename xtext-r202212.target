@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="xtext-r202212" sequenceNumber="4">
+<target name="xtext-r202212" sequenceNumber="5">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315/"/>
@@ -37,7 +37,7 @@
 			<unit id="org.eclipse.buildship.feature.group" version="0.0.0" />
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/lsp4j/updates/releases/0.21.0"/>
+			<repository location="https://download.eclipse.org/lsp4j/updates/releases/0.21.1"/>
 			<unit id="org.eclipse.lsp4j.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
