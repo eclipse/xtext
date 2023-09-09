@@ -67,6 +67,9 @@
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
     <choice
+        value="2023-12"
+        label="Eclipse 2023-12 - 4.30"/>
+    <choice
         value="2023-09"
         label="Eclipse 2023-09 - 4.29"/>
     <choice
@@ -500,8 +503,13 @@
     </setupTask>
     <setupTask
         xsi:type="setup.targlets:TargletTask"
-        filter="(eclipse.target.platform=2023-09)">
+        filter="(eclipse.target.platform=2023-12)">
       <composedTarget>xtext-latest</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2023-09)">
+      <composedTarget>xtext-r202309</composedTarget>
     </setupTask>
     <setupTask
         xsi:type="setup.targlets:TargletTask"
