@@ -22,13 +22,11 @@ Check the Update Site and Drop dirs to contain the new Milestone or Release
    * Select both repositories again the perform the Release toolbar action
 
 1. Contribute milestone / release to Simrel Aggregation Build
-    * Clone / pull `ssh://<gerrituser>@git.eclipse.org:29418/simrel/org.eclipse.simrel.build`
+    * Clone / pull `git@github.com:eclipse-simrel/simrel.build.git`
     * Edit `tmf-xtext.aggrcon` and enter new repo path and version numbers.
     * Create a commit
-    * `git push origin HEAD:refs/for/master`
-    * wait for the gerrit job to finish 
-    * Approve the created [gerrit review](https://git.eclipse.org/r/q/project:simrel/org.eclipse.simrel.build+status:open)
-    * Submit the gerrit review
+    * Create a pr at github
+    * Submit the pr
 
 1. Update and publish Release Notes (for Releases only)
    * Create and review release notes (https://github.com/eclipse/xtext-website/tree/main/xtend-website/_posts/releasenotes and https://github.com/eclipse/xtend-website/tree/main/xtend-website/_posts/releasenotes)
