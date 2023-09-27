@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
@@ -97,11 +98,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 
 		@Override
 		public int hashCode() {
-			int prime = 31;
-			int result = 1;
-			result = prime * result + ((label == null) ? 0 : label.hashCode());
-			result = prime * result + ((description == null) ? 0 : description.hashCode());
-			return prime * result + ((this.result == null) ? 0 : this.result.hashCode());
+			return Objects.hash(description, label, result);
 		}
 
 		@Override
@@ -112,25 +109,11 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			AbstractQuickfixTest.Quickfix other = (AbstractQuickfixTest.Quickfix) obj;
-			if (label == null) {
-				if (other.label != null)
-					return false;
-			} else if (!label.equals(other.label))
-				return false;
-			if (description == null) {
-				if (other.description != null)
-					return false;
-			} else if (!description.equals(other.description))
-				return false;
-			if (result == null) {
-				if (other.result != null)
-					return false;
-			} else if (!result.equals(other.result))
-				return false;
-			return true;
+			Quickfix other = (Quickfix) obj;
+			return Objects.equals(description, other.description) && Objects.equals(label, other.label)
+					&& Objects.equals(result, other.result);
 		}
-
+		
 		@Override
 		public String toString() {
 			return "label: " + label + ", description: " + description + ", result: " + result;
@@ -193,7 +176,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		try {
 			return openEditor(dslFile);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException(e);
 		}
 	}
 
@@ -222,7 +205,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		List<Issue> issueCandidates = document
 				.readOnly(state -> resourceValidator.validate(state, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)) //
 				.stream() //
-				.filter(issue -> issue.getCode().equals(issueCode)) //
+				.filter(issue -> Objects.equals(issue.getCode(), issueCode)) //
 				.collect(Collectors.toList());
 		assertEquals("There should be one '" + issueCode + "' validation issue!", 1, issueCandidates.size());
 		return issueCandidates.get(0);
