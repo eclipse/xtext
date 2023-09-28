@@ -9,16 +9,6 @@
    <feature id="org.eclipse.xtend.lib" version="0.0.0">
       <category name="Xtext"/>
    </feature>
-   <feature id="org.eclipse.xtext.generator" version="0.0.0">
-      <category name="Xtext"/>
-   </feature>
-
-   <bundle id="org.eclipse.xpand" version="2.2.0.qualifier"/>
-   <bundle id="org.eclipse.xpand.source" version="2.2.0.qualifier"/>
-   <bundle id="org.eclipse.xtend" version="2.2.0.qualifier"/>
-   <bundle id="org.eclipse.xtend.source" version="2.2.0.qualifier"/>
-   <bundle id="org.eclipse.xtend.typesystem.emf" version="2.2.0.qualifier"/>
-   <bundle id="org.eclipse.xtend.typesystem.emf.source" version="2.2.0.qualifier"/>
 
    <bundle id="com.google.guava" version="32.1.2.qualifier"/>
    <bundle id="com.google.guava.source" version="32.1.2.qualifier"/>

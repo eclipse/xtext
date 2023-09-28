@@ -38,7 +38,6 @@ Export-Package: org.eclipse.xtext.util;
    org.eclipse.xtext.common.types.tests,
    org.eclipse.xtext.common.types.ui,
    org.eclipse.xtext.common.types.eclipse.tests,
-   org.eclipse.xtext.generator,
    org.eclipse.xtext.ide,
    org.eclipse.xtext.java,
    org.eclipse.xtext.junit4,
