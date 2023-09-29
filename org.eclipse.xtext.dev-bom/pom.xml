@@ -395,21 +395,6 @@
 				<version>3.12.300</version>
 			</dependency>
 			<dependency>
-				<groupId>org.eclipse.xpand</groupId>
-				<artifactId>org.eclipse.xpand</artifactId>
-				<version>2.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.xpand</groupId>
-				<artifactId>org.eclipse.xtend.typesystem.emf</artifactId>
-				<version>2.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.xpand</groupId>
-				<artifactId>org.eclipse.xtend</artifactId>
-				<version>2.0.0</version>
-			</dependency>
-			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-antlr-generator</artifactId>
 				<version>2.1.1</version>

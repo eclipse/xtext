@@ -76,16 +76,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.xpand</groupId>
-			<artifactId>org.eclipse.xtend.typesystem.emf</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xpand</groupId>
-			<artifactId>org.eclipse.xtend</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
 			<optional>true</optional>
