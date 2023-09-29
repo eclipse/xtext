@@ -122,14 +122,8 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	/**
 	 * @since 2.9
 	 */
-	@SuppressWarnings({"removal","deprecation"})
+	@Deprecated
 	public void configureIXtext2EcorePostProcessor(Binder binder) {
-		try {
-			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
-			binder.bind(org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor.class)
-				.to(org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor.class);
-		} catch (ClassNotFoundException e) {
-		}
 	}
 
 	@Override

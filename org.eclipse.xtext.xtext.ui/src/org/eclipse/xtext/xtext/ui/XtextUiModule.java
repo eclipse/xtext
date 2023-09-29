@@ -141,12 +141,6 @@ public class XtextUiModule extends AbstractXtextUiModule {
 
 	@Deprecated(forRemoval = true)
 	public void configureIXtext2EcorePostProcessor(Binder binder) {
-		try {
-			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
-			binder.bind(org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor.class)
-				.to(org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor.class);
-		} catch (ClassNotFoundException e) {
-		}
 	}
 
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
