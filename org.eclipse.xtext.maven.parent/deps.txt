@@ -21,10 +21,6 @@ Xtend standalone
 
 Xtext standalone
 <id>org.eclipse.xtext.ecore</id>
-<id>org.eclipse.xtext.generator</id>
-<id>org.eclipse.xtend</id>
-<id>org.eclipse.xpand</id>
-<id>org.eclipse.xtend.typesystem.emf</id>
 
 <id>org.eclipse.emf.mwe.utils</id>
 <id>org.eclipse.emf.mwe2.launch</id>

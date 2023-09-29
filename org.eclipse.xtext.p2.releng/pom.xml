@@ -50,7 +50,6 @@
 		<module>../org.eclipse.xtext.xbase.testlanguages.ide</module>
 		<module>../org.eclipse.xtext.builder.standalone</module>
 		<module>../org.eclipse.xtext.xbase.testdata</module>
-		<module>../org.eclipse.xtext.generator</module>
 		<module>../org.eclipse.xtext.java</module>
 		<module>../org.eclipse.xtext.purexbase</module>
 		<module>../org.eclipse.xtext.purexbase.ide</module>
@@ -118,7 +117,6 @@
 		<!-- xtext-umbrella -->
 		<module>../org.eclipse.xtext.docs.feature</module>
 		<module>../org.eclipse.xtext.examples.feature</module>
-		<module>../org.eclipse.xtext.generator.feature</module>
 		<module>../org.eclipse.xtext.redist.feature</module>
 		<module>../org.eclipse.xtext.runtime.feature</module>
 		<module>../org.eclipse.xtext.sdk.feature</module>
