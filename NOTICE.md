@@ -56,7 +56,7 @@ args4j (2.33)
 
 * License: MIT License
 
-ASM (9.4)
+ASM (9.6)
 
 * License: BSD-3-Clause
 
