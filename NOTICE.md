@@ -48,7 +48,7 @@ Apache Commons Lang (2.4)
 * License: Apache License, 2.0
 
 
-Apache Log4j (1.2.17)
+Apache Log4j / Reload4j (1.2.25)
 
 * License: Apache License 2.0
 
@@ -60,7 +60,7 @@ ASM (9.4)
 
 * License: BSD-3-Clause
 
-classgraph (4.8.149)
+classgraph (4.8.162)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph
@@ -70,7 +70,7 @@ Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
-Google Guava (32.1.2)
+Google Guava (32.1.3)
 
 * License: Apache License 2.0
 
@@ -82,7 +82,7 @@ Gradle Wrapper (8)
 
 * License: Apache License, 2.0
 
-guava gwt (32.1.2)
+guava gwt (32.1.3)
 
 * License: Apache License, 2.0
 

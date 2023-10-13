@@ -29,7 +29,7 @@
 	<!-- pathref 'xtend.deps' will be  modified programmmaticaly, when tests are started-->
 	<path id="xtend.deps">
 		<fileset dir="${deps.dir}">
-			<include name="org.apache.log4j*.jar" />
+			<include name="reload4j*.jar" />
 			<include name="org.eclipse.emf.ecore*.jar" />
 			<include name="org.eclipse.emf.ecore*.jar" />
 			<include name="org.eclipse.emf.common*.jar" />
