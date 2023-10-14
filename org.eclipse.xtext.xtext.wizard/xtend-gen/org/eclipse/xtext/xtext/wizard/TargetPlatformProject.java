@@ -194,7 +194,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"jakarta.inject.jakarta.inject-api\" version=\"2.0.1\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v20220404-1927\"/>");
+    _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v20230929-1400\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20230809-1000\"/>");
@@ -251,7 +251,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.5.0\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.149.v20220915-0556\"/>");
+    _builder.append("<unit id=\"io.github.classgraph.classgraph\" version=\"4.8.162\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2023-12\"/>");

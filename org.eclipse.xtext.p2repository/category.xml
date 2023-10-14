@@ -10,8 +10,8 @@
       <category name="Xtext"/>
    </feature>
 
-   <bundle id="com.google.guava" version="32.1.2.qualifier"/>
-   <bundle id="com.google.guava.source" version="32.1.2.qualifier"/>
+   <bundle id="com.google.guava" version="32.1.3.qualifier"/>
+   <bundle id="com.google.guava.source" version="32.1.3.qualifier"/>
    <bundle id="com.google.guava.failureaccess" version="1.0.1.qualifier"/>
    <bundle id="com.google.guava.failureaccess.source" version="1.0.1.qualifier"/>
    <bundle id="com.google.inject" version="7.0.0.qualifier"/>
@@ -20,8 +20,8 @@
    <bundle id="jakarta.inject.jakarta.inject-api.source" version="2.0.1.qualifier"/>
    <bundle id="org.antlr.runtime" version="3.2.0.qualifier"/>
    <bundle id="org.antlr.runtime.source" version="3.2.0.qualifier"/>
-   <bundle id="org.apache.log4j" version="1.2.24.qualifier"/>
-   <bundle id="org.apache.log4j.source" version="1.2.24.qualifier"/>
+   <bundle id="org.apache.log4j" version="1.2.25.qualifier"/>
+   <bundle id="org.apache.log4j.source" version="1.2.25.qualifier"/>
    <bundle id="org.aopalliance" version="1.0.0.qualifier"/>
    <bundle id="org.aopalliance.source" version="1.0.0.qualifier"/>
    <bundle id="org.junit" version="4.13.2.qualifier"/>
@@ -34,8 +34,8 @@
    <bundle id="org.kohsuke.args4j.source" version="0.0.0"/>
    <bundle id="org.objectweb.asm" version="9.5.0.qualifier"/>
    <bundle id="org.objectweb.asm.source" version="9.5.0.qualifier"/>
-   <bundle id="io.github.classgraph" version="4.8.149.qualifier"/>
-   <bundle id="io.github.classgraph.source" version="4.8.149.qualifier"/>
+   <bundle id="io.github.classgraph.classgraph" version="4.8.162.qualifier"/>
+   <bundle id="io.github.classgraph.classgraph.source" version="4.8.162.qualifier"/>
 
 	<category-def name="Xtext" label="Xtext" />
 </site>
