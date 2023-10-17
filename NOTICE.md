@@ -56,11 +56,11 @@ args4j (2.33)
 
 * License: MIT License
 
-ASM (9.4)
+ASM (9.6)
 
 * License: BSD-3-Clause
 
-classgraph (4.8.162)
+classgraph (4.8.163)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph

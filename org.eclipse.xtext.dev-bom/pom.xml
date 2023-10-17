@@ -177,7 +177,7 @@
 			<dependency>
 				<groupId>io.github.classgraph</groupId>
 				<artifactId>classgraph</artifactId>
-				<version>4.8.162</version>
+				<version>4.8.163</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.annotation</groupId>
@@ -452,7 +452,7 @@
 			<dependency>
 				<groupId>org.ow2.asm</groupId>
 				<artifactId>asm</artifactId>
-				<version>9.5</version>
+				<version>9.6</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

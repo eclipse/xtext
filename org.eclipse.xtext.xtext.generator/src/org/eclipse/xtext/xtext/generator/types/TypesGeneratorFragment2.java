@@ -53,11 +53,11 @@ public class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		if (getProjectConfig().getRuntime().getManifest() != null) {
 			Set<String> requiredBundles = getProjectConfig().getRuntime().getManifest().getRequiredBundles();
 			requiredBundles.add("org.eclipse.xtext.common.types");
-			requiredBundles.add("org.objectweb.asm;bundle-version=\"[9.5.0,9.6.0)\";resolution:=optional");
+			requiredBundles.add("org.objectweb.asm;bundle-version=\"[9.6.0,9.7.0)\";resolution:=optional");
 		}
 		if (getProjectConfig().getRuntimeTest().getManifest() != null) {
 			Set<String> requiredBundles = getProjectConfig().getRuntimeTest().getManifest().getRequiredBundles();
-			requiredBundles.add("org.objectweb.asm;bundle-version=\"[9.5.0,9.6.0)\";resolution:=optional");
+			requiredBundles.add("org.objectweb.asm;bundle-version=\"[9.6.0,9.7.0)\";resolution:=optional");
 		}
 		if (getProjectConfig().getEclipsePlugin().getManifest() != null) {
 			Set<String> requiredBundles = getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();

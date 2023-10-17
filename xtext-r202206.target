@@ -55,8 +55,8 @@
 			<unit id="org.antlr.runtime" version="3.2.0.v20230929-1400"/>
 			<unit id="org.aopalliance" version="1.0.0.v20230720-0728"/>
 			<unit id="org.opentest4j" version="0.0.0"/>
-			<unit id="org.objectweb.asm" version="9.5.0"/>
-			<unit id="io.github.classgraph.classgraph" version="4.8.162"/>
+			<unit id="org.objectweb.asm" version="9.6.0"/>
+			<unit id="io.github.classgraph.classgraph" version="4.8.163"/>
 			<unit id="slf4j.api" version="0.0.0"/>
 			<unit id="slf4j.simple" version="0.0.0"/>
 			<unit id="org.junit" version="4.13.2.v20230809-1000"/>
