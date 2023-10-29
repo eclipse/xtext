@@ -49,7 +49,7 @@ Export-Package: org.eclipse.xtext.util;
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.26.0",
  com.google.guava;bundle-version="[32.1.2,33.0.0)";visibility:=reexport,
  com.google.inject;bundle-version="7.0.0";visibility:=reexport,
- com.google.guava.failureaccess;bundle-version="1.0.1";visibility:=reexport,
+ com.google.guava.failureaccess;bundle-version="1.0.2";visibility:=reexport,
  jakarta.inject.jakarta.inject-api;bundle-version="2.0.1";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.24"
