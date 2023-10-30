@@ -379,8 +379,10 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	
 	protected void highlightNumberLiterals(XNumberLiteral literal, IHighlightedPositionAcceptor acceptor) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(literal);
-		ITextRegion textRegion = node.getTextRegion();
-		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), NUMBER_ID);
+		if (node != null) {
+			ITextRegion textRegion = node.getTextRegion();
+			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), NUMBER_ID);
+		}
 	}
 	
 	protected void highlightConstructorCall(XConstructorCall constructorCall, IHighlightedPositionAcceptor acceptor) {
