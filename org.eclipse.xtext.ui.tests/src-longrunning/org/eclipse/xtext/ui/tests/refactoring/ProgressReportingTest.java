@@ -15,12 +15,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceDescriptor;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 /**
  * @author Christian Schneider - Initial contribution and API
@@ -34,7 +36,7 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 		@Override
 		public void worked(int work) {
 			accumulatedWork = accumulatedWork + work;
-			events.add("Worked " +work + " (" + accumulatedWork + ")");
+			events.add("Worked " + work + " (" + accumulatedWork + ")");
 		}
 
 		@Override
@@ -80,44 +82,57 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 
 	@Test
 	public void testProgressReportOfRenameCommonDir() throws Exception {
-		String model =
-				"package foo.bar\n" +
-				"element X {\n" +
-				"	ref X\n" +
-				"}\n";
+		String model = "package foo.bar\n" + "element X {\n" + "	ref X\n" + "}\n";
 		IFile x = file("foo/X.fileawaretestlanguage", model);
-		String model2 =
-				"package foo\n" +
-				"element Y {\n" +
-				"	ref bar.X\n" +
-				"}\n";
+		String model2 = "package foo\n" + "element Y {\n" + "	ref bar.X\n" + "}\n";
 		IFile y = file("foo/Y.fileawaretestlanguage", model2);
 		ProgressReportingTest.TestProgressMonitor monitor = new ProgressReportingTest.TestProgressMonitor();
 		performRename(x.getParent(), "baz", monitor);
 		Assert.assertFalse(x.exists());
 		Assert.assertFalse(y.exists());
 		List<String> expectation = new ArrayList<>();
-		expectation.add("BeginTask (44)");
-		expectation.add("SetTaskName Checking preconditions...");
-		expectation.add("InternalWorked 4.0 (4.0)");
-		expectation.add("SetTaskName Checking preconditions...");
-		expectation.add("InternalWorked 22.22222222222222 (26.22222222222222)");
-		expectation.add("SetTaskName Preparing the refactoring...");
-		expectation.add("InternalWorked 1.777777777777778 (28.0)");
-		expectation.add("SetTaskName Preparing and applying file changes...");
-		expectation.add("InternalWorked 0.8355555555555556 (28.835555555555555)");
-		expectation.add("InternalWorked 0.8355555555555556 (29.67111111111111)");
-		expectation.add("InternalWorked 0.4177777777777778 (30.08888888888889)");
-		expectation.add("InternalWorked 0.4177777777777778 (30.506666666666668)");
-		expectation.add("InternalWorked 0.4177777777777778 (30.924444444444447)");
-		expectation.add("InternalWorked 0.4177777777777778 (31.342222222222226)");
-		expectation.add("SetTaskName Creating text changes...");
-		expectation.add("InternalWorked 2.088888888888889 (33.431111111111115)");
-		expectation.add("InternalWorked 0.8444444444444444 (34.275555555555556)");
-		expectation.add("InternalWorked 0.8355555555555556 (35.111111111111114)");
-		expectation.add("InternalWorked 2.2222222222222223 (37.333333333333336)");
-		expectation.add("InternalWorked 6.666666666666664 (44.0)");
-		expectation.add("Done");
+		if (Platform.getBundle("org.eclipse.ltk.core.refactoring").getVersion().compareTo(new Version("3.14.200")) >= 0) {
+			expectation.add("BeginTask (44)");
+			expectation.add("InternalWorked 4.0 (4.0)");
+			expectation.add("InternalWorked 22.2 (26.2)");
+			expectation.add("InternalWorked 1.76 (27.96)");
+			expectation.add("SetTaskName Preparing and applying file changes...");
+			expectation.add("InternalWorked 0.8 (28.76)");
+			expectation.add("InternalWorked 0.84 (29.6)");
+			expectation.add("InternalWorked 0.4 (30.0)");
+			expectation.add("InternalWorked 0.44 (30.44)");
+			expectation.add("InternalWorked 0.4 (30.84)");
+			expectation.add("InternalWorked 0.44 (31.28)");
+			expectation.add("SetTaskName Creating text changes...");
+			expectation.add("InternalWorked 2.08 (33.36)");
+			expectation.add("InternalWorked 0.88 (34.24)");
+			expectation.add("InternalWorked 0.84 (35.080000000000005)");
+			expectation.add("InternalWorked 8.920000000000002 (44.00000000000001)");
+			expectation.add("Done");
+		} else {
+			expectation.add("BeginTask (44)");
+			expectation.add("SetTaskName Checking preconditions...");
+			expectation.add("InternalWorked 4.0 (4.0)");
+			expectation.add("SetTaskName Checking preconditions...");
+			expectation.add("InternalWorked 22.22222222222222 (26.22222222222222)");
+			expectation.add("SetTaskName Preparing the refactoring...");
+			expectation.add("InternalWorked 1.777777777777778 (28.0)");
+			expectation.add("SetTaskName Preparing and applying file changes...");
+			expectation.add("InternalWorked 0.8355555555555556 (28.835555555555555)");
+			expectation.add("InternalWorked 0.8355555555555556 (29.67111111111111)");
+			expectation.add("InternalWorked 0.4177777777777778 (30.08888888888889)");
+			expectation.add("InternalWorked 0.4177777777777778 (30.506666666666668)");
+			expectation.add("InternalWorked 0.4177777777777778 (30.924444444444447)");
+			expectation.add("InternalWorked 0.4177777777777778 (31.342222222222226)");
+			expectation.add("SetTaskName Creating text changes...");
+			expectation.add("InternalWorked 2.088888888888889 (33.431111111111115)");
+			expectation.add("InternalWorked 0.8444444444444444 (34.275555555555556)");
+			expectation.add("InternalWorked 0.8355555555555556 (35.111111111111114)");
+			expectation.add("InternalWorked 2.2222222222222223 (37.333333333333336)");
+			expectation.add("InternalWorked 6.666666666666664 (44.0)");
+			expectation.add("Done");
+
+		}
 		monitor.assertLogged(expectation);
 	}
 
