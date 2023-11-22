@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.33.0.qualifier
+Bundle-Version: 2.34.0.qualifier
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtend.ide;singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -26,7 +26,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.jdt.debug.ui;bundle-version="3.12.600",
  org.eclipse.ui.editors;bundle-version="3.14.300",
  org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.xtext.xbase.lib;bundle-version="2.33.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
  org.eclipse.jdt.core.manipulation;bundle-version="1.16.0";resolution:=optional,
  org.eclipse.e4.core.services,
  org.eclipse.osgi.services,
