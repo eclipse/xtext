@@ -508,6 +508,11 @@
     </setupTask>
     <setupTask
         xsi:type="setup.targlets:TargletTask"
+        filter="(eclipse.target.platform=2023-12)">
+      <composedTarget>xtext-r202312</composedTarget>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
         filter="(eclipse.target.platform=2023-09)">
       <composedTarget>xtext-r202309</composedTarget>
     </setupTask>
