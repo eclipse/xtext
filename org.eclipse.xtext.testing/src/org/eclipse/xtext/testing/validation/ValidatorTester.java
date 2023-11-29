@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.testing.validation;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
+import org.eclipse.xtext.validation.AbstractInjectableValidator;
+import org.eclipse.xtext.validation.EValidatorRegistrar;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -25,6 +27,8 @@ import com.google.inject.name.Names;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @since 2.34
  */
 public class ValidatorTester<T extends AbstractDeclarativeValidator> extends AbstractValidatorTester {
 
@@ -37,7 +41,7 @@ public class ValidatorTester<T extends AbstractDeclarativeValidator> extends Abs
 			injector.getInstance(EValidatorRegistrar.class),
 			injector.getInstance(Key.get(String.class, Names.named(Constants.LANGUAGE_NAME))));
 	}
-	
+
 	@Inject
 	public ValidatorTester(T validator, EValidatorRegistrar registrar, @Named(Constants.LANGUAGE_NAME) final String languageName) {
 		this.validator = validator;
@@ -56,7 +60,7 @@ public class ValidatorTester<T extends AbstractDeclarativeValidator> extends Abs
 		registrar.setRegistry(originalRegistry);
 		validatorCalled = false;
 	}
-	
+
 	public AssertableDiagnostics diagnose() {
 		if (!validatorCalled)
 			throw new IllegalStateException("You have to call validator() before you call diagnose()");

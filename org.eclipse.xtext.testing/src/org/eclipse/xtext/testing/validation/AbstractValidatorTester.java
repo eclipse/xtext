@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.testing.validation;
 
 import java.util.Map;
 
@@ -14,10 +14,11 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @since 2.34
  */
 public abstract class AbstractValidatorTester {
 
@@ -27,7 +28,7 @@ public abstract class AbstractValidatorTester {
 		Diagnostic d = diagnostician.validate(type, obj);
 		return new AssertableDiagnostics(d);
 	}
-	
+
 	public AssertableDiagnostics validate(EObject obj) {
 		Diagnostic d = diagnostician.validate(obj);
 		return new AssertableDiagnostics(d);
