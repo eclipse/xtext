@@ -3,7 +3,7 @@
 <target name="xtext-r202312" sequenceNumber="13">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.35.0"/>
+			<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.36.0"/>
 			<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
