@@ -117,7 +117,12 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addProjectNatures(JavaCore.NATURE_ID);
 		factory.addBuilderIds(JavaCore.BUILDER_ID);
 		for (SourceFolderDescriptor sourceFolder : descriptor.getSourceFolders()) {
-			String output = sourceFolder.isTest() ? (needsM2eIntegration(descriptor) ? "target/test-classes" : "test-bin") : null;
+			String output = sourceFolder.isTest() ?
+				(needsM2eIntegration(descriptor) ? 
+					(needsTychoIntegration(descriptor) ?
+						"target/classes" : // Tycho will generate into target/classes for eclipse-plugin-test projects
+						"target/test-classes")
+					: "test-bin") : null;
 			factory.addSourceFolder(sourceFolder.getPath(), output, sourceFolder.isTest());
 		}
 		factory.setJreContainerEntry(JREContainerProvider.getJREContainerEntry(descriptor.getBree()));
@@ -285,6 +290,10 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 
 	private boolean needsM2eIntegration(ProjectDescriptor descriptor) {
 		return descriptor.isPartOfMavenBuild() && descriptor.getConfig().needsMavenBuild();
+	}
+
+	private boolean needsTychoIntegration(ProjectDescriptor descriptor) {
+		return descriptor.isPartOfMavenBuild() && descriptor.getConfig().needsTychoBuild();
 	}
 
 	private boolean needsBuildshipIntegration(ProjectDescriptor descriptor) {
