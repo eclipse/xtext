@@ -60,7 +60,7 @@ ASM (9.6)
 
 * License: BSD-3-Clause
 
-classgraph (4.8.164)
+classgraph (4.8.165)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph
