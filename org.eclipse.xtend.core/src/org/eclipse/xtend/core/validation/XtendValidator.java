@@ -671,18 +671,10 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 	}
 
-	@Check
-	public void checkSuperTypes(XtendInterface xtendInterface) {
-		for (int i = 0; i < xtendInterface.getExtends().size(); ++i) {
-			JvmTypeReference extendedType = xtendInterface.getExtends().get(i);
-			checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
-		}
-	}
-	
 	protected boolean isAnnotation(JvmType jvmType) {
 		return jvmType instanceof JvmAnnotationType;
 	}
-	
+
 	@Check
 	public void checkSuperTypes(AnonymousClass anonymousClass) {
 		JvmGenericType inferredType = associations.getInferredType(anonymousClass);

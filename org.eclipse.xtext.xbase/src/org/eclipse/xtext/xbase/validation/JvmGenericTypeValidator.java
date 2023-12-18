@@ -79,14 +79,16 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			var superTypes = type.getSuperTypes();
 			for (int i = 0; i < superTypes.size(); ++i) {
 				JvmTypeReference extendedType = superTypes.get(i);
+				var associated = associations.getPrimarySourceElement(extendedType);
+				var eContainingFeature = associated.eContainingFeature();
 				if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
-					var associated = associations.getPrimarySourceElement(extendedType);
-					var eContainingFeature = associated.eContainingFeature();
 					error("Extended interface must be an interface",
 						primarySourceElement,
 						eContainingFeature, i, INTERFACE_EXPECTED);
 				}
-//				checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
+				checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+						extendedType,
+						eContainingFeature, i);
 			}
 		}
 	}
@@ -115,6 +117,22 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected boolean isAnnotation(JvmType jvmType) {
 		return jvmType instanceof JvmAnnotationType;
+	}
+
+	protected void checkWildcardSupertype(EObject sourceElement,
+			String name,
+			JvmTypeReference superTypeReference,
+			EStructuralFeature feature, int index) { 
+		if(isInvalidWildcard(superTypeReference)) 
+			error("The type " 
+					+ name
+					+ " cannot extend or implement "
+					+ superTypeReference.getIdentifier() 
+					+ ". A supertype may not specify any wildcard",
+				sourceElement,
+				feature,
+				index,
+				WILDCARD_IN_SUPERTYPE);
 	}
 
 	protected boolean isInvalidWildcard(JvmTypeReference typeRef) {

@@ -182,6 +182,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String INTERFACE_EXPECTED = ISSUE_CODE_PREFIX + "interface_expected";
+	/**
+	 * @since 2.34
+	 */
+	public static final String WILDCARD_IN_SUPERTYPE = ISSUE_CODE_PREFIX +  "wildcard_in_supertype";
 
 	private IssueCodes() {
 	}

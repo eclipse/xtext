@@ -89,8 +89,6 @@ public final class IssueCodes {
 	public static final String MISSING_STATIC_MODIFIER = ISSUE_CODE_PREFIX +  "missing_static_modifier";
 	public static final String MODIFIER_DOES_NOT_MATCH_TYPENAME = ISSUE_CODE_PREFIX + "missing_abstract_modifier";
 	
-	public static final String WILDCARD_IN_SUPERTYPE = ISSUE_CODE_PREFIX +  "wildcard_in_supertype";
-
 	public static final String INVALID_EXTENSION_TYPE = ISSUE_CODE_PREFIX +  "invalid_extension_type";
 	
 	public static final String INVALID_OPERATOR_SIGNATURE = ISSUE_CODE_PREFIX +  "invalid_operator_signature";
