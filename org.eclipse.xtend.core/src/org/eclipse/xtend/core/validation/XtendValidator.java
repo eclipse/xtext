@@ -76,12 +76,10 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
@@ -659,7 +657,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				if (((JvmGenericType) superClass.getType()).isFinal()) {
 					error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
 				}
-				checkWildcardSupertype(xtendClass, superClass, XTEND_CLASS__EXTENDS, INSIGNIFICANT_INDEX);
 			}
 		}
 		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
@@ -667,7 +664,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			if (!isInterface(implementedType.getType()) && !isAnnotation(implementedType.getType())) {
 				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
 			}
-			checkWildcardSupertype(xtendClass, implementedType, XTEND_CLASS__IMPLEMENTS, i);
 		}
 	}
 
@@ -705,30 +701,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				}
 			}
 		}
-	}
-	
-	protected void checkWildcardSupertype(XtendTypeDeclaration xtendType, JvmTypeReference superTypeReference,
-			EStructuralFeature feature, int index) { 
-		if(isInvalidWildcard(superTypeReference)) 
-			error("The type " 
-					+ notNull(xtendType.getName()) 
-					+ " cannot extend or implement "
-					+ superTypeReference.getIdentifier() 
-					+ ". A supertype may not specify any wildcard", feature, index, WILDCARD_IN_SUPERTYPE);
-	}
-	
-	protected boolean isInvalidWildcard(JvmTypeReference typeRef) {
-		if (typeRef instanceof JvmWildcardTypeReference)
-			return true;
-		else if (typeRef instanceof JvmParameterizedTypeReference) {
-			for(JvmTypeReference typeArgument: ((JvmParameterizedTypeReference) typeRef).getArguments()) {
-				if(typeArgument instanceof JvmWildcardTypeReference) 
-					return true;
-			}
-		} else if (typeRef instanceof JvmSpecializedTypeReference) {
-			return isInvalidWildcard(((JvmSpecializedTypeReference) typeRef).getEquivalent());
-		}
-		return false;
 	}
 
 	@Check

@@ -90,6 +90,18 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 						extendedType,
 						eContainingFeature, i);
 			}
+		} else {
+			var superTypes = type.getSuperTypes();
+			for (int i = 0; i < superTypes.size(); ++i) {
+				JvmTypeReference extendedType = superTypes.get(i);
+				var associated = associations.getPrimarySourceElement(extendedType);
+				if (associated == null)
+					continue; // synthetic superclass (e.g., Object)
+				var eContainingFeature = associated.eContainingFeature();
+				checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+						extendedType,
+						eContainingFeature, i);
+			}
 		}
 	}
 
