@@ -996,6 +996,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "class Foo implements Bar { interface I {} }"
 				+ "interface Bar extends Foo.I {}").getXtendTypes().iterator();
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
 	@Test public void testInheritanceCycle_5() throws Exception {
@@ -1003,6 +1004,21 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "class Foo extends Bar { static class Baz {} }"
 				+ "class Bar extends Foo.Baz {}").getXtendTypes().iterator();
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+
+	@Test public void testInheritanceCycle_6() throws Exception {
+		Iterator<XtendTypeDeclaration> types = file("package test "
+				 + "class Container {"
+				 + "  interface Foo extends Bar {}"
+				 + "  interface Bar extends Baz {}"
+				 + "  interface Baz extends Foo {}"
+				 + "}").getXtendTypes().iterator();
+		var container = types.next();
+		var internalTypes = container.getMembers().iterator();
+		helper.assertError(internalTypes.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(internalTypes.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(internalTypes.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 
 	@Test public void testMultipleInheritance() throws Exception {
