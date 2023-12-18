@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -44,6 +45,10 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		var contents = o.eResource().getContents();
 		if (contents.get(0) != o)
 			return;
+		checkJvmGenericTypes(contents);
+	}
+
+	protected void checkJvmGenericTypes(List<? extends EObject> contents) {
 		contents.stream()
 				.filter(e -> !associations.getSourceElements(e).isEmpty())
 				.filter(JvmGenericType.class::isInstance)
@@ -53,6 +58,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void checkJvmGenericType(JvmGenericType type) {
 		checkSuperTypes(type);
+		checkJvmGenericTypes(type.getMembers());
 	}
 
 	protected void checkSuperTypes(JvmGenericType type) {
