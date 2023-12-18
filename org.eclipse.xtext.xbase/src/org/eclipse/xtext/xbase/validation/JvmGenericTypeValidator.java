@@ -98,6 +98,33 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				if (associated == null)
 					continue; // synthetic superclass (e.g., Object)
 				var eContainingFeature = associated.eContainingFeature();
+				// there's no direct way to tell whether the supertype is meant
+				// to be an extended class or an implemented interface, so we
+				// check whether the original source element's containing feature
+				// is single or multiple, assuming that the source element allows
+				// for a single extended class
+				if (eContainingFeature.isMany()) {
+					// assume to be expected as an interface
+					if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
+						error("Implemented interface must be an interface",
+							primarySourceElement,
+							eContainingFeature, i, INTERFACE_EXPECTED);
+					}
+				} else {
+					// assume to be expected as a class
+					if (!(extendedType.getType() instanceof JvmGenericType)
+							|| ((JvmGenericType) extendedType.getType()).isInterface()) {
+						error("Superclass must be a class",
+							primarySourceElement,
+							eContainingFeature, CLASS_EXPECTED);
+					} else {
+						if (((JvmGenericType) extendedType.getType()).isFinal()) {
+							error("Attempt to override final class",
+								primarySourceElement,
+								eContainingFeature, OVERRIDDEN_FINAL);
+						}
+					}
+				}
 				checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
 						extendedType,
 						eContainingFeature, i);
@@ -136,7 +163,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			JvmTypeReference superTypeReference,
 			EStructuralFeature feature, int index) { 
 		if(isInvalidWildcard(superTypeReference)) 
-			error("The type " 
+			error("The type "
 					+ name
 					+ " cannot extend or implement "
 					+ superTypeReference.getIdentifier() 

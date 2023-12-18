@@ -38,7 +38,6 @@ public final class IssueCodes {
 	public static final String CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT = "create_functions_must_not_be_abstract";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";
-	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";
 	public static final String DUPLICATE_METHOD = ISSUE_CODE_PREFIX + "duplicate_method";
 	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
 	public static final String DUPLICATE_TYPE_NAME = org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_TYPE;
@@ -59,7 +58,6 @@ public final class IssueCodes {
 	public static final String ANONYMOUS_CLASS_STATIC_FIELD = ISSUE_CODE_PREFIX + "anonymous_class_static_field";
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
 
-	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
 	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
 	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
 	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";

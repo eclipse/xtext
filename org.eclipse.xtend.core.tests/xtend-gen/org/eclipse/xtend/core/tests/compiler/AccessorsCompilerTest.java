@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -171,7 +171,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String source = _builder.toString();
-      this._validationTestHelper.assertError(this.file(source), XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
+      this._validationTestHelper.assertError(this.file(source), XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
         source.indexOf("int"), "int".length(), 
         "incompatible", "getFoo");
     } catch (Throwable _e) {
@@ -359,7 +359,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible");
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

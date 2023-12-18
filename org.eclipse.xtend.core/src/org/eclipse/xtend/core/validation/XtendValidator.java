@@ -647,31 +647,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	}
 
 	@Check
-	public void checkSuperTypes(XtendClass xtendClass) {
-		JvmTypeReference superClass = xtendClass.getExtends();
-		if (superClass != null && superClass.getType() != null) {
-			if (!(superClass.getType() instanceof JvmGenericType)
-					|| ((JvmGenericType) superClass.getType()).isInterface()) {
-				error("Superclass must be a class", XTEND_CLASS__EXTENDS, CLASS_EXPECTED);
-			} else {
-				if (((JvmGenericType) superClass.getType()).isFinal()) {
-					error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
-				}
-			}
-		}
-		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
-			JvmTypeReference implementedType = xtendClass.getImplements().get(i);
-			if (!isInterface(implementedType.getType()) && !isAnnotation(implementedType.getType())) {
-				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
-			}
-		}
-	}
-
-	protected boolean isAnnotation(JvmType jvmType) {
-		return jvmType instanceof JvmAnnotationType;
-	}
-
-	@Check
 	public void checkSuperTypes(AnonymousClass anonymousClass) {
 		JvmGenericType inferredType = associations.getInferredType(anonymousClass);
 		if (inferredType != null) {

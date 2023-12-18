@@ -10,9 +10,9 @@ package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
 import java.lang.reflect.Modifier
-import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.Test
 
 class AccessorsCompilerTest extends AbstractXtendCompilerTest {
@@ -89,7 +89,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 				@Accessors int foo
 			}
 		'''
-		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE,
+		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE,
 			source.indexOf("int"), "int".length,
 			"incompatible", "getFoo")
 	}
@@ -190,7 +190,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible")
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible")
 	}
 
 	@Test

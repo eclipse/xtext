@@ -185,7 +185,15 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	/**
 	 * @since 2.34
 	 */
+	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";
+	/**
+	 * @since 2.34
+	 */
 	public static final String WILDCARD_IN_SUPERTYPE = ISSUE_CODE_PREFIX +  "wildcard_in_supertype";
+	/**
+	 * @since 2.34
+	 */
+	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
 
 	private IssueCodes() {
 	}

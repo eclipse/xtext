@@ -5559,7 +5559,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, org.eclipse.xtend.core.validation.IssueCodes.CLASS_EXPECTED).assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'").assertNoResolutionLabels("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'");
+    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.CLASS_EXPECTED).assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'").assertNoResolutionLabels("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'");
   }
 
   @Test
