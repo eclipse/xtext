@@ -12,6 +12,7 @@ import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.CYCLIC_INHERITANCE;
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*;
 
 import java.util.Iterator;

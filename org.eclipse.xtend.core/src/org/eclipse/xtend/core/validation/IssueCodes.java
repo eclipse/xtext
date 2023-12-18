@@ -64,7 +64,6 @@ public final class IssueCodes {
 	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
 	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
 	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
-	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
 
 	public static final String UNUSED_PRIVATE_MEMBER = ISSUE_CODE_PREFIX + "unused_private_member";
 	public static final String FIELD_NOT_INITIALIZED = ISSUE_CODE_PREFIX + "field_not_initialized";

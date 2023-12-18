@@ -140,6 +140,7 @@ import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
+import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
 import org.eclipse.xtext.xbase.validation.ProxyAwareUIStrings;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -166,7 +167,7 @@ import com.google.inject.Inject;
  * @author Holger Schill
  * @author Stephane Galland
  */
-@ComposedChecks(validators = { AnnotationValidation.class })
+@ComposedChecks(validators = { AnnotationValidation.class, JvmGenericTypeValidator.class })
 public class XtendValidator extends XbaseWithAnnotationsValidator {
 
 	@Inject
@@ -668,11 +669,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			}
 			checkWildcardSupertype(xtendClass, implementedType, XTEND_CLASS__IMPLEMENTS, i);
 		}
-		JvmGenericType inferredType = associations.getInferredType(xtendClass);
-		if (inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
-			error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles",
-					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
-		}
 	}
 
 	@Check
@@ -683,11 +679,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				error("Extended interface must be an interface", XTEND_INTERFACE__EXTENDS, i, INTERFACE_EXPECTED);
 			}
 			checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
-		}
-		JvmGenericType inferredType = associations.getInferredType(xtendInterface);
-		if(inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
-			error("The inheritance hierarchy of " + notNull(xtendInterface.getName()) + " contains cycles",
-					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 		}
 	}
 	
@@ -751,24 +742,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		return false;
 	}
 
-	protected boolean hasCycleInHierarchy(JvmGenericType type, Set<JvmGenericType> processedSuperTypes) {
-		JvmDeclaredType container = type;
-		do {
-			if (processedSuperTypes.contains(container))
-				return true;
-			container = container.getDeclaringType();
-		} while (container != null);
-		processedSuperTypes.add(type);
-		for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
-			if (superTypeRef.getType() instanceof JvmGenericType) {
-				if (hasCycleInHierarchy((JvmGenericType) superTypeRef.getType(), processedSuperTypes))
-					return true;
-			}
-		}
-		processedSuperTypes.remove(type);
-		return false;
-	}
-	
 	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);

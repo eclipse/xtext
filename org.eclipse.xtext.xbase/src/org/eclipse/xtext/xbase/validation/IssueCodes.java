@@ -174,6 +174,11 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 */
 	public static final String INVALID_TRY_RESOURCE_TYPE = ISSUE_CODE_PREFIX + "invalid_try_resource_type";
 	
+	/**
+	 * @since 2.34
+	 */
+	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
+
 	private IssueCodes() {
 	}
 
