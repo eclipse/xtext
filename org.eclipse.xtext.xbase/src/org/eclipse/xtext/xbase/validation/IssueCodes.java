@@ -178,6 +178,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
+	/**
+	 * @since 2.34
+	 */
+	public static final String INTERFACE_EXPECTED = ISSUE_CODE_PREFIX + "interface_expected";
 
 	private IssueCodes() {
 	}

@@ -39,7 +39,6 @@ public final class IssueCodes {
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";
 	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";
-	public static final String INTERFACE_EXPECTED = ISSUE_CODE_PREFIX + "interface_expected";
 	public static final String DUPLICATE_METHOD = ISSUE_CODE_PREFIX + "duplicate_method";
 	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
 	public static final String DUPLICATE_TYPE_NAME = org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_TYPE;

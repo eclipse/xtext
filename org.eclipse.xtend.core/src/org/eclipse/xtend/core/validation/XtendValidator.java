@@ -675,9 +675,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	public void checkSuperTypes(XtendInterface xtendInterface) {
 		for (int i = 0; i < xtendInterface.getExtends().size(); ++i) {
 			JvmTypeReference extendedType = xtendInterface.getExtends().get(i);
-			if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
-				error("Extended interface must be an interface", XTEND_INTERFACE__EXTENDS, i, INTERFACE_EXPECTED);
-			}
 			checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
 		}
 	}

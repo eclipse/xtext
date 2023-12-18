@@ -17,9 +17,14 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
@@ -63,10 +68,26 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void checkSuperTypes(JvmGenericType type) {
 		var primarySourceElement = associations.getPrimarySourceElement(type);
-		if (primarySourceElement != null && hasCycleInHierarchy(type, new HashSet<>())) {
+		if (primarySourceElement == null)
+			return;
+		if (hasCycleInHierarchy(type, new HashSet<>())) {
 			error("The inheritance hierarchy of " + notNull(type.getSimpleName()) + " contains cycles",
 					primarySourceElement,
 					getFeatureForIssue(primarySourceElement), CYCLIC_INHERITANCE);
+		}
+		if (type.isInterface()) {
+			var superTypes = type.getSuperTypes();
+			for (int i = 0; i < superTypes.size(); ++i) {
+				JvmTypeReference extendedType = superTypes.get(i);
+				if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
+					var associated = associations.getPrimarySourceElement(extendedType);
+					var eContainingFeature = associated.eContainingFeature();
+					error("Extended interface must be an interface",
+						primarySourceElement,
+						eContainingFeature, i, INTERFACE_EXPECTED);
+				}
+//				checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
+			}
 		}
 	}
 
@@ -85,6 +106,28 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			}
 		}
 		processedSuperTypes.remove(type);
+		return false;
+	}
+
+	protected boolean isInterface(JvmType type) {
+		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
+	}
+
+	protected boolean isAnnotation(JvmType jvmType) {
+		return jvmType instanceof JvmAnnotationType;
+	}
+
+	protected boolean isInvalidWildcard(JvmTypeReference typeRef) {
+		if (typeRef instanceof JvmWildcardTypeReference)
+			return true;
+		else if (typeRef instanceof JvmParameterizedTypeReference) {
+			for(JvmTypeReference typeArgument: ((JvmParameterizedTypeReference) typeRef).getArguments()) {
+				if(typeArgument instanceof JvmWildcardTypeReference) 
+					return true;
+			}
+		} else if (typeRef instanceof JvmSpecializedTypeReference) {
+			return isInvalidWildcard(((JvmSpecializedTypeReference) typeRef).getEquivalent());
+		}
 		return false;
 	}
 

@@ -5569,7 +5569,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, org.eclipse.xtend.core.validation.IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'");
+    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'");
   }
 
   @Test
@@ -5579,7 +5579,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertNoResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, org.eclipse.xtend.core.validation.IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Java class \'Bar\'", "Create Xtend class \'Bar\'", "Create local Xtend class \'Bar\'");
+    QuickfixTestBuilder _assertNoResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Java class \'Bar\'", "Create Xtend class \'Bar\'", "Create local Xtend class \'Bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("interface Foo extends Bar {");
     _builder_1.newLine();
