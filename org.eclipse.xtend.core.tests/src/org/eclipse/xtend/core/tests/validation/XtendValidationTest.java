@@ -934,8 +934,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testClassUniqueNames() throws Exception {
-		XtendClass clazz = clazz("class Foo {} class Foo {}");
-		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE_NAME, "type", "already defined");
+		var source = "class Foo {} class Foo {}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE_NAME,
+				source.indexOf("Foo"), "Foo".length(),
+				"type", "already defined");
+		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE_NAME,
+				source.lastIndexOf("Foo"), "Foo".length(),
+				"type", "already defined");
 	}
 	
 	@Test public void testInterfaceExtendsInterface() throws Exception {
@@ -1084,15 +1090,28 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testDuplicateFieldName() throws Exception {
-		XtendClass clazz = clazz("class Foo { int foo String foo double foo }");
-		for(XtendMember member: clazz.getMembers())
-			helper.assertError(member, XTEND_FIELD, DUPLICATE_FIELD, "foo", "duplicate");
+		var source = "class Foo { int foo String foo double foo }";
+		Iterator<XtendMember> members = clazz(source).getMembers().iterator();
+		helper.assertError(members.next(), XTEND_FIELD, DUPLICATE_FIELD,
+				source.indexOf("foo"), "foo".length(),
+				"foo", "duplicate");
+		helper.assertError(members.next(), XTEND_FIELD, DUPLICATE_FIELD,
+				source.indexOf("String foo") + "String ".length(), "foo".length(),
+				"foo", "duplicate");
+		helper.assertError(members.next(), XTEND_FIELD, DUPLICATE_FIELD,
+				source.indexOf("double foo") + "double ".length(), "foo".length(),
+				"foo", "duplicate");
 	}
 	
 	@Test public void testDuplicateAnonymousExtension() throws Exception {
-		XtendClass clazz = clazz("import com.google.inject.Inject class Foo { @Inject extension String @Inject extension String }");
-		for(XtendMember member: clazz.getMembers())
-			helper.assertError(member, XTEND_FIELD, DUPLICATE_FIELD, "duplicate", "same", "type");
+		var source = "import com.google.inject.Inject class Foo { @Inject extension String @Inject extension String }";
+		Iterator<XtendMember> members = clazz(source).getMembers().iterator();
+		helper.assertError(members.next(), XTEND_FIELD, DUPLICATE_FIELD,
+				source.indexOf("String"), "String".length(),
+				"duplicate", "same", "type");
+		helper.assertError(members.next(), XTEND_FIELD, DUPLICATE_FIELD,
+				source.lastIndexOf("String"), "String".length(),
+				"duplicate", "same", "type");
 	}
 	
 	@Test public void testCaseFunctionNoParameters() throws Exception {
