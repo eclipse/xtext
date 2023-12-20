@@ -65,9 +65,9 @@ public abstract class AbstractXtendTestCase extends Assert {
 	 */
 	protected static final String TEMPLATE_CLASS = "class Foo { %s }";
 	/**
-	 * Use it to subtract from the index position of a source element of a function or constructor
+	 * Use it to add it to the index position of a source element of a function or constructor
 	 */
-	protected static final int TEMPLATE_CLASS_SIZE = TEMPLATE_CLASS.length() - 2; // 2 is the length of placeholder %s
+	protected static final int TEMPLATE_CLASS_PREFIX_SIZE = TEMPLATE_CLASS.indexOf("%s");
 
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
