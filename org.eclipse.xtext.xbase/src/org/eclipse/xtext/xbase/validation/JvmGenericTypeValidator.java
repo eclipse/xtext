@@ -68,12 +68,12 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkJvmGenericType(JvmGenericType type) {
-		checkSuperTypes(type);
+		handleExceptionDuringValidation(() -> checkSuperTypes(type));
 		type.getDeclaredFields().forEach(field -> {
 			if (isAssociatedToSource(field))
-				checkField(field);
+				handleExceptionDuringValidation(() -> checkField(field));
 		});
-		checkJvmGenericTypes(type.getMembers());
+		handleExceptionDuringValidation(() -> checkJvmGenericTypes(type.getMembers()));
 	}
 
 	protected void checkSuperTypes(JvmGenericType type) {
@@ -222,5 +222,19 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	 */
 	protected EStructuralFeature getFeatureForIssue(EObject object) {
 		return object.eClass().getEStructuralFeature("name");
+	}
+
+	/**
+	 * When the {@link AbstractDeclarativeValidator} executes {@link Check} methods,
+	 * it swallows some runtime exceptions so that other methods can be executed.
+	 * In this class we only have a {@link Check} method that calls other methods, so for th
+	 * other methods we simulate the same behavior.
+	 */
+	protected void handleExceptionDuringValidation(Runnable code) {
+		try {
+			code.run();
+		} catch (Throwable e) {
+			handleExceptionDuringValidation(e);
+		}
 	}
 }
