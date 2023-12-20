@@ -34,8 +34,14 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	private ValidationTestHelper helper;
 
 	@Test public void testDuplicateMethod_0() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { def bar(int x) {true} def bar(int x) {false} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate");
+		var source = "class Foo { def bar(int x) {true} def bar(int x) {false} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("bar"), "bar".length(),
+				"duplicate");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.lastIndexOf("bar"), "bar".length(),
+				"duplicate");
 	}
 
 	@Test public void testDuplicateMethod_1() throws Exception {
