@@ -19,8 +19,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -73,7 +75,17 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			if (isAssociatedToSource(field))
 				handleExceptionDuringValidation(() -> checkField(field));
 		});
-		handleExceptionDuringValidation(() -> checkJvmGenericTypes(type.getMembers()));
+		var members = type.getMembers();
+		handleExceptionDuringValidation(() -> checkJvmExecutables(members));
+		handleExceptionDuringValidation(() -> checkJvmGenericTypes(members));
+	}
+
+	protected void checkJvmExecutables(List<? extends JvmMember> contents) {
+		contents.stream()
+				.filter(this::isAssociatedToSource)
+				.filter(JvmExecutable.class::isInstance)
+				.map(JvmExecutable.class::cast)
+				.forEach(this::checkJvmExecutable);
 	}
 
 	protected void checkSuperTypes(JvmGenericType type) {
@@ -146,11 +158,25 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkField(JvmField field) {
-		JvmTypeReference declaredFieldType = field.getType();
-		var associated = associations.getPrimarySourceElement(declaredFieldType);
+		var declaredFieldType = field.getType();
 		if (isPrimitiveVoid(declaredFieldType)) {
+			var associated = associations.getPrimarySourceElement(declaredFieldType);
 			error("Primitive void cannot be a dependency.",
 					associated, null, INVALID_USE_OF_TYPE);
+		}
+	}
+
+	protected void checkJvmExecutable(JvmExecutable executable) {
+		var parameters = executable.getParameters();
+		for (var parameter : parameters) {
+			var parameterType = parameter.getParameterType();
+			var associated = associations.getPrimarySourceElement(parameterType);
+			if (associated == null)
+				continue; // synthetic type (e.g., computed/inferred)
+			if (isPrimitiveVoid(parameterType)) {
+				error("void is an invalid type for the parameter " + parameter.getName() + " of the method "
+						+ executable.getSimpleName(), associated, null, INVALID_USE_OF_TYPE);
+			}
 		}
 	}
 

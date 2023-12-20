@@ -564,21 +564,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 	}
 
-
-	@Check
-	public void checkXtendParameterNotPrimitiveVoid(XtendParameter param) {
-		if (isPrimitiveVoid(param.getParameterType())) {
-			XtendFunction function = (XtendFunction) (param.eContainer() instanceof XtendFunction ? param.eContainer()
-					: null);
-			if (function != null)
-				error("void is an invalid type for the parameter " + param.getName() + " of the method "
-						+ function.getName(), param.getParameterType(), null, INVALID_USE_OF_TYPE);
-			else
-				error("void is an invalid type for the parameter " + param.getName(), param.getParameterType(), null,
-						INVALID_USE_OF_TYPE);
-		}
-	}
-	
 	@Check
 	public void checkVarArgIsNotExtension(XtendParameter param) {
 		if (param.isVarArg() && param.isExtension()) {
