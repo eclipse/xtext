@@ -381,15 +381,21 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testConstructorDuplicate() throws Exception {
-		XtendClass clazz = clazz("class K { new(Object o) {} new(Object o) {} }");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
+		var source = "class K { new(Object o) {} new(Object o) {} }";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.indexOf("new(Object o) {}"), "new(Object o) {}".length());
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.lastIndexOf("new(Object o) {}"), "new(Object o) {}".length());
 	}
 	
 	@Test public void testConstructorDuplicateErasure() throws Exception {
-		XtendClass clazz = clazz("class K { new(java.util.List<Object> o) {} new(java.util.List<String> o) {} }");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
+		var source = "class K { new(java.util.List<Object> o) {} new(java.util.List<String> o) {} }";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.indexOf("new(java.util.List<Object> o) {}"), "new(java.util.List<Object> o) {}".length());
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.indexOf("new(java.util.List<String> o) {}"), "new(java.util.List<String> o) {}".length());
 	}
 	
 	@Test public void testConstructorDoesNotSupportTypeArguments() throws Exception {
