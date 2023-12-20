@@ -909,10 +909,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testClassImplementsClass() throws Exception {
-		XtendClass clazz = clazz("class Foo implements Object {}");
-		helper.assertError(clazz, XTEND_CLASS, INTERFACE_EXPECTED, "Implemented", "interface");
+		var source = "class Foo implements Object {}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CLASS, INTERFACE_EXPECTED,
+				source.indexOf("Object"), "Object".length(),
+				"Implemented", "interface");
 	}
-	
+
 	@Test public void testClassExtendsItself() throws Exception {
 		var source = "class Foo extends Foo {}";
 		XtendClass clazz = clazz(source);
@@ -932,8 +935,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceExtendsClass() throws Exception {
-		XtendInterface interfaze = interfaze("interface Foo extends Object {}");
-		helper.assertError(interfaze, XTEND_INTERFACE, INTERFACE_EXPECTED, "Extended", "interface");
+		var source = "interface Foo extends Object {}";
+		XtendInterface interfaze = interfaze(source);
+		helper.assertError(interfaze, XTEND_INTERFACE, INTERFACE_EXPECTED,
+				source.indexOf("Object"), "Object".length(),
+				"Extended", "interface");
 	}
 	
 	@Test public void testInterfaceExtendsItself() throws Exception {
