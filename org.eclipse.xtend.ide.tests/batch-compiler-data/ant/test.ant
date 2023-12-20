@@ -35,7 +35,7 @@
 			<include name="org.eclipse.emf.common*.jar" />
 			<include name="org.eclipse.emf.codegen*.jar" />
 			<include name="com.google.guava*.jar" />
-			<include name="*guava*32*.jar" />
+			<include name="*guava*33*.jar" />
 			<include name="com.google.inject*.jar" />
 			<include name="guice*.jar" />
 			<include name="*failureaccess*jar" />
