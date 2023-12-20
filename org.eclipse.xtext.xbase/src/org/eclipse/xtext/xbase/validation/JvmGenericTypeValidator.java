@@ -19,11 +19,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -55,14 +57,22 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void checkJvmGenericTypes(List<? extends EObject> contents) {
 		contents.stream()
-				.filter(e -> !associations.getSourceElements(e).isEmpty())
+				.filter(this::isAssociatedToSource)
 				.filter(JvmGenericType.class::isInstance)
 				.map(JvmGenericType.class::cast)
 				.forEach(this::checkJvmGenericType);
 	}
 
+	private boolean isAssociatedToSource(EObject e) {
+		return !associations.getSourceElements(e).isEmpty();
+	}
+
 	protected void checkJvmGenericType(JvmGenericType type) {
 		checkSuperTypes(type);
+		type.getDeclaredFields().forEach(field -> {
+			if (isAssociatedToSource(field))
+				checkField(field);
+		});
 		checkJvmGenericTypes(type.getMembers());
 	}
 
@@ -133,6 +143,22 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				}
 			}
 		}
+	}
+
+	protected void checkField(JvmField field) {
+		JvmTypeReference declaredFieldType = field.getType();
+		var associated = associations.getPrimarySourceElement(declaredFieldType);
+		if (isPrimitiveVoid(declaredFieldType)) {
+			error("Primitive void cannot be a dependency.",
+					associated, null, INVALID_USE_OF_TYPE);
+		}
+	}
+
+	/**
+	 * Copied from {@link XbaseValidator#isPrimitiveVoid(JvmTypeReference)}
+	 */
+	protected boolean isPrimitiveVoid(JvmTypeReference typeReference) {
+		return typeReference != null && typeReference.getType() != null && !typeReference.getType().eIsProxy() && typeReference.getType() instanceof JvmVoid;
 	}
 
 	private boolean hasCycleInHierarchy(JvmGenericType type, Set<JvmGenericType> processedSuperTypes) {
