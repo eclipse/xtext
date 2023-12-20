@@ -577,8 +577,10 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testVoidInDependency() throws Exception {
-		XtendClass clazz = clazz("class X { @Inject void v }");
-		helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
+		var source = "class X { @Inject void v }";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE,
+				source.indexOf("void"), "void".length());
 	}
 	
 	@Test public void testVoidInReturn() throws Exception {
