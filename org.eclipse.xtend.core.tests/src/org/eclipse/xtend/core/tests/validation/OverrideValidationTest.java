@@ -391,8 +391,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideFinalClass() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends String { }");
-		helper.assertError(xtendClass, XTEND_CLASS, OVERRIDDEN_FINAL, "override", "final");
+		var source = "class Foo extends String { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, OVERRIDDEN_FINAL,
+				source.indexOf("String"), "String".length(),
+				"override", "final");
 	}
 
 	@Test public void testOverrideFinalMethod() throws Exception {
