@@ -1182,12 +1182,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	public void checkParameterNames(XtendFunction function) {
 		for (int i = 0; i < function.getParameters().size(); ++i) {
 			String leftParameterName = function.getParameters().get(i).getName();
-			for (int j = i + 1; j < function.getParameters().size(); ++j) {
-				if (equal(leftParameterName, function.getParameters().get(j).getName())) {
-					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
-					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
-				}
-			}
+			// standard parameter name check is done in JvmGenericTypeValidator
 			if (function.getCreateExtensionInfo() != null) {
 				if (equal(leftParameterName, function.getCreateExtensionInfo().getName())) {
 					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
@@ -1286,19 +1281,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 							addIssue("The binary operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
 						}
 					}
-				}
-			}
-		}
-	}
-	
-	@Check
-	public void checkParameterNames(XtendConstructor constructor) {
-		for (int i = 0; i < constructor.getParameters().size(); ++i) {
-			String leftParameterName = constructor.getParameters().get(i).getName();
-			for (int j = i + 1; j < constructor.getParameters().size(); ++j) {
-				if (equal(leftParameterName, constructor.getParameters().get(j).getName())) {
-					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, i, DUPLICATE_PARAMETER_NAME);
-					error("Duplicate parameter " + leftParameterName, XTEND_EXECUTABLE__PARAMETERS, j, DUPLICATE_PARAMETER_NAME);
 				}
 			}
 		}

@@ -168,14 +168,29 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void checkJvmExecutable(JvmExecutable executable) {
 		var parameters = executable.getParameters();
-		for (var parameter : parameters) {
+		var sourceExecutable = associations.getPrimarySourceElement(executable);
+		for (int i = 0; i < parameters.size(); ++i) {
+			var parameter = parameters.get(i);
+			var sourceParameter = associations.getPrimarySourceElement(parameter);
+			if (sourceParameter == null)
+				continue; // synthetic parameter
+			var leftParameterName = parameter.getName();
+			var sourceParametersFeature = sourceParameter.eContainingFeature();
+			for (int j = i + 1; j < parameters.size(); ++j) {
+				if (equal(leftParameterName, parameters.get(j).getName())) {
+					error("Duplicate parameter " + leftParameterName,
+						sourceExecutable, sourceParametersFeature, i, DUPLICATE_PARAMETER_NAME);
+					error("Duplicate parameter " + leftParameterName,
+						sourceExecutable, sourceParametersFeature, j, DUPLICATE_PARAMETER_NAME);
+				}
+			}
 			var parameterType = parameter.getParameterType();
-			var associated = associations.getPrimarySourceElement(parameterType);
-			if (associated == null)
+			var sourceParameterType = associations.getPrimarySourceElement(parameterType);
+			if (sourceParameterType == null)
 				continue; // synthetic type (e.g., computed/inferred)
 			if (isPrimitiveVoid(parameterType)) {
 				error("void is an invalid type for the parameter " + parameter.getName() + " of the method "
-						+ executable.getSimpleName(), associated, null, INVALID_USE_OF_TYPE);
+						+ executable.getSimpleName(), sourceParameterType, null, INVALID_USE_OF_TYPE);
 			}
 		}
 	}
