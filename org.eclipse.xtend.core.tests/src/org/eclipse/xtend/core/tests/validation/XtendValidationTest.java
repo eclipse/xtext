@@ -1229,15 +1229,27 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testDuplicateParameter() throws Exception {
-		XtendFunction function = function("def foo(int x, int x) {null}");
-		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
+		var source = "def foo(int x, int x) {null}";
+		XtendFunction function = function(source);
+		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME,
+				source.indexOf("int x") + TEMPLATE_CLASS_PREFIX_SIZE, "int x".length(),
+				"duplicate", "x");
+		helper.assertError(function, XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME,
+				source.lastIndexOf("int x") + TEMPLATE_CLASS_PREFIX_SIZE, "int x".length(),
+				"duplicate", "x");
 	}
-	
+
 	@Test public void testDuplicateConstructorParameter() throws Exception {
-		XtendConstructor constructor = constructor("new(int x, int x) {null}");
-		helper.assertError(constructor, XTEND_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME, "duplicate", "x");
+		var source = "new(int x, int x) {null}";
+		XtendConstructor constructor = constructor(source);
+		helper.assertError(constructor, XTEND_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME,
+				source.indexOf("int x") + TEMPLATE_CLASS_PREFIX_SIZE, "int x".length(),
+				"duplicate", "x");
+		helper.assertError(constructor, XTEND_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME,
+				source.lastIndexOf("int x") + TEMPLATE_CLASS_PREFIX_SIZE, "int x".length(),
+				"duplicate", "x");
 	}
-	
+
 	@Test public void testDuplicateParameter_CreateExtension_01() throws Exception {
 		XtendFunction function = function("def create newArrayList foo(int it) {}");
 		helper.assertError(function, CREATE_EXTENSION_INFO, DUPLICATE_PARAMETER_NAME, "duplicate", "implicit", "it");
