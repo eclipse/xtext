@@ -914,8 +914,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testClassExtendsItself() throws Exception {
-		XtendClass clazz = clazz("class Foo extends Foo {}");
-		helper.assertError(clazz, XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		var source = "class Foo extends Foo {}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CLASS, CYCLIC_INHERITANCE,
+				source.indexOf("Foo"), "Foo".length(),
+				"hierarchy", "cycles");
 	}
 	
 	@Test public void testClassUniqueNames() throws Exception {
@@ -956,13 +959,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testInheritanceCycle() throws Exception {
-		Iterator<XtendTypeDeclaration> types = file("package test "
+		var source = "package test "
 				+ "class Foo extends Bar {}"
 				+ "class Bar extends Baz {}"
-				+ "class Baz extends Foo {}").getXtendTypes().iterator();
-		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+				+ "class Baz extends Foo {}";
+		Iterator<XtendTypeDeclaration> types = file(source).getXtendTypes().iterator();
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE,
+				source.indexOf("Foo"), "Foo".length(),
+				"hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE,
+				source.lastIndexOf("Bar"), "Bar".length(),
+				"hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE,
+				source.lastIndexOf("Baz"), "Baz".length(),
+				"hierarchy", "cycles");
 	}
 	
 	@Test public void testInheritanceCycle_1() throws Exception {
