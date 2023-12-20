@@ -606,7 +606,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.file(_builder.toString());
-    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
+    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_METHOD, 
       "The static method getTheNumber() cannot hide the instance method getTheNumber() of type IX.");
   }
 
@@ -640,7 +640,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.file(_builder.toString());
-    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
+    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_METHOD, 
       "The static method getTheNumber(Number) cannot hide the instance method getTheNumber(Number) of type IX.");
   }
 

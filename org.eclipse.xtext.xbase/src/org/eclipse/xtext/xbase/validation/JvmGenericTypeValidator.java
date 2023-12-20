@@ -11,6 +11,8 @@ package org.eclipse.xtext.xbase.validation;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,22 +23,38 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
+import com.google.common.base.Function;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -46,6 +64,12 @@ import com.google.inject.Inject;
 public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IJvmModelAssociations associations;
+
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
+
+	@Inject
+	private OverrideHelper overrideHelper;
 
 	@Override
 	public void register(EValidatorRegistrar registrar) {
@@ -79,6 +103,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				handleExceptionDuringValidation(() -> checkField(field));
 		});
 		handleExceptionDuringValidation(() -> checkMemberNamesAreUnique(type));
+		handleExceptionDuringValidation(() -> checkDuplicateAndOverriddenFunctions(type));
 		var members = type.getMembers();
 		handleExceptionDuringValidation(() -> checkJvmExecutables(members));
 		handleExceptionDuringValidation(() -> checkJvmGenericTypes(members));
@@ -186,6 +211,15 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				}
 			}
 		}
+	}
+
+	protected void checkDuplicateAndOverriddenFunctions(JvmGenericType type) {
+		var sourceType = associations.getPrimarySourceElement(type);
+		JavaVersion targetVersion = getGeneratorConfig(sourceType).getJavaSourceVersion();
+		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(type, targetVersion);
+		
+		Set<EObject> flaggedOperations = Sets.newHashSet();
+		doCheckDuplicateExecutables(type, resolvedFeatures, flaggedOperations);
 	}
 
 	private <T1 extends JvmMember, T2 extends T1> Map<String, List<T2>> groupMembersByName(
@@ -301,10 +335,98 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	/**
-	 * The default implementation returns the feature "name".
+	 * The default implementation returns the feature "name" or null if it does not exist.
 	 */
 	protected EStructuralFeature getFeatureForIssue(EObject object) {
 		return object.eClass().getEStructuralFeature("name");
+	}
+
+	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+		List<IResolvedOperation> declaredOperations = resolvedFeatures.getDeclaredOperations();
+		doCheckDuplicateExecutables(inferredType, declaredOperations, new Function<String, List<IResolvedOperation>>() {
+			@Override
+			public List<IResolvedOperation> apply(String erasedSignature) {
+				return resolvedFeatures.getDeclaredOperations(erasedSignature);
+			}
+		}, flaggedOperations);
+		final List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
+		doCheckDuplicateExecutables(inferredType, declaredConstructors, new Function<String, List<IResolvedConstructor>>() {
+			@Override
+			public List<IResolvedConstructor> apply(String erasedSignature) {
+				if (declaredConstructors.size() == 1) {
+					if (erasedSignature.equals(declaredConstructors.get(0).getResolvedErasureSignature())) {
+						return declaredConstructors;
+					}
+					return Collections.emptyList();
+				}
+				List<IResolvedConstructor> result = Lists.newArrayListWithCapacity(declaredConstructors.size());
+				for(IResolvedConstructor constructor: declaredConstructors) {
+					if (erasedSignature.equals(constructor.getResolvedErasureSignature())) {
+						result.add(constructor);
+					}
+				}
+				return result;
+			}
+		}, flaggedOperations);
+	}
+
+	protected <Executable extends IResolvedExecutable> void doCheckDuplicateExecutables(JvmGenericType inferredType,
+			List<Executable> declaredOperations, Function<String, List<Executable>> bySignature, Set<EObject> flaggedOperations) {
+		Set<Executable> processed = Sets.newHashSet();
+		for(Executable declaredExecutable: declaredOperations) {
+			if (!processed.contains(declaredExecutable)) {
+				List<Executable> sameErasure = bySignature.apply(declaredExecutable.getResolvedErasureSignature());
+				if (sameErasure.size() > 1) {
+					Multimap<String, Executable> perSignature = HashMultimap.create(sameErasure.size(), 2);
+					outer: for(Executable executable: sameErasure) {
+						for(LightweightTypeReference parameterType: executable.getResolvedParameterTypes()) {
+							if (parameterType.isUnknown())
+								continue outer;
+						}
+						perSignature.put(executable.getResolvedSignature(), executable);
+					}
+					if (perSignature.size() > 1) {
+						for(Collection<Executable> sameSignature: perSignature.asMap().values()) {
+							for(Executable operationWithSameSignature: sameSignature) {
+								JvmExecutable executable = operationWithSameSignature.getDeclaration();
+								EObject otherSource = associations.getPrimarySourceElement(executable);
+								if (flaggedOperations.add(otherSource)) {
+									if (sameSignature.size() > 1) {
+										error("Duplicate " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
+												+ " in type " + inferredType.getSimpleName(), otherSource,
+												getFeatureForIssue(otherSource), DUPLICATE_METHOD);
+									} else {
+										error("The " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
+												+ " has the same erasure "
+												+ operationWithSameSignature.getResolvedErasureSignature()
+												+ " as another " + typeLabel(executable) + " in type " + inferredType.getSimpleName(), otherSource,
+												getFeatureForIssue(otherSource), DUPLICATE_METHOD);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	protected String typeLabel(JvmExecutable executable) {
+		if (executable instanceof JvmOperation) 
+			return "method";
+		else if(executable instanceof JvmConstructor) 
+			return "constructor";
+		else 
+			return "?";
+	}
+
+	protected GeneratorConfig getGeneratorConfig(EObject element) {
+		GeneratorConfig result = (GeneratorConfig) getContext().get(GeneratorConfig.class);
+		if (result == null) {
+			result = generatorConfigProvider.get(element);
+			getContext().put(GeneratorConfig.class, result);
+		}
+		return result;
 	}
 
 	/**
