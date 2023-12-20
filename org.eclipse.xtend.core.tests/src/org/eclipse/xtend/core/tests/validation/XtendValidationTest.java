@@ -591,9 +591,10 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testParameterTypeMayNotBeVoid() throws Exception {
 		var source = "def void foo(void myParam) { }";
 		XtendFunction function = function(source);
+		var lastIndexOf = source.lastIndexOf("void");
 		helper.assertError(function, TypesPackage.Literals.JVM_TYPE_REFERENCE,
 				INVALID_USE_OF_TYPE,
-				source.lastIndexOf("void") - TEMPLATE_CLASS_SIZE, "void".length());
+				lastIndexOf + TEMPLATE_CLASS_PREFIX_SIZE, "void".length());
 	}
 	
 	@Test public void testVarArgIsNotExtension() throws Exception {
