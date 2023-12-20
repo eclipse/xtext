@@ -92,6 +92,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			}
 		} else {
 			var superTypes = type.getSuperTypes();
+			var expectedInterfaceIndex = -1;
 			for (int i = 0; i < superTypes.size(); ++i) {
 				JvmTypeReference extendedType = superTypes.get(i);
 				var associated = associations.getPrimarySourceElement(extendedType);
@@ -103,15 +104,17 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				// check whether the original source element's containing feature
 				// is single or multiple, assuming that the source element allows
 				// for a single extended class
-				if (eContainingFeature.isMany()) {
-					// assume to be expected as an interface
+				if (eContainingFeature.isMany()) { // assume to be expected as an interface
+					expectedInterfaceIndex++;
 					if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
 						error("Implemented interface must be an interface",
 							primarySourceElement,
-							eContainingFeature, i, INTERFACE_EXPECTED);
+							eContainingFeature, expectedInterfaceIndex, INTERFACE_EXPECTED);
 					}
-				} else {
-					// assume to be expected as a class
+					checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+							extendedType,
+							eContainingFeature, expectedInterfaceIndex);
+				} else { // assume to be expected as a class
 					if (!(extendedType.getType() instanceof JvmGenericType)
 							|| ((JvmGenericType) extendedType.getType()).isInterface()) {
 						error("Superclass must be a class",
@@ -123,11 +126,11 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 								primarySourceElement,
 								eContainingFeature, OVERRIDDEN_FINAL);
 						}
+						checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+								extendedType,
+								eContainingFeature, INSIGNIFICANT_INDEX);
 					}
 				}
-				checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
-						extendedType,
-						eContainingFeature, i);
 			}
 		}
 	}
