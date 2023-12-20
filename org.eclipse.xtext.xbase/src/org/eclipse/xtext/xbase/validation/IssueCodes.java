@@ -198,6 +198,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
 
 	private IssueCodes() {
 	}

@@ -552,7 +552,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			Collection<XtendTypeDeclaration> types = name2type.get(name);
 			if(types.size() >1) {
 				for(XtendTypeDeclaration type: types)
-					error("Duplicate nested type " + name, type, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, DUPLICATE_TYPE_NAME);
+					error("Duplicate nested type " + name, type, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, DUPLICATE_TYPE);
 			}
 		}
 		for(JvmType type: type2extension.keySet()) {
