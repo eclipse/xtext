@@ -904,8 +904,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testClassExtendsInterface() throws Exception {
-		XtendClass clazz = clazz("class Foo extends Cloneable {}");
-		helper.assertError(clazz, XTEND_CLASS, CLASS_EXPECTED, "Superclass");
+		var source = "class Foo extends Cloneable {}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CLASS, CLASS_EXPECTED,
+				source.indexOf("Cloneable"), "Cloneable".length(),
+				"Superclass");
 	}
 
 	@Test public void testClassImplementsClass() throws Exception {
