@@ -275,6 +275,11 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		if (result == null) {
 			result = generatorConfigProvider.get(element);
 			getContext().put(GeneratorConfig.class, result);
+		}
+		// the GeneratorConfig for the same element could be set by other
+		// validators, e.g., JvmGenericTypeValidator, so we must ensure we initialize
+		// the methodInInterfaceModifierValidator
+		if (methodInInterfaceModifierValidator == null) {
 			if (result.getJavaSourceVersion().isAtLeast(JAVA8)) {
 				methodInInterfaceModifierValidator = new ModifierValidator(
 						newArrayList("public", "abstract", "static", "def", "override"), this);
