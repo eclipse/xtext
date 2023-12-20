@@ -516,6 +516,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	public void checkMemberNamesAreUnique(XtendTypeDeclaration xtendType) {
+		// duplicated standard fields and duplicated nested types are checked by JvmGenericTypeValidator
 		final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
 		for (XtendMember member : xtendType.getMembers()) {
 			if (member instanceof XtendField) {
