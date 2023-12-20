@@ -38,10 +38,10 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz(source);
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
 				source.indexOf("bar"), "bar".length(),
-				"duplicate");
+				"duplicate", "method");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
 				source.lastIndexOf("bar"), "bar".length(),
-				"duplicate");
+				"duplicate", "method");
 	}
 
 	@Test public void testDuplicateMethod_1() throws Exception {
@@ -56,9 +56,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testDuplicateMethod_3() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def bar(java.util.List<String> x) {true} def bar(java.util.List<Integer> x) {false} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)",
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
+				"erasure", "List)", "method",
 				"List<String");
-		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)",
+		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD,
+				"erasure", "List)", "method",
 				"List<Integer");
 	}
 

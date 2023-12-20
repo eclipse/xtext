@@ -384,18 +384,22 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		var source = "class K { new(Object o) {} new(Object o) {} }";
 		XtendClass clazz = clazz(source);
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
-				source.indexOf("new(Object o) {}"), "new(Object o) {}".length());
+				source.indexOf("new(Object o) {}"), "new(Object o) {}".length(),
+				"Duplicate", "constructor");
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
-				source.lastIndexOf("new(Object o) {}"), "new(Object o) {}".length());
+				source.lastIndexOf("new(Object o) {}"), "new(Object o) {}".length(),
+				"Duplicate", "constructor");
 	}
 	
 	@Test public void testConstructorDuplicateErasure() throws Exception {
 		var source = "class K { new(java.util.List<Object> o) {} new(java.util.List<String> o) {} }";
 		XtendClass clazz = clazz(source);
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
-				source.indexOf("new(java.util.List<Object> o) {}"), "new(java.util.List<Object> o) {}".length());
+				source.indexOf("new(java.util.List<Object> o) {}"), "new(java.util.List<Object> o) {}".length(),
+				"erasure", "constructor", "List<Object>");
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD,
-				source.indexOf("new(java.util.List<String> o) {}"), "new(java.util.List<String> o) {}".length());
+				source.indexOf("new(java.util.List<String> o) {}"), "new(java.util.List<String> o) {}".length(),
+				"erasure", "constructor", "List<String>");
 	}
 	
 	@Test public void testConstructorDoesNotSupportTypeArguments() throws Exception {
