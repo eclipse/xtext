@@ -13,7 +13,10 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -75,6 +78,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			if (isAssociatedToSource(field))
 				handleExceptionDuringValidation(() -> checkField(field));
 		});
+		handleExceptionDuringValidation(() -> checkMemberNamesAreUnique(type));
 		var members = type.getMembers();
 		handleExceptionDuringValidation(() -> checkJvmExecutables(members));
 		handleExceptionDuringValidation(() -> checkJvmGenericTypes(members));
@@ -155,6 +159,44 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				}
 			}
 		}
+	}
+
+	protected void checkMemberNamesAreUnique(JvmGenericType type) {
+		Map<String, List<JvmField>> fieldsByName = groupMembersByName(type.getMembers(),
+				JvmField.class);
+		Map<String, List<JvmDeclaredType>> typesByName = groupMembersByName(type.getMembers(),
+				JvmDeclaredType.class);
+		for (String name : fieldsByName.keySet()) {
+			var withSameName = fieldsByName.get(name);
+			if (withSameName.size() > 1) {
+				for (var duplicate : withSameName) {
+					var originalSource = associations.getPrimarySourceElement(duplicate);
+					error("Duplicate field " + name,
+						originalSource, getFeatureForIssue(originalSource), DUPLICATE_FIELD);
+				}
+			}
+		}
+		for (String name : typesByName.keySet()) {
+			var withSameName = typesByName.get(name);
+			if (withSameName.size() > 1) {
+				for (var duplicate : withSameName) {
+					var originalSource = associations.getPrimarySourceElement(duplicate);
+					error("Duplicate nested type " + name,
+							originalSource, getFeatureForIssue(originalSource), DUPLICATE_TYPE);
+				}
+			}
+		}
+	}
+
+	private <T1 extends JvmMember, T2 extends T1> Map<String, List<T2>> groupMembersByName(
+			List<T1> members,
+			Class<T2> memberType) {
+		return members.stream()
+			.filter(this::isAssociatedToSource)
+			.filter(memberType::isInstance)
+			.map(memberType::cast)
+			.filter(e -> Objects.nonNull(e.getSimpleName()))
+			.collect(Collectors.groupingBy(JvmMember::getSimpleName));
 	}
 
 	protected void checkField(JvmField field) {

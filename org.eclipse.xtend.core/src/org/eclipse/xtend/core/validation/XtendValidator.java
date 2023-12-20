@@ -516,8 +516,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	public void checkMemberNamesAreUnique(XtendTypeDeclaration xtendType) {
-		final Multimap<String, XtendField> name2field = HashMultimap.create();
-		final Multimap<String, XtendTypeDeclaration> name2type = HashMultimap.create();
 		final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
 		for (XtendMember member : xtendType.getMembers()) {
 			if (member instanceof XtendField) {
@@ -531,28 +529,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 								type2extension.put(type, field);
 						}
 					}
-				} else {
-					name2field.put(field.getName(), field);
 				}
-			} else if (member instanceof XtendTypeDeclaration) {
-				String name = ((XtendTypeDeclaration) member).getName();
-				if (name != null && name.length() > 0) {
-					name2type.put(name, (XtendTypeDeclaration) member);
-				}
-			}
-		}
-		for(String name: name2field.keySet()) {
-			Collection<XtendField> fields = name2field.get(name);
-			if(fields.size() >1) {
-				for(XtendField field: fields)
-					error("Duplicate field " + name, field, XtendPackage.Literals.XTEND_FIELD__NAME, DUPLICATE_FIELD);
-			}
-		}
-		for(String name: name2type.keySet()) {
-			Collection<XtendTypeDeclaration> types = name2type.get(name);
-			if(types.size() >1) {
-				for(XtendTypeDeclaration type: types)
-					error("Duplicate nested type " + name, type, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, DUPLICATE_TYPE);
 			}
 		}
 		for(JvmType type: type2extension.keySet()) {
