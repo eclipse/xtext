@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
@@ -50,7 +51,6 @@ import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
-import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -343,30 +343,24 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> declaredOperations = resolvedFeatures.getDeclaredOperations();
-		doCheckDuplicateExecutables(inferredType, declaredOperations, new Function<String, List<IResolvedOperation>>() {
-			@Override
-			public List<IResolvedOperation> apply(String erasedSignature) {
-				return resolvedFeatures.getDeclaredOperations(erasedSignature);
-			}
-		}, flaggedOperations);
+		doCheckDuplicateExecutables(inferredType, declaredOperations,
+			erasedSignature -> resolvedFeatures.getDeclaredOperations(erasedSignature),
+			flaggedOperations);
 		final List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
-		doCheckDuplicateExecutables(inferredType, declaredConstructors, new Function<String, List<IResolvedConstructor>>() {
-			@Override
-			public List<IResolvedConstructor> apply(String erasedSignature) {
-				if (declaredConstructors.size() == 1) {
-					if (erasedSignature.equals(declaredConstructors.get(0).getResolvedErasureSignature())) {
-						return declaredConstructors;
-					}
-					return Collections.emptyList();
+		doCheckDuplicateExecutables(inferredType, declaredConstructors, erasedSignature -> {
+			if (declaredConstructors.size() == 1) {
+				if (erasedSignature.equals(declaredConstructors.get(0).getResolvedErasureSignature())) {
+					return declaredConstructors;
 				}
-				List<IResolvedConstructor> result = Lists.newArrayListWithCapacity(declaredConstructors.size());
-				for(IResolvedConstructor constructor: declaredConstructors) {
-					if (erasedSignature.equals(constructor.getResolvedErasureSignature())) {
-						result.add(constructor);
-					}
-				}
-				return result;
+				return Collections.emptyList();
 			}
+			List<IResolvedConstructor> result = Lists.newArrayListWithCapacity(declaredConstructors.size());
+			for(IResolvedConstructor constructor: declaredConstructors) {
+				if (erasedSignature.equals(constructor.getResolvedErasureSignature())) {
+					result.add(constructor);
+				}
+			}
+			return result;
 		}, flaggedOperations);
 	}
 
