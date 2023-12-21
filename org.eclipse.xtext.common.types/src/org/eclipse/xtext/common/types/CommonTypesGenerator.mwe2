@@ -9,6 +9,7 @@
  module org.eclipse.xtext.common.types.CommonTypesGenerator
 
 import org.eclipse.emf.mwe.utils.StandaloneSetup
+import org.eclipse.emf.mwe.utils.DirectoryCleaner
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator
 
 var project = "org.eclipse.xtext.common.types"
@@ -20,6 +21,10 @@ Workflow {
 	bean = StandaloneSetup {
 		// initialize the EMF singleton with proper classpath to platform:/resource mappings
 		platformUri = "."
+	}
+
+	component = DirectoryCleaner {
+		directory = "emf-gen"
 	}
 
 	component = EcoreGenerator {
