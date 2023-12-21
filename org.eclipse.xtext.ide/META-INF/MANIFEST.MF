@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.lsp4j;bundle-version="[0.21.1,0.22.0)";resolution:=optional,
  org.eclipse.lsp4j.jsonrpc;bundle-version="[0.21.1,0.22.0)";resolution:=optional,
  org.eclipse.emf.ecore.change;bundle-version="[2.14.0,3)",
- com.google.guava
+ com.google.guava;bundle-version="[33.0.0,34.0.0)"
 Import-Package: org.apache.log4j;version="1.2.24"
 Export-Package: org.eclipse.xtext.ide;
   x-friends:="org.eclipse.xtend.ide,
