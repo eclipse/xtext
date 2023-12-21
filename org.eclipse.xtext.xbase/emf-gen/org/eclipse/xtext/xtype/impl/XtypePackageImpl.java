@@ -103,7 +103,6 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	{
 		super(eNS_URI, XtypeFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
