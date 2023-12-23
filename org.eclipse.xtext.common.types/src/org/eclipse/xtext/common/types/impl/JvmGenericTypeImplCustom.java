@@ -69,6 +69,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	@Override
 	public void setClassToExtend(JvmTypeReference newClassToExtend) {
 		checkPendingInitialization();
+		checkValidUsage(false);
 		JvmTypeReference oldClassToExtend = classToExtend;
 		super.setClassToExtend(newClassToExtend);
 		super.getSuperTypes().remove(oldClassToExtend);
@@ -80,6 +81,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	@Override
 	public JvmTypeReference getClassToExtend() {
 		checkPendingInitialization();
+		checkValidUsage(false);
 		if (!super.getSuperTypes().contains(classToExtend)) {
 			// some one else removed it via superTypes API
 			super.setClassToExtend(null);
@@ -119,6 +121,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	@Override
 	public EList<JvmTypeReference> getInterfacesToImplement() {
 		checkPendingInitialization();
+		checkValidUsage(false);
 		var origInterfacesToImplement = super.getInterfacesToImplement();
 		var origSuperTypes = super.getSuperTypes();
 		if (!superTypesSnapshot.equals(origSuperTypes)) {
@@ -135,6 +138,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	@Override
 	public EList<JvmTypeReference> getInterfacesToExtend() {
 		checkPendingInitialization();
+		checkValidUsage(true);
 		var origInterfacesToExtend = super.getInterfacesToExtend();
 		var origSuperTypes = super.getSuperTypes();
 		if (!superTypesSnapshot.equals(origSuperTypes)) {
@@ -146,6 +150,14 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 				createSnapshot(origSuperTypes);
 		}
 		return origInterfacesToExtend;
+	}
+
+	private void checkValidUsage(boolean expectInterface) {
+		var interf = isInterface();
+		if (expectInterface && !interf)
+			throw new IllegalStateException("interfacesToExtend can only be used in interfaces");
+		if (!expectInterface && interf)
+			throw new IllegalStateException("classToExtend/interfacesToImplement can only be used in classes");
 	}
 
 	private List<JvmTypeReference> createSnapshot(EList<JvmTypeReference> origList) {

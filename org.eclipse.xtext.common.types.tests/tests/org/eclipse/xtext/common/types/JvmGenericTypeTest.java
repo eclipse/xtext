@@ -210,6 +210,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 	}
 
 	@Test public void testUpdateInterfacesToExtendUpdatesSuperTypes() {
+		genericType.setInterface(true);
 		JvmTypeReference interface1 = createTypeReference();
 		JvmTypeReference interface2 = createTypeReference();
 		genericType.getInterfacesToExtend().addAll(List.of(interface1, interface2));
@@ -227,6 +228,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 	}
 
 	@Test public void testUpdateSuperTypesUpdatesInterfacesToExtend() {
+		genericType.setInterface(true);
 		JvmTypeReference interface1 = createTypeReference();
 		JvmTypeReference interface2 = createTypeReference();
 		JvmTypeReference anotherType = createTypeReference();
@@ -246,6 +248,26 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		genericType.getSuperTypes().clear();
 		// ... the interface to extend is removed as well ...
 		assertEquals(0, genericType.getInterfacesToExtend().size());
+	}
+
+	@Test public void testWrongUsageInClass() {
+		IllegalStateException thrown = assertThrows(IllegalStateException.class, () ->
+			genericType.getInterfacesToExtend());
+		assertEquals("interfacesToExtend can only be used in interfaces", thrown.getMessage());
+	}
+
+	@Test public void testWrongUsageInInterface() {
+		genericType.setInterface(true);
+		var expectedMessage = "classToExtend/interfacesToImplement can only be used in classes";
+		var thrown = assertThrows(IllegalStateException.class, () ->
+			genericType.getClassToExtend());
+		assertEquals(expectedMessage, thrown.getMessage());
+		thrown = assertThrows(IllegalStateException.class, () ->
+			genericType.setClassToExtend(null));
+		assertEquals(expectedMessage, thrown.getMessage());
+		thrown = assertThrows(IllegalStateException.class, () ->
+			genericType.getInterfacesToImplement());
+		assertEquals(expectedMessage, thrown.getMessage());
 	}
 
 	private JvmTypeReference createTypeReference() {
