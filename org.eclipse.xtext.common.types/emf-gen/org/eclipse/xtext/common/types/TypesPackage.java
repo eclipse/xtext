@@ -1499,13 +1499,40 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE__ANONYMOUS = JVM_DECLARED_TYPE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Class To Extend</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__CLASS_TO_EXTEND = JVM_DECLARED_TYPE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Interfaces To Implement</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT = JVM_DECLARED_TYPE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Interfaces To Extend</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND = JVM_DECLARED_TYPE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Generic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 4;
+	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
@@ -3337,6 +3364,39 @@ public interface TypesPackage extends EPackage
 	EAttribute getJvmGenericType_Anonymous();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmGenericType#getClassToExtend <em>Class To Extend</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Class To Extend</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#getClassToExtend()
+	 * @see #getJvmGenericType()
+	 * @generated
+	 */
+	EReference getJvmGenericType_ClassToExtend();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmGenericType#getInterfacesToImplement <em>Interfaces To Implement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Interfaces To Implement</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#getInterfacesToImplement()
+	 * @see #getJvmGenericType()
+	 * @generated
+	 */
+	EReference getJvmGenericType_InterfacesToImplement();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmGenericType#getInterfacesToExtend <em>Interfaces To Extend</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Interfaces To Extend</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#getInterfacesToExtend()
+	 * @see #getJvmGenericType()
+	 * @generated
+	 */
+	EReference getJvmGenericType_InterfacesToExtend();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeReference <em>Jvm Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4668,6 +4728,30 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute JVM_GENERIC_TYPE__ANONYMOUS = eINSTANCE.getJvmGenericType_Anonymous();
+
+		/**
+		 * The meta object literal for the '<em><b>Class To Extend</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_GENERIC_TYPE__CLASS_TO_EXTEND = eINSTANCE.getJvmGenericType_ClassToExtend();
+
+		/**
+		 * The meta object literal for the '<em><b>Interfaces To Implement</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT = eINSTANCE.getJvmGenericType_InterfacesToImplement();
+
+		/**
+		 * The meta object literal for the '<em><b>Interfaces To Extend</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND = eINSTANCE.getJvmGenericType_InterfacesToExtend();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.

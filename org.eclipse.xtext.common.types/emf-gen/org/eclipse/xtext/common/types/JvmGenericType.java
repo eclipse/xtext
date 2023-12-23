@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,6 +22,9 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#getClassToExtend <em>Class To Extend</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#getInterfacesToImplement <em>Interfaces To Implement</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#getInterfacesToExtend <em>Interfaces To Extend</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType()
@@ -94,5 +98,51 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @generated
 	 */
 	void setAnonymous(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Class To Extend</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Class To Extend</em>' reference.
+	 * @see #setClassToExtend(JvmTypeReference)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_ClassToExtend()
+	 * @model
+	 * @generated
+	 */
+	JvmTypeReference getClassToExtend();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmGenericType#getClassToExtend <em>Class To Extend</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Class To Extend</em>' reference.
+	 * @see #getClassToExtend()
+	 * @generated
+	 */
+	void setClassToExtend(JvmTypeReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Interfaces To Implement</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Interfaces To Implement</em>' reference list.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_InterfacesToImplement()
+	 * @model resolveProxies="false"
+	 * @generated
+	 */
+	EList<JvmTypeReference> getInterfacesToImplement();
+
+	/**
+	 * Returns the value of the '<em><b>Interfaces To Extend</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Interfaces To Extend</em>' reference list.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_InterfacesToExtend()
+	 * @model resolveProxies="false"
+	 * @generated
+	 */
+	EList<JvmTypeReference> getInterfacesToExtend();
 
 } // JvmGenericType

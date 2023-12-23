@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,12 +52,6 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		Iterable<JvmTypeReference> interfaces = genericType.getExtendedInterfaces();
 		assertNotNull(interfaces);
 		assertTrue(Iterables.isEmpty(interfaces));
-	}
-	
-	private JvmTypeReference createReferenceTo(JvmType type) {
-		JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		result.setType(type);
-		return result;
 	}
 	
 	@Test public void testGetExtendedInterfaces_02() {
@@ -140,5 +136,126 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		genericType.getMembers().add(constructor);
 		genericType.getMembers().add(operation);
 		assertEquals(constructor, Iterables.getOnlyElement(genericType.getDeclaredConstructors()));
+	}
+
+	@Test public void testSetClassToExtendsUpdatesSuperTypes() {
+		JvmTypeReference classToExtend = createTypeReference();
+		genericType.setClassToExtend(classToExtend);
+		assertNotNull(genericType.getClassToExtend());
+		assertSame(classToExtend, genericType.getSuperTypes().get(0));
+		// if we unset the class to extend...
+		genericType.setClassToExtend(null);
+		assertNull(genericType.getClassToExtend());
+		// ... it must also be removed from supertypes
+		assertEquals(0, genericType.getSuperTypes().size());
+	}
+
+	@Test public void testUpdateSuperTypesSetsClassToExtend() {
+		JvmTypeReference classToExtend = createTypeReference();
+		JvmTypeReference anotherType = createTypeReference();
+		genericType.setClassToExtend(classToExtend);
+		assertNotNull(genericType.getClassToExtend());
+		assertSame(classToExtend, genericType.getSuperTypes().get(0));
+
+		genericType.getSuperTypes().add(anotherType);
+		assertEquals(2, genericType.getSuperTypes().size());
+		// if we remove a super type that is not the class to extend...
+		genericType.getSuperTypes().remove(anotherType);
+		assertEquals(1, genericType.getSuperTypes().size());
+		// ... the extended class is still there
+		assertNotNull(genericType.getClassToExtend());
+		// ... otherwise ...
+		genericType.getSuperTypes().clear();
+		// ... the class to extend is unset as well ...
+		assertNull(genericType.getClassToExtend());
+	}
+
+	@Test public void testUpdateInterfacesToImplementUpdatesSuperTypes() {
+		JvmTypeReference interface1 = createTypeReference();
+		JvmTypeReference interface2 = createTypeReference();
+		genericType.getInterfacesToImplement().addAll(List.of(interface1, interface2));
+		assertEquals(2, genericType.getInterfacesToImplement().size());
+		var superTypes = genericType.getSuperTypes();
+		assertEquals(genericType.getInterfacesToImplement(), superTypes);
+		// call it twice to make sure it doesn't change
+		var superTypes2 = genericType.getSuperTypes();
+		assertEquals(genericType.getInterfacesToImplement(), superTypes2);
+		// remove from interface to implement ...
+		genericType.getInterfacesToImplement().remove(0);
+		assertEquals(1, genericType.getInterfacesToImplement().size());
+		// ... and the interface must be removed from supertypes as well
+		assertEquals(genericType.getInterfacesToImplement(), genericType.getSuperTypes());
+	}
+
+	@Test public void testUpdateSuperTypesUpdatesInterfacesToImplement() {
+		JvmTypeReference interface1 = createTypeReference();
+		JvmTypeReference interface2 = createTypeReference();
+		JvmTypeReference anotherType = createTypeReference();
+		genericType.getInterfacesToImplement().addAll(List.of(interface1, interface2));
+		assertEquals(2, genericType.getInterfacesToImplement().size());
+		var superTypes = genericType.getSuperTypes();
+		assertEquals(genericType.getInterfacesToImplement(), superTypes);
+
+		genericType.getSuperTypes().add(anotherType);
+		assertEquals(3, genericType.getSuperTypes().size());
+		// if we remove a super type that is not an interface to implement...
+		genericType.getSuperTypes().remove(anotherType);
+		assertEquals(2, genericType.getSuperTypes().size());
+		// ... the interface to implement is still there
+		assertEquals(2, genericType.getInterfacesToImplement().size());
+		// ... otherwise ...
+		genericType.getSuperTypes().clear();
+		// ... the interface to implement is removed as well ...
+		assertEquals(0, genericType.getInterfacesToImplement().size());
+	}
+
+	@Test public void testUpdateInterfacesToExtendUpdatesSuperTypes() {
+		JvmTypeReference interface1 = createTypeReference();
+		JvmTypeReference interface2 = createTypeReference();
+		genericType.getInterfacesToExtend().addAll(List.of(interface1, interface2));
+		assertEquals(2, genericType.getInterfacesToExtend().size());
+		var superTypes = genericType.getSuperTypes();
+		assertEquals(genericType.getInterfacesToExtend(), superTypes);
+		// call it twice to make sure it doesn't change
+		var superTypes2 = genericType.getSuperTypes();
+		assertEquals(genericType.getInterfacesToExtend(), superTypes2);
+		// remove from interface to extend ...
+		genericType.getInterfacesToExtend().remove(0);
+		assertEquals(1, genericType.getInterfacesToExtend().size());
+		// ... and the interface must be removed from supertypes as well
+		assertEquals(genericType.getInterfacesToExtend(), genericType.getSuperTypes());
+	}
+
+	@Test public void testUpdateSuperTypesUpdatesInterfacesToExtend() {
+		JvmTypeReference interface1 = createTypeReference();
+		JvmTypeReference interface2 = createTypeReference();
+		JvmTypeReference anotherType = createTypeReference();
+		genericType.getInterfacesToExtend().addAll(List.of(interface1, interface2));
+		assertEquals(2, genericType.getInterfacesToExtend().size());
+		var superTypes = genericType.getSuperTypes();
+		assertEquals(genericType.getInterfacesToExtend(), superTypes);
+
+		genericType.getSuperTypes().add(anotherType);
+		assertEquals(3, genericType.getSuperTypes().size());
+		// if we remove a super type that is not an interface to extend...
+		genericType.getSuperTypes().remove(anotherType);
+		assertEquals(2, genericType.getSuperTypes().size());
+		// ... the interface to implement is still there
+		assertEquals(2, genericType.getInterfacesToExtend().size());
+		// ... otherwise ...
+		genericType.getSuperTypes().clear();
+		// ... the interface to extend is removed as well ...
+		assertEquals(0, genericType.getInterfacesToExtend().size());
+	}
+
+	private JvmTypeReference createTypeReference() {
+		return createReferenceTo(
+				TypesFactory.eINSTANCE.createJvmGenericType());
+	}
+
+	private JvmTypeReference createReferenceTo(JvmType type) {
+		JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		result.setType(type);
+		return result;
 	}
 }

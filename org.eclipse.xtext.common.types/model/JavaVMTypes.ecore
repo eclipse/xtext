@@ -149,6 +149,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="anonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classToExtend" eType="#//JvmTypeReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfacesToImplement"
+        upperBound="-1" eType="#//JvmTypeReference" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfacesToExtend" upperBound="-1"
+        eType="#//JvmTypeReference" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeReference" abstract="true">
     <eOperations name="getType" eType="#//JvmType"/>

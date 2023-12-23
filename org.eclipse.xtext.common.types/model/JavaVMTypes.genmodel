@@ -103,6 +103,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmGenericType/interface"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmGenericType/strictFloatingPoint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmGenericType/anonymous"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmGenericType/classToExtend"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmGenericType/interfacesToImplement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmGenericType/interfacesToExtend"/>
     </genClasses>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmTypeReference">
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmTypeReference/getType"/>

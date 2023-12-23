@@ -943,6 +943,39 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * @generated
 	 */
 	@Override
+	public EReference getJvmGenericType_ClassToExtend()
+	{
+		return (EReference)jvmGenericTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getJvmGenericType_InterfacesToImplement()
+	{
+		return (EReference)jvmGenericTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getJvmGenericType_InterfacesToExtend()
+	{
+		return (EReference)jvmGenericTypeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getJvmTypeReference()
 	{
 		return jvmTypeReferenceEClass;
@@ -2044,6 +2077,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEAttribute(jvmGenericTypeEClass, JVM_GENERIC_TYPE__INTERFACE);
 		createEAttribute(jvmGenericTypeEClass, JVM_GENERIC_TYPE__STRICT_FLOATING_POINT);
 		createEAttribute(jvmGenericTypeEClass, JVM_GENERIC_TYPE__ANONYMOUS);
+		createEReference(jvmGenericTypeEClass, JVM_GENERIC_TYPE__CLASS_TO_EXTEND);
+		createEReference(jvmGenericTypeEClass, JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT);
+		createEReference(jvmGenericTypeEClass, JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND);
 
 		jvmTypeReferenceEClass = createEClass(JVM_TYPE_REFERENCE);
 
@@ -2393,6 +2429,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmGenericType_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmGenericType_StrictFloatingPoint(), ecorePackage.getEBoolean(), "strictFloatingPoint", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmGenericType_Anonymous(), ecorePackage.getEBoolean(), "anonymous", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmGenericType_ClassToExtend(), this.getJvmTypeReference(), null, "classToExtend", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmGenericType_InterfacesToImplement(), this.getJvmTypeReference(), null, "interfacesToImplement", null, 0, -1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmGenericType_InterfacesToExtend(), this.getJvmTypeReference(), null, "interfacesToExtend", null, 0, -1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmTypeReferenceEClass, JvmTypeReference.class, "JvmTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

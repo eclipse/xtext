@@ -21,11 +21,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -40,6 +42,9 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isAnonymous <em>Anonymous</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getClassToExtend <em>Class To Extend</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getInterfacesToImplement <em>Interfaces To Implement</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getInterfacesToExtend <em>Interfaces To Extend</em>}</li>
  * </ul>
  *
  * @generated
@@ -115,6 +120,36 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * @ordered
 	 */
 	protected boolean anonymous = ANONYMOUS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getClassToExtend() <em>Class To Extend</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassToExtend()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmTypeReference classToExtend;
+
+	/**
+	 * The cached value of the '{@link #getInterfacesToImplement() <em>Interfaces To Implement</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInterfacesToImplement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeReference> interfacesToImplement;
+
+	/**
+	 * The cached value of the '{@link #getInterfacesToExtend() <em>Interfaces To Extend</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInterfacesToExtend()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeReference> interfacesToExtend;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,6 +267,81 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public JvmTypeReference getClassToExtend()
+	{
+		if (classToExtend != null && classToExtend.eIsProxy())
+		{
+			InternalEObject oldClassToExtend = (InternalEObject)classToExtend;
+			classToExtend = (JvmTypeReference)eResolveProxy(oldClassToExtend);
+			if (classToExtend != oldClassToExtend)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_GENERIC_TYPE__CLASS_TO_EXTEND, oldClassToExtend, classToExtend));
+			}
+		}
+		return classToExtend;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmTypeReference basicGetClassToExtend()
+	{
+		return classToExtend;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setClassToExtend(JvmTypeReference newClassToExtend)
+	{
+		JvmTypeReference oldClassToExtend = classToExtend;
+		classToExtend = newClassToExtend;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__CLASS_TO_EXTEND, oldClassToExtend, classToExtend));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<JvmTypeReference> getInterfacesToImplement()
+	{
+		if (interfacesToImplement == null)
+		{
+			interfacesToImplement = new EObjectEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT);
+		}
+		return interfacesToImplement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<JvmTypeReference> getInterfacesToExtend()
+	{
+		if (interfacesToExtend == null)
+		{
+			interfacesToExtend = new EObjectEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND);
+		}
+		return interfacesToExtend;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -278,6 +388,13 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 				return isStrictFloatingPoint();
 			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
 				return isAnonymous();
+			case TypesPackage.JVM_GENERIC_TYPE__CLASS_TO_EXTEND:
+				if (resolve) return getClassToExtend();
+				return basicGetClassToExtend();
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT:
+				return getInterfacesToImplement();
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND:
+				return getInterfacesToExtend();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -306,6 +423,17 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
 				setAnonymous((Boolean)newValue);
 				return;
+			case TypesPackage.JVM_GENERIC_TYPE__CLASS_TO_EXTEND:
+				setClassToExtend((JvmTypeReference)newValue);
+				return;
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT:
+				getInterfacesToImplement().clear();
+				getInterfacesToImplement().addAll((Collection<? extends JvmTypeReference>)newValue);
+				return;
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND:
+				getInterfacesToExtend().clear();
+				getInterfacesToExtend().addAll((Collection<? extends JvmTypeReference>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -332,6 +460,15 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
 				setAnonymous(ANONYMOUS_EDEFAULT);
 				return;
+			case TypesPackage.JVM_GENERIC_TYPE__CLASS_TO_EXTEND:
+				setClassToExtend((JvmTypeReference)null);
+				return;
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT:
+				getInterfacesToImplement().clear();
+				return;
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND:
+				getInterfacesToExtend().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -354,6 +491,12 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 				return strictFloatingPoint != STRICT_FLOATING_POINT_EDEFAULT;
 			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
 				return anonymous != ANONYMOUS_EDEFAULT;
+			case TypesPackage.JVM_GENERIC_TYPE__CLASS_TO_EXTEND:
+				return classToExtend != null;
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_IMPLEMENT:
+				return interfacesToImplement != null && !interfacesToImplement.isEmpty();
+			case TypesPackage.JVM_GENERIC_TYPE__INTERFACES_TO_EXTEND:
+				return interfacesToExtend != null && !interfacesToExtend.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
