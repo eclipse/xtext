@@ -114,6 +114,45 @@ public class CompilerTest {
   }
 
   @Test
+  public void testGeneratedJavaInheritedMethod() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity Foo extends Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// getName and setName inherited from Bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("op doStuff(String x) : String {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return x + \' \' + getName()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("entity Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("name : String");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+      try {
+        final Object fooObj = it.getCompiledClass("Foo").getDeclaredConstructor().newInstance();
+        this._reflectExtensions.invoke(fooObj, "setName", "World");
+        Assert.assertEquals("Hello World", this._reflectExtensions.invoke(fooObj, "doStuff", "Hello"));
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    this._compilationTestHelper.compile(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_builder.toString(), _builder_1.toString())), _function);
+  }
+
+  @Test
   public void compareGeneratedJava() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
