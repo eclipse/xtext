@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -185,6 +186,17 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	}
 
 	@Test
+	public void testImplementsWithInterfacesToImplement() throws Exception {
+		XExpression expression = expression("null", false);
+		JvmGenericType clazz = builder.toClass(expression, "my.test.Foo", (JvmGenericType it) -> {
+			it.setAbstract(true);
+			it.getInterfacesToImplement().add(typeRef(expression, Iterable.class, String.class));
+		});
+		Class<?> compiled = compile(expression.eResource(), clazz);
+		Assert.assertTrue(Iterable.class.isAssignableFrom(compiled));
+	}
+
+	@Test
 	public void testExtends() throws Exception {
 		XExpression expression = expression("null", false);
 		JvmGenericType clazz = builder.toClass(expression, "my.test.Foo", (JvmGenericType it) -> {
@@ -194,6 +206,30 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		Class<?> compiled = compile(expression.eResource(), clazz);
 		Assert.assertTrue(Iterable.class.isAssignableFrom(compiled));
 		Assert.assertTrue(AbstractList.class.isAssignableFrom(compiled));
+	}
+
+	@Test
+	public void testExtendsWithClassToExtend() throws Exception {
+		XExpression expression = expression("null", false);
+		JvmGenericType clazz = builder.toClass(expression, "my.test.Foo", (JvmGenericType it) -> {
+			it.setAbstract(true);
+			it.setClassToExtend(typeRef(expression, AbstractList.class, String.class));
+		});
+		Class<?> compiled = compile(expression.eResource(), clazz);
+		Assert.assertTrue(Iterable.class.isAssignableFrom(compiled));
+		Assert.assertTrue(AbstractList.class.isAssignableFrom(compiled));
+	}
+
+	@Test
+	public void testInterfaceExtendsWithInterfacesToImplement() throws Exception {
+		XExpression expression = expression("null", false);
+		JvmGenericType clazz = builder.toInterface(expression, "my.test.Foo", (JvmGenericType it) -> {
+			it.getInterfacesToExtend().add(typeRef(expression, Iterable.class, String.class));
+			it.getInterfacesToExtend().add(typeRef(expression, Serializable.class));
+		});
+		Class<?> compiled = compile(expression.eResource(), clazz);
+		Assert.assertTrue(Iterable.class.isAssignableFrom(compiled));
+		Assert.assertTrue(Serializable.class.isAssignableFrom(compiled));
 	}
 
 	@Test
