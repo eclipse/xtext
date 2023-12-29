@@ -8168,7 +8168,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CONFLICTING_DEFAULT_METHODS).assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
+      this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CONFLICTING_DEFAULT_METHODS).assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

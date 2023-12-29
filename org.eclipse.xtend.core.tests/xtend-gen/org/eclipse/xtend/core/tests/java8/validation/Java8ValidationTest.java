@@ -11,7 +11,6 @@ package org.eclipse.xtend.core.tests.java8.validation;
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
-import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
 
 /**
@@ -606,7 +606,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.file(_builder.toString());
-    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_METHOD, 
+    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
       "The static method getTheNumber() cannot hide the instance method getTheNumber() of type IX.");
   }
 
@@ -640,7 +640,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.file(_builder.toString());
-    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_METHOD, 
+    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
       "The static method getTheNumber(Number) cannot hide the instance method getTheNumber(Number) of type IX.");
   }
 
@@ -666,7 +666,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C extends B implements I {}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -693,7 +693,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements J {}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -726,7 +726,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements I, K, L {}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -975,7 +975,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ABSTRACT_METHOD_INVOCATION, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.ABSTRACT_METHOD_INVOCATION, 
         "Cannot directly invoke the abstract method foo() of the type A");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -999,7 +999,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, 
         "The enclosing type does not extend or implement the interface List");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

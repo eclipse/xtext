@@ -206,6 +206,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String DUPLICATE_METHOD = ISSUE_CODE_PREFIX + "duplicate_method";
+	/**
+	 * @since 2.34
+	 */
+	public static final String CONFLICTING_DEFAULT_METHODS = ISSUE_CODE_PREFIX + "conflicting_default_methods";
 
 	private IssueCodes() {
 	}

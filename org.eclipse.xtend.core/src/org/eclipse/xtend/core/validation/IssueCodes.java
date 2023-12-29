@@ -38,7 +38,6 @@ public final class IssueCodes {
 	public static final String CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT = "create_functions_must_not_be_abstract";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";
-	public static final String CONFLICTING_DEFAULT_METHODS = ISSUE_CODE_PREFIX + "conflicting_default_methods";
 	public static final String MISSING_ABSTRACT = ISSUE_CODE_PREFIX + "missing_abstract";
 	public static final String MISSING_ABSTRACT_IN_ANONYMOUS = ISSUE_CODE_PREFIX + "missing_abstract_in_anonymous";
 	public static final String MISSING_OVERRIDE = ISSUE_CODE_PREFIX + "missing_override";

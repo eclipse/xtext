@@ -413,7 +413,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 	}
 	
-	@Fix(IssueCodes.CONFLICTING_DEFAULT_METHODS)
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.CONFLICTING_DEFAULT_METHODS)
 	public void overrideDefaultMethod(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData() != null) {
 			for (String data : issue.getData()) {
