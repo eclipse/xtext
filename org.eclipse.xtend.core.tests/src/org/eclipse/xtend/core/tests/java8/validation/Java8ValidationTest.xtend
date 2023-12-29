@@ -69,7 +69,7 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 	
 	@Test
 	def void testConflictingDefaultMethods01() {
-		file('''
+		val source = '''
 			interface A {
 				def void foo() { }
 			}
@@ -77,13 +77,15 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 				def void foo() { }
 			}
 			class C implements A, B { }
-		''').assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
+		'''
+		file(source).assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
 			"The type C inherits multiple implementations of the method foo() from A and B.")
 	}
 	
 	@Test
 	def void testConflictingDefaultMethods02() {
-		file('''
+		val source = '''
 			interface A {
 				def void foo() { }
 			}
@@ -91,13 +93,15 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 				def void foo() { }
 			}
 			interface C extends A, B { }
-		''').assertError(XTEND_INTERFACE, CONFLICTING_DEFAULT_METHODS,
+		'''
+		file(source).assertError(XTEND_INTERFACE, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
 			"The type C inherits multiple implementations of the method foo() from A and B.")
 	}
 	
 	@Test
 	def void testConflictingDefaultMethods03() {
-		file('''
+		val source = '''
 			interface A {
 				def void foo() { }
 			}
@@ -105,13 +109,15 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 				def void foo()
 			}
 			class C implements A, B { }
-		''').assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
+		'''
+		file(source).assertError(XTEND_CLASS, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
 			"The non-abstract method foo() inherited from A conflicts with the method foo() inherited from B.")
 	}
 	
 	@Test
 	def void testConflictingDefaultMethods04() {
-		file('''
+		val source = '''
 			interface A {
 				def void foo() { }
 			}
@@ -119,7 +125,9 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 				def void foo()
 			}
 			interface C extends A, B { }
-		''').assertError(XTEND_INTERFACE, CONFLICTING_DEFAULT_METHODS,
+		'''
+		file(source).assertError(XTEND_INTERFACE, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
 			"The non-abstract method foo() inherited from A conflicts with the method foo() inherited from B.")
 	}
 	
