@@ -156,10 +156,14 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideGenericMethod_10() throws Exception {
-		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		var source = " abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T extends String> foo1() {}"+
-									"}");
-		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD);
+									"}";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("foo1"), "foo1".length(),
+				"Name clash", "same erasure", "GenericSuperTypeClass",
+				"does not override it");
 	}
 
 	@Test public void testOverrideGenericMethod_11() throws Exception {
@@ -195,6 +199,28 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 									"override <T> void foo3(T t, (T)=>void proc){} "+
 									"}");
 		helper.assertNoErrors(xtendClass);
+	}
+
+	@Test public void testStaticMethodHidesInstanceMethod() throws Exception {
+		var source = " abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+						"static def foo1() {}"+
+						"}";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("foo1"), "foo1".length(),
+				"The static method", "GenericSuperTypeClass",
+				"cannot hide the instance method");
+	}
+
+	@Test public void testOverrideStaticMethod() throws Exception {
+		var source = " abstract class Foo extends testdata.Methods {  " +
+						"override staticMethod() {}"+
+						"}";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("staticMethod"), "staticMethod".length(),
+				"The instance method", "Methods",
+				"cannot override the static method");
 	}
 
 	@Test public void testOverrideReturnType() throws Exception {
