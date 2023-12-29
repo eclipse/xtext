@@ -2367,16 +2367,19 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test
 	public void testAnonymousClassExtendsFinal() throws Exception {
-		XtendFile file = file(
-				"class Foo {"
-				+ " val bar = new Bar() {" 
-				+ " }"
-				+ "}"
-				+ "final class Bar {"
-				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), XCONSTRUCTOR_CALL, OVERRIDDEN_FINAL);
+		var source = "class Foo {"
+		+ " val bar = new Bar() {" 
+		+ " }"
+		+ "}"
+		+ "final class Bar {"
+		+ "}";
+		XtendFile file = file(source);
+		helper.assertError(file.getXtendTypes().get(0),
+				XCONSTRUCTOR_CALL, OVERRIDDEN_FINAL,
+				source.indexOf("Bar"), "Bar".length(),
+				"Attempt to override final class");
 	}
-	
+
 	@Test 
 	public void testVoidInFunctionParams() throws Exception {
 		XtendFile file = file(
