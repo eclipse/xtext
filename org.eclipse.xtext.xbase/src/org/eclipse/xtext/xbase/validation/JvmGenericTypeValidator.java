@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -106,7 +107,11 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		handleExceptionDuringValidation(() -> checkDuplicateAndOverriddenFunctions(type));
 		var members = type.getMembers();
 		handleExceptionDuringValidation(() -> checkJvmExecutables(members));
-		handleExceptionDuringValidation(() -> checkJvmGenericTypes(members));
+		members.forEach(member -> {
+			EcoreUtil2.eAllOfType(member, JvmGenericType.class).
+				forEach(nestedType ->
+					handleExceptionDuringValidation(() -> checkJvmGenericType(nestedType)));
+		});
 	}
 
 	protected void checkJvmExecutables(List<? extends JvmMember> contents) {
