@@ -389,20 +389,29 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testClassMustBeAbstract_01() throws Exception {
-		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement",
+		var source = "class Foo<S> implements Comparable<S> { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+				source.indexOf("Foo"), "Foo".length(),
+				"abstract", "not", "implement",
 				"compareTo(S)");
 	}
 
 	@Test public void testClassMustBeAbstract_02() throws Exception {
-		XtendClass xtendClass = clazz("class Foo<S> implements Comparable { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement",
+		var source = "class Foo<S> implements Comparable { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+				source.indexOf("Foo"), "Foo".length(),
+				"abstract", "not", "implement",
 				"compareTo(Object)");
 	}
 
 	@Test public void testClassMustBeAbstract_03() throws Exception {
-		XtendClass xtendClass = clazz("class Foo implements Comparable<String> { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement",
+		var source = "class Foo implements Comparable<String> { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+				source.indexOf("Foo"), "Foo".length(),
+				"abstract", "not", "implement",
 				"compareTo(String)");
 	}
 
