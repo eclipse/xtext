@@ -806,7 +806,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		StringBuilder errorMsg = new StringBuilder();
 		String name = xtendClass.getName();
 		boolean needsNewLine = operationsMissingImplementation.size() > 1;
-		if (xtendClass.isAnonymous()) {
+		if (inferredType.isAnonymous()) {
 			JvmTypeReference superType = Iterables.getLast(inferredType.getSuperTypes());
 			errorMsg.append("The anonymous subclass of ").append(superType.getSimpleName());
 			errorMsg.append(" does not implement ");
@@ -814,9 +814,9 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			errorMsg.append("The class ").append(name);	
 			errorMsg.append(" must be defined abstract because it does not implement ");
 		}
-			if (needsNewLine) {
-				errorMsg.append("its inherited abstract methods ");
-			}
+		if (needsNewLine) {
+			errorMsg.append("its inherited abstract methods ");
+		}
 		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
 			operation = operationsMissingImplementation.get(i);
@@ -833,7 +833,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				return EcoreUtil.getURI(from.getDeclaration()).toString();
 			}
 		});
-		if (xtendClass.isAnonymous()) {
+		if (inferredType.isAnonymous()) {
 			error(errorMsg.toString(), xtendClass, ANONYMOUS_CLASS__CONSTRUCTOR_CALL, ANONYMOUS_CLASS_MISSING_MEMBERS, 
 					toArray(uris, String.class));
 		} else {
