@@ -17,7 +17,7 @@ import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class GenerateEMF {
+public class GenerateCommonTypes {
 	/**
 	 * Can't use MWE2 because of circular dependencies
 	 */
