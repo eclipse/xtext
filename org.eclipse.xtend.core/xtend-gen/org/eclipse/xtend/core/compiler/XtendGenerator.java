@@ -16,17 +16,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.compiler.output.AnonymousClassAwareTreeAppendable;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.CodeGenerationContextImpl;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
-import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -50,6 +49,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -57,11 +58,14 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation;
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -256,8 +260,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     final Consumer<JvmGenericType> _function = (JvmGenericType it) -> {
       EObject _head = IterableExtensions.<EObject>head(this.getSourceElements(it));
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
-      boolean _canBeCompiledAsJavaAnonymousClass = this.canBeCompiledAsJavaAnonymousClass(anonymousClass);
-      if (_canBeCompiledAsJavaAnonymousClass) {
+      boolean _canCompileToJavaAnonymousClass = XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass);
+      if (_canCompileToJavaAnonymousClass) {
         return;
       }
       appendable.newLine();
@@ -474,9 +478,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         if ((it.getDeclaringType().isLocal() && (it instanceof JvmOperation))) {
           JvmDeclaredType _declaringType_1 = it.getDeclaringType();
           final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
-          boolean _isAnonymous = declarator.isAnonymous();
-          boolean _not = (!_isAnonymous);
-          if (_not) {
+          if (((!declarator.isAnonymous()) || 
+            (!XtendCompilerUtil.canCompileToJavaAnonymousClass(((AnonymousClass) IterableExtensions.<EObject>head(this.getSourceElements(declarator))))))) {
             return result;
           }
         }
@@ -577,13 +580,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     return _xifexpression;
   }
 
-  private boolean canBeCompiledAsJavaAnonymousClass(final AnonymousClass anonymousClass) {
-    EList<XtendMember> _members = anonymousClass.getMembers();
-    for (final XtendMember member : _members) {
-      if (((member instanceof XtendField) || ((member instanceof XtendFunction) && (!((XtendFunction) member).isOverride())))) {
-        return false;
-      }
-    }
-    return true;
+  @Override
+  public TreeAppendable createAppendable(final ImportManager importManager, final ITraceURIConverter converter, final ILocationInFileProvider locationProvider, final IJvmModelAssociations jvmModelAssociations, final EObject source, final String indentation, final String lineSeparator) {
+    return new AnonymousClassAwareTreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
   }
 }

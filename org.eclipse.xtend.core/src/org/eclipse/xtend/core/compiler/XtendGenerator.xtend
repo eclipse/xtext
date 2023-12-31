@@ -46,7 +46,12 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
-import org.eclipse.xtend.core.xtend.XtendField
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.generator.trace.ITraceURIConverter
+import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.compiler.output.AnonymousClassAwareTreeAppendable
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -167,7 +172,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
 		feature.localClasses.forEach[
 			val anonymousClass = sourceElements.head as AnonymousClass
-			if (anonymousClass.canBeCompiledAsJavaAnonymousClass) {
+			if (XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass)) {
 				return
 			}
 			appendable.newLine
@@ -324,7 +329,9 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			}
 			if (declaringType.local && it instanceof JvmOperation) {
 				val declarator = declaringType as JvmGenericType
-				if (!declarator.anonymous) {
+				if (!declarator.anonymous ||
+					!XtendCompilerUtil.canCompileToJavaAnonymousClass(declarator.sourceElements.head as AnonymousClass)
+				) {
 					return result
 				}
 			}
@@ -391,12 +398,8 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 		
 	}
 
-	def private boolean canBeCompiledAsJavaAnonymousClass(AnonymousClass anonymousClass) {
-		for(XtendMember member: anonymousClass.getMembers()) {
-			if(member instanceof XtendField ||	
-				(member instanceof XtendFunction && !(member as XtendFunction).isOverride())) 
-				return false;
-		}
-		return true;
+	override createAppendable(ImportManager importManager, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source, String indentation, String lineSeparator) {
+		return new AnonymousClassAwareTreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
 	}
+
 }

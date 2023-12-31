@@ -839,12 +839,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def getImportManager(ITreeAppendable appendable) {
-		val stateField = appendable.getClass.getDeclaredField("state")
-		stateField.setAccessible(true)
-		val stateValue = stateField.get(appendable)
-		val importManagerField = stateValue.getClass.getDeclaredField("importManager")
-		importManagerField.setAccessible(true)
-		importManagerField.get(stateValue) as ImportManager
+		(appendable as TreeAppendable).importManager
 	}
 
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable, GeneratorConfig config) {
@@ -984,7 +979,7 @@ class JvmModelGenerator implements IGenerator {
 				compiler.toJavaExpression(it, appendable)
 			])
 	}
-		
+	
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
 		val cachingConverter = new ITraceURIConverter() {
 			
@@ -1007,9 +1002,15 @@ class JvmModelGenerator implements IGenerator {
 			}
 			
 		}
-		val appendable = new TreeAppendable(importManager, cachingConverter, locationProvider, jvmModelAssociations, context, "  ", "\n")
+		val appendable = createAppendable(importManager, cachingConverter, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		appendable.state.generatorConfig = config
 		return appendable
+	}
+	
+	def TreeAppendable createAppendable(ImportManager importManager, ITraceURIConverter converter,
+			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations,
+			EObject source, String indentation, String lineSeparator) {
+		return new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
 	}
 	
 	def JvmGenericType containerType(EObject context) {

@@ -23,10 +23,7 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
-import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
@@ -580,7 +577,7 @@ public class XtendCompiler extends XbaseCompiler {
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
 			AnonymousClass anonymousClass = (AnonymousClass) expression;
-			if (!canBeCompiledAsJavaAnonymousClass(anonymousClass))
+			if (!XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass))
 				return false;
 			JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
 			return inferredLocalClass.isAnonymous();
@@ -600,7 +597,7 @@ public class XtendCompiler extends XbaseCompiler {
 					JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 					JvmDeclaredType type = constructor.getDeclaringType();
 					if (((JvmGenericType) type).isAnonymous() &&
-							canBeCompiledAsJavaAnonymousClass(anonymousClass)) {
+							XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass)) {
 						return false;
 					}
 				}
@@ -672,7 +669,7 @@ public class XtendCompiler extends XbaseCompiler {
 	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
 		if (!expr.isAnonymousClassConstructorCall() ||
 				!((JvmGenericType) expr.getConstructor().getDeclaringType()).isAnonymous() ||
-				canBeCompiledAsJavaAnonymousClass((AnonymousClass) expr.eContainer())) {
+				XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) expr.eContainer())) {
 			super.constructorCallToJavaExpression(expr, b);
 			return;
 		}
@@ -694,7 +691,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
 		if (((JvmGenericType) type).isAnonymous() &&
-				!canBeCompiledAsJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
+				!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
 			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
 			LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
 			typeAppendable.append(actualType.getSimpleName());
@@ -709,7 +706,7 @@ public class XtendCompiler extends XbaseCompiler {
 		if (type.isAnonymous()) {
 			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
 			if (sourceElement instanceof AnonymousClass &&
-					!canBeCompiledAsJavaAnonymousClass((AnonymousClass) sourceElement)) {
+					!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) sourceElement)) {
 				final String proposedName = makeJavaIdentifier(getFavoriteVariableName(expr));
 				final String varName = b.declareSyntheticVariable(expr, proposedName);
 				b.newLine();
@@ -728,7 +725,7 @@ public class XtendCompiler extends XbaseCompiler {
 		if (type.isAnonymous()) {
 			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
 			if (sourceElement instanceof AnonymousClass &&
-					!canBeCompiledAsJavaAnonymousClass((AnonymousClass) sourceElement)) {
+					!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) sourceElement)) {
 				appendable.append(type.getSimpleName());
 				return;
 			}
@@ -748,13 +745,4 @@ public class XtendCompiler extends XbaseCompiler {
 //		}
 //		super.appendTypeArgument(type, appendable);
 //	}
-
-	protected boolean canBeCompiledAsJavaAnonymousClass(AnonymousClass anonymousClass) {
-		for(XtendMember member: anonymousClass.getMembers()) {
-			if(member instanceof XtendField ||	
-				(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 
-				return false;
-		}
-		return true;
-	}
 }
