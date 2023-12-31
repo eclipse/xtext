@@ -99,7 +99,6 @@ import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -1132,14 +1131,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
-		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
-		if (type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous()) {
-			typeAppendable.append(Iterables.getLast(type.getSuperTypes()).getType());
-		} else {
-			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
-			LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
-			typeAppendable.append(actualType);
-		}
+		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
+		LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
+		typeAppendable.append(actualType);
 	}
 	
 	/* @Nullable */
