@@ -694,7 +694,7 @@ public class XtendCompiler extends XbaseCompiler {
 				!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
 			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
 			LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
-			typeAppendable.append(actualType.getSimpleName());
+			typeAppendable.append(actualType);
 			return;
 		}
 		super.appendConstructedTypeName(constructorCall, typeAppendable);
