@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+import org.eclipse.xtend.core.xtend.XtendField
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -164,9 +165,12 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 	
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
-		feature.localClasses.filter[ !anonymous ].forEach[
-			appendable.newLine
+		feature.localClasses.forEach[
 			val anonymousClass = sourceElements.head as AnonymousClass
+			if (anonymousClass.canBeCompiledAsJavaAnonymousClass) {
+				return
+			}
+			appendable.newLine
 			val childAppendable = appendable.trace(anonymousClass)
 			childAppendable.append('abstract class ')
 			childAppendable.traceSignificant(anonymousClass).append(simpleName)
@@ -386,5 +390,13 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 		}
 		
 	}
-	
+
+	def private boolean canBeCompiledAsJavaAnonymousClass(AnonymousClass anonymousClass) {
+		for(XtendMember member: anonymousClass.getMembers()) {
+			if(member instanceof XtendField ||	
+				(member instanceof XtendFunction && !(member as XtendFunction).isOverride())) 
+				return false;
+		}
+		return true;
+	}
 }

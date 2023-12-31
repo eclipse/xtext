@@ -852,7 +852,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			JvmFeature container) {
 		final JvmGenericType inferredType = typesFactory.createJvmGenericType();
 		inferredType.setSimpleName(localClassName);
-		inferredType.setAnonymous(!hasAdditionalMembers(anonymousClass));
+		inferredType.setAnonymous(true);
 		inferredType.setFinal(true);
 		inferredType.setVisibility(JvmVisibility.DEFAULT);
 		inferredType.getSuperTypes().add(jvmTypesBuilder.inferredType(anonymousClass));
@@ -873,14 +873,5 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			associator.associateLogicalContainer(actualParameter, container);
 		}
 	}
-	
-	protected boolean hasAdditionalMembers(AnonymousClass anonymousClass) {
-		for(XtendMember member: anonymousClass.getMembers()) {
-			if(member instanceof XtendField ||	
-				(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 
-				return true;
-		}
-		return false;
-	}
-	
+
 }

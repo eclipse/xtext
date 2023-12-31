@@ -23,7 +23,10 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
@@ -38,6 +41,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
@@ -60,6 +64,8 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
@@ -87,6 +93,9 @@ public class XtendCompiler extends XbaseCompiler {
 	
 	@Inject
 	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private IBatchTypeResolver batchTypeResolver;
 	
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {
@@ -571,6 +580,8 @@ public class XtendCompiler extends XbaseCompiler {
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
 			AnonymousClass anonymousClass = (AnonymousClass) expression;
+			if (!canBeCompiledAsJavaAnonymousClass(anonymousClass))
+				return false;
 			JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
 			return inferredLocalClass.isAnonymous();
 		} else
@@ -588,7 +599,8 @@ public class XtendCompiler extends XbaseCompiler {
 				if (result) {
 					JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 					JvmDeclaredType type = constructor.getDeclaringType();
-					if (((JvmGenericType) type).isAnonymous()) {
+					if (((JvmGenericType) type).isAnonymous() &&
+							canBeCompiledAsJavaAnonymousClass(anonymousClass)) {
 						return false;
 					}
 				}
@@ -655,5 +667,94 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		return false;
 	}
-	
+
+	@Override
+	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
+		if (!expr.isAnonymousClassConstructorCall() ||
+				!((JvmGenericType) expr.getConstructor().getDeclaringType()).isAnonymous() ||
+				canBeCompiledAsJavaAnonymousClass((AnonymousClass) expr.eContainer())) {
+			super.constructorCallToJavaExpression(expr, b);
+			return;
+		}
+		ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
+		ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? b.trace(locationWithNewKeyword) : b;
+		appendableWithNewKeyword.append("new ");
+		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
+		appendConstructedTypeName(expr, typeAppendable);
+		b.append("(");
+		appendArguments(expr.getArguments(), b);
+		b.append(")");
+	}
+
+	@Override
+	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
+		if (!constructorCall.isAnonymousClassConstructorCall()) {
+			super.appendConstructedTypeName(constructorCall, typeAppendable);
+			return;
+		}
+		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
+		if (((JvmGenericType) type).isAnonymous() &&
+				!canBeCompiledAsJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
+			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
+			LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
+			typeAppendable.append(actualType.getSimpleName());
+			return;
+		}
+		super.appendConstructedTypeName(constructorCall, typeAppendable);
+	}
+
+	@Override
+	protected void declareFreshLocalVariable(XExpression expr, ITreeAppendable b, Later expression) {
+		LightweightTypeReference type = getTypeForVariableDeclaration(expr);
+		if (type.isAnonymous()) {
+			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
+			if (sourceElement instanceof AnonymousClass &&
+					!canBeCompiledAsJavaAnonymousClass((AnonymousClass) sourceElement)) {
+				final String proposedName = makeJavaIdentifier(getFavoriteVariableName(expr));
+				final String varName = b.declareSyntheticVariable(expr, proposedName);
+				b.newLine();
+				b.append(type.getSimpleName());
+				b.append(" ").append(varName).append(" = ");
+				expression.exec(b);
+				b.append(";");
+				return;
+			}
+		}
+		super.declareFreshLocalVariable(expr, b, expression);
+	}
+
+	@Override
+	protected void appendVariableInferredType(LightweightTypeReference type, ITreeAppendable appendable) {
+		if (type.isAnonymous()) {
+			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
+			if (sourceElement instanceof AnonymousClass &&
+					!canBeCompiledAsJavaAnonymousClass((AnonymousClass) sourceElement)) {
+				appendable.append(type.getSimpleName());
+				return;
+			}
+		}
+		super.appendVariableInferredType(type, appendable);
+	}
+
+//	@Override
+//	protected void appendTypeArgument(LightweightTypeReference type, ITreeAppendable appendable) {
+//		if (type.isAnonymous()) {
+//			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
+//			if (sourceElement instanceof AnonymousClass &&
+//					!canBeCompiledAsJavaAnonymousClass((AnonymousClass) sourceElement)) {
+//				appendable.append(type.getSimpleName());
+//				return;
+//			}
+//		}
+//		super.appendTypeArgument(type, appendable);
+//	}
+
+	protected boolean canBeCompiledAsJavaAnonymousClass(AnonymousClass anonymousClass) {
+		for(XtendMember member: anonymousClass.getMembers()) {
+			if(member instanceof XtendField ||	
+				(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 
+				return false;
+		}
+		return true;
+	}
 }

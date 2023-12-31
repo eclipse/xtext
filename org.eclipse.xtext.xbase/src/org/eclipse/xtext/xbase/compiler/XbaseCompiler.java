@@ -311,13 +311,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (i != 0) {
 					completeFeatureCallAppendable.append(", ");
 				}
-				completeFeatureCallAppendable.append(typeArguments.get(i));
+				appendTypeArgument(typeArguments.get(i), completeFeatureCallAppendable);
 			}
 			completeFeatureCallAppendable.append(">");
 		}
 		return completeFeatureCallAppendable;
 	}
-	
+
+	protected void appendTypeArgument(LightweightTypeReference type, ITreeAppendable appendable) {
+		appendable.append(type);
+	}
+
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XBlockExpression) {
@@ -771,11 +775,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (type.isAny()) {
 				type = getTypeForVariableDeclaration(varDeclaration.getRight());
 			}
-			appendable.append(type);
+			appendVariableInferredType(type, appendable);
 		}
 		appendable.append(" ");
 		appendable.append(appendable.declareVariable(varDeclaration, makeJavaIdentifier(varDeclaration.getName())));
 		return type;
+	}
+
+	protected void appendVariableInferredType(LightweightTypeReference type, ITreeAppendable appendable) {
+		appendable.append(type);
 	}
 
 	/**

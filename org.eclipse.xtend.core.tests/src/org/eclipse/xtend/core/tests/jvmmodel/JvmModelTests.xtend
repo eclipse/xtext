@@ -219,7 +219,7 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(anonymous.final)
 		assertFalse(anonymous.static)
 		assertTrue(anonymous.local)
-		assertFalse(anonymous.anonymous) // additional member -> named local class
+		assertTrue(anonymous.anonymous)
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
 		assertEquals(2, anonymous.superTypes.size)
 		assertEquals('java.lang.Runnable', anonymous.superTypes.last.qualifiedName)

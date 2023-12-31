@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,6 +26,7 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.CodeGenerationContextImpl;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -251,14 +253,14 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   }
 
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
-    final Function1<JvmGenericType, Boolean> _function = (JvmGenericType it) -> {
-      boolean _isAnonymous = it.isAnonymous();
-      return Boolean.valueOf((!_isAnonymous));
-    };
-    final Consumer<JvmGenericType> _function_1 = (JvmGenericType it) -> {
-      appendable.newLine();
+    final Consumer<JvmGenericType> _function = (JvmGenericType it) -> {
       EObject _head = IterableExtensions.<EObject>head(this.getSourceElements(it));
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
+      boolean _canBeCompiledAsJavaAnonymousClass = this.canBeCompiledAsJavaAnonymousClass(anonymousClass);
+      if (_canBeCompiledAsJavaAnonymousClass) {
+        return;
+      }
+      appendable.newLine();
       final ITreeAppendable childAppendable = appendable.trace(anonymousClass);
       childAppendable.append("abstract class ");
       this._treeAppendableUtil.traceSignificant(childAppendable, anonymousClass).append(it.getSimpleName());
@@ -277,10 +279,10 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         childAppendable.newLine().append("final ").append(it.getSimpleName()).append(" ").append(thisName).append(" = this;");
         childAppendable.blankLine();
       }
-      final Procedure1<LoopParams> _function_2 = (LoopParams it_1) -> {
+      final Procedure1<LoopParams> _function_1 = (LoopParams it_1) -> {
         it_1.setSeparator(this.memberSeparator());
       };
-      final Procedure1<JvmMember> _function_3 = (JvmMember it_1) -> {
+      final Procedure1<JvmMember> _function_2 = (JvmMember it_1) -> {
         final ITreeAppendable memberAppendable = this._treeAppendableUtil.traceWithComments(childAppendable, it_1);
         memberAppendable.openScope();
         if ((it_1 instanceof JvmOperation)) {
@@ -345,11 +347,11 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         }
         memberAppendable.closeScope();
       };
-      this._loopExtensions.<JvmMember>forEach(childAppendable, this.getAddedDeclarations(it, anonymousClass), _function_2, _function_3);
+      this._loopExtensions.<JvmMember>forEach(childAppendable, this.getAddedDeclarations(it, anonymousClass), _function_1, _function_2);
       childAppendable.decreaseIndentation().newLine().append("}");
       appendable.blankLine();
     };
-    IterableExtensions.<JvmGenericType>filter(feature.getLocalClasses(), _function).forEach(_function_1);
+    feature.getLocalClasses().forEach(_function);
   }
 
   private ITreeAppendable generateJavaConstant(final Object value, final ITreeAppendable appendable) {
@@ -573,5 +575,15 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       _xifexpression = super.generateMembersInBody(it, appendable, config);
     }
     return _xifexpression;
+  }
+
+  private boolean canBeCompiledAsJavaAnonymousClass(final AnonymousClass anonymousClass) {
+    EList<XtendMember> _members = anonymousClass.getMembers();
+    for (final XtendMember member : _members) {
+      if (((member instanceof XtendField) || ((member instanceof XtendFunction) && (!((XtendFunction) member).isOverride())))) {
+        return false;
+      }
+    }
+    return true;
   }
 }
