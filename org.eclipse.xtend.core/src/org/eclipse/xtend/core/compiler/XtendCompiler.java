@@ -700,49 +700,4 @@ public class XtendCompiler extends XbaseCompiler {
 		super.appendConstructedTypeName(constructorCall, typeAppendable);
 	}
 
-	@Override
-	protected void declareFreshLocalVariable(XExpression expr, ITreeAppendable b, Later expression) {
-		LightweightTypeReference type = getTypeForVariableDeclaration(expr);
-		if (type.isAnonymous()) {
-			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
-			if (sourceElement instanceof AnonymousClass &&
-					!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) sourceElement)) {
-				final String proposedName = makeJavaIdentifier(getFavoriteVariableName(expr));
-				final String varName = b.declareSyntheticVariable(expr, proposedName);
-				b.newLine();
-				b.append(type.getSimpleName());
-				b.append(" ").append(varName).append(" = ");
-				expression.exec(b);
-				b.append(";");
-				return;
-			}
-		}
-		super.declareFreshLocalVariable(expr, b, expression);
-	}
-
-	@Override
-	protected void appendVariableInferredType(LightweightTypeReference type, ITreeAppendable appendable) {
-		if (type.isAnonymous()) {
-			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
-			if (sourceElement instanceof AnonymousClass &&
-					!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) sourceElement)) {
-				appendable.append(type.getSimpleName());
-				return;
-			}
-		}
-		super.appendVariableInferredType(type, appendable);
-	}
-
-//	@Override
-//	protected void appendTypeArgument(LightweightTypeReference type, ITreeAppendable appendable) {
-//		if (type.isAnonymous()) {
-//			EObject sourceElement = associations.getPrimarySourceElement(type.getType());
-//			if (sourceElement instanceof AnonymousClass &&
-//					!canBeCompiledAsJavaAnonymousClass((AnonymousClass) sourceElement)) {
-//				appendable.append(type.getSimpleName());
-//				return;
-//			}
-//		}
-//		super.appendTypeArgument(type, appendable);
-//	}
 }

@@ -311,15 +311,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (i != 0) {
 					completeFeatureCallAppendable.append(", ");
 				}
-				appendTypeArgument(typeArguments.get(i), completeFeatureCallAppendable);
+				completeFeatureCallAppendable.append(typeArguments.get(i));
 			}
 			completeFeatureCallAppendable.append(">");
 		}
 		return completeFeatureCallAppendable;
-	}
-
-	protected void appendTypeArgument(LightweightTypeReference type, ITreeAppendable appendable) {
-		appendable.append(type);
 	}
 
 	@Override
@@ -775,15 +771,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (type.isAny()) {
 				type = getTypeForVariableDeclaration(varDeclaration.getRight());
 			}
-			appendVariableInferredType(type, appendable);
+			appendable.append(type);
 		}
 		appendable.append(" ");
 		appendable.append(appendable.declareVariable(varDeclaration, makeJavaIdentifier(varDeclaration.getName())));
 		return type;
-	}
-
-	protected void appendVariableInferredType(LightweightTypeReference type, ITreeAppendable appendable) {
-		appendable.append(type);
 	}
 
 	/**
