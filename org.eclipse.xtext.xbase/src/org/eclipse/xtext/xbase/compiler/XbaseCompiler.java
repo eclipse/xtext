@@ -1106,24 +1106,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
 		appendConstructedTypeName(expr, typeAppendable);
 		if (hasTypeArguments) {
-			if (typeArguments.isEmpty()) {
-				LightweightTypeReference createdType = resolvedTypes.getActualType(expr);
-				typeArguments = createdType.getNamedType().getTypeArguments();
-			}
-			if (!typeArguments.isEmpty()) {
-				typeAppendable.append("<");
-				for(int i = 0; i < typeArguments.size(); i++) {
-					if (i != 0) {
-						typeAppendable.append(", ");
-					}
-					if (explicitTypeArguments.isEmpty()) {
-						typeAppendable.append(typeArguments.get(i));
-					} else {
-						typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
-					}
+			typeAppendable.append("<");
+			for(int i = 0; i < typeArguments.size(); i++) {
+				if (i != 0) {
+					typeAppendable.append(", ");
 				}
-				typeAppendable.append(">");
+				if (explicitTypeArguments.isEmpty()) {
+					typeAppendable.append(typeArguments.get(i));
+				} else {
+					typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
+				}
 			}
+			typeAppendable.append(">");
 		}
 		b.append("(");
 		appendArguments(expr.getArguments(), b);
