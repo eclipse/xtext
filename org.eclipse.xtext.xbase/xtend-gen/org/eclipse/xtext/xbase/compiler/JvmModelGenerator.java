@@ -12,7 +12,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -1226,21 +1225,7 @@ public class JvmModelGenerator implements IGenerator {
   }
 
   public ImportManager getImportManager(final ITreeAppendable appendable) {
-    try {
-      ImportManager _xblockexpression = null;
-      {
-        final Field stateField = appendable.getClass().getDeclaredField("state");
-        stateField.setAccessible(true);
-        final Object stateValue = stateField.get(appendable);
-        final Field importManagerField = stateValue.getClass().getDeclaredField("importManager");
-        importManagerField.setAccessible(true);
-        Object _get = importManagerField.get(stateValue);
-        _xblockexpression = ((ImportManager) _get);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    return ((TreeAppendable) appendable).getImportManager();
   }
 
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable, final GeneratorConfig config) {
