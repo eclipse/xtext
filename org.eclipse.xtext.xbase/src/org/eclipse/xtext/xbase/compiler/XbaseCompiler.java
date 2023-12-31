@@ -1105,7 +1105,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
 		appendConstructedTypeName(expr, typeAppendable);
-		if (hasTypeArguments || (expr.isAnonymousClassConstructorCall() && !explicitTypeArguments.isEmpty() && ((JvmGenericType) constructor.getDeclaringType()).isAnonymous())) {
+		if (hasTypeArguments) {
 			if (typeArguments.isEmpty()) {
 				LightweightTypeReference createdType = resolvedTypes.getActualType(expr);
 				typeArguments = createdType.getNamedType().getTypeArguments();
