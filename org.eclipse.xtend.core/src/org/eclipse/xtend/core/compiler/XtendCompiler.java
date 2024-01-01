@@ -33,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -669,19 +668,14 @@ public class XtendCompiler extends XbaseCompiler {
 
 	@Override
 	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
-		if (!constructorCall.isAnonymousClassConstructorCall()) {
+		if (!constructorCall.isAnonymousClassConstructorCall() ||
+				XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
 			super.appendConstructedTypeName(constructorCall, typeAppendable);
-			return;
-		}
-		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
-		if (((JvmGenericType) type).isAnonymous() &&
-				!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
+		} else {
 			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
 			LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
 			typeAppendable.append(actualType);
-			return;
 		}
-		super.appendConstructedTypeName(constructorCall, typeAppendable);
 	}
 
 }
