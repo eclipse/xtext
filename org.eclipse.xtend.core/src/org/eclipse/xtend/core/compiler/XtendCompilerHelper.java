@@ -14,6 +14,8 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
@@ -24,23 +26,30 @@ import com.google.inject.Inject;
 public class XtendCompilerHelper {
 
 	@Inject
+	private IResourceScopeCache cache;
+
+	@Inject
 	private IJvmModelAssociations associations;
 
 	/**
 	 * Assumes that the passed type is anonymous.
 	 */
 	public boolean canCompileToJavaAnonymousClass(JvmType type) {
-		EObject sourceElement = associations.getPrimarySourceElement(type);
-		return sourceElement instanceof AnonymousClass &&
-			canCompileToJavaAnonymousClass((AnonymousClass) sourceElement);
+		return cache.get(Tuples.pair("anonymousJava", type), type.eResource(), () -> {
+			EObject sourceElement = associations.getPrimarySourceElement(type);
+			return sourceElement instanceof AnonymousClass &&
+					canCompileToJavaAnonymousClass((AnonymousClass) sourceElement);
+		});
 	}
 
 	public boolean canCompileToJavaAnonymousClass(AnonymousClass anonymousClass) {
-		for(XtendMember member: anonymousClass.getMembers()) {
-			if(member instanceof XtendField ||	
-				(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 
-				return false;
-		}
-		return true;
+		return cache.get(Tuples.pair("anonymousJava", anonymousClass), anonymousClass.eResource(), () -> {
+			for(XtendMember member: anonymousClass.getMembers()) {
+				if(member instanceof XtendField ||	
+					(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 
+					return false;
+			}
+			return true;
+		});
 	}
 }
