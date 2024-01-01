@@ -653,7 +653,6 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
 		if (!expr.isAnonymousClassConstructorCall() ||
-				!((JvmGenericType) expr.getConstructor().getDeclaringType()).isAnonymous() ||
 				XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) expr.eContainer())) {
 			super.constructorCallToJavaExpression(expr, b);
 			return;
