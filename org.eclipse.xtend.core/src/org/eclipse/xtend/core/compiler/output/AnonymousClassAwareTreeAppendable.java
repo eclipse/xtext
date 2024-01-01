@@ -34,14 +34,12 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
  */
 public class AnonymousClassAwareTreeAppendable extends TreeAppendable {
 
-	private ITraceURIConverter traceURIConverter;
 	private IJvmModelAssociations associations;
 
 	public AnonymousClassAwareTreeAppendable(ImportManager importManager, ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source, String indentation,
 			String lineSeparator) {
 		super(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
-		this.traceURIConverter = converter;
 		this.associations = jvmModelAssociations;
 	}
 
@@ -49,7 +47,6 @@ public class AnonymousClassAwareTreeAppendable extends TreeAppendable {
 			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, Set<ILocationData> sourceLocations,
 			boolean useForDebugging) {
 		super(state, converter, locationProvider, jvmModelAssociations, sourceLocations, useForDebugging);
-		this.traceURIConverter = converter;
 		this.associations = jvmModelAssociations;
 	}
 
@@ -72,9 +69,9 @@ public class AnonymousClassAwareTreeAppendable extends TreeAppendable {
 	}
 
 	@Override
-	protected TreeAppendable createChild(SharedAppendableState state, ILocationInFileProvider locationProvider,
+	protected TreeAppendable createChild(SharedAppendableState state, ITraceURIConverter converter, ILocationInFileProvider locationProvider,
 			IJvmModelAssociations jvmModelAssociations, Set<ILocationData> newData, boolean useForDebugging) {
-		return new AnonymousClassAwareTreeAppendable(state, traceURIConverter, locationProvider, jvmModelAssociations, newData, useForDebugging);
+		return new AnonymousClassAwareTreeAppendable(state, converter, locationProvider, jvmModelAssociations, newData, useForDebugging);
 	}
 
 }
