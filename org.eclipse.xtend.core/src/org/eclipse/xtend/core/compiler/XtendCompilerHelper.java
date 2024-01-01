@@ -8,21 +8,34 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.compiler;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+
+import com.google.inject.Inject;
 
 /**
  * @author Lorenzo Bettini - Initial contribution and API
  */
-public class XtendCompilerUtil {
+public class XtendCompilerHelper {
 
-	private XtendCompilerUtil() {
-		// only static methods
+	@Inject
+	private IJvmModelAssociations associations;
+
+	/**
+	 * Assumes that the passed type is anonymous.
+	 */
+	public boolean canCompileToJavaAnonymousClass(JvmType type) {
+		EObject sourceElement = associations.getPrimarySourceElement(type);
+		return sourceElement instanceof AnonymousClass &&
+			canCompileToJavaAnonymousClass((AnonymousClass) sourceElement);
 	}
 
-	public static boolean canCompileToJavaAnonymousClass(AnonymousClass anonymousClass) {
+	public boolean canCompileToJavaAnonymousClass(AnonymousClass anonymousClass) {
 		for(XtendMember member: anonymousClass.getMembers()) {
 			if(member instanceof XtendField ||	
 				(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 

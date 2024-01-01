@@ -89,6 +89,9 @@ public class XtendCompiler extends XbaseCompiler {
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;
 	
+	@Inject
+	private XtendCompilerHelper compilerHelper;
+	
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {
 		if (ex instanceof RichStringForLoop)
@@ -571,7 +574,7 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
-			return XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) expression);
+			return compilerHelper.canCompileToJavaAnonymousClass((AnonymousClass) expression);
 		} else
 			return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
@@ -584,7 +587,7 @@ public class XtendCompiler extends XbaseCompiler {
 			if (container instanceof AnonymousClass) {
 				AnonymousClass anonymousClass = (AnonymousClass) container;
 				return isVariableDeclarationRequired(anonymousClass, b, recursive) &&
-					!XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass);
+					!compilerHelper.canCompileToJavaAnonymousClass(anonymousClass);
 			}
 		}
 		return result;
@@ -652,7 +655,7 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
 		if (!expr.isAnonymousClassConstructorCall() ||
-				XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) expr.eContainer())) {
+				compilerHelper.canCompileToJavaAnonymousClass((AnonymousClass) expr.eContainer())) {
 			super.constructorCallToJavaExpression(expr, b);
 			return;
 		}
@@ -669,7 +672,7 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
 		if (!constructorCall.isAnonymousClassConstructorCall() ||
-				XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
+				compilerHelper.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer())) {
 			super.appendConstructedTypeName(constructorCall, typeAppendable);
 		} else {
 			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);

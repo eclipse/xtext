@@ -62,7 +62,8 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	@Inject OperationCanceledManager operationCanceledManager
 
 	@Inject ElementIssueProvider.Factory issueProviderFactory
-	
+	@Inject XtendCompilerHelper compilerHelper
+
 	override doGenerate(Resource input, IFileSystemAccess fsa) {
 		super.doGenerate(input, fsa)
 		callMacroProcessors(input)
@@ -171,10 +172,10 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
 		feature.localClasses.forEach[
-			val anonymousClass = sourceElements.head as AnonymousClass
-			if (XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass)) {
+			if (compilerHelper.canCompileToJavaAnonymousClass(it)) {
 				return
 			}
+			val anonymousClass = sourceElements.head as AnonymousClass
 			appendable.newLine
 			val childAppendable = appendable.trace(anonymousClass)
 			childAppendable.append('abstract class ')
@@ -330,7 +331,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			if (declaringType.local && it instanceof JvmOperation) {
 				val declarator = declaringType as JvmGenericType
 				if (!declarator.anonymous ||
-					!XtendCompilerUtil.canCompileToJavaAnonymousClass(declarator.sourceElements.head as AnonymousClass)
+					!compilerHelper.canCompileToJavaAnonymousClass(declarator)
 				) {
 					return result
 				}
@@ -399,7 +400,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 
 	override createAppendable(ImportManager importManager, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source, String indentation, String lineSeparator) {
-		return new AnonymousClassAwareTreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
+		return new AnonymousClassAwareTreeAppendable(compilerHelper, importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
 	}
 
 }

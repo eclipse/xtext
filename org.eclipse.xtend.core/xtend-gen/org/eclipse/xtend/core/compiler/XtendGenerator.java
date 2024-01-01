@@ -97,6 +97,9 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   @Inject
   private ElementIssueProvider.Factory issueProviderFactory;
 
+  @Inject
+  private XtendCompilerHelper compilerHelper;
+
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     super.doGenerate(input, fsa);
@@ -258,12 +261,12 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Consumer<JvmGenericType> _function = (JvmGenericType it) -> {
-      EObject _head = IterableExtensions.<EObject>head(this.getSourceElements(it));
-      final AnonymousClass anonymousClass = ((AnonymousClass) _head);
-      boolean _canCompileToJavaAnonymousClass = XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass);
+      boolean _canCompileToJavaAnonymousClass = this.compilerHelper.canCompileToJavaAnonymousClass(it);
       if (_canCompileToJavaAnonymousClass) {
         return;
       }
+      EObject _head = IterableExtensions.<EObject>head(this.getSourceElements(it));
+      final AnonymousClass anonymousClass = ((AnonymousClass) _head);
       appendable.newLine();
       final ITreeAppendable childAppendable = appendable.trace(anonymousClass);
       childAppendable.append("abstract class ");
@@ -479,7 +482,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           JvmDeclaredType _declaringType_1 = it.getDeclaringType();
           final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
           if (((!declarator.isAnonymous()) || 
-            (!XtendCompilerUtil.canCompileToJavaAnonymousClass(((AnonymousClass) IterableExtensions.<EObject>head(this.getSourceElements(declarator))))))) {
+            (!this.compilerHelper.canCompileToJavaAnonymousClass(declarator)))) {
             return result;
           }
         }
@@ -582,6 +585,6 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 
   @Override
   public TreeAppendable createAppendable(final ImportManager importManager, final ITraceURIConverter converter, final ILocationInFileProvider locationProvider, final IJvmModelAssociations jvmModelAssociations, final EObject source, final String indentation, final String lineSeparator) {
-    return new AnonymousClassAwareTreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
+    return new AnonymousClassAwareTreeAppendable(this.compilerHelper, importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
   }
 }
