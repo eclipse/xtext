@@ -14,7 +14,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -87,9 +86,6 @@ public class XtendCompiler extends XbaseCompiler {
 	
 	@Inject 
 	private IGeneratorConfigProvider generatorConfigProvider;
-	
-	@Inject
-	private IXtendJvmAssociations associations;
 	
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;
@@ -576,11 +572,7 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
-			AnonymousClass anonymousClass = (AnonymousClass) expression;
-			if (!XtendCompilerUtil.canCompileToJavaAnonymousClass(anonymousClass))
-				return false;
-			JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
-			return inferredLocalClass.isAnonymous();
+			return XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) expression);
 		} else
 			return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
