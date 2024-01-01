@@ -24,6 +24,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSer
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 /**
+ * A custom implementation that takes into consideration anonymous classes,
+ * which, in some cases, cannot be compiled into standard Java anonymous classes:
+ * they are compiled into nested local classes.
+ * 
+ * It uses a custom {@link LightweightTypeReferenceSerializer}.
+ * 
  * @author Lorenzo Bettini - Initial contribution and API
  */
 public class AnonymousClassAwareTreeAppendable extends TreeAppendable {
@@ -50,26 +56,17 @@ public class AnonymousClassAwareTreeAppendable extends TreeAppendable {
 	@Override
 	protected LightweightTypeReferenceSerializer createLightweightTypeReferenceSerializer() {
 		return new LightweightTypeReferenceSerializer(this) {
-			private TreeAppendable appender = AnonymousClassAwareTreeAppendable.this;
-
 			@Override
 			protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
 				if (reference.isAnonymous()) {
 					EObject sourceElement = associations.getPrimarySourceElement(reference.getType());
 					if (sourceElement instanceof AnonymousClass &&
 							!XtendCompilerUtil.canCompileToJavaAnonymousClass((AnonymousClass) sourceElement)) {
-						appender.append(reference.getType());
-					} else {
-						reference.getNamedType().accept(this);
-					}
-				} else {
-					appender.append(reference.getType());
-					if (!reference.getTypeArguments().isEmpty()) {
-						appender.append("<");
-						appendCommaSeparated(reference.getTypeArguments());
-						appender.append(">");
+						AnonymousClassAwareTreeAppendable.this.append(reference.getType());
+						return;
 					}
 				}
+				super.doVisitParameterizedTypeReference(reference);
 			}
 		};
 	}
