@@ -1105,7 +1105,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
 		appendConstructedTypeName(expr, typeAppendable);
-		if (hasTypeArguments || (expr.isAnonymousClassConstructorCall() && !explicitTypeArguments.isEmpty() && ((JvmGenericType) constructor.getDeclaringType()).isAnonymous())) {
+		if (hasTypeArguments ||
+				(!explicitTypeArguments.isEmpty() &&
+						canCompileToJavaAnonymousClass(expr))) {
 			if (typeArguments.isEmpty()) {
 				LightweightTypeReference createdType = resolvedTypes.getActualType(expr);
 				typeArguments = createdType.getNamedType().getTypeArguments();
@@ -1131,16 +1133,23 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
-		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
 		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
 		LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall);
-		if (type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous()) {
+		if (canCompileToJavaAnonymousClass(constructorCall)) {
 			typeAppendable.append(actualType.getNamedType().getRawTypeReference());
 		} else {
 			typeAppendable.append(actualType.getRawTypeReference());
 		}
 	}
-	
+
+	/**
+	 * @since 2.34
+	 */
+	protected boolean canCompileToJavaAnonymousClass(XConstructorCall constructorCall) {
+		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
+		return type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous();
+	}
+
 	/* @Nullable */
 	protected ILocationData getLocationWithNewKeyword(XConstructorCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
