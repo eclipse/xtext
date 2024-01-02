@@ -581,16 +581,12 @@ public class XtendCompiler extends XbaseCompiler {
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
 		boolean result = super.isVariableDeclarationRequired(expr, b, recursive);
 		if (result && expr instanceof XConstructorCall) {
-			EObject container = expr.eContainer();
-			if (container instanceof AnonymousClass) {
-				AnonymousClass anonymousClass = (AnonymousClass) container;
-				result = isVariableDeclarationRequired(anonymousClass, b, recursive);
+			XConstructorCall constructorCall = (XConstructorCall) expr;
+			if (constructorCall.isAnonymousClassConstructorCall()) {
+				EObject container = expr.eContainer();
+				result = isVariableDeclarationRequired((XExpression) container, b, recursive);
 				if (result) {
-					JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
-					JvmDeclaredType type = constructor.getDeclaringType();
-					if (((JvmGenericType) type).isAnonymous()) {
-						return false;
-					}
+					return !canCompileToJavaAnonymousClass(constructorCall);
 				}
 			}
 		}
