@@ -584,10 +584,8 @@ public class XtendCompiler extends XbaseCompiler {
 			XConstructorCall constructorCall = (XConstructorCall) expr;
 			if (constructorCall.isAnonymousClassConstructorCall()) {
 				EObject container = expr.eContainer();
-				result = isVariableDeclarationRequired((XExpression) container, b, recursive);
-				if (result) {
-					return !canCompileToJavaAnonymousClass(constructorCall);
-				}
+				return isVariableDeclarationRequired((XExpression) container, b, recursive) &&
+					!canCompileToJavaAnonymousClass(constructorCall);
 			}
 		}
 		return result;
