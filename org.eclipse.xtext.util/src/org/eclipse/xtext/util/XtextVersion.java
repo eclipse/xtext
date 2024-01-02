@@ -52,14 +52,14 @@ public class XtextVersion {
 	 * @noreference
 	 */
 	public String getMweVersion() {
-		return "2.16.0";
+		return "2.17.0.M0";
 	}
 
 	/**
 	 * @noreference
 	 */
 	public String getMweBuildNumber() {
-		return "";
+		return "S202312301643";
 	}
 
 	public String getAntlrGeneratorVersion() {

@@ -52,7 +52,7 @@ final class GenerateXbase {
 		final String root = "..";
 		final String projectName = "org.eclipse.xtext.xbase";
 		final String runtimeProject = root + "/" + projectName;
-		final String uiProject = System.getProperty("uiProject", root + "/../xtext-eclipse/" + projectName + ".ui");	
+		final String uiProject = System.getProperty("uiProject", root + "/../" + projectName + ".ui");	
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";

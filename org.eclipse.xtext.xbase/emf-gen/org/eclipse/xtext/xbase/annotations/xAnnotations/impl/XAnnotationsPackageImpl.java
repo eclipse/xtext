@@ -73,7 +73,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	{
 		super(eNS_URI, XAnnotationsFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

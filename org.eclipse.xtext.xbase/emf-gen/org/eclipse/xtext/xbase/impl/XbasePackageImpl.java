@@ -371,7 +371,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	{
 		super(eNS_URI, XbaseFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
