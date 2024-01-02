@@ -1146,6 +1146,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 * @since 2.34
 	 */
 	protected boolean canCompileToJavaAnonymousClass(XConstructorCall constructorCall) {
+		if (!constructorCall.isAnonymousClassConstructorCall())
+			return false;
 		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
 		return type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous();
 	}
