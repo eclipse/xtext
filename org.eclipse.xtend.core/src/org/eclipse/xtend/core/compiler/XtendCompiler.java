@@ -357,7 +357,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	public void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
+	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		prependLocalTypesIfFieldInitializer(obj, appendable, isReferenced);
 		if(obj instanceof AnonymousClass) 
 			_toJavaStatement((AnonymousClass)obj, appendable, isReferenced);
@@ -374,7 +374,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 	
-	public void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
+	private void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
 		LightweightTypeReference actualType = getLightweightType(richString);
 		b = b.trace(richString);
 		if (actualType.isType(StringConcatenationClient.class)) {
@@ -416,7 +416,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 
 	@Override
-	public void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
+	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof AnonymousClass)
 			_toJavaExpression((AnonymousClass) obj, appendable);
 		else if (obj instanceof RichString)
@@ -425,7 +425,7 @@ public class XtendCompiler extends XbaseCompiler {
 			super.internalToConvertedExpression(obj, appendable);
 	}
 	
-	protected void _toJavaExpression(AnonymousClass anonymousClass, ITreeAppendable b) {
+	private void _toJavaExpression(AnonymousClass anonymousClass, ITreeAppendable b) {
 		String varName = getReferenceName(anonymousClass, b);
 		if (varName != null) {
 			b.trace(anonymousClass, false).append(varName);
@@ -445,7 +445,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 
-	protected void compileAnonymousClassBody(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
+	private void compileAnonymousClassBody(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
 		ITreeAppendable appendable = b.trace(anonymousClass, true);
 		appendable.append(" ");
 		appendable.openScope();
@@ -455,7 +455,7 @@ public class XtendCompiler extends XbaseCompiler {
 		appendable.closeScope();
 	}
 	
-	public void _toJavaExpression(RichString richString, ITreeAppendable b) {
+	private void _toJavaExpression(RichString richString, ITreeAppendable b) {
 		b.append(getVarName(richString, b));
 		if(getLightweightType(richString).isType(String.class))
 			b.append(".toString()");
@@ -468,7 +468,7 @@ public class XtendCompiler extends XbaseCompiler {
 		super.appendCatchClauseParameter(catchClause, parameterType, parameterName, appendable);
 	}
 
-	protected void appendExtensionAnnotation(JvmFormalParameter parameter, EObject context,
+	private void appendExtensionAnnotation(JvmFormalParameter parameter, EObject context,
 			ITreeAppendable appendable, boolean newLine) {
 		if (parameter instanceof XtendFormalParameter) {
 			XtendFormalParameter castedParameter = (XtendFormalParameter) parameter;
@@ -478,7 +478,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 
-	protected void appendExtensionAnnotation(EObject context, ITreeAppendable appendable, boolean newLine) {
+	private void appendExtensionAnnotation(EObject context, ITreeAppendable appendable, boolean newLine) {
 		JvmType extension = findKnownTopLevelType(Extension.class, context);
 		if (extension != null) {
 			appendable.append("@");
@@ -538,8 +538,8 @@ public class XtendCompiler extends XbaseCompiler {
 	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		toJavaStatement(expr, b, isReferenced, false);
 	}
-	
-	protected void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
+
+	private void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
 		_toJavaStatement(anonymousClass.getConstructorCall(), b, isReferenced);
 	}
 
