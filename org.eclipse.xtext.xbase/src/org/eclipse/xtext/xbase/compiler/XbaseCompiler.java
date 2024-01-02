@@ -2177,6 +2177,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 		}
+		if (expr instanceof XConstructorCall) {
+			XConstructorCall constructorCall = (XConstructorCall) expr;
+			if (constructorCall.isAnonymousClassConstructorCall()) {
+				return isVariableDeclarationRequired((XExpression) container, b, recursive) &&
+					!canCompileToJavaAnonymousClass(constructorCall);
+			}
+		}
 		return super.isVariableDeclarationRequired(expr, b, recursive);
 	}
 	
