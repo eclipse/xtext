@@ -54,7 +54,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -433,8 +432,16 @@ public class XtendCompiler extends XbaseCompiler {
 		} else {
 			XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 			constructorCallToJavaExpression(constructorCall, b);
-			JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
-			compileAnonymousClassBody(anonymousClass, declaringType, b);
+		}
+	}
+
+	@Override
+	protected void constructorCallToJavaExpression(XConstructorCall expr, ITreeAppendable b) {
+		super.constructorCallToJavaExpression(expr, b);
+		if (expr.eContainer() instanceof AnonymousClass) {
+			JvmConstructor constructor = expr.getConstructor();
+			JvmDeclaredType declaringType = constructor.getDeclaringType();
+			compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, b);
 		}
 	}
 
@@ -535,38 +542,7 @@ public class XtendCompiler extends XbaseCompiler {
 	protected void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
 		_toJavaStatement(anonymousClass.getConstructorCall(), b, isReferenced);
 	}
-	
-	@Override
-	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
-		for (XExpression arg : expr.getArguments()) {
-			prepareExpression(arg, b);
-		}
-		
-		if (!isReferenced) {
-			b.newLine();
-			constructorCallToJavaExpression(expr, b);
-			if (expr.eContainer() instanceof AnonymousClass) {
-				JvmConstructor constructor = expr.getConstructor();
-				JvmDeclaredType declaringType = constructor.getDeclaringType();
-				compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, b);
-			}
-			b.append(";");
-		} else if (isVariableDeclarationRequired(expr, b, true)) {
-			Later later = new Later() {
-				@Override
-				public void exec(ITreeAppendable appendable) {
-					constructorCallToJavaExpression(expr, appendable);
-					if (expr.eContainer() instanceof AnonymousClass) {
-						JvmConstructor constructor = expr.getConstructor();
-						JvmDeclaredType declaringType = constructor.getDeclaringType();
-						compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, appendable);
-					}
-				}
-			};
-			declareFreshLocalVariable(expr, b, later);
-		}
-	}
-	
+
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
