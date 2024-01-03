@@ -11,7 +11,6 @@ package org.eclipse.xtend.core.validation;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Lists.transform;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
@@ -121,7 +120,6 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.override.ConflictingDefaultOperation;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
@@ -129,9 +127,6 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
-import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
-import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
 import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
@@ -193,9 +188,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
-	
-	@Inject
-	private IVisibilityHelper visibilityHelper;
 	
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
@@ -630,7 +622,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType, targetVersion);
 			
 			Set<EObject> flaggedOperations = Sets.newHashSet();
-			doCheckOverriddenMethods(xtendType, (JvmGenericType) inferredType, resolvedFeatures, flaggedOperations);
 			doCheckFunctionOverrides(resolvedFeatures, flaggedOperations);
 		}
 	}
@@ -654,182 +645,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		else
 			return null;
 	}
-	
-	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType, ResolvedFeatures resolvedFeatures,
-			Set<EObject> flaggedOperations) {
-		List<IResolvedOperation> operationsMissingImplementation = null;
-		boolean doCheckAbstract = !inferredType.isAbstract();
-		if (doCheckAbstract) {
-			operationsMissingImplementation = Lists.newArrayList();
-		}
-		IVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, resolvedFeatures.getType());
-		boolean flaggedType = false;
-		for (IResolvedOperation operation : resolvedFeatures.getAllOperations()) {
-			JvmDeclaredType operationDeclaringType = operation.getDeclaration().getDeclaringType();
-			if (operationDeclaringType != inferredType) {
-				if (operationsMissingImplementation != null && operation.getDeclaration().isAbstract()) {
-					operationsMissingImplementation.add(operation);
-				}
-				if (visibilityHelper.isVisible(operation.getDeclaration())) {
-					String erasureSignature = operation.getResolvedErasureSignature();
-					List<IResolvedOperation> declaredOperationsWithSameErasure = resolvedFeatures.getDeclaredOperations(erasureSignature);
-					for (IResolvedOperation localOperation : declaredOperationsWithSameErasure) {
-						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
-							EObject source = findPrimarySourceElement(localOperation);
-							if (operation.getDeclaration().isStatic() && !localOperation.getDeclaration().isStatic()) {
-								if (!isInterface(operationDeclaringType)) {
-									if (flaggedOperations.add(source)) {
-										error("The instance method "
-												+ localOperation.getSimpleSignature()
-												+ " cannot override the static method "
-												+ operation.getSimpleSignature() + " of type "
-												+ getDeclaratorName(operation.getDeclaration()) + ".",
-												source, nameFeature(source), DUPLICATE_METHOD);
-									}
-								}
-							} else if (!operation.getDeclaration().isStatic() && localOperation.getDeclaration().isStatic()) {
-								if (flaggedOperations.add(source)) {
-									error("The static method "
-											+ localOperation.getSimpleSignature()
-											+ " cannot hide the instance method "
-											+ operation.getSimpleSignature() + " of type "
-											+ getDeclaratorName(operation.getDeclaration()) + ".",
-											source, nameFeature(source), DUPLICATE_METHOD);
-								}
-							} else if (flaggedOperations.add(source)) {
-								error("Name clash: The method "
-										+ localOperation.getSimpleSignature() + " of type "
-										+ inferredType.getSimpleName()
-										+ " has the same erasure as "
-										+ operation.getSimpleSignature() + " of type "
-										+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
-										source, nameFeature(source), DUPLICATE_METHOD);
-							}
-						}
-					}
-					if (operation instanceof ConflictingDefaultOperation
-							&& contributesToConflict(inferredType, (ConflictingDefaultOperation) operation) && !flaggedType) {
-						IResolvedOperation conflictingOperation = ((ConflictingDefaultOperation) operation).getConflictingOperations()
-								.get(0);
-						// Include the declaring class in the issue code in order to give better quick fixes
-						String[] uris = new String[] {
-								getDeclaratorName(operation.getDeclaration()) + "|"
-										+ EcoreUtil.getURI(operation.getDeclaration()).toString(),
-								getDeclaratorName(conflictingOperation.getDeclaration()) + "|"
-										+ EcoreUtil.getURI(conflictingOperation.getDeclaration()).toString() };
-						if (!operation.getDeclaration().isAbstract() && !conflictingOperation.getDeclaration().isAbstract()) {
-							error("The type " + inferredType.getSimpleName() + " inherits multiple implementations of the method "
-									+ conflictingOperation.getSimpleSignature() + " from "
-									+ getDeclaratorName(conflictingOperation.getDeclaration()) + " and "
-									+ getDeclaratorName(operation.getDeclaration()) + ".", xtendType,
-									XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, CONFLICTING_DEFAULT_METHODS, uris);
-						} else {
-							// At least one of the operations is non-abstract
-							IResolvedOperation abstractOp, nonabstractOp;
-							if (operation.getDeclaration().isAbstract()) {
-								abstractOp = operation;
-								nonabstractOp = conflictingOperation;
-							} else {
-								abstractOp = conflictingOperation;
-								nonabstractOp = operation;
-							}
-							error("The non-abstract method " + nonabstractOp.getSimpleSignature() + " inherited from "
-									+ getDeclaratorName(nonabstractOp.getDeclaration()) + " conflicts with the method "
-									+ abstractOp.getSimpleSignature() + " inherited from " + getDeclaratorName(abstractOp.getDeclaration())
-									+ ".", xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, CONFLICTING_DEFAULT_METHODS,
-									uris);
-						}
-						flaggedType = true;
-					}
-				}
-			}
-		}
-		if (operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty() && !flaggedType) {
-			reportMissingImplementations(xtendType, inferredType, operationsMissingImplementation);
-		}
-	}
-	
-	/**
-	 * Determine whether the given type contributes to the conflict caused by the given default interface implementation.
-	 */
-	private boolean contributesToConflict(JvmGenericType rootType, ConflictingDefaultOperation conflictingDefaultOperation) {
-		Set<JvmDeclaredType> involvedInterfaces = Sets.newHashSet();
-		involvedInterfaces.add(conflictingDefaultOperation.getDeclaration().getDeclaringType());
-		for (IResolvedOperation conflictingOperation : conflictingDefaultOperation.getConflictingOperations()) {
-			involvedInterfaces.add(conflictingOperation.getDeclaration().getDeclaringType());
-		}
-		RecursionGuard<JvmDeclaredType> recursionGuard = new RecursionGuard<JvmDeclaredType>();
-		if (rootType.isInterface()) {
-			int contributingCount = 0;
-			for (JvmTypeReference typeRef : rootType.getExtendedInterfaces()) {
-				JvmType rawType = typeRef.getType();
-				if (rawType instanceof JvmDeclaredType && contributesToConflict((JvmDeclaredType) rawType, involvedInterfaces, recursionGuard)) {
-					contributingCount++;
-				}
-			}
-			return contributingCount >= 2;
-		} else {
-			return contributesToConflict(rootType, involvedInterfaces, recursionGuard);
-		}
-	}
-	
-	private boolean contributesToConflict(JvmDeclaredType type, Set<JvmDeclaredType> involvedInterfaces,
-			RecursionGuard<JvmDeclaredType> guard) {
-		if (!guard.tryNext(type)) {
-			return false;
-		}
-		if (involvedInterfaces.contains(type)) {
-			return true;
-		}
-		for (JvmTypeReference typeRef : type.getExtendedInterfaces()) {
-			JvmType rawType = typeRef.getType();
-			if (rawType instanceof JvmDeclaredType && contributesToConflict((JvmDeclaredType) rawType, involvedInterfaces, guard)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	protected void reportMissingImplementations(XtendTypeDeclaration xtendClass, JvmGenericType inferredType, List<IResolvedOperation> operationsMissingImplementation) {
-		StringBuilder errorMsg = new StringBuilder();
-		String name = xtendClass.getName();
-		boolean needsNewLine = operationsMissingImplementation.size() > 1;
-		if (xtendClass.isAnonymous()) {
-			JvmTypeReference superType = Iterables.getLast(inferredType.getSuperTypes());
-			errorMsg.append("The anonymous subclass of ").append(superType.getSimpleName());
-			errorMsg.append(" does not implement ");
-		} else {
-			errorMsg.append("The class ").append(name);	
-			errorMsg.append(" must be defined abstract because it does not implement ");
-		}
-			if (needsNewLine) {
-				errorMsg.append("its inherited abstract methods ");
-			}
-		IResolvedOperation operation;
-		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
-			operation = operationsMissingImplementation.get(i);
-			if(needsNewLine)
-				errorMsg.append("\n- ");
-			errorMsg.append(operation.getSimpleSignature());
-		}
-		int numUnshownOperations = operationsMissingImplementation.size() - 3;
-		if(numUnshownOperations >0)
-			errorMsg.append("\nand " +  numUnshownOperations + " more.");
-		List<String> uris = transform(operationsMissingImplementation, new Function<IResolvedOperation, String>() {
-			@Override
-			public String apply(IResolvedOperation from) {
-				return EcoreUtil.getURI(from.getDeclaration()).toString();
-			}
-		});
-		if (xtendClass.isAnonymous()) {
-			error(errorMsg.toString(), xtendClass, ANONYMOUS_CLASS__CONSTRUCTOR_CALL, ANONYMOUS_CLASS_MISSING_MEMBERS, 
-					toArray(uris, String.class));
-		} else {
-			error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, CLASS_MUST_BE_ABSTRACT, 
-							toArray(uris, String.class));
-		}
-	}
-	
+
 	protected void doCheckFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		for(IResolvedOperation operation: resolvedFeatures.getDeclaredOperations()) {
 			doCheckFunctionOverrides(operation, flaggedOperations);
