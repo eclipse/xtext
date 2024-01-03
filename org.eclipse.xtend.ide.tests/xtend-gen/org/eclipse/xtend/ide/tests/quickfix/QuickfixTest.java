@@ -3337,7 +3337,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("abstract class Foo {");
     _builder_1.newLine();
@@ -3388,7 +3388,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo implements Comparable<Foo> {");
     _builder_1.newLine();
@@ -3429,7 +3429,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("C.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS).assertResolutionLabels("Add unimplemented methods");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("C.xtend", _builder.toString()).assertIssueCodes(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS).assertResolutionLabels("Add unimplemented methods");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class C {");
     _builder_1.newLine();
@@ -5827,7 +5827,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.List");
     _builder_1.newLine();

@@ -396,7 +396,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 	}
 	
-	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
 		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
@@ -408,7 +408,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 
-	@Fix(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS)
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS)
 	public void implementAbstractMethodsInAnonymousClass(final Issue issue, IssueResolutionAcceptor acceptor) {
 		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 	}

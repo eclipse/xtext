@@ -666,7 +666,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C extends B implements I {}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -693,7 +693,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements J {}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -726,7 +726,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("class C implements I, K, L {}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT, 
+      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.CLASS_MUST_BE_ABSTRACT, 
         "The class C must be defined abstract because it does not implement m()");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
