@@ -272,7 +272,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		var declaredFieldType = field.getType();
 		if (isPrimitiveVoid(declaredFieldType)) {
 			var associated = associations.getPrimarySourceElement(declaredFieldType);
-			error("Primitive void cannot be a dependency.",
+			error("void is an invalid type for the field " + field.getSimpleName(),
 					associated, null, INVALID_USE_OF_TYPE);
 		}
 	}
