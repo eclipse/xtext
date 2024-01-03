@@ -1007,6 +1007,9 @@ class JvmModelGenerator implements IGenerator {
 		return appendable
 	}
 	
+	/**
+	 * @since 2.34
+	 */
 	def TreeAppendable createAppendable(ImportManager importManager, ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations,
 			EObject source, String indentation, String lineSeparator) {

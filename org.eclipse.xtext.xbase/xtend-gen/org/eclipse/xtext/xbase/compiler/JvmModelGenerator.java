@@ -1505,6 +1505,9 @@ public class JvmModelGenerator implements IGenerator {
     return appendable;
   }
 
+  /**
+   * @since 2.34
+   */
   public TreeAppendable createAppendable(final ImportManager importManager, final ITraceURIConverter converter, final ILocationInFileProvider locationProvider, final IJvmModelAssociations jvmModelAssociations, final EObject source, final String indentation, final String lineSeparator) {
     return new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
   }
