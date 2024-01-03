@@ -51,8 +51,10 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -131,8 +133,8 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 					primarySourceElement,
 					getFeatureForIssue(primarySourceElement), CYCLIC_INHERITANCE);
 		}
+		var superTypes = type.getSuperTypes();
 		if (type.isInterface()) {
-			var superTypes = type.getSuperTypes();
 			for (int i = 0; i < superTypes.size(); ++i) {
 				JvmTypeReference extendedType = superTypes.get(i);
 				var associated = associations.getPrimarySourceElement(extendedType);
@@ -146,12 +148,23 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 						extendedType,
 						eContainingFeature, i);
 			}
+		} else if (isAnonymous(type)) {
+			JvmTypeReference extendedType = Iterables.getLast(superTypes);
+			var associated = getSuperTypeSourceElement(extendedType);
+			var eContainingFeature = associated.eContainingFeature();
+			if (((JvmGenericType) extendedType.getType()).isFinal()) {
+				error("Attempt to override final class",
+					primarySourceElement,
+					eContainingFeature, OVERRIDDEN_FINAL);
+			}
+			checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+					extendedType,
+					eContainingFeature, INSIGNIFICANT_INDEX);
 		} else {
-			var superTypes = type.getSuperTypes();
 			var expectedInterfaceIndex = -1;
 			for (int i = 0; i < superTypes.size(); ++i) {
 				JvmTypeReference extendedType = superTypes.get(i);
-				var associated = associations.getPrimarySourceElement(extendedType);
+				var associated = getSuperTypeSourceElement(extendedType);
 				if (associated == null)
 					continue; // synthetic superclass (e.g., Object)
 				var eContainingFeature = associated.eContainingFeature();
@@ -189,6 +202,23 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Workaround for https://github.com/eclipse/xtext/issues/2886
+	 */
+	protected boolean isAnonymous(JvmGenericType type) {
+		return type.isAnonymous() ||
+			Iterables.getLast(type.getSuperTypes()) instanceof XComputedTypeReference;
+	}
+
+	protected EObject getSuperTypeSourceElement(JvmTypeReference extendedType) {
+		var associated = associations.getPrimarySourceElement(extendedType);
+		while (associated == null && extendedType instanceof XComputedTypeReference) {
+			extendedType = ((XComputedTypeReference) extendedType).getEquivalent();
+			associated = associations.getPrimarySourceElement(extendedType);
+		}
+		return associated;
 	}
 
 	protected void checkMemberNamesAreUnique(JvmGenericType type) {

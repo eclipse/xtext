@@ -17,7 +17,6 @@ import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.util.Strings.isEmpty;
-import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
@@ -602,17 +601,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		richStringProcessor.process(richString, helper, helper);
 	}
 
-	@Check
-	public void checkSuperTypes(AnonymousClass anonymousClass) {
-		JvmGenericType inferredType = associations.getInferredType(anonymousClass);
-		if (inferredType != null) {
-			JvmTypeReference superTypeRef = Iterables.getLast(inferredType.getSuperTypes());
-			JvmType superType = superTypeRef.getType();
-			if(superType instanceof JvmGenericType && ((JvmGenericType) superType).isFinal())
-				error("Attempt to override final class", anonymousClass.getConstructorCall(), XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
-		}
-	}
-	
 	@Check
 	public void checkStaticMembers(AnonymousClass anonymousClass) {
 		for (XtendMember member : anonymousClass.getMembers()) {

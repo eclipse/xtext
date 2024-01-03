@@ -806,6 +806,8 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	
 	protected JvmParameterizedTypeReference createSuperTypeReference(JvmType superType, XConstructorCall constructorCall) {
 		JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		// we need the association later when checking anonymous class in JvmGenericTypeValidator
+		typesBuilder.associate(constructorCall, result);
 		result.setType(superType);
 		for(JvmTypeReference typeReference: constructorCall.getTypeArguments()) {
 			result.getArguments().add(typesBuilder.cloneWithProxies(typeReference));

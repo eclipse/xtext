@@ -2382,8 +2382,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		+ "}";
 		XtendFile file = file(source);
 		helper.assertError(file.getXtendTypes().get(0),
-				XCONSTRUCTOR_CALL, OVERRIDDEN_FINAL,
-				source.indexOf("Bar"), "Bar".length(),
+				ANONYMOUS_CLASS, OVERRIDDEN_FINAL,
+				source.indexOf("new Bar()"), "new Bar()".length(),
 				"Attempt to override final class");
 	}
 
