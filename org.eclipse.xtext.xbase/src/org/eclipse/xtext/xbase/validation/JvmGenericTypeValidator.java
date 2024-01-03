@@ -152,7 +152,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			JvmTypeReference extendedType = Iterables.getLast(superTypes);
 			var associated = getSuperTypeSourceElement(extendedType);
 			var eContainingFeature = associated.eContainingFeature();
-			if (((JvmGenericType) extendedType.getType()).isFinal()) {
+			if (((JvmDeclaredType) extendedType.getType()).isFinal()) {
 				error("Attempt to override final class",
 					primarySourceElement,
 					eContainingFeature, OVERRIDDEN_FINAL);
