@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -64,7 +63,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -97,11 +95,9 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -113,8 +109,6 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -179,12 +173,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Inject 
 	private UIStrings uiStrings;
-	
-	@Inject
-	private ILogicalContainerProvider containerProvider;
-	
-	@Inject
-	private JvmTypeExtensions typeExtensions;
 	
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
@@ -791,95 +779,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 	}
 
-	@Check
-	public void checkDefaultSuperConstructor(XtendClass xtendClass) {
-		JvmGenericType inferredType = associations.getInferredType(xtendClass);
-		if (inferredType == null)
-			return;
-		Iterable<JvmConstructor> constructors = filter(inferredType.getMembers(), JvmConstructor.class);
-		if(inferredType.getExtendedClass() != null) {
-			JvmType superType = inferredType.getExtendedClass().getType();
-			if(superType instanceof JvmGenericType) {
-				Iterable<JvmConstructor> superConstructors = ((JvmGenericType) superType).getDeclaredConstructors();
-				for(JvmConstructor superConstructor: superConstructors) {
-					if(superConstructor.getParameters().isEmpty()) 
-						// there is a default super constructor. nothing more to check
-						return;
-				}
-				if(size(constructors) == 1 && typeExtensions.isSingleSyntheticDefaultConstructor(constructors.iterator().next())) {
-					List<String> issueData = newArrayList();
-					for(JvmConstructor superConstructor:superConstructors) {
-						issueData.add(EcoreUtil.getURI(superConstructor).toString());
-						issueData.add(doGetReadableSignature(xtendClass.getName(), superConstructor.getParameters()));
-					}
-					error("No default constructor in super type " + superType.getSimpleName() + "." +
-							xtendClass.getName() + " must define an explicit constructor.",
-							xtendClass, XTEND_TYPE_DECLARATION__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
-				} else {
-					for(JvmConstructor constructor: constructors) {
-						XExpression expression = containerProvider.getAssociatedExpression(constructor);
-						if (expression instanceof XBlockExpression) {
-							List<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
-							if(expressions.isEmpty() || !isDelegateConstructorCall(expressions.get(0))) {
-								EObject source = associations.getPrimarySourceElement(constructor);
-								error("No default constructor in super type " + superType.getSimpleName() 
-										+ ". Another constructor must be invoked explicitly.",
-										source, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
-							}
-						}
-					}
-				}
-			}
-		} 
-	}
-
-	protected boolean isDelegateConstructorCall(XExpression expression) {
-		if(expression instanceof XFeatureCall) {
-			JvmIdentifiableElement feature = ((XFeatureCall)expression).getFeature();
-			return (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor);
-		}
-		return false;
-	}
-
 	protected boolean isInterface(JvmDeclaredType type) {
 		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
 	}
 
 	protected String canonicalName(JvmIdentifiableElement element) {
 		return (element != null) ? notNull(element.getIdentifier()) : null;
-	}
-
-	protected String getReadableSignature(JvmExecutable executable) {
-		if (executable == null)
-			return "null";
-		return doGetReadableSignature(executable.getSimpleName(), executable.getParameters());
-	}
-
-	protected String doGetReadableSignature(String simpleName, List<JvmFormalParameter> parameters) {
-		return getReadableSignature(simpleName,
-				Lists.transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
-					@Override
-					public JvmTypeReference apply(JvmFormalParameter from) {
-						return from.getParameterType();
-					}
-				}));
-	}
-
-	protected String getReadableSignature(String elementName, List<JvmTypeReference> parameterTypes) {
-		StringBuilder result = new StringBuilder(elementName);
-		result.append('(');
-		for (int i = 0; i < parameterTypes.size(); i++) {
-			if (i != 0) {
-				result.append(", ");
-			}
-			JvmTypeReference parameterType = parameterTypes.get(i);
-			if (parameterType != null)
-				result.append(parameterType.getSimpleName());
-			else
-				result.append("null");
-		}
-		result.append(')');
-		return result.toString();
 	}
 
 	@Check

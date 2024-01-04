@@ -9,6 +9,7 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
@@ -32,7 +33,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -45,9 +48,14 @@ import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.typesystem.override.ConflictingDefaultOperation;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
@@ -84,6 +92,12 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IVisibilityHelper visibilityHelper;
 
+	@Inject
+	private JvmTypeExtensions typeExtensions;
+
+	@Inject
+	private ILogicalContainerProvider containerProvider;
+
 	@Override
 	public void register(EValidatorRegistrar registrar) {
 		// library validator is not registered for a specific language
@@ -110,6 +124,8 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkJvmGenericType(JvmGenericType type) {
+		var sourceType = associations.getPrimarySourceElement(type);
+		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));
 		handleExceptionDuringValidation(() -> checkSuperTypes(type));
 		type.getDeclaredFields().forEach(field -> {
 			if (isAssociatedToSource(field))
@@ -229,6 +245,77 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			associated = associations.getPrimarySourceElement(extendedType);
 		}
 		return associated;
+	}
+
+	protected void checkDefaultSuperConstructor(EObject sourceType, JvmGenericType type) {
+		Iterable<JvmConstructor> constructors = filter(type.getMembers(), JvmConstructor.class);
+		if(type.getExtendedClass() != null) {
+			JvmType superType = type.getExtendedClass().getType();
+			if(superType instanceof JvmGenericType) {
+				Iterable<JvmConstructor> superConstructors = ((JvmGenericType) superType).getDeclaredConstructors();
+				for(JvmConstructor superConstructor: superConstructors) {
+					if(superConstructor.getParameters().isEmpty()) 
+						// there is a default super constructor. nothing more to check
+						return;
+				}
+				if(size(constructors) == 1 && typeExtensions.isSingleSyntheticDefaultConstructor(constructors.iterator().next())) {
+					List<String> issueData = newArrayList();
+					for(JvmConstructor superConstructor:superConstructors) {
+						issueData.add(EcoreUtil.getURI(superConstructor).toString());
+						issueData.add(doGetReadableSignature(type.getSimpleName(), superConstructor.getParameters()));
+					}
+					error("No default constructor in super type " + superType.getSimpleName() + "." +
+							type.getSimpleName() + " must define an explicit constructor.",
+							sourceType, getFeatureForIssue(sourceType), MISSING_CONSTRUCTOR,
+							toArray(issueData, String.class));
+				} else {
+					for(JvmConstructor constructor: constructors) {
+						XExpression expression = containerProvider.getAssociatedExpression(constructor);
+						if (expression instanceof XBlockExpression) {
+							List<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
+							if(expressions.isEmpty() || !isDelegateConstructorCall(expressions.get(0))) {
+								EObject source = associations.getPrimarySourceElement(constructor);
+								error("No default constructor in super type " + superType.getSimpleName() 
+										+ ". Another constructor must be invoked explicitly.",
+										source, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
+							}
+						}
+					}
+				}
+			}
+		} 
+	}
+
+	protected String doGetReadableSignature(String simpleName, List<JvmFormalParameter> parameters) {
+		return getReadableSignature(simpleName,
+			parameters.stream()
+				.map(JvmFormalParameter::getParameterType)
+				.collect(Collectors.toList()));
+	}
+
+	protected String getReadableSignature(String elementName, List<JvmTypeReference> parameterTypes) {
+		StringBuilder result = new StringBuilder(elementName);
+		result.append('(');
+		for (int i = 0; i < parameterTypes.size(); i++) {
+			if (i != 0) {
+				result.append(", ");
+			}
+			JvmTypeReference parameterType = parameterTypes.get(i);
+			if (parameterType != null)
+				result.append(parameterType.getSimpleName());
+			else
+				result.append("null");
+		}
+		result.append(')');
+		return result.toString();
+	}
+
+	protected boolean isDelegateConstructorCall(XExpression expression) {
+		if(expression instanceof XFeatureCall) {
+			JvmIdentifiableElement feature = ((XFeatureCall)expression).getFeature();
+			return (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor);
+		}
+		return false;
 	}
 
 	protected void checkMemberNamesAreUnique(JvmGenericType type) {
