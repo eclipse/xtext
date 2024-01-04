@@ -218,6 +218,14 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
+	/**
+	 * @since 2.34
+	 */
+	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
+	/**
+	 * @since 2.34
+	 */
+	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
 
 	private IssueCodes() {
 	}

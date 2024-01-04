@@ -60,8 +60,6 @@ public final class IssueCodes {
 	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
 	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
 
-	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
-	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
 	public static final String CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED = ISSUE_CODE_PREFIX
 			+ "constructor_type_params_not_supported";
 	public static final String CONSTRUCTOR_NOT_PERMITTED = ISSUE_CODE_PREFIX + "constructor_not_permitted";

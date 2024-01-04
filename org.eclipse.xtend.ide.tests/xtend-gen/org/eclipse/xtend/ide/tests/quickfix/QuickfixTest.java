@@ -4167,7 +4167,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.MISSING_CONSTRUCTOR).assertResolutionLabels("Add constructor new(int)");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.MISSING_CONSTRUCTOR).assertResolutionLabels("Add constructor new(int)");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();

@@ -363,7 +363,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 	}
 
-	@Fix(IssueCodes.MISSING_CONSTRUCTOR)
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.MISSING_CONSTRUCTOR)
 	public void addConstuctorFromSuper(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData() != null) {
 			for(int i=0; i<issue.getData().length; i+=2) {
