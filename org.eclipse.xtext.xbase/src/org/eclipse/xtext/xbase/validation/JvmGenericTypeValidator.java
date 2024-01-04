@@ -9,10 +9,10 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -259,7 +259,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 						return;
 				}
 				if(size(constructors) == 1 && typeExtensions.isSingleSyntheticDefaultConstructor(constructors.iterator().next())) {
-					List<String> issueData = newArrayList();
+					List<String> issueData = new ArrayList<>();
 					for(JvmConstructor superConstructor:superConstructors) {
 						issueData.add(EcoreUtil.getURI(superConstructor).toString());
 						issueData.add(doGetReadableSignature(type.getSimpleName(), superConstructor.getParameters()));
