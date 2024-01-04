@@ -408,13 +408,19 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testMissingConstructor() throws Exception {
-		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor {}");
-		helper.assertError(clazz, XTEND_CLASS, MISSING_CONSTRUCTOR);
+		var source = "class K extends test.NoDefaultConstructor {}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CLASS, MISSING_CONSTRUCTOR,
+				source.indexOf("K"), 1,
+				"must define an explicit constructor");
 	}
 	
 	@Test public void testMissingSuperConstructorCall() throws Exception {
-		XtendClass clazz = clazz("class K extends test.NoDefaultConstructor { new() {} }");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, MUST_INVOKE_SUPER_CONSTRUCTOR);
+		var source = "class K extends test.NoDefaultConstructor { new() {} }";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, MUST_INVOKE_SUPER_CONSTRUCTOR,
+				source.indexOf("new() {}"), "new() {}".length(),
+				"Another constructor must be invoked explicitly");
 	}
 	
 	@Test public void testSuperConstructorCall() throws Exception {
