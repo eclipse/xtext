@@ -10,7 +10,7 @@
 	<artifactId>org.eclipse.xtend.performance.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 
-	<name>Xtend IDE Performance Tests</name>
+	<name>Xtend Performance Tests</name>
 
 	<build>
 		<plugins>
