@@ -97,7 +97,7 @@ public class ValidationBug435020Test extends AbstractXtendTestCase {
       final String source = _builder.toString();
       final XtendFile c = this.parser.parse(source);
       this.helper.assertError(c, XtendPackage.Literals.XTEND_FIELD, IssueCodes.ANONYMOUS_CLASS_STATIC_FIELD, 
-        source.indexOf("static"), "static".length(), 
+        source.indexOf("x"), 1, 
         "A static field of an anonymous class must be final");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -166,7 +166,7 @@ public class ValidationBug435020Test extends AbstractXtendTestCase {
       final String source = _builder.toString();
       final XtendFile c = this.parser.parse(source);
       this.helper.assertError(c, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.ANONYMOUS_CLASS_STATIC_METHOD, 
-        source.indexOf("static"), "static".length(), 
+        source.indexOf("bar"), "bar".length(), 
         "A method of an anonymous class cannot be static");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -53,7 +53,7 @@ class ValidationBug435020Test extends AbstractXtendTestCase {
 		'''
 		val c = parser.parse(source)
 		c.assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.ANONYMOUS_CLASS_STATIC_FIELD,
-			source.indexOf("static"), "static".length,
+			source.indexOf("x"), 1,
 			"A static field of an anonymous class must be final"
 		)
 	}
@@ -88,7 +88,7 @@ class ValidationBug435020Test extends AbstractXtendTestCase {
 		'''
 		val c = parser.parse(source)
 		c.assertError(XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.ANONYMOUS_CLASS_STATIC_METHOD,
-			source.indexOf("static"), "static".length,
+			source.indexOf("bar"), "bar".length,
 			"A method of an anonymous class cannot be static"
 		)
 	}

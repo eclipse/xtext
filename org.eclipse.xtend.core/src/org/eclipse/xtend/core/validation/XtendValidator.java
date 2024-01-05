@@ -582,27 +582,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	}
 
 	@Check
-	public void checkStaticMembers(AnonymousClass anonymousClass) {
-		for (XtendMember member : anonymousClass.getMembers()) {
-			if (member.isStatic()) {
-				if (member instanceof XtendExecutable) {
-					error("A method of an anonymous class cannot be static.", member, XTEND_MEMBER__MODIFIERS,
-							INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_METHOD);
-				} else if (member instanceof XtendField) {
-					JvmField field = (JvmField) jvmModelAssociations.getPrimaryJvmElement(member);
-					if (!member.isFinal()) {
-						error("A static field of an anonymous class must be final.", member, XTEND_MEMBER__MODIFIERS,
-								INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_FIELD);
-					} else if (!field.isConstant()) {
-						error("A static field of an anonymous class must be initialized with a constant expression.",
-								member, XTEND_FIELD__INITIAL_VALUE, INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_FIELD);
-					}
-				}
-			}
-		}
-	}
-
-	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 		if (inferredType instanceof JvmGenericType) {

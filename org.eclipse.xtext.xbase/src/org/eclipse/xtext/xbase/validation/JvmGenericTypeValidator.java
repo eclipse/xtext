@@ -135,6 +135,8 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		handleExceptionDuringValidation(() -> checkDuplicateAndOverriddenFunctions(sourceType, type));
 		var members = type.getMembers();
 		handleExceptionDuringValidation(() -> checkJvmExecutables(members));
+		if (isAnonymous(type))
+			handleExceptionDuringValidation(() -> checkAnonymousClassStaticMembers(type));
 		members.forEach(member -> {
 			EcoreUtil2.eAllOfType(member, JvmGenericType.class).
 				forEach(nestedType ->
@@ -244,6 +246,30 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			associated = associations.getPrimarySourceElement(extendedType);
 		}
 		return associated;
+	}
+
+	protected void checkAnonymousClassStaticMembers(JvmGenericType type) {
+		type.getMembers().stream().filter(this::isAssociatedToSource).forEach(member -> {
+			var source = associations.getPrimarySourceElement(member);
+			if (member instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) member;
+				if (operation.isStatic())
+					error("A method of an anonymous class cannot be static.", source, getFeatureForIssue(source),
+						INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_METHOD);
+			} else if (member instanceof JvmField) {
+				JvmField field = (JvmField) member;
+				if (field.isStatic()) {
+					if (!field.isFinal()) {
+						error("A static field of an anonymous class must be final.", source, getFeatureForIssue(source),
+							INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_FIELD);
+					} else if (!field.isConstant()) {
+						var initExpression = Iterables.getLast(filter(source.eContents(), XExpression.class));
+						error("A static field of an anonymous class must be initialized with a constant expression.",
+							source, initExpression.eContainingFeature(), INSIGNIFICANT_INDEX, ANONYMOUS_CLASS_STATIC_FIELD);
+					}
+				}
+			}
+		});
 	}
 
 	protected void checkDefaultSuperConstructor(EObject sourceType, JvmGenericType type) {
