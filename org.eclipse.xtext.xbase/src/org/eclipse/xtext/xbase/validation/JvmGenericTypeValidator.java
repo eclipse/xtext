@@ -126,13 +126,13 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	protected void checkJvmGenericType(JvmGenericType type) {
 		var sourceType = associations.getPrimarySourceElement(type);
 		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));
-		handleExceptionDuringValidation(() -> checkSuperTypes(type));
+		handleExceptionDuringValidation(() -> checkSuperTypes(sourceType, type));
 		type.getDeclaredFields().forEach(field -> {
 			if (isAssociatedToSource(field))
 				handleExceptionDuringValidation(() -> checkField(field));
 		});
 		handleExceptionDuringValidation(() -> checkMemberNamesAreUnique(type));
-		handleExceptionDuringValidation(() -> checkDuplicateAndOverriddenFunctions(type));
+		handleExceptionDuringValidation(() -> checkDuplicateAndOverriddenFunctions(sourceType, type));
 		var members = type.getMembers();
 		handleExceptionDuringValidation(() -> checkJvmExecutables(members));
 		members.forEach(member -> {
@@ -150,14 +150,13 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				.forEach(this::checkJvmExecutable);
 	}
 
-	protected void checkSuperTypes(JvmGenericType type) {
-		var primarySourceElement = associations.getPrimarySourceElement(type);
-		if (primarySourceElement == null)
+	protected void checkSuperTypes(EObject sourceType, JvmGenericType type) {
+		if (sourceType == null)
 			return;
 		if (hasCycleInHierarchy(type, new HashSet<>())) {
 			error("The inheritance hierarchy of " + notNull(type.getSimpleName()) + " contains cycles",
-					primarySourceElement,
-					getFeatureForIssue(primarySourceElement), CYCLIC_INHERITANCE);
+					sourceType,
+					getFeatureForIssue(sourceType), CYCLIC_INHERITANCE);
 		}
 		var superTypes = type.getSuperTypes();
 		if (type.isInterface()) {
@@ -167,10 +166,10 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				var eContainingFeature = associated.eContainingFeature();
 				if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
 					error("Extended interface must be an interface",
-						primarySourceElement,
+						sourceType,
 						eContainingFeature, i, INTERFACE_EXPECTED);
 				}
-				checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+				checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
 						extendedType,
 						eContainingFeature, i);
 			}
@@ -180,10 +179,10 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			var eContainingFeature = associated.eContainingFeature();
 			if (((JvmDeclaredType) extendedType.getType()).isFinal()) {
 				error("Attempt to override final class",
-					primarySourceElement,
+					sourceType,
 					eContainingFeature, OVERRIDDEN_FINAL);
 			}
-			checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+			checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
 					extendedType,
 					eContainingFeature, INSIGNIFICANT_INDEX);
 		} else {
@@ -203,25 +202,25 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 					expectedInterfaceIndex++;
 					if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
 						error("Implemented interface must be an interface",
-							primarySourceElement,
+							sourceType,
 							eContainingFeature, expectedInterfaceIndex, INTERFACE_EXPECTED);
 					}
-					checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+					checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
 							extendedType,
 							eContainingFeature, expectedInterfaceIndex);
 				} else { // assume to be expected as a class
 					if (!(extendedType.getType() instanceof JvmGenericType)
 							|| ((JvmGenericType) extendedType.getType()).isInterface()) {
 						error("Superclass must be a class",
-							primarySourceElement,
+							sourceType,
 							eContainingFeature, CLASS_EXPECTED);
 					} else {
 						if (((JvmGenericType) extendedType.getType()).isFinal()) {
 							error("Attempt to override final class",
-								primarySourceElement,
+								sourceType,
 								eContainingFeature, OVERRIDDEN_FINAL);
 						}
-						checkWildcardSupertype(primarySourceElement, notNull(type.getSimpleName()),
+						checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
 								extendedType,
 								eContainingFeature, INSIGNIFICANT_INDEX);
 					}
@@ -345,8 +344,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected void checkDuplicateAndOverriddenFunctions(JvmGenericType type) {
-		var sourceType = associations.getPrimarySourceElement(type);
+	protected void checkDuplicateAndOverriddenFunctions(EObject sourceType, JvmGenericType type) {
 		JavaVersion targetVersion = getGeneratorConfig(sourceType).getJavaSourceVersion();
 		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(type, targetVersion);
 		
@@ -682,7 +680,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void reportMissingImplementations(
-			EObject source,
+			EObject sourceType,
 			JvmGenericType inferredType, List<IResolvedOperation> operationsMissingImplementation) {
 		StringBuilder errorMsg = new StringBuilder();
 		String name = inferredType.getSimpleName();
@@ -715,10 +713,10 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			JvmTypeReference superType = Iterables.getLast(inferredType.getSuperTypes());
 			var associated = getSuperTypeSourceElement(superType);
 			var eContainingFeature = associated.eContainingFeature();
-			error(errorMsg.toString(), source, eContainingFeature, ANONYMOUS_CLASS_MISSING_MEMBERS, 
+			error(errorMsg.toString(), sourceType, eContainingFeature, ANONYMOUS_CLASS_MISSING_MEMBERS, 
 					toArray(uris, String.class));
 		} else {
-			error(errorMsg.toString(), source, getFeatureForIssue(source), CLASS_MUST_BE_ABSTRACT, 
+			error(errorMsg.toString(), sourceType, getFeatureForIssue(sourceType), CLASS_MUST_BE_ABSTRACT, 
 							toArray(uris, String.class));
 		}
 	}
