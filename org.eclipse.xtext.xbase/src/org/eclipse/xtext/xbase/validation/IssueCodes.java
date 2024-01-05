@@ -226,6 +226,14 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
+	/**
+	 * @since 2.34
+	 */
+	public static final String ANONYMOUS_CLASS_STATIC_METHOD = ISSUE_CODE_PREFIX + "anonymous_class_static_method";
+	/**
+	 * @since 2.34
+	 */
+	public static final String ANONYMOUS_CLASS_STATIC_FIELD = ISSUE_CODE_PREFIX + "anonymous_class_static_field";
 
 	private IssueCodes() {
 	}

@@ -48,9 +48,6 @@ public final class IssueCodes {
 	public static final String XBASE_LIB_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "xbase_lib_not_on_classpath";
 	public static final String JDK_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "jdk_not_on_classpath";
 
-	public static final String ANONYMOUS_CLASS_STATIC_METHOD = ISSUE_CODE_PREFIX + "anonymous_class_static_method";
-	public static final String ANONYMOUS_CLASS_STATIC_FIELD = ISSUE_CODE_PREFIX + "anonymous_class_static_field";
-
 	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
 	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
 	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
