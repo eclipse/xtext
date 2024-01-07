@@ -45,8 +45,8 @@ Export-Package: org.eclipse.xtext.builder,
  org.eclipse.xtext.builder.trace;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
  org.eclipse.xtext.builder.trace.impl;x-internal:=true,
  org.eclipse.xtext.builder.trace.util;x-internal:=true
-Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.util,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.34.0",
+ org.eclipse.xtext.util;bundle-version="2.34.0",
  org.eclipse.emf.ecore;bundle-version="2.26.0";visibility:=reexport,
  com.google.guava;bundle-version="[33.0.0,34.0.0)",
  com.google.inject;bundle-version="7.0.0",
@@ -55,18 +55,18 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.core.runtime;bundle-version="3.24.100";resolution:=optional;x-installation:=greedy,
  org.eclipse.jface;bundle-version="3.25.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui;bundle-version="3.201.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui;bundle-version="2.34.0",
  org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.common.types.ui;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.common.types.ui;bundle-version="2.34.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.launching;bundle-version="3.19.500";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.forms;bundle-version="3.11.300";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0";visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.34.0";visibility:=reexport,
  org.eclipse.emf.ecore.editor;bundle-version="2.17.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.core;bundle-version="3.19.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.ui;bundle-version="3.16.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.jdt.debug;bundle-version="3.19.100";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.console;bundle-version="3.11.100",
- org.eclipse.xtext.smap
+ org.eclipse.xtext.smap;bundle-version="2.34.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.24"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator

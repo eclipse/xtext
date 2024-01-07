@@ -51,18 +51,18 @@ Export-Package: org.eclipse.xtend.core;x-friends:="org.eclipse.xtend.ide.common,
  org.eclipse.xtend.core.xtend.util;x-internal:=true
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.24.100",
  org.eclipse.emf.ecore;bundle-version="2.26.0";visibility:=reexport,
- org.eclipse.xtext.common.types;visibility:=reexport,
- org.eclipse.xtext.xbase;visibility:=reexport,
- org.eclipse.xtext,
- org.eclipse.xtext.util,
+ org.eclipse.xtext.common.types;bundle-version="2.34.0";visibility:=reexport,
+ org.eclipse.xtext.xbase;bundle-version="2.34.0";visibility:=reexport,
+ org.eclipse.xtext;bundle-version="2.34.0",
+ org.eclipse.xtext.util;bundle-version="2.34.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.jdt.core;bundle-version="3.29.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
  org.eclipse.xtend.lib;bundle-version="2.34.0",
- org.eclipse.xtext.smap,
+ org.eclipse.xtext.smap;bundle-version="2.34.0",
  org.apache.ant;bundle-version="1.7.1";resolution:=optional;x-installation:=greedy,
  org.objectweb.asm;bundle-version="[9.6.0,9.7.0)";resolution:=optional,
- org.eclipse.xtext.xbase.testing;resolution:=optional
+ org.eclipse.xtext.xbase.testing;bundle-version="2.34.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.24"
 Automatic-Module-Name: org.eclipse.xtend.core

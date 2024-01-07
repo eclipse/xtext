@@ -18,12 +18,12 @@ Export-Package: org.eclipse.xtext.testing,
  org.eclipse.xtext.testing.smoketest.processors,
  org.eclipse.xtext.testing.util,
  org.eclipse.xtext.testing.validation
-Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.ide;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.34.0";visibility:=reexport,
+ org.eclipse.xtext.ide;bundle-version="2.34.0";visibility:=reexport,
  org.eclipse.lsp4j;resolution:=optional,
  org.eclipse.lsp4j.jsonrpc;resolution:=optional,
  org.junit;bundle-version="4.13.2",
- org.eclipse.xtend.lib
+ org.eclipse.xtend.lib;bundle-version="2.34.0"
 Import-Package: org.apache.log4j;version="1.2.24",
  org.apache.log4j.spi;version="1.2.24",
  org.junit.jupiter.api;version="[5.1.0,6.0.0)",

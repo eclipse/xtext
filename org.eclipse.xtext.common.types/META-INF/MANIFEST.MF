@@ -5,13 +5,12 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.34.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.common.types;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: 
- org.eclipse.emf.ecore;bundle-version="2.26.0",
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.26.0",
  org.eclipse.emf.common;bundle-version="2.24.0",
  com.google.inject;bundle-version="7.0.0",
- org.eclipse.xtext,
+ org.eclipse.xtext;bundle-version="2.34.0",
  org.objectweb.asm;bundle-version="[9.6.0,9.7.0)",
- org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib;bundle-version="2.34.0",
  com.google.guava;bundle-version="[33.0.0,34.0.0)"
 Import-Package: io.github.classgraph;version="4.8.165",
  org.apache.commons.logging;version="1.0.4";resolution:=optional,

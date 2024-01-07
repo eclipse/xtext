@@ -6,13 +6,13 @@ Bundle-Version: 2.34.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates;singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.util,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.34.0",
+ org.eclipse.xtext.util;bundle-version="2.34.0",
  org.eclipse.emf.ecore;bundle-version="2.26.0",
  org.eclipse.emf.common;bundle-version="2.24.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.eclipse.xtend.lib
+ org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
+ org.eclipse.xtend.lib;bundle-version="2.34.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.24"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
@@ -33,4 +33,3 @@ Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext
  org.eclipse.xtext.ui.codetemplates.validation;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.serializer
 Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates
-

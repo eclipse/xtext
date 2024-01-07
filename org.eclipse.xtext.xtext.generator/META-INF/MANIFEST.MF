@@ -6,11 +6,11 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Name: Xtext Generator 2
 Bundle-Vendor: Eclipse Xtext
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;x-installation:=greedy,
- org.eclipse.xtext.util;x-installation:=greedy,
- org.eclipse.xtext.xbase.lib;visibility:=reexport;x-installation:=greedy,
- org.eclipse.xtend.lib,
- org.eclipse.xtext.ecore,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.34.0";x-installation:=greedy,
+ org.eclipse.xtext.util;bundle-version="2.34.0";x-installation:=greedy,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.34.0";visibility:=reexport;x-installation:=greedy,
+ org.eclipse.xtend.lib;bundle-version="2.34.0",
+ org.eclipse.xtext.ecore;bundle-version="2.34.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.29.0";visibility:=reexport;x-installation:=greedy,
  org.eclipse.emf.ecore;bundle-version="2.26.0",
  org.eclipse.emf.common;bundle-version="2.24.0",
