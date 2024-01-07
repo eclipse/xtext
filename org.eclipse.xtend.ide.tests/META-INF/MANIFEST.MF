@@ -43,5 +43,5 @@ Import-Package: org.apache.log4j;version="1.2.24",
  org.junit.runner;version="4.13.2",
  org.junit.runners;version="4.13.2",
  org.junit.runners.model;version="4.13.2"
-Export-Package: org.eclipse.xtend.ide.tests;x-friends:="org.eclipse.xtend.performance.tests"
+Export-Package: org.eclipse.xtend.ide.tests;version="2.34.0";x-friends:="org.eclipse.xtend.performance.tests"
 Automatic-Module-Name: org.eclipse.xtend.ide.tests

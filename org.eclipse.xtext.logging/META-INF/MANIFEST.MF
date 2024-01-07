@@ -9,5 +9,5 @@ Bundle-Version: 1.2.24.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Import-Package: org.eclipse.core.runtime;bundle-version="3.24.100",
  org.osgi.framework;version="1.5.0"
-Export-Package: org.eclipse.xtext.logging;x-internal:=true
+Export-Package: org.eclipse.xtext.logging;version="2.34.0";x-internal:=true
 Automatic-Module-Name: org.eclipse.xtext.logging

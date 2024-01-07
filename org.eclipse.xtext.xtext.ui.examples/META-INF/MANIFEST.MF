@@ -12,5 +12,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.xtext.xtext.ui.examples;x-internal:=true
+Export-Package: org.eclipse.xtext.xtext.ui.examples;version="2.34.0";x-internal:=true
 Automatic-Module-Name: org.eclipse.xtext.xtext.ui.examples

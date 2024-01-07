@@ -5,7 +5,7 @@ Bundle-Name: %Bundle-Name
 Bundle-Vendor: %Bundle-Vendor
 Bundle-Version: 2.34.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtend.lib
+Export-Package: org.eclipse.xtend.lib;version="2.34.0"
 Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.34.0"
 Automatic-Module-Name: org.eclipse.xtend.lib.gwt
 Eclipse-SourceReferences: eclipseSourceReferences

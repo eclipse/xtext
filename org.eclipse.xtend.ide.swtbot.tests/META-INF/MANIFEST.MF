@@ -12,7 +12,7 @@ Import-Package: org.apache.log4j;version="1.2.24",
  org.junit.runner.notification;version="4.13.2",
  org.junit.runners;version="4.13.2",
  org.slf4j;resolution:=optional
-Export-Package: org.eclipse.xtend.ide.tests;x-friends:="org.eclipse.xtend.performance.tests"
+Export-Package: org.eclipse.xtend.ide.tests;version="2.34.0";x-friends:="org.eclipse.xtend.performance.tests"
 Require-Bundle: org.eclipse.swtbot.eclipse.core;bundle-version="2.6.0",
  org.eclipse.swtbot.eclipse.finder;bundle-version="2.6.0",
  org.eclipse.swtbot.junit4_x;bundle-version="2.6.0",

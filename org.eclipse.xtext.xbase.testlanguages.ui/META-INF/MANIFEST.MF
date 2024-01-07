@@ -32,12 +32,12 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.13.2",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtext.xbase.testlanguages.bug462047.ui;x-internal:=true,
- org.eclipse.xtext.xbase.testlanguages.bug462047.ui.contentassist,
- org.eclipse.xtext.xbase.testlanguages.ui,
- org.eclipse.xtext.xbase.testlanguages.ui.contentassist,
- org.eclipse.xtext.xbase.testlanguages.ui.internal,
- org.eclipse.xtext.xbase.testlanguages.bug462047.ui.editor,
- org.eclipse.xtext.xbase.testlanguages.ui.editor
+Export-Package: org.eclipse.xtext.xbase.testlanguages.bug462047.ui;version="2.34.0";x-internal:=true,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.ui.contentassist;version="2.34.0",
+ org.eclipse.xtext.xbase.testlanguages.ui;version="2.34.0",
+ org.eclipse.xtext.xbase.testlanguages.ui.contentassist;version="2.34.0",
+ org.eclipse.xtext.xbase.testlanguages.ui.internal;version="2.34.0",
+ org.eclipse.xtext.xbase.testlanguages.bug462047.ui.editor;version="2.34.0",
+ org.eclipse.xtext.xbase.testlanguages.ui.editor;version="2.34.0"
 Bundle-Activator: org.eclipse.xtext.xbase.testlanguages.ui.internal.TestlanguagesActivator
 Automatic-Module-Name: org.eclipse.xtext.xbase.testlanguages.ui

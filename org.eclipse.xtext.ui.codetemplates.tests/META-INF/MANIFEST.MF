@@ -24,7 +24,7 @@ Import-Package: org.junit;version="4.13.2",
  org.junit.runners.model;version="4.13.2",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtext.ui.codetemplates.tests;x-internal=true,
- org.eclipse.xtext.ui.codetemplates.ui.tests;x-internal=true
+Export-Package: org.eclipse.xtext.ui.codetemplates.tests;version="2.34.0";x-internal=true,
+ org.eclipse.xtext.ui.codetemplates.ui.tests;version="2.34.0";x-internal=true
 Bundle-Vendor: %providerName
 Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates.tests
