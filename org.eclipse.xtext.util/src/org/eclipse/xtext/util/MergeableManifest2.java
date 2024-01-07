@@ -10,9 +10,6 @@ package org.eclipse.xtext.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,6 +45,7 @@ public class MergeableManifest2 implements Cloneable {
 	public static final String SIGNATURE_VERSION = "Signature-Version";
 	public static final String REQUIRE_BUNDLE = "Require-Bundle";
 	public static final String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName";
+	public static final String BUNDLE_VERSION = "Bundle-Version";
 	public static final String EXPORT_PACKAGE = "Export-Package";
 	public static final String IMPORT_PACKAGE = "Import-Package";
 	public static final String BUNDLE_REQUIREDEXECUTIONENVIRONMENT = "Bundle-RequiredExecutionEnvironment";
@@ -64,70 +62,6 @@ public class MergeableManifest2 implements Cloneable {
 
 	private Pattern emptyEntryPattern = newEmptyLinePattern();
 	
-	public static void main(String[] args) throws IOException {
-		File gitRoot = new File("./..");
-		for (File bundleDir: gitRoot.listFiles()) {
-			if (bundleDir.isDirectory()) {
-				File manifest = new File(bundleDir, "META-INF/MANIFEST.MF");
-				if (manifest.exists()) {
-					MergeableManifest2 mergable;
-					try(FileInputStream is = new FileInputStream(manifest)) {
-						mergable = new MergeableManifest2(is);
-					}
-					updateRequiredBundles(mergable);
-					updateImportedPackages(mergable);
-					updateExportedPackages(mergable);
-					try(FileOutputStream out = new FileOutputStream(manifest)) {
-						mergable.write(out);
-					}
-				}
-			}
-		}
-	}
-
-	private static void updateRequiredBundles(MergeableManifest2 mergable) {
-		String oldBundles = mergable.mainAttributes.get(REQUIRE_BUNDLE);
-		if (oldBundles == null)
-			return;
-		BundleList requiredBundles = BundleList.fromInput(oldBundles, mergable.newline ,"bundle-version");
-		List<String> updatedBundles = new ArrayList<>();
-		for(Bundle requiredBundle: requiredBundles.list) {
-			String bundleName = requiredBundle.getName();
-			if (bundleName.startsWith("org.eclipse.x")) {
-				updatedBundles.add(bundleName + ";bundle-version=\"2.34.0\"");
-			}
-		}
-		mergable.addRequiredBundles(updatedBundles.toArray(new String[0]), true);
-	}
-	
-	private static void updateImportedPackages(MergeableManifest2 mergable) {
-		String oldPackages = mergable.mainAttributes.get(IMPORT_PACKAGE);
-		if (oldPackages == null)
-			return;
-		BundleList importedPackages = BundleList.fromInput(oldPackages, mergable.newline, "version");
-		List<String> updatedPackages = new ArrayList<>();
-		for(Bundle importedPackage: importedPackages.list) {
-			String packageName = importedPackage.getName();
-			if (packageName.startsWith("org.eclipse.x")) {
-				updatedPackages.add(packageName + ";version=\"2.34.0\"");
-			}
-		}
-		mergable.addImportedPackages(updatedPackages.toArray(new String[0]), true);
-	}
-	
-	private static void updateExportedPackages(MergeableManifest2 mergable) {
-		String oldPackages = mergable.mainAttributes.get(EXPORT_PACKAGE);
-		if (oldPackages == null)
-			return;
-		BundleList exportedPackages = BundleList.fromInput(oldPackages, mergable.newline, "version");
-		List<String> updatedPackages = new ArrayList<>();
-		for(Bundle exportedPackage: exportedPackages.list) {
-			String packageName = exportedPackage.getName();
-			updatedPackages.add(packageName + ";version=\"2.34.0\"");
-		}
-		mergable.addExportedPackages(updatedPackages.toArray(new String[0]), true);
-	}
-
 	/**
 	 * Create a new manifest from the given stream and with the given name. As
 	 * the stream is created by the caller the caller is also responsible for
@@ -207,7 +141,7 @@ public class MergeableManifest2 implements Cloneable {
 				} else if (version == null && name.equals(SIGNATURE_VERSION)) {
 					version = value;
 				} else if (name.equals(BUNDLE_SYMBOLIC_NAME)) {
-					this.name = Bundle.fromInput(value).getName();
+					this.name = BundleOrPackage.fromInput(value).getName();
 				} else if (name.equals(BUNDLE_REQUIREDEXECUTIONENVIRONMENT)) {
 					bree = value;
 				} else if (name.equals(BUNDLE_ACTIVATOR)) {
@@ -352,10 +286,10 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(REQUIRE_BUNDLE);
 		if (oldBundles == null)
 			oldBundles = "";
-		BundleList oldResultList = BundleList.fromInput(oldBundles, newline, "bundle-version");
-		BundleList resultList = BundleList.fromInput(oldBundles, newline, "bundle-version");
+		BundleOrPackageList oldResultList = BundleOrPackageList.fromInput(oldBundles, newline, "bundle-version");
+		BundleOrPackageList resultList = BundleOrPackageList.fromInput(oldBundles, newline, "bundle-version");
 		for (String bundle : requiredBundles) {
-			Bundle newBundle = Bundle.fromInput(bundle);
+			BundleOrPackage newBundle = BundleOrPackage.fromInput(bundle);
 			if (!force && name != null && name.equals(newBundle.getName()))
 				continue;
 			resultList.mergeInto(newBundle, force);
@@ -368,7 +302,7 @@ public class MergeableManifest2 implements Cloneable {
 	}
 
 	/**
-	 * Add the set with given bundles to the "Import-Package" main attribute.
+	 * Add the set with given packages to the "Import-Package" main attribute.
 	 * 
 	 * @param importedPackages The set of all packages to add.
 	 */
@@ -377,7 +311,7 @@ public class MergeableManifest2 implements Cloneable {
 	}
 
 	/**
-	 * Add the list with given bundles to the "Import-Package" main attribute.
+	 * Add the list with given packages to the "Import-Package" main attribute.
 	 * 
 	 * @param importedPackages The list of all packages to add.
 	 */
@@ -386,18 +320,18 @@ public class MergeableManifest2 implements Cloneable {
 	}
 	
 	/**
-	 * Add the list with given bundles to the "Import-Package" main attribute.
+	 * Add the list with given packages to the "Import-Package" main attribute.
 	 * 
 	 * @param importedPackages The list of all packages to add.
 	 */
 	public void addImportedPackages(String[] importedPackages, boolean force) {
-		String oldBundles = mainAttributes.get(IMPORT_PACKAGE);
-		if (oldBundles == null)
-			oldBundles = "";
-		BundleList oldResultList = BundleList.fromInput(oldBundles, newline, "version");
-		BundleList resultList = BundleList.fromInput(oldBundles, newline, "version");
-		for (String bundle : importedPackages)
-			resultList.mergeInto(Bundle.fromInput(bundle), force);
+		String oldPackages = mainAttributes.get(IMPORT_PACKAGE);
+		if (oldPackages == null)
+			oldPackages = "";
+		BundleOrPackageList oldResultList = BundleOrPackageList.fromInput(oldPackages, newline, "version");
+		BundleOrPackageList resultList = BundleOrPackageList.fromInput(oldPackages, newline, "version");
+		for (String importedPackage : importedPackages)
+			resultList.mergeInto(BundleOrPackage.fromInput(importedPackage), force);
 		String result = resultList.toString();
 		boolean changed = !oldResultList.toString().equals(result);
 		modified |= changed;
@@ -406,7 +340,7 @@ public class MergeableManifest2 implements Cloneable {
 	}
 
 	/**
-	 * Add the set with given bundles to the "Export-Package" main attribute.
+	 * Add the set with given packages to the "Export-Package" main attribute.
 	 * 
 	 * @param exportedPackages The set of all packages to add.
 	 */
@@ -415,7 +349,7 @@ public class MergeableManifest2 implements Cloneable {
 	}
 
 	/**
-	 * Add the list with given bundles to the "Export-Package" main attribute.
+	 * Add the list with given packages to the "Export-Package" main attribute.
 	 * 
 	 * @param exportedPackages The list of all packages to add.
 	 */
@@ -424,18 +358,18 @@ public class MergeableManifest2 implements Cloneable {
 	}
 	
 	/**
-	 * Add the list with given bundles to the "Export-Package" main attribute.
+	 * Add the list with given packages to the "Export-Package" main attribute.
 	 * 
 	 * @param exportedPackages The list of all packages to add.
 	 */
 	public void addExportedPackages(String[] exportedPackages, boolean force) {
-		String oldBundles = mainAttributes.get(EXPORT_PACKAGE);
-		if (oldBundles == null)
-			oldBundles = "";
-		BundleList oldResultList = BundleList.fromInput(oldBundles, newline, "version");
-		BundleList resultList = BundleList.fromInput(oldBundles, newline, "version");
-		for (String bundle : exportedPackages)
-			resultList.mergeInto(Bundle.fromInput(bundle), force);
+		String oldPackages = mainAttributes.get(EXPORT_PACKAGE);
+		if (oldPackages == null)
+			oldPackages = "";
+		BundleOrPackageList oldResultList = BundleOrPackageList.fromInput(oldPackages, newline, "version");
+		BundleOrPackageList resultList = BundleOrPackageList.fromInput(oldPackages, newline, "version");
+		for (String exportedPackage : exportedPackages)
+			resultList.mergeInto(BundleOrPackage.fromInput(exportedPackage), force);
 		String result = resultList.toString();
 		boolean changed = !oldResultList.toString().equals(result);
 		modified |= changed;
@@ -496,6 +430,10 @@ public class MergeableManifest2 implements Cloneable {
 	public void setLineDelimiter(String lineDelimeter) {
 		newline = lineDelimeter;
 		this.emptyEntryPattern = newEmptyLinePattern();
+	}
+	
+	String getLineDelimiter() {
+		return newline;
 	}
 
 	/**
@@ -753,54 +691,58 @@ public class MergeableManifest2 implements Cloneable {
 
 	}
 
-	private static class BundleList {
+	static class BundleOrPackageList {
 
-		private final List<Bundle> list;
+		private final List<BundleOrPackage> list;
 		private final String newline;
 		private final String versionString;
 
-		public BundleList(List<Bundle> list, String newline, String versionString) {
+		public BundleOrPackageList(List<BundleOrPackage> list, String newline, String versionString) {
 			this.list = list;
 			this.newline = newline;
 			this.versionString = versionString;
 		}
 
-		private static BundleList fromInput(String input, String newline, String versionString) {
+		static BundleOrPackageList fromInput(String input, String newline, String versionString) {
 			if (input.isEmpty())
-				return new BundleList(new ArrayList<>(), newline, versionString);
-			return new BundleList(splitAtCharHonorQuoting(input, ',').stream().map(s -> Bundle.fromInput(s))
+				return new BundleOrPackageList(new ArrayList<>(), newline, versionString);
+			return new BundleOrPackageList(splitAtCharHonorQuoting(input, ',').stream().map(s -> BundleOrPackage.fromInput(s))
 					.filter(b -> !"".equals(b.getName())).collect(Collectors.toList()), newline, versionString);
 		}
+		
+		public List<BundleOrPackage> list() {
+			return list;
+		}
 
-		public void mergeInto(Bundle newBundle, boolean force) {
+		public void mergeInto(BundleOrPackage newItem, boolean force) {
 			if (list.isEmpty()) {
-				list.add(newBundle);
+				list.add(newItem);
 				return;
 			}
 			boolean merged = false;
 			for (int i = 0; i < list.size(); i++) {
-				Bundle oldBundle = list.get(i);
-				if (oldBundle.hasSameName(newBundle)) {
-					String oldBundleNameIncludingWhitespacePrefix = oldBundle.getNameIncludingWhitespacePrefix();
-					String oldBundleVersion = oldBundle.getVersion();
-					String oldBundleSuffix = oldBundle.getSuffix();
-					String bundleVersion = oldBundleVersion == null || force ? newBundle.getVersion() : oldBundleVersion;
+				BundleOrPackage oldItem = list.get(i);
+				if (oldItem.hasSameName(newItem)) {
+					String oldNameIncludingWhitespacePrefix = oldItem.getNameIncludingWhitespacePrefix();
+					String oldVersion = oldItem.getVersion();
+					String oldSuffix = oldItem.getSuffix();
+					String version = oldVersion == null || force ? newItem.getVersion() : oldVersion;
 					merged = true;
-					if (bundleVersion != null) {
-						if (oldBundleSuffix == null) {
-							list.set(i, Bundle.fromNameVersion(oldBundleNameIncludingWhitespacePrefix, versionString, bundleVersion));
-						} else if (oldBundleVersion == null || force) {
-							list.set(i, Bundle.fromNameVersionSuffix(oldBundleNameIncludingWhitespacePrefix,
-									versionString, bundleVersion, oldBundleSuffix));
+					if (version != null) {
+						if (oldSuffix == null) {
+							list.set(i, BundleOrPackage.fromNameVersion(oldNameIncludingWhitespacePrefix, versionString, version));
+						} else if (oldVersion == null || force) {
+							list.set(i, BundleOrPackage.fromNameVersionSuffix(oldNameIncludingWhitespacePrefix,
+									versionString, version, oldSuffix));
 						}
 					}
 				}
 			}
-			// in case we add a new bundle and there are already other bundles
+			// in case we add a new item and there are already other items
 			// we write it on a new line for better readability
 			if (!merged) {
-				if (!"".equals(newBundle.getName())) {
-					list.add(Bundle.fromBundleWithNewName(newBundle, newline + " " + newBundle.getName()));
+				if (!"".equals(newItem.getName())) {
+					list.add(BundleOrPackage.fromBundleWithNewName(newItem, newline + " " + newItem.getName()));
 				}
 			}
 		}
@@ -810,7 +752,7 @@ public class MergeableManifest2 implements Cloneable {
 		public String toString() {
 			String separator = "";
 			StringBuilder result = new StringBuilder("");
-			for (Bundle bundle : list) {
+			for (BundleOrPackage bundle : list) {
 				result.append(separator).append(bundle);
 				separator = ",";
 			}
@@ -819,33 +761,33 @@ public class MergeableManifest2 implements Cloneable {
 
 	}
 
-	private static class Bundle {
+	static class BundleOrPackage {
 		private final String input;
 		private final List<String> split;
 
-		public static Bundle fromInput(String input) {
-			return new Bundle(input);
+		public static BundleOrPackage fromInput(String input) {
+			return new BundleOrPackage(input);
 		}
 
-		public static Bundle fromBundleWithNewName(Bundle bundle, String newName) {
+		public static BundleOrPackage fromBundleWithNewName(BundleOrPackage bundle, String newName) {
 			if (bundle.getSuffix() == null)
-				return new Bundle(newName);
-			return new Bundle(newName + ";" + bundle.getSuffix());
+				return new BundleOrPackage(newName);
+			return new BundleOrPackage(newName + ";" + bundle.getSuffix());
 		}
 
-		public static Bundle fromNameVersion(String name, String versionString, String versionNumber) {
-			return new Bundle(name + ";" + versionString + "=\"" + versionNumber + "\"");
+		public static BundleOrPackage fromNameVersion(String name, String versionString, String versionNumber) {
+			return new BundleOrPackage(name + ";" + versionString + "=\"" + versionNumber + "\"");
 		}
 
-		public static Bundle fromNameVersionSuffix(String name, String versionString, String versionNumber, String suffix) {
+		public static BundleOrPackage fromNameVersionSuffix(String name, String versionString, String versionNumber, String suffix) {
 			Matcher m = Pattern.compile("(bundle-)?version=\"[^\"]+\"").matcher(suffix);
 			if (m.find()) {
-				return new Bundle(name + ";" + m.replaceAll(versionString + "=\"" + versionNumber + "\""));
+				return new BundleOrPackage(name + ";" + m.replaceAll(versionString + "=\"" + versionNumber + "\""));
 			}
-			return new Bundle(name + ";" + versionString + "=\"" + versionNumber + "\";" + suffix);
+			return new BundleOrPackage(name + ";" + versionString + "=\"" + versionNumber + "\";" + suffix);
 		}
 
-		private Bundle(String input) {
+		private BundleOrPackage(String input) {
 			this.input = input;
 			if (this.input.contains(";"))
 				this.split = Collections.unmodifiableList(splitAtCharHonorQuoting(this.input, ';'));
@@ -853,7 +795,7 @@ public class MergeableManifest2 implements Cloneable {
 				this.split = Collections.singletonList(this.input);
 		}
 
-		public boolean hasSameName(Bundle other) {
+		public boolean hasSameName(BundleOrPackage other) {
 			return Objects.equals(getName(), other.getName());
 		}
 
