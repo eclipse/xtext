@@ -9,13 +9,6 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtext.logging</artifactId>
-	<version>1.2.24-SNAPSHOT</version>
-
-	<properties>
-		<!-- redefines the property for versions of artifacts not in this Git repository,
-			so that it takes the same snapshot version of this project's parent'. -->
-		<xtext-dev-bom-version>${project.parent.version}</xtext-dev-bom-version>
-	</properties>
 
 	<build>
 		<plugins>
