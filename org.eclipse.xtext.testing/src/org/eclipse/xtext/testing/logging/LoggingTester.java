@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -69,17 +69,19 @@ public class LoggingTester {
 	}
 
 	private static void removeFilter(Appender appender, Filter filter) {
-		if (Objects.equals(appender.getFilter(), filter)) {
-			appender.clearFilters();
-			appender.addFilter(filter.getNext());
-		} else {
-			for (Filter current = appender.getFilter(); current != null; current = current.getNext()) {
-				if (Objects.equals(current.getNext(), filter)) {
-					current.setNext(filter.getNext());
-					return;
-				}
+		List<Filter> filtersToKeep = new ArrayList<>();
+		Filter present = appender.getFilter();
+		while (present != null) {
+			if (!Objects.equals(present, filter)) {
+				filtersToKeep.add(present);
 			}
+			present = present.getNext();
 		}
+		appender.clearFilters();
+		filtersToKeep.forEach(addMe -> {
+			addMe.setNext(null);
+			appender.addFilter(addMe);
+		});
 	}
 
 	public static class LogCapture {
