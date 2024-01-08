@@ -1316,6 +1316,45 @@ public class MergeableManifest2Test {
 		newManifest.addExportedPackages("test");
 		assertEquals(expectedNewContent, write(newManifest));
 	}
+	
+	@Test
+	public void readWrite_addExportedPackage_realisticManifest_regression_xtend_lib() throws Exception {
+		// @formatter:off
+		String content =
+				"Manifest-Version: 1.0\n"
+				+ "Bundle-ManifestVersion: 2\n"
+				+ "Bundle-SymbolicName: org.eclipse.xtend.lib\n"
+				+ "Bundle-Name: Xtend Runtime Library\n"
+				+ "Bundle-Vendor: Eclipse Xtext\n"
+				+ "Bundle-Version: 2.34.0.qualifier\n"
+				+ "Bundle-RequiredExecutionEnvironment: JavaSE-11\n"
+				+ "Export-Package: org.eclipse.xtend.lib;version=\"2.34.0\";uses:=\"org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro\",\n"
+				+ " org.eclipse.xtend.lib.annotations;version=\"2.34.0\";uses:=\"org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend2.lib,org.eclipse.xtend.lib.macro\"\n"
+				+ "Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version=\"2.34.0\";visibility:=reexport,\n"
+				+ " org.eclipse.xtend.lib.macro;bundle-version=\"2.34.0\";visibility:=reexport\n"
+				+ "Automatic-Module-Name: org.eclipse.xtend.lib\n"
+				+ "Eclipse-SourceReferences: eclipseSourceReferences\n";
+		String expectedNewContent =
+				"Manifest-Version: 1.0\n"
+				+ "Bundle-ManifestVersion: 2\n"
+				+ "Bundle-SymbolicName: org.eclipse.xtend.lib\n"
+				+ "Bundle-Name: Xtend Runtime Library\n"
+				+ "Bundle-Vendor: Eclipse Xtext\n"
+				+ "Bundle-Version: 2.34.0.qualifier\n"
+				+ "Bundle-RequiredExecutionEnvironment: JavaSE-11\n"
+				+ "Export-Package: org.eclipse.xtend.lib;version=\"4.5.6\";uses:=\"org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro\",\n"
+				+ " org.eclipse.xtend.lib.annotations;version=\"2.34.0\";uses:=\"org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend2.lib,org.eclipse.xtend.lib.macro\",\n"
+				+ " org.eclipse.xtend.lib.macro;version=\"4.5.6\"\n"
+				+ "Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version=\"2.34.0\";visibility:=reexport,\n"
+				+ " org.eclipse.xtend.lib.macro;bundle-version=\"2.34.0\";visibility:=reexport\n"
+				+ "Automatic-Module-Name: org.eclipse.xtend.lib\n"
+				+ "Eclipse-SourceReferences: eclipseSourceReferences\n";
+		// @formatter:on
+		MergeableManifest2 newManifest = newManifest(content);
+		newManifest.setLineDelimiter("\n");
+		newManifest.addExportedPackages(new String[] { "org.eclipse.xtend.lib;version=\"4.5.6\"", "org.eclipse.xtend.lib.macro;version=\"4.5.6\"" } , true );
+		assertEquals(expectedNewContent, write(newManifest));
+	}
 
 	@Test
 	public void readWrite_emptyBundleEntriesAreFiltered() throws Exception {

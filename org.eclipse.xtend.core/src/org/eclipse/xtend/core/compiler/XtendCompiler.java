@@ -372,7 +372,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 	
-	private void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
 		LightweightTypeReference actualType = getLightweightType(richString);
 		b = b.trace(richString);
 		if (actualType.isType(StringConcatenationClient.class)) {
@@ -423,7 +423,7 @@ public class XtendCompiler extends XbaseCompiler {
 			super.internalToConvertedExpression(obj, appendable);
 	}
 	
-	private void _toJavaExpression(AnonymousClass anonymousClass, ITreeAppendable b) {
+	protected void _toJavaExpression(AnonymousClass anonymousClass, ITreeAppendable b) {
 		String varName = getReferenceName(anonymousClass, b);
 		if (varName != null) {
 			b.trace(anonymousClass, false).append(varName);
@@ -443,7 +443,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 
-	private void compileAnonymousClassBody(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
+	protected void compileAnonymousClassBody(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
 		ITreeAppendable appendable = b.trace(anonymousClass, true);
 		appendable.append(" ");
 		appendable.openScope();
@@ -453,7 +453,7 @@ public class XtendCompiler extends XbaseCompiler {
 		appendable.closeScope();
 	}
 	
-	private void _toJavaExpression(RichString richString, ITreeAppendable b) {
+	protected void _toJavaExpression(RichString richString, ITreeAppendable b) {
 		b.append(getVarName(richString, b));
 		if(getLightweightType(richString).isType(String.class))
 			b.append(".toString()");
@@ -466,7 +466,7 @@ public class XtendCompiler extends XbaseCompiler {
 		super.appendCatchClauseParameter(catchClause, parameterType, parameterName, appendable);
 	}
 
-	private void appendExtensionAnnotation(JvmFormalParameter parameter, EObject context,
+	protected void appendExtensionAnnotation(JvmFormalParameter parameter, EObject context,
 			ITreeAppendable appendable, boolean newLine) {
 		if (parameter instanceof XtendFormalParameter) {
 			XtendFormalParameter castedParameter = (XtendFormalParameter) parameter;
@@ -476,7 +476,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 
-	private void appendExtensionAnnotation(EObject context, ITreeAppendable appendable, boolean newLine) {
+	protected void appendExtensionAnnotation(EObject context, ITreeAppendable appendable, boolean newLine) {
 		JvmType extension = findKnownTopLevelType(Extension.class, context);
 		if (extension != null) {
 			appendable.append("@");
@@ -537,7 +537,7 @@ public class XtendCompiler extends XbaseCompiler {
 		toJavaStatement(expr, b, isReferenced, false);
 	}
 
-	private void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
+	protected void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
 		_toJavaStatement(anonymousClass.getConstructorCall(), b, isReferenced);
 	}
 

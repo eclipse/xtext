@@ -42,7 +42,7 @@ class ValidationBug435020Test extends AbstractXtendTestCase {
 	}
 	
 	@Test def void test_02() {
-		val c = parser.parse('''
+		val source = '''
 			class Foo {
 				def void foo() {
 					new Object {
@@ -50,12 +50,16 @@ class ValidationBug435020Test extends AbstractXtendTestCase {
 					}
 				}
 			}
-		''')
-		c.assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.ANONYMOUS_CLASS_STATIC_FIELD)
+		'''
+		val c = parser.parse(source)
+		c.assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.ANONYMOUS_CLASS_STATIC_FIELD,
+			source.indexOf("static"), "static".length,
+			"A static field of an anonymous class must be final"
+		)
 	}
 	
 	@Test def void test_03() {
-		val c = parser.parse('''
+		val source = '''
 			class Foo {
 				def void foo() {
 					new Object {
@@ -63,12 +67,16 @@ class ValidationBug435020Test extends AbstractXtendTestCase {
 					}
 				}
 			}
-		''')
-		c.assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.ANONYMOUS_CLASS_STATIC_FIELD)
+		'''
+		val c = parser.parse(source)
+		c.assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.ANONYMOUS_CLASS_STATIC_FIELD,
+			source.indexOf("Math.max(1, 2)"), "Math.max(1, 2)".length,
+			"must be initialized with a constant expression"
+		)
 	}
 	
 	@Test def void test_04() {
-		val c = parser.parse('''
+		val source = '''
 			class Foo {
 				def void foo() {
 					new Object {
@@ -77,8 +85,12 @@ class ValidationBug435020Test extends AbstractXtendTestCase {
 					}
 				}
 			}
-		''')
-		c.assertError(XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.ANONYMOUS_CLASS_STATIC_METHOD)
+		'''
+		val c = parser.parse(source)
+		c.assertError(XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.ANONYMOUS_CLASS_STATIC_METHOD,
+			source.indexOf("static"), "static".length,
+			"A method of an anonymous class cannot be static"
+		)
 	}
 	
 }

@@ -6,20 +6,19 @@ Bundle-Version: 2.34.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.util,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.34.0",
  org.eclipse.emf.ecore;bundle-version="2.26.0",
  org.eclipse.emf.common;bundle-version="2.24.0",
  org.eclipse.emf.mwe2.runtime,
- org.eclipse.xtext.ecore,
- org.eclipse.xtext.testlanguages,
+ org.eclipse.xtext.ecore;bundle-version="2.34.0",
+ org.eclipse.xtext.testlanguages;bundle-version="2.34.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.hamcrest.core;bundle-version="1.1.0",
  org.eclipse.core.runtime;bundle-version="3.24.100",
- org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib;bundle-version="2.34.0",
  org.eclipse.ui.workbench;bundle-version="3.125.0";resolution:=optional,
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.eclipse.xtext.xtext.wizard
+ org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
+ org.eclipse.xtext.xtext.wizard;bundle-version="2.34.0"
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Import-Package: org.apache.log4j;version="1.2.24",

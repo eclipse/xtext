@@ -804,7 +804,7 @@ class JvmModelGenerator implements IGenerator {
 				generateDocumentation(adapter.documentation, emptyList, appendable, config)
 			}
 		}
-	} 
+	}
 	
 	def addJavaDocImports(EObject it, ITreeAppendable appendable,List<INode> documentationNodes) {
 		for(node : documentationNodes){
@@ -839,7 +839,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def getImportManager(ITreeAppendable appendable) {
-		(appendable as TreeAppendable).importManager
+		(appendable as TreeAppendable).getImportManager()
 	}
 
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable, GeneratorConfig config) {
@@ -881,7 +881,7 @@ class JvmModelGenerator implements IGenerator {
 				toJava(appendable, config)
 			])
 	}
-	 
+	
 	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (operation !== null) {
 			if (operation.simpleName === null) {
@@ -894,11 +894,11 @@ class JvmModelGenerator implements IGenerator {
 		}
 		toJavaLiteral(appendable, config)
 	}
-		
+	
 	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue value, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(value.values, [generateAnnotation(appendable, config)])
 	}
-		
+	
 	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [appendable.append(toString)])
 	}
@@ -950,12 +950,12 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append('"' + doConvertToJavaString(toString) + '"')
 		])
 	}
-		
+	
 	def dispatch void toJavaLiteral(JvmTypeAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(type).append(".class")
 		])
-	} 
+	}
 	
 	def dispatch void toJavaLiteral(JvmEnumAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
@@ -963,13 +963,13 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append(".")
 			appendable.append(simpleName.makeJavaIdentifier)
 		])
-	} 
-		
+	}
+	
 	def dispatch void toJavaLiteral(JvmBooleanAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(toString)			
 		])
-	} 
+	}
 	
 	def dispatch void toJavaLiteral(JvmCustomAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		if(values.isEmpty)

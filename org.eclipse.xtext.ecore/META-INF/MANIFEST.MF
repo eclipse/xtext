@@ -5,10 +5,10 @@ Bundle-SymbolicName: org.eclipse.xtext.ecore;singleton:=true
 Bundle-Version: 2.34.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.24.100",
- org.eclipse.xtext;visibility:=reexport
+ org.eclipse.xtext;bundle-version="2.34.0";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.ecore;
+Export-Package: org.eclipse.xtext.ecore;version="2.34.0";
   uses:="org.eclipse.emf.ecore,
    com.google.inject,
    org.eclipse.xtext.resource.generic,
