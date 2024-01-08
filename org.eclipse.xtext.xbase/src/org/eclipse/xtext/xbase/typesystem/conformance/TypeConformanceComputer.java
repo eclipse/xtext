@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -252,6 +253,33 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			if (allPrimitiveVoid(types)) {
 				return types.get(0);
 			}
+			
+			// Compute the common super type without looking at any of the UnboundTypeReferences that do
+			// not carry any hints yet.
+			List<LightweightTypeReference> unconstrainedUnboundTypes = new ArrayList<>();
+			for(LightweightTypeReference type: types) {
+				if (type.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+					UnboundTypeReference casted = (UnboundTypeReference)type;
+					if (!casted.hasSignificantHints()) {
+						unconstrainedUnboundTypes.add(casted);
+					}
+				}
+			}
+			if (!unconstrainedUnboundTypes.isEmpty()) {
+				List<LightweightTypeReference> withoutUnconstrained = new ArrayList<>(types);
+				withoutUnconstrained.removeAll(unconstrainedUnboundTypes);
+				if (!withoutUnconstrained.isEmpty()) {
+					if (containsPrimitiveOrAnyReferences(withoutUnconstrained)) {
+						withoutUnconstrained = replacePrimitivesAndRemoveAnyReferences(types);
+					}
+					LightweightTypeReference intermediate = getCommonSuperType(withoutUnconstrained);
+					if (intermediate != null) {
+						unconstrainedUnboundTypes.add(0, intermediate);
+						types = unconstrainedUnboundTypes;
+					}
+				}
+			}
+			
 			LightweightTypeReference conformsToAllOrVoid = findConformsToAllOrVoid(types);
 			if (conformsToAllOrVoid != null) {
 				if (conformsToAllOrVoid.isPrimitiveVoid()) {
@@ -270,7 +298,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		
 		protected LightweightTypeReference doGetCommonSuperType(List<LightweightTypeReference> types) {
 			LightweightTypeReference firstType = types.get(0);
-			final List<LightweightTypeReference> tail = types.subList(1, types.size());
+			List<LightweightTypeReference> tail = types.subList(1, types.size());
 			// mapping from rawtype to resolved parameterized types
 			// used to determine the correct type arguments
 			Multimap<JvmType, LightweightTypeReference> all = LinkedHashMultimap.create();
@@ -287,7 +315,8 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			}
 			inplaceSortByDistanceAndName(candidates);
 			List<LightweightTypeReference> referencesWithSameDistance = getMostSpecialCandidates(types, all, candidates);
-			return wrapInCompoundTypeIfNecessary(referencesWithSameDistance);
+			LightweightTypeReference result = wrapInCompoundTypeIfNecessary(referencesWithSameDistance);
+			return result;
 		}
 
 		protected LightweightTypeReference wrapInCompoundTypeIfNecessary(
