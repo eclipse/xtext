@@ -11,7 +11,6 @@ Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.equinox.common;bundle-version="3.16.0",
  org.eclipse.xtend.lib;bundle-version="2.14.0",
  org.eclipse.xtext,
- org.eclipse.xtext.util,
  org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j

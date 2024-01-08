@@ -5,8 +5,6 @@ Bundle-Version: 2.34.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.34.0";visibility:=reexport,
- com.google.guava;bundle-version="[33.0.0,34.0.0)",
- com.google.inject;bundle-version="7.0.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.16.100";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.emf.ecore;bundle-version="2.26.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtext;bundle-version="2.34.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
