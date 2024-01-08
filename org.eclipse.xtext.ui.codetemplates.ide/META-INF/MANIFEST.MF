@@ -6,14 +6,13 @@ Bundle-Version: 2.34.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates.ide
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: org.eclipse.xtext.ide,
- org.eclipse.xtext.ui.codetemplates,
+Require-Bundle: org.eclipse.xtext.ide;bundle-version="2.34.0",
+ org.eclipse.xtext.ui.codetemplates;bundle-version="2.34.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
-Export-Package: org.eclipse.xtext.ui.codetemplates.ide,
- org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr,
- org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.internal,
- org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.lexer,
- org.eclipse.xtext.ui.codetemplates.ui.contentassist,
- org.eclipse.xtext.ui.codetemplates.ui.highlighting
+Export-Package: org.eclipse.xtext.ui.codetemplates.ide;version="2.34.0",
+ org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr;version="2.34.0",
+ org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.internal;version="2.34.0",
+ org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.lexer;version="2.34.0",
+ org.eclipse.xtext.ui.codetemplates.ui.contentassist;version="2.34.0",
+ org.eclipse.xtext.ui.codetemplates.ui.highlighting;version="2.34.0"
 Automatic-Module-Name: org.eclipse.xtext.ui.codetemplates.ide
-

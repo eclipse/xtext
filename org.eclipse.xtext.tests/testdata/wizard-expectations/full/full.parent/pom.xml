@@ -115,7 +115,7 @@
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.xtext.logging</id>
-								<versionRange>1.2.24</versionRange>
+								<versionRange>${xtextVersion}</versionRange>
 							</requirement>
 							<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
 								platform is Luna or later. (backward compatible with kepler and previous
