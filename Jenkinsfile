@@ -62,7 +62,7 @@ pipeline {
       steps {
         xvnc(useXauthority: true) {
           sh """
-            ./full-build.sh --tp=${selectedTargetPlatform()} \
+            ./full-build.sh -Dsurefire.timeout=1800 --tp=${selectedTargetPlatform()} \
               ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
           """
         }
@@ -93,7 +93,7 @@ pipeline {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log'
     }
     unsuccessful {
-      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log, **/hs_err_pid*.log'
+      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/target/work/data/.metadata/bak*.log, **/hs_err_pid*.log, **/target/surefire-reports/*'
     }
     cleanup {
       script {
