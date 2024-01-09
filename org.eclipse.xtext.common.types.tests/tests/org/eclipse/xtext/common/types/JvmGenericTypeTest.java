@@ -249,8 +249,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 	}
 
 	private JvmTypeReference createTypeReference() {
-		return createReferenceTo(
-				TypesFactory.eINSTANCE.createJvmGenericType());
+		return createReferenceTo(TypesFactory.eINSTANCE.createJvmGenericType());
 	}
 
 	private JvmTypeReference createReferenceTo(JvmType type) {
