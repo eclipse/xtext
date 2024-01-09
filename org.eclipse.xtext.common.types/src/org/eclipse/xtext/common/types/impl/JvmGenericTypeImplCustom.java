@@ -99,8 +99,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 			// add all interfaces to implement
 			origSuperTypes.addAll(origInterfacesToImplement);
 			// update snapshot
-			interfacesToImplementSnapshot =
-				createSnapshot(origInterfacesToImplement);
+			interfacesToImplementSnapshot = createSnapshot(origInterfacesToImplement);
 		}
 
 		var origInterfacesToExtend = super.getInterfacesToExtend();
@@ -110,8 +109,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 			// add all interfaces to extend
 			origSuperTypes.addAll(origInterfacesToExtend);
 			// update snapshot
-			interfacesToExtendSnapshot =
-				createSnapshot(origInterfacesToExtend);
+			interfacesToExtendSnapshot = createSnapshot(origInterfacesToExtend);
 		}
 		return origSuperTypes;
 	}
@@ -126,8 +124,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 			// if they're not there, they have been removed through superTypes
 			origInterfacesToImplement.removeIf(e -> !origSuperTypes.contains(e));
 			// update snapshot
-			superTypesSnapshot =
-				createSnapshot(origSuperTypes);
+			superTypesSnapshot = createSnapshot(origSuperTypes);
 		}
 		return origInterfacesToImplement;
 	}
@@ -142,8 +139,7 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 			// if they're not there, they have been removed through superTypes
 			origInterfacesToExtend.removeIf(e -> !origSuperTypes.contains(e));
 			// update snapshot
-			superTypesSnapshot =
-				createSnapshot(origSuperTypes);
+			superTypesSnapshot = createSnapshot(origSuperTypes);
 		}
 		return origInterfacesToExtend;
 	}
