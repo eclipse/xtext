@@ -30,7 +30,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 	override generate() {
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext', 'org.eclipse.xtext.util'
+				'org.eclipse.xtext'
 			])
 			
 			if (generateXtendStub) {

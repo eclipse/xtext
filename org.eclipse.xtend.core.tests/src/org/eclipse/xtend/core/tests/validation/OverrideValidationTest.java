@@ -34,8 +34,14 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	private ValidationTestHelper helper;
 
 	@Test public void testDuplicateMethod_0() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { def bar(int x) {true} def bar(int x) {false} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate");
+		var source = "class Foo { def bar(int x) {true} def bar(int x) {false} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("bar"), "bar".length(),
+				"duplicate", "method");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.lastIndexOf("bar"), "bar".length(),
+				"duplicate", "method");
 	}
 
 	@Test public void testDuplicateMethod_1() throws Exception {
@@ -50,9 +56,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testDuplicateMethod_3() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def bar(java.util.List<String> x) {true} def bar(java.util.List<Integer> x) {false} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)",
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD,
+				"erasure", "List)", "method",
 				"List<String");
-		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)",
+		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD,
+				"erasure", "List)", "method",
 				"List<Integer");
 	}
 
@@ -148,10 +156,14 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideGenericMethod_10() throws Exception {
-		XtendClass xtendClass = clazz(" abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+		var source = " abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T extends String> foo1() {}"+
-									"}");
-		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD);
+									"}";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("foo1"), "foo1".length(),
+				"Name clash", "same erasure", "GenericSuperTypeClass",
+				"does not override it");
 	}
 
 	@Test public void testOverrideGenericMethod_11() throws Exception {
@@ -187,6 +199,28 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 									"override <T> void foo3(T t, (T)=>void proc){} "+
 									"}");
 		helper.assertNoErrors(xtendClass);
+	}
+
+	@Test public void testStaticMethodHidesInstanceMethod() throws Exception {
+		var source = " abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+						"static def foo1() {}"+
+						"}";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("foo1"), "foo1".length(),
+				"The static method", "GenericSuperTypeClass",
+				"cannot hide the instance method");
+	}
+
+	@Test public void testOverrideStaticMethod() throws Exception {
+		var source = " abstract class Foo extends testdata.Methods {  " +
+						"override staticMethod() {}"+
+						"}";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD,
+				source.indexOf("staticMethod"), "staticMethod".length(),
+				"The instance method", "Methods",
+				"cannot override the static method");
 	}
 
 	@Test public void testOverrideReturnType() throws Exception {
@@ -355,20 +389,29 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testClassMustBeAbstract_01() throws Exception {
-		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement",
+		var source = "class Foo<S> implements Comparable<S> { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+				source.indexOf("Foo"), "Foo".length(),
+				"abstract", "not", "implement",
 				"compareTo(S)");
 	}
 
 	@Test public void testClassMustBeAbstract_02() throws Exception {
-		XtendClass xtendClass = clazz("class Foo<S> implements Comparable { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement",
+		var source = "class Foo<S> implements Comparable { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+				source.indexOf("Foo"), "Foo".length(),
+				"abstract", "not", "implement",
 				"compareTo(Object)");
 	}
 
 	@Test public void testClassMustBeAbstract_03() throws Exception {
-		XtendClass xtendClass = clazz("class Foo implements Comparable<String> { }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement",
+		var source = "class Foo implements Comparable<String> { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT,
+				source.indexOf("Foo"), "Foo".length(),
+				"abstract", "not", "implement",
 				"compareTo(String)");
 	}
 
@@ -391,8 +434,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideFinalClass() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends String { }");
-		helper.assertError(xtendClass, XTEND_CLASS, OVERRIDDEN_FINAL, "override", "final");
+		var source = "class Foo extends String { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, OVERRIDDEN_FINAL,
+				source.indexOf("String"), "String".length(),
+				"override", "final");
 	}
 
 	@Test public void testOverrideFinalMethod() throws Exception {
@@ -913,8 +959,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testAnonymousClassMustBeAbstract() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() {} }");
-		helper.assertError(xtendClass, ANONYMOUS_CLASS, ANONYMOUS_CLASS_MISSING_MEMBERS, "The anonymous subclass of Runnable does not implement run()");
+		var source = "class Foo { val foo = new Runnable() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, ANONYMOUS_CLASS, ANONYMOUS_CLASS_MISSING_MEMBERS,
+				source.indexOf("new Runnable()"), "new Runnable()".length(),
+				"The anonymous subclass of Runnable does not implement run()");
+	}
+
+	@Test public void testAnonymousClassMustBeAbstract_1() throws Exception {
+		var source = "class Foo { val foo = new Runnable() { int i; } }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, ANONYMOUS_CLASS, ANONYMOUS_CLASS_MISSING_MEMBERS,
+				source.indexOf("new Runnable()"), "new Runnable()".length(),
+				"The anonymous subclass of Runnable does not implement run()");
 	}
 
 	@Test public void testAnonymousClassIncompatibleSignature_0() throws Exception {

@@ -45,7 +45,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
       this.getProjectConfig().getRuntime().getManifest().getRequiredBundles().addAll(
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util")));
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext")));
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         Set<String> _requiredBundles = this.getProjectConfig().getRuntime().getManifest().getRequiredBundles();

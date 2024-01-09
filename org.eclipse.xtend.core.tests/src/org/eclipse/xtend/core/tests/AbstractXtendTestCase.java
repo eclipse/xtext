@@ -56,9 +56,18 @@ public abstract class AbstractXtendTestCase extends Assert {
 
 	@Rule
 	@Inject public TemporaryFolder temporaryFolder;
-	
+
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
+
+	/**
+	 * To build a function or constructor for tests
+	 */
+	protected static final String TEMPLATE_CLASS = "class Foo { %s }";
+	/**
+	 * Use it to add it to the index position of a source element of a function or constructor
+	 */
+	protected static final int TEMPLATE_CLASS_PREFIX_SIZE = TEMPLATE_CLASS.indexOf("%s");
 
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
@@ -160,7 +169,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 	}
 
 	protected XtendFunction function(String string) throws Exception {
-		XtendClass clazz = clazz("class Foo { " + string + "}");
+		XtendClass clazz = clazz(String.format(TEMPLATE_CLASS, string));
 		return (XtendFunction) clazz.getMembers().get(0);
 	}
 

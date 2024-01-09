@@ -500,10 +500,11 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	}
 
 	@Check
-	public void checkNoVoidInDependencyDeclaration(XtendField dep) {
-		JvmTypeReference declaredFieldType = dep.getType();
+	public void checkXtendFieldNotPrimitiveVoid(XtendField field) {
+		JvmTypeReference declaredFieldType = field.getType();
 		if (isPrimitiveVoid(declaredFieldType)) {
-			error("Primitive void cannot be a dependency.", dep.getType(), null, INVALID_USE_OF_TYPE);
+			error("void is an invalid type for the field " + field.getName(),
+					field.getType(), null, INVALID_USE_OF_TYPE);
 		}
 	}
 	

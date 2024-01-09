@@ -8,7 +8,7 @@
 
 	<properties>
 		<xtextVersion>unspecified</xtextVersion>
-		<mwe2Version>2.16.0</mwe2Version>
+		<mwe2Version>2.17.0.M0</mwe2Version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -117,7 +117,7 @@
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.xtext.logging</id>
-								<versionRange>1.2.24</versionRange>
+								<versionRange>${xtextVersion}</versionRange>
 							</requirement>
 							<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
 								platform is Luna or later. (backward compatible with kepler and previous

@@ -589,7 +589,10 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return state;
 	}
 	
-	ImportManager getImportManager() {
+	/**
+	 * @since 2.34
+	 */
+	public ImportManager getImportManager() {
 		return state.getImportManager();
 	}
 	

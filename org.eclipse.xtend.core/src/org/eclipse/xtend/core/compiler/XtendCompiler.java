@@ -54,7 +54,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -358,7 +357,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	public void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
+	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		prependLocalTypesIfFieldInitializer(obj, appendable, isReferenced);
 		if(obj instanceof AnonymousClass) 
 			_toJavaStatement((AnonymousClass)obj, appendable, isReferenced);
@@ -375,7 +374,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 	}
 	
-	public void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
 		LightweightTypeReference actualType = getLightweightType(richString);
 		b = b.trace(richString);
 		if (actualType.isType(StringConcatenationClient.class)) {
@@ -417,7 +416,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 
 	@Override
-	public void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
+	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof AnonymousClass)
 			_toJavaExpression((AnonymousClass) obj, appendable);
 		else if (obj instanceof RichString)
@@ -433,8 +432,16 @@ public class XtendCompiler extends XbaseCompiler {
 		} else {
 			XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 			constructorCallToJavaExpression(constructorCall, b);
-			JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
-			compileAnonymousClassBody(anonymousClass, declaringType, b);
+		}
+	}
+
+	@Override
+	protected void constructorCallToJavaExpression(XConstructorCall expr, ITreeAppendable b) {
+		super.constructorCallToJavaExpression(expr, b);
+		if (expr.eContainer() instanceof AnonymousClass) {
+			JvmConstructor constructor = expr.getConstructor();
+			JvmDeclaredType declaringType = constructor.getDeclaringType();
+			compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, b);
 		}
 	}
 
@@ -448,7 +455,7 @@ public class XtendCompiler extends XbaseCompiler {
 		appendable.closeScope();
 	}
 	
-	public void _toJavaExpression(RichString richString, ITreeAppendable b) {
+	protected void _toJavaExpression(RichString richString, ITreeAppendable b) {
 		b.append(getVarName(richString, b));
 		if(getLightweightType(richString).isType(String.class))
 			b.append(".toString()");
@@ -531,42 +538,11 @@ public class XtendCompiler extends XbaseCompiler {
 	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		toJavaStatement(expr, b, isReferenced, false);
 	}
-	
+
 	protected void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
 		_toJavaStatement(anonymousClass.getConstructorCall(), b, isReferenced);
 	}
-	
-	@Override
-	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
-		for (XExpression arg : expr.getArguments()) {
-			prepareExpression(arg, b);
-		}
-		
-		if (!isReferenced) {
-			b.newLine();
-			constructorCallToJavaExpression(expr, b);
-			if (expr.eContainer() instanceof AnonymousClass) {
-				JvmConstructor constructor = expr.getConstructor();
-				JvmDeclaredType declaringType = constructor.getDeclaringType();
-				compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, b);
-			}
-			b.append(";");
-		} else if (isVariableDeclarationRequired(expr, b, true)) {
-			Later later = new Later() {
-				@Override
-				public void exec(ITreeAppendable appendable) {
-					constructorCallToJavaExpression(expr, appendable);
-					if (expr.eContainer() instanceof AnonymousClass) {
-						JvmConstructor constructor = expr.getConstructor();
-						JvmDeclaredType declaringType = constructor.getDeclaringType();
-						compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, appendable);
-					}
-				}
-			};
-			declareFreshLocalVariable(expr, b, later);
-		}
-	}
-	
+
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
@@ -576,27 +552,7 @@ public class XtendCompiler extends XbaseCompiler {
 		} else
 			return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
-	
-	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
-		boolean result = super.isVariableDeclarationRequired(expr, b, recursive);
-		if (result && expr instanceof XConstructorCall) {
-			EObject container = expr.eContainer();
-			if (container instanceof AnonymousClass) {
-				AnonymousClass anonymousClass = (AnonymousClass) container;
-				result = isVariableDeclarationRequired(anonymousClass, b, recursive);
-				if (result) {
-					JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
-					JvmDeclaredType type = constructor.getDeclaringType();
-					if (((JvmGenericType) type).isAnonymous()) {
-						return false;
-					}
-				}
-			}
-		}
-		return result;
-	}
-	
+
 	@Override
 	/* @Nullable */
 	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
