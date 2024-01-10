@@ -23,6 +23,9 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -292,6 +295,21 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	private XtendFileGenerator fileGenerator;
+	
+	@BeforeClass
+	public static void setUpProject() throws Exception {
+		// This shadows org.eclipse.xtend.ide.tests.AbstractXtendUITestCase.setUpProject()
+		// see https://junit.org/junit4/javadoc/latest/org/junit/BeforeClass.html
+		// The class passed to TargetPlatformUtil.setTargetPlatform must be in the same bundle
+		// of the running test, while AbstractXtendUITestCase is in another bundle.
+		// Manually setting the TP allows the Tycho build to succeed
+		// otherwise, the required bundles taken from the workspace
+		// have a wrong layout in "Plug-in Dependencies", and their
+		// classes cannot be resolved
+		TargetPlatformUtil.setTargetPlatform(PerformanceTest.class);
+		IResourcesSetupUtil.cleanWorkspace();
+		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
+	}
 	
 	@Override
 	public void tearDown() throws Exception {

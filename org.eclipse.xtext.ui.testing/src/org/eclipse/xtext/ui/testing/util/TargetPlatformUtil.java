@@ -43,7 +43,9 @@ public class TargetPlatformUtil {
 	
 	/**
 	 * Sets the target platform for tests (to be used in tycho mainly)
-	 * @param context any class of the test bundle to be able to determine the test bundle
+	 * @param context any class of the test bundle to be able to determine the test bundle;
+	 * the class must be in the same bundle of the test to execute; if the class is in a required
+	 * bundle it will not work.
 	 * @since 2.14
 	 */
 	public static void setTargetPlatform(Class<?> context) throws Exception {

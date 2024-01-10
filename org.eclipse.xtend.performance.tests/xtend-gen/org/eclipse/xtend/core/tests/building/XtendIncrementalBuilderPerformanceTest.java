@@ -6,7 +6,7 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.eclipse.xtend.core.tests.build;
+package org.eclipse.xtend.core.tests.building;
 
 import com.google.common.base.Stopwatch;
 import com.google.inject.Inject;
