@@ -189,7 +189,7 @@ public class StandaloneBuilderTest {
 		try(FileReader reader = new FileReader(configFile, StandardCharsets.UTF_8)) {
 			onlyProd.load(reader);
 		}
-		assertEquals(5, onlyProd.size());
+		assertEquals(7, onlyProd.size());
 		
 		testBuilder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/",
 				"test-data/missing.jar"));
@@ -205,7 +205,7 @@ public class StandaloneBuilderTest {
 		}
 		
 		assertTrue(alsoTest.entrySet().containsAll(onlyProd.entrySet()));
-		assertEquals(10, alsoTest.size());
+		assertEquals(14, alsoTest.size());
 		
 		testBuilder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/"));
 		testBuilder.setClasspathConfigurationLocation(configFile.getAbsolutePath(), "prod", "prod-out");
@@ -216,7 +216,7 @@ public class StandaloneBuilderTest {
 		try(FileReader reader = new FileReader(configFile, StandardCharsets.UTF_8)) {
 			alsoTest.load(reader);
 		}
-		assertEquals(9, alsoTest.size());
+		assertEquals(12, alsoTest.size());
 	}
 
 	@Test

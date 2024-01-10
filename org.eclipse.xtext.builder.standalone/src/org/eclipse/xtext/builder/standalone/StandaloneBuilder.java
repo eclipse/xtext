@@ -36,11 +36,13 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.regex.Pattern;
@@ -103,6 +105,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -355,11 +358,11 @@ public class StandaloneBuilder {
 				String key = String.valueOf(existing.getKey());
 				return key.startsWith(prefix);
 			});
-			intoProperties(modelRoots, prefix + "model.", properties);
-			intoProperties(sourceDirs, prefix + "src.", properties);
+			intoProperties(modelRoots, prefix + "model.", properties, true);
+			intoProperties(sourceDirs, prefix + "src.", properties, false);
 			if (classpath) {
-				intoProperties(List.of(classOutputDirectory), prefix + "bin.", properties);
-				intoProperties(classPathEntries, prefix + "cp.", properties);
+				intoProperties(List.of(classOutputDirectory), prefix + "bin.", properties, false);
+				intoProperties(classPathEntries, prefix + "cp.", properties, true);
 			}
 			try (Writer writer = new TailWriter(new FileWriter(file, StandardCharsets.UTF_8), 1)) {
 				new Properties() {
@@ -378,10 +381,15 @@ public class StandaloneBuilder {
 		}
 	}
 
-	private void intoProperties(Iterable<String> values, String prefix, Properties target) {
+	private void intoProperties(Iterable<String> values, String prefix, Properties target, boolean hash) {
 		int i = 0;
 		for(String value: values) {
-			target.put(prefix + i, new File(value).getAbsolutePath());
+			String key = prefix + i;
+			target.put(key, new File(value).getAbsolutePath());
+			if (hash) {
+				IPath path = new Path(value);
+				target.put(key + ".hash", classpathInfos.hashClassesOrJar(path).asString());
+			}
 			i++;
 		}
 		target.put(prefix + "count", String.valueOf(i));

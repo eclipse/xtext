@@ -24,4 +24,6 @@ public interface ClasspathEntryHash {
 	
 	void accept(ClasspathEntryHashVisitor visitor);
 	
+	String asString();
+	
 }
