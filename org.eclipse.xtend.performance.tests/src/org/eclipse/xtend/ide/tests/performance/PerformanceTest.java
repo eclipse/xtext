@@ -298,6 +298,14 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@BeforeClass
 	public static void setUpProject() throws Exception {
+		// This shadows org.eclipse.xtend.ide.tests.AbstractXtendUITestCase.setUpProject()
+		// see https://junit.org/junit4/javadoc/latest/org/junit/BeforeClass.html
+		// The class passed to TargetPlatformUtil.setTargetPlatform must be in the same bundle
+		// of the running test, while AbstractXtendUITestCase is in another bundle.
+		// Manually setting the TP allows the Tycho build to succeed
+		// otherwise, the required bundles taken from the workspace
+		// have a wrong layout in "Plug-in Dependencies", and their
+		// classes cannot be resolved
 		TargetPlatformUtil.setTargetPlatform(PerformanceTest.class);
 		IResourcesSetupUtil.cleanWorkspace();
 		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
