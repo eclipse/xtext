@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceDescriptor;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 import org.junit.ComparisonFailure;
@@ -74,15 +73,15 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 		}
 
 		public void assertLogged(List<String> expectation) {
-			String eventsDump = IterableExtensions.join(events, "\n");
-			String expectedEventsDump = IterableExtensions.join(expectation, "\n");
+			String eventsDump = String.join("\n", events);
+			String expectedEventsDump = String.join("\n", expectation);
 			if (!eventsDump.startsWith(expectedEventsDump)) {
 				throw new ComparisonFailure("", expectedEventsDump, eventsDump);
 			}
 		}
 
 		public void assertLogged(String expectation) {
-			String eventsDump = IterableExtensions.join(events, "\n");
+			String eventsDump = String.join("\n", events);
 			assertEquals(expectation, eventsDump);
 		}
 	}
