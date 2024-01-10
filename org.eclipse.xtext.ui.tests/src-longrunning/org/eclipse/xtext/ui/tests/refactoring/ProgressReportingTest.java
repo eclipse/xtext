@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,11 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 				throw new ComparisonFailure("", expectedEventsDump, eventsDump);
 			}
 		}
+
+		public void assertLogged(String expectation) {
+			String eventsDump = IterableExtensions.join(events, "\n");
+			assertEquals(expectation, eventsDump);
+		}
 	}
 
 	@Test
@@ -91,7 +98,55 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 		Assert.assertFalse(x.exists());
 		Assert.assertFalse(y.exists());
 		List<String> expectation = new ArrayList<>();
-		if (Platform.getBundle("org.eclipse.ltk.core.refactoring").getVersion().compareTo(new Version("3.14.200")) >= 0) {
+		Version ltkVersion = Platform.getBundle("org.eclipse.ltk.core.refactoring").getVersion();
+		if (ltkVersion.compareTo(new Version("3.14.300")) >= 0) {
+			String expected = "BeginTask (1000)\n"
+					+ "Worked 90 (90.0)\n"
+					+ "Worked 505 (595.0)\n"
+					+ "Worked 40 (635.0)\n"
+					+ "SetTaskName Preparing and applying file changes...\n"
+					+ "Worked 19 (654.0)\n"
+					+ "Worked 19 (673.0)\n"
+					+ "Worked 9 (682.0)\n"
+					+ "Worked 10 (692.0)\n"
+					+ "Worked 9 (701.0)\n"
+					+ "Worked 10 (711.0)\n"
+					+ "SetTaskName Creating text changes...\n"
+					+ "Worked 47 (758.0)\n"
+					+ "Worked 20 (778.0)\n"
+					+ "Worked 19 (797.0)\n"
+					+ "Worked 203 (1000.0)\n"
+					+ "BeginTask Creating workspace modifications... (1000)\n"
+					+ "Worked 333 (1333.0)\n"
+					+ "Worked 333 (1666.0)\n"
+					+ "Worked 334 (2000.0)\n"
+					+ "Done\n"
+					+ "BeginTask Performing changes... (1000)\n"
+					+ "Worked 41 (2041.0)\n"
+					+ "Worked 42 (2083.0)\n"
+					+ "Worked 20 (2103.0)\n"
+					+ "Worked 21 (2124.0)\n"
+					+ "Worked 21 (2145.0)\n"
+					+ "Worked 21 (2166.0)\n"
+					+ "Worked 84 (2250.0)\n"
+					+ "Worked 41 (2291.0)\n"
+					+ "Worked 42 (2333.0)\n"
+					+ "Worked 20 (2353.0)\n"
+					+ "Worked 21 (2374.0)\n"
+					+ "Worked 21 (2395.0)\n"
+					+ "Worked 21 (2416.0)\n"
+					+ "Worked 84 (2500.0)\n"
+					+ "Worked 5 (2505.0)\n"
+					+ "Worked 125 (2630.0)\n"
+					+ "Worked 25 (2655.0)\n"
+					+ "Worked 75 (2730.0)\n"
+					+ "Worked 25 (2755.0)\n"
+					+ "Worked 120 (2875.0)\n"
+					+ "Worked 120 (2995.0)\n"
+					+ "Worked 5 (3000.0)\n"
+					+ "Done";
+			monitor.assertLogged(expected);
+		} else if (ltkVersion.compareTo(new Version("3.14.200")) >= 0) {
 			expectation.add("BeginTask (44)");
 			expectation.add("InternalWorked 4.0 (4.0)");
 			expectation.add("InternalWorked 22.2 (26.2)");
@@ -109,6 +164,7 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 			expectation.add("InternalWorked 0.84 (35.080000000000005)");
 			expectation.add("InternalWorked 8.920000000000002 (44.00000000000001)");
 			expectation.add("Done");
+			monitor.assertLogged(expectation);
 		} else {
 			expectation.add("BeginTask (44)");
 			expectation.add("SetTaskName Checking preconditions...");
@@ -131,9 +187,8 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 			expectation.add("InternalWorked 2.2222222222222223 (37.333333333333336)");
 			expectation.add("InternalWorked 6.666666666666664 (44.0)");
 			expectation.add("Done");
-
+			monitor.assertLogged(expectation);
 		}
-		monitor.assertLogged(expectation);
 	}
 
 	protected void performRename(IResource theResource, String theNewName, IProgressMonitor monitor) throws Exception {
