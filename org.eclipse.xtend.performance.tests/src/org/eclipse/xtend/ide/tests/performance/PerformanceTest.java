@@ -23,6 +23,9 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -292,6 +295,13 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	private XtendFileGenerator fileGenerator;
+	
+	@BeforeClass
+	public static void setUpProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform(PerformanceTest.class);
+		IResourcesSetupUtil.cleanWorkspace();
+		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
+	}
 	
 	@Override
 	public void tearDown() throws Exception {
