@@ -67,7 +67,6 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 		compile(testClassPath, testCompileSourceRoots, testOutputDirectory);
 	}
 
-	@SuppressWarnings("deprecation")
 	protected List<String> getTestClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getTestSourceDirectory());
@@ -76,7 +75,6 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 		} catch (DependencyResolutionRequiredException e) {
 			throw new WrappedException(e);
 		}
-		addDependencies(classPath, project.getTestArtifacts());
 		classPath.remove(project.getBuild().getTestOutputDirectory());
 		return newArrayList(filter(classPath, FILE_EXISTS));
 	}

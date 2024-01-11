@@ -68,7 +68,6 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 		compile(classPath, compileSourceRoots, outputDirectory);
 	}
 
-	@SuppressWarnings("deprecation")
 	protected List<String> getClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getSourceDirectory());
@@ -77,7 +76,6 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 		} catch (DependencyResolutionRequiredException e) {
 			throw new WrappedException(e);
 		}
-		addDependencies(classPath, project.getCompileArtifacts());
 		classPath.remove(project.getBuild().getOutputDirectory());
 		return newArrayList(filter(classPath, FILE_EXISTS));
 	}

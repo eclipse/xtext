@@ -18,9 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
-import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
@@ -162,12 +160,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	}
 
 	protected abstract String getTempDirectory();
-
-	protected void addDependencies(Set<String> classPath, List<Artifact> dependencies) {
-		for (Artifact artifact : dependencies) {
-			classPath.add(artifact.getFile().getAbsolutePath());
-		}
-	}
 
 	protected void readXtendEclipseSetting(String sourceDirectory, Procedure1<String> fieldSetter) {
 		if (propertiesFileLocation != null) {
