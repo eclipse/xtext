@@ -42,17 +42,16 @@ public class MarkerCreator {
 		// Do this in one single setAttributes() call, as each set of an attribute is a workspace operation
 		Map<String, Object> attributes = new HashMap<>(16);
 
-		String lineNR = "";
 		if (issue.getLineNumber() != null) {
-			lineNR = "line: " + issue.getLineNumber() + " ";
+			attributes.put(IMarker.LINE_NUMBER, issue.getLineNumber());
+		} else {
+			attributes.put(IMarker.LOCATION, resource.getFullPath().toString());
 		}
-		attributes.put(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
 		attributes.put(Issue.CODE_KEY, issue.getCode());		
 		attributes.put(IMarker.SEVERITY, getSeverity(issue));
 		attributes.put(IMarker.CHAR_START, issue.getOffset());
 		if(issue.getOffset() != null && issue.getLength() != null)
 			attributes.put(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
-		attributes.put(IMarker.LINE_NUMBER, issue.getLineNumber());
 		attributes.put(Issue.COLUMN_KEY, issue.getColumn());
 		attributes.put(IMarker.MESSAGE, issue.getMessage());
 
