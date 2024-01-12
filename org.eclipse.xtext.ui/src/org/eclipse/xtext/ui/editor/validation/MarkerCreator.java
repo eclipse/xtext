@@ -44,8 +44,6 @@ public class MarkerCreator {
 
 		if (issue.getLineNumber() != null) {
 			attributes.put(IMarker.LINE_NUMBER, issue.getLineNumber());
-		} else {
-			attributes.put(IMarker.LOCATION, resource.getFullPath().toString());
 		}
 		attributes.put(Issue.CODE_KEY, issue.getCode());		
 		attributes.put(IMarker.SEVERITY, getSeverity(issue));
