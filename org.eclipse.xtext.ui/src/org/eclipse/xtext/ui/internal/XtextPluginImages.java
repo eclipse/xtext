@@ -139,7 +139,10 @@ public class XtextPluginImages {
 	}
 
 	private static void ensureInitialized() {
-		if (PLUGIN_REGISTRY == null)
+		if (PLUGIN_REGISTRY == null &&
+				// to avoid NPE in XtextPluginImages when initialized from non-UI thread
+				// https://github.com/eclipse/xtext/issues/2807
+				Display.getCurrent() != null)
 			initialize();
 	}
 	
