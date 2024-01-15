@@ -62,7 +62,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def void testCannotOverrideFinalGetter() {
-		file('''
+		val source = '''
 			import org.eclipse.xtend.lib.annotations.Accessors
 			class Fizz {
 				def final String getFoo() {"foo"}
@@ -71,7 +71,10 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Buzz extends Fizz {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "final", "getFoo")
+		'''
+		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL,
+			source.lastIndexOf("foo"), "foo".length,
+			"final", "getFoo")
 	}
 	
 	@Test
@@ -158,7 +161,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 
 	@Test
 	def void testCannotOverrideFinalSetter() {
-		file('''
+		val source = '''
 			import org.eclipse.xtend.lib.annotations.Accessors
 			class Foo {
 				def final void setFoo(String foo) {}
@@ -167,7 +170,10 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "setFoo(String)", "final")
+		'''
+		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL,
+			source.lastIndexOf("foo"), "foo".length,
+			"setFoo(String)", "final")
 	}
 
 	@Test

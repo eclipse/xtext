@@ -140,7 +140,10 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "final", "getFoo");
+      final String source = _builder.toString();
+      this._validationTestHelper.assertError(this.file(source), XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, 
+        source.lastIndexOf("foo"), "foo".length(), 
+        "final", "getFoo");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -323,7 +326,10 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, "setFoo(String)", "final");
+      final String source = _builder.toString();
+      this._validationTestHelper.assertError(this.file(source), XtendPackage.Literals.XTEND_FIELD, IssueCodes.OVERRIDDEN_FINAL, 
+        source.lastIndexOf("foo"), "foo".length(), 
+        "setFoo(String)", "final");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

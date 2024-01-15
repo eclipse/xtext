@@ -442,8 +442,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideFinalMethod() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ClassWithFinalMembers { def foo() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDDEN_FINAL, "override", "final");
+		var source = "class Foo extends test.ClassWithFinalMembers { def foo() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDDEN_FINAL,
+				source.indexOf("foo"), "foo".length(),
+				"override", "final");
 	}
 
 	@Test public void testOverrideSameVisibility() throws Exception {
