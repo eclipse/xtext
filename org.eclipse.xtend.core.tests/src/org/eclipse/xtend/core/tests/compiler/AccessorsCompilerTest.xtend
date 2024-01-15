@@ -90,7 +90,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''
 		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE,
-			source.indexOf("@Accessors int foo"), "@Accessors int foo".length,
+			source.indexOf("int"), "int".length,
 			"incompatible", "getFoo")
 	}
 	

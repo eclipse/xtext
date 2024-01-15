@@ -172,7 +172,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String source = _builder.toString();
       this._validationTestHelper.assertError(this.file(source), XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
-        source.indexOf("@Accessors int foo"), "@Accessors int foo".length(), 
+        source.indexOf("int"), "int".length(), 
         "incompatible", "getFoo");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
