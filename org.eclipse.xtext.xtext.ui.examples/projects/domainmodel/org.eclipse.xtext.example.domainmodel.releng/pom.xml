@@ -104,7 +104,7 @@
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.xtext.logging</id>
-								<versionRange>${xtextVersion}</versionRange>
+								<versionRange>0.0.0</versionRange>
 							</requirement>
 						</extraRequirements>
 					</dependency-resolution>
