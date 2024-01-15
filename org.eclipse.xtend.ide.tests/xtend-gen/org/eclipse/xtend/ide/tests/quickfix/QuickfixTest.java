@@ -136,7 +136,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
 
   @Test
   public void missingSynchronized() {
-    this.builder.setSeverity(org.eclipse.xtend.core.validation.IssueCodes.MISSING_SYNCHRONIZED, "warning");
+    this.builder.setSeverity(IssueCodes.MISSING_SYNCHRONIZED, "warning");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bar {");
     _builder.newLine();
@@ -168,7 +168,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("XXX.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.MISSING_SYNCHRONIZED).assertResolutionLabels("Mark operation as synchronized");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("XXX.xtend", _builder.toString()).assertIssueCodes(IssueCodes.MISSING_SYNCHRONIZED).assertResolutionLabels("Mark operation as synchronized");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Bar {");
     _builder_1.newLine();

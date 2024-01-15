@@ -238,6 +238,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
+	/**
+	 * @since 2.34
+	 */
+	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
 
 	private IssueCodes() {
 	}

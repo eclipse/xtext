@@ -334,7 +334,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 
-	@Fix(IssueCodes.MISSING_SYNCHRONIZED)
+	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.MISSING_SYNCHRONIZED)
 	public void fixMissingSynchronizedKeyword(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Mark operation as synchronized", "Marks this operation as synchronized", "fix_indent.gif", new ISemanticModification() {
 			@Override
