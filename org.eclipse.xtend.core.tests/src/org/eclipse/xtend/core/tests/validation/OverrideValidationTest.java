@@ -460,15 +460,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideHides() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { override protected publicMethod() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY, "reduce",
-				"visibility");
+		var source = "class Foo extends test.Visibilities { override protected publicMethod() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY,
+				source.indexOf("publicMethod"), "publicMethod".length(),
+				"reduce", "visibility");
 	}
 
 	@Test public void testDispatchHides() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { def protected dispatch publicMethod() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY, "reduce",
-				"visibility");
+		var source = "class Foo extends test.Visibilities { def protected dispatch publicMethod() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY,
+				source.indexOf("protected"), "protected".length(),
+				"reduce", "visibility");
 	}
 
 	@Test public void testIncompatibleThrowsClause() throws Exception {
