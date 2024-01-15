@@ -476,8 +476,10 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testIncompatibleThrowsClause() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws Exception {} }");
+		var source = "class Foo extends test.ExceptionThrowing { override ioException() throws Exception {} }";
+		XtendClass xtendClass = clazz(source);
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				source.lastIndexOf("Exception"), "Exception".length(),
 				"Exception", "not", "compatible", "throws", "clause");
 	}
 	
