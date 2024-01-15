@@ -79,7 +79,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def void testCannotOverrideWithConflictingReturnType() {
-		file('''
+		val source = '''
 			import org.eclipse.xtend.lib.annotations.Accessors
 			class Foo {
 				def String getFoo() {"foo"}
@@ -88,7 +88,10 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors int foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE, "incompatible", "getFoo")
+		'''
+		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_RETURN_TYPE,
+			source.indexOf("@Accessors int foo"), "@Accessors int foo".length,
+			"incompatible", "getFoo")
 	}
 	
 	@Test

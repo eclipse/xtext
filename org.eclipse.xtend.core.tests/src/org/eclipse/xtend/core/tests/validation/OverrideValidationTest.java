@@ -805,8 +805,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceIncompatibleReturnType_0() throws Exception {
-		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override Boolean string() }");
-		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		var source = "interface Foo extends test.SuperInterface { override Boolean string() }";
+		XtendInterface xtendInterface = interfaze(source);
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("Boolean"), "Boolean".length(),
+				"return type is incompatible with", "string()");
 	}
 
 	@Test public void testInterfaceIncompatibleReturnType_1() throws Exception {
@@ -815,8 +818,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceIncompatibleReturnType_2() throws Exception {
-		XtendInterface xtendInterface = interfaze("interface Foo extends test.SomeInterface { override void foo() }");
-		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		var source = "interface Foo extends test.SomeInterface { override void foo() }";
+		XtendInterface xtendInterface = interfaze(source);
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("void"), "void".length(),
+				"return type is incompatible with", "foo()");
 	}
 
 	@Test public void testInterfaceIncompatibleGenericReturnType_0() throws Exception {
@@ -825,8 +831,10 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceIncompatibleGenericReturnType_1() throws Exception {
-		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override java.util.List<Object> returnsListString() }");
-		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		var source = "interface Foo extends test.SuperInterface { override java.util.List<Object> returnsListString() }";
+		XtendInterface xtendInterface = interfaze(source);
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("java.util.List<Object>"), "java.util.List<Object>".length());
 	}
 
 	@Test public void testInterfaceIncompatibleGenericReturnType_2() throws Exception {
