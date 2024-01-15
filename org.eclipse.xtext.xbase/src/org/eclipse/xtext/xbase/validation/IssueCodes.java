@@ -242,6 +242,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
+	/**
+	 * @since 2.34
+	 */
+	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
 
 	private IssueCodes() {
 	}

@@ -48,8 +48,6 @@ public final class IssueCodes {
 	public static final String XBASE_LIB_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "xbase_lib_not_on_classpath";
 	public static final String JDK_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "jdk_not_on_classpath";
 
-	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
-
 	public static final String UNUSED_PRIVATE_MEMBER = ISSUE_CODE_PREFIX + "unused_private_member";
 	public static final String FIELD_NOT_INITIALIZED = ISSUE_CODE_PREFIX + "field_not_initialized";
 	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
