@@ -1030,8 +1030,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testSynchronized_1() throws Exception{
-		XtendClass xtendClass = clazz("class Foo extends Bar { override myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
-		helper.assertWarning(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
+		var source = "class Foo extends Bar { override myMethod() {1} } class Bar { def synchronized int myMethod() {0} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertWarning(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED,
+				source.indexOf("myMethod"), "myMethod".length(),
+				"The overridden method is synchronized, the current one is not synchronized");
 	}
 	
 	@Test public void testSynchronized_2() throws Exception{
