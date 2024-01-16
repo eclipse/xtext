@@ -480,7 +480,7 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz(source);
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
 				source.lastIndexOf("Exception"), "Exception".length(),
-				"Exception", "not", "compatible", "throws", "clause");
+				"Exception", "is not", "compatible", "throws", "clause");
 	}
 	
 	@Test public void testIncompatibleThrowsClause_01() throws Exception {
@@ -512,7 +512,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
 				"Exception", "FileNotFoundException", "not", "compatible", "throws", "clause");
 	}
-	
+
+	/**
+	 * Two incompatible exceptions; the marker is on the first one
+	 */
+	@Test public void testIncompatibleThrowsClause_06() throws Exception {
+		var source = "class Foo extends test.ExceptionThrowing { override nullPointerException() throws java.io.IOException, java.io.FileNotFoundException {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				source.indexOf("java.io.IOException"), "java.io.IOException".length(),
+				"declared exceptions", "IOException", "FileNotFoundException",
+				"are not", "compatible", "throws", "clause");
+	}
+
 	@Test public void testCompatibleThrowsClause() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws java.io.FileNotFoundException {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
