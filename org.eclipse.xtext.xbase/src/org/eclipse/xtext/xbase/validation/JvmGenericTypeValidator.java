@@ -15,6 +15,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.typesystem.override.ConflictingDefaultOperation;
+import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -377,6 +379,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		Set<EObject> flaggedOperations = Sets.newHashSet();
 		doCheckDuplicateExecutables(type, resolvedFeatures, flaggedOperations);
 		doCheckOverriddenMethods(sourceType, type, resolvedFeatures, flaggedOperations);
+		doCheckFunctionOverrides(resolvedFeatures, flaggedOperations);
 	}
 
 	private <T1 extends JvmMember, T2 extends T1> Map<String, List<T2>> groupMembersByName(
@@ -747,6 +750,93 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+	protected void doCheckFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+		for(IResolvedOperation operation: resolvedFeatures.getDeclaredOperations()) {
+			doCheckFunctionOverrides(operation, flaggedOperations);
+		}
+	}
+
+	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
+		EObject sourceElement = findPrimarySourceElement(operation);
+		if (sourceElement != null) {
+			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
+			if (!allInherited.isEmpty() && flaggedOperations.add(sourceElement)) {
+				doCheckFunctionOverrides(sourceElement, operation, allInherited);
+			}
+		}
+	}
+
+	protected void doCheckFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
+			List<IResolvedOperation> allInherited) {
+		List<IResolvedOperation> exceptionMismatch = null;
+		for(IResolvedOperation inherited: allInherited) {
+			if (inherited.getOverrideCheckResult().hasProblems()) {
+				EnumSet<OverrideCheckDetails> details = inherited.getOverrideCheckResult().getDetails();
+				if (details.contains(OverrideCheckDetails.IS_FINAL)) {
+					error("Attempt to override final method " + inherited.getSimpleSignature(), sourceElement,
+							getFeatureForIssue(sourceElement), OVERRIDDEN_FINAL);
+				} else if (details.contains(OverrideCheckDetails.REDUCED_VISIBILITY)) {
+					error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
+							sourceElement, getFeatureForIssue(sourceElement), OVERRIDE_REDUCES_VISIBILITY);
+				} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
+					if (exceptionMismatch == null)
+						exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
+					exceptionMismatch.add(inherited);
+				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
+					error("The return type is incompatible with " + inherited.getSimpleSignature(), sourceElement,
+							returnTypeFeature(sourceElement, resolved), INCOMPATIBLE_RETURN_TYPE);
+				} else if (details.contains(OverrideCheckDetails.SYNCHRONIZED_MISMATCH)) {
+					warning("The overridden method is synchronized, the current one is not synchronized.", sourceElement,
+							getFeatureForIssue(sourceElement), MISSING_SYNCHRONIZED);
+				}
+			}
+		}
+		if (exceptionMismatch != null) {
+			createExceptionMismatchError(resolved, sourceElement, exceptionMismatch);
+		}
+	}
+
+	protected void createExceptionMismatchError(IResolvedOperation operation, EObject sourceElement,
+			List<IResolvedOperation> exceptionMismatch) {
+		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
+		StringBuilder message = new StringBuilder(100);
+		message.append("The declared exception");
+		if (exceptions.size() > 1) {
+			message.append('s');
+		}
+		message.append(' ');
+		for(int i = 0; i < exceptions.size(); i++) {
+			if (i != 0) {
+				if (i != exceptions.size() - 1)
+					message.append(", ");
+				else
+					message.append(" and ");
+			}
+			message.append(exceptions.get(i).getHumanReadableName());
+		}
+		if (exceptions.size() > 1) {
+			message.append(" are");
+		} else {
+			message.append(" is");
+		}
+		message.append(" not compatible with throws clause in ");
+		for(int i = 0; i < exceptionMismatch.size(); i++) {
+			if (i != 0) {
+				if (i != exceptionMismatch.size() - 1)
+					message.append(", ");
+				else
+					message.append(" and ");
+			}
+			IResolvedOperation resolvedOperation = exceptionMismatch.get(i);
+			message.append(getDeclaratorName(resolvedOperation));
+			message.append('.');
+			message.append(exceptionMismatch.get(i).getSimpleSignature());
+		}
+		// TODO: maybe put an error on each mismatching exception?
+		// TODO: currently we mark the first exception as in Xtend
+		error(message.toString(), sourceElement, exceptionsFeature(sourceElement, operation), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
 	protected String typeLabel(JvmExecutable executable) {
 		if (executable instanceof JvmOperation) 
 			return "method";
@@ -763,6 +853,29 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		} else {
 			return declarator.getSimpleName();
 		}
+	}
+
+	protected String getDeclaratorName(IResolvedOperation resolved) {
+		return getDeclaratorName(resolved.getDeclaration());
+	}
+
+	protected EStructuralFeature returnTypeFeature(EObject member, IResolvedOperation resolved) {
+		JvmOperation operation = resolved.getDeclaration();
+		JvmTypeReference returnType = operation.getReturnType();
+		EObject sourceReturnType = associations.getPrimarySourceElement(returnType);
+		if (sourceReturnType != null)
+			return sourceReturnType.eContainingFeature();
+		return null;
+	}
+
+	protected EStructuralFeature exceptionsFeature(EObject member, IResolvedOperation resolved) {
+		// This mimics the current Xtend that marks the first exception
+		JvmOperation operation = resolved.getDeclaration();
+		JvmTypeReference exceptionType = operation.getExceptions().get(0);
+		EObject sourceExceptionType = associations.getPrimarySourceElement(exceptionType);
+		if (sourceExceptionType != null)
+			return sourceExceptionType.eContainingFeature();
+		return null;
 	}
 
 	protected GeneratorConfig getGeneratorConfig(EObject element) {

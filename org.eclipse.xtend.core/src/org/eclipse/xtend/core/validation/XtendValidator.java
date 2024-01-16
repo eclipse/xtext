@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.validation;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
@@ -21,7 +20,6 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.lang.annotation.ElementType;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -47,7 +45,6 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
-import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
@@ -114,7 +111,6 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
@@ -137,7 +133,6 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
@@ -604,15 +599,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			return null;
 	}
 
-	protected EStructuralFeature returnTypeFeature(EObject member) {
-		if (member instanceof XtendFunction) 
-			return XTEND_FUNCTION__RETURN_TYPE;
-		else if (member instanceof XtendField) // e.g., for an active annotation like @Accessors
-			return XTEND_FIELD__TYPE;
-		else
-			return null;
-	}
-
 	protected void doCheckFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		for(IResolvedOperation operation: resolvedFeatures.getDeclaredOperations()) {
 			doCheckFunctionOverrides(operation, flaggedOperations);
@@ -646,32 +632,10 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	protected void doCheckFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
 			List<IResolvedOperation> allInherited) {
 		boolean overrideProblems = false;
-		List<IResolvedOperation> exceptionMismatch = null;
 		for(IResolvedOperation inherited: allInherited) {
 			if (inherited.getOverrideCheckResult().hasProblems()) {
 				overrideProblems = true;
-				EnumSet<OverrideCheckDetails> details = inherited.getOverrideCheckResult().getDetails();
-				if (details.contains(OverrideCheckDetails.IS_FINAL)) {
-					error("Attempt to override final method " + inherited.getSimpleSignature(), sourceElement,
-							nameFeature(sourceElement), OVERRIDDEN_FINAL);
-				} else if (details.contains(OverrideCheckDetails.REDUCED_VISIBILITY)) {
-					error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
-							sourceElement, nameFeature(sourceElement), OVERRIDE_REDUCES_VISIBILITY);
-				} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
-					if (exceptionMismatch == null)
-						exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
-					exceptionMismatch.add(inherited);
-				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
-					error("The return type is incompatible with " + inherited.getSimpleSignature(), sourceElement,
-							returnTypeFeature(sourceElement), INCOMPATIBLE_RETURN_TYPE);
-				} else if (details.contains(OverrideCheckDetails.SYNCHRONIZED_MISMATCH)) {
-					warning("The overridden method is synchronized, the current one is not synchronized.", sourceElement,
-							nameFeature(sourceElement), MISSING_SYNCHRONIZED);
-				}
 			}
-		}
-		if (exceptionMismatch != null) {
-			createExceptionMismatchError(resolved, sourceElement, exceptionMismatch);
 		}
 		if (sourceElement instanceof XtendFunction) {
 			XtendFunction function = (XtendFunction) sourceElement;
@@ -699,40 +663,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 
 	protected String getDeclaratorName(IResolvedOperation resolved) {
 		return getDeclaratorName(resolved.getDeclaration());
-	}
-	
-	protected void createExceptionMismatchError(IResolvedOperation operation, EObject sourceElement,
-			List<IResolvedOperation> exceptionMismatch) {
-		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
-
-		var suffixMessage = new StringBuilder();
-		suffixMessage.append(" not compatible with the throws clause in ");
-
-		for (int i = 0; i < exceptionMismatch.size(); i++) {
-			if (i != 0) {
-				if (i != exceptionMismatch.size() - 1)
-					suffixMessage.append(", ");
-				else
-					suffixMessage.append(" and ");
-			}
-			IResolvedOperation resolvedOperation = exceptionMismatch.get(i);
-			suffixMessage.append(getDeclaratorName(resolvedOperation));
-			suffixMessage.append('.');
-			suffixMessage.append(exceptionMismatch.get(i).getSimpleSignature());
-		}
-
-		List<LightweightTypeReference> resolvedExceptions = operation.getResolvedExceptions();
-		for (LightweightTypeReference exception : exceptions) {
-			var message = new StringBuilder(100);
-			message.append("The declared exception ");
-			message.append(exception.getHumanReadableName());
-			message.append(" is");
-			message.append(suffixMessage);
-			var exceptionIndex = resolvedExceptions.indexOf(exception);
-			error(message.toString(),
-				sourceElement, XTEND_EXECUTABLE__EXCEPTIONS,
-				exceptionIndex, INCOMPATIBLE_THROWS_CLAUSE);
-		}
 	}
 
 	protected EObject findPrimarySourceElement(IResolvedOperation operation) {
