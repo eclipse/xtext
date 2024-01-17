@@ -14,7 +14,6 @@ import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
 import static org.eclipse.xtext.util.Strings.*;
-import static org.eclipse.xtext.util.Strings.isEmpty;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
@@ -483,34 +482,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					return;
 				}
 				outer = EcoreUtil2.getContainerOfType(outer.eContainer(), XtendTypeDeclaration.class);
-			}
-		}
-	}
-	
-	@Check
-	public void checkMemberNamesAreUnique(XtendTypeDeclaration xtendType) {
-		// duplicated standard fields and duplicated nested types are checked by JvmGenericTypeValidator
-		final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
-		for (XtendMember member : xtendType.getMembers()) {
-			if (member instanceof XtendField) {
-				XtendField field = (XtendField) member;
-				if (isEmpty(field.getName())) {
-					if (field.isExtension()) {
-						JvmTypeReference typeReference = field.getType();
-						if (typeReference != null) {
-							JvmType type = typeReference.getType();
-							if (type != null)
-								type2extension.put(type, field);
-						}
-					}
-				}
-			}
-		}
-		for(JvmType type: type2extension.keySet()) {
-			Collection<XtendField> fields = type2extension.get(type);
-			if(fields.size() >1) {
-				for(XtendField field: fields)
-					error("Duplicate extension with same type", field, XTEND_FIELD__TYPE, DUPLICATE_FIELD);
 			}
 		}
 	}

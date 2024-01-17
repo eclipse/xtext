@@ -126,7 +126,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkJvmGenericType(JvmGenericType type) {
-		var sourceType = associations.getPrimarySourceElement(type);
+		var sourceType = getPrimarySourceElement(type);
 		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));
 		handleExceptionDuringValidation(() -> checkSuperTypes(sourceType, type));
 		type.getDeclaredFields().forEach(field -> {
@@ -144,6 +144,10 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				forEach(nestedType ->
 					handleExceptionDuringValidation(() -> checkJvmGenericType(nestedType)));
 		});
+	}
+
+	protected EObject getPrimarySourceElement(JvmGenericType type) {
+		return associations.getPrimarySourceElement(type);
 	}
 
 	protected void checkJvmExecutables(List<? extends JvmMember> contents) {

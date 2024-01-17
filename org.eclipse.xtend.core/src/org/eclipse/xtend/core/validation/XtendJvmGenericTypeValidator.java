@@ -10,15 +10,27 @@ package org.eclipse.xtend.core.validation;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
+import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 /**
  * A specialization of {@link JvmGenericTypeValidator} to deal with specific features of Xtend.
@@ -27,6 +39,38 @@ import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
  * @author Sebastian Zarnekow - Author of the original Java code in XtendValidator extracted here.
  */
 public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
+
+	@Override
+	protected void checkMemberNamesAreUnique(JvmGenericType genericType) {
+		super.checkMemberNamesAreUnique(genericType);
+		var primarySourceElement = getPrimarySourceElement(genericType);
+		if (primarySourceElement instanceof XtendTypeDeclaration) {
+			XtendTypeDeclaration xtendType = (XtendTypeDeclaration) primarySourceElement;
+			final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
+			for (XtendMember member : xtendType.getMembers()) {
+				if (member instanceof XtendField) {
+					XtendField field = (XtendField) member;
+					if (isEmpty(field.getName())) {
+						if (field.isExtension()) {
+							JvmTypeReference typeReference = field.getType();
+							if (typeReference != null) {
+								JvmType type = typeReference.getType();
+								if (type != null)
+									type2extension.put(type, field);
+							}
+						}
+					}
+				}
+			}
+			for(JvmType type: type2extension.keySet()) {
+				Collection<XtendField> fields = type2extension.get(type);
+				if(fields.size() >1) {
+					for(XtendField field: fields)
+						error("Duplicate extension with same type", field, XTEND_FIELD__TYPE, DUPLICATE_FIELD);
+				}
+			}
+		}
+	}
 
 	@Override
 	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
