@@ -86,7 +86,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -113,13 +112,11 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
-import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
 import org.eclipse.xtext.xbase.validation.ProxyAwareUIStrings;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -145,7 +142,7 @@ import com.google.inject.Inject;
  * @author Holger Schill
  * @author Stephane Galland
  */
-@ComposedChecks(validators = { AnnotationValidation.class, JvmGenericTypeValidator.class })
+@ComposedChecks(validators = { AnnotationValidation.class, XtendJvmGenericTypeValidator.class })
 public class XtendValidator extends XbaseWithAnnotationsValidator {
 
 	@Inject
@@ -576,99 +573,10 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		richStringProcessor.process(richString, helper, helper);
 	}
 
-	@Check
-	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
-		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
-		if (inferredType instanceof JvmGenericType) {
-			JavaVersion targetVersion = getGeneratorConfig(xtendType).getJavaSourceVersion();
-			ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType, targetVersion);
-			
-			Set<EObject> flaggedOperations = Sets.newHashSet();
-			doCheckFunctionOverrides(resolvedFeatures, flaggedOperations);
-		}
-	}
-
-	protected EStructuralFeature nameFeature(EObject member) {
-		if (member instanceof XtendFunction) 
-			return XTEND_FUNCTION__NAME;
-		else if(member instanceof XtendConstructor)
-			return null;
-		else if(member instanceof XtendField)
-			return XTEND_FIELD__NAME;
-		else
-			return null;
-	}
-
-	protected void doCheckFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
-		for(IResolvedOperation operation: resolvedFeatures.getDeclaredOperations()) {
-			doCheckFunctionOverrides(operation, flaggedOperations);
-		}
-	}
-
-	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
-		EObject sourceElement = findPrimarySourceElement(operation);
-		if (sourceElement != null) {
-			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
-			if (allInherited.isEmpty()) {
-				if (sourceElement instanceof XtendFunction && flaggedOperations.add(sourceElement)) {
-					XtendFunction function = (XtendFunction) sourceElement;
-					if (function.isOverride()) {
-						error("The method "+ operation.getSimpleSignature() +" of type "+getDeclaratorName(operation.getDeclaration())+" must override a superclass method.", 
-								function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
-					} else {
-						for (XAnnotation anno : function.getAnnotations()) {
-							if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
-								error("Superfluous @Override annotation", anno, null, OBSOLETE_ANNOTATION_OVERRIDE);
-							}
-						}
-					}
-				}
-			} else if (flaggedOperations.add(sourceElement)) {
-				doCheckFunctionOverrides(sourceElement, operation, allInherited);
-			}
-		}
-	}
-
-	protected void doCheckFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
-			List<IResolvedOperation> allInherited) {
-		boolean overrideProblems = false;
-		for(IResolvedOperation inherited: allInherited) {
-			if (inherited.getOverrideCheckResult().hasProblems()) {
-				overrideProblems = true;
-			}
-		}
-		if (sourceElement instanceof XtendFunction) {
-			XtendFunction function = (XtendFunction) sourceElement;
-			if (!overrideProblems && !function.isOverride() && !function.isStatic()) {
-				error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) +
-						" must use override keyword since it actually overrides a supertype method.", function,
-						XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
-			} 
-			if (!overrideProblems && function.isOverride() && function.isStatic()) {
-				for(IResolvedOperation inherited: allInherited) {
-					error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) + 
-							" shadows the method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(inherited) + 
-							", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
-				}
-			}
-			if (function.isOverride()) {
-				for (XAnnotation anno : function.getAnnotations()) {
-					if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
-						warning("Superfluous @Override annotation", anno, null, OBSOLETE_ANNOTATION_OVERRIDE);
-					}
-				}
-			}
-		}
-	}
-
-	protected String getDeclaratorName(IResolvedOperation resolved) {
-		return getDeclaratorName(resolved.getDeclaration());
-	}
-
 	protected EObject findPrimarySourceElement(IResolvedOperation operation) {
 		return associations.getPrimarySourceElement(operation.getDeclaration());
 	}
-	
+
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
 		if (o1 == o2) {
 			return false;
@@ -686,14 +594,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					throw new IllegalArgumentException("Unknown JvmVisibility " + o1);
 			}
 		}
-	}
-
-	protected boolean isInterface(JvmDeclaredType type) {
-		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
-	}
-
-	protected String canonicalName(JvmIdentifiableElement element) {
-		return (element != null) ? notNull(element.getIdentifier()) : null;
 	}
 
 	@Check
