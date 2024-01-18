@@ -883,6 +883,8 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	protected EStructuralFeature returnTypeFeature(EObject member) {
 		if (member instanceof XtendFunction) 
 			return XTEND_FUNCTION__RETURN_TYPE;
+		else if (member instanceof XtendField) // e.g., for an active annotation like @Accessors
+			return XTEND_FIELD__TYPE;
 		else
 			return null;
 	}

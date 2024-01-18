@@ -442,8 +442,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideFinalMethod() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ClassWithFinalMembers { def foo() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDDEN_FINAL, "override", "final");
+		var source = "class Foo extends test.ClassWithFinalMembers { def foo() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDDEN_FINAL,
+				source.indexOf("foo"), "foo".length(),
+				"override", "final");
 	}
 
 	@Test public void testOverrideSameVisibility() throws Exception {
@@ -457,21 +460,27 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testOverrideHides() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { override protected publicMethod() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY, "reduce",
-				"visibility");
+		var source = "class Foo extends test.Visibilities { override protected publicMethod() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY,
+				source.indexOf("publicMethod"), "publicMethod".length(),
+				"reduce", "visibility");
 	}
 
 	@Test public void testDispatchHides() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.Visibilities { def protected dispatch publicMethod() {} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY, "reduce",
-				"visibility");
+		var source = "class Foo extends test.Visibilities { def protected dispatch publicMethod() {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDE_REDUCES_VISIBILITY,
+				source.indexOf("protected"), "protected".length(),
+				"reduce", "visibility");
 	}
 
 	@Test public void testIncompatibleThrowsClause() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws Exception {} }");
+		var source = "class Foo extends test.ExceptionThrowing { override ioException() throws Exception {} }";
+		XtendClass xtendClass = clazz(source);
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
-				"Exception", "not", "compatible", "throws", "clause");
+				source.lastIndexOf("Exception"), "Exception".length(),
+				"Exception", "is not", "compatible", "throws", "clause");
 	}
 	
 	@Test public void testIncompatibleThrowsClause_01() throws Exception {
@@ -503,7 +512,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
 				"Exception", "FileNotFoundException", "not", "compatible", "throws", "clause");
 	}
-	
+
+	/**
+	 * Two incompatible exceptions; the marker is on the first one
+	 */
+	@Test public void testIncompatibleThrowsClause_06() throws Exception {
+		var source = "class Foo extends test.ExceptionThrowing { override nullPointerException() throws java.io.IOException, java.io.FileNotFoundException {} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				source.indexOf("java.io.IOException"), "java.io.IOException".length(),
+				"declared exceptions", "IOException", "FileNotFoundException",
+				"are not", "compatible", "throws", "clause");
+	}
+
 	@Test public void testCompatibleThrowsClause() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override ioException() throws java.io.FileNotFoundException {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
@@ -798,8 +819,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceIncompatibleReturnType_0() throws Exception {
-		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override Boolean string() }");
-		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		var source = "interface Foo extends test.SuperInterface { override Boolean string() }";
+		XtendInterface xtendInterface = interfaze(source);
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("Boolean"), "Boolean".length(),
+				"return type is incompatible with", "string()");
 	}
 
 	@Test public void testInterfaceIncompatibleReturnType_1() throws Exception {
@@ -808,8 +832,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceIncompatibleReturnType_2() throws Exception {
-		XtendInterface xtendInterface = interfaze("interface Foo extends test.SomeInterface { override void foo() }");
-		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		var source = "interface Foo extends test.SomeInterface { override void foo() }";
+		XtendInterface xtendInterface = interfaze(source);
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("void"), "void".length(),
+				"return type is incompatible with", "foo()");
 	}
 
 	@Test public void testInterfaceIncompatibleGenericReturnType_0() throws Exception {
@@ -818,8 +845,10 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testInterfaceIncompatibleGenericReturnType_1() throws Exception {
-		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override java.util.List<Object> returnsListString() }");
-		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		var source = "interface Foo extends test.SuperInterface { override java.util.List<Object> returnsListString() }";
+		XtendInterface xtendInterface = interfaze(source);
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("java.util.List<Object>"), "java.util.List<Object>".length());
 	}
 
 	@Test public void testInterfaceIncompatibleGenericReturnType_2() throws Exception {
@@ -1015,8 +1044,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testSynchronized_1() throws Exception{
-		XtendClass xtendClass = clazz("class Foo extends Bar { override myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
-		helper.assertWarning(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
+		var source = "class Foo extends Bar { override myMethod() {1} } class Bar { def synchronized int myMethod() {0} }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertWarning(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED,
+				source.indexOf("myMethod"), "myMethod".length(),
+				"The overridden method is synchronized, the current one is not synchronized");
 	}
 	
 	@Test public void testSynchronized_2() throws Exception{
