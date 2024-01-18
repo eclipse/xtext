@@ -514,15 +514,18 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	/**
-	 * Two incompatible exceptions; the marker is on the first one
+	 * Three incompatible exceptions from different supertypes; the marker is on the first one
 	 */
 	@Test public void testIncompatibleThrowsClause_06() throws Exception {
-		var source = "class Foo extends test.ExceptionThrowing { override nullPointerException() throws java.io.IOException, java.io.FileNotFoundException {} }";
+		var source = "class Foo extends test.ExceptionThrowing implements test.ExceptionThrowingInterface, test.ExceptionThrowingInterface2 {"
+				+ "override nullPointerException() throws NullPointerException, java.io.IOException, java.io.FileNotFoundException {} "
+				+ "}";
 		XtendClass xtendClass = clazz(source);
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
-				source.indexOf("java.io.IOException"), "java.io.IOException".length(),
+				source.indexOf("NullPointerException"), "NullPointerException".length(),
 				"declared exceptions", "IOException", "FileNotFoundException",
-				"are not", "compatible", "throws", "clause");
+				"are not compatible with throws clause in "
+				+ "ExceptionThrowing.nullPointerException(), ExceptionThrowingInterface.nullPointerException() and ExceptionThrowingInterface2.nullPointerException()");
 	}
 
 	@Test public void testCompatibleThrowsClause() throws Exception {
