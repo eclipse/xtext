@@ -1152,7 +1152,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		var suffixMessage = new StringBuilder();
 		suffixMessage.append(" not compatible with throws clause in ");
 
-		for(int i = 0; i < exceptionMismatch.size(); i++) {
+		for (int i = 0; i < exceptionMismatch.size(); i++) {
 			if (i != 0) {
 				if (i != exceptionMismatch.size() - 1)
 					suffixMessage.append(", ");
@@ -1166,10 +1166,9 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 
 		List<LightweightTypeReference> resolvedExceptions = operation.getResolvedExceptions();
-		for(int i = 0; i < exceptions.size(); i++) {
+		for (LightweightTypeReference exception : exceptions) {
 			var message = new StringBuilder(100);
 			message.append("The declared exception ");
-			LightweightTypeReference exception = exceptions.get(i);
 			message.append(exception.getHumanReadableName());
 			message.append(" is");
 			message.append(suffixMessage);
