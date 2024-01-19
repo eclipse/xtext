@@ -181,7 +181,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 
 	@Test
 	def void testCannotOverrideSetterWithIncompatibleReturnType() {
-		file('''
+		val source = '''
 			import org.eclipse.xtend.lib.annotations.Accessors
 			class Foo {
 				def Object setFoo(String foo) {null}
@@ -190,7 +190,10 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			class Bar extends Foo {
 				@Accessors String foo
 			}
-		''').assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible")
+		'''
+		file(source).assertError(XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE,
+			source.lastIndexOf("String"), "String".length,
+			"setFoo(String)", "incompatible")
 	}
 
 	@Test

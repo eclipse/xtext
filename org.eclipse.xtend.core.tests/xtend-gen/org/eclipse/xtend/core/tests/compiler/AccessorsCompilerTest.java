@@ -359,7 +359,10 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._validationTestHelper.assertError(this.file(_builder.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE, "setFoo(String)", "incompatible");
+      final String source = _builder.toString();
+      this._validationTestHelper.assertError(this.file(source), XtendPackage.Literals.XTEND_FIELD, IssueCodes.INCOMPATIBLE_RETURN_TYPE, 
+        source.lastIndexOf("String"), "String".length(), 
+        "setFoo(String)", "incompatible");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
