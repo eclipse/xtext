@@ -9,6 +9,7 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
@@ -291,5 +292,16 @@ public interface INode {
 	 * @since 2.5
 	 */
 	ITextRegionWithLineInformation getTotalTextRegionWithLineInformation();
+	
+	/**
+	 * Offers access to the {@link org.eclipse.xtext.nodemodel.util.NodeModelUtils.Implementation} and is thereby an
+	 * opportunity for low-level customizing.
+	 *
+	 * @see INodeReference
+	 * @since 2.34
+	 */
+	default NodeModelUtils.Implementation utils() {
+		return NodeModelUtils.Implementation.Default.INSTANCE;
+	}
 
 }
