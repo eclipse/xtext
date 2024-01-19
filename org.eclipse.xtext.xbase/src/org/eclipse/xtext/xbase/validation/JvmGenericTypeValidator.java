@@ -803,42 +803,41 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	protected void createExceptionMismatchError(IResolvedOperation operation, EObject sourceElement,
 			List<IResolvedOperation> exceptionMismatch) {
 		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
-		StringBuilder message = new StringBuilder(100);
-		message.append("The declared exception");
-		if (exceptions.size() > 1) {
-			message.append('s');
-		}
-		message.append(' ');
-		for(int i = 0; i < exceptions.size(); i++) {
-			if (i != 0) {
-				if (i != exceptions.size() - 1)
-					message.append(", ");
-				else
-					message.append(" and ");
-			}
-			message.append(exceptions.get(i).getHumanReadableName());
-		}
-		if (exceptions.size() > 1) {
-			message.append(" are");
-		} else {
-			message.append(" is");
-		}
-		message.append(" not compatible with throws clause in ");
-		for(int i = 0; i < exceptionMismatch.size(); i++) {
+
+		var suffixMessage = new StringBuilder();
+		suffixMessage.append(" not compatible with the throws clause in ");
+
+		for (int i = 0; i < exceptionMismatch.size(); i++) {
 			if (i != 0) {
 				if (i != exceptionMismatch.size() - 1)
-					message.append(", ");
+					suffixMessage.append(", ");
 				else
-					message.append(" and ");
+					suffixMessage.append(" and ");
 			}
 			IResolvedOperation resolvedOperation = exceptionMismatch.get(i);
-			message.append(getDeclaratorName(resolvedOperation));
-			message.append('.');
-			message.append(exceptionMismatch.get(i).getSimpleSignature());
+			suffixMessage.append(getDeclaratorName(resolvedOperation));
+			suffixMessage.append('.');
+			suffixMessage.append(exceptionMismatch.get(i).getSimpleSignature());
 		}
-		// TODO: maybe put an error on each mismatching exception?
-		// TODO: currently we mark the first exception as in Xtend
-		error(message.toString(), sourceElement, exceptionsFeature(sourceElement, operation), INCOMPATIBLE_THROWS_CLAUSE);
+
+		List<LightweightTypeReference> resolvedExceptions = operation.getResolvedExceptions();
+		JvmOperation sourceOperation = operation.getDeclaration();
+		for (LightweightTypeReference exception : exceptions) {
+			var message = new StringBuilder(100);
+			message.append("The declared exception ");
+			message.append(exception.getHumanReadableName());
+			message.append(" is");
+			message.append(suffixMessage);
+			var exceptionIndex = resolvedExceptions.indexOf(exception);
+			JvmTypeReference exceptionType = sourceOperation.getExceptions().get(exceptionIndex);
+			EObject sourceExceptionType = associations.getPrimarySourceElement(exceptionType);
+			EStructuralFeature feature = null;
+			if (sourceExceptionType != null)
+				feature = sourceExceptionType.eContainingFeature();
+			error(message.toString(),
+				sourceElement, feature,
+				exceptionIndex, INCOMPATIBLE_THROWS_CLAUSE);
+		}
 	}
 
 	protected String typeLabel(JvmExecutable executable) {
@@ -867,18 +866,9 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		JvmOperation operation = resolved.getDeclaration();
 		JvmTypeReference returnType = operation.getReturnType();
 		EObject sourceReturnType = associations.getPrimarySourceElement(returnType);
+		// it can be null in Xtend due to a field with @Accessors active annotation
 		if (sourceReturnType != null)
 			return sourceReturnType.eContainingFeature();
-		return null;
-	}
-
-	protected EStructuralFeature exceptionsFeature(EObject member, IResolvedOperation resolved) {
-		// This mimics the current Xtend that marks the first exception
-		JvmOperation operation = resolved.getDeclaration();
-		JvmTypeReference exceptionType = operation.getExceptions().get(0);
-		EObject sourceExceptionType = associations.getPrimarySourceElement(exceptionType);
-		if (sourceExceptionType != null)
-			return sourceExceptionType.eContainingFeature();
 		return null;
 	}
 

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -129,5 +130,13 @@ public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected EStructuralFeature returnTypeFeature(EObject member, IResolvedOperation resolved) {
+		var returnTypeFeature = super.returnTypeFeature(member, resolved);
+		if (returnTypeFeature == null && member instanceof XtendField) // e.g., for an active annotation like @Accessors
+			return XTEND_FIELD__TYPE;
+		return returnTypeFeature;
 	}
 }
