@@ -1150,7 +1150,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
 
 		var suffixMessage = new StringBuilder();
-		suffixMessage.append(" not compatible with throws clause in ");
+		suffixMessage.append(" not compatible with the throws clause in ");
 
 		for (int i = 0; i < exceptionMismatch.size(); i++) {
 			if (i != 0) {
