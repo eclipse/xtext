@@ -514,15 +514,25 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	}
 
 	/**
-	 * Two incompatible exceptions; the marker is on the first one
+	 * Two incompatible exceptions from three supertypes;
+	 * the marker is set on the offending exceptions only.
+	 * https://github.com/eclipse/xtext/issues/2912
 	 */
 	@Test public void testIncompatibleThrowsClause_06() throws Exception {
-		var source = "class Foo extends test.ExceptionThrowing { override nullPointerException() throws java.io.IOException, java.io.FileNotFoundException {} }";
+		var source = "class Foo extends test.ExceptionThrowing implements test.ExceptionThrowingInterface, test.ExceptionThrowingInterface2 {"
+				+ "override nullPointerException() throws NullPointerException, java.io.IOException, java.io.FileNotFoundException {} "
+				+ "}";
 		XtendClass xtendClass = clazz(source);
+		var expectedSuffix = " is not compatible with the throws clause in "
+				+ "ExceptionThrowing.nullPointerException(), ExceptionThrowingInterface.nullPointerException() and ExceptionThrowingInterface2.nullPointerException()";
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
 				source.indexOf("java.io.IOException"), "java.io.IOException".length(),
-				"declared exceptions", "IOException", "FileNotFoundException",
-				"are not", "compatible", "throws", "clause");
+				"declared exception IOException",
+				expectedSuffix);
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				source.indexOf("java.io.FileNotFoundException"), "java.io.FileNotFoundException".length(),
+				"declared exception FileNotFoundException",
+				expectedSuffix);
 	}
 
 	@Test public void testCompatibleThrowsClause() throws Exception {

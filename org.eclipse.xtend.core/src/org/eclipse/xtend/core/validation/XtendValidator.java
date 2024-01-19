@@ -872,14 +872,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		else
 			return null;
 	}
-	
-	protected EStructuralFeature exceptionsFeature(EObject member) {
-		if (member instanceof XtendExecutable) 
-			return XTEND_EXECUTABLE__EXCEPTIONS;
-		else
-			return null;
-	}
-	
+
 	protected EStructuralFeature returnTypeFeature(EObject member) {
 		if (member instanceof XtendFunction) 
 			return XTEND_FUNCTION__RETURN_TYPE;
@@ -1155,40 +1148,35 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	protected void createExceptionMismatchError(IResolvedOperation operation, EObject sourceElement,
 			List<IResolvedOperation> exceptionMismatch) {
 		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
-		StringBuilder message = new StringBuilder(100);
-		message.append("The declared exception");
-		if (exceptions.size() > 1) {
-			message.append('s');
-		}
-		message.append(' ');
-		for(int i = 0; i < exceptions.size(); i++) {
-			if (i != 0) {
-				if (i != exceptions.size() - 1)
-					message.append(", ");
-				else
-					message.append(" and ");
-			}
-			message.append(exceptions.get(i).getHumanReadableName());
-		}
-		if (exceptions.size() > 1) {
-			message.append(" are");
-		} else {
-			message.append(" is");
-		}
-		message.append(" not compatible with throws clause in ");
-		for(int i = 0; i < exceptionMismatch.size(); i++) {
+
+		var suffixMessage = new StringBuilder();
+		suffixMessage.append(" not compatible with the throws clause in ");
+
+		for (int i = 0; i < exceptionMismatch.size(); i++) {
 			if (i != 0) {
 				if (i != exceptionMismatch.size() - 1)
-					message.append(", ");
+					suffixMessage.append(", ");
 				else
-					message.append(" and ");
+					suffixMessage.append(" and ");
 			}
 			IResolvedOperation resolvedOperation = exceptionMismatch.get(i);
-			message.append(getDeclaratorName(resolvedOperation));
-			message.append('.');
-			message.append(exceptionMismatch.get(i).getSimpleSignature());
+			suffixMessage.append(getDeclaratorName(resolvedOperation));
+			suffixMessage.append('.');
+			suffixMessage.append(exceptionMismatch.get(i).getSimpleSignature());
 		}
-		error(message.toString(), sourceElement, exceptionsFeature(sourceElement), INCOMPATIBLE_THROWS_CLAUSE);
+
+		List<LightweightTypeReference> resolvedExceptions = operation.getResolvedExceptions();
+		for (LightweightTypeReference exception : exceptions) {
+			var message = new StringBuilder(100);
+			message.append("The declared exception ");
+			message.append(exception.getHumanReadableName());
+			message.append(" is");
+			message.append(suffixMessage);
+			var exceptionIndex = resolvedExceptions.indexOf(exception);
+			error(message.toString(),
+				sourceElement, XTEND_EXECUTABLE__EXCEPTIONS,
+				exceptionIndex, INCOMPATIBLE_THROWS_CLAUSE);
+		}
 	}
 
 	protected EObject findPrimarySourceElement(IResolvedOperation operation) {
