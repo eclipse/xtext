@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -28,10 +28,12 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.INodeReference;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -67,46 +69,8 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
 	/* @Nullable */
-	public static ILeafNode findLeafNodeAtOffset(/* @NonNull */ INode node, int leafNodeOffset) {
-		INode localNode = node;
-		while(!(localNode instanceof AbstractNode)) {
-			localNode = localNode.getParent();
-		}
-		int offset = localNode.getTotalOffset();
-		int length = localNode.getTotalLength();
-		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) localNode).basicIterator();
-		if (leafNodeOffset > (offset + length) / 2) {
-			while (iterator.hasPrevious()) {
-				AbstractNode previous = iterator.previous();
-				int previousOffset = previous.getTotalOffset();
-				int previousLength = previous.getTotalLength();
-				if (!intersects(previousOffset, previousLength, leafNodeOffset)) {
-					if (previousOffset + previousLength <= leafNodeOffset) {
-						return null;
-					}
-					iterator.prune();
-				} else {
-					if (previous instanceof ILeafNode)
-						return (ILeafNode) previous;
-				}
-			}
-		} else {
-			while (iterator.hasNext()) {
-				AbstractNode next = iterator.next();
-				int nextOffset = next.getTotalOffset();
-				int nextLength = next.getTotalLength();
-				if (!intersects(nextOffset, nextLength, leafNodeOffset)) {
-					if (nextOffset > leafNodeOffset) {
-						return null;
-					}
-					iterator.prune();
-				} else {
-					if (next instanceof ILeafNode)
-						return (ILeafNode) next;
-				}
-			}
-		}
-		return null;
+	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
+		return node.utils().findLeafNodeAtOffset(node, leafNodeOffset);
 	}
 	
 	/**
@@ -125,17 +89,11 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 *             {@code documentOffset < 0 || documentOffset > anyNode.rootNode.text.length}
 	 */
 	public static LineAndColumn getLineAndColumn(INode anyNode, int documentOffset) {
-		// special treatment for inconsistent nodes such as SyntheticLinkingLeafNode
-		if (anyNode.getParent() == null && !(anyNode instanceof RootNode)) {
-			return LineAndColumn.from(1,1);
-		}
-		return InternalNodeModelUtils.getLineAndColumn(anyNode, documentOffset);
+		return anyNode.utils().getLineAndColumn(anyNode, documentOffset);
 	}
-
-	private static boolean intersects(int offset, int length, int lookupOffset) {
-		if (offset <= lookupOffset && offset + length > lookupOffset)
-			return true;
-		return false;
+	
+	private static LineAndColumn internalGetLineAndColumn(INode anyNode, int documentOffset) {
+		return InternalNodeModelUtils.getLineAndColumn(anyNode, documentOffset);
 	}
 
 	/**
@@ -144,18 +102,16 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 * @param object the semantic object whose direct node should be provided.
 	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
+	 * @see INodeReference
 	 */
 	/* @Nullable */
 	public static ICompositeNode getNode(/* @Nullable */ EObject object) {
 		if (object == null)
 			return null;
-		List<Adapter> adapters = object.eAdapters();
-		for (int i = 0; i < adapters.size(); i++) {
-			Adapter adapter = adapters.get(i);
-			if (adapter instanceof ICompositeNode)
-				return (ICompositeNode) adapter;
+		if (object instanceof INodeReference) {
+			return ((INodeReference) object).getNode();
 		}
-		return null;
+		return (ICompositeNode) EcoreUtil.getExistingAdapter(object, ICompositeNode.class);
 	}
 
 	/**
@@ -166,55 +122,10 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	/* @NonNull */
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
 		ICompositeNode node = findActualNodeFor(semanticObject);
-		if (node != null && structuralFeature != null) {
-			return findNodesForFeature(semanticObject, node, structuralFeature);
+		if (node != null) {
+			return node.utils().findNodesForFeature(semanticObject, node, structuralFeature);
 		}
 		return Collections.emptyList();
-	}
-
-	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,
-			EStructuralFeature structuralFeature) {
-		List<INode> result = Lists.newArrayList();
-		String featureName = structuralFeature.getName();
-		BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
-		while (iterator.hasNext()) {
-			INode child = iterator.next();
-			EObject grammarElement = child.getGrammarElement();
-			if (grammarElement != null) {
-				if (grammarElement instanceof Action) {
-					Action action = (Action) grammarElement;
-					if (child.getSemanticElement() == semanticElement) {
-						child = iterator.next();
-						if (featureName.equals(action.getFeature())) {
-							result.add(child);
-						}
-					} else {
-						// navigate the action's left side (first child) until we find an assignment (a rule call)
-						// the assignment will tell us about the feature to which we assigned
-						// the semantic object that has been created by the action
-						INode firstChild = ((ICompositeNode) child).getFirstChild();
-						while (firstChild.getGrammarElement() instanceof Action) {
-							firstChild = ((ICompositeNode) firstChild).getFirstChild();
-						}
-						EObject firstChildGrammarElement = firstChild.getGrammarElement();
-						Assignment assignment = GrammarUtil.containingAssignment(firstChildGrammarElement);
-						if (assignment != null && featureName.equals(assignment.getFeature())) {
-							result.add(child);
-						}
-					}
-					iterator.prune();
-				} else if (child != node) {
-					Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-					if (assignment != null) {
-						if (featureName.equals(assignment.getFeature())) {
-							result.add(child);
-						}
-						iterator.prune();
-					}
-				}
-			}
-		}
-		return result;
 	}
 
 	/**
@@ -241,14 +152,7 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	public static ICompositeNode findActualNodeFor(/* @Nullable */ EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
-			while(GrammarUtil.containingAssignment(node.getGrammarElement()) == null) {
-				ICompositeNode parent = node.getParent();
-				if (parent != null && !parent.hasDirectSemanticElement() && !GrammarUtil.isEObjectFragmentRuleCall(parent.getGrammarElement())) {
-					node = parent;
-				} else {
-					break;
-				}
-			}
+			return node.utils().findActualNodeEnclosing(node);
 		}
 		return node;
 	}
@@ -264,75 +168,7 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	public static EObject findActualSemanticObjectFor(/* @Nullable */ INode node) {
 		if (node == null)
 			return null;
-		if (node.hasDirectSemanticElement())
-			return node.getSemanticElement();
-		EObject grammarElement = node.getGrammarElement();
-		ICompositeNode parent = node.getParent();
-		if (grammarElement == null)
-			return findActualSemanticObjectFor(parent);
-		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-		if (assignment != null) {
-			if (GrammarUtil.isEObjectFragmentRule(GrammarUtil.containingRule(assignment))) {
-				EObject result = findActualSemanticObjectInChildren(node, grammarElement);
-				if (result != null)
-					return result;
-			}
-			if (parent.hasDirectSemanticElement())
-				return findActualSemanticObjectFor(parent);
-			INode sibling = parent.getFirstChild();
-			while(!sibling.equals(node)) {
-				EObject siblingGrammarElement = sibling.getGrammarElement();
-				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
-					if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement)) {
-						return findActualSemanticObjectFor(sibling);
-					}
-					if (siblingGrammarElement.eClass() == XtextPackage.Literals.ACTION) {
-						return findActualSemanticObjectFor(sibling);
-					}
-				}
-				sibling = sibling.getNextSibling();
-			}
-		} else if (!GrammarUtil.isEObjectFragmentRuleCall(grammarElement)) {
-			EObject result = findActualSemanticObjectInChildren(node, grammarElement);
-			if (result != null)
-				return result;
-		}
-		return findActualSemanticObjectFor(parent);
-	}
-
-	/* @Nullable */
-	private static EObject findActualSemanticObjectInChildren(/* @NonNull */ INode node, /* @Nullable */ EObject grammarElement) {
-		if (node.hasDirectSemanticElement())
-			return node.getSemanticElement();
-		AbstractRule rule = null;
-		if (grammarElement instanceof RuleCall) {
-			rule = ((RuleCall) grammarElement).getRule();
-		} else if (grammarElement instanceof AbstractRule) {
-			rule = (AbstractRule) grammarElement;
-		}
-		if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule(rule)) {
-			if (node instanceof ICompositeNode) {
-				for (INode child : ((ICompositeNode) node).getChildren()) {
-					if (child instanceof ICompositeNode) {
-						EObject childGrammarElement = child.getGrammarElement();
-						if (childGrammarElement instanceof Action) {
-							EObject result = findActualSemanticObjectInChildren(child, childGrammarElement);
-							if (result != null)
-								return result;
-						} else if (childGrammarElement instanceof RuleCall) {
-							RuleCall childRuleCall = (RuleCall) childGrammarElement;
-							if (childRuleCall.getRule() instanceof ParserRule
-									&& !GrammarUtil.isDatatypeRule(childRuleCall.getRule())) {
-								EObject result = findActualSemanticObjectInChildren(child, childRuleCall);
-								if (result != null)
-									return result;
-							}
-						}
-					}
-				}
-			}
-		}
-		return null;
+		return node.utils().findActualSemanticObjectFor(node);
 	}
 
 	/**
@@ -341,60 +177,10 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 * @return a debug string for the given node.
 	 */
 	public static String compactDump(INode node, boolean showHidden) {
-		StringBuilder result = new StringBuilder();
-		try {
-			compactDump(node, showHidden, "", result);
-		} catch (IOException e) {
-			return e.getMessage();
+		if (node == null) {
+			return "(null)";
 		}
-		return result.toString();
-	}
-
-	private static void compactDump(INode node, boolean showHidden, String prefix, Appendable result)
-			throws IOException {
-		if (!showHidden && node instanceof ILeafNode && ((ILeafNode) node).isHidden())
-			return;
-		if (prefix.length() != 0) {
-			result.append("\n");
-			result.append(prefix);
-		}
-		if (node instanceof ICompositeNode) {
-			if (node.getGrammarElement() != null)
-				result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
-			else
-				result.append("(unknown)");
-			String newPrefix = prefix + "  ";
-			result.append(" {");
-			BidiIterator<INode> children = ((ICompositeNode) node).getChildren().iterator();
-			while (children.hasNext()) {
-				INode child = children.next();
-				compactDump(child, showHidden, newPrefix, result);
-			}
-			result.append("\n");
-			result.append(prefix);
-			result.append("}");
-			SyntaxErrorMessage error = node.getSyntaxErrorMessage();
-			if (error != null)
-				result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
-		} else if (node instanceof ILeafNode) {
-			if (((ILeafNode) node).isHidden())
-				result.append("hidden ");
-			if (node.getGrammarElement() != null)
-				result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
-			else
-				result.append("(unknown)");
-			result.append(" => '");
-			result.append(node.getText());
-			result.append("'");
-			SyntaxErrorMessage error = node.getSyntaxErrorMessage();
-			if (error != null)
-				result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
-		} else if (node == null) {
-			result.append("(null)");
-		} else {
-			result.append("unknown type ");
-			result.append(node.getClass().getName());
-		}
+		return node.utils().compactDump(node, showHidden);
 	}
 
 	/**
@@ -411,41 +197,323 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 * 
 	 */
 	public static String getTokenText(INode node) {
-		if (node instanceof ILeafNode)
-			return ((ILeafNode) node).getText();
-		else {
-			StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
-			boolean hiddenSeen = false;
-			for (ILeafNode leaf : node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					if (hiddenSeen && builder.length() > 0)
-						builder.append(' ');
-					builder.append(leaf.getText());
-					hiddenSeen = false;
-				} else {
-					hiddenSeen = true;
-				}
-			}
-			return builder.toString();
-		}
+		return node.utils().getTokenText(node);
 	}
 	
 	public static ParserRule getEntryParserRule(INode node) {
-		ICompositeNode root = node.getRootNode();
-		EObject ge1 = root.getGrammarElement();
-		if (ge1 instanceof ParserRule) {
-			return (ParserRule) ge1;
-		} else if (ge1 instanceof Action) {
-			INode firstChild = root.getFirstChild();
-			while (firstChild.getGrammarElement() instanceof Action && firstChild instanceof CompositeNode) {
-				firstChild = ((CompositeNode)firstChild).getFirstChild();
-			}
-			EObject ge2 = firstChild.getGrammarElement();
-			if (ge2 instanceof ParserRule) {
-				return (ParserRule) ge2;
-			}
-		}
-		throw new IllegalStateException("No Root Parser Rule found; The Node Model is broken.");
+		return node.utils().getEntryParserRule(node);
 	}
 
+	/**
+	 * Internal abstraction of the {@link NodeModelUtils} that allows to customize the functionality of the
+	 * {@link NodeModelUtils} even though it's statically available.
+	 * 
+	 * @see INode#utils()
+	 * @see INodeReference
+	 * @see NodeModelBuilder
+	 * 
+	 * @since 2.34
+	 */
+	public interface Implementation {
+
+		/**
+		 * The singleton default instance that implements {@link NodeModelUtils.Implementation}.
+		 * @since 2.34
+		 */
+		enum Default implements Implementation {
+			INSTANCE;
+		}
+
+		default /* @Nullable */ ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
+			INode localNode = node;
+			while (!(localNode instanceof AbstractNode)) {
+				localNode = localNode.getParent();
+			}
+			int offset = localNode.getTotalOffset();
+			int length = localNode.getTotalLength();
+			BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) localNode).basicIterator();
+			if (leafNodeOffset > (offset + length) / 2) {
+				while (iterator.hasPrevious()) {
+					AbstractNode previous = iterator.previous();
+					int previousOffset = previous.getTotalOffset();
+					int previousLength = previous.getTotalLength();
+					if (!intersects(previousOffset, previousLength, leafNodeOffset)) {
+						if (previousOffset + previousLength <= leafNodeOffset) {
+							return null;
+						}
+						iterator.prune();
+					} else {
+						if (previous instanceof ILeafNode)
+							return (ILeafNode) previous;
+					}
+				}
+			} else {
+				while (iterator.hasNext()) {
+					AbstractNode next = iterator.next();
+					int nextOffset = next.getTotalOffset();
+					int nextLength = next.getTotalLength();
+					if (!intersects(nextOffset, nextLength, leafNodeOffset)) {
+						if (nextOffset > leafNodeOffset) {
+							return null;
+						}
+						iterator.prune();
+					} else {
+						if (next instanceof ILeafNode)
+							return (ILeafNode) next;
+					}
+				}
+			}
+			return null;
+		}
+
+		default LineAndColumn getLineAndColumn(INode anyNode, int documentOffset) {
+			// special treatment for inconsistent nodes such as SyntheticLinkingLeafNode
+			if (anyNode.getParent() == null && !(anyNode instanceof RootNode)) {
+				return LineAndColumn.from(1, 1);
+			}
+			return internalGetLineAndColumn(anyNode, documentOffset);
+		}
+
+		private boolean intersects(int offset, int length, int lookupOffset) {
+			if (offset <= lookupOffset && offset + length > lookupOffset)
+				return true;
+			return false;
+		}
+
+		default List<INode> findNodesForFeature(EObject semanticElement, INode node, EStructuralFeature structuralFeature) {
+			if (structuralFeature == null) {
+				return Collections.emptyList();
+			}
+
+			List<INode> result = Lists.newArrayList();
+			String featureName = structuralFeature.getName();
+			BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
+			while (iterator.hasNext()) {
+				INode child = iterator.next();
+				EObject grammarElement = child.getGrammarElement();
+				if (grammarElement != null) {
+					if (grammarElement instanceof Action) {
+						Action action = (Action) grammarElement;
+						if (child.getSemanticElement() == semanticElement) {
+							child = iterator.next();
+							if (featureName.equals(action.getFeature())) {
+								result.add(child);
+							}
+						} else {
+							// navigate the action's left side (first child) until we find an assignment (a rule call)
+							// the assignment will tell us about the feature to which we assigned
+							// the semantic object that has been created by the action
+							INode firstChild = ((ICompositeNode) child).getFirstChild();
+							while (firstChild.getGrammarElement() instanceof Action) {
+								firstChild = ((ICompositeNode) firstChild).getFirstChild();
+							}
+							EObject firstChildGrammarElement = firstChild.getGrammarElement();
+							Assignment assignment = GrammarUtil.containingAssignment(firstChildGrammarElement);
+							if (assignment != null && featureName.equals(assignment.getFeature())) {
+								result.add(child);
+							}
+						}
+						iterator.prune();
+					} else if (child != node) {
+						Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+						if (assignment != null) {
+							if (featureName.equals(assignment.getFeature())) {
+								result.add(child);
+							}
+							iterator.prune();
+						}
+					}
+				}
+			}
+			return result;
+		}
+
+		default /* @Nullable */ ICompositeNode findActualNodeEnclosing(ICompositeNode node) {
+			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null) {
+				ICompositeNode parent = node.getParent();
+				if (parent != null && !parent.hasDirectSemanticElement()
+						&& !GrammarUtil.isEObjectFragmentRuleCall(parent.getGrammarElement())) {
+					node = parent;
+				} else {
+					break;
+				}
+			}
+			return node;
+		}
+
+		default /* @Nullable */ EObject findActualSemanticObjectFor(INode node) {
+			if (node == null) {
+				return null;
+			}
+			if (node.hasDirectSemanticElement()) {
+				return node.getSemanticElement();
+			}
+			EObject grammarElement = node.getGrammarElement();
+			ICompositeNode parent = node.getParent();
+			if (grammarElement == null)
+				return findActualSemanticObjectFor(parent);
+			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+			if (assignment != null) {
+				if (GrammarUtil.isEObjectFragmentRule(GrammarUtil.containingRule(assignment))) {
+					EObject result = findActualSemanticObjectInChildren(node, grammarElement);
+					if (result != null)
+						return result;
+				}
+				if (parent.hasDirectSemanticElement())
+					return findActualSemanticObjectFor(parent);
+				INode sibling = parent.getFirstChild();
+				while (!sibling.equals(node)) {
+					EObject siblingGrammarElement = sibling.getGrammarElement();
+					if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
+						if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement)) {
+							return findActualSemanticObjectFor(sibling);
+						}
+						if (siblingGrammarElement.eClass() == XtextPackage.Literals.ACTION) {
+							return findActualSemanticObjectFor(sibling);
+						}
+					}
+					sibling = sibling.getNextSibling();
+				}
+			} else if (!GrammarUtil.isEObjectFragmentRuleCall(grammarElement)) {
+				EObject result = findActualSemanticObjectInChildren(node, grammarElement);
+				if (result != null)
+					return result;
+			}
+			return findActualSemanticObjectFor(parent);
+		}
+
+		private /* @Nullable */ EObject findActualSemanticObjectInChildren(INode node, /* @Nullable */ EObject grammarElement) {
+			if (node.hasDirectSemanticElement())
+				return node.getSemanticElement();
+			AbstractRule rule = null;
+			if (grammarElement instanceof RuleCall) {
+				rule = ((RuleCall) grammarElement).getRule();
+			} else if (grammarElement instanceof AbstractRule) {
+				rule = (AbstractRule) grammarElement;
+			}
+			if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule(rule)) {
+				if (node instanceof ICompositeNode) {
+					for (INode child : ((ICompositeNode) node).getChildren()) {
+						if (child instanceof ICompositeNode) {
+							EObject childGrammarElement = child.getGrammarElement();
+							if (childGrammarElement instanceof Action) {
+								EObject result = findActualSemanticObjectInChildren(child, childGrammarElement);
+								if (result != null)
+									return result;
+							} else if (childGrammarElement instanceof RuleCall) {
+								RuleCall childRuleCall = (RuleCall) childGrammarElement;
+								if (childRuleCall.getRule() instanceof ParserRule
+										&& !GrammarUtil.isDatatypeRule(childRuleCall.getRule())) {
+									EObject result = findActualSemanticObjectInChildren(child, childRuleCall);
+									if (result != null)
+										return result;
+								}
+							}
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		/**
+		 * Creates a string representation of the given node. Useful for debugging.
+		 * 
+		 * @return a debug string for the given node.
+		 */
+		default String compactDump(INode node, boolean showHidden) {
+			StringBuilder result = new StringBuilder();
+			try {
+				compactDump(node, showHidden, "", result);
+			} catch (IOException e) {
+				return e.getMessage();
+			}
+			return result.toString();
+		}
+
+		private void compactDump(INode node, boolean showHidden, String prefix, Appendable result) throws IOException {
+			if (!showHidden && node instanceof ILeafNode && ((ILeafNode) node).isHidden())
+				return;
+			if (prefix.length() != 0) {
+				result.append("\n");
+				result.append(prefix);
+			}
+			if (node instanceof ICompositeNode) {
+				if (node.getGrammarElement() != null)
+					result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
+				else
+					result.append("(unknown)");
+				String newPrefix = prefix + "  ";
+				result.append(" {");
+				BidiIterator<INode> children = ((ICompositeNode) node).getChildren().iterator();
+				while (children.hasNext()) {
+					INode child = children.next();
+					compactDump(child, showHidden, newPrefix, result);
+				}
+				result.append("\n");
+				result.append(prefix);
+				result.append("}");
+				SyntaxErrorMessage error = node.getSyntaxErrorMessage();
+				if (error != null)
+					result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
+			} else if (node instanceof ILeafNode) {
+				if (((ILeafNode) node).isHidden())
+					result.append("hidden ");
+				if (node.getGrammarElement() != null)
+					result.append(new GrammarElementTitleSwitch().showAssignments().doSwitch(node.getGrammarElement()));
+				else
+					result.append("(unknown)");
+				result.append(" => '");
+				result.append(node.getText());
+				result.append("'");
+				SyntaxErrorMessage error = node.getSyntaxErrorMessage();
+				if (error != null)
+					result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
+			} else if (node == null) {
+				result.append("(null)");
+			} else {
+				result.append("unknown type ");
+				result.append(node.getClass().getName());
+			}
+		}
+
+		default String getTokenText(INode node) {
+			if (node instanceof ILeafNode)
+				return ((ILeafNode) node).getText();
+			else {
+				StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
+				boolean hiddenSeen = false;
+				for (ILeafNode leaf : node.getLeafNodes()) {
+					if (!leaf.isHidden()) {
+						if (hiddenSeen && builder.length() > 0)
+							builder.append(' ');
+						builder.append(leaf.getText());
+						hiddenSeen = false;
+					} else {
+						hiddenSeen = true;
+					}
+				}
+				return builder.toString();
+			}
+		}
+
+		default ParserRule getEntryParserRule(INode node) {
+			ICompositeNode root = node.getRootNode();
+			EObject ge1 = root.getGrammarElement();
+			if (ge1 instanceof ParserRule) {
+				return (ParserRule) ge1;
+			} else if (ge1 instanceof Action) {
+				INode firstChild = root.getFirstChild();
+				while (firstChild.getGrammarElement() instanceof Action && firstChild instanceof CompositeNode) {
+					firstChild = ((CompositeNode) firstChild).getFirstChild();
+				}
+				EObject ge2 = firstChild.getGrammarElement();
+				if (ge2 instanceof ParserRule) {
+					return (ParserRule) ge2;
+				}
+			}
+			throw new IllegalStateException("No Root Parser Rule found; The Node Model is broken.");
+		}
+
+	}
 }

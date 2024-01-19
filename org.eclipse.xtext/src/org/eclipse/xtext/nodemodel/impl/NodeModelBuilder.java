@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,6 +15,7 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.INodeReference;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 /**
@@ -22,14 +23,30 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
  * want to create a node model and maintain its invariants. 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
+ * 
+ * @see INodeReference
  */
 public class NodeModelBuilder {
 
 	private EObject forcedGrammarElement;
 
-	private GrammarElementsInterner cachedFoldedGrammarElements = new GrammarElementsInterner();
+	private final GrammarElementsInterner cachedFoldedGrammarElements;
 
 	private boolean compressRoot = true;
+	
+	/**
+	 * @since 2.34
+	 */
+	protected NodeModelBuilder(GrammarElementsInterner cachedFoldedGrammarElements) {
+		this.cachedFoldedGrammarElements = cachedFoldedGrammarElements;
+	}
+	
+	/**
+	 * @since 2.34
+	 */
+	public NodeModelBuilder() {
+		this(new GrammarElementsInterner());
+	}
 	
 	public void addChild(ICompositeNode node, AbstractNode child) {
 		checkValidNewChild(child);
@@ -330,5 +347,25 @@ public class NodeModelBuilder {
 	protected void setLookAhead(CompositeNode node, int lookAhead) {
 		node.basicSetLookAhead(lookAhead);
 	}
+	
+	/**
+	 * @since 2.34
+	 */
+	protected GrammarElementsInterner getCachedFoldedGrammarElements() {
+		return cachedFoldedGrammarElements;
+	}
+	
+	/**
+	 * @since 2.34
+	 */
+	protected boolean isCompressRoot() {
+		return compressRoot;
+	}
 
+	/**
+	 * @since 2.34
+	 */
+	protected EObject getForcedGrammarElement() {
+		return forcedGrammarElement;
+	}
 }
