@@ -1675,13 +1675,19 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
-		XtendClass clazz = clazz("class X { new () throws Integer { }}");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		var source = "class X { new () throws Integer { }}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
 	}
 	
 	@Test public void testFunctionThrownExceptionsOfTypeThrowable() throws Exception {
-		XtendClass clazz = clazz("class X { def foo() throws Integer { } }");
-		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		var source = "class X { def foo() throws Integer { } }";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
 	}
 	
 	@Test public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
