@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -111,9 +110,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
 import org.eclipse.xtext.xbase.validation.ProxyAwareUIStrings;
@@ -131,7 +128,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -1039,14 +1035,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	}
 	
 	@Check
-	public void checkDeclaredExceptions(XtendConstructor constructor){
-		JvmConstructor jvmConstructor = associations.getInferredConstructor(constructor);
-		if (jvmConstructor != null) {
-			checkExceptions(constructor, jvmConstructor.getExceptions(), XtendPackage.Literals.XTEND_EXECUTABLE__EXCEPTIONS);
-		}
-	}
-	
-	@Check
 	public void checkTypeParameterForwardReferences(XtendClass xtendClass) {
 		doCheckTypeParameterForwardReference(xtendClass.getTypeParameters());
 	}
@@ -1067,36 +1055,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			error("Type parameters are not supported for constructors", XtendPackage.Literals.XTEND_EXECUTABLE__TYPE_PARAMETERS, INSIGNIFICANT_INDEX, CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
 		}
 	}
-	
-	@Check
-	public void checkDeclaredExceptions(XtendFunction function){
-		JvmOperation jvmOperation = associations.getDirectlyInferredOperation(function);
-		if (jvmOperation != null) {
-			checkExceptions(function,jvmOperation.getExceptions(), XtendPackage.Literals.XTEND_EXECUTABLE__EXCEPTIONS);
-		}
-	}
-	
-	private void checkExceptions(EObject context, List<JvmTypeReference> exceptions, EReference reference) {
-		Set<String> declaredExceptionNames = Sets.newHashSet();
-		JvmTypeReference throwableType = getServices().getTypeReferences().getTypeForName(Throwable.class, context);
-		if (throwableType == null) {
-			return;
-		}
-		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), context);
-		LightweightTypeReference throwableReference = owner.toLightweightTypeReference(throwableType);
-		for(int i = 0; i < exceptions.size(); i++) {
-			JvmTypeReference exception = exceptions.get(i);
-			// throwables may not carry generics thus the raw comparison is sufficient
-			if (exception.getType() != null && !exception.getType().eIsProxy()) {
-				if(!throwableReference.isAssignableFrom(exception.getType()))
-					error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable",
-							reference, i, EXCEPTION_NOT_THROWABLE);
-				if(!declaredExceptionNames.add(exception.getQualifiedName()))
-					error("Exception " + exception.getSimpleName() + " is declared twice", reference, i, EXCEPTION_DECLARED_TWICE);
-			}
-		}
-	}
-	
+
 	@Check
     public void checkLeftHandSideIsVariable(XAssignment assignment){
         String concreteSyntaxFeatureName = assignment.getConcreteSyntaxFeatureName();

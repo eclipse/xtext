@@ -19,11 +19,13 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.inject.Inject;
 
 /**
  * A specialization of {@link JvmGenericTypeValidator} to deal with specific features of Xtend.
@@ -40,6 +43,8 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow - Author of the original Java code in XtendValidator extracted here.
  */
 public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
+	@Inject
+	private DispatchHelper dispatchHelper;
 
 	@Override
 	protected void checkMemberNamesAreUnique(JvmGenericType genericType) {
@@ -138,5 +143,18 @@ public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
 		if (returnTypeFeature == null && member instanceof XtendField) // e.g., for an active annotation like @Accessors
 			return XTEND_FIELD__TYPE;
 		return returnTypeFeature;
+	}
+
+	/**
+	 * Dispatcher {@link JvmOperation}s must not be checked by the {@link JvmGenericTypeValidator}.
+	 */
+	@Override
+	protected boolean isAssociatedToSource(EObject element) {
+		if (element instanceof JvmOperation) {
+			JvmOperation op = (JvmOperation) element;
+			if (dispatchHelper.isDispatcherFunction(op))
+				return false;
+		}
+		return super.isAssociatedToSource(element);
 	}
 }

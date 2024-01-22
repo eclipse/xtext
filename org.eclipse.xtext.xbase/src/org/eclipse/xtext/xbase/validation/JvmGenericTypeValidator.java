@@ -64,7 +64,10 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
@@ -100,6 +103,9 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private ILogicalContainerProvider containerProvider;
 
+	@Inject
+	private CommonTypeComputationServices services;
+
 	@Override
 	public void register(EValidatorRegistrar registrar) {
 		// library validator is not registered for a specific language
@@ -121,7 +127,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				.forEach(this::checkJvmGenericType);
 	}
 
-	private boolean isAssociatedToSource(EObject e) {
+	protected boolean isAssociatedToSource(EObject e) {
 		return !associations.getSourceElements(e).isEmpty();
 	}
 
@@ -433,6 +439,41 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 						+ executable.getSimpleName(), sourceParameterType, null, INVALID_USE_OF_TYPE);
 			}
 		}
+		checkExceptions(sourceExecutable, executable);
+	}
+
+	protected void checkExceptions(EObject sourceExecutable, JvmExecutable executable) {
+		List<JvmTypeReference> exceptions = executable.getExceptions();
+		if (exceptions.isEmpty())
+			return;
+		Set<String> declaredExceptionNames = Sets.newHashSet();
+		JvmTypeReference throwableType = getServices().getTypeReferences().getTypeForName(Throwable.class, executable);
+		if (throwableType == null) {
+			return;
+		}
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), executable);
+		LightweightTypeReference throwableReference = owner.toLightweightTypeReference(throwableType);
+		for(int i = 0; i < exceptions.size(); i++) {
+			JvmTypeReference exception = exceptions.get(i);
+			// throwables may not carry generics thus the raw comparison is sufficient
+			if (exception.getType() != null && !exception.getType().eIsProxy()) {
+				var sourceException = associations.getPrimarySourceElement(exception);
+				if (sourceException == null)
+					continue;
+				var containingFeature = sourceException.eContainingFeature();
+				if(!throwableReference.isAssignableFrom(exception.getType()))
+					error("No exception of type " + exception.getSimpleName() +
+							" can be thrown; an exception type must be a subclass of Throwable",
+						sourceExecutable, containingFeature, i, EXCEPTION_NOT_THROWABLE);
+				if(!declaredExceptionNames.add(exception.getQualifiedName()))
+					error("Exception " + exception.getSimpleName() + " is declared twice",
+						sourceExecutable, containingFeature, i, EXCEPTION_DECLARED_TWICE);
+			}
+		}
+	}
+
+	protected CommonTypeComputationServices getServices() {
+		return services;
 	}
 
 	/**
