@@ -25,6 +25,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -149,12 +150,12 @@ public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
 	 * Dispatcher {@link JvmOperation}s must not be checked by the {@link JvmGenericTypeValidator}.
 	 */
 	@Override
-	protected boolean isAssociatedToSource(EObject element) {
+	protected boolean shouldBeValidated(JvmIdentifiableElement element) {
 		if (element instanceof JvmOperation) {
 			JvmOperation op = (JvmOperation) element;
 			if (dispatchHelper.isDispatcherFunction(op))
 				return false;
 		}
-		return super.isAssociatedToSource(element);
+		return super.shouldBeValidated(element);
 	}
 }

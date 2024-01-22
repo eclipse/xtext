@@ -75,9 +75,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -121,14 +119,21 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void checkJvmGenericTypes(List<? extends EObject> contents) {
 		contents.stream()
-				.filter(this::isAssociatedToSource)
 				.filter(JvmGenericType.class::isInstance)
 				.map(JvmGenericType.class::cast)
+				.filter(this::shouldBeValidated)
 				.forEach(this::checkJvmGenericType);
 	}
 
-	protected boolean isAssociatedToSource(EObject e) {
-		return !associations.getSourceElements(e).isEmpty();
+	/**
+	 * Whether the element is to be considered for validation from this
+	 * validator. The default implementation checks whether there is a
+	 * source element associated to the the passed {@link JvmIdentifiableElement} element, using {@link IJvmModelAssociations#getSourceElements(EObject)}.
+	 * 
+	 * @param element
+	 */
+	protected boolean shouldBeValidated(JvmIdentifiableElement element) {
+		return !associations.getSourceElements(element).isEmpty();
 	}
 
 	protected void checkJvmGenericType(JvmGenericType type) {
@@ -136,7 +141,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));
 		handleExceptionDuringValidation(() -> checkSuperTypes(sourceType, type));
 		type.getDeclaredFields().forEach(field -> {
-			if (isAssociatedToSource(field))
+			if (shouldBeValidated(field))
 				handleExceptionDuringValidation(() -> checkField(field));
 		});
 		handleExceptionDuringValidation(() -> checkMemberNamesAreUnique(type));
@@ -158,7 +163,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected void checkJvmExecutables(List<? extends JvmMember> contents) {
 		contents.stream()
-				.filter(this::isAssociatedToSource)
+				.filter(this::shouldBeValidated)
 				.filter(JvmExecutable.class::isInstance)
 				.map(JvmExecutable.class::cast)
 				.forEach(this::checkJvmExecutable);
@@ -261,7 +266,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkAnonymousClassStaticMembers(JvmGenericType type) {
-		type.getMembers().stream().filter(this::isAssociatedToSource).forEach(member -> {
+		type.getMembers().stream().filter(this::shouldBeValidated).forEach(member -> {
 			var source = associations.getPrimarySourceElement(member);
 			if (member instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) member;
@@ -386,7 +391,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		JavaVersion targetVersion = getGeneratorConfig(sourceType).getJavaSourceVersion();
 		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(type, targetVersion);
 		
-		Set<EObject> flaggedOperations = Sets.newHashSet();
+		Set<EObject> flaggedOperations = new HashSet<>();
 		doCheckDuplicateExecutables(type, resolvedFeatures, flaggedOperations);
 		doCheckOverriddenMethods(sourceType, type, resolvedFeatures, flaggedOperations);
 		doCheckFunctionOverrides(resolvedFeatures, flaggedOperations);
@@ -396,7 +401,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			List<T1> members,
 			Class<T2> memberType) {
 		return members.stream()
-			.filter(this::isAssociatedToSource)
+			.filter(this::shouldBeValidated)
 			.filter(memberType::isInstance)
 			.map(memberType::cast)
 			.filter(e -> Objects.nonNull(e.getSimpleName()))
@@ -413,8 +418,13 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkJvmExecutable(JvmExecutable executable) {
-		var parameters = executable.getParameters();
 		var sourceExecutable = associations.getPrimarySourceElement(executable);
+		checkParameters(sourceExecutable, executable);
+		checkExceptions(sourceExecutable, executable);
+	}
+
+	protected void checkParameters(EObject sourceExecutable, JvmExecutable executable) {
+		var parameters = executable.getParameters();
 		for (int i = 0; i < parameters.size(); ++i) {
 			var parameter = parameters.get(i);
 			var sourceParameter = associations.getPrimarySourceElement(parameter);
@@ -439,14 +449,13 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 						+ executable.getSimpleName(), sourceParameterType, null, INVALID_USE_OF_TYPE);
 			}
 		}
-		checkExceptions(sourceExecutable, executable);
 	}
 
 	protected void checkExceptions(EObject sourceExecutable, JvmExecutable executable) {
 		List<JvmTypeReference> exceptions = executable.getExceptions();
 		if (exceptions.isEmpty())
 			return;
-		Set<String> declaredExceptionNames = Sets.newHashSet();
+		Set<String> declaredExceptionNames = new HashSet<>();
 		JvmTypeReference throwableType = getServices().getTypeReferences().getTypeForName(Throwable.class, executable);
 		if (throwableType == null) {
 			return;
@@ -559,7 +568,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				}
 				return Collections.emptyList();
 			}
-			List<IResolvedConstructor> result = Lists.newArrayListWithCapacity(declaredConstructors.size());
+			List<IResolvedConstructor> result = new ArrayList<>(declaredConstructors.size());
 			for(IResolvedConstructor constructor: declaredConstructors) {
 				if (erasedSignature.equals(constructor.getResolvedErasureSignature())) {
 					result.add(constructor);
@@ -571,7 +580,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	protected <Executable extends IResolvedExecutable> void doCheckDuplicateExecutables(JvmGenericType inferredType,
 			List<Executable> declaredOperations, Function<String, List<Executable>> bySignature, Set<EObject> flaggedOperations) {
-		Set<Executable> processed = Sets.newHashSet();
+		Set<Executable> processed = new HashSet<>();
 		for(Executable declaredExecutable: declaredOperations) {
 			if (!processed.contains(declaredExecutable)) {
 				List<Executable> sameErasure = bySignature.apply(declaredExecutable.getResolvedErasureSignature());
@@ -615,7 +624,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
 		if (doCheckAbstract) {
-			operationsMissingImplementation = Lists.newArrayList();
+			operationsMissingImplementation = new ArrayList<>();
 		}
 		IVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, resolvedFeatures.getType());
 		boolean flaggedType = false;
@@ -716,7 +725,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	 * Determine whether the given type contributes to the conflict caused by the given default interface implementation.
 	 */
 	private boolean contributesToConflict(JvmGenericType rootType, ConflictingDefaultOperation conflictingDefaultOperation) {
-		Set<JvmDeclaredType> involvedInterfaces = Sets.newHashSet();
+		Set<JvmDeclaredType> involvedInterfaces = new HashSet<>();
 		involvedInterfaces.add(conflictingDefaultOperation.getDeclaration().getDeclaringType());
 		for (IResolvedOperation conflictingOperation : conflictingDefaultOperation.getConflictingOperations()) {
 			involvedInterfaces.add(conflictingOperation.getDeclaration().getDeclaringType());
@@ -825,7 +834,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 							sourceElement, getFeatureForIssue(sourceElement), OVERRIDE_REDUCES_VISIBILITY);
 				} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
 					if (exceptionMismatch == null)
-						exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
+						exceptionMismatch = new ArrayList<>(allInherited.size());
 					exceptionMismatch.add(inherited);
 				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
 					error("The return type is incompatible with " + inherited.getSimpleSignature(), sourceElement,
