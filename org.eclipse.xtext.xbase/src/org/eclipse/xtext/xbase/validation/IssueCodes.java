@@ -250,6 +250,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
+	/**
+	 * @since 2.34
+	 */
+	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
 
 	private IssueCodes() {
 	}
