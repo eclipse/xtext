@@ -12,7 +12,6 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -100,14 +99,14 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testFeatureCall_03() throws Exception {
 		XtendFile file = file("class C { def void m() throws String {} def void n() { m() } }");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-		helper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.EXCEPTION_NOT_THROWABLE,
+		helper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
 				"No exception of type String can be thrown; an exception type must be a subclass of Throwable");
 	}
 	
 	@Test public void testFeatureCall_04() throws Exception {
 		XtendFile file = file("class C { def void m() throws DoesNotExist {} def void n() { m() } }");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-		helper.assertNoError(file, IssueCodes.EXCEPTION_NOT_THROWABLE);
+		helper.assertNoError(file, EXCEPTION_NOT_THROWABLE);
 	}
 	
 	@Test public void testFeatureCall_05() throws Exception {
@@ -148,14 +147,14 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testGenericFeatureCall_02() throws Exception {
 		XtendFile file = file("class C { def <E extends String> void m() throws E {} def void n() { m() } }");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-		helper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.EXCEPTION_NOT_THROWABLE,
+		helper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
 				"No exception of type E can be thrown; an exception type must be a subclass of Throwable");
 	}
 	
 	@Test public void testGenericFeatureCall_03() throws Exception {
 		XtendFile file = file("class C { def <E extends DoesNotExist> void m() throws E {} def void n() { m() } }");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-		helper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.EXCEPTION_NOT_THROWABLE,
+		helper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
 				"No exception of type E can be thrown; an exception type must be a subclass of Throwable");
 	}
 	

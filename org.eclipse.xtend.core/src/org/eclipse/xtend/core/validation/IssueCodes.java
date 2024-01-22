@@ -50,7 +50,6 @@ public final class IssueCodes {
 
 	public static final String UNUSED_PRIVATE_MEMBER = ISSUE_CODE_PREFIX + "unused_private_member";
 	public static final String FIELD_NOT_INITIALIZED = ISSUE_CODE_PREFIX + "field_not_initialized";
-	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
 	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
 
 	public static final String CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED = ISSUE_CODE_PREFIX

@@ -246,6 +246,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
+	/**
+	 * @since 2.34
+	 */
+	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
 
 	private IssueCodes() {
 	}
