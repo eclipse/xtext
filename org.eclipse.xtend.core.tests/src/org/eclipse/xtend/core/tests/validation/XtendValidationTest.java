@@ -1691,8 +1691,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
-		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, IOException { }}");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+		var source = "import java.io.IOException class X { new () throws IOException, IOException { }}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
 	}
 	
 	@Test public void testExceptionsNotDeclaredTwiceOnConstructor() throws Exception {
@@ -1701,8 +1704,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testExceptionsDeclaredTwiceOnFunction() throws Exception {
-		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, IOException { }}");
-		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+		var source = "import java.io.IOException class X {def foo() throws IOException, IOException { }}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
 	}
 	
 	@Test public void testExceptionsNotDeclaredTwiceOnFunction() throws Exception {
