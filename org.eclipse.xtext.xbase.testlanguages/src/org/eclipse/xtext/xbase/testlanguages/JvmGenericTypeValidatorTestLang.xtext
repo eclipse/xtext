@@ -1,0 +1,22 @@
+grammar org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang with org.eclipse.xtext.xbase.Xbase
+
+generate jvmGenericTypeValidatorTestLang "http://www.eclipse.org/xtext/xbase/testlanguages/JvmGenericTypeValidatorTestLang"
+
+JvmGenericTypeValidatorTestLangModel:
+	('package' package=QualifiedName ';'?)?
+	importSection=XImportSection?
+	(modelTypes+=MyType)*;
+
+MyType:
+	MyClass | MyInterface;
+
+MyClass:
+	'class' name=ValidID
+	("extends" extends=JvmParameterizedTypeReference)?
+	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
+	'}';
+
+MyInterface:
+	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)? '{'
+	'}';
