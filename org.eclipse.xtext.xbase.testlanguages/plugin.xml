@@ -19,4 +19,10 @@
 			class = "org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.Bug462047Package"
 			genModel = "model/generated/Bug462047Lang.genmodel" />
 	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.eclipse.org/xtext/xbase/testlanguages/JvmGenericTypeValidatorTestLang"
+			class = "org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage"
+			genModel = "model/generated/JvmGenericTypeValidatorTestLang.genmodel" />
+	</extension>
 </plugin>
