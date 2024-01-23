@@ -1689,6 +1689,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				source.indexOf("Integer"), "Integer".length(),
 				"No", "can", "subclass", "Throwable");
 	}
+
+	@Test public void testDispatchMethodsThrownExceptionsOfTypeThrowable() throws Exception {
+		var source = "class Foo {\n"
+				+ "	def dispatch foo(Object o) throws Integer {}\n"
+				+ "	def dispatch foo(Number m) throws String {}\n"
+				+ "}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("String"), "String".length(),
+				"No", "can", "subclass", "Throwable");
+	}
 	
 	@Test public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
 		var source = "import java.io.IOException class X { new () throws IOException, IOException { }}";
@@ -1709,6 +1723,24 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
 				source.lastIndexOf("IOException"), "IOException".length(),
 				"IOException", "declared", "twice");
+	}
+
+	@Test public void testExceptionsDeclaredTwiceOnDispatchMethods() throws Exception {
+		var source = "import java.io.IOException\n"
+				+ "import java.io.FileNotFoundException\n"
+				+ "\n"
+				+ "class Foo {\n"
+				+ "	def dispatch foo(Object o) throws IOException, IOException {}\n"
+				+ "	def dispatch foo(Number m) throws FileNotFoundException, FileNotFoundException {}\n"
+				+ "}\n"
+				+ "";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("FileNotFoundException"), "FileNotFoundException".length(),
+				"FileNotFoundException", "declared", "twice");
 	}
 	
 	@Test public void testExceptionsNotDeclaredTwiceOnFunction() throws Exception {
