@@ -8,9 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.testlanguages;
 
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.testlanguages.jvmmodel.JvmGenericTypeValidatorTestLangJmvModelInferrer;
+import org.eclipse.xtext.xbase.testlanguages.scoping.JvmGenericTypeValidatorTestLangQualifiedNameProvider;
 
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * @author Lorenzo Bettini
  */
 public class JvmGenericTypeValidatorTestLangRuntimeModule extends AbstractJvmGenericTypeValidatorTestLangRuntimeModule {
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return JvmGenericTypeValidatorTestLangJmvModelInferrer.class;
+	}
+
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return JvmGenericTypeValidatorTestLangQualifiedNameProvider.class;
+	}
 }
