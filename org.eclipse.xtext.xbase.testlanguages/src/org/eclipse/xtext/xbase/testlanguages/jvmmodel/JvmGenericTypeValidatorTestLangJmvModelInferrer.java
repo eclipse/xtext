@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyC
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod;
 
 import com.google.inject.Inject;
 
@@ -71,6 +72,14 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			} else if (member instanceof MyField) {
 				MyField field = (MyField) member;
 				it.getMembers().add(jvmTypesBuilder.toField(field, field.getName(), field.getType()));
+			} else if (member instanceof MyMethod) {
+				MyMethod method = (MyMethod) member;
+				it.getMembers().add(jvmTypesBuilder.toMethod(method, method.getName(), method.getType(), meth -> {
+					jvmTypesBuilder.setBody(meth, method.getExpression());
+					for (var param : method.getParameters()) {
+						meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
+					}
+				}));
 			}
 		}
 	}

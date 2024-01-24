@@ -330,6 +330,61 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    */
   int MY_FIELD_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 2;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl <em>My Method</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMethod()
+   * @generated
+   */
+  int MY_METHOD = 7;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD__TYPE = MY_MEMBER_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD__NAME = MY_MEMBER_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD__PARAMETERS = MY_MEMBER_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>My Method</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 4;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangModel <em>Model</em>}'.
@@ -545,6 +600,60 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   EAttribute getMyField_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod <em>My Method</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>My Method</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod
+   * @generated
+   */
+  EClass getMyMethod();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getType()
+   * @see #getMyMethod()
+   * @generated
+   */
+  EReference getMyMethod_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getName()
+   * @see #getMyMethod()
+   * @generated
+   */
+  EAttribute getMyMethod_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getParameters <em>Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Parameters</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getParameters()
+   * @see #getMyMethod()
+   * @generated
+   */
+  EReference getMyMethod_Parameters();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getExpression()
+   * @see #getMyMethod()
+   * @generated
+   */
+  EReference getMyMethod_Expression();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -740,6 +849,48 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EAttribute MY_FIELD__NAME = eINSTANCE.getMyField_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl <em>My Method</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMethod()
+     * @generated
+     */
+    EClass MY_METHOD = eINSTANCE.getMyMethod();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_METHOD__TYPE = eINSTANCE.getMyMethod_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MY_METHOD__NAME = eINSTANCE.getMyMethod_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_METHOD__PARAMETERS = eINSTANCE.getMyMethod_Parameters();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_METHOD__EXPRESSION = eINSTANCE.getMyMethod_Expression();
 
   }
 

@@ -320,7 +320,25 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Assignment cNameAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cNameValidIDParserRuleCall_1_2_0 = (RuleCall)cNameAssignment_1_2.eContents().get(0);
-		private final RuleCall cMyClassParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Action cMyMethodAction_2_0 = (Action)cGroup_2.eContents().get(0);
+		private final Keyword cDefKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cTypeAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_2_0 = (RuleCall)cTypeAssignment_2_2.eContents().get(0);
+		private final Assignment cNameAssignment_2_3 = (Assignment)cGroup_2.eContents().get(3);
+		private final RuleCall cNameValidIDParserRuleCall_2_3_0 = (RuleCall)cNameAssignment_2_3.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
+		private final Group cGroup_2_5 = (Group)cGroup_2.eContents().get(5);
+		private final Assignment cParametersAssignment_2_5_0 = (Assignment)cGroup_2_5.eContents().get(0);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_2_5_0_0 = (RuleCall)cParametersAssignment_2_5_0.eContents().get(0);
+		private final Group cGroup_2_5_1 = (Group)cGroup_2_5.eContents().get(1);
+		private final Keyword cCommaKeyword_2_5_1_0 = (Keyword)cGroup_2_5_1.eContents().get(0);
+		private final Assignment cParametersAssignment_2_5_1_1 = (Assignment)cGroup_2_5_1.eContents().get(1);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_2_5_1_1_0 = (RuleCall)cParametersAssignment_2_5_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_6 = (Keyword)cGroup_2.eContents().get(6);
+		private final Assignment cExpressionAssignment_2_7 = (Assignment)cGroup_2.eContents().get(7);
+		private final RuleCall cExpressionXBlockExpressionParserRuleCall_2_7_0 = (RuleCall)cExpressionAssignment_2_7.eContents().get(0);
+		private final RuleCall cMyClassParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//MyMember:
 		//    ({MyConstructor} 'constructor'
@@ -328,6 +346,10 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//        expression=XBlockExpression)
 		//    |
 		//    ({MyField} type=JvmTypeReference name=ValidID)
+		//    |
+		//    ({MyMethod} 'def' type=JvmTypeReference name=ValidID
+		//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		//        expression=XBlockExpression)
 		//    |
 		//    MyClass
 		//;
@@ -338,6 +360,10 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//    expression=XBlockExpression)
 		//|
 		//({MyField} type=JvmTypeReference name=ValidID)
+		//|
+		//({MyMethod} 'def' type=JvmTypeReference name=ValidID
+		//    '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		//    expression=XBlockExpression)
 		//|
 		//MyClass
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -404,8 +430,64 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_2_0() { return cNameValidIDParserRuleCall_1_2_0; }
 		
+		//({MyMethod} 'def' type=JvmTypeReference name=ValidID
+		//    '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		//    expression=XBlockExpression)
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//{MyMethod}
+		public Action getMyMethodAction_2_0() { return cMyMethodAction_2_0; }
+		
+		//'def'
+		public Keyword getDefKeyword_2_1() { return cDefKeyword_2_1; }
+		
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_2_2() { return cTypeAssignment_2_2; }
+		
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_2_0() { return cTypeJvmTypeReferenceParserRuleCall_2_2_0; }
+		
+		//name=ValidID
+		public Assignment getNameAssignment_2_3() { return cNameAssignment_2_3; }
+		
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_2_3_0() { return cNameValidIDParserRuleCall_2_3_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_2_4() { return cLeftParenthesisKeyword_2_4; }
+		
+		//(parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)?
+		public Group getGroup_2_5() { return cGroup_2_5; }
+		
+		//parameters+=JvmFormalParameter
+		public Assignment getParametersAssignment_2_5_0() { return cParametersAssignment_2_5_0; }
+		
+		//JvmFormalParameter
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_2_5_0_0() { return cParametersJvmFormalParameterParserRuleCall_2_5_0_0; }
+		
+		//(',' parameters+=JvmFormalParameter)*
+		public Group getGroup_2_5_1() { return cGroup_2_5_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_5_1_0() { return cCommaKeyword_2_5_1_0; }
+		
+		//parameters+=JvmFormalParameter
+		public Assignment getParametersAssignment_2_5_1_1() { return cParametersAssignment_2_5_1_1; }
+		
+		//JvmFormalParameter
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_2_5_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_2_5_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_2_6() { return cRightParenthesisKeyword_2_6; }
+		
+		//expression=XBlockExpression
+		public Assignment getExpressionAssignment_2_7() { return cExpressionAssignment_2_7; }
+		
+		//XBlockExpression
+		public RuleCall getExpressionXBlockExpressionParserRuleCall_2_7_0() { return cExpressionXBlockExpressionParserRuleCall_2_7_0; }
+		
 		//MyClass
-		public RuleCall getMyClassParserRuleCall_2() { return cMyClassParserRuleCall_2; }
+		public RuleCall getMyClassParserRuleCall_3() { return cMyClassParserRuleCall_3; }
 	}
 	
 	
@@ -520,6 +602,10 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	//        expression=XBlockExpression)
 	//    |
 	//    ({MyField} type=JvmTypeReference name=ValidID)
+	//    |
+	//    ({MyMethod} 'def' type=JvmTypeReference name=ValidID
+	//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+	//        expression=XBlockExpression)
 	//    |
 	//    MyClass
 	//;

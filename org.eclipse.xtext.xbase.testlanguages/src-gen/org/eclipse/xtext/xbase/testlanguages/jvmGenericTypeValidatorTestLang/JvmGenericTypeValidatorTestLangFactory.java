@@ -92,6 +92,15 @@ public interface JvmGenericTypeValidatorTestLangFactory extends EFactory
   MyField createMyField();
 
   /**
+   * Returns a new object of class '<em>My Method</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Method</em>'.
+   * @generated
+   */
+  MyMethod createMyMethod();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

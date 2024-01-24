@@ -77,6 +77,7 @@ public class JvmGenericTypeValidatorTestLangFactoryImpl extends EFactoryImpl imp
       case JvmGenericTypeValidatorTestLangPackage.MY_MEMBER: return createMyMember();
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR: return createMyConstructor();
       case JvmGenericTypeValidatorTestLangPackage.MY_FIELD: return createMyField();
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD: return createMyMethod();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -164,6 +165,18 @@ public class JvmGenericTypeValidatorTestLangFactoryImpl extends EFactoryImpl imp
   {
     MyFieldImpl myField = new MyFieldImpl();
     return myField;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MyMethod createMyMethod()
+  {
+    MyMethodImpl myMethod = new MyMethodImpl();
+    return myMethod;
   }
 
   /**

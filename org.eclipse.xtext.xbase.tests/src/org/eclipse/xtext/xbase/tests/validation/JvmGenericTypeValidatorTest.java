@@ -224,6 +224,62 @@ public class JvmGenericTypeValidatorTest {
 				"override", "final");
 	}
 
+	@Test public void testConstructorDuplicate() throws Exception {
+		var source = "class K { constructor (Object o) {} constructor (Object o) {} }";
+		var model = parse(source);
+		var wrongPart = "constructor (Object o) {}";
+		validationHelper.assertError(model, MY_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.indexOf(wrongPart), wrongPart.length(),
+				"Duplicate", "constructor");
+		validationHelper.assertError(model, MY_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.lastIndexOf(wrongPart), wrongPart.length(),
+				"Duplicate", "constructor");
+	}
+
+	@Test public void testConstructorDuplicateErasure() throws Exception {
+		var source = "class K { "
+				+ "constructor (java.util.List<Object> o) {}"
+				+ "constructor (java.util.List<String> o) {}"
+				+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.indexOf("constructor (java.util.List<Object> o) {}"),
+				"constructor (java.util.List<Object> o) {}".length(),
+				"erasure", "constructor", "List<Object>");
+		validationHelper.assertError(model, MY_CONSTRUCTOR, DUPLICATE_METHOD,
+				source.indexOf("constructor (java.util.List<String> o) {}"),
+				"constructor (java.util.List<String> o) {}".length(),
+				"erasure", "constructor", "List<String>");
+	}
+
+	@Test public void testDuplicateMethod() throws Exception {
+		var source = "class Foo {"
+				+ "def boolean bar(int x) {true}"
+				+ "def boolean bar(int x) {false}"
+				+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.indexOf("bar"), "bar".length(),
+				"duplicate", "method");
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.lastIndexOf("bar"), "bar".length(),
+				"duplicate", "method");
+	}
+
+	@Test public void testDuplicateMethodErasure() throws Exception {
+		var source = "class Foo {"
+				+ "def boolean bar(java.util.List<Object> o) {true}"
+				+ "def boolean bar(java.util.List<String> o) {false}"
+				+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.indexOf("bar"), "bar".length(),
+				"erasure", "method", "List<Object>");
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.lastIndexOf("bar"), "bar".length(),
+				"erasure", "method", "List<String>");
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}

@@ -66,6 +66,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyC
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod;
 import org.eclipse.xtext.xbase.testlanguages.services.JvmGenericTypeValidatorTestLangGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -100,6 +101,9 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_INTERFACE:
 				sequence_MyInterface(context, (MyInterface) semanticObject); 
+				return; 
+			case JvmGenericTypeValidatorTestLangPackage.MY_METHOD:
+				sequence_MyMember(context, (MyMethod) semanticObject); 
 				return; 
 			}
 		else if (epackage == TypesPackage.eINSTANCE)
@@ -617,6 +621,20 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 		feeder.accept(grammarAccess.getMyMemberAccess().getTypeJvmTypeReferenceParserRuleCall_1_1_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getMyMemberAccess().getNameValidIDParserRuleCall_1_2_0(), semanticObject.getName());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     MyMember returns MyMethod
+	 *
+	 * Constraint:
+	 *     (type=JvmTypeReference name=ValidID (parameters+=JvmFormalParameter parameters+=JvmFormalParameter*)? expression=XBlockExpression)
+	 * </pre>
+	 */
+	protected void sequence_MyMember(ISerializationContext context, MyMethod semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

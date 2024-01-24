@@ -132,6 +132,14 @@ public class JvmGenericTypeValidatorTestLangSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD:
+      {
+        MyMethod myMethod = (MyMethod)theEObject;
+        T result = caseMyMethod(myMethod);
+        if (result == null) result = caseMyMember(myMethod);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -244,6 +252,22 @@ public class JvmGenericTypeValidatorTestLangSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMyField(MyField object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>My Method</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>My Method</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMyMethod(MyMethod object)
   {
     return null;
   }

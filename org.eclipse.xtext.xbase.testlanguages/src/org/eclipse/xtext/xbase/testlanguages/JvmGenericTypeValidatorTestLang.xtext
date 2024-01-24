@@ -2,6 +2,9 @@ grammar org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang wi
 
 generate jvmGenericTypeValidatorTestLang "http://www.eclipse.org/xtext/xbase/testlanguages/JvmGenericTypeValidatorTestLang"
 
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
 JvmGenericTypeValidatorTestLangModel:
 	('package' package=QualifiedName ';'?)?
 	importSection=XImportSection?
@@ -28,6 +31,10 @@ MyMember:
 		expression=XBlockExpression)
 	|
 	({MyField} type=JvmTypeReference name=ValidID)
+	|
+	({MyMethod} 'def' type=JvmTypeReference name=ValidID
+		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		expression=XBlockExpression)
 	|
 	MyClass
 ;
