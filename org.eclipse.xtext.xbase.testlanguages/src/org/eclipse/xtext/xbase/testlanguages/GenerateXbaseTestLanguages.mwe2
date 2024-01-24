@@ -195,7 +195,8 @@ Workflow {
     		fragment = resourceFactory.ResourceFactoryFragment2 {}
     		fragment = parser.antlr.XtextAntlrGeneratorFragment2 {}
     		fragment = validation.ValidatorFragment2 {
-    			generateStub = false
+    			generateStub = true
+    			generateXtendStub = false
 			}
     		fragment = scoping.ImportNamespacesScopingFragment2 {
     			generateStub = false

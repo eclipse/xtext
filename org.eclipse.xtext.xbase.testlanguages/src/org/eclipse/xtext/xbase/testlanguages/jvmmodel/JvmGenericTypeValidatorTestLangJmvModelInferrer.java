@@ -44,14 +44,13 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 	}
 
 	protected void _infer(MyInterface myInterface, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
-		acceptor.accept(jvmTypesBuilder.toClass(myInterface, qualifiedNameProvider.getFullyQualifiedName(myInterface)),
+		acceptor.accept(jvmTypesBuilder.toInterface(myInterface, qualifiedNameProvider.getFullyQualifiedName(myInterface).toString(),
 			(JvmGenericType it) -> {
-				it.setInterface(true);
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myInterface));
 				for (var interf : myInterface.getExtends()) {
 					it.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(interf));
 				}
-			});
+			}));
 	}
 
 	@Override

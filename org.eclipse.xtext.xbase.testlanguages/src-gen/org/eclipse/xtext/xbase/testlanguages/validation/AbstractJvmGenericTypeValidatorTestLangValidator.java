@@ -13,7 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xbase.validation.XbaseValidator;
 
-public class JvmGenericTypeValidatorTestLangValidator extends XbaseValidator {
+public abstract class AbstractJvmGenericTypeValidatorTestLangValidator extends XbaseValidator {
 	
 	@Override
 	protected List<EPackage> getEPackages() {
