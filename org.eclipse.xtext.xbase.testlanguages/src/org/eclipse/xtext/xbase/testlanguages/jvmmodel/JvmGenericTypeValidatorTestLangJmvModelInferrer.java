@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -34,6 +35,8 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 	private IQualifiedNameProvider qualifiedNameProvider;
 
 	protected void inferClass(MyClass myClass, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase, JvmDeclaredType containerSceleton) {
+		if (Strings.isEmpty(myClass.getName()))
+			return;
 		var inferred = jvmTypesBuilder.toClass(myClass, qualifiedNameProvider.getFullyQualifiedName(myClass));
 		if (containerSceleton != null)
 			containerSceleton.getMembers().add(inferred);
@@ -73,6 +76,8 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 	}
 
 	protected void inferInterface(MyInterface myInterface, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+		if (Strings.isEmpty(myInterface.getName()))
+			return;
 		acceptor.accept(jvmTypesBuilder.toInterface(myInterface, qualifiedNameProvider.getFullyQualifiedName(myInterface).toString(),
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myInterface));

@@ -42,6 +42,8 @@ public class JvmGenericTypeValidatorTest {
 			+ "class MyClass2 {\n"
 			+ "}\n"
 			+ "interface MyInterface extends Serializable {\n"
+			+ "}"
+			+ "interface MyInterface2 extends Override {\n"
 			+ "}");
 		validationHelper.assertNoErrors(model);
 	}
@@ -165,6 +167,53 @@ public class JvmGenericTypeValidatorTest {
 		validationHelper.assertError(model, MY_CLASS, CYCLIC_INHERITANCE,
 				source.lastIndexOf("Baz"), "Baz".length(),
 				"hierarchy", "cycles");
+	}
+
+	@Test public void testClassImplementsClass() throws Exception {
+		var source = "class Foo implements Object {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, INTERFACE_EXPECTED,
+				source.indexOf("Object"), "Object".length(),
+				"Implemented", "interface");
+	}
+
+	@Test public void testClassImplementsAnnotation() throws Exception {
+		var source = "class Foo implements Override {}";
+		var model = parse(source);
+		// there's only the error: should be defined abstract, it should implement annotationType
+		validationHelper.assertNoError(model, INTERFACE_EXPECTED);
+	}
+
+	@Test public void testClassExtendsInterface() throws Exception {
+		var source = "class Foo extends Cloneable {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, CLASS_EXPECTED,
+				source.indexOf("Cloneable"), "Cloneable".length(),
+				"Superclass");
+	}
+
+	@Test public void testClassExtendsEnum() throws Exception {
+		var source = "class Foo extends test.AnEnum {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, CLASS_EXPECTED,
+				source.indexOf("test.AnEnum"), "test.AnEnum".length(),
+				"Superclass");
+	}
+
+	@Test public void testInterfaceExtendsClass() throws Exception {
+		var source = "interface Foo extends Object {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_INTERFACE, INTERFACE_EXPECTED,
+				source.indexOf("Object"), "Object".length(),
+				"Extended", "interface");
+	}
+
+	@Test public void testOverrideFinalClass() throws Exception {
+		var source = "class Foo extends String { }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, OVERRIDDEN_FINAL,
+				source.indexOf("String"), "String".length(),
+				"override", "final");
 	}
 
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
