@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.override.ConflictingDefaultOperation;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
@@ -127,8 +128,12 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 
 	/**
 	 * Whether the element is to be considered for validation from this
-	 * validator. The default implementation checks whether there is a
-	 * source element associated to the the passed {@link JvmIdentifiableElement} element, using {@link IJvmModelAssociations#getSourceElements(EObject)}.
+	 * validator. The default implementation checks whether there is a source
+	 * element associated to the the passed {@link JvmIdentifiableElement}
+	 * element, using {@link IJvmModelAssociations#getSourceElements(EObject)}.
+	 * This strategy should not be completely overridden, since some of the
+	 * other methods assume that the checked Jvm model element is associated to
+	 * a source.
 	 * 
 	 * @param element
 	 */
@@ -136,14 +141,16 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		return !associations.getSourceElements(element).isEmpty();
 	}
 
+	/**
+	 * The method assumes that the passed {@link JvmGenericType} has an associated source.
+	 */
 	protected void checkJvmGenericType(JvmGenericType type) {
 		var sourceType = getPrimarySourceElement(type);
 		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));
 		handleExceptionDuringValidation(() -> checkSuperTypes(sourceType, type));
-		type.getDeclaredFields().forEach(field -> {
-			if (shouldBeValidated(field))
-				handleExceptionDuringValidation(() -> checkField(field));
-		});
+		IterableExtensions.toList(type.getDeclaredFields()).stream()
+			.filter(this::shouldBeValidated)
+			.forEach(field -> handleExceptionDuringValidation(() -> checkField(field)));
 		handleExceptionDuringValidation(() -> checkMemberNamesAreUnique(type));
 		handleExceptionDuringValidation(() -> checkDuplicateAndOverriddenFunctions(sourceType, type));
 		var members = type.getMembers();
@@ -151,8 +158,9 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		if (isAnonymous(type))
 			handleExceptionDuringValidation(() -> checkAnonymousClassStaticMembers(type));
 		members.forEach(member -> {
-			EcoreUtil2.eAllOfType(member, JvmGenericType.class).
-				forEach(nestedType ->
+			EcoreUtil2.eAllOfType(member, JvmGenericType.class).stream()
+				.filter(this::shouldBeValidated)
+				.forEach(nestedType ->
 					handleExceptionDuringValidation(() -> checkJvmGenericType(nestedType)));
 		});
 	}
@@ -170,8 +178,6 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkSuperTypes(EObject sourceType, JvmGenericType type) {
-		if (sourceType == null)
-			return;
 		if (hasCycleInHierarchy(type, new HashSet<>())) {
 			error("The inheritance hierarchy of " + notNull(type.getSimpleName()) + " contains cycles",
 					sourceType,
