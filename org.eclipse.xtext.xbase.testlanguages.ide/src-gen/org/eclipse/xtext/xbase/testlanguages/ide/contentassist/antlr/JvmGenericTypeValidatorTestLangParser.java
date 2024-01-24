@@ -87,6 +87,9 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 			builder.put(grammarAccess.getMyInterfaceAccess().getGroup_2_2(), "rule__MyInterface__Group_2_2__0");
 			builder.put(grammarAccess.getMyInterfaceAccess().getGroup_3(), "rule__MyInterface__Group_3__0");
 			builder.put(grammarAccess.getMyInterfaceAccess().getGroup_3_2(), "rule__MyInterface__Group_3_2__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup(), "rule__MyMember__Group__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_3(), "rule__MyMember__Group_3__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_3_1(), "rule__MyMember__Group_3_1__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_1_1(), "rule__XAssignment__Group_1_1__0");
@@ -273,11 +276,15 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 			builder.put(grammarAccess.getMyClassAccess().getExtendsAssignment_2_1(), "rule__MyClass__ExtendsAssignment_2_1");
 			builder.put(grammarAccess.getMyClassAccess().getImplementsAssignment_3_1(), "rule__MyClass__ImplementsAssignment_3_1");
 			builder.put(grammarAccess.getMyClassAccess().getImplementsAssignment_3_2_1(), "rule__MyClass__ImplementsAssignment_3_2_1");
+			builder.put(grammarAccess.getMyClassAccess().getMembersAssignment_5(), "rule__MyClass__MembersAssignment_5");
 			builder.put(grammarAccess.getMyInterfaceAccess().getNameAssignment_1(), "rule__MyInterface__NameAssignment_1");
 			builder.put(grammarAccess.getMyInterfaceAccess().getTypeParametersAssignment_2_1(), "rule__MyInterface__TypeParametersAssignment_2_1");
 			builder.put(grammarAccess.getMyInterfaceAccess().getTypeParametersAssignment_2_2_1(), "rule__MyInterface__TypeParametersAssignment_2_2_1");
 			builder.put(grammarAccess.getMyInterfaceAccess().getExtendsAssignment_3_1(), "rule__MyInterface__ExtendsAssignment_3_1");
 			builder.put(grammarAccess.getMyInterfaceAccess().getExtendsAssignment_3_2_1(), "rule__MyInterface__ExtendsAssignment_3_2_1");
+			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_3_0(), "rule__MyMember__ParametersAssignment_3_0");
+			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_3_1_1(), "rule__MyMember__ParametersAssignment_3_1_1");
+			builder.put(grammarAccess.getMyMemberAccess().getExpressionAssignment_5(), "rule__MyMember__ExpressionAssignment_5");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 			builder.put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

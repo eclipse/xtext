@@ -174,13 +174,22 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_CLASS__IMPLEMENTS = MY_TYPE_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Members</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS__MEMBERS = MY_TYPE_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>My Class</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MY_CLASS_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 2;
+  int MY_CLASS_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyInterfaceImpl <em>My Interface</em>}' class.
@@ -227,6 +236,62 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @ordered
    */
   int MY_INTERFACE_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl <em>My Member</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMember()
+   * @generated
+   */
+  int MY_MEMBER = 4;
+
+  /**
+   * The number of structural features of the '<em>My Member</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_MEMBER_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl <em>My Constructor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyConstructor()
+   * @generated
+   */
+  int MY_CONSTRUCTOR = 5;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CONSTRUCTOR__PARAMETERS = MY_MEMBER_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CONSTRUCTOR__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>My Constructor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CONSTRUCTOR_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 2;
 
 
   /**
@@ -326,6 +391,17 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   EReference getMyClass_Implements();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#getMembers <em>Members</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Members</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#getMembers()
+   * @see #getMyClass()
+   * @generated
+   */
+  EReference getMyClass_Members();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface <em>My Interface</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -356,6 +432,48 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    */
   EReference getMyInterface_Extends();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember <em>My Member</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>My Member</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember
+   * @generated
+   */
+  EClass getMyMember();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor <em>My Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>My Constructor</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor
+   * @generated
+   */
+  EClass getMyConstructor();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getParameters <em>Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Parameters</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getParameters()
+   * @see #getMyConstructor()
+   * @generated
+   */
+  EReference getMyConstructor_Parameters();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExpression()
+   * @see #getMyConstructor()
+   * @generated
+   */
+  EReference getMyConstructor_Expression();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -459,6 +577,14 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
     EReference MY_CLASS__IMPLEMENTS = eINSTANCE.getMyClass_Implements();
 
     /**
+     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_CLASS__MEMBERS = eINSTANCE.getMyClass_Members();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyInterfaceImpl <em>My Interface</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -483,6 +609,42 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EReference MY_INTERFACE__EXTENDS = eINSTANCE.getMyInterface_Extends();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl <em>My Member</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMember()
+     * @generated
+     */
+    EClass MY_MEMBER = eINSTANCE.getMyMember();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl <em>My Constructor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyConstructor()
+     * @generated
+     */
+    EClass MY_CONSTRUCTOR = eINSTANCE.getMyConstructor();
+
+    /**
+     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_CONSTRUCTOR__PARAMETERS = eINSTANCE.getMyConstructor_Parameters();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_CONSTRUCTOR__EXPRESSION = eINSTANCE.getMyConstructor_Expression();
 
   }
 

@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyC
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#getImplements <em>Implements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#getMembers <em>Members</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,6 +65,16 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
    * @ordered
    */
   protected EList<JvmParameterizedTypeReference> implements_;
+
+  /**
+   * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMembers()
+   * @generated
+   * @ordered
+   */
+  protected EList<MyMember> members;
 
   /**
    * <!-- begin-user-doc -->
@@ -156,6 +168,21 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
    * @generated
    */
   @Override
+  public EList<MyMember> getMembers()
+  {
+    if (members == null)
+    {
+      members = new EObjectContainmentEList<MyMember>(MyMember.class, this, JvmGenericTypeValidatorTestLangPackage.MY_CLASS__MEMBERS);
+    }
+    return members;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -164,6 +191,8 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
         return basicSetExtends(null, msgs);
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__IMPLEMENTS:
         return ((InternalEList<?>)getImplements()).basicRemove(otherEnd, msgs);
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__MEMBERS:
+        return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -182,6 +211,8 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
         return getExtends();
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__IMPLEMENTS:
         return getImplements();
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__MEMBERS:
+        return getMembers();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -204,6 +235,10 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
         getImplements().clear();
         getImplements().addAll((Collection<? extends JvmParameterizedTypeReference>)newValue);
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__MEMBERS:
+        getMembers().clear();
+        getMembers().addAll((Collection<? extends MyMember>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -224,6 +259,9 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__IMPLEMENTS:
         getImplements().clear();
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__MEMBERS:
+        getMembers().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -242,6 +280,8 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
         return extends_ != null;
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__IMPLEMENTS:
         return implements_ != null && !implements_.isEmpty();
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__MEMBERS:
+        return members != null && !members.isEmpty();
     }
     return super.eIsSet(featureID);
   }

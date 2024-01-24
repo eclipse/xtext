@@ -49,11 +49,54 @@ public class JvmGenericTypeValidatorTest {
 			+ "import test.NoDefaultConstructor\n"
 			+ "class MyClass extends NoDefaultConstructor {\n"
 			+ "}";
-		var model = parse(
-			source);
+		var model = parse(source);
 		validationHelper.assertError(model, MY_CLASS, MISSING_CONSTRUCTOR,
 				source.indexOf("MyClass"), "MyClass".length(),
 				"must define an explicit constructor");
+	}
+
+	@Test public void testMissingConstructorCall() throws Exception {
+		var source = "package mypackage\n"
+			+ "import test.NoDefaultConstructor\n"
+			+ "class MyClass extends NoDefaultConstructor {\n"
+			+ "  constructor() {}\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CONSTRUCTOR, MUST_INVOKE_SUPER_CONSTRUCTOR,
+				source.indexOf("constructor() {}"), "constructor() {}".length(),
+				"Another constructor must be invoked explicitly");
+	}
+
+	@Test public void testMissingConstructorCall_01() throws Exception {
+		var source = "package mypackage\n"
+			+ "import test.NoDefaultConstructor\n"
+			+ "class MyClass extends NoDefaultConstructor {\n"
+			+ "  constructor() { println() }\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CONSTRUCTOR, MUST_INVOKE_SUPER_CONSTRUCTOR,
+				source.indexOf("constructor() { println() }"), "constructor() { println() }".length(),
+				"Another constructor must be invoked explicitly");
+	}
+
+	@Test public void testSuperConstructorCall() throws Exception {
+		var source = "package mypackage\n"
+			+ "import test.NoDefaultConstructor\n"
+			+ "class MyClass extends NoDefaultConstructor {\n"
+			+ "  constructor() { super('test') }\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
+	}
+
+	@Test public void testSuperConstructorCall_01() throws Exception {
+		var source = "package mypackage\n"
+			+ "import test.NoDefaultConstructor\n"
+			+ "class MyClass extends NoDefaultConstructor {\n"
+			+ "  constructor(String s) { super(s) }\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
 	}
 
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {

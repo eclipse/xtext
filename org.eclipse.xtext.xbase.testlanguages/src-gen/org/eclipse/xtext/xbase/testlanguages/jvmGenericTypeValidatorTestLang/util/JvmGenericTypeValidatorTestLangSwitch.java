@@ -108,6 +108,21 @@ public class JvmGenericTypeValidatorTestLangSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case JvmGenericTypeValidatorTestLangPackage.MY_MEMBER:
+      {
+        MyMember myMember = (MyMember)theEObject;
+        T result = caseMyMember(myMember);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR:
+      {
+        MyConstructor myConstructor = (MyConstructor)theEObject;
+        T result = caseMyConstructor(myConstructor);
+        if (result == null) result = caseMyMember(myConstructor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -172,6 +187,38 @@ public class JvmGenericTypeValidatorTestLangSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMyInterface(MyInterface object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>My Member</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>My Member</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMyMember(MyMember object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>My Constructor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>My Constructor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMyConstructor(MyConstructor object)
   {
     return null;
   }

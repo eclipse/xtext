@@ -65,6 +65,24 @@ public interface JvmGenericTypeValidatorTestLangFactory extends EFactory
   MyInterface createMyInterface();
 
   /**
+   * Returns a new object of class '<em>My Member</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Member</em>'.
+   * @generated
+   */
+  MyMember createMyMember();
+
+  /**
+   * Returns a new object of class '<em>My Constructor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Constructor</em>'.
+   * @generated
+   */
+  MyConstructor createMyConstructor();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

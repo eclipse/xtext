@@ -17,11 +17,15 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
+import org.eclipse.xtext.xbase.XbasePackage;
+
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangFactory;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangModel;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyType;
 
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -61,6 +65,20 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   private EClass myInterfaceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myMemberEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myConstructorEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -112,6 +130,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     // Initialize simple dependencies
     TypesPackage.eINSTANCE.eClass();
+    XbasePackage.eINSTANCE.eClass();
     XtypePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -233,6 +252,17 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
+  public EReference getMyClass_Members()
+  {
+    return (EReference)myClassEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getMyInterface()
   {
     return myInterfaceEClass;
@@ -258,6 +288,50 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   public EReference getMyInterface_Extends()
   {
     return (EReference)myInterfaceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMyMember()
+  {
+    return myMemberEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMyConstructor()
+  {
+    return myConstructorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyConstructor_Parameters()
+  {
+    return (EReference)myConstructorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyConstructor_Expression()
+  {
+    return (EReference)myConstructorEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -302,10 +376,17 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     myClassEClass = createEClass(MY_CLASS);
     createEReference(myClassEClass, MY_CLASS__EXTENDS);
     createEReference(myClassEClass, MY_CLASS__IMPLEMENTS);
+    createEReference(myClassEClass, MY_CLASS__MEMBERS);
 
     myInterfaceEClass = createEClass(MY_INTERFACE);
     createEReference(myInterfaceEClass, MY_INTERFACE__TYPE_PARAMETERS);
     createEReference(myInterfaceEClass, MY_INTERFACE__EXTENDS);
+
+    myMemberEClass = createEClass(MY_MEMBER);
+
+    myConstructorEClass = createEClass(MY_CONSTRUCTOR);
+    createEReference(myConstructorEClass, MY_CONSTRUCTOR__PARAMETERS);
+    createEReference(myConstructorEClass, MY_CONSTRUCTOR__EXPRESSION);
   }
 
   /**
@@ -335,6 +416,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     // Obtain other dependent packages
     XtypePackage theXtypePackage = (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
     TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
 
@@ -343,6 +425,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     // Add supertypes to classes
     myClassEClass.getESuperTypes().add(this.getMyType());
     myInterfaceEClass.getESuperTypes().add(this.getMyType());
+    myConstructorEClass.getESuperTypes().add(this.getMyMember());
 
     // Initialize classes and features; add operations and parameters
     initEClass(jvmGenericTypeValidatorTestLangModelEClass, JvmGenericTypeValidatorTestLangModel.class, "JvmGenericTypeValidatorTestLangModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -356,10 +439,17 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     initEClass(myClassEClass, MyClass.class, "MyClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMyClass_Extends(), theTypesPackage.getJvmParameterizedTypeReference(), null, "extends", null, 0, 1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyClass_Implements(), theTypesPackage.getJvmParameterizedTypeReference(), null, "implements", null, 0, -1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMyClass_Members(), this.getMyMember(), null, "members", null, 0, -1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(myInterfaceEClass, MyInterface.class, "MyInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMyInterface_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, MyInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyInterface_Extends(), theTypesPackage.getJvmParameterizedTypeReference(), null, "extends", null, 0, -1, MyInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(myMemberEClass, MyMember.class, "MyMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(myConstructorEClass, MyConstructor.class, "MyConstructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMyConstructor_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMyConstructor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

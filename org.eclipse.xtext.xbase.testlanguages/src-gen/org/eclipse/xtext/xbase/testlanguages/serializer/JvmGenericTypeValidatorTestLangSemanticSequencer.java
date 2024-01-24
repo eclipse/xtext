@@ -63,6 +63,7 @@ import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangModel;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
 import org.eclipse.xtext.xbase.testlanguages.services.JvmGenericTypeValidatorTestLangGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -89,6 +90,9 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_CLASS:
 				sequence_MyClass(context, (MyClass) semanticObject); 
+				return; 
+			case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR:
+				sequence_MyMember(context, (MyConstructor) semanticObject); 
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_INTERFACE:
 				sequence_MyInterface(context, (MyInterface) semanticObject); 
@@ -542,7 +546,12 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 *     MyClass returns MyClass
 	 *
 	 * Constraint:
-	 *     (name=ValidID extends=JvmParameterizedTypeReference? (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)?)
+	 *     (
+	 *         name=ValidID 
+	 *         extends=JvmParameterizedTypeReference? 
+	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 
+	 *         members+=MyMember*
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_MyClass(ISerializationContext context, MyClass semanticObject) {
@@ -565,6 +574,20 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 * </pre>
 	 */
 	protected void sequence_MyInterface(ISerializationContext context, MyInterface semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     MyMember returns MyConstructor
+	 *
+	 * Constraint:
+	 *     ((parameters+=JvmFormalParameter parameters+=JvmFormalParameter*)? expression=XBlockExpression)
+	 * </pre>
+	 */
+	protected void sequence_MyMember(ISerializationContext context, MyConstructor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

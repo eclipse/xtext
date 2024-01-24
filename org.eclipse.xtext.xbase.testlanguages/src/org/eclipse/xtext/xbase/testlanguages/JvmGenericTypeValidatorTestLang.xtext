@@ -14,9 +14,16 @@ MyClass:
 	'class' name=ValidID
 	("extends" extends=JvmParameterizedTypeReference)?
 	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
+		(members+=MyMember)*
 	'}';
 
 MyInterface:
 	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)? '{'
 	'}';
+
+MyMember:
+	{MyConstructor} 'constructor'
+		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		expression=XBlockExpression
+;

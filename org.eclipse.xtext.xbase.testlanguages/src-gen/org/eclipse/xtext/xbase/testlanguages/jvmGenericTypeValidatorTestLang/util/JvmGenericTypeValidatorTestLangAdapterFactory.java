@@ -101,6 +101,16 @@ public class JvmGenericTypeValidatorTestLangAdapterFactory extends AdapterFactor
         return createMyInterfaceAdapter();
       }
       @Override
+      public Adapter caseMyMember(MyMember object)
+      {
+        return createMyMemberAdapter();
+      }
+      @Override
+      public Adapter caseMyConstructor(MyConstructor object)
+      {
+        return createMyConstructorAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -178,6 +188,36 @@ public class JvmGenericTypeValidatorTestLangAdapterFactory extends AdapterFactor
    * @generated
    */
   public Adapter createMyInterfaceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember <em>My Member</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember
+   * @generated
+   */
+  public Adapter createMyMemberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor <em>My Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor
+   * @generated
+   */
+  public Adapter createMyConstructorAdapter()
   {
     return null;
   }

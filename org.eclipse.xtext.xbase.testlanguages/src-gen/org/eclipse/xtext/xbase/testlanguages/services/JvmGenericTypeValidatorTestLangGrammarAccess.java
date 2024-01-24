@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.testlanguages.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
@@ -117,18 +118,22 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		private final Assignment cImplementsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
 		private final RuleCall cImplementsJvmParameterizedTypeReferenceParserRuleCall_3_2_1_0 = (RuleCall)cImplementsAssignment_3_2_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cMembersAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cMembersMyMemberParserRuleCall_5_0 = (RuleCall)cMembersAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//MyClass:
 		//    'class' name=ValidID
 		//    ("extends" extends=JvmParameterizedTypeReference)?
 		//    ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
+		//        (members+=MyMember)*
 		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'class' name=ValidID
 		//("extends" extends=JvmParameterizedTypeReference)?
 		//('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
+		//    (members+=MyMember)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -180,8 +185,14 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 		
+		//(members+=MyMember)*
+		public Assignment getMembersAssignment_5() { return cMembersAssignment_5; }
+		
+		//MyMember
+		public RuleCall getMembersMyMemberParserRuleCall_5_0() { return cMembersMyMemberParserRuleCall_5_0; }
+		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class MyInterfaceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyInterface");
@@ -286,12 +297,81 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
+	public class MyMemberElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyMember");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMyConstructorAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cConstructorKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cParametersAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_3_0_0 = (RuleCall)cParametersAssignment_3_0.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cParametersAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_3_1_1_0 = (RuleCall)cParametersAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cExpressionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cExpressionXBlockExpressionParserRuleCall_5_0 = (RuleCall)cExpressionAssignment_5.eContents().get(0);
+		
+		//MyMember:
+		//    {MyConstructor} 'constructor'
+		//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		//        expression=XBlockExpression
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{MyConstructor} 'constructor'
+		//    '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		//    expression=XBlockExpression
+		public Group getGroup() { return cGroup; }
+		
+		//{MyConstructor}
+		public Action getMyConstructorAction_0() { return cMyConstructorAction_0; }
+		
+		//'constructor'
+		public Keyword getConstructorKeyword_1() { return cConstructorKeyword_1; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		
+		//(parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//parameters+=JvmFormalParameter
+		public Assignment getParametersAssignment_3_0() { return cParametersAssignment_3_0; }
+		
+		//JvmFormalParameter
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_3_0_0() { return cParametersJvmFormalParameterParserRuleCall_3_0_0; }
+		
+		//(',' parameters+=JvmFormalParameter)*
+		public Group getGroup_3_1() { return cGroup_3_1; }
+		
+		//','
+		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		
+		//parameters+=JvmFormalParameter
+		public Assignment getParametersAssignment_3_1_1() { return cParametersAssignment_3_1_1; }
+		
+		//JvmFormalParameter
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_3_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_3_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		
+		//expression=XBlockExpression
+		public Assignment getExpressionAssignment_5() { return cExpressionAssignment_5; }
+		
+		//XBlockExpression
+		public RuleCall getExpressionXBlockExpressionParserRuleCall_5_0() { return cExpressionXBlockExpressionParserRuleCall_5_0; }
+	}
 	
 	
 	private final JvmGenericTypeValidatorTestLangModelElements pJvmGenericTypeValidatorTestLangModel;
 	private final MyTypeElements pMyType;
 	private final MyClassElements pMyClass;
 	private final MyInterfaceElements pMyInterface;
+	private final MyMemberElements pMyMember;
 	
 	private final Grammar grammar;
 	
@@ -310,6 +390,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		this.pMyType = new MyTypeElements();
 		this.pMyClass = new MyClassElements();
 		this.pMyInterface = new MyInterfaceElements();
+		this.pMyMember = new MyMemberElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -369,6 +450,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	//    'class' name=ValidID
 	//    ("extends" extends=JvmParameterizedTypeReference)?
 	//    ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
+	//        (members+=MyMember)*
 	//    '}';
 	public MyClassElements getMyClassAccess() {
 		return pMyClass;
@@ -388,6 +470,19 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	
 	public ParserRule getMyInterfaceRule() {
 		return getMyInterfaceAccess().getRule();
+	}
+	
+	//MyMember:
+	//    {MyConstructor} 'constructor'
+	//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+	//        expression=XBlockExpression
+	//;
+	public MyMemberElements getMyMemberAccess() {
+		return pMyMember;
+	}
+	
+	public ParserRule getMyMemberRule() {
+		return getMyMemberAccess().getRule();
 	}
 	
 	//XExpression returns XExpression :

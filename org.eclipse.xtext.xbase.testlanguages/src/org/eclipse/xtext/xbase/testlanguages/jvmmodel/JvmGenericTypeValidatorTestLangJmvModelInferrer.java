@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
 
 import com.google.inject.Inject;
@@ -40,7 +41,22 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 				for (var interf : myClass.getImplements()) {
 					it.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(interf));
 				}
+				inferMembers(myClass, it);
 			});
+	}
+
+	private void inferMembers(MyClass myClass, JvmGenericType it) {
+		for (var member : myClass.getMembers()) {
+			if (member instanceof MyConstructor) {
+				MyConstructor constructor = (MyConstructor) member;
+				it.getMembers().add(jvmTypesBuilder.toConstructor(constructor, cons -> {
+					jvmTypesBuilder.setBody(cons, constructor.getExpression());
+					for (var param : constructor.getParameters()) {
+						cons.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
+					}
+				}));
+			}
+		}
 	}
 
 	protected void _infer(MyInterface myInterface, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
