@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.Jvm
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyType;
@@ -79,6 +80,13 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   private EClass myConstructorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myFieldEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -340,6 +348,39 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
+  public EClass getMyField()
+  {
+    return myFieldEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyField_Type()
+  {
+    return (EReference)myFieldEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getMyField_Name()
+  {
+    return (EAttribute)myFieldEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public JvmGenericTypeValidatorTestLangFactory getJvmGenericTypeValidatorTestLangFactory()
   {
     return (JvmGenericTypeValidatorTestLangFactory)getEFactoryInstance();
@@ -387,6 +428,10 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     myConstructorEClass = createEClass(MY_CONSTRUCTOR);
     createEReference(myConstructorEClass, MY_CONSTRUCTOR__PARAMETERS);
     createEReference(myConstructorEClass, MY_CONSTRUCTOR__EXPRESSION);
+
+    myFieldEClass = createEClass(MY_FIELD);
+    createEReference(myFieldEClass, MY_FIELD__TYPE);
+    createEAttribute(myFieldEClass, MY_FIELD__NAME);
   }
 
   /**
@@ -426,6 +471,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     myClassEClass.getESuperTypes().add(this.getMyType());
     myInterfaceEClass.getESuperTypes().add(this.getMyType());
     myConstructorEClass.getESuperTypes().add(this.getMyMember());
+    myFieldEClass.getESuperTypes().add(this.getMyMember());
 
     // Initialize classes and features; add operations and parameters
     initEClass(jvmGenericTypeValidatorTestLangModelEClass, JvmGenericTypeValidatorTestLangModel.class, "JvmGenericTypeValidatorTestLangModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -450,6 +496,10 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     initEClass(myConstructorEClass, MyConstructor.class, "MyConstructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMyConstructor_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyConstructor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(myFieldEClass, MyField.class, "MyField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMyField_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, MyField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMyField_Name(), ecorePackage.getEString(), "name", null, 0, 1, MyField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

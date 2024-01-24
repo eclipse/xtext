@@ -299,71 +299,105 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	}
 	public class MyMemberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyMember");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cMyConstructorAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cConstructorKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cParametersAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cParametersJvmFormalParameterParserRuleCall_3_0_0 = (RuleCall)cParametersAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cParametersAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cParametersJvmFormalParameterParserRuleCall_3_1_1_0 = (RuleCall)cParametersAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cExpressionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cExpressionXBlockExpressionParserRuleCall_5_0 = (RuleCall)cExpressionAssignment_5.eContents().get(0);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cMyConstructorAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Keyword cConstructorKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final Group cGroup_0_3 = (Group)cGroup_0.eContents().get(3);
+		private final Assignment cParametersAssignment_0_3_0 = (Assignment)cGroup_0_3.eContents().get(0);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_0_3_0_0 = (RuleCall)cParametersAssignment_0_3_0.eContents().get(0);
+		private final Group cGroup_0_3_1 = (Group)cGroup_0_3.eContents().get(1);
+		private final Keyword cCommaKeyword_0_3_1_0 = (Keyword)cGroup_0_3_1.eContents().get(0);
+		private final Assignment cParametersAssignment_0_3_1_1 = (Assignment)cGroup_0_3_1.eContents().get(1);
+		private final RuleCall cParametersJvmFormalParameterParserRuleCall_0_3_1_1_0 = (RuleCall)cParametersAssignment_0_3_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_0_4 = (Keyword)cGroup_0.eContents().get(4);
+		private final Assignment cExpressionAssignment_0_5 = (Assignment)cGroup_0.eContents().get(5);
+		private final RuleCall cExpressionXBlockExpressionParserRuleCall_0_5_0 = (RuleCall)cExpressionAssignment_0_5.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cMyFieldAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
+		private final Assignment cNameAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_1_2_0 = (RuleCall)cNameAssignment_1_2.eContents().get(0);
 		
 		//MyMember:
-		//    {MyConstructor} 'constructor'
+		//    ({MyConstructor} 'constructor'
 		//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
-		//        expression=XBlockExpression
+		//        expression=XBlockExpression)
+		//    |
+		//    ({MyField} type=JvmTypeReference name=ValidID)
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{MyConstructor} 'constructor'
+		//({MyConstructor} 'constructor'
 		//    '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
-		//    expression=XBlockExpression
-		public Group getGroup() { return cGroup; }
+		//    expression=XBlockExpression)
+		//|
+		//({MyField} type=JvmTypeReference name=ValidID)
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//({MyConstructor} 'constructor'
+		//    '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		//    expression=XBlockExpression)
+		public Group getGroup_0() { return cGroup_0; }
 		
 		//{MyConstructor}
-		public Action getMyConstructorAction_0() { return cMyConstructorAction_0; }
+		public Action getMyConstructorAction_0_0() { return cMyConstructorAction_0_0; }
 		
 		//'constructor'
-		public Keyword getConstructorKeyword_1() { return cConstructorKeyword_1; }
+		public Keyword getConstructorKeyword_0_1() { return cConstructorKeyword_0_1; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		public Keyword getLeftParenthesisKeyword_0_2() { return cLeftParenthesisKeyword_0_2; }
 		
 		//(parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_0_3() { return cGroup_0_3; }
 		
 		//parameters+=JvmFormalParameter
-		public Assignment getParametersAssignment_3_0() { return cParametersAssignment_3_0; }
+		public Assignment getParametersAssignment_0_3_0() { return cParametersAssignment_0_3_0; }
 		
 		//JvmFormalParameter
-		public RuleCall getParametersJvmFormalParameterParserRuleCall_3_0_0() { return cParametersJvmFormalParameterParserRuleCall_3_0_0; }
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_0_3_0_0() { return cParametersJvmFormalParameterParserRuleCall_0_3_0_0; }
 		
 		//(',' parameters+=JvmFormalParameter)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
+		public Group getGroup_0_3_1() { return cGroup_0_3_1; }
 		
 		//','
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		public Keyword getCommaKeyword_0_3_1_0() { return cCommaKeyword_0_3_1_0; }
 		
 		//parameters+=JvmFormalParameter
-		public Assignment getParametersAssignment_3_1_1() { return cParametersAssignment_3_1_1; }
+		public Assignment getParametersAssignment_0_3_1_1() { return cParametersAssignment_0_3_1_1; }
 		
 		//JvmFormalParameter
-		public RuleCall getParametersJvmFormalParameterParserRuleCall_3_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_3_1_1_0; }
+		public RuleCall getParametersJvmFormalParameterParserRuleCall_0_3_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_0_3_1_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		public Keyword getRightParenthesisKeyword_0_4() { return cRightParenthesisKeyword_0_4; }
 		
 		//expression=XBlockExpression
-		public Assignment getExpressionAssignment_5() { return cExpressionAssignment_5; }
+		public Assignment getExpressionAssignment_0_5() { return cExpressionAssignment_0_5; }
 		
 		//XBlockExpression
-		public RuleCall getExpressionXBlockExpressionParserRuleCall_5_0() { return cExpressionXBlockExpressionParserRuleCall_5_0; }
+		public RuleCall getExpressionXBlockExpressionParserRuleCall_0_5_0() { return cExpressionXBlockExpressionParserRuleCall_0_5_0; }
+		
+		//({MyField} type=JvmTypeReference name=ValidID)
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{MyField}
+		public Action getMyFieldAction_1_0() { return cMyFieldAction_1_0; }
+		
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_1_1() { return cTypeAssignment_1_1; }
+		
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_1_0() { return cTypeJvmTypeReferenceParserRuleCall_1_1_0; }
+		
+		//name=ValidID
+		public Assignment getNameAssignment_1_2() { return cNameAssignment_1_2; }
+		
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_1_2_0() { return cNameValidIDParserRuleCall_1_2_0; }
 	}
 	
 	
@@ -473,9 +507,11 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	}
 	
 	//MyMember:
-	//    {MyConstructor} 'constructor'
+	//    ({MyConstructor} 'constructor'
 	//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
-	//        expression=XBlockExpression
+	//        expression=XBlockExpression)
+	//    |
+	//    ({MyField} type=JvmTypeReference name=ValidID)
 	//;
 	public MyMemberElements getMyMemberAccess() {
 		return pMyMember;

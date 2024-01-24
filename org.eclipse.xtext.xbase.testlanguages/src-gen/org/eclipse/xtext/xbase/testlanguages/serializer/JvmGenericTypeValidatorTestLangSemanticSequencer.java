@@ -64,6 +64,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.Jvm
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
 import org.eclipse.xtext.xbase.testlanguages.services.JvmGenericTypeValidatorTestLangGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -93,6 +94,9 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR:
 				sequence_MyMember(context, (MyConstructor) semanticObject); 
+				return; 
+			case JvmGenericTypeValidatorTestLangPackage.MY_FIELD:
+				sequence_MyMember(context, (MyField) semanticObject); 
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_INTERFACE:
 				sequence_MyInterface(context, (MyInterface) semanticObject); 
@@ -589,6 +593,29 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 */
 	protected void sequence_MyMember(ISerializationContext context, MyConstructor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     MyMember returns MyField
+	 *
+	 * Constraint:
+	 *     (type=JvmTypeReference name=ValidID)
+	 * </pre>
+	 */
+	protected void sequence_MyMember(ISerializationContext context, MyField semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, JvmGenericTypeValidatorTestLangPackage.Literals.MY_FIELD__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, JvmGenericTypeValidatorTestLangPackage.Literals.MY_FIELD__TYPE));
+			if (transientValues.isValueTransient(semanticObject, JvmGenericTypeValidatorTestLangPackage.Literals.MY_FIELD__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, JvmGenericTypeValidatorTestLangPackage.Literals.MY_FIELD__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMyMemberAccess().getTypeJvmTypeReferenceParserRuleCall_1_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getMyMemberAccess().getNameValidIDParserRuleCall_1_2_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

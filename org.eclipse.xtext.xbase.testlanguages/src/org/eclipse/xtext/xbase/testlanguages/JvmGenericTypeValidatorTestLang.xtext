@@ -23,7 +23,9 @@ MyInterface:
 	'}';
 
 MyMember:
-	{MyConstructor} 'constructor'
+	({MyConstructor} 'constructor'
 		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
-		expression=XBlockExpression
+		expression=XBlockExpression)
+	|
+	({MyField} type=JvmTypeReference name=ValidID)
 ;

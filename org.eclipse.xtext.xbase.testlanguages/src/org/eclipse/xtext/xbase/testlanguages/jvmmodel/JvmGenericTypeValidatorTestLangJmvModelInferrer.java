@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
 
 import com.google.inject.Inject;
@@ -55,6 +56,9 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 						cons.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
 					}
 				}));
+			} else if (member instanceof MyField) {
+				MyField field = (MyField) member;
+				it.getMembers().add(jvmTypesBuilder.toField(field, field.getName(), field.getType()));
 			}
 		}
 	}

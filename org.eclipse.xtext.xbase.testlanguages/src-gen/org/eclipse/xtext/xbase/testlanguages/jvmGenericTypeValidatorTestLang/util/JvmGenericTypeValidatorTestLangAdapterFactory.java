@@ -111,6 +111,11 @@ public class JvmGenericTypeValidatorTestLangAdapterFactory extends AdapterFactor
         return createMyConstructorAdapter();
       }
       @Override
+      public Adapter caseMyField(MyField object)
+      {
+        return createMyFieldAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -218,6 +223,21 @@ public class JvmGenericTypeValidatorTestLangAdapterFactory extends AdapterFactor
    * @generated
    */
   public Adapter createMyConstructorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField <em>My Field</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField
+   * @generated
+   */
+  public Adapter createMyFieldAdapter()
   {
     return null;
   }

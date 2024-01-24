@@ -37,6 +37,7 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, JvmGenericTypeValidatorTestLangGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getMyTypeAccess().getAlternatives(), "rule__MyType__Alternatives");
+			builder.put(grammarAccess.getMyMemberAccess().getAlternatives(), "rule__MyMember__Alternatives");
 			builder.put(grammarAccess.getXAssignmentAccess().getAlternatives(), "rule__XAssignment__Alternatives");
 			builder.put(grammarAccess.getOpMultiAssignAccess().getAlternatives(), "rule__OpMultiAssign__Alternatives");
 			builder.put(grammarAccess.getOpEqualityAccess().getAlternatives(), "rule__OpEquality__Alternatives");
@@ -87,9 +88,10 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 			builder.put(grammarAccess.getMyInterfaceAccess().getGroup_2_2(), "rule__MyInterface__Group_2_2__0");
 			builder.put(grammarAccess.getMyInterfaceAccess().getGroup_3(), "rule__MyInterface__Group_3__0");
 			builder.put(grammarAccess.getMyInterfaceAccess().getGroup_3_2(), "rule__MyInterface__Group_3_2__0");
-			builder.put(grammarAccess.getMyMemberAccess().getGroup(), "rule__MyMember__Group__0");
-			builder.put(grammarAccess.getMyMemberAccess().getGroup_3(), "rule__MyMember__Group_3__0");
-			builder.put(grammarAccess.getMyMemberAccess().getGroup_3_1(), "rule__MyMember__Group_3_1__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_0(), "rule__MyMember__Group_0__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_0_3(), "rule__MyMember__Group_0_3__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_0_3_1(), "rule__MyMember__Group_0_3_1__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_1(), "rule__MyMember__Group_1__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_1_1(), "rule__XAssignment__Group_1_1__0");
@@ -282,9 +284,11 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 			builder.put(grammarAccess.getMyInterfaceAccess().getTypeParametersAssignment_2_2_1(), "rule__MyInterface__TypeParametersAssignment_2_2_1");
 			builder.put(grammarAccess.getMyInterfaceAccess().getExtendsAssignment_3_1(), "rule__MyInterface__ExtendsAssignment_3_1");
 			builder.put(grammarAccess.getMyInterfaceAccess().getExtendsAssignment_3_2_1(), "rule__MyInterface__ExtendsAssignment_3_2_1");
-			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_3_0(), "rule__MyMember__ParametersAssignment_3_0");
-			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_3_1_1(), "rule__MyMember__ParametersAssignment_3_1_1");
-			builder.put(grammarAccess.getMyMemberAccess().getExpressionAssignment_5(), "rule__MyMember__ExpressionAssignment_5");
+			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_0_3_0(), "rule__MyMember__ParametersAssignment_0_3_0");
+			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_0_3_1_1(), "rule__MyMember__ParametersAssignment_0_3_1_1");
+			builder.put(grammarAccess.getMyMemberAccess().getExpressionAssignment_0_5(), "rule__MyMember__ExpressionAssignment_0_5");
+			builder.put(grammarAccess.getMyMemberAccess().getTypeAssignment_1_1(), "rule__MyMember__TypeAssignment_1_1");
+			builder.put(grammarAccess.getMyMemberAccess().getNameAssignment_1_2(), "rule__MyMember__NameAssignment_1_2");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 			builder.put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

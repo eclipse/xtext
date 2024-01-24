@@ -99,6 +99,32 @@ public class JvmGenericTypeValidatorTest {
 		validationHelper.assertNoErrors(model);
 	}
 
+	@Test public void testDuplicateFieldName() throws Exception {
+		var source = "package mypackage\n"
+			+ "class MyClass {\n"
+			+ "  int foo String foo double foo\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_FIELD, DUPLICATE_FIELD,
+				source.indexOf("foo"), "foo".length(),
+				"foo", "duplicate");
+		validationHelper.assertError(model, MY_FIELD, DUPLICATE_FIELD,
+				source.indexOf("String foo") + "String ".length(), "foo".length(),
+				"foo", "duplicate");
+		validationHelper.assertError(model, MY_FIELD, DUPLICATE_FIELD,
+				source.indexOf("double foo") + "double ".length(), "foo".length(),
+				"foo", "duplicate");
+	}
+
+	@Test public void testNoDuplicateFieldName() throws Exception {
+		var source = "package mypackage\n"
+			+ "class MyClass {\n"
+			+ "  int x String y double z\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}
