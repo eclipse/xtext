@@ -30,7 +30,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  * @model
  * @generated
  */
-public interface MyClass extends MyType
+public interface MyClass extends MyType, MyMember
 {
   /**
    * Returns the value of the '<em><b>Extends</b></em>' containment reference.

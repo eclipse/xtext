@@ -2164,6 +2164,12 @@ rule__MyMember__Alternatives
 		(rule__MyMember__Group_1__0)
 		{ after(grammarAccess.getMyMemberAccess().getGroup_1()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getMyMemberAccess().getMyClassParserRuleCall_2()); }
+		ruleMyClass
+		{ after(grammarAccess.getMyMemberAccess().getMyClassParserRuleCall_2()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);

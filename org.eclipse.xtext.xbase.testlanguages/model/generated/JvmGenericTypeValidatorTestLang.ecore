@@ -12,7 +12,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="MyType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MyClass" eSuperTypes="#//MyType">
+  <eClassifiers xsi:type="ecore:EClass" name="MyClass" eSuperTypes="#//MyType #//MyMember">
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"

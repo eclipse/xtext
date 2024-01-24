@@ -548,6 +548,7 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 * Contexts:
 	 *     MyType returns MyClass
 	 *     MyClass returns MyClass
+	 *     MyMember returns MyClass
 	 *
 	 * Constraint:
 	 *     (

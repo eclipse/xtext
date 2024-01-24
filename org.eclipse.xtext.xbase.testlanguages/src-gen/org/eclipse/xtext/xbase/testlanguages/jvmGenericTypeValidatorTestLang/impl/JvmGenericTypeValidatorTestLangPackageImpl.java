@@ -469,6 +469,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     // Add supertypes to classes
     myClassEClass.getESuperTypes().add(this.getMyType());
+    myClassEClass.getESuperTypes().add(this.getMyMember());
     myInterfaceEClass.getESuperTypes().add(this.getMyType());
     myConstructorEClass.getESuperTypes().add(this.getMyMember());
     myFieldEClass.getESuperTypes().add(this.getMyMember());

@@ -39,6 +39,8 @@ public class JvmGenericTypeValidatorTest {
 			+ "import java.io.Serializable\n"
 			+ "class MyClass extends ArrayList<String> implements Serializable {\n"
 			+ "}\n"
+			+ "class MyClass2 {\n"
+			+ "}\n"
 			+ "interface MyInterface extends Serializable {\n"
 			+ "}");
 		validationHelper.assertNoErrors(model);
@@ -120,6 +122,29 @@ public class JvmGenericTypeValidatorTest {
 		var source = "package mypackage\n"
 			+ "class MyClass {\n"
 			+ "  int x String y double z\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
+	}
+
+	@Test public void testDuplicateNestedTypes() throws Exception {
+		var source = "package mypackage\n"
+			+ "class MyClass {\n"
+			+ "  class Nested {} class Nested {}\n"
+			+ "}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, DUPLICATE_TYPE,
+				source.indexOf("Nested"), "Nested".length(),
+				"Duplicate nested type Nested");
+		validationHelper.assertError(model, MY_CLASS, DUPLICATE_TYPE,
+				source.lastIndexOf("Nested"), "Nested".length(),
+				"Duplicate nested type Nested");
+	}
+
+	@Test public void testNoDuplicateNestedTypes() throws Exception {
+		var source = "package mypackage\n"
+			+ "class MyClass {\n"
+			+ "  class Nested1 {} class Nested2 {}\n"
 			+ "}";
 		var model = parse(source);
 		validationHelper.assertNoErrors(model);

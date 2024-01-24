@@ -28,4 +28,6 @@ MyMember:
 		expression=XBlockExpression)
 	|
 	({MyField} type=JvmTypeReference name=ValidID)
+	|
+	MyClass
 ;

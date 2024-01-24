@@ -97,6 +97,7 @@ public class JvmGenericTypeValidatorTestLangSwitch<T> extends Switch<T>
         MyClass myClass = (MyClass)theEObject;
         T result = caseMyClass(myClass);
         if (result == null) result = caseMyType(myClass);
+        if (result == null) result = caseMyMember(myClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }

@@ -637,6 +637,15 @@ ruleMyMember returns [EObject current=null]
 				)
 			)
 		)
+		    |
+		{
+			newCompositeNode(grammarAccess.getMyMemberAccess().getMyClassParserRuleCall_2());
+		}
+		this_MyClass_11=ruleMyClass
+		{
+			$current = $this_MyClass_11.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 

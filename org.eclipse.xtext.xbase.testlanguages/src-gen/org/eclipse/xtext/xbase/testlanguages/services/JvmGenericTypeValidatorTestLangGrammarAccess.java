@@ -320,6 +320,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Assignment cNameAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cNameValidIDParserRuleCall_1_2_0 = (RuleCall)cNameAssignment_1_2.eContents().get(0);
+		private final RuleCall cMyClassParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//MyMember:
 		//    ({MyConstructor} 'constructor'
@@ -327,6 +328,8 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//        expression=XBlockExpression)
 		//    |
 		//    ({MyField} type=JvmTypeReference name=ValidID)
+		//    |
+		//    MyClass
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -335,6 +338,8 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//    expression=XBlockExpression)
 		//|
 		//({MyField} type=JvmTypeReference name=ValidID)
+		//|
+		//MyClass
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//({MyConstructor} 'constructor'
@@ -398,6 +403,9 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_2_0() { return cNameValidIDParserRuleCall_1_2_0; }
+		
+		//MyClass
+		public RuleCall getMyClassParserRuleCall_2() { return cMyClassParserRuleCall_2; }
 	}
 	
 	
@@ -512,6 +520,8 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	//        expression=XBlockExpression)
 	//    |
 	//    ({MyField} type=JvmTypeReference name=ValidID)
+	//    |
+	//    MyClass
 	//;
 	public MyMemberElements getMyMemberAccess() {
 		return pMyMember;

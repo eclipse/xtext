@@ -9,6 +9,7 @@
 package org.eclipse.xtext.xbase.testlanguages.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
@@ -32,8 +33,11 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 
-	protected void _infer(MyClass myClass, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
-		acceptor.accept(jvmTypesBuilder.toClass(myClass, qualifiedNameProvider.getFullyQualifiedName(myClass)),
+	protected void inferClass(MyClass myClass, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase, JvmDeclaredType containerSceleton) {
+		var inferred = jvmTypesBuilder.toClass(myClass, qualifiedNameProvider.getFullyQualifiedName(myClass));
+		if (containerSceleton != null)
+			containerSceleton.getMembers().add(inferred);
+		acceptor.accept(inferred,
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myClass));
 				if (myClass.getExtends() != null) {
@@ -42,11 +46,16 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 				for (var interf : myClass.getImplements()) {
 					it.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(interf));
 				}
-				inferMembers(myClass, it);
+				inferMembers(myClass, it, acceptor, prelinkingPhase);
 			});
+		for (var member : myClass.getMembers()) {
+			if (member instanceof MyClass) {
+				inferClass((MyClass) member, acceptor, prelinkingPhase, inferred);
+			}
+		}
 	}
 
-	private void inferMembers(MyClass myClass, JvmGenericType it) {
+	private void inferMembers(MyClass myClass, JvmGenericType it, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		for (var member : myClass.getMembers()) {
 			if (member instanceof MyConstructor) {
 				MyConstructor constructor = (MyConstructor) member;
@@ -63,7 +72,7 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 		}
 	}
 
-	protected void _infer(MyInterface myInterface, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+	protected void inferInterface(MyInterface myInterface, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		acceptor.accept(jvmTypesBuilder.toInterface(myInterface, qualifiedNameProvider.getFullyQualifiedName(myInterface).toString(),
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myInterface));
@@ -76,10 +85,10 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 	@Override
 	public void infer(EObject element, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		if (element instanceof MyClass) {
-			_infer((MyClass) element, acceptor, prelinkingPhase);
+			inferClass((MyClass) element, acceptor, prelinkingPhase, null);
 			return;
 		} else if (element instanceof MyInterface) {
-			_infer((MyInterface) element, acceptor, prelinkingPhase);
+			inferInterface((MyInterface) element, acceptor, prelinkingPhase);
 			return;
 		} else {
 			super.infer(element, acceptor, prelinkingPhase);
