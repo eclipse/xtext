@@ -8,17 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage.Literals.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangModel;
-import org.eclipse.xtext.xbase.testlanguages.tests.JvmGenericTypeValidatorTestLangInjectorProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
-import static org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage.Literals.*;
 
 import com.google.inject.Inject;
 
@@ -26,7 +25,7 @@ import com.google.inject.Inject;
  * @author Lorenzo Bettini - Initial contribution and API
  */
 @RunWith(XtextRunner.class)
-@InjectWith(JvmGenericTypeValidatorTestLangInjectorProvider.class)
+@InjectWith(JvmGenericTypeValidatorTestLangInjectorProviderCustom.class)
 public class JvmGenericTypeValidatorTest {
 	@Inject
 	private ParseHelper<JvmGenericTypeValidatorTestLangModel> parseHelper;
