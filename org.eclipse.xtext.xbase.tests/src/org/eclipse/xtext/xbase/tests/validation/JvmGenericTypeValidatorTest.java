@@ -150,6 +150,23 @@ public class JvmGenericTypeValidatorTest {
 		validationHelper.assertNoErrors(model);
 	}
 
+	@Test public void testInheritanceCycle() throws Exception {
+		var source = "package test "
+				+ "class Foo extends Bar {}"
+				+ "class Bar extends Baz {}"
+				+ "class Baz extends Foo {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, CYCLIC_INHERITANCE,
+				source.indexOf("Foo"), "Foo".length(),
+				"hierarchy", "cycles");
+		validationHelper.assertError(model, MY_CLASS, CYCLIC_INHERITANCE,
+				source.lastIndexOf("Bar"), "Bar".length(),
+				"hierarchy", "cycles");
+		validationHelper.assertError(model, MY_CLASS, CYCLIC_INHERITANCE,
+				source.lastIndexOf("Baz"), "Baz".length(),
+				"hierarchy", "cycles");
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}
