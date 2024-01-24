@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
@@ -127,6 +128,13 @@ public class JvmGenericTypeValidatorTest {
 			+ "}";
 		var model = parse(source);
 		validationHelper.assertNoErrors(model);
+	}
+
+	@Test public void testInvalidVoidInFieldType() throws Exception {
+		var source = "class X { void v }";
+		var model = parse(source);
+		validationHelper.assertError(model, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE,
+				source.indexOf("void"), "void".length());
 	}
 
 	@Test public void testDuplicateNestedTypes() throws Exception {
