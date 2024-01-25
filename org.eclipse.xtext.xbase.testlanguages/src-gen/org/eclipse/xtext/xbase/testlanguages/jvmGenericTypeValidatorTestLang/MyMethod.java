@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getParameters <em>Parameters</em>}</li>
@@ -58,6 +60,18 @@ public interface MyMethod extends MyMember
    * @generated
    */
   void setStatic(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type Parameters</em>' containment reference list.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage#getMyMethod_TypeParameters()
+   * @model containment="true"
+   * @generated
+   */
+  EList<JvmTypeParameter> getTypeParameters();
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.

@@ -350,13 +350,22 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_METHOD__STATIC = MY_MEMBER_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD__TYPE_PARAMETERS = MY_MEMBER_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MY_METHOD__TYPE = MY_MEMBER_FEATURE_COUNT + 1;
+  int MY_METHOD__TYPE = MY_MEMBER_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -365,7 +374,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_METHOD__NAME = MY_MEMBER_FEATURE_COUNT + 2;
+  int MY_METHOD__NAME = MY_MEMBER_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -374,7 +383,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_METHOD__PARAMETERS = MY_MEMBER_FEATURE_COUNT + 3;
+  int MY_METHOD__PARAMETERS = MY_MEMBER_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -383,7 +392,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_METHOD__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 4;
+  int MY_METHOD__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 5;
 
   /**
    * The number of structural features of the '<em>My Method</em>' class.
@@ -392,7 +401,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_METHOD_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 5;
+  int MY_METHOD_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 6;
 
 
   /**
@@ -628,6 +637,17 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    */
   EAttribute getMyMethod_Static();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getTypeParameters <em>Type Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getTypeParameters()
+   * @see #getMyMethod()
+   * @generated
+   */
+  EReference getMyMethod_TypeParameters();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getType <em>Type</em>}'.
@@ -887,6 +907,14 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EAttribute MY_METHOD__STATIC = eINSTANCE.getMyMethod_Static();
+
+    /**
+     * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_METHOD__TYPE_PARAMETERS = eINSTANCE.getMyMethod_TypeParameters();
 
     /**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.

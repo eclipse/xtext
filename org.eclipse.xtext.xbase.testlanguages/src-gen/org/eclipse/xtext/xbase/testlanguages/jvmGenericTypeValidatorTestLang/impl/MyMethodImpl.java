@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getParameters <em>Parameters</em>}</li>
@@ -69,6 +71,16 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
    * @ordered
    */
   protected boolean static_ = STATIC_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTypeParameters()
+   * @generated
+   * @ordered
+   */
+  protected EList<JvmTypeParameter> typeParameters;
 
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -164,6 +176,21 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     static_ = newStatic;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC, oldStatic, static_));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<JvmTypeParameter> getTypeParameters()
+  {
+    if (typeParameters == null)
+    {
+      typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS);
+    }
+    return typeParameters;
   }
 
   /**
@@ -316,6 +343,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
+        return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         return basicSetType(null, msgs);
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PARAMETERS:
@@ -338,6 +367,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     {
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
         return isStatic();
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
+        return getTypeParameters();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         return getType();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__NAME:
@@ -363,6 +394,10 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     {
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
         setStatic((Boolean)newValue);
+        return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
+        getTypeParameters().clear();
+        getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
         return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         setType((JvmTypeReference)newValue);
@@ -394,6 +429,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
         setStatic(STATIC_EDEFAULT);
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
+        getTypeParameters().clear();
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         setType((JvmTypeReference)null);
         return;
@@ -422,6 +460,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     {
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
         return static_ != STATIC_EDEFAULT;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
+        return typeParameters != null && !typeParameters.isEmpty();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         return type != null;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__NAME:

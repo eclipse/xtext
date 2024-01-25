@@ -302,6 +302,17 @@ public class JvmGenericTypeValidatorTest {
 				"cannot hide the instance method");
 	}
 
+	@Test public void testOverrideGenericMethod_10() throws Exception {
+		var source = "class Foo extends test.GenericSuperTypeClass<String> {  " +
+					"def <T extends String> void foo1() {}"+
+					"}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.indexOf("foo1"), "foo1".length(),
+				"Name clash", "same erasure", "GenericSuperTypeClass",
+				"does not override it");
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}

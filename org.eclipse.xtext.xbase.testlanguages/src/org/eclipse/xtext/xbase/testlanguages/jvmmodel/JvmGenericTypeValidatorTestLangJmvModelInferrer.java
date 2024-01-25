@@ -8,13 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.testlanguages.jvmmodel;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
@@ -34,6 +39,9 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+
+	@Inject
+	private IJvmModelAssociator associator;
 
 	protected void inferClass(MyClass myClass, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase, JvmDeclaredType containerSceleton) {
 		if (Strings.isEmpty(myClass.getName()))
@@ -80,7 +88,20 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 					for (var param : method.getParameters()) {
 						meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
 					}
+					copyTypeParameters(method.getTypeParameters(), meth);
 				}));
+			}
+		}
+	}
+
+	private void copyTypeParameters(List<JvmTypeParameter> typeParameters, JvmTypeParameterDeclarator target) {
+		for (JvmTypeParameter typeParameter : typeParameters) {
+			if (!Strings.isEmpty(typeParameter.getName())) {
+				final JvmTypeParameter clonedTypeParameter = jvmTypesBuilder.cloneWithProxies(typeParameter);
+				if (clonedTypeParameter != null) {
+					target.getTypeParameters().add(clonedTypeParameter);
+					associator.associate(typeParameter, clonedTypeParameter);
+				}
 			}
 		}
 	}
