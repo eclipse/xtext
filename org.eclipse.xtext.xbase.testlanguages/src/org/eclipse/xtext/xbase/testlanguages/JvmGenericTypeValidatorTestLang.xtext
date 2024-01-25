@@ -32,7 +32,7 @@ MyMember:
 	|
 	({MyField} type=JvmTypeReference name=ValidID)
 	|
-	({MyMethod} 'def' type=JvmTypeReference name=ValidID
+	({MyMethod} 'def' (static ?= 'static')? type=JvmTypeReference name=ValidID
 		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
 		expression=XBlockExpression)
 	|

@@ -93,8 +93,8 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 			builder.put(grammarAccess.getMyMemberAccess().getGroup_0_3_1(), "rule__MyMember__Group_0_3_1__0");
 			builder.put(grammarAccess.getMyMemberAccess().getGroup_1(), "rule__MyMember__Group_1__0");
 			builder.put(grammarAccess.getMyMemberAccess().getGroup_2(), "rule__MyMember__Group_2__0");
-			builder.put(grammarAccess.getMyMemberAccess().getGroup_2_5(), "rule__MyMember__Group_2_5__0");
-			builder.put(grammarAccess.getMyMemberAccess().getGroup_2_5_1(), "rule__MyMember__Group_2_5_1__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_2_6(), "rule__MyMember__Group_2_6__0");
+			builder.put(grammarAccess.getMyMemberAccess().getGroup_2_6_1(), "rule__MyMember__Group_2_6_1__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
 			builder.put(grammarAccess.getXAssignmentAccess().getGroup_1_1(), "rule__XAssignment__Group_1_1__0");
@@ -292,11 +292,12 @@ public class JvmGenericTypeValidatorTestLangParser extends AbstractContentAssist
 			builder.put(grammarAccess.getMyMemberAccess().getExpressionAssignment_0_5(), "rule__MyMember__ExpressionAssignment_0_5");
 			builder.put(grammarAccess.getMyMemberAccess().getTypeAssignment_1_1(), "rule__MyMember__TypeAssignment_1_1");
 			builder.put(grammarAccess.getMyMemberAccess().getNameAssignment_1_2(), "rule__MyMember__NameAssignment_1_2");
-			builder.put(grammarAccess.getMyMemberAccess().getTypeAssignment_2_2(), "rule__MyMember__TypeAssignment_2_2");
-			builder.put(grammarAccess.getMyMemberAccess().getNameAssignment_2_3(), "rule__MyMember__NameAssignment_2_3");
-			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_2_5_0(), "rule__MyMember__ParametersAssignment_2_5_0");
-			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_2_5_1_1(), "rule__MyMember__ParametersAssignment_2_5_1_1");
-			builder.put(grammarAccess.getMyMemberAccess().getExpressionAssignment_2_7(), "rule__MyMember__ExpressionAssignment_2_7");
+			builder.put(grammarAccess.getMyMemberAccess().getStaticAssignment_2_2(), "rule__MyMember__StaticAssignment_2_2");
+			builder.put(grammarAccess.getMyMemberAccess().getTypeAssignment_2_3(), "rule__MyMember__TypeAssignment_2_3");
+			builder.put(grammarAccess.getMyMemberAccess().getNameAssignment_2_4(), "rule__MyMember__NameAssignment_2_4");
+			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_2_6_0(), "rule__MyMember__ParametersAssignment_2_6_0");
+			builder.put(grammarAccess.getMyMemberAccess().getParametersAssignment_2_6_1_1(), "rule__MyMember__ParametersAssignment_2_6_1_1");
+			builder.put(grammarAccess.getMyMemberAccess().getExpressionAssignment_2_8(), "rule__MyMember__ExpressionAssignment_2_8");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 			builder.put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

@@ -400,9 +400,20 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
+  public EAttribute getMyMethod_Static()
+  {
+    return (EAttribute)myMethodEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getMyMethod_Type()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(0);
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -413,7 +424,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   @Override
   public EAttribute getMyMethod_Name()
   {
-    return (EAttribute)myMethodEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)myMethodEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -424,7 +435,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   @Override
   public EReference getMyMethod_Parameters()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(2);
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -435,7 +446,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   @Override
   public EReference getMyMethod_Expression()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(3);
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -497,6 +508,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     createEAttribute(myFieldEClass, MY_FIELD__NAME);
 
     myMethodEClass = createEClass(MY_METHOD);
+    createEAttribute(myMethodEClass, MY_METHOD__STATIC);
     createEReference(myMethodEClass, MY_METHOD__TYPE);
     createEAttribute(myMethodEClass, MY_METHOD__NAME);
     createEReference(myMethodEClass, MY_METHOD__PARAMETERS);
@@ -573,6 +585,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     initEAttribute(getMyField_Name(), ecorePackage.getEString(), "name", null, 0, 1, MyField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(myMethodEClass, MyMethod.class, "MyMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMyMethod_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyMethod_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMyMethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyMethod_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

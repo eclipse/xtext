@@ -280,6 +280,28 @@ public class JvmGenericTypeValidatorTest {
 				"erasure", "method", "List<String>");
 	}
 
+	@Test public void testOverrideStaticMethod() throws Exception {
+		var source = "class Foo extends testdata.Methods {  " +
+				"def void staticMethod() {}"+
+			"}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.indexOf("staticMethod"), "staticMethod".length(),
+				"The instance method", "Methods",
+				"cannot override the static method");
+	}
+
+	@Test public void testStaticMethodHidesInstanceMethod() throws Exception {
+		var source = "class Foo extends test.Methods {" +
+					"def static void method(int i) {}"+
+					"}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_METHOD,
+				source.indexOf("method"), "method".length(),
+				"The static method", "Methods",
+				"cannot hide the instance method");
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}

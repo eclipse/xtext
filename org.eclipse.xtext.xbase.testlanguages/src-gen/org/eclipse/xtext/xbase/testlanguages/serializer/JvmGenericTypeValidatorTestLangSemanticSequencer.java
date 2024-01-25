@@ -630,7 +630,13 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 *     MyMember returns MyMethod
 	 *
 	 * Constraint:
-	 *     (type=JvmTypeReference name=ValidID (parameters+=JvmFormalParameter parameters+=JvmFormalParameter*)? expression=XBlockExpression)
+	 *     (
+	 *         static?='static'? 
+	 *         type=JvmTypeReference 
+	 *         name=ValidID 
+	 *         (parameters+=JvmFormalParameter parameters+=JvmFormalParameter*)? 
+	 *         expression=XBlockExpression
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_MyMember(ISerializationContext context, MyMethod semanticObject) {

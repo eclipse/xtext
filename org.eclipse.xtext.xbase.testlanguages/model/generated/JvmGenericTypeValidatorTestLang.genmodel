@@ -35,6 +35,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JvmGenericTypeValidatorTestLang.ecore#//MyField/name"/>
     </genClasses>
     <genClasses ecoreClass="JvmGenericTypeValidatorTestLang.ecore#//MyMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JvmGenericTypeValidatorTestLang.ecore#//MyMethod/static"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyMethod/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JvmGenericTypeValidatorTestLang.ecore#//MyMethod/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyMethod/parameters"/>

@@ -75,6 +75,7 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			} else if (member instanceof MyMethod) {
 				MyMethod method = (MyMethod) member;
 				it.getMembers().add(jvmTypesBuilder.toMethod(method, method.getName(), method.getType(), meth -> {
+					meth.setStatic(method.isStatic());
 					jvmTypesBuilder.setBody(meth, method.getExpression());
 					for (var param : method.getParameters()) {
 						meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));

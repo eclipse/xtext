@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getParameters <em>Parameters</em>}</li>
@@ -49,6 +50,26 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  */
 public class MyMethodImpl extends MyMemberImpl implements MyMethod
 {
+  /**
+   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean STATIC_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected boolean static_ = STATIC_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -118,6 +139,31 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
   protected EClass eStaticClass()
   {
     return JvmGenericTypeValidatorTestLangPackage.Literals.MY_METHOD;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isStatic()
+  {
+    return static_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setStatic(boolean newStatic)
+  {
+    boolean oldStatic = static_;
+    static_ = newStatic;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC, oldStatic, static_));
   }
 
   /**
@@ -290,6 +336,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
+        return isStatic();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         return getType();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__NAME:
@@ -313,6 +361,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
+        setStatic((Boolean)newValue);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         setType((JvmTypeReference)newValue);
         return;
@@ -340,6 +391,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
+        setStatic(STATIC_EDEFAULT);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         setType((JvmTypeReference)null);
         return;
@@ -366,6 +420,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__STATIC:
+        return static_ != STATIC_EDEFAULT;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
         return type != null;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__NAME:
@@ -389,7 +445,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
+    result.append(" (static: ");
+    result.append(static_);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();
