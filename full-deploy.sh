@@ -44,9 +44,9 @@ done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
 
-echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
+echo ./mvnw -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 
-mvn -B \
+./mvnw -B \
   -f org.eclipse.xtext.full.releng \
   clean deploy \
   ${MVN_ARGS[@]} \

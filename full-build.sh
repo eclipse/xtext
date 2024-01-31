@@ -44,10 +44,10 @@ done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
 
-echo mvn -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
+echo ./mvnw -B -f org.eclipse.xtext.full.releng ${MVN_ARGS[@]} $@
 
 #echo "Using target platform '$TARGET_PLATFORM'"
-mvn -B \
+./mvnw -B \
   -f org.eclipse.xtext.full.releng \
   clean deploy \
   -DaltDeploymentRepository=local::default::file:./build/maven-repository \
