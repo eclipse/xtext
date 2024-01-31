@@ -25,7 +25,6 @@ pipeline {
   }
 
   tools {
-     maven "apache-maven-3.8.6"
      jdk "temurin-jdk17-latest"
   }
 
