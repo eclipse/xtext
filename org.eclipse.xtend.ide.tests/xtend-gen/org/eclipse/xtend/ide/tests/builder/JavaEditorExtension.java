@@ -134,13 +134,27 @@ public class JavaEditorExtension {
       };
       JavaCore.addElementChangedListener(_function, eventMask);
       producer.apply();
-      while ((!changed.get())) {
-        Display _current = Display.getCurrent();
-        boolean _tripleNotEquals = (_current != null);
-        if (_tripleNotEquals) {
-          while (Display.getDefault().readAndDispatch()) {
+      Display display = Display.getCurrent();
+      Assert.assertNotNull(display);
+      final AtomicBoolean stop = new AtomicBoolean();
+      final Runnable _function_1 = () -> {
+        stop.set(true);
+      };
+      display.timerExec(10000, _function_1);
+      while (((!changed.get()) && (!stop.get()))) {
+        boolean _readAndDispatch = display.readAndDispatch();
+        boolean _not = (!_readAndDispatch);
+        if (_not) {
+          if ((JavaEditorExtension.VERBOSE).booleanValue()) {
+            InputOutput.<String>println("Display sleep...");
           }
+          display.sleep();
         }
+      }
+      boolean _get = changed.get();
+      boolean _not = (!_get);
+      if (_not) {
+        throw new AssertionError("No event has been received");
       }
       String _xifexpression = null;
       if ((JavaEditorExtension.VERBOSE).booleanValue()) {

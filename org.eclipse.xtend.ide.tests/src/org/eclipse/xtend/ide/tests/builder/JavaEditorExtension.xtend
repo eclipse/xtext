@@ -99,13 +99,25 @@ class JavaEditorExtension {
 					}
 				}
 			], eventMask)
+
 		producer.apply
-		while (!changed.get) {
-			if (Display.getCurrent() !== null) {
-				while (Display.getDefault().readAndDispatch()) {
-					// process queued ui events
+
+		var display = Display.getCurrent()
+		assertNotNull(display)
+
+		val stop = new AtomicBoolean()
+		display.timerExec(10000, [stop.set(true)])
+
+		while (!changed.get && !stop.get) {
+			if (!display.readAndDispatch()) {
+				if (VERBOSE) {
+					println("Display sleep...")
 				}
+				display.sleep();
 			}
+		}
+		if (!changed.get) {
+			throw new AssertionError("No event has been received")
 		}
 		if (VERBOSE) {
 			println('''end waiting for an element changed event: «eventMask»''')
