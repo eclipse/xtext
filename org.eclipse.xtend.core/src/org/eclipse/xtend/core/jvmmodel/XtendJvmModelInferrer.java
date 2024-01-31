@@ -65,6 +65,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.JvmTypeReferenceUtil;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
@@ -391,10 +392,14 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			if (typeRefToObject != null)
 				inferredJvmType.getSuperTypes().add(typeRefToObject);
 		} else {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(extendsClause));
+			JvmTypeReference superClass = jvmTypesBuilder.cloneWithProxies(extendsClause);
+			JvmTypeReferenceUtil.setExpectedAsClass(superClass);
+			inferredJvmType.getSuperTypes().add(superClass);
 		}
 		for (JvmTypeReference intf : source.getImplements()) {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
+			JvmTypeReference superInterface = jvmTypesBuilder.cloneWithProxies(intf);
+			JvmTypeReferenceUtil.setExpectedAsInterface(superInterface);
+			inferredJvmType.getSuperTypes().add(superInterface);
 		}
 		fixTypeParameters(inferredJvmType);
 		addDefaultConstructor(source, inferredJvmType);
@@ -419,7 +424,9 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
+			JvmTypeReference superInterface = jvmTypesBuilder.cloneWithProxies(intf);
+			JvmTypeReferenceUtil.setExpectedAsInterface(superInterface);
+			inferredJvmType.getSuperTypes().add(superInterface);
 		}
 		fixTypeParameters(inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
