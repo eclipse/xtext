@@ -47,9 +47,9 @@ done
 MVN_ARGS+=(-PuseJenkinsSnapshots)
 # MVN_ARGS+=(-Pjavadoc)
 
-echo mvn -B -f org.eclipse.xtext.maven.releng ${MVN_ARGS[@]} $@
+echo ./mvnw -B -f org.eclipse.xtext.maven.releng ${MVN_ARGS[@]} $@
 
-mvn -B \
+./mvnw -B \
   -f org.eclipse.xtext.maven.releng \
   clean deploy \
   -DaltDeploymentRepository=local::default::file:./build/maven-repository \

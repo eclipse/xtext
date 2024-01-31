@@ -1,6 +1,6 @@
 # THIS SIGNS, SKIPPING TESTS
 
-mvn \
+./mvnw \
   -f org.eclipse.xtext.p2.releng \
   package \
   -P useJenkinsSnapshots \

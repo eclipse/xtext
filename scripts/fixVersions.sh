@@ -33,7 +33,7 @@ deriveToVersion()
 #ToDo: not used right now
 deriveFromVersion()
 {
-  MVNVersion=$(mvn -f ./releng/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+  MVNVersion=$(./mvnw -f ./releng/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
   echo "# MVN version from pom $MVNVersion"
   from_version=`echo $MVNVersion | sed -e 's/[^0-9][^0-9]*$//'`
   echo "# Derived from_version from MVN version $from_version"
