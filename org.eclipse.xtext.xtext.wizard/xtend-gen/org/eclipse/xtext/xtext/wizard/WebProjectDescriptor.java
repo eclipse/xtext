@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,7 +25,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
 
   private static final String JQUERY_VERSION = "3.6.0";
 
-  private static final String JETTY_VERSION = "11.0.18";
+  private static final String JETTY_VERSION = "11.0.20";
 
   private static final String SLF4J_VERSION = "2.0.5";
 
