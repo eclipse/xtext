@@ -9,6 +9,7 @@
 package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -17,9 +18,17 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 public class JvmTypeReferenceUtil {
 
 	private static class ExpectedClassMarker extends AdapterImpl {
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type == ExpectedClassMarker.class;
+		}
 	}
 
 	private static class ExpectedInterfaceMarker extends AdapterImpl {
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type == ExpectedInterfaceMarker.class;
+		}
 	}
 
 	private JvmTypeReferenceUtil() {
@@ -31,7 +40,7 @@ public class JvmTypeReferenceUtil {
 	}
 
 	public static boolean isExpectedAsClass(JvmTypeReference typeReference) {
-		return typeReference.eAdapters().stream().anyMatch(ExpectedClassMarker.class::isInstance);
+		return EcoreUtil.getAdapter(typeReference.eAdapters(), ExpectedClassMarker.class) != null;
 	}
 
 	public static void setExpectedAsInterface(JvmTypeReference typeReference) {
@@ -39,6 +48,6 @@ public class JvmTypeReferenceUtil {
 	}
 
 	public static boolean isExpectedAsInterface(JvmTypeReference typeReference) {
-		return typeReference.eAdapters().stream().anyMatch(ExpectedInterfaceMarker.class::isInstance);
+		return EcoreUtil.getAdapter(typeReference.eAdapters(), ExpectedInterfaceMarker.class) != null;
 	}
 }
