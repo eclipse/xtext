@@ -31,12 +31,15 @@ public class JvmTypeReferenceUtil {
 		}
 	}
 
+	private static final ExpectedClassMarker EXPECTED_CLASS_MARKER = new ExpectedClassMarker();
+	private static final ExpectedInterfaceMarker EXPECTED_INTERFACE_MARKER = new ExpectedInterfaceMarker();
+
 	private JvmTypeReferenceUtil() {
 		// only static methods
 	}
 
 	public static void setExpectedAsClass(JvmTypeReference typeReference) {
-		typeReference.eAdapters().add(new ExpectedClassMarker());
+		typeReference.eAdapters().add(EXPECTED_CLASS_MARKER);
 	}
 
 	public static boolean isExpectedAsClass(JvmTypeReference typeReference) {
@@ -44,7 +47,7 @@ public class JvmTypeReferenceUtil {
 	}
 
 	public static void setExpectedAsInterface(JvmTypeReference typeReference) {
-		typeReference.eAdapters().add(new ExpectedInterfaceMarker());
+		typeReference.eAdapters().add(EXPECTED_INTERFACE_MARKER);
 	}
 
 	public static boolean isExpectedAsInterface(JvmTypeReference typeReference) {

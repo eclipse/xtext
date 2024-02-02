@@ -21,20 +21,30 @@ public class JvmTypeReferenceUtilTest {
 
 	@Test
 	public void testExpectedAsClass() {
-		var typeReference = createTypeReference();
-		assertFalse(JvmTypeReferenceUtil.isExpectedAsClass(typeReference));
-		JvmTypeReferenceUtil.setExpectedAsClass(typeReference);
-		assertTrue(JvmTypeReferenceUtil.isExpectedAsClass(typeReference));
-		assertFalse(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference));
+		var typeReference1 = createTypeReference();
+		var typeReference2 = createTypeReference();
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsClass(typeReference1));
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsClass(typeReference2));
+		JvmTypeReferenceUtil.setExpectedAsClass(typeReference1);
+		JvmTypeReferenceUtil.setExpectedAsClass(typeReference2);
+		assertTrue(JvmTypeReferenceUtil.isExpectedAsClass(typeReference1));
+		assertTrue(JvmTypeReferenceUtil.isExpectedAsClass(typeReference2));
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference1));
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference2));
 	}
 
 	@Test
 	public void testExpectedAsInterface() {
-		var typeReference = createTypeReference();
-		assertFalse(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference));
-		JvmTypeReferenceUtil.setExpectedAsInterface(typeReference);
-		assertTrue(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference));
-		assertFalse(JvmTypeReferenceUtil.isExpectedAsClass(typeReference));
+		var typeReference1 = createTypeReference();
+		var typeReference2 = createTypeReference();
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference1));
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference2));
+		JvmTypeReferenceUtil.setExpectedAsInterface(typeReference1);
+		JvmTypeReferenceUtil.setExpectedAsInterface(typeReference2);
+		assertTrue(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference1));
+		assertTrue(JvmTypeReferenceUtil.isExpectedAsInterface(typeReference2));
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsClass(typeReference1));
+		assertFalse(JvmTypeReferenceUtil.isExpectedAsClass(typeReference2));
 	}
 
 	private JvmParameterizedTypeReference createTypeReference() {
