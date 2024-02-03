@@ -8,15 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.tests.internal;
 
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageRuntimeModule;
 import org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageUiModule;
-import org.eclipse.xtext.ui.shared.JdtHelper;
-import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
-import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
 /**
@@ -48,24 +51,35 @@ public class TestsActivatorCustom extends TestsActivator {
 		if (ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE_GH2920.equals(grammar))
 			return new BuilderTestLanguageUiModule(this) {
 				/**
-				 * By default, the {@link IJdtHelper} is bound by the {@link org.eclipse.xtext.ui.shared.SharedStateModule}, but since the
-				 * UI module is mixed as the last one in {@link TestsActivator}, we can "override" its binding here.
+				 * {@link IResourceUIServiceProvider} specifies its default implementation to be {@link org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider}
+				 * with no explicit binding in any module, so we can customize the binding here.
 				 */
 				@SuppressWarnings("unused")
-				public Provider<IJdtHelper> provideJdtHelper() {
-					return new Provider<>() {
-						@Override
-						public IJdtHelper get() {
-							return new JdtHelper() {
-								@Override
-								protected boolean computeJavaCoreAvailable() {
-									return false;
-								}
-							};
-						}
-					};
+				public Class<? extends IResourceUIServiceProvider> bindIResourceUIServiceProvider() {
+					return ResourceNonUIServiceProvider.class;
 				}
 			};
 		return super.getUiModule(grammar);
+	}
+	/** A provider that essentially mimics the behavior of {@link DefaultResourceServiceProvider} in the guise of a {@link IResourceUIServiceProvider}. */
+	static class ResourceNonUIServiceProvider extends DefaultResourceServiceProvider implements IResourceUIServiceProvider {
+		@Override
+		public ILabelProvider getLabelProvider() {
+			return null;
+		}
+		@Override
+		public boolean canHandle(URI uri, IStorage storage) {
+			// if we wouldn't implement IResourceUIServiceProvider then this method would be invoked in the first place:
+			return canHandle(uri);
+		}
+		@Override
+		public IURIEditorOpener getURIEditorOpener() {
+			return null;
+		}
+		@SuppressWarnings({ "deprecation", "restriction" })
+		@Override
+		public org.eclipse.xtext.ui.refactoring.IReferenceUpdater getReferenceUpdater() {
+			return null;
+		}
 	}
 }
