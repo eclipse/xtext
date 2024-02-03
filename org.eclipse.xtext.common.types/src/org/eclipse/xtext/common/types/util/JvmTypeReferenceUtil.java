@@ -8,31 +8,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * @author Lorenzo Bettini - Initial contribution and API
  */
 public class JvmTypeReferenceUtil {
+	private static class Marker implements Adapter {
+		@Override
+		public Notifier getTarget() {
+			return null;
+		}
 
-	private static class ExpectedClassMarker extends AdapterImpl {
 		@Override
 		public boolean isAdapterForType(Object type) {
-			return type == ExpectedClassMarker.class;
+			return false;
 		}
-	}
 
-	private static class ExpectedInterfaceMarker extends AdapterImpl {
 		@Override
-		public boolean isAdapterForType(Object type) {
-			return type == ExpectedInterfaceMarker.class;
+		public void notifyChanged(Notification notification) {
 		}
-	}
 
-	private static final ExpectedClassMarker EXPECTED_CLASS_MARKER = new ExpectedClassMarker();
-	private static final ExpectedInterfaceMarker EXPECTED_INTERFACE_MARKER = new ExpectedInterfaceMarker();
+		@Override
+		public void setTarget(Notifier newTarget) {
+		}
+	};
+
+	private static final Marker EXPECTED_CLASS_MARKER = new Marker();
+	private static final Marker EXPECTED_INTERFACE_MARKER = new Marker();
 
 	private JvmTypeReferenceUtil() {
 		// only static methods
@@ -43,7 +49,7 @@ public class JvmTypeReferenceUtil {
 	}
 
 	public static boolean isExpectedAsClass(JvmTypeReference typeReference) {
-		return EcoreUtil.getAdapter(typeReference.eAdapters(), ExpectedClassMarker.class) != null;
+		return typeReference.eAdapters().contains(EXPECTED_CLASS_MARKER);
 	}
 
 	public static void setExpectedAsInterface(JvmTypeReference typeReference) {
@@ -51,6 +57,6 @@ public class JvmTypeReferenceUtil {
 	}
 
 	public static boolean isExpectedAsInterface(JvmTypeReference typeReference) {
-		return EcoreUtil.getAdapter(typeReference.eAdapters(), ExpectedInterfaceMarker.class) != null;
+		return typeReference.eAdapters().contains(EXPECTED_INTERFACE_MARKER);
 	}
 }
