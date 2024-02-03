@@ -1463,11 +1463,15 @@ public class JvmTypesBuilder {
 	 * {@link JvmTypeReferenceUtil#setExpectedAsClass(JvmTypeReference)}.
 	 * 
 	 * @param inferredJvmType the type to set the super class to.
-	 * @param superType the type reference representing the super class.
+	 * @param superType the type reference representing the super class. If
+	 * null, no operation is performed.
 	 * @since 2.34
 	 */
 	public void setSuperClass(JvmDeclaredType inferredJvmType, JvmTypeReference superType) {
-		JvmTypeReferenceUtil.setExpectedAsClass(internalCloneAndAddToSuperTypes(inferredJvmType, superType));
+		JvmTypeReference cloned = internalCloneAndAddToSuperTypes(inferredJvmType, superType);
+		if (cloned == null)
+			return;
+		JvmTypeReferenceUtil.setExpectedAsClass(cloned);
 	}
 
 	/**
@@ -1478,17 +1482,21 @@ public class JvmTypesBuilder {
 	 * {@link JvmTypeReferenceUtil#setExpectedAsInterface(JvmTypeReference)}.
 	 * 
 	 * @param inferredJvmType the type to add the super interface to.
-	 * @param superType the type reference representing the super interface.
+	 * @param superType the type reference representing the super interface. If
+	 * null, no operation is performed.
 	 * @since 2.34
 	 */
 	public void addSuperInterface(JvmDeclaredType inferredJvmType, JvmTypeReference superType) {
-		JvmTypeReferenceUtil.setExpectedAsInterface(internalCloneAndAddToSuperTypes(inferredJvmType, superType));
+		JvmTypeReference cloned = internalCloneAndAddToSuperTypes(inferredJvmType, superType);
+		if (cloned == null)
+			return;
+		JvmTypeReferenceUtil.setExpectedAsInterface(cloned);
 	}
 
 	private JvmTypeReference internalCloneAndAddToSuperTypes(JvmDeclaredType inferredJvmType, JvmTypeReference superType) {
 		JvmTypeReference cloned = cloneWithProxies(superType);
 		if (cloned == null)
-			throw new IllegalArgumentException("type reference cannot be null");
+			return null;
 		inferredJvmType.getSuperTypes().add(cloned);
 		return cloned;
 	}
