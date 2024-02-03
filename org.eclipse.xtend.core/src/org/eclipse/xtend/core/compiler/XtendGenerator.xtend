@@ -330,9 +330,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			}
 			if (declaringType.local && it instanceof JvmOperation) {
 				val declarator = declaringType as JvmGenericType
-				if (!declarator.anonymous ||
-					!compilerHelper.canCompileToJavaAnonymousClass(declarator)
-				) {
+				if (!compilerHelper.canCompileToJavaAnonymousClass(declarator)) {
 					return result
 				}
 			}

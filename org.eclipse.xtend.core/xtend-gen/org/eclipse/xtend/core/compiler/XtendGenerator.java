@@ -481,8 +481,9 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         if ((it.getDeclaringType().isLocal() && (it instanceof JvmOperation))) {
           JvmDeclaredType _declaringType_1 = it.getDeclaringType();
           final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
-          if (((!declarator.isAnonymous()) || 
-            (!this.compilerHelper.canCompileToJavaAnonymousClass(declarator)))) {
+          boolean _canCompileToJavaAnonymousClass = this.compilerHelper.canCompileToJavaAnonymousClass(declarator);
+          boolean _not = (!_canCompileToJavaAnonymousClass);
+          if (_not) {
             return result;
           }
         }
