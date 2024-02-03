@@ -8,6 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -21,17 +27,18 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-
 import com.google.inject.Inject;
 
 /**
  * @author sherrmann - Initial contribution and API
+ * @author Lorenzo Bettini - make it appropriate for reproducing https://github.com/eclipse/xtext/issues/2920
  */
 public class GH2920Test extends AbstractParticipatingBuilderTest {
 	private IJavaProject javaProject;
-	
+
 	@Inject private IResourceDescriptionsProvider descriptionsProvider;
+
+	private List<String> descriptionsInOutputFolder = new ArrayList<>();
 
 	@Before
 	public void createProjectUnderTest() throws Exception {
@@ -43,7 +50,12 @@ public class GH2920Test extends AbstractParticipatingBuilderTest {
 	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		IResourceDescriptions resourceDescriptions = descriptionsProvider.getResourceDescriptions(context.getResourceSet());
-		resourceDescriptions.getAllResourceDescriptions().forEach(rd -> assertFalse(rd.getURI().toString().contains("bin")));
+		resourceDescriptions.getAllResourceDescriptions().forEach(
+			rd -> {
+				String uriString = rd.getURI().toString();
+				if (uriString.contains("bin"))
+					descriptionsInOutputFolder.add(uriString);
+			});
 		super.build(context, monitor);
 	}
 
@@ -54,14 +66,21 @@ public class GH2920Test extends AbstractParticipatingBuilderTest {
 		build();
 		startLogging();
 		createSomeBuilderRelatedFile(project, "Bar");
+		checkNoUrisInOutputFolder();
 	}
 
 	private IFile createSomeBuilderRelatedFile(IProject project, String name) throws CoreException {
 		IFolder folder = project.getProject().getFolder("src");
-		IFile file = folder.getFile(name + F_EXT);
+		IFile file = folder.getFile(name + F_EXT + "GH2920");
 		file.create(new StringInputStream("object "+name), true, monitor());
 		build();
 		return file;
 	}
-}
 
+	private void checkNoUrisInOutputFolder() {
+		if (!descriptionsInOutputFolder.isEmpty())
+			fail("unexpected resources in output folder:\n" +
+				descriptionsInOutputFolder.stream()
+					.collect(Collectors.joining("\n", "  ", "")));
+	}
+}
