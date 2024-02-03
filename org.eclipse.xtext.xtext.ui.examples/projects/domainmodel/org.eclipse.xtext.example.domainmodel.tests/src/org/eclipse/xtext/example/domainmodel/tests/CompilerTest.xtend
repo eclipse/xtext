@@ -68,6 +68,29 @@ class CompilerTest {
 		]
 	}
 
+	@Test def void testGeneratedJavaInheritedMethod() throws Exception {
+		#[
+		'''
+			entity Foo extends Bar {
+				// getName and setName inherited from Bar
+				op doStuff(String x) : String {
+					return x + ' ' + getName()
+				}
+			}
+		''',
+		'''
+			entity Bar {
+				name : String
+			}
+		'''
+		].compile [
+			val fooObj = it.getCompiledClass("Foo").getDeclaredConstructor().newInstance
+			fooObj.invoke('setName', 'World')
+			assertEquals("Hello World", fooObj.invoke('doStuff','Hello'))
+		]
+	}
+
+
 	@Test def void compareGeneratedJava() throws Exception {
 		'''
 			entity Foo {
