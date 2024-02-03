@@ -62,7 +62,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	@Inject OperationCanceledManager operationCanceledManager
 
 	@Inject ElementIssueProvider.Factory issueProviderFactory
-	@Inject XtendCompilerHelper compilerHelper
+	@Inject AnonymousClassCompilerHelper compilerHelper
 
 	override doGenerate(Resource input, IFileSystemAccess fsa) {
 		super.doGenerate(input, fsa)

@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 /**
  * @author Lorenzo Bettini - Initial contribution and API
  */
-public class XtendCompilerHelper {
+public class AnonymousClassCompilerHelper {
 
 	@Inject
 	private IResourceScopeCache cache;

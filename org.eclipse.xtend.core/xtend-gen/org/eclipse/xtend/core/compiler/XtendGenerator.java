@@ -98,7 +98,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   private ElementIssueProvider.Factory issueProviderFactory;
 
   @Inject
-  private XtendCompilerHelper compilerHelper;
+  private AnonymousClassCompilerHelper compilerHelper;
 
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {

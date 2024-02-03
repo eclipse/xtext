@@ -83,7 +83,7 @@ public class XtendCompiler extends XbaseCompiler {
 	private IGeneratorConfigProvider generatorConfigProvider;
 	
 	@Inject
-	private XtendCompilerHelper compilerHelper;
+	private AnonymousClassCompilerHelper compilerHelper;
 	
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {

@@ -11,7 +11,7 @@ package org.eclipse.xtend.core.compiler.output;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.compiler.XtendCompilerHelper;
+import org.eclipse.xtend.core.compiler.AnonymousClassCompilerHelper;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -33,16 +33,16 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
  */
 public class AnonymousClassAwareTreeAppendable extends TreeAppendable {
 
-	private XtendCompilerHelper compilerHelper;
+	private AnonymousClassCompilerHelper compilerHelper;
 
-	public AnonymousClassAwareTreeAppendable(XtendCompilerHelper compilerHelper, ImportManager importManager, ITraceURIConverter converter,
+	public AnonymousClassAwareTreeAppendable(AnonymousClassCompilerHelper compilerHelper, ImportManager importManager, ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source, String indentation,
 			String lineSeparator) {
 		super(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
 		this.compilerHelper = compilerHelper;
 	}
 
-	protected AnonymousClassAwareTreeAppendable(XtendCompilerHelper compilerHelper, SharedAppendableState state, ITraceURIConverter converter,
+	protected AnonymousClassAwareTreeAppendable(AnonymousClassCompilerHelper compilerHelper, SharedAppendableState state, ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, Set<ILocationData> sourceLocations,
 			boolean useForDebugging) {
 		super(state, converter, locationProvider, jvmModelAssociations, sourceLocations, useForDebugging);
