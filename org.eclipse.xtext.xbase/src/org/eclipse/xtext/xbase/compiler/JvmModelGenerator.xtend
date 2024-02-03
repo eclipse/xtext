@@ -1010,7 +1010,7 @@ class JvmModelGenerator implements IGenerator {
 	/**
 	 * @since 2.34
 	 */
-	def TreeAppendable createAppendable(ImportManager importManager, ITraceURIConverter converter,
+	def protected TreeAppendable createAppendable(ImportManager importManager, ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations,
 			EObject source, String indentation, String lineSeparator) {
 		return new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
