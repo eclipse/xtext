@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -111,7 +112,11 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 		if (object instanceof INodeReference) {
 			return ((INodeReference) object).getNode();
 		}
-		return (ICompositeNode) EcoreUtil.getExistingAdapter(object, ICompositeNode.class);
+		Adapter adapter = EcoreUtil.getExistingAdapter(object, ICompositeNode.class);
+		if (adapter instanceof INodeReference) {
+			return ((INodeReference) adapter).getNode();
+		}
+		return (ICompositeNode) adapter;
 	}
 
 	/**

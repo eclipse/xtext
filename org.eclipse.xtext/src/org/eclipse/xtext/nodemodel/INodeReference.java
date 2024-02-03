@@ -8,17 +8,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
  * An EMF object might store the node model information differently from the default adapter
  * based approach. If it implements {@link INodeReference}, it will be queried by 
- * {@link NodeModelUtils#getNode(org.eclipse.emf.ecore.EObject)}.   
+ * {@link NodeModelUtils#getNode(org.eclipse.emf.ecore.EObject)}.
  * 
- * @since 2.34
+ * Alternatively, the {@link EObject} might contain an adapter for the {@link ICompositeNode ICompositeNode.class}
+ * which also implements {@link INodeReference}. This is mostly meant as a compatiblity mode
+ * for existing EMF packages that cannot be altered in a way that the EObject itself fulfills this
+ * interface.
  * 
  * @see NodeModelBuilder#associateWithSemanticElement(ICompositeNode, org.eclipse.emf.ecore.EObject)
+ * @see NodeModelUtils#getNode(org.eclipse.emf.ecore.EObject)
+ * 
+ * @since 2.34
  */
 public interface INodeReference {
 
