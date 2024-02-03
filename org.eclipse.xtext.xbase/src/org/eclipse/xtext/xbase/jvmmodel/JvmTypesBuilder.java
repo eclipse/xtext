@@ -47,6 +47,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.AnnotationLookup;
+import org.eclipse.xtext.common.types.util.JvmTypeReferenceUtil;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -81,7 +82,7 @@ import com.google.inject.Inject;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
- * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=468641
+ * @author Lorenzo Bettini
  * 
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
@@ -1453,5 +1454,42 @@ public class JvmTypesBuilder {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Clones the passed superType {@link JvmTypeReference} (see
+	 * {@link #cloneWithProxies(JvmTypeReference)}) and adds it to the
+	 * superTypes of the passed inferredJvmType after marking that as an
+	 * expected class (see
+	 * {@link JvmTypeReferenceUtil#setExpectedAsClass(JvmTypeReference)}.
+	 * 
+	 * @param inferredJvmType the type to set the super class to.
+	 * @param superType the type reference representing the super class.
+	 * @since 2.34
+	 */
+	public void setSuperClass(JvmDeclaredType inferredJvmType, JvmTypeReference superType) {
+		JvmTypeReferenceUtil.setExpectedAsClass(internalCloneAndAddToSuperTypes(inferredJvmType, superType));
+	}
+
+	/**
+	 * Clones the passed superType {@link JvmTypeReference} (see
+	 * {@link #cloneWithProxies(JvmTypeReference)}) and adds it to the
+	 * superTypes of the passed inferredJvmType after marking that as an
+	 * expected interface (see
+	 * {@link JvmTypeReferenceUtil#setExpectedAsInterface(JvmTypeReference)}.
+	 * 
+	 * @param inferredJvmType the type to add the super interface to.
+	 * @param superType the type reference representing the super interface.
+	 * @since 2.34
+	 */
+	public void addSuperInterface(JvmDeclaredType inferredJvmType, JvmTypeReference superType) {
+		JvmTypeReferenceUtil.setExpectedAsInterface(internalCloneAndAddToSuperTypes(inferredJvmType, superType));
+	}
+
+	private JvmTypeReference internalCloneAndAddToSuperTypes(JvmDeclaredType inferredJvmType, JvmTypeReference superType) {
+		JvmTypeReference cloned = cloneWithProxies(superType);
+		if (cloned == null)
+			throw new IllegalArgumentException("type reference cannot be null");
+		inferredJvmType.getSuperTypes().add(cloned);
+		return cloned;
+	}
 }

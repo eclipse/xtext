@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
+import java.util.AbstractList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -25,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.JvmTypeReferenceUtil;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -166,13 +169,31 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	public void testInterfaceCreation() throws Exception {
 		XExpression e = expression("'foo'");
-		JvmGenericType anno = jvmTypesBuilder.toInterface(e, "foo.bar.MyAnnotation", (JvmGenericType it) -> {
-			jvmTypesBuilder.operator_add(it.getSuperTypes(), jvmTypeReferenceBuilder.typeRef(Iterable.class));
+		JvmGenericType interf = jvmTypesBuilder.toInterface(e, "foo.bar.MyInterface", (JvmGenericType it) -> {
+			jvmTypesBuilder.addSuperInterface(it, jvmTypeReferenceBuilder.typeRef(Iterable.class));
+			jvmTypesBuilder.addSuperInterface(it, jvmTypeReferenceBuilder.typeRef(Collection.class));
 		});
-		Assert.assertTrue(anno.isInterface());
-		Assert.assertEquals("foo.bar", anno.getPackageName());
-		Assert.assertEquals("MyAnnotation", anno.getSimpleName());
-		Assert.assertEquals(1, anno.getSuperTypes().size());
+		Assert.assertTrue(interf.isInterface());
+		Assert.assertEquals("foo.bar", interf.getPackageName());
+		Assert.assertEquals("MyInterface", interf.getSimpleName());
+		var superTypes = interf.getSuperTypes();
+		Assert.assertEquals(2, superTypes.size());
+		Assert.assertTrue(JvmTypeReferenceUtil.isExpectedAsInterface(superTypes.get(0)));
+		Assert.assertTrue(JvmTypeReferenceUtil.isExpectedAsInterface(superTypes.get(1)));
+	}
+
+	@Test
+	public void testClassCreation() throws Exception {
+		XExpression e = expression("'foo'");
+		JvmGenericType interf = jvmTypesBuilder.toClass(e, "foo.bar.MyClass", (JvmGenericType it) -> {
+			jvmTypesBuilder.setSuperClass(it, jvmTypeReferenceBuilder.typeRef(AbstractList.class));
+		});
+		Assert.assertFalse(interf.isInterface());
+		Assert.assertEquals("foo.bar", interf.getPackageName());
+		Assert.assertEquals("MyClass", interf.getSimpleName());
+		var superTypes = interf.getSuperTypes();
+		Assert.assertEquals(1, superTypes.size());
+		Assert.assertTrue(JvmTypeReferenceUtil.isExpectedAsClass(superTypes.get(0)));
 	}
 
 	@Test
