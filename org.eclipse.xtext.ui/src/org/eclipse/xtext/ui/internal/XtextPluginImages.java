@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  * PDEPluginImages.
  * 
  * @author Peter Friese - Initial contribution and API
- * @author Dennis Hübner
+ * @author Dennis HÃ¼bner
  * 
  */
 public class XtextPluginImages {
@@ -199,6 +199,7 @@ public class XtextPluginImages {
 	}
 
 	public static Image manage(String key, ImageDescriptor desc) {
+		ensureInitialized();
 		if (PLUGIN_REGISTRY == null)
 			return null;
 		Image image = desc.createImage();
