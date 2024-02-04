@@ -135,6 +135,8 @@ public class XtextPluginImages {
 
 	public static Image get(String key) {
 		ensureInitialized();
+		if (PLUGIN_REGISTRY == null)
+			return null;
 		return PLUGIN_REGISTRY.get(key);
 	}
 
@@ -197,6 +199,8 @@ public class XtextPluginImages {
 	}
 
 	public static Image manage(String key, ImageDescriptor desc) {
+		if (PLUGIN_REGISTRY == null)
+			return null;
 		Image image = desc.createImage();
 		PLUGIN_REGISTRY.put(key, image);
 		return image;
