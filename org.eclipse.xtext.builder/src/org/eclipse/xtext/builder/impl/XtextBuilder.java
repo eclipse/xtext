@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
@@ -588,6 +589,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
 						return toBeBuiltComputer.updateStorage(null, toBeBuilt, (IStorage) delta.getResource());
 					}
+				} else if (delta.getResource() instanceof IFolder) {
+					return toBeBuiltComputer.isHandled((IFolder) delta.getResource());
 				}
 				return true;
 			}

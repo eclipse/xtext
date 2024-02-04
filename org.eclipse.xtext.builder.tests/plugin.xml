@@ -132,14 +132,31 @@
 			type="buildertestlanguage">
 		</parser>
 	</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactoryGH2920:org.eclipse.xtext.resource.IResourceFactory"
+			type="buildertestlanguageGH2920">
+		</parser>
+	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
 			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
 			uriExtension="buildertestlanguage">
 		</resourceServiceProvider>
 	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactoryGH2920:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="buildertestlanguageGH2920">
+		</resourceServiceProvider>
+	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"/>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactoryGH2920:org.eclipse.xtext.builder.IXtextBuilderParticipant"/>
 	</extension>
 </plugin>
