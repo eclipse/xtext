@@ -354,6 +354,42 @@ public class JvmGenericTypeValidatorTest {
 				"does not override it");
 	}
 
+	@Test public void testDuplicateParameter() throws Exception {
+		var source = "class Foo { def void foo(int x, int x) {} }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_PARAMETER_NAME,
+				source.indexOf("int x"), "int x".length(),
+				"duplicate", "x");
+		validationHelper.assertError(model, MY_METHOD, DUPLICATE_PARAMETER_NAME,
+				source.lastIndexOf("int x"), "int x".length(),
+				"duplicate", "x");
+	}
+
+	@Test public void testDuplicateConstructorParameter() throws Exception {
+		var source = "class Foo { constructor(int x, int x) {null} }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME,
+				source.indexOf("int x"), "int x".length(),
+				"duplicate", "x");
+		validationHelper.assertError(model, MY_CONSTRUCTOR, DUPLICATE_PARAMETER_NAME,
+				source.lastIndexOf("int x"), "int x".length(),
+				"duplicate", "x");
+	}
+
+	@Test public void testInvalidVoidInMethodParameterType() throws Exception {
+		var source = "class X { def void m(void v) {} }";
+		var model = parse(source);
+		validationHelper.assertError(model, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE,
+				source.lastIndexOf("void"), "void".length());
+	}
+
+	@Test public void testInvalidVoidInConstructorParameterType() throws Exception {
+		var source = "class X { constructor(void v) {} }";
+		var model = parse(source);
+		validationHelper.assertError(model, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE,
+				source.indexOf("void"), "void".length());
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}
