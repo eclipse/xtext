@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
@@ -64,13 +63,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   protected void _infer(final Entity entity, @Extension final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
       this._jvmTypesBuilder.setDocumentation(it, this._jvmTypesBuilder.getDocumentation(entity));
-      JvmParameterizedTypeReference _superType = entity.getSuperType();
-      boolean _tripleNotEquals = (_superType != null);
-      if (_tripleNotEquals) {
-        EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-        JvmTypeReference _cloneWithProxies = this._jvmTypesBuilder.cloneWithProxies(entity.getSuperType());
-        this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
-      }
+      this._jvmTypesBuilder.setSuperClass(it, entity.getSuperType());
       EList<JvmMember> _members = it.getMembers();
       final Procedure1<JvmConstructor> _function_1 = (JvmConstructor it_1) -> {
       };

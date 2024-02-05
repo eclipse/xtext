@@ -391,10 +391,10 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			if (typeRefToObject != null)
 				inferredJvmType.getSuperTypes().add(typeRefToObject);
 		} else {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(extendsClause));
+			jvmTypesBuilder.setSuperClass(inferredJvmType, extendsClause);
 		}
 		for (JvmTypeReference intf : source.getImplements()) {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
+			jvmTypesBuilder.addSuperInterface(inferredJvmType, intf);
 		}
 		fixTypeParameters(inferredJvmType);
 		addDefaultConstructor(source, inferredJvmType);
@@ -419,7 +419,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
+			jvmTypesBuilder.addSuperInterface(inferredJvmType, intf);
 		}
 		fixTypeParameters(inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
