@@ -189,7 +189,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				JvmTypeReference extendedType = superTypes.get(i);
 				var associated = associations.getPrimarySourceElement(extendedType);
 				var eContainingFeature = associated.eContainingFeature();
-				if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
+				if (!isInterface(extendedType) && !isAnnotation(extendedType)) {
 					error("Extended interface must be an interface",
 						sourceType,
 						eContainingFeature, i, INTERFACE_EXPECTED);
@@ -516,12 +516,20 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		return false;
 	}
 
+	protected boolean isInterface(JvmTypeReference typeRef) {
+		return isInterface(typeRef.getType());
+	}
+
 	protected boolean isInterface(JvmType type) {
 		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
 	}
 
-	protected boolean isAnnotation(JvmType jvmType) {
-		return jvmType instanceof JvmAnnotationType;
+	protected boolean isAnnotation(JvmTypeReference typeRef) {
+		return isAnnotation(typeRef.getType());
+	}
+
+	protected boolean isAnnotation(JvmType type) {
+		return type instanceof JvmAnnotationType;
 	}
 
 	protected void checkWildcardSupertype(EObject sourceElement,
