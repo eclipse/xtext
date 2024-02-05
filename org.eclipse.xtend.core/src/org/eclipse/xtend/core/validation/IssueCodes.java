@@ -97,4 +97,9 @@ public final class IssueCodes {
 	 * @since 2.18
 	 */
 	public static final String TERNARY_EXPRESSION_NOT_ALLOWED = ISSUE_CODE_PREFIX + "ternary_if_operator_is_not_allowed";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_INTERFACE = ISSUE_CODE_PREFIX + "duplicate_interface";
+
 }
