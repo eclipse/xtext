@@ -224,6 +224,15 @@ public class JvmGenericTypeValidatorTest {
 				"override", "final");
 	}
 
+	@Test
+	public void testWildcardSuperType() throws Exception {
+		var source = "class Foo extends Bar<?>{}"
+		+ "class Bar<T> {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, WILDCARD_IN_SUPERTYPE,
+				source.indexOf("Bar<?>"), "Bar<?>".length());
+	}
+
 	@Test public void testConstructorDuplicate() throws Exception {
 		var source = "class K { constructor (Object o) {} constructor (Object o) {} }";
 		var model = parse(source);
