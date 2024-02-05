@@ -2350,13 +2350,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test
 	public void testWildcardSuperType_0() throws Exception {
-		XtendFile file = file(
-				"class Foo extends Bar<?>{" 
-				+ "}"
-				+ ""
-				+ "class Bar<T> {"
-				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), XTEND_CLASS, WILDCARD_IN_SUPERTYPE);
+		var source = "class Foo extends Bar<?>{" 
+		+ "}"
+		+ ""
+		+ "class Bar<T> {"
+		+ "}";
+		XtendFile file = file(source);
+		helper.assertError(file.getXtendTypes().get(0), XTEND_CLASS, WILDCARD_IN_SUPERTYPE,
+				source.indexOf("Bar<?>"), "Bar<?>".length());
 	}
 
 	@Test
