@@ -45,6 +45,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
@@ -121,6 +122,16 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
    * @ordered
    */
   protected EList<JvmFormalParameter> parameters;
+
+  /**
+   * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExceptions()
+   * @generated
+   * @ordered
+   */
+  protected EList<JvmTypeReference> exceptions;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -289,6 +300,21 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
    * @generated
    */
   @Override
+  public EList<JvmTypeReference> getExceptions()
+  {
+    if (exceptions == null)
+    {
+      exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXCEPTIONS);
+    }
+    return exceptions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public XExpression getExpression()
   {
     return expression;
@@ -349,6 +375,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         return basicSetType(null, msgs);
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXCEPTIONS:
+        return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXPRESSION:
         return basicSetExpression(null, msgs);
     }
@@ -375,6 +403,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         return getName();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PARAMETERS:
         return getParameters();
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXCEPTIONS:
+        return getExceptions();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXPRESSION:
         return getExpression();
     }
@@ -409,6 +439,10 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         getParameters().clear();
         getParameters().addAll((Collection<? extends JvmFormalParameter>)newValue);
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXCEPTIONS:
+        getExceptions().clear();
+        getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXPRESSION:
         setExpression((XExpression)newValue);
         return;
@@ -441,6 +475,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PARAMETERS:
         getParameters().clear();
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXCEPTIONS:
+        getExceptions().clear();
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXPRESSION:
         setExpression((XExpression)null);
         return;
@@ -468,6 +505,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXCEPTIONS:
+        return exceptions != null && !exceptions.isEmpty();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__EXPRESSION:
         return expression != null;
     }

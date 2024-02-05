@@ -390,6 +390,38 @@ public class JvmGenericTypeValidatorTest {
 				source.indexOf("void"), "void".length());
 	}
 
+	@Test public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
+		var source = "class X { constructor () throws Integer { }}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
+	}
+	
+	@Test public void testFunctionThrownExceptionsOfTypeThrowable() throws Exception {
+		var source = "class X { def void foo() throws Integer { } }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
+	}
+
+	@Test public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
+		var source = "import java.io.IOException class X { constructor () throws IOException, IOException { }}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
+	}
+
+	@Test public void testExceptionsDeclaredTwiceOnFunction() throws Exception {
+		var source = "import java.io.IOException class X {def void foo() throws IOException, IOException { }}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}

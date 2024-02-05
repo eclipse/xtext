@@ -375,9 +375,20 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyConstructor_Expression()
+  public EReference getMyConstructor_Exceptions()
   {
     return (EReference)myConstructorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyConstructor_Expression()
+  {
+    return (EReference)myConstructorEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -485,9 +496,20 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyMethod_Expression()
+  public EReference getMyMethod_Exceptions()
   {
     return (EReference)myMethodEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyMethod_Expression()
+  {
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -545,6 +567,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     myConstructorEClass = createEClass(MY_CONSTRUCTOR);
     createEReference(myConstructorEClass, MY_CONSTRUCTOR__PARAMETERS);
+    createEReference(myConstructorEClass, MY_CONSTRUCTOR__EXCEPTIONS);
     createEReference(myConstructorEClass, MY_CONSTRUCTOR__EXPRESSION);
 
     myFieldEClass = createEClass(MY_FIELD);
@@ -557,6 +580,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     createEReference(myMethodEClass, MY_METHOD__TYPE);
     createEAttribute(myMethodEClass, MY_METHOD__NAME);
     createEReference(myMethodEClass, MY_METHOD__PARAMETERS);
+    createEReference(myMethodEClass, MY_METHOD__EXCEPTIONS);
     createEReference(myMethodEClass, MY_METHOD__EXPRESSION);
   }
 
@@ -627,6 +651,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     initEClass(myConstructorEClass, MyConstructor.class, "MyConstructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMyConstructor_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMyConstructor_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyConstructor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, MyConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(myFieldEClass, MyField.class, "MyField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -639,6 +664,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     initEReference(getMyMethod_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMyMethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyMethod_Parameters(), theTypesPackage.getJvmFormalParameter(), null, "parameters", null, 0, -1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMyMethod_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyMethod_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource

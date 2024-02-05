@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -39,6 +40,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyC
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyConstructorImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
@@ -55,6 +57,16 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
    * @ordered
    */
   protected EList<JvmFormalParameter> parameters;
+
+  /**
+   * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExceptions()
+   * @generated
+   * @ordered
+   */
+  protected EList<JvmTypeReference> exceptions;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -100,6 +112,21 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
       parameters = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__PARAMETERS);
     }
     return parameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<JvmTypeReference> getExceptions()
+  {
+    if (exceptions == null)
+    {
+      exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXCEPTIONS);
+    }
+    return exceptions;
   }
 
   /**
@@ -164,6 +191,8 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
     {
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+      case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXCEPTIONS:
+        return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXPRESSION:
         return basicSetExpression(null, msgs);
     }
@@ -182,6 +211,8 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
     {
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__PARAMETERS:
         return getParameters();
+      case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXCEPTIONS:
+        return getExceptions();
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXPRESSION:
         return getExpression();
     }
@@ -203,6 +234,10 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
         getParameters().clear();
         getParameters().addAll((Collection<? extends JvmFormalParameter>)newValue);
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXCEPTIONS:
+        getExceptions().clear();
+        getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXPRESSION:
         setExpression((XExpression)newValue);
         return;
@@ -223,6 +258,9 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__PARAMETERS:
         getParameters().clear();
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXCEPTIONS:
+        getExceptions().clear();
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXPRESSION:
         setExpression((XExpression)null);
         return;
@@ -242,6 +280,8 @@ public class MyConstructorImpl extends MyMemberImpl implements MyConstructor
     {
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
+      case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXCEPTIONS:
+        return exceptions != null && !exceptions.isEmpty();
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR__EXPRESSION:
         return expression != null;
     }

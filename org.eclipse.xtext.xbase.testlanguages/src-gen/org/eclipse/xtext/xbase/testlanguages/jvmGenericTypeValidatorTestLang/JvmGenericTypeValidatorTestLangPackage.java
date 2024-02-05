@@ -313,13 +313,22 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_CONSTRUCTOR__PARAMETERS = MY_MEMBER_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CONSTRUCTOR__EXCEPTIONS = MY_MEMBER_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MY_CONSTRUCTOR__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 1;
+  int MY_CONSTRUCTOR__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>My Constructor</em>' class.
@@ -328,7 +337,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_CONSTRUCTOR_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 2;
+  int MY_CONSTRUCTOR_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyFieldImpl <em>My Field</em>}' class.
@@ -423,13 +432,22 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_METHOD__PARAMETERS = MY_MEMBER_FEATURE_COUNT + 4;
 
   /**
+   * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_METHOD__EXCEPTIONS = MY_MEMBER_FEATURE_COUNT + 5;
+
+  /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MY_METHOD__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 5;
+  int MY_METHOD__EXPRESSION = MY_MEMBER_FEATURE_COUNT + 6;
 
   /**
    * The number of structural features of the '<em>My Method</em>' class.
@@ -438,7 +456,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_METHOD_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 6;
+  int MY_METHOD_FEATURE_COUNT = MY_MEMBER_FEATURE_COUNT + 7;
 
 
   /**
@@ -633,6 +651,17 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   EReference getMyConstructor_Parameters();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExceptions <em>Exceptions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Exceptions</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExceptions()
+   * @see #getMyConstructor()
+   * @generated
+   */
+  EReference getMyConstructor_Exceptions();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExpression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -739,6 +768,17 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    */
   EReference getMyMethod_Parameters();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getExceptions <em>Exceptions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Exceptions</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getExceptions()
+   * @see #getMyMethod()
+   * @generated
+   */
+  EReference getMyMethod_Exceptions();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getExpression <em>Expression</em>}'.
@@ -933,6 +973,14 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
     EReference MY_CONSTRUCTOR__PARAMETERS = eINSTANCE.getMyConstructor_Parameters();
 
     /**
+     * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_CONSTRUCTOR__EXCEPTIONS = eINSTANCE.getMyConstructor_Exceptions();
+
+    /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1015,6 +1063,14 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EReference MY_METHOD__PARAMETERS = eINSTANCE.getMyMethod_Parameters();
+
+    /**
+     * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_METHOD__EXCEPTIONS = eINSTANCE.getMyMethod_Exceptions();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

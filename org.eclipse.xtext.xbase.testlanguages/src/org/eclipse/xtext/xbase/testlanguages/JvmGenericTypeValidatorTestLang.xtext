@@ -40,6 +40,7 @@ MyClassWithSuperTypes:
 MyMember:
 	({MyConstructor} 'constructor'
 		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 		expression=XBlockExpression)
 	|
 	({MyField} type=JvmTypeReference name=ValidID)
@@ -48,6 +49,7 @@ MyMember:
 		('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 		type=JvmTypeReference name=ValidID
 		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 		expression=XBlockExpression)
 	|
 	MyClass // nested local class

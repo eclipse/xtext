@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -24,6 +25,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor#getExpression <em>Expression</em>}</li>
  * </ul>
  *
@@ -44,6 +46,18 @@ public interface MyConstructor extends MyMember
    * @generated
    */
   EList<JvmFormalParameter> getParameters();
+
+  /**
+   * Returns the value of the '<em><b>Exceptions</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Exceptions</em>' containment reference list.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage#getMyConstructor_Exceptions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<JvmTypeReference> getExceptions();
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

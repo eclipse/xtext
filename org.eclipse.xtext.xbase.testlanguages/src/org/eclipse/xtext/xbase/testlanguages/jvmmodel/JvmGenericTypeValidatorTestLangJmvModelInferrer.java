@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.util.Strings;
@@ -76,10 +77,13 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			if (member instanceof MyConstructor) {
 				MyConstructor constructor = (MyConstructor) member;
 				it.getMembers().add(jvmTypesBuilder.toConstructor(constructor, cons -> {
-					jvmTypesBuilder.setBody(cons, constructor.getExpression());
 					for (var param : constructor.getParameters()) {
 						cons.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
 					}
+					for (JvmTypeReference exception : constructor.getExceptions()) {
+						cons.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
+					}
+					jvmTypesBuilder.setBody(cons, constructor.getExpression());
 				}));
 			} else if (member instanceof MyField) {
 				MyField field = (MyField) member;
@@ -88,11 +92,14 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 				MyMethod method = (MyMethod) member;
 				it.getMembers().add(jvmTypesBuilder.toMethod(method, method.getName(), method.getType(), meth -> {
 					meth.setStatic(method.isStatic());
-					jvmTypesBuilder.setBody(meth, method.getExpression());
 					for (var param : method.getParameters()) {
 						meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
 					}
 					copyTypeParameters(method.getTypeParameters(), meth);
+					for (JvmTypeReference exception : method.getExceptions()) {
+						meth.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
+					}
+					jvmTypesBuilder.setBody(meth, method.getExpression());
 				}));
 			}
 		}

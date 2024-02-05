@@ -31,6 +31,7 @@
     <genClasses ecoreClass="JvmGenericTypeValidatorTestLang.ecore#//MyMember"/>
     <genClasses ecoreClass="JvmGenericTypeValidatorTestLang.ecore#//MyConstructor">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyConstructor/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyConstructor/exceptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyConstructor/expression"/>
     </genClasses>
     <genClasses ecoreClass="JvmGenericTypeValidatorTestLang.ecore#//MyField">
@@ -43,6 +44,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyMethod/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JvmGenericTypeValidatorTestLang.ecore#//MyMethod/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyMethod/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyMethod/exceptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyMethod/expression"/>
     </genClasses>
   </genPackages>
