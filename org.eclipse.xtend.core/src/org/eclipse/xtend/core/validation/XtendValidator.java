@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -649,6 +650,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 
 	@Check
 	public void checkSuperTypes(XtendClass xtendClass) {
+		checkDuplicateInterfaces(xtendClass, xtendClass.getImplements(), XTEND_CLASS__IMPLEMENTS);
 		JvmTypeReference superClass = xtendClass.getExtends();
 		if (superClass != null && superClass.getType() != null) {
 			if (!(superClass.getType() instanceof JvmGenericType)
@@ -677,6 +679,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 
 	@Check
 	public void checkSuperTypes(XtendInterface xtendInterface) {
+		checkDuplicateInterfaces(xtendInterface, xtendInterface.getExtends(), XTEND_INTERFACE__EXTENDS);
 		for (int i = 0; i < xtendInterface.getExtends().size(); ++i) {
 			JvmTypeReference extendedType = xtendInterface.getExtends().get(i);
 			if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
@@ -690,7 +693,19 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 		}
 	}
-	
+
+	protected void checkDuplicateInterfaces(XtendTypeDeclaration decl, List<JvmTypeReference> interfaces,
+			EStructuralFeature interfaceFeature) {
+		Set<String> seen = new HashSet<>();
+		for (int i = 0; i < interfaces.size(); ++i) {
+			JvmTypeReference interf = interfaces.get(i);
+			if (!seen.add(interf.getIdentifier())) {
+				error(String.format("Duplicate interface %s for the type %s", interf.getSimpleName(), decl.getName()),
+					decl, interfaceFeature, i, DUPLICATE_INTERFACE);
+			}
+		}
+	}
+
 	protected boolean isAnnotation(JvmType jvmType) {
 		return jvmType instanceof JvmAnnotationType;
 	}

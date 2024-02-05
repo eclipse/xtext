@@ -977,7 +977,31 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendInterface interfaze = interfaze("interface Foo extends Foo {}");
 		helper.assertError(interfaze, XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
-	
+
+	@Test public void testDuplicateImplementedInterfaces() throws Exception {
+		var source = "import java.io.Serializable\n"
+				+ "class Foo implements Serializable, java.io.Serializable, Serializable {}";
+		XtendFile file = file(source);
+		helper.assertError(file, XTEND_CLASS, DUPLICATE_INTERFACE,
+				source.lastIndexOf("java.io.Serializable"), "java.io.Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+		helper.assertError(file, XTEND_CLASS, DUPLICATE_INTERFACE,
+				source.lastIndexOf("Serializable"), "Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+	}
+
+	@Test public void testDuplicateExtendedInterfaces() throws Exception {
+		var source = "import java.io.Serializable\n"
+				+ "interface Foo extends Serializable, java.io.Serializable, Serializable {}";
+		XtendFile file = file(source);
+		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_INTERFACE,
+				source.lastIndexOf("java.io.Serializable"), "java.io.Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_INTERFACE,
+				source.lastIndexOf("Serializable"), "Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+	}
+
 	@Test public void testTypesUniqueNames() throws Exception {
 		XtendFile file = file("class Foo {} interface Foo {} annotation Foo {}");
 		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE_NAME, "type", "already defined");
