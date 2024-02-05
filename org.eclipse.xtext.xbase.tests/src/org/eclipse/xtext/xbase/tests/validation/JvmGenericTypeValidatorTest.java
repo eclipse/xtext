@@ -216,6 +216,32 @@ public class JvmGenericTypeValidatorTest {
 				"Extended", "interface");
 	}
 
+	@Test public void testDuplicateImplementedInterfaces() throws Exception {
+		var source = "import java.io.Serializable\n"
+				+ "class Foo implements "
+				+ "Serializable, java.io.Serializable, Cloneable, Serializable {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, DUPLICATE_INTERFACE,
+				source.lastIndexOf("java.io.Serializable"), "java.io.Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+		validationHelper.assertError(model, MY_CLASS, DUPLICATE_INTERFACE,
+				source.lastIndexOf("Serializable"), "Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+	}
+
+	@Test public void testDuplicateExtendedInterfaces() throws Exception {
+		var source = "import java.io.Serializable\n"
+				+ "interface Foo extends "
+				+ "Serializable, java.io.Serializable, Cloneable, Serializable {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_INTERFACE, DUPLICATE_INTERFACE,
+				source.lastIndexOf("java.io.Serializable"), "java.io.Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+		validationHelper.assertError(model, MY_INTERFACE, DUPLICATE_INTERFACE,
+				source.lastIndexOf("Serializable"), "Serializable".length(),
+				"Duplicate interface Serializable for the type Foo");
+	}
+
 	@Test public void testCheckSuperTypesWithClassWithSuperTypes() throws Exception {
 		// the first supertype must be a class, and then the other ones interfaces
 		var source = "classWithSuperTypes Foo superTypes Cloneable, Object {}";
