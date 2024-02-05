@@ -187,6 +187,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		var superTypes = type.getSuperTypes();
 		var mismatchedSuperInterfaceErrorPrerix = type.isInterface() ? "Extended" : "Implemented";
 		var multiFeatureIndex = -1;
+		Set<String> seen = new HashSet<>();
 		for (int i = 0; i < superTypes.size(); ++i) {
 			JvmTypeReference extendedType = superTypes.get(i);
 			var associated = getSuperTypeSourceElement(extendedType);
@@ -194,15 +195,20 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				continue; // synthetic superclass (e.g., Object)
 			var eContainingFeature = associated.eContainingFeature();
 			int featureIndex = INSIGNIFICANT_INDEX;
+			multiFeatureIndex++;
 			if (eContainingFeature.isMany()) {
-				featureIndex = ++multiFeatureIndex;
+				featureIndex = multiFeatureIndex;
 			}
 			if (JvmTypeReferenceUtil.isExpectedAsInterface(extendedType)) {
-				multiFeatureIndex++;
 				if (!isInterface(extendedType) && !isAnnotation(extendedType)) {
 					error(mismatchedSuperInterfaceErrorPrerix + " interface must be an interface",
 						sourceType,
 						eContainingFeature, featureIndex, INTERFACE_EXPECTED);
+				} else if (!seen.add(extendedType.getIdentifier())) {
+					error(String.format("Duplicate interface %s for the type %s",
+						extendedType.getSimpleName(), type.getSimpleName()),
+						sourceType,
+						eContainingFeature, featureIndex, DUPLICATE_INTERFACE);
 				}
 			} else if (JvmTypeReferenceUtil.isExpectedAsClass(extendedType)) {
 				if (!isClass(extendedType)) {
@@ -211,6 +217,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 						eContainingFeature, CLASS_EXPECTED);
 				}
 			}
+			seen.add(extendedType.getIdentifier());
 			if (isFinal(extendedType)) {
 				error("Attempt to override final class",
 					sourceType,

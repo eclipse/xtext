@@ -254,6 +254,10 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 * @since 2.34
 	 */
 	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_INTERFACE = ISSUE_CODE_PREFIX + "duplicate_interface";
 
 	private IssueCodes() {
 	}
