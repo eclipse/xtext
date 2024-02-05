@@ -186,7 +186,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}
 		var superTypes = type.getSuperTypes();
 		var mismatchedSuperInterfaceErrorPrerix = type.isInterface() ? "Extended" : "Implemented";
-		var expectedInterfaceIndex = -1;
+		var multiFeatureIndex = -1;
 		for (int i = 0; i < superTypes.size(); ++i) {
 			JvmTypeReference extendedType = superTypes.get(i);
 			var associated = getSuperTypeSourceElement(extendedType);
@@ -195,10 +195,10 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			var eContainingFeature = associated.eContainingFeature();
 			int featureIndex = INSIGNIFICANT_INDEX;
 			if (eContainingFeature.isMany()) {
-				featureIndex = ++expectedInterfaceIndex;
+				featureIndex = ++multiFeatureIndex;
 			}
 			if (JvmTypeReferenceUtil.isExpectedAsInterface(extendedType)) {
-				expectedInterfaceIndex++;
+				multiFeatureIndex++;
 				if (!isInterface(extendedType) && !isAnnotation(extendedType)) {
 					error(mismatchedSuperInterfaceErrorPrerix + " interface must be an interface",
 						sourceType,
@@ -217,8 +217,8 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 					eContainingFeature, OVERRIDDEN_FINAL);
 			}
 			checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
-					extendedType,
-					eContainingFeature, featureIndex);
+				extendedType,
+				eContainingFeature, featureIndex);
 		}
 	}
 
