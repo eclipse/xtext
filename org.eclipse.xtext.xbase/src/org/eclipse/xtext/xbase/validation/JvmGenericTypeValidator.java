@@ -45,6 +45,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.JvmTypeReferenceUtil;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -218,22 +219,18 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				if (associated == null)
 					continue; // synthetic superclass (e.g., Object)
 				var eContainingFeature = associated.eContainingFeature();
-				// there's no direct way to tell whether the supertype is meant
-				// to be an extended class or an implemented interface, so we
-				// check whether the original source element's containing feature
-				// is single or multiple, assuming that the source element allows
-				// for a single extended class
-				if (eContainingFeature.isMany()) { // assume to be expected as an interface
+				int featureIndex = INSIGNIFICANT_INDEX;
+				if (eContainingFeature.isMany()) {
+					featureIndex = ++expectedInterfaceIndex;
+				}
+				if (JvmTypeReferenceUtil.isExpectedAsInterface(extendedType)) {
 					expectedInterfaceIndex++;
 					if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
 						error("Implemented interface must be an interface",
 							sourceType,
-							eContainingFeature, expectedInterfaceIndex, INTERFACE_EXPECTED);
+							eContainingFeature, featureIndex, INTERFACE_EXPECTED);
 					}
-					checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
-							extendedType,
-							eContainingFeature, expectedInterfaceIndex);
-				} else { // assume to be expected as a class
+				} else if (JvmTypeReferenceUtil.isExpectedAsClass(extendedType)) {
 					if (!(extendedType.getType() instanceof JvmGenericType)
 							|| ((JvmGenericType) extendedType.getType()).isInterface()) {
 						error("Superclass must be a class",
@@ -245,11 +242,11 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 								sourceType,
 								eContainingFeature, OVERRIDDEN_FINAL);
 						}
-						checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
-								extendedType,
-								eContainingFeature, INSIGNIFICANT_INDEX);
 					}
 				}
+				checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
+						extendedType,
+						eContainingFeature, featureIndex);
 			}
 		}
 	}

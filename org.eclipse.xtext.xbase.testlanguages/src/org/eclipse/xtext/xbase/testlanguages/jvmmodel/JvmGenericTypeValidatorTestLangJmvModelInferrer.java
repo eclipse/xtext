@@ -52,11 +52,9 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 		acceptor.accept(inferred,
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myClass));
-				if (myClass.getExtends() != null) {
-					it.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(myClass.getExtends()));
-				}
+				jvmTypesBuilder.setSuperClass(it, myClass.getExtends());
 				for (var interf : myClass.getImplements()) {
-					it.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(interf));
+					jvmTypesBuilder.addSuperInterface(it, interf);
 				}
 				inferMembers(myClass, it, acceptor, prelinkingPhase);
 			});
@@ -113,7 +111,7 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myInterface));
 				for (var interf : myInterface.getExtends()) {
-					it.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(interf));
+					jvmTypesBuilder.addSuperInterface(it, interf);
 				}
 			}));
 	}
