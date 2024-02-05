@@ -185,70 +185,66 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 					getFeatureForIssue(sourceType), CYCLIC_INHERITANCE);
 		}
 		var superTypes = type.getSuperTypes();
-		if (type.isInterface()) {
-			for (int i = 0; i < superTypes.size(); ++i) {
-				JvmTypeReference extendedType = superTypes.get(i);
-				var associated = associations.getPrimarySourceElement(extendedType);
-				var eContainingFeature = associated.eContainingFeature();
-				if (!isInterface(extendedType) && !isAnnotation(extendedType)) {
-					error("Extended interface must be an interface",
-						sourceType,
-						eContainingFeature, i, INTERFACE_EXPECTED);
-				}
-				checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
-						extendedType,
-						eContainingFeature, i);
-			}
-		} else if (isAnonymous(type)) {
-			JvmTypeReference extendedType = Iterables.getLast(superTypes);
+		var mismatchedSuperInterfaceErrorPrerix = type.isInterface() ? "Extended" : "Implemented";
+		var expectedInterfaceIndex = -1;
+		for (int i = 0; i < superTypes.size(); ++i) {
+			JvmTypeReference extendedType = superTypes.get(i);
 			var associated = getSuperTypeSourceElement(extendedType);
+			if (associated == null)
+				continue; // synthetic superclass (e.g., Object)
 			var eContainingFeature = associated.eContainingFeature();
-			if (((JvmDeclaredType) extendedType.getType()).isFinal()) {
+			int featureIndex = INSIGNIFICANT_INDEX;
+			if (eContainingFeature.isMany()) {
+				featureIndex = ++expectedInterfaceIndex;
+			}
+			if (JvmTypeReferenceUtil.isExpectedAsInterface(extendedType)) {
+				expectedInterfaceIndex++;
+				if (!isInterface(extendedType) && !isAnnotation(extendedType)) {
+					error(mismatchedSuperInterfaceErrorPrerix + " interface must be an interface",
+						sourceType,
+						eContainingFeature, featureIndex, INTERFACE_EXPECTED);
+				}
+			} else if (JvmTypeReferenceUtil.isExpectedAsClass(extendedType)) {
+				if (!isClass(extendedType)) {
+					error("Superclass must be a class",
+						sourceType,
+						eContainingFeature, CLASS_EXPECTED);
+				}
+			}
+			if (isFinal(extendedType)) {
 				error("Attempt to override final class",
 					sourceType,
 					eContainingFeature, OVERRIDDEN_FINAL);
 			}
 			checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
 					extendedType,
-					eContainingFeature, INSIGNIFICANT_INDEX);
-		} else {
-			var expectedInterfaceIndex = -1;
-			for (int i = 0; i < superTypes.size(); ++i) {
-				JvmTypeReference extendedType = superTypes.get(i);
-				var associated = getSuperTypeSourceElement(extendedType);
-				if (associated == null)
-					continue; // synthetic superclass (e.g., Object)
-				var eContainingFeature = associated.eContainingFeature();
-				int featureIndex = INSIGNIFICANT_INDEX;
-				if (eContainingFeature.isMany()) {
-					featureIndex = ++expectedInterfaceIndex;
-				}
-				if (JvmTypeReferenceUtil.isExpectedAsInterface(extendedType)) {
-					expectedInterfaceIndex++;
-					if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
-						error("Implemented interface must be an interface",
-							sourceType,
-							eContainingFeature, featureIndex, INTERFACE_EXPECTED);
-					}
-				} else if (JvmTypeReferenceUtil.isExpectedAsClass(extendedType)) {
-					if (!(extendedType.getType() instanceof JvmGenericType)
-							|| ((JvmGenericType) extendedType.getType()).isInterface()) {
-						error("Superclass must be a class",
-							sourceType,
-							eContainingFeature, CLASS_EXPECTED);
-					} else {
-						if (((JvmGenericType) extendedType.getType()).isFinal()) {
-							error("Attempt to override final class",
-								sourceType,
-								eContainingFeature, OVERRIDDEN_FINAL);
-						}
-					}
-				}
-				checkWildcardSupertype(sourceType, notNull(type.getSimpleName()),
-						extendedType,
-						eContainingFeature, featureIndex);
-			}
+					eContainingFeature, featureIndex);
 		}
+	}
+
+	protected boolean isInterface(JvmTypeReference typeRef) {
+		return isInterface(typeRef.getType());
+	}
+
+	protected boolean isInterface(JvmType type) {
+		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
+	}
+
+	protected boolean isAnnotation(JvmTypeReference typeRef) {
+		return isAnnotation(typeRef.getType());
+	}
+
+	protected boolean isAnnotation(JvmType type) {
+		return type instanceof JvmAnnotationType;
+	}
+
+	protected boolean isFinal(JvmTypeReference typeRef) {
+		return typeRef.getType() instanceof JvmGenericType &&((JvmGenericType) typeRef.getType()).isFinal();
+	}
+
+	protected boolean isClass(JvmTypeReference typeRef) {
+		return typeRef.getType() instanceof JvmGenericType
+				&& !((JvmGenericType) typeRef.getType()).isInterface();
 	}
 
 	/**
@@ -511,22 +507,6 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}
 		processedSuperTypes.remove(type);
 		return false;
-	}
-
-	protected boolean isInterface(JvmTypeReference typeRef) {
-		return isInterface(typeRef.getType());
-	}
-
-	protected boolean isInterface(JvmType type) {
-		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
-	}
-
-	protected boolean isAnnotation(JvmTypeReference typeRef) {
-		return isAnnotation(typeRef.getType());
-	}
-
-	protected boolean isAnnotation(JvmType type) {
-		return type instanceof JvmAnnotationType;
 	}
 
 	protected void checkWildcardSupertype(EObject sourceElement,
