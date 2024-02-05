@@ -29,6 +29,11 @@
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MyClassWithSuperTypes" eSuperTypes="#//MyType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MyMember"/>
   <eClassifiers xsi:type="ecore:EClass" name="MyConstructor" eSuperTypes="#//MyMember">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"

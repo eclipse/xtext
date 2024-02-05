@@ -63,6 +63,7 @@ import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangModel;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
@@ -92,6 +93,9 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_CLASS:
 				sequence_MyClass(context, (MyClass) semanticObject); 
+				return; 
+			case JvmGenericTypeValidatorTestLangPackage.MY_CLASS_WITH_SUPER_TYPES:
+				sequence_MyClassWithSuperTypes(context, (MyClassWithSuperTypes) semanticObject); 
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR:
 				sequence_MyMember(context, (MyConstructor) semanticObject); 
@@ -543,6 +547,21 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 * </pre>
 	 */
 	protected void sequence_JvmWildcardTypeReference(ISerializationContext context, JvmWildcardTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     MyType returns MyClassWithSuperTypes
+	 *     MyClassWithSuperTypes returns MyClassWithSuperTypes
+	 *
+	 * Constraint:
+	 *     (name=ValidID (superTypes+=JvmParameterizedTypeReference superTypes+=JvmParameterizedTypeReference*)?)
+	 * </pre>
+	 */
+	protected void sequence_MyClassWithSuperTypes(ISerializationContext context, MyClassWithSuperTypes semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

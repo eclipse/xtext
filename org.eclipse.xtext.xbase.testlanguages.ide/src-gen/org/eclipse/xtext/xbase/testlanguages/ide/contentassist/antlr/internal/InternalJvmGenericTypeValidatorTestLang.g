@@ -155,6 +155,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleMyClassWithSuperTypes
+entryRuleMyClassWithSuperTypes
+:
+{ before(grammarAccess.getMyClassWithSuperTypesRule()); }
+	 ruleMyClassWithSuperTypes
+{ after(grammarAccess.getMyClassWithSuperTypesRule()); } 
+	 EOF 
+;
+
+// Rule MyClassWithSuperTypes
+ruleMyClassWithSuperTypes 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getMyClassWithSuperTypesAccess().getGroup()); }
+		(rule__MyClassWithSuperTypes__Group__0)
+		{ after(grammarAccess.getMyClassWithSuperTypesAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleMyMember
 entryRuleMyMember
 :
@@ -2142,6 +2167,12 @@ rule__MyType__Alternatives
 		{ before(grammarAccess.getMyTypeAccess().getMyInterfaceParserRuleCall_1()); }
 		ruleMyInterface
 		{ after(grammarAccess.getMyTypeAccess().getMyInterfaceParserRuleCall_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getMyTypeAccess().getMyClassWithSuperTypesParserRuleCall_2()); }
+		ruleMyClassWithSuperTypes
+		{ after(grammarAccess.getMyTypeAccess().getMyClassWithSuperTypesParserRuleCall_2()); }
 	)
 ;
 finally {
@@ -4250,6 +4281,276 @@ rule__MyInterface__Group_3_2__1__Impl
 	{ before(grammarAccess.getMyInterfaceAccess().getExtendsAssignment_3_2_1()); }
 	(rule__MyInterface__ExtendsAssignment_3_2_1)
 	{ after(grammarAccess.getMyInterfaceAccess().getExtendsAssignment_3_2_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__MyClassWithSuperTypes__Group__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group__0__Impl
+	rule__MyClassWithSuperTypes__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getClassWithSuperTypesKeyword_0()); }
+	'classWithSuperTypes'
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getClassWithSuperTypesKeyword_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group__1__Impl
+	rule__MyClassWithSuperTypes__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getNameAssignment_1()); }
+	(rule__MyClassWithSuperTypes__NameAssignment_1)
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getNameAssignment_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group__2__Impl
+	rule__MyClassWithSuperTypes__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getGroup_2()); }
+	(rule__MyClassWithSuperTypes__Group_2__0)?
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getGroup_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group__3__Impl
+	rule__MyClassWithSuperTypes__Group__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getLeftCurlyBracketKeyword_3()); }
+	'{'
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getLeftCurlyBracketKeyword_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group__4__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getRightCurlyBracketKeyword_4()); }
+	'}'
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getRightCurlyBracketKeyword_4()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__MyClassWithSuperTypes__Group_2__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group_2__0__Impl
+	rule__MyClassWithSuperTypes__Group_2__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesKeyword_2_0()); }
+	'superTypes'
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesKeyword_2_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group_2__1__Impl
+	rule__MyClassWithSuperTypes__Group_2__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesAssignment_2_1()); }
+	(rule__MyClassWithSuperTypes__SuperTypesAssignment_2_1)
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesAssignment_2_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group_2__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getGroup_2_2()); }
+	(rule__MyClassWithSuperTypes__Group_2_2__0)*
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getGroup_2_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__MyClassWithSuperTypes__Group_2_2__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group_2_2__0__Impl
+	rule__MyClassWithSuperTypes__Group_2_2__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2_2__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getCommaKeyword_2_2_0()); }
+	','
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getCommaKeyword_2_2_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2_2__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithSuperTypes__Group_2_2__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__Group_2_2__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesAssignment_2_2_1()); }
+	(rule__MyClassWithSuperTypes__SuperTypesAssignment_2_2_1)
+	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesAssignment_2_2_1()); }
 )
 ;
 finally {
@@ -17089,6 +17390,51 @@ rule__MyInterface__ExtendsAssignment_3_2_1
 		{ before(grammarAccess.getMyInterfaceAccess().getExtendsJvmParameterizedTypeReferenceParserRuleCall_3_2_1_0()); }
 		ruleJvmParameterizedTypeReference
 		{ after(grammarAccess.getMyInterfaceAccess().getExtendsJvmParameterizedTypeReferenceParserRuleCall_3_2_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__NameAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMyClassWithSuperTypesAccess().getNameValidIDParserRuleCall_1_0()); }
+		ruleValidID
+		{ after(grammarAccess.getMyClassWithSuperTypesAccess().getNameValidIDParserRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__SuperTypesAssignment_2_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_1_0()); }
+		ruleJvmParameterizedTypeReference
+		{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithSuperTypes__SuperTypesAssignment_2_2_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0()); }
+		ruleJvmParameterizedTypeReference
+		{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0()); }
 	)
 ;
 finally {

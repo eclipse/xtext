@@ -65,6 +65,15 @@ public interface JvmGenericTypeValidatorTestLangFactory extends EFactory
   MyInterface createMyInterface();
 
   /**
+   * Returns a new object of class '<em>My Class With Super Types</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Class With Super Types</em>'.
+   * @generated
+   */
+  MyClassWithSuperTypes createMyClassWithSuperTypes();
+
+  /**
    * Returns a new object of class '<em>My Member</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

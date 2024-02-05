@@ -101,6 +101,11 @@ public class JvmGenericTypeValidatorTestLangAdapterFactory extends AdapterFactor
         return createMyInterfaceAdapter();
       }
       @Override
+      public Adapter caseMyClassWithSuperTypes(MyClassWithSuperTypes object)
+      {
+        return createMyClassWithSuperTypesAdapter();
+      }
+      @Override
       public Adapter caseMyMember(MyMember object)
       {
         return createMyMemberAdapter();
@@ -198,6 +203,21 @@ public class JvmGenericTypeValidatorTestLangAdapterFactory extends AdapterFactor
    * @generated
    */
   public Adapter createMyInterfaceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes <em>My Class With Super Types</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes
+   * @generated
+   */
+  public Adapter createMyClassWithSuperTypesAdapter()
   {
     return null;
   }

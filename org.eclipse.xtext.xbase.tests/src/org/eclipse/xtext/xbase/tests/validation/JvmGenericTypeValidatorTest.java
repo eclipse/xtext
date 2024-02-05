@@ -216,6 +216,38 @@ public class JvmGenericTypeValidatorTest {
 				"Extended", "interface");
 	}
 
+	@Test public void testCheckSuperTypesWithClassWithSuperTypes() throws Exception {
+		// the first supertype must be a class, and then the other ones interfaces
+		var source = "classWithSuperTypes Foo superTypes Cloneable, Object {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS_WITH_SUPER_TYPES, INTERFACE_EXPECTED,
+				source.indexOf("Object"), "Object".length(),
+				"Implemented", "interface");
+		validationHelper.assertError(model, MY_CLASS_WITH_SUPER_TYPES, CLASS_EXPECTED,
+				source.indexOf("Cloneable"), "Cloneable".length(),
+				"Superclass");
+	}
+
+	@Test public void testCheckSuperTypesWithClassWithSuperTypes_01() throws Exception {
+		// the first supertype must be a class, and then the other ones interfaces
+		// Serializable is an implicit super interface, but we check whether the explicit one has an error
+		var source = "classWithSuperTypes Foo superTypes Serializable, Object {}";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS_WITH_SUPER_TYPES, INTERFACE_EXPECTED,
+				source.indexOf("Object"), "Object".length(),
+				"Implemented", "interface");
+		validationHelper.assertError(model, MY_CLASS_WITH_SUPER_TYPES, CLASS_EXPECTED,
+				source.indexOf("Serializable"), "Serializable".length(),
+				"Superclass");
+	}
+
+	@Test public void testCheckSuperTypesWithClassWithSuperTypes_02() throws Exception {
+		// the first supertype must be a class, and then the other ones interfaces
+		var source = "classWithSuperTypes Foo superTypes Object, Cloneable {}";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
+	}
+
 	@Test public void testOverrideFinalClass() throws Exception {
 		var source = "class Foo extends String { }";
 		var model = parse(source);

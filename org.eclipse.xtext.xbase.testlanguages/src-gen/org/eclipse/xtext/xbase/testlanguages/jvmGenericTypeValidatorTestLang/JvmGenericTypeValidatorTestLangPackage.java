@@ -238,6 +238,43 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_INTERFACE_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithSuperTypesImpl <em>My Class With Super Types</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithSuperTypesImpl
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyClassWithSuperTypes()
+   * @generated
+   */
+  int MY_CLASS_WITH_SUPER_TYPES = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS_WITH_SUPER_TYPES__NAME = MY_TYPE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS_WITH_SUPER_TYPES__SUPER_TYPES = MY_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>My Class With Super Types</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS_WITH_SUPER_TYPES_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl <em>My Member</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -245,7 +282,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMember()
    * @generated
    */
-  int MY_MEMBER = 4;
+  int MY_MEMBER = 5;
 
   /**
    * The number of structural features of the '<em>My Member</em>' class.
@@ -264,7 +301,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyConstructor()
    * @generated
    */
-  int MY_CONSTRUCTOR = 5;
+  int MY_CONSTRUCTOR = 6;
 
   /**
    * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -301,7 +338,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyField()
    * @generated
    */
-  int MY_FIELD = 6;
+  int MY_FIELD = 7;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -338,7 +375,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMethod()
    * @generated
    */
-  int MY_METHOD = 7;
+  int MY_METHOD = 8;
 
   /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -542,6 +579,27 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    */
   EReference getMyInterface_Extends();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes <em>My Class With Super Types</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>My Class With Super Types</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes
+   * @generated
+   */
+  EClass getMyClassWithSuperTypes();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes#getSuperTypes <em>Super Types</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Super Types</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes#getSuperTypes()
+   * @see #getMyClassWithSuperTypes()
+   * @generated
+   */
+  EReference getMyClassWithSuperTypes_SuperTypes();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember <em>My Member</em>}'.
@@ -827,6 +885,24 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EReference MY_INTERFACE__EXTENDS = eINSTANCE.getMyInterface_Extends();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithSuperTypesImpl <em>My Class With Super Types</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithSuperTypesImpl
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyClassWithSuperTypes()
+     * @generated
+     */
+    EClass MY_CLASS_WITH_SUPER_TYPES = eINSTANCE.getMyClassWithSuperTypes();
+
+    /**
+     * The meta object literal for the '<em><b>Super Types</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_CLASS_WITH_SUPER_TYPES__SUPER_TYPES = eINSTANCE.getMyClassWithSuperTypes_SuperTypes();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl <em>My Member</em>}' class.

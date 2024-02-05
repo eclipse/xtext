@@ -11,7 +11,7 @@ JvmGenericTypeValidatorTestLangModel:
 	(modelTypes+=MyType)*;
 
 MyType:
-	MyClass | MyInterface;
+	MyClass | MyInterface | MyClassWithSuperTypes;
 
 MyClass:
 	'class' name=ValidID
@@ -24,6 +24,18 @@ MyInterface:
 	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)? '{'
 	'}';
+
+/**
+ * Special class where the first specified super type is expected to be a class
+ * and the following ones interfaces.
+ * Moreover, the class is always implicitly implements Serializable.
+ * Just a corner case for testing JvmGenericTypeValidator.
+ */
+MyClassWithSuperTypes:
+	'classWithSuperTypes' name=ValidID
+	("superTypes" superTypes+=JvmParameterizedTypeReference (',' superTypes+=JvmParameterizedTypeReference)*)? '{'
+	'}'
+;
 
 MyMember:
 	({MyConstructor} 'constructor'
@@ -38,5 +50,5 @@ MyMember:
 		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
 		expression=XBlockExpression)
 	|
-	MyClass
+	MyClass // nested local class
 ;

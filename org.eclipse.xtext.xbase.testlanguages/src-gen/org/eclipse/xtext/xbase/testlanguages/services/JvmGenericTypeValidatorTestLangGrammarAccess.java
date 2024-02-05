@@ -85,12 +85,13 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cMyClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cMyInterfaceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cMyClassWithSuperTypesParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//MyType:
-		//    MyClass | MyInterface;
+		//    MyClass | MyInterface | MyClassWithSuperTypes;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//MyClass | MyInterface
+		//MyClass | MyInterface | MyClassWithSuperTypes
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//MyClass
@@ -98,6 +99,9 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		
 		//MyInterface
 		public RuleCall getMyInterfaceParserRuleCall_1() { return cMyInterfaceParserRuleCall_1; }
+		
+		//MyClassWithSuperTypes
+		public RuleCall getMyClassWithSuperTypesParserRuleCall_2() { return cMyClassWithSuperTypesParserRuleCall_2; }
 	}
 	public class MyClassElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyClass");
@@ -297,6 +301,80 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
+	public class MyClassWithSuperTypesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyClassWithSuperTypes");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cClassWithSuperTypesKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cSuperTypesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cSuperTypesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_1_0 = (RuleCall)cSuperTypesAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cSuperTypesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0 = (RuleCall)cSuperTypesAssignment_2_2_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		///**
+		// * Special class where the first specified super type is expected to be a class
+		// * and the following ones interfaces.
+		// * Moreover, the class is always implicitly implements Serializable.
+		// * Just a corner case for testing JvmGenericTypeValidator.
+		// */
+		//MyClassWithSuperTypes:
+		//    'classWithSuperTypes' name=ValidID
+		//    ("superTypes" superTypes+=JvmParameterizedTypeReference (',' superTypes+=JvmParameterizedTypeReference)*)? '{'
+		//    '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'classWithSuperTypes' name=ValidID
+		//("superTypes" superTypes+=JvmParameterizedTypeReference (',' superTypes+=JvmParameterizedTypeReference)*)? '{'
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//'classWithSuperTypes'
+		public Keyword getClassWithSuperTypesKeyword_0() { return cClassWithSuperTypesKeyword_0; }
+		
+		//name=ValidID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+		
+		//("superTypes" superTypes+=JvmParameterizedTypeReference (',' superTypes+=JvmParameterizedTypeReference)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//"superTypes"
+		public Keyword getSuperTypesKeyword_2_0() { return cSuperTypesKeyword_2_0; }
+		
+		//superTypes+=JvmParameterizedTypeReference
+		public Assignment getSuperTypesAssignment_2_1() { return cSuperTypesAssignment_2_1; }
+		
+		//JvmParameterizedTypeReference
+		public RuleCall getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_1_0() { return cSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_1_0; }
+		
+		//(',' superTypes+=JvmParameterizedTypeReference)*
+		public Group getGroup_2_2() { return cGroup_2_2; }
+		
+		//','
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
+		
+		//superTypes+=JvmParameterizedTypeReference
+		public Assignment getSuperTypesAssignment_2_2_1() { return cSuperTypesAssignment_2_2_1; }
+		
+		//JvmParameterizedTypeReference
+		public RuleCall getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0() { return cSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
 	public class MyMemberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyMember");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -364,7 +442,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
 		//        expression=XBlockExpression)
 		//    |
-		//    MyClass
+		//    MyClass // nested local class
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -545,6 +623,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	private final MyTypeElements pMyType;
 	private final MyClassElements pMyClass;
 	private final MyInterfaceElements pMyInterface;
+	private final MyClassWithSuperTypesElements pMyClassWithSuperTypes;
 	private final MyMemberElements pMyMember;
 	
 	private final Grammar grammar;
@@ -564,6 +643,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		this.pMyType = new MyTypeElements();
 		this.pMyClass = new MyClassElements();
 		this.pMyInterface = new MyInterfaceElements();
+		this.pMyClassWithSuperTypes = new MyClassWithSuperTypesElements();
 		this.pMyMember = new MyMemberElements();
 	}
 	
@@ -611,7 +691,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	}
 	
 	//MyType:
-	//    MyClass | MyInterface;
+	//    MyClass | MyInterface | MyClassWithSuperTypes;
 	public MyTypeElements getMyTypeAccess() {
 		return pMyType;
 	}
@@ -646,6 +726,25 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		return getMyInterfaceAccess().getRule();
 	}
 	
+	///**
+	// * Special class where the first specified super type is expected to be a class
+	// * and the following ones interfaces.
+	// * Moreover, the class is always implicitly implements Serializable.
+	// * Just a corner case for testing JvmGenericTypeValidator.
+	// */
+	//MyClassWithSuperTypes:
+	//    'classWithSuperTypes' name=ValidID
+	//    ("superTypes" superTypes+=JvmParameterizedTypeReference (',' superTypes+=JvmParameterizedTypeReference)*)? '{'
+	//    '}'
+	//;
+	public MyClassWithSuperTypesElements getMyClassWithSuperTypesAccess() {
+		return pMyClassWithSuperTypes;
+	}
+	
+	public ParserRule getMyClassWithSuperTypesRule() {
+		return getMyClassWithSuperTypesAccess().getRule();
+	}
+	
 	//MyMember:
 	//    ({MyConstructor} 'constructor'
 	//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
@@ -659,7 +758,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	//        '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
 	//        expression=XBlockExpression)
 	//    |
-	//    MyClass
+	//    MyClass // nested local class
 	//;
 	public MyMemberElements getMyMemberAccess() {
 		return pMyMember;

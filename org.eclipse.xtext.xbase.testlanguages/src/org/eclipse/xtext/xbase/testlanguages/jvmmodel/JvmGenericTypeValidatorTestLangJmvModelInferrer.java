@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.testlanguages.jvmmodel;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
@@ -22,6 +24,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
@@ -42,6 +45,9 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 
 	@Inject
 	private IJvmModelAssociator associator;
+
+	@Inject
+	private TypeReferences typeReferences;
 
 	protected void inferClass(MyClass myClass, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase, JvmDeclaredType containerSceleton) {
 		if (Strings.isEmpty(myClass.getName()))
@@ -116,6 +122,24 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			}));
 	}
 
+	protected void inferClassWithSuperTypes(MyClassWithSuperTypes myClass, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+		if (Strings.isEmpty(myClass.getName()))
+			return;
+		acceptor.accept(jvmTypesBuilder.toClass(myClass, qualifiedNameProvider.getFullyQualifiedName(myClass),
+			(JvmGenericType it) -> {
+				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myClass));
+				var superTypes = myClass.getSuperTypes();
+				for (int i = 0; i < superTypes.size(); i++) {
+					if (i == 0) {
+						jvmTypesBuilder.setSuperClass(it, superTypes.get(i));
+					} else {
+						jvmTypesBuilder.addSuperInterface(it, superTypes.get(i));
+					}
+				}
+				it.getSuperTypes().add(typeReferences.getTypeForName(Serializable.class, myClass));
+			}));
+	}
+
 	@Override
 	public void infer(EObject element, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		if (element instanceof MyClass) {
@@ -123,6 +147,9 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			return;
 		} else if (element instanceof MyInterface) {
 			inferInterface((MyInterface) element, acceptor, prelinkingPhase);
+			return;
+		} else if (element instanceof MyClassWithSuperTypes) {
+			inferClassWithSuperTypes((MyClassWithSuperTypes) element, acceptor, prelinkingPhase);
 			return;
 		} else {
 			super.infer(element, acceptor, prelinkingPhase);

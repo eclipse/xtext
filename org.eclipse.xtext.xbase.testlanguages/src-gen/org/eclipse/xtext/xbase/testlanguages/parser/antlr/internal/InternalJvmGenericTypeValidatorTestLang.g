@@ -186,6 +186,15 @@ ruleMyType returns [EObject current=null]
 			$current = $this_MyInterface_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getMyTypeAccess().getMyClassWithSuperTypesParserRuleCall_2());
+		}
+		this_MyClassWithSuperTypes_2=ruleMyClassWithSuperTypes
+		{
+			$current = $this_MyClassWithSuperTypes_2.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -483,6 +492,106 @@ ruleMyInterface returns [EObject current=null]
 		otherlv_12='}'
 		{
 			newLeafNode(otherlv_12, grammarAccess.getMyInterfaceAccess().getRightCurlyBracketKeyword_5());
+		}
+	)
+;
+
+// Entry rule entryRuleMyClassWithSuperTypes
+entryRuleMyClassWithSuperTypes returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMyClassWithSuperTypesRule()); }
+	iv_ruleMyClassWithSuperTypes=ruleMyClassWithSuperTypes
+	{ $current=$iv_ruleMyClassWithSuperTypes.current; }
+	EOF;
+
+// Rule MyClassWithSuperTypes
+ruleMyClassWithSuperTypes returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='classWithSuperTypes'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getMyClassWithSuperTypesAccess().getClassWithSuperTypesKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMyClassWithSuperTypesAccess().getNameValidIDParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleValidID
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMyClassWithSuperTypesRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.xbase.Xtype.ValidID");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_2='superTypes'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_1_0());
+					}
+					lv_superTypes_3_0=ruleJvmParameterizedTypeReference
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getMyClassWithSuperTypesRule());
+						}
+						add(
+							$current,
+							"superTypes",
+							lv_superTypes_3_0,
+							"org.eclipse.xtext.xbase.Xtype.JvmParameterizedTypeReference");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_4=','
+				{
+					newLeafNode(otherlv_4, grammarAccess.getMyClassWithSuperTypesAccess().getCommaKeyword_2_2_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0());
+						}
+						lv_superTypes_5_0=ruleJvmParameterizedTypeReference
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getMyClassWithSuperTypesRule());
+							}
+							add(
+								$current,
+								"superTypes",
+								lv_superTypes_5_0,
+								"org.eclipse.xtext.xbase.Xtype.JvmParameterizedTypeReference");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+		)?
+		otherlv_6='{'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getMyClassWithSuperTypesAccess().getLeftCurlyBracketKeyword_3());
+		}
+		otherlv_7='}'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getMyClassWithSuperTypesAccess().getRightCurlyBracketKeyword_4());
 		}
 	)
 ;
