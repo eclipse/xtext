@@ -981,7 +981,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testDuplicateImplementedInterfaces() throws Exception {
 		var source = "import java.io.Serializable\n"
-				+ "class Foo implements Serializable, java.io.Serializable, Serializable {}";
+				+ "class Foo implements "
+				+ "Serializable, java.io.Serializable, Cloneable, Serializable {}";
 		XtendFile file = file(source);
 		helper.assertError(file, XTEND_CLASS, DUPLICATE_INTERFACE,
 				source.lastIndexOf("java.io.Serializable"), "java.io.Serializable".length(),
@@ -993,7 +994,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testDuplicateExtendedInterfaces() throws Exception {
 		var source = "import java.io.Serializable\n"
-				+ "interface Foo extends Serializable, java.io.Serializable, Serializable {}";
+				+ "interface Foo extends "
+				+ "Serializable, java.io.Serializable, Cloneable, Serializable {}";
 		XtendFile file = file(source);
 		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_INTERFACE,
 				source.lastIndexOf("java.io.Serializable"), "java.io.Serializable".length(),
