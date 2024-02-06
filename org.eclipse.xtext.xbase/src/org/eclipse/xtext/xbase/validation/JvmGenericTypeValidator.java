@@ -254,12 +254,8 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 				&& !((JvmGenericType) typeRef.getType()).isInterface();
 	}
 
-	/**
-	 * Workaround for https://github.com/eclipse/xtext/issues/2886
-	 */
 	protected boolean isAnonymous(JvmGenericType type) {
-		return type.isAnonymous() ||
-			Iterables.getLast(type.getSuperTypes()) instanceof XComputedTypeReference;
+		return type.isAnonymous();
 	}
 
 	protected EObject getSuperTypeSourceElement(JvmTypeReference extendedType) {
