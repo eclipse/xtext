@@ -195,7 +195,14 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	 * @since 2.4
 	 */
 	protected TreeAppendable createChild(SharedAppendableState state, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, Set<ILocationData> newData, boolean useForDebugging) {
-		return new TreeAppendable(state, traceURIConverter, locationProvider, jvmModelAssociations, newData, useForDebugging);
+		return createChild(state, traceURIConverter, locationProvider, jvmModelAssociations, newData, useForDebugging);
+	}
+
+	/**
+	 * @since 2.34
+	 */
+	protected TreeAppendable createChild(SharedAppendableState state, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, Set<ILocationData> newData, boolean useForDebugging) {
+		return new TreeAppendable(state, converter, locationProvider, jvmModelAssociations, newData, useForDebugging);
 	}
 	
 	@Override
@@ -646,5 +653,4 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	public GeneratorConfig getGeneratorConfig() {
 		return state.getGeneratorConfig();
 	}
-	
 }

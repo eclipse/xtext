@@ -1499,10 +1499,17 @@ public class JvmModelGenerator implements IGenerator {
         return this.uriForTraceCache.get(resource.getURI());
       }
     };
-    final TreeAppendable appendable = new TreeAppendable(importManager, cachingConverter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
+    final TreeAppendable appendable = this.createAppendable(importManager, cachingConverter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
     SharedAppendableState _state = appendable.getState();
     _state.setGeneratorConfig(config);
     return appendable;
+  }
+
+  /**
+   * @since 2.34
+   */
+  protected TreeAppendable createAppendable(final ImportManager importManager, final ITraceURIConverter converter, final ILocationInFileProvider locationProvider, final IJvmModelAssociations jvmModelAssociations, final EObject source, final String indentation, final String lineSeparator) {
+    return new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
   }
 
   public JvmGenericType containerType(final EObject context) {

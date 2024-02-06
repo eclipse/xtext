@@ -40,4 +40,5 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 		checkPendingInitialization();
 		return super.isAnonymous();
 	}
+
 }

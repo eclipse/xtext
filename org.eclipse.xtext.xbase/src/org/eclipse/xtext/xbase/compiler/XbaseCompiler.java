@@ -316,7 +316,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return completeFeatureCallAppendable;
 	}
-	
+
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XBlockExpression) {
