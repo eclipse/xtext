@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.compiler.output.AnonymousClassAwareTreeAppendable;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.CodeGenerationContextImpl;
@@ -48,6 +49,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -55,11 +58,14 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation;
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -90,6 +96,9 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 
   @Inject
   private ElementIssueProvider.Factory issueProviderFactory;
+
+  @Inject
+  private AnonymousClassCompilerHelper compilerHelper;
 
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
@@ -251,14 +260,14 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   }
 
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
-    final Function1<JvmGenericType, Boolean> _function = (JvmGenericType it) -> {
-      boolean _isAnonymous = it.isAnonymous();
-      return Boolean.valueOf((!_isAnonymous));
-    };
-    final Consumer<JvmGenericType> _function_1 = (JvmGenericType it) -> {
-      appendable.newLine();
+    final Consumer<JvmGenericType> _function = (JvmGenericType it) -> {
+      boolean _canCompileToJavaAnonymousClass = this.compilerHelper.canCompileToJavaAnonymousClass(it);
+      if (_canCompileToJavaAnonymousClass) {
+        return;
+      }
       EObject _head = IterableExtensions.<EObject>head(this.getSourceElements(it));
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
+      appendable.newLine();
       final ITreeAppendable childAppendable = appendable.trace(anonymousClass);
       childAppendable.append("abstract class ");
       this._treeAppendableUtil.traceSignificant(childAppendable, anonymousClass).append(it.getSimpleName());
@@ -277,10 +286,10 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         childAppendable.newLine().append("final ").append(it.getSimpleName()).append(" ").append(thisName).append(" = this;");
         childAppendable.blankLine();
       }
-      final Procedure1<LoopParams> _function_2 = (LoopParams it_1) -> {
+      final Procedure1<LoopParams> _function_1 = (LoopParams it_1) -> {
         it_1.setSeparator(this.memberSeparator());
       };
-      final Procedure1<JvmMember> _function_3 = (JvmMember it_1) -> {
+      final Procedure1<JvmMember> _function_2 = (JvmMember it_1) -> {
         final ITreeAppendable memberAppendable = this._treeAppendableUtil.traceWithComments(childAppendable, it_1);
         memberAppendable.openScope();
         if ((it_1 instanceof JvmOperation)) {
@@ -345,11 +354,11 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         }
         memberAppendable.closeScope();
       };
-      this._loopExtensions.<JvmMember>forEach(childAppendable, this.getAddedDeclarations(it, anonymousClass), _function_2, _function_3);
+      this._loopExtensions.<JvmMember>forEach(childAppendable, this.getAddedDeclarations(it, anonymousClass), _function_1, _function_2);
       childAppendable.decreaseIndentation().newLine().append("}");
       appendable.blankLine();
     };
-    IterableExtensions.<JvmGenericType>filter(feature.getLocalClasses(), _function).forEach(_function_1);
+    feature.getLocalClasses().forEach(_function);
   }
 
   private ITreeAppendable generateJavaConstant(final Object value, final ITreeAppendable appendable) {
@@ -472,8 +481,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         if ((it.getDeclaringType().isLocal() && (it instanceof JvmOperation))) {
           JvmDeclaredType _declaringType_1 = it.getDeclaringType();
           final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
-          boolean _isAnonymous = declarator.isAnonymous();
-          boolean _not = (!_isAnonymous);
+          boolean _canCompileToJavaAnonymousClass = this.compilerHelper.canCompileToJavaAnonymousClass(declarator);
+          boolean _not = (!_canCompileToJavaAnonymousClass);
           if (_not) {
             return result;
           }
@@ -573,5 +582,10 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       _xifexpression = super.generateMembersInBody(it, appendable, config);
     }
     return _xifexpression;
+  }
+
+  @Override
+  public TreeAppendable createAppendable(final ImportManager importManager, final ITraceURIConverter converter, final ILocationInFileProvider locationProvider, final IJvmModelAssociations jvmModelAssociations, final EObject source, final String indentation, final String lineSeparator) {
+    return new AnonymousClassAwareTreeAppendable(this.compilerHelper, importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator);
   }
 }

@@ -14,7 +14,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -34,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -85,7 +83,7 @@ public class XtendCompiler extends XbaseCompiler {
 	private IGeneratorConfigProvider generatorConfigProvider;
 	
 	@Inject
-	private IXtendJvmAssociations associations;
+	private AnonymousClassCompilerHelper compilerHelper;
 	
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {
@@ -546,9 +544,7 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if(expression instanceof AnonymousClass) {
-			AnonymousClass anonymousClass = (AnonymousClass) expression;
-			JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
-			return inferredLocalClass.isAnonymous();
+			return compilerHelper.canCompileToJavaAnonymousClass((AnonymousClass) expression);
 		} else
 			return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
@@ -611,5 +607,10 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		return false;
 	}
-	
+
+	@Override
+	protected boolean canCompileToJavaAnonymousClass(XConstructorCall constructorCall) {
+		return super.canCompileToJavaAnonymousClass(constructorCall) &&
+			compilerHelper.canCompileToJavaAnonymousClass((AnonymousClass) constructorCall.eContainer());
+	}
 }

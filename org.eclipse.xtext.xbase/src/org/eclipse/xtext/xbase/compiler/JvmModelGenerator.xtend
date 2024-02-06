@@ -1002,9 +1002,18 @@ class JvmModelGenerator implements IGenerator {
 			}
 			
 		}
-		val appendable = new TreeAppendable(importManager, cachingConverter, locationProvider, jvmModelAssociations, context, "  ", "\n")
+		val appendable = createAppendable(importManager, cachingConverter, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		appendable.state.generatorConfig = config
 		return appendable
+	}
+	
+	/**
+	 * @since 2.34
+	 */
+	def protected TreeAppendable createAppendable(ImportManager importManager, ITraceURIConverter converter,
+			ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations,
+			EObject source, String indentation, String lineSeparator) {
+		return new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
 	}
 	
 	def JvmGenericType containerType(EObject context) {

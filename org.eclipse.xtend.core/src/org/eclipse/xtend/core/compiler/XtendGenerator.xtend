@@ -46,6 +46,12 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.generator.trace.ITraceURIConverter
+import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.compiler.output.AnonymousClassAwareTreeAppendable
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -56,7 +62,8 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	@Inject OperationCanceledManager operationCanceledManager
 
 	@Inject ElementIssueProvider.Factory issueProviderFactory
-	
+	@Inject AnonymousClassCompilerHelper compilerHelper
+
 	override doGenerate(Resource input, IFileSystemAccess fsa) {
 		super.doGenerate(input, fsa)
 		callMacroProcessors(input)
@@ -164,9 +171,12 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 	
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
-		feature.localClasses.filter[ !anonymous ].forEach[
-			appendable.newLine
+		feature.localClasses.forEach[
+			if (compilerHelper.canCompileToJavaAnonymousClass(it)) {
+				return
+			}
 			val anonymousClass = sourceElements.head as AnonymousClass
+			appendable.newLine
 			val childAppendable = appendable.trace(anonymousClass)
 			childAppendable.append('abstract class ')
 			childAppendable.traceSignificant(anonymousClass).append(simpleName)
@@ -320,7 +330,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			}
 			if (declaringType.local && it instanceof JvmOperation) {
 				val declarator = declaringType as JvmGenericType
-				if (!declarator.anonymous) {
+				if (!compilerHelper.canCompileToJavaAnonymousClass(declarator)) {
 					return result
 				}
 			}
@@ -386,5 +396,9 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 		}
 		
 	}
-	
+
+	override createAppendable(ImportManager importManager, ITraceURIConverter converter, ILocationInFileProvider locationProvider, IJvmModelAssociations jvmModelAssociations, EObject source, String indentation, String lineSeparator) {
+		return new AnonymousClassAwareTreeAppendable(compilerHelper, importManager, converter, locationProvider, jvmModelAssociations, source, indentation, lineSeparator)
+	}
+
 }
