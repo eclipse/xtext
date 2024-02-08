@@ -35,7 +35,7 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 
 	private final static Logger log = Logger.getLogger(JFlexLoader.class);
 	
-	private static final String DOWNLOAD_URL = "http://jflex.de/jflex-1.4.3.zip";
+	private static final String DOWNLOAD_URL = "https://jflex.de/jflex-1.4.3.zip";
 	
 	private static final String MAIN_CLASS = "JFlex.Main";
 
