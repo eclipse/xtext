@@ -446,6 +446,20 @@ public class JvmGenericTypeValidatorTest {
 			+ " inherited from InterfaceWithAbstractMethod.");
 	}
 
+	@Test public void testOverrideFinalMethod() throws Exception {
+		var source = "class Foo extends test.ClassWithFinalMembers { def void foo() {} }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, OVERRIDDEN_FINAL,
+				source.indexOf("foo"), "foo".length(),
+				"override", "final");
+	}
+
+	@Test public void testOverrideNonFinalMethod() throws Exception {
+		var source = "class Foo extends test.SuperTypeClass { def void foo() {} }";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
+	}
+
 	@Test public void testDuplicateParameter() throws Exception {
 		var source = "class Foo { def void foo(int x, int x) {} }";
 		var model = parse(source);
