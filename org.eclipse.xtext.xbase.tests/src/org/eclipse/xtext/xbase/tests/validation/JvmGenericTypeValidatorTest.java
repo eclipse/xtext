@@ -476,6 +476,39 @@ public class JvmGenericTypeValidatorTest {
 				"reduce", "visibility");
 	}
 
+	@Test public void testIncompatibleThrowsClause() throws Exception {
+		var source = "class Foo extends test.ExceptionThrowing {"
+				+ "def void ioException() throws Exception {} }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, INCOMPATIBLE_THROWS_CLAUSE,
+				source.lastIndexOf("Exception"), "Exception".length(),
+				"Exception", "is not", "compatible", "throws", "clause");
+	}
+
+	/**
+	 * Two incompatible exceptions from three supertypes;
+	 * the marker is set on the offending exceptions only.
+	 * https://github.com/eclipse/xtext/issues/2912
+	 */
+	@Test public void testIncompatibleThrowsClauseFromMultipleSuperTypes() throws Exception {
+		var source = "class Foo extends test.ExceptionThrowing "
+				+ "implements test.ExceptionThrowingInterface, test.ExceptionThrowingInterface2 {"
+				+ "def void nullPointerException() throws "
+				+ "NullPointerException, java.io.IOException, java.io.FileNotFoundException {} "
+				+ "}";
+		var model = parse(source);
+		var expectedSuffix = " is not compatible with the throws clause in "
+				+ "ExceptionThrowing.nullPointerException(), ExceptionThrowingInterface.nullPointerException() and ExceptionThrowingInterface2.nullPointerException()";
+		validationHelper.assertError(model, MY_METHOD, INCOMPATIBLE_THROWS_CLAUSE,
+				source.indexOf("java.io.IOException"), "java.io.IOException".length(),
+				"declared exception IOException",
+				expectedSuffix);
+		validationHelper.assertError(model, MY_METHOD, INCOMPATIBLE_THROWS_CLAUSE,
+				source.indexOf("java.io.FileNotFoundException"), "java.io.FileNotFoundException".length(),
+				"declared exception FileNotFoundException",
+				expectedSuffix);
+	}
+
 	@Test public void testDuplicateParameter() throws Exception {
 		var source = "class Foo { def void foo(int x, int x) {} }";
 		var model = parse(source);
