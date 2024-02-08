@@ -575,6 +575,7 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 *
 	 * Constraint:
 	 *     (
+	 *         abstract?='abstract'? 
 	 *         name=ValidID 
 	 *         extends=JvmParameterizedTypeReference? 
 	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 

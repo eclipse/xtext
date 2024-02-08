@@ -14,7 +14,7 @@ MyType:
 	MyClass | MyInterface | MyClassWithSuperTypes;
 
 MyClass:
-	'class' name=ValidID
+	(abstract ?= 'abstract')? 'class' name=ValidID
 	("extends" extends=JvmParameterizedTypeReference)?
 	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
 		(members+=MyMember)*

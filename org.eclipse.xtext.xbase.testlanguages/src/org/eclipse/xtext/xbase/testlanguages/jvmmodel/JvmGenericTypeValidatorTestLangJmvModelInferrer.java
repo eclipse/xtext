@@ -59,6 +59,7 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 		acceptor.accept(inferred,
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myClass));
+				it.setAbstract(myClass.isAbstract());
 				jvmTypesBuilder.setSuperClass(it, myClass.getExtends());
 				for (var interf : myClass.getImplements()) {
 					jvmTypesBuilder.addSuperInterface(it, interf);

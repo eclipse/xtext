@@ -156,13 +156,22 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_CLASS__NAME = MY_TYPE__NAME;
 
   /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS__ABSTRACT = MY_TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Extends</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MY_CLASS__EXTENDS = MY_TYPE_FEATURE_COUNT + 0;
+  int MY_CLASS__EXTENDS = MY_TYPE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Implements</b></em>' containment reference list.
@@ -171,7 +180,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_CLASS__IMPLEMENTS = MY_TYPE_FEATURE_COUNT + 1;
+  int MY_CLASS__IMPLEMENTS = MY_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -180,7 +189,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_CLASS__MEMBERS = MY_TYPE_FEATURE_COUNT + 2;
+  int MY_CLASS__MEMBERS = MY_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>My Class</em>' class.
@@ -189,7 +198,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MY_CLASS_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 3;
+  int MY_CLASS_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyInterfaceImpl <em>My Interface</em>}' class.
@@ -534,6 +543,17 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   EClass getMyClass();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#isAbstract <em>Abstract</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Abstract</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#isAbstract()
+   * @see #getMyClass()
+   * @generated
+   */
+  EAttribute getMyClass_Abstract();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#getExtends <em>Extends</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -875,6 +895,14 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EClass MY_CLASS = eINSTANCE.getMyClass();
+
+    /**
+     * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MY_CLASS__ABSTRACT = eINSTANCE.getMyClass_Abstract();
 
     /**
      * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.

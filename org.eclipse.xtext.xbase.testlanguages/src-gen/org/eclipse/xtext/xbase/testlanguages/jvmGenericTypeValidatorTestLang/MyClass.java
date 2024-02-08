@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#getMembers <em>Members</em>}</li>
@@ -32,6 +33,28 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  */
 public interface MyClass extends MyType, MyMember
 {
+  /**
+   * Returns the value of the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Abstract</em>' attribute.
+   * @see #setAbstract(boolean)
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage#getMyClass_Abstract()
+   * @model
+   * @generated
+   */
+  boolean isAbstract();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass#isAbstract <em>Abstract</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Abstract</em>' attribute.
+   * @see #isAbstract()
+   * @generated
+   */
+  void setAbstract(boolean value);
+
   /**
    * Returns the value of the '<em><b>Extends</b></em>' containment reference.
    * <!-- begin-user-doc -->

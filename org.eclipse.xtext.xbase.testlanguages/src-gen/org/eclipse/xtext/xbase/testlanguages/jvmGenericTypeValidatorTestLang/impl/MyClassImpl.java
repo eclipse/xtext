@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassImpl#getMembers <em>Members</em>}</li>
@@ -46,6 +47,26 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  */
 public class MyClassImpl extends MyTypeImpl implements MyClass
 {
+  /**
+   * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isAbstract()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean ABSTRACT_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isAbstract()
+   * @generated
+   * @ordered
+   */
+  protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -95,6 +116,31 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
   protected EClass eStaticClass()
   {
     return JvmGenericTypeValidatorTestLangPackage.Literals.MY_CLASS;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isAbstract()
+  {
+    return abstract_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAbstract(boolean newAbstract)
+  {
+    boolean oldAbstract = abstract_;
+    abstract_ = newAbstract;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, JvmGenericTypeValidatorTestLangPackage.MY_CLASS__ABSTRACT, oldAbstract, abstract_));
   }
 
   /**
@@ -207,6 +253,8 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__ABSTRACT:
+        return isAbstract();
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__EXTENDS:
         return getExtends();
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__IMPLEMENTS:
@@ -228,6 +276,9 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__ABSTRACT:
+        setAbstract((Boolean)newValue);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__EXTENDS:
         setExtends((JvmParameterizedTypeReference)newValue);
         return;
@@ -253,6 +304,9 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__ABSTRACT:
+        setAbstract(ABSTRACT_EDEFAULT);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__EXTENDS:
         setExtends((JvmParameterizedTypeReference)null);
         return;
@@ -276,6 +330,8 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
   {
     switch (featureID)
     {
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__ABSTRACT:
+        return abstract_ != ABSTRACT_EDEFAULT;
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__EXTENDS:
         return extends_ != null;
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS__IMPLEMENTS:
@@ -284,6 +340,23 @@ public class MyClassImpl extends MyTypeImpl implements MyClass
         return members != null && !members.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (abstract: ");
+    result.append(abstract_);
+    result.append(')');
+    return result.toString();
   }
 
 } //MyClassImpl

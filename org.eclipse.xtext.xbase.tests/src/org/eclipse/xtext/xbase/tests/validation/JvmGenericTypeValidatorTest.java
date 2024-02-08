@@ -192,6 +192,12 @@ public class JvmGenericTypeValidatorTest {
 		validationHelper.assertNoError(model, INTERFACE_EXPECTED);
 	}
 
+	@Test public void testAbstractClassImplementsAnnotation() throws Exception {
+		var source = "abstract class Foo implements Override {}";
+		var model = parse(source);
+		validationHelper.assertNoErrors(model);
+	}
+
 	@Test public void testClassExtendsInterface() throws Exception {
 		var source = "class Foo extends Cloneable {}";
 		var model = parse(source);

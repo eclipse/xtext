@@ -17,6 +17,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JvmGenericTypeValidatorTestLang.ecore#//MyType/name"/>
     </genClasses>
     <genClasses ecoreClass="JvmGenericTypeValidatorTestLang.ecore#//MyClass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JvmGenericTypeValidatorTestLang.ecore#//MyClass/abstract"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyClass/extends"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyClass/implements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JvmGenericTypeValidatorTestLang.ecore#//MyClass/members"/>

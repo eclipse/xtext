@@ -254,9 +254,9 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyClass_Extends()
+  public EAttribute getMyClass_Abstract()
   {
-    return (EReference)myClassEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)myClassEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -265,7 +265,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyClass_Implements()
+  public EReference getMyClass_Extends()
   {
     return (EReference)myClassEClass.getEStructuralFeatures().get(1);
   }
@@ -276,9 +276,20 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyClass_Members()
+  public EReference getMyClass_Implements()
   {
     return (EReference)myClassEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyClass_Members()
+  {
+    return (EReference)myClassEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -552,6 +563,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     createEAttribute(myTypeEClass, MY_TYPE__NAME);
 
     myClassEClass = createEClass(MY_CLASS);
+    createEAttribute(myClassEClass, MY_CLASS__ABSTRACT);
     createEReference(myClassEClass, MY_CLASS__EXTENDS);
     createEReference(myClassEClass, MY_CLASS__IMPLEMENTS);
     createEReference(myClassEClass, MY_CLASS__MEMBERS);
@@ -636,6 +648,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     initEAttribute(getMyType_Name(), ecorePackage.getEString(), "name", null, 0, 1, MyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(myClassEClass, MyClass.class, "MyClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMyClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyClass_Extends(), theTypesPackage.getJvmParameterizedTypeReference(), null, "extends", null, 0, 1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyClass_Implements(), theTypesPackage.getJvmParameterizedTypeReference(), null, "implements", null, 0, -1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyClass_Members(), this.getMyMember(), null, "members", null, 0, -1, MyClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

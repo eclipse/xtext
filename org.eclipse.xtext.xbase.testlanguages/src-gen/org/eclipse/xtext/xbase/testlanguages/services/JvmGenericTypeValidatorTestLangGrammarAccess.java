@@ -106,97 +106,105 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	public class MyClassElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyClass");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cClassKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cExtendsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_0 = (RuleCall)cExtendsAssignment_2_1.eContents().get(0);
+		private final Assignment cAbstractAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cAbstractAbstractKeyword_0_0 = (Keyword)cAbstractAssignment_0.eContents().get(0);
+		private final Keyword cClassKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cImplementsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cImplementsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cImplementsJvmParameterizedTypeReferenceParserRuleCall_3_1_0 = (RuleCall)cImplementsAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cImplementsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cImplementsJvmParameterizedTypeReferenceParserRuleCall_3_2_1_0 = (RuleCall)cImplementsAssignment_3_2_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cMembersAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cMembersMyMemberParserRuleCall_5_0 = (RuleCall)cMembersAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cExtendsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cExtendsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cExtendsJvmParameterizedTypeReferenceParserRuleCall_3_1_0 = (RuleCall)cExtendsAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cImplementsKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cImplementsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cImplementsJvmParameterizedTypeReferenceParserRuleCall_4_1_0 = (RuleCall)cImplementsAssignment_4_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
+		private final Keyword cCommaKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cImplementsAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cImplementsJvmParameterizedTypeReferenceParserRuleCall_4_2_1_0 = (RuleCall)cImplementsAssignment_4_2_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cMembersAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cMembersMyMemberParserRuleCall_6_0 = (RuleCall)cMembersAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//MyClass:
-		//    'class' name=ValidID
+		//    (abstract ?= 'abstract')? 'class' name=ValidID
 		//    ("extends" extends=JvmParameterizedTypeReference)?
 		//    ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
 		//        (members+=MyMember)*
 		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'class' name=ValidID
+		//(abstract ?= 'abstract')? 'class' name=ValidID
 		//("extends" extends=JvmParameterizedTypeReference)?
 		//('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
 		//    (members+=MyMember)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
+		//(abstract ?= 'abstract')?
+		public Assignment getAbstractAssignment_0() { return cAbstractAssignment_0; }
+		
+		//'abstract'
+		public Keyword getAbstractAbstractKeyword_0_0() { return cAbstractAbstractKeyword_0_0; }
+		
 		//'class'
-		public Keyword getClassKeyword_0() { return cClassKeyword_0; }
+		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 		
 		//name=ValidID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
 		
 		//("extends" extends=JvmParameterizedTypeReference)?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//"extends"
-		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
-		
-		//extends=JvmParameterizedTypeReference
-		public Assignment getExtendsAssignment_2_1() { return cExtendsAssignment_2_1; }
-		
-		//JvmParameterizedTypeReference
-		public RuleCall getExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_0() { return cExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_0; }
-		
-		//('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?
 		public Group getGroup_3() { return cGroup_3; }
 		
-		//'implements'
-		public Keyword getImplementsKeyword_3_0() { return cImplementsKeyword_3_0; }
+		//"extends"
+		public Keyword getExtendsKeyword_3_0() { return cExtendsKeyword_3_0; }
 		
-		//implements+=JvmParameterizedTypeReference
-		public Assignment getImplementsAssignment_3_1() { return cImplementsAssignment_3_1; }
+		//extends=JvmParameterizedTypeReference
+		public Assignment getExtendsAssignment_3_1() { return cExtendsAssignment_3_1; }
 		
 		//JvmParameterizedTypeReference
-		public RuleCall getImplementsJvmParameterizedTypeReferenceParserRuleCall_3_1_0() { return cImplementsJvmParameterizedTypeReferenceParserRuleCall_3_1_0; }
+		public RuleCall getExtendsJvmParameterizedTypeReferenceParserRuleCall_3_1_0() { return cExtendsJvmParameterizedTypeReferenceParserRuleCall_3_1_0; }
+		
+		//('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'implements'
+		public Keyword getImplementsKeyword_4_0() { return cImplementsKeyword_4_0; }
+		
+		//implements+=JvmParameterizedTypeReference
+		public Assignment getImplementsAssignment_4_1() { return cImplementsAssignment_4_1; }
+		
+		//JvmParameterizedTypeReference
+		public RuleCall getImplementsJvmParameterizedTypeReferenceParserRuleCall_4_1_0() { return cImplementsJvmParameterizedTypeReferenceParserRuleCall_4_1_0; }
 		
 		//(',' implements+=JvmParameterizedTypeReference)*
-		public Group getGroup_3_2() { return cGroup_3_2; }
+		public Group getGroup_4_2() { return cGroup_4_2; }
 		
 		//','
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+		public Keyword getCommaKeyword_4_2_0() { return cCommaKeyword_4_2_0; }
 		
 		//implements+=JvmParameterizedTypeReference
-		public Assignment getImplementsAssignment_3_2_1() { return cImplementsAssignment_3_2_1; }
+		public Assignment getImplementsAssignment_4_2_1() { return cImplementsAssignment_4_2_1; }
 		
 		//JvmParameterizedTypeReference
-		public RuleCall getImplementsJvmParameterizedTypeReferenceParserRuleCall_3_2_1_0() { return cImplementsJvmParameterizedTypeReferenceParserRuleCall_3_2_1_0; }
+		public RuleCall getImplementsJvmParameterizedTypeReferenceParserRuleCall_4_2_1_0() { return cImplementsJvmParameterizedTypeReferenceParserRuleCall_4_2_1_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 		
 		//(members+=MyMember)*
-		public Assignment getMembersAssignment_5() { return cMembersAssignment_5; }
+		public Assignment getMembersAssignment_6() { return cMembersAssignment_6; }
 		
 		//MyMember
-		public RuleCall getMembersMyMemberParserRuleCall_5_0() { return cMembersMyMemberParserRuleCall_5_0; }
+		public RuleCall getMembersMyMemberParserRuleCall_6_0() { return cMembersMyMemberParserRuleCall_6_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 	public class MyInterfaceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyInterface");
@@ -771,7 +779,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	}
 	
 	//MyClass:
-	//    'class' name=ValidID
+	//    (abstract ?= 'abstract')? 'class' name=ValidID
 	//    ("extends" extends=JvmParameterizedTypeReference)?
 	//    ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)? '{'
 	//        (members+=MyMember)*
