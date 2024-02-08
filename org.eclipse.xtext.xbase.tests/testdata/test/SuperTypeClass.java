@@ -16,4 +16,7 @@ public abstract class SuperTypeClass {
 	public void foo() {
 	}
 
+	public String stringMethod() {
+		return null;
+	}
 }

@@ -460,6 +460,14 @@ public class JvmGenericTypeValidatorTest {
 		validationHelper.assertNoErrors(model);
 	}
 
+	@Test public void testOverrideIncompatbileReturnType() throws Exception {
+		var source = "class Foo extends test.SuperTypeClass { def Integer stringMethod() {null} }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, INCOMPATIBLE_RETURN_TYPE,
+				source.indexOf("Integer"), "Integer".length(),
+				"incompatible", "stringMethod");
+	}
+
 	@Test public void testOverrideHides() throws Exception {
 		var source = "class Foo extends test.SuperTypeClass { def private void foo() {} }";
 		var model = parse(source);
