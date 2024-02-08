@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyM
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#isPrivate <em>Private</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#isSynchronized <em>Synchronized</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMethodImpl#getName <em>Name</em>}</li>
@@ -93,6 +94,26 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
    * @ordered
    */
   protected boolean private_ = PRIVATE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSynchronized()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean SYNCHRONIZED_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSynchronized()
+   * @generated
+   * @ordered
+   */
+  protected boolean synchronized_ = SYNCHRONIZED_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
@@ -233,6 +254,31 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     private_ = newPrivate;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PRIVATE, oldPrivate, private_));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isSynchronized()
+  {
+    return synchronized_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSynchronized(boolean newSynchronized)
+  {
+    boolean oldSynchronized = synchronized_;
+    synchronized_ = newSynchronized;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, JvmGenericTypeValidatorTestLangPackage.MY_METHOD__SYNCHRONIZED, oldSynchronized, synchronized_));
   }
 
   /**
@@ -443,6 +489,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         return isStatic();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PRIVATE:
         return isPrivate();
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__SYNCHRONIZED:
+        return isSynchronized();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
         return getTypeParameters();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
@@ -475,6 +523,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PRIVATE:
         setPrivate((Boolean)newValue);
+        return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__SYNCHRONIZED:
+        setSynchronized((Boolean)newValue);
         return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
         getTypeParameters().clear();
@@ -517,6 +568,9 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PRIVATE:
         setPrivate(PRIVATE_EDEFAULT);
         return;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__SYNCHRONIZED:
+        setSynchronized(SYNCHRONIZED_EDEFAULT);
+        return;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
         getTypeParameters().clear();
         return;
@@ -553,6 +607,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
         return static_ != STATIC_EDEFAULT;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__PRIVATE:
         return private_ != PRIVATE_EDEFAULT;
+      case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__SYNCHRONIZED:
+        return synchronized_ != SYNCHRONIZED_EDEFAULT;
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE_PARAMETERS:
         return typeParameters != null && !typeParameters.isEmpty();
       case JvmGenericTypeValidatorTestLangPackage.MY_METHOD__TYPE:
@@ -584,6 +640,8 @@ public class MyMethodImpl extends MyMemberImpl implements MyMethod
     result.append(static_);
     result.append(", private: ");
     result.append(private_);
+    result.append(", synchronized: ");
+    result.append(synchronized_);
     result.append(", name: ");
     result.append(name);
     result.append(')');

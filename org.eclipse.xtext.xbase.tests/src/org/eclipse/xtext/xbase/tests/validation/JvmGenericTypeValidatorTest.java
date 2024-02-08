@@ -509,6 +509,21 @@ public class JvmGenericTypeValidatorTest {
 				expectedSuffix);
 	}
 
+	@Test public void testSynchronized_1() throws Exception{
+		var source = "class Foo extends Bar { def int myMethod() {1} } "
+				+ "class Bar { def synchronized int myMethod() {0} }";
+		var model = parse(source);
+		validationHelper.assertWarning(model, MY_METHOD, MISSING_SYNCHRONIZED,
+				source.indexOf("myMethod"), "myMethod".length(),
+				"The overridden method is synchronized, the current one is not synchronized");
+	}
+
+	@Test public void testSynchronized_2() throws Exception{
+		var model = parse("class Foo extends Bar { def synchronized int myMethod() {1} } "
+				+ "class Bar { def synchronized int myMethod() {0} }");
+		validationHelper.assertNoWarnings(model, MY_METHOD, MISSING_SYNCHRONIZED);
+	}
+
 	@Test public void testDuplicateParameter() throws Exception {
 		var source = "class Foo { def void foo(int x, int x) {} }";
 		var model = parse(source);

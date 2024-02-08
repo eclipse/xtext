@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#isPrivate <em>Private</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#isSynchronized <em>Synchronized</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#getName <em>Name</em>}</li>
@@ -84,6 +85,28 @@ public interface MyMethod extends MyMember
    * @generated
    */
   void setPrivate(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Synchronized</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Synchronized</em>' attribute.
+   * @see #setSynchronized(boolean)
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage#getMyMethod_Synchronized()
+   * @model
+   * @generated
+   */
+  boolean isSynchronized();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMethod#isSynchronized <em>Synchronized</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Synchronized</em>' attribute.
+   * @see #isSynchronized()
+   * @generated
+   */
+  void setSynchronized(boolean value);
 
   /**
    * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.
