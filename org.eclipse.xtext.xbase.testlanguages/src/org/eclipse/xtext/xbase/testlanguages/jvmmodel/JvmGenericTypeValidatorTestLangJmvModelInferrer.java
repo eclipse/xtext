@@ -137,6 +137,7 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			(JvmGenericType it) -> {
 				jvmTypesBuilder.setDocumentation(it, jvmTypesBuilder.getDocumentation(myClass));
 				var superTypes = myClass.getSuperTypes();
+				it.getSuperTypes().add(typeReferences.getTypeForName(Serializable.class, myClass));
 				for (int i = 0; i < superTypes.size(); i++) {
 					if (i == 0) {
 						jvmTypesBuilder.setSuperClass(it, superTypes.get(i));
@@ -144,7 +145,6 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 						jvmTypesBuilder.addSuperInterface(it, superTypes.get(i));
 					}
 				}
-				it.getSuperTypes().add(typeReferences.getTypeForName(Serializable.class, myClass));
 			}));
 	}
 

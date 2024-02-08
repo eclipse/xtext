@@ -191,8 +191,11 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		for (int i = 0; i < superTypes.size(); ++i) {
 			JvmTypeReference extendedType = superTypes.get(i);
 			var associated = getSuperTypeSourceElement(extendedType);
-			if (associated == null)
+			if (associated == null) {
+				// we still record this supertype for possible duplication checks
+				seen.add(extendedType.getIdentifier());
 				continue; // synthetic superclass (e.g., Object)
+			}
 			var eContainingFeature = associated.eContainingFeature();
 			int featureIndex = INSIGNIFICANT_INDEX;
 			multiFeatureIndex++;
