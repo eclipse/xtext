@@ -8,16 +8,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.xbase.testing.JavaVersionModule;
 import org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLangRuntimeModule;
+import org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLangStandaloneSetup;
 import org.eclipse.xtext.xbase.testlanguages.tests.JvmGenericTypeValidatorTestLangInjectorProvider;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * To let the validator/scoping/linking find the Java classes of "testdata" referred in some tests also in an OSGI and Maven/Tycho
  * environment. This is required because the original {@link JvmGenericTypeValidatorTestLangInjectorProvider} is not in this bundle.
+ * Moreover, we configure Java 8.
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  */
 public class JvmGenericTypeValidatorTestLangInjectorProviderCustom extends JvmGenericTypeValidatorTestLangInjectorProvider {
+
+	@Override
+	protected Injector internalCreateInjector() {
+		return new JvmGenericTypeValidatorTestLangStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(createRuntimeModule(),
+						new JavaVersionModule(JavaVersion.JAVA8));
+			}
+		}.createInjectorAndDoEMFRegistration();
+	}
 
 	@Override
 	protected JvmGenericTypeValidatorTestLangRuntimeModule createRuntimeModule() {

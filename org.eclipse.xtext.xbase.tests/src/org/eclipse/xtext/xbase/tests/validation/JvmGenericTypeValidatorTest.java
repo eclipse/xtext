@@ -400,6 +400,52 @@ public class JvmGenericTypeValidatorTest {
 				"does not override it");
 	}
 
+	@Test public void testConflictingDefaultMethods() throws Exception {
+		var source = "class C implements "
+				+ "test.InterfaceWithDefaultMethod1,"
+				+ "test.InterfaceWithDefaultMethod2 { }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
+			"The type C inherits multiple implementations of the method foo()"
+			+ " from InterfaceWithDefaultMethod1 and InterfaceWithDefaultMethod2.");
+	}
+
+	@Test public void testConflictingDefaultMethods00() throws Exception {
+		var source = "interface C extends "
+				+ "test.InterfaceWithDefaultMethod1,"
+				+ "test.InterfaceWithDefaultMethod2 { }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_INTERFACE, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
+			"The type C inherits multiple implementations of the method foo()"
+			+ " from InterfaceWithDefaultMethod1 and InterfaceWithDefaultMethod2.");
+	}
+
+	@Test public void testConflictingDefaultMethods01() throws Exception {
+		var source = "class C implements "
+				+ "test.InterfaceWithDefaultMethod1,"
+				+ "test.InterfaceWithAbstractMethod { }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
+			"The non-abstract method foo() inherited from "
+			+ "InterfaceWithDefaultMethod1 conflicts with the method foo()"
+			+ " inherited from InterfaceWithAbstractMethod.");
+	}
+
+	@Test public void testConflictingDefaultMethods02() throws Exception {
+		var source = "class C implements "
+				+ "test.InterfaceWithAbstractMethod,"
+				+ "test.InterfaceWithDefaultMethod1 { }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_CLASS, CONFLICTING_DEFAULT_METHODS,
+			source.indexOf("C"), 1,
+			"The non-abstract method foo() inherited from "
+			+ "InterfaceWithDefaultMethod1 conflicts with the method foo()"
+			+ " inherited from InterfaceWithAbstractMethod.");
+	}
+
 	@Test public void testDuplicateParameter() throws Exception {
 		var source = "class Foo { def void foo(int x, int x) {} }";
 		var model = parse(source);
