@@ -656,6 +656,7 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 * Constraint:
 	 *     (
 	 *         static?='static'? 
+	 *         private?='private'? 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         type=JvmTypeReference 
 	 *         name=ValidID 

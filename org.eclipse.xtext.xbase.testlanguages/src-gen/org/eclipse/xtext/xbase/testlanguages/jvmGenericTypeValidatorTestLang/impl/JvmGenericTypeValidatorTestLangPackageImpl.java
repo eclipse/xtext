@@ -463,9 +463,9 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyMethod_TypeParameters()
+  public EAttribute getMyMethod_Private()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)myMethodEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -474,7 +474,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
-  public EReference getMyMethod_Type()
+  public EReference getMyMethod_TypeParameters()
   {
     return (EReference)myMethodEClass.getEStructuralFeatures().get(2);
   }
@@ -485,9 +485,20 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
+  public EReference getMyMethod_Type()
+  {
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EAttribute getMyMethod_Name()
   {
-    return (EAttribute)myMethodEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)myMethodEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -498,7 +509,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   @Override
   public EReference getMyMethod_Parameters()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(4);
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -509,7 +520,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   @Override
   public EReference getMyMethod_Exceptions()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(5);
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -520,7 +531,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
   @Override
   public EReference getMyMethod_Expression()
   {
-    return (EReference)myMethodEClass.getEStructuralFeatures().get(6);
+    return (EReference)myMethodEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -588,6 +599,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     myMethodEClass = createEClass(MY_METHOD);
     createEAttribute(myMethodEClass, MY_METHOD__STATIC);
+    createEAttribute(myMethodEClass, MY_METHOD__PRIVATE);
     createEReference(myMethodEClass, MY_METHOD__TYPE_PARAMETERS);
     createEReference(myMethodEClass, MY_METHOD__TYPE);
     createEAttribute(myMethodEClass, MY_METHOD__NAME);
@@ -673,6 +685,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     initEClass(myMethodEClass, MyMethod.class, "MyMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMyMethod_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMyMethod_Private(), ecorePackage.getEBoolean(), "private", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyMethod_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMyMethod_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMyMethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, MyMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

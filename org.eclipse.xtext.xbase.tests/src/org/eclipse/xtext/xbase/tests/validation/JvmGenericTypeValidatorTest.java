@@ -460,6 +460,14 @@ public class JvmGenericTypeValidatorTest {
 		validationHelper.assertNoErrors(model);
 	}
 
+	@Test public void testOverrideHides() throws Exception {
+		var source = "class Foo extends test.SuperTypeClass { def private void foo() {} }";
+		var model = parse(source);
+		validationHelper.assertError(model, MY_METHOD, OVERRIDE_REDUCES_VISIBILITY,
+				source.indexOf("foo"), "foo".length(),
+				"reduce", "visibility");
+	}
+
 	@Test public void testDuplicateParameter() throws Exception {
 		var source = "class Foo { def void foo(int x, int x) {} }";
 		var model = parse(source);

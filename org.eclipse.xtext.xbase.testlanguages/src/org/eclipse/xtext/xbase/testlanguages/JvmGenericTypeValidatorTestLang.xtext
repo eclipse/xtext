@@ -45,7 +45,7 @@ MyMember:
 	|
 	({MyField} type=JvmTypeReference name=ValidID)
 	|
-	({MyMethod} 'def' (static ?= 'static')?
+	({MyMethod} 'def' (static ?= 'static')? (private ?= 'private')?
 		('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 		type=JvmTypeReference name=ValidID
 		'(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
