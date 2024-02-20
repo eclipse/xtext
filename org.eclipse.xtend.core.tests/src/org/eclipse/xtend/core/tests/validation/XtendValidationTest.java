@@ -1701,18 +1701,41 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
-		XtendClass clazz = clazz("class X { new () throws Integer { }}");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		var source = "class X { new () throws Integer { }}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
 	}
 	
 	@Test public void testFunctionThrownExceptionsOfTypeThrowable() throws Exception {
-		XtendClass clazz = clazz("class X { def foo() throws Integer { } }");
-		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE, "No", "can", "subclass", "Throwable");
+		var source = "class X { def foo() throws Integer { } }";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
+	}
+
+	@Test public void testDispatchMethodsThrownExceptionsOfTypeThrowable() throws Exception {
+		var source = "class Foo {\n"
+				+ "	def dispatch foo(Object o) throws Integer {}\n"
+				+ "	def dispatch foo(Number m) throws String {}\n"
+				+ "}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("Integer"), "Integer".length(),
+				"No", "can", "subclass", "Throwable");
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_NOT_THROWABLE,
+				source.indexOf("String"), "String".length(),
+				"No", "can", "subclass", "Throwable");
 	}
 	
 	@Test public void testExceptionsDeclaredTwiceOnConstructor() throws Exception {
-		XtendClass clazz = clazz("import java.io.IOException class X { new () throws IOException, IOException { }}");
-		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+		var source = "import java.io.IOException class X { new () throws IOException, IOException { }}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_CONSTRUCTOR, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
 	}
 	
 	@Test public void testExceptionsNotDeclaredTwiceOnConstructor() throws Exception {
@@ -1721,8 +1744,29 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testExceptionsDeclaredTwiceOnFunction() throws Exception {
-		XtendClass clazz = clazz("import java.io.IOException class X {def foo() throws IOException, IOException { }}");
-		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE, "Exception", "declared", "twice");
+		var source = "import java.io.IOException class X {def foo() throws IOException, IOException { }}";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
+	}
+
+	@Test public void testExceptionsDeclaredTwiceOnDispatchMethods() throws Exception {
+		var source = "import java.io.IOException\n"
+				+ "import java.io.FileNotFoundException\n"
+				+ "\n"
+				+ "class Foo {\n"
+				+ "	def dispatch foo(Object o) throws IOException, IOException {}\n"
+				+ "	def dispatch foo(Number m) throws FileNotFoundException, FileNotFoundException {}\n"
+				+ "}\n"
+				+ "";
+		XtendClass clazz = clazz(source);
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("IOException"), "IOException".length(),
+				"IOException", "declared", "twice");
+		helper.assertError(clazz, XTEND_FUNCTION, EXCEPTION_DECLARED_TWICE,
+				source.lastIndexOf("FileNotFoundException"), "FileNotFoundException".length(),
+				"FileNotFoundException", "declared", "twice");
 	}
 	
 	@Test public void testExceptionsNotDeclaredTwiceOnFunction() throws Exception {
@@ -2331,13 +2375,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test
 	public void testWildcardSuperType_0() throws Exception {
-		XtendFile file = file(
-				"class Foo extends Bar<?>{" 
-				+ "}"
-				+ ""
-				+ "class Bar<T> {"
-				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), XTEND_CLASS, WILDCARD_IN_SUPERTYPE);
+		var source = "class Foo extends Bar<?>{" 
+		+ "}"
+		+ ""
+		+ "class Bar<T> {"
+		+ "}";
+		XtendFile file = file(source);
+		helper.assertError(file.getXtendTypes().get(0), XTEND_CLASS, WILDCARD_IN_SUPERTYPE,
+				source.indexOf("Bar<?>"), "Bar<?>".length());
 	}
 
 	@Test
