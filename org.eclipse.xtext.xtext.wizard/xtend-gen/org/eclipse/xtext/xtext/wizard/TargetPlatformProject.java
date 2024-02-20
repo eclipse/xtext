@@ -205,6 +205,9 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.hamcrest.core\" version=\"2.2.0.v20230809-1000\"/>");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<unit id=\"org.apache.commons.logging\" version=\"1.2.0\"/>");
+    _builder.newLine();
     {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
       boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
