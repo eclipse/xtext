@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="xtext-r202312" sequenceNumber="18">
+<target name="xtext-r202312" sequenceNumber="19">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.36.0"/>
@@ -63,6 +63,7 @@
 			<unit id="org.junit" version="4.13.2.v20230809-1000"/>
 			<unit id="org.hamcrest" version="2.2.0"/>
 			<unit id="org.hamcrest.core" version="2.2.0.v20230809-1000"/>
+			<unit id="org.apache.commons.logging" version="1.2.0"/>
 			<unit id="junit-jupiter-api" version="0.0.0"/>
 			<unit id="junit-jupiter-engine" version="0.0.0"/>
 			<unit id="junit-jupiter-migrationsupport" version="0.0.0"/>
