@@ -89,6 +89,7 @@ public class ResourceStorageLoadable {
 
 	protected void readResourceDescription(StorageAwareResource resource, InputStream inputStream) throws IOException {
 		try {
+			@SuppressWarnings("resource")
 			SerializableResourceDescription description = (SerializableResourceDescription) new ObjectInputStream(
 					inputStream).readObject();
 			description.updateResourceURI(resource.getURI());
