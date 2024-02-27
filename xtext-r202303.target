@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="xtext-r202303" sequenceNumber="20">
+<target name="xtext-r202303" sequenceNumber="21">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.33.0"/>
@@ -15,7 +15,7 @@
 			<unit id="org.eclipse.emf.mwe2.runtime" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/2.34.0.M1/"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.34.0/"/>
 			<!-- required by mwe2.language (at least 2.34.0) -->
 			<unit id="org.eclipse.xtext" version="0.0.0"/>
 		</location>
