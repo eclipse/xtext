@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.common.types.shared;singleton:=true
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-Activator: org.eclipse.xtext.common.types.shared.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.24.100",
@@ -18,5 +18,5 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.24.100",
  org.eclipse.jdt.debug;bundle-version="3.19.100";resolution:=optional;x-installation:=greedy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.common.types.shared;version="2.34.0";x-internal:=true
+Export-Package: org.eclipse.xtext.common.types.shared;version="2.35.0";x-internal:=true
 Automatic-Module-Name: org.eclipse.xtext.common.types.shared

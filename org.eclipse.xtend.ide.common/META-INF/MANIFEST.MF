@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtend.ide.common
 Bundle-ActivationPolicy: lazy
@@ -12,13 +12,13 @@ Require-Bundle: org.eclipse.xtend.core;bundle-version="2.34.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.core.runtime;bundle-version="3.24.100";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr;version="2.34.0";x-friends:="org.eclipse.xtend.ide",
- org.eclipse.xtend.ide.common.contentassist.antlr.internal;version="2.34.0";x-friends:="org.eclipse.xtend.ide",
- org.eclipse.xtend.ide.common.contentassist.javadoc;version="2.34.0";x-friends:="org.eclipse.xtend.ide",
- org.eclipse.xtend.ide.common.editor.bracketmatching;version="2.34.0";x-friends:="org.eclipse.xtend.ide",
- org.eclipse.xtend.ide.common.highlighting;version="2.34.0";x-friends:="org.eclipse.xtend.ide,
+Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr;version="2.35.0";x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtend.ide.common.contentassist.antlr.internal;version="2.35.0";x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtend.ide.common.contentassist.javadoc;version="2.35.0";x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtend.ide.common.editor.bracketmatching;version="2.35.0";x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtend.ide.common.highlighting;version="2.35.0";x-friends:="org.eclipse.xtend.ide,
    org.eclipse.xtend.ide.tests",
- org.eclipse.xtend.ide.common.outline;version="2.34.0";x-friends:="org.eclipse.xtend.ide"
+ org.eclipse.xtend.ide.common.outline;version="2.35.0";x-friends:="org.eclipse.xtend.ide"
 Import-Package: org.apache.log4j;version="1.2.24"
 Automatic-Module-Name: org.eclipse.xtend.ide.common
 Eclipse-SourceReferences: eclipseSourceReferences

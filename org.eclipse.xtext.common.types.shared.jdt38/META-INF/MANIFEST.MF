@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.common.types.shared.jdt38;singleton:=true
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-Localization: fragment
 Fragment-Host: org.eclipse.xtext.common.types.shared
 Bundle-RequiredExecutionEnvironment: JavaSE-11
@@ -12,5 +12,5 @@ Require-Bundle: org.eclipse.xtext.xbase.ui;bundle-version="2.34.0",
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j;version="1.2.24",
  org.eclipse.ui.ide
-Export-Package: org.eclipse.xtext.common.types.shared.jdt38;version="2.34.0";x-internal:=true
+Export-Package: org.eclipse.xtext.common.types.shared.jdt38;version="2.35.0";x-internal:=true
 Automatic-Module-Name: org.eclipse.xtext.common.types.shared.jdt38

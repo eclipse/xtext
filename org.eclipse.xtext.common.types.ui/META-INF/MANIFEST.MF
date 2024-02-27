@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.common.types.ui
 Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.34.0";visibility:=reexport,
  org.eclipse.ui;bundle-version="3.201.0",
@@ -21,21 +21,21 @@ Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.34.0";visibilit
  org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.24"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtext.common.types.access.jdt;version="2.34.0",
- org.eclipse.xtext.common.types.ui;version="2.34.0",
- org.eclipse.xtext.common.types.ui.editor;version="2.34.0";x-internal:=true,
- org.eclipse.xtext.common.types.ui.navigation;version="2.34.0";x-friends:="org.eclipse.xtext.xbase.ui",
- org.eclipse.xtext.common.types.ui.notification;version="2.34.0",
- org.eclipse.xtext.common.types.ui.query;version="2.34.0",
- org.eclipse.xtext.common.types.ui.refactoring;version="2.34.0";x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
- org.eclipse.xtext.common.types.ui.refactoring.participant;version="2.34.0";x-friends:="org.eclipse.xtext.xbase.ui,
+Export-Package: org.eclipse.xtext.common.types.access.jdt;version="2.35.0",
+ org.eclipse.xtext.common.types.ui;version="2.35.0",
+ org.eclipse.xtext.common.types.ui.editor;version="2.35.0";x-internal:=true,
+ org.eclipse.xtext.common.types.ui.navigation;version="2.35.0";x-friends:="org.eclipse.xtext.xbase.ui",
+ org.eclipse.xtext.common.types.ui.notification;version="2.35.0",
+ org.eclipse.xtext.common.types.ui.query;version="2.35.0",
+ org.eclipse.xtext.common.types.ui.refactoring;version="2.35.0";x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
+ org.eclipse.xtext.common.types.ui.refactoring.participant;version="2.35.0";x-friends:="org.eclipse.xtext.xbase.ui,
    org.eclipse.xtext.common.types.eclipse.tests,
    org.eclipse.xtend.ide,
    org.eclipse.xtend.ide.tests",
- org.eclipse.xtext.common.types.ui.trace;version="2.34.0";x-friends:="org.eclipse.xtext.builder,
+ org.eclipse.xtext.common.types.ui.trace;version="2.35.0";x-friends:="org.eclipse.xtext.builder,
    org.eclipse.xtext.xbase.ui,
    org.eclipse.xtext.ui.shared",
- org.eclipse.xtext.common.types.util.jdt;version="2.34.0",
- org.eclipse.xtext.common.types.xtext.ui;version="2.34.0"
+ org.eclipse.xtext.common.types.util.jdt;version="2.35.0",
+ org.eclipse.xtext.common.types.xtext.ui;version="2.35.0"
 Bundle-Localization: plugin
 Automatic-Module-Name: org.eclipse.xtext.common.types.ui
