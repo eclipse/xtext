@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Xtext Editor UI Tests
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.tests;singleton:=true
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.26.0",
@@ -25,7 +25,7 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.26.0",
  org.eclipse.xtext.testing;bundle-version="2.34.0",
  org.eclipse.xtext.ui.testing;bundle-version="2.34.0",
  org.eclipse.compare,
- org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.35.0",
  org.eclipse.xtext.builder;bundle-version="2.34.0",
  org.eclipse.xtext.ui.codetemplates.ui;bundle-version="2.34.0"
 Import-Package: org.apache.log4j;version="1.2.24",
@@ -34,17 +34,17 @@ Import-Package: org.apache.log4j;version="1.2.24",
  org.junit.runner;version="4.13.2",
  org.junit.runners;version="4.13.2"
 Bundle-Activator: org.eclipse.xtext.xtext.ui.tests.internal.TestsActivator
-Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.services;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.serializer;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.scoping;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.ui.quickfix;version="2.34.0",
- org.eclipse.xtext.xtext.ui.tests.internal;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.validation;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.ide.contentassist.antlr.internal;version="2.34.0",
- org.eclipse.xtext.xtext.ui.ecore2xtext.ide.contentassist.antlr;version="2.34.0"
+Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.services;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.serializer;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.scoping;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ui.quickfix;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.tests.internal;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.validation;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ide.contentassist.antlr.internal;version="2.35.0",
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ide.contentassist.antlr;version="2.35.0"
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: org.eclipse.xtext.xtext.ui.tests

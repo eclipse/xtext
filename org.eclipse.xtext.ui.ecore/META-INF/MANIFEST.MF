@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui.ecore;singleton:=true
 Bundle-Localization: plugin
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-Activator: org.eclipse.xtext.ui.ecore.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui;bundle-version="3.201.0",
@@ -16,5 +16,5 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.201.0",
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.24"
-Export-Package: org.eclipse.xtext.ui.ecore;version="2.34.0"
+Export-Package: org.eclipse.xtext.ui.ecore;version="2.35.0"
 Automatic-Module-Name: org.eclipse.xtext.ui.ecore
