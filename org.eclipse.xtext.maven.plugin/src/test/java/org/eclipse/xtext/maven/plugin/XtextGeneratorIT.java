@@ -49,6 +49,7 @@ public class XtextGeneratorIT {
 	static public void setUpOnce() throws IOException, VerificationException {
 		testDir = extractTestRoot();
 		if (fork) {
+			System.out.println("maven.home=" + System.getProperty("maven.home"));
 			File mvnExecutable = new File(new Verifier(testDir.getAbsolutePath()).getExecutable());
 			if (!mvnExecutable.exists()) {
 				String mavenHome = findMaven();
