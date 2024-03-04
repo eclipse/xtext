@@ -73,7 +73,8 @@ class QuickDebugSourceInstallingCompilationParticipantTest extends AbstractXtend
 							7:12
 							4:13,2
 							*E
-						'''.toString, debug)
+						'''.toString.replace("\r", ""),
+							debug.replace("\r", ""))
 						debugInfoFound.set(true)
 					}
 					super.visitSource(source, debug)

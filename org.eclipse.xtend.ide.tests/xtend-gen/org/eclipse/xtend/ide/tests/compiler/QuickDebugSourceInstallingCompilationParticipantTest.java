@@ -123,7 +123,8 @@ public class QuickDebugSourceInstallingCompilationParticipantTest extends Abstra
               _builder.newLine();
               _builder.append("*E");
               _builder.newLine();
-              Assert.assertEquals(_builder.toString(), debug);
+              Assert.assertEquals(_builder.toString().replace("\r", ""), 
+                debug.replace("\r", ""));
               debugInfoFound.set(true);
             }
             super.visitSource(source, debug);
