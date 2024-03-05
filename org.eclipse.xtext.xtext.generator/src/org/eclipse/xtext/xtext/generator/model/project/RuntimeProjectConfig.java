@@ -61,7 +61,7 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
 	@Override
 	public String getXbaseLibVersionLowerBound() {
 		// We re-export Guava from xbase.lib thus we need to restrict the version of the library to the latest and greatest
-		return "2.34.0";
+		return "2.35.0";
 	}
 
 	@Override

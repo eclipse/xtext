@@ -6,11 +6,11 @@ Bundle-Version: 2.35.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.xtext.ui.shared.internal.Activator
 Bundle-Vendor: Eclipse Xtext
-Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.34.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.builder;bundle-version="2.34.0";resolution:=optional;x-installation:=greedy,
+Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.35.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.builder;bundle-version="2.35.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.core;bundle-version="3.29.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.ui;bundle-version="3.26.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.common.types.ui;bundle-version="2.34.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.common.types.ui;bundle-version="2.35.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional;x-installation:=greedy,
  org.eclipse.core.expressions;bundle-version="3.8.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-11

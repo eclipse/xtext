@@ -7,5 +7,5 @@ Bundle-Version: 2.35.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.eclipse.xtext.xtext.bootstrap
 Export-Package: org.eclipse.xtext.xtext.bootstrap;version="2.35.0"
-Require-Bundle: org.eclipse.xtext;bundle-version="2.34.0",
- org.eclipse.xtext.xtext.generator;bundle-version="2.34.0"
+Require-Bundle: org.eclipse.xtext;bundle-version="2.35.0",
+ org.eclipse.xtext.xtext.generator;bundle-version="2.35.0"
