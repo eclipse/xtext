@@ -41,23 +41,23 @@ deriveFromVersion()
 
 xargs_sed_inplace() {
 	if [[ "$OSTYPE" == "darwin"* ]]; then
-		xargs  sed -i '' "$@"
+		xargs sed -i '' -e "$@"
 	else
-		xargs  sed -i "$@"
+		xargs sed -i'' -e "$@"
 	fi	
 }
 
 SnapshotToSnapshot() {
-	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g" 
-	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/;version=\"${from}\"/;version=\"${to}\"/g"
-	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtext.xbase.lib;bundle-version=\"${from}\"/org.eclipse.xtext.xbase.lib;bundle-version=\"${to}\"/g"
-	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtend.lib;bundle-version=\"${from}\"/org.eclipse.xtend.lib;bundle-version=\"${to}\"/g"
-	find . -type f -name "MANIFEST.MF_gen" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g"
-	find . -type f -name "pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
-	find . -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
-	find . -type f -name "category.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
-	find . -type f -name "plugin.xml" | xargs_sed_inplace -e "s/<version>${from}-SNAPSHOT<\/version>/<version>${to}-SNAPSHOT<\/version>/g"
+	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace "s/${from}.qualifier/${to}.qualifier/g" 
+	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace "s/;version=\"${from}\"/;version=\"${to}\"/g"
+	find . -type f -name "MANIFEST.MF" | xargs_sed_inplace "s/org.eclipse.xte\([^;]*\);bundle-version=\"${from}\"/org.eclipse.xte\1;bundle-version=\"${to}\"/g"
+	find . -type f -name "MANIFEST.MF_gen" | xargs_sed_inplace "s/${from}.qualifier/${to}.qualifier/g"
+	find . -type f -name "pom.xml" | xargs_sed_inplace "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
+	find . -type f -name "feature.xml" | xargs_sed_inplace "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
+	find . -type f -name "feature.xml" | xargs_sed_inplace "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
+	find . -type f -name "category.xml" | xargs_sed_inplace "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
+	find . -type f -name "plugin.xml" | xargs_sed_inplace "s/<version>${from}-SNAPSHOT<\/version>/<version>${to}-SNAPSHOT<\/version>/g"
+	find . -type f -name "RuntimeProjectConfig.java" | xargs_sed_inplace "s/${from}/${to}/g" 
 }
 
 if [ $# -lt 2 ] || [ $# -gt 6 ] ; then
