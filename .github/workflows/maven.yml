@@ -14,7 +14,7 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.base.repo.clone_url != github.event.pull_request.head.repo.clone_url
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'macos-latest' ] # 'windows-latest' too flaky
+        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -35,10 +35,18 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: Set Maven Home environment variable
+        run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" >> "$GITHUB_ENV"
+        if: runner.os != 'Windows'
+      - name: Set Maven Home environment variable on Windows
+        run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" | Out-File -FilePath $env:GITHUB_ENV -Append
+        # In Windows the syntax for setting environment variable is different
+        if: runner.os == 'Windows'
+
       - name: Build and test
         uses: coactions/setup-xvfb@v1
         with: 
-          run: ./mvnw clean verify -PuseJenkinsSnapshots -f org.eclipse.xtext.full.releng
+          run: ./mvnw clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.full.releng
 
   build-maven-artifacts:
     if: github.event_name != 'pull_request' || github.event.pull_request.base.repo.clone_url != github.event.pull_request.head.repo.clone_url
@@ -61,5 +69,8 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-maven
 
+      - name: Set Maven Home environment variable
+        run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" >> "$GITHUB_ENV"
+
       - name: Build Maven artifacts
-        run: ./mvnw clean verify -PuseJenkinsSnapshots -f org.eclipse.xtext.maven.releng
+        run: ./mvnw clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.maven.releng

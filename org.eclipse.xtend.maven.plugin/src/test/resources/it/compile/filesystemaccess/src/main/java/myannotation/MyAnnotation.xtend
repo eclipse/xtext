@@ -61,12 +61,13 @@ class MyAnnotationProcessor extends AbstractClassProcessor {
 		assertTrue(
 			userCodeFile.toString.endsWith("/filesystemaccess-client/src/main/java/myusercode/UserCode.xtend"))
 
-		val userCodeContent = 
-			"package myusercode\n"
-			+ "\n"
-			+"@myannotation.MyAnnotation\n"
-			+"class MyClass {\n"
-			+"}\n"
+		val userCodeContent = '''
+			package myusercode
+			
+			@myannotation.MyAnnotation
+			class MyClass {
+			}
+		'''
 		
 		assertEquals(userCodeContent, userCodeFile.contents)
 		assertEquals(userCodeContent, CharStreams.toString(new InputStreamReader(userCodeFile.contentsAsStream)))
