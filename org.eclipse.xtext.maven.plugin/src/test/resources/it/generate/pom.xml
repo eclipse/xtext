@@ -15,7 +15,6 @@
 		<!-- The @...@ will be replaced during resource filtering with
 			the current version of our project -->
 		<xtext-version>@project.version@</xtext-version>
-		<tycho-version>2.7.5</tycho-version>
 		<eclipse-text-version>3.12.300</eclipse-text-version>
 		<core-resources-version>3.18.200</core-resources-version>
 		<core-runtime-version>3.26.100</core-runtime-version>

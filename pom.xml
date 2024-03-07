@@ -126,7 +126,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-		<tycho-version>3.0.5</tycho-version>
+		<tycho-version>4.0.6</tycho-version>
 
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -464,7 +464,7 @@
 							<configuration>
 								<rules>
 									<requireMavenVersion>
-										<version>3.9.2</version>
+										<version>3.9.6</version>
 									</requireMavenVersion>
 								</rules>
 							</configuration>
@@ -521,8 +521,9 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire-version}</version>
 					<!--
-					This is not needed now, but will be needed when switching to Tycho 4.0.0
+					This is needed due to changes in Tycho 4.0.0
 					see https://github.com/eclipse-tycho/tycho/blob/master/RELEASE_NOTES.md#using-integrationplugin-tests-with-eclipse-plugin-packaging
+					-->
 					<executions>
 						<execution>
 							<id>execute-unit-tests</id>
@@ -531,7 +532,6 @@
 							</goals>
 						</execution>
 					</executions>
-					-->
 					<configuration>
 						<!--
 						The Surefire Plugin excludes nested classes by default: http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#excludes
