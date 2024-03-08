@@ -26,6 +26,9 @@ import org.eclipse.xtext.builder.standalone.LanguageAccessFactory;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilder;
 import org.eclipse.xtext.builder.standalone.compiler.CompilerConfiguration;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -87,10 +90,10 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	private List<ProjectMapping> projectMappings;
 
 	@Parameter(property = "xtext.generator.skip", defaultValue = "false")
-	private Boolean skip;
+	private boolean skip;
 
 	@Parameter(defaultValue = "true")
-	private Boolean failOnValidationError;
+	private boolean failOnValidationError = true;
 
 	@Parameter(property = "maven.compiler.source", defaultValue = "11")
 	private String compilerSourceLevel;
@@ -99,10 +102,10 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	private String compilerTargetLevel;
 
 	@Parameter(defaultValue = "false")
-	private Boolean compilerSkipAnnotationProcessing;
+	private boolean compilerSkipAnnotationProcessing;
 
 	@Parameter(defaultValue = "false")
-	private Boolean compilerPreserveInformationAboutFormalParameters;
+	private boolean compilerPreserveInformationAboutFormalParameters;
 
 	/**
 	 * RegEx expression to filter class path during model files look up
@@ -121,22 +124,32 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	 * the platform resource map automatically
 	 */
 	@Parameter(defaultValue = "false")
-	private Boolean autoFillPlatformResourceMap = Boolean.FALSE;
+	private boolean autoFillPlatformResourceMap;
 
 	/**
 	 * Automatically add all output directories of all configured languages to the
 	 * compile source roots needed by maven-compiler
 	 */
 	@Parameter(defaultValue = "true")
-	private Boolean addOutputDirectoriesToCompileSourceRoots = Boolean.TRUE;
+	private boolean addOutputDirectoriesToCompileSourceRoots = true;
 
 	/**
 	 * Track dependencies between model files and perform incremental builds when re-running
 	 * the build after some files were touched.
 	 */
 	@Parameter(defaultValue = "false")
-	private Boolean incrementalXtextBuild = Boolean.FALSE;
+	private boolean incrementalXtextBuild;
 
+	/**
+	 * Whether to use the {@link StorageAwareResource} to write the semantic model, the
+	 * {@link IResourceDescription resource description} and optionally the node model to a ResourceStorage.<br>
+	 * For details see {@link StorageAwareResource} and {@link IResourceStorageFacade}.
+	 * 
+	 * @since 2.35
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean writeStorageResources;
+	
 	@Parameter( readonly = true, defaultValue = "${plugin.artifacts}" )
 	private List<Artifact> pluginDependencies;
 
@@ -184,6 +197,7 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 		builder.setTempDir(createTempDir().getAbsolutePath());
 		builder.setDebugLog(getLog().isDebugEnabled());
 		builder.setIncrementalBuild(incrementalXtextBuild);
+		builder.setWriteStorageResources(writeStorageResources);
 		if (clusteringConfig != null)
 			builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
 		configureCompiler(builder.getCompiler());

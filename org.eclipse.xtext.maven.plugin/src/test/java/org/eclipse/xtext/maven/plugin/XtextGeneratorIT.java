@@ -155,6 +155,20 @@ public class XtextGeneratorIT {
 		verifier.verifyFileContentMatches(refModelOutput, "People to greet\\: Test");
 		verifier.verifyFileContentMatches(modelOutput, Pattern.quote(modelOutputContent));
 	}
+	
+	@Test
+	public void simpleLangWriteStorageResources() throws Exception {
+		String project = "simple-lang-write-storage-resources";
+		Verifier verifier = verifyErrorFreeLog(project);
+		verifier.verifyFileContentMatches(verifier.getBasedir() + "/src-gen/Model.nojdt.txt",
+				"People to greet\\: maven");
+		verifier.verifyFileContentMatches(verifier.getBasedir() + "/src-gen/RefModel.nojdt.txt",
+				"People to greet\\: Test");
+		
+		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/.Model.nojdtbin");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/.RefModel.nojdtbin");
+	}
+
 
 	@Test
 	public void mavenConfiguration() throws Exception {

@@ -77,6 +77,7 @@ Export-Package: org.eclipse.xtext.testlanguages;version="2.35.0";x-internal:=tru
  org.eclipse.xtext.testlanguages.noJdt.serializer;version="2.35.0",
  org.eclipse.xtext.testlanguages.noJdt.services;version="2.35.0",
  org.eclipse.xtext.testlanguages.noJdt.validation;version="2.35.0",
+ org.eclipse.xtext.testlanguages.noJdt.writeStorageResources;version="2.35.0",
  org.eclipse.xtext.testlanguages.xtextgrammar;version="2.35.0",
  org.eclipse.xtext.testlanguages.xtextgrammar.parser.antlr;version="2.35.0",
  org.eclipse.xtext.testlanguages.xtextgrammar.parser.antlr.internal;version="2.35.0",
