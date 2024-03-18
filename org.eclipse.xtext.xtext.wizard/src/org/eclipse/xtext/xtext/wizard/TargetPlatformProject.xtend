@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -62,7 +62,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 					«IF config.javaVersion.isAtLeast(JavaVersion.JAVA17)»
-						<repository location="https://download.eclipse.org/releases/2024-03"/>
+						<repository location="https://download.eclipse.org/releases/2024-06"/>
 					«ELSE»
 						<repository location="https://download.eclipse.org/releases/2023-03"/>
 					«ENDIF»

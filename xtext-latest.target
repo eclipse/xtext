@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="xtext-latest" sequenceNumber="21">
+<target name="xtext-latest" sequenceNumber="22">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/modeling/emf/emf/builds/nightly/latest" />
@@ -15,7 +15,7 @@
 			<unit id="org.eclipse.emf.mwe2.runtime" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/releases/2024-03/"/>
+			<repository location="https://download.eclipse.org/releases/2024-06/"/>
 			<unit id="org.eclipse.draw2d.feature.group" version="0.0.0" />
 			<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0" />
 			<unit id="org.eclipse.buildship.feature.group" version="0.0.0" />
