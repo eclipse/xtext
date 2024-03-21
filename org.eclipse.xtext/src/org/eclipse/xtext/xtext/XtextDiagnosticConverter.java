@@ -86,10 +86,10 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 	}
 	
 	// group 1 matches the suffix in an issue code e.g. someCode from org.eclipse.xtext.Xtext.someCode 
-	private final Pattern afterLastDot = Pattern.compile(".*\\W(\\w+)$");
+	private static final Pattern afterLastDot = Pattern.compile(".*\\W(\\w+)$");
 	// group 1 matches the codes given in SuppressWarnings[code1, code2], e.g. "code1, code2" is returned
-	private final Pattern suppressWarnings = Pattern.compile("SuppressWarnings\\[([^]]*)\\]", Pattern.CASE_INSENSITIVE);
-	private final Splitter splitter = Splitter.on(',').trimResults().omitEmptyStrings();
+	private static final Pattern suppressWarnings = Pattern.compile("SuppressWarnings\\[([^]]*)\\]", Pattern.CASE_INSENSITIVE);
+	private static final Splitter splitter = Splitter.on(',').trimResults().omitEmptyStrings();
 	private static final String ALL = "all";
 	
 	protected boolean isMarkedAsIgnored(EObject object, String code) {

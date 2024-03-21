@@ -2,21 +2,21 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Pure Xbase Tests
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.34.0.qualifier
+Bundle-Version: 2.35.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.purexbase;bundle-version="2.34.0",
+Require-Bundle: org.eclipse.xtext.purexbase;bundle-version="2.35.0",
  org.eclipse.core.runtime;bundle-version="3.24.100",
- org.eclipse.xtext;bundle-version="2.34.0",
- org.eclipse.xtext.testing;bundle-version="2.34.0",
+ org.eclipse.xtext;bundle-version="2.35.0",
+ org.eclipse.xtext.testing;bundle-version="2.35.0",
  org.eclipse.jdt.core;bundle-version="3.29.0",
  org.objectweb.asm;bundle-version="[9.6.0,9.7.0)";resolution:=optional,
- org.eclipse.xtext.xbase.lib;bundle-version="2.34.0",
- org.eclipse.xtext.xbase.testing;bundle-version="2.34.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.35.0",
+ org.eclipse.xtext.xbase.testing;bundle-version="2.35.0",
  org.junit;bundle-version="4.13.2"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.24"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: org.eclipse.xtext.purexbase.tests;version="2.34.0";x-internal=true,
- org.eclipse.xtext.purexbase.tests.data;version="2.34.0"
+Export-Package: org.eclipse.xtext.purexbase.tests;version="2.35.0";x-internal=true,
+ org.eclipse.xtext.purexbase.tests.data;version="2.35.0"
 Automatic-Module-Name: org.eclipse.xtext.purexbase.tests

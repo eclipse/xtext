@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -112,7 +112,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
       boolean _isAtLeast = this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA17);
       if (_isAtLeast) {
         _builder.append("\t\t\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/releases/2024-03\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/releases/2024-06\"/>");
         _builder.newLine();
       } else {
         _builder.append("\t\t\t");
@@ -204,6 +204,9 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.hamcrest.core\" version=\"2.2.0.v20230809-1000\"/>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<unit id=\"org.apache.commons.logging\" version=\"1.2.0\"/>");
     _builder.newLine();
     {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();

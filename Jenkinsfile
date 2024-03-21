@@ -6,7 +6,7 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', choices: [ '11', '17' ], description: 'Which JDK version should be used?')
   }
@@ -25,7 +25,6 @@ pipeline {
   }
 
   tools {
-     maven "apache-maven-3.9.2"
      jdk "temurin-jdk17-latest"
   }
 
@@ -149,7 +148,7 @@ def isTriggeredByUpstream() {
 def eclipseVersion() {
   def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
-    return "4.31"
+    return "4.32"
   } else {
     def baseDate = java.time.LocalDate.parse("2018-06-01") // 4.8 Photon
     def df = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")

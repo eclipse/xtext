@@ -94,7 +94,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
 		super.checkConfiguration(issues);
 		if (!antlrTool.isWorkable()) {
 			issues.addError(
-					"\n\n*ATTENTION*\nIt is highly recommended to use ANTLR's parser generator (get it from 'http://xtext.itemis.com/'). \nAs an alternative to ANTLR you could also use the alternative implementation shipped with Xtext.\nTo do so use the generator fragment 'org.eclipse.xtext.generator.parser.packrat.PackratParserFragment' in your mwe2 file instead.");
+					"\n\n*ATTENTION*\nIt is required to use ANTLR's parser generator (get it from 'https://download.itemis.com/antlr-generator-3.2.0-patch.jar').");
 		}
 	}
 

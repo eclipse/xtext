@@ -13,6 +13,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -32,9 +33,16 @@ public class XtextGeneratorIT {
 
 	private final static boolean debug = Boolean.getBoolean("xtext.it.tests.debug");
 	private final static boolean fork = !debug;
-	
+
 	private static String ROOT = "/it/generate";
 	private static File testDir;
+
+	/**
+	 * As soon as a {@link Verifier} object is created System.out and System.err are
+	 * captured by the verifier; we save the original System.out here so that we can
+	 * print information to the console later.
+	 */
+	private static PrintStream systemOut;
 
 	/**
 	 * This is the local Maven repository (typically ~/.m2/repository) that we
@@ -47,19 +55,24 @@ public class XtextGeneratorIT {
 
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
+		systemOut = System.out;
 		testDir = extractTestRoot();
 		if (fork) {
+			systemOut.println("Current maven.home=" + System.getProperty("maven.home"));
 			File mvnExecutable = new File(new Verifier(testDir.getAbsolutePath()).getExecutable());
 			if (!mvnExecutable.exists()) {
 				String mavenHome = findMaven();
 				if (mavenHome != null) {
 					System.setProperty("maven.home", mavenHome);
+					systemOut.println("Detected maven.home=" + System.getProperty("maven.home"));
 				} else {
 					Assert.fail("Maven home not found. Tried to call '" + mvnExecutable
 							+ "'.\nConsider to set the envVar 'M2_HOME' or System property 'maven.home'.\n"
 							+ "Current settings are: maven.home=" + System.getProperty("maven.home") + " M2_HOME="
 							+ CommandLineUtils.getSystemEnvVars().getProperty("M2_HOME"));
 				}
+			} else {
+				systemOut.println("Maven executable: " + mvnExecutable);
 			}
 		}
 		verifyErrorFreeLog("" /*root*/, false, "clean", "install");
@@ -78,8 +91,8 @@ public class XtextGeneratorIT {
 		String localCentralRepository = System.getProperty("maven.repo.local",
 				System.getProperty("user.home") + "/.m2/repository");
 		localRepoDir = new File( localCentralRepository );
-		System.out.println("IT projects will be executed from " + testDir);
-		System.out.println("Local Maven Central Repository " + localRepoDir);
+		systemOut.println("IT projects will be executed from " + testDir);
+		systemOut.println("Local Maven Central Repository " + localRepoDir);
 		testDir = ResourceExtractor.extractResourcePath(XtextGeneratorIT.class, ROOT, tempDir, true);
 		return testDir;
 	}
@@ -155,6 +168,20 @@ public class XtextGeneratorIT {
 		verifier.verifyFileContentMatches(refModelOutput, "People to greet\\: Test");
 		verifier.verifyFileContentMatches(modelOutput, Pattern.quote(modelOutputContent));
 	}
+	
+	@Test
+	public void simpleLangWriteStorageResources() throws Exception {
+		String project = "simple-lang-write-storage-resources";
+		Verifier verifier = verifyErrorFreeLog(project);
+		verifier.verifyFileContentMatches(verifier.getBasedir() + "/src-gen/Model.nojdt.txt",
+				"People to greet\\: maven");
+		verifier.verifyFileContentMatches(verifier.getBasedir() + "/src-gen/RefModel.nojdt.txt",
+				"People to greet\\: Test");
+		
+		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/.Model.nojdtbin");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/.RefModel.nojdtbin");
+	}
+
 
 	@Test
 	public void mavenConfiguration() throws Exception {
@@ -279,7 +306,7 @@ public class XtextGeneratorIT {
 		verifier.verifyErrorFreeLog();
 		if (debug) {
 			List<String> lines = verifier.loadFile(verifier.getBasedir(), verifier.getLogFileName(), false);
-			System.out.println(Joiner.on('\n').join(lines));
+			systemOut.println(Joiner.on('\n').join(lines));
 		}
 		verifier.resetStreams();
 		return verifier;
@@ -294,7 +321,7 @@ public class XtextGeneratorIT {
 			String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g";
 			verifier.setEnvironmentVariable("MAVEN_OPTS", modMvnOpts);
 			if (debug) {
-				System.out.println("Modified Maven Opts: " + modMvnOpts);
+				systemOut.println("Modified Maven Opts: " + modMvnOpts);
 			}
 		} else {
 			verifier.setForkJvm(false);
