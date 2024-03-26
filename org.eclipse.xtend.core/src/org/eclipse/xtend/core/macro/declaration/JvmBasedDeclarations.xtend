@@ -1320,6 +1320,8 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	}
 	
 	override remove() {
+		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate.type)
+		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
 		compilationUnit.jvmModelAssociator.removeLogicalChildAssociation(delegate)
 		super.remove()
 	}
