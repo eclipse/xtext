@@ -101,7 +101,7 @@ public class UriExtensions {
 			query = URI.encodeQuery(URI.decode(query), false);
 		}
 		if (fragment != null) {
-			query = URI.encodeFragment(URI.decode(fragment), false);
+			fragment = URI.encodeFragment(URI.decode(fragment), false);
 		}
 		// Depending on the shape of the URI recreate it from the decomposed parts which are now
 		// correctly encoded in a minimal (only the strictly necessary but no optional escape sequences) way

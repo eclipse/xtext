@@ -317,6 +317,12 @@ public class UriExtensionsTest {
 		assertSame(uriWithAuthority, uriExtensions.withEmptyAuthority(uriWithAuthority));
 	}
 
+	@Test
+	public void testEscapedSequenceWithFragment() throws Exception {
+		assertEquals(URI.createURI("file:///path/to%20the/resource#ABC"),
+				uriExtensions.toUri(("file:///path/to%20the/resource#ABC")));
+	}
+
 	private Path createTempDir(final String prefix) throws Exception {
 		return Files.createTempDirectory(getTempDirPath(), prefix);
 	}
