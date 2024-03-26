@@ -80,4 +80,16 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	 * @exception IllegalArgumentException if the name is not a valid java identifier or the type is <code>null</code>
 	 */
 	MutableParameterDeclaration addParameter(String name, TypeReference type);
+	
+	/**
+	 * Inserts a parameter at the specified position in the parameter list
+	 * 
+	 * @param index the position of the parameter, must be > 0 and <= to the current number of parameters
+	 * @param name the name of the parameter, must be a valid java identifier
+	 * @param type the type of the parameter, must not be <code>null</code>
+	 * @return the created parameter
+	 * @exception IllegalArgumentException if the name is not a valid java identifier or the type is <code>null</code> 
+	 * @exception IndexOutOfBoundsException if the index is out of range (index < 0 || index > parameters.size())
+	 */
+	MutableParameterDeclaration addParameter(int position, String name, TypeReference type);
 }

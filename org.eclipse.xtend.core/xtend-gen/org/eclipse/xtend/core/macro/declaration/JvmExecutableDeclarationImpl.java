@@ -140,6 +140,22 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     return ((MutableParameterDeclaration) _parameterDeclaration);
   }
 
+  public MutableParameterDeclaration addParameter(final int index, final String name, final TypeReference type) {
+    this.checkMutable();
+    ConditionUtils.checkJavaIdentifier(name, "name");
+    Preconditions.checkArgument((type != null), "type cannot be null");
+    boolean _isInferred = type.isInferred();
+    if (_isInferred) {
+      throw new IllegalArgumentException("Cannot use inferred type as parameter type.");
+    }
+    final JvmFormalParameter param = TypesFactory.eINSTANCE.createJvmFormalParameter();
+    param.setName(name);
+    param.setParameterType(this.getCompilationUnit().toJvmTypeReference(type));
+    this.getDelegate().getParameters().add(index, param);
+    ParameterDeclaration _parameterDeclaration = this.getCompilationUnit().toParameterDeclaration(param);
+    return ((MutableParameterDeclaration) _parameterDeclaration);
+  }
+
   @Override
   public void remove() {
     this.getCompilationUnit().getJvmModelAssociator().removeLogicalChildAssociation(this.getDelegate());
