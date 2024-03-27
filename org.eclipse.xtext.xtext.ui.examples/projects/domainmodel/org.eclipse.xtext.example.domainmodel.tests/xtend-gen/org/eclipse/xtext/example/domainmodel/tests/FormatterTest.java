@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,15 +8,12 @@
  */
 package org.eclipse.xtext.example.domainmodel.tests;
 
-import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.testing.formatter.FormatterTestHelper;
-import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,54 +21,47 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(DomainmodelInjectorProvider.class)
 @SuppressWarnings("all")
-public class FormatterTest {
-  @Inject
-  @Extension
-  private FormatterTestHelper _formatterTestHelper;
-
+public class FormatterTest extends AbstractFormatterTest {
   /**
    * This example tests if the formatted document equals the unformatted document.
    * This is the most convenient way to test a formatter.
    */
   @Test
   public void example1() {
-    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("entity Foo {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("propertyName:String");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("op name() {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("val x = 1 + 2 + 4");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("val foo = {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("println()");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("println()");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("null");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      it.setToBeFormatted(_builder);
-    };
-    this._formatterTestHelper.assertFormatted(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("propertyName:String");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("op name() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val x = 1 + 2 + 4");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val foo = {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("println()");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("println()");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   /**
@@ -82,28 +72,24 @@ public class FormatterTest {
    */
   @Test
   public void example2() {
-    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("entity Foo {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("op foo():String {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("\"xx\"");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      it.setExpectation(_builder);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("entity Foo {  op  foo  (  )  :  String  {  \"xx\"  }  }");
-      _builder_1.newLine();
-      it.setToBeFormatted(_builder_1);
-    };
-    this._formatterTestHelper.assertFormatted(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity Foo {  op  foo  (  )  :  String  {  \"xx\"  }  }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("op foo():String {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\"xx\"");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedTo(_builder, _builder_1);
   }
 
   /**
@@ -111,42 +97,37 @@ public class FormatterTest {
    */
   @Test
   public void example3() {
-    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
-      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
-        it_1.<String>put(FormatterPreferenceKeys.indentation, " ");
-      };
-      it.preferences(_function_1);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("entity Foo {");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("op foo():String {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("\"xx\"");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      it.setExpectation(_builder);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("entity Foo {");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("op foo():String {");
-      _builder_1.newLine();
-      _builder_1.append("\t\t");
-      _builder_1.append("\"xx\"");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("}");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      it.setToBeFormatted(_builder_1);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("op foo():String {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\"xx\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("entity Foo {");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("op foo():String {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("\"xx\"");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<String>put(FormatterPreferenceKeys.indentation, " ");
     };
-    this._formatterTestHelper.assertFormatted(_function);
+    this.assertFormattedTo(_builder, _builder_1, _function);
   }
 }

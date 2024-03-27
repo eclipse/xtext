@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,18 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
-	def CharSequence refToFile(CharSequence string) '''
-		import java.util.*
-		
-		class Foo {
-			«string» x
-		}
-	'''
-
-	def CharSequence paramToFile(CharSequence string) '''
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
+class TypeVariableFormatterTest extends AbstractFormatterTest {
+	
+	private def CharSequence paramToFile(CharSequence string) '''
 		import java.util.*
 		
 		class Foo«string» {
@@ -27,11 +27,11 @@ class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
 	'''
 
 	def assertTypeParam(CharSequence toBeFormatted) {
-		assertFormatted(toBeFormatted.paramToFile)
+		toBeFormatted.paramToFile.assertUnformattedEqualsFormatted
 	}
 	
 	@Test def integration() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			import java.util.*
 			
 			class Foo<T extends Collection<?>, K extends Collection<?>> {

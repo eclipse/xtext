@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,77 +8,66 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest
 import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 
-class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
-	
-	@Test def void formatEmptyMethod1() {
-		assertFormatted('''
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
+class XtendOnelinersFormatterTest extends AbstractFormatterTest {
+
+	@Test def formatEmptyMethod1() {
+		assertUnformattedEqualsFormatted('''
 			class C {
 				def m() {
 				}
 			}
 		''')
 	}
-	
-	@Test def void formatEmptyMethod2() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		],'''
+
+	@Test def formatEmptyMethod2() {
+		'''
 			class C {
 				def m() {
 				}
 			}
-		''')
+		'''.assertUnformattedEqualsFormatted[put(keepOneLineMethods, true)]
 	}
-	
-	@Test def void formatEmptyMethod3() {
-		assertFormatted('''
-			class C {
-				def m() {
-				}
-			}
-		''',
+
+	@Test def formatEmptyMethod3() {
 		'''
 			class C {
 				def m() {}
 			}
-		''')
-	}
-	
-	@Test def void formatEmptyMethod4() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		]
-		,'''
+		'''.assertFormattedTo(
+		'''
 			class C {
-				def m() {}
+				def m() {
+				}
 			}
-		''',
+		''', [put(keepOneLineMethods, false)])
+	}
+
+	@Test def formatEmptyMethod4() {
 		'''
 			class C {
 				def m() {          }
 			}
-		''')
-	}
-	
-	@Test def void formatMethodWithJustAComment1() {
-	assertFormatted('''
-		class C {
-			def m() {
-				/*foo*/
+		'''.assertFormattedTo('''
+			class C {
+				def m() {}
 			}
-		}
-	''')
+		''', [put(keepOneLineMethods, true)])
 	}
-	
-	@Test def void formatMethodWithJustAComment2() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		],'''
+
+	@Test def formatMethodWithJustAComment1() {
+		assertUnformattedEqualsFormatted('''
 			class C {
 				def m() {
 					/*foo*/
@@ -86,40 +75,47 @@ class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')
 	}
-	
+
+	@Test def formatMethodWithJustAComment2() {
+		'''
+			class C {
+				def m() {
+					/*foo*/
+				}
+			}
+		'''.assertUnformattedEqualsFormatted[put(keepOneLineMethods, true)]
+	}
+
 	@Ignore("Another manifestation of Bug 415950")
-	@Test def void formatMethodWithJustAComment3() {
-		assertFormatted('''
-			class C {
-				def m() {
-					/*foo*/
-				}
-			}
-		''',
+	@Test def formatMethodWithJustAComment3() {
 		'''
 			class C {
 				def m() { /*foo*/ }
 			}
+		'''.assertFormattedTo(
+		'''
+			class C {
+				def m() {
+					/*foo*/
+				}
+			}
 		''')
 	}
-	
-	@Test def void formatMethodWithJustAComment4() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		]
-		,'''
-			class C {
-				def m() { /*foo*/ }
-			}
-		''','''
+
+	@Test def formatMethodWithJustAComment4() {
+		'''
 			class C {
 				def m() {     /*foo*/          }
 			}
-		''')
+		'''.assertFormattedTo('''
+			class C {
+				def m() { /*foo*/ }
+			}
+		''', [put(keepOneLineMethods, true)])
 	}
-	
-	@Test def void formatMethodWithOneExpression1() {
-		assertFormatted('''
+
+	@Test def formatMethodWithOneExpression1() {
+		assertUnformattedEqualsFormatted('''
 			class C {
 				def m() {
 					"Foo"
@@ -127,54 +123,49 @@ class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')
 	}
-	
-	@Test def void formatMethodWithOneExpression2() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		],'''
+
+	@Test def formatMethodWithOneExpression2() {
+		'''
 			class C {
 				def m() {
 					"Foo"
 				}
 			}
-		''')
+		'''.assertUnformattedEqualsFormatted[put(keepOneLineMethods, true)]
 	}
-	
-	@Test def void formatMethodWithOneExpression3() {
-		assertFormatted('''
-			class C {
-				def m() {
-					"Foo"
-				}
-			}
-		''',
+
+	@Test def formatMethodWithOneExpression3() {
 		'''
 			class C {
 				def m() {"Foo"}
 			}
-		''')
-	}
-	
-	@Test def void formatMethodWithOneExpression4() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		]
-		,'''
+		'''.assertFormattedTo('''
 			class C {
-				def m() { "Foo" }
+				def m() {
+					"Foo"
+				}
 			}
-		''','''
+		''', [put(keepOneLineMethods, false)])
+	}
+
+	@Test def formatMethodWithOneExpression4() {
+		'''
 			class C {
 				def m() {       "Foo"     }
 			}
-		''')
+		'''.assertFormattedTo('''
+			class C {
+				def m() { "Foo" }
+			}
+		''', [put(keepOneLineMethods, true)])
 	}
-	
-	@Test def void formatMethodWithTryCatchExpression() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		]
-		,'''
+
+	@Test def formatMethodWithTryCatchExpression() {
+		'''
+			class C {
+				def m() {try{"Foo"} catch (Exception e) {"Bar"} }
+			}
+		'''.assertFormattedTo('''
 			class C {
 				def m() {
 					try {
@@ -184,15 +175,11 @@ class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
 					}
 				}
 			}
-		''','''
-			class C {
-				def m() {try{"Foo"} catch (Exception e) {"Bar"} }
-			}
-		''')
+		''', [put(keepOneLineMethods, true)])
 	}
-	
-	@Test def void formatMethodWithTwoExpressions1() {
-		assertFormatted('''
+
+	@Test def formatMethodWithTwoExpressions1() {
+		assertUnformattedEqualsFormatted('''
 			class C {
 				def m() {
 					println(this)
@@ -201,52 +188,45 @@ class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')
 	}
-	
-	@Test def void formatMethodWithTwoExpressions2() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		],'''
+
+	@Test def formatMethodWithTwoExpressions2() {
+		'''
 			class C {
 				def m() {
 					println(this)
 					"Foo"
 				}
 			}
-		''')
+		'''.assertUnformattedEqualsFormatted[put(keepOneLineMethods, true)]
 	}
-	
-	@Test def void formatMethodWithTwoExpressions3() {
-		assertFormatted('''
-			class C {
-				def m() {
-					println(this)
-					"Foo"
-				}
-			}
-		''',
+
+	@Test def formatMethodWithTwoExpressions3() {
 		'''
 			class C {
 				def m() {println(this) "Foo"}
 			}
-		''')
-	}
-	
-	@Test def void formatMethodWithTwoExpressions4() {
-		assertFormatted([
-			put(keepOneLineMethods, true)
-		]
-		,'''
+		'''.assertFormattedTo('''
 			class C {
 				def m() {
 					println(this)
 					"Foo"
 				}
 			}
-		''',
+		''')
+	}
+
+	@Test def formatMethodWithTwoExpressions4() {
 		'''
 			class C {
 				def m() {     println(this)      "Foo"     }
 			}
-		''')
+		'''.assertFormattedTo('''
+		class C {
+			def m() {
+				println(this)
+				"Foo"
+			}
+		}
+		''', [put(keepOneLineMethods, true)])
 	}
 }

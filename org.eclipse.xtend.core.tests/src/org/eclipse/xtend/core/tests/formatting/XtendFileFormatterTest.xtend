@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,80 +8,83 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest
 import org.junit.Test
+import org.junit.runner.RunWith
 
+import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
-class XtendFileFormatterTest extends AbstractXtendFormatterTest {
-	
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
+class XtendFileFormatterTest extends AbstractFormatterTest {
+
 	@Test def formatClass11() {
-		assertFormatted([
-			put(bracesInNewLine, false)
-		],'''
+		'''
 			package foo
 			
 			class bar {
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, false)]
 	}
-	
+
 	@Test def formatClass12() {
-		assertFormatted([
-			put(bracesInNewLine, true)
-		],'''
+		'''
 			package foo
 			
 			class bar
 			{
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, true)]
 	}
-	
+
 	@Test def formatClass112() {
-		assertFormatted([
-			put(bracesInNewLine, false)
-		],'''
+		'''
 			package foo
 			
 			class bar {
 				int member1
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, false)]
 	}
-	
+
 	@Test def formatClass122() {
-		assertFormatted([
-			put(bracesInNewLine, true)
-		],'''
+		'''
 			package foo
 			
 			class bar
 			{
 				int member1
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, true)]
 	}
-	
+
 	@Test def formatClass111() {
-		assertFormatted('''
+		'''   package  foo  class  bar  {  }'''.assertFormattedTo('''
 			package foo
 			
 			class bar {
 			}
-			''', '''   package  foo  class  bar  {  }''')	
+		''')
 	}
-	
+
 	@Test def formatClass2() {
-		assertFormatted('''
+		'''
+			class bar{}
+		'''.assertFormattedTo('''
 			class bar {
 			}
-		''', '''
-			class bar{}
-		''')	
+		''')
 	}
-	
+
 	@Test def formatClass3() {
-		assertFormatted('''
+		'''
+			class bar{ int member1 int member2 def meth1() {} def meth2(){} int member3 }
+		'''.assertFormattedTo('''
 			class bar {
 				int member1
 				int member2
@@ -94,20 +97,11 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 			
 				int member3
 			}
-		''', '''
-			class bar{ int member1 int member2 def meth1() {} def meth2(){} int member3 }
-		''')	
+		''', [put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)])
 	}
-	
+
 	@Test def formatClass31() {
-		assertFormatted('''
-			class bar {
-			
-				def meth1() {
-				}
-			
-			}
-		''', '''
+		'''
 			class bar{
 			
 
@@ -115,26 +109,18 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 
 
 			}
-		''')	
-	}
-	
-	@Test def formatClass4() {
-		assertFormatted('''
+		'''.assertFormattedTo('''
 			class bar {
-
-				int member1
-
-				int member2
 			
 				def meth1() {
 				}
 			
-				def meth2() {
-				}
-			
-				int member3
 			}
-		''', '''
+		''', [put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)])
+	}
+
+	@Test def formatClass4() {
+		'''
 			class bar{
 				
 				
@@ -152,25 +138,28 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 				
 				int member3
 			}
-		''')	
+		'''.assertFormattedTo('''
+			class bar {
+
+				int member1
+
+				int member2
+			
+				def meth1() {
+				}
+			
+				def meth2() {
+				}
+			
+				int member3
+			}
+		''', [put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)])
 	}
-	
+
 	@Test def formatClasses1() {
-		assertFormatted('''
-			package foo
-			
-			class bar {
-			}
-			
-			class baz {
-			}
-		''', '''
+		'''
 			package foo class bar{} class baz{}
-		''')	
-	}
-	
-	@Test def formatClasses2() {
-		assertFormatted('''
+		'''.assertFormattedTo('''
 			package foo
 			
 			class bar {
@@ -178,7 +167,11 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 			
 			class baz {
 			}
-		''', '''
+		''')
+	}
+
+	@Test def formatClasses2() {
+		'''
 			package foo 
 			
 			
@@ -188,11 +181,19 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 			
 			
 			class baz{}
-		''')	
+		'''.assertFormattedTo('''
+			package foo
+			
+			class bar {
+			}
+			
+			class baz {
+			}
+		''')
 	}
-	
+
 	@Test def formatImports1() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			package foo
 			
 			import java.util.Map
@@ -202,20 +203,11 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 				def baz() {
 				}
 			}
-		''')	
+		''')
 	}
-	
+
 	@Test def formatImports2() {
-		assertFormatted('''
-			package foo
-			
-			import java.util.Map
-			
-			import java.util.Set
-			
-			class bar {
-			}
-		''', '''
+		'''
 			package foo
 			
 			import java.util.Map
@@ -227,11 +219,20 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 			
 			class bar {
 			}
-		''')	
+		'''.assertFormattedTo('''
+			package foo
+			
+			import java.util.Map
+			
+			import java.util.Set
+			
+			class bar {
+			}
+		''')
 	}
-	
+
 	@Test def formatPreferencesExample() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			class Movies {
 				def settings(XtendFormatterConfig config) {
 					val List<FormatterSetting> settings = newArrayList()
@@ -248,11 +249,11 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 					return settings
 				}
 			}
-		''')	
+		''', [put(maxLineWidth, 80)])
 	}
-	
+
 	@Test def formatPreferencesExample_02() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			class Movies {
 				def settings(XtendFormatterConfig config) {
 					val List<FormatterSetting> settings = newArrayList()
@@ -269,11 +270,11 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 					return settings
 				}
 			}
-		''')	
+		''', [put(maxLineWidth, 80)])
 	}
 
 	@Test def formatAssignment_01() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			class C {
 				int i
 			
@@ -281,11 +282,11 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 					this.i = 5
 				}
 			}
-		''')	
+		''')
 	}
 
 	@Test def formatAssignment_02() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			class C {
 				static int i
 			
@@ -293,16 +294,16 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 					C::i = 5
 				}
 			}
-		''')	
+		''')
 	}
-	
+
 	@Test def typeReferenceIntegration() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			import java.util.*
-			
+
 			abstract class Foo extends AbstractMap<String, Collection<?>> implements List<String>, Map<String, Collection<?>> {
 				String[] field
-			
+
 				def String[] methode(String[] param) {
 					val String[] valTypes = null
 					val featureCall1 = <String>newArrayList
@@ -324,5 +325,5 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')
 	} 
-	
+
 }

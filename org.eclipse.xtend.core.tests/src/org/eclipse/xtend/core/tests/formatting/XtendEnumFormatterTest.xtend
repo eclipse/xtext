@@ -8,45 +8,46 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest
 import org.junit.Test
+import org.junit.runner.RunWith
 
-import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
-class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
+class XtendEnumFormatterTest extends AbstractFormatterTest {
 	
 	@Test def formatPublic() {
-		assertFormatted([
-		],'''
+		'''
 			public enum Bar {
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted	
 	}
 	
 	@Test def formatLiteral01() {
-		assertFormatted([
-		],'''
+		'''
 			enum Bar {
 				FOO
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
 	
 	@Test def formatLiteral02() {
-		assertFormatted([
-		],'''
+		'''
 			enum Bar {
 				FOO,
 				BAR,
 				BAZ
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted	
 	}
 	
 	@Test def formatLiteral03() {
-		assertFormatted([
-			put(blankLinesBetweenEnumLiterals, 1)
-		],'''
+		'''
 			enum Bar {
 				FOO,
 			
@@ -54,29 +55,25 @@ class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
 			
 				BAZ
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted	
 	}
 	
 	@Test def formatBraces_01() {
-		assertFormatted([
-			put(bracesInNewLine, false)
-		],'''
+		'''
 			package foo
 			
 			enum Bar {
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
 	
 	@Test def formatBraces_02() {
-		assertFormatted([
-			put(bracesInNewLine, true)
-		],'''
+		'''
 			package foo
 			
 			enum Bar
 			{
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, true)]	
 	}
 }

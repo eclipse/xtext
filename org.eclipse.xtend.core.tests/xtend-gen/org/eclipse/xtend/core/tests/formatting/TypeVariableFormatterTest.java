@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,28 +8,19 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
-  public CharSequence refToFile(final CharSequence string) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append(string, "\t");
-    _builder.append(" x");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-
-  public CharSequence paramToFile(final CharSequence string) {
+public class TypeVariableFormatterTest extends AbstractFormatterTest {
+  private CharSequence paramToFile(final CharSequence string) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");
     _builder.newLine();
@@ -44,7 +35,7 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
   }
 
   public void assertTypeParam(final CharSequence toBeFormatted) {
-    this.assertFormatted(this.paramToFile(toBeFormatted));
+    this.assertUnformattedEqualsFormatted(this.paramToFile(toBeFormatted));
   }
 
   @Test
@@ -71,7 +62,7 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
