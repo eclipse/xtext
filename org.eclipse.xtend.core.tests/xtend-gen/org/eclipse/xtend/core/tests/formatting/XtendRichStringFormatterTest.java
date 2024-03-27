@@ -498,8 +498,8 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     this.assertFormattedRichStringExpression(_builder);
   }
 
-  @Test
   @Ignore("indentation increases every time the formatter runs")
+  @Test
   public void prefixedForLoop() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = ```");
@@ -602,7 +602,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormattedRichString(_builder);
+    this.assertUnformattedEqualsFormatted(this.decode(_builder));
   }
 
   @Test
@@ -619,7 +619,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("\t\t\t");
     _builder.append("<<IF true>>");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
+    _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<<ENDIF>>");
@@ -644,7 +644,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.append("\t\t\t");
     _builder_1.append("<<IF true>>");
     _builder_1.newLine();
-    _builder_1.append("\t\t\t");
+    _builder_1.append("\t\t\t\t");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("<<ENDIF>>");
@@ -657,7 +657,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
+    this.assertFormattedTo(this.decode(_builder), this.decode(_builder_1));
   }
 
   @Test
@@ -674,7 +674,6 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("\t\t\t");
     _builder.append("<<IF true>>");
     _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<<ENDIF>>");
@@ -699,6 +698,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.append("\t\t\t");
     _builder_1.append("<<IF true>>");
     _builder_1.newLine();
+    _builder_1.append("\t\t\t");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("<<ENDIF>>");
@@ -711,6 +711,6 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
+    this.assertFormattedTo(this.decode(_builder), this.decode(_builder_1));
   }
 }

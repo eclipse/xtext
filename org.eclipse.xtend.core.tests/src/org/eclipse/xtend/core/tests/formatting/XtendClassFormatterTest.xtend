@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,67 +8,72 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest
 import org.junit.Test
+import org.junit.runner.RunWith
 
+import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
-class XtendClassFormatterTest extends AbstractXtendFormatterTest {
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
+class XtendClassFormatterTest extends AbstractFormatterTest {
+
 	@Test def formatConstructor01() {
-		assertFormatted([
-			put(bracesInNewLine, false)
-		],'''
+		'''
 			class bar {
 				new() {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, false)]
 	}
-	
+
 	@Test def formatConstructor02() {
-		assertFormatted([
-			put(bracesInNewLine, true)
-		],'''
+		'''
 			class bar
 			{
 				new()
 				{
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, true)]
 	}
-	
+
 	@Test def formatConstructor1() {
-		assertFormatted('''
+		'''
 			class bar {
 				new() {
 					super()
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatConstructor2() {
-		assertFormatted('''
+		'''
 			class bar {
 				new(String x) {
 					super(x)
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatConstructor3() {
-		assertFormatted('''
+		'''
 			class bar {
 				new(String x, String y) {
 					super(x, y)
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatConstructor4() {
-		assertFormatted('''
+		'''
 			package foo
 
 			class bar {
@@ -81,167 +86,146 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 				) {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
-	
-	
+
 	@Test def formatField01() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				int foo
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatField02() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				int foo
 				int baz
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldInit01() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				int foo = 1 + 1
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldInit02() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				int foo = 1 + 1
 				int baz = 1 + 1
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldVal() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				val int foo
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldVar() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				var int foo
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldStatic02() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				static int bar
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldStaticVal() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				static val int foo
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldStaticVar() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				static var int foo
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldExtension01() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				extension String
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldExtensionInit01() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				extension String = "a" + "b"
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldExtensionInit02() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				extension String = "a" + "b"
 				extension Integer = 1 + 2
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldExtensionVal01() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				extension val String
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldExtensionVar01() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				extension var String
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatFieldExtension02() {
-		assertFormatted([
-		],'''
+		'''
 			class bar {
 				extension String
 				extension Integer
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatMethod01() {
-		assertFormatted([
-			put(bracesInNewLine, false)
-		],'''
+		'''
 			package foo
 			
 			class bar {
 				def baz() {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, false)]
 	}
-	
+
 	@Test def formatMethod02() {
-		assertFormatted([
-			put(bracesInNewLine, true)
-		],'''
+		'''
 			package foo
 			
 			class bar
@@ -250,33 +234,33 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 				{
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(bracesInNewLine, true)]
 	}
-	
+
 	@Test def formatMethod1() {
-		assertFormatted('''
+		'''
 			package foo
 			
 			class bar {
 				def baz(String x) {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatMethod2() {
-		assertFormatted('''
+		'''
 			package foo
 			
 			class bar {
 				def baz(String x, String y) {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatMethod3() {
-		assertFormatted('''
+		'''
 			package foo
 
 			class bar {
@@ -285,11 +269,11 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 					String p13, String p14) {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted[put(maxLineWidth, 80)]
 	}
-	
+
 	@Test def formatMethod4() {
-		assertFormatted('''
+		'''
 			package foo
 
 			class bar {
@@ -302,32 +286,39 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 				) {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatAbstractMethod1() {
-		assertFormatted('''
+		'''
 			abstract class bar {
 				def baz()
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
+
 	@Test def formatAbstractMethod2() {
-		assertFormatted('''
+		'''
 			abstract class bar {
 				def foo()
 
 				def baz()
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
-	
-	
+
 	@Test def formatMethodMultiline() {
-		assertFormatted('''
+		'''
 			package foo
-			
+
+			class bar {
+				def baz(String x, String y
+				) {
+				}
+			}
+		'''.assertFormattedTo('''
+			package foo
+
 			class bar {
 				def baz(
 					String x,
@@ -335,26 +326,17 @@ class XtendClassFormatterTest extends AbstractXtendFormatterTest {
 				) {
 				}
 			}
-		''', '''
-			package foo
-			
-			class bar {
-				def baz(String x, String y
-				) {
-				}
-			}
-		''')	
+		''')
 	}
-	
-	
+
 	@Test def formatMethodAnnotation() {
-		assertFormatted('''
+		'''
 			package foo
 			
 			class bar {
 				@Deprecated def baz() {
 				}
 			}
-		''')	
+		'''.assertUnformattedEqualsFormatted
 	}
 }

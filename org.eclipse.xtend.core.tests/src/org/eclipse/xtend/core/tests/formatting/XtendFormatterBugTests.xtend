@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
 import org.junit.Ignore
 import org.junit.Test
@@ -16,7 +17,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	
 	@Test
 	def testCoreIssue527_01() {
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 		class test {
 			val static SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH = #[]
 		
@@ -30,7 +31,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	}
 	@Test
 	def testtestCoreIssue527_02() {
-		tester.assertFormatted [
+		formatterTestHelper.assertFormatted [
 			preferences[
 				put(FormatterPreferenceKeys.maxLineWidth, 80)
 			]
@@ -62,7 +63,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
 	def testBug402917_01() {
-		assertFormatted(
+		assertUnformattedEqualsFormatted(
 			'''
 			package foo
 			
@@ -84,28 +85,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
 	def testBug402917_02() {
-		assertFormatted(
-			'''
-			package foo
-			
-			class Dully {
-			
-				@Deprecated
-				extension IntegerExtensions y
-				@Deprecated extension IntegerExtensions x
-			
-				def all(@Deprecated extension IntegerExtensions x) {
-					val extension IntegerExtensions foo = null
-					val c = [ extension IntegerExtensions p |
-						123.bitwiseAnd(1)
-					]
-				}
-			
-				def all2(extension @Deprecated IntegerExtensions x) {
-				}
-			}
-			''',
-			'''
+		'''
 			package foo
 			
 			class Dully {
@@ -124,13 +104,49 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 				def all2(   extension  @Deprecated  IntegerExtensions x) {
 				}	
 			}
-			'''
-		)
+		'''.assertFormattedTo('''
+			package foo
+			
+			class Dully {
+			
+				@Deprecated
+				extension IntegerExtensions y
+				@Deprecated extension IntegerExtensions x
+			
+				def all(@Deprecated extension IntegerExtensions x) {
+					val extension IntegerExtensions foo = null
+					val c = [ extension IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+			
+				def all2(extension @Deprecated IntegerExtensions x) {
+				}
+			}
+		''')
 	}
 
 	@Test
 	def testBug398718(){
-		assertFormatted('''
+		'''
+			package foo
+			class bar {
+				def testVisibilityOfDispatchMethods() {
+					```
+					package foo;
+
+					import java.util.Arrays;
+
+					@SuppressWarnings("all")
+					public class NoSuchElementException {
+
+					  }
+					}
+					```
+
+					}
+			}
+		'''.decode.assertFormattedTo('''
 			package foo
 
 			class bar {
@@ -149,30 +165,12 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 				}
 			}
-		'''.decode, '''
-			package foo
-			class bar {
-				def testVisibilityOfDispatchMethods() {
-					```
-					package foo;
-
-					import java.util.Arrays;
-
-					@SuppressWarnings("all")
-					public class NoSuchElementException {
-
-					  }
-					}
-					```
-
-					}
-			}
 		'''.decode)
 	}
 
 	@Test
 	def testBug434976(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			class Foo {
 				def bar() {
 					new Baz[]
@@ -183,7 +181,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	
 	@Test
 	def testBug398625(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			package foo
 			
 			class bar {
@@ -193,11 +191,11 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 					setExceptions("42", [])
 				}
 			}
-		''')	
+		''', [put(FormatterPreferenceKeys.maxLineWidth, 80)])	
 	}
 	@Test
 	def testBug398625_2(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			package foo
 			
 			class bar {
@@ -207,12 +205,12 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 					setExceptions("42")[]
 				}
 			}
-		''')	
+		''', [put(FormatterPreferenceKeys.maxLineWidth, 80)])	
 	}
 	
 	@Test
 	def testBug398625_3(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			package foo
 
 			class bar {
@@ -230,12 +228,12 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 					]
 				}
 			}
-		''')	
+		''', [put(FormatterPreferenceKeys.maxLineWidth, 80)])	
 	}
 
 	@Test
 	def testBug400030(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 		class Foo {
 
 			/** foo */
@@ -274,7 +272,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
 	def testBug400025_2(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 		class bar {
 			// foo
 		}
@@ -296,7 +294,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
 	def testBug400024(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 		class Foo {
 
 			def bar() {
@@ -312,7 +310,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
 	def testBug400024_1(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 		class Foo {
 
 			def bar() {
@@ -328,7 +326,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	
 	@Test
 	def testBug_xtext_xtend_194(){
-		assertFormatted('''
+		assertUnformattedEqualsFormatted('''
 			class Foo {
 			
 				static val SOME_MULTI_LINE_THINGY = new StringBuilder('a').append('b').
@@ -338,21 +336,23 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 				var bar = new Object
 			
 			}
-		''')
+		''', [put(FormatterPreferenceKeys.maxLineWidth, 80)])
 	}
 	
 	@Test
 	def testBug455582() {
-		assertFormatted('''
-		abstract package class XtendTest {
-			static final def void foo() {
+		'''
+			  abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }
+		'''.assertFormattedTo('''
+			abstract package class XtendTest {
+				static final def void foo() {
+				}
 			}
-		}
-		''', '''  abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }''')
+		''', [put(XtendFormatterPreferenceKeys.keepOneLineMethods, false)])
 	}
 	
 	@Test def bug462628() {
-		tester.assertFormatted [
+		formatterTestHelper.assertFormatted [
 			preferences[
 				put(FormatterPreferenceKeys.maxLineWidth, 120)
 			]
@@ -368,7 +368,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	}
 	
 	@Test def bug403823() {
-		tester.assertFormatted [
+		formatterTestHelper.assertFormatted [
 			preferences[
 				put(FormatterPreferenceKeys.maxLineWidth, 120)
 			]
@@ -386,7 +386,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	}
 	
 	@Test def bug403823_1() {
-		tester.assertFormatted [
+		formatterTestHelper.assertFormatted [
 			preferences[
 				put(FormatterPreferenceKeys.maxLineWidth, 120)
 			]
@@ -401,7 +401,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	}
 	
 	@Test def bug403340() {
-		tester.assertFormatted [
+		formatterTestHelper.assertFormatted [
 			preferences[
 				put(FormatterPreferenceKeys.maxLineWidth, 120)
 			]
@@ -419,7 +419,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 	}
 	
 	@Test def bug403340_1() {
-		tester.assertFormatted [
+		formatterTestHelper.assertFormatted [
 			preferences[
 				put(FormatterPreferenceKeys.maxLineWidth, 120)
 			]
