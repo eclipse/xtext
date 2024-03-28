@@ -41,6 +41,18 @@ public class LoggingTester {
 
 	public static LogCapture captureLogging(Level level, Class<?> source, Runnable action) {
 		Logger logger = Logger.getLogger(source);
+		return captureLogging(logger, level, action);
+	}
+
+	/**
+	 * @since 2.35
+	 */
+	public static LogCapture captureLogging(Level level, String source, Runnable action) {
+		Logger logger = Logger.getLogger(source);
+		return captureLogging(logger, level, action);
+	}
+	
+	protected static LogCapture captureLogging(Logger logger, Level level, Runnable action) {
 		QueueAppender appender = new QueueAppender();
 		Level oldLevel = logger.getLevel();
 		List<Appender> allAppenders = appenderHierarchy(logger);

@@ -1,22 +1,25 @@
 /*******************************************************************************
- * Copyright (c) 2020 Robert Lewis and others.
+ * Copyright (c) 2024 Sebastian Zarnekow and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.nodemodel;
+package org.eclipse.xtext.nodemodel.util;
 
-import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 
 /**
- * @author Robert Lewis - Initial contribution and API
+ * @since 2.35
  */
-public class BasicNodeIterable extends org.eclipse.xtext.nodemodel.impl.BasicNodeIterable {
+public abstract class ForwardingLeafNode extends ForwardingNode implements ILeafNode {
+	@Override
+	protected abstract ILeafNode delegate();
 
-	protected BasicNodeIterable(AbstractNode startWith) {
-		super(startWith);
+	@Override
+	public boolean isHidden() {
+		return delegate().isHidden();
 	}
-
+	
 }

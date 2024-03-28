@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import static org.eclipse.xtext.nodemodel.NodeModelAccessForTests.*;
+import static org.junit.Assert.*;
+
 import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -16,6 +19,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreAdapterFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.junit.Test;
 
 import com.google.common.collect.AbstractIterator;
@@ -30,20 +37,17 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	@Test public void testTextOffsetLength() {
 		RootNode root = new RootNode();
 		String completeContent = " completeContent ";
-		root.basicSetCompleteContent(completeContent);
+		basicSetCompleteContent(root, completeContent);
 		LeafNode firstChild = new LeafNode();
-		firstChild.basicSetTotalLength(1);
-		firstChild.basicSetTotalOffset(0);
+		basicSetTotalRegion(firstChild, 0, 1);
 		addChild(root, firstChild);
 		CompositeNodeWithSemanticElement composite = createCompositeNode();
 		LeafNode child = new LeafNode();
-		child.basicSetTotalOffset(1);
-		child.basicSetTotalLength(completeContent.trim().length());
+		basicSetTotalRegion(child, 1, completeContent.trim().length());
 		addChild(composite, child);
 		addChild(root, composite);
 		LeafNode lastChild = new LeafNode();
-		lastChild.basicSetTotalLength(1);
-		lastChild.basicSetTotalOffset(completeContent.length() - 2);
+		basicSetTotalRegion(lastChild, completeContent.length() - 2, 1);
 		addChild(root, lastChild);
 		assertEquals(completeContent.trim(), composite.getText());
 		assertEquals(1, composite.getTotalOffset());
@@ -52,10 +56,9 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	
 	@Test public void testGetTotalOffsetWithoutChildren() {
 		RootNode rootNode = new RootNode();
-		rootNode.basicSetCompleteContent("my string");
+		basicSetCompleteContent(rootNode, "my string");
 		LeafNode leafNode = new LeafNode();
-		leafNode.basicSetTotalOffset(0);
-		leafNode.basicSetTotalLength(3);
+		basicSetTotalRegion(leafNode, 0, 3);
 		addChild(rootNode, leafNode);
 		CompositeNodeWithSemanticElement firstChild = createCompositeNode();
 		CompositeNodeWithSemanticElement firstGrandChild = createCompositeNode();
@@ -88,7 +91,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	
 	@Test public void testGetLeafNodes_01() {
 		RootNode rootNode = new RootNode();
-		rootNode.basicSetCompleteContent("my string");
+		basicSetCompleteContent(rootNode, "my string");
 		CompositeNode first = new CompositeNode();
 		CompositeNode childOfFirst = new CompositeNode();
 		CompositeNode second = new CompositeNode();
@@ -129,7 +132,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	
 	@Override
 	protected AbstractNode getFirstChild(ICompositeNode node) {
-		return ((CompositeNodeWithSemanticElement) node).basicGetFirstChild();
+		return basicGetFirstChild((CompositeNode) node);
 	}
 	
 	@Override

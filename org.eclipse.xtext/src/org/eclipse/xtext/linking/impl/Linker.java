@@ -83,10 +83,6 @@ public class Linker extends AbstractCleaningLinker {
 		}
 	}
 
-	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {
-		return new LinkingDiagnosticProducer(consumer);
-	}
-
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for (EReference ref : obj.eClass().getEAllReferences()) {
 			if (canSetDefaultValues(ref) && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
@@ -238,11 +234,11 @@ public class Linker extends AbstractCleaningLinker {
 
 	@Override
 	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
-		final IDiagnosticProducer producer = createDiagnosticProducer(consumer);
+		IDiagnosticProducer producer = createDiagnosticProducer(consumer, model.eResource());
 		ensureModelLinked(model, producer);
 	}
 
-	protected void ensureModelLinked(EObject model, final IDiagnosticProducer producer) {
+	protected void ensureModelLinked(EObject model, IDiagnosticProducer producer) {
 		boolean clearAllReferencesRequired = isClearAllReferencesRequired(model.eResource());
 		TreeIterator<EObject> iterator = getAllLinkableContents(model);
 		while(iterator.hasNext()) {

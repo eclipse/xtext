@@ -8,19 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import static org.junit.Assert.*;
+
 import java.util.NoSuchElementException;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractNodeTest extends Assert {
+public abstract class AbstractNodeTest {
 
 	protected NodeModelBuilder builder;
 

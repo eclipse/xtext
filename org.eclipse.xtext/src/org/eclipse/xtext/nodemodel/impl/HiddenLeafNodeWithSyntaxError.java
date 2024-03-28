@@ -51,6 +51,18 @@ public class HiddenLeafNodeWithSyntaxError extends HiddenLeafNode {
 	}
 	
 	@Override
+	protected void writeContent(NodeModelOutput out) throws IOException {
+		super.writeContent(out);
+		out.writeSyntaxErrorMessage(syntaxErrorMessage);
+	}
+	
+	@Override
+	protected void readContent(NodeModelInput in) throws IOException {
+		super.readContent(in);
+		syntaxErrorMessage = in.readSyntaxErrorMessage();
+	}
+	
+	@Override
 	protected NodeType getNodeId() {
 		return NodeType.HiddenLeafNodeWithSyntaxError;  
 	}

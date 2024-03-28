@@ -27,29 +27,15 @@ import com.google.common.collect.Iterators;
  * 
  * @author Jan Köhnlein
  */
-public class ParseResult implements IParseResult {
+public class ParseResult extends AbstractParseResult {
 
-    private EObject rootAstElement;
     private ICompositeNode rootNode;
-	private final boolean hasErrors;
     
     public ParseResult(/* @Nullable */ EObject rootAstElement, /* @NonNull */ ICompositeNode rootNode, boolean hasErrors) {
-    	Preconditions.checkNotNull(rootNode);
-        this.rootAstElement = rootAstElement;
-        this.rootNode = rootNode;
-		this.hasErrors = hasErrors;
+    	super(rootAstElement, hasErrors);
+        this.rootNode = Preconditions.checkNotNull(rootNode);
     }
     
-    public void setRootASTElement(/* @Nullable */ EObject rootAstElement) {
-        this.rootAstElement = rootAstElement;
-    }
-
-    /* @Nullable */
-    @Override
-	public EObject getRootASTElement() {
-        return rootAstElement;
-    }
-
     /* @NonNull */
 	@Override
 	public Iterable<INode> getSyntaxErrors() {
@@ -78,12 +64,7 @@ public class ParseResult implements IParseResult {
 	}
     
 	public void setRootNode(/* @NonNull */ ICompositeNode rootNode) {
-		Preconditions.checkNotNull(rootNode);
-		this.rootNode = rootNode;
+		this.rootNode = Preconditions.checkNotNull(rootNode);
 	}
 
-	@Override
-	public boolean hasSyntaxErrors() {
-		return hasErrors;
-	}
 }
