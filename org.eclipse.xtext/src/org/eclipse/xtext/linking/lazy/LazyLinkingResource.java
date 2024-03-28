@@ -44,12 +44,10 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-
 import com.google.inject.name.Named;
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -324,10 +322,10 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected String getReferences(Triple<EObject, EReference, INode> triple,
-			LinkedHashSet<Triple<EObject, EReference, INode>> resolving2) {
+			LinkedHashSet<Triple<EObject, EReference, INode>> resolving) {
 		StringBuffer buffer = new StringBuffer();
 		boolean found = false;
-		for (Triple<EObject, EReference, INode> triple2 : resolving2) {
+		for (Triple<EObject, EReference, INode> triple2 : resolving) {
 			found = found || triple2.equals(triple);
 			if (found)
 				buffer.append(getQualifiedName(triple2.getSecond())).append("->");
@@ -523,7 +521,7 @@ public class LazyLinkingResource extends XtextResource {
 	 */
 	public int addLazyProxyInformation(EObject obj, EReference ref, INode node) {
 		int index = proxyInformation.size();
-		proxyInformation.add(Tuples.create(obj, ref, node));
+		proxyInformation.add(getParseResultWrapper().toProxyInformation(internalGetParseResult(), obj, ref, node));
 		return index;
 	}
 	

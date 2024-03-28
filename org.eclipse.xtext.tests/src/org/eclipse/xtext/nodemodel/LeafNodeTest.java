@@ -8,8 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import static org.eclipse.xtext.nodemodel.NodeModelAccessForTests.*;
+import static org.junit.Assert.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.nodemodel.impl.LeafNodeWithSyntaxError;
 import org.junit.Test;
 
 /**
@@ -18,8 +23,8 @@ import org.junit.Test;
 public class LeafNodeTest extends AbstractNodeTest {
 
 	@Override
-	protected LeafNode createNode() {
-		return new LeafNode();
+	protected LeafNodeWithSyntaxError createNode() {
+		return new LeafNodeWithSyntaxError();
 	}
 
 	@Override
@@ -61,15 +66,15 @@ public class LeafNodeTest extends AbstractNodeTest {
 	@Test public void testGetGrammarElement() {
 		LeafNode leafNode = createNode();
 		EObject grammarElement = EcoreFactory.eINSTANCE.createEObject();
-		leafNode.basicSetGrammarElement(grammarElement);
+		basicSetGrammarElement(leafNode, grammarElement);
 		assertSame(grammarElement, leafNode.getGrammarElement());
 	}
 
 	@Override
 	@Test public void testGetSyntaxErrorMessage() {
-		LeafNode leafNode = createNode();
+		LeafNodeWithSyntaxError leafNode = createNode();
 		SyntaxErrorMessage errorMessage = new SyntaxErrorMessage("message", null);
-		leafNode.basicSetSyntaxErrorMessage(errorMessage);
+		basicSetSyntaxErrorMessage(leafNode, errorMessage);
 		assertSame(errorMessage, leafNode.getSyntaxErrorMessage());
 	}
 

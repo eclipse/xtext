@@ -50,7 +50,7 @@ public class SerializationTest extends AbstractEnumRulesTest {
 	// EAttribute's default value.
 	// Therefore, the serializer returns the first match, which should not be
 	// relied on, since the order is not defined.
-	public void _testSerialize_01() throws Exception {
+	public void testSerialize_01() throws Exception {
 		String result = serialize(model);
 		assertEquals("generated SameName", result);
 	}
@@ -61,8 +61,7 @@ public class SerializationTest extends AbstractEnumRulesTest {
 		assertEquals("existing DifferentLiteral", result);
 	}
 	
-	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
-	public void _testSerialize_03() throws Exception {
+	@Test public void testSerialize_03() throws Exception {
 		model.setGenerated(GeneratedEnum.DIFFERENT_NAME);
 		String result = serialize(model);
 		assertEquals("generated DifferentLiteral", result);

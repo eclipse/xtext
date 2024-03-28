@@ -24,9 +24,11 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
@@ -150,6 +152,24 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	private boolean isContainedInFragmentRule(EObject grammarElement) {
 		ParserRule rule = (ParserRule) GrammarUtil.containingRule(grammarElement);
 		return rule.isFragment();
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer, Resource resource) {
+		IDiagnosticProducer result = createDiagnosticProducer(consumer);
+		if (resource instanceof XtextResource) {
+			result = ((XtextResource) resource).wrap(result);
+		}
+		return result;
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {
+		return new LinkingDiagnosticProducer(consumer);
 	}
 
 }

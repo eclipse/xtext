@@ -429,8 +429,14 @@ public class XtextGeneratorTemplates {
                 _builder.append(_expression_2, "\t");
               } else {
                 TypeReference _type_2 = it.getValue().getType();
-                _builder.append(_type_2, "\t");
-                _builder.append(".class");
+                boolean _tripleNotEquals_1 = (_type_2 != null);
+                if (_tripleNotEquals_1) {
+                  TypeReference _type_3 = it.getValue().getType();
+                  _builder.append(_type_3, "\t");
+                  _builder.append(".class");
+                } else {
+                  _builder.append("null");
+                }
               }
             }
             _builder.append(";");
@@ -466,14 +472,14 @@ public class XtextGeneratorTemplates {
                   _builder.append("Class<? extends ");
                   _builder.append(Provider.class);
                   _builder.append("<? extends ");
-                  TypeReference _type_3 = it.getKey().getType();
-                  _builder.append(_type_3);
+                  TypeReference _type_4 = it.getKey().getType();
+                  _builder.append(_type_4);
                   _builder.append(">>");
                 } else {
                   _builder.append(Provider.class);
                   _builder.append("<? extends ");
-                  TypeReference _type_4 = it.getKey().getType();
-                  _builder.append(_type_4);
+                  TypeReference _type_5 = it.getKey().getType();
+                  _builder.append(_type_5);
                   _builder.append(">");
                 }
               }
@@ -486,13 +492,13 @@ public class XtextGeneratorTemplates {
               _builder.append("return ");
               {
                 Object _expression_4 = it.getValue().getExpression();
-                boolean _tripleNotEquals_1 = (_expression_4 != null);
-                if (_tripleNotEquals_1) {
+                boolean _tripleNotEquals_2 = (_expression_4 != null);
+                if (_tripleNotEquals_2) {
                   Object _expression_5 = it.getValue().getExpression();
                   _builder.append(_expression_5, "\t");
                 } else {
-                  TypeReference _type_5 = it.getValue().getType();
-                  _builder.append(_type_5, "\t");
+                  TypeReference _type_6 = it.getValue().getType();
+                  _builder.append(_type_6, "\t");
                   _builder.append(".class");
                 }
               }

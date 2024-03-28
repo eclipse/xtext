@@ -8,12 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import static org.eclipse.xtext.nodemodel.NodeModelAccessForTests.*;
+
 import java.util.NoSuchElementException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.BasicNodeIterator;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +35,7 @@ public class BasicNodeIteratorTest {
 		String text = "alpha beta gamma";
 		
 		RootNode root = new RootNode();
-		root.basicSetCompleteContent(text);
+		basicSetCompleteContent(root, text);
 		
 		EObject alpha = new EObjectImpl() {};
 		builder.newLeafNode(text.indexOf("alpha"), "alpha".length(), alpha, false, null, root);
@@ -42,7 +46,7 @@ public class BasicNodeIteratorTest {
 		EObject gamma = new EObjectImpl() {};
 		builder.newLeafNode(text.indexOf("gamma"), "gamma".length(), gamma, false, null, root);
 		
-		return root.basicGetFirstChild();
+		return basicGetFirstChild(root);
 
 	}
 		

@@ -8,7 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import static org.eclipse.xtext.nodemodel.NodeModelAccessForTests.*;
+import static org.junit.Assert.*;
+
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.junit.Test;
 
 /**
@@ -20,7 +25,7 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 	@Test public void testTextOffsetLength() {
 		RootNode rootNode = createCompositeNode();
 		String completeContent = "completeContent";
-		rootNode.basicSetCompleteContent(completeContent);
+		basicSetCompleteContent(rootNode, completeContent);
 		assertEquals(completeContent, rootNode.getText());
 		assertEquals(0, rootNode.getTotalOffset());
 		assertEquals(completeContent.length(), rootNode.getTotalLength());
@@ -28,7 +33,7 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 	
 	@Override
 	protected AbstractNode getFirstChild(ICompositeNode node) {
-		return ((RootNode) node).basicGetFirstChild();
+		return basicGetFirstChild((CompositeNode) node);
 	}
 	
 	@Override

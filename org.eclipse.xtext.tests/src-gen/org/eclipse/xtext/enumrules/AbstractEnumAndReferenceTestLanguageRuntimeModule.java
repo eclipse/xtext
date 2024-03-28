@@ -20,6 +20,9 @@ import org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenc
 import org.eclipse.xtext.enumrules.serializer.EnumAndReferenceTestLanguageSemanticSequencer;
 import org.eclipse.xtext.enumrules.serializer.EnumAndReferenceTestLanguageSyntacticSequencer;
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess;
+import org.eclipse.xtext.nodemodel.detachable.DetachableNodeModelBuilder;
+import org.eclipse.xtext.nodemodel.detachable.DetachableParseResultWrapper;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ITokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -29,6 +32,8 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.parser.impl.PartialParsingHelper;
+import org.eclipse.xtext.resource.ParseResultWrapper;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -118,6 +123,21 @@ public abstract class AbstractEnumAndReferenceTestLanguageRuntimeModule extends 
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.DetachableNodeModelFragment
+	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
+		return DetachableNodeModelBuilder.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.DetachableNodeModelFragment
+	public Class<? extends ParseResultWrapper> bindParseResultWrapper() {
+		return DetachableParseResultWrapper.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.DetachableNodeModelFragment
+	public Class<? extends PartialParsingHelper> bindPartialParsingHelper() {
+		return null;
 	}
 	
 }

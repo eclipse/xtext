@@ -361,7 +361,43 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	}
 
 	protected enum NodeType {
-		CompositeNode, LeafNode, CompositeNodeWithSemanticElement, CompositeNodeWithSyntaxError, CompositeNodeWithSemanticElementAndSyntaxError, RootNode, HiddenLeafNode, HiddenLeafNodeWithSyntaxError, LeafNodeWithSyntaxError
+		CompositeNode, //
+		LeafNode, //
+		CompositeNodeWithSemanticElement, //
+		CompositeNodeWithSyntaxError, //
+		CompositeNodeWithSemanticElementAndSyntaxError, //
+		RootNode, //
+		HiddenLeafNode, //
+		HiddenLeafNodeWithSyntaxError, //
+		LeafNodeWithSyntaxError;
+
+		/**
+		 * @since 2.35
+		 */
+		public static AbstractNode fromOrdinal(int ordinal) {
+			switch (ordinal) {
+			case 0:
+				return new CompositeNode();
+			case 1:
+				return new LeafNode();
+			case 2:
+				return new CompositeNodeWithSemanticElement();
+			case 3:
+				return new CompositeNodeWithSyntaxError();
+			case 4:
+				return new CompositeNodeWithSemanticElementAndSyntaxError();
+			case 5:
+				return new RootNode();
+			case 6:
+				return new HiddenLeafNode();
+			case 7:
+				return new HiddenLeafNodeWithSyntaxError();
+			case 8:
+				return new LeafNodeWithSyntaxError();
+			default:
+				return null;
+			}
+		}
 	}
 
 	protected abstract NodeType getNodeId();
@@ -408,7 +444,21 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 			}
 		}
 	}
-
+	
+	/**
+	 * @since 2.35
+	 */
+	protected void writeContent(NodeModelOutput out) throws IOException {
+		out.writeGrammarElement(grammarElementOrArray);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected void readContent(NodeModelInput in) throws IOException {
+		grammarElementOrArray = in.readGrammarElement();
+	}
+	
 	private void writeGrammarId(DataOutputStream out, SerializationConversionContext scc, EObject eObject)
 			throws IOException {
 		Integer grammarId = scc.getGrammarElementId(eObject);

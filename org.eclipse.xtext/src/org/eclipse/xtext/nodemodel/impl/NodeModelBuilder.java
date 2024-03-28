@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
@@ -15,16 +17,16 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.INodeReference;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseResult;
 
 /**
  * A stateful (!) builder that provides call back methods for clients who
  * want to create a node model and maintain its invariants. 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
- * 
- * @see INodeReference
  */
 public class NodeModelBuilder {
 
@@ -46,6 +48,13 @@ public class NodeModelBuilder {
 	 */
 	public NodeModelBuilder() {
 		this(new GrammarElementsInterner());
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	public IParseResult createParseResult(EObject model, ICompositeNode root, boolean hasErrors) {
+		return new ParseResult(model, root, hasErrors);
 	}
 	
 	public void addChild(ICompositeNode node, AbstractNode child) {
@@ -70,6 +79,21 @@ public class NodeModelBuilder {
 	public void associateWithSemanticElement(ICompositeNode node, EObject astElement) {
 		CompositeNodeWithSemanticElement casted = (CompositeNodeWithSemanticElement) node;
 		astElement.eAdapters().add(casted);
+	}
+	
+	protected void updateAssociation(CompositeNode oldNode, CompositeNodeWithSemanticElement newNode,
+			EObject astElement) {
+		List<Adapter> adapters = astElement.eAdapters();
+		if (oldNode instanceof Adapter)
+			adapters.remove((Adapter)oldNode);
+		adapters.add(newNode);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected void basicSetSemanticElement(CompositeNodeWithSemanticElement node, EObject element) {
+		node.basicSetSemanticElement(element);
 	}
 	
 	public ICompositeNode newCompositeNodeAsParentOf(EObject grammarElement, int lookahead, ICompositeNode existing) {
@@ -223,9 +247,7 @@ public class NodeModelBuilder {
 		rootNode.basicSetLookAhead(oldNode.getLookAhead());
 		EObject semanticElement = oldNode.getSemanticElement();
 		if (semanticElement != null) {
-			if (oldNode instanceof Adapter)
-				semanticElement.eAdapters().remove((Adapter)oldNode);
-			rootNode.getSemanticElement().eAdapters().add(rootNode);
+			updateAssociation(oldNode, rootNode, semanticElement);
 		}
 	}
 	
@@ -250,13 +272,12 @@ public class NodeModelBuilder {
 		} else {
 			CompositeNode oldNode = (CompositeNode) node;
 			CompositeNode newNode = null;
-			if (oldNode.basicGetSemanticElement() != null) {
+			EObject semanticElement = oldNode.basicGetSemanticElement();
+			if (semanticElement != null) {
 				CompositeNodeWithSemanticElementAndSyntaxError newComposite = new CompositeNodeWithSemanticElementAndSyntaxError();
-				newComposite.basicSetSemanticElement(oldNode.basicGetSemanticElement());
+				newComposite.basicSetSemanticElement(semanticElement);
 				newComposite.basicSetSyntaxErrorMessage(errorMessage);
-				if (oldNode instanceof Adapter)
-					oldNode.basicGetSemanticElement().eAdapters().remove((Adapter)oldNode);
-				newComposite.basicGetSemanticElement().eAdapters().add(newComposite);
+				updateAssociation(oldNode, newComposite, semanticElement);
 				newNode = newComposite;
 			} else {
 				CompositeNodeWithSyntaxError newComposite = new CompositeNodeWithSyntaxError();
