@@ -193,14 +193,17 @@ Workflow {
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
+			fragment = nodemodel.detachable.DetachableNodeModelFragment {}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
+			fragment = nodemodel.detachable.DetachableNodeModelFragment {}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/enumrules/MultiRuleEnumTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
+			fragment = nodemodel.detachable.DetachableNodeModelFragment {}
 		}
 
 		language = { 

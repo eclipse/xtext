@@ -49,6 +49,18 @@ public class LeafNodeWithSyntaxError extends LeafNode {
 	}
 	
 	@Override
+	protected void writeContent(NodeModelOutput out) throws IOException {
+		super.writeContent(out);
+		out.writeSyntaxErrorMessage(syntaxErrorMessage);
+	}
+	
+	@Override
+	protected void readContent(NodeModelInput in) throws IOException {
+		super.readContent(in);
+		this.syntaxErrorMessage = in.readSyntaxErrorMessage();
+	}
+	
+	@Override
 	protected NodeType getNodeId() {
 		return NodeType.LeafNodeWithSyntaxError;
 	}

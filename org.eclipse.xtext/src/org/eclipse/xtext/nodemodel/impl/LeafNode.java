@@ -80,6 +80,19 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 		
 		SerializationUtil.writeInt (out, totalLength, true); 
 	}
+	
+	@Override
+	protected void writeContent(NodeModelOutput out) throws IOException {
+		super.writeContent(out);
+		out.writeLength(totalLength);
+	}
+	
+	@Override
+	protected void readContent(NodeModelInput in) throws IOException {
+		super.readContent(in);
+		totalOffset = in.currentOffset();
+		totalLength = in.readLength();
+	}
 
 	@Override
 	protected NodeType getNodeId() {

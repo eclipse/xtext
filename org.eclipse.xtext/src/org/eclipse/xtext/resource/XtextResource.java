@@ -23,12 +23,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
@@ -139,6 +142,9 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IEncodingProvider encodingProvider;
+	
+	@Inject
+	private ParseResultWrapper parseResultWrapper;
 
 	private String encoding;
 
@@ -168,6 +174,28 @@ public class XtextResource extends ResourceImpl {
 	/* @Nullable */
 	public IParseResult getParseResult() {
 		return parseResult;
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected final IParseResult internalGetParseResult() {
+		return parseResult;
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected final ParseResultWrapper getParseResultWrapper() {
+		return parseResultWrapper;
+	}
+	
+	@Override
+	public NotificationChain basicSetResourceSet(ResourceSet resourceSet, NotificationChain notifications) {
+		if (resourceSet == null && this.resourceSet != null && this.parseResultWrapper != null) {
+			parseResultWrapper.release(parseResult);
+		}
+		return super.basicSetResourceSet(resourceSet, notifications);
 	}
 	
 	@Override
@@ -235,7 +263,7 @@ public class XtextResource extends ResourceImpl {
 	@Override
 	protected void doUnload() {
 		super.doUnload();
-		parseResult = null;
+		parseResult = parseResultWrapper.release(parseResult);
 	}
 	
 	/**
@@ -293,7 +321,7 @@ public class XtextResource extends ResourceImpl {
 	}
 	
 	protected void updateInternalState(IParseResult newParseResult) {
-		this.parseResult = newParseResult;
+		setParseResult(newParseResult);
 		EObject newRootASTElement = parseResult.getRootASTElement();
 		if (newRootASTElement != null && !containsRootElement(newRootASTElement))
 			getContents().add(0, newRootASTElement);
@@ -342,7 +370,7 @@ public class XtextResource extends ResourceImpl {
 		}
 		getContents().clear();
 		clearErrorsAndWarnings();
-		this.parseResult = null;
+		this.parseResult = parseResultWrapper.release(parseResult);
 	}
 
 	protected void doLinking() {
@@ -355,6 +383,10 @@ public class XtextResource extends ResourceImpl {
 			getErrors().addAll(consumer.getResult(Severity.ERROR));
 			getWarnings().addAll(consumer.getResult(Severity.WARNING));
 		}
+	}
+	
+	public IDiagnosticProducer wrap(IDiagnosticProducer original) {
+		return parseResultWrapper.wrap(parseResult, original);
 	}
 
 	@Override
@@ -491,7 +523,8 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	public void setParseResult(IParseResult parseResult) {
-		this.parseResult = parseResult;
+		parseResultWrapper.release(this.parseResult);
+		this.parseResult = parseResultWrapper.acquire(parseResult);
 	}
 
 	public boolean isValidationDisabled() {

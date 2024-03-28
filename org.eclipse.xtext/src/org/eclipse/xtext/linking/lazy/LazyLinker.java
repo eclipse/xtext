@@ -39,7 +39,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.AbstractCleaningLinker;
-import org.eclipse.xtext.linking.impl.LinkingDiagnosticProducer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -90,7 +89,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	@Override
 	protected void doLinkModel(final EObject model, IDiagnosticConsumer consumer) {
 		final Multimap<EStructuralFeature.Setting, INode> settingsToLink = ArrayListMultimap.create();
-		final LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
+		final IDiagnosticProducer producer = createDiagnosticProducer(consumer, model.eResource());
 		cache.execWithoutCacheClear(model.eResource(), new IUnitOfWork.Void<Resource>() {
 			@Override
 			public void process(Resource state) throws Exception {
