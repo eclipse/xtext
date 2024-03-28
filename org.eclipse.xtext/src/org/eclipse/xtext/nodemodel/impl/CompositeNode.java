@@ -260,6 +260,63 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 
 		SerializationUtil.writeInt(out, lookAhead, true);
 	}
+	
+	@Override
+	protected final void writeContent(NodeModelOutput out) throws IOException {
+		doWriteContent(out);
+		writeChildren(out);
+	}
+
+	/**
+	 * @since 2.35
+	 */
+	protected void doWriteContent(NodeModelOutput out) throws IOException {
+		super.writeContent(out);
+		out.writeCompressedInt(lookAhead);
+	}
+
+	protected void writeChildren(NodeModelOutput out) throws IOException {
+		AbstractNode child = firstChild;
+		while(child != null) {
+			out.writeNode(child);
+			child = child.basicGetNextSibling();
+			if (child == firstChild) {
+				break;
+			}
+		}
+		out.writeCompressedInt(-1);
+	}
+	
+	@Override
+	protected final void readContent(NodeModelInput in) throws IOException {
+		doReadContent(in);
+		readChildren(in);
+	}
+
+	protected void doReadContent(NodeModelInput in) throws IOException {
+		super.readContent(in);
+		lookAhead = in.readCompressedInt();
+	}
+
+	protected void readChildren(NodeModelInput in) throws IOException {
+		AbstractNode readNode = in.readNode();
+		AbstractNode child = null;
+		while(readNode != null) {
+			readNode.basicSetParent(this);
+			if (child == null) {
+				firstChild = readNode;
+			} else {
+				readNode.basicSetPreviousSibling(child);
+				child.basicSetNextSibling(readNode);
+			}
+			child = readNode;
+			readNode = in.readNode();
+		}
+		if (firstChild != null) {
+			firstChild.basicSetPreviousSibling(child);
+			child.basicSetNextSibling(firstChild);
+		}
+	}
 
 	private int getChildCount() {
 		if (firstChild == null) {

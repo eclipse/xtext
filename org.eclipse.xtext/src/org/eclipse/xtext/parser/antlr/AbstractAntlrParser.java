@@ -82,7 +82,7 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	protected abstract String getDefaultRuleName();
 
 	protected IParseResult parse(String ruleName, CharStream in) {
-		return doParse(ruleName, in, nodeModelBuilder.get(), 0);
+		return doParse(ruleName, in, createNodeModelBuilder(), 0);
 	}
 
 	protected IParseResult doParse(String ruleName, CharStream in, NodeModelBuilder nodeModelBuilder, int initialLookAhead) {
@@ -125,7 +125,7 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	@Override
 	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 		try {
-			NodeModelBuilder builder = nodeModelBuilder.get();
+			NodeModelBuilder builder = createNodeModelBuilder();
 			builder.setForcedFirstGrammarElement(ruleCall);
 			IParseResult parseResult = doParse(ruleCall.getRule().getName(), new ANTLRReaderStream(reader), builder, initialLookAhead);
 			return parseResult;

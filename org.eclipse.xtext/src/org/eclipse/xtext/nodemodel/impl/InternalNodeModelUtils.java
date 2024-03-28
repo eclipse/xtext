@@ -12,7 +12,9 @@ import java.io.LineNumberReader;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.util.LineAndColumn;
 
 import com.google.common.base.Preconditions;
@@ -84,6 +86,70 @@ public class InternalNodeModelUtils {
 	 */
 	protected static AbstractNode basicGetLastChild(CompositeNode node) {
 		return node.basicGetLastChild();
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static void basicSetCompleteContent(RootNode node, String content) {
+		node.basicSetCompleteContent(content);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static void basicSetGrammarElement(AbstractNode node, EObject grammarElement) {
+		node.basicSetGrammarElement(grammarElement);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static void basicSetGrammarElement(AbstractNode node, EObject[] grammarElementArray) {
+		node.basicSetGrammarElement(grammarElementArray);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static void basicSetSyntaxErrorMessage(LeafNodeWithSyntaxError leafNode, SyntaxErrorMessage errorMessage) {
+		leafNode.basicSetSyntaxErrorMessage(errorMessage);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static void basicSetTotalRegion(LeafNode leaf, int offset, int length) {
+		leaf.basicSetTotalOffset(offset);
+		leaf.basicSetTotalLength(length);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static AbstractNode basicGetNextSibling(AbstractNode node) {
+		return node.basicGetNextSibling();
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static AbstractNode basicGetPreviousSibling(AbstractNode node) {
+		return node.basicGetPreviousSibling();
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static CompositeNode basicGetDelegate(SyntheticCompositeNode node) {
+		return node.basicGetDelegate();
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected static int basicGetGrammarElementIndex(SyntheticCompositeNode node) {
+		return node.basicGetGrammarElementIndex();
 	}
 	
 	/*

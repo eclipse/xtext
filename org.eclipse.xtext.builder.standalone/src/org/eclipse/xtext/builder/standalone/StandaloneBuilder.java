@@ -960,6 +960,9 @@ public class StandaloneBuilder {
 		boolean wasDeliver = resourceSet.eDeliver();
 		try {
 			resourceSet.eSetDeliver(false);
+			for (Resource resource : resourceSet.getResources()) {
+				resource.eSetDeliver(false);
+			}
 			resourceSet.getResources().clear();
 		} finally {
 			resourceSet.eSetDeliver(wasDeliver);
