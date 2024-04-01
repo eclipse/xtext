@@ -56,7 +56,7 @@ args4j (2.33)
 
 * License: MIT License
 
-ASM (9.6)
+ASM (9.7)
 
 * License: BSD-3-Clause
 
@@ -70,7 +70,7 @@ Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
-Google Guava (33.0.0)
+Google Guava (33.1.0)
 
 * License: Apache License 2.0
 
@@ -82,7 +82,7 @@ Gradle Wrapper (8)
 
 * License: Apache License, 2.0
 
-guava gwt (33.0.0)
+guava gwt (33.1.0)
 
 * License: Apache License, 2.0
 
