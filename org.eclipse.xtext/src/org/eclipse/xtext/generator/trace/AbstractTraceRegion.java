@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -132,8 +133,7 @@ public abstract class AbstractTraceRegion {
 
 	protected Map<SourceRelativeURI, List<Pair<ILocationData, AbstractTraceRegion>>> collectMatchingLocations(
 			SourceRelativeURI expectedAssociatedPath) {
-		Map<SourceRelativeURI, List<Pair<ILocationData, AbstractTraceRegion>>> result = Maps
-				.newHashMapWithExpectedSize(2);
+		Map<SourceRelativeURI, List<Pair<ILocationData, AbstractTraceRegion>>> result = new HashMap<>(3);
 		Iterator<AbstractTraceRegion> treeIterator = treeIterator();
 		while (treeIterator.hasNext()) {
 			AbstractTraceRegion next = treeIterator.next();
