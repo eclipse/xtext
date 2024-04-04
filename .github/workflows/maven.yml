@@ -46,7 +46,7 @@ jobs:
       - name: Build and test
         uses: coactions/setup-xvfb@v1.0.1
         with: 
-          run: ./mvnw clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.full.releng
+          run: ./mvnw --toolchains releng/toolchains.xml clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.full.releng
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v4
@@ -86,7 +86,7 @@ jobs:
         run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" >> "$GITHUB_ENV"
 
       - name: Build Maven artifacts
-        run: ./mvnw clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.maven.releng
+        run: ./mvnw --toolchains releng/toolchains.xml clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.maven.releng
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v4
