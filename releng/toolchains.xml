@@ -22,4 +22,14 @@
 			<jdkHome>${env.JAVA_HOME_17_X64}</jdkHome>
 		</configuration>
 	</toolchain>
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<id>JavaSE-21</id>
+			<version>21</version>
+		</provides>
+		<configuration>
+			<jdkHome>${env.JAVA_HOME_21_X64}</jdkHome>
+		</configuration>
+	</toolchain>
 </toolchains>
