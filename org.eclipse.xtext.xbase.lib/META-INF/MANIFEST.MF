@@ -8,7 +8,7 @@ Export-Package: org.eclipse.xtend2.lib;version="2.35.0",
  org.eclipse.xtext.xbase.lib;version="2.35.0",
  org.eclipse.xtext.xbase.lib.internal;version="2.35.0";x-internal:="true",
  org.eclipse.xtext.xbase.lib.util;version="2.35.0"
-Require-Bundle: com.google.guava;bundle-version="[33.0.0,34.0.0)";visibility:=reexport
+Require-Bundle: com.google.guava;bundle-version="[33.1.0,34.0.0)";visibility:=reexport
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.xbase.lib
 Eclipse-SourceReferences: eclipseSourceReferences
