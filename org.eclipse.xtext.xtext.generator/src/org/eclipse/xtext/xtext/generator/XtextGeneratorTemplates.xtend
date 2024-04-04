@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import com.google.common.collect.Maps
 import com.google.inject.Binder
 import com.google.inject.Guice
 import com.google.inject.Inject
@@ -18,6 +17,7 @@ import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.google.inject.name.Names
 import java.util.Collections
+import java.util.HashMap
 import java.util.List
 import java.util.Map
 import java.util.Properties
@@ -36,12 +36,12 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
 /**
  * Templates for generating the common language infrastructure.
@@ -505,7 +505,7 @@ class XtextGeneratorTemplates {
 				
 				private static «activator.simpleName» INSTANCE;
 				
-				private «Map»<String, «Injector»> injectors = «Collections».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
+				private «Map»<String, «Injector»> injectors = «Collections».synchronizedMap(new «HashMap»<>(2));
 				
 				@Override
 				public void start(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
