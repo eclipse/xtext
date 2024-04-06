@@ -123,214 +123,185 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
 
 	@Test
 	public void testListMethods() {
-		String model = "entity Foo { op bar(): void { #['blub'].add| } }";
+		String model = "entity Bar {\n"
+				+ "  op nop(String s) : void {  }\n"
+				+ "  op add(String s) : boolean { false }\n"
+				+ "  op addAll(Iterable<String> strings) : boolean { false }\n"
+				+ "  op addFirst(String s) : boolean { false }\n"
+				+ "}\n"
+				+ "entity Foo { op bar(): void { new Bar().add| } }";
 		String expectedResult =
-				"ContentAssistResult [\n" +
-				"  stateId = \"-80000000\"\n" +
-				"  entries = ArrayList (\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"add\"\n" +
-				"      proposal = \"add()\"\n" +
-				"      label = \"add(E arg0) : boolean\"\n" +
-				"      description = \"List\"\n" +
-				"      escapePosition = 45\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [44:0]\n" +
-				"      )\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"add\"\n" +
-				"      proposal = \"add()\"\n" +
-				"      label = \"add(int arg0, E arg1) : void\"\n" +
-				"      description = \"List\"\n" +
-				"      escapePosition = 45\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [44:0]\n" +
-				"      )\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"add\"\n" +
-				"      proposal = \"addAll()\"\n" +
-				"      label = \"addAll(Collection<? extends E> arg0) : boolean\"\n" +
-				"      description = \"List\"\n" +
-				"      escapePosition = 48\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [47:0]\n" +
-				"      )\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"add\"\n" +
-				"      proposal = \"addAll()\"\n" +
-				"      label = \"addAll(Iterable<? extends T> arg1) : boolean\"\n" +
-				"      description = \"CollectionExtensions\"\n" +
-				"      escapePosition = 48\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [47:0]\n" +
-				"      )\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"add\"\n" +
-				"      proposal = \"addAll()\"\n" +
-				"      label = \"addAll(T... arg1) : boolean\"\n" +
-				"      description = \"CollectionExtensions\"\n" +
-				"      escapePosition = 48\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [47:0]\n" +
-				"      )\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"add\"\n" +
-				"      proposal = \"addAll()\"\n" +
-				"      label = \"addAll(int arg0, Collection<? extends E> arg1) : boolean\"\n" +
-				"      description = \"List\"\n" +
-				"      escapePosition = 48\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [47:0]\n" +
-				"      )\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"!=\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"!==\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"&&\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"+\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"->\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"<\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"<=\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"<=>\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"==\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"===\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"=>\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \">\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \">=\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"?:\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"||\"\n" +
-				"      description = \"JvmOperation\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList ()\n" +
-				"      kind = \"REFERENCE\"\n" +
-				"    ],\n" +
-				"    ContentAssistEntry [\n" +
-				"      prefix = \"\"\n" +
-				"      proposal = \"\"value\"\"\n" +
-				"      description = \"STRING\"\n" +
-				"      textReplacements = ArrayList ()\n" +
-				"      editPositions = ArrayList (\n" +
-				"        [44:5]\n" +
-				"      )\n" +
-				"      kind = \"TEXT\"\n" +
-				"    ]\n" +
-				"  )\n]";
+				"ContentAssistResult [\n"
+				+ "  stateId = \"-80000000\"\n"
+				+ "  entries = ArrayList (\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"add\"\n"
+				+ "      proposal = \"add()\"\n"
+				+ "      label = \"add(String s) : boolean\"\n"
+				+ "      description = \"Bar\"\n"
+				+ "      escapePosition = 232\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList (\n"
+				+ "        [231:0]\n"
+				+ "      )\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"add\"\n"
+				+ "      proposal = \"addAll()\"\n"
+				+ "      label = \"addAll(Iterable<String> strings) : boolean\"\n"
+				+ "      description = \"Bar\"\n"
+				+ "      escapePosition = 235\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList (\n"
+				+ "        [234:0]\n"
+				+ "      )\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"add\"\n"
+				+ "      proposal = \"addFirst()\"\n"
+				+ "      label = \"addFirst(String s) : boolean\"\n"
+				+ "      description = \"Bar\"\n"
+				+ "      escapePosition = 237\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList (\n"
+				+ "        [236:0]\n"
+				+ "      )\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"!=\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"!==\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"&&\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"+\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"->\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"<\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"<=\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"<=>\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"==\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"===\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"=>\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \">\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \">=\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"?:\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"||\"\n"
+				+ "      description = \"JvmOperation\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList ()\n"
+				+ "      kind = \"REFERENCE\"\n"
+				+ "    ],\n"
+				+ "    ContentAssistEntry [\n"
+				+ "      prefix = \"\"\n"
+				+ "      proposal = \"\"value\"\"\n"
+				+ "      description = \"STRING\"\n"
+				+ "      textReplacements = ArrayList ()\n"
+				+ "      editPositions = ArrayList (\n"
+				+ "        [231:5]\n"
+				+ "      )\n"
+				+ "      kind = \"TEXT\"\n"
+				+ "    ]\n"
+				+ "  )\n"
+				+ "]";
 		assertContentAssistResult(model, expectedResult);
 	}
 
