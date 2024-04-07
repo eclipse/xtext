@@ -122,6 +122,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import testdata.MyStubbedList;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -471,7 +473,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	@Test
 	public void testFindTypeByName_javaUtilList_07() {
-		String typeName = List.class.getName();
+		String typeName = MyStubbedList.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
 		JvmParameterizedTypeReference superType = (JvmParameterizedTypeReference) type.getSuperTypes().get(0);
@@ -2038,14 +2040,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	public void publicNativeMethod() {
 		String typeName = Methods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
+		JvmOperation method = getMethodFromType(type, Methods.class, "publicNativeMethod()");
 		assertSame(type, method.getDeclaringType());
 		assertFalse(method.isAbstract());
 		assertFalse(method.isFinal());
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
-		assertTrue(method.isStrictFloatingPoint());
-		assertFalse(method.isNative());
+		assertFalse(method.isStrictFloatingPoint());
+		assertTrue(method.isNative());
 		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
 		JvmType methodType = method.getReturnType().getType();
 		assertEquals("void", methodType.getIdentifier());

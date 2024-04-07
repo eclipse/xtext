@@ -476,7 +476,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, type.getSuperTypes().size());
 		JvmParameterizedTypeReference superType = (JvmParameterizedTypeReference) type.getSuperTypes().get(0);
 		assertFalse(superType.getType().eIsProxy());
-		assertEquals("java.util.Collection<E>", superType.getIdentifier());
+		// in Java 21 List extends SequencedCollection
+		// but this test relies on sources so we cannot use stubbed classes
+		// like in xtext.java.tests or common.types.tests
+		// so we remove "Sequenced" from the super type
+		// Lorenzo: that's the best and simplest solution I could find
+		assertEquals("java.util.Collection<E>",
+				superType.getIdentifier().replace("Sequenced", ""));
 		assertEquals(1, type.getTypeParameters().size());
 		JvmType rawType = superType.getType();
 		assertFalse(rawType.eIsProxy());
@@ -2016,14 +2022,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	public void publicNativeMethod() {
 		String typeName = Methods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
+		JvmOperation method = getMethodFromType(type, Methods.class, "publicNativeMethod()");
 		assertSame(type, method.getDeclaringType());
 		assertFalse(method.isAbstract());
 		assertFalse(method.isFinal());
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
-		assertTrue(method.isStrictFloatingPoint());
-		assertFalse(method.isNative());
+		assertFalse(method.isStrictFloatingPoint());
+		assertTrue(method.isNative());
 		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
 		JvmType methodType = method.getReturnType().getType();
 		assertEquals("void", methodType.getIdentifier());
