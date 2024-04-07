@@ -54,6 +54,10 @@ public class JavaRuntimeVersion {
 		return JAVA_VERSION >= 17;
 	}
 
+	public static boolean isJava18OrLater() {
+		return JAVA_VERSION >= 18;
+	}
+
 	private static int determineJavaVersion() {
 		String javaVersion = System.getProperty("java.version");
 		if (javaVersion == null) {
