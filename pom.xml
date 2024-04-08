@@ -4,7 +4,7 @@
 
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>xtext-parent</artifactId>
-	<version>2.35.0-SNAPSHOT</version>
+	<version>2.35.0.M1</version>
 	<packaging>pom</packaging>
 
 	<name>Xtext Parent POM</name>
@@ -126,7 +126,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-		<tycho-version>4.0.7</tycho-version>
+		<tycho-version>4.0.6</tycho-version>
 
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -142,7 +142,7 @@
 		and org.eclipse.emf.mwe2.language.sdk.dummy: in those projects we can redefine
 		this property with ${project.parent.version}.
 		-->
-		<xtext-dev-bom-version>${project.version}</xtext-dev-bom-version>
+		<xtext-dev-bom-version>2.35.0.M1</xtext-dev-bom-version>
 
 		<!--
 		This is the version of the currently released latest version of the xtend-maven-plugin that we
