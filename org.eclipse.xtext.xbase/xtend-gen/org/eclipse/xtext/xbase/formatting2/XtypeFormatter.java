@@ -133,8 +133,8 @@ public class XtypeFormatter extends AbstractJavaFormatter {
     for (final XImportDeclaration imp : _importDeclarations) {
       {
         format.<XImportDeclaration>format(imp);
-        XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(section.getImportDeclarations());
-        boolean _notEquals = (!Objects.equal(imp, _last));
+        XImportDeclaration _lastOrNull = IterableExtensions.<XImportDeclaration>lastOrNull(section.getImportDeclarations());
+        boolean _notEquals = (!Objects.equal(imp, _lastOrNull));
         if (_notEquals) {
           format.<XImportDeclaration>append(imp, XbaseFormatterPreferenceKeys.blankLinesBetweenImports);
         } else {

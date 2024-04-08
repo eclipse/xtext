@@ -269,7 +269,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		if (nodes.isEmpty())
 			return;
 		INode firstNode = IterableExtensions.head(nodes);
-		INode lastNode = IterableExtensions.last(nodes);
+		INode lastNode = IterableExtensions.lastOrNull(nodes);
 		int offset = firstNode.getOffset();
 		int length = lastNode.getEndOffset() - offset;
 		ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
@@ -327,7 +327,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 						if (switchExpression == null) {
 							return;
 						}
-						XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
+						XCasePart casePart = IterableExtensions.lastOrNull(switchExpression.getCases());
 						if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
 							return;
 						}
@@ -337,7 +337,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 							return;
 						}
 						INode firstNode = IterableExtensions.head(nodes);
-						INode lastNode = IterableExtensions.last(nodes);
+						INode lastNode = IterableExtensions.lastOrNull(nodes);
 						int offset = firstNode.getOffset();
 						int length = lastNode.getEndOffset() - offset;
 						ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
@@ -404,7 +404,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		if (cases.isEmpty()) {
 			return insertionOffsets.inEmpty(switchExpression);
 		}
-		XCasePart casePart = IterableExtensions.last(cases);
+		XCasePart casePart = IterableExtensions.lastOrNull(cases);
 		return insertionOffsets.after(casePart);
 	}
 

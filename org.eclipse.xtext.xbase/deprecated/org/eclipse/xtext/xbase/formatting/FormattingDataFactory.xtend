@@ -147,7 +147,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 							result += new WhitespaceData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange,
 								if (trace) new RuntimeException(), if (leaf.offset == 0) "" else if(leafs.containsComment) null else " ")
 						else
-							if(equalIndentationChange && leafs.leafs.last != leaf)
+							if(equalIndentationChange && leafs.leafs.lastOrNull != leaf)
 								result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
 							else
 								result += new NewLineData(leaf.offset, leaf.length, if(equalIndentationChange) 0  else increaseIndentationChange, if(equalIndentationChange) 0 else decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
@@ -156,7 +156,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 						var newLines = 1
 						if (leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
-						if(equalIndentationChange && leafs.leafs.last != leaf)
+						if(equalIndentationChange && leafs.leafs.lastOrNull != leaf)
 							result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
 						else
 							result += new NewLineData(leaf.offset, leaf.length, 0, 0, if (trace) new RuntimeException(), newLines)

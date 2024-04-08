@@ -108,8 +108,8 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       boolean _isEmpty = this.parameterBuilders.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        AbstractParameterBuilder _last = IterableExtensions.<AbstractParameterBuilder>last(this.parameterBuilders);
-        _last.setVarArgsFlag(this.varArgsFlag);
+        AbstractParameterBuilder _lastOrNull = IterableExtensions.<AbstractParameterBuilder>lastOrNull(this.parameterBuilders);
+        _lastOrNull.setVarArgsFlag(this.varArgsFlag);
       }
       int _size = this.parameterBuilders.size();
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);

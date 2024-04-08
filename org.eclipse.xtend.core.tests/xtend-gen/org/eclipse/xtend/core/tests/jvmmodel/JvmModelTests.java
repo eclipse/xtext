@@ -374,9 +374,9 @@ public class JvmModelTests extends AbstractXtendTestCase {
       Assert.assertTrue(anonymous.isAnonymous());
       Assert.assertEquals(JvmVisibility.DEFAULT, anonymous.getVisibility());
       Assert.assertEquals(2, anonymous.getSuperTypes().size());
-      Assert.assertEquals("java.lang.Runnable", IterableExtensions.<JvmTypeReference>last(anonymous.getSuperTypes()).getQualifiedName());
+      Assert.assertEquals("java.lang.Runnable", IterableExtensions.<JvmTypeReference>lastOrNull(anonymous.getSuperTypes()).getQualifiedName());
       Assert.assertEquals(3, anonymous.getMembers().size());
-      final JvmMember constructor = IterableExtensions.<JvmMember>last(anonymous.getMembers());
+      final JvmMember constructor = IterableExtensions.<JvmMember>lastOrNull(anonymous.getMembers());
       Assert.assertTrue((constructor instanceof JvmConstructor));
       Assert.assertEquals(0, ((JvmConstructor) constructor).getParameters().size());
       JvmMember _head = IterableExtensions.<JvmMember>head(anonymous.getMembers());
@@ -415,9 +415,9 @@ public class JvmModelTests extends AbstractXtendTestCase {
       Assert.assertTrue(anonymous.isAnonymous());
       Assert.assertEquals(JvmVisibility.DEFAULT, anonymous.getVisibility());
       Assert.assertEquals(2, anonymous.getSuperTypes().size());
-      Assert.assertEquals("java.lang.Runnable", IterableExtensions.<JvmTypeReference>last(anonymous.getSuperTypes()).getQualifiedName());
+      Assert.assertEquals("java.lang.Runnable", IterableExtensions.<JvmTypeReference>lastOrNull(anonymous.getSuperTypes()).getQualifiedName());
       Assert.assertEquals(2, anonymous.getMembers().size());
-      final JvmMember constructor = IterableExtensions.<JvmMember>last(anonymous.getMembers());
+      final JvmMember constructor = IterableExtensions.<JvmMember>lastOrNull(anonymous.getMembers());
       Assert.assertTrue((constructor instanceof JvmConstructor));
       Assert.assertEquals(0, ((JvmConstructor) constructor).getParameters().size());
       final JvmMember overriding = IterableExtensions.<JvmMember>head(anonymous.getMembers());
@@ -455,9 +455,9 @@ public class JvmModelTests extends AbstractXtendTestCase {
       Assert.assertEquals(0, anonymous.getTypeParameters().size());
       Assert.assertEquals(JvmVisibility.DEFAULT, anonymous.getVisibility());
       Assert.assertEquals(2, anonymous.getSuperTypes().size());
-      Assert.assertEquals("java.lang.Iterable<T>", IterableExtensions.<JvmTypeReference>last(anonymous.getSuperTypes()).getQualifiedName());
+      Assert.assertEquals("java.lang.Iterable<T>", IterableExtensions.<JvmTypeReference>lastOrNull(anonymous.getSuperTypes()).getQualifiedName());
       Assert.assertEquals(2, anonymous.getMembers().size());
-      final JvmMember constructor = IterableExtensions.<JvmMember>last(anonymous.getMembers());
+      final JvmMember constructor = IterableExtensions.<JvmMember>lastOrNull(anonymous.getMembers());
       Assert.assertTrue((constructor instanceof JvmConstructor));
       Assert.assertEquals(0, ((JvmConstructor) constructor).getTypeParameters().size());
       final JvmMember overriding = IterableExtensions.<JvmMember>head(anonymous.getMembers());
@@ -525,10 +525,10 @@ public class JvmModelTests extends AbstractXtendTestCase {
       Assert.assertEquals("Nested2", nested2.getSimpleName());
       Assert.assertTrue(nested2.isStatic());
       Assert.assertEquals(2, nested1.getMembers().size());
-      JvmMember _last = IterableExtensions.<JvmMember>last(nested1.getMembers());
-      Assert.assertTrue((_last instanceof JvmEnumerationType));
-      JvmMember _last_1 = IterableExtensions.<JvmMember>last(nested1.getMembers());
-      final JvmEnumerationType nested3 = ((JvmEnumerationType) _last_1);
+      JvmMember _lastOrNull = IterableExtensions.<JvmMember>lastOrNull(nested1.getMembers());
+      Assert.assertTrue((_lastOrNull instanceof JvmEnumerationType));
+      JvmMember _lastOrNull_1 = IterableExtensions.<JvmMember>lastOrNull(nested1.getMembers());
+      final JvmEnumerationType nested3 = ((JvmEnumerationType) _lastOrNull_1);
       Assert.assertEquals("Nested3", nested3.getSimpleName());
       Assert.assertTrue(nested3.isStatic());
     } catch (Throwable _e) {

@@ -1495,7 +1495,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 	
 	@Check
 	public void checkRedundantCase(XSwitchExpression switchExpression) {
-		XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
+		XCasePart casePart = IterableExtensions.lastOrNull(switchExpression.getCases());
 		if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
 			return;
 		}

@@ -70,7 +70,7 @@ public class RangeComparatorTest extends Assert {
 		assertEquals(2, input.get(1).getStart().getCharacter());
 		assertEquals(2, input.get(1).getEnd().getLine());
 		assertEquals(3, input.get(1).getEnd().getCharacter());
-		assertNull(IterableExtensions.last(input));
+		assertNull(IterableExtensions.lastOrNull(input));
 	}
 
 	private Range newRange(int startLine, int startChar, int endLine, int endChar) {

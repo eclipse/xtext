@@ -313,7 +313,7 @@ public class FormattingDataFactory {
                 WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_3, _xifexpression_4);
                 result.add(_whitespaceData_1);
               } else {
-                if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+                if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {
                   int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
                   int _length_2 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_6 = null;
@@ -356,7 +356,7 @@ public class FormattingDataFactory {
               if (_endsWithNewLine_2) {
                 newLines_1 = (newLines_1 - 1);
               }
-              if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+              if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {
                 int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
                 int _length_4 = ((WhitespaceInfo)leaf).getLength();
                 RuntimeException _xifexpression_10 = null;

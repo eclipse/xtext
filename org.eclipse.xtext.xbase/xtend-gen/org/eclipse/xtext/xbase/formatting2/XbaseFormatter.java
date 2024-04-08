@@ -145,7 +145,7 @@ public class XbaseFormatter extends XtypeFormatter {
           final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
             it.newLine();
           };
-          format.<EObject>append(IterableExtensions.last(elements), _function_2);
+          format.<EObject>append(IterableExtensions.lastOrNull(elements), _function_2);
           final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
             it.indent();
           };
@@ -302,18 +302,18 @@ public class XbaseFormatter extends XtypeFormatter {
 
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
-    XExpression _last = IterableExtensions.<XExpression>last(params);
-    boolean _tripleNotEquals = (_last != null);
+    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(params);
+    boolean _tripleNotEquals = (_lastOrNull != null);
     if (_tripleNotEquals) {
       XClosure _xblockexpression = null;
       {
-        final EObject grammarElement = this.grammarElement(IterableExtensions.<XExpression>last(params));
+        final EObject grammarElement = this.grammarElement(IterableExtensions.<XExpression>lastOrNull(params));
         XClosure _xifexpression_1 = null;
         if (((Objects.equal(grammarElement, this.grammar.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()) || 
           Objects.equal(grammarElement, this.grammar.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0())) || 
           Objects.equal(grammarElement, this.grammar.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()))) {
-          XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-          _xifexpression_1 = ((XClosure) _last_1);
+          XExpression _lastOrNull_1 = IterableExtensions.<XExpression>lastOrNull(params);
+          _xifexpression_1 = ((XClosure) _lastOrNull_1);
         }
         _xblockexpression = _xifexpression_1;
       }
@@ -828,7 +828,7 @@ public class XbaseFormatter extends XtypeFormatter {
           it.noSpace();
         };
         format.<JvmFormalParameter>format(format.<JvmFormalParameter>append(format.<JvmFormalParameter>prepend(cc.getDeclaredParam(), _function_1), _function_2));
-        if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>last(expr.getCatchClauses()))) || (expr.getFinallyExpression() != null))) {
+        if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>lastOrNull(expr.getCatchClauses()))) || (expr.getFinallyExpression() != null))) {
           this.formatBodyInline(cc.getExpression(), true, format);
         } else {
           this.formatBody(cc.getExpression(), true, format);
@@ -945,8 +945,8 @@ public class XbaseFormatter extends XtypeFormatter {
               it.oneSpace();
             };
             format.<XExpression>prepend(c_1.getThen(), _function_8);
-            XCasePart _last = IterableExtensions.<XCasePart>last(expr.getCases());
-            boolean _notEquals = (!Objects.equal(c_1, _last));
+            XCasePart _lastOrNull = IterableExtensions.<XCasePart>lastOrNull(expr.getCases());
+            boolean _notEquals = (!Objects.equal(c_1, _lastOrNull));
             if (_notEquals) {
               final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
                 it.newLine();
@@ -1165,8 +1165,8 @@ public class XbaseFormatter extends XtypeFormatter {
                     it_1.noSpace();
                   };
                   final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it_1) -> {
-                    XExpression _last = IterableExtensions.<XExpression>last(children);
-                    boolean _equals = Objects.equal(c, _last);
+                    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(children);
+                    boolean _equals = Objects.equal(c, _lastOrNull);
                     if (_equals) {
                       it_1.noSpace();
                     } else {
@@ -1176,8 +1176,8 @@ public class XbaseFormatter extends XtypeFormatter {
                   it.append(it.prepend(semicolon, _function_6), _function_7);
                 } else {
                   final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it_1) -> {
-                    XExpression _last = IterableExtensions.<XExpression>last(children);
-                    boolean _equals = Objects.equal(c, _last);
+                    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(children);
+                    boolean _equals = Objects.equal(c, _lastOrNull);
                     if (_equals) {
                       it_1.noSpace();
                     } else {

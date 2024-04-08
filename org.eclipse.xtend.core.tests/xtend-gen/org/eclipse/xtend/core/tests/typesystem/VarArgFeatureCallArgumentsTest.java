@@ -153,8 +153,8 @@ public class VarArgFeatureCallArgumentsTest extends AbstractTestingTypeReference
     Assert.assertEquals(2, expressions.size());
     XExpression _head = IterableExtensions.<XExpression>head(expressions);
     Assert.assertTrue((_head instanceof XStringLiteral));
-    XExpression _last = IterableExtensions.<XExpression>last(expressions);
-    Assert.assertTrue((_last instanceof XNumberLiteral));
+    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(expressions);
+    Assert.assertTrue((_lastOrNull instanceof XNumberLiteral));
     valid.markProcessed();
     Assert.assertTrue(arguments.isProcessed(0));
     Assert.assertTrue(arguments.isProcessed(1));
@@ -173,8 +173,8 @@ public class VarArgFeatureCallArgumentsTest extends AbstractTestingTypeReference
     Assert.assertEquals(2, expressions.size());
     XExpression _head = IterableExtensions.<XExpression>head(expressions);
     Assert.assertTrue((_head instanceof XStringLiteral));
-    XExpression _last = IterableExtensions.<XExpression>last(expressions);
-    Assert.assertTrue((_last instanceof XNumberLiteral));
+    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(expressions);
+    Assert.assertTrue((_lastOrNull instanceof XNumberLiteral));
     Assert.assertTrue(arguments.isProcessed(0));
     Assert.assertFalse(arguments.isProcessed(1));
     Assert.assertFalse(arguments.isProcessed(2));

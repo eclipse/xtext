@@ -2623,7 +2623,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
           Assert.assertNotNull(value.findAnnotation(deprecatedAnnotationType));
         }
       }
-      Assert.assertEquals("D", IterableExtensions.last(enumerationType.getDeclaredValues()).getSimpleName());
+      Assert.assertEquals("D", IterableExtensions.lastOrNull(enumerationType.getDeclaredValues()).getSimpleName());
       Assert.assertNotNull(enumerationType.findDeclaredValue("D"));
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);

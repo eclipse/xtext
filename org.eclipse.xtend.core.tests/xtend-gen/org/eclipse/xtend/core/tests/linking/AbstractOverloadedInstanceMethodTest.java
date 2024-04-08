@@ -52,8 +52,8 @@ public abstract class AbstractOverloadedInstanceMethodTest extends AbstractXtend
       final XtendFunction m = ((XtendFunction) _head_1);
       XExpression _expression = m.getExpression();
       final XBlockExpression body = ((XBlockExpression) _expression);
-      XExpression _last = IterableExtensions.<XExpression>last(body.getExpressions());
-      final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _last);
+      XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(body.getExpressions());
+      final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _lastOrNull);
       JvmIdentifiableElement _feature = featureCall.getFeature();
       final JvmOperation operation = ((JvmOperation) _feature);
       final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, file);

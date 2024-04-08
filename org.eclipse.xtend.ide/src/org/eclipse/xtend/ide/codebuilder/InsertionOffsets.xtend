@@ -33,7 +33,7 @@ class InsertionOffsets {
 		val callingMember = EcoreUtil2.getContainerOfType(call, XtendField)
 		if (callingMember !== null && ownerType.members.contains(callingMember))
 			return before(callingMember)
-		val lastDefinedField = ownerType.members.filter(XtendField).last
+		val lastDefinedField = ownerType.members.filter(XtendField).lastOrNull
 		if (lastDefinedField === null)
 			return before(ownerType.members.head)
 		else
@@ -47,11 +47,11 @@ class InsertionOffsets {
 		else if (ownerType.members.empty)
 			return inEmpty(ownerType)
 		else
-			return after(ownerType.members.last)
+			return after(ownerType.members.lastOrNull)
 	}
 
 	def getNewConstructorInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
-		val lastDefinedConstructor = ownerType.members.filter(XtendConstructor).last
+		val lastDefinedConstructor = ownerType.members.filter(XtendConstructor).lastOrNull
 		if(lastDefinedConstructor === null)
 			return getNewFieldInsertOffset(call, ownerType)		
 		else	

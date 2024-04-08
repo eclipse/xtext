@@ -64,8 +64,8 @@ public class Java8TypeProviderTest {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parseHelper.parse(_builder);
-      EObject _last = IterableExtensions.<EObject>last(file.eResource().getContents());
-      final JvmGenericType intf = ((JvmGenericType) _last);
+      EObject _lastOrNull = IterableExtensions.<EObject>lastOrNull(file.eResource().getContents());
+      final JvmGenericType intf = ((JvmGenericType) _lastOrNull);
       this.doTestMethods(intf);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

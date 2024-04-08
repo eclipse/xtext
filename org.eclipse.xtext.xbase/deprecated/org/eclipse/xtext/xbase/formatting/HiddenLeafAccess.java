@@ -68,7 +68,7 @@ public class HiddenLeafAccess {
 				}
 			}
 			if (comment) {
-				if (!(IterableExtensions.last(result.getLeafs()) instanceof WhitespaceInfo)) {
+				if (!(IterableExtensions.lastOrNull(result.getLeafs()) instanceof WhitespaceInfo)) {
 					result.getLeafs().add(new WhitespaceInfo(result, null, 0, node.getOffset()));
 				}
 				result.getLeafs().add(new CommentInfo(result, node, newLines, trailing));
@@ -79,12 +79,12 @@ public class HiddenLeafAccess {
 				trailing = false;
 			}
 		}
-		if (!(IterableExtensions.last(result.getLeafs()) instanceof WhitespaceInfo)) {
+		if (!(IterableExtensions.lastOrNull(result.getLeafs()) instanceof WhitespaceInfo)) {
 			int whitespaceOffset = 0;
 			if (result.getLeafs().isEmpty()) {
 				whitespaceOffset = offset;
 			} else {
-				whitespaceOffset = IterableExtensions.last(result.getLeafs()).getNode().getEndOffset();
+				whitespaceOffset = IterableExtensions.lastOrNull(result.getLeafs()).getNode().getEndOffset();
 			}
 			result.getLeafs().add(new WhitespaceInfo(result, null, 0, whitespaceOffset));
 		}

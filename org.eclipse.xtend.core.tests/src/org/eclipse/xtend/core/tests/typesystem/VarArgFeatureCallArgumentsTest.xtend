@@ -130,7 +130,7 @@ class VarArgFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwner {
 		val expressions = valid.argumentExpressions
 		assertEquals(2, expressions.size)
 		assertTrue(expressions.head instanceof XStringLiteral)
-		assertTrue(expressions.last instanceof XNumberLiteral)
+		assertTrue(expressions.lastOrNull instanceof XNumberLiteral)
 		
 		valid.markProcessed
 		
@@ -152,7 +152,7 @@ class VarArgFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwner {
 		val expressions = valid.argumentExpressions
 		assertEquals(2, expressions.size)
 		assertTrue(expressions.head instanceof XStringLiteral)
-		assertTrue(expressions.last instanceof XNumberLiteral)		
+		assertTrue(expressions.lastOrNull instanceof XNumberLiteral)		
 
 		assertTrue(arguments.isProcessed(0))
 		assertFalse(arguments.isProcessed(1))

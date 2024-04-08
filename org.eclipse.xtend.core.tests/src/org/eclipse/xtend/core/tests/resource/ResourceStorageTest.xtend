@@ -154,7 +154,7 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		
 		// check constant value was written
 		val jvmClass = resource.contents.get(1) as JvmGenericType
-		val field = jvmClass.members.last as JvmField
+		val field = jvmClass.members.lastOrNull as JvmField
 		assertTrue(field.constant)
 		assertTrue(field.isSetConstant)
 		assertEquals('ab0', field.constantValue)
@@ -185,7 +185,7 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		
 		// check constant value was written
 		val jvmClass = resource.contents.get(1) as JvmGenericType
-		val field = jvmClass.members.last as JvmField
+		val field = jvmClass.members.lastOrNull as JvmField
 		assertFalse(field.constant)
 		assertTrue(field.isSetConstant)
 		assertNull(field.constantValue)

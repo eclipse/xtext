@@ -161,8 +161,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 format.operator_add(_append_2);
               }
             }
-            EObject _last = IterableExtensions.last(elements);
-            boolean _equals_1 = Objects.equal(elem, _last);
+            EObject _lastOrNull = IterableExtensions.lastOrNull(elements);
+            boolean _equals_1 = Objects.equal(elem, _lastOrNull);
             if (_equals_1) {
               final Procedure1<FormattingDataInit> _function_3 = (FormattingDataInit it) -> {
                 it.newLine();
@@ -235,7 +235,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       int _size = elements.size();
       boolean _greaterThan_1 = (_size > 0);
       if (_greaterThan_1) {
-        final INode last = this._nodeModelAccess.nodeForEObject(IterableExtensions.last(elements));
+        final INode last = this._nodeModelAccess.nodeForEObject(IterableExtensions.lastOrNull(elements));
         final Procedure1<FormattingDataInit> _function_1 = (FormattingDataInit it) -> {
           it.noSpace();
         };
@@ -524,8 +524,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
           };
           Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(n, _function);
           document.operator_add(_prepend);
-          ILeafNode _last = IterableExtensions.<ILeafNode>last(leafs);
-          boolean _notEquals = (!Objects.equal(n, _last));
+          ILeafNode _lastOrNull = IterableExtensions.<ILeafNode>lastOrNull(leafs);
+          boolean _notEquals = (!Objects.equal(n, _lastOrNull));
           if (_notEquals) {
             final Procedure1<FormattingDataInit> _function_1 = (FormattingDataInit it) -> {
               it.noSpace();
@@ -641,8 +641,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
               }
             }
           }
-          XExpression _last = IterableExtensions.<XExpression>last(explicitParams);
-          boolean _equals_1 = Objects.equal(arg, _last);
+          XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(explicitParams);
+          boolean _equals_1 = Objects.equal(arg, _lastOrNull);
           if (_equals_1) {
             final Procedure1<FormattingDataInit> _function_7 = (FormattingDataInit it) -> {
               it.noSpace();
@@ -664,7 +664,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       final Procedure1<FormattingDataInit> _function_1 = (FormattingDataInit it) -> {
         it.decreaseIndentation();
       };
-      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XExpression>last(explicitParams)), _function_1);
+      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XExpression>lastOrNull(explicitParams)), _function_1);
       format.operator_add(_append_1);
     }
     if ((builder != null)) {
@@ -684,19 +684,19 @@ public class XbaseFormatter2 extends AbstractFormatter {
 
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
-    XExpression _last = IterableExtensions.<XExpression>last(params);
-    boolean _tripleNotEquals = (_last != null);
+    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(params);
+    boolean _tripleNotEquals = (_lastOrNull != null);
     if (_tripleNotEquals) {
       XClosure _xblockexpression = null;
       {
-        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(IterableExtensions.<XExpression>last(params));
+        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(IterableExtensions.<XExpression>lastOrNull(params));
         final EObject grammarElement = ((ICompositeNode) _nodeForEObject).getFirstChild().getGrammarElement();
         XClosure _xifexpression_1 = null;
         if (((Objects.equal(grammarElement, this._xbaseGrammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()) || 
           Objects.equal(grammarElement, this._xbaseGrammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0())) || 
           Objects.equal(grammarElement, this._xbaseGrammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()))) {
-          XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-          _xifexpression_1 = ((XClosure) _last_1);
+          XExpression _lastOrNull_1 = IterableExtensions.<XExpression>lastOrNull(params);
+          _xifexpression_1 = ((XClosure) _lastOrNull_1);
         }
         _xblockexpression = _xifexpression_1;
       }
@@ -755,8 +755,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
               format.operator_add(_append_1);
             }
           }
-          XExpression _last = IterableExtensions.<XExpression>last(explicitParams);
-          boolean _equals_1 = Objects.equal(arg, _last);
+          XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(explicitParams);
+          boolean _equals_1 = Objects.equal(arg, _lastOrNull);
           if (_equals_1) {
             final Procedure1<FormattingDataInit> _function_3 = (FormattingDataInit it) -> {
               it.newLine();
@@ -1141,7 +1141,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       final Procedure1<FormattingDataInit> _function = (FormattingDataInit it) -> {
         it.decreaseIndentation();
       };
-      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XMemberFeatureCall>last(calls)), _function);
+      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XMemberFeatureCall>lastOrNull(calls)), _function);
       format.operator_add(_append);
     }
   }
@@ -1225,7 +1225,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       final Procedure1<FormattingDataInit> _function = (FormattingDataInit it) -> {
         it.decreaseIndentation();
       };
-      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XBinaryOperation>last(calls)), _function);
+      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XBinaryOperation>lastOrNull(calls)), _function);
       format.operator_add(_append);
     }
   }
@@ -1869,7 +1869,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         for (final XExpression child : _expressions) {
           {
             this.format(child, format);
-            if (((!Objects.equal(child, IterableExtensions.<XExpression>last(expr.getExpressions()))) || (close != null))) {
+            if (((!Objects.equal(child, IterableExtensions.<XExpression>lastOrNull(expr.getExpressions()))) || (close != null))) {
               final INode childNode = this._nodeModelAccess.nodeForEObject(child);
               final ILeafNode sem = this._nodeModelAccess.immediatelyFollowingKeyword(childNode, ";");
               if ((sem != null)) {
@@ -2007,7 +2007,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     for (final XCatchClause cc : _catchClauses) {
       {
         this.format(cc, format);
-        if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>last(expr.getCatchClauses()))) || (expr.getFinallyExpression() != null))) {
+        if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>lastOrNull(expr.getCatchClauses()))) || (expr.getFinallyExpression() != null))) {
           XExpression _expression_1 = cc.getExpression();
           if ((_expression_1 instanceof XBlockExpression)) {
             final Procedure1<FormattingDataInit> _function_4 = (FormattingDataInit it) -> {
@@ -2237,8 +2237,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
             };
             Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _prepend_3 = this._formattingDataFactory.prepend(this._nodeModelAccess.nodeForEObject(c_1.getThen()), _function_12);
             format.operator_add(_prepend_3);
-            XCasePart _last = IterableExtensions.<XCasePart>last(expr.getCases());
-            boolean _notEquals = (!Objects.equal(c_1, _last));
+            XCasePart _lastOrNull = IterableExtensions.<XCasePart>lastOrNull(expr.getCases());
+            boolean _notEquals = (!Objects.equal(c_1, _lastOrNull));
             if (_notEquals) {
               final Procedure1<FormattingDataInit> _function_13 = (FormattingDataInit it) -> {
                 it.newLine();
@@ -2308,7 +2308,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
               };
               Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _prepend_6 = this._formattingDataFactory.prepend(cnode_1, _function_19);
               format.operator_add(_prepend_6);
-              if (((expr.getDefault() != null) || (!Objects.equal(c_2, IterableExtensions.<XCasePart>last(expr.getCases()))))) {
+              if (((expr.getDefault() != null) || (!Objects.equal(c_2, IterableExtensions.<XCasePart>lastOrNull(expr.getCases()))))) {
                 final Procedure1<FormattingDataInit> _function_20 = (FormattingDataInit it) -> {
                   it.newLine();
                 };
@@ -2338,7 +2338,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _prepend_7 = this._formattingDataFactory.prepend(cnode_1, _function_23);
                 format.operator_add(_prepend_7);
               }
-              if (((expr.getDefault() != null) || (!Objects.equal(c_2, IterableExtensions.<XCasePart>last(expr.getCases()))))) {
+              if (((expr.getDefault() != null) || (!Objects.equal(c_2, IterableExtensions.<XCasePart>lastOrNull(expr.getCases()))))) {
                 final Procedure1<FormattingDataInit> _function_24 = (FormattingDataInit it) -> {
                   it.newLine();
                   it.decreaseIndentation();
@@ -2539,8 +2539,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
         };
         Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _prepend_2 = this._formattingDataFactory.prepend(semicolon, _function_5);
         format.operator_add(_prepend_2);
-        XExpression _last = IterableExtensions.<XExpression>last(children);
-        boolean _notEquals = (!Objects.equal(c, _last));
+        XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(children);
+        boolean _notEquals = (!Objects.equal(c, _lastOrNull));
         if (_notEquals) {
           INode _elvis = null;
           if (semicolon != null) {
@@ -2653,7 +2653,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       final Procedure1<FormattingDataInit> _function_2 = (FormattingDataInit it) -> {
         it.decreaseIndentation();
       };
-      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XExpression>last(children)), _function_2);
+      Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(this._nodeModelAccess.nodeForEObject(IterableExtensions.<XExpression>lastOrNull(children)), _function_2);
       format.operator_add(_append_1);
     }
     final Procedure1<FormattingDataInit> _function_3 = (FormattingDataInit it) -> {

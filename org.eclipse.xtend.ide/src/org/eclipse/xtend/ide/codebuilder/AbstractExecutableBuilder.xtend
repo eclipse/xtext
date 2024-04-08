@@ -69,7 +69,7 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 		appendable.append("(")
 		val notAllowed = newHashSet
 		if(!parameterBuilders.isEmpty)
-			parameterBuilders.last.varArgsFlag = varArgsFlag
+			parameterBuilders.lastOrNull.varArgsFlag = varArgsFlag
 		for (i : 0 ..< parameterBuilders.size) {
 			val parameterBuilder = parameterBuilders.get(i)
 			val acceptor = new VariableNameAcceptor(notAllowed)

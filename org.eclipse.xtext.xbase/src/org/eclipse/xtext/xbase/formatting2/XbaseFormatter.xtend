@@ -83,7 +83,7 @@ class XbaseFormatter extends XtypeFormatter {
 				elem.format
 				elem.immediatelyFollowing.keyword(",").prepend[noSpace].append[newLine]
 			}
-			elements.last.append[newLine]
+			elements.lastOrNull.append[newLine]
 			interior(open, close)[indent]
 		} else {
 			val indent = new IndentOnceAutowrapFormatter(close.previousHiddenRegion)
@@ -170,12 +170,12 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected XClosure builder(List<XExpression> params) {
-		if (params.last !== null) {
-			val grammarElement = params.last.grammarElement
+		if (params.lastOrNull !== null) {
+			val grammarElement = params.lastOrNull.grammarElement
 			if (grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 ||
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
 				grammarElement == XConstructorCallAccess.argumentsXClosureParserRuleCall_5_0)
-				params.last as XClosure
+				params.lastOrNull as XClosure
 		}
 	}
 
@@ -412,7 +412,7 @@ class XbaseFormatter extends XtypeFormatter {
 		for (cc : expr.catchClauses) {
 			cc.regionFor.keyword("catch").append(whitespaceBetweenKeywordAndParenthesisML)
 			cc.declaredParam.prepend[noSpace].append[noSpace].format
-			if (cc != expr.catchClauses.last || expr.finallyExpression !== null)
+			if (cc != expr.catchClauses.lastOrNull || expr.finallyExpression !== null)
 				cc.expression.formatBodyInline(true, format)
 			else
 				cc.expression.formatBody(true, format)
@@ -466,7 +466,7 @@ class XbaseFormatter extends XtypeFormatter {
 				c.^case.format
 				c.then.format
 				c.then.prepend[oneSpace]
-				if (c != expr.cases.last)
+				if (c != expr.cases.lastOrNull)
 					c.append[newLine]
 			}
 			if (expr.^default !== null) {
@@ -549,9 +549,9 @@ class XbaseFormatter extends XtypeFormatter {
 					c.format
 					val semicolon = c.immediatelyFollowing.keyword(";")
 					if (semicolon !== null)
-						semicolon.prepend[noSpace].append[if(c == children.last) noSpace else oneSpace]
+						semicolon.prepend[noSpace].append[if(c == children.lastOrNull) noSpace else oneSpace]
 					else
-						c.append[if(c == children.last) noSpace else oneSpace]
+						c.append[if(c == children.lastOrNull) noSpace else oneSpace]
 				}
 			], [ doc |
 				val last = expr.formatClosureParams(open, doc)[oneSpace]

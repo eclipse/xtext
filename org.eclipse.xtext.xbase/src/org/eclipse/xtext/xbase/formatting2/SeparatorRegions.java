@@ -66,7 +66,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
 		if (first == null) {
 			first = newObject;
 		} else {
-			SeparatorEntry<T, R> last = IterableExtensions.last(separators());
+			SeparatorEntry<T, R> last = IterableExtensions.lastOrNull(separators());
 			newObject.previous = last;
 			last.next = newObject;
 		}

@@ -36,7 +36,7 @@ abstract class AbstractOverloadedInstanceMethodTest extends AbstractXtendTestCas
 		val c = file.xtendTypes.head as XtendClass
 		val m = c.members.head as XtendFunction
 		val body = m.expression as XBlockExpression
-		val featureCall = body.expressions.last as XAbstractFeatureCall
+		val featureCall = body.expressions.lastOrNull as XAbstractFeatureCall
 		val operation = featureCall.feature as JvmOperation
 		val owner = new StandardTypeReferenceOwner(services, file)
 		val declaration = owner.newParameterizedTypeReference(operation.declaringType)

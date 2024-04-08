@@ -69,7 +69,7 @@ class IndentationAwareLanguageTest {
 		assertNotNull(tree)
 		assertEquals(2, tree.nodes.size)
 		assertEquals('first', tree.nodes.head.name)
-		assertEquals('second', tree.nodes.last.name)
+		assertEquals('second', tree.nodes.lastOrNull.name)
 	}
 	
 	@Test
@@ -83,7 +83,7 @@ class IndentationAwareLanguageTest {
 		assertEquals(2, tree.nodes.size)
 		assertEquals('first', tree.nodes.head.name)
 		assertEquals(0, tree.nodes.head.children.size)
-		assertEquals('second', tree.nodes.last.name)
+		assertEquals('second', tree.nodes.lastOrNull.name)
 	}
 	
 	@Test
@@ -97,7 +97,7 @@ class IndentationAwareLanguageTest {
 		assertEquals(2, tree.moreNodes.size)
 		assertEquals('first', tree.moreNodes.head.name)
 		assertNull(tree.moreNodes.head.childList)
-		assertEquals('second', tree.moreNodes.last.name)
+		assertEquals('second', tree.moreNodes.lastOrNull.name)
 	}
 	
 	@Test
