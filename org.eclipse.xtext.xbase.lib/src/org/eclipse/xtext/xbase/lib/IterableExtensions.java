@@ -146,7 +146,7 @@ public class IterableExtensions {
 	 * collection is empty, instead of returning null.
 	 * @see https://github.com/eclipse/xtext/issues/2981
 	 */
-	@Deprecated(since = "2.35.0")
+	@Deprecated
 	public static <T> T last(Iterable<T> iterable) {
 		return lastOrNull(iterable);
 	}
