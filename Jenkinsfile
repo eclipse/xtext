@@ -58,6 +58,7 @@ pipeline {
         MAVEN_OPTS = "-Xmx1500m"
         JAVA_HOME_11_X64 = tool(type:'jdk', name:'temurin-jdk11-latest')
         JAVA_HOME_17_X64 = tool(type:'jdk', name:'temurin-jdk17-latest')
+        JAVA_HOME_21_X64 = tool(type:'jdk', name:'temurin-jdk21-latest')
       }
       steps {
         xvnc(useXauthority: true) {
