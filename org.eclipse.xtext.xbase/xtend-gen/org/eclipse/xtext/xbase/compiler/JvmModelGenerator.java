@@ -1363,13 +1363,13 @@ public class JvmModelGenerator implements IGenerator {
         _switchResult = "Double.NaN";
       }
       if (!_matched) {
-        if (Objects.equals(it_1, Double.POSITIVE_INFINITY)) {
+        if (com.google.common.base.Objects.equal(it_1, Double.POSITIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Double.POSITIVE_INFINITY";
         }
       }
       if (!_matched) {
-        if (Objects.equals(it_1, Double.NEGATIVE_INFINITY)) {
+        if (com.google.common.base.Objects.equal(it_1, Double.NEGATIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Double.NEGATIVE_INFINITY";
         }
@@ -1393,13 +1393,13 @@ public class JvmModelGenerator implements IGenerator {
         _switchResult = "Float.NaN";
       }
       if (!_matched) {
-        if (Objects.equals(it_1, Float.POSITIVE_INFINITY)) {
+        if (com.google.common.base.Objects.equal(it_1, Float.POSITIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Float.POSITIVE_INFINITY";
         }
       }
       if (!_matched) {
-        if (Objects.equals(it_1, Float.NEGATIVE_INFINITY)) {
+        if (com.google.common.base.Objects.equal(it_1, Float.NEGATIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Float.NEGATIVE_INFINITY";
         }
