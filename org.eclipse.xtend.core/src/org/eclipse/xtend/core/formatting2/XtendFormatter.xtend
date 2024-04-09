@@ -64,7 +64,7 @@ class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		xtendFile.importSection?.format
 		for (clazz : xtendFile.xtendTypes) {
 			clazz.format
-			if (clazz != xtendFile.xtendTypes.last)
+			if (clazz != xtendFile.xtendTypes.lastOrNull)
 				clazz.append(blankLinesBetweenClasses)
 		}
 		xtendFile.append[newLine]
@@ -335,12 +335,12 @@ class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	override protected builder(List<XExpression> params) {
-		if (params.last !== null) {
-			val grammarElement = params.last.grammarElement
+		if (params.lastOrNull !== null) {
+			val grammarElement = params.lastOrNull.grammarElement
 			if (grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 ||
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
 				grammarElement == xbaseConstructorCallAccess.argumentsXClosureParserRuleCall_5_0)
-				params.last as XClosure
+				params.lastOrNull as XClosure
 		}
 	}
 

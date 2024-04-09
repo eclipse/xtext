@@ -82,11 +82,11 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin
 		for (e : richString.expressions)
 			format(e, doc)
 		val lines = impl.model.lines
-		val canIndent = !lines.empty && lines.last.content.nullOrEmpty
+		val canIndent = !lines.empty && lines.lastOrNull.content.nullOrEmpty
 		for (line : lines) {
 			if (impl.model.rootIndentLenght > 0) {
 				val increaseIndentationChange = if(canIndent && line == lines.head) 1 else 0
-				val decraseIndentationChange = if(canIndent && line == lines.last) 1 else 0
+				val decraseIndentationChange = if(canIndent && line == lines.lastOrNull) 1 else 0
 				val nloffset = if(line.leadingSemanticNewLine) line.offset + line.newLineCharCount else line.offset
 				val i = Math.min(line.indentLength, impl.model.rootIndentLenght)
 				val nllength = if(line.leadingSemanticNewLine) i else line.newLineCharCount + i
@@ -187,7 +187,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin
 
 	def dispatch void format(RichStringIf expr, extension IFormattableDocument doc) {
 		expr.regionFor.keyword("IF").prepend[noSpace].append[oneSpace]
-		expr.elseIfs.last.append[noSpace]
+		expr.elseIfs.lastOrNull.append[noSpace]
 		formatIntoSingleLine(doc, expr.^if)
 		format(expr.then, doc)
 		for (elseif : expr.elseIfs)
@@ -308,7 +308,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 				model.leadingText = lastLinesContent
 				contentStartColumn = 0
 			} else {
-				val lastLine = model.lines.last
+				val lastLine = model.lines.lastOrNull
 				lastLine.content = lastLinesContent
 				val newContentStartColumn = contentStartOffset - (lastLine.offset + lastLine.newLineCharCount)
 				if (lastLine.leadingSemanticNewLine) {
@@ -323,7 +323,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 						if (ws.column > newContentStartColumn)
 							indentationStack.remove(ws)
 					}
-					val lastWs = indentationStack.last
+					val lastWs = indentationStack.lastOrNull
 					val length = if (lastWs === null)
 							newContentStartColumn - model.rootIndentLenght
 						else if (lastWs instanceof SemanticWhitespace)
@@ -348,7 +348,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398718
 				if (newContentStartColumn != 0)
 					contentStartColumn = newContentStartColumn
-				model.lines.last.chunks += indentationStack
+				model.lines.lastOrNull.chunks += indentationStack
 			}
 		}
 		if (indentNextLine) {

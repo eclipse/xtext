@@ -10697,7 +10697,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
       final String expectedBazClass = _builder_2.toString();
       final XtendFile file = this.file(input.toString(), true);
       final JvmDeclaredType barType = IterableExtensions.<JvmDeclaredType>head(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
-      final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
+      final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>lastOrNull(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
       final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(barType);
       CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
       barJavaCode = this.postProcessor.postProcess(null, barJavaCode);

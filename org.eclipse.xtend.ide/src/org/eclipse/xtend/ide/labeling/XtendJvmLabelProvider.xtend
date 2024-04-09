@@ -34,7 +34,7 @@ class XtendJvmLabelProvider extends XbaseLabelProvider {
 	protected override text(JvmGenericType element) {
 		val local = element.isLocal()
 		if (local) {
-			val supertype = element.superTypes.last
+			val supertype = element.superTypes.lastOrNull
 			return '''new «supertype.simpleName»() {...}'''
 		}
 		element.simpleName + if (element.typeParameters.empty)

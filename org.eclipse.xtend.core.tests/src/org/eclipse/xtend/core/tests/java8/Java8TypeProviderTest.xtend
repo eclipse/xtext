@@ -44,7 +44,7 @@ class Java8TypeProviderTest {
 				static def void staticMethod() {}
 			}
 		''')
-		val intf = file.eResource.contents.last as JvmGenericType
+		val intf = file.eResource.contents.lastOrNull as JvmGenericType
 		doTestMethods(intf)
 	}
 

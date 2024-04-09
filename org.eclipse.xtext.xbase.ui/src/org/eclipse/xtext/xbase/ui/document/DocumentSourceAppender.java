@@ -220,7 +220,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 				return importedType;
 			}
 		}
-		return IterableExtensions.last(importedTypes);
+		return IterableExtensions.lastOrNull(importedTypes);
 	}
 	
 	protected char getInnerTypeSeparator() {

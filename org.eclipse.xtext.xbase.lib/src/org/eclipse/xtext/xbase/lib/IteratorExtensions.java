@@ -167,8 +167,24 @@ import com.google.common.collect.Sets;
 	 * @param iterator
 	 *            the iterator. May not be <code>null</code>.
 	 * @return the last element in the iterator or <code>null</code>.
+	 * @deprecated Use {@link #lastOrNull(Iterator<T>)} instead. To be aligned with
+	 * {@link IterableExtensions#lastOrNull(Iterable)} (see the deprecation reason of
+	 * {@link IterableExtensions#last(Iterable)}).
 	 */
+	@Deprecated
 	public static <T> T last(Iterator<T> iterator) {
+		return lastOrNull(iterator);
+	}
+
+	/**
+	 * Returns the last element in the given iterator or <code>null</code> if empty.
+	 * 
+	 * @param iterator
+	 *            the iterator. May not be <code>null</code>.
+	 * @return the last element in the iterator or <code>null</code>.
+	 * @since 2.35
+	 */
+	public static <T> T lastOrNull(Iterator<T> iterator) {
 		T result = null;
 		while(iterator.hasNext()) {
 			result = iterator.next();

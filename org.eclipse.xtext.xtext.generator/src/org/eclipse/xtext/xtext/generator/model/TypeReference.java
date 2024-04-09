@@ -163,7 +163,7 @@ public class TypeReference {
 		} else {
 			List<String> packageSegments = segments.subList(0, segments.size() - 1);
 			while (!packageSegments.isEmpty()) {
-				if (Character.isUpperCase(IterableExtensions.last(packageSegments).charAt(0))) {
+				if (Character.isUpperCase(IterableExtensions.lastOrNull(packageSegments).charAt(0))) {
 					packageSegments = packageSegments.subList(0, packageSegments.size() - 1);
 				} else {
 					return Joiner.on(".").join(packageSegments);
@@ -229,7 +229,7 @@ public class TypeReference {
 	}
 
 	public String getSimpleName() {
-		return IterableExtensions.last(simpleNames);
+		return IterableExtensions.lastOrNull(simpleNames);
 	}
 
 	public String getPath() {

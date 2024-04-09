@@ -97,7 +97,7 @@ public class RichStringFormatter {
       this.format(e, doc);
     }
     final List<Line> lines = impl.getModel().getLines();
-    final boolean canIndent = ((!lines.isEmpty()) && StringExtensions.isNullOrEmpty(IterableExtensions.<Line>last(lines).getContent()));
+    final boolean canIndent = ((!lines.isEmpty()) && StringExtensions.isNullOrEmpty(IterableExtensions.<Line>lastOrNull(lines).getContent()));
     for (final Line line : lines) {
       int _rootIndentLenght = impl.getModel().getRootIndentLenght();
       boolean _greaterThan = (_rootIndentLenght > 0);
@@ -110,7 +110,7 @@ public class RichStringFormatter {
         }
         final int increaseIndentationChange = _xifexpression;
         int _xifexpression_1 = (int) 0;
-        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>last(lines)))) {
+        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>lastOrNull(lines)))) {
           _xifexpression_1 = 1;
         } else {
           _xifexpression_1 = 0;
@@ -278,7 +278,7 @@ public class RichStringFormatter {
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.<RichStringElseIf>append(IterableExtensions.<RichStringElseIf>last(expr.getElseIfs()), _function_2);
+    doc.<RichStringElseIf>append(IterableExtensions.<RichStringElseIf>lastOrNull(expr.getElseIfs()), _function_2);
     this.formatIntoSingleLine(doc, expr.getIf());
     this.format(expr.getThen(), doc);
     EList<RichStringElseIf> _elseIfs = expr.getElseIfs();

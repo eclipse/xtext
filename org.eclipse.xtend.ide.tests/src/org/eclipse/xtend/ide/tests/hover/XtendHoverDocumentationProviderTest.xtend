@@ -60,7 +60,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
         }
         ''',resourceSet)
         val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
-        val function = clazz.members.last as XtendFunction
+        val function = clazz.members.lastOrNull as XtendFunction
         val docu = documentationProvider.getDocumentation(function)
         assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
     }
@@ -92,7 +92,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
         }
         ''',resourceSet)
         val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
-        val function = clazz.members.last as XtendFunction
+        val function = clazz.members.lastOrNull as XtendFunction
         val docu = documentationProvider.getDocumentation(function)
         assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2">#foo(Object)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
     }
@@ -124,7 +124,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
         }
         ''',resourceSet)
         val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
-        val function = clazz.members.last as XtendFunction
+        val function = clazz.members.lastOrNull as XtendFunction
         val docu = documentationProvider.getDocumentation(function)
         assertEquals('''<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
     }
@@ -156,7 +156,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
         }
         ''',resourceSet)
         val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
-        val function = clazz.members.last as XtendFunction
+        val function = clazz.members.lastOrNull as XtendFunction
         val docu = documentationProvider.getDocumentation(function)
         // Due to a bug in JDT (3.5) the org.eclipse.jdt.core.dom.ASTParser would introduce a } after foo( 
         // So we can only check that the documentation gets computed and starts with foo(

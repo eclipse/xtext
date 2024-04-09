@@ -75,7 +75,7 @@ class ErrorTest extends AbstractXtendTestCase {
 				@
 		'''.processWithoutException
 		val clazz = file.xtendTypes.head as XtendClass
-		val lastMember = clazz.members.last
+		val lastMember = clazz.members.lastOrNull
 		val annotations = lastMember.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
@@ -91,7 +91,7 @@ class ErrorTest extends AbstractXtendTestCase {
 				d
 		'''.processWithoutException
 		val clazz = file.xtendTypes.head as XtendClass
-		val lastMember = clazz.members.last
+		val lastMember = clazz.members.lastOrNull
 		val annotations = lastMember.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
@@ -107,7 +107,7 @@ class ErrorTest extends AbstractXtendTestCase {
 				def m
 		'''.processWithoutException
 		val clazz = file.xtendTypes.head as XtendClass
-		val lastMember = clazz.members.last
+		val lastMember = clazz.members.lastOrNull
 		val annotations = lastMember.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
@@ -130,7 +130,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			@Data class A {}
 			@
 		'''.processWithoutException
-		val typeDeclaration = file.xtendTypes.last
+		val typeDeclaration = file.xtendTypes.lastOrNull
 		val annotations = typeDeclaration.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
@@ -142,7 +142,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			@Data class A {}
 			@Data class
 		'''.processWithoutException
-		val typeDeclaration = file.xtendTypes.last
+		val typeDeclaration = file.xtendTypes.lastOrNull
 		val annotations = typeDeclaration.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
@@ -153,8 +153,8 @@ class ErrorTest extends AbstractXtendTestCase {
 		val file = '''
 			annotation Bar { @
 		'''.processWithoutException
-		val typeDeclaration = file.xtendTypes.last
-		val annotations = typeDeclaration.members.last.annotations
+		val typeDeclaration = file.xtendTypes.lastOrNull
+		val annotations = typeDeclaration.members.lastOrNull.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
 	}
@@ -165,8 +165,8 @@ class ErrorTest extends AbstractXtendTestCase {
 			class X {
 				@Property val S
 		'''.processWithoutException
-		val typeDeclaration = file.xtendTypes.last
-		val annotations = typeDeclaration.members.last.annotations
+		val typeDeclaration = file.xtendTypes.lastOrNull
+		val annotations = typeDeclaration.members.lastOrNull.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
 	}
@@ -176,7 +176,7 @@ class ErrorTest extends AbstractXtendTestCase {
 		val file = '''
 			@SuppressWarnings("unused"
 		'''.processWithoutException
-		val typeDeclaration = file.xtendTypes.last
+		val typeDeclaration = file.xtendTypes.lastOrNull
 		val annotations = typeDeclaration.annotations
 		val resolvedTypes = typeResolver.resolveTypes(annotations.head)
 		assertNotNull(resolvedTypes.getActualType(annotations.head))
@@ -189,7 +189,7 @@ class ErrorTest extends AbstractXtendTestCase {
 				val inferred = 'bar'
 			}
 		'''.processWithoutException
-		val annotation = file.xtendTypes.last
+		val annotation = file.xtendTypes.lastOrNull
 		val field = annotation.members.head as XtendField
 		val initializer = field.initialValue
 		val resolvedTypes = typeResolver.resolveTypes(initializer)
@@ -239,7 +239,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			   def  getHeader();
 			}
 		'''.processWithoutException
-		val headerAccess = file.xtendTypes.last
+		val headerAccess = file.xtendTypes.lastOrNull
 		val function = headerAccess.members.head as XtendFunction // error recovery parses two fields after the function #test
 		val operation = associations.getJvmElements(function).head as JvmOperation
 		val resolvedTypes = typeResolver.resolveTypes(operation)
@@ -258,7 +258,7 @@ class ErrorTest extends AbstractXtendTestCase {
 				def String foo(String x, String...args)
 			}
 		'''.processWithoutException
-		val headerAccess = file.xtendTypes.last
+		val headerAccess = file.xtendTypes.lastOrNull
 		val function = headerAccess.members.head as XtendFunction // error recovery parses two fields after the function #test
 		val operation = associations.getJvmElements(function).head as JvmOperation
 		val resolvedTypes = typeResolver.resolveTypes(operation)
@@ -288,7 +288,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 		val unnamed = file.xtendTypes.head
-		val constructor = unnamed.members.last as XtendConstructor
+		val constructor = unnamed.members.lastOrNull as XtendConstructor
 		val body = constructor.expression as XBlockExpression
 		val assignment = body.expressions.head as XAssignment
 		val resolvedTypes = typeResolver.resolveTypes(assignment)
@@ -314,7 +314,7 @@ class ErrorTest extends AbstractXtendTestCase {
 				valuri = [| new URI('')].propagate [ new IllegalArgumentException(it) ]
 			}
 		'''.processWithoutException
-		val client = file.xtendTypes.last
+		val client = file.xtendTypes.lastOrNull
 		val field = client.members.head as XtendField
 		val initializer = field.initialValue as XMemberFeatureCall
 		val closure = initializer.memberCallArguments.head as XClosure
@@ -369,7 +369,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 		val y = file.xtendTypes.head
-		val function = y.members.last as XtendFunction
+		val function = y.members.lastOrNull as XtendFunction
 		val body = function.expression as XBlockExpression
 		val featureCall = body.expressions.head as XMemberFeatureCall
 		val implicitReceiver = featureCall.implicitReceiver as XMemberFeatureCall
@@ -1225,7 +1225,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 		val resolvedTypes = typeResolver.resolveTypes(file)
-		val casted = file.eAllContents.filter(XCastedExpression).last
+		val casted = file.eAllContents.filter(XCastedExpression).lastOrNull
 		assertNull(casted.type)
 		assertNotNull(resolvedTypes.getActualType(casted))
 	}

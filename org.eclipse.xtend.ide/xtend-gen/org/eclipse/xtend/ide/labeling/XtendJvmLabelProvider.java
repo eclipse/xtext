@@ -41,7 +41,7 @@ public class XtendJvmLabelProvider extends XbaseLabelProvider {
     {
       final boolean local = element.isLocal();
       if (local) {
-        final JvmTypeReference supertype = IterableExtensions.<JvmTypeReference>last(element.getSuperTypes());
+        final JvmTypeReference supertype = IterableExtensions.<JvmTypeReference>lastOrNull(element.getSuperTypes());
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("new ");
         String _simpleName = supertype.getSimpleName();

@@ -222,9 +222,9 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(anonymous.anonymous)
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
 		assertEquals(2, anonymous.superTypes.size)
-		assertEquals('java.lang.Runnable', anonymous.superTypes.last.qualifiedName)
+		assertEquals('java.lang.Runnable', anonymous.superTypes.lastOrNull.qualifiedName)
 		assertEquals(3, anonymous.members.size)
-		val constructor = anonymous.members.last
+		val constructor = anonymous.members.lastOrNull
 		assertTrue(constructor instanceof JvmConstructor)
 		assertEquals(0, (constructor as JvmConstructor).parameters.size)
 		assertTrue(anonymous.members.head instanceof JvmField)
@@ -250,9 +250,9 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(anonymous.anonymous)
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
 		assertEquals(2, anonymous.superTypes.size)
-		assertEquals('java.lang.Runnable', anonymous.superTypes.last.qualifiedName)
+		assertEquals('java.lang.Runnable', anonymous.superTypes.lastOrNull.qualifiedName)
 		assertEquals(2, anonymous.members.size)
-		val constructor = anonymous.members.last
+		val constructor = anonymous.members.lastOrNull
 		assertTrue(constructor instanceof JvmConstructor)
 		assertEquals(0, (constructor as JvmConstructor).parameters.size)
 		val overriding = anonymous.members.head
@@ -278,9 +278,9 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertEquals(0, anonymous.typeParameters.size)
 		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
 		assertEquals(2, anonymous.superTypes.size)
-		assertEquals('java.lang.Iterable<T>', anonymous.superTypes.last.qualifiedName)
+		assertEquals('java.lang.Iterable<T>', anonymous.superTypes.lastOrNull.qualifiedName)
 		assertEquals(2, anonymous.members.size)
-		val constructor = anonymous.members.last
+		val constructor = anonymous.members.lastOrNull
 		assertTrue(constructor instanceof JvmConstructor)
 		assertEquals(0, (constructor as JvmConstructor).typeParameters.size)
 		val overriding = anonymous.members.head
@@ -322,8 +322,8 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(nested2.static)
 
 		assertEquals(2, nested1.members.size)
-		assertTrue(nested1.members.last instanceof JvmEnumerationType)
-		val nested3 = nested1.members.last as JvmEnumerationType
+		assertTrue(nested1.members.lastOrNull instanceof JvmEnumerationType)
+		val nested3 = nested1.members.lastOrNull as JvmEnumerationType
 		assertEquals('Nested3', nested3.simpleName)
 		assertTrue(nested3.static)
 	}

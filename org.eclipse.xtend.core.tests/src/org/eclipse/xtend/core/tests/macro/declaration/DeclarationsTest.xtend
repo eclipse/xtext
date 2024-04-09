@@ -261,7 +261,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals("add", listAdd.simpleName)
 			assertEquals("E", listAdd.parameters.head.type.simpleName)
 			
-			val intfAdd = allOverridden.last
+			val intfAdd = allOverridden.lastOrNull
 			assertEquals("add", intfAdd.simpleName)
 			assertEquals("String", intfAdd.parameters.head.type.simpleName)
 		]

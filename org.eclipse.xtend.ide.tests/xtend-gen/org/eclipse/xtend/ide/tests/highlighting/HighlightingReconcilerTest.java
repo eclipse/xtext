@@ -109,7 +109,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       Assert.assertEquals("Highlighting regions broken", 3, semanticSnippets.size());
       Assert.assertEquals("Foo", IterableExtensions.<String>head(semanticSnippets));
       Assert.assertEquals("foo", IterableExtensions.<String>head(IterableExtensions.<String>tail(semanticSnippets)));
-      Assert.assertEquals("3", IterableExtensions.<String>last(semanticSnippets));
+      Assert.assertEquals("3", IterableExtensions.<String>lastOrNull(semanticSnippets));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -170,7 +170,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       String _plus = ("Highlighting regions broken " + _join);
       Assert.assertEquals(_plus, 2, semanticSnippets.size());
       Assert.assertEquals("Foo", IterableExtensions.<String>head(semanticSnippets));
-      Assert.assertEquals("foo", IterableExtensions.<String>last(semanticSnippets));
+      Assert.assertEquals("foo", IterableExtensions.<String>lastOrNull(semanticSnippets));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

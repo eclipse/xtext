@@ -130,7 +130,7 @@ public class ImportsCollector {
   protected void _visit(final JvmGenericType jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     boolean _isAnonymous = jvmType.isAnonymous();
     if (_isAnonymous) {
-      this.visit(IterableExtensions.<JvmTypeReference>last(jvmType.getSuperTypes()).getType(), originNode, acceptor);
+      this.visit(IterableExtensions.<JvmTypeReference>lastOrNull(jvmType.getSuperTypes()).getType(), originNode, acceptor);
     } else {
       this._visit(((JvmDeclaredType) jvmType), originNode, acceptor);
     }

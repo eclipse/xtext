@@ -93,7 +93,7 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
 
 	private boolean isStop(GrammarAlias.TokenAlias it) {
 		return (it.getToken() == null && it.getParent() instanceof GrammarAlias.GroupAlias
-				&& Objects.equal(it, IterableExtensions.<GrammarAlias.AbstractElementAlias>last(
+				&& Objects.equal(it, IterableExtensions.<GrammarAlias.AbstractElementAlias>lastOrNull(
 						((GrammarAlias.GroupAlias) it.getParent()).getChildren())));
 	}
 

@@ -89,8 +89,8 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
       final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
-      XtendMember _last = IterableExtensions.<XtendMember>last(clazz.getMembers());
-      final XtendFunction function = ((XtendFunction) _last);
+      XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
+      final XtendFunction function = ((XtendFunction) _lastOrNull);
       final String docu = this.documentationProvider.getDocumentation(function);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
@@ -153,8 +153,8 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
       final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
-      XtendMember _last = IterableExtensions.<XtendMember>last(clazz.getMembers());
-      final XtendFunction function = ((XtendFunction) _last);
+      XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
+      final XtendFunction function = ((XtendFunction) _lastOrNull);
       final String docu = this.documentationProvider.getDocumentation(function);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">#foo(Object)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
@@ -217,8 +217,8 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
       final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
-      XtendMember _last = IterableExtensions.<XtendMember>last(clazz.getMembers());
-      final XtendFunction function = ((XtendFunction) _last);
+      XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
+      final XtendFunction function = ((XtendFunction) _lastOrNull);
       final String docu = this.documentationProvider.getDocumentation(function);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
@@ -281,8 +281,8 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder.newLine();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
       final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
-      XtendMember _last = IterableExtensions.<XtendMember>last(clazz.getMembers());
-      final XtendFunction function = ((XtendFunction) _last);
+      XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
+      final XtendFunction function = ((XtendFunction) _lastOrNull);
       final String docu = this.documentationProvider.getDocumentation(function);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\"> #foo(");

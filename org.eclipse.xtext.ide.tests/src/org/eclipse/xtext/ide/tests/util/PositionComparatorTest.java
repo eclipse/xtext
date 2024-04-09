@@ -61,7 +61,7 @@ public class PositionComparatorTest extends Assert {
 		assertEquals(2, input.get(1).getLine());
 		assertEquals(2, input.get(1).getCharacter());
 
-		assertNull(IterableExtensions.last(input));
+		assertNull(IterableExtensions.lastOrNull(input));
 	}
 
 	private List<? extends Position> sort(List<? extends Position> toSort) {

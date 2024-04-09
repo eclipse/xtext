@@ -93,7 +93,7 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(operation.eResource());
       Assert.assertEquals("Runnable", resolvedTypes.getActualType(operation).toString());
       XExpression _expression = function.getExpression();
-      final XExpression variable = IterableExtensions.<XExpression>last(((XBlockExpression) _expression).getExpressions());
+      final XExpression variable = IterableExtensions.<XExpression>lastOrNull(((XBlockExpression) _expression).getExpressions());
       final LightweightTypeReference variableType = resolvedTypes.getActualType(variable);
       Assert.assertEquals("__Foo_1", variableType.toString());
       Assert.assertTrue(variableType.isSubtypeOf(Runnable.class));
@@ -126,8 +126,8 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       XExpression _expression = function.getExpression();
       XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
-      XtendMember _last = IterableExtensions.<XtendMember>last(anonymousClass.getMembers());
-      final JvmOperation overriding = this._iXtendJvmAssociations.getDirectlyInferredOperation(((XtendFunction) _last));
+      XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(anonymousClass.getMembers());
+      final JvmOperation overriding = this._iXtendJvmAssociations.getDirectlyInferredOperation(((XtendFunction) _lastOrNull));
       Assert.assertEquals("Iterator<String>", resolvedTypes.getActualType(overriding).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -158,8 +158,8 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       XExpression _expression = function.getExpression();
       XExpression _head = IterableExtensions.<XExpression>head(((XBlockExpression) _expression).getExpressions());
       final AnonymousClass anonymousClass = ((AnonymousClass) _head);
-      XtendMember _last = IterableExtensions.<XtendMember>last(anonymousClass.getMembers());
-      final JvmOperation overriding = this._iXtendJvmAssociations.getDirectlyInferredOperation(((XtendFunction) _last));
+      XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(anonymousClass.getMembers());
+      final JvmOperation overriding = this._iXtendJvmAssociations.getDirectlyInferredOperation(((XtendFunction) _lastOrNull));
       Assert.assertEquals("Iterator<T>", resolvedTypes.getActualType(overriding).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

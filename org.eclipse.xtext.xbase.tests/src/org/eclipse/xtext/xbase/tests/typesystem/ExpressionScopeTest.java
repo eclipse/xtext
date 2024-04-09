@@ -157,7 +157,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReassignedType_01() throws Exception {
 		XIfExpression ifExpr = (XIfExpression) IterableExtensions
-				.last(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) {} }", false)).getExpressions());
+				.lastOrNull(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) {} }", false)).getExpressions());
 		XBlockExpression block = (XBlockExpression) ifExpr.getThen();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
 		contains(expressionScope, "charAt");
@@ -168,7 +168,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReassignedType_02() throws Exception {
 		XIfExpression ifExpr = (XIfExpression) IterableExtensions
-				.last(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
+				.lastOrNull(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
 						.getExpressions());
 		XBlockExpression block = (XBlockExpression) ifExpr.getThen();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
@@ -180,7 +180,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReassignedType_03() throws Exception {
 		XIfExpression ifExpr = (XIfExpression) IterableExtensions
-				.last(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
+				.lastOrNull(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
 						.getExpressions());
 		XBlockExpression block = (XBlockExpression) ifExpr.getThen();
 		XExpression assignment = Iterables.getFirst(block.getExpressions(), null);

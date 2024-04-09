@@ -73,7 +73,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
 	@Override
 	protected List<String> getSignificantContent() {
 		List<String> result = super.getSignificantContent();
-		if (result.size() >= 1 && Objects.equal(getLineDelimiter(), IterableExtensions.last(result))) {
+		if (result.size() >= 1 && Objects.equal(getLineDelimiter(), IterableExtensions.lastOrNull(result))) {
 			return result.subList(0, result.size() - 1);
 		}
 		return result;

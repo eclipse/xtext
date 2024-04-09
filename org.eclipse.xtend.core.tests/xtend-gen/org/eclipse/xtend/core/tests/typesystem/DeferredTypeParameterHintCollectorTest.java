@@ -91,7 +91,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(resolver);
     final MockTypeParameterSubstitutor substitutor = new MockTypeParameterSubstitutor(_owner_1, _publicResolvedTypes);
     final LightweightTypeReference hasUnbounds = substitutor.substitute(this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>head(operation.getParameters()).getParameterType()));
-    final LightweightTypeReference isActual = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>last(operation.getParameters()).getParameterType());
+    final LightweightTypeReference isActual = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>lastOrNull(operation.getParameters()).getParameterType());
     collector.processPairedReferences(hasUnbounds, isActual);
     return substitutor.getTypeParameterMapping();
   }

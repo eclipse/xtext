@@ -35,7 +35,7 @@ class TypeReferenceAssignabilityTest extends AssignabilityTest {
 				else
 					toTypeReference(owner.newAnyTypeReference)
 			val rhsType = if (rhs !== null)
-					toTypeReference(operation.parameters.last.parameterType)
+					toTypeReference(operation.parameters.lastOrNull.parameterType)
 				else
 					toTypeReference(owner.newAnyTypeReference)
 			assertEquals(lhsType.simpleName + " := " + rhsType.simpleName, expectation,

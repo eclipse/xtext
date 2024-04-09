@@ -4847,7 +4847,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		val file = file(input.toString(), true)
 		val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
-		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
+		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).lastOrNull
 		val generatorConfig =  generatorConfigProvider.get(barType)
 		var barJavaCode = generator.generateType(barType, generatorConfig);
 		barJavaCode = postProcessor.postProcess(null, barJavaCode);
