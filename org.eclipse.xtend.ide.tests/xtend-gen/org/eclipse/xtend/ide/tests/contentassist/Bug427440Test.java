@@ -54,6 +54,10 @@ public class Bug427440Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     final Iterator<ICompletionProposal> proposals = ((List<ICompletionProposal>)Conversions.doWrapArray(_newBuilder.append(_builder.toString()).computeCompletionProposals("|"))).iterator();
     this.assertContains(proposals.next(), "augument");
+    boolean _isJava21OrLater = JavaRuntimeVersion.isJava21OrLater();
+    if (_isJava21OrLater) {
+      this.assertContains(proposals.next(), "accessFlags");
+    }
     this.assertContains(proposals.next(), "annotatedInterfaces");
     this.assertContains(proposals.next(), "annotatedSuperclass");
     this.assertContains(proposals.next(), "annotation");
