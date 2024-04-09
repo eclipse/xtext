@@ -171,7 +171,7 @@ public class IterableExtensions {
 				return null;
 			return sortedSet.last();
 		} else {
-			return IteratorExtensions.last(iterable.iterator());
+			return IteratorExtensions.lastOrNull(iterable.iterator());
 		}
 	}
 
