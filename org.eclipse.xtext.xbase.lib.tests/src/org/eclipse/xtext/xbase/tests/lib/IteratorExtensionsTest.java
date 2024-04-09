@@ -84,7 +84,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 
 	@Override
 	protected Integer last(Iterator<Integer> input) {
-		return IteratorExtensions.last(input);
+		return IteratorExtensions.lastOrNull(input);
 	}
 
 	@Override

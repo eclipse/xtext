@@ -2238,7 +2238,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
-    final XCastedExpression casted = IteratorExtensions.<XCastedExpression>last(Iterators.<XCastedExpression>filter(file.eAllContents(), XCastedExpression.class));
+    final XCastedExpression casted = IteratorExtensions.<XCastedExpression>lastOrNull(Iterators.<XCastedExpression>filter(file.eAllContents(), XCastedExpression.class));
     Assert.assertNull(casted.getType());
     Assert.assertNotNull(resolvedTypes.getActualType(casted));
   }

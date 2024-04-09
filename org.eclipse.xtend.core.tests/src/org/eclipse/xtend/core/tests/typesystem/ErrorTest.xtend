@@ -1225,7 +1225,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 		val resolvedTypes = typeResolver.resolveTypes(file)
-		val casted = file.eAllContents.filter(XCastedExpression).last
+		val casted = file.eAllContents.filter(XCastedExpression).lastOrNull
 		assertNull(casted.type)
 		assertNotNull(resolvedTypes.getActualType(casted))
 	}
