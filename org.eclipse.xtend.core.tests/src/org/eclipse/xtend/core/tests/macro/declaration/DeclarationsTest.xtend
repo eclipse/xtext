@@ -47,7 +47,9 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.qualifiedName)
 			assertEquals('unused', suppressWarning.getStringArrayValue('value').get(0))
 			
-			assertEquals(2, supressWarningsDeclaration.annotations.size)
+			val annotations = supressWarningsDeclaration.annotations
+			assertEquals(annotations.map[it.annotationTypeDeclaration].toString,
+				2, annotations.size)
 			
 			val valueProperty = supressWarningsDeclaration.declaredMembers.filter(typeof(AnnotationTypeElementDeclaration)).head
 			assertEquals("String[]", valueProperty.type.toString)

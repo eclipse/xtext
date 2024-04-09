@@ -45,6 +45,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -79,7 +80,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       final AnnotationTypeDeclaration supressWarningsDeclaration = suppressWarning.getAnnotationTypeDeclaration();
       Assert.assertEquals("java.lang.SuppressWarnings", supressWarningsDeclaration.getQualifiedName());
       Assert.assertEquals("unused", suppressWarning.getStringArrayValue("value")[0]);
-      Assert.assertEquals(2, IterableExtensions.size(supressWarningsDeclaration.getAnnotations()));
+      final Iterable<? extends AnnotationReference> annotations = supressWarningsDeclaration.getAnnotations();
+      final Function1<AnnotationReference, AnnotationTypeDeclaration> _function_1 = (AnnotationReference it_1) -> {
+        return it_1.getAnnotationTypeDeclaration();
+      };
+      Assert.assertEquals(IterableExtensions.map(annotations, _function_1).toString(), 
+        2, IterableExtensions.size(annotations));
       final AnnotationTypeElementDeclaration valueProperty = IterableExtensions.<AnnotationTypeElementDeclaration>head(Iterables.<AnnotationTypeElementDeclaration>filter(supressWarningsDeclaration.getDeclaredMembers(), AnnotationTypeElementDeclaration.class));
       Assert.assertEquals("String[]", valueProperty.getType().toString());
       Assert.assertEquals("value", valueProperty.getSimpleName());
