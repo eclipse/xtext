@@ -2009,7 +2009,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		// and it doesn't seem to be present at runtime in 17+
 		// see also https://bugs.eclipse.org/bugs/show_bug.cgi?id=545510#c6
 		// for sure, it fails with Java 21
-		Assume.assumeFalse("Ignored on Java 18 and later", JavaRuntimeVersion.isJava18OrLater());
+		Assume.assumeFalse("Ignored on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
 		String typeName = Methods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");

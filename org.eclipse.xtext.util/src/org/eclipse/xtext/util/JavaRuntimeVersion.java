@@ -54,10 +54,6 @@ public class JavaRuntimeVersion {
 		return JAVA_VERSION >= 17;
 	}
 
-	public static boolean isJava18OrLater() {
-		return JAVA_VERSION >= 18;
-	}
-
 	public static boolean isJava21OrLater() {
 		return JAVA_VERSION >= 21;
 	}
