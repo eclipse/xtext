@@ -36,8 +36,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
-          restore-keys: ${{ runner.os }}-m2
+          key: ${{ runner.os }}-m2-${{ matrix.java }}-${{ hashFiles('**/pom.xml', '**/*.target') }}
+          restore-keys: ${{ runner.os }}-m2-${{ matrix.java }}
 
       - name: Set Maven Home environment variable
         run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" >> "$GITHUB_ENV"
