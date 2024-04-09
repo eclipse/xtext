@@ -9,12 +9,11 @@
 package org.eclipse.xtend.core.tests.resource
 
 import com.google.inject.Inject
+import java.util.Comparator
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.IResourceDescription
-import org.junit.Test
 import org.junit.Assert
-import java.util.Arrays
-import java.util.Comparator
+import org.junit.Test
 
 class ImportedNamesTest extends AbstractXtendTestCase {
 	@Inject
@@ -138,37 +137,37 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 			import java.util.AbstractMap.*;
 			
 			class C {
-				val list = new java.util.ArrayList<Map.Entry>
+				val list = new testdata.stubs.StubbedArrayList<Map.Entry>
 				val entry = new SimpleEntry(null, null)
 				val int i = 0
 			}
 		''', true)
 		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
 		val importedNames = description.importedNames
-		Assert.assertEquals(Arrays.asList(
-				"java.io.serializable",
-				"java.lang.cloneable",
-				"java.lang.iterable",
-				"java.lang.java$util$arraylist",
-				"java.lang.object",
-				"java.util.abstractcollection",
-				"java.util.abstractlist",
-				"java.util.abstractmap",
-				"java.util.abstractmap.java$util$arraylist",
-				"java.util.abstractmap.simpleentry",
-				"java.util.abstractmap$java$util$arraylist",
-				"java.util.abstractmap$simpleentry",
-				"java.util.arraylist",
-				"java.util.collection",
-				"java.util.list",
-				"java.util.map",
-				"java.util.map$entry",
-				"java.util.randomaccess",
-				"java.util$abstractmap$java$util$arraylist",
-				"java$util$abstractmap$java$util$arraylist",
-				"my.pack.c",
-				"my.pack.java$util$arraylist",
-				"org.eclipse.xtext.xbase.lib.java$util$arraylist").join("\n"),
+		Assert.assertEquals('''
+				java.io.serializable
+				java.lang.cloneable
+				java.lang.iterable
+				java.lang.object
+				java.lang.testdata$stubs$stubbedarraylist
+				java.util.abstractcollection
+				java.util.abstractmap
+				java.util.abstractmap.simpleentry
+				java.util.abstractmap.testdata$stubs$stubbedarraylist
+				java.util.abstractmap$simpleentry
+				java.util.abstractmap$testdata$stubs$stubbedarraylist
+				java.util.collection
+				java.util.map
+				java.util.map$entry
+				java.util.randomaccess
+				java.util$abstractmap$testdata$stubs$stubbedarraylist
+				java$util$abstractmap$testdata$stubs$stubbedarraylist
+				my.pack.c
+				my.pack.testdata$stubs$stubbedarraylist
+				org.eclipse.xtext.xbase.lib.testdata$stubs$stubbedarraylist
+				testdata.stubs.stubbedabstractlist
+				testdata.stubs.stubbedarraylist
+				testdata.stubs.stubbedlist'''.toString.replace("\r", ""),
 				importedNames.toList.sortWith(Comparator.naturalOrder).join("\n"));
 	}
 }

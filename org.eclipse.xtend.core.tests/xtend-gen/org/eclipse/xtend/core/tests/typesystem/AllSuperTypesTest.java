@@ -9,12 +9,12 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.Collection;
-import java.util.List;
 import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Ignore;
 import org.junit.Test;
+import testdata.stubs.StubbedList;
 
 /**
  * @author Sebastian Zarnekow
@@ -75,25 +75,25 @@ public class AllSuperTypesTest extends AbstractSuperTypesTest {
   @Test
   @Override
   public void testRawList() {
-    this.assertSuperTypes(List.class, "Collection", "Iterable", "Object");
+    this.assertSuperTypes(StubbedList.class, "Collection", "Iterable", "Object");
   }
 
   @Test
   @Override
   public void testStringList() {
-    this.assertSuperTypes("java.util.List<String>", "Collection<String>", "Iterable<String>", "Object");
+    this.assertSuperTypes("testdata.stubs.StubbedList<String>", "Collection<String>", "Iterable<String>", "Object");
   }
 
   @Test
   @Override
   public void testStringArrayArrayList() {
-    this.assertSuperTypes("java.util.ArrayList<? extends String[]>", 
-      "AbstractList<? extends String[]>", 
+    this.assertSuperTypes("testdata.stubs.StubbedArrayList<? extends String[]>", 
+      "StubbedAbstractList<? extends String[]>", 
       "RandomAccess", 
       "Cloneable", 
       "Serializable", 
       "AbstractCollection<? extends String[]>", 
-      "List<? extends String[]>", 
+      "StubbedList<? extends String[]>", 
       "Collection<? extends String[]>", 
       "Iterable<? extends String[]>", 
       "Object");
