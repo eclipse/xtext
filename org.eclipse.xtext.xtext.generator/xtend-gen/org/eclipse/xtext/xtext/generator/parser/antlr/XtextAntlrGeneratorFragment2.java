@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -19,6 +18,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -841,7 +841,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
           for(final AbstractElement element : partition) {
-            _builder.append("builder.put(grammarAccess.");
+            _builder.append("mappings.put(grammarAccess.");
             String _grammarElementAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.grammarElementAccess(AntlrGrammarGenUtil.<AbstractElement>getOriginalElement(element));
             _builder.append(_grammarElementAccess);
             _builder.append(", \"");
@@ -912,12 +912,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("private static void doInit(");
-                  _builder.append(ImmutableMap.class, "\t\t");
-                  _builder.append(".Builder<");
+                  _builder.append(Map.class, "\t\t");
+                  _builder.append("<");
                   _builder.append(AbstractElement.class, "\t\t");
                   _builder.append(", ");
                   _builder.append(String.class, "\t\t");
-                  _builder.append("> builder, ");
+                  _builder.append("> mappings, ");
                   TypeReference _grammarAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
                   _builder.append(_grammarAccess, "\t\t");
                   _builder.append(" grammarAccess) {");
@@ -962,21 +962,23 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append(" grammarAccess) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append(ImmutableMap.class, "\t\t");
-          _builder.append(".Builder<");
+          _builder.append(Map.class, "\t\t");
+          _builder.append("<");
           _builder.append(AbstractElement.class, "\t\t");
           _builder.append(", ");
           _builder.append(String.class, "\t\t");
-          _builder.append("> builder = ");
-          _builder.append(ImmutableMap.class, "\t\t");
-          _builder.append(".builder();");
+          _builder.append("> mappings = new ");
+          _builder.append(HashMap.class, "\t\t");
+          _builder.append("<>();");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("init(builder, grammarAccess);");
+          _builder.append("init(mappings, grammarAccess);");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("this.mappings = builder.build();");
-          _builder.newLine();
+          _builder.append("this.mappings = ");
+          _builder.append(Map.class, "\t\t");
+          _builder.append(".copyOf(mappings);");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -999,12 +1001,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.newLine();
           _builder.append("\t");
           _builder.append("private static void init(");
-          _builder.append(ImmutableMap.class, "\t");
-          _builder.append(".Builder<");
+          _builder.append(Map.class, "\t");
+          _builder.append("<");
           _builder.append(AbstractElement.class, "\t");
           _builder.append(", ");
           _builder.append(String.class, "\t");
-          _builder.append("> builder, ");
+          _builder.append("> mappings, ");
           TypeReference _grammarAccess_2 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(XtextAntlrGeneratorFragment2.this.getGrammar());
           _builder.append(_grammarAccess_2, "\t");
           _builder.append(" grammarAccess) {");
@@ -1020,7 +1022,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
                   _builder.append("Init");
                   Integer _key_1 = partition_1.getKey();
                   _builder.append(_key_1, "\t\t");
-                  _builder.append(".doInit(builder, grammarAccess);");
+                  _builder.append(".doInit(mappings, grammarAccess);");
                   _builder.newLineIfNotEmpty();
                 }
               }

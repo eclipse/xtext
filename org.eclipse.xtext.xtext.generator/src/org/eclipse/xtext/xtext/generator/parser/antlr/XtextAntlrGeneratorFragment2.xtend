@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import com.google.common.collect.ImmutableMap
 import com.google.common.collect.Lists
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.google.inject.name.Names
 import java.io.InputStream
+import java.util.HashMap
 import java.util.List
 import java.util.Map
 import java.util.Set
@@ -372,7 +372,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	 */
 	protected def StringConcatenationClient initNameMappings(List<AbstractElement> partition) '''
 		«FOR element : partition»
-			builder.put(grammarAccess.«element.originalElement.grammarElementAccess», "«element.originalElement.containingRule.contentAssistRuleName»__«element.originalElement.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
+			mappings.put(grammarAccess.«element.originalElement.grammarElementAccess», "«element.originalElement.containingRule.contentAssistRuleName»__«element.originalElement.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
 		«ENDFOR»
 	'''
 	
@@ -394,7 +394,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				«IF partitions.size > 1»
 					«FOR partition : partitions.indexed»
 						private static final class Init«partition.key» {
-							private static void doInit(«ImmutableMap».Builder<«AbstractElement», «String»> builder, «grammar.grammarAccess» grammarAccess) {
+							private static void doInit(«Map»<«AbstractElement», «String»> mappings, «grammar.grammarAccess» grammarAccess) {
 								«partition.value.initNameMappings»
 							}
 						}
@@ -405,19 +405,19 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				
 				@«Inject»
 				public NameMappings(«grammar.grammarAccess» grammarAccess) {
-					«ImmutableMap».Builder<«AbstractElement», «String»> builder = «ImmutableMap».builder();
-					init(builder, grammarAccess);
-					this.mappings = builder.build();
+					«Map»<«AbstractElement», «String»> mappings = new «HashMap»<>();
+					init(mappings, grammarAccess);
+					this.mappings = «Map».copyOf(mappings);
 				}
 				
 				public «String» getRuleName(«AbstractElement» element) {
 					return mappings.get(element);
 				}
 				
-				private static void init(«ImmutableMap».Builder<«AbstractElement», «String»> builder, «grammar.grammarAccess» grammarAccess) {
+				private static void init(«Map»<«AbstractElement», «String»> mappings, «grammar.grammarAccess» grammarAccess) {
 					«IF partitions.size > 1»
 						«FOR partition : partitions.indexed»
-							Init«partition.key».doInit(builder, grammarAccess);
+							Init«partition.key».doInit(mappings, grammarAccess);
 						«ENDFOR»
 					«ELSE»
 						«FOR partition : partitions»
