@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -21,8 +22,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
-
-import com.google.common.base.Objects;
 
 /**
  * A specialized {@link StringConcatenation} that will properly convert
@@ -73,7 +72,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
 	@Override
 	protected List<String> getSignificantContent() {
 		List<String> result = super.getSignificantContent();
-		if (result.size() >= 1 && Objects.equal(getLineDelimiter(), IterableExtensions.lastOrNull(result))) {
+		if (result.size() >= 1 && Objects.equals(getLineDelimiter(), IterableExtensions.lastOrNull(result))) {
 			return result.subList(0, result.size() - 1);
 		}
 		return result;

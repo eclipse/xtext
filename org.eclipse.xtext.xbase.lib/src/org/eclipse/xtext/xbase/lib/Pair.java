@@ -9,9 +9,9 @@
 package org.eclipse.xtext.xbase.lib;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.base.Objects;
 
 /**
  * An immutable pair of {@link #getKey() key} and {@link #getValue() value}. A pair is considered to be
@@ -87,7 +87,7 @@ import com.google.common.base.Objects;
 		if (!(o instanceof Pair))
 			return false;
 		Pair<?, ?> e = (Pair<?, ?>) o;
-		return Objects.equal(k, e.getKey()) && Objects.equal(v, e.getValue());
+		return Objects.equals(k, e.getKey()) && Objects.equals(v, e.getValue());
 	}
 
 	@Override

@@ -9,6 +9,7 @@
 package org.eclipse.xtext.xbase.validation;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -31,7 +32,6 @@ import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -64,7 +64,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 	public void checkUniqueName(EObject root) {
 		if (root.eContainer() == null) {
 			Resource resource = root.eResource();
-			if (Objects.equal(Iterables.getFirst(resource.getContents(), null), root)) {
+			if (Objects.equals(Iterables.getFirst(resource.getContents(), null), root)) {
 				for (EObject o : resource.getContents()) {
 					if (o instanceof JvmDeclaredType) {
 						doCheckUniqueName((JvmDeclaredType) o);
@@ -97,7 +97,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 		}
 		if (resourceURIs.size() > 1) {
 			for (URI uri : resourceURIs) {
-				if (!Objects.equal(uri, type.eResource().getURI())) {
+				if (!Objects.equals(uri, type.eResource().getURI())) {
 					addIssue(type, uri.lastSegment());
 					break;
 				}

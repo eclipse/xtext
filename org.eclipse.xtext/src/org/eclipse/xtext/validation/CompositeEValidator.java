@@ -12,6 +12,7 @@ package org.eclipse.xtext.validation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -25,7 +26,6 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -65,7 +65,7 @@ public class CompositeEValidator implements EValidator, Cloneable {
 					AbstractInjectableValidator otherCasted = (AbstractInjectableValidator) otherDelegate;
 					if (casted.isLanguageSpecific() == otherCasted.isLanguageSpecific()) {
 						if (casted.isLanguageSpecific()) {
-							return Objects.equal(casted.getLanguageName(), otherCasted.getLanguageName());
+							return Objects.equals(casted.getLanguageName(), otherCasted.getLanguageName());
 						}
 						return true;
 					}

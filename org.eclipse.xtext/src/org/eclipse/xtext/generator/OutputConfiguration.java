@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.util.Objects;
 import java.util.Set;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 
@@ -317,7 +317,7 @@ public class OutputConfiguration {
 		public boolean equals(Object obj) {
 			if (obj instanceof SourceMapping) {
 				SourceMapping other = (SourceMapping) obj;
-				return Objects.equal(sourceFolder, other.sourceFolder);
+				return Objects.equals(sourceFolder, other.sourceFolder);
 			}
 			return false;
 		}

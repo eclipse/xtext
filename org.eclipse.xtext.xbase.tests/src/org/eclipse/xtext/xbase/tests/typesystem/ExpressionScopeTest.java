@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -26,7 +28,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -48,7 +49,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 		String toString = elements.toString();
 		assertNotNull(toString, scope.getSingleElement(name));
 		assertFalse(toString, Iterables.isEmpty(scope.getElements(name)));
-		assertTrue(toString, IterableExtensions.exists(elements, it -> Objects.equal(it.getName(), name)));
+		assertTrue(toString, IterableExtensions.exists(elements, it -> Objects.equals(it.getName(), name)));
 	}
 
 	protected void containsNot(IExpressionScope scope, String name) {
@@ -60,7 +61,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 		String toString = elements.toString();
 		assertNull(toString, scope.getSingleElement(name));
 		assertTrue(toString, Iterables.isEmpty(scope.getElements(name)));
-		assertFalse(toString, IterableExtensions.exists(elements, it -> Objects.equal(it.getName(), name)));
+		assertFalse(toString, IterableExtensions.exists(elements, it -> Objects.equals(it.getName(), name)));
 	}
 
 	@Test

@@ -8,8 +8,10 @@
  */
 package org.eclipse.xtext.xbase.formatting;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+
+import java.util.Objects;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Keyword;
@@ -34,15 +36,15 @@ public class NodeModelAccess {
 	public ILeafNode nodeForKeyword(EObject obj, String kw) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
 		return (ILeafNode) IterableExtensions.findFirst(node.getAsTreeIterable(),
-				(INode it) -> Objects.equal(it.getSemanticElement(), obj) && it.getGrammarElement() instanceof Keyword
-						&& Objects.equal(it.getText(), kw));
+				(INode it) -> Objects.equals(it.getSemanticElement(), obj) && it.getGrammarElement() instanceof Keyword
+						&& Objects.equals(it.getText(), kw));
 	}
 
 	public Iterable<ILeafNode> nodesForKeyword(EObject obj, String kw) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
 		Iterable<ILeafNode> leafNodes = Iterables.filter(node.getAsTreeIterable(), ILeafNode.class);
-		return Iterables.filter(leafNodes, n -> Objects.equal(n.getSemanticElement(), obj)
-				&& n.getGrammarElement() instanceof Keyword && Objects.equal(n.getText(), kw));
+		return Iterables.filter(leafNodes, n -> Objects.equals(n.getSemanticElement(), obj)
+				&& n.getGrammarElement() instanceof Keyword && Objects.equals(n.getText(), kw));
 	}
 
 	public INode nodeForFeature(EObject obj, EStructuralFeature feature) {
@@ -64,8 +66,8 @@ public class NodeModelAccess {
 		}
 		INode current1 = current;
 		ILeafNode result = findNextLeaf(current1,
-				n -> !Objects.equal(current1, n) && n.getGrammarElement() instanceof Keyword);
-		if (result != null && Objects.equal(result.getText(), kw)) {
+				n -> !Objects.equals(current1, n) && n.getGrammarElement() instanceof Keyword);
+		if (result != null && Objects.equals(result.getText(), kw)) {
 			return result;
 		}
 		return null;

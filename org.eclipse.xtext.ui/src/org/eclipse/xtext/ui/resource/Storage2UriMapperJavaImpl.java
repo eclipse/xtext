@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
@@ -53,7 +54,6 @@ import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ForwardingMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -272,7 +272,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	}
 	
 	protected boolean isUpToDate(PackageFragmentRootData data, IPackageFragmentRoot root) {
-		return Objects.equal(data.modificationStamp, computeModificationStamp(root));
+		return Objects.equals(data.modificationStamp, computeModificationStamp(root));
 	}
 	
 	protected Object computeModificationStamp(IPackageFragmentRoot root) {

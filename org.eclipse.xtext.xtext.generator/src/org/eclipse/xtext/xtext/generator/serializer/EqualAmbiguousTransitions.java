@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.serializer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.util.formallang.Production;
 import org.eclipse.xtext.util.formallang.ProductionFormatter;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 
 /**
@@ -62,7 +62,7 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
 				@Override
 				public String format(Production<GrammarAlias.AbstractElementAlias, AbstractElement> adapter,
 						GrammarAlias.AbstractElementAlias grammarElement, boolean needParenthesis) {
-					if (Objects.equal(grammarElement, elementAlias)) {
+					if (Objects.equals(grammarElement, elementAlias)) {
 						return "(ambiguity)";
 					}
 					if (grammarElement instanceof GrammarAlias.TokenAlias) {
@@ -87,13 +87,13 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
 	}
 
 	private boolean isStart(GrammarAlias.TokenAlias it) {
-		return (it.getToken() == null && it.getParent() instanceof GrammarAlias.GroupAlias && Objects.equal(it,
+		return (it.getToken() == null && it.getParent() instanceof GrammarAlias.GroupAlias && Objects.equals(it,
 				Iterables.getFirst(((GrammarAlias.GroupAlias) it.getParent()).getChildren(), null)));
 	}
 
 	private boolean isStop(GrammarAlias.TokenAlias it) {
 		return (it.getToken() == null && it.getParent() instanceof GrammarAlias.GroupAlias
-				&& Objects.equal(it, IterableExtensions.<GrammarAlias.AbstractElementAlias>lastOrNull(
+				&& Objects.equals(it, IterableExtensions.<GrammarAlias.AbstractElementAlias>lastOrNull(
 						((GrammarAlias.GroupAlias) it.getParent()).getChildren())));
 	}
 

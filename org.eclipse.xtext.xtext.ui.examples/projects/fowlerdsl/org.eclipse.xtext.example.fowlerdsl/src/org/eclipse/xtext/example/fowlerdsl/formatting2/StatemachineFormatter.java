@@ -13,6 +13,7 @@ import static org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePacka
 import static org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage.Literals.STATE__NAME;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.xtext.example.fowlerdsl.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.example.fowlerdsl.statemachine.Command;
@@ -25,7 +26,6 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -194,7 +194,7 @@ public class StatemachineFormatter extends AbstractJavaFormatter {
 
 	private boolean isLastState(State state) {
 		Statemachine statemachine = (Statemachine) state.eContainer();
-		return Objects.equal(state, Iterables.getLast(statemachine.getStates()));
+		return Objects.equals(state, Iterables.getLast(statemachine.getStates()));
 	}
 
 }

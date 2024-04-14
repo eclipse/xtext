@@ -9,14 +9,13 @@
 package org.eclipse.xtext.resource;
 
 import java.io.File;
+import java.util.Objects;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.google.common.base.Objects;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,7 +53,7 @@ public abstract class AbstractResourceSetTest {
 		new ResourceSetImpl.ResourceLocator(rs) {
 			@Override
 			public Resource getResource(URI uri, boolean loadOnDemand) {
-				if (Objects.equal(uri, resource.getURI())) {
+				if (Objects.equals(uri, resource.getURI())) {
 					return resource;
 				}
 				throw new IllegalArgumentException(uri.toString());

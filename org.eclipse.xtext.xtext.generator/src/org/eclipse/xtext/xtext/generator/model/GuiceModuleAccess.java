@@ -13,13 +13,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
-
-import com.google.common.base.Objects;
 
 /**
  * Configuration object for Guice modules based on
@@ -41,8 +40,8 @@ public class GuiceModuleAccess {
 		@Override
 		public boolean equals(Object other) {
 			if (other instanceof GuiceModuleAccess.BindKey) {
-				return Objects.equal(this.name, ((GuiceModuleAccess.BindKey) other).name)
-						&& Objects.equal(this.type, ((GuiceModuleAccess.BindKey) other).type);
+				return Objects.equals(this.name, ((GuiceModuleAccess.BindKey) other).name)
+						&& Objects.equals(this.type, ((GuiceModuleAccess.BindKey) other).type);
 			} else {
 				return false;
 			}
@@ -188,7 +187,7 @@ public class GuiceModuleAccess {
 		@Override
 		public boolean equals(Object other) {
 			if (other instanceof GuiceModuleAccess.Binding) {
-				return Objects.equal(this.key, ((GuiceModuleAccess.Binding) other).key);
+				return Objects.equals(this.key, ((GuiceModuleAccess.Binding) other).key);
 			} else {
 				return false;
 			}
@@ -401,7 +400,7 @@ public class GuiceModuleAccess {
 			boolean found = false;
 			while (iterator.hasNext() && !found) {
 				GuiceModuleAccess.Binding oldBinding = iterator.next();
-				if (Objects.equal(oldBinding, newBinding)) {
+				if (Objects.equals(oldBinding, newBinding)) {
 					if (oldBinding.isFinal) {
 						if (newBinding.isFinal) {
 							throw new IllegalStateException(

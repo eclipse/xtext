@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.preferences;
 import java.io.IOException;
+import java.util.Objects;
 
 import org.eclipse.core.commands.common.EventManager;
 import org.eclipse.core.runtime.Assert;
@@ -25,8 +26,6 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.SafeRunnable;
 import org.osgi.service.prefs.BackingStoreException;
-
-import com.google.common.base.Objects;
 
 /**
  * Mainly copied from {@link org.eclipse.ui.preferences.ScopedPreferenceStore}.
@@ -712,7 +711,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 			// removing a non-existing preference is a no-op so call the Core
 			// API directly
 			getStorePreferences().remove(name);
-			if (!Objects.equal(oldValue, defaultValue)) {
+			if (!Objects.equals(oldValue, defaultValue)) {
 				dirty = true;
 				firePropertyChangeEvent(name, oldValue, defaultValue);
 			}

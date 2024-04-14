@@ -11,6 +11,7 @@ package org.eclipse.xtext.web.server.hover;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -99,7 +99,7 @@ public class HoverService {
 							public void accept(ContentAssistEntry entry, int priority) {
 								operationCanceledManager.checkCanceled(cancelIndicator);
 								if (entry != null && entry.getSource() != null
-										&& Objects.equal(entry.getProposal(), proposal)) {
+										&& Objects.equals(entry.getProposal(), proposal)) {
 									proposedElement.set(entry.getSource());
 								}
 							}

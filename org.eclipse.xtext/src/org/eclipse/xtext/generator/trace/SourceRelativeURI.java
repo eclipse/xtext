@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.emf.common.util.URI;
+import java.util.Objects;
 
-import com.google.common.base.Objects;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * A source relative URI.
@@ -38,7 +38,7 @@ public class SourceRelativeURI extends AbstractURIWrapper {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && !Objects.equal(obj.getClass(), SourceRelativeURI.class)) {
+		if (obj != null && !Objects.equals(obj.getClass(), SourceRelativeURI.class)) {
 			throw new IllegalArgumentException(obj.toString() + " instanceof " + obj.getClass().getName());
 		}
 		return super.equals(obj);

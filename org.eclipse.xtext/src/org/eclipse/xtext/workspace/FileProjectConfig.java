@@ -12,12 +12,11 @@ import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.UriUtil;
-
-import com.google.common.base.Objects;
 
 public class FileProjectConfig implements IProjectConfig {
 	private final URI path;
@@ -76,7 +75,7 @@ public class FileProjectConfig implements IProjectConfig {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof FileProjectConfig) {
-			return Objects.equal(path, ((FileProjectConfig) obj).path);
+			return Objects.equals(path, ((FileProjectConfig) obj).path);
 		}
 		return false;
 	}

@@ -10,11 +10,11 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.validation.Issue;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -38,7 +38,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 			@Override
 			public boolean apply(Method input) {
 				for (Fix annotation : input.getAnnotationsByType(Fix.class)) {
-					boolean result = annotation != null && Objects.equal(annotation.value(), issueCode)
+					boolean result = annotation != null && Objects.equals(annotation.value(), issueCode)
 							&& input.getParameterTypes().length == 2 && Void.TYPE == input.getReturnType()
 							&& input.getParameterTypes()[0].isAssignableFrom(Issue.class)
 							&& input.getParameterTypes()[1].isAssignableFrom(IssueResolutionAcceptor.class);

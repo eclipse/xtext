@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -42,7 +43,6 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -611,7 +611,7 @@ public class RewritableImportSection {
 		for (XImportDeclaration importDeclr : addedImportDeclarations) {
 			String identifier = importDeclr.getImportedTypeName();
 			if (importDeclr.isStatic() && typeName.equals(identifier)) {
-				if (Objects.equal(importDeclr.getMemberName(), memberName) || importDeclr.isWildcard() || "*".equals(importDeclr.getMemberName())) {
+				if (Objects.equals(importDeclr.getMemberName(), memberName) || importDeclr.isWildcard() || "*".equals(importDeclr.getMemberName())) {
 					return true;
 				}
 			}

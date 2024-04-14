@@ -11,6 +11,7 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide.serializer;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -25,7 +26,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -56,7 +56,7 @@ public class PartialSerializationTestLanguageReferenceUpdater extends ReferenceU
 						.head(delta.getSnapshot().getDescriptions()).getQualifiedName();
 				QualifiedName modified = IterableExtensions.head(delta.getDescriptions())
 						.getQualifiedName();
-				if (!Objects.equal(original, modified)) {
+				if (!Objects.equals(original, modified)) {
 					Import imp = imports.get(original);
 					if (imp != null) {
 						toChange.put(imp, modified);

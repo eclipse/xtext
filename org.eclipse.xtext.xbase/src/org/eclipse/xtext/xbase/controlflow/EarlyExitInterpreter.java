@@ -8,11 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.controlflow;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
-
-import com.google.common.base.Objects;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +21,7 @@ public class EarlyExitInterpreter extends SwitchConstantExpressionsInterpreter {
 	public boolean isConstant(XExpression it, Object value) {
 		try {
 			Object constant = evaluate(it);
-			return Objects.equal(value, constant);
+			return Objects.equals(value, constant);
 		} catch (ConstantExpressionEvaluationException e) {
 			return false;
 		}

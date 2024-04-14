@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.rename;
 
+import java.util.Objects;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ide.server.rename.RenameService2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -19,7 +21,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 
 public class TestLanguageRenameService extends RenameService2 {
@@ -43,8 +44,8 @@ public class TestLanguageRenameService extends RenameService2 {
 								QualifiedName fqn = nameProvider.getFullyQualifiedName(element);
 								if (fqn != null) {
 									String leafText = NodeModelUtils.getTokenText(leaf);
-									if (fqn.getSegmentCount() == 1 && Objects.equal(fqn.toString(), leafText)
-											|| Objects.equal(fqn.getLastSegment(), leafText)) {
+									if (fqn.getSegmentCount() == 1 && Objects.equals(fqn.toString(), leafText)
+											|| Objects.equals(fqn.getLastSegment(), leafText)) {
 										return element;
 									}
 								}

@@ -23,11 +23,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 /**
@@ -257,7 +257,7 @@ public class MergeableManifest extends Manifest {
 	 */
 	public void setBREE(String bree) {
 		String oldValue = getBREE();
-		if (Objects.equal(oldValue, bree)) {
+		if (Objects.equals(oldValue, bree)) {
 			return;
 		}
 		getMainAttributes().put(BUNDLE_REQUIRED_EXECUTION_ENV, bree);
@@ -276,7 +276,7 @@ public class MergeableManifest extends Manifest {
 	 */
 	public void setBundleActivator(String activator) {
 		String oldValue = getBundleActivator();
-		if (Objects.equal(oldValue, activator)) {
+		if (Objects.equals(oldValue, activator)) {
 			return;
 		}
 		getMainAttributes().put(BUNDLE_ACTIVATOR, activator);

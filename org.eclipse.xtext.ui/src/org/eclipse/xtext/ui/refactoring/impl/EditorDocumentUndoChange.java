@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.util.Objects;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -27,8 +29,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
-
-import com.google.common.base.Objects;
 
 /**
  * The reverse of an {@link EditorDocumentChange}.
@@ -64,7 +64,7 @@ public class EditorDocumentUndoChange extends Change {
 	protected ITextEditor getEditor() {
 		try {
 			IEditorPart editor = page.findEditor(editorInput);
-			if (editor != null && Objects.equal(editor.getSite().getId(), editorID))
+			if (editor != null && Objects.equals(editor.getSite().getId(), editorID))
 				return (ITextEditor) editor;
 			else
 				return (ITextEditor) page.openEditor(editorInput, editorID, true, IWorkbenchPage.MATCH_INPUT | IWorkbenchPage.MATCH_ID);

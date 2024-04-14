@@ -14,6 +14,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -109,7 +110,6 @@ import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.Option
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -623,7 +623,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								if (obj instanceof JvmDeclaredType) {
 									JvmDeclaredType type = (JvmDeclaredType) obj;
 									String typePackage = type.getPackageName();
-									if (Objects.equal(typePackage, oldPackageName) || typePackage != null && typePackage.startsWith(oldPackageName + ".")) {
+									if (Objects.equals(typePackage, oldPackageName) || typePackage != null && typePackage.startsWith(oldPackageName + ".")) {
 										type.internalSetIdentifier(null);
 										type.setPackageName(newPackageName);
 									}

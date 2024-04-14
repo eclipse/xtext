@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.ParameterInformation;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
@@ -199,7 +199,7 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
 						scopeProvider.getScope(object, TestLanguagePackage.Literals.OPERATION_CALL__OPERATION)
 								.getAllElements(),
 						(IEObjectDescription it) -> it.getEClass() == TestLanguagePackage.Literals.OPERATION),
-						(IEObjectDescription it) -> Objects.equal(it.getQualifiedName().getLastSegment(), name)),
+						(IEObjectDescription it) -> Objects.equals(it.getQualifiedName().getLastSegment(), name)),
 				IEObjectDescription::getEObjectOrProxy), Operation.class);
 	}
 
