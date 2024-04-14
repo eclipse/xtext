@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.workspace;
 
-import org.eclipse.emf.common.util.URI;
+import java.util.Objects;
 
-import com.google.common.base.Objects;
+import org.eclipse.emf.common.util.URI;
 
 public class FileSourceFolder implements ISourceFolder {
 	private final FileProjectConfig parent;
@@ -42,7 +42,7 @@ public class FileSourceFolder implements ISourceFolder {
 		if (obj instanceof FileSourceFolder) {
 			URI path1 = this.getPath();
 			URI path2 = ((FileSourceFolder) obj).getPath();
-			return Objects.equal(path1, path2);
+			return Objects.equals(path1, path2);
 		}
 		return false;
 	}

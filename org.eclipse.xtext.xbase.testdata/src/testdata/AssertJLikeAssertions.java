@@ -9,7 +9,7 @@
 
 package testdata;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 
 public class AssertJLikeAssertions {
 
@@ -40,7 +40,7 @@ public class AssertJLikeAssertions {
 
 		@Override
 		public IntegerAssert isEqualTo(int expected) {
-			if (!Objects.equal(expected, value)) {
+			if (!Objects.equals(expected, value)) {
 				throw new AssertJLikeException(expected + " != " + value);
 			}
 			return this;

@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.web.server.occurrences;
 
+import java.util.Objects;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -26,7 +28,6 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.util.CancelIndicatorProgressMonitor;
 import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -77,7 +78,7 @@ public class OccurrencesService {
 					};
 					referenceFinder.findReferences(targetURIs, doc.getResource(), acceptor,
 							new CancelIndicatorProgressMonitor(cancelIndicator));
-					if (Objects.equal(element.eResource(), doc.getResource())) {
+					if (Objects.equals(element.eResource(), doc.getResource())) {
 						ITextRegion definitionRegion = locationInFileProvider.getSignificantTextRegion(element);
 						if (definitionRegion != null
 								&& definitionRegion != ITextRegionWithLineInformation.EMPTY_REGION) {

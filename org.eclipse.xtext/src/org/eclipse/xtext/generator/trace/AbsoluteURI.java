@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtext.generator.trace;
 
+import java.util.Objects;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
-
-import com.google.common.base.Objects;
 
 /**
  * An absolute URI that allows to obtain a resource in a {@link IProjectConfig project}.
@@ -50,7 +50,7 @@ public class AbsoluteURI extends AbstractURIWrapper {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && !Objects.equal(obj.getClass(), AbsoluteURI.class)) {
+		if (obj != null && !Objects.equals(obj.getClass(), AbsoluteURI.class)) {
 			throw new IllegalArgumentException(obj.toString() + " instanceof " + obj.getClass().getName());
 		}
 		return super.equals(obj);

@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ide.serializer.impl;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 
 /**
@@ -196,7 +196,7 @@ public class ReferenceUpdater implements IReferenceUpdater {
 			return true;
 		}
 		Delta sourceDelta = findContainingDelta(deltas, ref.getSourceEObject());
-		return !Objects.equal(sourceDelta, targetDelta);
+		return !Objects.equals(sourceDelta, targetDelta);
 	}
 
 	@Override

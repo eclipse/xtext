@@ -9,6 +9,7 @@
 package org.eclipse.xtext.example.arithmetics.ui.autoedit;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -36,7 +36,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 	@Override
 	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
 		for (String lineDelimiter : document.getLegalLineDelimiters()) {
-			if (Objects.equal(command.text, lineDelimiter)) {
+			if (Objects.equals(command.text, lineDelimiter)) {
 				try {
 					int line = document.getLineOfOffset(command.offset);
 					int lineStart = document.getLineOffset(line);

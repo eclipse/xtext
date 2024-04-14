@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
 
@@ -23,7 +24,6 @@ import org.eclipse.xtext.ide.serializer.hooks.IResourceSnapshot;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Arrays;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -131,7 +131,7 @@ public class EObjectDescriptionDeltaProvider {
 					return false;
 				String oldValue = oldObj.getUserData(key);
 				String newValue = newObj.getUserData(key);
-				if (!Objects.equal(oldValue, newValue))
+				if (!Objects.equals(oldValue, newValue))
 					return false;
 			}
 			return true;

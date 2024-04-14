@@ -9,6 +9,7 @@
 package org.eclipse.xtext.web.servlet;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.servlet.ServletException;
@@ -26,7 +27,6 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.inject.Injector;
@@ -92,7 +92,7 @@ public class XtextServlet extends HttpServlet {
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		XtextServiceDispatcher.ServiceDescriptor service = getService(req);
 		String type = service.getContext().getParameter(IServiceContext.SERVICE_TYPE);
-		if (!service.isHasConflict() && !Objects.equal(type, "update")) {
+		if (!service.isHasConflict() && !Objects.equals(type, "update")) {
 			super.doPut(req, resp);
 		} else {
 			doService(service, resp);
@@ -104,7 +104,7 @@ public class XtextServlet extends HttpServlet {
 		XtextServiceDispatcher.ServiceDescriptor service = getService(req);
 		String type = service.getContext().getParameter(IServiceContext.SERVICE_TYPE);
 		if (!service.isHasConflict()
-				&& (!service.isHasSideEffects() && !hasTextInput(service) || Objects.equal(type, "update"))) {
+				&& (!service.isHasSideEffects() && !hasTextInput(service) || Objects.equals(type, "update"))) {
 			super.doPost(req, resp);
 		} else {
 			doService(service, resp);

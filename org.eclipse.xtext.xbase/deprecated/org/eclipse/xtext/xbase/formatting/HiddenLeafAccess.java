@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.formatting;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
@@ -150,7 +150,7 @@ public class HiddenLeafAccess {
 			NodeIterator ni = new NodeIterator(current);
 			while (ni.hasPrevious()) {
 				INode previous = ni.previous();
-				if (!Objects.equal(previous, current) && previous instanceof ILeafNode) {
+				if (!Objects.equals(previous, current) && previous instanceof ILeafNode) {
 					if (((ILeafNode) previous).isHidden()) {
 						result.add((ILeafNode) previous);
 					} else { // if(!result.empty)

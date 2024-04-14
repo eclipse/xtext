@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.util.formallang.ProductionFactory;
 import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -234,7 +234,7 @@ public class GrammarAlias {
 			if (obj == null || obj.getClass() != getClass())
 				return false;
 			TokenAlias other = (TokenAlias) obj;
-			return many == other.many && optional == other.optional && Objects.equal(token, other.token);
+			return many == other.many && optional == other.optional && Objects.equals(token, other.token);
 		}
 
 		public AbstractElement getToken() {

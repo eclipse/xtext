@@ -11,11 +11,11 @@ package org.eclipse.xtext.xtext.wizard;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 
 public abstract class TestedProjectDescriptor extends ProjectDescriptor {
@@ -52,7 +52,7 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
 		if (getTestProject().isInlined()) {
 			Iterable<? extends AbstractFile> filtered = IterableExtensions.filter(getTestProject().getFiles(),
 					(AbstractFile fileFromTestProject) -> files.stream()
-							.noneMatch(f -> Objects.equal(f.getRelativePath(), fileFromTestProject.getRelativePath())));
+							.noneMatch(f -> Objects.equals(f.getRelativePath(), fileFromTestProject.getRelativePath())));
 			Iterables.addAll(files, filtered);
 		}
 		return files;

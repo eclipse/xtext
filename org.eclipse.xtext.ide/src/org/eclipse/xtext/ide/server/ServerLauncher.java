@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.concurrent.Future;
 
 import org.eclipse.lsp4j.jsonrpc.Launcher;
@@ -22,7 +23,6 @@ import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
-import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -119,7 +119,7 @@ public class ServerLauncher {
 
 	public static boolean testArg(String arg, String... values) {
 		for(String value : values) {
-			if (Objects.equal(value, arg)) {
+			if (Objects.equals(value, arg)) {
 				return true;
 			}
 		}

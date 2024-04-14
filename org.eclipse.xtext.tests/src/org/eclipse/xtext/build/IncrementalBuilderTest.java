@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.build;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -25,7 +26,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -188,13 +188,13 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		build(newBuildRequest((BuildRequest it) -> {
 			it.setDeletedFiles(Lists.newArrayList(uri("src/B.indextestlanguage")));
 			it.setAfterValidate((URI uri, Iterable<Issue> issues) -> {
-				if (Objects.equal(uri("src/A.indextestlanguage"), uri)) {
+				if (Objects.equals(uri("src/A.indextestlanguage"), uri)) {
 					Assert.assertTrue(issues.toString(), Iterables.<Issue>getFirst(issues, null).getMessage()
 							.contains("Couldn't resolve reference to Type 'foo.B'"));
 					validateCalled.set(true);
 					return false;
 				} else {
-					if (Objects.equal(uri("src/B.indextestlanguage"), uri)) {
+					if (Objects.equals(uri("src/B.indextestlanguage"), uri)) {
 						Assert.assertEquals("zero issues expected", 0, Iterables.size(issues));
 						return true;
 					} else {
@@ -226,14 +226,14 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		build(newBuildRequest((BuildRequest it) -> {
 			it.setDeletedFiles(Lists.newArrayList(uri("src/B.indextestlanguage")));
 			it.setAfterValidate((URI uri, Iterable<Issue> issues) -> {
-				if (Objects.equal(uri("src/A.indextestlanguage"), uri)) {
+				if (Objects.equals(uri("src/A.indextestlanguage"), uri)) {
 					Assert.assertTrue(issues.toString(),
 							!Iterables.isEmpty(issues) && Iterables.<Issue>getFirst(issues, null).getMessage()
 									.contains("Couldn't resolve reference to Type 'foo.B'"));
 					validateCalled.set(true);
 					return false;
 				} else {
-					if (Objects.equal(uri("src/B.indextestlanguage"), uri)) {
+					if (Objects.equals(uri("src/B.indextestlanguage"), uri)) {
 						Assert.assertEquals("zero issues expected", 0, Iterables.size(issues));
 						return true;
 					} else {

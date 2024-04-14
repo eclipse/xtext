@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.xtext.generator.util;
 
+import java.util.Objects;
+
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenDataType;
@@ -28,7 +30,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 
 public class GenModelUtil2 {
@@ -39,7 +40,7 @@ public class GenModelUtil2 {
 	public static GenClassifier getGenClassifier(EClassifier cls, ResourceSet resourceSet) {
 		GenPackage genPackage = GenModelUtil2.getGenPackage(cls.getEPackage(), resourceSet);
 		for (GenClassifier genCls : genPackage.getGenClassifiers()) {
-			if (Objects.equal(cls.getName(), genCls.getEcoreClassifier().getName())) {
+			if (Objects.equals(cls.getName(), genCls.getEcoreClassifier().getName())) {
 				return genCls;
 			}
 		}
@@ -57,7 +58,7 @@ public class GenModelUtil2 {
 	public static GenFeature getGenFeature(EStructuralFeature feature, ResourceSet resourceSet) {
 		GenClass genCls = (GenClass) GenModelUtil2.getGenClassifier(feature.getEContainingClass(), resourceSet);
 		for (GenFeature genFeat : genCls.getGenFeatures()) {
-			if (Objects.equal(feature.getName(), genFeat.getEcoreFeature().getName())) {
+			if (Objects.equals(feature.getName(), genFeat.getEcoreFeature().getName())) {
 				return genFeat;
 			}
 		}
@@ -95,7 +96,7 @@ public class GenModelUtil2 {
 			ResourceSet resourceSet) {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (genModelURI == null) {
-			if (Objects.equal(EcorePackage.eNS_URI, nsURI)) { // If we really want to use the registered ecore ...
+			if (Objects.equals(EcorePackage.eNS_URI, nsURI)) { // If we really want to use the registered ecore ...
 				return null; // look into the resource set to find a genpackage
 								// for the given URI
 			}
@@ -107,7 +108,7 @@ public class GenModelUtil2 {
 				for (EObject obj : res.getContents()) {
 					if (obj instanceof GenModel) {
 						for (GenPackage genPackage : ((GenModel) obj).getGenPackages()) {
-							if (Objects.equal(genPackage.getNSURI(), nsURI)) {
+							if (Objects.equals(genPackage.getNSURI(), nsURI)) {
 								return genPackage.eResource();
 							}
 						}
@@ -187,10 +188,10 @@ public class GenModelUtil2 {
 	public static String getGetAccessor(GenFeature genFeature, ResourceSet resourceSet) {
 		GenClass genClass = genFeature.getGenClass();
 		if (genClass.isMapEntry()) {
-			if (Objects.equal(genFeature, genClass.getMapEntryKeyFeature())) {
+			if (Objects.equals(genFeature, genClass.getMapEntryKeyFeature())) {
 				return "getKey";
 			}
-			if (Objects.equal(genFeature, genClass.getMapEntryValueFeature())) {
+			if (Objects.equals(genFeature, genClass.getMapEntryValueFeature())) {
 				return "getValue";
 			}
 		}

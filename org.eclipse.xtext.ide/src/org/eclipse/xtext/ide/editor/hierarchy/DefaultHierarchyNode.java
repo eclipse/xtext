@@ -10,12 +10,11 @@ package org.eclipse.xtext.ide.editor.hierarchy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Wrapper;
-
-import com.google.common.base.Objects;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -54,7 +53,7 @@ public class DefaultHierarchyNode implements IHierarchyNode {
 		while (node != null) {
 			URI nodeElementUri = node.getElement().getEObjectURI();
 			URI elementUri = this.element.getEObjectURI();
-			if (Objects.equal(nodeElementUri, elementUri)) {
+			if (Objects.equals(nodeElementUri, elementUri)) {
 				return true;
 			}
 			node = node.getParent();

@@ -11,6 +11,7 @@ package org.eclipse.xtext.xtext.wizard;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -154,9 +154,9 @@ public class WizardConfigurationTest {
 				.getExternalDependencies()) {
 			assertTrue(IterableExtensions.exists(config.getRuntimeProject().getExternalDependencies(),
 					(ExternalDependency it) -> {
-						return Objects.equal(it.getMaven().getArtifactId(), testDependency.getMaven().getArtifactId())
-								&& Objects.equal(it.getP2().getBundleId(), testDependency.getP2().getBundleId())
-								&& Objects.equal(it.getP2().getPackages(), testDependency.getP2().getPackages());
+						return Objects.equals(it.getMaven().getArtifactId(), testDependency.getMaven().getArtifactId())
+								&& Objects.equals(it.getP2().getBundleId(), testDependency.getP2().getBundleId())
+								&& Objects.equals(it.getP2().getPackages(), testDependency.getP2().getPackages());
 					}));
 		}
 	}

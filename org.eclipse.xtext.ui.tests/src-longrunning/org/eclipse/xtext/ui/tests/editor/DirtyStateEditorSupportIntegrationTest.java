@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -31,7 +32,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -145,7 +145,7 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 		textWidget.notifyListeners(SWT.KeyUp, event2);
 		int maxTries = 10;
 		while (maxTries-- > 0) {
-			if (!Objects.equal(editor.getDocument().get(), textBefore)) {
+			if (!Objects.equals(editor.getDocument().get(), textBefore)) {
 				syncUtil.waitForReconciler(editor);
 				return;
 			}

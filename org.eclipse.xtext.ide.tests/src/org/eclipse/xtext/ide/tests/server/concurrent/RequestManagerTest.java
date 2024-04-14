@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.ide.tests.server.concurrent;
 
+import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
@@ -36,7 +37,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.google.common.base.Objects;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -355,7 +355,7 @@ public class RequestManagerTest {
 			@Override
 			protected void addRequest(AbstractRequest<?> request) {
 				if (((request instanceof WriteRequest)
-						&& Objects.equal(Thread.currentThread(), readerThreadRef.get()))) {
+						&& Objects.equals(Thread.currentThread(), readerThreadRef.get()))) {
 					super.addRequest(request);
 					addedFromReader.countDown();
 					Uninterruptibles.awaitUninterruptibly(submittedFromMain, 100, TimeUnit.MILLISECONDS);
@@ -366,7 +366,7 @@ public class RequestManagerTest {
 
 			@Override
 			protected void submitRequest(AbstractRequest<?> request) {
-				if (((request instanceof WriteRequest) && Objects.equal(Thread.currentThread(), mainThread))) {
+				if (((request instanceof WriteRequest) && Objects.equals(Thread.currentThread(), mainThread))) {
 					super.submitRequest(request);
 					submittedFromMain.countDown();
 				} else {
@@ -376,7 +376,7 @@ public class RequestManagerTest {
 
 			@Override
 			protected CompletableFuture<Void> cancel() {
-				if (Objects.equal(Thread.currentThread(), mainThread)) {
+				if (Objects.equals(Thread.currentThread(), mainThread)) {
 					Uninterruptibles.awaitUninterruptibly(addedFromReader, 100, TimeUnit.MILLISECONDS);
 				}
 				return super.cancel();

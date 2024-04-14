@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -41,7 +42,6 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -409,7 +409,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
 					if (textFile != null) {
 						textFileContent = textFile.toString();
 					}
-					if (!Objects.equal(textFileContent, pluginXml.getContentString())) {
+					if (!Objects.equals(textFileContent, pluginXml.getContentString())) {
 						if (pluginXml.getPath().endsWith(".xml")) {
 							pluginXml.setPath(pluginXml.getPath() + "_gen");
 							pluginXml.writeTo(root);

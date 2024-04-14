@@ -9,6 +9,7 @@
 package org.eclipse.xtext.generator.parser;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +18,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 /**
@@ -217,7 +217,7 @@ public class AntlrGrammarComparator {
 			} else {
 				matchReference = "««eof»»";
 			}
-			if (!Objects.equal(matchReference, match)) {
+			if (!Objects.equals(matchReference, match)) {
 				errorHandler.handleMismatch(match, matchReference, errorContext);
 			}
 		}

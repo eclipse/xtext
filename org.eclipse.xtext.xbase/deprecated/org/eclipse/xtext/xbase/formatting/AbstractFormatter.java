@@ -9,14 +9,13 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-
-import com.google.common.base.Objects;
 
 /**
  * @deprecated use {@link AbstractFormatter2}
@@ -45,7 +44,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
 			return edits;
 		} else {
 			return IterableExtensions.toList(IterableExtensions.filter(edits, (TextReplacement it) -> {
-				return !Objects.equal(doc.substring(it.getOffset(), (it.getOffset() + it.getLength())), it.getText());
+				return !Objects.equals(doc.substring(it.getOffset(), (it.getOffset() + it.getLength())), it.getText());
 			}));
 		}
 	}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.ide.contentassist;
 
 import java.lang.reflect.Modifier;
 import java.util.Collections;
+import java.util.Objects;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -31,7 +32,6 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -154,7 +154,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
 							if (it.getImportedType() != null) {
 								importFqn = it.getImportedType().getQualifiedName();
 							}
-							return Objects.equal(importFqn, qualifiedName);
+							return Objects.equals(importFqn, qualifiedName);
 						}));
 	}
 

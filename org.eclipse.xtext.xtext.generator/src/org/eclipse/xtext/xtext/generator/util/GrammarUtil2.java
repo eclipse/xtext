@@ -8,16 +8,16 @@
  */
 package org.eclipse.xtext.xtext.generator.util;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-
-import com.google.common.base.Objects;
 
 public class GrammarUtil2 extends GrammarUtil {
 	public static final String TERMINALS = "org.eclipse.xtext.common.Terminals";
 
 	public static boolean inherits(Grammar grammar, String languageID) {
-		if (Objects.equal(grammar.getName(), languageID)) {
+		if (Objects.equals(grammar.getName(), languageID)) {
 			return true;
 		}
 		for (Grammar g : grammar.getUsedGrammars()) {

@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.junit.Assert;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.primitives.Longs;
 
@@ -62,7 +62,7 @@ public class LoggingTester {
 
 		public void assertNumberOfLogEntries(int number, Level level, String... messageParts) {
 			Iterable<LogEntry> passed = Iterables.filter(logEntries, (LogEntry log) -> {
-				return (level == null || Objects.equal(log.level, level)) && 
+				return (level == null || Objects.equals(log.level, level)) &&
 					IterableExtensions.forall(messageParts == null ? null : Arrays.asList(messageParts), (String it) -> log.message.contains(it));
 			});
 			if (Iterables.size(passed) != number) {
@@ -252,7 +252,7 @@ public class LoggingTester {
 
 		@Override
 		public int decide(LoggingEvent event) {
-			if (Objects.equal(event.getLoggerName(), source.getName())) {
+			if (Objects.equals(event.getLoggerName(), source.getName())) {
 				return Filter.DENY;
 			} else {
 				return Filter.NEUTRAL;
@@ -336,7 +336,7 @@ public class LoggingTester {
 		List<Filter> filtersToKeep = new ArrayList<>();
 		Filter present = appender.getFilter();
 		while (present != null) {
-			if (!Objects.equal(present, filter)) {
+			if (!Objects.equals(present, filter)) {
 				filtersToKeep.add(present);
 			}
 			present = present.getNext();
