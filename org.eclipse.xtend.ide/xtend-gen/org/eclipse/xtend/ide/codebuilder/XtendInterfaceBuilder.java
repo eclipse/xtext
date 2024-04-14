@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.Objects;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -28,7 +28,7 @@ public class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements I
 
   @Override
   public boolean isValid() {
-    return ((super.isValid() && (this.getInterfaceName() != null)) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
+    return ((super.isValid() && (this.getInterfaceName() != null)) && Objects.equals(this.getVisibility(), JvmVisibility.PUBLIC));
   }
 
   @Override

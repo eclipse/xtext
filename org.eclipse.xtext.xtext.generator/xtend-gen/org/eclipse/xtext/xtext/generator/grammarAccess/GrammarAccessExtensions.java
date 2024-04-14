@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.grammarAccess;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
@@ -19,6 +18,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -785,7 +785,7 @@ public class GrammarAccessExtensions {
         return GrammarUtil.containedRuleCalls(it);
       }))), ((Function1<RuleCall, Boolean>) (RuleCall ruleCall) -> {
         AbstractRule _rule = ruleCall.getRule();
-        return Boolean.valueOf(Objects.equal(_rule, rule));
+        return Boolean.valueOf(Objects.equals(_rule, rule));
       })));
     }
     return _xblockexpression;
@@ -895,7 +895,7 @@ public class GrammarAccessExtensions {
   public String setOrAdd(final Action it) {
     String _xifexpression = null;
     String _operator = it.getOperator();
-    boolean _equals = Objects.equal(_operator, "+=");
+    boolean _equals = Objects.equals(_operator, "+=");
     if (_equals) {
       _xifexpression = "add";
     } else {
@@ -907,7 +907,7 @@ public class GrammarAccessExtensions {
   public String setOrAdd(final Assignment it) {
     String _xifexpression = null;
     String _operator = it.getOperator();
-    boolean _equals = Objects.equal(_operator, "+=");
+    boolean _equals = Objects.equals(_operator, "+=");
     if (_equals) {
       _xifexpression = "add";
     } else {

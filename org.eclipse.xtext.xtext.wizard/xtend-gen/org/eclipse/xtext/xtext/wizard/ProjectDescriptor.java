@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import java.net.URL;
@@ -16,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -46,7 +46,7 @@ public abstract class ProjectDescriptor {
   public String getLocation() {
     String _xifexpression = null;
     ProjectLayout _projectLayout = this.config.getProjectLayout();
-    boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
+    boolean _equals = Objects.equals(_projectLayout, ProjectLayout.FLAT);
     if (_equals) {
       String _rootLocation = this.config.getRootLocation();
       String _plus = (_rootLocation + "/");

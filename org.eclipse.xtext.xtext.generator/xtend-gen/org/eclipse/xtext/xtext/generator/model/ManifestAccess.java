@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
-import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -67,7 +67,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     {
       String _path = this.getPath();
       String _path_1 = other.getPath();
-      boolean _notEquals = (!Objects.equal(_path, _path_1));
+      boolean _notEquals = (!Objects.equals(_path, _path_1));
       if (_notEquals) {
         String _path_2 = this.getPath();
         String _plus = ("Merging manifest files with different paths: " + _path_2);
@@ -76,7 +76,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         String _plus_2 = (_plus_1 + _path_3);
         ManifestAccess.LOG.warn(_plus_2);
       }
-      boolean _notEquals_1 = (!Objects.equal(this.bundleName, other.bundleName));
+      boolean _notEquals_1 = (!Objects.equals(this.bundleName, other.bundleName));
       if (_notEquals_1) {
         if ((this.bundleName == null)) {
           this.bundleName = other.bundleName;
@@ -86,7 +86,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
           }
         }
       }
-      boolean _notEquals_2 = (!Objects.equal(this.symbolicName, other.symbolicName));
+      boolean _notEquals_2 = (!Objects.equals(this.symbolicName, other.symbolicName));
       if (_notEquals_2) {
         if ((this.symbolicName == null)) {
           this.symbolicName = other.symbolicName;
@@ -96,7 +96,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
           }
         }
       }
-      boolean _notEquals_3 = (!Objects.equal(this.activator, other.activator));
+      boolean _notEquals_3 = (!Objects.equals(this.activator, other.activator));
       if (_notEquals_3) {
         if ((this.activator == null)) {
           this.activator = other.activator;
@@ -106,7 +106,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
           }
         }
       }
-      boolean _notEquals_4 = (!Objects.equal(this.version, other.version));
+      boolean _notEquals_4 = (!Objects.equals(this.version, other.version));
       if (_notEquals_4) {
         ManifestAccess.LOG.warn(((("Merging manifest files with different versions: " + this.version) + ", ") + other.version));
       }
@@ -200,7 +200,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         {
           final Function1<String, Boolean> _function = (String it) -> {
             String _effectiveSymbolicName = this.getEffectiveSymbolicName();
-            return Boolean.valueOf((!Objects.equal(it, _effectiveSymbolicName)));
+            return Boolean.valueOf((!Objects.equals(it, _effectiveSymbolicName)));
           };
           Iterable<String> _filter = IterableExtensions.<String>filter(IterableExtensions.<String>sort(this.requiredBundles), _function);
           boolean _hasElements_1 = false;

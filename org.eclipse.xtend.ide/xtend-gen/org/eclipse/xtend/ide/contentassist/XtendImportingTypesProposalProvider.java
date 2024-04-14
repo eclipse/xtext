@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.ide.contentassist;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import java.util.Objects;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -30,7 +30,7 @@ public class XtendImportingTypesProposalProvider extends ImportingTypesProposalP
   protected ConfigurableCompletionProposal.IReplacementTextApplier createTextApplier(final ContentAssistContext context, final IScope typeScope, final IQualifiedNameConverter qualifiedNameConverter, final IValueConverter<String> valueConverter) {
     final Predicate<IEObjectDescription> _function = (IEObjectDescription it) -> {
       QualifiedName _name = it.getName();
-      return (!Objects.equal(_name, XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION));
+      return (!Objects.equals(_name, XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION));
     };
     final FilteringScope scope = new FilteringScope(typeScope, _function);
     return super.createTextApplier(context, scope, qualifiedNameConverter, valueConverter);

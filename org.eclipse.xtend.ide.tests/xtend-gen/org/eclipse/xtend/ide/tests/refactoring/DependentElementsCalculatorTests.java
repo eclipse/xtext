@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -81,7 +81,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       final Consumer<EObject> _function = (EObject it) -> {
         final Function1<URI, Boolean> _function_1 = (URI element) -> {
           URI _uRI = EcoreUtil.getURI(it);
-          return Boolean.valueOf(Objects.equal(element, _uRI));
+          return Boolean.valueOf(Objects.equals(element, _uRI));
         };
         Assert.assertTrue(it.toString(), IterableExtensions.<URI>exists(dependentElementURIs, _function_1));
       };
@@ -127,7 +127,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       final Consumer<EObject> _function_1 = (EObject it) -> {
         final Function1<URI, Boolean> _function_2 = (URI element) -> {
           URI _uRI = EcoreUtil.getURI(it);
-          return Boolean.valueOf(Objects.equal(element, _uRI));
+          return Boolean.valueOf(Objects.equals(element, _uRI));
         };
         Assert.assertTrue(it.toString(), IterableExtensions.<URI>exists(dependentElementURIs, _function_2));
       };

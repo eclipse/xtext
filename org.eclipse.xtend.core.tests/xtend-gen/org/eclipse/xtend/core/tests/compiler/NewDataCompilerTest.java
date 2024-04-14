@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -375,7 +375,7 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
           Assert.assertEquals(Boolean.valueOf(true), getFoo.invoke(instance));
           final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
             String _name = it_1.getName();
-            return Boolean.valueOf(Objects.equal(_name, "isFoo"));
+            return Boolean.valueOf(Objects.equals(_name, "isFoo"));
           };
           Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
         } catch (Throwable _e) {
@@ -656,12 +656,12 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
           final Function1<Field, Boolean> _function_2 = (Field it_2) -> {
             String _name = it_2.getName();
-            return Boolean.valueOf(Objects.equal(_name, "foo"));
+            return Boolean.valueOf(Objects.equals(_name, "foo"));
           };
           Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(it_1.getDeclaredFields())), _function_2));
           final Function1<Method, Boolean> _function_3 = (Method it_2) -> {
             String _name = it_2.getName();
-            return Boolean.valueOf(Objects.equal(_name, "getFoo"));
+            return Boolean.valueOf(Objects.equals(_name, "getFoo"));
           };
           Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_3));
           final Function1<Constructor<?>, Boolean> _function_4 = (Constructor<?> it_2) -> {
@@ -699,22 +699,22 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
           final Function1<Field, Boolean> _function_2 = (Field it_2) -> {
             String _name = it_2.getName();
-            return Boolean.valueOf(Objects.equal(_name, "foo"));
+            return Boolean.valueOf(Objects.equals(_name, "foo"));
           };
           Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(it_1.getDeclaredFields())), _function_2));
           final Function1<Field, Boolean> _function_3 = (Field it_2) -> {
             String _name = it_2.getName();
-            return Boolean.valueOf(Objects.equal(_name, "bar"));
+            return Boolean.valueOf(Objects.equals(_name, "bar"));
           };
           Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(it_1.getDeclaredFields())), _function_3));
           final Function1<Method, Boolean> _function_4 = (Method it_2) -> {
             String _name = it_2.getName();
-            return Boolean.valueOf(Objects.equal(_name, "isFoo"));
+            return Boolean.valueOf(Objects.equals(_name, "isFoo"));
           };
           Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_4));
           final Function1<Method, Boolean> _function_5 = (Method it_2) -> {
             String _name = it_2.getName();
-            return Boolean.valueOf(Objects.equal(_name, "getBar"));
+            return Boolean.valueOf(Objects.equals(_name, "getBar"));
           };
           Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_5));
         };
@@ -751,7 +751,7 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
         final Procedure1<Class<?>> _function_1 = (Class<?> it_1) -> {
           final Function1<Constructor<?>, Boolean> _function_2 = (Constructor<?> it_2) -> {
             List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_2.getParameterTypes())));
-            return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+            return Boolean.valueOf(Objects.equals(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
           };
           Assert.assertTrue(IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it_1.getDeclaredConstructors())), _function_2));
         };

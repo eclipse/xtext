@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -58,7 +58,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
           List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
-          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+          return Boolean.valueOf(Objects.equals(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
         Assert.assertTrue(
           IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
@@ -95,7 +95,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
           List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
-          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+          return Boolean.valueOf(Objects.equals(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
         Assert.assertTrue(
           IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
@@ -261,7 +261,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
           List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
-          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+          return Boolean.valueOf(Objects.equals(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
         Assert.assertTrue(
           IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
@@ -307,7 +307,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
           List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
-          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+          return Boolean.valueOf(Objects.equals(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
         Assert.assertTrue(
           IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));
@@ -341,7 +341,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
           List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())));
-          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+          return Boolean.valueOf(Objects.equals(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
         };
         Assert.assertTrue(
           IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredConstructors())), _function_1));

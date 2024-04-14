@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
@@ -69,7 +69,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
-          return Boolean.valueOf(((Objects.equal(it_1.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty()) && Objects.equal(it_1.getReturnType(), void.class)));
+          return Boolean.valueOf(((Objects.equals(it_1.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty()) && Objects.equals(it_1.getReturnType(), void.class)));
         };
         Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -110,7 +110,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
-          return Boolean.valueOf(((Objects.equal(it_1.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty()) && Objects.equal(it_1.getReturnType(), int.class)));
+          return Boolean.valueOf(((Objects.equals(it_1.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes())).isEmpty()) && Objects.equals(it_1.getReturnType(), int.class)));
         };
         Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -151,7 +151,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       this._validationTestHelper.assertNoIssues(this.file(text));
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
-          return Boolean.valueOf(((Objects.equal(it_1.getName(), "m") && Objects.equal(IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes()))), Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(String.class, Object.class)))) && Objects.equal(it_1.getReturnType(), void.class)));
+          return Boolean.valueOf(((Objects.equals(it_1.getName(), "m") && Objects.equals(IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it_1.getParameterTypes()))), Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(String.class, Object.class)))) && Objects.equals(it_1.getReturnType(), void.class)));
         };
         Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -193,7 +193,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
-          return Boolean.valueOf(Objects.equal(_name, "m"));
+          return Boolean.valueOf(Objects.equals(_name, "m"));
         };
         Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -235,7 +235,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
-          return Boolean.valueOf(Objects.equal(_name, "m"));
+          return Boolean.valueOf(Objects.equals(_name, "m"));
         };
         Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -277,7 +277,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
-          return Boolean.valueOf(Objects.equal(_name, "m"));
+          return Boolean.valueOf(Objects.equals(_name, "m"));
         };
         Assert.assertTrue(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -512,7 +512,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _name = it_1.getName();
-          return Boolean.valueOf(Objects.equal(_name, "f"));
+          return Boolean.valueOf(Objects.equals(_name, "f"));
         };
         Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };
@@ -716,7 +716,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         final Function1<Method, Boolean> _function_1 = (Method it_1) -> {
           String _simpleName = it_1.getDeclaringClass().getSimpleName();
-          return Boolean.valueOf(Objects.equal(_simpleName, "A"));
+          return Boolean.valueOf(Objects.equals(_simpleName, "A"));
         };
         Assert.assertTrue(IterableExtensions.<Method>forall(((Iterable<Method>)Conversions.doWrapArray(it.getCompiledClass().getDeclaredMethods())), _function_1));
       };

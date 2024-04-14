@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -99,7 +99,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
     if ((_type_2 instanceof JvmAnnotationType)) {
       return true;
     }
-    if ((Objects.equal(toCheck.getType().getQualifiedName(), "java.lang.String") || Objects.equal(toCheck.getType().getQualifiedName(), "java.lang.Class"))) {
+    if ((Objects.equals(toCheck.getType().getQualifiedName(), "java.lang.String") || Objects.equals(toCheck.getType().getQualifiedName(), "java.lang.Class"))) {
       return true;
     }
     return false;

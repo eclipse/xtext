@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -92,7 +92,7 @@ public class QuickDebugSourceInstallingCompilationParticipantTest extends Abstra
         r.accept(new ClassVisitor(Opcodes.ASM9) {
           @Override
           public void visitSource(final String source, final String debug) {
-            boolean _equals = Objects.equal("Outer.java", source);
+            boolean _equals = Objects.equals("Outer.java", source);
             if (_equals) {
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("SMAP");

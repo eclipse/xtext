@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtext.xtext.wizard.ecore2xtext;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -54,7 +54,7 @@ public class Ecore2XtextGrammarCreator {
           _builder.append(_nsURI);
           _builder.append("\" ");
           {
-            if (((UniqueNameUtil.uniqueName(it_1) != null) && (!Objects.equal(UniqueNameUtil.uniqueName(it_1), "")))) {
+            if (((UniqueNameUtil.uniqueName(it_1) != null) && (!Objects.equals(UniqueNameUtil.uniqueName(it_1), "")))) {
               _builder.append("as ");
               String _uniqueName = UniqueNameUtil.uniqueName(it_1);
               _builder.append(_uniqueName);

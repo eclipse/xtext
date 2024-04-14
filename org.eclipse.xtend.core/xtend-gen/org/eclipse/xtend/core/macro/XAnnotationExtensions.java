@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -180,11 +180,11 @@ public class XAnnotationExtensions {
         _identifier=_annotation.getIdentifier();
       }
       String _name = Active.class.getName();
-      return Boolean.valueOf(Objects.equal(_identifier, _name));
+      return Boolean.valueOf(Objects.equals(_identifier, _name));
     };
     final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(it.getAnnotations(), _function);
     final Function1<JvmAnnotationValue, Boolean> _function_1 = (JvmAnnotationValue it_1) -> {
-      return Boolean.valueOf(((it_1.getOperation() == null) || Objects.equal(it_1.getOperation().getSimpleName(), "value")));
+      return Boolean.valueOf(((it_1.getOperation() == null) || Objects.equals(it_1.getOperation().getSimpleName(), "value")));
     };
     final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(activeAnnotation.getValues(), _function_1);
     boolean _matched = false;
@@ -246,7 +246,7 @@ public class XAnnotationExtensions {
     for (final JvmAnnotationReference anno : _annotations) {
       String _identifier = anno.getAnnotation().getIdentifier();
       String _name = Active.class.getName();
-      boolean _equals = Objects.equal(_identifier, _name);
+      boolean _equals = Objects.equals(_identifier, _name);
       if (_equals) {
         return true;
       }

@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -149,7 +149,7 @@ public class QuickfixTestBuilder {
     QuickfixTestBuilder _xblockexpression = null;
     {
       final Function1<Issue, Boolean> _function = (Issue it) -> {
-        return Boolean.valueOf((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
+        return Boolean.valueOf((Objects.equals(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
           ArrayExtensions.contains(it.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL)));
       };
       Assert.assertTrue(IterableExtensions.<Issue>exists(this.getIssuesAtCaret(), _function));
@@ -162,7 +162,7 @@ public class QuickfixTestBuilder {
     QuickfixTestBuilder _xblockexpression = null;
     {
       final Function1<Issue, Boolean> _function = (Issue it) -> {
-        return Boolean.valueOf((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
+        return Boolean.valueOf((Objects.equals(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
           ArrayExtensions.contains(it.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL)));
       };
       Assert.assertTrue(IterableExtensions.<Issue>exists(this.getIssuesAtCaret(), _function));
@@ -258,7 +258,7 @@ public class QuickfixTestBuilder {
       final String originalModel = this.editor.getDocument().get();
       final Function1<IssueResolution, Boolean> _function_1 = (IssueResolution it) -> {
         String _label = it.getLabel();
-        return Boolean.valueOf(Objects.equal(_label, label));
+        return Boolean.valueOf(Objects.equals(_label, label));
       };
       final IssueResolution matchingResolution = IterableExtensions.<IssueResolution>findFirst(resolutions, _function_1);
       final Function1<IssueResolution, String> _function_2 = (IssueResolution it) -> {

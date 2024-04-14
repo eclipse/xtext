@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -77,7 +77,7 @@ public class ConditionUtils {
   }
 
   public static void checkTypeName(final String typeName, final String valueType) {
-    boolean _equals = Objects.equal(typeName, valueType);
+    boolean _equals = Objects.equals(typeName, valueType);
     Preconditions.checkArgument(_equals, ConditionUtils.isNotApplicableMessage(valueType, typeName));
   }
 

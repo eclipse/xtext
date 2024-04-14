@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import java.util.Objects;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
@@ -98,7 +98,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
 
   protected final void checkMutable() {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.getCompilationUnit().getLastPhase();
-    boolean _notEquals = (!Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE));
+    boolean _notEquals = (!Objects.equals(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE));
     if (_notEquals) {
       throw new IllegalStateException("Element cannot be modified outside the transformation phase");
     }

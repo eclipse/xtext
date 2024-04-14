@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -46,11 +46,11 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
   }
 
   public boolean isInlined() {
-    return (this.isEnabled() && (!Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN)));
+    return (this.isEnabled() && (!Objects.equals(this.getConfig().getSourceLayout(), SourceLayout.PLAIN)));
   }
 
   public boolean isSeparate() {
-    return (this.isEnabled() && Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN));
+    return (this.isEnabled() && Objects.equals(this.getConfig().getSourceLayout(), SourceLayout.PLAIN));
   }
 
   @Override
@@ -75,7 +75,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
     Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
     JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
-    boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_4);
+    boolean _equals = Objects.equals(_junitVersion, JUnitVersion.JUNIT_4);
     if (_equals) {
       ExternalDependency _externalDependency = new ExternalDependency();
       final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
@@ -94,7 +94,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       deps.add(_doubleArrow);
     }
     JUnitVersion _junitVersion_1 = this.getConfig().getJunitVersion();
-    boolean _equals_1 = Objects.equal(_junitVersion_1, JUnitVersion.JUNIT_5);
+    boolean _equals_1 = Objects.equals(_junitVersion_1, JUnitVersion.JUNIT_5);
     if (_equals_1) {
       ExternalDependency _externalDependency_1 = new ExternalDependency();
       final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
@@ -161,7 +161,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       _builder.append("<build>");
       _builder.newLine();
       {
-        if (((!this.isEclipsePluginProject()) && Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN))) {
+        if (((!this.isEclipsePluginProject()) && Objects.equals(this.getConfig().getSourceLayout(), SourceLayout.PLAIN))) {
           _builder.append("\t");
           _builder.append("<testSourceDirectory>");
           String _sourceFolder = this.sourceFolder(Outlet.TEST_JAVA);
@@ -393,7 +393,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     GradleBuildFile _buildGradle = super.buildGradle();
     final Procedure1<GradleBuildFile> _function = (GradleBuildFile it) -> {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
-      boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
+      boolean _equals = Objects.equals(_junitVersion, JUnitVersion.JUNIT_5);
       if (_equals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("test {");

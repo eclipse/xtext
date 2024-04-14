@@ -62,10 +62,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import java.util.function.Consumer;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
@@ -136,7 +136,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      return ((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
+			      return ((Objects.equals(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
 			    };
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.emailAddress;
@@ -185,10 +185,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import java.util.function.Consumer;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
@@ -259,7 +259,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      return ((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
+			      return ((Objects.equals(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
 			    };
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.emailAddress;
@@ -305,10 +305,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import java.util.function.Consumer;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -379,7 +379,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
-			      return Boolean.valueOf(((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25)));
+			      return Boolean.valueOf(((Objects.equals(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25)));
 			    };
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.emailAddress;
@@ -427,10 +427,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import java.util.function.Predicate;
 			import java.util.function.ToIntFunction;
 			import org.eclipse.xtend.lib.annotations.Accessors;
@@ -499,7 +499,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
+			      return Objects.equals(it.gender, Demo.Person.Sex.MALE);
 			    };
 			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
 			      return it.getAge();
@@ -677,10 +677,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import java.util.function.BiConsumer;
 			import java.util.function.Function;
 			import java.util.function.IntConsumer;
@@ -786,7 +786,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
+			      return Objects.equals(it.gender, Demo.Person.Sex.MALE);
 			    };
 			    final Function<Demo.Person, Integer> _function_1 = (Demo.Person it) -> {
 			      return Integer.valueOf(it.getAge());
@@ -857,10 +857,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.List;
+			import java.util.Objects;
 			import java.util.function.BiConsumer;
 			import java.util.function.Function;
 			import java.util.function.IntConsumer;
@@ -965,7 +965,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			
 			  public static void main(final Demo.Person[] roster) {
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
+			      return Objects.equals(it.gender, Demo.Person.Sex.MALE);
 			    };
 			    final Function<Demo.Person, Integer> _function_1 = (Demo.Person it) -> {
 			      return Integer.valueOf(it.getAge());
@@ -1019,10 +1019,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.time.LocalDate;
 			import java.time.Period;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import java.util.function.Function;
 			import java.util.function.Predicate;
 			import java.util.stream.Collectors;
@@ -1092,7 +1092,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      return Objects.equal(it.gender, Demo.Person.Sex.MALE);
+			      return Objects.equals(it.gender, Demo.Person.Sex.MALE);
 			    };
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.name;
@@ -2186,9 +2186,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.util.ArrayList;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -2242,7 +2242,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
-			      return Boolean.valueOf(Objects.equal(it.gender, Demo.Person.Sex.MALE));
+			      return Boolean.valueOf(Objects.equals(it.gender, Demo.Person.Sex.MALE));
 			    };
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.name;
@@ -2278,7 +2278,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtend.lib.annotations.Accessors;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -2331,7 +2331,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			
 			  public static void main(final Demo.Person[] roster) {
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
-			      return Boolean.valueOf(Objects.equal(it.gender, Demo.Person.Sex.MALE));
+			      return Boolean.valueOf(Objects.equals(it.gender, Demo.Person.Sex.MALE));
 			    };
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.name;

@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -340,7 +340,7 @@ public class VarArgFeatureCallArgumentsTest extends AbstractTestingTypeReference
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       final IFeatureCallArguments result = this.factory.createVarArgArguments(arguments, operation.getParameters(), receiver, this.getOwner());
       Class<? extends IFeatureCallArguments> _class = result.getClass();
-      boolean _equals = Objects.equal(_class, VarArgFeatureCallArguments.class);
+      boolean _equals = Objects.equals(_class, VarArgFeatureCallArguments.class);
       Assert.assertTrue(_equals);
       return result;
     } catch (Throwable _e) {

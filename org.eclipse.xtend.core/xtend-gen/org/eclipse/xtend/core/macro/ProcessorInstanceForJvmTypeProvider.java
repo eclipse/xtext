@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
 import java.io.Closeable;
@@ -18,6 +17,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -49,7 +49,7 @@ public class ProcessorInstanceForJvmTypeProvider {
 
     @Override
     public boolean isAdapterForType(final Object type) {
-      return Objects.equal(type, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
+      return Objects.equals(type, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
     }
 
     @Override

@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -130,7 +130,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
         };
         List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(constructor.getParameters(), _function_1));
         List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-        return Boolean.valueOf(Objects.equal(_list, _list_1));
+        return Boolean.valueOf(Objects.equals(_list, _list_1));
       };
       _xblockexpression = IterableExtensions.findFirst(this.getDeclaredConstructors(), _function);
     }
@@ -140,7 +140,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public FieldDeclaration findDeclaredField(final String name) {
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
       String _simpleName = field.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredFields(), _function);
   }
@@ -148,7 +148,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public TypeDeclaration findDeclaredType(final String name) {
     final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
       String _simpleName = type.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredTypes(), _function);
   }
@@ -158,7 +158,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration method) -> {
-        return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
+        return Boolean.valueOf((Objects.equals(method.getSimpleName(), name) && Objects.equals(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
           return it.getType();
         }))), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
       };

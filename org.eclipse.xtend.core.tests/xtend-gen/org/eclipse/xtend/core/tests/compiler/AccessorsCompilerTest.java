@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -425,12 +425,12 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
             Assert.assertTrue(Modifier.isPublic(it_1.getDeclaredMethod("setB", int.class).getModifiers()));
             final Function1<Method, Boolean> _function_2 = (Method it_2) -> {
               String _name = it_2.getName();
-              return Boolean.valueOf(Objects.equal(_name, "getC"));
+              return Boolean.valueOf(Objects.equals(_name, "getC"));
             };
             Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_2));
             final Function1<Method, Boolean> _function_3 = (Method it_2) -> {
               String _name = it_2.getName();
-              return Boolean.valueOf(Objects.equal(_name, "setC"));
+              return Boolean.valueOf(Objects.equals(_name, "setC"));
             };
             Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_3));
           } catch (Throwable _e) {
@@ -476,12 +476,12 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
             Assert.assertTrue(Modifier.isPublic(it_1.getDeclaredMethod("setB", int.class).getModifiers()));
             final Function1<Method, Boolean> _function_2 = (Method it_2) -> {
               String _name = it_2.getName();
-              return Boolean.valueOf(Objects.equal(_name, "getC"));
+              return Boolean.valueOf(Objects.equals(_name, "getC"));
             };
             Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_2));
             final Function1<Method, Boolean> _function_3 = (Method it_2) -> {
               String _name = it_2.getName();
-              return Boolean.valueOf(Objects.equal(_name, "setC"));
+              return Boolean.valueOf(Objects.equals(_name, "setC"));
             };
             Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_3));
           } catch (Throwable _e) {
@@ -524,7 +524,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
             Assert.assertTrue(Modifier.isProtected(it_1.getDeclaredMethod("getA").getModifiers()));
             final Function1<Method, Boolean> _function_2 = (Method it_2) -> {
               String _name = it_2.getName();
-              return Boolean.valueOf(Objects.equal(_name, "setA"));
+              return Boolean.valueOf(Objects.equals(_name, "setA"));
             };
             Assert.assertFalse(IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(it_1.getDeclaredMethods())), _function_2));
           } catch (Throwable _e) {

@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -125,7 +125,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     final Function1<EObjectDiagnosticImpl, Boolean> _function = (EObjectDiagnosticImpl diag) -> {
       EObject _problematicObject = diag.getProblematicObject();
       EObject _value = resAndObj.getValue();
-      return Boolean.valueOf(Objects.equal(_problematicObject, _value));
+      return Boolean.valueOf(Objects.equals(_problematicObject, _value));
     };
     final Function1<EObjectDiagnosticImpl, Problem> _function_1 = (EObjectDiagnosticImpl diag) -> {
       String _code = diag.getCode();
@@ -176,7 +176,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     boolean _matched = false;
     if (element instanceof CompilationUnitImpl) {
-      boolean _equals = Objects.equal(element, this.compilationUnit);
+      boolean _equals = Objects.equals(element, this.compilationUnit);
       if (_equals) {
         _matched=true;
         Resource _eResource = this.compilationUnit.getXtendFile().eResource();
@@ -189,7 +189,7 @@ public class ProblemSupportImpl implements ProblemSupport {
         _matched=true;
         final Resource resource = ((AbstractElementImpl<? extends EObject>)element).getDelegate().eResource();
         Resource _eResource = this.compilationUnit.getXtendFile().eResource();
-        boolean _equals = Objects.equal(resource, _eResource);
+        boolean _equals = Objects.equals(resource, _eResource);
         if (_equals) {
           final EObject eobject = this.compilationUnit.getJvmModelAssociations().getPrimarySourceElement(((AbstractElementImpl<? extends EObject>)element).getDelegate());
           if ((eobject == null)) {

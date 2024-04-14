@@ -57,8 +57,8 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import com.google.common.io.LineReader;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			
 			@SuppressWarnings("all")
@@ -67,7 +67,7 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 			    try {
 			      int counter = 0;
 			      LineReader reader = null;
-			      if (((counter == 0) && (!Objects.equal(reader.readLine(), null)))) {
+			      if (((counter == 0) && (!Objects.equals(reader.readLine(), null)))) {
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -90,8 +90,8 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import com.google.common.io.LineReader;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			
 			@SuppressWarnings("all")
@@ -100,7 +100,7 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 			    try {
 			      int counter = 0;
 			      LineReader reader = null;
-			      while (((counter == 0) && (!Objects.equal(reader.readLine(), null)))) {
+			      while (((counter == 0) && (!Objects.equals(reader.readLine(), null)))) {
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -121,8 +121,8 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import com.google.common.io.LineReader;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			
 			@SuppressWarnings("all")
@@ -131,7 +131,7 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 			    try {
 			      LineReader reader = null;
 			      do {
-			      } while((!Objects.equal(reader.readLine(), null)));
+			      } while((!Objects.equals(reader.readLine(), null)));
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }

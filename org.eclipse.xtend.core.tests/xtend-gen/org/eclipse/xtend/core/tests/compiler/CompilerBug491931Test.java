@@ -254,7 +254,7 @@ public class CompilerBug491931Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -265,7 +265,7 @@ public class CompilerBug491931Test extends AbstractXtendCompilerTest {
     _builder_1.append("public boolean foo(final CharSequence obj) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return (!((obj.subSequence(1, 1) instanceof String) && (!Objects.equal(obj, null))));");
+    _builder_1.append("return (!((obj.subSequence(1, 1) instanceof String) && (!Objects.equals(obj, null))));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

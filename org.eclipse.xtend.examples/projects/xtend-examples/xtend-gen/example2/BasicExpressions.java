@@ -8,7 +8,6 @@
  */
 package example2;
 
-import com.google.common.base.Objects;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +16,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -93,7 +93,7 @@ public class BasicExpressions {
     if (_equals) {
       int _xifexpression = (int) 0;
       String _lowerCase = "BAR".toLowerCase();
-      boolean _notEquals = (!Objects.equal("foo", _lowerCase));
+      boolean _notEquals = (!Objects.equals("foo", _lowerCase));
       if (_notEquals) {
         _xifexpression = 42;
       } else {
@@ -112,7 +112,7 @@ public class BasicExpressions {
       Assert.fail("Never happens!");
     }
     if (!_matched) {
-      if (Objects.equal(t, "text")) {
+      if (Objects.equals(t, "text")) {
         _matched=true;
         Assert.assertTrue(true);
       }

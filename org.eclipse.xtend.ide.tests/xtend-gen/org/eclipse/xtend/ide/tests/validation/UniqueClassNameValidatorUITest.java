@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.ide.tests.validation;
 
-import com.google.common.base.Objects;
 import java.util.Map;
+import java.util.Objects;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -219,7 +219,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
     final Function1<IMarker, Boolean> _function = (IMarker it) -> {
       try {
         Object _attribute = it.getAttribute(IMarker.SEVERITY);
-        return Boolean.valueOf(Objects.equal(Integer.valueOf(IMarker.SEVERITY_ERROR), _attribute));
+        return Boolean.valueOf(Objects.equals(Integer.valueOf(IMarker.SEVERITY_ERROR), _attribute));
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }

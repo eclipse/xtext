@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.tests.findrefs;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jdt.core.IField;
@@ -140,22 +140,22 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         Assert.assertEquals(4, it.size());
         final Function1<IField, Boolean> _function_1 = (IField it_1) -> {
           String _elementName = it_1.getElementName();
-          return Boolean.valueOf(Objects.equal(_elementName, "x"));
+          return Boolean.valueOf(Objects.equals(_elementName, "x"));
         };
         Assert.assertTrue(IterableExtensions.<IField>exists(Iterables.<IField>filter(it, IField.class), _function_1));
         final Function1<IMethod, Boolean> _function_2 = (IMethod it_1) -> {
           String _elementName = it_1.getElementName();
-          return Boolean.valueOf(Objects.equal(_elementName, "foo"));
+          return Boolean.valueOf(Objects.equals(_elementName, "foo"));
         };
         Assert.assertTrue(IterableExtensions.<IMethod>exists(Iterables.<IMethod>filter(it, IMethod.class), _function_2));
         final Function1<IMethod, Boolean> _function_3 = (IMethod it_1) -> {
           String _elementName = it_1.getElementName();
-          return Boolean.valueOf(Objects.equal(_elementName, "bar"));
+          return Boolean.valueOf(Objects.equals(_elementName, "bar"));
         };
         Assert.assertTrue(IterableExtensions.<IMethod>exists(Iterables.<IMethod>filter(it, IMethod.class), _function_3));
         final Function1<IMethod, Boolean> _function_4 = (IMethod it_1) -> {
           String _elementName = it_1.getElementName();
-          return Boolean.valueOf(Objects.equal(_elementName, "baz"));
+          return Boolean.valueOf(Objects.equals(_elementName, "baz"));
         };
         Assert.assertTrue(IterableExtensions.<IMethod>exists(Iterables.<IMethod>filter(it, IMethod.class), _function_4));
       };
@@ -201,11 +201,11 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
         Assert.assertEquals(2, it.size());
         final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "y")));
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equals(((IField) it_1).getElementName(), "y")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_1));
         final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "bar")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "bar")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_2));
       };
@@ -270,19 +270,19 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
         Assert.assertEquals(4, it.size());
         final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "bar")));
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equals(((IField) it_1).getElementName(), "bar")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_1));
         final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "baz")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_2));
         final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "fooBar_0")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "fooBar_0")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_3));
         final Function1<Object, Boolean> _function_4 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "fooBar_1")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "fooBar_1")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_4));
       };
@@ -343,23 +343,23 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
         Assert.assertEquals(5, it.size());
         final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "bar")));
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equals(((IField) it_1).getElementName(), "bar")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_1));
         final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "baz")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_2));
         final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "fooBar")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "fooBar")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_3));
         final Function1<Object, Boolean> _function_4 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "getFoo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "getFoo")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_4));
         final Function1<Object, Boolean> _function_5 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "setFoo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "setFoo")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_5));
       };
@@ -438,15 +438,15 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
         Assert.assertEquals(3, it.size());
         final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo_1")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "foo_1")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_1));
         final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "baz")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_2));
         final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "foo")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_3));
       };
@@ -501,15 +501,15 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
         Assert.assertEquals(3, it.size());
         final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "foo")));
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equals(((IField) it_1).getElementName(), "foo")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_1));
         final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "bar")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "bar")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_2));
         final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "baz")));
         };
         Assert.assertTrue(IterableExtensions.<Object>exists(it, _function_3));
       };
@@ -533,7 +533,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
         Assert.assertEquals(1, IterableExtensions.size(it));
         final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IType) && Objects.equal(((IType) it_1).getElementName(), "Xtend")));
+          return Boolean.valueOf(((it_1 instanceof IType) && Objects.equals(((IType) it_1).getElementName(), "Xtend")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_1));
       };
@@ -563,7 +563,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
         Assert.assertEquals(1, IterableExtensions.size(it));
         final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "foo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_1));
       };
@@ -590,7 +590,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
         Assert.assertEquals(1, IterableExtensions.size(it));
         final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "foo")));
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equals(((IField) it_1).getElementName(), "foo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_1));
       };
@@ -617,15 +617,15 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
         Assert.assertEquals(3, IterableExtensions.size(it));
         final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "getFoo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "getFoo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_1));
         final Function1<IJavaElement, Boolean> _function_2 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "setFoo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "setFoo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_2));
         final Function1<IJavaElement, Boolean> _function_3 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "_foo")));
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equals(((IField) it_1).getElementName(), "_foo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_3));
       };
@@ -662,11 +662,11 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
         Assert.assertEquals(2, IterableExtensions.size(it));
         final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "_foo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "_foo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_1));
         final Function1<IJavaElement, Boolean> _function_2 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "foo")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_2));
       };
@@ -737,11 +737,11 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
         Assert.assertEquals(2, IterableExtensions.size(it));
         final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IType) && Objects.equal(((IType) it_1).getElementName(), "Xtend")));
+          return Boolean.valueOf(((it_1 instanceof IType) && Objects.equals(((IType) it_1).getElementName(), "Xtend")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_1));
         final Function1<IJavaElement, Boolean> _function_2 = (IJavaElement it_1) -> {
-          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "Xtend")));
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equals(((IMethod) it_1).getElementName(), "Xtend")));
         };
         Assert.assertTrue(IterableExtensions.<IJavaElement>exists(it, _function_2));
       };

@@ -3,7 +3,7 @@
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.xbase.tests.compiler;
@@ -596,16 +596,16 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"String _switchResult = null;\n" +
 				"final String x = \"lalala\";\n" +
 				"boolean _matched = false;\n" +
-				"if (com.google.common.base.Objects.equal(x, \"a\")) {\n" +
+				"if (java.util.Objects.equals(x, \"a\")) {\n" +
 				"  _matched=true;\n" +
 				"}\n" +
 				"if (!_matched) {\n" +
-				"  if (com.google.common.base.Objects.equal(x, \"b\")) {\n" +
+				"  if (java.util.Objects.equals(x, \"b\")) {\n" +
 				"    _matched=true;\n" +
 				"  }\n" +
 				"}\n" +
 				"if (!_matched) {\n" +
-				"  if (com.google.common.base.Objects.equal(x, \"c\")) {\n" +
+				"  if (java.util.Objects.equals(x, \"c\")) {\n" +
 				"    _matched=true;\n" +
 				"  }\n" +
 				"}\n" +
@@ -654,11 +654,11 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"String _switchResult = null;\n" +
 				"final String x = \"lalala\";\n" +
 				"boolean _matched = false;\n" +
-				"if (com.google.common.base.Objects.equal(x, \"a\")) {\n" +
+				"if (java.util.Objects.equals(x, \"a\")) {\n" +
 				"  _matched=true;\n" +
 				"}\n" +
 				"if (!_matched) {\n" +
-				"  if (com.google.common.base.Objects.equal(x, \"b\")) {\n" +
+				"  if (java.util.Objects.equals(x, \"b\")) {\n" +
 				"    _matched=true;\n" +
 				"  }\n" +
 				"}\n" +
@@ -717,19 +717,19 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"final Object x = _object;\n" +
 				"boolean _matched = false;\n" +
 				"if (x instanceof String) {\n" +
-				"  if (com.google.common.base.Objects.equal(x, \"a\")) {\n" +
+				"  if (java.util.Objects.equals(x, \"a\")) {\n" +
 				"    _matched=true;\n" +
 				"    _switchResult = \"blabla\";\n" +
 				"  }\n" +
 				"}\n" +
 				"if (!_matched) {\n" +
 				"  if (x instanceof Integer) {\n" +
-				"    if (com.google.common.base.Objects.equal(x, 1)) {\n" +
+				"    if (java.util.Objects.equals(x, 1)) {\n" +
 				"      _matched=true;\n" +
 				"    }\n" +
 				"  }\n" +
 				"  if (!_matched) {\n" +
-				"    if (com.google.common.base.Objects.equal(x, 2)) {\n" +
+				"    if (java.util.Objects.equals(x, 2)) {\n" +
 				"      _matched=true;\n" +
 				"    }\n" +
 				"  }\n" +
@@ -761,7 +761,7 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"}\n" +
 				"if (!_matched) {\n" +
 				"  if (x instanceof Integer) {\n" +
-				"    if (com.google.common.base.Objects.equal(x, 1)) {\n" +
+				"    if (java.util.Objects.equals(x, 1)) {\n" +
 				"      _matched=true;\n" +
 				"    }\n" +
 				"  }\n" +
@@ -2100,7 +2100,7 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 	public void testObjectEqualNull() throws Exception {
 		compilesTo(
 				"\"Foo\" == null\n", "\n" +
-				"boolean _equals = com.google.common.base.Objects.equal(\"Foo\", null);\n" +
+				"boolean _equals = java.util.Objects.equals(\"Foo\", null);\n" +
 				"return _equals;\n");
 	}
 
@@ -2109,7 +2109,7 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 		compilesTo(
 				"\"Foo\" != null\n",
 				"\n" +
-				"boolean _notEquals = (!com.google.common.base.Objects.equal(\"Foo\", null));\n" +
+				"boolean _notEquals = (!java.util.Objects.equals(\"Foo\", null));\n" +
 				"return _notEquals;\n");
 	}
 

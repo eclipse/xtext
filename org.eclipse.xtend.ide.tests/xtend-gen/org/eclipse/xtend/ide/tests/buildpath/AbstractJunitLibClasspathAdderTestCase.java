@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.ide.tests.buildpath;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.InputStream;
+import java.util.Objects;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.IPath;
@@ -73,7 +73,7 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
       final IProject project = this.workbenchHelper.getProject();
       final IProjectDescription description = project.getDescription();
       final Function1<String, Boolean> _function = (String it) -> {
-        return Boolean.valueOf((!Objects.equal(it, "org.eclipse.pde.PluginNature")));
+        return Boolean.valueOf((!Objects.equals(it, "org.eclipse.pde.PluginNature")));
       };
       description.setNatureIds(((String[])Conversions.unwrapArray(IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(description.getNatureIds())), _function), String.class)));
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -89,7 +89,7 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
   protected void assertClasspath(final String message, final IPath entryPath) {
     try {
       final Function1<IClasspathEntry, Boolean> _function = (IClasspathEntry it) -> {
-        return Boolean.valueOf((Objects.equal(it.getPath(), entryPath) && (it.getEntryKind() == IClasspathEntry.CPE_CONTAINER)));
+        return Boolean.valueOf((Objects.equals(it.getPath(), entryPath) && (it.getEntryKind() == IClasspathEntry.CPE_CONTAINER)));
       };
       Assert.assertTrue(message, 
         IterableExtensions.<IClasspathEntry>exists(((Iterable<IClasspathEntry>)Conversions.doWrapArray(JavaCore.create(this.workbenchHelper.getProject()).getRawClasspath())), _function));

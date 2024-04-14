@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -224,7 +224,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     this.workbenchTestHelper.closeAllEditors(false);
     this.clientFile.delete(true, null);
     this.macroFile.delete(true, null);
-    boolean _notEquals = (!Objects.equal("myannotation", this.exportedPackage));
+    boolean _notEquals = (!Objects.equals("myannotation", this.exportedPackage));
     if (_notEquals) {
       boolean _removeExportedPackages = WorkbenchTestHelper.removeExportedPackages(ActiveAnnotationsProcessingInIDETest.macroProject.getProject(), this.exportedPackage);
       if (_removeExportedPackages) {

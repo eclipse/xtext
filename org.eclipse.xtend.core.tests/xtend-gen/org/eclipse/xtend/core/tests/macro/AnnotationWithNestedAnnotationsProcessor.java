@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.xtend.core.tests.macro.AnnotationWithNestedAnnotations;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
@@ -79,7 +79,7 @@ public class AnnotationWithNestedAnnotationsProcessor implements RegisterGlobals
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
       String _qualifiedName = it.getAnnotationTypeDeclaration().getQualifiedName();
       String _name = AnnotationWithNestedAnnotations.Annotation1.class.getName();
-      return Boolean.valueOf(Objects.equal(_qualifiedName, _name));
+      return Boolean.valueOf(Objects.equals(_qualifiedName, _name));
     };
     final Consumer<AnnotationReference> _function_1 = (AnnotationReference it) -> {
       new AnnotationWithNestedAnnotations.Annotation1Config(it);
@@ -88,7 +88,7 @@ public class AnnotationWithNestedAnnotationsProcessor implements RegisterGlobals
     final Function1<AnnotationReference, Boolean> _function_2 = (AnnotationReference it) -> {
       String _qualifiedName = it.getAnnotationTypeDeclaration().getQualifiedName();
       String _name = AnnotationWithNestedAnnotations.Annotation2.class.getName();
-      return Boolean.valueOf(Objects.equal(_qualifiedName, _name));
+      return Boolean.valueOf(Objects.equals(_qualifiedName, _name));
     };
     final Consumer<AnnotationReference> _function_3 = (AnnotationReference it) -> {
       new AnnotationWithNestedAnnotations.Annotation2Config(it);
@@ -97,7 +97,7 @@ public class AnnotationWithNestedAnnotationsProcessor implements RegisterGlobals
     final Function1<AnnotationReference, Boolean> _function_4 = (AnnotationReference it) -> {
       String _qualifiedName = it.getAnnotationTypeDeclaration().getQualifiedName();
       String _name = AnnotationWithNestedAnnotations.Annotation3.class.getName();
-      return Boolean.valueOf(Objects.equal(_qualifiedName, _name));
+      return Boolean.valueOf(Objects.equals(_qualifiedName, _name));
     };
     final Consumer<AnnotationReference> _function_5 = (AnnotationReference it) -> {
       new AnnotationWithNestedAnnotations.Annotation3Config(it);

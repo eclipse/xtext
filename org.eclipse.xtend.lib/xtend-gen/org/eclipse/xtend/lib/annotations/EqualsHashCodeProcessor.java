@@ -9,8 +9,8 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.Objects;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -63,7 +63,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
     public boolean hasEquals(final ClassDeclaration it) {
       final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration it_1) -> {
-        return Boolean.valueOf(((Objects.equal(it_1.getSimpleName(), "equals") && (IterableExtensions.size(it_1.getParameters()) == 1)) && Objects.equal(IterableExtensions.head(it_1.getParameters()).getType(), this.context.getObject())));
+        return Boolean.valueOf(((Objects.equals(it_1.getSimpleName(), "equals") && (IterableExtensions.size(it_1.getParameters()) == 1)) && Objects.equals(IterableExtensions.head(it_1.getParameters()).getType(), this.context.getObject())));
       };
       return IterableExtensions.exists(it.getDeclaredMethods(), _function);
     }
@@ -191,7 +191,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       String _name = this.orObject(it.getType()).getName();
       boolean _matched = false;
       String _name_1 = Double.TYPE.getName();
-      if (Objects.equal(_name, _name_1)) {
+      if (Objects.equals(_name, _name_1)) {
         _matched=true;
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -217,7 +217,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       if (!_matched) {
         String _name_2 = Float.TYPE.getName();
-        if (Objects.equal(_name, _name_2)) {
+        if (Objects.equals(_name, _name_2)) {
           _matched=true;
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
@@ -244,36 +244,36 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       if (!_matched) {
         String _name_3 = Boolean.TYPE.getName();
-        if (Objects.equal(_name, _name_3)) {
+        if (Objects.equals(_name, _name_3)) {
           _matched=true;
         }
         if (!_matched) {
           String _name_4 = Integer.TYPE.getName();
-          if (Objects.equal(_name, _name_4)) {
+          if (Objects.equals(_name, _name_4)) {
             _matched=true;
           }
         }
         if (!_matched) {
           String _name_5 = Character.TYPE.getName();
-          if (Objects.equal(_name, _name_5)) {
+          if (Objects.equals(_name, _name_5)) {
             _matched=true;
           }
         }
         if (!_matched) {
           String _name_6 = Byte.TYPE.getName();
-          if (Objects.equal(_name, _name_6)) {
+          if (Objects.equals(_name, _name_6)) {
             _matched=true;
           }
         }
         if (!_matched) {
           String _name_7 = Short.TYPE.getName();
-          if (Objects.equal(_name, _name_7)) {
+          if (Objects.equals(_name, _name_7)) {
             _matched=true;
           }
         }
         if (!_matched) {
           String _name_8 = Long.TYPE.getName();
-          if (Objects.equal(_name, _name_8)) {
+          if (Objects.equals(_name, _name_8)) {
             _matched=true;
           }
         }
@@ -461,7 +461,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       String _name = this.orObject(it.getType()).getName();
       boolean _matched = false;
       String _name_1 = Double.TYPE.getName();
-      if (Objects.equal(_name, _name_1)) {
+      if (Objects.equals(_name, _name_1)) {
         _matched=true;
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -483,7 +483,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       if (!_matched) {
         String _name_2 = Float.TYPE.getName();
-        if (Objects.equal(_name, _name_2)) {
+        if (Objects.equals(_name, _name_2)) {
           _matched=true;
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
@@ -500,7 +500,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       if (!_matched) {
         String _name_3 = Boolean.TYPE.getName();
-        if (Objects.equal(_name, _name_3)) {
+        if (Objects.equals(_name, _name_3)) {
           _matched=true;
           StringConcatenationClient _client_2 = new StringConcatenationClient() {
             @Override
@@ -516,24 +516,24 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       if (!_matched) {
         String _name_4 = Integer.TYPE.getName();
-        if (Objects.equal(_name, _name_4)) {
+        if (Objects.equals(_name, _name_4)) {
           _matched=true;
         }
         if (!_matched) {
           String _name_5 = Character.TYPE.getName();
-          if (Objects.equal(_name, _name_5)) {
+          if (Objects.equals(_name, _name_5)) {
             _matched=true;
           }
         }
         if (!_matched) {
           String _name_6 = Byte.TYPE.getName();
-          if (Objects.equal(_name, _name_6)) {
+          if (Objects.equals(_name, _name_6)) {
             _matched=true;
           }
         }
         if (!_matched) {
           String _name_7 = Short.TYPE.getName();
-          if (Objects.equal(_name, _name_7)) {
+          if (Objects.equals(_name, _name_7)) {
             _matched=true;
           }
         }
@@ -551,7 +551,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       if (!_matched) {
         String _name_8 = Long.TYPE.getName();
-        if (Objects.equal(_name, _name_8)) {
+        if (Objects.equals(_name, _name_8)) {
           _matched=true;
           StringConcatenationClient _client_4 = new StringConcatenationClient() {
             @Override

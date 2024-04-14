@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -106,7 +106,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
       };
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(constructor.getParameters(), _function_1));
       List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-      return Boolean.valueOf(Objects.equal(_list, _list_1));
+      return Boolean.valueOf(Objects.equals(_list, _list_1));
     };
     return IterableExtensions.findFirst(this.getDeclaredConstructors(), _function);
   }
@@ -115,7 +115,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public FieldDeclaration findDeclaredField(final String name) {
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
       String _simpleName = field.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredFields(), _function);
   }
@@ -124,7 +124,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public TypeDeclaration findDeclaredType(final String name) {
     final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
       String _simpleName = type.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredTypes(), _function);
   }
@@ -132,7 +132,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   @Override
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration method) -> {
-      return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
+      return Boolean.valueOf((Objects.equals(method.getSimpleName(), name) && Objects.equals(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
         return it.getType();
       }))), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
     };

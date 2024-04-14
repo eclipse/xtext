@@ -216,9 +216,9 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
     _builder_1.newLine();
@@ -243,7 +243,7 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("{");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("boolean _equals = Objects.equal(this.mySeq, null);");
+    _builder_1.append("boolean _equals = Objects.equals(this.mySeq, null);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (_equals) {");

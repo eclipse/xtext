@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.tests.java8;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -75,7 +75,7 @@ public class Java8TypeProviderTest {
   protected void doTestMethods(final JvmGenericType intf) {
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, "staticMethod"));
+      return Boolean.valueOf(Objects.equals(_simpleName, "staticMethod"));
     };
     final JvmOperation staticMethod = IterableExtensions.<JvmOperation>head(IterableExtensions.<JvmOperation>filter(Iterables.<JvmOperation>filter(intf.getMembers(), JvmOperation.class), _function));
     Assert.assertNotNull(staticMethod);
@@ -84,7 +84,7 @@ public class Java8TypeProviderTest {
     Assert.assertFalse(staticMethod.isDefault());
     final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, "defaultMethod"));
+      return Boolean.valueOf(Objects.equals(_simpleName, "defaultMethod"));
     };
     final JvmOperation defaultMethod = IterableExtensions.<JvmOperation>head(IterableExtensions.<JvmOperation>filter(Iterables.<JvmOperation>filter(intf.getMembers(), JvmOperation.class), _function_1));
     Assert.assertNotNull(defaultMethod);

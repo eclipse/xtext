@@ -110,9 +110,9 @@ public class CompilerBug451814Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.io.LineReader;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
     _builder_1.newLine();
@@ -134,7 +134,7 @@ public class CompilerBug451814Test extends AbstractXtendCompilerTest {
     _builder_1.append("LineReader reader = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (((counter == 0) && (!Objects.equal(reader.readLine(), null)))) {");
+    _builder_1.append("if (((counter == 0) && (!Objects.equals(reader.readLine(), null)))) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -184,9 +184,9 @@ public class CompilerBug451814Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.io.LineReader;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
     _builder_1.newLine();
@@ -208,7 +208,7 @@ public class CompilerBug451814Test extends AbstractXtendCompilerTest {
     _builder_1.append("LineReader reader = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("while (((counter == 0) && (!Objects.equal(reader.readLine(), null)))) {");
+    _builder_1.append("while (((counter == 0) && (!Objects.equals(reader.readLine(), null)))) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -252,9 +252,9 @@ public class CompilerBug451814Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.io.LineReader;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
     _builder_1.newLine();
@@ -276,7 +276,7 @@ public class CompilerBug451814Test extends AbstractXtendCompilerTest {
     _builder_1.append("do {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("} while((!Objects.equal(reader.readLine(), null)));");
+    _builder_1.append("} while((!Objects.equals(reader.readLine(), null)));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} catch (Throwable _e) {");

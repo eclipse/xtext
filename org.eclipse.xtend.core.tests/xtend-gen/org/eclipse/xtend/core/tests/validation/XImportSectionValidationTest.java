@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.tests.validation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -630,7 +630,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
     final Function1<Issue, Boolean> _function = (Issue it) -> {
       EObject object = resource.getResourceSet().getEObject(it.getUriToProblem(), true);
       final boolean featureCall = ArrayExtensions.contains(it.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
-      return Boolean.valueOf((((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
+      return Boolean.valueOf((((Objects.equals(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
         objectType.isInstance(object)) && featureCall));
     };
     final Iterable<Issue> match = IterableExtensions.<Issue>filter(allIssues, _function);

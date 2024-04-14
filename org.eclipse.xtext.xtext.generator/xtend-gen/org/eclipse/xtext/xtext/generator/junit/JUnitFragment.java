@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.xtext.generator.junit;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -213,7 +213,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
-          boolean _equals = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
+          boolean _equals = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
           if (_equals) {
             _builder.append("@");
             _builder.append(runWith);
@@ -224,7 +224,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           }
         }
         {
-          boolean _equals_1 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
+          boolean _equals_1 = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
           if (_equals_1) {
             _builder.append("@");
             _builder.append(extendWith);
@@ -284,7 +284,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
         _builder.append("val errors = result.eResource.errors");
         _builder.newLine();
         {
-          boolean _equals_2 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
+          boolean _equals_2 = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
           if (_equals_2) {
             _builder.append("\t\t");
             _builder.append(assert_, "\t\t");
@@ -299,7 +299,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           }
         }
         {
-          boolean _equals_3 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
+          boolean _equals_3 = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
           if (_equals_3) {
             _builder.append("\t\t");
             _builder.append(assert_, "\t\t");
@@ -377,7 +377,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
-          boolean _equals = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
+          boolean _equals = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
           if (_equals) {
             _builder.append("@");
             _builder.append(runWith);
@@ -388,7 +388,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           }
         }
         {
-          boolean _equals_1 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
+          boolean _equals_1 = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
           if (_equals_1) {
             _builder.append("@");
             _builder.append(extendWith);
@@ -444,7 +444,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
         _builder.append("> errors = result.eResource().getErrors();");
         _builder.newLineIfNotEmpty();
         {
-          boolean _equals_2 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
+          boolean _equals_2 = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
           if (_equals_2) {
             _builder.append("\t\t");
             _builder.append(assert_, "\t\t");
@@ -455,7 +455,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           }
         }
         {
-          boolean _equals_3 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
+          boolean _equals_3 = Objects.equals(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
           if (_equals_3) {
             _builder.append("\t\t");
             _builder.append(assert_, "\t\t");

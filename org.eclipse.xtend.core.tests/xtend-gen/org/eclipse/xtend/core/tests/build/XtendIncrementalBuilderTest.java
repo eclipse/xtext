@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.tests.build;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
@@ -292,14 +292,14 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
       it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_delete)));
       final BuildRequest.IPostValidationCallback _function_2 = (URI uri, Iterable<Issue> issues) -> {
         URI _uri = this.uri("src/A.xtend");
-        boolean _equals = Objects.equal(_uri, uri);
+        boolean _equals = Objects.equals(_uri, uri);
         if (_equals) {
           Assert.assertTrue(IterableExtensions.<Issue>head(issues).getMessage(), IterableExtensions.<Issue>head(issues).getMessage().contains("foo.B cannot be resolved to a type"));
           validateCalled.set(true);
           return false;
         } else {
           URI _uri_1 = this.uri("src/foo/B.xtend");
-          boolean _equals_1 = Objects.equal(_uri_1, uri);
+          boolean _equals_1 = Objects.equals(_uri_1, uri);
           if (_equals_1) {
             Assert.assertEquals("zero issues expected", 0, IterableExtensions.size(issues));
             return true;

@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.formatting2;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -103,14 +103,14 @@ public class RichStringFormatter {
       boolean _greaterThan = (_rootIndentLenght > 0);
       if (_greaterThan) {
         int _xifexpression = (int) 0;
-        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>head(lines)))) {
+        if ((canIndent && Objects.equals(line, IterableExtensions.<Line>head(lines)))) {
           _xifexpression = 1;
         } else {
           _xifexpression = 0;
         }
         final int increaseIndentationChange = _xifexpression;
         int _xifexpression_1 = (int) 0;
-        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>lastOrNull(lines)))) {
+        if ((canIndent && Objects.equals(line, IterableExtensions.<Line>lastOrNull(lines)))) {
           _xifexpression_1 = 1;
         } else {
           _xifexpression_1 = 0;

@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.xtext.generator.scoping;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Names;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -54,12 +54,12 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
 
   protected TypeReference getScopeProviderClass(final Grammar grammar) {
     String _name = grammar.getName();
-    boolean _equals = Objects.equal(_name, "org.eclipse.xtext.xbase.Xbase");
+    boolean _equals = Objects.equals(_name, "org.eclipse.xtext.xbase.Xbase");
     if (_equals) {
       return TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider");
     }
     String _name_1 = grammar.getName();
-    boolean _equals_1 = Objects.equal(_name_1, "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
+    boolean _equals_1 = Objects.equals(_name_1, "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
     if (_equals_1) {
       return TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider");
     }

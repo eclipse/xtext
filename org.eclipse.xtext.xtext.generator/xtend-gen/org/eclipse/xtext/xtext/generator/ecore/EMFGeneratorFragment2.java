@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ecore;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.common.io.CharStreams;
@@ -28,6 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -689,7 +689,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
           throw new RuntimeException(_plus);
         }
         String _nsURI = ecorePackage.getNsURI();
-        boolean _equals = Objects.equal(nsURI, _nsURI);
+        boolean _equals = Objects.equals(nsURI, _nsURI);
         if (_equals) {
           return genPackage;
         }
@@ -710,7 +710,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   }
 
   private void putMappingData(final Map<EObject, EObject> result, final EPackage usedEPackage, final EPackage loadedEPackage) {
-    if (((loadedEPackage != null) && (!Objects.equal(usedEPackage, loadedEPackage)))) {
+    if (((loadedEPackage != null) && (!Objects.equals(usedEPackage, loadedEPackage)))) {
       result.put(usedEPackage, loadedEPackage);
       EList<EClassifier> _eClassifiers = usedEPackage.getEClassifiers();
       for (final EClassifier usedClassifier : _eClassifiers) {
@@ -733,7 +733,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
           final Function1<EPackage, Boolean> _function = (EPackage it) -> {
             String _name = it.getName();
             String _name_1 = usedNestedPackage.getName();
-            return Boolean.valueOf(Objects.equal(_name, _name_1));
+            return Boolean.valueOf(Objects.equals(_name, _name_1));
           };
           final EPackage loadedNestedPackage = IterableExtensions.<EPackage>findFirst(loadedEPackage.getESubpackages(), _function);
           if ((loadedNestedPackage != null)) {
@@ -950,7 +950,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
           _nsURI=_ecorePackage.getNsURI();
         }
         String _nsURI_1 = pkg.getNsURI();
-        return Boolean.valueOf(Objects.equal(_nsURI, _nsURI_1));
+        return Boolean.valueOf(Objects.equals(_nsURI, _nsURI_1));
       };
       boolean _exists = IterableExtensions.<GenPackage>exists(existingGenModel.getGenPackages(), _function);
       boolean _not = (!_exists);

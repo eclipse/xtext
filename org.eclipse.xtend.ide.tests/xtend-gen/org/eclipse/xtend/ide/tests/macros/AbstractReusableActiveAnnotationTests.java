@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
@@ -4860,7 +4860,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       String _simpleName = it.getTypeLookup().findClass("myusercode.DoesNotExist").getSimpleName();
-      boolean _equals = Objects.equal(_simpleName, "DoesNotExist");
+      boolean _equals = Objects.equals(_simpleName, "DoesNotExist");
       Assert.assertTrue(_equals);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -6273,7 +6273,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
 
   public void assertSameType(final TypeReference first, final TypeReference second) {
-    boolean _notEquals = (!Objects.equal(first, second));
+    boolean _notEquals = (!Objects.equals(first, second));
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append(first);

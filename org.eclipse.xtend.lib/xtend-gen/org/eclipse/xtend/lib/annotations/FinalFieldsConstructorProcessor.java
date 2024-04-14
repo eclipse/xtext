@@ -9,13 +9,13 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -82,7 +82,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
             return it_1.getType();
           };
           List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function_1));
-          return Boolean.valueOf(Objects.equal(_list, expectedTypes));
+          return Boolean.valueOf(Objects.equals(_list, expectedTypes));
         };
         _xblockexpression = IterableExtensions.exists(cls.getDeclaredConstructors(), _function);
       }
@@ -220,7 +220,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
 
     public ResolvedConstructor getSuperConstructor(final TypeDeclaration it) {
       if ((it instanceof ClassDeclaration)) {
-        if ((Objects.equal(((ClassDeclaration)it).getExtendedClass(), this.context.getObject()) || (((ClassDeclaration)it).getExtendedClass() == null))) {
+        if ((Objects.equals(((ClassDeclaration)it).getExtendedClass(), this.context.getObject()) || (((ClassDeclaration)it).getExtendedClass() == null))) {
           return null;
         }
         return IterableExtensions.head(((ClassDeclaration)it).getExtendedClass().getDeclaredResolvedConstructors());

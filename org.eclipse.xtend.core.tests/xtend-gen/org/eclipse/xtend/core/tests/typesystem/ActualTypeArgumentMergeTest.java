@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -92,7 +92,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = Objects.equal(_simpleName, typeParamName);
+      boolean _equals = Objects.equals(_simpleName, typeParamName);
       if (_equals) {
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         LightweightMergedBoundTypeArgument _merge = this.merger.merge(mappingData, this.getOwner());

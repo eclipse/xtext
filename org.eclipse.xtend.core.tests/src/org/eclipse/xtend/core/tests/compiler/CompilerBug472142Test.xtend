@@ -94,8 +94,8 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtend2.lib.StringConcatenation;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
@@ -106,7 +106,7 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 			  public CharSequence m() {
 			    CharSequence _xblockexpression = null;
 			    {
-			      boolean _equals = Objects.equal(this.mySeq, null);
+			      boolean _equals = Objects.equals(this.mySeq, null);
 			      if (_equals) {
 			        StringConcatenation _builder = new StringConcatenation();
 			        _builder.append("s2");
