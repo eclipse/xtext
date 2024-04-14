@@ -1585,7 +1585,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
@@ -1607,7 +1607,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(_switchValue, null)) {");
+    _builder_1.append("if (Objects.equals(_switchValue, null)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -1631,7 +1631,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(_switchValue, null)) {");
+    _builder_1.append("if (Objects.equals(_switchValue, null)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -1773,7 +1773,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
     _builder_1.newLine();
@@ -1807,7 +1807,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.append("Integer _apply = _function.apply();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(x, _apply)) {");
+    _builder_1.append("if (Objects.equals(x, _apply)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -2353,11 +2353,11 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.collect.AbstractIterator;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Iterator;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
@@ -2387,7 +2387,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.append("final Function1<T, Boolean> _function = (T it_1) -> {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("return Boolean.valueOf((!Objects.equal(it_1, null)));");
+    _builder_1.append("return Boolean.valueOf((!Objects.equals(it_1, null)));");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("};");
@@ -3144,7 +3144,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.append("package x;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -3161,7 +3161,7 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.append("boolean _xifexpression = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = Objects.equal(\"foo\", p);");
+    _builder_1.append("boolean _equals = Objects.equals(\"foo\", p);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");

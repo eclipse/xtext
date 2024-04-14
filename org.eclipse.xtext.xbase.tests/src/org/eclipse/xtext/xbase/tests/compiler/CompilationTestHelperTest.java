@@ -3,7 +3,7 @@
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.xbase.tests.compiler;
@@ -55,7 +55,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 				"}\n";
 		compilationTestHelper.compile(source, (CompilationTestHelper.Result it) -> {
 			String expectation =
-					"import com.google.common.base.Objects;\n" +
+					"import java.util.Objects;\n" +
 					"\n" +
 					"@SuppressWarnings(\"all\")\n" +
 					"public class Test {\n" +
@@ -65,7 +65,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 					"      final String s_1 = \"\";\n" +
 					"      String _switchResult = null;\n" +
 					"      boolean _matched = false;\n" +
-					"      if (Objects.equal(s_1, \"foo\")) {\n" +
+					"      if (Objects.equals(s_1, \"foo\")) {\n" +
 					"        _matched=true;\n" +
 					"        _switchResult = \"foo\";\n" +
 					"      }\n" +

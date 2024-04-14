@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.xbase.controlflow;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -35,7 +35,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   private final boolean compileTimeConstant;
 
   public boolean isNotAConstant() {
-    return Objects.equal(this.rawValue, EvaluationResult.NOT_A_CONSTANT.rawValue);
+    return Objects.equals(this.rawValue, EvaluationResult.NOT_A_CONSTANT.rawValue);
   }
 
   @Override
@@ -48,7 +48,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
 
   private Object _equalValue(final Object myValue, final Object otherValue) {
-    return Boolean.valueOf(Objects.equal(myValue, otherValue));
+    return Boolean.valueOf(Objects.equals(myValue, otherValue));
   }
 
   private Object _equalValue(final Void myValue, final Object otherValue) {
@@ -68,7 +68,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
 
   private Object _equalValue(final ThisReference myValue, final ThisReference otherValue) {
-    return Boolean.valueOf(Objects.equal(myValue, otherValue));
+    return Boolean.valueOf(Objects.equals(myValue, otherValue));
   }
 
   private Object _equalValue(final Void myValue, final JvmIdentifiableElement otherValue) {
@@ -120,7 +120,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
 
   private Object _equalValue(final List<?> myValue, final List<?> otherValue) {
-    final boolean equalLists = Objects.equal(myValue, otherValue);
+    final boolean equalLists = Objects.equals(myValue, otherValue);
     if (equalLists) {
       return Boolean.TRUE;
     }
@@ -128,11 +128,11 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
 
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmIdentifiableElement otherValue) {
-    return Boolean.valueOf(Objects.equal(myValue, otherValue));
+    return Boolean.valueOf(Objects.equals(myValue, otherValue));
   }
 
   private Object _equalValue(final JvmFormalParameter myValue, final JvmFormalParameter otherValue) {
-    boolean _equals = Objects.equal(myValue, otherValue);
+    boolean _equals = Objects.equals(myValue, otherValue);
     if (_equals) {
       return Boolean.TRUE;
     }
@@ -148,7 +148,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
 
   private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmEnumerationLiteral otherValue) {
-    return Boolean.valueOf(Objects.equal(myValue, otherValue));
+    return Boolean.valueOf(Objects.equals(myValue, otherValue));
   }
 
   private Object _equalValue(final JvmType myValue, final Void otherValue) {
@@ -156,15 +156,15 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
 
   private Object _equalValue(final XTypeLiteral myValue, final XTypeLiteral otherTypeLiteral) {
-    return Boolean.valueOf((Objects.equal(myValue.getType(), otherTypeLiteral.getType()) && Objects.equal(myValue.getArrayDimensions(), otherTypeLiteral.getArrayDimensions())));
+    return Boolean.valueOf((Objects.equals(myValue.getType(), otherTypeLiteral.getType()) && Objects.equals(myValue.getArrayDimensions(), otherTypeLiteral.getArrayDimensions())));
   }
 
   private Object _equalValue(final JvmType myValue, final XTypeLiteral otherTypeLiteral) {
-    return Boolean.valueOf((Objects.equal(myValue, otherTypeLiteral.getType()) && otherTypeLiteral.getArrayDimensions().isEmpty()));
+    return Boolean.valueOf((Objects.equals(myValue, otherTypeLiteral.getType()) && otherTypeLiteral.getArrayDimensions().isEmpty()));
   }
 
   private Object _equalValue(final XTypeLiteral myValue, final JvmType otherType) {
-    return Boolean.valueOf((Objects.equal(myValue.getType(), otherType) && myValue.getArrayDimensions().isEmpty()));
+    return Boolean.valueOf((Objects.equals(myValue.getType(), otherType) && myValue.getArrayDimensions().isEmpty()));
   }
 
   private Object _equalValue(final JvmType myValue, final ThisReference otherValue) {

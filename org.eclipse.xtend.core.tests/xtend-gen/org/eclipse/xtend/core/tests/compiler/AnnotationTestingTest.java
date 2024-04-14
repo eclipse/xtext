@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
@@ -52,17 +52,17 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
           Assert.assertEquals(3, ((List<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())).size());
           final Function1<Field, Boolean> _function_1 = (Field it_1) -> {
             String _name = it_1.getName();
-            return Boolean.valueOf(Objects.equal(_name, "foo"));
+            return Boolean.valueOf(Objects.equals(_name, "foo"));
           };
           Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())), _function_1));
           final Function1<Field, Boolean> _function_2 = (Field it_1) -> {
             String _name = it_1.getName();
-            return Boolean.valueOf(Objects.equal(_name, "bar"));
+            return Boolean.valueOf(Objects.equals(_name, "bar"));
           };
           Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())), _function_2));
           final Function1<Field, Boolean> _function_3 = (Field it_1) -> {
             String _name = it_1.getName();
-            return Boolean.valueOf(Objects.equal(_name, "baz"));
+            return Boolean.valueOf(Objects.equals(_name, "baz"));
           };
           Assert.assertTrue(IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(compiledClass.getDeclaredFields())), _function_3));
           final URI targetFileUri = sourceFileUri.trimSegments(2).appendSegment("xtend-gen").appendSegment("out.txt");

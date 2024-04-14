@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.ide.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.filesystem.EFS;
@@ -182,7 +182,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
                   if (locationUri!=null) {
                     _scheme=locationUri.getScheme();
                   }
-                  boolean _equals = Objects.equal(EFS.SCHEME_FILE, _scheme);
+                  boolean _equals = Objects.equals(EFS.SCHEME_FILE, _scheme);
                   if (_equals) {
                     java.net.URI _rawLocationURI = library.getRawLocationURI();
                     URL _uRL_1 = null;

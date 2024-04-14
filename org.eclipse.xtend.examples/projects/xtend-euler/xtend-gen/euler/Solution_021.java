@@ -11,8 +11,8 @@
  */
 package euler;
 
-import com.google.common.base.Objects;
 import java.util.HashSet;
+import java.util.Objects;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -42,9 +42,9 @@ public class Solution_021 {
       boolean _not = (!_contains);
       if (_not) {
         final Integer sumOfDivisors = Solution_021.sumOfDivisors((i).intValue());
-        if (((!Objects.equal(sumOfDivisors, i)) && ((sumOfDivisors).intValue() <= max))) {
+        if (((!Objects.equals(sumOfDivisors, i)) && ((sumOfDivisors).intValue() <= max))) {
           final Integer otherSumOfDivisors = Solution_021.sumOfDivisors((sumOfDivisors).intValue());
-          boolean _equals = Objects.equal(otherSumOfDivisors, i);
+          boolean _equals = Objects.equals(otherSumOfDivisors, i);
           if (_equals) {
             result.add(i);
             result.add(sumOfDivisors);

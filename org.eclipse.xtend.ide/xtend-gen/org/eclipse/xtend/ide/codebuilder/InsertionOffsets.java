@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -92,7 +92,7 @@ public class InsertionOffsets {
       final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerType);
       final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
         String _text = it.getText();
-        return Boolean.valueOf(Objects.equal(_text, "{"));
+        return Boolean.valueOf(Objects.equals(_text, "{"));
       };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(classNode.getLeafNodes(), _function);
       int _xifexpression = (int) 0;

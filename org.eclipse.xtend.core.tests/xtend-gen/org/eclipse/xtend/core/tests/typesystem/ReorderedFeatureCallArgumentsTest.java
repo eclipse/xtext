@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -269,7 +269,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       final IFeatureCallArguments result = this.factory.createStandardArguments(arguments, operation.getParameters(), receiver, this.getOwner());
       Class<? extends IFeatureCallArguments> _class = result.getClass();
-      boolean _equals = Objects.equal(_class, ReorderedFeatureCallArguments.class);
+      boolean _equals = Objects.equals(_class, ReorderedFeatureCallArguments.class);
       Assert.assertTrue(_equals);
       return result;
     } catch (Throwable _e) {

@@ -9,11 +9,11 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -192,7 +192,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
 
     public boolean isBooleanType(final TypeReference it) {
-      return ((!it.isInferred()) && Objects.equal(it, this.context.getPrimitiveBoolean()));
+      return ((!it.isInferred()) && Objects.equals(it, this.context.getPrimitiveBoolean()));
     }
 
     public void addGetter(final MutableFieldDeclaration field, final Visibility visibility) {

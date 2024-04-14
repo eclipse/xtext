@@ -8,12 +8,12 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -73,7 +73,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     final JvmAnnotationType annotationType = this.delegate.getAnnotation();
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(annotationType.getDeclaredOperations(), _function);
     if ((jvmOperation == null)) {
@@ -96,7 +96,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
 
   protected boolean remove(final JvmOperation op) {
     final Predicate<JvmAnnotationValue> _function = (JvmAnnotationValue it) -> {
-      return (Objects.equal(op, it.getOperation()) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value")));
+      return (Objects.equals(op, it.getOperation()) || ((it.getOperation() == null) && Objects.equals(op.getSimpleName(), "value")));
     };
     return Iterators.<JvmAnnotationValue>removeIf(this.delegate.getExplicitValues().iterator(), _function);
   }
@@ -117,7 +117,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (returnType!=null) {
         _eClass=returnType.eClass();
       }
-      boolean _notEquals = (!Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE));
+      boolean _notEquals = (!Objects.equals(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE));
       _and = _notEquals;
     }
     if (_and) {
@@ -444,13 +444,13 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
           String _identifier = ((JvmGenericType)type).getIdentifier();
           boolean _matched_1 = false;
           String _name = String.class.getName();
-          if (Objects.equal(_identifier, _name)) {
+          if (Objects.equals(_identifier, _name)) {
             _matched_1=true;
             _switchResult_1 = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
           }
           if (!_matched_1) {
             String _name_1 = Class.class.getName();
-            if (Objects.equal(_identifier, _name_1)) {
+            if (Objects.equals(_identifier, _name_1)) {
               _matched_1=true;
               _switchResult_1 = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
             }
@@ -504,7 +504,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (_type!=null) {
         _eClass=_type.eClass();
       }
-      boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      boolean _equals = Objects.equals(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
       _or = _equals;
     }
     if (_or) {
@@ -783,7 +783,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (returnType!=null) {
         _eClass=returnType.eClass();
       }
-      boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      boolean _equals = Objects.equals(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
       _or = _equals;
     }
     if (_or) {

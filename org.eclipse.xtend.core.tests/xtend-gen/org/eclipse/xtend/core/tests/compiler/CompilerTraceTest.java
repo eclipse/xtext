@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.URI;
@@ -1585,7 +1585,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       Assert.assertFalse(IterableExtensions.isEmpty(locations));
       for (final ILocationInResource location : locations) {
         ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
-        boolean _equals = Objects.equal(_textRegion_1, expectedRegion);
+        boolean _equals = Objects.equals(_textRegion_1, expectedRegion);
         if (_equals) {
           return;
         }

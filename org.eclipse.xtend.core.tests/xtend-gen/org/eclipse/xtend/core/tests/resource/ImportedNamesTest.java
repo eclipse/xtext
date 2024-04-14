@@ -8,12 +8,12 @@
  */
 package org.eclipse.xtend.core.tests.resource;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -188,7 +188,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
         String _string = it.toString();
         String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$StaticInnerClass".toLowerCase();
-        return Boolean.valueOf(Objects.equal(_string, _lowerCase));
+        return Boolean.valueOf(Objects.equals(_string, _lowerCase));
       };
       Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
@@ -216,7 +216,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
         String _string = it.toString();
         String _lowerCase = "types.StaticOuterClass$Unknown".toLowerCase();
-        return Boolean.valueOf(Objects.equal(_string, _lowerCase));
+        return Boolean.valueOf(Objects.equals(_string, _lowerCase));
       };
       Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {
@@ -244,7 +244,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
         String _string = it.toString();
         String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$Unknown".toLowerCase();
-        return Boolean.valueOf(Objects.equal(_string, _lowerCase));
+        return Boolean.valueOf(Objects.equals(_string, _lowerCase));
       };
       Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
     } catch (Throwable _e) {

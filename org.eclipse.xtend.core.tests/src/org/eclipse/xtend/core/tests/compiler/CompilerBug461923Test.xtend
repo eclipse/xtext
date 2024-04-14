@@ -26,9 +26,9 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
 			import com.google.common.collect.ImmutableList;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
@@ -37,7 +37,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> ImmutableList<T> m(final List<? extends T> list, final T value) {
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
-			        return Boolean.valueOf((!Objects.equal(it, value)));
+			        return Boolean.valueOf((!Objects.equals(it, value)));
 			      }
 			    };
 			    return ImmutableList.<T>builder().addAll(IterableExtensions.filter(list, _function)).build();
@@ -57,9 +57,9 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
 			import com.google.common.collect.ImmutableList;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
@@ -68,7 +68,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> ImmutableList<T> m(final List<T> list, final T value) {
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
-			        return Boolean.valueOf((!Objects.equal(it, value)));
+			        return Boolean.valueOf((!Objects.equals(it, value)));
 			      }
 			    };
 			    return ImmutableList.<T>builder().addAll(IterableExtensions.<T>filter(list, _function)).build();
@@ -88,9 +88,9 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
 			import com.google.common.collect.ImmutableList;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
@@ -99,7 +99,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> ImmutableList<Object> m(final List<? super T> list, final T value) {
 			    final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
 			      public Boolean apply(final Object it) {
-			        return Boolean.valueOf((!Objects.equal(it, value)));
+			        return Boolean.valueOf((!Objects.equals(it, value)));
 			      }
 			    };
 			    return ImmutableList.<Object>builder().addAll(IterableExtensions.filter(list, _function)).build();
@@ -237,8 +237,8 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
 			import com.google.common.collect.ImmutableList;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -248,7 +248,7 @@ class CompilerBug461923Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> ImmutableList<T> m(final T[] arr, final T value) {
 			    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			      public Boolean apply(final T it) {
-			        return Boolean.valueOf((!Objects.equal(it, value)));
+			        return Boolean.valueOf((!Objects.equals(it, value)));
 			      }
 			    };
 			    return ImmutableList.<T>builder().addAll(IterableExtensions.<T>filter(((Iterable<T>)Conversions.doWrapArray(arr)), _function)).build();

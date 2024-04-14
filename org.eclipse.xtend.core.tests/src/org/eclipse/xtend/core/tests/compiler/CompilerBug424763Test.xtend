@@ -106,8 +106,8 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import java.util.ArrayList;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
@@ -118,7 +118,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			
 			  public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {
 			    Function0<JAVA_TYPE> _xifexpression = null;
-			    boolean _equals = Objects.equal(theConstructor, null);
+			    boolean _equals = Objects.equals(theConstructor, null);
 			    if (_equals) {
 			      _xifexpression = new NoConstructor<JAVA_TYPE>(theType);
 			    } else {
@@ -237,7 +237,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
@@ -246,7 +246,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			
 			  public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {
 			    Function0<JAVA_TYPE> _xifexpression = null;
-			    boolean _equals = Objects.equal(theConstructor, null);
+			    boolean _equals = Objects.equals(theConstructor, null);
 			    if (_equals) {
 			      Class<JAVA_TYPE> _xtrycatchfinallyexpression = null;
 			      try {

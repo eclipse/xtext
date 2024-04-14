@@ -8,9 +8,9 @@
  */
 package extract;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
+import java.util.Objects;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -49,7 +49,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
     Iterable<? extends MutableMethodDeclaration> _declaredMethods = annotatedClass.getDeclaredMethods();
     for (final MutableMethodDeclaration method : _declaredMethods) {
       Visibility _visibility = method.getVisibility();
-      boolean _equals = Objects.equal(_visibility, Visibility.PUBLIC);
+      boolean _equals = Objects.equals(_visibility, Visibility.PUBLIC);
       if (_equals) {
         final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
           it.setDocComment(method.getDocComment());

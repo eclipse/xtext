@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -152,7 +152,7 @@ public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDe
   public MutableAnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     final Function1<MutableAnnotationTypeElementDeclaration, Boolean> _function = (MutableAnnotationTypeElementDeclaration it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredAnnotationTypeElements(), _function);
   }

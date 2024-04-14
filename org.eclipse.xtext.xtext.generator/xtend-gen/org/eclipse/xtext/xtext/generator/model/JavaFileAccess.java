@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
-import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -121,7 +121,7 @@ public class JavaFileAccess extends TextFileAccess {
   public String importType(final TypeReference typeRef) {
     final List<String> simpleNames = typeRef.getSimpleNames();
     String usableName = null;
-    if ((Objects.equal(typeRef.getPackageName(), "java.lang") || Objects.equal(typeRef.getPackageName(), this.javaType.getPackageName()))) {
+    if ((Objects.equals(typeRef.getPackageName(), "java.lang") || Objects.equals(typeRef.getPackageName(), this.javaType.getPackageName()))) {
       usableName = IterableExtensions.join(simpleNames, ".");
     } else {
       boolean found = false;
@@ -143,7 +143,7 @@ public class JavaFileAccess extends TextFileAccess {
               this.imports.put(usableName, importable);
               found = true;
             } else {
-              boolean _equals = Objects.equal(imported, importable);
+              boolean _equals = Objects.equals(imported, importable);
               if (_equals) {
                 found = true;
               }

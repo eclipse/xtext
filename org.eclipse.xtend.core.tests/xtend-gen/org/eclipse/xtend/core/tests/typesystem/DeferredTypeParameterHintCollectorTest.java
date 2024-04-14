@@ -8,12 +8,12 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -100,7 +100,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = Objects.equal(_simpleName, typeParamName);
+      boolean _equals = Objects.equals(_simpleName, typeParamName);
       if (_equals) {
         LightweightTypeReference _typeReference = mapping.get(key).getTypeReference();
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);
@@ -128,7 +128,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = Objects.equal(_simpleName, typeParamName);
+      boolean _equals = Objects.equals(_simpleName, typeParamName);
       if (_equals) {
         LightweightTypeReference _typeReference = mapping.get(key).getTypeReference();
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);

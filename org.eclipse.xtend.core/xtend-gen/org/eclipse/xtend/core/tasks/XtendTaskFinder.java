@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.tasks;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtext.RuleCall;
@@ -57,8 +57,8 @@ public class XtendTaskFinder extends DefaultTaskFinder {
   private boolean isRichComment(final ILeafNode node) {
     EObject _grammarElement = node.getGrammarElement();
     if ((_grammarElement instanceof RuleCall)) {
-      return (Objects.equal(((RuleCall) node.getGrammarElement()).getRule(), this._xtendGrammarAccess.getCOMMENT_RICH_TEXT_ENDRule()) || 
-        Objects.equal(((RuleCall) node.getGrammarElement()).getRule(), this._xtendGrammarAccess.getCOMMENT_RICH_TEXT_INBETWEENRule()));
+      return (Objects.equals(((RuleCall) node.getGrammarElement()).getRule(), this._xtendGrammarAccess.getCOMMENT_RICH_TEXT_ENDRule()) || 
+        Objects.equals(((RuleCall) node.getGrammarElement()).getRule(), this._xtendGrammarAccess.getCOMMENT_RICH_TEXT_INBETWEENRule()));
     }
     return false;
   }

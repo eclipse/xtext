@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtext.example.homeautomation.formatting2;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -132,7 +132,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
           };
           document.prepend(sem, _function_1);
           XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(expr.getExpressions());
-          boolean _notEquals = (!Objects.equal(child, _lastOrNull));
+          boolean _notEquals = (!Objects.equals(child, _lastOrNull));
           if (_notEquals) {
             final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
               it.newLine();
@@ -141,7 +141,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
           }
         } else {
           XExpression _lastOrNull_1 = IterableExtensions.<XExpression>lastOrNull(expr.getExpressions());
-          boolean _notEquals_1 = (!Objects.equal(child, _lastOrNull_1));
+          boolean _notEquals_1 = (!Objects.equals(child, _lastOrNull_1));
           if (_notEquals_1) {
             final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
               it.newLine();
@@ -210,7 +210,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
         };
         document.append(document.prepend(this.regionFor(c).feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH), _function_8), _function_9);
         document.<XExpression>format(c.getCase());
-        if ((Objects.equal(c, IterableExtensions.<XCasePart>lastOrNull(expr.getCases())) && (expr.getDefault() == null))) {
+        if ((Objects.equals(c, IterableExtensions.<XCasePart>lastOrNull(expr.getCases())) && (expr.getDefault() == null))) {
           this.formatBody(c.getThen(), true, document);
         } else {
           this.formatBodyParagraph(c.getThen(), document);

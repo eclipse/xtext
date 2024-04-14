@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -35,7 +35,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
 
   @Override
   public boolean isEclipsePluginProject() {
-    return (Objects.equal(this.getConfig().getPreferredBuildSystem(), BuildSystem.NONE) || this.getConfig().getUiProject().isEnabled());
+    return (Objects.equals(this.getConfig().getPreferredBuildSystem(), BuildSystem.NONE) || this.getConfig().getUiProject().isEnabled());
   }
 
   @Override
@@ -70,7 +70,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
     final Procedure1<PomFile> _function = (PomFile it) -> {
       StringConcatenation _builder = new StringConcatenation();
       {
-        if (((!Objects.equal(this.getConfig().getLanguageServer(), LanguageServer.NONE)) && this.isEclipsePluginProject())) {
+        if (((!Objects.equals(this.getConfig().getLanguageServer(), LanguageServer.NONE)) && this.isEclipsePluginProject())) {
           _builder.append("<dependencies>");
           _builder.newLine();
           _builder.append("\t");
@@ -116,7 +116,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
       _builder.append("<build>");
       _builder.newLine();
       {
-        if (((!this.isEclipsePluginProject()) && Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN))) {
+        if (((!this.isEclipsePluginProject()) && Objects.equals(this.getConfig().getSourceLayout(), SourceLayout.PLAIN))) {
           _builder.append("\t");
           _builder.append("<sourceDirectory>");
           String _sourceFolder = this.sourceFolder(Outlet.MAIN_JAVA);
@@ -305,7 +305,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
       }
       {
         LanguageServer _languageServer = this.getConfig().getLanguageServer();
-        boolean _notEquals = (!Objects.equal(_languageServer, LanguageServer.NONE));
+        boolean _notEquals = (!Objects.equals(_languageServer, LanguageServer.NONE));
         if (_notEquals) {
           {
             boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
@@ -616,7 +616,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           }
           {
             LanguageServer _languageServer_1 = this.getConfig().getLanguageServer();
-            boolean _equals = Objects.equal(_languageServer_1, LanguageServer.FATJAR);
+            boolean _equals = Objects.equals(_languageServer_1, LanguageServer.FATJAR);
             if (_equals) {
               _builder.append("\t\t");
               _builder.append("<plugin>");
@@ -937,7 +937,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
       }
       {
         LanguageServer _languageServer_2 = this.getConfig().getLanguageServer();
-        boolean _equals_1 = Objects.equal(_languageServer_2, LanguageServer.APP);
+        boolean _equals_1 = Objects.equals(_languageServer_2, LanguageServer.APP);
         if (_equals_1) {
           _builder.append("\t\t");
           _builder.append("<plugin>");

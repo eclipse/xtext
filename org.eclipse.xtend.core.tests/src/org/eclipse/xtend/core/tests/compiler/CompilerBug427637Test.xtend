@@ -1121,12 +1121,12 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''', '''
 			package org.eclipse.xtext.xbase.formatting;
 			
-			import com.google.common.base.Objects;
 			import com.google.common.collect.Iterables;
 			import com.google.inject.Inject;
 			import java.util.ArrayList;
 			import java.util.Arrays;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtext.nodemodel.INode;
 			import org.eclipse.xtext.preferences.PreferenceKey;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -1202,7 +1202,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          _elvis = Integer.valueOf(0);
 			        }
 			        final int newLines2 = (int) _elvis;
-			        if (((Objects.equal(it.space, null) && Objects.equal(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equal(it.space, ""))))) {
+			        if (((Objects.equals(it.space, null) && Objects.equals(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equals(it.space, ""))))) {
 			          return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			        } else {
 			          return FormattingDataFactory.this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
@@ -1472,7 +1472,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			                WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_3, _xifexpression_4);
 			                result.add(_whitespaceData_1);
 			              } else {
-			                if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+			                if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
 			                  int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
 			                  int _length_2 = ((WhitespaceInfo)leaf).getLength();
 			                  RuntimeException _xifexpression_6 = null;
@@ -1515,7 +1515,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			              if (_endsWithNewLine_2) {
 			                newLines_1 = (newLines_1 - 1);
 			              }
-			              if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+			              if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
 			                int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
 			                int _length_4 = ((WhitespaceInfo)leaf).getLength();
 			                RuntimeException _xifexpression_10 = null;
@@ -1550,7 +1550,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			
 			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
 			    Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
-			    boolean _notEquals = (!Objects.equal(node, null));
+			    boolean _notEquals = (!Objects.equals(node, null));
 			    if (_notEquals) {
 			      _xifexpression = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsAfter(node), init);
 			    }
@@ -1559,7 +1559,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			
 			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
 			    Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
-			    boolean _notEquals = (!Objects.equal(node, null));
+			    boolean _notEquals = (!Objects.equals(node, null));
 			    if (_notEquals) {
 			      _xifexpression = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsBefore(node), init);
 			    }
@@ -1572,7 +1572,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			        ArrayList<FormattingData> _xblockexpression = null;
 			        {
 			          final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-			          boolean _notEquals = (!Objects.equal(node, null));
+			          boolean _notEquals = (!Objects.equals(node, null));
 			          if (_notEquals) {
 			            Iterable<FormattingData> _elvis = null;
 			            Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node), init);
@@ -1615,7 +1615,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			        ArrayList<FormattingData> _xblockexpression = null;
 			        {
 			          final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-			          boolean _notEquals = (!Objects.equal(node, null));
+			          boolean _notEquals = (!Objects.equals(node, null));
 			          if (_notEquals) {
 			            Iterable<FormattingData> _elvis = null;
 			            Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node), before);

@@ -11,8 +11,8 @@
  */
 package euler;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -39,7 +39,7 @@ public class Solution_004 {
           if ((candidate > result)) {
             List<Character> charList = (List<Character>)Conversions.doWrapArray(Integer.valueOf(candidate).toString().toCharArray());
             List<Character> _reverseView = ListExtensions.<Character>reverseView(charList);
-            boolean _equals = Objects.equal(_reverseView, charList);
+            boolean _equals = Objects.equals(_reverseView, charList);
             if (_equals) {
               result = candidate;
             }

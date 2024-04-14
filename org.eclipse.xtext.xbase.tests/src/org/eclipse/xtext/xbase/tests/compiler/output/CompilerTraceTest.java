@@ -827,12 +827,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"if (Objects.equals(_switchValue, \"\")) {\n" +
 				"  _matched=true;\n" + 
 				"  _switchResult = \"\";\n" + 
 				"#}#\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
+				"  if (Objects.equals(_switchValue, \" \")) {\n" +
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -848,12 +848,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (Objects.equal(_switchValue, #\"\"#)) {\n" + 
+				"if (Objects.equals(_switchValue, #\"\"#)) {\n" +
 				"  _matched=true;\n" + 
 				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
+				"  if (Objects.equals(_switchValue, \" \")) {\n" +
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -869,12 +869,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"if (Objects.equals(_switchValue, \"\")) {\n" + 
 				"  _matched=true;\n" + 
 				"  _switchResult = #\"\"#;\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
+				"  if (Objects.equals(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -890,12 +890,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = #\"\"#;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"if (Objects.equals(_switchValue, \"\")) {\n" + 
 				"  _matched=true;\n" + 
 				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
+				"  if (Objects.equals(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -911,12 +911,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _swi#tc#hResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"if (Objects.equals(_switchValue, \"\")) {\n" + 
 				"  _matched=true;\n" + 
 				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
+				"  if (Objects.equals(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -932,7 +932,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"if (Objects.equals(_switchValue, \"\")) {\n" + 
 				"  _matched=true;\n" + 
 				"  _switchResult = \"\";\n" + 
 				"}\n" + 
@@ -957,7 +957,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  _switchResult = \"\";\n" + 
 				"#}#\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(it, \"\")) {\n" + 
+				"  if (Objects.equals(it, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -980,7 +980,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(it, \"\")) {\n" + 
+				"  if (Objects.equals(it, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -1042,7 +1042,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final Object it = null;\n" + 
 				"boolean _matched = false;\n" + 
 				"if (it instanceof String) {\n" + 
-				"  if (Objects.equal(it, \"\")) {\n" + 
+				"  if (Objects.equals(it, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 

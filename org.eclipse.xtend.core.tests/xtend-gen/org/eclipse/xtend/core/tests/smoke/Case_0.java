@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.tests.smoke;
 
-import com.google.common.base.Objects;
 import java.util.ArrayList;
+import java.util.Objects;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -59,7 +59,7 @@ public class Case_0 {
 
   public boolean isUpper(final String s) {
     String _upperCase = s.toUpperCase();
-    return Objects.equal(_upperCase, s);
+    return Objects.equals(_upperCase, s);
   }
 
   public String another(final String x, final String y) {

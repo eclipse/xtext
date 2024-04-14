@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.common.primitives.Booleans;
@@ -26,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -357,7 +357,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
     this.lastPhase = phase;
     final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, this.xtendFile);
-    boolean _equals = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.INDEXING, phase);
+    boolean _equals = Objects.equals(ActiveAnnotationContexts.AnnotationCallback.INDEXING, phase);
     if (_equals) {
       IndexingLightweightTypeReferenceFactory _indexingLightweightTypeReferenceFactory = new IndexingLightweightTypeReferenceFactory(standardTypeReferenceOwner);
       this.typeRefFactory = _indexingLightweightTypeReferenceFactory;
@@ -365,18 +365,18 @@ public class CompilationUnitImpl implements CompilationUnit {
       LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(standardTypeReferenceOwner);
       this.typeRefFactory = _lightweightTypeReferenceFactory;
     }
-    boolean _equals_1 = Objects.equal(ActiveAnnotationContexts.AnnotationCallback.VALIDATION, phase);
+    boolean _equals_1 = Objects.equals(ActiveAnnotationContexts.AnnotationCallback.VALIDATION, phase);
     if (_equals_1) {
       this.problemSupport.validationPhaseStarted();
     }
   }
 
   public void after(final ActiveAnnotationContexts.AnnotationCallback phase) {
-    boolean _equals = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
+    boolean _equals = Objects.equals(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
     if (_equals) {
       this.identityCache.clear();
     }
-    boolean _equals_1 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+    boolean _equals_1 = Objects.equals(phase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
     if (_equals_1) {
       this.resourceChangeRegistry.discardCreateOrModifyInformation(this.xtendFile.eResource().getURI());
     }
@@ -771,7 +771,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public boolean isBelongedToCompilationUnit(final EObject element) {
     Resource _eResource = element.eResource();
     Resource _eResource_1 = this.xtendFile.eResource();
-    return Objects.equal(_eResource, _eResource_1);
+    return Objects.equals(_eResource, _eResource_1);
   }
 
   public NamedElement toNamedElement(final JvmIdentifiableElement delegate) {
@@ -1453,48 +1453,48 @@ public class CompilationUnitImpl implements CompilationUnit {
     final Collection<?> collection = _xifexpression;
     Object _switchResult = null;
     boolean _matched = false;
-    if (Objects.equal(componentType, int.class)) {
+    if (Objects.equals(componentType, int.class)) {
       _matched=true;
       _switchResult = Ints.toArray(((List<Integer>) collection));
     }
     if (!_matched) {
-      if (Objects.equal(componentType, long.class)) {
+      if (Objects.equals(componentType, long.class)) {
         _matched=true;
         _switchResult = Longs.toArray(((List<Long>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType, char.class)) {
+      if (Objects.equals(componentType, char.class)) {
         _matched=true;
         _switchResult = Chars.toArray(((List<Character>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType, boolean.class)) {
+      if (Objects.equals(componentType, boolean.class)) {
         _matched=true;
         _switchResult = Booleans.toArray(((List<Boolean>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType, byte.class)) {
+      if (Objects.equals(componentType, byte.class)) {
         _matched=true;
         _switchResult = Bytes.toArray(((List<Byte>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType, short.class)) {
+      if (Objects.equals(componentType, short.class)) {
         _matched=true;
         _switchResult = Shorts.toArray(((List<Short>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType, float.class)) {
+      if (Objects.equals(componentType, float.class)) {
         _matched=true;
         _switchResult = Floats.toArray(((List<Float>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType, double.class)) {
+      if (Objects.equals(componentType, double.class)) {
         _matched=true;
         _switchResult = Doubles.toArray(((List<Double>) collection));
       }
@@ -1631,7 +1631,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if ((t instanceof VirtualMachineError)) {
       throw ((VirtualMachineError)t);
     }
-    boolean _equals = Objects.equal(this.lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+    boolean _equals = Objects.equals(this.lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
     if (_equals) {
       Throwables.throwIfUnchecked(t);
       String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);

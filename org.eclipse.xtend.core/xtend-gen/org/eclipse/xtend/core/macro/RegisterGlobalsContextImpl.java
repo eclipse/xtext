@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -120,7 +120,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     for (final JvmDeclaredType type : types) {
       {
         final String candidateQualifiedName = type.getQualifiedName('.');
-        boolean _equals = Objects.equal(string, candidateQualifiedName);
+        boolean _equals = Objects.equals(string, candidateQualifiedName);
         if (_equals) {
           return type;
         }

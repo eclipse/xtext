@@ -9,7 +9,7 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
+import java.util.Objects;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -209,7 +209,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     } else {
       TypeReference _extendedClass = it.getExtendedClass();
       TypeReference _object = context.getObject();
-      boolean _notEquals = (!Objects.equal(_extendedClass, _object));
+      boolean _notEquals = (!Objects.equals(_extendedClass, _object));
       if (_notEquals) {
         util.addReflectiveToString(it, configuration);
       } else {

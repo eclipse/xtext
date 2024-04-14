@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.declaration.Element;
@@ -73,14 +73,14 @@ public class TracabilityImpl implements Tracability {
       _matched=true;
       Resource _eResource = ((JvmElementImpl<?>)element).getDelegate().eResource();
       Resource _eResource_1 = this.unit.getXtendFile().eResource();
-      return Objects.equal(_eResource, _eResource_1);
+      return Objects.equals(_eResource, _eResource_1);
     }
     if (!_matched) {
       if (element instanceof JvmTypeParameterDeclarationImpl) {
         _matched=true;
         Resource _eResource = ((JvmTypeParameterDeclarationImpl)element).getDelegate().eResource();
         Resource _eResource_1 = this.unit.getXtendFile().eResource();
-        return Objects.equal(_eResource, _eResource_1);
+        return Objects.equals(_eResource, _eResource_1);
       }
     }
     if (!_matched) {
@@ -134,7 +134,7 @@ public class TracabilityImpl implements Tracability {
         return false;
       }
       Element _primaryGeneratedJavaElement = this.getPrimaryGeneratedJavaElement(source);
-      _xblockexpression = Objects.equal(_primaryGeneratedJavaElement, target);
+      _xblockexpression = Objects.equals(_primaryGeneratedJavaElement, target);
     }
     return _xblockexpression;
   }

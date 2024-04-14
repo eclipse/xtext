@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.List;
+import java.util.Objects;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -82,7 +82,7 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
     {
       String _path = this.getPath();
       String _path_1 = other.getPath();
-      boolean _notEquals = (!Objects.equal(_path, _path_1));
+      boolean _notEquals = (!Objects.equals(_path, _path_1));
       if (_notEquals) {
         String _path_2 = this.getPath();
         String _plus = ("Merging plugin.xml files with different paths: " + _path_2);

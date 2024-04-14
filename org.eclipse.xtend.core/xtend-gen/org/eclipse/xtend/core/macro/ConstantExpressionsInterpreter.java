@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -17,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
@@ -315,42 +315,42 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           Class<?> _class = IterableExtensions.<Object>head(elements).getClass();
           final Class<?> cl = _class;
           boolean _matched_1 = false;
-          if (Objects.equal(cl, Integer.class)) {
+          if (Objects.equals(cl, Integer.class)) {
             _matched_1=true;
             _switchResult_1 = Integer.TYPE;
           }
           if (!_matched_1) {
-            if (Objects.equal(cl, Long.class)) {
+            if (Objects.equals(cl, Long.class)) {
               _matched_1=true;
               _switchResult_1 = Long.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl, Short.class)) {
+            if (Objects.equals(cl, Short.class)) {
               _matched_1=true;
               _switchResult_1 = Short.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl, Boolean.class)) {
+            if (Objects.equals(cl, Boolean.class)) {
               _matched_1=true;
               _switchResult_1 = Boolean.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl, Double.class)) {
+            if (Objects.equals(cl, Double.class)) {
               _matched_1=true;
               _switchResult_1 = Double.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl, Byte.class)) {
+            if (Objects.equals(cl, Byte.class)) {
               _matched_1=true;
               _switchResult_1 = Byte.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl, Float.class)) {
+            if (Objects.equals(cl, Float.class)) {
               _matched_1=true;
               _switchResult_1 = Float.TYPE;
             }
@@ -570,7 +570,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           _matched_2=true;
           final Function1<JvmEnumerationLiteral, Boolean> _function = (JvmEnumerationLiteral it_1) -> {
             String _simpleName = it_1.getSimpleName();
-            return Boolean.valueOf(Objects.equal(_simpleName, featureName));
+            return Boolean.valueOf(Objects.equals(_simpleName, featureName));
           };
           final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(((JvmEnumerationType)type).getLiterals(), _function);
           if ((enumValue == null)) {
@@ -586,7 +586,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
             _matched_2=true;
             final Function1<JvmField, Boolean> _function = (JvmField it_1) -> {
               String _simpleName = it_1.getSimpleName();
-              return Boolean.valueOf(Objects.equal(_simpleName, featureName));
+              return Boolean.valueOf(Objects.equals(_simpleName, featureName));
             };
             final JvmField field = IterableExtensions.<JvmField>findFirst(Iterables.<JvmField>filter(((JvmGenericType)type).getAllFeatures(), JvmField.class), _function);
             if ((field == null)) {
@@ -686,7 +686,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       return classFinder.forName(_plus);
     }
     String _identifier = type.getIdentifier();
-    boolean _equals = Objects.equal(_identifier, "java.lang.Class");
+    boolean _equals = Objects.equals(_identifier, "java.lang.Class");
     if (_equals) {
       return JvmTypeReference.class;
     }

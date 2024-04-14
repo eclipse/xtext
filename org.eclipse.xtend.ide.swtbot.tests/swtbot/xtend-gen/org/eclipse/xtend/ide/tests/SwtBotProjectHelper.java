@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.ide.tests;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -56,7 +56,7 @@ public class SwtBotProjectHelper {
       final SWTBotShell shell = it.activeShell();
       final Function1<SWTBotView, Boolean> _function = (SWTBotView it_1) -> {
         String _title = it_1.getTitle();
-        return Boolean.valueOf(Objects.equal(_title, "Welcome"));
+        return Boolean.valueOf(Objects.equals(_title, "Welcome"));
       };
       SWTBotView _findFirst = IterableExtensions.<SWTBotView>findFirst(it.views(), _function);
       if (_findFirst!=null) {
@@ -244,12 +244,12 @@ public class SwtBotProjectHelper {
       for (final Integer i : _doubleDotLessThan) {
         String _substring = content.substring((i).intValue(), ((i).intValue() + 1));
         boolean _matched = false;
-        if (Objects.equal(_substring, ignoreNext)) {
+        if (Objects.equals(_substring, ignoreNext)) {
           _matched=true;
           ignoreNext = null;
         }
         if (!_matched) {
-          if (Objects.equal(_substring, "\n")) {
+          if (Objects.equals(_substring, "\n")) {
             _matched=true;
             column = 0;
             line = (line + 1);
@@ -257,7 +257,7 @@ public class SwtBotProjectHelper {
           }
         }
         if (!_matched) {
-          if (Objects.equal(_substring, "\r")) {
+          if (Objects.equals(_substring, "\r")) {
             _matched=true;
             column = 0;
             line = (line + 1);

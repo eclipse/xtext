@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -140,7 +140,7 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
   public MutableEnumerationValueDeclaration findDeclaredValue(final String name) {
     final Function1<MutableEnumerationValueDeclaration, Boolean> _function = (MutableEnumerationValueDeclaration value) -> {
       String _simpleName = value.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredValues(), _function);
   }

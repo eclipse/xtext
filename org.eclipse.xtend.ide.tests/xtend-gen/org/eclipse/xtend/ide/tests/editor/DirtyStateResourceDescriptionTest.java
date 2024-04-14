@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.tests.editor;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collections;
+import java.util.Objects;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -53,7 +53,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     Assert.assertEquals(1, IterableExtensions.size(d.getExportedObjects()));
     final String textHash = IterableExtensions.<IEObjectDescription>head(d.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
     Assert.assertNotNull(textHash);
-    boolean _equals = Objects.equal("", textHash);
+    boolean _equals = Objects.equals("", textHash);
     Assert.assertFalse(_equals);
   }
 
@@ -88,7 +88,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     final IResourceDescription d1 = this.getDirtyResourceDescription(_builder_1);
     final String textHash1 = IterableExtensions.<IEObjectDescription>head(d1.getExportedObjects()).getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH);
-    boolean _equals = Objects.equal(textHash, textHash1);
+    boolean _equals = Objects.equals(textHash, textHash1);
     Assert.assertFalse(_equals);
     final IResourceDescription.Delta delta = this.dirtyManager.createDelta(d, d1);
     Assert.assertTrue(delta.haveEObjectDescriptionsChanged());

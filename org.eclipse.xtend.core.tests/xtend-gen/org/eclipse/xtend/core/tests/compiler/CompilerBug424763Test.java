@@ -230,9 +230,9 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.ArrayList;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
     _builder_1.newLine();
@@ -256,7 +256,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("Function0<JAVA_TYPE> _xifexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = Objects.equal(theConstructor, null);");
+    _builder_1.append("boolean _equals = Objects.equals(theConstructor, null);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");
@@ -530,7 +530,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
     _builder_1.newLine();
@@ -550,7 +550,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("Function0<JAVA_TYPE> _xifexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = Objects.equal(theConstructor, null);");
+    _builder_1.append("boolean _equals = Objects.equals(theConstructor, null);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");

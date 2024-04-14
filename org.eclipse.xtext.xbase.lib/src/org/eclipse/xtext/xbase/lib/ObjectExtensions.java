@@ -8,10 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.base.Objects;
 
 /**
  * This is an extension library for all {@link Object objects}.
@@ -29,9 +30,9 @@ import com.google.common.base.Objects;
 	 * @return <code>true</code> if {@code a} and {@code b} are not equal.
 	 */
 	@Pure
-	@Inline(value="(!$3.equal($1, $2))", imported=Objects.class)
+	@Inline(value="(!$3.equals($1, $2))", imported=Objects.class)
 	public static boolean operator_notEquals(Object a, Object b) {
-		return !Objects.equal(a, b);
+		return !Objects.equals(a, b);
 	}
 
 	/**
@@ -45,9 +46,9 @@ import com.google.common.base.Objects;
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
 	@Pure
-	@Inline(value="$3.equal($1, $2)", imported=Objects.class)
+	@Inline(value="$3.equals($1, $2)", imported=Objects.class)
 	public static boolean operator_equals(Object a, Object b) {
-		return Objects.equal(a, b);
+		return Objects.equals(a, b);
 	}
 
 	/**

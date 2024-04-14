@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
@@ -102,7 +102,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   public FieldDeclaration findDeclaredField(final String name) {
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.<FieldDeclaration>findFirst(Iterables.<FieldDeclaration>filter(this.getDeclaredMembers(), FieldDeclaration.class), _function);
   }
@@ -113,7 +113,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration it) -> {
-        return Boolean.valueOf((Objects.equal(it.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it_1) -> {
+        return Boolean.valueOf((Objects.equals(it.getSimpleName(), name) && Objects.equals(IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it_1) -> {
           return it_1.getType();
         }))), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
       };

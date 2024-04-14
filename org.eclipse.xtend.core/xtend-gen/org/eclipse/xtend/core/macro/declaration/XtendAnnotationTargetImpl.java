@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
+import java.util.Objects;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;
@@ -34,7 +34,7 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
   public AnnotationReference findAnnotation(final Type annotationType) {
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
       AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-      return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
+      return Boolean.valueOf(Objects.equals(_annotationTypeDeclaration, annotationType));
     };
     return IterableExtensions.findFirst(this.getAnnotations(), _function);
   }

@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -102,12 +102,12 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   protected XExpression findValue(final String property) {
     XExpression _xblockexpression = null;
     {
-      if ((Objects.equal(property, "value") && (this.getDelegate().getValue() != null))) {
+      if ((Objects.equals(property, "value") && (this.getDelegate().getValue() != null))) {
         return this.getDelegate().getValue();
       }
       final Function1<XAnnotationElementValuePair, Boolean> _function = (XAnnotationElementValuePair it) -> {
         String _simpleName = it.getElement().getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, property));
+        return Boolean.valueOf(Objects.equals(_simpleName, property));
       };
       XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(this.getDelegate().getElementValuePairs(), _function);
       XExpression _value = null;
@@ -124,7 +124,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     if ((annotationType instanceof JvmAnnotationType)) {
       final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
         String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, property));
+        return Boolean.valueOf(Objects.equals(_simpleName, property));
       };
       final JvmOperation operation = IterableExtensions.<JvmOperation>findFirst(Iterables.<JvmOperation>filter(((JvmAnnotationType)annotationType).getMembers(), JvmOperation.class), _function);
       if ((operation != null)) {
