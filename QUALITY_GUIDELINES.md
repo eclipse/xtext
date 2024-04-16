@@ -18,4 +18,4 @@ This page lists criteria that code, commits, and pull requests should fulfill.
 ## API
  1. We must not break binary backward compatibility of runtime artifacts. These are the artifacts an Xtext DSL user has installed. This does *not* include `xtext.generator` and test utilities.
  2. If we introduce breaking changes without violating the first rule, the DSL developer should be guided as well as possible through the migration efforts. E.g., through comments on `@Deprecated` annotations or log messages.
- 3. We should be careful about what we make API because we will need to maintain it for a long time.
+ 3. We should be careful about what we make API because we will need to maintain it for a long time. When we introduce a new accessible class or method, these must be annotated with `@since <major>.<minor>`, where `<major>.<minor>` is the current major and minor versions, respectively.
