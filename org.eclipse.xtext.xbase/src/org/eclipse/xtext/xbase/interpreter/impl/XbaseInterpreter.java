@@ -323,7 +323,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (type != null && (type.isType(Character.TYPE) || type.isType(Character.class))) {
 			return literal.getValue().charAt(0);
 		}
-		return literal.getValue();
+		// see org.eclipse.xtext.xbase.compiler.LiteralsCompiler.toJavaExpression(XStringLiteral, ITreeAppendable, boolean)
+		return literal.getValue().replace("\r", "");
 	}
 
 	/**
