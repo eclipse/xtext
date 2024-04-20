@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
+import java.util.function.Consumer;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
@@ -16,7 +17,6 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.formatter.AbstractFormatterTest;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -217,7 +217,7 @@ public class XtendInterfaceFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
     };
     this.assertUnformattedEqualsFormatted(_builder, _function);
@@ -238,7 +238,7 @@ public class XtendInterfaceFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
     };
     this.assertUnformattedEqualsFormatted(_builder, _function);
@@ -259,7 +259,7 @@ public class XtendInterfaceFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
     };
     this.assertUnformattedEqualsFormatted(_builder, _function);
@@ -316,7 +316,7 @@ public class XtendInterfaceFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
     };
     this.assertUnformattedEqualsFormatted(_builder, _function);

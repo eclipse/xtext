@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtext.example.domainmodel.tests;
 
+import java.util.function.Consumer;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.formatter.AbstractFormatterTest;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -125,7 +125,7 @@ public class FormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<String>put(FormatterPreferenceKeys.indentation, " ");
     };
     this.assertFormattedTo(_builder, _builder_1, _function);
