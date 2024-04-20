@@ -38,12 +38,8 @@ public class ExtendedXbaseResourceDescriptionStrategyTest extends AbstractXbaseI
 			// make it work also with Maven/Tycho and OSGI
 			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
 			// to access the testdata.stubs.StubbedList in this bundle
+			// allows for bindClassLoaderToInstance to get the class loader of this bundle
 			return new ContentAssistFragmentTestLangRuntimeModule() {
-				@Override
-				public ClassLoader bindClassLoaderToInstance() {
-					return ContentAssistFragmentTestLangInjectorProviderCustom.class
-							.getClassLoader();
-				}
 			};
 		}
 	}
