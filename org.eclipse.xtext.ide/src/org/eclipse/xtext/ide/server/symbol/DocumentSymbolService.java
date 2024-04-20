@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -146,11 +147,15 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 				new ReferenceAcceptor(resourceServiceProviderRegistry, (IReferenceDescription reference) -> {
 					URI sourceEObjectUri = reference.getSourceEObjectUri();
 					doRead(resourceAccess, sourceEObjectUri, (EObject obj) -> {
-						Location location = getDocumentExtensions(sourceEObjectUri).newLocation(obj, reference.getEReference(),
-								reference.getIndexInList());
-						if (location != null) {
-							locations.add(location);
-						}
+						try {
+							Location location = getDocumentExtensions(sourceEObjectUri).newLocation(obj,
+									 reference.getEReference(), reference.getIndexInList());
+							if (location != null) {
+								locations.add(location);
+							}
+						} catch (Exception e) {
+							Logger.getLogger(DocumentSymbolService.class).error("exception finding references", e);
+					    }
 					});
 				}), new CancelIndicatorProgressMonitor(cancelIndicator));
 		return locations;
