@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
+import java.util.function.Consumer;
 import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -61,7 +62,7 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
@@ -80,7 +81,7 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
@@ -117,7 +118,7 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(true));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
@@ -586,18 +587,26 @@ public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
   }
 
   private void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));
     };
     this.assertFormattedTo(this.toMember(toBeFormatted), this.toMember(expectation), _function);
   }
 
   private void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation, final CharSequence toBeFormatted) {
-    this.assertFormattedTo(this.toMember(toBeFormatted), this.toMember(expectation), ((Procedure1<MapBasedPreferenceValues>)cfg));
+    this.assertFormattedTo(this.toMember(toBeFormatted), this.toMember(expectation), new Consumer<MapBasedPreferenceValues>() {
+        public void accept(MapBasedPreferenceValues t) {
+          cfg.apply(t);
+        }
+    });
   }
 
   private void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation) {
-    this.assertUnformattedEqualsFormatted(this.toMember(expectation), ((Procedure1<MapBasedPreferenceValues>)cfg));
+    this.assertUnformattedEqualsFormatted(this.toMember(expectation), new Consumer<MapBasedPreferenceValues>() {
+        public void accept(MapBasedPreferenceValues t) {
+          cfg.apply(t);
+        }
+    });
   }
 
   private CharSequence toMember(final CharSequence expression) {
