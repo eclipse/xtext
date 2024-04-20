@@ -27,6 +27,11 @@
 			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>
