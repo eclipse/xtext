@@ -2190,4 +2190,25 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"}\n" +
 				"return _xblockexpression;\n");
 	}
+
+	@Test
+	public void testStringLiteralWithUnixEOL_Issue2293() throws Exception {
+		compilesTo(
+				"{var s = \"a multiline\nstring\"}",
+				"String s = \"a multiline\\nstring\";");
+	}
+
+	@Test
+	public void testStringLiteralWithWindowsEOL_Issue2293() throws Exception {
+		compilesTo(
+				"{var s = \"a multiline\r\nstring\"}",
+				"String s = \"a multiline\\nstring\";");
+	}
+
+	@Test
+	public void testStringLiteralWithEscapedWindowsEOL_Issue2293() throws Exception {
+		compilesTo(
+				"{var s = \"a multiline\\\\r\nstring\"}",
+				"String s = \"a multiline\\\\r\\nstring\";");
+	}
 }

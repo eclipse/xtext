@@ -86,7 +86,12 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
 			appendable.append("Character.valueOf('").append(javaString).append("')");
 		} else {
-			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
+			// Avoid Windows EOL characters from the original parsed text:
+			// this would result in different generated Java files in Windows
+			// see https://github.com/eclipse/xtext/issues/2293
+			// This is aligned with Java text blocks' "Normalization of Line Terminators"
+			String normalizationOfLineTerminators = literal.getValue().replace("\r", "");
+			String javaString = Strings.convertToJavaString(normalizationOfLineTerminators, useUnicodeEscapes);
 			appendable.append("\"").append(javaString).append("\"");
 		}
 	}

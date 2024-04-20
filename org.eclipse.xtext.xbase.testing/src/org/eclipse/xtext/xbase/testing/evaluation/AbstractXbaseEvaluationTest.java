@@ -912,7 +912,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testStringLiteral_03() throws Exception {
-		assertEvaluatesTo("lite\r\nr\\al", "'lite\r\nr\\\\al'");
+		assertEvaluatesTo("lite\nr\\al", "'lite\r\nr\\\\al'");
 	}
 	
 	@Test public void testStringLiteral_04() throws Exception {
