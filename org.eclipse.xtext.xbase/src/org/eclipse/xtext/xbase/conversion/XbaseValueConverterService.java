@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,6 +19,7 @@ import org.eclipse.xtext.conversion.impl.INTValueConverter;
 import org.eclipse.xtext.conversion.impl.KeywordAlternativeConverter;
 import org.eclipse.xtext.conversion.impl.KeywordBasedValueConverter;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
+import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
@@ -34,6 +35,8 @@ import com.google.inject.Singleton;
  * <p>Clients, who extend Xbase should inherit from this value converter service.</p>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - remove Windows EOLs from string literals,
+ * https://github.com/eclipse/xtext/issues/2293
  */
 @Singleton
 public class XbaseValueConverterService extends DefaultTerminalConverters {
@@ -249,6 +252,31 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 			if (Strings.isEmpty(withoutUnderscore))
 				throw new ValueConverterException("Couldn't convert input '" + string + "' to an int value.", node, null);
 			return super.toValue(withoutUnderscore, node);
+		}
+	}
+
+	@Inject
+	private WindowsEOLsAwareSTRINGValueConverter windowsEOLsAwareSTRINGValueConverter;
+
+	@Override
+	@ValueConverter(rule = "STRING")
+	public IValueConverter<String> STRING() {
+		return windowsEOLsAwareSTRINGValueConverter;
+	}
+
+	/**
+	 * Avoid Windows EOL characters from the original parsed text: this would
+	 * result in different generated Java files in Windows see
+	 * https://github.com/eclipse/xtext/issues/2293 This is aligned with Java
+	 * text blocks' "Normalization of Line Terminators"
+	 * 
+	 * @author Lorenzo Bettini - Initial contribution and API
+	 * @since 2.35
+	 */
+	public static class WindowsEOLsAwareSTRINGValueConverter extends STRINGValueConverter {
+		@Override
+		public String toValue(String string, INode node) {
+			return Strings.toUnixLineSeparator(super.toValue(string, node));
 		}
 	}
 }
