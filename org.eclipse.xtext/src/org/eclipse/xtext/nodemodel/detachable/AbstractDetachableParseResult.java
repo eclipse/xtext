@@ -81,7 +81,7 @@ public abstract class AbstractDetachableParseResult<NMR extends NodeModelReferen
 		if (logger.isTraceEnabled()) {
 			logger.trace("DetachableParseResultBase.discard");
 		}
-		timer.stop();
+		timer.reset();
 	}
 	
 	protected void nodeModelRequested() {

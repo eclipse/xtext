@@ -11,6 +11,7 @@ package org.eclipse.xtext.enumrules;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference;
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage;
@@ -70,6 +71,13 @@ public class DetachNodeModelTest extends AbstractEnumRulesTest {
 		
 		EcoreUtil.resolveAll(resource);
 		assertTrue(resource.getErrors().isEmpty());
+	}
+	
+	@Test public void testNoExceptionWhenRemovedFromResourceSet() throws Exception {
+		String modelAsString = "kindOfKeyword Hoo reference Hoo";
+		XtextResource resource = parse(modelAsString);
+		ResourceSet rs = resource.getResourceSet();
+		rs.getResources().remove(resource);
 	}
 	
 	protected void assertEqualNodes(RootNode expected, RootNode actual) throws IOException {
