@@ -52,6 +52,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReflectionUtil;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -324,7 +325,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return literal.getValue().charAt(0);
 		}
 		// see org.eclipse.xtext.xbase.compiler.LiteralsCompiler.toJavaExpression(XStringLiteral, ITreeAppendable, boolean)
-		return literal.getValue().replace("\r", "");
+		return Strings.toUnixLineSeparator(literal.getValue());
 	}
 
 	/**

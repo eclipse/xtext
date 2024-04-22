@@ -2201,14 +2201,14 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 	@Test
 	public void testStringLiteralWithWindowsEOL_Issue2293() throws Exception {
 		compilesTo(
-				"{var s = \"a multiline\r\nstring\"}",
-				"String s = \"a multiline\\nstring\";");
+				"{var s = \"a multiline\r\nstring\\r\\nstring\"}",
+				"String s = \"a multiline\\nstring\\nstring\";");
 	}
 
 	@Test
-	public void testStringLiteralWithEscapedWindowsEOL_Issue2293() throws Exception {
+	public void testStringLiteralWithCarriageReturn_Issue2293() throws Exception {
 		compilesTo(
-				"{var s = \"a multiline\\\\r\nstring\"}",
-				"String s = \"a multiline\\\\r\\nstring\";");
+				"{\"astring\".toString.replace(\"\\r\", \"\");}",
+				"return \"astring\".toString().replace(\"\\r\", \"\");");
 	}
 }
