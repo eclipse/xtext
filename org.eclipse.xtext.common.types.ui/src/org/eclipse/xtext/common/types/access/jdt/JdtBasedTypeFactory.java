@@ -154,7 +154,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 	 * A cached AST parser that's reused by top-level type {@link #createType(IType) creation}.
 	 */
 	@SuppressWarnings("all")
-	private final ASTParser parser = ASTParser.newParser(AST.JLS3);
+	private final ASTParser parser = ASTParser.newParser(AST.getJLSLatest());
 
 	/**
 	 * The cached binding for <code>java.lang.String</code>.
