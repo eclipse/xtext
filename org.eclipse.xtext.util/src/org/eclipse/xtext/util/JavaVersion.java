@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2017, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -57,7 +57,11 @@ public enum JavaVersion {
 	/**
 	 * Well, Java 17, next LTS version
 	 */
-	JAVA17("Java 17", new String[] {"17", "1.17"}, "JavaSE-17", "-1.17", Constants.JAVA17)
+	JAVA17("Java 17", new String[] {"17", "1.17"}, "JavaSE-17", "-1.17", Constants.JAVA17),
+	/**
+	 * Java 21, next LTS version
+	 */
+	JAVA21("Java 21", new String[] {"21", "1.21"}, "JavaSE-21", "-1.21", Constants.JAVA21)
 	;
 
 	private static final class Constants {
@@ -71,6 +75,7 @@ public enum JavaVersion {
 		private static final long JAVA10 = ((long)(MAJOR_VERSION_1_5 + 5) << 16) + MINOR_VERSION_0;
 		private static final long JAVA11 = ((long)(MAJOR_VERSION_1_5 + 6) << 16) + MINOR_VERSION_0;
 		private static final long JAVA17 = ((long)(MAJOR_VERSION_1_5 + 12) << 16) + MINOR_VERSION_0;
+		private static final long JAVA21 = ((long)(MAJOR_VERSION_1_5 + 16) << 16) + MINOR_VERSION_0;
 	}
 
 	//	 if you introduce a new JavaVersion don't forget to adapt

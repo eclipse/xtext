@@ -29,6 +29,7 @@ public class JavaVersionExtendedTest {
 		assertEquals(ClassFileConstants.JDK10, JavaVersion.JAVA10.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK11, JavaVersion.JAVA11.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK17, JavaVersion.JAVA17.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK21, JavaVersion.JAVA21.toJdtClassFileConstant());
 //		try {
 //			long value = ClassFileConstants.class.getField("JDK17").getLong(null);
 //			assertEquals(value, JavaVersion.JAVA17.toJdtClassFileConstant());
