@@ -276,7 +276,7 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	public static class WindowsEOLsAwareSTRINGValueConverter extends STRINGValueConverter {
 		@Override
 		public String toValue(String string, INode node) {
-			return Strings.toUnixLineSeparator(super.toValue(string, node));
+			return super.toValue(Strings.toUnixLineSeparator(string), node);
 		}
 	}
 }

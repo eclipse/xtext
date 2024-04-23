@@ -2211,4 +2211,18 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"{\"astring\".toString.replace(\"\\r\", \"\");}",
 				"return \"astring\".toString().replace(\"\\r\", \"\");");
 	}
+
+	@Test
+	public void testStringLiteralWithCarriageReturn2_Issue2293() throws Exception {
+		compilesTo(
+				"{\"astring\".toString.replaceAll(\"\\r?\\n\", \"\\n\");}",
+				"return \"astring\".toString().replaceAll(\"\\r?\\n\", \"\\n\");");
+	}
+
+	@Test
+	public void testStringLiteralWithCarriageReturn3_Issue2293() throws Exception {
+		compilesTo(
+				"{\"astring\".toString.replaceAll(\"\\r\\n\", \"\\n\");}",
+				"return \"astring\".toString().replaceAll(\"\\r\\n\", \"\\n\");");
+	}
 }
