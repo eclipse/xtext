@@ -296,6 +296,7 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
 		return IntUnderscoreValueConverter.class;
 	}
 
+	@Override
 	public Class<? extends STRINGValueConverter> bindSTRINGValueConverter() {
 		return StringValueConverter.class;
 	}

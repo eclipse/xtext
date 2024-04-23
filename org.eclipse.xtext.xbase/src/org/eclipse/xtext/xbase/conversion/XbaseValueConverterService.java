@@ -19,7 +19,6 @@ import org.eclipse.xtext.conversion.impl.INTValueConverter;
 import org.eclipse.xtext.conversion.impl.KeywordAlternativeConverter;
 import org.eclipse.xtext.conversion.impl.KeywordBasedValueConverter;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
-import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
@@ -255,28 +254,4 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		}
 	}
 
-	@Inject
-	private WindowsEOLsAwareSTRINGValueConverter windowsEOLsAwareSTRINGValueConverter;
-
-	@Override
-	@ValueConverter(rule = "STRING")
-	public IValueConverter<String> STRING() {
-		return windowsEOLsAwareSTRINGValueConverter;
-	}
-
-	/**
-	 * Avoid Windows EOL characters from the original parsed text: this would
-	 * result in different generated Java files in Windows see
-	 * https://github.com/eclipse/xtext/issues/2293 This is aligned with Java
-	 * text blocks' "Normalization of Line Terminators"
-	 * 
-	 * @author Lorenzo Bettini - Initial contribution and API
-	 * @since 2.35
-	 */
-	public static class WindowsEOLsAwareSTRINGValueConverter extends STRINGValueConverter {
-		@Override
-		public String toValue(String string, INode node) {
-			return super.toValue(Strings.toUnixLineSeparator(string), node);
-		}
-	}
 }
