@@ -48,6 +48,19 @@ jobs:
         with: 
           run: ./mvnw clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.full.releng
 
+      - name: Archive Test Results
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() || cancelled() }}
+        with:
+          name: test-results-${{ runner.os }}
+          path: '**/*.tests/target/surefire-reports'
+      - name: Archive Logs
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() || cancelled() }}
+        with:
+          name: logs-${{ runner.os }}
+          path: '**/*.tests/target/**/*.log'
+
   build-maven-artifacts:
     if: github.event_name != 'pull_request' || github.event.pull_request.base.repo.clone_url != github.event.pull_request.head.repo.clone_url
     runs-on: ubuntu-22.04
@@ -74,3 +87,16 @@ jobs:
 
       - name: Build Maven artifacts
         run: ./mvnw clean verify "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -f org.eclipse.xtext.maven.releng
+
+      - name: Archive Test Results
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() || cancelled() }}
+        with:
+          name: test-results-${{ runner.os }}
+          path: '**/target/surefire-reports'
+      - name: Archive Logs
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() || cancelled() }}
+        with:
+          name: logs-${{ runner.os }}
+          path: '**/target/**/*.log'
