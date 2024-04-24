@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -21,6 +21,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.google.inject.Inject;
 
@@ -75,6 +77,7 @@ public abstract class AbstractOutlineTest extends AbstractEditorTest {
 	}
 
 	@Override
+	@Before @BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		createjavaProject(TEST_PROJECT);
