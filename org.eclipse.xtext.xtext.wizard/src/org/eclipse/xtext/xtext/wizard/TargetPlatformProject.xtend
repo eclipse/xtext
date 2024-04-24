@@ -109,7 +109,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="org.opentest4j" version="0.0.0"/>
 					«ENDIF»
 					<unit id="org.objectweb.asm" version="9.7.0"/>
-					<unit id="io.github.classgraph.classgraph" version="4.8.168"/>
+					<unit id="io.github.classgraph.classgraph" version="4.8.172"/>
 					<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-06"/>
 				</location>
 			</locations>

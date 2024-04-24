@@ -28,7 +28,7 @@
 			<unit id="org.hamcrest.core" version="2.2.0.v20230809-1000"/>
 			<unit id="org.apache.commons.logging" version="1.2.0"/>
 			<unit id="org.objectweb.asm" version="9.7.0"/>
-			<unit id="io.github.classgraph.classgraph" version="4.8.168"/>
+			<unit id="io.github.classgraph.classgraph" version="4.8.172"/>
 			<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-06"/>
 		</location>
 	</locations>

@@ -34,7 +34,7 @@
    <bundle id="org.kohsuke.args4j.source" version="0.0.0"/>
    <bundle id="org.objectweb.asm" version="9.7.0.qualifier"/>
    <bundle id="org.objectweb.asm.source" version="9.7.0.qualifier"/>
-   <bundle id="io.github.classgraph.classgraph" version="4.8.168.qualifier"/>
-   <bundle id="io.github.classgraph.classgraph.source" version="4.8.168.qualifier"/>
+   <bundle id="io.github.classgraph.classgraph" version="4.8.172.qualifier"/>
+   <bundle id="io.github.classgraph.classgraph.source" version="4.8.172.qualifier"/>
    <category-def name="Xtext" label="Xtext" />
 </site>
