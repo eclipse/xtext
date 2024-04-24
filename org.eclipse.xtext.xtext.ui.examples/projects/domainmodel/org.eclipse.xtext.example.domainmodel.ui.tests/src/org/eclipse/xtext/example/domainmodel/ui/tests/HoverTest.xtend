@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -38,7 +38,7 @@ class HoverTest extends AbstractHoverTest {
 			entity Foo {
 				bar : List<String>
 			}
-		'''.hasHoverOver("java.util.List", '''An ordered collection (also known as a <i>sequence</i>''')
+		'''.hasHoverOver("java.util.List", '''An ordered collection''')
 	}
 
 	@Test def hover_over_link_in_javadoc() {
@@ -47,7 +47,7 @@ class HoverTest extends AbstractHoverTest {
 			 * {@link java.util.List}
 			 */
 			 entity Foo {}
-		'''.hasHoverOver("java.util.List", '''An ordered collection (also known as a <i>sequence</i>''')
+		'''.hasHoverOver("java.util.List", '''An ordered collection''')
 	}
 
 	@Test def hover_over_java_typed_property() {
