@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.java.resource.JavaConfig;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
@@ -36,9 +37,12 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -177,6 +181,30 @@ public class JavaSourceLanguageTest {
 		Resource superResource = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MySuperClass2.java"));
 		JvmGenericType clazz = (JvmGenericType) Iterables.getFirst(superResource.getContents(), null);
+		Assert.assertNotNull(clazz);
+		Assert.assertNotNull(Iterables.getFirst(clazz.getDeclaredOperations(), null));
+	}
+
+	@Test
+	public void testJava21Record() {
+		Assume.assumeTrue("Active only on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
+		ImmutableMap<String, String> files = ImmutableMap.<String, String>builder()
+				.put("example/MyRecord.java", 
+					"package example;\n"
+					+ "\n"
+					+ "public record MyRecord(String name, int age) {\n"
+					+ "\n"
+					+ "}\n"
+				+ "").build();
+		XtextResourceSet rs = this.resourceSet(files);
+		JavaConfig javaConfig = new JavaConfig();
+		javaConfig.setJavaSourceLevel(JavaVersion.JAVA21);
+		javaConfig.setJavaTargetLevel(JavaVersion.JAVA21);
+		javaConfig.attachToEmfObject(rs);
+		Resource r1 = IterableExtensions.findFirst(rs.getResources(),
+				it -> it.getURI().toString().endsWith("MyRecord.java"));
+		Assert.assertEquals(1, r1.getContents().size());
+		JvmGenericType clazz = (JvmGenericType) Iterables.getFirst(r1.getContents(), null);
 		Assert.assertNotNull(clazz);
 		Assert.assertNotNull(Iterables.getFirst(clazz.getDeclaredOperations(), null));
 	}
