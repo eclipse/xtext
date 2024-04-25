@@ -227,5 +227,6 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 		for(int i = 0; i < lineBreakOffsets.length; i++) {
 			lineBreakOffsets[i] = in.readCompressedInt();
 		}
+		this.lineBreakOffsets = lineBreakOffsets;
 	}
 }

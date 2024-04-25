@@ -20,7 +20,9 @@ import java.util.Collections;
 import java.util.zip.ZipInputStream;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel;
 import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
@@ -89,6 +91,7 @@ public class ResourceStorageLoadable {
 
 	protected void readResourceDescription(StorageAwareResource resource, InputStream inputStream) throws IOException {
 		try {
+			@SuppressWarnings("resource")
 			SerializableResourceDescription description = (SerializableResourceDescription) new ObjectInputStream(
 					inputStream).readObject();
 			description.updateResourceURI(resource.getURI());
@@ -99,21 +102,25 @@ public class ResourceStorageLoadable {
 	}
 
 	protected void readNodeModel(StorageAwareResource resource, InputStream inputStream) throws IOException {
-		SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
-		// if this is a synthetic resource (i.e. tests or so, don't load the node model)
-		if (!resource.getResourceSet().getURIConverter().exists(resource.getURI(),
-				resource.getResourceSet().getLoadOptions())) {
-			LOG.info("Skipping loading node model for synthetic resource " + resource.getURI());
-			return;
-		}
-		try (InputStreamReader reader = new InputStreamReader(resource.getResourceSet().getURIConverter().createInputStream(resource.getURI()),
-				resource.getEncoding())) {
-			String completeContent = CharStreams.toString(reader);
-			DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource,
-					completeContent);
-			serializableNodeModel.readObjectData(new DataInputStream(inputStream), deserializationContext);
-			resource.setParseResult(new ParseResult(head(resource.getContents()), serializableNodeModel.root,
-					deserializationContext.hasErrors()));
+		if (!resource.customReadNodeModel(inputStream)) {
+			SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
+			// if this is a synthetic resource (i.e. tests or so, don't load the node model)
+			URIConverter uriConverter = resource.getResourceSet().getURIConverter();
+			URI resourceUri = resource.getURI();
+			if (!uriConverter.exists(resourceUri, resource.getResourceSet().getLoadOptions())) {
+				LOG.info("Skipping loading node model for synthetic resource " + resourceUri);
+				return;
+			}
+			try (InputStreamReader reader = new InputStreamReader(
+					uriConverter.createInputStream(resourceUri),
+					resource.getEncoding())) {
+				String completeContent = CharStreams.toString(reader);
+				DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource,
+						completeContent);
+				serializableNodeModel.readObjectData(new DataInputStream(inputStream), deserializationContext);
+				resource.setParseResult(new ParseResult(head(resource.getContents()), serializableNodeModel.root,
+						deserializationContext.hasErrors()));
+			}
 		}
 	}
 
