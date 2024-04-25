@@ -139,9 +139,11 @@ public class ResourceStorageWritable {
 	}
 
 	protected void writeNodeModel(StorageAwareResource resource, OutputStream outputStream) throws IOException {
-		DataOutputStream out = new DataOutputStream(outputStream);
-		new SerializableNodeModel(resource).writeObjectData(out, new SerializationConversionContext(resource));
-		out.flush();
+		if (!resource.customWriteNodeModel(outputStream)) {
+			DataOutputStream out = new DataOutputStream(outputStream);
+			new SerializableNodeModel(resource).writeObjectData(out, new SerializationConversionContext(resource));
+			out.flush();
+		}
 	}
 
 }

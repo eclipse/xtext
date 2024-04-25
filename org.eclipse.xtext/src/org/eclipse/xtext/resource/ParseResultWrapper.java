@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
@@ -41,6 +45,14 @@ public class ParseResultWrapper {
 	
 	public IParseResult acquire(IParseResult parseResult) {
 		return parseResult;
+	}
+	
+	public boolean customWriteNodeModel(XtextResource resource, OutputStream outputStream) throws IOException {
+		return false;
+	}
+	
+	public boolean customReadNodeModel(XtextResource resource, InputStream inputStream) throws IOException {
+		return false;
 	}
 	
 }
