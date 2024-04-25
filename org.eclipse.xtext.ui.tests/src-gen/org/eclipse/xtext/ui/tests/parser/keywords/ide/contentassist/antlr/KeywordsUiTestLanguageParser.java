@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.parser.keywords.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,25 +26,25 @@ public class KeywordsUiTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(KeywordsUiTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, KeywordsUiTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
-			builder.put(grammarAccess.getModelAccess().getFirstAssignment_0(), "rule__Model__FirstAssignment_0");
-			builder.put(grammarAccess.getModelAccess().getSecondAssignment_1(), "rule__Model__SecondAssignment_1");
-			builder.put(grammarAccess.getModelAccess().getThirdAssignment_2(), "rule__Model__ThirdAssignment_2");
-			builder.put(grammarAccess.getModelAccess().getForthAssignment_3(), "rule__Model__ForthAssignment_3");
-			builder.put(grammarAccess.getModelAccess().getFifthAssignment_4(), "rule__Model__FifthAssignment_4");
-			builder.put(grammarAccess.getModelAccess().getSixthAssignment_5(), "rule__Model__SixthAssignment_5");
-			builder.put(grammarAccess.getModelAccess().getSeventhAssignment_6(), "rule__Model__SeventhAssignment_6");
-			builder.put(grammarAccess.getModelAccess().getEighthAssignment_7(), "rule__Model__EighthAssignment_7");
+		private static void init(Map<AbstractElement, String> mappings, KeywordsUiTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
+			mappings.put(grammarAccess.getModelAccess().getFirstAssignment_0(), "rule__Model__FirstAssignment_0");
+			mappings.put(grammarAccess.getModelAccess().getSecondAssignment_1(), "rule__Model__SecondAssignment_1");
+			mappings.put(grammarAccess.getModelAccess().getThirdAssignment_2(), "rule__Model__ThirdAssignment_2");
+			mappings.put(grammarAccess.getModelAccess().getForthAssignment_3(), "rule__Model__ForthAssignment_3");
+			mappings.put(grammarAccess.getModelAccess().getFifthAssignment_4(), "rule__Model__FifthAssignment_4");
+			mappings.put(grammarAccess.getModelAccess().getSixthAssignment_5(), "rule__Model__SixthAssignment_5");
+			mappings.put(grammarAccess.getModelAccess().getSeventhAssignment_6(), "rule__Model__SeventhAssignment_6");
+			mappings.put(grammarAccess.getModelAccess().getEighthAssignment_7(), "rule__Model__EighthAssignment_7");
 		}
 	}
 	

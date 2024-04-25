@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.xmleditor.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,31 +26,31 @@ public class XmlParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(XmlGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, XmlGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getContentAccess().getAlternatives(), "rule__Content__Alternatives");
-			builder.put(grammarAccess.getTagAccess().getAlternatives_3(), "rule__Tag__Alternatives_3");
-			builder.put(grammarAccess.getXmlDocumentAccess().getGroup(), "rule__XmlDocument__Group__0");
-			builder.put(grammarAccess.getTagAccess().getGroup(), "rule__Tag__Group__0");
-			builder.put(grammarAccess.getTagAccess().getGroup_3_1(), "rule__Tag__Group_3_1__0");
-			builder.put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
-			builder.put(grammarAccess.getXmlDocumentAccess().getContentsAssignment_1(), "rule__XmlDocument__ContentsAssignment_1");
-			builder.put(grammarAccess.getContentAccess().getTagAssignment_0(), "rule__Content__TagAssignment_0");
-			builder.put(grammarAccess.getContentAccess().getTextAssignment_1(), "rule__Content__TextAssignment_1");
-			builder.put(grammarAccess.getTagAccess().getNameAssignment_1(), "rule__Tag__NameAssignment_1");
-			builder.put(grammarAccess.getTagAccess().getAttributesAssignment_2(), "rule__Tag__AttributesAssignment_2");
-			builder.put(grammarAccess.getTagAccess().getContentsAssignment_3_1_1(), "rule__Tag__ContentsAssignment_3_1_1");
-			builder.put(grammarAccess.getTagAccess().getCloseNameAssignment_3_1_3(), "rule__Tag__CloseNameAssignment_3_1_3");
-			builder.put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
-			builder.put(grammarAccess.getAttributeAccess().getValueAssignment_2(), "rule__Attribute__ValueAssignment_2");
+		private static void init(Map<AbstractElement, String> mappings, XmlGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getContentAccess().getAlternatives(), "rule__Content__Alternatives");
+			mappings.put(grammarAccess.getTagAccess().getAlternatives_3(), "rule__Tag__Alternatives_3");
+			mappings.put(grammarAccess.getXmlDocumentAccess().getGroup(), "rule__XmlDocument__Group__0");
+			mappings.put(grammarAccess.getTagAccess().getGroup(), "rule__Tag__Group__0");
+			mappings.put(grammarAccess.getTagAccess().getGroup_3_1(), "rule__Tag__Group_3_1__0");
+			mappings.put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
+			mappings.put(grammarAccess.getXmlDocumentAccess().getContentsAssignment_1(), "rule__XmlDocument__ContentsAssignment_1");
+			mappings.put(grammarAccess.getContentAccess().getTagAssignment_0(), "rule__Content__TagAssignment_0");
+			mappings.put(grammarAccess.getContentAccess().getTextAssignment_1(), "rule__Content__TextAssignment_1");
+			mappings.put(grammarAccess.getTagAccess().getNameAssignment_1(), "rule__Tag__NameAssignment_1");
+			mappings.put(grammarAccess.getTagAccess().getAttributesAssignment_2(), "rule__Tag__AttributesAssignment_2");
+			mappings.put(grammarAccess.getTagAccess().getContentsAssignment_3_1_1(), "rule__Tag__ContentsAssignment_3_1_1");
+			mappings.put(grammarAccess.getTagAccess().getCloseNameAssignment_3_1_3(), "rule__Tag__CloseNameAssignment_3_1_3");
+			mappings.put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
+			mappings.put(grammarAccess.getAttributeAccess().getValueAssignment_2(), "rule__Attribute__ValueAssignment_2");
 		}
 	}
 	

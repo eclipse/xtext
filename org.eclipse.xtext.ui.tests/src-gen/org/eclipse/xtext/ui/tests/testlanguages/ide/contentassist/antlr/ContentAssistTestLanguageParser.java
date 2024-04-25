@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.testlanguages.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,26 +26,26 @@ public class ContentAssistTestLanguageParser extends AbstractContentAssistParser
 		
 		@Inject
 		public NameMappings(ContentAssistTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, ContentAssistTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getAbstractRuleAccess().getAlternatives(), "rule__AbstractRule__Alternatives");
-			builder.put(grammarAccess.getStartAccess().getGroup(), "rule__Start__Group__0");
-			builder.put(grammarAccess.getFirstAbstractRuleChildAccess().getGroup(), "rule__FirstAbstractRuleChild__Group__0");
-			builder.put(grammarAccess.getSecondAbstractRuleChildAccess().getGroup(), "rule__SecondAbstractRuleChild__Group__0");
-			builder.put(grammarAccess.getStartAccess().getRulesAssignment_1(), "rule__Start__RulesAssignment_1");
-			builder.put(grammarAccess.getFirstAbstractRuleChildAccess().getNameAssignment_0(), "rule__FirstAbstractRuleChild__NameAssignment_0");
-			builder.put(grammarAccess.getFirstAbstractRuleChildAccess().getElementsAssignment_2(), "rule__FirstAbstractRuleChild__ElementsAssignment_2");
-			builder.put(grammarAccess.getSecondAbstractRuleChildAccess().getNameAssignment_0(), "rule__SecondAbstractRuleChild__NameAssignment_0");
-			builder.put(grammarAccess.getSecondAbstractRuleChildAccess().getRuleAssignment_3(), "rule__SecondAbstractRuleChild__RuleAssignment_3");
-			builder.put(grammarAccess.getAbstractRuleCallAccess().getRuleAssignment(), "rule__AbstractRuleCall__RuleAssignment");
+		private static void init(Map<AbstractElement, String> mappings, ContentAssistTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getAbstractRuleAccess().getAlternatives(), "rule__AbstractRule__Alternatives");
+			mappings.put(grammarAccess.getStartAccess().getGroup(), "rule__Start__Group__0");
+			mappings.put(grammarAccess.getFirstAbstractRuleChildAccess().getGroup(), "rule__FirstAbstractRuleChild__Group__0");
+			mappings.put(grammarAccess.getSecondAbstractRuleChildAccess().getGroup(), "rule__SecondAbstractRuleChild__Group__0");
+			mappings.put(grammarAccess.getStartAccess().getRulesAssignment_1(), "rule__Start__RulesAssignment_1");
+			mappings.put(grammarAccess.getFirstAbstractRuleChildAccess().getNameAssignment_0(), "rule__FirstAbstractRuleChild__NameAssignment_0");
+			mappings.put(grammarAccess.getFirstAbstractRuleChildAccess().getElementsAssignment_2(), "rule__FirstAbstractRuleChild__ElementsAssignment_2");
+			mappings.put(grammarAccess.getSecondAbstractRuleChildAccess().getNameAssignment_0(), "rule__SecondAbstractRuleChild__NameAssignment_0");
+			mappings.put(grammarAccess.getSecondAbstractRuleChildAccess().getRuleAssignment_3(), "rule__SecondAbstractRuleChild__RuleAssignment_3");
+			mappings.put(grammarAccess.getAbstractRuleCallAccess().getRuleAssignment(), "rule__AbstractRuleCall__RuleAssignment");
 		}
 	}
 	

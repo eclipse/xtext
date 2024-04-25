@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
@@ -28,28 +28,28 @@ public class IndentationAwareUiTestLanguageParser extends AbstractContentAssistP
 		
 		@Inject
 		public NameMappings(IndentationAwareUiTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, IndentationAwareUiTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getTreeAccess().getGroup(), "rule__Tree__Group__0");
-			builder.put(grammarAccess.getTreeNodeAccess().getGroup(), "rule__TreeNode__Group__0");
-			builder.put(grammarAccess.getTreeNodeAccess().getGroup_1(), "rule__TreeNode__Group_1__0");
-			builder.put(grammarAccess.getOtherTreeNodeAccess().getGroup(), "rule__OtherTreeNode__Group__0");
-			builder.put(grammarAccess.getChildListAccess().getGroup(), "rule__ChildList__Group__0");
-			builder.put(grammarAccess.getTreeAccess().getNodesAssignment_1(), "rule__Tree__NodesAssignment_1");
-			builder.put(grammarAccess.getTreeAccess().getMoreNodesAssignment_2(), "rule__Tree__MoreNodesAssignment_2");
-			builder.put(grammarAccess.getTreeNodeAccess().getNameAssignment_0(), "rule__TreeNode__NameAssignment_0");
-			builder.put(grammarAccess.getTreeNodeAccess().getChildrenAssignment_1_1(), "rule__TreeNode__ChildrenAssignment_1_1");
-			builder.put(grammarAccess.getOtherTreeNodeAccess().getNameAssignment_0(), "rule__OtherTreeNode__NameAssignment_0");
-			builder.put(grammarAccess.getOtherTreeNodeAccess().getChildListAssignment_1(), "rule__OtherTreeNode__ChildListAssignment_1");
-			builder.put(grammarAccess.getChildListAccess().getChildrenAssignment_2(), "rule__ChildList__ChildrenAssignment_2");
+		private static void init(Map<AbstractElement, String> mappings, IndentationAwareUiTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getTreeAccess().getGroup(), "rule__Tree__Group__0");
+			mappings.put(grammarAccess.getTreeNodeAccess().getGroup(), "rule__TreeNode__Group__0");
+			mappings.put(grammarAccess.getTreeNodeAccess().getGroup_1(), "rule__TreeNode__Group_1__0");
+			mappings.put(grammarAccess.getOtherTreeNodeAccess().getGroup(), "rule__OtherTreeNode__Group__0");
+			mappings.put(grammarAccess.getChildListAccess().getGroup(), "rule__ChildList__Group__0");
+			mappings.put(grammarAccess.getTreeAccess().getNodesAssignment_1(), "rule__Tree__NodesAssignment_1");
+			mappings.put(grammarAccess.getTreeAccess().getMoreNodesAssignment_2(), "rule__Tree__MoreNodesAssignment_2");
+			mappings.put(grammarAccess.getTreeNodeAccess().getNameAssignment_0(), "rule__TreeNode__NameAssignment_0");
+			mappings.put(grammarAccess.getTreeNodeAccess().getChildrenAssignment_1_1(), "rule__TreeNode__ChildrenAssignment_1_1");
+			mappings.put(grammarAccess.getOtherTreeNodeAccess().getNameAssignment_0(), "rule__OtherTreeNode__NameAssignment_0");
+			mappings.put(grammarAccess.getOtherTreeNodeAccess().getChildListAssignment_1(), "rule__OtherTreeNode__ChildListAssignment_1");
+			mappings.put(grammarAccess.getChildListAccess().getChildrenAssignment_2(), "rule__ChildList__ChildrenAssignment_2");
 		}
 	}
 	

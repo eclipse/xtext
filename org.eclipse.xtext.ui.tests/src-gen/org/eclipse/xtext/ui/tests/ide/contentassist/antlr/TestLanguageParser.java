@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,21 +26,21 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getStuffAccess().getGroup(), "rule__Stuff__Group__0");
-			builder.put(grammarAccess.getStuffAccess().getGroup_2(), "rule__Stuff__Group_2__0");
-			builder.put(grammarAccess.getFileAccess().getStuffAssignment(), "rule__File__StuffAssignment");
-			builder.put(grammarAccess.getStuffAccess().getNameAssignment_1(), "rule__Stuff__NameAssignment_1");
-			builder.put(grammarAccess.getStuffAccess().getRefsAssignment_2_1(), "rule__Stuff__RefsAssignment_2_1");
+		private static void init(Map<AbstractElement, String> mappings, TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getStuffAccess().getGroup(), "rule__Stuff__Group__0");
+			mappings.put(grammarAccess.getStuffAccess().getGroup_2(), "rule__Stuff__Group_2__0");
+			mappings.put(grammarAccess.getFileAccess().getStuffAssignment(), "rule__File__StuffAssignment");
+			mappings.put(grammarAccess.getStuffAccess().getNameAssignment_1(), "rule__Stuff__NameAssignment_1");
+			mappings.put(grammarAccess.getStuffAccess().getRefsAssignment_2_1(), "rule__Stuff__RefsAssignment_2_1");
 		}
 	}
 	

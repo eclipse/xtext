@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,18 +26,18 @@ public class ContentAssistNoTerminalExtensionTestLanguageParser extends Abstract
 		
 		@Inject
 		public NameMappings(ContentAssistNoTerminalExtensionTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, ContentAssistNoTerminalExtensionTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getPolygonBasedNodeShapeAccess().getAlternatives(), "rule__PolygonBasedNodeShape__Alternatives");
-			builder.put(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment(), "rule__PolygonBasedShape__ShapeAssignment");
+		private static void init(Map<AbstractElement, String> mappings, ContentAssistNoTerminalExtensionTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getPolygonBasedNodeShapeAccess().getAlternatives(), "rule__PolygonBasedNodeShape__Alternatives");
+			mappings.put(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment(), "rule__PolygonBasedShape__ShapeAssignment");
 		}
 	}
 	

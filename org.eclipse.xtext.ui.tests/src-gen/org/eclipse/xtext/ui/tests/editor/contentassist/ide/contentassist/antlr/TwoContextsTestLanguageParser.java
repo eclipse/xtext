@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,21 +26,21 @@ public class TwoContextsTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(TwoContextsTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, TwoContextsTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getAnElementAccess().getGroup(), "rule__AnElement__Group__0");
-			builder.put(grammarAccess.getAnElementAccess().getGroup_1(), "rule__AnElement__Group_1__0");
-			builder.put(grammarAccess.getMainModelAccess().getElementsAssignment(), "rule__MainModel__ElementsAssignment");
-			builder.put(grammarAccess.getAnElementAccess().getNameAssignment_0(), "rule__AnElement__NameAssignment_0");
-			builder.put(grammarAccess.getAnElementAccess().getReferredAssignment_1_1(), "rule__AnElement__ReferredAssignment_1_1");
+		private static void init(Map<AbstractElement, String> mappings, TwoContextsTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getAnElementAccess().getGroup(), "rule__AnElement__Group__0");
+			mappings.put(grammarAccess.getAnElementAccess().getGroup_1(), "rule__AnElement__Group_1__0");
+			mappings.put(grammarAccess.getMainModelAccess().getElementsAssignment(), "rule__MainModel__ElementsAssignment");
+			mappings.put(grammarAccess.getAnElementAccess().getNameAssignment_0(), "rule__AnElement__NameAssignment_0");
+			mappings.put(grammarAccess.getAnElementAccess().getReferredAssignment_1_1(), "rule__AnElement__ReferredAssignment_1_1");
 		}
 	}
 	

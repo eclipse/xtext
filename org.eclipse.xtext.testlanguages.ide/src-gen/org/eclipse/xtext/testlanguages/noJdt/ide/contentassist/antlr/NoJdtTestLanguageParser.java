@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,21 +26,21 @@ public class NoJdtTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(NoJdtTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, NoJdtTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getGreetingAccess().getGroup(), "rule__Greeting__Group__0");
-			builder.put(grammarAccess.getGreetingAccess().getGroup_2(), "rule__Greeting__Group_2__0");
-			builder.put(grammarAccess.getModelAccess().getGreetingsAssignment(), "rule__Model__GreetingsAssignment");
-			builder.put(grammarAccess.getGreetingAccess().getNameAssignment_1(), "rule__Greeting__NameAssignment_1");
-			builder.put(grammarAccess.getGreetingAccess().getOtherAssignment_2_2(), "rule__Greeting__OtherAssignment_2_2");
+		private static void init(Map<AbstractElement, String> mappings, NoJdtTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getGreetingAccess().getGroup(), "rule__Greeting__Group__0");
+			mappings.put(grammarAccess.getGreetingAccess().getGroup_2(), "rule__Greeting__Group_2__0");
+			mappings.put(grammarAccess.getModelAccess().getGreetingsAssignment(), "rule__Model__GreetingsAssignment");
+			mappings.put(grammarAccess.getGreetingAccess().getNameAssignment_1(), "rule__Greeting__NameAssignment_1");
+			mappings.put(grammarAccess.getGreetingAccess().getOtherAssignment_2_2(), "rule__Greeting__OtherAssignment_2_2");
 		}
 	}
 	

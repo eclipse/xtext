@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,23 +26,23 @@ public class Bug307519TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(Bug307519TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug307519TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
-			builder.put(grammarAccess.getEnumTAccess().getAlternatives(), "rule__EnumT__Alternatives");
-			builder.put(grammarAccess.getElem2Access().getGroup(), "rule__Elem2__Group__0");
-			builder.put(grammarAccess.getModelAccess().getE1Assignment_0(), "rule__Model__E1Assignment_0");
-			builder.put(grammarAccess.getModelAccess().getE2Assignment_1(), "rule__Model__E2Assignment_1");
-			builder.put(grammarAccess.getElem1Access().getValueAssignment(), "rule__Elem1__ValueAssignment");
-			builder.put(grammarAccess.getElem2Access().getValueAssignment_0(), "rule__Elem2__ValueAssignment_0");
+		private static void init(Map<AbstractElement, String> mappings, Bug307519TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
+			mappings.put(grammarAccess.getEnumTAccess().getAlternatives(), "rule__EnumT__Alternatives");
+			mappings.put(grammarAccess.getElem2Access().getGroup(), "rule__Elem2__Group__0");
+			mappings.put(grammarAccess.getModelAccess().getE1Assignment_0(), "rule__Model__E1Assignment_0");
+			mappings.put(grammarAccess.getModelAccess().getE2Assignment_1(), "rule__Model__E2Assignment_1");
+			mappings.put(grammarAccess.getElem1Access().getValueAssignment(), "rule__Elem1__ValueAssignment");
+			mappings.put(grammarAccess.getElem2Access().getValueAssignment_0(), "rule__Elem2__ValueAssignment_0");
 		}
 	}
 	
