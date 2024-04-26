@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,22 +26,22 @@ public class RenameTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(RenameTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, RenameTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getTypeDeclarationAccess().getGroup(), "rule__TypeDeclaration__Group__0");
-			builder.put(grammarAccess.getTypeDeclarationAccess().getGroup_2(), "rule__TypeDeclaration__Group_2__0");
-			builder.put(grammarAccess.getTypeDeclarationAccess().getGroup_3(), "rule__TypeDeclaration__Group_3__0");
-			builder.put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
-			builder.put(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1(), "rule__TypeDeclaration__NameAssignment_1");
-			builder.put(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1(), "rule__TypeDeclaration__SuperTypeAssignment_2_1");
+		private static void init(Map<AbstractElement, String> mappings, RenameTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getTypeDeclarationAccess().getGroup(), "rule__TypeDeclaration__Group__0");
+			mappings.put(grammarAccess.getTypeDeclarationAccess().getGroup_2(), "rule__TypeDeclaration__Group_2__0");
+			mappings.put(grammarAccess.getTypeDeclarationAccess().getGroup_3(), "rule__TypeDeclaration__Group_3__0");
+			mappings.put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
+			mappings.put(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1(), "rule__TypeDeclaration__NameAssignment_1");
+			mappings.put(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1(), "rule__TypeDeclaration__SuperTypeAssignment_2_1");
 		}
 	}
 	

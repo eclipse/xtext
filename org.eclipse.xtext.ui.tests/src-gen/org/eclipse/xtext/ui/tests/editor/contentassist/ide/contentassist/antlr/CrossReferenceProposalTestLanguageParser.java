@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,26 +26,26 @@ public class CrossReferenceProposalTestLanguageParser extends AbstractContentAss
 		
 		@Inject
 		public NameMappings(CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getClassAccess().getAlternatives_0_0(), "rule__Class__Alternatives_0_0");
-			builder.put(grammarAccess.getClassAccess().getNameAlternatives_1_0(), "rule__Class__NameAlternatives_1_0");
-			builder.put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group__0");
-			builder.put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0__0");
-			builder.put(grammarAccess.getComplexNameAccess().getGroup(), "rule__ComplexName__Group__0");
-			builder.put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
-			builder.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_0(), "rule__Class__SuperClassAssignment_0_0_0");
-			builder.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_1(), "rule__Class__SuperClassAssignment_0_0_1");
-			builder.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_2(), "rule__Class__SuperClassAssignment_0_0_2");
-			builder.put(grammarAccess.getClassAccess().getNameAssignment_1(), "rule__Class__NameAssignment_1");
+		private static void init(Map<AbstractElement, String> mappings, CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getClassAccess().getAlternatives_0_0(), "rule__Class__Alternatives_0_0");
+			mappings.put(grammarAccess.getClassAccess().getNameAlternatives_1_0(), "rule__Class__NameAlternatives_1_0");
+			mappings.put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group__0");
+			mappings.put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0__0");
+			mappings.put(grammarAccess.getComplexNameAccess().getGroup(), "rule__ComplexName__Group__0");
+			mappings.put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
+			mappings.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_0(), "rule__Class__SuperClassAssignment_0_0_0");
+			mappings.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_1(), "rule__Class__SuperClassAssignment_0_0_1");
+			mappings.put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_2(), "rule__Class__SuperClassAssignment_0_0_2");
+			mappings.put(grammarAccess.getClassAccess().getNameAssignment_1(), "rule__Class__NameAssignment_1");
 		}
 	}
 	

@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,28 +26,28 @@ public class Bug288760TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(Bug288760TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug288760TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getWorkflowElementAccess().getAlternatives(), "rule__WorkflowElement__Alternatives");
-			builder.put(grammarAccess.getWorkflowElementAccess().getGroup_0(), "rule__WorkflowElement__Group_0__0");
-			builder.put(grammarAccess.getWorkflowElementAccess().getGroup_1(), "rule__WorkflowElement__Group_1__0");
-			builder.put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
-			builder.put(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0(), "rule__WorkflowElement__NameAssignment_0_0");
-			builder.put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1(), "rule__WorkflowElement__AttributesAssignment_0_1");
-			builder.put(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0(), "rule__WorkflowElement__NameAssignment_1_0");
-			builder.put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1(), "rule__WorkflowElement__AttributesAssignment_1_1");
-			builder.put(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3(), "rule__WorkflowElement__ChildrenAssignment_1_3");
-			builder.put(grammarAccess.getWorkflowElementAccess().getEndAssignment_1_4(), "rule__WorkflowElement__EndAssignment_1_4");
-			builder.put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
-			builder.put(grammarAccess.getAttributeAccess().getValueAssignment_2(), "rule__Attribute__ValueAssignment_2");
+		private static void init(Map<AbstractElement, String> mappings, Bug288760TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getWorkflowElementAccess().getAlternatives(), "rule__WorkflowElement__Alternatives");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getGroup_0(), "rule__WorkflowElement__Group_0__0");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getGroup_1(), "rule__WorkflowElement__Group_1__0");
+			mappings.put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0(), "rule__WorkflowElement__NameAssignment_0_0");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1(), "rule__WorkflowElement__AttributesAssignment_0_1");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0(), "rule__WorkflowElement__NameAssignment_1_0");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1(), "rule__WorkflowElement__AttributesAssignment_1_1");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3(), "rule__WorkflowElement__ChildrenAssignment_1_3");
+			mappings.put(grammarAccess.getWorkflowElementAccess().getEndAssignment_1_4(), "rule__WorkflowElement__EndAssignment_1_4");
+			mappings.put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
+			mappings.put(grammarAccess.getAttributeAccess().getValueAssignment_2(), "rule__Attribute__ValueAssignment_2");
 		}
 	}
 	

@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.linking.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,24 +26,24 @@ public class ImportUriUiTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(ImportUriUiTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, ImportUriUiTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getMainAccess().getGroup(), "rule__Main__Group__0");
-			builder.put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-			builder.put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
-			builder.put(grammarAccess.getMainAccess().getImportsAssignment_0(), "rule__Main__ImportsAssignment_0");
-			builder.put(grammarAccess.getMainAccess().getTypesAssignment_1(), "rule__Main__TypesAssignment_1");
-			builder.put(grammarAccess.getImportAccess().getImportURIAssignment_1(), "rule__Import__ImportURIAssignment_1");
-			builder.put(grammarAccess.getTypeAccess().getNameAssignment_1(), "rule__Type__NameAssignment_1");
-			builder.put(grammarAccess.getTypeAccess().getExtendsAssignment_3(), "rule__Type__ExtendsAssignment_3");
+		private static void init(Map<AbstractElement, String> mappings, ImportUriUiTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getMainAccess().getGroup(), "rule__Main__Group__0");
+			mappings.put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
+			mappings.put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
+			mappings.put(grammarAccess.getMainAccess().getImportsAssignment_0(), "rule__Main__ImportsAssignment_0");
+			mappings.put(grammarAccess.getMainAccess().getTypesAssignment_1(), "rule__Main__TypesAssignment_1");
+			mappings.put(grammarAccess.getImportAccess().getImportURIAssignment_1(), "rule__Import__ImportURIAssignment_1");
+			mappings.put(grammarAccess.getTypeAccess().getNameAssignment_1(), "rule__Type__NameAssignment_1");
+			mappings.put(grammarAccess.getTypeAccess().getExtendsAssignment_3(), "rule__Type__ExtendsAssignment_3");
 		}
 	}
 	

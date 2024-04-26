@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,29 +26,29 @@ public class Bug288734TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(Bug288734TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug288734TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getTConstantAccess().getAlternatives(), "rule__TConstant__Alternatives");
-			builder.put(grammarAccess.getTStringConstantAccess().getGroup(), "rule__TStringConstant__Group__0");
-			builder.put(grammarAccess.getTIntegerConstantAccess().getGroup(), "rule__TIntegerConstant__Group__0");
-			builder.put(grammarAccess.getTBooleanConstantAccess().getGroup(), "rule__TBooleanConstant__Group__0");
-			builder.put(grammarAccess.getTAnnotationAccess().getGroup(), "rule__TAnnotation__Group__0");
-			builder.put(grammarAccess.getModelAccess().getConstantsAssignment(), "rule__Model__ConstantsAssignment");
-			builder.put(grammarAccess.getTStringConstantAccess().getAnnotationsAssignment_0(), "rule__TStringConstant__AnnotationsAssignment_0");
-			builder.put(grammarAccess.getTStringConstantAccess().getNameAssignment_3(), "rule__TStringConstant__NameAssignment_3");
-			builder.put(grammarAccess.getTIntegerConstantAccess().getAnnotationsAssignment_0(), "rule__TIntegerConstant__AnnotationsAssignment_0");
-			builder.put(grammarAccess.getTIntegerConstantAccess().getNameAssignment_3(), "rule__TIntegerConstant__NameAssignment_3");
-			builder.put(grammarAccess.getTBooleanConstantAccess().getAnnotationsAssignment_0(), "rule__TBooleanConstant__AnnotationsAssignment_0");
-			builder.put(grammarAccess.getTBooleanConstantAccess().getNameAssignment_3(), "rule__TBooleanConstant__NameAssignment_3");
-			builder.put(grammarAccess.getTAnnotationAccess().getDescriptionAssignment_1(), "rule__TAnnotation__DescriptionAssignment_1");
+		private static void init(Map<AbstractElement, String> mappings, Bug288734TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getTConstantAccess().getAlternatives(), "rule__TConstant__Alternatives");
+			mappings.put(grammarAccess.getTStringConstantAccess().getGroup(), "rule__TStringConstant__Group__0");
+			mappings.put(grammarAccess.getTIntegerConstantAccess().getGroup(), "rule__TIntegerConstant__Group__0");
+			mappings.put(grammarAccess.getTBooleanConstantAccess().getGroup(), "rule__TBooleanConstant__Group__0");
+			mappings.put(grammarAccess.getTAnnotationAccess().getGroup(), "rule__TAnnotation__Group__0");
+			mappings.put(grammarAccess.getModelAccess().getConstantsAssignment(), "rule__Model__ConstantsAssignment");
+			mappings.put(grammarAccess.getTStringConstantAccess().getAnnotationsAssignment_0(), "rule__TStringConstant__AnnotationsAssignment_0");
+			mappings.put(grammarAccess.getTStringConstantAccess().getNameAssignment_3(), "rule__TStringConstant__NameAssignment_3");
+			mappings.put(grammarAccess.getTIntegerConstantAccess().getAnnotationsAssignment_0(), "rule__TIntegerConstant__AnnotationsAssignment_0");
+			mappings.put(grammarAccess.getTIntegerConstantAccess().getNameAssignment_3(), "rule__TIntegerConstant__NameAssignment_3");
+			mappings.put(grammarAccess.getTBooleanConstantAccess().getAnnotationsAssignment_0(), "rule__TBooleanConstant__AnnotationsAssignment_0");
+			mappings.put(grammarAccess.getTBooleanConstantAccess().getNameAssignment_3(), "rule__TBooleanConstant__NameAssignment_3");
+			mappings.put(grammarAccess.getTAnnotationAccess().getDescriptionAssignment_1(), "rule__TAnnotation__DescriptionAssignment_1");
 		}
 	}
 	

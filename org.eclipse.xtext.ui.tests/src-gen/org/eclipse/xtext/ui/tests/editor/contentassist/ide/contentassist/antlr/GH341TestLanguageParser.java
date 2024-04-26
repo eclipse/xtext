@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,41 +26,41 @@ public class GH341TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(GH341TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, GH341TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getModelAccess().getElementsAlternatives_0(), "rule__Model__ElementsAlternatives_0");
-			builder.put(grammarAccess.getElementAccess().getAlternatives(), "rule__Element__Alternatives");
-			builder.put(grammarAccess.getWorksAccess().getGroup(), "rule__Works__Group__0");
-			builder.put(grammarAccess.getWorksAccess().getGroup_2(), "rule__Works__Group_2__0");
-			builder.put(grammarAccess.getWorksAccess().getGroup_2_1(), "rule__Works__Group_2_1__0");
-			builder.put(grammarAccess.getWorksAccess().getGroup_3(), "rule__Works__Group_3__0");
-			builder.put(grammarAccess.getWorksAccess().getGroup_3_1(), "rule__Works__Group_3_1__0");
-			builder.put(grammarAccess.getBrokenAccess().getGroup(), "rule__Broken__Group__0");
-			builder.put(grammarAccess.getBrokenAccess().getGroup_3(), "rule__Broken__Group_3__0");
-			builder.put(grammarAccess.getBrokenAccess().getGroup_3_1(), "rule__Broken__Group_3_1__0");
-			builder.put(grammarAccess.getThirdAccess().getGroup(), "rule__Third__Group__0");
-			builder.put(grammarAccess.getFragmentAccess().getGroup(), "rule__Fragment__Group__0");
-			builder.put(grammarAccess.getFragmentAccess().getGroup_1(), "rule__Fragment__Group_1__0");
-			builder.put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
-			builder.put(grammarAccess.getWorksAccess().getNameAssignment_1(), "rule__Works__NameAssignment_1");
-			builder.put(grammarAccess.getWorksAccess().getIdsAssignment_2_0(), "rule__Works__IdsAssignment_2_0");
-			builder.put(grammarAccess.getWorksAccess().getIdsAssignment_2_1_1(), "rule__Works__IdsAssignment_2_1_1");
-			builder.put(grammarAccess.getWorksAccess().getRefsAssignment_3_0(), "rule__Works__RefsAssignment_3_0");
-			builder.put(grammarAccess.getWorksAccess().getRefsAssignment_3_1_1(), "rule__Works__RefsAssignment_3_1_1");
-			builder.put(grammarAccess.getBrokenAccess().getNameAssignment_1(), "rule__Broken__NameAssignment_1");
-			builder.put(grammarAccess.getBrokenAccess().getRefsAssignment_3_0(), "rule__Broken__RefsAssignment_3_0");
-			builder.put(grammarAccess.getBrokenAccess().getRefsAssignment_3_1_1(), "rule__Broken__RefsAssignment_3_1_1");
-			builder.put(grammarAccess.getThirdAccess().getNameAssignment_2(), "rule__Third__NameAssignment_2");
-			builder.put(grammarAccess.getFragmentAccess().getIdsAssignment_0(), "rule__Fragment__IdsAssignment_0");
-			builder.put(grammarAccess.getFragmentAccess().getIdsAssignment_1_1(), "rule__Fragment__IdsAssignment_1_1");
+		private static void init(Map<AbstractElement, String> mappings, GH341TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getModelAccess().getElementsAlternatives_0(), "rule__Model__ElementsAlternatives_0");
+			mappings.put(grammarAccess.getElementAccess().getAlternatives(), "rule__Element__Alternatives");
+			mappings.put(grammarAccess.getWorksAccess().getGroup(), "rule__Works__Group__0");
+			mappings.put(grammarAccess.getWorksAccess().getGroup_2(), "rule__Works__Group_2__0");
+			mappings.put(grammarAccess.getWorksAccess().getGroup_2_1(), "rule__Works__Group_2_1__0");
+			mappings.put(grammarAccess.getWorksAccess().getGroup_3(), "rule__Works__Group_3__0");
+			mappings.put(grammarAccess.getWorksAccess().getGroup_3_1(), "rule__Works__Group_3_1__0");
+			mappings.put(grammarAccess.getBrokenAccess().getGroup(), "rule__Broken__Group__0");
+			mappings.put(grammarAccess.getBrokenAccess().getGroup_3(), "rule__Broken__Group_3__0");
+			mappings.put(grammarAccess.getBrokenAccess().getGroup_3_1(), "rule__Broken__Group_3_1__0");
+			mappings.put(grammarAccess.getThirdAccess().getGroup(), "rule__Third__Group__0");
+			mappings.put(grammarAccess.getFragmentAccess().getGroup(), "rule__Fragment__Group__0");
+			mappings.put(grammarAccess.getFragmentAccess().getGroup_1(), "rule__Fragment__Group_1__0");
+			mappings.put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
+			mappings.put(grammarAccess.getWorksAccess().getNameAssignment_1(), "rule__Works__NameAssignment_1");
+			mappings.put(grammarAccess.getWorksAccess().getIdsAssignment_2_0(), "rule__Works__IdsAssignment_2_0");
+			mappings.put(grammarAccess.getWorksAccess().getIdsAssignment_2_1_1(), "rule__Works__IdsAssignment_2_1_1");
+			mappings.put(grammarAccess.getWorksAccess().getRefsAssignment_3_0(), "rule__Works__RefsAssignment_3_0");
+			mappings.put(grammarAccess.getWorksAccess().getRefsAssignment_3_1_1(), "rule__Works__RefsAssignment_3_1_1");
+			mappings.put(grammarAccess.getBrokenAccess().getNameAssignment_1(), "rule__Broken__NameAssignment_1");
+			mappings.put(grammarAccess.getBrokenAccess().getRefsAssignment_3_0(), "rule__Broken__RefsAssignment_3_0");
+			mappings.put(grammarAccess.getBrokenAccess().getRefsAssignment_3_1_1(), "rule__Broken__RefsAssignment_3_1_1");
+			mappings.put(grammarAccess.getThirdAccess().getNameAssignment_2(), "rule__Third__NameAssignment_2");
+			mappings.put(grammarAccess.getFragmentAccess().getIdsAssignment_0(), "rule__Fragment__IdsAssignment_0");
+			mappings.put(grammarAccess.getFragmentAccess().getIdsAssignment_1_1(), "rule__Fragment__IdsAssignment_1_1");
 		}
 	}
 	

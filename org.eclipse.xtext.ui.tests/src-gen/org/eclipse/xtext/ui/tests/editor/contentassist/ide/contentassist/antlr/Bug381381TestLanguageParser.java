@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,25 +26,25 @@ public class Bug381381TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(Bug381381TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug381381TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup(), "rule__CopyFieldNameToVariableStmt__Group__0");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup_1_0(), "rule__CopyFieldNameToVariableStmt__Group_1_0__0");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup_1_1(), "rule__CopyFieldNameToVariableStmt__Group_1_1__0");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup_1_2(), "rule__CopyFieldNameToVariableStmt__Group_1_2__0");
-			builder.put(grammarAccess.getModelAccess().getStmtAssignment(), "rule__Model__StmtAssignment");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getLineAssignment_1_0_4(), "rule__CopyFieldNameToVariableStmt__LineAssignment_1_0_4");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getColumnAssignment_1_0_6(), "rule__CopyFieldNameToVariableStmt__ColumnAssignment_1_0_6");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getNameAssignment_1_1_3(), "rule__CopyFieldNameToVariableStmt__NameAssignment_1_1_3");
-			builder.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), "rule__CopyFieldNameToVariableStmt__UnorderedGroup_1");
+		private static void init(Map<AbstractElement, String> mappings, Bug381381TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup(), "rule__CopyFieldNameToVariableStmt__Group__0");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup_1_0(), "rule__CopyFieldNameToVariableStmt__Group_1_0__0");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup_1_1(), "rule__CopyFieldNameToVariableStmt__Group_1_1__0");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getGroup_1_2(), "rule__CopyFieldNameToVariableStmt__Group_1_2__0");
+			mappings.put(grammarAccess.getModelAccess().getStmtAssignment(), "rule__Model__StmtAssignment");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getLineAssignment_1_0_4(), "rule__CopyFieldNameToVariableStmt__LineAssignment_1_0_4");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getColumnAssignment_1_0_6(), "rule__CopyFieldNameToVariableStmt__ColumnAssignment_1_0_6");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getNameAssignment_1_1_3(), "rule__CopyFieldNameToVariableStmt__NameAssignment_1_1_3");
+			mappings.put(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), "rule__CopyFieldNameToVariableStmt__UnorderedGroup_1");
 		}
 	}
 	

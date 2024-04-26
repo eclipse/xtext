@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,27 +26,27 @@ public class BmTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(BmTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, BmTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
-			builder.put(grammarAccess.getSExpressionAccess().getAlternatives_1(), "rule__SExpression__Alternatives_1");
-			builder.put(grammarAccess.getVALUEAccess().getAlternatives(), "rule__VALUE__Alternatives");
-			builder.put(grammarAccess.getExpressionAccess().getGroup_2(), "rule__Expression__Group_2__0");
-			builder.put(grammarAccess.getSExpressionAccess().getGroup(), "rule__SExpression__Group__0");
-			builder.put(grammarAccess.getSExpressionAccess().getGroup_1_0(), "rule__SExpression__Group_1_0__0");
-			builder.put(grammarAccess.getSExpressionAccess().getGroup_1_1(), "rule__SExpression__Group_1_1__0");
-			builder.put(grammarAccess.getFileAccess().getExpressionAssignment(), "rule__File__ExpressionAssignment");
-			builder.put(grammarAccess.getSExpressionAccess().getElementAssignment_1_0_1(), "rule__SExpression__ElementAssignment_1_0_1");
-			builder.put(grammarAccess.getSExpressionAccess().getElementAssignment_1_1_1(), "rule__SExpression__ElementAssignment_1_1_1");
-			builder.put(grammarAccess.getAtomAccess().getValueAssignment(), "rule__Atom__ValueAssignment");
+		private static void init(Map<AbstractElement, String> mappings, BmTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
+			mappings.put(grammarAccess.getSExpressionAccess().getAlternatives_1(), "rule__SExpression__Alternatives_1");
+			mappings.put(grammarAccess.getVALUEAccess().getAlternatives(), "rule__VALUE__Alternatives");
+			mappings.put(grammarAccess.getExpressionAccess().getGroup_2(), "rule__Expression__Group_2__0");
+			mappings.put(grammarAccess.getSExpressionAccess().getGroup(), "rule__SExpression__Group__0");
+			mappings.put(grammarAccess.getSExpressionAccess().getGroup_1_0(), "rule__SExpression__Group_1_0__0");
+			mappings.put(grammarAccess.getSExpressionAccess().getGroup_1_1(), "rule__SExpression__Group_1_1__0");
+			mappings.put(grammarAccess.getFileAccess().getExpressionAssignment(), "rule__File__ExpressionAssignment");
+			mappings.put(grammarAccess.getSExpressionAccess().getElementAssignment_1_0_1(), "rule__SExpression__ElementAssignment_1_0_1");
+			mappings.put(grammarAccess.getSExpressionAccess().getElementAssignment_1_1_1(), "rule__SExpression__ElementAssignment_1_1_1");
+			mappings.put(grammarAccess.getAtomAccess().getValueAssignment(), "rule__Atom__ValueAssignment");
 		}
 	}
 	

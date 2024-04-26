@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages.fileAware.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,30 +26,30 @@ public class FileAwareTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(FileAwareTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, FileAwareTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getElementAccess().getAlternatives_3(), "rule__Element__Alternatives_3");
-			builder.put(grammarAccess.getPackageDeclarationAccess().getGroup(), "rule__PackageDeclaration__Group__0");
-			builder.put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-			builder.put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
-			builder.put(grammarAccess.getElementAccess().getGroup_3_1(), "rule__Element__Group_3_1__0");
-			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
-			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
-			builder.put(grammarAccess.getPackageDeclarationAccess().getNameAssignment_1(), "rule__PackageDeclaration__NameAssignment_1");
-			builder.put(grammarAccess.getPackageDeclarationAccess().getImportsAssignment_2(), "rule__PackageDeclaration__ImportsAssignment_2");
-			builder.put(grammarAccess.getPackageDeclarationAccess().getContentsAssignment_3(), "rule__PackageDeclaration__ContentsAssignment_3");
-			builder.put(grammarAccess.getImportAccess().getElementAssignment_1(), "rule__Import__ElementAssignment_1");
-			builder.put(grammarAccess.getElementAccess().getNameAssignment_1(), "rule__Element__NameAssignment_1");
-			builder.put(grammarAccess.getElementAccess().getContentsAssignment_3_0(), "rule__Element__ContentsAssignment_3_0");
-			builder.put(grammarAccess.getElementAccess().getRefAssignment_3_1_1(), "rule__Element__RefAssignment_3_1_1");
+		private static void init(Map<AbstractElement, String> mappings, FileAwareTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getElementAccess().getAlternatives_3(), "rule__Element__Alternatives_3");
+			mappings.put(grammarAccess.getPackageDeclarationAccess().getGroup(), "rule__PackageDeclaration__Group__0");
+			mappings.put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
+			mappings.put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
+			mappings.put(grammarAccess.getElementAccess().getGroup_3_1(), "rule__Element__Group_3_1__0");
+			mappings.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
+			mappings.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
+			mappings.put(grammarAccess.getPackageDeclarationAccess().getNameAssignment_1(), "rule__PackageDeclaration__NameAssignment_1");
+			mappings.put(grammarAccess.getPackageDeclarationAccess().getImportsAssignment_2(), "rule__PackageDeclaration__ImportsAssignment_2");
+			mappings.put(grammarAccess.getPackageDeclarationAccess().getContentsAssignment_3(), "rule__PackageDeclaration__ContentsAssignment_3");
+			mappings.put(grammarAccess.getImportAccess().getElementAssignment_1(), "rule__Import__ElementAssignment_1");
+			mappings.put(grammarAccess.getElementAccess().getNameAssignment_1(), "rule__Element__NameAssignment_1");
+			mappings.put(grammarAccess.getElementAccess().getContentsAssignment_3_0(), "rule__Element__ContentsAssignment_3_0");
+			mappings.put(grammarAccess.getElementAccess().getRefAssignment_3_1_1(), "rule__Element__RefAssignment_3_1_1");
 		}
 	}
 	

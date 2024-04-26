@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.enumrules.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,25 +26,25 @@ public class EnumRulesUiTestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(EnumRulesUiTestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, EnumRulesUiTestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
-			builder.put(grammarAccess.getExistingEnumAccess().getAlternatives(), "rule__ExistingEnum__Alternatives");
-			builder.put(grammarAccess.getGeneratedEnumAccess().getAlternatives(), "rule__GeneratedEnum__Alternatives");
-			builder.put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0__0");
-			builder.put(grammarAccess.getModelAccess().getGroup_0_2(), "rule__Model__Group_0_2__0");
-			builder.put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
-			builder.put(grammarAccess.getModelAccess().getExistingAssignment_0_1(), "rule__Model__ExistingAssignment_0_1");
-			builder.put(grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1(), "rule__Model__GeneratedAssignment_0_2_1");
-			builder.put(grammarAccess.getModelAccess().getGeneratedAssignment_1_1(), "rule__Model__GeneratedAssignment_1_1");
+		private static void init(Map<AbstractElement, String> mappings, EnumRulesUiTestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
+			mappings.put(grammarAccess.getExistingEnumAccess().getAlternatives(), "rule__ExistingEnum__Alternatives");
+			mappings.put(grammarAccess.getGeneratedEnumAccess().getAlternatives(), "rule__GeneratedEnum__Alternatives");
+			mappings.put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0__0");
+			mappings.put(grammarAccess.getModelAccess().getGroup_0_2(), "rule__Model__Group_0_2__0");
+			mappings.put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
+			mappings.put(grammarAccess.getModelAccess().getExistingAssignment_0_1(), "rule__Model__ExistingAssignment_0_1");
+			mappings.put(grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1(), "rule__Model__GeneratedAssignment_0_2_1");
+			mappings.put(grammarAccess.getModelAccess().getGeneratedAssignment_1_1(), "rule__Model__GeneratedAssignment_1_1");
 		}
 	}
 	

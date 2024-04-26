@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,31 +26,31 @@ public class Bug286935TestLanguageParser extends AbstractContentAssistParser {
 		
 		@Inject
 		public NameMappings(Bug286935TestLanguageGrammarAccess grammarAccess) {
-			ImmutableMap.Builder<AbstractElement, String> builder = ImmutableMap.builder();
-			init(builder, grammarAccess);
-			this.mappings = builder.build();
+			Map<AbstractElement, String> mappings = new HashMap<>();
+			init(mappings, grammarAccess);
+			this.mappings = Map.copyOf(mappings);
 		}
 		
 		public String getRuleName(AbstractElement element) {
 			return mappings.get(element);
 		}
 		
-		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, Bug286935TestLanguageGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getStateAccess().getAlternatives_1(), "rule__State__Alternatives_1");
-			builder.put(grammarAccess.getStateTypeAccess().getAlternatives(), "rule__StateType__Alternatives");
-			builder.put(grammarAccess.getStateAccess().getGroup(), "rule__State__Group__0");
-			builder.put(grammarAccess.getStateAccess().getGroup_1_3(), "rule__State__Group_1_3__0");
-			builder.put(grammarAccess.getStateAccess().getGroup_1_4(), "rule__State__Group_1_4__0");
-			builder.put(grammarAccess.getStateAccess().getIsInitialAssignment_1_0(), "rule__State__IsInitialAssignment_1_0");
-			builder.put(grammarAccess.getStateAccess().getIsFinalAssignment_1_1(), "rule__State__IsFinalAssignment_1_1");
-			builder.put(grammarAccess.getStateAccess().getStateKindAssignment_1_2(), "rule__State__StateKindAssignment_1_2");
-			builder.put(grammarAccess.getStateAccess().getIsInitialAssignment_1_3_0(), "rule__State__IsInitialAssignment_1_3_0");
-			builder.put(grammarAccess.getStateAccess().getStateKindAssignment_1_3_1(), "rule__State__StateKindAssignment_1_3_1");
-			builder.put(grammarAccess.getStateAccess().getIsInitialAssignment_1_4_0(), "rule__State__IsInitialAssignment_1_4_0");
-			builder.put(grammarAccess.getStateAccess().getStateKindAssignment_1_4_1(), "rule__State__StateKindAssignment_1_4_1");
-			builder.put(grammarAccess.getStateAccess().getIsFinalAssignment_1_4_2(), "rule__State__IsFinalAssignment_1_4_2");
-			builder.put(grammarAccess.getStateAccess().getStateNameAssignment_3(), "rule__State__StateNameAssignment_3");
-			builder.put(grammarAccess.getStateAccess().getLabelAssignment_4(), "rule__State__LabelAssignment_4");
+		private static void init(Map<AbstractElement, String> mappings, Bug286935TestLanguageGrammarAccess grammarAccess) {
+			mappings.put(grammarAccess.getStateAccess().getAlternatives_1(), "rule__State__Alternatives_1");
+			mappings.put(grammarAccess.getStateTypeAccess().getAlternatives(), "rule__StateType__Alternatives");
+			mappings.put(grammarAccess.getStateAccess().getGroup(), "rule__State__Group__0");
+			mappings.put(grammarAccess.getStateAccess().getGroup_1_3(), "rule__State__Group_1_3__0");
+			mappings.put(grammarAccess.getStateAccess().getGroup_1_4(), "rule__State__Group_1_4__0");
+			mappings.put(grammarAccess.getStateAccess().getIsInitialAssignment_1_0(), "rule__State__IsInitialAssignment_1_0");
+			mappings.put(grammarAccess.getStateAccess().getIsFinalAssignment_1_1(), "rule__State__IsFinalAssignment_1_1");
+			mappings.put(grammarAccess.getStateAccess().getStateKindAssignment_1_2(), "rule__State__StateKindAssignment_1_2");
+			mappings.put(grammarAccess.getStateAccess().getIsInitialAssignment_1_3_0(), "rule__State__IsInitialAssignment_1_3_0");
+			mappings.put(grammarAccess.getStateAccess().getStateKindAssignment_1_3_1(), "rule__State__StateKindAssignment_1_3_1");
+			mappings.put(grammarAccess.getStateAccess().getIsInitialAssignment_1_4_0(), "rule__State__IsInitialAssignment_1_4_0");
+			mappings.put(grammarAccess.getStateAccess().getStateKindAssignment_1_4_1(), "rule__State__StateKindAssignment_1_4_1");
+			mappings.put(grammarAccess.getStateAccess().getIsFinalAssignment_1_4_2(), "rule__State__IsFinalAssignment_1_4_2");
+			mappings.put(grammarAccess.getStateAccess().getStateNameAssignment_3(), "rule__State__StateNameAssignment_3");
+			mappings.put(grammarAccess.getStateAccess().getLabelAssignment_4(), "rule__State__LabelAssignment_4");
 		}
 	}
 	
