@@ -19,14 +19,14 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StringValueConverter extends XbaseStringValueConverter {
+public class XtendStringValueConverter extends XbaseStringValueConverter {
 
 	@Inject
 	private FlexerFactory flexerFactory;
-	
+
 	@Override
 	protected TokenSource getTokenSource(String escapedValue) {
 		return flexerFactory.createTokenSource(new StringReader(escapedValue));
 	}
-	
+
 }

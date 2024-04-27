@@ -17,7 +17,7 @@ import org.eclipse.xtend.core.compiler.XtendGenerator;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
 import org.eclipse.xtend.core.conversion.IntUnderscoreValueConverter;
 import org.eclipse.xtend.core.conversion.JavaIDValueConverter;
-import org.eclipse.xtend.core.conversion.StringValueConverter;
+import org.eclipse.xtend.core.conversion.XtendStringValueConverter;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.documentation.XtendDocumentationProvider;
 import org.eclipse.xtend.core.documentation.XtendFileHeaderProvider;
@@ -298,7 +298,7 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
 
 	@Override
 	public Class<? extends STRINGValueConverter> bindSTRINGValueConverter() {
-		return StringValueConverter.class;
+		return XtendStringValueConverter.class;
 	}
 
 	public Class<? extends TokenRegionProvider> bindTokenRegionProvider() {
