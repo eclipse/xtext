@@ -1,0 +1,6 @@
+{
+	val myRec = new com.acme.MyRecord("aName", 10)
+	val s = String.valueOf(myRec.age)
+	s.length
+	return null
+}
