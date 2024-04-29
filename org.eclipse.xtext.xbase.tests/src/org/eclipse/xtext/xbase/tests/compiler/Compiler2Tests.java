@@ -2190,4 +2190,39 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"}\n" +
 				"return _xblockexpression;\n");
 	}
+
+	@Test
+	public void testStringLiteralWithUnixEOL_Issue2293() throws Exception {
+		compilesTo(
+				"{var s = \"a multiline\nstring\"}",
+				"String s = \"a multiline\\nstring\";");
+	}
+
+	@Test
+	public void testStringLiteralWithWindowsEOL_Issue2293() throws Exception {
+		compilesTo(
+				"{var s = \"a multiline\r\nstring\r\nstring\"}",
+				"String s = \"a multiline\\nstring\\nstring\";");
+	}
+
+	@Test
+	public void testStringLiteralWithCarriageReturn_Issue2293() throws Exception {
+		compilesTo(
+				"{\"astring\".toString.replace(\"\\r\", \"\");}",
+				"return \"astring\".toString().replace(\"\\r\", \"\");");
+	}
+
+	@Test
+	public void testStringLiteralWithCarriageReturn2_Issue2293() throws Exception {
+		compilesTo(
+				"{\"astring\".toString.replaceAll(\"\\r?\\n\", \"\\n\");}",
+				"return \"astring\".toString().replaceAll(\"\\r?\\n\", \"\\n\");");
+	}
+
+	@Test
+	public void testStringLiteralWithCarriageReturn3_Issue2293() throws Exception {
+		compilesTo(
+				"{\"astring\".toString.replaceAll(\"\\r\\n\", \"\\n\");}",
+				"return \"astring\".toString().replaceAll(\"\\r\\n\", \"\\n\");");
+	}
 }

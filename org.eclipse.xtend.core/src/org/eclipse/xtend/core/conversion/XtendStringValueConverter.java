@@ -12,21 +12,21 @@ import java.io.StringReader;
 
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
+import org.eclipse.xtext.xbase.conversion.XbaseStringValueConverter;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StringValueConverter extends STRINGValueConverter {
+public class XtendStringValueConverter extends XbaseStringValueConverter {
 
 	@Inject
 	private FlexerFactory flexerFactory;
-	
+
 	@Override
 	protected TokenSource getTokenSource(String escapedValue) {
 		return flexerFactory.createTokenSource(new StringReader(escapedValue));
 	}
-	
+
 }
