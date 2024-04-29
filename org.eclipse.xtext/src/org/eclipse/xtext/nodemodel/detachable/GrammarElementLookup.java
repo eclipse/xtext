@@ -71,7 +71,7 @@ public class GrammarElementLookup {
 	}
 	
 	public int size() {
-		return lookup.size();
+		return delegate().size();
 	}
 
 	public EObject getGrammarElement(int id) {
