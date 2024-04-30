@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,12 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.fowlerdsl.ui.tests
 
-import java.util.List
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
 import org.junit.Test
 import org.junit.runner.RunWith
+
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.waitForBuild
 
 /**
  * @author miklossy - Initial contribution and API
@@ -22,13 +23,10 @@ import org.junit.runner.RunWith
 @InjectWith(StatemachineUiInjectorProvider)
 class StatemachineContentAssistTest extends AbstractContentAssistTest {
 
-	// cursor position marker
-	val c = '''<|>'''
-
 	@Test def empty() throws Exception {
 		'''
 			«c»
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'commands',
 			'events',
 			'resetEvents',
@@ -51,7 +49,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 			resetEvents
 				«c»
 			end
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'doorClosed',
 			'drawerOpened',
 			'lightOn',
@@ -84,7 +82,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 			state idle
 				actions {«c»}
 			end
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'unlockPanel',
 			'lockPanel',
 			'lockDoor',
@@ -129,7 +127,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 				actions {unlockDoor lockPanel}
 				«c»
 			end
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'Transition - Template for a Transition',
 			'doorClosed',
 			'drawerOpened',
@@ -207,7 +205,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 				actions {unlockPanel lockDoor}
 				panelClosed => «c»
 			end
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'idle',
 			'active',
 			'waitingForLight',
@@ -274,7 +272,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 			
 			state active
 			end
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'doorClosed',
 			'drawerOpened',
 			'lightOn',
@@ -301,15 +299,33 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	private def void testContentAssistant(CharSequence text, List<String> expectedProposals,
-		String proposalToApply, String expectedContent) throws Exception {
-		
-		val cursorPosition = text.toString.indexOf(c)
-		val content = text.toString.replace(c, "")
-		
-		newBuilder.append(content).
-		assertTextAtCursorPosition(cursorPosition, expectedProposals).
-		applyProposal(cursorPosition, proposalToApply).
-		expectContent(expectedContent)
+	@Test def events_from_another_file() {
+		"events".createDslFile('''
+			events
+				doorClosed   D1CL
+				drawerOpened D2OP
+				lightOn      L1ON
+				doorOpened   D1OP
+				panelClosed  PNCL
+			end
+		''')
+
+		waitForBuild
+
+		'''
+			resetEvents
+				«c»
+			end
+		'''.assertContentAssistant('''
+			doorClosed
+			drawerOpened
+			lightOn
+			doorOpened
+			panelClosed
+		''', 'doorOpened', '''
+			resetEvents
+				doorOpened
+			end
+		''')
 	}
 }

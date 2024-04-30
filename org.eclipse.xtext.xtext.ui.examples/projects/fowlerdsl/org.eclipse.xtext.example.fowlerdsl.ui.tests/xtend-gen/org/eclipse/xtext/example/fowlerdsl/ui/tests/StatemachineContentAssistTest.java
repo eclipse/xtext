@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,15 +8,11 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui.tests;
 
-import java.util.Collections;
-import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,15 +23,6 @@ import org.junit.runner.RunWith;
 @InjectWith(StatemachineUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class StatemachineContentAssistTest extends AbstractContentAssistTest {
-  private final String c = new Function0<String>() {
-    @Override
-    public String apply() {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("<|>");
-      return _builder.toString();
-    }
-  }.apply();
-
   @Test
   public void empty() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -44,8 +31,8 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("resetEvents");
     _builder_1.newLine();
-    this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("commands", "events", "resetEvents", "state")), "resetEvents", _builder_1.toString());
+    this.assertContentAssistant(_builder, 
+      new String[] { "commands", "events", "resetEvents", "state" }, "resetEvents", _builder_1.toString());
   }
 
   @Test
@@ -106,8 +93,8 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.newLine();
     _builder_1.append("end");
     _builder_1.newLine();
-    this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed")), "doorOpened", _builder_1.toString());
+    this.assertContentAssistant(_builder, 
+      new String[] { "doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed" }, "doorOpened", _builder_1.toString());
   }
 
   @Test
@@ -164,8 +151,8 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.newLine();
     _builder_1.append("end");
     _builder_1.newLine();
-    this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("unlockPanel", "lockPanel", "lockDoor", "unlockDoor", "{")), "unlockDoor", _builder_1.toString());
+    this.assertContentAssistant(_builder, 
+      new String[] { "unlockPanel", "lockPanel", "lockDoor", "unlockDoor", "{" }, "unlockDoor", _builder_1.toString());
   }
 
   @Test
@@ -282,8 +269,8 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.newLine();
     _builder_1.append("end");
     _builder_1.newLine();
-    this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Transition - Template for a Transition", "doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "end")), "doorClosed", _builder_1.toString());
+    this.assertContentAssistant(_builder, 
+      new String[] { "Transition - Template for a Transition", "doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "end" }, "doorClosed", _builder_1.toString());
   }
 
   @Test
@@ -477,8 +464,8 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.newLine();
     _builder_1.append("end");
     _builder_1.newLine();
-    this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("idle", "active", "waitingForLight", "waitingForDrawer", "unlockedPanel")), "idle", _builder_1.toString());
+    this.assertContentAssistant(_builder, 
+      new String[] { "idle", "active", "waitingForLight", "waitingForDrawer", "unlockedPanel" }, "idle", _builder_1.toString());
   }
 
   @Test
@@ -549,13 +536,61 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.newLine();
     _builder_1.append("end");
     _builder_1.newLine();
-    this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "actions", "end", "Transition - Template for a Transition")), "Transition - Template for a Transition", _builder_1.toString());
+    this.assertContentAssistant(_builder, 
+      new String[] { "doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "actions", "end", "Transition - Template for a Transition" }, "Transition - Template for a Transition", _builder_1.toString());
   }
 
-  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
-    final int cursorPosition = text.toString().indexOf(this.c);
-    final String content = text.toString().replace(this.c, "");
-    this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
+  @Test
+  public void events_from_another_file() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("events");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorClosed   D1CL");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("drawerOpened D2OP");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("lightOn      L1ON");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorOpened   D1OP");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("panelClosed  PNCL");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    this.createDslFile("events", _builder);
+    IResourcesSetupUtil.waitForBuild();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("resetEvents");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(this.c, "\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("end");
+    _builder_1.newLine();
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("doorClosed");
+    _builder_2.newLine();
+    _builder_2.append("drawerOpened");
+    _builder_2.newLine();
+    _builder_2.append("lightOn");
+    _builder_2.newLine();
+    _builder_2.append("doorOpened");
+    _builder_2.newLine();
+    _builder_2.append("panelClosed");
+    _builder_2.newLine();
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("resetEvents");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("doorOpened");
+    _builder_3.newLine();
+    _builder_3.append("end");
+    _builder_3.newLine();
+    this.assertContentAssistant(_builder_1, _builder_2, "doorOpened", _builder_3.toString());
   }
 }
