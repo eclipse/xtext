@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -24,7 +24,7 @@ public class InsertParameterMiniHelperAnnoProcessor extends AbstractClassProcess
   @Override
   public void doTransform(final MutableClassDeclaration clazz, @Extension final TransformationContext context) {
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference a) -> {
-      return Boolean.valueOf((Objects.equal(a.getAnnotationTypeDeclaration().getSimpleName(), InsertParameterMiniHelperAnno.class.getSimpleName()) && (a.getClassValue("classRef") != null)));
+      return Boolean.valueOf((Objects.equals(a.getAnnotationTypeDeclaration().getSimpleName(), InsertParameterMiniHelperAnno.class.getSimpleName()) && (a.getClassValue("classRef") != null)));
     };
     AnnotationReference _findFirst = IterableExtensions.findFirst(clazz.getAnnotations(), _function);
     TypeReference _classValue = null;
@@ -35,7 +35,7 @@ public class InsertParameterMiniHelperAnnoProcessor extends AbstractClassProcess
     final Function1<AnnotationReference, Boolean> _function_1 = (AnnotationReference a) -> {
       String _simpleName = a.getAnnotationTypeDeclaration().getSimpleName();
       String _simpleName_1 = InsertParameterMiniHelperAnno.class.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, _simpleName_1));
+      return Boolean.valueOf(Objects.equals(_simpleName, _simpleName_1));
     };
     final int position = IterableExtensions.findFirst(clazz.getAnnotations(), _function_1).getIntValue("position");
     Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
