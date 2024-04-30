@@ -94,7 +94,7 @@ public class DetachedNodeModelReader extends EObjectInputStream implements NodeM
 		if (id == -1) {
 			return null;
 		}
-		if (id > grammarElements.size()) {
+		if (id >= grammarElements.size()) {
 			return grammarElementArrays.get(id - grammarElements.size()).getArray();
 		}
 		return grammarElements.getGrammarElement(id);
