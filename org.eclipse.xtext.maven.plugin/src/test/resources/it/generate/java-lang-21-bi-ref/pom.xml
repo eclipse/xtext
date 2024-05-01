@@ -52,17 +52,6 @@
 						<artifactId>org.eclipse.xtext.purexbase</artifactId>
 						<version>${xtext-version}</version>
 					</dependency>
-					<!-- force the version of JDT that supports Java 21 -->
-					<dependency>
-						<groupId>org.eclipse.jdt</groupId>
-						<artifactId>ecj</artifactId>
-						<version>3.37.0</version>
-					</dependency>
-					<dependency>
-						<groupId>org.eclipse.jdt</groupId>
-						<artifactId>org.eclipse.jdt.core</artifactId>
-						<version>3.37.0</version>
-					</dependency>
 				</dependencies>
 			</plugin>
 		</plugins>
