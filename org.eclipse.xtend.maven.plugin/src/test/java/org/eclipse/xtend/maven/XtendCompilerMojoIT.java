@@ -17,7 +17,9 @@ import java.util.Arrays;
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -61,6 +63,12 @@ public class XtendCompilerMojoIT {
 	@Test
 	public void simpleProject() throws Exception {
 		verifyErrorFreeLog(ROOT + "/simple");
+	}
+
+	@Test
+	public void simpleJava21Project() throws Exception {
+		Assume.assumeTrue("Active only on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
+		verifyErrorFreeLog(ROOT + "/simple-java21");
 	}
 
 	@Test
