@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ide.server.rename;
 
 import java.io.FileNotFoundException;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.log4j.Logger;
@@ -55,7 +56,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -252,7 +252,7 @@ public class RenameService2 implements IRenameService2 {
 							String convertedNameValue = getConvertedValue(leaf.getGrammarElement(), leaf);
 							String elementName = getElementName(element);
 							if (!Strings.isEmpty(convertedNameValue) && !Strings.isEmpty(elementName)
-									&& Objects.equal(convertedNameValue, elementName)) {
+									&& Objects.equals(convertedNameValue, elementName)) {
 								Position start = document.getPosition(leaf.getOffset());
 								Position end = document.getPosition(leaf.getEndOffset());
 								return Either3.forFirst(new Range(start, end));

@@ -335,11 +335,11 @@ public class IncrementalStandaloneBuilderWithJavaTest {
 	}
 
 	private StandaloneBuilder initBuilder(ILanguageConfiguration[] configs, String... srcDirs) {
-		List<String> patthes = new ArrayList<String>();
+		List<String> pathes = new ArrayList<String>();
 		for (String srcDir : srcDirs) {
-			patthes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
+			pathes.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
 		}
-		testBuilder.setSourceDirs(patthes);
+		testBuilder.setSourceDirs(pathes);
 		testBuilder.resetCallStatistic();
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory()
 				.createLanguageAccess(ImmutableList.copyOf(configs), getClass().getClassLoader());

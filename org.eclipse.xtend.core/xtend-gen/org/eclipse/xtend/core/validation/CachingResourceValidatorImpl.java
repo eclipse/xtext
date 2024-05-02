@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtend.core.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
@@ -118,7 +118,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   private void addWarningsForOrphanedJvmElements(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     final IssueSeverities issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(resource);
     final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELEMENT);
-    boolean _equals = Objects.equal(severity, Severity.IGNORE);
+    boolean _equals = Objects.equals(severity, Severity.IGNORE);
     if (_equals) {
       return;
     }

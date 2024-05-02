@@ -83,7 +83,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertNotNull(tree);
     Assert.assertEquals(2, tree.getNodes().size());
     Assert.assertEquals("first", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
-    Assert.assertEquals("second", IterableExtensions.<TreeNode>last(tree.getNodes()).getName());
+    Assert.assertEquals("second", IterableExtensions.<TreeNode>lastOrNull(tree.getNodes()).getName());
   }
 
   @Test
@@ -100,7 +100,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals(2, tree.getNodes().size());
     Assert.assertEquals("first", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
     Assert.assertEquals(0, IterableExtensions.<TreeNode>head(tree.getNodes()).getChildren().size());
-    Assert.assertEquals("second", IterableExtensions.<TreeNode>last(tree.getNodes()).getName());
+    Assert.assertEquals("second", IterableExtensions.<TreeNode>lastOrNull(tree.getNodes()).getName());
   }
 
   @Test
@@ -117,7 +117,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals(2, tree.getMoreNodes().size());
     Assert.assertEquals("first", IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getName());
     Assert.assertNull(IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getChildList());
-    Assert.assertEquals("second", IterableExtensions.<OtherTreeNode>last(tree.getMoreNodes()).getName());
+    Assert.assertEquals("second", IterableExtensions.<OtherTreeNode>lastOrNull(tree.getMoreNodes()).getName());
   }
 
   @Test

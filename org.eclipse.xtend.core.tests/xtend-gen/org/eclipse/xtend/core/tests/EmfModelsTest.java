@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.tests;
 
-import com.google.common.base.Objects;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -155,7 +155,7 @@ public class EmfModelsTest {
     for (final EStructuralFeature eStructuralFeature : _eAllStructuralFeatures) {
       try {
         String prefix = "get";
-        if ((Objects.equal(eStructuralFeature.getEType(), EcorePackage.Literals.EBOOLEAN) && (eStructuralFeature.getUpperBound() == 1))) {
+        if ((Objects.equals(eStructuralFeature.getEType(), EcorePackage.Literals.EBOOLEAN) && (eStructuralFeature.getUpperBound() == 1))) {
           prefix = "is";
         }
         String _firstUpper = Strings.toFirstUpper(eStructuralFeature.getName());
@@ -225,48 +225,48 @@ public class EmfModelsTest {
     boolean _isPrimitive = clazz.isPrimitive();
     if (_isPrimitive) {
       boolean _matched = false;
-      if (Objects.equal(clazz, Boolean.TYPE)) {
+      if (Objects.equals(clazz, Boolean.TYPE)) {
         _matched=true;
         return Boolean.valueOf(false);
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Long.TYPE)) {
+        if (Objects.equals(clazz, Long.TYPE)) {
           _matched=true;
           return Long.valueOf(0l);
         }
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Integer.TYPE)) {
+        if (Objects.equals(clazz, Integer.TYPE)) {
           _matched=true;
           return Integer.valueOf(0);
         }
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Character.TYPE)) {
+        if (Objects.equals(clazz, Character.TYPE)) {
           _matched=true;
           return Character.valueOf(((char) 0));
         }
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Short.TYPE)) {
+        if (Objects.equals(clazz, Short.TYPE)) {
           _matched=true;
           return Short.valueOf(((short) 0));
         }
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Byte.TYPE)) {
+        if (Objects.equals(clazz, Byte.TYPE)) {
           _matched=true;
           return Byte.valueOf(((byte) 0));
         }
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Double.TYPE)) {
+        if (Objects.equals(clazz, Double.TYPE)) {
           _matched=true;
           return Double.valueOf(0d);
         }
       }
       if (!_matched) {
-        if (Objects.equal(clazz, Float.TYPE)) {
+        if (Objects.equals(clazz, Float.TYPE)) {
           _matched=true;
           return Float.valueOf(0f);
         }

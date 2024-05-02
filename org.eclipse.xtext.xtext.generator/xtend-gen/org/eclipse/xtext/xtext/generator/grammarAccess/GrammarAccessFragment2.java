@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.grammarAccess;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.IOException;
@@ -17,6 +16,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -85,7 +85,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   public void generate() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     String _name = this.getLanguage().getGrammar().getName();
-    boolean _notEquals = (!Objects.equal(_name, "org.eclipse.xtext.common.Terminals"));
+    boolean _notEquals = (!Objects.equals(_name, "org.eclipse.xtext.common.Terminals"));
     if (_notEquals) {
       TypeReference _typeRef = TypeReference.typeRef(ClassLoader.class);
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -190,7 +190,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         final Resource packResource = pack.eResource();
         String _string = packResource.getURI().toString();
         String _nsURI = pack.getNsURI();
-        boolean _notEquals = (!Objects.equal(_string, _nsURI));
+        boolean _notEquals = (!Objects.equals(_string, _nsURI));
         if (_notEquals) {
           final ResourceSet packResourceSet = packResource.getResourceSet();
           if ((packResourceSet != null)) {

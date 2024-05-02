@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -40,7 +40,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   public Expression getExpression(final String property) {
     final JvmOperation op = this.findOperation(property);
     final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
-      return Boolean.valueOf((Objects.equal(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value"))));
+      return Boolean.valueOf((Objects.equals(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equals(op.getSimpleName(), "value"))));
     };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(this.getDelegate().getValues(), _function);
     boolean _matched = false;
@@ -60,7 +60,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     try {
       final JvmOperation op = this.findOperation(property);
       final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
-        return Boolean.valueOf((Objects.equal(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value"))));
+        return Boolean.valueOf((Objects.equals(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equals(op.getSimpleName(), "value"))));
       };
       final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(this.getDelegate().getValues(), _function);
       final boolean isArrayType = ((op != null) && this.getCompilationUnit().getTypeReferences().isArray(op.getReturnType()));
@@ -84,7 +84,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final JvmAnnotationType jvmAnnoType = ((JvmAnnotationTypeDeclarationImpl) _annotationTypeDeclaration).getDelegate();
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(jvmAnnoType.getDeclaredOperations(), _function);
     if ((jvmOperation == null)) {

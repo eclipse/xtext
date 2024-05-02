@@ -11,9 +11,9 @@
  */
 package euler;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.AbstractIterator;
 import java.util.BitSet;
+import java.util.Objects;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -83,12 +83,12 @@ public class Solution_014 extends AbstractIterator<Long> {
     long _switchResult = (long) 0;
     final Long current = this.current;
     boolean _matched = false;
-    if (Objects.equal(current, 0L)) {
+    if (Objects.equals(current, 0L)) {
       _matched=true;
       return this.endOfData();
     }
     if (!_matched) {
-      if (Objects.equal(current, 1L)) {
+      if (Objects.equals(current, 1L)) {
         _matched=true;
         _switchResult = 0L;
       }

@@ -11,7 +11,7 @@
  */
 package euler;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -86,120 +86,120 @@ public class Solution_017 {
   public String wordToHundred(final int number) {
     String _switchResult = null;
     boolean _matched = false;
-    if (Objects.equal(number, 0)) {
+    if (Objects.equals(number, 0)) {
       _matched=true;
       _switchResult = "";
     }
     if (!_matched) {
-      if (Objects.equal(number, 1)) {
+      if (Objects.equals(number, 1)) {
         _matched=true;
         _switchResult = "one";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 2)) {
+      if (Objects.equals(number, 2)) {
         _matched=true;
         _switchResult = "two";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 3)) {
+      if (Objects.equals(number, 3)) {
         _matched=true;
         _switchResult = "three";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 4)) {
+      if (Objects.equals(number, 4)) {
         _matched=true;
         _switchResult = "four";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 5)) {
+      if (Objects.equals(number, 5)) {
         _matched=true;
         _switchResult = "five";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 6)) {
+      if (Objects.equals(number, 6)) {
         _matched=true;
         _switchResult = "six";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 7)) {
+      if (Objects.equals(number, 7)) {
         _matched=true;
         _switchResult = "seven";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 8)) {
+      if (Objects.equals(number, 8)) {
         _matched=true;
         _switchResult = "eight";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 9)) {
+      if (Objects.equals(number, 9)) {
         _matched=true;
         _switchResult = "nine";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 10)) {
+      if (Objects.equals(number, 10)) {
         _matched=true;
         _switchResult = "ten";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 11)) {
+      if (Objects.equals(number, 11)) {
         _matched=true;
         _switchResult = "eleven";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 12)) {
+      if (Objects.equals(number, 12)) {
         _matched=true;
         _switchResult = "twelve";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 13)) {
+      if (Objects.equals(number, 13)) {
         _matched=true;
         _switchResult = "thirteen";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 14)) {
+      if (Objects.equals(number, 14)) {
         _matched=true;
         _switchResult = "fourteen";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 15)) {
+      if (Objects.equals(number, 15)) {
         _matched=true;
         _switchResult = "fifteen";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 16)) {
+      if (Objects.equals(number, 16)) {
         _matched=true;
         _switchResult = "sixteen";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 17)) {
+      if (Objects.equals(number, 17)) {
         _matched=true;
         _switchResult = "seventeen";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 18)) {
+      if (Objects.equals(number, 18)) {
         _matched=true;
         _switchResult = "eighteen";
       }
     }
     if (!_matched) {
-      if (Objects.equal(number, 19)) {
+      if (Objects.equals(number, 19)) {
         _matched=true;
         _switchResult = "nineteen";
       }

@@ -8,12 +8,12 @@
  */
 package org.eclipse.xtext.xbase.formatting;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.preferences.PreferenceKey;
@@ -52,7 +52,7 @@ public class FormattingDataFactory {
         _elvis = Integer.valueOf(0);
       }
       final int newLines2 = (int) _elvis;
-      if ((((it.space == null) && (it.newLines == null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equal(it.space, ""))))) {
+      if ((((it.space == null) && (it.newLines == null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equals(it.space, ""))))) {
         return this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
       } else {
         return this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
@@ -313,7 +313,7 @@ public class FormattingDataFactory {
                 WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_3, _xifexpression_4);
                 result.add(_whitespaceData_1);
               } else {
-                if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+                if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {
                   int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
                   int _length_2 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_6 = null;
@@ -356,7 +356,7 @@ public class FormattingDataFactory {
               if (_endsWithNewLine_2) {
                 newLines_1 = (newLines_1 - 1);
               }
-              if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+              if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {
                 int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
                 int _length_4 = ((WhitespaceInfo)leaf).getLength();
                 RuntimeException _xifexpression_10 = null;

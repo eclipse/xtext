@@ -63,7 +63,7 @@ class XtypeFormatter extends AbstractJavaFormatter {
 	def dispatch format(XImportSection section, extension IFormattableDocument format) {
 		for (imp : section.importDeclarations) {
 			imp.format
-			if (imp != section.importDeclarations.last)
+			if (imp != section.importDeclarations.lastOrNull)
 				imp.append(blankLinesBetweenImports)
 			else
 				imp.append(blankLinesAfterImports)

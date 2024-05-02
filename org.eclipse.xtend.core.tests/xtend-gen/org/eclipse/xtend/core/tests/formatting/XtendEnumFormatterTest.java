@@ -8,31 +8,33 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
-import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
+import java.util.function.Consumer;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
+public class XtendEnumFormatterTest extends AbstractFormatterTest {
   @Test
   public void formatPublic() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public enum Bar {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
   public void formatLiteral01() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum Bar {");
     _builder.newLine();
@@ -41,13 +43,11 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
   public void formatLiteral02() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum Bar {");
     _builder.newLine();
@@ -62,14 +62,11 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
   public void formatLiteral03() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-      it.<Integer>put(XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals, Integer.valueOf(1));
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum Bar {");
     _builder.newLine();
@@ -86,14 +83,11 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
   public void formatBraces_01() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -102,14 +96,11 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
   public void formatBraces_02() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -120,6 +111,9 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+    };
+    this.assertUnformattedEqualsFormatted(_builder, _function);
   }
 }

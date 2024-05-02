@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -346,7 +346,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       final IFeatureCallArguments result = this.factory.createStandardArguments(arguments, operation.getParameters(), receiver, this.getOwner());
       Class<? extends IFeatureCallArguments> _class = result.getClass();
-      boolean _equals = Objects.equal(_class, StandardFeatureCallArguments.class);
+      boolean _equals = Objects.equals(_class, StandardFeatureCallArguments.class);
       Assert.assertTrue(_equals);
       return result;
     } catch (Throwable _e) {

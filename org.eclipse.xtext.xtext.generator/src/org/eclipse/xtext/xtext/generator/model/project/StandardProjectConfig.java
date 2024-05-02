@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtext.xtext.generator.model.project;
 
+import java.util.Objects;
+
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtext.xtext.generator.Issues;
-
-import com.google.common.base.Objects;
 
 /**
  * Specialized project configuration that uses standard names and paths. Usually
@@ -110,25 +110,25 @@ public class StandardProjectConfig extends XtextProjectConfig {
 	}
 
 	protected String computeName(SubProjectConfig project) {
-		if (Objects.equal(project, getRuntime())) {
+		if (Objects.equals(project, getRuntime())) {
 			return baseName;
-		} else if (Objects.equal(project, getRuntimeTest())) {
+		} else if (Objects.equals(project, getRuntimeTest())) {
 			if (!mavenLayout) {
 				return baseName + ".tests";
 			} else {
 				return baseName;
 			}
-		} else if (Objects.equal(project, getGenericIde())) {
+		} else if (Objects.equals(project, getGenericIde())) {
 			return baseName + ".ide";
-		} else if (Objects.equal(project, getEclipsePlugin())) {
+		} else if (Objects.equals(project, getEclipsePlugin())) {
 			return baseName + ".ui";
-		} else if (Objects.equal(project, getEclipsePluginTest())) {
+		} else if (Objects.equals(project, getEclipsePluginTest())) {
 			if (!mavenLayout) {
 				return baseName + ".ui.tests";
 			} else {
 				return baseName + ".ui";
 			}
-		} else if (Objects.equal(project, getWeb())) {
+		} else if (Objects.equals(project, getWeb())) {
 			return baseName + ".web";
 		}
 		return null;

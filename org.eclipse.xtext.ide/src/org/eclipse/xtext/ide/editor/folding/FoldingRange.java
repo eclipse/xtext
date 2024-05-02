@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.folding;
 
-import org.eclipse.xtext.util.ITextRegion;
+import java.util.Objects;
 
-import com.google.common.base.Objects;
+import org.eclipse.xtext.util.ITextRegion;
 
 /**
  * Represents an abstraction for different folding implementations.
@@ -70,15 +70,15 @@ public class FoldingRange {
 		if (other instanceof FoldingRange) {
 			FoldingRange range = (FoldingRange) other;
 			return offset == range.offset && length == range.length && initiallyFolded == range.initiallyFolded
-					&& Objects.equal(kind, range.kind)
-					&& Objects.equal(visualPlaceholderRegion, range.visualPlaceholderRegion);
+					&& Objects.equals(kind, range.kind)
+					&& Objects.equals(visualPlaceholderRegion, range.visualPlaceholderRegion);
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(offset, length, initiallyFolded, kind, visualPlaceholderRegion);
+		return Objects.hash(offset, length, initiallyFolded, kind, visualPlaceholderRegion);
 	}
 	
 	@Override

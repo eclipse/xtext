@@ -2249,11 +2249,11 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.collect.AbstractIterator;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Iterator;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -2282,7 +2282,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final T elem = iter.next();");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("boolean _notEquals = (!Objects.equal(elem, null));");
+    _builder_1.append("boolean _notEquals = (!Objects.equals(elem, null));");
     _builder_1.newLine();
     _builder_1.append("            ");
     _builder_1.append("if (_notEquals) {");
@@ -2564,11 +2564,11 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.collect.AbstractIterator;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Iterator;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
@@ -2601,7 +2601,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Boolean apply(final T it_1) {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("return Boolean.valueOf((!Objects.equal(it_1, null)));");
+    _builder_1.append("return Boolean.valueOf((!Objects.equals(it_1, null)));");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");
@@ -3527,7 +3527,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.IntegerRange;");
     _builder_1.newLine();
@@ -3543,7 +3543,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(a, \"b\")) {");
+    _builder_1.append("if (Objects.equals(a, \"b\")) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -3564,7 +3564,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(a, \"c\")) {");
+    _builder_1.append("if (Objects.equals(a, \"c\")) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -3588,7 +3588,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(a, \"d\")) {");
+    _builder_1.append("if (Objects.equals(a, \"d\")) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -3957,7 +3957,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.IntegerRange;");
     _builder_1.newLine();
@@ -3973,7 +3973,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(a, \"b\")) {");
+    _builder_1.append("if (Objects.equals(a, \"b\")) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -3994,7 +3994,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(a, \"c\")) {");
+    _builder_1.append("if (Objects.equals(a, \"c\")) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -4018,7 +4018,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(a, \"d\")) {");
+    _builder_1.append("if (Objects.equals(a, \"d\")) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -4078,7 +4078,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -4095,7 +4095,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(a, \"a\")) {");
+    _builder_1.append("if (Objects.equals(a, \"a\")) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -4131,7 +4131,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(a, \"b\")) {");
+    _builder_1.append("if (Objects.equals(a, \"b\")) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -4452,7 +4452,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
@@ -4474,7 +4474,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(_switchValue, null)) {");
+    _builder_1.append("if (Objects.equals(_switchValue, null)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -4504,7 +4504,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(_switchValue, null)) {");
+    _builder_1.append("if (Objects.equals(_switchValue, null)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -4668,7 +4668,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -4688,7 +4688,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(x, 1)) {");
+    _builder_1.append("if (Objects.equals(x, 1)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -4745,7 +4745,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -4765,7 +4765,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(x, 1d)) {");
+    _builder_1.append("if (Objects.equals(x, 1d)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -5065,7 +5065,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
     _builder_1.newLine();
@@ -5105,7 +5105,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Integer _apply = _function.apply();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(x, _apply)) {");
+    _builder_1.append("if (Objects.equals(x, _apply)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");
@@ -5447,7 +5447,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -5485,7 +5485,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int _xifexpression = (int) 0;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("boolean _equals = Objects.equal(Integer.valueOf(y), Boolean.valueOf(true));");
+    _builder_1.append("boolean _equals = Objects.equals(Integer.valueOf(y), Boolean.valueOf(true));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (_equals) {");
@@ -5515,7 +5515,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(x, z)) {");
+    _builder_1.append("if (Objects.equals(x, z)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -5569,7 +5569,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -5598,7 +5598,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (Objects.equal(x, state)) {");
+    _builder_1.append("if (Objects.equals(x, state)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -7965,7 +7965,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package x;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -7979,7 +7979,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _xifexpression = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = Objects.equal(\"foo\", p);");
+    _builder_1.append("boolean _equals = Objects.equals(\"foo\", p);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");
@@ -10697,7 +10697,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
       final String expectedBazClass = _builder_2.toString();
       final XtendFile file = this.file(input.toString(), true);
       final JvmDeclaredType barType = IterableExtensions.<JvmDeclaredType>head(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
-      final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
+      final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>lastOrNull(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
       final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(barType);
       CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
       barJavaCode = this.postProcessor.postProcess(null, barJavaCode);
@@ -12098,7 +12098,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -12109,7 +12109,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = Objects.equal(\"a\", \"b\");");
+    _builder_1.append("boolean _equals = Objects.equals(\"a\", \"b\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");
@@ -12121,7 +12121,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("for (;;) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("boolean _equals_1 = Objects.equal(\"b\", \"c\");");
+    _builder_1.append("boolean _equals_1 = Objects.equals(\"b\", \"c\");");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (_equals_1) {");
@@ -13045,7 +13045,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -13067,7 +13067,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _matched = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (Objects.equal(x, this.X)) {");
+    _builder_1.append("if (Objects.equals(x, this.X)) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_matched=true;");

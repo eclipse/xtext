@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
@@ -22,6 +21,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -209,7 +209,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
 
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
-    boolean _equals = Objects.equal(path, Path.ROOT);
+    boolean _equals = Objects.equals(path, Path.ROOT);
     if (_equals) {
       Path _absolutePath = path.getAbsolutePath(this.projectConfigProvider.getProjectConfig(this.context).getName());
       return Collections.<Path>unmodifiableList(CollectionLiterals.<Path>newArrayList(_absolutePath));
@@ -272,7 +272,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   public boolean exists(final Path path) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(path, Path.ROOT);
+      boolean _equals = Objects.equals(path, Path.ROOT);
       if (_equals) {
         return true;
       }
@@ -344,7 +344,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   public boolean isFolder(final Path path) {
     Boolean _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(path, Path.ROOT);
+      boolean _equals = Objects.equals(path, Path.ROOT);
       if (_equals) {
         return true;
       }
@@ -407,7 +407,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
 
   protected URI getURI(final Path path) {
-    if (((path == null) || Objects.equal(path, Path.ROOT))) {
+    if (((path == null) || Objects.equals(path, Path.ROOT))) {
       return null;
     }
     final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
@@ -417,7 +417,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     final URI projectURI = projectConfig.getPath();
     final String projectName = IterableExtensions.<String>head(path.getSegments());
     String _name = projectConfig.getName();
-    boolean _notEquals = (!Objects.equal(projectName, _name));
+    boolean _notEquals = (!Objects.equals(projectName, _name));
     if (_notEquals) {
       return null;
     }
@@ -472,7 +472,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
         URI _xifexpression_1 = null;
         String _segment = baseURI.segment(1);
         String _segment_1 = absoluteURI.segment(1);
-        boolean _notEquals = (!Objects.equal(_segment, _segment_1));
+        boolean _notEquals = (!Objects.equals(_segment, _segment_1));
         if (_notEquals) {
           URI _xblockexpression_1 = null;
           {
@@ -491,7 +491,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
         _xifexpression = absoluteURI.deresolve(baseURI);
       }
       final URI relativeURI = _xifexpression;
-      if ((relativeURI.isEmpty() || Objects.equal(relativeURI, absoluteURI))) {
+      if ((relativeURI.isEmpty() || Objects.equals(relativeURI, absoluteURI))) {
         return null;
       }
       _xblockexpression = basePath.getAbsolutePath(relativeURI.toString());

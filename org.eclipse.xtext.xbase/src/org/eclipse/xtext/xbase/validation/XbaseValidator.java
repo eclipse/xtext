@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -136,7 +137,6 @@ import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -1207,7 +1207,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 				}
 				continue;
 			}
-			if (Objects.equal(member.getSimpleName(), staticImportDeclaration.getMemberName())) {
+			if (Objects.equals(member.getSimpleName(), staticImportDeclaration.getMemberName())) {
 				indexToRemove = i;
 				break;
 			}
@@ -1495,7 +1495,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 	
 	@Check
 	public void checkRedundantCase(XSwitchExpression switchExpression) {
-		XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
+		XCasePart casePart = IterableExtensions.lastOrNull(switchExpression.getCases());
 		if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
 			return;
 		}

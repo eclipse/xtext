@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.findReferences.TargetURICollector;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.workspace.ProjectConfigProvider;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
+import org.eclipse.xtext.xbase.conversion.XbaseStringValueConverter;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 import org.eclipse.xtext.xbase.debug.XbaseStratumBreakpointSupport;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -242,5 +244,11 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	public Class<? extends IJavaDocTypeReferenceProvider> bindIJavaDocReferenceProvider() {
 		return XbaseJavaDocTypeReferenceProvider.class;
 	}
-	
+
+	/**
+	 * @since 2.35
+	 */
+	public Class<? extends STRINGValueConverter> bindSTRINGValueConverter() {
+		return XbaseStringValueConverter.class;
+	}
 }

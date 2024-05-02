@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
 
@@ -22,7 +23,6 @@ import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -355,7 +355,7 @@ public class NfaUtil {
 	public <S> boolean equalsIgnoreOrder(Nfa<S> nfa1, Nfa<S> nfa2, Function<S, ? extends Object> keyFunc) {
 		if (nfa1 == nfa2)
 			return true;
-		if (!Objects.equal(keyFunc.apply(nfa1.getStart()), keyFunc.apply(nfa2.getStart())))
+		if (!Objects.equals(keyFunc.apply(nfa1.getStart()), keyFunc.apply(nfa2.getStart())))
 			return false;
 		return equalsIgnoreOrder(nfa1, nfa2, nfa1.getStart(), nfa2.getStart(), keyFunc, Sets.<S> newHashSet());
 	}

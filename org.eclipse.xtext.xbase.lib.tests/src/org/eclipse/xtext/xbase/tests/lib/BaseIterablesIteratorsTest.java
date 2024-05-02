@@ -297,39 +297,39 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 		}
 	}
 	
-	protected abstract Integer last(IterableOrIterator input);
+	protected abstract Integer lastOrNull(IterableOrIterator input);
 	
-	@Test public void testLast_empty() {
+	@Test public void testLastOrNull_empty() {
 		for(IterableOrIterator testMe: testData()) {
-			Integer last = last(testMe);
+			Integer last = lastOrNull(testMe);
 			assertNull("empty input yields null", last);
 		}
 	}
 	
-	@Test public void testLast_oneEntry() {
+	@Test public void testLastOrNull_oneEntry() {
 		for(IterableOrIterator testMe: testData(first)) {
-			Integer last = last(testMe);
+			Integer last = lastOrNull(testMe);
 			assertEquals(first, last);
 		}
 	}
 	
-	@Test public void testLast_entryIsNull() {
+	@Test public void testLastOrNull_entryIsNull() {
 		for(IterableOrIterator testMe: nullableTestData((Integer)null)) {
-			Integer last = last(testMe);
+			Integer last = lastOrNull(testMe);
 			assertEquals(null, last);
 		}
 	}
 	
-	@Test public void testLast_moreEntries() {
+	@Test public void testLastOrNull_moreEntries() {
 		for(IterableOrIterator testMe: testData(first, second, third)) {
-			Integer last = last(testMe);
+			Integer last = lastOrNull(testMe);
 			assertEquals(third, last);
 		}
 	}
 	
-	@Test public void testLast_NPE() {
+	@Test public void testLastOrNull_NPE() {
 		try {
-			last(null);
+			lastOrNull(null);
 			fail("expeced NPE");
 		} catch(NullPointerException npe) {
 			// expected

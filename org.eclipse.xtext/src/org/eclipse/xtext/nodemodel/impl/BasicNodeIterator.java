@@ -18,13 +18,17 @@ import com.google.common.collect.UnmodifiableIterator;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implements BidiIterator<AbstractNode>{
 
 	private final AbstractNode startWith;
 	private AbstractNode lastReturned;
 
-	protected BasicNodeIterator(AbstractNode startWith) {
+	/**
+	 * @since 2.35
+	 */
+	public BasicNodeIterator(AbstractNode startWith) {
 		Objects.requireNonNull(startWith);
 		this.startWith = startWith;
 	}

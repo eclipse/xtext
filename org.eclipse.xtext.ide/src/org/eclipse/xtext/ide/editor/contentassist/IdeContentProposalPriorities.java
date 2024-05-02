@@ -8,9 +8,10 @@
  */
 package org.eclipse.xtext.ide.editor.contentassist;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.resource.IEObjectDescription;
 
-import com.google.common.base.Objects;
 import com.google.inject.Singleton;
 
 /**
@@ -34,7 +35,7 @@ public class IdeContentProposalPriorities {
 		if (!Character.isLetter(entry.getProposal().charAt(0))) {
 			adjustedPriority = adjustedPriority - 30;
 		}
-		if (Objects.equal(entry.getProposal(), entry.getPrefix())) {
+		if (Objects.equals(entry.getProposal(), entry.getPrefix())) {
 			adjustedPriority = adjustedPriority - 20;
 		}
 		return adjustedPriority;

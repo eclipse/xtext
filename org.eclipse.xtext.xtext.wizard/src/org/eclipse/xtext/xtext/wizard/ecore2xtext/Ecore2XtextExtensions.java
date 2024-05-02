@@ -26,7 +26,6 @@ import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -249,11 +248,11 @@ public class Ecore2XtextExtensions {
 	}
 
 	public static boolean isPrefixBooleanFeature(EStructuralFeature it) {
-		return isBoolean(it.getEType()) && !it.isMany() && !Objects.equal(it.getDefaultValueLiteral(), "true");
+		return isBoolean(it.getEType()) && !it.isMany() && !"true".equals(it.getDefaultValueLiteral());
 	}
 
 	public static boolean isString(EClassifier it) {
-		return it instanceof EDataType && Objects.equal(it.getName(), "EString") && isEcoreType(it);
+		return it instanceof EDataType && "EString".equals(it.getName()) && isEcoreType(it);
 	}
 
 	public static boolean isEcoreType(EClassifier it) {

@@ -565,6 +565,7 @@
     <setupTask
         xsi:type="projects:ProjectsBuildTask"
         id="clean-xtext-lib-complete"
+        onlyNewProjects="true"
         refresh="true"
         clean="true"/>
     <stream

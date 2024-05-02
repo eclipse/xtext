@@ -12,19 +12,19 @@ import org.junit.Ignore
 import org.junit.Test
 
 class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
-	
+
 	@Test def testSimple() {
 		assertFormattedRichStringExpression('''
 			val x = ```foo```;
 		''')
 	}
-	
+
 	@Test def testSimpleVar() {
 		assertFormattedRichStringExpression('''
 			val x = ```foo<<newArrayList()>>>bar```
 		''')
 	}
-	
+
 	@Test def testIndentation1() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -36,7 +36,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIndentation2() {
 		assertFormattedRichStringExpression('''
 			val x = ```x
@@ -44,7 +44,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIndentation3() {
 		assertFormattedRichStringExpression('''
 			val x = ```x
@@ -52,7 +52,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIndentation4() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -60,7 +60,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			x```
 		''')
 	}
-	
+
 	@Test def testIf1() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -78,7 +78,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIf2() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -98,7 +98,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIfElse() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -120,7 +120,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIfElseIfElse() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -146,7 +146,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIfElseIfElseInline() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -158,7 +158,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIfNested() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -182,7 +182,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testForLoop() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -192,7 +192,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testForLoopInline() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -200,7 +200,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testForLoopNested() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -213,7 +213,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testForLoopParams() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -232,7 +232,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testForSyntaxErrors() {
 		assertFormattedRichStringExpressionWithErrors('''
 			val x = ```
@@ -240,7 +240,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIrregularIndentation() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -251,7 +251,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def testIrregularIndentation2() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -266,10 +266,9 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
-	@Test
+
 	@Ignore("indentation increases every time the formatter runs")
-	def prefixedForLoop() {
+	@Test def prefixedForLoop() {
 		assertFormattedRichStringExpression('''
 			val x = ```
 				return <<FOR field : cls.persistentState SEPARATOR "&&">>
@@ -278,7 +277,7 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def smokeTest() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -297,9 +296,9 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
-	
+
 	@Test def bug450458() {
-		assertFormattedRichString('''
+		'''
 			class Foo {
 				@Test def testDefaultPackageLeadingWhitespace() {
 					```
@@ -313,11 +312,21 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 					```)
 				}
 			}
-		''')
+		'''.decode.assertUnformattedEqualsFormatted
 	}
 
 	@Test def indentThreeTabsLineInIf() {
-		assertFormatted('''
+		'''
+			class Generator {
+				def generate() {
+					```
+						<<IF true>>
+						
+						<<ENDIF>>
+					```
+				}
+			}
+		'''.decode.assertFormattedTo('''
 			class Generator {
 				def generate() {
 					```
@@ -327,35 +336,15 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 					```
 				}
 			}
-		'''.decode, '''
-			class Generator {
-				def generate() {
-					```
-						<<IF true>>
-						
-						<<ENDIF>>
-					```
-				}
-			}
 		'''.decode)
 	}
-	
+
 	// TODO this test case is not 100% correct ... one additional tab should be generated for the blank line.
 	// But the formatter code is to complicated. Was not able to generate the correct indentation. But as it is now
 	// the test at least ensures that there is no exception generated.
 	// See: https://github.com/eclipse/xtext-core/issues/710
 	@Test def indentEmptyLineInIf() {
-		assertFormatted('''
-			class Generator {
-				def generate() {
-					```
-						<<IF true>>
-						
-						<<ENDIF>>
-					```
-				}
-			}
-		'''.decode, '''
+		'''
 			class Generator {
 				def generate() {
 					```
@@ -365,8 +354,17 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 					```
 				}
 			}
+		'''.decode.assertFormattedTo('''
+			class Generator {
+				def generate() {
+					```
+						<<IF true>>
+						
+						<<ENDIF>>
+					```
+				}
+			}
 		'''.decode)
 	}
-	
+
 }
-	 

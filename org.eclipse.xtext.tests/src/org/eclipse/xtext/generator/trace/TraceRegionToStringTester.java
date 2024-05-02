@@ -10,10 +10,9 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.xtext.util.ITextRegion;
-
-import com.google.common.base.Objects;
 
 public class TraceRegionToStringTester extends AbstractTraceRegionToString {
 	public static class Location extends LocationData {
@@ -63,10 +62,10 @@ public class TraceRegionToStringTester extends AbstractTraceRegionToString {
 
 	@Override
 	protected String getRemoteText(SourceRelativeURI uri) {
-		if (Objects.equal(uri, uri1)) {
+		if (Objects.equals(uri, uri1)) {
 			return remote1;
 		}
-		if (Objects.equal(uri, uri2)) {
+		if (Objects.equals(uri, uri2)) {
 			return remote2;
 		}
 		return null;

@@ -50,7 +50,7 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		val firstMember = firstType.members.head as XtendFunction
 		val block = firstMember.expression as XBlockExpression
 		val resolvedTypes = file.resolveTypes
-		val linkingCandidate = switch featureOrConstructorCall : block.expressions.last {
+		val linkingCandidate = switch featureOrConstructorCall : block.expressions.lastOrNull {
 			XAbstractFeatureCall: resolvedTypes.getLinkingCandidate(featureOrConstructorCall)
 			XConstructorCall: resolvedTypes.getLinkingCandidate(featureOrConstructorCall)
 			default: throw new IllegalArgumentException(String.valueOf(featureOrConstructorCall.eClass.name))

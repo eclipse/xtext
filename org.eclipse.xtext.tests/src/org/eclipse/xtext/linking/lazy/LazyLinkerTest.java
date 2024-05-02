@@ -31,9 +31,10 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.LeafNode;
+import org.eclipse.xtext.nodemodel.NodeModelAccessForTests;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.nodemodel.impl.LeafNodeWithSyntaxError;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
@@ -149,12 +150,12 @@ public class LazyLinkerTest extends AbstractXtextTests {
 	}
 
 	private INode newCrossReferenceAssignmentNode(final String feature) {
-		final LeafNode leafNode = new LeafNode();
+		final LeafNodeWithSyntaxError leafNode = new LeafNodeWithSyntaxError();
 		final Assignment assignment = XtextFactory.eINSTANCE.createAssignment();
 		assignment.setFeature(feature);
 		final CrossReference crossReference = XtextFactory.eINSTANCE.createCrossReference();
 		assignment.setTerminal(crossReference);
-		leafNode.basicSetGrammarElement(crossReference);
+		NodeModelAccessForTests.basicSetGrammarElement(leafNode, crossReference);
 		return leafNode;
 	}
 

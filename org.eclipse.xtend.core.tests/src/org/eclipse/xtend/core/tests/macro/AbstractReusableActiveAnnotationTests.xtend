@@ -1344,7 +1344,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				assertEquals(1, value.annotations.size)
 				assertNotNull(value.findAnnotation(deprecatedAnnotationType))
 			}
-			assertEquals("D", enumerationType.declaredValues.last.simpleName)
+			assertEquals("D", enumerationType.declaredValues.lastOrNull.simpleName)
 			assertNotNull(enumerationType.findDeclaredValue("D"))
 		]
 	}

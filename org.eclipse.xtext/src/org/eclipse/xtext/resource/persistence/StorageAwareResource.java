@@ -9,6 +9,8 @@
 package org.eclipse.xtext.resource.persistence;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -161,5 +163,13 @@ public class StorageAwareResource extends LazyLinkingResource {
 
 	public void setResourceDescription(IResourceDescription resourceDescription) {
 		this.resourceDescription = resourceDescription;
+	}
+	
+	protected boolean customWriteNodeModel(OutputStream outputStream) throws IOException {
+		return getParseResultWrapper().customWriteNodeModel(this, outputStream);
+	}
+	
+	protected boolean customReadNodeModel(InputStream inputStream) throws IOException {
+		return getParseResultWrapper().customReadNodeModel(this, inputStream);
 	}
 }

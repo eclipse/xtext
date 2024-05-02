@@ -10,8 +10,8 @@
       <category name="Xtext"/>
    </feature>
 
-   <bundle id="com.google.guava" version="33.0.0.qualifier"/>
-   <bundle id="com.google.guava.source" version="33.0.0.qualifier"/>
+   <bundle id="com.google.guava" version="33.1.0.qualifier"/>
+   <bundle id="com.google.guava.source" version="33.1.0.qualifier"/>
    <bundle id="com.google.guava.failureaccess" version="1.0.2.qualifier"/>
    <bundle id="com.google.guava.failureaccess.source" version="1.0.2.qualifier"/>
    <bundle id="com.google.inject" version="7.0.0.qualifier"/>
@@ -32,9 +32,9 @@
    <bundle id="org.hamcrest.core.source" version="2.2.0.qualifier"/>
    <bundle id="org.kohsuke.args4j" version="0.0.0"/>
    <bundle id="org.kohsuke.args4j.source" version="0.0.0"/>
-   <bundle id="org.objectweb.asm" version="9.6.0.qualifier"/>
-   <bundle id="org.objectweb.asm.source" version="9.6.0.qualifier"/>
-   <bundle id="io.github.classgraph.classgraph" version="4.8.165.qualifier"/>
-   <bundle id="io.github.classgraph.classgraph.source" version="4.8.165.qualifier"/>
+   <bundle id="org.objectweb.asm" version="9.7.0.qualifier"/>
+   <bundle id="org.objectweb.asm.source" version="9.7.0.qualifier"/>
+   <bundle id="io.github.classgraph.classgraph" version="4.8.172.qualifier"/>
+   <bundle id="io.github.classgraph.classgraph.source" version="4.8.172.qualifier"/>
    <category-def name="Xtext" label="Xtext" />
 </site>

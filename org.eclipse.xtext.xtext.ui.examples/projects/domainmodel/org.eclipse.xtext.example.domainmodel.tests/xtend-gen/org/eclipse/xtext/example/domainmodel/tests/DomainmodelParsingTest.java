@@ -183,8 +183,8 @@ public class DomainmodelParsingTest {
     final PackageDeclaration pack = ((PackageDeclaration) _head);
     AbstractElement _head_1 = IterableExtensions.<AbstractElement>head(pack.getElements());
     final Entity entity = ((Entity) _head_1);
-    Feature _last = IterableExtensions.<Feature>last(entity.getFeatures());
-    final Operation op = ((Operation) _last);
+    Feature _lastOrNull = IterableExtensions.<Feature>lastOrNull(entity.getFeatures());
+    final Operation op = ((Operation) _lastOrNull);
     EObject _head_2 = IterableExtensions.<EObject>head(this._iJvmModelAssociations.getJvmElements(op));
     final JvmOperation method = ((JvmOperation) _head_2);
     Assert.assertEquals("String", method.getReturnType().getSimpleName());

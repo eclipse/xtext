@@ -9,7 +9,6 @@
 package org.eclipse.xtext.testing;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -26,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -724,7 +724,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
           }
         }
       } else {
-        if (((it.getInsertText() != null) && (!Objects.equal(it.getInsertText(), it.getLabel())))) {
+        if (((it.getInsertText() != null) && (!Objects.equals(it.getInsertText(), it.getLabel())))) {
           _builder.append(" -> ");
           String _insertText = it.getInsertText();
           _builder.append(_insertText);

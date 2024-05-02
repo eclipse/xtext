@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.contentAssist;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -376,7 +376,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       final Function1<Assignment, Boolean> _function = (Assignment it) -> {
         String _feature = it.getFeature();
         String _feature_1 = assignment.getFeature();
-        return Boolean.valueOf(Objects.equal(_feature, _feature_1));
+        return Boolean.valueOf(Objects.equals(_feature, _feature_1));
       };
       final Function1<Assignment, AbstractElement> _function_1 = (Assignment it) -> {
         return it.getTerminal();

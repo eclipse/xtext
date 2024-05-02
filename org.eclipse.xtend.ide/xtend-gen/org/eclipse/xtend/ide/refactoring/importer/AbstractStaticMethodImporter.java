@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.refactoring.importer;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.DocumentRewriteSession;
@@ -120,7 +120,7 @@ public abstract class AbstractStaticMethodImporter {
           if ((call.isStatic() && (!call.isExtension()))) {
             final Pair<String, String> toImport = this.computeImport(call);
             final Function1<XMemberFeatureCall, Boolean> _function_1 = (XMemberFeatureCall it) -> {
-              return Boolean.valueOf((Objects.equal(call.getFeature(), it.getFeature()) && (!it.isExtension())));
+              return Boolean.valueOf((Objects.equals(call.getFeature(), it.getFeature()) && (!it.isExtension())));
             };
             final Function1<XMemberFeatureCall, Boolean> _function_2 = (XMemberFeatureCall it) -> {
               return Boolean.valueOf((it != call));

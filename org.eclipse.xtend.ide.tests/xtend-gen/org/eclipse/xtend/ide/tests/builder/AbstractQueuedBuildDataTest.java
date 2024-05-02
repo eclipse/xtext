@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.tests.builder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.JavaCore;
@@ -106,7 +106,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         for (final String exportedName : _exportedNames) {
           {
             final Function1<String, Boolean> _function = (String it) -> {
-              return Boolean.valueOf(Objects.equal(exportedName, it));
+              return Boolean.valueOf(Objects.equals(exportedName, it));
             };
             final String qualifiedName = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(expectedExportedNames)), _function);
             if ((qualifiedName == null)) {

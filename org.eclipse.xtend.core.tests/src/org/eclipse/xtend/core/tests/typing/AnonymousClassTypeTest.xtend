@@ -53,7 +53,7 @@ class AnonymousClassTypeTest extends AbstractXtendTestCase {
 		val operation = function.directlyInferredOperation
 		val resolvedTypes = operation.eResource.resolveTypes
 		assertEquals('Runnable', resolvedTypes.getActualType(operation).toString)	
-		val variable = (function.expression as XBlockExpression).expressions.last
+		val variable = (function.expression as XBlockExpression).expressions.lastOrNull
 		val variableType = resolvedTypes.getActualType(variable)
 		assertEquals('__Foo_1', variableType.toString)
 		assertTrue(variableType.isSubtypeOf(Runnable))
@@ -72,7 +72,7 @@ class AnonymousClassTypeTest extends AbstractXtendTestCase {
 		val resolvedTypes = operation.eResource.resolveTypes
 		assertEquals('Iterable<String>', resolvedTypes.getActualType(operation).toString)
 		val anonymousClass = (function.expression as XBlockExpression).expressions.head as AnonymousClass
-		val overriding = (anonymousClass.members.last as XtendFunction).directlyInferredOperation
+		val overriding = (anonymousClass.members.lastOrNull as XtendFunction).directlyInferredOperation
 		assertEquals('Iterator<String>', resolvedTypes.getActualType(overriding).toString)
 	}
 	
@@ -89,7 +89,7 @@ class AnonymousClassTypeTest extends AbstractXtendTestCase {
 		val resolvedTypes = operation.eResource.resolveTypes
 		assertEquals('Iterable<T>', resolvedTypes.getActualType(operation).toString)
 		val anonymousClass = (function.expression as XBlockExpression).expressions.head as AnonymousClass
-		val overriding = (anonymousClass.members.last as XtendFunction).directlyInferredOperation
+		val overriding = (anonymousClass.members.lastOrNull as XtendFunction).directlyInferredOperation
 		assertEquals('Iterator<T>', resolvedTypes.getActualType(overriding).toString)
 	}
 }

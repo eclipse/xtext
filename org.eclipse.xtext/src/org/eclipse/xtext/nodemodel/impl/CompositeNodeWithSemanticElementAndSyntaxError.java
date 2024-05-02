@@ -47,6 +47,18 @@ public class CompositeNodeWithSemanticElementAndSyntaxError extends CompositeNod
 		super.write(out, scc);
 		SerializationUtil.writeSyntaxErrorMessage(out, scc, syntaxErrorMessage);
 	}
+	
+	@Override
+	protected void doWriteContent(NodeModelOutput out) throws IOException {
+		super.doWriteContent(out);
+		out.writeSyntaxErrorMessage(syntaxErrorMessage);
+	}
+	
+	@Override
+	protected void doReadContent(NodeModelInput in) throws IOException {
+		super.doReadContent(in);
+		syntaxErrorMessage = in.readSyntaxErrorMessage();
+	}
 
 	@Override
 	protected NodeType getNodeId() {

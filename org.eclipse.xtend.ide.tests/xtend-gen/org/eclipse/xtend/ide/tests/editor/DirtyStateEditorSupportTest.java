@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.tests.editor;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.log4j.Level;
 import org.eclipse.jface.text.source.Annotation;
@@ -267,7 +267,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   private List<Annotation> getErrorAnnotations(final XtextEditor editor) {
     final Function1<Annotation, Boolean> _function = (Annotation it) -> {
       String _type = it.getType();
-      return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
+      return Boolean.valueOf(Objects.equals(_type, "org.eclipse.xtext.ui.editor.error"));
     };
     return IteratorExtensions.<Annotation>toList(IteratorExtensions.<Annotation>filter(Iterators.<Annotation>filter(editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput()).getAnnotationIterator(), Annotation.class), _function));
   }

@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -53,7 +53,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
   public AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     final Function1<AnnotationTypeElementDeclaration, Boolean> _function = (AnnotationTypeElementDeclaration it) -> {
       String _simpleName = it.getSimpleName();
-      return Boolean.valueOf(Objects.equal(_simpleName, name));
+      return Boolean.valueOf(Objects.equals(_simpleName, name));
     };
     return IterableExtensions.findFirst(this.getDeclaredAnnotationTypeElements(), _function);
   }

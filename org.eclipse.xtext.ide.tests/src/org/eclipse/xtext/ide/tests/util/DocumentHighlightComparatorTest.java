@@ -103,7 +103,7 @@ public class DocumentHighlightComparatorTest extends Assert {
 		assertEquals(1, input.get(2).getRange().getEnd().getLine());
 		assertEquals(1, input.get(2).getRange().getEnd().getCharacter());
 		assertEquals(DocumentHighlightKind.Write, input.get(2).getKind());
-		assertNull(IterableExtensions.last(input));
+		assertNull(IterableExtensions.lastOrNull(input));
 	}
 
 	private DocumentHighlight newHighlight(DocumentHighlightKind kind, Range range) {

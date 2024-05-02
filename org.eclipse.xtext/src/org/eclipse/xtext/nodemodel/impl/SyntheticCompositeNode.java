@@ -35,7 +35,10 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	private final CompositeNode delegate;
 	private final int grammarElementIdx;
 	
-	protected SyntheticCompositeNode(CompositeNode delegate, int grammarElementIdx) {
+	/**
+	 * @since 2.35
+	 */
+	public SyntheticCompositeNode(CompositeNode delegate, int grammarElementIdx) {
 		this.delegate = delegate;
 		this.grammarElementIdx = grammarElementIdx;
 	}
@@ -45,6 +48,20 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 		if (grammarElementIdx == 1)
 			return delegate;
 		return new SyntheticCompositeNode(delegate, grammarElementIdx - 1);
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected CompositeNode basicGetDelegate() {
+		return delegate;
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected int basicGetGrammarElementIndex() {
+		return grammarElementIdx;
 	}
 	
 	@Override

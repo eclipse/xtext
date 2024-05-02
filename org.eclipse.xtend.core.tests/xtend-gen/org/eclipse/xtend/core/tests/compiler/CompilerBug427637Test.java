@@ -2659,8 +2659,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("package org.eclipse.xtext.xbase.formatting;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import com.google.common.base.Objects;");
-    _builder_1.newLine();
     _builder_1.append("import com.google.common.collect.Iterables;");
     _builder_1.newLine();
     _builder_1.append("import com.google.inject.Inject;");
@@ -2670,6 +2668,8 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
     _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Objects;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.nodemodel.INode;");
     _builder_1.newLine();
@@ -2857,7 +2857,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("final int newLines2 = (int) _elvis;");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if (((Objects.equal(it.space, null) && Objects.equal(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equal(it.space, \"\"))))) {");
+    _builder_1.append("if (((Objects.equals(it.space, null) && Objects.equals(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equals(it.space, \"\"))))) {");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());");
@@ -3653,7 +3653,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {");
+    _builder_1.append("if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {");
     _builder_1.newLine();
     _builder_1.append("                  ");
     _builder_1.append("int _offset_4 = ((WhitespaceInfo)leaf).getOffset();");
@@ -3782,7 +3782,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {");
+    _builder_1.append("if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {");
     _builder_1.newLine();
     _builder_1.append("                ");
     _builder_1.append("int _offset_6 = ((WhitespaceInfo)leaf).getOffset();");
@@ -3885,7 +3885,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _notEquals = (!Objects.equal(node, null));");
+    _builder_1.append("boolean _notEquals = (!Objects.equals(node, null));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_notEquals) {");
@@ -3910,7 +3910,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _notEquals = (!Objects.equal(node, null));");
+    _builder_1.append("boolean _notEquals = (!Objects.equals(node, null));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_notEquals) {");
@@ -3947,7 +3947,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("boolean _notEquals = (!Objects.equal(node, null));");
+    _builder_1.append("boolean _notEquals = (!Objects.equals(node, null));");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("if (_notEquals) {");
@@ -4074,7 +4074,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("boolean _notEquals = (!Objects.equal(node, null));");
+    _builder_1.append("boolean _notEquals = (!Objects.equals(node, null));");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("if (_notEquals) {");

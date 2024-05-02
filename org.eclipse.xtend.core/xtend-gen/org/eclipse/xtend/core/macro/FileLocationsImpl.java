@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -43,7 +43,7 @@ public class FileLocationsImpl implements FileLocations {
   protected IProjectConfig getProjectConfig(final Path path) {
     final String firstSegment = path.getSegments().get(0);
     final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(this.context.getResourceSet());
-    if (((projectConfig == null) || (!Objects.equal(projectConfig.getName(), firstSegment)))) {
+    if (((projectConfig == null) || (!Objects.equals(projectConfig.getName(), firstSegment)))) {
       throw new IllegalArgumentException((("The project \'" + firstSegment) + "\' has not been configured."));
     }
     return projectConfig;

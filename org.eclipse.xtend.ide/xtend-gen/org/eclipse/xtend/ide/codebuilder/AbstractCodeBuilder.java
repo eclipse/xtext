@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaElement;
@@ -81,24 +81,24 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected ISourceAppender appendVisibility(final ISourceAppender appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
     String _switchResult = null;
     boolean _matched = false;
-    if (Objects.equal(visibility, skippableDefault)) {
+    if (Objects.equals(visibility, skippableDefault)) {
       _matched=true;
       _switchResult = "";
     }
     if (!_matched) {
-      if (Objects.equal(visibility, JvmVisibility.PRIVATE)) {
+      if (Objects.equals(visibility, JvmVisibility.PRIVATE)) {
         _matched=true;
         _switchResult = "private ";
       }
     }
     if (!_matched) {
-      if (Objects.equal(visibility, JvmVisibility.PROTECTED)) {
+      if (Objects.equals(visibility, JvmVisibility.PROTECTED)) {
         _matched=true;
         _switchResult = "protected ";
       }
     }
     if (!_matched) {
-      if (Objects.equal(visibility, JvmVisibility.PUBLIC)) {
+      if (Objects.equals(visibility, JvmVisibility.PUBLIC)) {
         _matched=true;
         _switchResult = "public ";
       }
@@ -111,7 +111,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
 
   protected <T extends EObject> T findByFragment(final XtextResource resource, final T object) {
     final Resource myResource = object.eResource();
-    boolean _equals = Objects.equal(myResource, resource);
+    boolean _equals = Objects.equals(myResource, resource);
     if (_equals) {
       return object;
     }
@@ -147,7 +147,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             appendable.append(typeParameter.getName());
             final Function1<JvmUpperBound, Boolean> _function = (JvmUpperBound it) -> {
               String _identifier = it.getTypeReference().getIdentifier();
-              return Boolean.valueOf((!Objects.equal(_identifier, "java.lang.Object")));
+              return Boolean.valueOf((!Objects.equals(_identifier, "java.lang.Object")));
             };
             final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(Iterables.<JvmUpperBound>filter(typeParameter.getConstraints(), JvmUpperBound.class), _function);
             boolean _isEmpty = IterableExtensions.isEmpty(upperBounds);

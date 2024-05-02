@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.tests.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -88,7 +88,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     XExpression _expression = firstMember.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
     final Function1<XAbstractFeatureCall, Boolean> _function_2 = (XAbstractFeatureCall it) -> {
-      return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
+      return Boolean.valueOf(((!Objects.equals(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
     };
     final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(Iterators.<XAbstractFeatureCall>filter(block.eAllContents(), XAbstractFeatureCall.class), _function_2);
     final IFeatureLinkingCandidate linkingCandidate = this._iBatchTypeResolver.resolveTypes(file).getLinkingCandidate(featureCall);
@@ -122,7 +122,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     XExpression _expression = firstMember.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
     final Function1<XAbstractFeatureCall, Boolean> _function_2 = (XAbstractFeatureCall it) -> {
-      return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
+      return Boolean.valueOf(((!Objects.equals(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
     };
     final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(Iterators.<XAbstractFeatureCall>filter(block.eAllContents(), XAbstractFeatureCall.class), _function_2);
     final IFeatureLinkingCandidate linkingCandidate = this._iBatchTypeResolver.resolveTypes(file).getLinkingCandidate(featureCall);

@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtext.ui.workspace;
 
+import java.util.Objects;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.workspace.ISourceFolder;
-
-import com.google.common.base.Objects;
 
 public class EclipseSourceFolder implements ISourceFolder {
 
@@ -50,7 +50,7 @@ public class EclipseSourceFolder implements ISourceFolder {
 		if (obj instanceof EclipseSourceFolder) {
 			URI path1 = this.getPath();
 			URI path2 = ((EclipseSourceFolder) obj).getPath();
-			return Objects.equal(path1, path2);
+			return Objects.equals(path1, path2);
 		}
 		return false;
 	}

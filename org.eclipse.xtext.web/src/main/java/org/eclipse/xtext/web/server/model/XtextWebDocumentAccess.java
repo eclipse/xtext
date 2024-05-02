@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.web.server.model;
 
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 
@@ -23,7 +24,6 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -143,7 +143,7 @@ public class XtextWebDocumentAccess {
 	}
 
 	protected void checkStateId() throws InvalidRequestException.InvalidDocumentStateException {
-		if (requiredStateId != null && !Objects.equal(requiredStateId, document.getStateId())) {
+		if (requiredStateId != null && !Objects.equals(requiredStateId, document.getStateId())) {
 			throw new InvalidRequestException.InvalidDocumentStateException(
 					"The given state id does not match the current state.");
 		}

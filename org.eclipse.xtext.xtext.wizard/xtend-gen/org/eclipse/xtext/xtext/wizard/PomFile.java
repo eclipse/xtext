@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -45,7 +45,7 @@ public class PomFile extends TextFile {
     {
       ProjectDescriptor _project = this.getProject();
       ParentProjectDescriptor _parentProject = this.getProject().getConfig().getParentProject();
-      boolean _notEquals = (!Objects.equal(_project, _parentProject));
+      boolean _notEquals = (!Objects.equals(_project, _parentProject));
       if (_notEquals) {
         _builder.append("\t");
         _builder.append("<parent>");
@@ -70,7 +70,7 @@ public class PomFile extends TextFile {
         _builder.newLine();
         {
           ProjectLayout _projectLayout = this.getProject().getConfig().getProjectLayout();
-          boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
+          boolean _equals = Objects.equals(_projectLayout, ProjectLayout.FLAT);
           if (_equals) {
             _builder.append("\t");
             _builder.append("\t");
@@ -200,7 +200,7 @@ public class PomFile extends TextFile {
             }
             {
               Scope _scope = dep.getScope();
-              boolean _notEquals_1 = (!Objects.equal(_scope, Scope.COMPILE));
+              boolean _notEquals_1 = (!Objects.equals(_scope, Scope.COMPILE));
               if (_notEquals_1) {
                 _builder.append("\t");
                 _builder.append("\t");

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,16 +8,25 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
+import java.util.function.Consumer;
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.formatter.AbstractFormatterTest;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
-  protected CharSequence toFile(final CharSequence ann) {
+public class XtendAnnotationsFormatterTest extends AbstractFormatterTest {
+  private CharSequence toFile(final CharSequence ann) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -36,36 +45,32 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     return _builder;
   }
 
-  protected void assertFormattedAnnotation(final CharSequence expectation, final CharSequence actual) {
-    this.assertFormatted(this.toFile(expectation), this.toFile(actual));
+  private void assertFormattedAnnotation(final CharSequence expectation, final CharSequence actual) {
+    this.assertFormattedTo(this.toFile(actual), this.toFile(expectation));
   }
 
   @Test
   public void formatClassSingleAnnotationSL() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo @Deprecated class bar { }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Deprecated class bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package foo");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("@Deprecated class bar {");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package foo @Deprecated class bar { }");
-    _builder_1.newLine();
-    this.assertFormatted(_function, _builder, _builder_1);
+    this.assertFormattedTo(_builder, _builder_1, _function);
   }
 
   @Test
   public void formatClassSingleAnnotationML1() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
-      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
-      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-    };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -76,7 +81,11 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_function, _builder);
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
+    };
+    this.assertUnformattedEqualsFormatted(_builder, _function);
   }
 
   @Test
@@ -91,29 +100,29 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
   public void formatClassSingleAnnotationML2() {
-    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo @Deprecated class bar { }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Deprecated");
+    _builder_1.newLine();
+    _builder_1.append("class bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(true));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package foo");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("@Deprecated");
-    _builder.newLine();
-    _builder.append("class bar {");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package foo @Deprecated class bar { }");
-    _builder_1.newLine();
-    this.assertFormatted(_function, _builder, _builder_1);
+    this.assertFormattedTo(_builder, _builder_1, _function);
   }
 
   @Test
@@ -126,7 +135,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -143,7 +152,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -158,7 +167,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -243,7 +252,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormattedMember(_builder.toString());
+    this.assertUnformattedEqualsFormatted(this.toMember(_builder));
   }
 
   @Test
@@ -383,6 +392,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodTwoAnnotations4() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
     };
@@ -421,6 +431,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodParameterTwoAnnotations1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations, Boolean.valueOf(false));
       it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
@@ -573,5 +584,43 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.append("@  SuppressWarnings  (  (  \"all\"  +  \"more\"  )  )");
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
+  }
+
+  private void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));
+    };
+    this.assertFormattedTo(this.toMember(toBeFormatted), this.toMember(expectation), _function);
+  }
+
+  private void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation, final CharSequence toBeFormatted) {
+    this.assertFormattedTo(this.toMember(toBeFormatted), this.toMember(expectation), new Consumer<MapBasedPreferenceValues>() {
+        public void accept(MapBasedPreferenceValues t) {
+          cfg.apply(t);
+        }
+    });
+  }
+
+  private void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation) {
+    this.assertUnformattedEqualsFormatted(this.toMember(expectation), new Consumer<MapBasedPreferenceValues>() {
+        public void accept(MapBasedPreferenceValues t) {
+          cfg.apply(t);
+        }
+    });
+  }
+
+  private CharSequence toMember(final CharSequence expression) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(expression, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
   }
 }

@@ -69,7 +69,7 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		assertEquals('Highlighting regions broken', 3, semanticSnippets.size)
 		assertEquals('Foo', semanticSnippets.head)
 		assertEquals('foo', semanticSnippets.tail.head)
-		assertEquals('3', semanticSnippets.last)
+		assertEquals('3', semanticSnippets.lastOrNull)
 	}
 	
 	@Test def void testOpenedEditorHasSemanticHighlighting() {
@@ -93,6 +93,6 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		// this fails if the first highlighting job didn't color the document
 		assertEquals('Highlighting regions broken ' + semanticSnippets.join(','), 2, semanticSnippets.size)
 		assertEquals('Foo', semanticSnippets.head)
-		assertEquals('foo', semanticSnippets.last)
+		assertEquals('foo', semanticSnippets.lastOrNull)
 	}
 }

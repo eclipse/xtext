@@ -696,7 +696,7 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			    }    
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			
 			@SuppressWarnings("all")
@@ -705,7 +705,7 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			    Function1<? super Integer, ?> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
-			    if (Objects.equal(_switchValue, null)) {
+			    if (Objects.equals(_switchValue, null)) {
 			      _matched=true;
 			      final Function1<Object, Object> _function = (Object it) -> {
 			        return it;
@@ -713,7 +713,7 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			      _switchResult = _function;
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(_switchValue, null)) {
+			      if (Objects.equals(_switchValue, null)) {
 			        _matched=true;
 			        final Function1<Integer, Integer> _function_1 = (Integer it) -> {
 			          return it;
@@ -771,7 +771,7 @@ class Java8Compiler2Test extends XtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
@@ -784,7 +784,7 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			      return Integer.valueOf(1);
 			    };
 			    Integer _apply = _function.apply();
-			    if (Objects.equal(x, _apply)) {
+			    if (Objects.equals(x, _apply)) {
 			      _matched=true;
 			      _switchResult = true;
 			    }
@@ -1016,9 +1016,9 @@ class Java8Compiler2Test extends XtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
 			import com.google.common.collect.AbstractIterator;
 			import java.util.Iterator;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 			
@@ -1030,7 +1030,7 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			      protected T computeNext() {
 			        T _elvis = null;
 			        final Function1<T, Boolean> _function = (T it_1) -> {
-			          return Boolean.valueOf((!Objects.equal(it_1, null)));
+			          return Boolean.valueOf((!Objects.equals(it_1, null)));
 			        };
 			        T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
 			        if (_findFirst != null) {
@@ -1389,14 +1389,14 @@ class Java8Compiler2Test extends XtendCompilerTest {
 		'''.assertCompilesTo('''
 			package x;
 
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 
 			@SuppressWarnings("all")
 			public class Y {
 			  @Override
 			  public boolean equals(final Object p) {
 			    boolean _xifexpression = false;
-			    boolean _equals = Objects.equal("foo", p);
+			    boolean _equals = Objects.equals("foo", p);
 			    if (_equals) {
 			      return true;
 			    } else {

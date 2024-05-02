@@ -11,6 +11,7 @@ package org.eclipse.xtext.generator;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -45,7 +45,7 @@ public interface IShouldGenerate {
 				return false;
 			}
 			List<Issue> issues = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator);
-			return !exists(issues, (Issue issue) -> Objects.equal(issue.getSeverity(), Severity.ERROR));
+			return !exists(issues, (Issue issue) -> Objects.equals(issue.getSeverity(), Severity.ERROR));
 		}
 	}
 

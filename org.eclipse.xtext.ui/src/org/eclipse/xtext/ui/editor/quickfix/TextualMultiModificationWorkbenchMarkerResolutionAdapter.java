@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -152,7 +152,7 @@ public class TextualMultiModificationWorkbenchMarkerResolutionAdapter extends Wo
 				for (IMarker candidate : markers) {
 					if (languageResourceHelper.isLanguageResource(marker.getResource()) && candidate != marker) {
 						Object canidateCodeKey = candidate.getAttribute(Issue.CODE_KEY);
-						if (Objects.equal(markerCodeKey, canidateCodeKey)) {
+						if (Objects.equals(markerCodeKey, canidateCodeKey)) {
 							result.add(candidate);
 							if (result.size() >= MAX_QUICKFIXES) {
 								break;

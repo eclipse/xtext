@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.web;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -17,6 +16,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -630,7 +630,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   _builder.append(state, "\t\t");
                   _builder.append(": ");
                   {
-                    boolean _equals = Objects.equal(state, "meta");
+                    boolean _equals = Objects.equals(state, "meta");
                     if (_equals) {
                       _builder.append("{");
                     } else {
@@ -655,7 +655,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   {
-                    boolean _equals_1 = Objects.equal(state, "meta");
+                    boolean _equals_1 = Objects.equals(state, "meta");
                     if (_equals_1) {
                       _builder.append("}");
                     } else {
@@ -696,7 +696,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             } else {
               _builder.appendImmediate("|", "");
             }
-            String _regexpString = RegexpExtensions.toRegexpString(kw, ((!Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
+            String _regexpString = RegexpExtensions.toRegexpString(kw, ((!Objects.equals(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
             _builder.append(_regexpString);
           }
         }
@@ -717,7 +717,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             } else {
               _builder.appendImmediate("|", "");
             }
-            String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, ((!Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
+            String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, ((!Objects.equals(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
             _builder.append(_regexpString_1);
           }
         }
@@ -730,7 +730,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 
   protected CharSequence generateKeywordsRegExp() {
     CharSequence _xifexpression = null;
-    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
+    if ((Objects.equals(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new RegExp(\"\\\\b(?:\" + keywords + \")\\\\b\", \"gi\")");
       _xifexpression = _builder;
@@ -744,7 +744,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 
   protected CharSequence generateExtraKeywordsRegExp() {
     CharSequence _xifexpression = null;
-    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
+    if ((Objects.equals(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new RegExp(\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
       _builder.append(WebIntegrationFragment.DELIMITERS_PATTERN);
@@ -896,12 +896,12 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       _builder_9.append("]\"}");
       patterns.put("start", _builder_9.toString());
     }
-    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && patterns.containsKey("comment"))) {
+    if ((Objects.equals(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && patterns.containsKey("comment"))) {
       StringConcatenation _builder_10 = new StringConcatenation();
       _builder_10.append("dontIndentStates: [\"comment\"]");
       patterns.put("meta", _builder_10.toString());
     }
-    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && hasSingleLineComment)) {
+    if ((Objects.equals(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && hasSingleLineComment)) {
       StringConcatenation _builder_11 = new StringConcatenation();
       _builder_11.append("lineComment: \"//\"");
       patterns.put("meta", _builder_11.toString());
@@ -934,7 +934,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         {
           WebIntegrationFragment.Framework _get = WebIntegrationFragment.this.framework.get();
-          boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.ORION);
+          boolean _equals = Objects.equals(_get, WebIntegrationFragment.Framework.ORION);
           if (_equals) {
             _builder.append("\t");
             _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"orion/code_edit/built-codeEdit.css\"/>");
@@ -947,7 +947,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.newLineIfNotEmpty();
           } else {
             WebIntegrationFragment.Framework _get_1 = WebIntegrationFragment.this.framework.get();
-            boolean _equals_1 = Objects.equal(_get_1, WebIntegrationFragment.Framework.ACE);
+            boolean _equals_1 = Objects.equals(_get_1, WebIntegrationFragment.Framework.ACE);
             if (_equals_1) {
               _builder.append("\t");
               _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
@@ -957,7 +957,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.newLineIfNotEmpty();
             } else {
               WebIntegrationFragment.Framework _get_2 = WebIntegrationFragment.this.framework.get();
-              boolean _equals_2 = Objects.equal(_get_2, WebIntegrationFragment.Framework.CODEMIRROR);
+              boolean _equals_2 = Objects.equals(_get_2, WebIntegrationFragment.Framework.CODEMIRROR);
               if (_equals_2) {
                 _builder.append("\t");
                 _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
@@ -1004,7 +1004,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         {
           WebIntegrationFragment.Framework _get_3 = WebIntegrationFragment.this.framework.get();
-          boolean _equals_3 = Objects.equal(_get_3, WebIntegrationFragment.Framework.ORION);
+          boolean _equals_3 = Objects.equals(_get_3, WebIntegrationFragment.Framework.ORION);
           if (_equals_3) {
             _builder.append("\t\t");
             _builder.append("require.config({");
@@ -1084,7 +1084,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.newLine();
           } else {
             WebIntegrationFragment.Framework _get_5 = WebIntegrationFragment.this.framework.get();
-            boolean _equals_4 = Objects.equal(_get_5, WebIntegrationFragment.Framework.ACE);
+            boolean _equals_4 = Objects.equals(_get_5, WebIntegrationFragment.Framework.ACE);
             if (_equals_4) {
               _builder.append("\t\t");
               _builder.append("require.config({");
@@ -1166,7 +1166,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.newLine();
             } else {
               WebIntegrationFragment.Framework _get_7 = WebIntegrationFragment.this.framework.get();
-              boolean _equals_5 = Objects.equal(_get_7, WebIntegrationFragment.Framework.CODEMIRROR);
+              boolean _equals_5 = Objects.equals(_get_7, WebIntegrationFragment.Framework.CODEMIRROR);
               if (_equals_5) {
                 _builder.append("\t\t");
                 _builder.append("require.config({");
@@ -1471,7 +1471,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         {
           WebIntegrationFragment.Framework _get = WebIntegrationFragment.this.framework.get();
-          boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.ORION);
+          boolean _equals = Objects.equals(_get, WebIntegrationFragment.Framework.ORION);
           if (_equals) {
             _builder.newLine();
             _builder.append("/************* Examples for custom icons *************/");

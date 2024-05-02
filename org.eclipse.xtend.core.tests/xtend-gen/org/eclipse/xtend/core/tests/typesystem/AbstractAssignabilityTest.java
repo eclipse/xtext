@@ -113,7 +113,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       final LightweightTypeReference lhsType = _xifexpression;
       LightweightTypeReference _xifexpression_1 = null;
       if ((rhs != null)) {
-        _xifexpression_1 = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>last(operation.getParameters()).getParameterType());
+        _xifexpression_1 = this.toLightweightTypeReference(IterableExtensions.<JvmFormalParameter>lastOrNull(operation.getParameters()).getParameterType());
       } else {
         _xifexpression_1 = this.getOwner().newAnyTypeReference();
       }

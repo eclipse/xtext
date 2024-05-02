@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtext.xbase.controlflow;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -323,7 +323,7 @@ public class ConstantConditionsInterpreter {
           _packageName=_declaringType.getPackageName();
         }
         String _string = XImportSectionNamespaceScopeProvider.XBASE_LIB.toString();
-        _switchResult = Objects.equal(_packageName, _string);
+        _switchResult = Objects.equals(_packageName, _string);
       }
       if (!_matched) {
         _switchResult = false;
@@ -343,7 +343,7 @@ public class ConstantConditionsInterpreter {
         final String op = it.getConcreteSyntaxFeatureName();
         EvaluationResult _switchResult = null;
         boolean _matched = false;
-        if (Objects.equal(op, "-")) {
+        if (Objects.equals(op, "-")) {
           _matched=true;
           try {
             final Object result = this.constantOperators.minus(arg.getRawValue());
@@ -358,7 +358,7 @@ public class ConstantConditionsInterpreter {
           }
         }
         if (!_matched) {
-          if ((Objects.equal(op, "!") && (arg.getRawValue() instanceof Boolean))) {
+          if ((Objects.equals(op, "!") && (arg.getRawValue() instanceof Boolean))) {
             _matched=true;
             Object _rawValue = arg.getRawValue();
             boolean _not = (!(((Boolean) _rawValue)).booleanValue());
@@ -367,7 +367,7 @@ public class ConstantConditionsInterpreter {
           }
         }
         if (!_matched) {
-          if ((Objects.equal(op, "+") && (arg.getRawValue() instanceof Number))) {
+          if ((Objects.equals(op, "+") && (arg.getRawValue() instanceof Number))) {
             _matched=true;
             _switchResult = arg;
           }

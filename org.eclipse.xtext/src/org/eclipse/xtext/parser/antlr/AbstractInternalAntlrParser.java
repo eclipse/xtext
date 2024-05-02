@@ -50,7 +50,6 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IParserErrorContext;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IUnorderedGroupErrorContext;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IValueConverterErrorContext;
@@ -600,7 +599,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				appendAllTokens();
 			} finally {
 				ICompositeNode root = nodeBuilder.compressAndReturnParent(currentNode);
-				result = new ParseResult(current, root, hadErrors);
+				result = nodeBuilder.createParseResult(current, root, hadErrors);
 			}
 		} catch (InvocationTargetException ite) {
 			Throwable targetException = ite.getTargetException();
@@ -609,7 +608,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 					appendAllTokens();
 				} finally {
 					ICompositeNode root = nodeBuilder.compressAndReturnParent(currentNode);
-					result = new ParseResult(current, root, hadErrors);
+					result = nodeBuilder.createParseResult(current, root, hadErrors);
 				}
 				throw (RecognitionException) targetException;
 			}

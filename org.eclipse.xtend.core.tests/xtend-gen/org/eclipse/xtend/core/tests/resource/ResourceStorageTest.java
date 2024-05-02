@@ -212,8 +212,8 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       resource.loadFromStorage(in);
       EObject _get = resource.getContents().get(1);
       final JvmGenericType jvmClass = ((JvmGenericType) _get);
-      JvmMember _last = IterableExtensions.<JvmMember>last(jvmClass.getMembers());
-      final JvmField field = ((JvmField) _last);
+      JvmMember _lastOrNull = IterableExtensions.<JvmMember>lastOrNull(jvmClass.getMembers());
+      final JvmField field = ((JvmField) _lastOrNull);
       Assert.assertTrue(field.isConstant());
       Assert.assertTrue(field.isSetConstant());
       Assert.assertEquals("ab0", field.getConstantValue());
@@ -253,8 +253,8 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       resource.loadFromStorage(in);
       EObject _get = resource.getContents().get(1);
       final JvmGenericType jvmClass = ((JvmGenericType) _get);
-      JvmMember _last = IterableExtensions.<JvmMember>last(jvmClass.getMembers());
-      final JvmField field = ((JvmField) _last);
+      JvmMember _lastOrNull = IterableExtensions.<JvmMember>lastOrNull(jvmClass.getMembers());
+      final JvmField field = ((JvmField) _lastOrNull);
       Assert.assertFalse(field.isConstant());
       Assert.assertTrue(field.isSetConstant());
       Assert.assertNull(field.getConstantValue());

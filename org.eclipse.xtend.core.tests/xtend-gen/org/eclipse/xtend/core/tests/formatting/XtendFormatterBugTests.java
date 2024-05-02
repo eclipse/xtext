@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
+import java.util.function.Consumer;
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -44,7 +46,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -104,7 +106,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this.tester.assertFormatted(_function);
+    this.formatterTestHelper.assertFormatted(_function);
   }
 
   @Test
@@ -143,7 +145,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -156,23 +158,26 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("@Deprecated");
+    _builder.append("@Deprecated ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("extension IntegerExtensions y");
+    _builder.append("extension ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("@Deprecated extension IntegerExtensions x");
+    _builder.append("IntegerExtensions y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated   extension    IntegerExtensions x");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def all(@Deprecated extension IntegerExtensions x) {");
+    _builder.append("def all(@Deprecated   extension    IntegerExtensions x) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("val extension IntegerExtensions foo = null");
+    _builder.append("val extension    IntegerExtensions foo = null");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("val c = [ extension IntegerExtensions p |");
+    _builder.append("val c = [ extension    IntegerExtensions p |");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("123.bitwiseAnd(1)");
@@ -183,12 +188,11 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def all2(   extension  @Deprecated  IntegerExtensions x) {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def all2(extension @Deprecated IntegerExtensions x) {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
+    _builder.append("}\t");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -200,26 +204,23 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("@Deprecated ");
+    _builder_1.append("@Deprecated");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("extension ");
+    _builder_1.append("extension IntegerExtensions y");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("IntegerExtensions y");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("@Deprecated   extension    IntegerExtensions x");
+    _builder_1.append("@Deprecated extension IntegerExtensions x");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("def all(@Deprecated   extension    IntegerExtensions x) {");
+    _builder_1.append("def all(@Deprecated extension IntegerExtensions x) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("val extension    IntegerExtensions foo = null");
+    _builder_1.append("val extension IntegerExtensions foo = null");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("val c = [ extension    IntegerExtensions p |");
+    _builder_1.append("val c = [ extension IntegerExtensions p |");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("123.bitwiseAnd(1)");
@@ -230,22 +231,22 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def all2(   extension  @Deprecated  IntegerExtensions x) {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("}\t");
+    _builder_1.append("def all2(extension @Deprecated IntegerExtensions x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertFormatted(_builder, _builder_1);
+    this.assertFormattedTo(_builder, _builder_1);
   }
 
   @Test
   public void testBug398718() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("class bar {");
     _builder.newLine();
@@ -255,41 +256,39 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.append("\t\t");
     _builder.append("```");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     _builder.append("package foo;");
     _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     _builder.append("import java.util.Arrays;");
     _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     _builder.append("@SuppressWarnings(\"all\")");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     _builder.append("public class NoSuchElementException {");
     _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.newLine();
-    _builder.append("\t\t\t  ");
+    _builder.append("\t\t  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("```");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package foo");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class bar {");
     _builder_1.newLine();
@@ -299,37 +298,40 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.append("\t\t");
     _builder_1.append("```");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
+    _builder_1.append("\t\t\t");
     _builder_1.append("package foo;");
     _builder_1.newLine();
+    _builder_1.append("\t\t\t");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
+    _builder_1.append("\t\t\t");
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("\t\t\t");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
+    _builder_1.append("\t\t\t");
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
+    _builder_1.append("\t\t\t");
     _builder_1.append("public class NoSuchElementException {");
     _builder_1.newLine();
+    _builder_1.append("\t\t\t");
     _builder_1.newLine();
-    _builder_1.append("\t\t  ");
+    _builder_1.append("\t\t\t  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
+    _builder_1.append("\t\t\t");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("```");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("\t\t");
+    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
+    this.assertFormattedTo(this.decode(_builder), this.decode(_builder_1));
   }
 
   @Test
@@ -348,7 +350,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -374,7 +376,10 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+    };
+    this.assertUnformattedEqualsFormatted(_builder, _function);
   }
 
   @Test
@@ -400,7 +405,10 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+    };
+    this.assertUnformattedEqualsFormatted(_builder, _function);
   }
 
   @Test
@@ -452,7 +460,10 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+    };
+    this.assertUnformattedEqualsFormatted(_builder, _function);
   }
 
   @Test
@@ -469,7 +480,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -524,7 +535,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Ignore("Conflict")
@@ -572,7 +583,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -604,7 +615,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    this.assertUnformattedEqualsFormatted(_builder);
   }
 
   @Test
@@ -629,26 +640,32 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertFormatted(_builder);
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+    };
+    this.assertUnformattedEqualsFormatted(_builder, _function);
   }
 
   @Test
   public void testBug455582() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("abstract package class XtendTest {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("static final def void foo() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
+    _builder.append("abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("  ");
-    _builder_1.append("abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }");
-    this.assertFormatted(_builder, _builder_1);
+    _builder_1.append("abstract package class XtendTest {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("static final def void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final Consumer<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));
+    };
+    this.assertFormattedTo(_builder, _builder_1, _function);
   }
 
   @Test
@@ -677,7 +694,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this.tester.assertFormatted(_function);
+    this.formatterTestHelper.assertFormatted(_function);
   }
 
   @Test
@@ -722,7 +739,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this.tester.assertFormatted(_function);
+    this.formatterTestHelper.assertFormatted(_function);
   }
 
   @Test
@@ -760,7 +777,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this.tester.assertFormatted(_function);
+    this.formatterTestHelper.assertFormatted(_function);
   }
 
   @Test
@@ -807,7 +824,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this.tester.assertFormatted(_function);
+    this.formatterTestHelper.assertFormatted(_function);
   }
 
   @Test
@@ -848,6 +865,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this.tester.assertFormatted(_function);
+    this.formatterTestHelper.assertFormatted(_function);
   }
 }

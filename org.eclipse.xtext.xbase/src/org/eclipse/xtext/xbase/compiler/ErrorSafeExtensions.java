@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Objects;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
@@ -22,7 +24,6 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -100,7 +101,7 @@ public class ErrorSafeExtensions {
 	}
 
 	protected ITreeAppendable closeErrorAppendable(ITreeAppendable parent, ITreeAppendable child) {
-		if (child instanceof ErrorTreeAppendable && !Objects.equal(child, parent)) {
+		if (child instanceof ErrorTreeAppendable && !Objects.equals(child, parent)) {
 			child.append(" */");
 		}
 		return parent;

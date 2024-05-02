@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.CompletableFuture;
@@ -145,7 +146,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -248,7 +248,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	protected boolean clientSupportsWorkspaceFolders() {
 		return this.initializeParams.getCapabilities() != null 
 				&& this.initializeParams.getCapabilities().getWorkspace() != null 
-				&& Objects.equal(this.initializeParams.getCapabilities().getWorkspace().getWorkspaceFolders(), Boolean.TRUE);
+				&& Objects.equals(this.initializeParams.getCapabilities().getWorkspace().getWorkspaceFolders(), Boolean.TRUE);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		if (rename != null) {
 			prepareSupport = rename.getPrepareSupport();
 		}
-		boolean clientPrepareSupport = Objects.equal(Boolean.TRUE, prepareSupport);
+		boolean clientPrepareSupport = Objects.equals(Boolean.TRUE, prepareSupport);
 		if (clientPrepareSupport && allLanguages.stream()
 				.anyMatch(serviceProvider -> serviceProvider.get(IRenameService2.class) != null)) {
 			RenameOptions renameOptions = new RenameOptions();
@@ -1123,7 +1123,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 									+ "\' can not be an extension as it is already defined in the LSP standard.");
 						} else {
 							JsonRpcMethod existing = extensions.put(entry.getKey(), entry.getValue());
-							if (existing != null && !Objects.equal(existing, entry.getValue())) {
+							if (existing != null && !Objects.equals(existing, entry.getValue())) {
 								LOG.error("An incompatible LSP extension \'" + entry.getKey()
 										+ "\' has already been registered. Using 1 ignoring 2. \n1 : " + existing
 										+ " \n2 : " + entry.getValue());

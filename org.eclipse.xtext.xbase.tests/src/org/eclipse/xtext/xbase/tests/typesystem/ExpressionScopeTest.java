@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -26,7 +28,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -48,7 +49,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 		String toString = elements.toString();
 		assertNotNull(toString, scope.getSingleElement(name));
 		assertFalse(toString, Iterables.isEmpty(scope.getElements(name)));
-		assertTrue(toString, IterableExtensions.exists(elements, it -> Objects.equal(it.getName(), name)));
+		assertTrue(toString, IterableExtensions.exists(elements, it -> Objects.equals(it.getName(), name)));
 	}
 
 	protected void containsNot(IExpressionScope scope, String name) {
@@ -60,7 +61,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 		String toString = elements.toString();
 		assertNull(toString, scope.getSingleElement(name));
 		assertTrue(toString, Iterables.isEmpty(scope.getElements(name)));
-		assertFalse(toString, IterableExtensions.exists(elements, it -> Objects.equal(it.getName(), name)));
+		assertFalse(toString, IterableExtensions.exists(elements, it -> Objects.equals(it.getName(), name)));
 	}
 
 	@Test
@@ -157,7 +158,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReassignedType_01() throws Exception {
 		XIfExpression ifExpr = (XIfExpression) IterableExtensions
-				.last(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) {} }", false)).getExpressions());
+				.lastOrNull(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) {} }", false)).getExpressions());
 		XBlockExpression block = (XBlockExpression) ifExpr.getThen();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
 		contains(expressionScope, "charAt");
@@ -168,7 +169,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReassignedType_02() throws Exception {
 		XIfExpression ifExpr = (XIfExpression) IterableExtensions
-				.last(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
+				.lastOrNull(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
 						.getExpressions());
 		XBlockExpression block = (XBlockExpression) ifExpr.getThen();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(block).getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
@@ -180,7 +181,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReassignedType_03() throws Exception {
 		XIfExpression ifExpr = (XIfExpression) IterableExtensions
-				.last(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
+				.lastOrNull(((XBlockExpression) expression("{ var it = new Object() if (it instanceof String) { it = new Object() } }", false))
 						.getExpressions());
 		XBlockExpression block = (XBlockExpression) ifExpr.getThen();
 		XExpression assignment = Iterables.getFirst(block.getExpressions(), null);

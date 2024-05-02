@@ -74,7 +74,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
         final TypeReference lhsType = _xifexpression;
         TypeReference _xifexpression_1 = null;
         if ((rhs != null)) {
-          _xifexpression_1 = it.toTypeReference(IterableExtensions.<JvmFormalParameter>last(operation.getParameters()).getParameterType());
+          _xifexpression_1 = it.toTypeReference(IterableExtensions.<JvmFormalParameter>lastOrNull(operation.getParameters()).getParameterType());
         } else {
           _xifexpression_1 = it.toTypeReference(this.getOwner().newAnyTypeReference());
         }

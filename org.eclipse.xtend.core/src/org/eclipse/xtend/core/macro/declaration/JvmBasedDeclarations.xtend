@@ -942,6 +942,10 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	def MutableParameterDeclaration addParameter(String name, TypeReference type) {
+		return addParameter(delegate.parameters.size, name, type) 
+	}
+	
+	def MutableParameterDeclaration addParameter(int index, String name, TypeReference type) {
 		checkMutable
 		checkJavaIdentifier(name, "name");
 		Preconditions.checkArgument(type !== null, "type cannot be null");
@@ -950,7 +954,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		val param = TypesFactory.eINSTANCE.createJvmFormalParameter
 		param.name = name
 		param.parameterType = compilationUnit.toJvmTypeReference(type)
-		delegate.parameters.add(param)
+		delegate.parameters.add(index, param)
 		return compilationUnit.toParameterDeclaration(param) as MutableParameterDeclaration 
 	}
 	

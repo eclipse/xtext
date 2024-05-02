@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtend.ide.refactoring.importer;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -55,8 +55,8 @@ public class StaticMethodImporter extends AbstractStaticMethodImporter {
     INode sibling = node;
     while (sibling.hasNextSibling()) {
       {
-        if ((Objects.equal(sibling.getGrammarElement(), this.grammar.getXMemberFeatureCallAccess().getFullStopKeyword_1_1_0_0_1_0()) || 
-          Objects.equal(sibling.getGrammarElement(), 
+        if ((Objects.equals(sibling.getGrammarElement(), this.grammar.getXMemberFeatureCallAccess().getFullStopKeyword_1_1_0_0_1_0()) || 
+          Objects.equals(sibling.getGrammarElement(), 
             this.grammar.getXMemberFeatureCallAccess().getExplicitStaticColonColonKeyword_1_1_0_0_1_2_0()))) {
           return sibling;
         }

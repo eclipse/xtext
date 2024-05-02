@@ -51,9 +51,9 @@ class RuleEngineFormatter extends XbaseFormatter {
 			val sem = child.immediatelyFollowing.keyword(";")
 			if (sem !== null) {
 				sem.prepend[noSpace]
-				if (child != expr.expressions.last)
+				if (child != expr.expressions.lastOrNull)
 					sem.append[newLine]
-			} else if (child != expr.expressions.last)
+			} else if (child != expr.expressions.lastOrNull)
 				child.append[newLine]
 			child.format
 		}
@@ -74,7 +74,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 			}
 			c.regionFor.feature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
 			c.^case.format
-			if (c == expr.cases.last && expr.^default === null)
+			if (c == expr.cases.lastOrNull && expr.^default === null)
 				c.then.formatBody(true, document)
 			else
 				c.then.formatBodyParagraph(document)

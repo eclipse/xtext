@@ -83,8 +83,8 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     final XBlockExpression block = ((XBlockExpression) _expression);
     final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(file);
     ILinkingCandidate _switchResult = null;
-    XExpression _last = IterableExtensions.<XExpression>last(block.getExpressions());
-    final XExpression featureOrConstructorCall = _last;
+    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(block.getExpressions());
+    final XExpression featureOrConstructorCall = _lastOrNull;
     boolean _matched = false;
     if (featureOrConstructorCall instanceof XAbstractFeatureCall) {
       _matched=true;

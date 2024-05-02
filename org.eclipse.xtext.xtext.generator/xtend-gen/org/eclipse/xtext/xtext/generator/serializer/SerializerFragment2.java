@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.serializer;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
@@ -19,6 +18,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
@@ -536,7 +536,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       return it.getType();
     };
     final Function1<EClass, Boolean> _function_1 = (EClass it) -> {
-      return Boolean.valueOf(((it != null) && Objects.equal(it.getEPackage(), pkg)));
+      return Boolean.valueOf(((it != null) && Objects.equals(it.getEPackage(), pkg)));
     };
     final Function1<EClass, String> _function_2 = (EClass it) -> {
       return it.getName();

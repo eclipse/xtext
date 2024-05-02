@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.ide.editor.hierarchy;
 
+import java.util.Objects;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -24,7 +26,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -65,7 +66,7 @@ public abstract class AbstractHierarchyBuilder implements IHierarchyBuilder {
 			return null;
 		}
 		for (IEObjectDescription o : resourceDescription.getExportedObjects()) {
-			if (Objects.equal(o.getEObjectURI(), objectURI)) {
+			if (Objects.equals(o.getEObjectURI(), objectURI)) {
 				return o;
 			}
 		}

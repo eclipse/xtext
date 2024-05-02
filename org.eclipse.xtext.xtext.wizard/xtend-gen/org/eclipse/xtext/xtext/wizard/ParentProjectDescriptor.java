@@ -9,12 +9,12 @@
 package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Resources;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -44,7 +44,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
 
   @Override
   public boolean isEnabled() {
-    return ((this.getConfig().needsGradleBuild() || this.getConfig().needsMavenBuild()) || Objects.equal(this.getConfig().getProjectLayout(), ProjectLayout.HIERARCHICAL));
+    return ((this.getConfig().needsGradleBuild() || this.getConfig().needsMavenBuild()) || Objects.equals(this.getConfig().getProjectLayout(), ProjectLayout.HIERARCHICAL));
   }
 
   @Override
@@ -106,7 +106,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
 
   public String getTychoVersion() {
-    return "4.0.6";
+    return "4.0.7";
   }
 
   public String getTychoVersionJ11() {
@@ -258,13 +258,13 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     StringConcatenation _builder = new StringConcatenation();
     {
       final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
-        return Boolean.valueOf(((!Objects.equal(it, this)) && it.isPartOfGradleBuild()));
+        return Boolean.valueOf(((!Objects.equals(it, this)) && it.isPartOfGradleBuild()));
       };
       Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(this.getConfig().getEnabledProjects(), _function);
       for(final ProjectDescriptor p : _filter) {
         {
           ProjectLayout _projectLayout = this.getConfig().getProjectLayout();
-          boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
+          boolean _equals = Objects.equals(_projectLayout, ProjectLayout.FLAT);
           if (_equals) {
             _builder.append("includeFlat");
           } else {
@@ -285,7 +285,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     StringConcatenation _builder = new StringConcatenation();
     {
       SourceLayout _sourceLayout = this.getConfig().getSourceLayout();
-      boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
+      boolean _equals = Objects.equals(_sourceLayout, SourceLayout.PLAIN);
       if (_equals) {
         _builder.append("if (name.endsWith(\".tests\")) {");
         _builder.newLine();
@@ -472,7 +472,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.newLine();
     {
       SourceLayout _sourceLayout_1 = this.getConfig().getSourceLayout();
-      boolean _notEquals = (!Objects.equal(_sourceLayout_1, SourceLayout.PLAIN));
+      boolean _notEquals = (!Objects.equals(_sourceLayout_1, SourceLayout.PLAIN));
       if (_notEquals) {
         _builder.append("\t");
         _builder.append("from(sourceSets.main.allSource) {");
@@ -608,7 +608,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.newLine();
       {
         final Function1<ProjectDescriptor, Boolean> _function_1 = (ProjectDescriptor it_1) -> {
-          return Boolean.valueOf(((!Objects.equal(it_1, this)) && it_1.isPartOfMavenBuild()));
+          return Boolean.valueOf(((!Objects.equals(it_1, this)) && it_1.isPartOfMavenBuild()));
         };
         Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(this.getConfig().getEnabledProjects(), _function_1);
         for(final ProjectDescriptor p : _filter) {
@@ -616,7 +616,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<module>");
           {
             ProjectLayout _projectLayout = this.getConfig().getProjectLayout();
-            boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
+            boolean _equals = Objects.equals(_projectLayout, ProjectLayout.FLAT);
             if (_equals) {
               _builder.append("../");
             }

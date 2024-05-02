@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -21,6 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Token;
@@ -542,7 +542,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
             };
             final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
               String _upperCase = it.getName().toUpperCase();
-              return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
+              return Boolean.valueOf(Objects.equals(_upperCase, "WS"));
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(ListExtensions.<TerminalRule, TerminalRule>map(GrammarUtil.allTerminalRules(XtextAntlrGeneratorFragment2.this.getGrammar()), _function), _function_1);
             if (_exists) {
@@ -1107,7 +1107,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
             };
             final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
               String _upperCase = it.getName().toUpperCase();
-              return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
+              return Boolean.valueOf(Objects.equals(_upperCase, "WS"));
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(ListExtensions.<TerminalRule, TerminalRule>map(GrammarUtil.allTerminalRules(XtextAntlrGeneratorFragment2.this.getGrammar()), _function), _function_1);
             if (_exists) {

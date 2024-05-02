@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -51,7 +51,7 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
       _builder_2.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:22)");
       _builder_2.newLine();
       final String messageEclipse = _builder_2.toString();
-      if (((!Objects.equal(messageJava, IterableExtensions.head(problems).getMessage())) && (!Objects.equal(messageEclipse, IterableExtensions.head(problems).getMessage())))) {
+      if (((!Objects.equals(messageJava, IterableExtensions.head(problems).getMessage())) && (!Objects.equals(messageEclipse, IterableExtensions.head(problems).getMessage())))) {
         StringConcatenation _builder_3 = new StringConcatenation();
         _builder_3.append("Expected one of the following problem messages:");
         _builder_3.newLine();

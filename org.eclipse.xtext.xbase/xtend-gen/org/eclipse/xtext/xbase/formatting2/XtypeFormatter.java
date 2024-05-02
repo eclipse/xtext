@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtext.xbase.formatting2;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -133,8 +133,8 @@ public class XtypeFormatter extends AbstractJavaFormatter {
     for (final XImportDeclaration imp : _importDeclarations) {
       {
         format.<XImportDeclaration>format(imp);
-        XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(section.getImportDeclarations());
-        boolean _notEquals = (!Objects.equal(imp, _last));
+        XImportDeclaration _lastOrNull = IterableExtensions.<XImportDeclaration>lastOrNull(section.getImportDeclarations());
+        boolean _notEquals = (!Objects.equals(imp, _lastOrNull));
         if (_notEquals) {
           format.<XImportDeclaration>append(imp, XbaseFormatterPreferenceKeys.blankLinesBetweenImports);
         } else {

@@ -114,7 +114,7 @@ class ImportsCollector {
 
 	dispatch def void visit(JvmGenericType jvmType, INode originNode, ImportsAcceptor acceptor) {
 		if (jvmType.anonymous) {
-			visit(jvmType.superTypes.last.type, originNode, acceptor)
+			visit(jvmType.superTypes.lastOrNull.type, originNode, acceptor)
 		} else {
 			_visit(jvmType as JvmDeclaredType, originNode, acceptor)
 		}

@@ -184,6 +184,15 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		return classFinder;
 	}
 	
+	/**
+	 * @since 2.35
+	 */
+	@Override
+	public void clearCache() {
+		classFinder.clearCache();
+		readerAccess.clearCache();
+	}
+	
 	@Override
 	public JvmType findTypeByName(String name) {
 		try {

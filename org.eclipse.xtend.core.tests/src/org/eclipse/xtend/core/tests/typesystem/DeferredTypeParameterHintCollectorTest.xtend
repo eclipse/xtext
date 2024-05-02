@@ -64,7 +64,7 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 		resolver.initializeFrom(EcoreUtil.getRootContainer(operation))
 		val substitutor = new MockTypeParameterSubstitutor(owner, new PublicResolvedTypes(resolver))
 		val hasUnbounds = substitutor.substitute(operation.parameters.head.parameterType.toLightweightTypeReference)
-		val isActual = operation.parameters.last.parameterType.toLightweightTypeReference
+		val isActual = operation.parameters.lastOrNull.parameterType.toLightweightTypeReference
 		collector.processPairedReferences(hasUnbounds, isActual)
 		return substitutor.typeParameterMapping
 	}

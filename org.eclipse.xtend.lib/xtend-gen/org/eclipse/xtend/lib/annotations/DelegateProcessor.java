@@ -9,7 +9,6 @@
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
@@ -18,6 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -108,12 +108,12 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function));
       boolean _matched = false;
-      if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+      if (Objects.equals(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
         _matched=true;
       }
       if (!_matched) {
         TypeReference _string = this.context.getString();
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
+        if (Objects.equals(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
           _matched=true;
         }
       }
@@ -121,7 +121,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         TypeReference _string_1 = this.context.getString();
         TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(this.context.newTypeReference(Class.class, this.context.newWildcardTypeReference()));
         TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(this.context.getObject());
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
+        if (Objects.equals(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
           _matched=true;
         }
       }
@@ -171,7 +171,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
 
     public Iterable<? extends MemberDeclaration> otherDelegates(final MemberDeclaration delegate) {
       final Function1<MemberDeclaration, Boolean> _function = (MemberDeclaration it) -> {
-        return Boolean.valueOf((!Objects.equal(it, delegate)));
+        return Boolean.valueOf((!Objects.equals(it, delegate)));
       };
       return IterableExtensions.filter(this.getDelegates(delegate.getDeclaringType()), _function);
     }
@@ -189,7 +189,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             final Function1<TypeReference, Boolean> _function = (TypeReference it) -> {
               Type _type = it.getType();
               Type _type_1 = iface.getType();
-              return Boolean.valueOf(Objects.equal(_type, _type_1));
+              return Boolean.valueOf(Objects.equals(_type, _type_1));
             };
             boolean _exists = IterableExtensions.<TypeReference>exists(availableInterfaces, _function);
             boolean _not = (!_exists);
@@ -206,7 +206,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             final Function1<TypeReference, Boolean> _function_1 = (TypeReference it) -> {
               Type _type = it.getType();
               Type _type_1 = iface.getType();
-              return Boolean.valueOf(Objects.equal(_type, _type_1));
+              return Boolean.valueOf(Objects.equals(_type, _type_1));
             };
             boolean _exists_1 = IterableExtensions.<TypeReference>exists(interfacesOfDeclaringType, _function_1);
             boolean _not_1 = (!_exists_1);
@@ -331,7 +331,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           return it_1.getResolvedType();
         };
         final List<TypeReference> parameterTypes = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getResolvedParameters(), _function));
-        _xblockexpression = (((((Objects.equal(name, "hashCode") && parameterTypes.isEmpty()) || (Objects.equal(name, "toString") && parameterTypes.isEmpty())) || (Objects.equal(name, "equals") && Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(this.context.getObject()))))) || (Objects.equal(name, "finalize") && parameterTypes.isEmpty())) || (Objects.equal(name, "clone") && parameterTypes.isEmpty()));
+        _xblockexpression = (((((Objects.equals(name, "hashCode") && parameterTypes.isEmpty()) || (Objects.equals(name, "toString") && parameterTypes.isEmpty())) || (Objects.equals(name, "equals") && Objects.equals(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(this.context.getObject()))))) || (Objects.equals(name, "finalize") && parameterTypes.isEmpty())) || (Objects.equals(name, "clone") && parameterTypes.isEmpty()));
       }
       return _xblockexpression;
     }
@@ -402,7 +402,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
 
     public TypeReference replace(final TypeReference target, final TypeReference oldType, final TypeReference newType) {
-      boolean _equals = Objects.equal(target, oldType);
+      boolean _equals = Objects.equals(target, oldType);
       if (_equals) {
         return newType;
       }
@@ -418,7 +418,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       if (_isWildCard) {
         TypeReference _upperBound = target.getUpperBound();
         TypeReference _object = this.context.getObject();
-        boolean _notEquals = (!Objects.equal(_upperBound, _object));
+        boolean _notEquals = (!Objects.equals(_upperBound, _object));
         if (_notEquals) {
           return this.context.newWildcardTypeReference(this.replace(target.getUpperBound(), oldType, newType));
         } else {
@@ -451,7 +451,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), _function));
       boolean _matched = false;
-      if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+      if (Objects.equals(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("this.");
@@ -462,7 +462,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       if (!_matched) {
         TypeReference _string = this.context.getString();
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
+        if (Objects.equals(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("this.");
@@ -479,7 +479,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         TypeReference _string_1 = this.context.getString();
         TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(this.context.newTypeReference(Class.class, this.context.newWildcardTypeReference()));
         TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(this.context.getObject());
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
+        if (Objects.equals(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
           _matched=true;
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("this.");

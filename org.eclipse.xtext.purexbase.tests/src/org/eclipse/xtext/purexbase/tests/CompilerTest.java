@@ -578,9 +578,9 @@ public class CompilerTest {
 				"		})\n" +
 				"// [a square : size=5, a circle : diameter=4, a rectangle : width=8 height=6] (List<String>)\n";
 		String expectation =
-				"import com.google.common.base.Objects;\n" +
 				"import java.util.ArrayList;\n" +
 				"import java.util.List;\n" +
+				"import java.util.Objects;\n" +
 				"import org.eclipse.xtext.purexbase.tests.data.Circle;\n" +
 				"import org.eclipse.xtext.purexbase.tests.data.Rectangle;\n" +
 				"import org.eclipse.xtext.purexbase.tests.data.Shape;\n" +
@@ -597,12 +597,12 @@ public class CompilerTest {
 				"      final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"foo\", \"bar\", \"baz\");\n" +
 				"      String _head = IterableExtensions.<String>head(list);\n" +
 				"      boolean _matched = false;\n" +
-				"      if (Objects.equal(_head, \"foo\")) {\n" +
+				"      if (Objects.equals(_head, \"foo\")) {\n" +
 				"        _matched=true;\n" +
 				"        /* \"it\\'s foo\" */\n" +
 				"      }\n" +
 				"      if (!_matched) {\n" +
-				"        if (Objects.equal(_head, \"bar\")) {\n" +
+				"        if (Objects.equals(_head, \"bar\")) {\n" +
 				"          _matched=true;\n" +
 				"          /* \"a bar\" */\n" +
 				"        }\n" +

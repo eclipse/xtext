@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.tests.smoke;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -29,7 +29,7 @@ public class Case_3 {
   }
 
   public void testReturnExpression_07(final Class<?> c) {
-    boolean _notEquals = (!Objects.equal(Case_3.class, c));
+    boolean _notEquals = (!Objects.equals(Case_3.class, c));
     if (_notEquals) {
       final Function1<Integer, Integer> _function = (Integer i) -> {
         return (i).intValue();

@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -142,7 +142,7 @@ public class MemberFromSuperImplementor {
     if (((superInterface instanceof JvmGenericType) && ((JvmGenericType) superInterface).isInterface())) {
       final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
         JvmType _type = it.getType();
-        return Boolean.valueOf(Objects.equal(_type, superInterface));
+        return Boolean.valueOf(Objects.equals(_type, superInterface));
       };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(subType.getSuperTypes(), _function);
       if (_exists) {

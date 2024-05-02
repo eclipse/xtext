@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtend.core.compiler;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -404,13 +404,13 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           if ((_eContainer instanceof XAbstractFeatureCall)) {
             EObject _eContainer_1 = referrer.eContainer();
             final XAbstractFeatureCall containingFeature = ((XAbstractFeatureCall) _eContainer_1);
-            if (((Objects.equal(containingFeature.getActualReceiver(), referrer) && (containingFeature.getFeature() instanceof JvmMember)) && (!this.isVisible(((JvmMember) containingFeature.getFeature()), localType)))) {
+            if (((Objects.equals(containingFeature.getActualReceiver(), referrer) && (containingFeature.getFeature() instanceof JvmMember)) && (!this.isVisible(((JvmMember) containingFeature.getFeature()), localType)))) {
               references.clear();
               throw new XtendGenerator.StopCollecting();
             }
           }
           final XtendTypeDeclaration enclosingType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(referrer, XtendTypeDeclaration.class);
-          if (((enclosingType != null) && (!Objects.equal(enclosingType, anonymousClass)))) {
+          if (((enclosingType != null) && (!Objects.equals(enclosingType, anonymousClass)))) {
             boolean _isEmpty = references.isEmpty();
             if (_isEmpty) {
               references.add(referrer);
@@ -444,7 +444,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
    */
   private boolean isVisible(final JvmMember member, final JvmDeclaredType context) {
     final JvmVisibility visibility = member.getVisibility();
-    boolean _equals = Objects.equal(visibility, JvmVisibility.PUBLIC);
+    boolean _equals = Objects.equals(visibility, JvmVisibility.PUBLIC);
     if (_equals) {
       return true;
     }
@@ -455,11 +455,11 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       _xifexpression = member.getDeclaringType();
     }
     final JvmDeclaredType type = _xifexpression;
-    if ((Objects.equal(type, context) || EcoreUtil.isAncestor(context, type))) {
+    if ((Objects.equals(type, context) || EcoreUtil.isAncestor(context, type))) {
       return true;
     }
-    if (((type != null) && (Objects.equal(visibility, JvmVisibility.DEFAULT) || Objects.equal(visibility, JvmVisibility.PROTECTED)))) {
-      if (((Strings.isEmpty(context.getPackageName()) && Strings.isEmpty(type.getPackageName())) || Objects.equal(context.getPackageName(), type.getPackageName()))) {
+    if (((type != null) && (Objects.equals(visibility, JvmVisibility.DEFAULT) || Objects.equals(visibility, JvmVisibility.PROTECTED)))) {
+      if (((Strings.isEmpty(context.getPackageName()) && Strings.isEmpty(type.getPackageName())) || Objects.equals(context.getPackageName(), type.getPackageName()))) {
         return true;
       }
     }
@@ -471,7 +471,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     ITreeAppendable _xblockexpression = null;
     {
       JvmVisibility _visibility = it.getVisibility();
-      boolean _equals = Objects.equal(_visibility, JvmVisibility.PRIVATE);
+      boolean _equals = Objects.equals(_visibility, JvmVisibility.PRIVATE);
       if (_equals) {
         JvmDeclaredType _declaringType = it.getDeclaringType();
         boolean _tripleEquals = (_declaringType == null);
@@ -489,7 +489,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         }
       } else {
         JvmVisibility _visibility_1 = it.getVisibility();
-        boolean _equals_1 = Objects.equal(_visibility_1, JvmVisibility.PUBLIC);
+        boolean _equals_1 = Objects.equals(_visibility_1, JvmVisibility.PUBLIC);
         if (_equals_1) {
           if (((it.getDeclaringType() instanceof JvmGenericType) && ((JvmGenericType) it.getDeclaringType()).isInterface())) {
             return result;

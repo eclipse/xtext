@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtend.core.formatting2;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -97,20 +97,20 @@ public class RichStringFormatter {
       this.format(e, doc);
     }
     final List<Line> lines = impl.getModel().getLines();
-    final boolean canIndent = ((!lines.isEmpty()) && StringExtensions.isNullOrEmpty(IterableExtensions.<Line>last(lines).getContent()));
+    final boolean canIndent = ((!lines.isEmpty()) && StringExtensions.isNullOrEmpty(IterableExtensions.<Line>lastOrNull(lines).getContent()));
     for (final Line line : lines) {
       int _rootIndentLenght = impl.getModel().getRootIndentLenght();
       boolean _greaterThan = (_rootIndentLenght > 0);
       if (_greaterThan) {
         int _xifexpression = (int) 0;
-        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>head(lines)))) {
+        if ((canIndent && Objects.equals(line, IterableExtensions.<Line>head(lines)))) {
           _xifexpression = 1;
         } else {
           _xifexpression = 0;
         }
         final int increaseIndentationChange = _xifexpression;
         int _xifexpression_1 = (int) 0;
-        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>last(lines)))) {
+        if ((canIndent && Objects.equals(line, IterableExtensions.<Line>lastOrNull(lines)))) {
           _xifexpression_1 = 1;
         } else {
           _xifexpression_1 = 0;
@@ -278,7 +278,7 @@ public class RichStringFormatter {
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    doc.<RichStringElseIf>append(IterableExtensions.<RichStringElseIf>last(expr.getElseIfs()), _function_2);
+    doc.<RichStringElseIf>append(IterableExtensions.<RichStringElseIf>lastOrNull(expr.getElseIfs()), _function_2);
     this.formatIntoSingleLine(doc, expr.getIf());
     this.format(expr.getThen(), doc);
     EList<RichStringElseIf> _elseIfs = expr.getElseIfs();

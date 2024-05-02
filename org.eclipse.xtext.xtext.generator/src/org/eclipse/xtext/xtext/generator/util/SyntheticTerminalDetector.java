@@ -12,8 +12,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 
-import com.google.common.base.Objects;
-
 /** 
  * Helper to identify synthetic terminal rules.
  * This implementation answers <code>true</code> for any terminal rule that has a body in the form
@@ -32,7 +30,7 @@ public class SyntheticTerminalDetector {
 		if (rule.getAlternatives() instanceof Keyword) {
 			String value = ((Keyword) rule.getAlternatives()).getValue();
 			String sytheticValue = "synthetic:" + AntlrGrammarGenUtil.getOriginalElement(rule).getName();
-			return Objects.equal(sytheticValue, value);
+			return sytheticValue.equals(value);
 		}
 		return false;
 	}

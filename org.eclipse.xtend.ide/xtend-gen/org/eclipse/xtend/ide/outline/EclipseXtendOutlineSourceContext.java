@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.ide.outline;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
@@ -54,7 +54,7 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
       boolean _tripleNotEquals = (_createExtensionInfo != null);
       if (_tripleNotEquals) {
         final Function1<JvmFeature, Boolean> _function = (JvmFeature it) -> {
-          return Boolean.valueOf((!Objects.equal(it, member)));
+          return Boolean.valueOf((!Objects.equals(it, member)));
         };
         final Function1<JvmFeature, Boolean> _function_1 = (JvmFeature it) -> {
           return Boolean.valueOf((it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || 

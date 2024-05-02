@@ -96,6 +96,18 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 			SerializationUtil.writeInt(out, id, true);
 		}
 	}
+	
+	@Override
+	protected void doWriteContent(NodeModelOutput out) throws IOException {
+		super.doWriteContent(out);
+		out.writeSemanticObject(semanticElement);
+	}
+	
+	@Override
+	protected void doReadContent(NodeModelInput in) throws IOException {
+		super.doReadContent(in);
+		semanticElement = in.readSemanticObject();
+	}
 
 	@Override
 	protected NodeType getNodeId() {

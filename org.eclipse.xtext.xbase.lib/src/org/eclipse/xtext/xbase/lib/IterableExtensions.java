@@ -138,8 +138,28 @@ public class IterableExtensions {
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @return the last element in the iterable or <code>null</code>.
+	 * @deprecated Use {@link #lastOrNull(Iterable<T>)} instead: in Java 21, the
+	 * method getLast has been introduced to some collection classes and would
+	 * be preferred to this one by the Xbase/Xtend compiler, breaking the
+	 * semantics of the original code:
+	 * The Java 21 getLast method throws a {@link NoSuchElementException} when the
+	 * collection is empty, instead of returning null.
+	 * @see https://github.com/eclipse/xtext/issues/2981
 	 */
+	@Deprecated
 	public static <T> T last(Iterable<T> iterable) {
+		return lastOrNull(iterable);
+	}
+
+	/**
+	 * Returns the last element in the given iterable or <code>null</code> if empty.
+	 * 
+	 * @param iterable
+	 *            the iterable. May not be <code>null</code>.
+	 * @return the last element in the iterable or <code>null</code>.
+	 * @since 2.35
+	 */
+	public static <T> T lastOrNull(Iterable<T> iterable) {
 		if (iterable instanceof List<?>) {
 			List<T> list = (List<T>) iterable;
 			if (list.isEmpty())
@@ -151,7 +171,7 @@ public class IterableExtensions {
 				return null;
 			return sortedSet.last();
 		} else {
-			return IteratorExtensions.last(iterable.iterator());
+			return IteratorExtensions.lastOrNull(iterable.iterator());
 		}
 	}
 

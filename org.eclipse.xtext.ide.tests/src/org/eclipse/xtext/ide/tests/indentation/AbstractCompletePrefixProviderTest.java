@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.ide.tests.indentation;
 
+import java.util.Objects;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -23,7 +25,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -903,7 +904,7 @@ public abstract class AbstractCompletePrefixProviderTest {
 				try {
 					return true;
 				} finally {
-					found = Objects.equal(t, element);
+					found = Objects.equals(t, element);
 				}
 			}
 		}

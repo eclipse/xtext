@@ -186,7 +186,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         this.model.setLeadingText(lastLinesContent);
         this.contentStartColumn = 0;
       } else {
-        final Line lastLine = IterableExtensions.<Line>last(this.model.getLines());
+        final Line lastLine = IterableExtensions.<Line>lastOrNull(this.model.getLines());
         lastLine.setContent(lastLinesContent);
         int _offset = lastLine.getOffset();
         int _newLineCharCount = lastLine.getNewLineCharCount();
@@ -210,7 +210,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
               this.indentationStack.remove(ws);
             }
           }
-          final Chunk lastWs = IterableExtensions.<Chunk>last(this.indentationStack);
+          final Chunk lastWs = IterableExtensions.<Chunk>lastOrNull(this.indentationStack);
           int _xifexpression = (int) 0;
           if ((lastWs == null)) {
             int _rootIndentLenght = this.model.getRootIndentLenght();
@@ -244,7 +244,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         if ((newContentStartColumn != 0)) {
           this.contentStartColumn = newContentStartColumn;
         }
-        List<Chunk> _chunks = IterableExtensions.<Line>last(this.model.getLines()).getChunks();
+        List<Chunk> _chunks = IterableExtensions.<Line>lastOrNull(this.model.getLines()).getChunks();
         Iterables.<Chunk>addAll(_chunks, this.indentationStack);
       }
     }

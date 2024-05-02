@@ -123,7 +123,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     final XtendFile file = this.processWithoutException(_builder);
     XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
     final XtendClass clazz = ((XtendClass) _head);
-    final XtendMember lastMember = IterableExtensions.<XtendMember>last(clazz.getMembers());
+    final XtendMember lastMember = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
     final EList<XAnnotation> annotations = lastMember.getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
@@ -148,7 +148,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     final XtendFile file = this.processWithoutException(_builder);
     XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
     final XtendClass clazz = ((XtendClass) _head);
-    final XtendMember lastMember = IterableExtensions.<XtendMember>last(clazz.getMembers());
+    final XtendMember lastMember = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
     final EList<XAnnotation> annotations = lastMember.getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
@@ -173,7 +173,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     final XtendFile file = this.processWithoutException(_builder);
     XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
     final XtendClass clazz = ((XtendClass) _head);
-    final XtendMember lastMember = IterableExtensions.<XtendMember>last(clazz.getMembers());
+    final XtendMember lastMember = IterableExtensions.<XtendMember>lastOrNull(clazz.getMembers());
     final EList<XAnnotation> annotations = lastMember.getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
@@ -199,7 +199,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("@");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     final EList<XAnnotation> annotations = typeDeclaration.getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
@@ -213,7 +213,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("@Data class");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     final EList<XAnnotation> annotations = typeDeclaration.getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
@@ -225,8 +225,8 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("annotation Bar { @");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
-    final EList<XAnnotation> annotations = IterableExtensions.<XtendMember>last(typeDeclaration.getMembers()).getAnnotations();
+    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
+    final EList<XAnnotation> annotations = IterableExtensions.<XtendMember>lastOrNull(typeDeclaration.getMembers()).getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
   }
@@ -240,8 +240,8 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("@Property val S");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
-    final EList<XAnnotation> annotations = IterableExtensions.<XtendMember>last(typeDeclaration.getMembers()).getAnnotations();
+    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
+    final EList<XAnnotation> annotations = IterableExtensions.<XtendMember>lastOrNull(typeDeclaration.getMembers()).getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
   }
@@ -252,7 +252,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("@SuppressWarnings(\"unused\"");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration typeDeclaration = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     final EList<XAnnotation> annotations = typeDeclaration.getAnnotations();
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(IterableExtensions.<XAnnotation>head(annotations));
     Assert.assertNotNull(resolvedTypes.getActualType(IterableExtensions.<XAnnotation>head(annotations)));
@@ -269,7 +269,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration annotation = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration annotation = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     XtendMember _head = IterableExtensions.<XtendMember>head(annotation.getMembers());
     final XtendField field = ((XtendField) _head);
     final XExpression initializer = field.getInitialValue();
@@ -367,7 +367,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration headerAccess = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration headerAccess = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     XtendMember _head = IterableExtensions.<XtendMember>head(headerAccess.getMembers());
     final XtendFunction function = ((XtendFunction) _head);
     EObject _head_1 = IterableExtensions.<EObject>head(this.associations.getJvmElements(function));
@@ -400,7 +400,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration headerAccess = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration headerAccess = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     XtendMember _head = IterableExtensions.<XtendMember>head(headerAccess.getMembers());
     final XtendFunction function = ((XtendFunction) _head);
     EObject _head_1 = IterableExtensions.<EObject>head(this.associations.getJvmElements(function));
@@ -444,8 +444,8 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
     final XtendTypeDeclaration unnamed = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
-    XtendMember _last = IterableExtensions.<XtendMember>last(unnamed.getMembers());
-    final XtendConstructor constructor = ((XtendConstructor) _last);
+    XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(unnamed.getMembers());
+    final XtendConstructor constructor = ((XtendConstructor) _lastOrNull);
     XExpression _expression = constructor.getExpression();
     final XBlockExpression body = ((XBlockExpression) _expression);
     XExpression _head = IterableExtensions.<XExpression>head(body.getExpressions());
@@ -495,7 +495,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
-    final XtendTypeDeclaration client = IterableExtensions.<XtendTypeDeclaration>last(file.getXtendTypes());
+    final XtendTypeDeclaration client = IterableExtensions.<XtendTypeDeclaration>lastOrNull(file.getXtendTypes());
     XtendMember _head = IterableExtensions.<XtendMember>head(client.getMembers());
     final XtendField field = ((XtendField) _head);
     XExpression _initialValue = field.getInitialValue();
@@ -580,8 +580,8 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
     final XtendTypeDeclaration y = IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes());
-    XtendMember _last = IterableExtensions.<XtendMember>last(y.getMembers());
-    final XtendFunction function = ((XtendFunction) _last);
+    XtendMember _lastOrNull = IterableExtensions.<XtendMember>lastOrNull(y.getMembers());
+    final XtendFunction function = ((XtendFunction) _lastOrNull);
     XExpression _expression = function.getExpression();
     final XBlockExpression body = ((XBlockExpression) _expression);
     XExpression _head = IterableExtensions.<XExpression>head(body.getExpressions());
@@ -2238,7 +2238,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     final XtendFile file = this.processWithoutException(_builder);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
-    final XCastedExpression casted = IteratorExtensions.<XCastedExpression>last(Iterators.<XCastedExpression>filter(file.eAllContents(), XCastedExpression.class));
+    final XCastedExpression casted = IteratorExtensions.<XCastedExpression>lastOrNull(Iterators.<XCastedExpression>filter(file.eAllContents(), XCastedExpression.class));
     Assert.assertNull(casted.getType());
     Assert.assertNotNull(resolvedTypes.getActualType(casted));
   }

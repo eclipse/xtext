@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.lib;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.UnmodifiableMergingMapView;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -229,7 +229,7 @@ import com.google.common.collect.Maps;
 		//TODO use the JRE 1.8 API: map.remove(entry.getKey(), entry.getValue());
 		final K key = entry.getKey();
 		final V storedValue = map.get(entry.getKey());
-	        if (!Objects.equal(storedValue, entry.getValue())
+	        if (!Objects.equals(storedValue, entry.getValue())
 			|| (storedValue == null && !map.containsKey(key))) {
 	            return false;
         	}
@@ -278,7 +278,7 @@ import com.google.common.collect.Maps;
 		return Maps.filterEntries(left, new Predicate<Entry<K, V>>() {
 			@Override
 			public boolean apply(Entry<K, V> input) {
-				return !Objects.equal(input.getKey(), right.getKey()) || !Objects.equal(input.getValue(), right.getValue());
+				return !Objects.equals(input.getKey(), right.getKey()) || !Objects.equals(input.getValue(), right.getValue());
 			}
 		});
 	}
@@ -303,7 +303,7 @@ import com.google.common.collect.Maps;
 		return Maps.filterKeys(map, new Predicate<K>() {
 			@Override
 			public boolean apply(K input) {
-				return !Objects.equal(input, key);
+				return !Objects.equals(input, key);
 			}
 		});
 	}
@@ -341,7 +341,7 @@ import com.google.common.collect.Maps;
 				if (value == null) {
 					return input.getValue() == null && right.containsKey(input.getKey());
 				}
-				return !Objects.equal(input.getValue(), value);
+				return !Objects.equals(input.getValue(), value);
 			}
 		});
 	}

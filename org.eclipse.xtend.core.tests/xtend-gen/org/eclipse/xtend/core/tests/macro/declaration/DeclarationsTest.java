@@ -366,7 +366,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       final MethodDeclaration listAdd = IterableExtensions.head(allOverridden);
       Assert.assertEquals("add", listAdd.getSimpleName());
       Assert.assertEquals("E", IterableExtensions.head(listAdd.getParameters()).getType().getSimpleName());
-      final MethodDeclaration intfAdd = IterableExtensions.last(allOverridden);
+      final MethodDeclaration intfAdd = IterableExtensions.lastOrNull(allOverridden);
       Assert.assertEquals("add", intfAdd.getSimpleName());
       Assert.assertEquals("String", IterableExtensions.head(intfAdd.getParameters()).getType().getSimpleName());
     };

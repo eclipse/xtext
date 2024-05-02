@@ -8,20 +8,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import static org.eclipse.xtext.nodemodel.NodeModelAccessForTests.*;
+import static org.junit.Assert.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractCompositeNodeTest extends Assert {
+public abstract class AbstractCompositeNodeTest {
 
 	private NodeModelBuilder mutator;
 
@@ -51,8 +54,8 @@ public abstract class AbstractCompositeNodeTest extends Assert {
 		addChild(composite, first);
 		assertSame(first, getFirstChild(composite));
 		assertSame(composite, first.getParent());
-		assertSame(first, first.basicGetNextSibling());
-		assertSame(first, first.basicGetPreviousSibling());
+		assertSame(first, basicGetNextSibling(first));
+		assertSame(first, basicGetPreviousSibling(first));
 	}
 
 	@Test public void testAddChild_01() {
@@ -63,9 +66,9 @@ public abstract class AbstractCompositeNodeTest extends Assert {
 		addChild(composite, second);
 		assertSame(first, getFirstChild(composite));
 		assertSame(second, first.getNextSibling());
-		assertSame(second, first.basicGetPreviousSibling());
+		assertSame(second, basicGetPreviousSibling(first));
 		assertSame(first, second.getPreviousSibling());
-		assertSame(first, second.basicGetNextSibling());
+		assertSame(first, basicGetNextSibling(second));
 		assertSame(composite, first.getParent());
 		assertSame(composite, second.getParent());
 	}
@@ -81,8 +84,8 @@ public abstract class AbstractCompositeNodeTest extends Assert {
 		assertSame(first, getFirstChild(composite));
 		assertSame(second, first.getNextSibling());
 		assertSame(third, second.getNextSibling());
-		assertSame(first, third.basicGetNextSibling());
-		assertSame(third, first.basicGetPreviousSibling());
+		assertSame(first, basicGetNextSibling(third));
+		assertSame(third, basicGetPreviousSibling(first));
 		assertSame(second, third.getPreviousSibling());
 		assertSame(first, second.getPreviousSibling());
 		assertSame(composite, first.getParent());

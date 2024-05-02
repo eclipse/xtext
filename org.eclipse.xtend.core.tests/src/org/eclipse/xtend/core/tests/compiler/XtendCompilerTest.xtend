@@ -989,9 +989,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.base.Objects;
 			import com.google.common.collect.AbstractIterator;
 			import java.util.Iterator;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class Foo {
@@ -1002,7 +1002,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        while (iter.hasNext()) {
 			          {
 			            final T elem = iter.next();
-			            boolean _notEquals = (!Objects.equal(elem, null));
+			            boolean _notEquals = (!Objects.equals(elem, null));
 			            if (_notEquals) {
 			              return elem;
 			            }
@@ -1119,9 +1119,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					}
 				}
 			''', '''
-				import com.google.common.base.Objects;
 				import com.google.common.collect.AbstractIterator;
 				import java.util.Iterator;
+				import java.util.Objects;
 				import org.eclipse.xtext.xbase.lib.Functions.Function1;
 				import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 				
@@ -1134,7 +1134,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				        T _elvis = null;
 				        final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 				          public Boolean apply(final T it_1) {
-				            return Boolean.valueOf((!Objects.equal(it_1, null)));
+				            return Boolean.valueOf((!Objects.equals(it_1, null)));
 				          }
 				        };
 				        T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
@@ -1556,21 +1556,21 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.IntegerRange;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final Object a) {
 			    boolean _matched = false;
-			    if (Objects.equal(a, "b")) {
+			    if (Objects.equals(a, "b")) {
 			      _matched=true;
 			      while (true) {
 			        "".toString();
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a, "c")) {
+			      if (Objects.equals(a, "c")) {
 			        _matched=true;
 			        if (true) {
 			          return;
@@ -1578,7 +1578,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a, "d")) {
+			      if (Objects.equals(a, "d")) {
 			        _matched=true;
 			        IntegerRange _upTo = new IntegerRange(1, 1);
 			        for (final Integer i : _upTo) {
@@ -1726,21 +1726,21 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.IntegerRange;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final Object a) {
 			    boolean _matched = false;
-			    if (Objects.equal(a, "b")) {
+			    if (Objects.equals(a, "b")) {
 			      _matched=true;
 			      while (true) {
 			        "".toString();
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a, "c")) {
+			      if (Objects.equals(a, "c")) {
 			        _matched=true;
 			        if (true) {
 			          return "a";
@@ -1748,7 +1748,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a, "d")) {
+			      if (Objects.equals(a, "d")) {
 			        _matched=true;
 			        IntegerRange _upTo = new IntegerRange(1, 1);
 			        for (final Integer i : _upTo) {
@@ -1773,14 +1773,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final Object a, final boolean b) {
 			    String _switchResult = null;
 			    boolean _matched = false;
-			    if (Objects.equal(a, "a")) {
+			    if (Objects.equals(a, "a")) {
 			      _matched=true;
 			      String _xblockexpression = null;
 			      {
@@ -1792,7 +1792,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      _switchResult = _xblockexpression;
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a, "b")) {
+			      if (Objects.equals(a, "b")) {
 			        _matched=true;
 			        if (true) {
 			          return "a";
@@ -1928,7 +1928,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			
 			@SuppressWarnings("all")
@@ -1937,7 +1937,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Function1<? super Integer, ?> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
-			    if (Objects.equal(_switchValue, null)) {
+			    if (Objects.equals(_switchValue, null)) {
 			      _matched=true;
 			      final Function1<Object, Object> _function = new Function1<Object, Object>() {
 			        public Object apply(final Object it) {
@@ -1947,7 +1947,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      _switchResult = _function;
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(_switchValue, null)) {
+			      if (Objects.equals(_switchValue, null)) {
 			        _matched=true;
 			        final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {
 			          public Integer apply(final Integer it) {
@@ -2016,7 +2016,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		}
 		'''.assertCompilesTo(
 		'''
-		import com.google.common.base.Objects;
+		import java.util.Objects;
 
 		@SuppressWarnings("all")
 		public class Foo {
@@ -2024,7 +2024,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    int _switchResult = (int) 0;
 		    final double x = (1d + 2);
 		    boolean _matched = false;
-		    if (Objects.equal(x, 1)) {
+		    if (Objects.equals(x, 1)) {
 		      _matched=true;
 		      _switchResult = 1;
 		    }
@@ -2050,7 +2050,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		}
 		'''.assertCompilesTo(
 		'''
-		import com.google.common.base.Objects;
+		import java.util.Objects;
 		
 		@SuppressWarnings("all")
 		public class Foo {
@@ -2058,7 +2058,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    int _switchResult = (int) 0;
 		    final int x = 1;
 		    boolean _matched = false;
-		    if (Objects.equal(x, 1d)) {
+		    if (Objects.equals(x, 1d)) {
 		      _matched=true;
 		      _switchResult = 1;
 		    }
@@ -2188,7 +2188,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		}
 		'''.assertCompilesTo(
 		'''
-		import com.google.common.base.Objects;
+		import java.util.Objects;
 		import org.eclipse.xtext.xbase.lib.Functions.Function0;
 		
 		@SuppressWarnings("all")
@@ -2203,7 +2203,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      }
 		    };
 		    Integer _apply = _function.apply();
-		    if (Objects.equal(x, _apply)) {
+		    if (Objects.equals(x, _apply)) {
 		      _matched=true;
 		      _switchResult = true;
 		    }
@@ -2346,7 +2346,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		}
 		'''.assertCompilesTo(
 		'''
-		import com.google.common.base.Objects;
+		import java.util.Objects;
 		
 		@SuppressWarnings("all")
 		public class Foo {
@@ -2360,7 +2360,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      }
 		      final int y = _xtrycatchfinallyexpression;
 		      int _xifexpression = (int) 0;
-		      boolean _equals = Objects.equal(Integer.valueOf(y), Boolean.valueOf(true));
+		      boolean _equals = Objects.equals(Integer.valueOf(y), Boolean.valueOf(true));
 		      if (_equals) {
 		        _xifexpression = 1;
 		      } else {
@@ -2370,7 +2370,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      boolean _switchResult = false;
 		      final int x = 1;
 		      boolean _matched = false;
-		      if (Objects.equal(x, z)) {
+		      if (Objects.equals(x, z)) {
 		        _matched=true;
 		        _switchResult = true;
 		      }
@@ -2395,7 +2395,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		}
 		'''.assertCompilesTo(
 		'''
-		import com.google.common.base.Objects;
+		import java.util.Objects;
 		
 		@SuppressWarnings("all")
 		public class Foo {
@@ -2406,7 +2406,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      boolean _switchResult = false;
 		      final Thread.State x = Thread.State.NEW;
 		      boolean _matched = false;
-		      if (Objects.equal(x, state)) {
+		      if (Objects.equals(x, state)) {
 		        _matched=true;
 		        _switchResult = true;
 		      }
@@ -3527,13 +3527,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			package x;
 
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 
 			@SuppressWarnings("all")
 			public class Y {
 			  public boolean equals(final Object p) {
 			    boolean _xifexpression = false;
-			    boolean _equals = Objects.equal("foo", p);
+			    boolean _equals = Objects.equals("foo", p);
 			    if (_equals) {
 			      return true;
 			    } else {
@@ -4847,7 +4847,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		val file = file(input.toString(), true)
 		val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
-		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
+		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).lastOrNull
 		val generatorConfig =  generatorConfigProvider.get(barType)
 		var barJavaCode = generator.generateType(barType, generatorConfig);
 		barJavaCode = postProcessor.postProcess(null, barJavaCode);
@@ -5502,16 +5502,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 
 			@SuppressWarnings("all")
 			public class Foo {
 			  public void foo() {
-			    boolean _equals = Objects.equal("a", "b");
+			    boolean _equals = Objects.equals("a", "b");
 			    if (_equals) {
 			    }
 			    for (;;) {
-			      boolean _equals_1 = Objects.equal("b", "c");
+			      boolean _equals_1 = Objects.equals("b", "c");
 			      if (_equals_1) {
 			      }
 			    }
@@ -5950,7 +5950,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class Foo {
@@ -5960,7 +5960,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			  public void foo(final int x) {
 			    boolean _matched = false;
-			    if (Objects.equal(x, this.X)) {
+			    if (Objects.equals(x, this.X)) {
 			      _matched=true;
 			      this.foo(x);
 			    }

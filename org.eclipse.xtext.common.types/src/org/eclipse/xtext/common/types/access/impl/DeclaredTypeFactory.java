@@ -79,7 +79,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 			logger.warn("ASM library is too old. Falling back to java.lang.reflect API.");
 		}
 		logger.warn("Please note that no information about compile time constants is available.");
-		logger.warn("It's recommended to use org.objectweb.asm 9.6.0 or better (Maven group id: org.ow2.asm).");
+		logger.warn("It's recommended to use org.objectweb.asm 9.7.0 or better (Maven group id: org.ow2.asm).");
 		logger.warn("--------------------------------------------------------------------------");
 		return false;
 	}
@@ -104,7 +104,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 			try {
 				ReflectURIHelper uriHelper = new ReflectURIHelper();
 				ReflectionTypeFactory reflectionBased = new ReflectionTypeFactory(uriHelper);
-				Class<?> clazz = Class.forName(binaryClass.getName(), false, classLoader);
+				Class<?> clazz = Class.forName(binaryClass.getName(), false, getClassLoader());
 				return reflectionBased.createType(clazz);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
@@ -113,8 +113,22 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 	}
 
 	protected JvmDeclaredType doCreateType(BinaryClass binaryClass) {
-		JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(binaryClass, bytesAccess, classLoader);
+		JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(binaryClass, getBytesAccess(), getClassLoader());
 		return builder.buildType();
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected ClassFileBytesAccess getBytesAccess() {
+		return bytesAccess;
+	}
+	
+	/**
+	 * @since 2.35
+	 */
+	protected ClassLoader getClassLoader() {
+		return classLoader;
 	}
 
 }

@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.ide.tests.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Objects;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
@@ -459,7 +459,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final IJavaProject javaProject = JavaCore.create(this.testHelper.getProject());
       final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, true);
       try {
-        boolean _notEquals = (!Objects.equal(javaSeverity, "error"));
+        boolean _notEquals = (!Objects.equals(javaSeverity, "error"));
         if (_notEquals) {
           Assert.fail((("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE) + "\' should be \'error\' by default"));
         }
@@ -535,7 +535,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     final IJavaProject javaProject = JavaCore.create(this.testHelper.getProject());
     final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, true);
     try {
-      boolean _notEquals = (!Objects.equal(javaSeverity, "ignore"));
+      boolean _notEquals = (!Objects.equals(javaSeverity, "ignore"));
       if (_notEquals) {
         Assert.fail((("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC) + "\' should be \'ignore\' by default"));
       }

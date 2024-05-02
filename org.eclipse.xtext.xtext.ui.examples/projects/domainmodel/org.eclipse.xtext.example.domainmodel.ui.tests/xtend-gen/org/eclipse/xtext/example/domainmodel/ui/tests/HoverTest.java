@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -43,7 +43,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("An ordered collection (also known as a <i>sequence</i>");
+    _builder_1.append("An ordered collection");
     this.hasHoverOver(_builder, "java.util.List", _builder_1.toString());
   }
 
@@ -62,7 +62,7 @@ public class HoverTest extends AbstractHoverTest {
     _builder.append("entity Foo {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("An ordered collection (also known as a <i>sequence</i>");
+    _builder_1.append("An ordered collection");
     this.hasHoverOver(_builder, "java.util.List", _builder_1.toString());
   }
 

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -97,7 +98,6 @@ import org.eclipse.xtext.xbase.util.XSwitchExpressionCompilationState;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -1601,7 +1601,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				JvmType objectsType = findKnownType(Objects.class, casePart);
 				if (objectsType != null) {
 					conditionAppendable.append(objectsType);
-					conditionAppendable.append(".equal(").append(variableName).append(", ");
+					conditionAppendable.append(".equals(").append(variableName).append(", ");
 					internalToJavaExpression(casePart.getCase(), conditionAppendable);
 					conditionAppendable.append(")");
 				} else {

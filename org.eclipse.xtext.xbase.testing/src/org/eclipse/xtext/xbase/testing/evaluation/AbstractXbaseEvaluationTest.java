@@ -912,9 +912,17 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testStringLiteral_03() throws Exception {
-		assertEvaluatesTo("lite\r\nr\\al", "'lite\r\nr\\\\al'");
+		assertEvaluatesTo("lite\nr\\al", "'lite\r\nr\\\\al'");
 	}
-	
+
+	@Test public void testStringLiteral_03_Issue_2293_01() throws Exception {
+		assertEvaluatesTo("lite\nr\\al", "'lite\\nr\\\\al'");
+	}
+
+	@Test public void testStringLiteral_03_Issue_2293_02() throws Exception {
+		assertEvaluatesTo("lite\r\nr\\al", "'lite\\r\\nr\\\\al'");
+	}
+
 	@Test public void testStringLiteral_04() throws Exception {
 		assertEvaluatesTo('\n', "{ val char x = '\n' x}");
 	}

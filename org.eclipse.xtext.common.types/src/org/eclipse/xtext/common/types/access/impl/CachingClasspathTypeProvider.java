@@ -49,5 +49,17 @@ public class CachingClasspathTypeProvider extends ClasspathTypeProvider {
 	public BinaryClassMirror createMirror(BinaryClass clazz) {
 		return BinaryClassMirror.createClassMirror(clazz, reusedFactory);
 	}
+	
+	/**
+	 * @since 2.35
+	 */
+	@Override
+	public void clearCache() {
+		super.clearCache();
+		if (reusedFactory instanceof CachingDeclaredTypeFactory) {
+			((CachingDeclaredTypeFactory)reusedFactory).clearCache();
+		}
+		
+	}
 
 }

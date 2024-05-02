@@ -125,6 +125,10 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
 
   public MutableParameterDeclaration addParameter(final String name, final TypeReference type) {
+    return this.addParameter(this.getDelegate().getParameters().size(), name, type);
+  }
+
+  public MutableParameterDeclaration addParameter(final int index, final String name, final TypeReference type) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
     Preconditions.checkArgument((type != null), "type cannot be null");
@@ -135,7 +139,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     final JvmFormalParameter param = TypesFactory.eINSTANCE.createJvmFormalParameter();
     param.setName(name);
     param.setParameterType(this.getCompilationUnit().toJvmTypeReference(type));
-    this.getDelegate().getParameters().add(param);
+    this.getDelegate().getParameters().add(index, param);
     ParameterDeclaration _parameterDeclaration = this.getCompilationUnit().toParameterDeclaration(param);
     return ((MutableParameterDeclaration) _parameterDeclaration);
   }

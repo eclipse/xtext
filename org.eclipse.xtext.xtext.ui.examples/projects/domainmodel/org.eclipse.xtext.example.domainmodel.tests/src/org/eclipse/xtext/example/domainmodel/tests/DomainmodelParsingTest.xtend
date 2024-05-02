@@ -107,7 +107,7 @@ class DomainmodelParsingTest{
 		'''.parse
 		val pack = model.elements.head as PackageDeclaration
 		val entity = pack.elements.head as Entity
-		val op = entity.features.last as Operation
+		val op = entity.features.lastOrNull as Operation
 		val method = op.jvmElements.head as JvmOperation
 		Assert.assertEquals("String", method.returnType.simpleName)
 	}

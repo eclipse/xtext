@@ -381,8 +381,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import com.google.common.base.Objects;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
 			@SuppressWarnings("all")
@@ -390,7 +390,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Iterable<?> m() {
 			    final List<?> a = null;
 			    final Object[] b = null;
-			    boolean _equals = Objects.equal("foo", "bar");
+			    boolean _equals = Objects.equals("foo", "bar");
 			    if (_equals) {
 			      return a;
 			    } else {
@@ -415,8 +415,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import com.google.common.base.Objects;
 			import java.util.List;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
 			@SuppressWarnings("all")
@@ -424,7 +424,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Object[] m() {
 			    final List<?> a = null;
 			    final Object[] b = null;
-			    boolean _equals = Objects.equal("foo", "bar");
+			    boolean _equals = Objects.equals("foo", "bar");
 			    if (_equals) {
 			      return ((Object[])Conversions.unwrapArray(a, Object.class));
 			    } else {
@@ -449,15 +449,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import com.google.common.base.Objects;
 			import java.util.List;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public Object m() {
 			    final List<?> a = null;
 			    final Object[] b = null;
-			    boolean _equals = Objects.equal("foo", "bar");
+			    boolean _equals = Objects.equals("foo", "bar");
 			    if (_equals) {
 			      return a;
 			    } else {
@@ -484,14 +484,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import com.google.common.base.Objects;
 			import com.google.common.base.Predicate;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public Function1<String, Boolean> foo() {
-			    boolean _equals = Objects.equal("foo", null);
+			    boolean _equals = Objects.equals("foo", null);
 			    if (_equals) {
 			      return new Function1<String, Boolean>() {
 			          public Boolean apply(String arg0) {
@@ -2281,7 +2281,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -2289,12 +2289,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
 			    boolean _matched = false;
-			    if (Objects.equal(_switchValue, "b")) {
+			    if (Objects.equals(_switchValue, "b")) {
 			      _matched=true;
 			      _switchResult = "a";
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(_switchValue, "c")) {
+			      if (Objects.equals(_switchValue, "c")) {
 			        _matched=true;
 			        if ((1 == 2)) {
 			          return "b";
@@ -2326,7 +2326,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -2334,12 +2334,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
 			    boolean _matched = false;
-			    if (Objects.equal(_switchValue, "b")) {
+			    if (Objects.equals(_switchValue, "b")) {
 			      _matched=true;
 			      _switchResult = "a";
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(_switchValue, "c")) {
+			      if (Objects.equals(_switchValue, "c")) {
 			        _matched=true;
 			        if (b) {
 			          return "b";
@@ -2368,7 +2368,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 			
 			@SuppressWarnings("all")
@@ -2382,7 +2382,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      _switchResult = "Double.NaN";
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(it, Double.POSITIVE_INFINITY)) {
+			      if (Objects.equals(it, Double.POSITIVE_INFINITY)) {
 			        _matched=true;
 			        _switchResult = "Double.POSITIVE_INFINITY";
 			      }
@@ -3637,7 +3637,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class Bug {
@@ -3652,7 +3652,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (this!=null) {
 			      _text_1=this.text;
 			    }
-			    return Objects.equal(_text, _text_1);
+			    return Objects.equals(_text, _text_1);
 			  }
 			}
 		''')

@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -17,6 +16,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
@@ -307,7 +307,7 @@ public class JvmModelGenerator implements IGenerator {
           _identifier=_annotation.getIdentifier();
         }
         String _name = SuppressWarnings.class.getName();
-        return Boolean.valueOf((!Objects.equal(_identifier, _name)));
+        return Boolean.valueOf((!Objects.equals(_identifier, _name)));
       };
       final Function1<JvmAnnotationReference, Boolean> noSuppressWarningsFilter = _function;
       this.generateAnnotations(IterableExtensions.<JvmAnnotationReference>filter(it.getAnnotations(), noSuppressWarningsFilter), appendable, true, config);
@@ -654,7 +654,7 @@ public class JvmModelGenerator implements IGenerator {
     if (((it instanceof JvmAnnotationType) || ((it instanceof JvmGenericType) && ((JvmGenericType) it).isInterface()))) {
       final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference typeRef) -> {
         String _identifier = typeRef.getIdentifier();
-        return Boolean.valueOf((!Objects.equal(_identifier, implicitSuperType)));
+        return Boolean.valueOf((!Objects.equals(_identifier, implicitSuperType)));
       };
       final Iterable<JvmTypeReference> withoutObject = IterableExtensions.<JvmTypeReference>filter(it.getSuperTypes(), _function);
       final Procedure1<LoopParams> _function_1 = (LoopParams it_1) -> {
@@ -669,7 +669,7 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       final Function1<JvmTypeReference, Boolean> _function_3 = (JvmTypeReference typeRef) -> {
         String _identifier = typeRef.getIdentifier();
-        return Boolean.valueOf((!Objects.equal(_identifier, implicitSuperType)));
+        return Boolean.valueOf((!Objects.equals(_identifier, implicitSuperType)));
       };
       final Iterable<JvmTypeReference> withoutObject_1 = IterableExtensions.<JvmTypeReference>filter(it.getSuperTypes(), _function_3);
       final Function1<JvmTypeReference, Boolean> _function_4 = (JvmTypeReference typeRef) -> {
@@ -677,7 +677,7 @@ public class JvmModelGenerator implements IGenerator {
       };
       final JvmTypeReference superClazz = IterableExtensions.<JvmTypeReference>head(IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_4));
       final Function1<JvmTypeReference, Boolean> _function_5 = (JvmTypeReference typeRef) -> {
-        return Boolean.valueOf((!Objects.equal(typeRef, superClazz)));
+        return Boolean.valueOf((!Objects.equals(typeRef, superClazz)));
       };
       final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_5);
       if ((superClazz != null)) {
@@ -1087,7 +1087,7 @@ public class JvmModelGenerator implements IGenerator {
             boolean _hasObject_1 = b.hasObject(simpleVarName);
             if (_hasObject_1) {
               final Object element_1 = b.getObject(simpleVarName);
-              boolean _notEquals = (!Objects.equal(element_1, interfaceRef));
+              boolean _notEquals = (!Objects.equals(element_1, interfaceRef));
               if (_notEquals) {
                 String _qualifiedName = interfaze.getQualifiedName();
                 final String qualifiedVarName = (_qualifiedName + ".super");
@@ -1210,7 +1210,7 @@ public class JvmModelGenerator implements IGenerator {
                   final JvmDeclaredType contextDeclarator = EcoreUtil2.<JvmDeclaredType>getContainerOfType(it, JvmDeclaredType.class);
                   String _packageName = referencedType.getPackageName();
                   String _packageName_1 = contextDeclarator.getPackageName();
-                  boolean _notEquals = (!Objects.equal(_packageName, _packageName_1));
+                  boolean _notEquals = (!Objects.equals(_packageName, _packageName_1));
                   if (_notEquals) {
                     final ImportManager importManager = this.getImportManager(appendable);
                     importManager.addImportFor(jvmType);
@@ -1363,13 +1363,13 @@ public class JvmModelGenerator implements IGenerator {
         _switchResult = "Double.NaN";
       }
       if (!_matched) {
-        if (Objects.equal(it_1, Double.POSITIVE_INFINITY)) {
+        if (Objects.equals(it_1, Double.POSITIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Double.POSITIVE_INFINITY";
         }
       }
       if (!_matched) {
-        if (Objects.equal(it_1, Double.NEGATIVE_INFINITY)) {
+        if (Objects.equals(it_1, Double.NEGATIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Double.NEGATIVE_INFINITY";
         }
@@ -1393,13 +1393,13 @@ public class JvmModelGenerator implements IGenerator {
         _switchResult = "Float.NaN";
       }
       if (!_matched) {
-        if (Objects.equal(it_1, Float.POSITIVE_INFINITY)) {
+        if (Objects.equals(it_1, Float.POSITIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Float.POSITIVE_INFINITY";
         }
       }
       if (!_matched) {
-        if (Objects.equal(it_1, Float.NEGATIVE_INFINITY)) {
+        if (Objects.equals(it_1, Float.NEGATIVE_INFINITY)) {
           _matched=true;
           _switchResult = "Float.NEGATIVE_INFINITY";
         }

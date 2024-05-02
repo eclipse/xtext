@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.documentation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -77,7 +77,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
       if ((type != null)) {
         if ((this.documentationProvider instanceof IEObjectDocumentationProviderExtension)) {
           INode _head = IterableExtensions.<INode>head(((IEObjectDocumentationProviderExtension)this.documentationProvider).getDocumentationNodes(type));
-          return Objects.equal(leafNode, _head);
+          return Objects.equals(leafNode, _head);
         }
       }
     }

@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -42,7 +42,7 @@ public class InsertionOffsets {
     if (((callingMember != null) && ownerType.getMembers().contains(callingMember))) {
       return this.before(callingMember);
     }
-    final XtendField lastDefinedField = IterableExtensions.<XtendField>last(Iterables.<XtendField>filter(ownerType.getMembers(), XtendField.class));
+    final XtendField lastDefinedField = IterableExtensions.<XtendField>lastOrNull(Iterables.<XtendField>filter(ownerType.getMembers(), XtendField.class));
     if ((lastDefinedField == null)) {
       return this.before(IterableExtensions.<XtendMember>head(ownerType.getMembers()));
     } else {
@@ -59,13 +59,13 @@ public class InsertionOffsets {
       if (_isEmpty) {
         return this.inEmpty(ownerType);
       } else {
-        return this.after(IterableExtensions.<XtendMember>last(ownerType.getMembers()));
+        return this.after(IterableExtensions.<XtendMember>lastOrNull(ownerType.getMembers()));
       }
     }
   }
 
   public int getNewConstructorInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
-    final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(Iterables.<XtendConstructor>filter(ownerType.getMembers(), XtendConstructor.class));
+    final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>lastOrNull(Iterables.<XtendConstructor>filter(ownerType.getMembers(), XtendConstructor.class));
     if ((lastDefinedConstructor == null)) {
       return this.getNewFieldInsertOffset(call, ownerType);
     } else {
@@ -92,7 +92,7 @@ public class InsertionOffsets {
       final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerType);
       final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
         String _text = it.getText();
-        return Boolean.valueOf(Objects.equal(_text, "{"));
+        return Boolean.valueOf(Objects.equals(_text, "{"));
       };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(classNode.getLeafNodes(), _function);
       int _xifexpression = (int) 0;

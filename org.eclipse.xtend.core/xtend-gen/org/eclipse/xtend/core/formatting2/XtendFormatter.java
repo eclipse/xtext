@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.formatting2;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -120,8 +120,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     for (final XtendTypeDeclaration clazz : _xtendTypes) {
       {
         format.<XtendTypeDeclaration>format(clazz);
-        XtendTypeDeclaration _last = IterableExtensions.<XtendTypeDeclaration>last(xtendFile.getXtendTypes());
-        boolean _notEquals = (!Objects.equal(clazz, _last));
+        XtendTypeDeclaration _lastOrNull = IterableExtensions.<XtendTypeDeclaration>lastOrNull(xtendFile.getXtendTypes());
+        boolean _notEquals = (!Objects.equals(clazz, _lastOrNull));
         if (_notEquals) {
           format.<XtendTypeDeclaration>append(clazz, XtendFormatterPreferenceKeys.blankLinesBetweenClasses);
         }
@@ -663,18 +663,18 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   @Override
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
-    XExpression _last = IterableExtensions.<XExpression>last(params);
-    boolean _tripleNotEquals = (_last != null);
+    XExpression _lastOrNull = IterableExtensions.<XExpression>lastOrNull(params);
+    boolean _tripleNotEquals = (_lastOrNull != null);
     if (_tripleNotEquals) {
       XClosure _xblockexpression = null;
       {
-        final EObject grammarElement = this.grammarElement(IterableExtensions.<XExpression>last(params));
+        final EObject grammarElement = this.grammarElement(IterableExtensions.<XExpression>lastOrNull(params));
         XClosure _xifexpression_1 = null;
-        if (((Objects.equal(grammarElement, this._xtendGrammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()) || 
-          Objects.equal(grammarElement, this._xtendGrammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0())) || 
-          Objects.equal(grammarElement, this._xtendGrammarAccess.getXbaseConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()))) {
-          XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-          _xifexpression_1 = ((XClosure) _last_1);
+        if (((Objects.equals(grammarElement, this._xtendGrammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()) || 
+          Objects.equals(grammarElement, this._xtendGrammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0())) || 
+          Objects.equals(grammarElement, this._xtendGrammarAccess.getXbaseConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()))) {
+          XExpression _lastOrNull_1 = IterableExtensions.<XExpression>lastOrNull(params);
+          _xifexpression_1 = ((XClosure) _lastOrNull_1);
         }
         _xblockexpression = _xifexpression_1;
       }

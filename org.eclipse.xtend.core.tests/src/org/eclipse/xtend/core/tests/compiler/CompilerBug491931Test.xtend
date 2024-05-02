@@ -119,12 +119,12 @@ class CompilerBug491931Test extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-			import com.google.common.base.Objects;
+			import java.util.Objects;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean foo(final CharSequence obj) {
-			    return (!((obj.subSequence(1, 1) instanceof String) && (!Objects.equal(obj, null))));
+			    return (!((obj.subSequence(1, 1) instanceof String) && (!Objects.equals(obj, null))));
 			  }
 			}
 		''')

@@ -126,7 +126,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
 						info.selectionLength = "value".length();
 						return info;
 					}
-					JvmTypeReference parameterType = IterableExtensions.<JvmFormalParameter>last(parameters)
+					JvmTypeReference parameterType = IterableExtensions.<JvmFormalParameter>lastOrNull(parameters)
 							.getParameterType();
 					LightweightTypeReference light = getTypeConverter(contentAssistContext.getResource())
 							.toLightweightReference(parameterType);

@@ -98,7 +98,7 @@ public class XtextLinker extends Linker {
 	}
 
 	@Override
-	protected IDiagnosticProducer createDiagnosticProducer(final IDiagnosticConsumer consumer) {
+	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {
 		return new AbstractDiagnosticProducerDecorator(super.createDiagnosticProducer(consumer)) {
 			private boolean filter = false;
 

@@ -84,7 +84,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 						format += open.append[newLine; increaseIndentation]
 					else if (comma !== null)
 						format += comma.append[newLine]
-					if (elem == elements.last)
+					if (elem == elements.lastOrNull)
 						format += elem.nodeForEObject.append[newLine; decreaseIndentation]
 					elem.format(format)
 					comma = elem.nodeForEObject.immediatelyFollowingKeyword(",")
@@ -111,7 +111,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				format += comma.prepend[noSpace]
 			}
 			if (elements.size > 0) {
-				val last = elements.last.nodeForEObject
+				val last = elements.lastOrNull.nodeForEObject
 				format += last.append[noSpace]
 				if (indented)
 					format += last.append[decreaseIndentation]
@@ -207,7 +207,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			for (n : leafs)
 				if (n.grammarElement instanceof Keyword && n.text == "::") {
 					document += n.prepend[noSpace]
-					if (n != leafs.last)
+					if (n != leafs.lastOrNull)
 						document += n.append[noSpace]
 				}
 		}
@@ -267,7 +267,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 						indented = true
 					}
 				}
-				if (arg == explicitParams.last) {
+				if (arg == explicitParams.lastOrNull) {
 					format += arg.nodeForEObject.append[noSpace]
 				}
 				arg.format(format)
@@ -275,7 +275,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				format += node.prepend[noSpace]
 			}
 		if (indented)
-			format += explicitParams.last.nodeForEObject.append[decreaseIndentation]
+			format += explicitParams.lastOrNull.nodeForEObject.append[decreaseIndentation]
 		if (builder !== null) {
 			format += builder.nodeForEObject.prepend [
 				if (builder.isMultilineLambda)
@@ -288,13 +288,13 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	}
 
 	def protected XClosure builder(List<XExpression> params) {
-		if (params.last !== null){
-			val grammarElement = (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement
+		if (params.lastOrNull !== null){
+			val grammarElement = (params.lastOrNull.nodeForEObject as ICompositeNode).firstChild.grammarElement
 			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || 
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
 				grammarElement == XConstructorCallAccess.argumentsXClosureParserRuleCall_5_0
 			)
-				params.last as XClosure
+				params.lastOrNull as XClosure
 		}
 	}
 
@@ -317,7 +317,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 					format += head.prepend[newLine; increaseIndentation]
 				} else if (node !== null)
 					format += node.append[newLine]
-				if (arg == explicitParams.last)
+				if (arg == explicitParams.lastOrNull)
 					format += arg.nodeForEObject.append[newLine; decreaseIndentation]
 				arg.format(format)
 				node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
@@ -509,7 +509,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			}
 		}
 		if (indented)
-			format += calls.last.nodeForEObject.append[decreaseIndentation]
+			format += calls.lastOrNull.nodeForEObject.append[decreaseIndentation]
 	}
 
 	def protected AbstractRule binaryOperationPrecedence(EObject op) {
@@ -556,7 +556,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			format(call.rightOperand, format)
 		}
 		if (indented)
-			format += calls.last.nodeForEObject.append[decreaseIndentation]
+			format += calls.lastOrNull.nodeForEObject.append[decreaseIndentation]
 	}
 	
 	def protected dispatch void format(XSynchronizedExpression expr, FormattableDocument format) {
@@ -740,7 +740,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				}
 				for (child : expr.expressions) {
 					child.format(format)
-					if (child != expr.expressions.last || close !== null) {
+					if (child != expr.expressions.lastOrNull || close !== null) {
 						val childNode = child.nodeForEObject
 						val sem = childNode.immediatelyFollowingKeyword(";")
 						if (sem !== null) {
@@ -802,7 +802,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		expr.expression.format(format)
 		for (cc : expr.catchClauses) {
 			cc.format(format)
-			if (cc != expr.catchClauses.last || expr.finallyExpression !== null) {
+			if (cc != expr.catchClauses.lastOrNull || expr.finallyExpression !== null) {
 				if (cc.expression instanceof XBlockExpression)
 					format += cc.nodeForEObject.append[cfg(bracesInNewLine)]
 				else
@@ -879,7 +879,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			format += open.append[increaseIndentation]
 			for (c : expr.cases) {
 				format += c.then.nodeForEObject.prepend[oneSpace]
-				if (c != expr.cases.last)
+				if (c != expr.cases.lastOrNull)
 					format += c.nodeForEObject.append[newLine]
 			}
 			if(expr.^default !== null) {
@@ -897,7 +897,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				val cnode = c.then.nodeForEObject?:c.nodeForFeature(XCASE_PART__FALL_THROUGH)
 				if (c.then instanceof XBlockExpression) {
 					format += cnode.prepend[cfg(bracesInNewLine)]
-					if (expr.^default !== null || c != expr.cases.last)
+					if (expr.^default !== null || c != expr.cases.lastOrNull)
 						format += cnode.append[newLine]
 					else
 						format += cnode.append[newLine; decreaseIndentation]
@@ -907,7 +907,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 					} else {
 						format += cnode.prepend[newLine; increaseIndentation]
 					}
-					if (expr.^default !== null || c != expr.cases.last)
+					if (expr.^default !== null || c != expr.cases.lastOrNull)
 						format += cnode.append[newLine; decreaseIndentation]
 					else
 						format += cnode.append[newLine; decreaseIndentationChange = -2]
@@ -983,7 +983,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			val node = c.nodeForEObject
 			val semicolon = node.immediatelyFollowingKeyword(";")
 			format += semicolon.prepend[noSpace]
-			if (c != children.last)
+			if (c != children.lastOrNull)
 				format += (semicolon ?: node).append[newLine]
 		}
 		format += close.prepend[newLine; decreaseIndentation]
@@ -1028,7 +1028,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			}
 		}
 		if (indented)
-			format += children.last.nodeForEObject.append[decreaseIndentation]
+			format += children.lastOrNull.nodeForEObject.append[decreaseIndentation]
 		format += close.prepend[noSpace]
 	}
 

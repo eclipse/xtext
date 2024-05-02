@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
@@ -200,7 +200,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     if ((obj instanceof TypeReferenceImpl)) {
       String _identifier = this.getDelegate().getIdentifier();
       String _identifier_1 = ((TypeReferenceImpl)obj).getDelegate().getIdentifier();
-      return Objects.equal(_identifier, _identifier_1);
+      return Objects.equals(_identifier, _identifier_1);
     }
     return false;
   }

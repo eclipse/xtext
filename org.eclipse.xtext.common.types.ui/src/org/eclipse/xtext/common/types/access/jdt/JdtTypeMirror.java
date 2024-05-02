@@ -11,9 +11,12 @@ package org.eclipse.xtext.common.types.access.jdt;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.IMirrorOptionsAware;
@@ -78,6 +81,16 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 			throw e;
 		}
 		this.typeResource = typeResource;
+	}
+	
+	@Override
+	public URI getLocationURI(Resource resource) {
+		IPath path = mirroredType.getPath();
+		if (mirroredType.getResource() != null) {
+			return URI.createPlatformResourceURI(path.toString(), true);
+		} else {
+			return URI.createFileURI(path.toString());
+		}
 	}
 
 	@Override

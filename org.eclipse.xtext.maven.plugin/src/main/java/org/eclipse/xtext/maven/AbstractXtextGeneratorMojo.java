@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -159,6 +160,25 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	 */
 	@Parameter(defaultValue = "false")
 	private boolean includePluginDependencies;
+	
+	/**
+	 * Location to which the class-path configuration shall be written. The file format is internal
+	 * to the {@link StandaloneBuilder}.
+	 * @see #writeClassPathConfigurationLocation
+	 */
+	@Parameter(defaultValue = "${project.build.directory}/xtext.classpath")
+	private String classpathConfigurationLocation;
+	
+	/**
+	 * Allows to write the class-path configuration to a file. The file format is internal
+	 * to the {@link StandaloneBuilder}.
+	 * @see #classpathConfigurationLocation
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean writeClasspathConfiguration = false;
+	
+	@Parameter( defaultValue = "${mojoExecution}", readonly = true )
+	private MojoExecution mojoExecution;
 
 	/*
 	 * (non-Javadoc)
@@ -198,8 +218,12 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 		builder.setDebugLog(getLog().isDebugEnabled());
 		builder.setIncrementalBuild(incrementalXtextBuild);
 		builder.setWriteStorageResources(writeStorageResources);
-		if (clusteringConfig != null)
+		if (writeClasspathConfiguration) {
+			builder.setClasspathConfigurationLocation(classpathConfigurationLocation, mojoExecution.getGoal(), getClassOutputDirectory());
+		}
+		if (clusteringConfig != null) {
 			builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
+		}
 		configureCompiler(builder.getCompiler());
 		logState();
 		boolean errorDetected = !builder.launch();
@@ -208,6 +232,8 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 		}
 	}
 
+	protected abstract String getClassOutputDirectory();
+	
 	protected abstract List<String> getSourceRoots();
 
 	private void configureCompiler(IJavaCompiler compiler) {

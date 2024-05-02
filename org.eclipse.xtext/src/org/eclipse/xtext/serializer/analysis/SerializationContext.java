@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.xtext.ConditionEvaluator;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -253,13 +253,13 @@ public abstract class SerializationContext implements ISerializationContext {
 	}
 
 	private boolean equalsInternal(ISerializationContext other) {
-		if (!Objects.equal(getParserRule(), other.getParserRule()))
+		if (!Objects.equals(getParserRule(), other.getParserRule()))
 			return false;
-		if (!Objects.equal(getAssignedAction(), other.getAssignedAction()))
+		if (!Objects.equals(getAssignedAction(), other.getAssignedAction()))
 			return false;
-		if (!Objects.equal(getEnabledBooleanParameters(), other.getEnabledBooleanParameters()))
+		if (!Objects.equals(getEnabledBooleanParameters(), other.getEnabledBooleanParameters()))
 			return false;
-		if (!Objects.equal(getType(), other.getType()))
+		if (!Objects.equals(getType(), other.getType()))
 			return false;
 		return true;
 	}

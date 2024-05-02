@@ -208,4 +208,25 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 			List<String> grammarIdToURIMap) {
 		fillGrammarElementToIdMap(0, grammarElementToIdMap, grammarIdToURIMap);
 	}
+	
+	@Override
+	protected void doWriteContent(NodeModelOutput out) throws IOException {
+		super.doWriteContent(out);
+		out.writeContent(completeContent);
+		out.writeCompressedInt(lineBreakOffsets.length);
+		for(int offset: lineBreakOffsets) {
+			out.writeCompressedInt(offset);	
+		}
+	}
+	
+	@Override
+	protected void doReadContent(NodeModelInput in) throws IOException {
+		super.doReadContent(in);
+		completeContent = in.readContent();
+		int[] lineBreakOffsets = new int[in.readCompressedInt()];
+		for(int i = 0; i < lineBreakOffsets.length; i++) {
+			lineBreakOffsets[i] = in.readCompressedInt();
+		}
+		this.lineBreakOffsets = lineBreakOffsets;
+	}
 }

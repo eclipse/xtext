@@ -15,13 +15,13 @@ import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.Channels;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.eclipse.lsp4j.jsonrpc.Launcher;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 
-import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -119,7 +119,7 @@ public class SocketServerLauncher {
 
 	protected String getValue(String[] args, String argName) {
 		for (int i = 0; (i < (args.length - 1)); i++) {
-			if (Objects.equal(args[i], argName)) {
+			if (Objects.equals(args[i], argName)) {
 				return args[i + 1];
 			}
 		}

@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -179,7 +179,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     for (final T type : typeDeclarations) {
       {
         final String name = qualifiedNameProvider.apply(type);
-        boolean _equals = Objects.equal(qualifiedName, name);
+        boolean _equals = Objects.equals(qualifiedName, name);
         if (_equals) {
           return type;
         }
@@ -222,7 +222,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       Resource _eResource = it.getEObjectOrProxy().eResource();
       Resource _eResource_1 = this.compilationUnit.getXtendFile().eResource();
-      return Boolean.valueOf((!Objects.equal(_eResource, _eResource_1)));
+      return Boolean.valueOf((!Objects.equals(_eResource, _eResource_1)));
     };
     return this.findTypeOnScope(typeName, _function);
   }

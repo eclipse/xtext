@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -34,6 +34,8 @@ import com.google.inject.Singleton;
  * <p>Clients, who extend Xbase should inherit from this value converter service.</p>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - remove Windows EOLs from string literals,
+ * https://github.com/eclipse/xtext/issues/2293
  */
 @Singleton
 public class XbaseValueConverterService extends DefaultTerminalConverters {
@@ -251,4 +253,5 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 			return super.toValue(withoutUnderscore, node);
 		}
 	}
+
 }

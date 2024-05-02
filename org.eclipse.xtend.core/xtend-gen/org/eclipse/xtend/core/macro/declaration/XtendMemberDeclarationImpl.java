@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -68,7 +68,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
       if (_annotationType!=null) {
         _identifier=_annotationType.getIdentifier();
       }
-      return Boolean.valueOf(Objects.equal(_name, _identifier));
+      return Boolean.valueOf(Objects.equals(_name, _identifier));
     };
     return IterableExtensions.<XAnnotation>exists(this.getDelegate().getAnnotations(), _function);
   }

@@ -8,8 +8,8 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.io.Serializable;
+import java.util.Objects;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -47,14 +47,14 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
       final Function1<TypeReference, Boolean> _function_1 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
         Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
-        return Boolean.valueOf(Objects.equal(_type, _type_1));
+        return Boolean.valueOf(Objects.equals(_type, _type_1));
       };
       Assert.assertNotNull(IterableExtensions.findFirst(classPA.getImplementedInterfaces(), _function_1));
       final MutableClassDeclaration classGA = ctx.findClass("GA");
       final Function1<TypeReference, Boolean> _function_2 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
         Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
-        return Boolean.valueOf(Objects.equal(_type, _type_1));
+        return Boolean.valueOf(Objects.equals(_type, _type_1));
       };
       Assert.assertNotNull(IterableExtensions.findFirst(classGA.getImplementedInterfaces(), _function_2));
     };
@@ -86,14 +86,14 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
       final Function1<TypeReference, Boolean> _function_1 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
         Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
-        return Boolean.valueOf(Objects.equal(_type, _type_1));
+        return Boolean.valueOf(Objects.equals(_type, _type_1));
       };
       Assert.assertNotNull(IterableExtensions.findFirst(classPA.getImplementedInterfaces(), _function_1));
       final MutableClassDeclaration classGA = ctx.findClass("my.pack.GA");
       final Function1<TypeReference, Boolean> _function_2 = (TypeReference it_1) -> {
         Type _type = it_1.getType();
         Type _type_1 = ctx.newTypeReference(Serializable.class).getType();
-        return Boolean.valueOf(Objects.equal(_type, _type_1));
+        return Boolean.valueOf(Objects.equals(_type, _type_1));
       };
       Assert.assertNotNull(IterableExtensions.findFirst(classGA.getImplementedInterfaces(), _function_2));
     };
