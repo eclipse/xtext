@@ -208,4 +208,36 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 		});
 	}
 
+	@Test
+	public void testAssertNoErrorsWithErrors() throws Exception {
+		String source = "{var int i = true; }";
+		compilationTestHelper.compile(source, it -> {
+			var thrown = assertThrows(AssertionError.class, () -> it.assertNoErrors());
+			assertTrue(thrown.getMessage(),
+					thrown.getMessage().contains("cannot convert from boolean to int"));
+		});
+	}
+
+	@Test
+	public void testAssertNoErrors() throws Exception {
+		String source = "{ var int i = 0; null }";
+		compilationTestHelper.compile(source, it -> it.assertNoErrors());
+	}
+
+	@Test
+	public void testAssertNoIssuesWithWarnings() throws Exception {
+		String source = "{var int i = 0; null }";
+		compilationTestHelper.compile(source, it -> {
+			var thrown = assertThrows(AssertionError.class, () -> it.assertNoIssues());
+			assertTrue(thrown.getMessage(),
+					thrown.getMessage().contains("is not used"));
+		});
+	}
+
+	@Test
+	public void testAssertNoIssues() throws Exception {
+		String source = "{ \"a string\" }";
+		compilationTestHelper.compile(source, it -> it.assertNoIssues());
+	}
+
 }
