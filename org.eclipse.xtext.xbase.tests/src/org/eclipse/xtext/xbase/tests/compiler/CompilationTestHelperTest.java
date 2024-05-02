@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
-import org.eclipse.xtext.xbase.testing.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.junit.Assert;
@@ -53,7 +52,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 				"		default: \"bar\"\n" +
 				"	}\n" +
 				"}\n";
-		compilationTestHelper.compile(source, (CompilationTestHelper.Result it) -> {
+		compilationTestHelper.compile(source, it -> {
 			String expectation =
 					"import java.util.Objects;\n" +
 					"\n" +
@@ -93,7 +92,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 				"		default: \"bar\"\n" +
 				"	}\n" +
 				"}\n";
-		compilationTestHelper.compile(source, (CompilationTestHelper.Result it) -> {
+		compilationTestHelper.compile(source, it -> {
 			String expectation =
 					"@SuppressWarnings(\"all\")\n" +
 					"public class Test {\n" +
@@ -131,7 +130,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 				"{\n" +
 				"	val f = [ int i | i + 1 ]\n" +
 				"}\n";
-		compilationTestHelper.compile(source, (CompilationTestHelper.Result it) -> {
+		compilationTestHelper.compile(source, it -> {
 			String expectation =
 					"import org.eclipse.xtext.xbase.lib.Functions.Function1;\n" +
 					"\n" +
@@ -160,7 +159,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 				"{\n" +
 				"	val f = [ int i | i + 1 ]\n" +
 				"}\n";
-		compilationTestHelper.compile(source, (CompilationTestHelper.Result it) -> {
+		compilationTestHelper.compile(source, it -> {
 			String expectation =
 					"import org.eclipse.xtext.xbase.lib.Functions.Function1;\n" +
 					"\n" +
@@ -192,7 +191,7 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 		GeneratorConfig generatorConfig = new GeneratorConfig();
 		generatorConfig.setGenerateSyntheticSuppressWarnings(false);
 		generatorConfigProvider.install(resourceSet, generatorConfig);
-		compilationTestHelper.compile(resourceSet, (Result it) -> {
+		compilationTestHelper.compile(resourceSet, it -> {
 			String expectation =
 					"import org.eclipse.xtext.xbase.lib.Functions.Function1;\n" +
 					"\n" +
@@ -208,4 +207,5 @@ public class CompilationTestHelperTest extends AbstractJvmModelTest {
 			Assert.assertEquals(expectation, Strings.toUnixLineSeparator(it.getSingleGeneratedCode()));
 		});
 	}
+
 }
