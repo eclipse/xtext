@@ -22,7 +22,7 @@ import com.google.common.collect.AbstractIterator
 class Solution_003 extends AbstractIterator<Long> {
 
 	def static void main(String[] args) {
-		println(new Solution_003().last)
+		println(new Solution_003().lastOrNull)
 	}
 
 	long compound = 600851475143L

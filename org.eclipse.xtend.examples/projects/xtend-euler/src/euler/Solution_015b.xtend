@@ -28,6 +28,6 @@ class Solution_015b {
 				set(col, get(col - 1) + get(col))
 			]
 		]
-		println(last)
+		println(lastOrNull)
 	}
 }
