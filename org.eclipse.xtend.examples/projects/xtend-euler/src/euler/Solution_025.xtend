@@ -43,7 +43,7 @@ import com.google.common.collect.AbstractIterator
 class Solution_025 extends AbstractIterator<Integer> {
 
 	def static void main(String[] args) {
-		println(new Solution_025().last)
+		println(new Solution_025().lastOrNull)
 	}
 
 	BigInteger max = 10bi.pow(999)

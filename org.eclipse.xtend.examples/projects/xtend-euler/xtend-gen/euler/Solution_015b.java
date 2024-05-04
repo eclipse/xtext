@@ -43,6 +43,6 @@ public class Solution_015b {
       new IntegerRange(1, gridSize).forEach(_function_2);
     };
     new IntegerRange(1, gridSize).forEach(_function_1);
-    InputOutput.<Long>println(IterableExtensions.<Long>last(it));
+    InputOutput.<Long>println(IterableExtensions.<Long>lastOrNull(it));
   }
 }

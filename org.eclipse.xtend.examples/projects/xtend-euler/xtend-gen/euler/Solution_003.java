@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 @SuppressWarnings("all")
 public class Solution_003 extends AbstractIterator<Long> {
   public static void main(final String[] args) {
-    InputOutput.<Long>println(IteratorExtensions.<Long>last(new Solution_003()));
+    InputOutput.<Long>println(IteratorExtensions.<Long>lastOrNull(new Solution_003()));
   }
 
   private long compound = 600851475143L;
