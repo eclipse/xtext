@@ -26,6 +26,11 @@
       <value>https://www.eclipse.org/Xtext/</value>
     </detail>
   </annotation>
+  <annotation
+      source="http://www.eclipse.org/oomph/setup/ConfigurationReference">
+    <reference
+        href="XtextConfiguration.setup#/"/>
+  </annotation>
   <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-17"
