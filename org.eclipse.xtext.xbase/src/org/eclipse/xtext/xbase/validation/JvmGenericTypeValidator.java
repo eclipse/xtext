@@ -388,11 +388,11 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	protected void checkDuplicateAndOverriddenFunctions(EObject sourceType, JvmGenericType type) {
 		JavaVersion targetVersion = getGeneratorConfig(sourceType).getJavaSourceVersion();
 		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(type, targetVersion);
-		
+
 		Set<EObject> flaggedOperations = new HashSet<>();
-		doCheckDuplicateExecutables(type, resolvedFeatures, flaggedOperations);
-		doCheckOverriddenMethods(sourceType, type, resolvedFeatures, flaggedOperations);
-		doCheckFunctionOverrides(resolvedFeatures, flaggedOperations);
+		checkDuplicateExecutables(type, resolvedFeatures, flaggedOperations);
+		checkOverriddenMethods(sourceType, type, resolvedFeatures, flaggedOperations);
+		checkFunctionOverrides(resolvedFeatures, flaggedOperations);
 	}
 
 	private <T1 extends JvmMember, T2 extends T1> Map<String, List<T2>> groupMembersByName(
@@ -545,13 +545,13 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		return object.eClass().getEStructuralFeature("name");
 	}
 
-	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+	protected void checkDuplicateExecutables(JvmGenericType inferredType,	final ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> declaredOperations = resolvedFeatures.getDeclaredOperations();
-		doCheckDuplicateExecutables(inferredType, declaredOperations,
+		checkDuplicateExecutables(inferredType, declaredOperations,
 			erasedSignature -> resolvedFeatures.getDeclaredOperations(erasedSignature),
 			flaggedOperations);
 		final List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
-		doCheckDuplicateExecutables(inferredType, declaredConstructors, erasedSignature -> {
+		checkDuplicateExecutables(inferredType, declaredConstructors, erasedSignature -> {
 			if (declaredConstructors.size() == 1) {
 				if (erasedSignature.equals(declaredConstructors.get(0).getResolvedErasureSignature())) {
 					return declaredConstructors;
@@ -568,7 +568,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}, flaggedOperations);
 	}
 
-	protected <Executable extends IResolvedExecutable> void doCheckDuplicateExecutables(JvmGenericType inferredType,
+	protected <Executable extends IResolvedExecutable> void checkDuplicateExecutables(JvmGenericType inferredType,
 			List<Executable> declaredOperations, Function<String, List<Executable>> bySignature, Set<EObject> flaggedOperations) {
 		Set<Executable> processed = new HashSet<>();
 		for(Executable declaredExecutable: declaredOperations) {
@@ -609,7 +609,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected void doCheckOverriddenMethods(EObject sourceType, JvmGenericType inferredType, ResolvedFeatures resolvedFeatures,
+	protected void checkOverriddenMethods(EObject sourceType, JvmGenericType inferredType, ResolvedFeatures resolvedFeatures,
 			Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
@@ -766,9 +766,9 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			errorMsg.append("The class ").append(name);	
 			errorMsg.append(" must be defined abstract because it does not implement ");
 		}
-			if (needsNewLine) {
-				errorMsg.append("its inherited abstract methods ");
-			}
+		if (needsNewLine) {
+			errorMsg.append("its inherited abstract methods ");
+		}
 		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
 			operation = operationsMissingImplementation.get(i);
@@ -794,23 +794,23 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected void doCheckFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+	protected void checkFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		for(IResolvedOperation operation: resolvedFeatures.getDeclaredOperations()) {
-			doCheckFunctionOverrides(operation, flaggedOperations);
+			checkFunctionOverrides(operation, flaggedOperations);
 		}
 	}
 
-	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
+	protected void checkFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
 		EObject sourceElement = findPrimarySourceElement(operation);
 		if (sourceElement != null) {
 			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
 			if (!allInherited.isEmpty() && flaggedOperations.add(sourceElement)) {
-				doCheckFunctionOverrides(sourceElement, operation, allInherited);
+				checkFunctionOverrides(sourceElement, operation, allInherited);
 			}
 		}
 	}
 
-	protected void doCheckFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
+	protected void checkFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
 			List<IResolvedOperation> allInherited) {
 		List<IResolvedOperation> exceptionMismatch = null;
 		for(IResolvedOperation inherited: allInherited) {

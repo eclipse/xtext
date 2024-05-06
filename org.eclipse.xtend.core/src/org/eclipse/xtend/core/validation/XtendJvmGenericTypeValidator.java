@@ -80,8 +80,8 @@ public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
 	}
 
 	@Override
-	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
-		super.doCheckFunctionOverrides(operation, flaggedOperations);
+	protected void checkFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
+		super.checkFunctionOverrides(operation, flaggedOperations);
 		EObject sourceElement = findPrimarySourceElement(operation);
 		if (sourceElement != null) {
 			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
@@ -104,9 +104,9 @@ public class XtendJvmGenericTypeValidator extends JvmGenericTypeValidator {
 	}
 
 	@Override
-	protected void doCheckFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
+	protected void checkFunctionOverrides(EObject sourceElement, IResolvedOperation resolved,
 			List<IResolvedOperation> allInherited) {
-		super.doCheckFunctionOverrides(sourceElement, resolved, allInherited);
+		super.checkFunctionOverrides(sourceElement, resolved, allInherited);
 		boolean overrideProblems = false;
 		for(IResolvedOperation inherited: allInherited) {
 			if (inherited.getOverrideCheckResult().hasProblems()) {
