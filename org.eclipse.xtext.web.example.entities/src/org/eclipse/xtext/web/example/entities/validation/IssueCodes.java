@@ -21,8 +21,4 @@ public interface IssueCodes {
 
 	String MISSING_TYPE = PREFIX + "MissingType";
 
-	String DUPLICATE_PROPERTY = PREFIX + "DuplicateProperty";
-
-	String DUPLICATE_OPERATION = PREFIX + "DuplicateOperation";
-
 }

@@ -8,26 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.entities.validation;
 
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.web.example.entities.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.web.example.entities.domainmodel.Entity;
 import org.eclipse.xtext.web.example.entities.domainmodel.Feature;
-import org.eclipse.xtext.web.example.entities.domainmodel.Operation;
 import org.eclipse.xtext.web.example.entities.domainmodel.PackageDeclaration;
-import org.eclipse.xtext.web.example.entities.domainmodel.Property;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
-import com.google.inject.Inject;
+import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
 
 /**
  * This class contains custom validation rules.
@@ -35,12 +24,8 @@ import com.google.inject.Inject;
  * See
  * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
+@ComposedChecks(validators = JvmGenericTypeValidator.class)
 public class EntitiesValidator extends AbstractEntitiesValidator {
-	@Inject
-	private IJvmModelAssociations jvmModelAssociations;
-
-	@Inject
-	private OverrideHelper overrideHelper;
 
 	@Check
 	public void checkTypeNameStartsWithCapital(Entity entity) {
@@ -68,40 +53,4 @@ public class EntitiesValidator extends AbstractEntitiesValidator {
 		}
 	}
 
-	@Check
-	public void checkPropertyNamesAreUnique(Entity entity) {
-		Multimap<String, Property> name2properties = HashMultimap.create();
-		IterableExtensions
-				.filter(Iterables.filter(entity.getFeatures(), Property.class),
-						(f) -> !StringExtensions.isNullOrEmpty(f.getName()))
-				.forEach((p) -> name2properties.put(p.getName(), p));
-		name2properties.asMap().values().forEach((properties) -> {
-			if (properties.size() > 1) {
-				properties.forEach((p) -> {
-					error("Duplicate property " + p.getName(), p, DomainmodelPackage.Literals.FEATURE__NAME,
-							IssueCodes.DUPLICATE_PROPERTY);
-				});
-			}
-		});
-	}
-
-	@Check
-	public void checkOperationNamesAreUnique(Entity entity) {
-		JvmGenericType inferredJavaClass = IterableExtensions
-				.head(Iterables.filter(jvmModelAssociations.getJvmElements(entity), JvmGenericType.class));
-		Multimap<String, JvmOperation> signature2Declarations = HashMultimap.create();
-		overrideHelper.getResolvedFeatures(inferredJavaClass).getDeclaredOperations().forEach((it) -> {
-			signature2Declarations.put(it.getResolvedErasureSignature(), it.getDeclaration());
-		});
-		signature2Declarations.asMap().values().forEach((jvmOperations) -> {
-			if (jvmOperations.size() > 1) {
-				Iterables
-						.filter(IterableExtensions.map(jvmOperations,
-								(op) -> jvmModelAssociations.getPrimarySourceElement(op)), Operation.class)
-						.forEach((op) -> {
-							error("Duplicate operation " + op.getName(), op, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION);
-						});
-			}
-		});
-	}
 }
