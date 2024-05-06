@@ -303,8 +303,8 @@ public class ValidationTests {
     DomainModel _parse = this._parseHelper.parse(model);
     final Procedure1<DomainModel> _function = (DomainModel it) -> {
       this.assertNumberOfIssues(it, 2);
-      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.PROPERTY, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY, model.indexOf("p"), 1, "Duplicate property p");
-      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.PROPERTY, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY, model.lastIndexOf("p"), 1, "Duplicate property p");
+      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.PROPERTY, IssueCodes.DUPLICATE_FIELD, model.indexOf("p"), 1, "Duplicate field p");
+      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.PROPERTY, IssueCodes.DUPLICATE_FIELD, model.lastIndexOf("p"), 1, "Duplicate field p");
     };
     ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
   }
@@ -326,8 +326,8 @@ public class ValidationTests {
     DomainModel _parse = this._parseHelper.parse(model);
     final Procedure1<DomainModel> _function = (DomainModel it) -> {
       this.assertNumberOfIssues(it, 2);
-      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.indexOf("foo"), 3, "Duplicate operation foo");
-      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.lastIndexOf("foo"), 3, "Duplicate operation foo");
+      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, IssueCodes.DUPLICATE_METHOD, model.indexOf("foo"), 3, "Duplicate method foo");
+      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, IssueCodes.DUPLICATE_METHOD, model.lastIndexOf("foo"), 3, "Duplicate method foo");
     };
     ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
   }
@@ -428,8 +428,8 @@ public class ValidationTests {
     DomainModel _parse = this._parseHelper.parse(model);
     final Procedure1<DomainModel> _function = (DomainModel it) -> {
       this.assertNumberOfIssues(it, 2);
-      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.indexOf("m"), 1, "Duplicate operation m");
-      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.lastIndexOf("m"), 1, "Duplicate operation m");
+      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, IssueCodes.DUPLICATE_METHOD, model.indexOf("m"), 1, "The method m(List<String>) has the same erasure");
+      this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, IssueCodes.DUPLICATE_METHOD, model.lastIndexOf("m"), 1, "The method m(List<Integer>) has the same erasure");
     };
     ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
   }
