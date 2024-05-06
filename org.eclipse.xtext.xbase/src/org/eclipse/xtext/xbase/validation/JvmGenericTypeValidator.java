@@ -309,7 +309,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 					List<String> issueData = new ArrayList<>();
 					for(JvmConstructor superConstructor:superConstructors) {
 						issueData.add(EcoreUtil.getURI(superConstructor).toString());
-						issueData.add(doGetReadableSignature(type.getSimpleName(), superConstructor.getParameters()));
+						issueData.add(getReadableSignature(type.getSimpleName(), superConstructor.getParameters()));
 					}
 					error("No default constructor in super type " + superType.getSimpleName() + "." +
 							type.getSimpleName() + " must define an explicit constructor.",
@@ -333,21 +333,14 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 		} 
 	}
 
-	protected String doGetReadableSignature(String simpleName, List<JvmFormalParameter> parameters) {
-		return getReadableSignature(simpleName,
-			parameters.stream()
-				.map(JvmFormalParameter::getParameterType)
-				.collect(Collectors.toList()));
-	}
-
-	protected String getReadableSignature(String elementName, List<JvmTypeReference> parameterTypes) {
+	protected String getReadableSignature(String elementName, List<JvmFormalParameter> parameters) {
 		StringBuilder result = new StringBuilder(elementName);
 		result.append('(');
-		for (int i = 0; i < parameterTypes.size(); i++) {
+		for (int i = 0; i < parameters.size(); i++) {
 			if (i != 0) {
 				result.append(", ");
 			}
-			JvmTypeReference parameterType = parameterTypes.get(i);
+			JvmTypeReference parameterType = parameters.get(i).getParameterType();
 			if (parameterType != null)
 				result.append(parameterType.getSimpleName());
 			else
