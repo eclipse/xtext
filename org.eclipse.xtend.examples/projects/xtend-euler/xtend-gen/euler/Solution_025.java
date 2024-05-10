@@ -45,7 +45,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 @SuppressWarnings("all")
 public class Solution_025 extends AbstractIterator<Integer> {
   public static void main(final String[] args) {
-    InputOutput.<Integer>println(IteratorExtensions.<Integer>last(new Solution_025()));
+    InputOutput.<Integer>println(IteratorExtensions.<Integer>lastOrNull(new Solution_025()));
   }
 
   private BigInteger max = BigInteger.TEN.pow(999);
