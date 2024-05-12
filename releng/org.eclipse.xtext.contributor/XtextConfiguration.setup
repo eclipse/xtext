@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    label="Eclipse Xtext">
+  <annotation
+      source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+    <detail
+        key="imageURI">
+      <value>https://projects.eclipse.org/sites/default/files/xtext-logo-dark-300.png</value>
+    </detail>
+    <detail
+        key="badgeLabel">
+      <value>Xtext</value>
+    </detail>
+  </annotation>
+  <installation
+      name="platform.installation"
+      label="Platform Installation">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="installation.id.default"
+        value="xtext"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.target.platform"
+        value="${eclipse.target.platform.latest}"/>
+    <productVersion
+        href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='epp.package.committers']/@versions[name='latest']"/>
+    <description>The Xtext installation provides the latest tools needed to work with the Xtexts's source code.</description>
+  </installation>
+  <workspace
+      name="xtext.workspace"
+      label="Xtext Workspace">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="workspace.id.default"
+        value="xtext-ws"/>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="User Preferences">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/UserPreferences">
+        <detail
+            key="/instance/org.eclipse.oomph.setup.ui/showToolBarContributions">
+          <value>record</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="org.eclipse.oomph.setup.ui">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.oomph.setup.ui/showToolBarContributions"
+            value="true"/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="org.eclipse.ui.ide">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.ui.ide/WORKSPACE_NAME"
+            value="Xtext"/>
+      </setupTask>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.git.authentication.style"
+        defaultValue="anonymous"/>
+    <stream
+        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']/@projects[name='xtext']/@projects[name='complete']/@streams[name='main']"/>
+    <description>The Xtext workspace provides all the source code of the Eclipse Xtext project.</description>
+  </workspace>
+  <description>
+    &lt;p>
+    The Xtext configuration provisions a dedicated development environment for the set projects that comprise the &lt;a href=&quot;https://eclipse.dev/Xtext/&quot;>Eclipse Xtext Project&lt;/a>.
+    &lt;/p>
+    &lt;p>
+    The installation is based on the latest IDE for Committers,
+    the workspace consists of projects from Xtext Git organized into workings sets,
+    the PDE target platform, is based on the latest dependencies,
+    and the API baseline is based on the most recent release.
+    &lt;p>
+    &lt;/p>
+    Please &lt;a href=&quot;https://wiki.eclipse.org/Eclipse_Platform_SDK_Provisioning&quot;>read the analgous tutorial instructions&lt;/a> for more details.
+    &lt;/p>
+  </description>
+</setup:Configuration>
