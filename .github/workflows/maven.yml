@@ -13,8 +13,8 @@ jobs:
   build:
     if: github.event_name != 'pull_request' || github.event.pull_request.base.repo.clone_url != github.event.pull_request.head.repo.clone_url
     strategy:
-      matrix: # 'macos-12' is x86, 'macos-14' is arm64
-        os: ['ubuntu-22.04', 'macos-12', 'macos-14', 'windows-2022']
+      matrix: # 'macos-13' is x86, 'macos-14' is arm64
+        os: ['ubuntu-22.04', 'macos-13', 'macos-14', 'windows-2022']
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
