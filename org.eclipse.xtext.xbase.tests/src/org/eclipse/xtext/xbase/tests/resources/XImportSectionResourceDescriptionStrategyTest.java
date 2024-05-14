@@ -16,6 +16,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangRuntimeModule;
 import org.eclipse.xtext.xbase.testlanguages.tests.XImportSectionTestLangInjectorProvider;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot;
 import org.junit.Assert;
@@ -23,12 +24,24 @@ import org.junit.Test;
 
 import com.google.inject.Inject;
 
-@InjectWith(XImportSectionTestLangInjectorProvider.class)
+@InjectWith(XImportSectionResourceDescriptionStrategyTest.XImportSectionTestLangInjectorProviderCustom.class)
 public class XImportSectionResourceDescriptionStrategyTest extends AbstractXbaseImportedNamesTest {
 	@Inject
 	private ParseHelper<ImportSectionTestLanguageRoot> parseHelper;
 	@Inject
 	private ValidationTestHelper validationHelper;
+
+	public static class XImportSectionTestLangInjectorProviderCustom extends XImportSectionTestLangInjectorProvider {
+		@Override
+		protected XImportSectionTestLangRuntimeModule createRuntimeModule() {
+			// make it work also with Maven/Tycho and OSGI
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+			// to access the testdata.stubs.StubbedList in this bundle
+			// allows for bindClassLoaderToInstance to get the class loader of this bundle
+			return new XImportSectionTestLangRuntimeModule() {
+			};
+		}
+	}
 
 	@Override
 	protected XExpression expression(CharSequence string) throws Exception {
@@ -70,6 +83,6 @@ public class XImportSectionResourceDescriptionStrategyTest extends AbstractXbase
 	protected void addExpectatedImportedNames(Resource resource, List<String> expectation) {
 		super.addExpectatedImportedNames(resource, expectation);
 		expectation.add("my.test." + resource.getURI().trimFileExtension().lastSegment().toLowerCase());
-		expectation.add("my.test.java$util$arraylist");
+		expectation.add("my.test.testdata$stubs$stubbedlist");
 	}
 }

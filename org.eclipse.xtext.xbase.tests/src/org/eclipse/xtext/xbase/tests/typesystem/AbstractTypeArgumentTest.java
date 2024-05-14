@@ -1892,106 +1892,106 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testBounds_07() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<Integer> list = null list.last }", "Integer"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Integer> list = null list.last }", "Integer"));
 	}
 
 	@Test
 	public void testBounds_08() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? extends Integer> list = null list.last }", "? extends Integer"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Integer> list = null list.last }", "? extends Integer"));
 	}
 
 	@Test
 	public void testBounds_09() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? super Integer> list = null list.last }", "? super Integer"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? super Integer> list = null list.last }", "? super Integer"));
 	}
 
 	@Test
 	public void testBounds_10() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<Iterable<Integer>> list = null list.last }", "Iterable<Integer>"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Iterable<Integer>> list = null list.last }", "Iterable<Integer>"));
 	}
 
 	@Test
 	public void testBounds_11() throws Exception {
 		done(and(
-				bindTypeArgumentsTo("{ var java.util.List<Iterable<Integer>> list = null list.last.last }", "Iterable<Integer>"),
+				bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Iterable<Integer>> list = null list.last.last }", "Iterable<Integer>"),
 				"Integer"));
 	}
 
 	@Test
 	public void testBounds_12() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? extends Iterable<Integer>> list = null list.last }",
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Iterable<Integer>> list = null list.last }",
 				"? extends Iterable<Integer>"));
 	}
 
 	@Test
 	public void testBounds_13() throws Exception {
-		done(and(bindTypeArgumentsTo("{ var java.util.List<? extends Iterable<Integer>> list = null list.last.last }",
+		done(and(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Iterable<Integer>> list = null list.last.last }",
 				"? extends Iterable<Integer>"), "Integer"));
 	}
 
 	@Test
 	public void testBounds_14() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<Iterable<? extends Integer>> list = null list.last }",
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Iterable<? extends Integer>> list = null list.last }",
 				"Iterable<? extends Integer>"));
 	}
 
 	@Test
 	public void testBounds_15() throws Exception {
-		done(and(bindTypeArgumentsTo("{ var java.util.List<Iterable<? extends Integer>> list = null list.last.last }",
+		done(and(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Iterable<? extends Integer>> list = null list.last.last }",
 				"Iterable<? extends Integer>"), "? extends Integer"));
 	}
 
 	@Test
 	public void testBounds_16() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? extends Iterable<? extends Integer>> list = null list.last }",
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Iterable<? extends Integer>> list = null list.last }",
 				"? extends Iterable<? extends Integer>"));
 	}
 
 	@Test
 	public void testBounds_17() throws Exception {
 		done(this
-				.and(bindTypeArgumentsTo("{ var java.util.List<? extends Iterable<? extends Integer>> list = null list.last.last }",
+				.and(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Iterable<? extends Integer>> list = null list.last.last }",
 						"? extends Iterable<? extends Integer>"), "? extends Integer"));
 	}
 
 	@Test
 	public void testBounds_18() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<Iterable<? super Integer>> list = null list.last }",
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Iterable<? super Integer>> list = null list.last }",
 				"Iterable<? super Integer>"));
 	}
 
 	@Test
 	public void testBounds_19() throws Exception {
-		done(and(bindTypeArgumentsTo("{ var java.util.List<Iterable<? super Integer>> list = null list.last.last }",
+		done(and(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Iterable<? super Integer>> list = null list.last.last }",
 				"Iterable<? super Integer>"), "? super Integer"));
 	}
 
 	@Test
 	public void testBounds_20() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last }",
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Iterable<? super Integer>> list = null list.last }",
 				"? extends Iterable<? super Integer>"));
 	}
 
 	@Test
 	public void testBounds_21() throws Exception {
 		done(
-				and(bindTypeArgumentsTo("{ var java.util.List<? extends Iterable<? super Integer>> list = null list.last.last }",
+				and(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Iterable<? super Integer>> list = null list.last.last }",
 						"? extends Iterable<? super Integer>"), "? super Integer"));
 	}
 
 	@Test
 	public void testImplicitReceiverBounds_07() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<Integer> it = null last }", "Integer"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<Integer> it = null last }", "Integer"));
 	}
 
 	@Test
 	public void testImplicitReceiverBounds_08() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? extends Integer> it = null last }", "? extends Integer"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? extends Integer> it = null last }", "? extends Integer"));
 	}
 
 	@Test
 	public void testImplicitReceiverBounds_09() throws Exception {
-		done(bindTypeArgumentsTo("{ var java.util.List<? super Integer> it = null last }", "? super Integer"));
+		done(bindTypeArgumentsTo("{ var testdata.stubs.StubbedList<? super Integer> it = null last }", "? super Integer"));
 	}
 
 	@Test

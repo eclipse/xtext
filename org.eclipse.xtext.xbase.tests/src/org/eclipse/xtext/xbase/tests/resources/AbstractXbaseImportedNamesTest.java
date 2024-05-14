@@ -30,19 +30,19 @@ public abstract class AbstractXbaseImportedNamesTest extends AbstractXbaseTestCa
 	
 	@Test
 	public void testImportedNamesForConstructors() throws Exception {
-		XExpression expression = expression("new java.util.ArrayList");
+		XExpression expression = expression("new testdata.stubs.StubbedList");
 		assertImportedNames(expression);
 	}
 
 	@Test
 	public void testImportedNamesForTypesInCasts() throws Exception {
-		XExpression expression = expression("null as java.util.ArrayList");
+		XExpression expression = expression("null as testdata.stubs.StubbedList");
 		assertImportedNames(expression);
 	}
 	
 	@Test
 	public void testImportedNamesForTypesInVars() throws Exception {
-		XExpression expression = expression("{ var java.util.ArrayList x = null }");
+		XExpression expression = expression("{ var testdata.stubs.StubbedList x = null }");
 		assertImportedNames(expression);
 	}
 	
@@ -64,17 +64,11 @@ public abstract class AbstractXbaseImportedNamesTest extends AbstractXbaseTestCa
 	protected void addExpectatedImportedNames(Resource resource, List<String> expectation) {
 		Collections.addAll(expectation, 
 				"java.io.serializable",
-				"java.lang.cloneable",
 				"java.lang.iterable",
-				"java.lang.java$util$arraylist",
+				"java.lang.testdata$stubs$stubbedlist",
 				"java.lang.object",
-				"java.util.abstractcollection",
-				"java.util.abstractlist",
-				"java.util.arraylist",
-				"java.util.collection",
-				"java.util.list",
-				"java.util.randomaccess",
-				"org.eclipse.xtext.xbase.lib.java$util$arraylist");
+				"testdata.stubs.stubbedlist",
+				"org.eclipse.xtext.xbase.lib.testdata$stubs$stubbedlist");
 	}
 	
 }

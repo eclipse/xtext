@@ -34,7 +34,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Test def testAnnotation() {
 		validFile('''
-			@SuppressWarnings("unused")
+			@testdata.stubs.StubbedSuppressWarnings("unused")
 			class MyClass {
 				@com.google.inject.Inject(optional=true) MyClass foo
 			}
@@ -44,10 +44,12 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('MyClass', clazz.qualifiedName)
 			val suppressWarning = clazz.annotations.head
 			val supressWarningsDeclaration = suppressWarning.annotationTypeDeclaration
-			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.qualifiedName)
+			assertEquals('testdata.stubs.StubbedSuppressWarnings', supressWarningsDeclaration.qualifiedName)
 			assertEquals('unused', suppressWarning.getStringArrayValue('value').get(0))
 			
-			assertEquals(2, supressWarningsDeclaration.annotations.size)
+			val annotations = supressWarningsDeclaration.annotations
+			assertEquals(annotations.map[it.annotationTypeDeclaration].toString,
+				2, annotations.size)
 			
 			val valueProperty = supressWarningsDeclaration.declaredMembers.filter(typeof(AnnotationTypeElementDeclaration)).head
 			assertEquals("String[]", valueProperty.type.toString)

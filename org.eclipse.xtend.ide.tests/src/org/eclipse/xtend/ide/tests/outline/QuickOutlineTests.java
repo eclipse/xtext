@@ -82,6 +82,9 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 15;
 		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 16; // wait0
+		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
 		int counter = 0;
 		sub.child(counter++, "baz : Number - Foo").numChildren(0).hasTextRegion(true);
@@ -123,6 +126,9 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 14;
 		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 15; // wait0
+		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
 		int counter = 0;
 		sub.child(counter++, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
@@ -157,6 +163,9 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		int numChildren = 13;
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 12;
+		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 13; // wait0
 		}
 		sub = assertBuilder.child(1, "C - pack.name").numChildren(numChildren);
 		int counter = 0;
@@ -194,6 +203,9 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		int numChildren = 13;
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 12;
+		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 13; // wait0
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
 		AssertBuilder foo = sub.child(0, "foo(Serializable) : void - Foo").numChildren(2).hasTextRegion(true);
@@ -245,6 +257,9 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		int numChildren = 18;
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 17;
+		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 18; // wait0
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
 		int i = 0;
