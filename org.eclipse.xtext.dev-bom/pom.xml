@@ -502,9 +502,21 @@
 			</build>
 		</profile>
 		<profile>
+			<!--
+				To be activated explicitly when using Java 21 to get
+				the latest version of JDT to access Java 21 new features
+				like Java records.
+
+				The profile must be activated through the system property "java-21"
+				either on the command line "-Djava-21", or by creating the file
+				"maven.config" inside the folder ".mvn" at the root of the
+				project, with the content "-Djava-21"
+			-->
 			<id>java-21</id>
 			<activation>
-				<jdk>[21,)</jdk>
+				<property>
+					<name>java-21</name>
+				</property>
 			</activation>
 			<properties>
 				<!-- This version supports Java 21 but requires Java 17;
