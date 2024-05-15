@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.xtext.parser.encoding.EncodingTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.encoding.encodingTest.Model;
 import org.eclipse.xtext.parser.encoding.encodingTest.Word;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.ITextRegion;
 import org.junit.Test;
 

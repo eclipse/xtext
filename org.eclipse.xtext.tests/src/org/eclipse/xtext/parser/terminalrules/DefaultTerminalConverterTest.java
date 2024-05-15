@@ -14,7 +14,7 @@ import java.util.Date;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguageFactory;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

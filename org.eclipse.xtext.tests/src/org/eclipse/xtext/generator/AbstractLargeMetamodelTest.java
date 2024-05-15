@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Ignore;
 import org.junit.Test;
 

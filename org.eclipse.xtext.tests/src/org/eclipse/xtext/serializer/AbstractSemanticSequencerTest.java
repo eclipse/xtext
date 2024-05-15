@@ -16,7 +16,7 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
 import org.eclipse.xtext.testing.serializer.DebugSequenceAcceptor;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

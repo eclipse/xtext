@@ -43,7 +43,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.testing.logging.LoggingTester.LogCapture;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;

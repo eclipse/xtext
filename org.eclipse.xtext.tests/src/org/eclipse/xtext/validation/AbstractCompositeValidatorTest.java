@@ -25,7 +25,7 @@ import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFa
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
 import org.junit.Test;
 

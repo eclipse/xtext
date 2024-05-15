@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.linking.ImportUriTestLanguageRuntimeModule;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.inject.Binder;

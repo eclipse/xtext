@@ -11,7 +11,7 @@ package org.eclipse.xtext.parser.antlr;
 import java.util.Map;
 
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableBiMap;

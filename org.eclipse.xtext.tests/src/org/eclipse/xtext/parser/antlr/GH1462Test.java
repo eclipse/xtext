@@ -25,7 +25,7 @@ import org.eclipse.xtext.parser.antlr.gh1462Test.Rule6;
 import org.eclipse.xtext.parser.antlr.gh1462Test.Rule7;
 import org.eclipse.xtext.parser.antlr.gh1462Test.Rule8;
 import org.eclipse.xtext.parser.antlr.gh1462Test.Rule9;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

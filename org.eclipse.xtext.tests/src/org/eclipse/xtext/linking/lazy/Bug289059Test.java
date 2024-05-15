@@ -10,7 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import org.eclipse.xtext.linking.Bug289059TestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.bug289059Test.Model;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**
