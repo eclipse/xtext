@@ -11,7 +11,7 @@ package org.eclipse.xtext.xtext.ui.ecore2xtext;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

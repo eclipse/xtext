@@ -20,13 +20,14 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.Modules2;
@@ -45,7 +46,7 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XtextContentAssistTest extends AbstractXtextTests {
+public class XtextContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		with(getSetup());

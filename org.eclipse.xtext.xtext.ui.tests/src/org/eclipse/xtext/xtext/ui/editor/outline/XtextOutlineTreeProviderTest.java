@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import java.util.List;
 
-import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;

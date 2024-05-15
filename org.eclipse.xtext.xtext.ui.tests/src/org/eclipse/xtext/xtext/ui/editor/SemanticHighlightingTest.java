@@ -13,7 +13,7 @@ import java.util.Set;
 import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
