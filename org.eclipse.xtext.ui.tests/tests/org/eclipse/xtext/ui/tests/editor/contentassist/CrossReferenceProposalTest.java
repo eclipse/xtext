@@ -36,8 +36,9 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
-import org.eclipse.xtext.ui.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
@@ -62,7 +63,7 @@ import com.google.inject.name.Names;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(CrossReferenceProposalTestLanguageUiInjectorProvider.class)
-public class CrossReferenceProposalTest extends AbstractXtextTests {
+public class CrossReferenceProposalTest extends AbstractXtextTests implements ResourceLoadHelper {
 	
 	@Inject
 	private Injector injector;
