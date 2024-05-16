@@ -287,10 +287,10 @@ public class IncrementalStandaloneBuilderWithJavaTest extends AbstractIncrementa
 
 		assertTrue(testBuilder.launch());
 
-		String traceSrcPath = loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.First.java._trace");
-		assertTrue(traceSrcPath, traceSrcPath.startsWith("com/acme"));
-		String traceSrc2Path = loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.Another.java._trace");
-		assertTrue(traceSrc2Path, traceSrc2Path.startsWith("foo/bar"));
+		assertEquals("com/acme/First.contentassistfragmenttestlang",
+				loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.First.java._trace"));
+		assertEquals("foo/bar/Another.contentassistfragmenttestlang",
+				loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.Another.java._trace"));
 	}
 
 	private String loadTraceSourcePath(String file) throws IOException {
