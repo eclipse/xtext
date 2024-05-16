@@ -611,6 +611,12 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           _builder.append("// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672");
           _builder.newLine();
           _builder.append("\t\t");
+          _builder.append("// allows for bindClassLoaderToInstance to get the class loader of the bundle");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("// containing the instance of the injector provider (possibly inherited)");
+          _builder.newLine();
+          _builder.append("\t\t");
           _builder.append("return new ");
           TypeReference _runtimeModule_1 = JUnitFragment.this._xtextGeneratorNaming.getRuntimeModule(JUnitFragment.this.getGrammar());
           _builder.append(_runtimeModule_1, "\t\t");
@@ -628,7 +634,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           _builder.append("return ");
           String _simpleName_1 = JUnitFragment.this.injectorProvider().getSimpleName();
           _builder.append(_simpleName_1, "\t\t\t\t");
-          _builder.append(".class");
+          _builder.append(".this.getClass()");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t\t\t\t\t");
           _builder.append(".getClassLoader();");
