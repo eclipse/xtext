@@ -26,7 +26,7 @@ import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.Type;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

@@ -9,7 +9,7 @@
 package org.eclipse.xtext.parser.antlr;
 
 import org.eclipse.xtext.parser.antlr.bug443221Test.Model;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

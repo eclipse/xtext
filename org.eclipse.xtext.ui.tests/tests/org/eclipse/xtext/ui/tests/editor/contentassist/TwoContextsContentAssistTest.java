@@ -16,8 +16,9 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
@@ -32,7 +33,7 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class TwoContextsContentAssistTest extends AbstractXtextTests {
+public class TwoContextsContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
 
 	@Test public void testTwoContexts() throws Exception {
     	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "Foo", "FooBar");

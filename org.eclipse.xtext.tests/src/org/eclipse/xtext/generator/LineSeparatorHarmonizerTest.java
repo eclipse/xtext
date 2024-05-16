@@ -12,7 +12,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

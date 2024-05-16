@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 import org.eclipse.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;

@@ -10,7 +10,7 @@ package org.eclipse.xtext.generator.parser.splitting;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.ConditionSimplifier;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup;

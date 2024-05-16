@@ -11,7 +11,7 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

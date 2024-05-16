@@ -17,7 +17,7 @@ import org.eclipse.xtext.testlanguages.ActionTestLanguage3StandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguage3GrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Assert;
 import org.junit.Test;

@@ -9,7 +9,7 @@
 package org.eclipse.xtext.parser.assignments;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**

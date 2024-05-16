@@ -19,7 +19,7 @@ import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.impl.TokenRegionProvider;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.junit.Before;

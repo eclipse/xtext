@@ -17,7 +17,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage2.Root;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Assert;
 import org.junit.Test;
 

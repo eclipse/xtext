@@ -16,7 +16,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Test;

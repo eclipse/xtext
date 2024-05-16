@@ -19,7 +19,7 @@ import org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage;
 import org.eclipse.xtext.testlanguages.actionLang.Model;
 import org.eclipse.xtext.testlanguages.actionLang.Parent;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;

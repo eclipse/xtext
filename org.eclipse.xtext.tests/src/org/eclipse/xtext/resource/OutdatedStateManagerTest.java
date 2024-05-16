@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.inject.Inject;

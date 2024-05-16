@@ -18,7 +18,7 @@ import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.ParserRuleFragmen
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Ignore;

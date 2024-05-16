@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 
 import org.eclipse.xtext.parsetree.reconstr.bug302128.Model;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

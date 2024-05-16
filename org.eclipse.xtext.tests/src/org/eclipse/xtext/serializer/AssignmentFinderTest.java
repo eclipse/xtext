@@ -42,7 +42,7 @@ import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammar
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess.TerminalBoolElements;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess.TerminalValElements;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;

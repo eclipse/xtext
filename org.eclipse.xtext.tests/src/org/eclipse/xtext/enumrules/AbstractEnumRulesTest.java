@@ -10,7 +10,7 @@ package org.eclipse.xtext.enumrules;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.enumrules.enums.EnumsPackage;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

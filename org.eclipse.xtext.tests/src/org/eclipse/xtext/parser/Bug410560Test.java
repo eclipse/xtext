@@ -12,7 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguageStanda
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Assert;
 import org.junit.Test;
 

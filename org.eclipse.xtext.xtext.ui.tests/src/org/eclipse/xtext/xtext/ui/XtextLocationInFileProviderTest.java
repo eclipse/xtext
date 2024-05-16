@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
+import static org.junit.Assert.*;
+
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.ITextRegion;
 import org.junit.Test;
 

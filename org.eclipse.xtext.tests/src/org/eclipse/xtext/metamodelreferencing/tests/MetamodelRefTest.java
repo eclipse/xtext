@@ -10,7 +10,7 @@
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.Foo;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 public class MetamodelRefTest extends AbstractXtextTests {

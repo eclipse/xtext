@@ -27,7 +27,7 @@ import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.tests.TestErrorAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xtext.XtextLinker;

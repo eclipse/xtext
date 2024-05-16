@@ -10,7 +10,7 @@ package org.eclipse.xtext.parser.parameters;
 
 import org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParserRuleParameters;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Assert;
 import org.junit.Test;
 

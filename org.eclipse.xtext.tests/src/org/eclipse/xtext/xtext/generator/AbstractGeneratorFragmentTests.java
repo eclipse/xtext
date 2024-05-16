@@ -23,7 +23,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.GlobalRegistries;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;

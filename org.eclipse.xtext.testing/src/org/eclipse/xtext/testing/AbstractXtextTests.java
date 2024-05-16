@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) Lorenzo Bettini and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui;
+package org.eclipse.xtext.testing;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,10 +41,9 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.serializer.SerializerTestHelper;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.Pair;
@@ -52,6 +51,8 @@ import org.eclipse.xtext.util.Tuples;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Joiner;
@@ -65,17 +66,24 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 
 /**
+ * Note that this represents the "old" way of implementing unit tests.
+ * 
+ * New tests should be implemented using the {@link InjectWith} annotation, and
+ * the generated {@link IInjectorProvider} and {@link RunWith} with
+ * {@link XtextRunner}, for JUnit 4, and {@link ExtendWith} with
+ * {@link InjectionExtension}, for JUnit 5.
+ * 
  * @author Sven Efftinge - Initial contribution and API
- * @since 2.30
+ * @since 2.35
  */
 @Beta
-public abstract class AbstractXtextTests extends Assert implements ResourceLoadHelper {
+public abstract class AbstractXtextTests extends Assert {
 
 	private Injector injector;
 	private boolean canCreateInjector;
 	private boolean isSerializerTestDisabled = false;
 	private GlobalStateMemento globalStateMemento;
-	
+
 	static {
 		GlobalRegistries.initializeDefaults();
 	}
@@ -116,11 +124,11 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
 		setInjector(setup.createInjectorAndDoEMFRegistration());
 	}
-	
+
 	protected void setInjector(Injector injector) {
 		this.injector = injector;
 	}
-	
+
 	final public Injector getInjector() {
 		if (injector==null)
 			throw new IllegalStateException("No injector set. Did you forget to call something like 'with(new YourStadaloneSetup())'?");
@@ -138,7 +146,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 			injector = Guice.createInjector();
 		return injector.getInstance(key);
 	}
-	
+
 	public void injectMembers(Object object) {
 		if (injector == null)
 			injector = Guice.createInjector();
@@ -172,7 +180,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected ISerializer getSerializer() {
 		return getInjector().getInstance(ISerializer.class);
 	}
-	
+
 	protected INodeModelFormatter getNodeModelFormatter() {
 		return getInjector().getInstance(INodeModelFormatter.class);
 	}
@@ -180,7 +188,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected IScopeProvider getScopeProvider() {
 		return getInjector().getInstance(IScopeProvider.class);
 	}
-	
+
 	protected InvariantChecker getInvariantChecker(){
 		return getInjector().getInstance(InvariantChecker.class);
 	}
@@ -191,33 +199,32 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected InputStream getAsStream(String model) {
 		return getAsStream(model, Charset.defaultCharset());
 	}
-	
+
 	/**
 	 * Gets the string as input stream with specified encoding.
-	 * @since 2.16
 	 */
 	protected InputStream getAsStream(String model, Charset encoding) {
 		return new LazyStringInputStream(model, encoding.name());
 	}
-	
+
 	// parse methods
 
 	public EObject getModel(String model) throws Exception {
 		return getModel(getAsStream(model));
 	}
-	
+
 	public final EObject getModel(InputStream model) throws Exception {
 		XtextResource resource = getResource(model);
 		return getModel(resource);
 	}
-	
+
 	public static final int EXPECT_ERRORS = -2;
 	public static final int UNKNOWN_EXPECTATION = Integer.MIN_VALUE;
 
 	public final EObject getModelAndExpect(String model, int errors) throws Exception {
 		return getModelAndExpect(getAsStream(model), errors);
 	}
-	
+
 	public final EObject getModelAndExpect(InputStream model, int errors) throws Exception {
 		XtextResource resource = getResourceAndExpect(model, errors);
 		return getModel(resource);
@@ -230,7 +237,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected final XtextResource getResourceFromString(String model) throws Exception {
 		return getResource(getAsStream(model));
 	}
-	
+
 	protected final XtextResource getResourceFromStringAndExpect(String model, int errors) throws Exception {
 		return getResourceAndExpect(getAsStream(model), errors);
 	}
@@ -238,15 +245,14 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	public final XtextResource getResource(InputStream in) throws Exception {
 		return getResource(in, URI.createURI("mytestmodel."+getCurrentFileExtension()));
 	}
-	
+
 	protected String getCurrentFileExtension() {
 		String instance = getInjector().getInstance(Key.get(String.class,Names.named(Constants.FILE_EXTENSIONS)));
 		if (instance.indexOf(',')==-1)
 			return instance;
 		return instance.split(",")[0];
 	}
-	
-	@Override
+
 	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			return getResourceAndExpect(stream, AbstractXtextTests.UNKNOWN_EXPECTATION);
@@ -256,14 +262,11 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public final XtextResource getResourceAndExpect(InputStream in, int errors) throws Exception {
 		return getResourceAndExpect(in, getTestModelURI(), errors);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	protected URI getTestModelURI() {
 		return URI.createURI("mytestmodel."+getCurrentFileExtension());
 	}
@@ -271,11 +274,11 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	public final XtextResource getResource(InputStream in, URI uri) throws Exception {
 		return getResourceAndExpect(in, uri, 0);
 	}
-	
+
 	public final XtextResource getResource(String contents, String uri) throws Exception {
 		return getResource(getAsStream(contents), URI.createURI(uri));
 	}
-	
+
 	public final XtextResource getResourceAndExpect(InputStream in, URI uri, int expectedErrors) throws Exception {
 		XtextResource resource = doGetResource(in, uri);
 		checkNodeModel(resource);
@@ -310,11 +313,11 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected boolean shouldTestSerializer(XtextResource resource) {
 		return !isSerializerTestDisabled && !"org.eclipse.xtext.Xtext".equals(resource.getLanguageName());
 	}
-	
+
 	protected void disableSerializerTest() {
 		isSerializerTestDisabled = true;
 	}
-	
+
 	protected Object getClasspathURIContext() {
 		return getClass();
 	}
@@ -337,7 +340,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 		XtextResource resource = getResource(model);
 		return getRootNode(resource);
 	}
-	
+
 	protected final ICompositeNode getRootNodeAndExpect(InputStream model, int errors) throws Exception {
 		XtextResource resource = getResourceAndExpect(model, errors);
 		return getRootNode(resource);
@@ -350,19 +353,19 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected final IParseResult getParseResult(String model) throws Exception {
 		return getResourceFromString(model).getParseResult();
 	}
-	
+
 	protected final IParseResult getParseResultAndExpect(String model, int errors) throws Exception {
 		return getResourceFromStringAndExpect(model, errors).getParseResult();
 	}
-	
+
 	protected final ICompositeNode getRootNode(String model) throws Exception {
 		return getRootNode(getAsStream(model));
 	}
-	
+
 	protected final ICompositeNode getRootNodeAndExpect(String model, int errors) throws Exception {
 		return getRootNodeAndExpect(getAsStream(model), errors);
 	}
-	
+
 	protected String readFileIntoString(String filePath) throws IOException {
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL url = classLoader.getResource(filePath);

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.xtextTest.Assignment;
 import org.eclipse.xtext.xtextTest.Grammar;
 import org.junit.Test;

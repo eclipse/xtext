@@ -18,7 +18,7 @@ import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPacka
 import org.eclipse.xtext.resource.locationprovidertest.Mode;
 import org.eclipse.xtext.resource.locationprovidertest.Model;
 import org.eclipse.xtext.resource.locationprovidertest.Processor;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.junit.Test;
 

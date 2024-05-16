@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.Strings;
 import org.junit.Assert;
 import org.junit.Ignore;

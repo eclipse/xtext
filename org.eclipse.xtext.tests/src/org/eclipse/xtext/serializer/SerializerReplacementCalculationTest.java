@@ -12,7 +12,7 @@ import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Model;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.junit.Test;
 

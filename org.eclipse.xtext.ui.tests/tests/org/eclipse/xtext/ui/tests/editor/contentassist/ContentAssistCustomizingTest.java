@@ -28,8 +28,9 @@ import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCustomizingTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ContentAssistCustomizingTestLanguageProposalProvider;
@@ -46,7 +47,7 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("deprecation")
-public class ContentAssistCustomizingTest extends AbstractXtextTests {
+public class ContentAssistCustomizingTest extends AbstractXtextTests implements ResourceLoadHelper {
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		with(getSetup());

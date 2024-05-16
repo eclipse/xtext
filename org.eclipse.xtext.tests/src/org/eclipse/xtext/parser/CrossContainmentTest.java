@@ -18,7 +18,7 @@ import org.eclipse.xtext.parser.partialParsingTestUtil.CrossResourceContainerOne
 import org.eclipse.xtext.parser.partialParsingTestUtil.PartialParsingTestUtilFactory;
 import org.eclipse.xtext.parser.partialParsingTestUtil.PartialParsingTestUtilPackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.testing.AbstractXtextTests;
 import org.junit.Test;
 
 /**
