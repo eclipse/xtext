@@ -12,12 +12,12 @@ import com.google.inject.Inject
 import java.io.Serializable
 import java.util.Collection
 import java.util.Collections
-import java.util.List
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtext.util.JavaRuntimeVersion
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.util.JavaRuntimeVersion
+import testdata.stubs.StubbedList
 
 /**
  * @author Sebastian Zarnekow
@@ -167,12 +167,12 @@ class SuperTypesTest extends AbstractSuperTypesTest {
 	
 	@Test
 	override void testRawList() {
-		typeof(List).assertSuperTypes("Collection")
+		typeof(StubbedList).assertSuperTypes("Collection")
 	}
 	
 	@Test
 	override void testStringList() {
-		"java.util.List<String>".assertSuperTypes("Collection<String>")
+		"testdata.stubs.StubbedList<String>".assertSuperTypes("Collection<String>")
 	}
 	
 	@Test
@@ -277,23 +277,23 @@ class AllSuperTypesTest extends AbstractSuperTypesTest {
 	
 	@Test
 	override void testRawList() {
-		typeof(List).assertSuperTypes("Collection", "Iterable", "Object")
+		typeof(StubbedList).assertSuperTypes("Collection", "Iterable", "Object")
 	}
 	
 	@Test
 	override void testStringList() {
-		"java.util.List<String>".assertSuperTypes("Collection<String>", "Iterable<String>", "Object")
+		"testdata.stubs.StubbedList<String>".assertSuperTypes("Collection<String>", "Iterable<String>", "Object")
 	}
 	
 	@Test
 	override void testStringArrayArrayList() {
-		"java.util.ArrayList<? extends String[]>".assertSuperTypes(
-			"AbstractList<? extends String[]>", 
+		"testdata.stubs.StubbedArrayList<? extends String[]>".assertSuperTypes(
+			"StubbedAbstractList<? extends String[]>", 
 			"RandomAccess",
 			"Cloneable",
 			"Serializable",
 			"AbstractCollection<? extends String[]>", 
-			"List<? extends String[]>",
+			"StubbedList<? extends String[]>",
 			"Collection<? extends String[]>",
 			"Iterable<? extends String[]>",
 			"Object")

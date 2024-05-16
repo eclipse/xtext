@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.homeautomation.ui.tests
 
-import java.util.List
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
@@ -22,13 +21,10 @@ import org.junit.runner.RunWith
 @InjectWith(RuleEngineUiInjectorProvider)
 class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 
-	// cursor position marker
-	val c = '''<|>'''
-
 	@Test def empty() throws Exception {
 		'''
 			«c»
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'Device',
 			'Rule'
 		], 'Device', '''
@@ -42,7 +38,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 			Device Heater can be on, off, error
 			
 			Rule 'rule1' when «c»
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'Window.open',
 			'Window.closed',
 			'Heater.on',
@@ -62,7 +58,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 			Device Heater can be on, off, error
 			
 			Rule 'rule1' when Win«c»
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'Window.open',
 			'Window.closed'
 		], 'Window.open', '''
@@ -80,7 +76,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 			
 			Rule 'rule1' when Window.open then
 				«c»
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'do',
 			'false',
 			'for',
@@ -113,7 +109,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 			
 			Rule 'rule1' when Window.open then
 				fire(Heater.o«c»)
-		'''.testContentAssistant(#[
+		'''.assertContentAssistant(#[
 			'on',
 			'off'
 		], 'off', '''
@@ -123,17 +119,5 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 			Rule 'rule1' when Window.open then
 				fire(Heater.off)
 		''')
-	}
-
-	private def void testContentAssistant(CharSequence text, List<String> expectedProposals,
-		String proposalToApply, String expectedContent) throws Exception {
-		
-		val cursorPosition = text.toString.indexOf(c)
-		val content = text.toString.replace(c, "")
-		
-		newBuilder.append(content).
-		assertTextAtCursorPosition(cursorPosition, expectedProposals).
-		applyProposal(cursorPosition, proposalToApply).
-		expectContent(expectedContent)
 	}
 }

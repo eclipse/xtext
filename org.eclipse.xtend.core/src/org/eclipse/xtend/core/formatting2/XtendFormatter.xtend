@@ -335,6 +335,9 @@ class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	override protected builder(List<XExpression> params) {
+		// don't use last (now deprecated) because in Java 21
+		// getLast() has been introduced, throwing NoSuchElementException
+		// instead of returning null
 		if (params.lastOrNull !== null) {
 			val grammarElement = params.lastOrNull.grammarElement
 			if (grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 ||

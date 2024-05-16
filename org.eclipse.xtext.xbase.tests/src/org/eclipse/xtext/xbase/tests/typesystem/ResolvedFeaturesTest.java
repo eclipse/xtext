@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -143,12 +144,20 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		ResolvedFeatures resolvedOperations = toResolvedOperations(UnmodifiableIterator.class);
 		List<IResolvedOperation> all = resolvedOperations.getAllOperations();
 		Assert.assertFalse(all.isEmpty());
-		Assert.assertEquals(all.toString(), 2,
-				Iterables.size(Iterables.filter(all, (IResolvedOperation it) -> it.getDeclaration().isAbstract())));
-		Assert.assertEquals(all.toString(), (1 + 6),
-				Iterables.size(Iterables.filter(all, (IResolvedOperation it) -> it.getDeclaration().isFinal())));
+		var abstractOperations = Iterables.filter(all,
+				it -> it.getDeclaration().isAbstract());
+		Assert.assertEquals(abstractOperations.toString(), 2,
+				Iterables.size(abstractOperations));
+		// avoid the new wait0 private method
+		// or the test will break with Java 21
+		// https://github.com/openjdk/jdk/commit/9583e3657e43cc1c6f2101a64534564db2a9bd84
+		var finalNonFinalOperations = Iterables.filter(all,
+				it -> it.getDeclaration().isFinal() &&
+					it.getDeclaration().getVisibility() != JvmVisibility.PRIVATE);
+		Assert.assertEquals(finalNonFinalOperations.toString(), (1 + 6),
+				Iterables.size(finalNonFinalOperations));
 		List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
-		Assert.assertEquals(1, declared.size());
+		Assert.assertEquals(declared.toString(), 1, declared.size());
 	}
 
 	@Test
@@ -156,10 +165,14 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		ResolvedFeatures resolvedOperations = toResolvedOperations(AbstractList.class);
 		List<IResolvedOperation> all = resolvedOperations.getAllOperations();
 		Assert.assertFalse(all.isEmpty());
-		Assert.assertEquals(all.toString(), 1 + 1,
-				Iterables.size(Iterables.filter(all, (IResolvedOperation it) -> it.getDeclaration().isAbstract())));
+		// the new method getLast added in Java 21 will not disturb this test
+		// that only considers abstract declarations
+		var abstractOperations = Iterables.filter(all,
+				it -> it.getDeclaration().isAbstract());
+		Assert.assertEquals(abstractOperations.toString(), 1 + 1,
+				Iterables.size(abstractOperations));
 		List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
-		Assert.assertEquals(1, Iterables.size(Iterables.filter(declared, (IResolvedOperation it) -> it.getDeclaration().isAbstract())));
+		Assert.assertEquals(declared.toString(), 1, Iterables.size(Iterables.filter(declared, (IResolvedOperation it) -> it.getDeclaration().isAbstract())));
 	}
 
 	@Test

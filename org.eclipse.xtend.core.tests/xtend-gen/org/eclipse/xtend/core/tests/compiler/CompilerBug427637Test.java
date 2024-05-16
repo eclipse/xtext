@@ -2361,7 +2361,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder.append("else");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t");
-    _builder.append("if(equalIndentationChange && leafs.leafs.last != leaf)");
+    _builder.append("if(equalIndentationChange && leafs.leafs.lastOrNull != leaf)");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t");
     _builder.append("result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)");
@@ -2388,7 +2388,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder.append("newLines = newLines - 1");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("if(equalIndentationChange && leafs.leafs.last != leaf)");
+    _builder.append("if(equalIndentationChange && leafs.leafs.lastOrNull != leaf)");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t");
     _builder.append("result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)");
@@ -3653,7 +3653,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {");
+    _builder_1.append("if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {");
     _builder_1.newLine();
     _builder_1.append("                  ");
     _builder_1.append("int _offset_4 = ((WhitespaceInfo)leaf).getOffset();");
@@ -3782,7 +3782,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {");
+    _builder_1.append("if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {");
     _builder_1.newLine();
     _builder_1.append("                ");
     _builder_1.append("int _offset_6 = ((WhitespaceInfo)leaf).getOffset();");

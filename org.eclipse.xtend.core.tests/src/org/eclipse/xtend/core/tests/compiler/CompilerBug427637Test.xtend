@@ -1014,7 +1014,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 										result += new WhitespaceData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange,
 											if (trace) new RuntimeException(), if (leaf.offset == 0) "" else if(leafs.containsComment) null else " ")
 									else
-										if(equalIndentationChange && leafs.leafs.last != leaf)
+										if(equalIndentationChange && leafs.leafs.lastOrNull != leaf)
 											result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
 										else
 											result += new NewLineData(leaf.offset, leaf.length, if(equalIndentationChange) 0  else increaseIndentationChange, if(equalIndentationChange) 0 else decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
@@ -1023,7 +1023,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 									var newLines = 1
 									if (leaf.leadingComment?.endsWithNewLine)
 										newLines = newLines - 1
-									if(equalIndentationChange && leafs.leafs.last != leaf)
+									if(equalIndentationChange && leafs.leafs.lastOrNull != leaf)
 										result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
 									else
 										result += new NewLineData(leaf.offset, leaf.length, 0, 0, if (trace) new RuntimeException(), newLines)
@@ -1472,7 +1472,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			                WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_3, _xifexpression_4);
 			                result.add(_whitespaceData_1);
 			              } else {
-			                if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+			                if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {
 			                  int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
 			                  int _length_2 = ((WhitespaceInfo)leaf).getLength();
 			                  RuntimeException _xifexpression_6 = null;
@@ -1515,7 +1515,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			              if (_endsWithNewLine_2) {
 			                newLines_1 = (newLines_1 - 1);
 			              }
-			              if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+			              if ((equalIndentationChange && (!Objects.equals(IterableExtensions.<LeafInfo>lastOrNull(leafs.getLeafs()), leaf)))) {
 			                int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
 			                int _length_4 = ((WhitespaceInfo)leaf).getLength();
 			                RuntimeException _xifexpression_10 = null;
@@ -1672,5 +1672,5 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	}	
+	}
 }

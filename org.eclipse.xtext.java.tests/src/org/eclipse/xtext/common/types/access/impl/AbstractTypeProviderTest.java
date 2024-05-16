@@ -110,7 +110,10 @@ import org.eclipse.xtext.common.types.testSetups.TestConstants;
 import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
+import org.eclipse.xtext.java.tests.MyStubbedList;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -472,7 +475,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	@Test
 	public void testFindTypeByName_javaUtilList_07() {
-		String typeName = List.class.getName();
+		String typeName = MyStubbedList.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
 		JvmParameterizedTypeReference superType = (JvmParameterizedTypeReference) type.getSuperTypes().get(0);
@@ -2020,6 +2023,11 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	@Test
 	public void testMethods_publicStrictFpMethod_01() {
+		// strictfp has no effect since Java 17 https://openjdk.org/jeps/306
+		// and it doesn't seem to be present at runtime in 17+
+		// see also https://bugs.eclipse.org/bugs/show_bug.cgi?id=545510#c6
+		// for sure, it fails with Java 21
+		Assume.assumeFalse("Ignored on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
 		String typeName = Methods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
@@ -2028,7 +2036,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertFalse(method.isFinal());
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
-		assertTrue(method.isStrictFloatingPoint());
+		assertTrue(method.isStrictFloatingPoint()); // it fails with Java 21
 		assertFalse(method.isNative());
 		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
 		JvmType methodType = method.getReturnType().getType();
@@ -2039,14 +2047,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	public void publicNativeMethod() {
 		String typeName = Methods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
+		JvmOperation method = getMethodFromType(type, Methods.class, "publicNativeMethod()");
 		assertSame(type, method.getDeclaringType());
 		assertFalse(method.isAbstract());
 		assertFalse(method.isFinal());
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
-		assertTrue(method.isStrictFloatingPoint());
-		assertFalse(method.isNative());
+		assertFalse(method.isStrictFloatingPoint());
+		assertTrue(method.isNative());
 		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
 		JvmType methodType = method.getReturnType().getType();
 		assertEquals("void", methodType.getIdentifier());

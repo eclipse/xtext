@@ -46,9 +46,17 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(3);
 
-		sub = assertBuilder.child(1, "Foo - test").numChildren(JavaRuntimeVersion.isJava14OrLater() ? 14 : 15);
+		int numChildren = 15;
+		if (JavaRuntimeVersion.isJava14OrLater()) {
+			numChildren = 14;
+		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 15; // wait0
+		}
+
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
 		checkExtendedMethods(sub, "Foo");
-		sub2 = assertBuilder.child(2, "Foo2 - test").numChildren(JavaRuntimeVersion.isJava14OrLater() ? 14 : 15);
+		sub2 = assertBuilder.child(2, "Foo2 - test").numChildren(numChildren);
 		checkExtendedMethods(sub2, "Foo2");
 	}
 
@@ -65,6 +73,9 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		} else if (JavaRuntimeVersion.isJava13OrLater()) {
 			numChildren = 33;
 		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 34; // wait0, hash : int
+		}
 		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo - (default package)").numChildren(numChildren);
 		interfaze.child(0, "BAR - Foo").numChildren(0);
 		interfaze.child(1, "BAZ - Foo").numChildren(0);
@@ -72,6 +83,9 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 			interfaze.nextChild("EnumDesc<E extends Enum<E>> - Enum").hasTextRegion(false);
 		}
 		interfaze.nextChild("valueOf(Class<T>, String) <T extends Enum<T>> : T - Enum<Foo>").hasTextRegion(false);
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			interfaze.nextChild("hash : int - Enum<Foo>").hasTextRegion(false);
+		}
 		interfaze.nextChild("name : String - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("ordinal : int - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("new(String, int) - Enum<Foo>").hasTextRegion(false);
@@ -153,6 +167,9 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 15;
 		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 16; // wait0
+		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
 		sub.child(0, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
 		sub.nextChild("toString() : String - Foo").numChildren(0).hasTextRegion(true);
@@ -192,6 +209,9 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		int numChildren = 15;
 		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 14;
+		}
+		if (JavaRuntimeVersion.isJava21OrLater()) {
+			numChildren = 15; // wait0
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
 		sub.nextChild("_foo(Number) : void - Foo").hasTextRegion(true);
