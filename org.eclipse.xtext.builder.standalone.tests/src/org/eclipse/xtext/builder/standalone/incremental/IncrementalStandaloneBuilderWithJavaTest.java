@@ -278,8 +278,7 @@ public class IncrementalStandaloneBuilderWithJavaTest extends AbstractIncrementa
 		assertTrue(testBuilder.launch());
 
 		String traceSourcePath = loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.First.java._trace");
-		// TODO: should be true, instead it is absolute
-		assertFalse(traceSourcePath, traceSourcePath.startsWith("src"));
+		assertTrue(traceSourcePath, traceSourcePath.startsWith("com/acme"));
 	}
 
 	private String loadTraceSourcePath(String file) throws IOException {

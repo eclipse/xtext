@@ -36,13 +36,11 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.regex.Pattern;
@@ -99,13 +97,14 @@ import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -263,6 +262,7 @@ public class StandaloneBuilder {
 			}
 			
 			XtextResourceSet resourceSet = resourceSetProvider.get();
+			configureWorkspace(resourceSet);
 			Iterable<String> allClassPathEntries = Iterables.concat(sourceDirs, classPathEntries);
 			if (stubsDirectory != null) {
 				LOG.info("Installing type provider.");
@@ -342,6 +342,22 @@ public class StandaloneBuilder {
 
 			LOG.info("Build took " + rootStopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms.");
 		}
+	}
+
+	/**
+	 * Allows for relative source folders are properly generated in the
+	 * trace files, instead of absolute ones.
+	 * 
+	 * See https://github.com/eclipse/xtext/issues/2957
+	 * 
+	 * @since 2.35
+	 */
+	protected void configureWorkspace(ResourceSet resourceSet) {
+		FileProjectConfig projectConfig = new FileProjectConfig(new File(baseDir), baseDir);
+		for (String sourceDir : sourceDirs) {
+			projectConfig.addSourceFolder(sourceDir);
+		}
+		ProjectConfigAdapter.install(resourceSet, projectConfig);
 	}
 
 	private void writeClassPathConfiguration(Iterable<String> modelRoots, boolean classpath) {
