@@ -136,7 +136,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
 
   @Test
   public void missingSynchronized() {
-    this.builder.setSeverity(org.eclipse.xtend.core.validation.IssueCodes.MISSING_SYNCHRONIZED, "warning");
+    this.builder.setSeverity(IssueCodes.MISSING_SYNCHRONIZED, "warning");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Bar {");
     _builder.newLine();
@@ -168,7 +168,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("XXX.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.MISSING_SYNCHRONIZED).assertResolutionLabels("Mark operation as synchronized");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("XXX.xtend", _builder.toString()).assertIssueCodes(IssueCodes.MISSING_SYNCHRONIZED).assertResolutionLabels("Mark operation as synchronized");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Bar {");
     _builder_1.newLine();
@@ -3337,7 +3337,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("abstract class Foo {");
     _builder_1.newLine();
@@ -3388,7 +3388,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo implements Comparable<Foo> {");
     _builder_1.newLine();
@@ -3429,7 +3429,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("C.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS).assertResolutionLabels("Add unimplemented methods");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("C.xtend", _builder.toString()).assertIssueCodes(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS).assertResolutionLabels("Add unimplemented methods");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class C {");
     _builder_1.newLine();
@@ -4167,7 +4167,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.MISSING_CONSTRUCTOR).assertResolutionLabels("Add constructor new(int)");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.MISSING_CONSTRUCTOR).assertResolutionLabels("Add constructor new(int)");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -5559,7 +5559,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, org.eclipse.xtend.core.validation.IssueCodes.CLASS_EXPECTED).assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'").assertNoResolutionLabels("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'");
+    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.CLASS_EXPECTED).assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'").assertNoResolutionLabels("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'");
   }
 
   @Test
@@ -5569,7 +5569,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, org.eclipse.xtend.core.validation.IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'");
+    this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'");
   }
 
   @Test
@@ -5579,7 +5579,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertNoResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, org.eclipse.xtend.core.validation.IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Java class \'Bar\'", "Create Xtend class \'Bar\'", "Create local Xtend class \'Bar\'");
+    QuickfixTestBuilder _assertNoResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.INTERFACE_EXPECTED).assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create Xtend interface \'Bar\'", "Create local Xtend interface \'Bar\'").assertNoResolutionLabels("Create Java class \'Bar\'", "Create Xtend class \'Bar\'", "Create local Xtend class \'Bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("interface Foo extends Bar {");
     _builder_1.newLine();
@@ -5827,7 +5827,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT).assertResolutionLabels("Add unimplemented methods", "Make class abstract");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.List");
     _builder_1.newLine();
@@ -8168,7 +8168,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CONFLICTING_DEFAULT_METHODS).assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
+      this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(IssueCodes.CONFLICTING_DEFAULT_METHODS).assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

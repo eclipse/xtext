@@ -12,6 +12,7 @@ import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.CYCLIC_INHERITANCE;
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*;
 
 import java.util.Iterator;
@@ -952,10 +953,10 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testClassUniqueNames() throws Exception {
 		var source = "class Foo {} class Foo {}";
 		XtendClass clazz = clazz(source);
-		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE_NAME,
+		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE,
 				source.indexOf("Foo"), "Foo".length(),
 				"type", "already defined");
-		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE_NAME,
+		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE,
 				source.lastIndexOf("Foo"), "Foo".length(),
 				"type", "already defined");
 	}
@@ -1006,14 +1007,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testTypesUniqueNames() throws Exception {
 		XtendFile file = file("class Foo {} interface Foo {} annotation Foo {}");
-		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE_NAME, "type", "already defined");
-		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE_NAME, "type", "already defined");
+		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE, "type", "already defined");
+		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE, "type", "already defined");
 	}
 	
 	@Test public void testNestedTypesUniqueNames() throws Exception {
 		XtendFile file = file("class C { static class Foo {} interface Foo {} annotation Foo {} }");
-		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE_NAME, "Duplicate nested type Foo");
-		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE_NAME, "Duplicate nested type Foo");
+		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE, "Duplicate nested type Foo");
+		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE, "Duplicate nested type Foo");
 	}
 	
 	@Test public void testNestedTypesOuterNameShadowing() throws Exception {
@@ -2452,8 +2453,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		+ "}";
 		XtendFile file = file(source);
 		helper.assertError(file.getXtendTypes().get(0),
-				XCONSTRUCTOR_CALL, OVERRIDDEN_FINAL,
-				source.indexOf("Bar"), "Bar".length(),
+				ANONYMOUS_CLASS, OVERRIDDEN_FINAL,
+				source.indexOf("new Bar()"), "new Bar()".length(),
 				"Attempt to override final class");
 	}
 

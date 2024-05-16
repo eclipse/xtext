@@ -19,8 +19,6 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.PROPERTY
 import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.OPERATION
-import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY
-import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 
@@ -181,9 +179,10 @@ class ValidationTests {
 			}
 		'''
 		model.parse => [
+			// coming from org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator
 			assertNumberOfIssues(2)
-			assertError(PROPERTY, DUPLICATE_PROPERTY, model.indexOf("p"), 1, "Duplicate property p")
-			assertError(PROPERTY, DUPLICATE_PROPERTY, model.lastIndexOf("p"), 1, "Duplicate property p")
+			assertError(PROPERTY, DUPLICATE_FIELD, model.indexOf("p"), 1, "Duplicate field p")
+			assertError(PROPERTY, DUPLICATE_FIELD, model.lastIndexOf("p"), 1, "Duplicate field p")
 		]
 	}
 
@@ -195,9 +194,10 @@ class ValidationTests {
 			}
 		'''
 		model.parse => [
+			// coming from org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator
 			assertNumberOfIssues(2)
-			assertError(OPERATION, DUPLICATE_OPERATION, model.indexOf("foo"), 3, "Duplicate operation foo")
-			assertError(OPERATION, DUPLICATE_OPERATION, model.lastIndexOf("foo"), 3, "Duplicate operation foo")
+			assertError(OPERATION, DUPLICATE_METHOD, model.indexOf("foo"), 3, "Duplicate method foo")
+			assertError(OPERATION, DUPLICATE_METHOD, model.lastIndexOf("foo"), 3, "Duplicate method foo")
 		]
 	}
 
@@ -250,9 +250,10 @@ class ValidationTests {
 			}
 		'''
 		model.parse => [
+			// coming from org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator
 			assertNumberOfIssues(2)
-			assertError(OPERATION, DUPLICATE_OPERATION, model.indexOf("m"), 1, "Duplicate operation m")
-			assertError(OPERATION, DUPLICATE_OPERATION, model.lastIndexOf("m"), 1, "Duplicate operation m")
+			assertError(OPERATION, DUPLICATE_METHOD, model.indexOf("m"), 1, "The method m(List<String>) has the same erasure")
+			assertError(OPERATION, DUPLICATE_METHOD, model.lastIndexOf("m"), 1, "The method m(List<Integer>) has the same erasure")
 		]
 	}
 

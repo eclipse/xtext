@@ -178,6 +178,47 @@ Workflow {
     			}
     		}
     	}
+    	
+    	language = {
+    		grammarUri = "classpath:/org/eclipse/xtext/xbase/testlanguages/JvmGenericTypeValidatorTestLang.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xtype.xtext"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/Xbase.xtext"
+    
+    		fragment = grammarAccess.GrammarAccessFragment2 {}
+    		fragment = ecore.EMFGeneratorFragment2 {}
+    		fragment = serializer.SerializerFragment2 {
+    			generateStub = false
+    		}
+    		fragment = resourceFactory.ResourceFactoryFragment2 {}
+    		fragment = parser.antlr.XtextAntlrGeneratorFragment2 {}
+    		fragment = validation.ValidatorFragment2 {
+    			generateStub = true
+    			generateXtendStub = false
+			}
+    		fragment = scoping.ImportNamespacesScopingFragment2 {
+    			generateStub = false
+			}
+    		fragment = exporting.QualifiedNamesFragment2 {}
+    		fragment = builder.BuilderIntegrationFragment2 {}
+    		fragment = generator.GeneratorFragment2 {}
+    		fragment = junit.JUnitFragment {
+    			generateStub = false
+    		}
+    		fragment = types.TypesGeneratorFragment2 {}
+    		fragment = xbase.XbaseGeneratorFragment2 {
+    			generateXtendInferrer = false
+    		}
+    		
+    		fragment = ConditionalXtextGeneratorFragment {
+    			enabled = generateEclipse
+    			fragment = ui.contentAssist.ContentAssistFragment2 {
+    				generateXtendStub = false
+    			}
+    		}
+    	}
     }
 }
 

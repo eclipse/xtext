@@ -8,40 +8,23 @@
  */
 package org.eclipse.xtext.example.domainmodel.validation;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
-import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
-import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
-import org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelHelper;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
+import org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator;
 
 /**
  * This class contains custom validation rules.
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
+@ComposedChecks(validators = JvmGenericTypeValidator.class)
 public class DomainmodelValidator extends AbstractDomainmodelValidator {
-	@Inject
-	private IJvmModelAssociations jvmModelAssociations;
-
-	@Inject
-	private DomainmodelJvmModelHelper domainmodelJvmModelHelper;
-
 	@Check
 	public void checkTypeNameStartsWithCapital(Entity entity) {
 		if (!Character.isUpperCase(entity.getName().charAt(0))) {
@@ -68,34 +51,4 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 		}
 	}
 
-	@Check
-	public void checkPropertyNamesAreUnique(Entity entity) {
-		Map<String, List<Feature>> name2properties = entity.getFeatures().stream()
-			.filter(Property.class::isInstance)
-			.filter(it -> !StringExtensions.isNullOrEmpty(it.getName()))
-			.collect(Collectors.groupingBy(Feature::getName));
-		name2properties.values().forEach(properties -> {
-			if (properties.size() > 1) {
-				properties.forEach(it ->
-					error("Duplicate property " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME,
-							IssueCodes.DUPLICATE_PROPERTY)
-				);
-			}
-		});
-	}
-
-	@Check
-	public void checkOperationNamesAreUnique(Entity entity) {
-		JvmGenericType inferredJavaClass = IterableExtensions
-				.head(Iterables.filter(jvmModelAssociations.getJvmElements(entity), JvmGenericType.class));
-		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, jvmOperations ->
-			jvmOperations.stream()
-				.map(it -> jvmModelAssociations.getPrimarySourceElement(it))
-				.filter(Operation.class::isInstance)
-				.map(Operation.class::cast)
-				.forEach(it -> 
-					error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION)
-				)
-		);
-	}
 }

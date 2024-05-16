@@ -262,6 +262,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						}
 						validator = {
 							// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			
+							// Enables several checks on the inferred Jvm model for Xbase languages concerning Java inheritance relations
+							// composedCheck = "org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator"
+			
 							// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
 							generateDeprecationValidation = true
 						}

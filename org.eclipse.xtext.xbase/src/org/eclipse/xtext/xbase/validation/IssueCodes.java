@@ -174,6 +174,91 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 */
 	public static final String INVALID_TRY_RESOURCE_TYPE = ISSUE_CODE_PREFIX + "invalid_try_resource_type";
 	
+	/**
+	 * @since 2.34
+	 */
+	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
+	/**
+	 * @since 2.34
+	 */
+	public static final String INTERFACE_EXPECTED = ISSUE_CODE_PREFIX + "interface_expected";
+	/**
+	 * @since 2.34
+	 */
+	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";
+	/**
+	 * @since 2.34
+	 */
+	public static final String WILDCARD_IN_SUPERTYPE = ISSUE_CODE_PREFIX +  "wildcard_in_supertype";
+	/**
+	 * @since 2.34
+	 */
+	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_METHOD = ISSUE_CODE_PREFIX + "duplicate_method";
+	/**
+	 * @since 2.34
+	 */
+	public static final String CONFLICTING_DEFAULT_METHODS = ISSUE_CODE_PREFIX + "conflicting_default_methods";
+	/**
+	 * @since 2.34
+	 */
+	public static final String ANONYMOUS_CLASS_MISSING_MEMBERS = ISSUE_CODE_PREFIX + "anonymous_class_missing_members";
+	/**
+	 * @since 2.34
+	 */
+	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
+	/**
+	 * @since 2.34
+	 */
+	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
+	/**
+	 * @since 2.34
+	 */
+	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
+	/**
+	 * @since 2.34
+	 */
+	public static final String ANONYMOUS_CLASS_STATIC_METHOD = ISSUE_CODE_PREFIX + "anonymous_class_static_method";
+	/**
+	 * @since 2.34
+	 */
+	public static final String ANONYMOUS_CLASS_STATIC_FIELD = ISSUE_CODE_PREFIX + "anonymous_class_static_field";
+	/**
+	 * @since 2.34
+	 */
+	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
+	/**
+	 * @since 2.34
+	 */
+	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
+	/**
+	 * @since 2.34
+	 */
+	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
+	/**
+	 * @since 2.34
+	 */
+	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
+	/**
+	 * @since 2.34
+	 */
+	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
+	/**
+	 * @since 2.34
+	 */
+	public static final String DUPLICATE_INTERFACE = ISSUE_CODE_PREFIX + "duplicate_interface";
+
 	private IssueCodes() {
 	}
 

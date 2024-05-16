@@ -38,12 +38,6 @@ public final class IssueCodes {
 	public static final String CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT = "create_functions_must_not_be_abstract";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
 	public static final String WRONG_FILE = ISSUE_CODE_PREFIX + "wrong_file";
-	public static final String CLASS_EXPECTED = ISSUE_CODE_PREFIX + "class_expected";
-	public static final String INTERFACE_EXPECTED = ISSUE_CODE_PREFIX + "interface_expected";
-	public static final String DUPLICATE_METHOD = ISSUE_CODE_PREFIX + "duplicate_method";
-	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
-	public static final String DUPLICATE_TYPE_NAME = org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_TYPE;
-	public static final String CONFLICTING_DEFAULT_METHODS = ISSUE_CODE_PREFIX + "conflicting_default_methods";
 	public static final String MISSING_ABSTRACT = ISSUE_CODE_PREFIX + "missing_abstract";
 	public static final String MISSING_ABSTRACT_IN_ANONYMOUS = ISSUE_CODE_PREFIX + "missing_abstract_in_anonymous";
 	public static final String MISSING_OVERRIDE = ISSUE_CODE_PREFIX + "missing_override";
@@ -54,25 +48,9 @@ public final class IssueCodes {
 	public static final String XBASE_LIB_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "xbase_lib_not_on_classpath";
 	public static final String JDK_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "jdk_not_on_classpath";
 
-	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
-	public static final String ANONYMOUS_CLASS_MISSING_MEMBERS = ISSUE_CODE_PREFIX + "anonymous_class_missing_members";
-	public static final String ANONYMOUS_CLASS_STATIC_METHOD = ISSUE_CODE_PREFIX + "anonymous_class_static_method";
-	public static final String ANONYMOUS_CLASS_STATIC_FIELD = ISSUE_CODE_PREFIX + "anonymous_class_static_field";
-	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
-
-	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
-	public static final String OVERRIDE_REDUCES_VISIBILITY = ISSUE_CODE_PREFIX + "override_reduces_visibility";
-	public static final String MISSING_SYNCHRONIZED = ISSUE_CODE_PREFIX + "missing_synchronized";
-	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
-	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
-
 	public static final String UNUSED_PRIVATE_MEMBER = ISSUE_CODE_PREFIX + "unused_private_member";
 	public static final String FIELD_NOT_INITIALIZED = ISSUE_CODE_PREFIX + "field_not_initialized";
-	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
-	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
 
-	public static final String MISSING_CONSTRUCTOR = ISSUE_CODE_PREFIX + "missing_constructor";
-	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
 	public static final String CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED = ISSUE_CODE_PREFIX
 			+ "constructor_type_params_not_supported";
 	public static final String CONSTRUCTOR_NOT_PERMITTED = ISSUE_CODE_PREFIX + "constructor_not_permitted";
@@ -91,8 +69,6 @@ public final class IssueCodes {
 	public static final String MISSING_STATIC_MODIFIER = ISSUE_CODE_PREFIX +  "missing_static_modifier";
 	public static final String MODIFIER_DOES_NOT_MATCH_TYPENAME = ISSUE_CODE_PREFIX + "missing_abstract_modifier";
 	
-	public static final String WILDCARD_IN_SUPERTYPE = ISSUE_CODE_PREFIX +  "wildcard_in_supertype";
-
 	public static final String INVALID_EXTENSION_TYPE = ISSUE_CODE_PREFIX +  "invalid_extension_type";
 	
 	public static final String INVALID_OPERATOR_SIGNATURE = ISSUE_CODE_PREFIX +  "invalid_operator_signature";
@@ -121,9 +97,5 @@ public final class IssueCodes {
 	 * @since 2.18
 	 */
 	public static final String TERNARY_EXPRESSION_NOT_ALLOWED = ISSUE_CODE_PREFIX + "ternary_if_operator_is_not_allowed";
-	/**
-	 * @since 2.34
-	 */
-	public static final String DUPLICATE_INTERFACE = ISSUE_CODE_PREFIX + "duplicate_interface";
 
 }

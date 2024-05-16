@@ -16,7 +16,6 @@ import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
-import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*

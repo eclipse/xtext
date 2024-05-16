@@ -51,5 +51,8 @@ Export-Package: org.eclipse.xtext.xbase.testlanguages;version="2.35.0",
  org.eclipse.xtext.xbase.testlanguages.validation;version="2.35.0",
  org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang;version="2.35.0",
  org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.impl;version="2.35.0",
- org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.util;version="2.35.0"
+ org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.util;version="2.35.0",
+ org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.util;version="2.35.0",
+ org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang;version="2.35.0",
+ org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl;version="2.35.0"
 Automatic-Module-Name: org.eclipse.xtext.xbase.testlanguages
