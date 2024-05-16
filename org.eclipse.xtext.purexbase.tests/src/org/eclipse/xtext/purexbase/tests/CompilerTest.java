@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import com.google.inject.Inject;
 
 @RunWith(XtextRunner.class)
-@InjectWith(RuntimeInjectorProvider.class)
+@InjectWith(PureXbaseInjectorProvider.class)
 public class CompilerTest {
 	@Rule
 	@Inject
