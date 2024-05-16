@@ -51,6 +51,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
@@ -65,6 +66,7 @@ import com.google.inject.name.Names;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.35
  */
+@Beta
 public abstract class AbstractXtextTests extends Assert {
 
 	private Injector injector;
