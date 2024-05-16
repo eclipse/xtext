@@ -48,10 +48,12 @@ public class Bug332217TestLanguageInjectorProvider implements IInjectorProvider,
 	protected Bug332217TestLanguageRuntimeModule createRuntimeModule() {
 		// make it work also with Maven/Tycho and OSGI
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+		// allows for bindClassLoaderToInstance to get the class loader of the bundle
+		// containing the instance of the injector provider (possibly inherited)
 		return new Bug332217TestLanguageRuntimeModule() {
 			@Override
 			public ClassLoader bindClassLoaderToInstance() {
-				return Bug332217TestLanguageInjectorProvider.class
+				return Bug332217TestLanguageInjectorProvider.this.getClass()
 						.getClassLoader();
 			}
 		};
