@@ -529,6 +529,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t\t");
     _builder.append("// composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("// Enables several checks on the inferred Jvm model for Xbase languages concerning Java inheritance relations");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("// composedCheck = \"org.eclipse.xtext.xbase.validation.JvmGenericTypeValidator\"");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage");
     _builder.newLine();
