@@ -274,11 +274,23 @@ public class IncrementalStandaloneBuilderWithJavaTest extends AbstractIncrementa
 
 	@Test
 	public void testPathInTraceFile() throws IOException {
-		initBuilder(new ContentAssistFragmentTestLangConfiguration());
+		initBuilder(new ILanguageConfiguration[] { new ContentAssistFragmentTestLangConfiguration() },
+				"src", "src2");
+
+		File modelFile = getFile("src2/foo/bar/Another.contentassistfragmenttestlang");
+		java.nio.file.Files.createDirectories(modelFile.getParentFile().toPath());
+		java.nio.file.Files.write(modelFile.toPath(), Arrays.asList(
+				"{",
+				"  new com.acme.BugsBunny().singSomeSong()",
+				"  return null",
+				"}"), ISO_8859_1, CREATE_NEW);
+
 		assertTrue(testBuilder.launch());
 
-		String traceSourcePath = loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.First.java._trace");
-		assertTrue(traceSourcePath, traceSourcePath.startsWith("com/acme"));
+		String traceSrcPath = loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.First.java._trace");
+		assertTrue(traceSrcPath, traceSrcPath.startsWith("com/acme"));
+		String traceSrc2Path = loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.Another.java._trace");
+		assertTrue(traceSrc2Path, traceSrc2Path.startsWith("foo/bar"));
 	}
 
 	private String loadTraceSourcePath(String file) throws IOException {
