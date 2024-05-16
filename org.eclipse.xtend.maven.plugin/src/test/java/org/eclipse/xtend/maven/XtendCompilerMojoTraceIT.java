@@ -9,6 +9,7 @@
 package org.eclipse.xtend.maven;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.maven.it.VerificationException;
@@ -28,17 +29,10 @@ public class XtendCompilerMojoTraceIT {
 		MavenVerifierUtil.checkMavenExecutable(ROOT);
 	}
 	
-	private String loadTraceSourcePath(String file) {
-		try {
-			FileInputStream in = new FileInputStream(file);
-			try {
-				AbstractTraceRegion region = new TraceRegionSerializer().readTraceRegionFrom(in);
-				return region.getAssociatedSrcRelativePath().toString();
-			} finally {
-				in.close();
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+	private String loadTraceSourcePath(String file) throws FileNotFoundException, IOException {
+		try (FileInputStream in = new FileInputStream(file)) {
+			AbstractTraceRegion region = new TraceRegionSerializer().readTraceRegionFrom(in);
+			return region.getAssociatedSrcRelativePath().toString();
 		}
 	}
 
