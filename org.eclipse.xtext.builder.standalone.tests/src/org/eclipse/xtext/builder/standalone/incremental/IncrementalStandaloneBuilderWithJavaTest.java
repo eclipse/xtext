@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.standalone.incremental;
 
 import static com.google.common.io.Files.readLines;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Files.write;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -19,10 +20,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.xtext.builder.standalone.ILanguageConfiguration;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -268,4 +273,33 @@ public class IncrementalStandaloneBuilderWithJavaTest extends AbstractIncrementa
 		genContent = readLines(genJavaFile, ISO_8859_1);
 		assertFalse(genContent.stream().filter(s -> s.contains("new Object()")).findFirst().isPresent());
 	}
+
+	@Test
+	public void testPathInTraceFile() throws IOException {
+		initBuilder(new ILanguageConfiguration[] { new ContentAssistFragmentTestLangConfiguration() },
+				"src", "src2");
+
+		File modelFile = getFile("src2/foo/bar/Another.contentassistfragmenttestlang");
+		createDirectories(modelFile.getParentFile().toPath());
+		write(modelFile.toPath(), Arrays.asList(
+				"{",
+				"  new com.acme.BugsBunny().singSomeSong()",
+				"  return null",
+				"}"), ISO_8859_1, CREATE_NEW);
+
+		assertTrue(testBuilder.launch());
+
+		assertEquals("com/acme/First.contentassistfragmenttestlang",
+				loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.First.java._trace"));
+		assertEquals("foo/bar/Another.contentassistfragmenttestlang",
+				loadTraceSourcePath(PROJECT_DIR + "/src-gen/my/test/.Another.java._trace"));
+	}
+
+	private String loadTraceSourcePath(String file) throws IOException {
+		try (FileInputStream in = new FileInputStream(file)) {
+			AbstractTraceRegion region = new TraceRegionSerializer().readTraceRegionFrom(in);
+			return region.getAssociatedSrcRelativePath().toString();
+		}
+	}
+
 }

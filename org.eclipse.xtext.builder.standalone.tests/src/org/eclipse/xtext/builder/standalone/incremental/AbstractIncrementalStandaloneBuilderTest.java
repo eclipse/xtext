@@ -67,7 +67,7 @@ public abstract class AbstractIncrementalStandaloneBuilderTest {
 		return initBuilder(configs, "src");
 	}
 
-	private StandaloneBuilder initBuilder(ILanguageConfiguration[] configs, String... srcDirs) {
+	protected StandaloneBuilder initBuilder(ILanguageConfiguration[] configs, String... srcDirs) {
 		List<String> paths = new ArrayList<String>();
 		for (String srcDir : srcDirs) {
 			paths.add(new File(PROJECT_DIR, srcDir).getAbsolutePath());
