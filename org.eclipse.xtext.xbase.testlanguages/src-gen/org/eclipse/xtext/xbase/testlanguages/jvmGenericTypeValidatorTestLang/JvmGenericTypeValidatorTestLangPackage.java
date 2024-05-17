@@ -284,6 +284,43 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
   int MY_CLASS_WITH_SUPER_TYPES_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithWrongAdditionalInferredInterfaceImpl <em>My Class With Wrong Additional Inferred Interface</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithWrongAdditionalInferredInterfaceImpl
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyClassWithWrongAdditionalInferredInterface()
+   * @generated
+   */
+  int MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE__NAME = MY_TYPE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Members</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE__MEMBERS = MY_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>My Class With Wrong Additional Inferred Interface</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE_FEATURE_COUNT = MY_TYPE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl <em>My Member</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -291,7 +328,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMember()
    * @generated
    */
-  int MY_MEMBER = 5;
+  int MY_MEMBER = 6;
 
   /**
    * The number of structural features of the '<em>My Member</em>' class.
@@ -310,7 +347,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyConstructor()
    * @generated
    */
-  int MY_CONSTRUCTOR = 6;
+  int MY_CONSTRUCTOR = 7;
 
   /**
    * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -356,7 +393,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyField()
    * @generated
    */
-  int MY_FIELD = 7;
+  int MY_FIELD = 8;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -393,7 +430,7 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyMethod()
    * @generated
    */
-  int MY_METHOD = 8;
+  int MY_METHOD = 9;
 
   /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -656,6 +693,27 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
    * @generated
    */
   EReference getMyClassWithSuperTypes_SuperTypes();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface <em>My Class With Wrong Additional Inferred Interface</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>My Class With Wrong Additional Inferred Interface</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface
+   * @generated
+   */
+  EClass getMyClassWithWrongAdditionalInferredInterface();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface#getMembers <em>Members</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Members</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface#getMembers()
+   * @see #getMyClassWithWrongAdditionalInferredInterface()
+   * @generated
+   */
+  EReference getMyClassWithWrongAdditionalInferredInterface_Members();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyMember <em>My Member</em>}'.
@@ -1011,6 +1069,24 @@ public interface JvmGenericTypeValidatorTestLangPackage extends EPackage
      * @generated
      */
     EReference MY_CLASS_WITH_SUPER_TYPES__SUPER_TYPES = eINSTANCE.getMyClassWithSuperTypes_SuperTypes();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithWrongAdditionalInferredInterfaceImpl <em>My Class With Wrong Additional Inferred Interface</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyClassWithWrongAdditionalInferredInterfaceImpl
+     * @see org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.JvmGenericTypeValidatorTestLangPackageImpl#getMyClassWithWrongAdditionalInferredInterface()
+     * @generated
+     */
+    EClass MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE = eINSTANCE.getMyClassWithWrongAdditionalInferredInterface();
+
+    /**
+     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE__MEMBERS = eINSTANCE.getMyClassWithWrongAdditionalInferredInterface_Members();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.impl.MyMemberImpl <em>My Member</em>}' class.

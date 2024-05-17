@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
@@ -152,6 +153,48 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			}));
 	}
 
+	private void inferClassAndWrongInterface(MyClassWithWrongAdditionalInferredInterface element,
+			IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+		// Infers a class correctly
+		var inferred = jvmTypesBuilder.toClass(element, qualifiedNameProvider.getFullyQualifiedName(element));
+		acceptor.accept(inferred,
+				(JvmGenericType it) -> {
+					for (var member : element.getMembers()) {
+						// for simplicity, let's assume it's a method
+						MyMethod method = (MyMethod) member;
+						it.getMembers().add(jvmTypesBuilder.toMethod(method, method.getName(), method.getType(), meth -> {
+							for (var param : method.getParameters()) {
+								meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(), param.getParameterType()));
+							}
+							jvmTypesBuilder.setBody(meth, method.getExpression());
+						}));
+					}
+			});
+		// but also infers an interface with a wrong method
+		// to verify that the JvmGenericType of the inferred interface will NOT be checked
+		// See https://github.com/eclipse/xtext/issues/3045
+		var wrongInferredInterface = jvmTypesBuilder.toInterface(element,
+				qualifiedNameProvider.getFullyQualifiedName(element).toString()+ "Interface",
+			(JvmGenericType it) -> {
+				for (var member : element.getMembers()) {
+					// for simplicity, let's assume it's a method
+					MyMethod method = (MyMethod) member;
+					// wrong abstract method with duplicate parameters
+					it.getMembers().add(jvmTypesBuilder.toMethod(method, method.getName() + "Wrong", method.getType(), meth -> {
+						meth.setAbstract(true);
+						for (var param : method.getParameters()) {
+							meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(),
+									param.getParameterType()));
+							// intentionally duplicate parameters
+							meth.getParameters().add(jvmTypesBuilder.toParameter(param, param.getName(),
+									param.getParameterType()));
+						}
+					}));
+				}
+			});
+		acceptor.accept(wrongInferredInterface);
+	}
+
 	@Override
 	public void infer(EObject element, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		if (element instanceof MyClass) {
@@ -162,6 +205,9 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			return;
 		} else if (element instanceof MyClassWithSuperTypes) {
 			inferClassWithSuperTypes((MyClassWithSuperTypes) element, acceptor, prelinkingPhase);
+			return;
+		} else if (element instanceof MyClassWithWrongAdditionalInferredInterface) {
+			inferClassAndWrongInterface((MyClassWithWrongAdditionalInferredInterface) element, acceptor, prelinkingPhase);
 			return;
 		} else {
 			super.infer(element, acceptor, prelinkingPhase);

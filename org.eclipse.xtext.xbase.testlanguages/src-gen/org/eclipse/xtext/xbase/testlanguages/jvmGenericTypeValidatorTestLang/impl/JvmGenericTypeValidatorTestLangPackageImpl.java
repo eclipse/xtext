@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.Jvm
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
@@ -75,6 +76,13 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   private EClass myClassWithSuperTypesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myClassWithWrongAdditionalInferredInterfaceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -353,6 +361,28 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
    * @generated
    */
   @Override
+  public EClass getMyClassWithWrongAdditionalInferredInterface()
+  {
+    return myClassWithWrongAdditionalInferredInterfaceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMyClassWithWrongAdditionalInferredInterface_Members()
+  {
+    return (EReference)myClassWithWrongAdditionalInferredInterfaceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getMyMember()
   {
     return myMemberEClass;
@@ -597,6 +627,9 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     myClassWithSuperTypesEClass = createEClass(MY_CLASS_WITH_SUPER_TYPES);
     createEReference(myClassWithSuperTypesEClass, MY_CLASS_WITH_SUPER_TYPES__SUPER_TYPES);
 
+    myClassWithWrongAdditionalInferredInterfaceEClass = createEClass(MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE);
+    createEReference(myClassWithWrongAdditionalInferredInterfaceEClass, MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE__MEMBERS);
+
     myMemberEClass = createEClass(MY_MEMBER);
 
     myConstructorEClass = createEClass(MY_CONSTRUCTOR);
@@ -658,6 +691,7 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
     myClassEClass.getESuperTypes().add(this.getMyMember());
     myInterfaceEClass.getESuperTypes().add(this.getMyType());
     myClassWithSuperTypesEClass.getESuperTypes().add(this.getMyType());
+    myClassWithWrongAdditionalInferredInterfaceEClass.getESuperTypes().add(this.getMyType());
     myConstructorEClass.getESuperTypes().add(this.getMyMember());
     myFieldEClass.getESuperTypes().add(this.getMyMember());
     myMethodEClass.getESuperTypes().add(this.getMyMember());
@@ -683,6 +717,9 @@ public class JvmGenericTypeValidatorTestLangPackageImpl extends EPackageImpl imp
 
     initEClass(myClassWithSuperTypesEClass, MyClassWithSuperTypes.class, "MyClassWithSuperTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMyClassWithSuperTypes_SuperTypes(), theTypesPackage.getJvmParameterizedTypeReference(), null, "superTypes", null, 0, -1, MyClassWithSuperTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(myClassWithWrongAdditionalInferredInterfaceEClass, MyClassWithWrongAdditionalInferredInterface.class, "MyClassWithWrongAdditionalInferredInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMyClassWithWrongAdditionalInferredInterface_Members(), this.getMyMember(), null, "members", null, 0, -1, MyClassWithWrongAdditionalInferredInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(myMemberEClass, MyMember.class, "MyMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

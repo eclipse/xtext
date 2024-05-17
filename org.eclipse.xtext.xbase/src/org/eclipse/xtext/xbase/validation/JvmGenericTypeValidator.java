@@ -146,11 +146,12 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkJvmGenericTypes(List<? extends EObject> contents) {
+		var processed = new HashSet<EObject>();
 		contents.stream()
 				.filter(JvmGenericType.class::isInstance)
 				.map(JvmGenericType.class::cast)
 				.filter(this::shouldBeValidated)
-				.forEach(this::checkJvmGenericType);
+				.forEach(t -> checkJvmGenericType(t, processed));
 	}
 
 	/**
@@ -171,8 +172,12 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	/**
 	 * The method assumes that the passed {@link JvmGenericType} has an associated source.
 	 */
-	protected void checkJvmGenericType(JvmGenericType type) {
+	protected void checkJvmGenericType(JvmGenericType type, Set<EObject> processed) {
 		var sourceType = getPrimarySourceElement(type);
+		// inferred types must be checked once per primary source element
+		// see https://github.com/eclipse/xtext/issues/3045
+		if (!processed.add(sourceType))
+			return;
 		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));
 		handleExceptionDuringValidation(() -> checkSuperTypes(sourceType, type));
 		IterableExtensions.toList(type.getDeclaredFields()).stream()
@@ -188,7 +193,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 			EcoreUtil2.eAllOfType(member, JvmGenericType.class).stream()
 				.filter(this::shouldBeValidated)
 				.forEach(nestedType ->
-					handleExceptionDuringValidation(() -> checkJvmGenericType(nestedType)));
+					handleExceptionDuringValidation(() -> checkJvmGenericType(nestedType, processed)));
 		});
 	}
 

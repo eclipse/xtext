@@ -75,6 +75,7 @@ public class JvmGenericTypeValidatorTestLangFactoryImpl extends EFactoryImpl imp
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS: return createMyClass();
       case JvmGenericTypeValidatorTestLangPackage.MY_INTERFACE: return createMyInterface();
       case JvmGenericTypeValidatorTestLangPackage.MY_CLASS_WITH_SUPER_TYPES: return createMyClassWithSuperTypes();
+      case JvmGenericTypeValidatorTestLangPackage.MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE: return createMyClassWithWrongAdditionalInferredInterface();
       case JvmGenericTypeValidatorTestLangPackage.MY_MEMBER: return createMyMember();
       case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR: return createMyConstructor();
       case JvmGenericTypeValidatorTestLangPackage.MY_FIELD: return createMyField();
@@ -142,6 +143,18 @@ public class JvmGenericTypeValidatorTestLangFactoryImpl extends EFactoryImpl imp
   {
     MyClassWithSuperTypesImpl myClassWithSuperTypes = new MyClassWithSuperTypesImpl();
     return myClassWithSuperTypes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MyClassWithWrongAdditionalInferredInterface createMyClassWithWrongAdditionalInferredInterface()
+  {
+    MyClassWithWrongAdditionalInferredInterfaceImpl myClassWithWrongAdditionalInferredInterface = new MyClassWithWrongAdditionalInferredInterfaceImpl();
+    return myClassWithWrongAdditionalInferredInterface;
   }
 
   /**

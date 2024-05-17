@@ -71,6 +71,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
     public static final int T__95=95;
     public static final int T__96=96;
     public static final int T__97=97;
+    public static final int T__98=98;
     public static final int RULE_DECIMAL=7;
     public static final int T__26=26;
     public static final int T__27=27;
@@ -414,10 +415,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:25:7: ( 'constructor' )
-            // InternalJvmGenericTypeValidatorTestLang.g:25:9: 'constructor'
+            // InternalJvmGenericTypeValidatorTestLang.g:25:7: ( 'classWithWrongInferredInterface' )
+            // InternalJvmGenericTypeValidatorTestLang.g:25:9: 'classWithWrongInferredInterface'
             {
-            match("constructor"); 
+            match("classWithWrongInferredInterface"); 
 
 
             }
@@ -435,10 +436,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:26:7: ( '(' )
-            // InternalJvmGenericTypeValidatorTestLang.g:26:9: '('
+            // InternalJvmGenericTypeValidatorTestLang.g:26:7: ( 'constructor' )
+            // InternalJvmGenericTypeValidatorTestLang.g:26:9: 'constructor'
             {
-            match('('); 
+            match("constructor"); 
+
 
             }
 
@@ -455,10 +457,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:27:7: ( ')' )
-            // InternalJvmGenericTypeValidatorTestLang.g:27:9: ')'
+            // InternalJvmGenericTypeValidatorTestLang.g:27:7: ( '(' )
+            // InternalJvmGenericTypeValidatorTestLang.g:27:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -475,11 +477,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:28:7: ( 'throws' )
-            // InternalJvmGenericTypeValidatorTestLang.g:28:9: 'throws'
+            // InternalJvmGenericTypeValidatorTestLang.g:28:7: ( ')' )
+            // InternalJvmGenericTypeValidatorTestLang.g:28:9: ')'
             {
-            match("throws"); 
-
+            match(')'); 
 
             }
 
@@ -496,10 +497,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:29:7: ( 'def' )
-            // InternalJvmGenericTypeValidatorTestLang.g:29:9: 'def'
+            // InternalJvmGenericTypeValidatorTestLang.g:29:7: ( 'throws' )
+            // InternalJvmGenericTypeValidatorTestLang.g:29:9: 'throws'
             {
-            match("def"); 
+            match("throws"); 
 
 
             }
@@ -517,10 +518,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:30:7: ( 'static' )
-            // InternalJvmGenericTypeValidatorTestLang.g:30:9: 'static'
+            // InternalJvmGenericTypeValidatorTestLang.g:30:7: ( 'def' )
+            // InternalJvmGenericTypeValidatorTestLang.g:30:9: 'def'
             {
-            match("static"); 
+            match("def"); 
 
 
             }
@@ -538,10 +539,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:31:7: ( 'private' )
-            // InternalJvmGenericTypeValidatorTestLang.g:31:9: 'private'
+            // InternalJvmGenericTypeValidatorTestLang.g:31:7: ( 'static' )
+            // InternalJvmGenericTypeValidatorTestLang.g:31:9: 'static'
             {
-            match("private"); 
+            match("static"); 
 
 
             }
@@ -559,10 +560,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:32:7: ( 'synchronized' )
-            // InternalJvmGenericTypeValidatorTestLang.g:32:9: 'synchronized'
+            // InternalJvmGenericTypeValidatorTestLang.g:32:7: ( 'private' )
+            // InternalJvmGenericTypeValidatorTestLang.g:32:9: 'private'
             {
-            match("synchronized"); 
+            match("private"); 
 
 
             }
@@ -580,10 +581,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:33:7: ( '=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:33:9: '='
+            // InternalJvmGenericTypeValidatorTestLang.g:33:7: ( 'synchronized' )
+            // InternalJvmGenericTypeValidatorTestLang.g:33:9: 'synchronized'
             {
-            match('='); 
+            match("synchronized"); 
+
 
             }
 
@@ -600,11 +602,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:34:7: ( '+=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:34:9: '+='
+            // InternalJvmGenericTypeValidatorTestLang.g:34:7: ( '=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:34:9: '='
             {
-            match("+="); 
-
+            match('='); 
 
             }
 
@@ -621,10 +622,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:35:7: ( '-=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:35:9: '-='
+            // InternalJvmGenericTypeValidatorTestLang.g:35:7: ( '+=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:35:9: '+='
             {
-            match("-="); 
+            match("+="); 
 
 
             }
@@ -642,10 +643,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:36:7: ( '*=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:36:9: '*='
+            // InternalJvmGenericTypeValidatorTestLang.g:36:7: ( '-=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:36:9: '-='
             {
-            match("*="); 
+            match("-="); 
 
 
             }
@@ -663,10 +664,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:37:7: ( '/=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:37:9: '/='
+            // InternalJvmGenericTypeValidatorTestLang.g:37:7: ( '*=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:37:9: '*='
             {
-            match("/="); 
+            match("*="); 
 
 
             }
@@ -684,10 +685,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:38:7: ( '%=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:38:9: '%='
+            // InternalJvmGenericTypeValidatorTestLang.g:38:7: ( '/=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:38:9: '/='
             {
-            match("%="); 
+            match("/="); 
 
 
             }
@@ -705,10 +706,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:39:7: ( '>=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:39:9: '>='
+            // InternalJvmGenericTypeValidatorTestLang.g:39:7: ( '%=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:39:9: '%='
             {
-            match(">="); 
+            match("%="); 
 
 
             }
@@ -726,10 +727,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:40:7: ( '||' )
-            // InternalJvmGenericTypeValidatorTestLang.g:40:9: '||'
+            // InternalJvmGenericTypeValidatorTestLang.g:40:7: ( '>=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:40:9: '>='
             {
-            match("||"); 
+            match(">="); 
 
 
             }
@@ -747,10 +748,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:41:7: ( '&&' )
-            // InternalJvmGenericTypeValidatorTestLang.g:41:9: '&&'
+            // InternalJvmGenericTypeValidatorTestLang.g:41:7: ( '||' )
+            // InternalJvmGenericTypeValidatorTestLang.g:41:9: '||'
             {
-            match("&&"); 
+            match("||"); 
 
 
             }
@@ -768,10 +769,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:42:7: ( '==' )
-            // InternalJvmGenericTypeValidatorTestLang.g:42:9: '=='
+            // InternalJvmGenericTypeValidatorTestLang.g:42:7: ( '&&' )
+            // InternalJvmGenericTypeValidatorTestLang.g:42:9: '&&'
             {
-            match("=="); 
+            match("&&"); 
 
 
             }
@@ -789,10 +790,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:43:7: ( '!=' )
-            // InternalJvmGenericTypeValidatorTestLang.g:43:9: '!='
+            // InternalJvmGenericTypeValidatorTestLang.g:43:7: ( '==' )
+            // InternalJvmGenericTypeValidatorTestLang.g:43:9: '=='
             {
-            match("!="); 
+            match("=="); 
 
 
             }
@@ -810,10 +811,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:44:7: ( '===' )
-            // InternalJvmGenericTypeValidatorTestLang.g:44:9: '==='
+            // InternalJvmGenericTypeValidatorTestLang.g:44:7: ( '!=' )
+            // InternalJvmGenericTypeValidatorTestLang.g:44:9: '!='
             {
-            match("==="); 
+            match("!="); 
 
 
             }
@@ -831,10 +832,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:45:7: ( '!==' )
-            // InternalJvmGenericTypeValidatorTestLang.g:45:9: '!=='
+            // InternalJvmGenericTypeValidatorTestLang.g:45:7: ( '===' )
+            // InternalJvmGenericTypeValidatorTestLang.g:45:9: '==='
             {
-            match("!=="); 
+            match("==="); 
 
 
             }
@@ -852,10 +853,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:46:7: ( 'instanceof' )
-            // InternalJvmGenericTypeValidatorTestLang.g:46:9: 'instanceof'
+            // InternalJvmGenericTypeValidatorTestLang.g:46:7: ( '!==' )
+            // InternalJvmGenericTypeValidatorTestLang.g:46:9: '!=='
             {
-            match("instanceof"); 
+            match("!=="); 
 
 
             }
@@ -873,10 +874,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:47:7: ( '->' )
-            // InternalJvmGenericTypeValidatorTestLang.g:47:9: '->'
+            // InternalJvmGenericTypeValidatorTestLang.g:47:7: ( 'instanceof' )
+            // InternalJvmGenericTypeValidatorTestLang.g:47:9: 'instanceof'
             {
-            match("->"); 
+            match("instanceof"); 
 
 
             }
@@ -894,10 +895,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:48:7: ( '..<' )
-            // InternalJvmGenericTypeValidatorTestLang.g:48:9: '..<'
+            // InternalJvmGenericTypeValidatorTestLang.g:48:7: ( '->' )
+            // InternalJvmGenericTypeValidatorTestLang.g:48:9: '->'
             {
-            match("..<"); 
+            match("->"); 
 
 
             }
@@ -915,10 +916,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:49:7: ( '..' )
-            // InternalJvmGenericTypeValidatorTestLang.g:49:9: '..'
+            // InternalJvmGenericTypeValidatorTestLang.g:49:7: ( '..<' )
+            // InternalJvmGenericTypeValidatorTestLang.g:49:9: '..<'
             {
-            match(".."); 
+            match("..<"); 
 
 
             }
@@ -936,10 +937,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:50:7: ( '=>' )
-            // InternalJvmGenericTypeValidatorTestLang.g:50:9: '=>'
+            // InternalJvmGenericTypeValidatorTestLang.g:50:7: ( '..' )
+            // InternalJvmGenericTypeValidatorTestLang.g:50:9: '..'
             {
-            match("=>"); 
+            match(".."); 
 
 
             }
@@ -957,10 +958,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:51:7: ( '<>' )
-            // InternalJvmGenericTypeValidatorTestLang.g:51:9: '<>'
+            // InternalJvmGenericTypeValidatorTestLang.g:51:7: ( '=>' )
+            // InternalJvmGenericTypeValidatorTestLang.g:51:9: '=>'
             {
-            match("<>"); 
+            match("=>"); 
 
 
             }
@@ -978,10 +979,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:52:7: ( '?:' )
-            // InternalJvmGenericTypeValidatorTestLang.g:52:9: '?:'
+            // InternalJvmGenericTypeValidatorTestLang.g:52:7: ( '<>' )
+            // InternalJvmGenericTypeValidatorTestLang.g:52:9: '<>'
             {
-            match("?:"); 
+            match("<>"); 
 
 
             }
@@ -999,10 +1000,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:53:7: ( '+' )
-            // InternalJvmGenericTypeValidatorTestLang.g:53:9: '+'
+            // InternalJvmGenericTypeValidatorTestLang.g:53:7: ( '?:' )
+            // InternalJvmGenericTypeValidatorTestLang.g:53:9: '?:'
             {
-            match('+'); 
+            match("?:"); 
+
 
             }
 
@@ -1019,10 +1021,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:54:7: ( '-' )
-            // InternalJvmGenericTypeValidatorTestLang.g:54:9: '-'
+            // InternalJvmGenericTypeValidatorTestLang.g:54:7: ( '+' )
+            // InternalJvmGenericTypeValidatorTestLang.g:54:9: '+'
             {
-            match('-'); 
+            match('+'); 
 
             }
 
@@ -1039,10 +1041,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:55:7: ( '*' )
-            // InternalJvmGenericTypeValidatorTestLang.g:55:9: '*'
+            // InternalJvmGenericTypeValidatorTestLang.g:55:7: ( '-' )
+            // InternalJvmGenericTypeValidatorTestLang.g:55:9: '-'
             {
-            match('*'); 
+            match('-'); 
 
             }
 
@@ -1059,11 +1061,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:56:7: ( '**' )
-            // InternalJvmGenericTypeValidatorTestLang.g:56:9: '**'
+            // InternalJvmGenericTypeValidatorTestLang.g:56:7: ( '*' )
+            // InternalJvmGenericTypeValidatorTestLang.g:56:9: '*'
             {
-            match("**"); 
-
+            match('*'); 
 
             }
 
@@ -1080,10 +1081,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:57:7: ( '/' )
-            // InternalJvmGenericTypeValidatorTestLang.g:57:9: '/'
+            // InternalJvmGenericTypeValidatorTestLang.g:57:7: ( '**' )
+            // InternalJvmGenericTypeValidatorTestLang.g:57:9: '**'
             {
-            match('/'); 
+            match("**"); 
+
 
             }
 
@@ -1100,10 +1102,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:58:7: ( '%' )
-            // InternalJvmGenericTypeValidatorTestLang.g:58:9: '%'
+            // InternalJvmGenericTypeValidatorTestLang.g:58:7: ( '/' )
+            // InternalJvmGenericTypeValidatorTestLang.g:58:9: '/'
             {
-            match('%'); 
+            match('/'); 
 
             }
 
@@ -1120,10 +1122,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:59:7: ( '!' )
-            // InternalJvmGenericTypeValidatorTestLang.g:59:9: '!'
+            // InternalJvmGenericTypeValidatorTestLang.g:59:7: ( '%' )
+            // InternalJvmGenericTypeValidatorTestLang.g:59:9: '%'
             {
-            match('!'); 
+            match('%'); 
 
             }
 
@@ -1140,11 +1142,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:60:7: ( 'as' )
-            // InternalJvmGenericTypeValidatorTestLang.g:60:9: 'as'
+            // InternalJvmGenericTypeValidatorTestLang.g:60:7: ( '!' )
+            // InternalJvmGenericTypeValidatorTestLang.g:60:9: '!'
             {
-            match("as"); 
-
+            match('!'); 
 
             }
 
@@ -1161,10 +1162,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:61:7: ( '++' )
-            // InternalJvmGenericTypeValidatorTestLang.g:61:9: '++'
+            // InternalJvmGenericTypeValidatorTestLang.g:61:7: ( 'as' )
+            // InternalJvmGenericTypeValidatorTestLang.g:61:9: 'as'
             {
-            match("++"); 
+            match("as"); 
 
 
             }
@@ -1182,10 +1183,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:62:7: ( '--' )
-            // InternalJvmGenericTypeValidatorTestLang.g:62:9: '--'
+            // InternalJvmGenericTypeValidatorTestLang.g:62:7: ( '++' )
+            // InternalJvmGenericTypeValidatorTestLang.g:62:9: '++'
             {
-            match("--"); 
+            match("++"); 
 
 
             }
@@ -1203,10 +1204,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:63:7: ( '.' )
-            // InternalJvmGenericTypeValidatorTestLang.g:63:9: '.'
+            // InternalJvmGenericTypeValidatorTestLang.g:63:7: ( '--' )
+            // InternalJvmGenericTypeValidatorTestLang.g:63:9: '--'
             {
-            match('.'); 
+            match("--"); 
+
 
             }
 
@@ -1223,11 +1225,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:64:7: ( '::' )
-            // InternalJvmGenericTypeValidatorTestLang.g:64:9: '::'
+            // InternalJvmGenericTypeValidatorTestLang.g:64:7: ( '.' )
+            // InternalJvmGenericTypeValidatorTestLang.g:64:9: '.'
             {
-            match("::"); 
-
+            match('.'); 
 
             }
 
@@ -1244,10 +1245,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:65:7: ( '?.' )
-            // InternalJvmGenericTypeValidatorTestLang.g:65:9: '?.'
+            // InternalJvmGenericTypeValidatorTestLang.g:65:7: ( '::' )
+            // InternalJvmGenericTypeValidatorTestLang.g:65:9: '::'
             {
-            match("?."); 
+            match("::"); 
 
 
             }
@@ -1265,10 +1266,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:66:7: ( '#' )
-            // InternalJvmGenericTypeValidatorTestLang.g:66:9: '#'
+            // InternalJvmGenericTypeValidatorTestLang.g:66:7: ( '?.' )
+            // InternalJvmGenericTypeValidatorTestLang.g:66:9: '?.'
             {
-            match('#'); 
+            match("?."); 
+
 
             }
 
@@ -1285,10 +1287,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:67:7: ( '[' )
-            // InternalJvmGenericTypeValidatorTestLang.g:67:9: '['
+            // InternalJvmGenericTypeValidatorTestLang.g:67:7: ( '#' )
+            // InternalJvmGenericTypeValidatorTestLang.g:67:9: '#'
             {
-            match('['); 
+            match('#'); 
 
             }
 
@@ -1305,10 +1307,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:68:7: ( ']' )
-            // InternalJvmGenericTypeValidatorTestLang.g:68:9: ']'
+            // InternalJvmGenericTypeValidatorTestLang.g:68:7: ( '[' )
+            // InternalJvmGenericTypeValidatorTestLang.g:68:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -1325,10 +1327,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:69:7: ( '|' )
-            // InternalJvmGenericTypeValidatorTestLang.g:69:9: '|'
+            // InternalJvmGenericTypeValidatorTestLang.g:69:7: ( ']' )
+            // InternalJvmGenericTypeValidatorTestLang.g:69:9: ']'
             {
-            match('|'); 
+            match(']'); 
 
             }
 
@@ -1345,11 +1347,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:70:7: ( 'if' )
-            // InternalJvmGenericTypeValidatorTestLang.g:70:9: 'if'
+            // InternalJvmGenericTypeValidatorTestLang.g:70:7: ( '|' )
+            // InternalJvmGenericTypeValidatorTestLang.g:70:9: '|'
             {
-            match("if"); 
-
+            match('|'); 
 
             }
 
@@ -1366,10 +1367,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:71:7: ( 'else' )
-            // InternalJvmGenericTypeValidatorTestLang.g:71:9: 'else'
+            // InternalJvmGenericTypeValidatorTestLang.g:71:7: ( 'if' )
+            // InternalJvmGenericTypeValidatorTestLang.g:71:9: 'if'
             {
-            match("else"); 
+            match("if"); 
 
 
             }
@@ -1387,10 +1388,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:72:7: ( 'switch' )
-            // InternalJvmGenericTypeValidatorTestLang.g:72:9: 'switch'
+            // InternalJvmGenericTypeValidatorTestLang.g:72:7: ( 'else' )
+            // InternalJvmGenericTypeValidatorTestLang.g:72:9: 'else'
             {
-            match("switch"); 
+            match("else"); 
 
 
             }
@@ -1408,10 +1409,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:73:7: ( ':' )
-            // InternalJvmGenericTypeValidatorTestLang.g:73:9: ':'
+            // InternalJvmGenericTypeValidatorTestLang.g:73:7: ( 'switch' )
+            // InternalJvmGenericTypeValidatorTestLang.g:73:9: 'switch'
             {
-            match(':'); 
+            match("switch"); 
+
 
             }
 
@@ -1428,11 +1430,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:74:7: ( 'default' )
-            // InternalJvmGenericTypeValidatorTestLang.g:74:9: 'default'
+            // InternalJvmGenericTypeValidatorTestLang.g:74:7: ( ':' )
+            // InternalJvmGenericTypeValidatorTestLang.g:74:9: ':'
             {
-            match("default"); 
-
+            match(':'); 
 
             }
 
@@ -1449,10 +1450,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:75:7: ( 'case' )
-            // InternalJvmGenericTypeValidatorTestLang.g:75:9: 'case'
+            // InternalJvmGenericTypeValidatorTestLang.g:75:7: ( 'default' )
+            // InternalJvmGenericTypeValidatorTestLang.g:75:9: 'default'
             {
-            match("case"); 
+            match("default"); 
 
 
             }
@@ -1470,10 +1471,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:76:7: ( 'for' )
-            // InternalJvmGenericTypeValidatorTestLang.g:76:9: 'for'
+            // InternalJvmGenericTypeValidatorTestLang.g:76:7: ( 'case' )
+            // InternalJvmGenericTypeValidatorTestLang.g:76:9: 'case'
             {
-            match("for"); 
+            match("case"); 
 
 
             }
@@ -1491,10 +1492,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:77:7: ( 'while' )
-            // InternalJvmGenericTypeValidatorTestLang.g:77:9: 'while'
+            // InternalJvmGenericTypeValidatorTestLang.g:77:7: ( 'for' )
+            // InternalJvmGenericTypeValidatorTestLang.g:77:9: 'for'
             {
-            match("while"); 
+            match("for"); 
 
 
             }
@@ -1512,10 +1513,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:78:7: ( 'do' )
-            // InternalJvmGenericTypeValidatorTestLang.g:78:9: 'do'
+            // InternalJvmGenericTypeValidatorTestLang.g:78:7: ( 'while' )
+            // InternalJvmGenericTypeValidatorTestLang.g:78:9: 'while'
             {
-            match("do"); 
+            match("while"); 
 
 
             }
@@ -1533,10 +1534,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:79:7: ( 'var' )
-            // InternalJvmGenericTypeValidatorTestLang.g:79:9: 'var'
+            // InternalJvmGenericTypeValidatorTestLang.g:79:7: ( 'do' )
+            // InternalJvmGenericTypeValidatorTestLang.g:79:9: 'do'
             {
-            match("var"); 
+            match("do"); 
 
 
             }
@@ -1554,10 +1555,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:80:7: ( 'val' )
-            // InternalJvmGenericTypeValidatorTestLang.g:80:9: 'val'
+            // InternalJvmGenericTypeValidatorTestLang.g:80:7: ( 'var' )
+            // InternalJvmGenericTypeValidatorTestLang.g:80:9: 'var'
             {
-            match("val"); 
+            match("var"); 
 
 
             }
@@ -1575,10 +1576,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:81:7: ( 'import' )
-            // InternalJvmGenericTypeValidatorTestLang.g:81:9: 'import'
+            // InternalJvmGenericTypeValidatorTestLang.g:81:7: ( 'val' )
+            // InternalJvmGenericTypeValidatorTestLang.g:81:9: 'val'
             {
-            match("import"); 
+            match("val"); 
 
 
             }
@@ -1596,10 +1597,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:82:7: ( 'extension' )
-            // InternalJvmGenericTypeValidatorTestLang.g:82:9: 'extension'
+            // InternalJvmGenericTypeValidatorTestLang.g:82:7: ( 'import' )
+            // InternalJvmGenericTypeValidatorTestLang.g:82:9: 'import'
             {
-            match("extension"); 
+            match("import"); 
 
 
             }
@@ -1617,10 +1618,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:83:7: ( 'super' )
-            // InternalJvmGenericTypeValidatorTestLang.g:83:9: 'super'
+            // InternalJvmGenericTypeValidatorTestLang.g:83:7: ( 'extension' )
+            // InternalJvmGenericTypeValidatorTestLang.g:83:9: 'extension'
             {
-            match("super"); 
+            match("extension"); 
 
 
             }
@@ -1638,10 +1639,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:84:7: ( 'new' )
-            // InternalJvmGenericTypeValidatorTestLang.g:84:9: 'new'
+            // InternalJvmGenericTypeValidatorTestLang.g:84:7: ( 'super' )
+            // InternalJvmGenericTypeValidatorTestLang.g:84:9: 'super'
             {
-            match("new"); 
+            match("super"); 
 
 
             }
@@ -1659,10 +1660,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__87;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:85:7: ( 'false' )
-            // InternalJvmGenericTypeValidatorTestLang.g:85:9: 'false'
+            // InternalJvmGenericTypeValidatorTestLang.g:85:7: ( 'new' )
+            // InternalJvmGenericTypeValidatorTestLang.g:85:9: 'new'
             {
-            match("false"); 
+            match("new"); 
 
 
             }
@@ -1680,10 +1681,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__88;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:86:7: ( 'true' )
-            // InternalJvmGenericTypeValidatorTestLang.g:86:9: 'true'
+            // InternalJvmGenericTypeValidatorTestLang.g:86:7: ( 'false' )
+            // InternalJvmGenericTypeValidatorTestLang.g:86:9: 'false'
             {
-            match("true"); 
+            match("false"); 
 
 
             }
@@ -1701,10 +1702,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__89;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:87:7: ( 'null' )
-            // InternalJvmGenericTypeValidatorTestLang.g:87:9: 'null'
+            // InternalJvmGenericTypeValidatorTestLang.g:87:7: ( 'true' )
+            // InternalJvmGenericTypeValidatorTestLang.g:87:9: 'true'
             {
-            match("null"); 
+            match("true"); 
 
 
             }
@@ -1722,10 +1723,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__90;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:88:7: ( 'typeof' )
-            // InternalJvmGenericTypeValidatorTestLang.g:88:9: 'typeof'
+            // InternalJvmGenericTypeValidatorTestLang.g:88:7: ( 'null' )
+            // InternalJvmGenericTypeValidatorTestLang.g:88:9: 'null'
             {
-            match("typeof"); 
+            match("null"); 
 
 
             }
@@ -1743,10 +1744,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__91;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:89:7: ( 'throw' )
-            // InternalJvmGenericTypeValidatorTestLang.g:89:9: 'throw'
+            // InternalJvmGenericTypeValidatorTestLang.g:89:7: ( 'typeof' )
+            // InternalJvmGenericTypeValidatorTestLang.g:89:9: 'typeof'
             {
-            match("throw"); 
+            match("typeof"); 
 
 
             }
@@ -1764,10 +1765,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:90:7: ( 'return' )
-            // InternalJvmGenericTypeValidatorTestLang.g:90:9: 'return'
+            // InternalJvmGenericTypeValidatorTestLang.g:90:7: ( 'throw' )
+            // InternalJvmGenericTypeValidatorTestLang.g:90:9: 'throw'
             {
-            match("return"); 
+            match("throw"); 
 
 
             }
@@ -1785,10 +1786,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:91:7: ( 'try' )
-            // InternalJvmGenericTypeValidatorTestLang.g:91:9: 'try'
+            // InternalJvmGenericTypeValidatorTestLang.g:91:7: ( 'return' )
+            // InternalJvmGenericTypeValidatorTestLang.g:91:9: 'return'
             {
-            match("try"); 
+            match("return"); 
 
 
             }
@@ -1806,10 +1807,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__94;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:92:7: ( 'finally' )
-            // InternalJvmGenericTypeValidatorTestLang.g:92:9: 'finally'
+            // InternalJvmGenericTypeValidatorTestLang.g:92:7: ( 'try' )
+            // InternalJvmGenericTypeValidatorTestLang.g:92:9: 'try'
             {
-            match("finally"); 
+            match("try"); 
 
 
             }
@@ -1827,10 +1828,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__95;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:93:7: ( 'catch' )
-            // InternalJvmGenericTypeValidatorTestLang.g:93:9: 'catch'
+            // InternalJvmGenericTypeValidatorTestLang.g:93:7: ( 'finally' )
+            // InternalJvmGenericTypeValidatorTestLang.g:93:9: 'finally'
             {
-            match("catch"); 
+            match("finally"); 
 
 
             }
@@ -1848,10 +1849,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__96;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:94:7: ( '?' )
-            // InternalJvmGenericTypeValidatorTestLang.g:94:9: '?'
+            // InternalJvmGenericTypeValidatorTestLang.g:94:7: ( 'catch' )
+            // InternalJvmGenericTypeValidatorTestLang.g:94:9: 'catch'
             {
-            match('?'); 
+            match("catch"); 
+
 
             }
 
@@ -1868,10 +1870,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = T__97;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:95:7: ( '&' )
-            // InternalJvmGenericTypeValidatorTestLang.g:95:9: '&'
+            // InternalJvmGenericTypeValidatorTestLang.g:95:7: ( '?' )
+            // InternalJvmGenericTypeValidatorTestLang.g:95:9: '?'
             {
-            match('&'); 
+            match('?'); 
 
             }
 
@@ -1883,15 +1885,35 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
     }
     // $ANTLR end "T__97"
 
+    // $ANTLR start "T__98"
+    public final void mT__98() throws RecognitionException {
+        try {
+            int _type = T__98;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalJvmGenericTypeValidatorTestLang.g:96:7: ( '&' )
+            // InternalJvmGenericTypeValidatorTestLang.g:96:9: '&'
+            {
+            match('&'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__98"
+
     // $ANTLR start "RULE_HEX"
     public final void mRULE_HEX() throws RecognitionException {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7492:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // InternalJvmGenericTypeValidatorTestLang.g:7492:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7570:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalJvmGenericTypeValidatorTestLang.g:7570:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // InternalJvmGenericTypeValidatorTestLang.g:7492:12: ( '0x' | '0X' )
+            // InternalJvmGenericTypeValidatorTestLang.g:7570:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1919,7 +1941,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7492:13: '0x'
+                    // InternalJvmGenericTypeValidatorTestLang.g:7570:13: '0x'
                     {
                     match("0x"); 
 
@@ -1927,7 +1949,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7492:18: '0X'
+                    // InternalJvmGenericTypeValidatorTestLang.g:7570:18: '0X'
                     {
                     match("0X"); 
 
@@ -1937,7 +1959,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
             }
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7492:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalJvmGenericTypeValidatorTestLang.g:7570:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1975,7 +1997,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7492:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7570:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1984,10 +2006,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7492:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalJvmGenericTypeValidatorTestLang.g:7570:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // InternalJvmGenericTypeValidatorTestLang.g:7492:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalJvmGenericTypeValidatorTestLang.g:7570:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -2005,7 +2027,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalJvmGenericTypeValidatorTestLang.g:7492:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalJvmGenericTypeValidatorTestLang.g:7570:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -2029,7 +2051,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // InternalJvmGenericTypeValidatorTestLang.g:7492:84: ( 'l' | 'L' )
+                            // InternalJvmGenericTypeValidatorTestLang.g:7570:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -2068,11 +2090,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7494:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // InternalJvmGenericTypeValidatorTestLang.g:7494:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalJvmGenericTypeValidatorTestLang.g:7572:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalJvmGenericTypeValidatorTestLang.g:7572:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // InternalJvmGenericTypeValidatorTestLang.g:7494:21: ( '0' .. '9' | '_' )*
+            // InternalJvmGenericTypeValidatorTestLang.g:7572:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -2121,11 +2143,11 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7496:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // InternalJvmGenericTypeValidatorTestLang.g:7496:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7574:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalJvmGenericTypeValidatorTestLang.g:7574:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // InternalJvmGenericTypeValidatorTestLang.g:7496:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7574:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2134,7 +2156,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7496:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalJvmGenericTypeValidatorTestLang.g:7574:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -2145,7 +2167,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalJvmGenericTypeValidatorTestLang.g:7496:36: ( '+' | '-' )?
+                    // InternalJvmGenericTypeValidatorTestLang.g:7574:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2178,7 +2200,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
             }
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7496:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7574:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -2190,7 +2212,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7496:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalJvmGenericTypeValidatorTestLang.g:7574:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2214,7 +2236,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7496:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalJvmGenericTypeValidatorTestLang.g:7574:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2247,10 +2269,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7498:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // InternalJvmGenericTypeValidatorTestLang.g:7498:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalJvmGenericTypeValidatorTestLang.g:7576:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalJvmGenericTypeValidatorTestLang.g:7576:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // InternalJvmGenericTypeValidatorTestLang.g:7498:11: ( '^' )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7576:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2259,7 +2281,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7498:11: '^'
+                    // InternalJvmGenericTypeValidatorTestLang.g:7576:11: '^'
                     {
                     match('^'); 
 
@@ -2277,7 +2299,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7498:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalJvmGenericTypeValidatorTestLang.g:7576:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2326,10 +2348,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7500:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // InternalJvmGenericTypeValidatorTestLang.g:7500:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalJvmGenericTypeValidatorTestLang.g:7578:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalJvmGenericTypeValidatorTestLang.g:7578:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // InternalJvmGenericTypeValidatorTestLang.g:7500:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalJvmGenericTypeValidatorTestLang.g:7578:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2347,10 +2369,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7500:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalJvmGenericTypeValidatorTestLang.g:7578:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // InternalJvmGenericTypeValidatorTestLang.g:7500:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalJvmGenericTypeValidatorTestLang.g:7578:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2366,7 +2388,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // InternalJvmGenericTypeValidatorTestLang.g:7500:21: '\\\\' .
+                    	    // InternalJvmGenericTypeValidatorTestLang.g:7578:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2374,7 +2396,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalJvmGenericTypeValidatorTestLang.g:7500:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalJvmGenericTypeValidatorTestLang.g:7578:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2394,7 +2416,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalJvmGenericTypeValidatorTestLang.g:7500:44: ( '\"' )?
+                    // InternalJvmGenericTypeValidatorTestLang.g:7578:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2403,7 +2425,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalJvmGenericTypeValidatorTestLang.g:7500:44: '\"'
+                            // InternalJvmGenericTypeValidatorTestLang.g:7578:44: '\"'
                             {
                             match('\"'); 
 
@@ -2416,10 +2438,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7500:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalJvmGenericTypeValidatorTestLang.g:7578:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // InternalJvmGenericTypeValidatorTestLang.g:7500:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalJvmGenericTypeValidatorTestLang.g:7578:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2435,7 +2457,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalJvmGenericTypeValidatorTestLang.g:7500:55: '\\\\' .
+                    	    // InternalJvmGenericTypeValidatorTestLang.g:7578:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2443,7 +2465,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalJvmGenericTypeValidatorTestLang.g:7500:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalJvmGenericTypeValidatorTestLang.g:7578:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2463,7 +2485,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalJvmGenericTypeValidatorTestLang.g:7500:79: ( '\\'' )?
+                    // InternalJvmGenericTypeValidatorTestLang.g:7578:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2472,7 +2494,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalJvmGenericTypeValidatorTestLang.g:7500:79: '\\''
+                            // InternalJvmGenericTypeValidatorTestLang.g:7578:79: '\\''
                             {
                             match('\''); 
 
@@ -2503,12 +2525,12 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7502:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalJvmGenericTypeValidatorTestLang.g:7502:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalJvmGenericTypeValidatorTestLang.g:7580:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalJvmGenericTypeValidatorTestLang.g:7580:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7502:24: ( options {greedy=false; } : . )*
+            // InternalJvmGenericTypeValidatorTestLang.g:7580:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2533,7 +2555,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalJvmGenericTypeValidatorTestLang.g:7502:52: .
+            	    // InternalJvmGenericTypeValidatorTestLang.g:7580:52: .
             	    {
             	    matchAny(); 
 
@@ -2563,12 +2585,12 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7504:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalJvmGenericTypeValidatorTestLang.g:7504:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7582:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalJvmGenericTypeValidatorTestLang.g:7582:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7504:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalJvmGenericTypeValidatorTestLang.g:7582:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2581,7 +2603,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalJvmGenericTypeValidatorTestLang.g:7504:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalJvmGenericTypeValidatorTestLang.g:7582:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2601,7 +2623,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalJvmGenericTypeValidatorTestLang.g:7504:40: ( ( '\\r' )? '\\n' )?
+            // InternalJvmGenericTypeValidatorTestLang.g:7582:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2610,9 +2632,9 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalJvmGenericTypeValidatorTestLang.g:7504:41: ( '\\r' )? '\\n'
+                    // InternalJvmGenericTypeValidatorTestLang.g:7582:41: ( '\\r' )? '\\n'
                     {
-                    // InternalJvmGenericTypeValidatorTestLang.g:7504:41: ( '\\r' )?
+                    // InternalJvmGenericTypeValidatorTestLang.g:7582:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2621,7 +2643,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalJvmGenericTypeValidatorTestLang.g:7504:41: '\\r'
+                            // InternalJvmGenericTypeValidatorTestLang.g:7582:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2653,10 +2675,10 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7506:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalJvmGenericTypeValidatorTestLang.g:7506:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalJvmGenericTypeValidatorTestLang.g:7584:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalJvmGenericTypeValidatorTestLang.g:7584:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalJvmGenericTypeValidatorTestLang.g:7506:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalJvmGenericTypeValidatorTestLang.g:7584:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2710,8 +2732,8 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalJvmGenericTypeValidatorTestLang.g:7508:16: ( . )
-            // InternalJvmGenericTypeValidatorTestLang.g:7508:18: .
+            // InternalJvmGenericTypeValidatorTestLang.g:7586:16: ( . )
+            // InternalJvmGenericTypeValidatorTestLang.g:7586:18: .
             {
             matchAny(); 
 
@@ -2726,8 +2748,8 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalJvmGenericTypeValidatorTestLang.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt21=94;
+        // InternalJvmGenericTypeValidatorTestLang.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt21=95;
         alt21 = dfa21.predict(input);
         switch (alt21) {
             case 1 :
@@ -3326,63 +3348,70 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
                 }
                 break;
             case 86 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:520: RULE_HEX
+                // InternalJvmGenericTypeValidatorTestLang.g:1:520: T__98
+                {
+                mT__98(); 
+
+                }
+                break;
+            case 87 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:526: RULE_HEX
                 {
                 mRULE_HEX(); 
 
                 }
                 break;
-            case 87 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:529: RULE_INT
+            case 88 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:535: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 88 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:538: RULE_DECIMAL
+            case 89 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:544: RULE_DECIMAL
                 {
                 mRULE_DECIMAL(); 
 
                 }
                 break;
-            case 89 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:551: RULE_ID
+            case 90 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:557: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 90 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:559: RULE_STRING
+            case 91 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:565: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 91 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:571: RULE_ML_COMMENT
+            case 92 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:577: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 92 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:587: RULE_SL_COMMENT
+            case 93 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:593: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 93 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:603: RULE_WS
+            case 94 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:609: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 94 :
-                // InternalJvmGenericTypeValidatorTestLang.g:1:611: RULE_ANY_OTHER
+            case 95 :
+                // InternalJvmGenericTypeValidatorTestLang.g:1:617: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -3396,17 +3425,17 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
 
     protected DFA21 dfa21 = new DFA21(this);
     static final String DFA21_eotS =
-        "\1\uffff\1\57\1\uffff\4\57\3\uffff\1\77\1\101\1\57\2\uffff\2\57\1\117\1\122\1\126\1\131\1\135\1\137\1\141\1\143\1\145\1\147\1\152\1\154\3\uffff\5\57\2\172\1\54\5\uffff\2\57\2\uffff\1\57\1\u0081\7\57\1\u008b\7\uffff\4\57\2\uffff\4\57\1\u0095\1\u0097\26\uffff\1\u0099\1\uffff\1\u009b\11\uffff\10\57\1\uffff\1\172\4\uffff\3\57\1\uffff\11\57\1\uffff\6\57\1\u00b8\1\57\1\u00bb\7\uffff\1\u00bc\3\57\1\u00c0\1\u00c1\1\u00c2\7\57\1\u00ca\2\57\1\u00cd\11\57\1\u00d7\1\uffff\2\57\2\uffff\3\57\3\uffff\1\u00dd\4\57\1\u00e3\1\57\1\uffff\1\u00e5\1\57\1\uffff\4\57\1\u00ed\3\57\1\u00f2\1\uffff\2\57\1\u00f5\1\57\1\u00f7\1\uffff\5\57\1\uffff\1\57\1\uffff\3\57\1\u0101\3\57\1\uffff\1\u0105\1\57\1\u0107\1\u0108\1\uffff\1\u0109\1\57\1\uffff\1\57\1\uffff\1\u010c\1\u010d\1\u010e\3\57\1\u0112\2\57\1\uffff\3\57\1\uffff\1\57\3\uffff\1\u0119\1\u011a\3\uffff\1\u011b\2\57\1\uffff\6\57\3\uffff\2\57\1\u0126\1\57\1\u0128\5\57\1\uffff\1\u012e\1\uffff\1\u012f\1\u0130\2\57\1\u0133\3\uffff\2\57\1\uffff\1\u0136\1\57\1\uffff\5\57\1\u013d\1\uffff";
+        "\1\uffff\1\57\1\uffff\4\57\3\uffff\1\77\1\101\1\57\2\uffff\2\57\1\117\1\122\1\126\1\131\1\135\1\137\1\141\1\143\1\145\1\147\1\152\1\154\3\uffff\5\57\2\172\1\54\5\uffff\2\57\2\uffff\1\57\1\u0081\7\57\1\u008b\7\uffff\4\57\2\uffff\4\57\1\u0095\1\u0097\26\uffff\1\u0099\1\uffff\1\u009b\11\uffff\10\57\1\uffff\1\172\4\uffff\3\57\1\uffff\11\57\1\uffff\6\57\1\u00b8\1\57\1\u00bb\7\uffff\1\u00bc\3\57\1\u00c0\1\u00c1\1\u00c2\7\57\1\u00ca\2\57\1\u00cd\11\57\1\u00d7\1\uffff\2\57\2\uffff\3\57\3\uffff\1\u00dd\4\57\1\u00e3\1\57\1\uffff\1\u00e5\1\57\1\uffff\4\57\1\u00ed\3\57\1\u00f2\1\uffff\2\57\1\u00f5\1\57\1\u00f7\1\uffff\5\57\1\uffff\1\57\1\uffff\3\57\1\u0101\3\57\1\uffff\1\u0105\1\57\1\u0107\1\u0108\1\uffff\1\u0109\1\57\1\uffff\1\57\1\uffff\1\u010c\1\u010d\1\u010e\3\57\1\u0112\2\57\1\uffff\3\57\1\uffff\1\57\3\uffff\1\u0119\1\u011a\3\uffff\1\u011b\2\57\1\uffff\6\57\3\uffff\2\57\1\u0127\1\57\1\u0129\6\57\1\uffff\1\u0130\1\uffff\1\u0131\1\u0132\3\57\1\u0136\3\uffff\3\57\1\uffff\1\u013a\2\57\1\uffff\12\57\1\u0147\1\57\1\uffff\13\57\1\u0154\1\uffff";
     static final String DFA21_eofS =
-        "\u013e\uffff";
+        "\u0155\uffff";
     static final String DFA21_minS =
-        "\1\0\1\141\1\uffff\1\142\1\141\1\154\1\146\3\uffff\1\76\1\75\1\164\2\uffff\1\150\1\145\1\75\1\53\1\55\2\52\1\75\1\174\1\46\1\75\2\56\1\72\3\uffff\1\141\1\150\1\141\2\145\2\60\1\44\5\uffff\1\143\1\151\2\uffff\1\163\1\44\1\141\1\156\1\163\1\164\1\163\1\160\1\163\1\44\7\uffff\1\160\1\141\1\156\1\151\2\uffff\1\162\1\165\1\160\1\146\1\44\1\75\26\uffff\1\75\1\uffff\1\74\11\uffff\1\162\1\154\1\156\1\151\1\154\1\167\1\154\1\164\1\uffff\1\60\4\uffff\1\153\1\166\1\164\1\uffff\2\163\1\145\1\143\2\145\1\154\1\145\1\164\1\uffff\1\145\1\164\1\143\1\164\1\157\1\145\1\44\1\145\1\44\7\uffff\1\44\1\163\1\141\1\154\3\44\1\154\1\165\2\141\1\162\1\163\1\164\1\44\1\150\1\156\1\44\1\145\2\162\1\141\1\162\1\151\1\150\1\143\1\167\1\44\1\uffff\1\157\1\165\2\uffff\1\145\1\154\1\145\3\uffff\1\44\1\162\1\147\1\164\1\141\1\44\1\162\1\uffff\1\44\1\144\1\uffff\1\155\1\164\1\146\1\156\1\44\1\143\1\162\1\150\1\44\1\uffff\1\146\1\154\1\44\1\154\1\44\1\uffff\1\156\2\145\1\143\1\151\1\uffff\1\165\1\uffff\1\163\1\151\1\145\1\44\1\141\1\143\1\171\1\uffff\1\44\1\157\2\44\1\uffff\1\44\1\164\1\uffff\1\171\1\uffff\3\44\2\164\1\143\1\44\1\157\1\156\1\uffff\1\143\1\145\1\160\1\uffff\1\156\3\uffff\2\44\3\uffff\1\44\1\150\1\164\1\uffff\1\156\1\164\1\145\1\157\1\145\1\151\3\uffff\1\123\1\157\1\44\1\163\1\44\1\146\1\163\1\172\1\165\1\162\1\uffff\1\44\1\uffff\2\44\1\145\1\160\1\44\3\uffff\1\144\1\145\1\uffff\1\44\1\162\1\uffff\1\124\1\171\1\160\1\145\1\163\1\44\1\uffff";
+        "\1\0\1\141\1\uffff\1\142\1\141\1\154\1\146\3\uffff\1\76\1\75\1\164\2\uffff\1\150\1\145\1\75\1\53\1\55\2\52\1\75\1\174\1\46\1\75\2\56\1\72\3\uffff\1\141\1\150\1\141\2\145\2\60\1\44\5\uffff\1\143\1\151\2\uffff\1\163\1\44\1\141\1\156\1\163\1\164\1\163\1\160\1\163\1\44\7\uffff\1\160\1\141\1\156\1\151\2\uffff\1\162\1\165\1\160\1\146\1\44\1\75\26\uffff\1\75\1\uffff\1\74\11\uffff\1\162\1\154\1\156\1\151\1\154\1\167\1\154\1\164\1\uffff\1\60\4\uffff\1\153\1\166\1\164\1\uffff\2\163\1\145\1\143\2\145\1\154\1\145\1\164\1\uffff\1\145\1\164\1\143\1\164\1\157\1\145\1\44\1\145\1\44\7\uffff\1\44\1\163\1\141\1\154\3\44\1\154\1\165\2\141\1\162\1\163\1\164\1\44\1\150\1\156\1\44\1\145\2\162\1\141\1\162\1\151\1\150\1\143\1\167\1\44\1\uffff\1\157\1\165\2\uffff\1\145\1\154\1\145\3\uffff\1\44\1\162\1\147\1\164\1\141\1\44\1\162\1\uffff\1\44\1\144\1\uffff\1\155\1\164\1\146\1\156\1\44\1\143\1\162\1\150\1\44\1\uffff\1\146\1\154\1\44\1\154\1\44\1\uffff\1\156\2\145\1\143\1\151\1\uffff\1\165\1\uffff\1\163\1\151\1\145\1\44\1\141\1\143\1\171\1\uffff\1\44\1\157\2\44\1\uffff\1\44\1\164\1\uffff\1\171\1\uffff\3\44\2\164\1\143\1\44\1\157\1\156\1\uffff\1\143\1\145\1\160\1\uffff\1\156\3\uffff\2\44\3\uffff\1\44\1\150\1\164\1\uffff\1\156\1\164\1\145\1\157\1\145\1\151\3\uffff\1\123\1\157\1\44\1\163\1\44\1\146\1\163\1\172\1\165\2\162\1\uffff\1\44\1\uffff\2\44\1\145\1\160\1\157\1\44\3\uffff\1\144\1\145\1\156\1\uffff\1\44\1\162\1\147\1\uffff\1\124\1\111\1\171\1\156\1\160\1\146\2\145\1\163\1\162\1\44\1\162\1\uffff\1\145\1\144\1\111\1\156\1\164\1\145\1\162\1\146\1\141\1\143\1\145\1\44\1\uffff";
     static final String DFA21_maxS =
-        "\1\uffff\1\162\1\uffff\1\163\1\157\1\170\1\156\3\uffff\1\76\1\75\1\171\2\uffff\1\171\1\157\1\76\1\75\1\76\3\75\1\174\1\46\1\75\1\56\2\72\3\uffff\1\157\1\150\1\141\1\165\1\145\1\170\1\154\1\172\5\uffff\1\143\1\151\2\uffff\1\163\1\172\1\141\1\156\2\164\1\163\1\160\1\164\1\172\7\uffff\1\160\1\141\1\156\1\151\2\uffff\1\162\1\171\1\160\1\146\1\172\1\75\26\uffff\1\75\1\uffff\1\74\11\uffff\1\162\1\154\1\156\1\151\1\162\1\167\1\154\1\164\1\uffff\1\154\4\uffff\1\153\1\166\1\164\1\uffff\2\163\1\145\1\143\2\145\1\157\1\145\1\164\1\uffff\1\145\1\164\1\143\1\164\1\157\1\145\1\172\1\145\1\172\7\uffff\1\172\1\163\1\141\1\154\3\172\1\154\1\165\2\141\1\162\1\163\1\164\1\172\1\150\1\156\1\172\1\145\2\162\1\141\1\162\1\151\1\150\1\143\1\167\1\172\1\uffff\1\157\1\165\2\uffff\1\145\1\154\1\145\3\uffff\1\172\1\162\1\147\1\164\1\141\1\172\1\162\1\uffff\1\172\1\163\1\uffff\1\155\1\164\1\146\1\156\1\172\1\143\1\162\1\150\1\172\1\uffff\1\146\1\154\1\172\1\154\1\172\1\uffff\1\156\2\145\1\143\1\151\1\uffff\1\165\1\uffff\1\163\1\151\1\145\1\172\1\141\1\143\1\171\1\uffff\1\172\1\157\2\172\1\uffff\1\172\1\164\1\uffff\1\171\1\uffff\3\172\2\164\1\143\1\172\1\157\1\156\1\uffff\1\143\1\145\1\160\1\uffff\1\156\3\uffff\2\172\3\uffff\1\172\1\150\1\164\1\uffff\1\156\1\164\1\145\1\157\1\145\1\151\3\uffff\1\123\1\157\1\172\1\163\1\172\1\146\1\163\1\172\1\165\1\162\1\uffff\1\172\1\uffff\2\172\1\145\1\160\1\172\3\uffff\1\144\1\145\1\uffff\1\172\1\162\1\uffff\1\124\1\171\1\160\1\145\1\163\1\172\1\uffff";
+        "\1\uffff\1\162\1\uffff\1\163\1\157\1\170\1\156\3\uffff\1\76\1\75\1\171\2\uffff\1\171\1\157\1\76\1\75\1\76\3\75\1\174\1\46\1\75\1\56\2\72\3\uffff\1\157\1\150\1\141\1\165\1\145\1\170\1\154\1\172\5\uffff\1\143\1\151\2\uffff\1\163\1\172\1\141\1\156\2\164\1\163\1\160\1\164\1\172\7\uffff\1\160\1\141\1\156\1\151\2\uffff\1\162\1\171\1\160\1\146\1\172\1\75\26\uffff\1\75\1\uffff\1\74\11\uffff\1\162\1\154\1\156\1\151\1\162\1\167\1\154\1\164\1\uffff\1\154\4\uffff\1\153\1\166\1\164\1\uffff\2\163\1\145\1\143\2\145\1\157\1\145\1\164\1\uffff\1\145\1\164\1\143\1\164\1\157\1\145\1\172\1\145\1\172\7\uffff\1\172\1\163\1\141\1\154\3\172\1\154\1\165\2\141\1\162\1\163\1\164\1\172\1\150\1\156\1\172\1\145\2\162\1\141\1\162\1\151\1\150\1\143\1\167\1\172\1\uffff\1\157\1\165\2\uffff\1\145\1\154\1\145\3\uffff\1\172\1\162\1\147\1\164\1\141\1\172\1\162\1\uffff\1\172\1\163\1\uffff\1\155\1\164\1\146\1\156\1\172\1\143\1\162\1\150\1\172\1\uffff\1\146\1\154\1\172\1\154\1\172\1\uffff\1\156\2\145\1\143\1\151\1\uffff\1\165\1\uffff\1\163\1\151\1\145\1\172\1\141\1\143\1\171\1\uffff\1\172\1\157\2\172\1\uffff\1\172\1\164\1\uffff\1\171\1\uffff\3\172\2\164\1\143\1\172\1\157\1\156\1\uffff\1\143\1\145\1\160\1\uffff\1\156\3\uffff\2\172\3\uffff\1\172\1\150\1\164\1\uffff\1\156\1\164\1\145\1\157\1\145\1\151\3\uffff\1\127\1\157\1\172\1\163\1\172\1\146\1\163\1\172\1\165\2\162\1\uffff\1\172\1\uffff\2\172\1\145\1\160\1\157\1\172\3\uffff\1\144\1\145\1\156\1\uffff\1\172\1\162\1\147\1\uffff\1\124\1\111\1\171\1\156\1\160\1\146\2\145\1\163\1\162\1\172\1\162\1\uffff\1\145\1\144\1\111\1\156\1\164\1\145\1\162\1\146\1\141\1\143\1\145\1\172\1\uffff";
     static final String DFA21_acceptS =
-        "\2\uffff\1\2\4\uffff\1\7\1\10\1\11\3\uffff\1\20\1\21\16\uffff\1\70\1\71\1\72\10\uffff\1\131\2\132\1\135\1\136\2\uffff\1\131\1\2\12\uffff\1\7\1\10\1\11\1\51\1\13\1\35\1\14\4\uffff\1\20\1\21\6\uffff\1\50\1\27\1\30\1\63\1\53\1\31\1\45\1\64\1\54\1\32\1\56\1\55\1\33\1\133\1\134\1\57\1\34\1\60\1\36\1\73\1\37\1\125\1\uffff\1\61\1\uffff\1\65\1\52\1\67\1\124\1\66\1\77\1\70\1\71\1\72\10\uffff\1\126\1\uffff\1\127\1\130\1\132\1\135\3\uffff\1\62\11\uffff\1\74\11\uffff\1\104\1\42\1\40\1\43\1\41\1\46\1\47\34\uffff\1\121\2\uffff\1\23\1\102\3\uffff\1\105\1\106\1\112\7\uffff\1\101\2\uffff\1\75\11\uffff\1\114\5\uffff\1\115\5\uffff\1\4\1\uffff\1\123\7\uffff\1\111\4\uffff\1\117\2\uffff\1\113\1\uffff\1\103\11\uffff\1\107\3\uffff\1\24\1\uffff\1\76\1\22\1\116\2\uffff\1\120\1\1\1\25\3\uffff\1\5\6\uffff\1\100\1\122\1\3\12\uffff\1\110\1\uffff\1\12\5\uffff\1\6\1\44\1\16\2\uffff\1\17\2\uffff\1\26\6\uffff\1\15";
+        "\2\uffff\1\2\4\uffff\1\7\1\10\1\11\3\uffff\1\21\1\22\16\uffff\1\71\1\72\1\73\10\uffff\1\132\2\133\1\136\1\137\2\uffff\1\132\1\2\12\uffff\1\7\1\10\1\11\1\52\1\13\1\36\1\14\4\uffff\1\21\1\22\6\uffff\1\51\1\30\1\31\1\64\1\54\1\32\1\46\1\65\1\55\1\33\1\57\1\56\1\34\1\134\1\135\1\60\1\35\1\61\1\37\1\74\1\40\1\126\1\uffff\1\62\1\uffff\1\66\1\53\1\70\1\125\1\67\1\100\1\71\1\72\1\73\10\uffff\1\127\1\uffff\1\130\1\131\1\133\1\136\3\uffff\1\63\11\uffff\1\75\11\uffff\1\105\1\43\1\41\1\44\1\42\1\47\1\50\34\uffff\1\122\2\uffff\1\24\1\103\3\uffff\1\106\1\107\1\113\7\uffff\1\102\2\uffff\1\76\11\uffff\1\115\5\uffff\1\116\5\uffff\1\4\1\uffff\1\124\7\uffff\1\112\4\uffff\1\120\2\uffff\1\114\1\uffff\1\104\11\uffff\1\110\3\uffff\1\25\1\uffff\1\77\1\23\1\117\2\uffff\1\121\1\1\1\26\3\uffff\1\5\6\uffff\1\101\1\123\1\3\13\uffff\1\111\1\uffff\1\12\6\uffff\1\6\1\45\1\16\3\uffff\1\20\3\uffff\1\27\14\uffff\1\15\14\uffff\1\17";
     static final String DFA21_specialS =
-        "\1\0\u013d\uffff}>";
+        "\1\0\u0154\uffff}>";
     static final String[] DFA21_transitionS = {
             "\11\54\2\53\2\54\1\53\22\54\1\53\1\31\1\51\1\35\1\50\1\26\1\30\1\52\1\15\1\16\1\24\1\22\1\7\1\23\1\32\1\25\1\45\11\46\1\34\1\2\1\12\1\21\1\13\1\33\1\54\32\50\1\36\1\54\1\37\1\47\1\50\1\54\1\3\1\50\1\4\1\20\1\5\1\40\2\50\1\6\4\50\1\43\1\50\1\1\1\50\1\44\1\14\1\17\1\50\1\42\1\41\3\50\1\10\1\27\1\11\uff82\54",
             "\1\55\20\uffff\1\56",
@@ -3692,38 +3721,61 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             "",
             "",
             "",
-            "\1\u0124",
-            "\1\u0125",
+            "\1\u0124\3\uffff\1\u0125",
+            "\1\u0126",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\1\u0127",
+            "\1\u0128",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\1\u0129",
             "\1\u012a",
             "\1\u012b",
             "\1\u012c",
             "\1\u012d",
+            "\1\u012e",
+            "\1\u012f",
             "",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\1\u0131",
-            "\1\u0132",
-            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "",
-            "",
-            "",
+            "\1\u0133",
             "\1\u0134",
             "\1\u0135",
-            "",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\1\u0137",
             "",
+            "",
+            "",
+            "\1\u0137",
             "\1\u0138",
             "\1\u0139",
-            "\1\u013a",
+            "",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u013b",
             "\1\u013c",
+            "",
+            "\1\u013d",
+            "\1\u013e",
+            "\1\u013f",
+            "\1\u0140",
+            "\1\u0141",
+            "\1\u0142",
+            "\1\u0143",
+            "\1\u0144",
+            "\1\u0145",
+            "\1\u0146",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\u0148",
+            "",
+            "\1\u0149",
+            "\1\u014a",
+            "\1\u014b",
+            "\1\u014c",
+            "\1\u014d",
+            "\1\u014e",
+            "\1\u014f",
+            "\1\u0150",
+            "\1\u0151",
+            "\1\u0152",
+            "\1\u0153",
             "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             ""
     };
@@ -3758,7 +3810,7 @@ public class InternalJvmGenericTypeValidatorTestLangLexer extends Lexer {
             this.transition = DFA21_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

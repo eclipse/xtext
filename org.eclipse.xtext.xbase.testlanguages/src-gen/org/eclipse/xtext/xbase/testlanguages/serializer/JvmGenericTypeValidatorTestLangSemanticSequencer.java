@@ -64,6 +64,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.Jvm
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.JvmGenericTypeValidatorTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClass;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithSuperTypes;
+import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyConstructor;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyField;
 import org.eclipse.xtext.xbase.testlanguages.jvmGenericTypeValidatorTestLang.MyInterface;
@@ -96,6 +97,9 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_CLASS_WITH_SUPER_TYPES:
 				sequence_MyClassWithSuperTypes(context, (MyClassWithSuperTypes) semanticObject); 
+				return; 
+			case JvmGenericTypeValidatorTestLangPackage.MY_CLASS_WITH_WRONG_ADDITIONAL_INFERRED_INTERFACE:
+				sequence_MyClassWithWrongAdditionalInferredInterface(context, (MyClassWithWrongAdditionalInferredInterface) semanticObject); 
 				return; 
 			case JvmGenericTypeValidatorTestLangPackage.MY_CONSTRUCTOR:
 				sequence_MyMember(context, (MyConstructor) semanticObject); 
@@ -562,6 +566,21 @@ public class JvmGenericTypeValidatorTestLangSemanticSequencer extends XbaseSeman
 	 * </pre>
 	 */
 	protected void sequence_MyClassWithSuperTypes(ISerializationContext context, MyClassWithSuperTypes semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     MyType returns MyClassWithWrongAdditionalInferredInterface
+	 *     MyClassWithWrongAdditionalInferredInterface returns MyClassWithWrongAdditionalInferredInterface
+	 *
+	 * Constraint:
+	 *     (name=ValidID members+=MyMember*)
+	 * </pre>
+	 */
+	protected void sequence_MyClassWithWrongAdditionalInferredInterface(ISerializationContext context, MyClassWithWrongAdditionalInferredInterface semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

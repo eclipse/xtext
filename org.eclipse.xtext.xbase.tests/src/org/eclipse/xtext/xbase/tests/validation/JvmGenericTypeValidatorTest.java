@@ -592,6 +592,23 @@ public class JvmGenericTypeValidatorTest {
 				"IOException", "declared", "twice");
 	}
 
+	@Test public void testCheckInferredTypePerPrimarySourceElementOnlyOnce_issue_3045() throws Exception {
+		var source = "classWithWrongInferredInterface X {"
+				+ " def void foo(String par) {  }"
+				+ "}";
+		var model = parse(source);
+		// this one is detected during type computation because of the wrong
+		// inferred interface's method with duplicate parameter
+		// (see org.eclipse.xtext.xbase.testlanguages.jvmmodel.JvmGenericTypeValidatorTestLangJmvModelInferrer.inferClassAndWrongInterface(MyClassWithWrongAdditionalInferredInterface, IJvmDeclaredTypeAcceptor, boolean))
+		validationHelper.assertError(model, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING,
+				source.indexOf("par"), "par".length(),
+				"Duplicate local variable par");
+		// but this one is not detected by the JvmGenericTypeValidator
+		// because it doesn't check the inferred interface: its primary source element
+		// is the inferred class, and a JvmGenericType is checked only once per primary source element
+		validationHelper.assertNoError(model, DUPLICATE_PARAMETER_NAME);
+	}
+
 	private JvmGenericTypeValidatorTestLangModel parse(CharSequence programText) throws Exception {
 		return parseHelper.parse(programText);
 	}
