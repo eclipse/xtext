@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.standalone.incremental;
 
 import static com.google.common.io.Files.readLines;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Files.write;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.xtext.builder.standalone.ILanguageConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.junit.Assert;
@@ -278,8 +280,8 @@ public class IncrementalStandaloneBuilderWithJavaTest extends AbstractIncrementa
 				"src", "src2");
 
 		File modelFile = getFile("src2/foo/bar/Another.contentassistfragmenttestlang");
-		java.nio.file.Files.createDirectories(modelFile.getParentFile().toPath());
-		java.nio.file.Files.write(modelFile.toPath(), Arrays.asList(
+		createDirectories(modelFile.getParentFile().toPath());
+		write(modelFile.toPath(), Arrays.asList(
 				"{",
 				"  new com.acme.BugsBunny().singSomeSong()",
 				"  return null",
