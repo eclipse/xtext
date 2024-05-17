@@ -196,11 +196,7 @@ public class JavaSourceLanguageTest {
 					+ "\n"
 					+ "}\n"
 				+ "").build();
-		XtextResourceSet rs = this.resourceSet(files);
-		JavaConfig javaConfig = new JavaConfig();
-		javaConfig.setJavaSourceLevel(JavaVersion.JAVA21);
-		javaConfig.setJavaTargetLevel(JavaVersion.JAVA21);
-		javaConfig.attachToEmfObject(rs);
+		XtextResourceSet rs = this.resourceSet(files, JavaVersion.JAVA21);
 		Resource r1 = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MyRecord.java"));
 		Assert.assertEquals(1, r1.getContents().size());
@@ -219,7 +215,17 @@ public class JavaSourceLanguageTest {
 	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	protected XtextResourceSet resourceSet(Map<String, String> files) {
+		return this.resourceSet(files, null);
+	}
+
+	protected XtextResourceSet resourceSet(Map<String, String> files, JavaVersion javaVersion) {
 		XtextResourceSet result = resourceSetProvider.get();
+		if (javaVersion != null) {
+			JavaConfig javaConfig = new JavaConfig();
+			javaConfig.setJavaSourceLevel(javaVersion);
+			javaConfig.setJavaTargetLevel(javaVersion);
+			javaConfig.attachToEmfObject(result);
+		}
 		typeProviderFactory.createTypeProvider(result);
 		result.setClasspathURIContext(getClass().getClassLoader());
 		result.getURIConverter().getURIHandlers().clear();

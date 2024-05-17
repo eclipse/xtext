@@ -126,6 +126,9 @@ public class JavaDerivedStateComputer {
 		case TypeDeclaration.ANNOTATION_TYPE_DECL:
 			jvmType = TypesFactory.eINSTANCE.createJvmAnnotationType();
 			break;
+		case TypeDeclaration.RECORD_DECL:
+			jvmType = TypesFactory.eINSTANCE.createJvmGenericType();
+			break;
 		default:
 			throw new IllegalArgumentException("Cannot handle type " + type.toString());
 		}
