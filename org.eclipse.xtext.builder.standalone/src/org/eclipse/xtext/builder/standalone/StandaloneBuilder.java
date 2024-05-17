@@ -353,6 +353,10 @@ public class StandaloneBuilder {
 	 * @since 2.35
 	 */
 	protected void configureWorkspace(ResourceSet resourceSet) {
+		ProjectConfigAdapter result = ProjectConfigAdapter.findInEmfObject(resourceSet);
+		if (result != null) {
+			return;
+		}
 		FileProjectConfig projectConfig = new FileProjectConfig(new File(baseDir), baseDir);
 		for (String sourceDir : sourceDirs) {
 			projectConfig.addSourceFolder(sourceDir);
