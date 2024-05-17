@@ -125,6 +125,7 @@
 		<url>git@github.com:eclipse/xtext.git</url>
 	</scm>
 	<properties>
+		<org.eclipse.jdt.core-version>3.33.0</org.eclipse.jdt.core-version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 	</properties>
 	<dependencyManagement>
@@ -267,12 +268,12 @@
 			<dependency>
 				<groupId>org.eclipse.jdt</groupId>
 				<artifactId>ecj</artifactId>
-				<version>3.33.0</version>
+				<version>${org.eclipse.jdt.core-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jdt</groupId>
 				<artifactId>org.eclipse.jdt.core</artifactId>
-				<version>3.33.0</version>
+				<version>${org.eclipse.jdt.core-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jdt</groupId>
@@ -499,6 +500,30 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<!--
+				To be activated explicitly when using Java 21 to get
+				the latest version of JDT to access Java 21 new features
+				like Java records.
+
+				The profile must be activated through the system property "java-21"
+				either on the command line "-Djava-21", or by creating the file
+				"maven.config" inside the folder ".mvn" at the root of the
+				project, with the content "-Djava-21"
+			-->
+			<id>java-21</id>
+			<activation>
+				<property>
+					<name>java-21</name>
+				</property>
+			</activation>
+			<properties>
+				<!-- This version supports Java 21 but requires Java 17;
+					for the moment we activate it only when building with Java 21.
+					By default, we don't require Java 17 but only Java 11 -->
+				<org.eclipse.jdt.core-version>3.37.0</org.eclipse.jdt.core-version>
+			</properties>
 		</profile>
 	</profiles>
 

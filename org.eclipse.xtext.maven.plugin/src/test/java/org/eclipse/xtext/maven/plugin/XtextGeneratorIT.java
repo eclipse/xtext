@@ -23,7 +23,9 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.eclipse.xtext.maven.trace.ClassFileDebugSourceExtractor;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -232,6 +234,15 @@ public class XtextGeneratorIT {
 		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/XbaseReferToJava.java");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/XbaseReferToJava.class");
 		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/JavaClazz.class");
+	}
+
+	@Test
+	public void javaLang21BiRef() throws Exception {
+		Assume.assumeTrue("Active only on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
+		Verifier verifier = verifyErrorFreeLog("java-lang-21-bi-ref");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/src-gen/XbaseReferToJava.java");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/XbaseReferToJava.class");
+		verifier.verifyFilePresent(verifier.getBasedir() + "/target/xtext-temp/stub-classes/JavaRecord.class");
 	}
 
 	@Test

@@ -18,7 +18,9 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.junit.Assume;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -1065,4 +1067,20 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("class Foo extends Bar { override synchronized myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
 		helper.assertNoWarnings(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
 	}
+
+	/**
+	 * Since there's no record in the JDK and adding a Java source with a record in this
+	 * project would require Java 21 compilation level, I'm using a known record from
+	 * draw2d, which is in our target platform.
+	 */
+	@Test public void testOverrideJavaRecord() throws Exception {
+		Assume.assumeTrue("Active only on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
+		var javaRecord = "org.eclipse.draw2d.geometry.Interval";
+		var source = "class Foo extends " + javaRecord + " { }";
+		XtendClass xtendClass = clazz(source);
+		helper.assertError(xtendClass, XTEND_CLASS, OVERRIDDEN_FINAL,
+				source.indexOf(javaRecord), javaRecord.length(),
+				"override", "final");
+	}
+
 }
