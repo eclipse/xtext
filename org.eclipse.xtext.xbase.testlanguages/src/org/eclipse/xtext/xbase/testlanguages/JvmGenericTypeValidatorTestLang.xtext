@@ -11,7 +11,7 @@ JvmGenericTypeValidatorTestLangModel:
 	(modelTypes+=MyType)*;
 
 MyType:
-	MyClass | MyInterface | MyClassWithSuperTypes;
+	MyClass | MyInterface | MyClassWithSuperTypes | MyClassWithWrongAdditionalInferredInterface;
 
 MyClass:
 	(abstract ?= 'abstract')? 'class' name=ValidID
@@ -28,12 +28,24 @@ MyInterface:
 /**
  * Special class where the first specified super type is expected to be a class
  * and the following ones interfaces.
- * Moreover, the class is always implicitly implements Serializable.
+ * Moreover, the class always implicitly implements Serializable.
  * Just a corner case for testing JvmGenericTypeValidator.
  */
 MyClassWithSuperTypes:
 	'classWithSuperTypes' name=ValidID
 	("superTypes" superTypes+=JvmParameterizedTypeReference (',' superTypes+=JvmParameterizedTypeReference)*)? '{'
+	'}'
+;
+
+/**
+ * Besides a Jvm class, the inferrer will also infer an interface with problems
+ * (an abstract method with "void" as a parameter type).
+ * The additional inferred interface WILL NOT be checked by JvmGenericTypeValidator.
+ * See https://github.com/eclipse/xtext/issues/3045
+ */
+MyClassWithWrongAdditionalInferredInterface:
+	'classWithWrongInferredInterface' name=ValidID '{'
+		(members+=MyMember)*
 	'}'
 ;
 

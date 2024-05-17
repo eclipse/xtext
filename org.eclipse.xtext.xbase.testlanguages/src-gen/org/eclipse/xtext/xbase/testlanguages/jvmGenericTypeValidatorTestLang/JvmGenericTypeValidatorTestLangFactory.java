@@ -74,6 +74,15 @@ public interface JvmGenericTypeValidatorTestLangFactory extends EFactory
   MyClassWithSuperTypes createMyClassWithSuperTypes();
 
   /**
+   * Returns a new object of class '<em>My Class With Wrong Additional Inferred Interface</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Class With Wrong Additional Inferred Interface</em>'.
+   * @generated
+   */
+  MyClassWithWrongAdditionalInferredInterface createMyClassWithWrongAdditionalInferredInterface();
+
+  /**
    * Returns a new object of class '<em>My Member</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

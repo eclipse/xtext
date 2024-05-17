@@ -195,6 +195,15 @@ ruleMyType returns [EObject current=null]
 			$current = $this_MyClassWithSuperTypes_2.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getMyTypeAccess().getMyClassWithWrongAdditionalInferredInterfaceParserRuleCall_3());
+		}
+		this_MyClassWithWrongAdditionalInferredInterface_3=ruleMyClassWithWrongAdditionalInferredInterface
+		{
+			$current = $this_MyClassWithWrongAdditionalInferredInterface_3.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -606,6 +615,75 @@ ruleMyClassWithSuperTypes returns [EObject current=null]
 		otherlv_7='}'
 		{
 			newLeafNode(otherlv_7, grammarAccess.getMyClassWithSuperTypesAccess().getRightCurlyBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleMyClassWithWrongAdditionalInferredInterface
+entryRuleMyClassWithWrongAdditionalInferredInterface returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceRule()); }
+	iv_ruleMyClassWithWrongAdditionalInferredInterface=ruleMyClassWithWrongAdditionalInferredInterface
+	{ $current=$iv_ruleMyClassWithWrongAdditionalInferredInterface.current; }
+	EOF;
+
+// Rule MyClassWithWrongAdditionalInferredInterface
+ruleMyClassWithWrongAdditionalInferredInterface returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='classWithWrongInferredInterface'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getClassWithWrongInferredInterfaceKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getNameValidIDParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleValidID
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.xbase.Xtype.ValidID");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_2='{'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getLeftCurlyBracketKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getMembersMyMemberParserRuleCall_3_0());
+				}
+				lv_members_3_0=ruleMyMember
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceRule());
+					}
+					add(
+						$current,
+						"members",
+						lv_members_3_0,
+						"org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyMember");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_4='}'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getRightCurlyBracketKeyword_4());
 		}
 	)
 ;

@@ -86,12 +86,13 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		private final RuleCall cMyClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cMyInterfaceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cMyClassWithSuperTypesParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cMyClassWithWrongAdditionalInferredInterfaceParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//MyType:
-		//    MyClass | MyInterface | MyClassWithSuperTypes;
+		//    MyClass | MyInterface | MyClassWithSuperTypes | MyClassWithWrongAdditionalInferredInterface;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//MyClass | MyInterface | MyClassWithSuperTypes
+		//MyClass | MyInterface | MyClassWithSuperTypes | MyClassWithWrongAdditionalInferredInterface
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//MyClass
@@ -102,6 +103,9 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		
 		//MyClassWithSuperTypes
 		public RuleCall getMyClassWithSuperTypesParserRuleCall_2() { return cMyClassWithSuperTypesParserRuleCall_2; }
+		
+		//MyClassWithWrongAdditionalInferredInterface
+		public RuleCall getMyClassWithWrongAdditionalInferredInterfaceParserRuleCall_3() { return cMyClassWithWrongAdditionalInferredInterfaceParserRuleCall_3; }
 	}
 	public class MyClassElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyClass");
@@ -329,7 +333,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		///**
 		// * Special class where the first specified super type is expected to be a class
 		// * and the following ones interfaces.
-		// * Moreover, the class is always implicitly implements Serializable.
+		// * Moreover, the class always implicitly implements Serializable.
 		// * Just a corner case for testing JvmGenericTypeValidator.
 		// */
 		//MyClassWithSuperTypes:
@@ -379,6 +383,56 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+	public class MyClassWithWrongAdditionalInferredInterfaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLang.MyClassWithWrongAdditionalInferredInterface");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cClassWithWrongInferredInterfaceKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cMembersAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMembersMyMemberParserRuleCall_3_0 = (RuleCall)cMembersAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		///**
+		// * Besides a Jvm class, the inferrer will also infer an interface with problems
+		// * (an abstract method with "void" as a parameter type).
+		// * The additional inferred interface WILL NOT be checked by JvmGenericTypeValidator.
+		// * See https://github.com/eclipse/xtext/issues/3045
+		// */
+		//MyClassWithWrongAdditionalInferredInterface:
+		//    'classWithWrongInferredInterface' name=ValidID '{'
+		//        (members+=MyMember)*
+		//    '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'classWithWrongInferredInterface' name=ValidID '{'
+		//    (members+=MyMember)*
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//'classWithWrongInferredInterface'
+		public Keyword getClassWithWrongInferredInterfaceKeyword_0() { return cClassWithWrongInferredInterfaceKeyword_0; }
+		
+		//name=ValidID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//(members+=MyMember)*
+		public Assignment getMembersAssignment_3() { return cMembersAssignment_3; }
+		
+		//MyMember
+		public RuleCall getMembersMyMemberParserRuleCall_3_0() { return cMembersMyMemberParserRuleCall_3_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -718,6 +772,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	private final MyClassElements pMyClass;
 	private final MyInterfaceElements pMyInterface;
 	private final MyClassWithSuperTypesElements pMyClassWithSuperTypes;
+	private final MyClassWithWrongAdditionalInferredInterfaceElements pMyClassWithWrongAdditionalInferredInterface;
 	private final MyMemberElements pMyMember;
 	
 	private final Grammar grammar;
@@ -738,6 +793,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		this.pMyClass = new MyClassElements();
 		this.pMyInterface = new MyInterfaceElements();
 		this.pMyClassWithSuperTypes = new MyClassWithSuperTypesElements();
+		this.pMyClassWithWrongAdditionalInferredInterface = new MyClassWithWrongAdditionalInferredInterfaceElements();
 		this.pMyMember = new MyMemberElements();
 	}
 	
@@ -785,7 +841,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	}
 	
 	//MyType:
-	//    MyClass | MyInterface | MyClassWithSuperTypes;
+	//    MyClass | MyInterface | MyClassWithSuperTypes | MyClassWithWrongAdditionalInferredInterface;
 	public MyTypeElements getMyTypeAccess() {
 		return pMyType;
 	}
@@ -823,7 +879,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	///**
 	// * Special class where the first specified super type is expected to be a class
 	// * and the following ones interfaces.
-	// * Moreover, the class is always implicitly implements Serializable.
+	// * Moreover, the class always implicitly implements Serializable.
 	// * Just a corner case for testing JvmGenericTypeValidator.
 	// */
 	//MyClassWithSuperTypes:
@@ -837,6 +893,25 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	
 	public ParserRule getMyClassWithSuperTypesRule() {
 		return getMyClassWithSuperTypesAccess().getRule();
+	}
+	
+	///**
+	// * Besides a Jvm class, the inferrer will also infer an interface with problems
+	// * (an abstract method with "void" as a parameter type).
+	// * The additional inferred interface WILL NOT be checked by JvmGenericTypeValidator.
+	// * See https://github.com/eclipse/xtext/issues/3045
+	// */
+	//MyClassWithWrongAdditionalInferredInterface:
+	//    'classWithWrongInferredInterface' name=ValidID '{'
+	//        (members+=MyMember)*
+	//    '}'
+	//;
+	public MyClassWithWrongAdditionalInferredInterfaceElements getMyClassWithWrongAdditionalInferredInterfaceAccess() {
+		return pMyClassWithWrongAdditionalInferredInterface;
+	}
+	
+	public ParserRule getMyClassWithWrongAdditionalInferredInterfaceRule() {
+		return getMyClassWithWrongAdditionalInferredInterfaceAccess().getRule();
 	}
 	
 	//MyMember:

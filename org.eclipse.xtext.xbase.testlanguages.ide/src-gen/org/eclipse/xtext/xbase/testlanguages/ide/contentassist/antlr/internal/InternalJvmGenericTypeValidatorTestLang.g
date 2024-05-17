@@ -180,6 +180,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleMyClassWithWrongAdditionalInferredInterface
+entryRuleMyClassWithWrongAdditionalInferredInterface
+:
+{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceRule()); }
+	 ruleMyClassWithWrongAdditionalInferredInterface
+{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceRule()); } 
+	 EOF 
+;
+
+// Rule MyClassWithWrongAdditionalInferredInterface
+ruleMyClassWithWrongAdditionalInferredInterface 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getGroup()); }
+		(rule__MyClassWithWrongAdditionalInferredInterface__Group__0)
+		{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleMyMember
 entryRuleMyMember
 :
@@ -2173,6 +2198,12 @@ rule__MyType__Alternatives
 		{ before(grammarAccess.getMyTypeAccess().getMyClassWithSuperTypesParserRuleCall_2()); }
 		ruleMyClassWithSuperTypes
 		{ after(grammarAccess.getMyTypeAccess().getMyClassWithSuperTypesParserRuleCall_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getMyTypeAccess().getMyClassWithWrongAdditionalInferredInterfaceParserRuleCall_3()); }
+		ruleMyClassWithWrongAdditionalInferredInterface
+		{ after(grammarAccess.getMyTypeAccess().getMyClassWithWrongAdditionalInferredInterfaceParserRuleCall_3()); }
 	)
 ;
 finally {
@@ -4578,6 +4609,141 @@ rule__MyClassWithSuperTypes__Group_2_2__1__Impl
 	{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesAssignment_2_2_1()); }
 	(rule__MyClassWithSuperTypes__SuperTypesAssignment_2_2_1)
 	{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesAssignment_2_2_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__0__Impl
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getClassWithWrongInferredInterfaceKeyword_0()); }
+	'classWithWrongInferredInterface'
+	{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getClassWithWrongInferredInterfaceKeyword_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__1__Impl
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getNameAssignment_1()); }
+	(rule__MyClassWithWrongAdditionalInferredInterface__NameAssignment_1)
+	{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getNameAssignment_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__2__Impl
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getLeftCurlyBracketKeyword_2()); }
+	'{'
+	{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getLeftCurlyBracketKeyword_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__3__Impl
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getMembersAssignment_3()); }
+	(rule__MyClassWithWrongAdditionalInferredInterface__MembersAssignment_3)*
+	{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getMembersAssignment_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MyClassWithWrongAdditionalInferredInterface__Group__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__Group__4__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getRightCurlyBracketKeyword_4()); }
+	'}'
+	{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getRightCurlyBracketKeyword_4()); }
 )
 ;
 finally {
@@ -17859,6 +18025,36 @@ rule__MyClassWithSuperTypes__SuperTypesAssignment_2_2_1
 		{ before(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0()); }
 		ruleJvmParameterizedTypeReference
 		{ after(grammarAccess.getMyClassWithSuperTypesAccess().getSuperTypesJvmParameterizedTypeReferenceParserRuleCall_2_2_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__NameAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getNameValidIDParserRuleCall_1_0()); }
+		ruleValidID
+		{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getNameValidIDParserRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MyClassWithWrongAdditionalInferredInterface__MembersAssignment_3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getMembersMyMemberParserRuleCall_3_0()); }
+		ruleMyMember
+		{ after(grammarAccess.getMyClassWithWrongAdditionalInferredInterfaceAccess().getMembersMyMemberParserRuleCall_3_0()); }
 	)
 ;
 finally {
