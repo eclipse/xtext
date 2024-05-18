@@ -74,7 +74,7 @@ pipeline {
       when {
         allOf {
           expression {
-            currentBuild.getBuildCauses().toString().contains('BranchIndexingCause')
+            currentBuild.getBuildCauses().toString().contains('Push event to branch')
           }
           branch 'main'
         }
