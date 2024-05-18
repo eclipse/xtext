@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -221,6 +221,11 @@ public class JavaSourceLanguageTest {
 	protected XtextResourceSet resourceSet(Map<String, String> files, JavaVersion javaVersion) {
 		XtextResourceSet result = resourceSetProvider.get();
 		if (javaVersion != null) {
+			/*
+			 * we need to configure the java version first before loading any resources into
+			 * the resourceset to make sure on the load / install stubs the correct java
+			 * version is picked
+			 */
 			JavaConfig javaConfig = new JavaConfig();
 			javaConfig.setJavaSourceLevel(javaVersion);
 			javaConfig.setJavaTargetLevel(javaVersion);
