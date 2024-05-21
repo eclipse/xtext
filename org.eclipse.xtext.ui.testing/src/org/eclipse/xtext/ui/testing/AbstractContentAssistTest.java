@@ -57,8 +57,12 @@ public abstract class AbstractContentAssistTest implements ResourceLoadHelper, I
 	@Inject
 	private Injector injector;
 
-	private static IJavaProject javaProject;
-	
+	/**
+	 * the {@link IJavaProject} used during tests, this is created once by {@link #setUp()}.
+	 * @since 2.35 
+	 */
+	protected static IJavaProject javaProject;
+
 	/**
 	 * cursor position marker
 	 * @since 2.35 
@@ -84,7 +88,7 @@ public abstract class AbstractContentAssistTest implements ResourceLoadHelper, I
 		XtextResourceSet resourceSet = resourceSetProvider.get();
 		initializeTypeProvider(resourceSet);
 		try {
-			String projectFullPath = javaProject.getProject().getFullPath().toString();
+			String projectFullPath = getJavaProject(resourceSet).getProject().getFullPath().toString();
 			URI resourceUri = URI.createPlatformResourceURI(projectFullPath + "/" + getProjectRelativePath() + "/" + "Test." + fileExtensionProvider.getPrimaryFileExtension(), true);
 
 			/*
