@@ -288,37 +288,37 @@
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.debug</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.generator</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.jsonrpc.debug</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.jsonrpc</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.websocket.jakarta</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.websocket</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j</artifactId>
-				<version>0.23.0</version>
+				<version>0.23.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
