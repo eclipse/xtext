@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -48,10 +48,12 @@ public class PureXbaseInjectorProvider implements IInjectorProvider, IRegistryCo
 	protected PureXbaseRuntimeModule createRuntimeModule() {
 		// make it work also with Maven/Tycho and OSGI
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+		// allows for bindClassLoaderToInstance to get the class loader of the bundle
+		// containing the instance of the injector provider (possibly inherited)
 		return new PureXbaseRuntimeModule() {
 			@Override
 			public ClassLoader bindClassLoaderToInstance() {
-				return PureXbaseInjectorProvider.class
+				return PureXbaseInjectorProvider.this.getClass()
 						.getClassLoader();
 			}
 		};

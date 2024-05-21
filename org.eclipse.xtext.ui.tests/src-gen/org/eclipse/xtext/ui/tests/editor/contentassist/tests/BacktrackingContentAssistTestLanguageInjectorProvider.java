@@ -48,10 +48,12 @@ public class BacktrackingContentAssistTestLanguageInjectorProvider implements II
 	protected BacktrackingContentAssistTestLanguageRuntimeModule createRuntimeModule() {
 		// make it work also with Maven/Tycho and OSGI
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+		// allows for bindClassLoaderToInstance to get the class loader of the bundle
+		// containing the instance of the injector provider (possibly inherited)
 		return new BacktrackingContentAssistTestLanguageRuntimeModule() {
 			@Override
 			public ClassLoader bindClassLoaderToInstance() {
-				return BacktrackingContentAssistTestLanguageInjectorProvider.class
+				return BacktrackingContentAssistTestLanguageInjectorProvider.this.getClass()
 						.getClassLoader();
 			}
 		};

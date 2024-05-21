@@ -30,7 +30,7 @@ import com.google.inject.Inject;
  * @author Eva Poell - Tests for Try with Resources and ternary if
  */
 @RunWith(XtextRunner.class)
-@InjectWith(RuntimeInjectorProvider.class)
+@InjectWith(PureXbaseInjectorProvider.class)
 public class PureXbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 	@Inject
 	private ParseHelper<Model> parseHelper;

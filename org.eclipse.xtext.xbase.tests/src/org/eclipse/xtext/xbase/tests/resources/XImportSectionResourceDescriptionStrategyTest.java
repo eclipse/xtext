@@ -16,7 +16,6 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangRuntimeModule;
 import org.eclipse.xtext.xbase.testlanguages.tests.XImportSectionTestLangInjectorProvider;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot;
 import org.junit.Assert;
@@ -31,16 +30,8 @@ public class XImportSectionResourceDescriptionStrategyTest extends AbstractXbase
 	@Inject
 	private ValidationTestHelper validationHelper;
 
+	// inheritance allows for bindClassLoaderToInstance to get the class loader of this bundle
 	public static class XImportSectionTestLangInjectorProviderCustom extends XImportSectionTestLangInjectorProvider {
-		@Override
-		protected XImportSectionTestLangRuntimeModule createRuntimeModule() {
-			// make it work also with Maven/Tycho and OSGI
-			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
-			// to access the testdata.stubs.StubbedList in this bundle
-			// allows for bindClassLoaderToInstance to get the class loader of this bundle
-			return new XImportSectionTestLangRuntimeModule() {
-			};
-		}
 	}
 
 	@Override

@@ -125,17 +125,17 @@ public abstract class AbstractEnumAndReferenceTestLanguageRuntimeModule extends 
 		return Serializer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.parser.DetachableNodeModelFragment
+	// contributed by org.eclipse.xtext.xtext.generator.nodemodel.detachable.DetachableNodeModelFragment
 	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
 		return DetachableNodeModelBuilder.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.parser.DetachableNodeModelFragment
+	// contributed by org.eclipse.xtext.xtext.generator.nodemodel.detachable.DetachableNodeModelFragment
 	public Class<? extends ParseResultWrapper> bindParseResultWrapper() {
 		return DetachableParseResultWrapper.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.parser.DetachableNodeModelFragment
+	// contributed by org.eclipse.xtext.xtext.generator.nodemodel.detachable.DetachableNodeModelFragment
 	public Class<? extends PartialParsingHelper> bindPartialParsingHelper() {
 		return null;
 	}

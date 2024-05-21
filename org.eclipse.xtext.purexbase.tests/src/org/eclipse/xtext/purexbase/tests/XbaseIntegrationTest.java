@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 
 
 @RunWith(XtextRunner.class)
-@InjectWith(RuntimeInjectorProvider.class)
+@InjectWith(PureXbaseInjectorProvider.class)
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject private CompilationTestHelper helper;

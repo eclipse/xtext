@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.validation;
 
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.testing.JavaVersionModule;
-import org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLangRuntimeModule;
 import org.eclipse.xtext.xbase.testlanguages.JvmGenericTypeValidatorTestLangStandaloneSetup;
 import org.eclipse.xtext.xbase.testlanguages.tests.JvmGenericTypeValidatorTestLangInjectorProvider;
 
@@ -37,15 +36,4 @@ public class JvmGenericTypeValidatorTestLangInjectorProviderCustom extends JvmGe
 		}.createInjectorAndDoEMFRegistration();
 	}
 
-	@Override
-	protected JvmGenericTypeValidatorTestLangRuntimeModule createRuntimeModule() {
-		// make it work also with Maven/Tycho and OSGI
-		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
-		return new JvmGenericTypeValidatorTestLangRuntimeModule() {
-			@Override
-			public ClassLoader bindClassLoaderToInstance() {
-				return JvmGenericTypeValidatorTestLangInjectorProviderCustom.class.getClassLoader();
-			}
-		};
-	}
 }
