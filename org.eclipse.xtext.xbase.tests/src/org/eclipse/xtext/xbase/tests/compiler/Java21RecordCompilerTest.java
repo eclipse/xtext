@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import java.util.stream.Collectors;
-
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
@@ -65,14 +62,9 @@ public class Java21RecordCompilerTest extends AbstractJvmModelTest {
 					+ "  }\n"
 					+ "}\n"
 					+ "";
-			var errors = it.getErrorsAndWarnings().stream()
-					.filter(issue -> issue.getSeverity() == Severity.ERROR)
-					.collect(Collectors.toList());
-			if (!errors.isEmpty()) {
-				throw new IllegalStateException("One or more resources contained issues: " + errors);
-			}
+			it.assertNoErrors();
 			assertEquals(expectation, Strings.toUnixLineSeparator(it.getSingleGeneratedCode()));
-			it.getCompiledClass();
+			it.getCompiledClass(); // check that the generated Java code compiles
 		});
 	}
 }
