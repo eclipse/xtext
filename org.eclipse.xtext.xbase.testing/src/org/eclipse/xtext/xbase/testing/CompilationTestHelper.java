@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2017, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,8 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.testing;
 
+import static com.google.common.collect.Iterables.isEmpty;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -27,6 +30,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IGenerator;
@@ -402,6 +406,32 @@ public class CompilationTestHelper {
 		public List<Issue> getErrorsAndWarnings() {
 			doValidation();
 			return allErrorsAndWarnings;
+		}
+
+		/**
+		 * Ensures that no error has been detected through the triggered validation.
+		 * 
+		 * @since 2.35
+		 */
+		public void assertNoErrors() {
+			var errors = getErrorsAndWarnings().stream()
+				.filter(it -> it.getSeverity() == Severity.ERROR)
+				.collect(Collectors.toList());
+			if (!isEmpty(errors))
+				fail("Expected no errors, but got:\n" +
+					errors.stream().map(Object::toString).collect(Collectors.joining("\n")));
+		}
+
+		/**
+		 * Ensures that no issue has been detected through the triggered validation.
+		 * 
+		 * @since 2.35
+		 */
+		public void assertNoIssues() {
+			var issues = getErrorsAndWarnings();
+			if (!isEmpty(issues))
+				fail("Expected no issues, but got:\n" +
+					issues.stream().map(Object::toString).collect(Collectors.joining("\n")));
 		}
 
 		/**
