@@ -88,7 +88,7 @@ public abstract class AbstractContentAssistTest implements ResourceLoadHelper, I
 		XtextResourceSet resourceSet = resourceSetProvider.get();
 		initializeTypeProvider(resourceSet);
 		try {
-			String projectFullPath = javaProject.getProject().getFullPath().toString();
+			String projectFullPath = getJavaProject(resourceSet).getProject().getFullPath().toString();
 			URI resourceUri = URI.createPlatformResourceURI(projectFullPath + "/" + getProjectRelativePath() + "/" + "Test." + fileExtensionProvider.getPrimaryFileExtension(), true);
 
 			/*
