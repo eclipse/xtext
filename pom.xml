@@ -695,6 +695,10 @@
 							<exclude />
 						</excludes>
 						<failIfNoTests>true</failIfNoTests>
+						<systemProperties>
+							<!-- https://github.com/eclipse/xtext/issues/3057 -->
+							<DetectVMInstallationsJob.disabled>true</DetectVMInstallationsJob.disabled>
+						</systemProperties>
 					</configuration>
 				</plugin>
 				<plugin>
