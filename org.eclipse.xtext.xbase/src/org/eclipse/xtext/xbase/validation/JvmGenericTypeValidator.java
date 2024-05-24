@@ -84,25 +84,39 @@ import com.google.inject.Inject;
 
 /**
  * This validator performs several checks on the inferred Jvm model for Xbase
- * languages concerning Java inheritance relations. For example: proper
- * inheritance of an abstract class or implemented interface (does the class
- * implement all the abstract methods or is it abstract?), whether methods are
- * unique considering type erasure, proper method overrides (including thrown
- * exceptions), etc.
+ * languages concerning Java inheritance relations.
  * 
- * <p>Errors are reported on the original source elements.</p>
+ * <p>
+ * For example, cycles in a hierarchy, extension of a final class, proper
+ * extension of an abstract class (do you implement all the abstract methods or
+ * declare the inferred class as abstract?), proper method overriding (including
+ * thrown exceptions), etc.
  * 
- * <p>The validator assumes that the model inferrer of the Xbase language is
+ * <p>
+ * It also performs duplicate elements checks, like duplicate parameter names,
+ * duplicate fields and duplicate methods (keeping the type-erasure into
+ * consideration when using types with arguments), etc.
+ * 
+ * <p>
+ * It only checks the first inferred {@link JvmGenericType} for the same DSL
+ * element (i.e., if for an element "Entity" you infer two JvmGenericTypes, "t1"
+ * and "t2", only the first one will be checked). Moreover, it only checks Jvm
+ * model elements with an associated source element. Errors are reported on the
+ * original source elements.
+ * 
+ * <p>
+ * The validator assumes that the model inferrer of the Xbase language is
  * implemented appropriately. Concerning intended classes to extend and
  * interfaces to extend/implement, it assumes the inferrer uses the
  * {@link JvmTypesBuilder#setSuperClass(JvmDeclaredType, JvmTypeReference)} and
  * {@link JvmTypesBuilder#addSuperInterface(JvmDeclaredType, JvmTypeReference)},
- * respectively.</p>
+ * respectively.
  * 
- * <p>Currently, this validator must be enabled explicitly through the
+ * <p>
+ * Currently, this validator must be enabled explicitly through the
  * <code>composedCheck</code> in the MWE2 file or the {@link ComposedChecks}
  * annotation in the validator, e.g.,
- * <code>@ComposedChecks(validators = JvmGenericTypeValidator.class)</code>.</p>
+ * <code>@ComposedChecks(validators = JvmGenericTypeValidator.class)</code>.
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  * @author Sebastian Zarnekow - Author of the original Java code in
