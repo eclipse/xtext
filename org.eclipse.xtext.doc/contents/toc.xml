@@ -171,6 +171,8 @@
 			<topic href="contents/305_xbase.html#xbase-inferred-type" label="Inferring a JVM Model">
 				<topic href="contents/305_xbase.html#linking-and-indexing" label="Linking and Indexing">
 				</topic>
+				<topic href="contents/305_xbase.html#validation" label="Validation">
+				</topic>
 			</topic>
 			<topic href="contents/305_xbase.html#xbase-expressions" label="Using Xbase Expressions">
 				<topic href="contents/305_xbase.html#making-your-grammar-refer-to-xbase" label="Making Your Grammar Refer To Xbase">
