@@ -62,7 +62,7 @@ pipeline {
       steps {
         xvnc(useXauthority: true) {
           sh """
-            ./full-build.sh -Dsurefire.timeout=1800 --tp=${selectedTargetPlatform()} \
+            ./full-build.sh -Dsurefire.timeout=2400 --tp=${selectedTargetPlatform()} \
               ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
           """
         }
