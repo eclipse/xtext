@@ -92,16 +92,13 @@
 		<module>../org.eclipse.xtext.ui.codetemplates.ide</module>
 		<module>../org.eclipse.xtext.ui.codetemplates.ui</module>
 		<module>../org.eclipse.xtext.ui.ecore</module>
-		<module>../org.eclipse.xtext.junit4</module>
 		<module>../org.eclipse.xtext.ui.testing</module>
-		<module>../org.eclipse.xtext.xbase.junit</module>
 		<module>../org.eclipse.xtext.xtext.ui</module>
 		<module>../org.eclipse.xtext.xtext.ui.graph</module>
 		<module>../org.eclipse.xtext.purexbase.ui</module>
 		<module>../org.eclipse.xtext.doc</module>
 		<module>../org.eclipse.xtext.xtext.ui.examples</module>
 		<module>../org.eclipse.xtext.builder.tests</module>
-		<module>../org.eclipse.xtext.junit4.tests</module>
 		<module>../org.eclipse.xtext.ui.codetemplates.tests</module>
 		<module>../org.eclipse.xtext.eclipse.tests</module>
 		<module>../org.eclipse.xtext.ui.tests</module>
