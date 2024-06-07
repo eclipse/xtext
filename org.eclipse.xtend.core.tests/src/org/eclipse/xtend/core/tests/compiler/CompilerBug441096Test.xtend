@@ -39,6 +39,7 @@ class CompilerBug441096Test extends AbstractXtendCompilerTest {
 			import java.util.Arrays;
 			import org.eclipse.xtend.lib.annotations.AccessorType;
 			import org.eclipse.xtend.lib.annotations.Accessors;
+			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.Pure;
 			
 			@SuppressWarnings("all")
@@ -65,6 +66,7 @@ class CompilerBug441096Test extends AbstractXtendCompilerTest {
 			    }
 			  };
 			
+			  @Generated
 			  public void m(final Object expr, final Object seq) {
 			    if (expr == null
 			         && seq instanceof StringBuilder) {

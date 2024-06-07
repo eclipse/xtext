@@ -1082,6 +1082,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Extension;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -1589,6 +1590,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			
+			  @Generated
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    if (key instanceof BlankLineKey) {
 			      return _newFormattingData(leafs, (BlankLineKey)key, it);
