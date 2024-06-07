@@ -1749,6 +1749,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				import java.util.Arrays;
 				import myannotation.AddDispatchCase;
+				import org.eclipse.xtext.xbase.lib.Generated;
 				
 				@AddDispatchCase
 				@SuppressWarnings("all")
@@ -1757,6 +1758,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				    return null;
 				  }
 				
+				  @Generated
 				  public String m(final Object i) {
 				    if (i instanceof Integer) {
 				      return _m((Integer)i);
@@ -1856,12 +1858,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 				package myusercode;
 				
 				import myannotation.Base;
+				import org.eclipse.xtext.xbase.lib.Generated;
 				
 				@SuppressWarnings("all")
 				public class D1 {
 				  protected void _m(final Base b) {
 				  }
 				
+				  @Generated
 				  public void m(final Base b) {
 				    _m(b);
 				    return;
@@ -1873,6 +1877,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				import java.util.Arrays;
 				import myannotation.Base;
+				import org.eclipse.xtext.xbase.lib.Generated;
 				
 				@SuppressWarnings("all")
 				public class D2 extends D1 {
@@ -1885,6 +1890,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				  protected void _m(final Derived3 d) {
 				  }
 				
+				  @Generated
 				  public void m(final Base d) {
 				    if (d instanceof Derived1) {
 				      _m((Derived1)d);

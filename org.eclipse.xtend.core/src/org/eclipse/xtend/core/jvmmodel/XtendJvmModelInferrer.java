@@ -85,6 +85,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Generated;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
@@ -485,15 +486,11 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		ListMultimap<DispatchHelper.DispatchSignature, JvmOperation> methods = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(target);
 		for (DispatchHelper.DispatchSignature signature : methods.keySet()) {
 			List<JvmOperation> operations = methods.get(signature);
-			Iterable<JvmOperation> localOperations = Iterables.filter(operations, new Predicate<JvmOperation>() {
-				@Override
-				public boolean apply(JvmOperation input) {
-					return target == input.eContainer();
-				}
-			});
+			Iterable<JvmOperation> localOperations = Iterables.filter(operations, input -> target == input.eContainer());
 			JvmOperation operation = deriveGenericDispatchOperationSignature(localOperations, target);
 			if (operation != null) {
 				dispatchHelper.markAsDispatcherFunction(operation);
+				operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(Generated.class));
 				operation.setSimpleName(signature.getSimpleName());
 				operation.setReturnType(jvmTypesBuilder.inferredType());
 			}

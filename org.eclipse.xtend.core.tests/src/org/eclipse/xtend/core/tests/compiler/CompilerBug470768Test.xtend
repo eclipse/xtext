@@ -36,6 +36,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			import java.util.Iterator;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
@@ -57,6 +58,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			    return CollectionLiterals.<SOE.A>emptyList();
 			  }
 			
+			  @Generated
 			  public List<SOE.A> getList(final Object it) {
 			    if (it instanceof SOE.A) {
 			      return _getList((SOE.A)it);
@@ -91,6 +93,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			import java.util.Iterator;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
@@ -109,6 +112,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			    return CollectionLiterals.<C>emptyList();
 			  }
 			
+			  @Generated
 			  public List<C> getList(final Object it) {
 			    if (it instanceof C) {
 			      return _getList((C)it);
@@ -145,6 +149,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			import java.util.Iterator;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
@@ -166,6 +171,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
 			
+			  @Generated
 			  public List<SOE.A> getList(final Object it) {
 			    if (it instanceof SOE.A) {
 			      return _getList((SOE.A)it);
@@ -201,6 +207,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			import java.util.Iterator;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			
 			@SuppressWarnings("all")
@@ -222,6 +229,7 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			    return CollectionLiterals.<SOE.A>emptyList();
 			  }
 			
+			  @Generated
 			  public List<SOE.A> getList(final Object it) {
 			    if (it instanceof SOE.A) {
 			      return _getList((SOE.A)it);
