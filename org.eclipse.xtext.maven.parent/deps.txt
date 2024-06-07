@@ -14,9 +14,7 @@ Xtend standalone
 <id>org.eclipse.xtext.common.types</id>
 <id>org.eclipse.xtext.util</id>
 <id>org.eclipse.xtext.smap</id>
-<id>org.eclipse.xtext.junit4</id>
 <id>org.eclipse.xtext.xbase</id>
-<id>org.eclipse.xtext.xbase.junit</id>
 <id>org.eclipse.xtend.core</id>
 
 Xtext standalone
