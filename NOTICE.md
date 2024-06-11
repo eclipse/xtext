@@ -60,7 +60,7 @@ ASM (9.7)
 
 * License: BSD-3-Clause
 
-classgraph (4.8.172)
+classgraph (4.8.173)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph
@@ -70,7 +70,7 @@ Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
-Google Guava (33.2.0)
+Google Guava (33.2.1)
 
 * License: Apache License 2.0
 
@@ -82,7 +82,7 @@ Gradle Wrapper (8)
 
 * License: Apache License, 2.0
 
-guava gwt (33.2.0)
+guava gwt (33.2.1)
 
 * License: Apache License, 2.0
 

@@ -153,17 +153,17 @@
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava-gwt</artifactId>
-				<version>33.2.0-jre</version>
+				<version>33.2.1-jre</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava-testlib</artifactId>
-				<version>33.2.0-jre</version>
+				<version>33.2.1-jre</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>33.2.0-jre</version>
+				<version>33.2.1-jre</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.inject</groupId>
@@ -178,7 +178,7 @@
 			<dependency>
 				<groupId>io.github.classgraph</groupId>
 				<artifactId>classgraph</artifactId>
-				<version>4.8.172</version>
+				<version>4.8.173</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.annotation</groupId>
