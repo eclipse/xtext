@@ -11,6 +11,7 @@ package org.eclipse.xtext.xtext.generator.nodemodel.detachable;
 import org.eclipse.xtext.nodemodel.detachable.DetachableNodeModelBuilder;
 import org.eclipse.xtext.nodemodel.detachable.DetachableParseResultWrapper;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.resource.ParseResultWrapper;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
@@ -27,6 +28,7 @@ public class DetachableNodeModelFragment extends AbstractXtextGeneratorFragment 
 		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType(TypeReference.typeRef(NodeModelBuilder.class), TypeReference.typeRef(DetachableNodeModelBuilder.class))
 			.addTypeToType(TypeReference.typeRef(ParseResultWrapper.class), TypeReference.typeRef(DetachableParseResultWrapper.class))
+			.addTypeToType(TypeReference.typeRef(IPartialParsingHelper.class), null)
 			.addTypeToType(TypeReference.typeRef(PartialParsingHelper.class), null)
 			.contributeTo(getLanguage().getRuntimeGenModule());
 	}

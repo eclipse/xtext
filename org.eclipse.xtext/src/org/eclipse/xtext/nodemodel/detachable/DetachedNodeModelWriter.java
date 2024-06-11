@@ -64,7 +64,7 @@ public class DetachedNodeModelWriter extends EObjectOutputStream implements Node
 	
 	@Override
 	protected void writeSignature() throws IOException {
-		// don'T write a signature
+		// don't write a signature
 	}
 	
 	@Override

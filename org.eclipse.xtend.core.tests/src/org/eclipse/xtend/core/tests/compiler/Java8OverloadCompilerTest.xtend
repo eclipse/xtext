@@ -797,6 +797,75 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	}	
+	}
+	
+	@Test
+	def test_15() {
+		assertCompilesTo('''
+			class C {
+				def String m(B b) {
+					return b.m
+				}
+			}
+			interface IA {
+				def CharSequence m() {
+					return null
+				}
+			}
+			interface IB extends IA {
+				override String m() {
+					return null
+				}
+			}
+			abstract class A implements IA {}
+			abstract class B extends A implements IB {}
+		''', '''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void x() {
+			    final ArrayList<Number> l = CollectionLiterals.<Number>newArrayList();
+			    l.add(Integer.valueOf(1));
+			    final Iterable<Number> l2 = l;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def test_16() {
+		assertCompilesTo('''
+			class C {
+				def <B extends A & IB> String m(B b) {
+					return b.m
+				}
+			}
+			interface IA {
+				def CharSequence m() {
+					return null
+				}
+			}
+			interface IB extends IA {
+				override String m() {
+					return null
+				}
+			}
+			abstract class A implements IA {}
+		''', '''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void x() {
+			    final ArrayList<Number> l = CollectionLiterals.<Number>newArrayList();
+			    l.add(Integer.valueOf(1));
+			    final Iterable<Number> l2 = l;
+			  }
+			}
+		''')
+	}
 	
 }

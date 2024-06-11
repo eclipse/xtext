@@ -313,8 +313,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 					if (result.size() <= 1 || (removedOverridden != null && removedOverridden.contains(simpleName))) {
 						return result;
 					}
-					// TODO use the number of parameters as a first fast criteria
-					Set<String> signatures = Sets.newHashSet();
+					Set<String> pseudoSignatures = Sets.newHashSet();
 					Iterator<JvmFeature> iter = result.iterator();
 					while (iter.hasNext()) {
 						JvmFeature next = iter.next();
@@ -327,27 +326,27 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 								 * where add(String) actually overrides add(T/Object)
 								 */
 								List<JvmFormalParameter> parameters = operation.getParameters();
-								StringBuilder signature = new StringBuilder(operation.getSimpleName());
+								String pseudoSignature;
 								if (parameters.isEmpty()) {
-									signature.append("()");
+									pseudoSignature = operation.getSimpleName();
 								} else {
-									signature.append("(");
+									StringBuilder signatureBuilder = new StringBuilder(operation.getSimpleName());
 									for (JvmFormalParameter parameter : parameters) {
 										String parameterType = getRawTypeIdentifier(parameter.getParameterType());
 										if (parameterType != null) {
-											signature.append(parameterType);
-											signature.append(",");
+											signatureBuilder.append('#');
+											signatureBuilder.append(parameterType);
 										}
 									}
-									signature.replace(signature.length() - 1, signature.length(), ")");
+									pseudoSignature = signatureBuilder.toString();
 								}
-								if (!signatures.add(signature.toString())) {
+								if (!pseudoSignatures.add(pseudoSignature.toString())) {
 									iter.remove();
 								}
 							}
 						} else if (next instanceof JvmField) {
 							JvmField field = (JvmField) next;
-							if (!field.isStatic() && !signatures.add(field.getSimpleName())) {
+							if (!field.isStatic() && !pseudoSignatures.add(field.getSimpleName())) {
 								iter.remove();
 							}
 						}

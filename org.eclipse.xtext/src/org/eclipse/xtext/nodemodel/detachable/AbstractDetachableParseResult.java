@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -26,7 +27,6 @@ import org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.parser.AbstractParseResult;
 
-import com.google.common.base.Stopwatch;
 import com.google.common.collect.Iterables;
 
 /**
@@ -38,9 +38,9 @@ public abstract class AbstractDetachableParseResult<NMR extends NodeModelReferen
 	
 	protected NodeModelReference reference;
 	protected final GrammarElementLookup grammarElementLookup;
-	protected final Stopwatch timer;
 	protected final Duration timeout;
 	protected final Executor releaser;
+	protected final AtomicLong lastUsed;
 	protected CompletableFuture<Void> scheduled;
 
 	protected AbstractDetachableParseResult(GrammarElementLookup grammarElementLookup) {
@@ -50,7 +50,7 @@ public abstract class AbstractDetachableParseResult<NMR extends NodeModelReferen
 	protected AbstractDetachableParseResult(GrammarElementLookup grammarElementLookup, Duration timeout) {
 		super(null, false);
 		this.grammarElementLookup = grammarElementLookup;
-		this.timer = Stopwatch.createUnstarted();
+		this.lastUsed = new AtomicLong(-1);
 		this.timeout = timeout;
 		this.releaser = CompletableFuture.delayedExecutor(timeout.toNanos(), TimeUnit.NANOSECONDS);
 		this.scheduled = CompletableFuture.completedFuture(null);
@@ -67,28 +67,30 @@ public abstract class AbstractDetachableParseResult<NMR extends NodeModelReferen
 	}
 	
 	public void releaseNodeModel(boolean now) {
-		if (!timer.isRunning()) {
-			timer.start();
-		}
+		lastUsed.compareAndSet(-1, System.nanoTime());
 		if (now) {
-			reference.release();
+			releaseReference(reference);
 		} else {
 			scheduleRelease();
 		}
+	}
+
+	protected void releaseReference(NodeModelReference reference) {
+		reference.release();
 	}
 	
 	protected void discard() {
 		if (logger.isTraceEnabled()) {
 			logger.trace("DetachableParseResultBase.discard");
 		}
-		timer.reset();
+		lastUsed.set(-1);
 	}
 	
 	protected void nodeModelRequested() {
 		if (logger.isTraceEnabled()) {
 			logger.trace("DetachableParseResultBase.nodeModelRequested");
 		}
-		timer.reset().start();
+		lastUsed.set(System.nanoTime());
 	}
 	
 	protected synchronized void scheduleRelease() {
@@ -98,9 +100,10 @@ public abstract class AbstractDetachableParseResult<NMR extends NodeModelReferen
 			}
 			scheduled = CompletableFuture.runAsync(()->{
 				NodeModelReference reference = this.reference;
-				if (timer.isRunning() && reference != null) {
-					if (timer.elapsed().compareTo(timeout) > 0) {
-						reference.release();
+				long lastUsedNanos = lastUsed.get();
+				if (lastUsedNanos != -1) {
+					if (Duration.ofNanos(System.nanoTime() - lastUsedNanos).compareTo(timeout) > 0) {
+						releaseReference(reference);
 					} else {
 						scheduled.cancel(false); // ensure it's marked as done
 						scheduleRelease();
