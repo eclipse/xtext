@@ -5,11 +5,6 @@
 		"mocha": "10.4.0",
 		"requirejs": "2.3.6"
 	},
-	"overrides": {
-	    "chokidar": {
-	      "braces": "3.0.3"
-	    }
-  	},
 	"scripts": {
 		"test": "mocha -u tdd --reporter dot src/test/js/*.js",
 		"optimize": "npm run optimizeAce && npm run optimizeOrion && npm run optimizeCodeMirror",
