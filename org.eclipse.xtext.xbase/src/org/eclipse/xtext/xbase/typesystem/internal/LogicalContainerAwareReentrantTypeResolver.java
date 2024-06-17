@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -1011,10 +1011,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				}
 			}
 			// traverse the type hierarchy to create the feature scope sessions
-			JvmTypeReference superType = getExtendedClass(type);
 			IFeatureScopeSession result = featureScopeSession;
-			if (superType != null) {
-				result = addExtensionFieldsToMemberSession(resolvedTypes, featureScopeSession, (JvmDeclaredType) superType.getType(), thisFeature, seenNames, seenTypes);
+			for (JvmTypeReference st : type.getSuperTypes()) {
+				JvmType candidateType = st.getType();
+				if (candidateType instanceof JvmGenericType) {
+					result = addExtensionFieldsToMemberSession(resolvedTypes, featureScopeSession, (JvmDeclaredType) candidateType, thisFeature, seenNames, seenTypes);
+				}
 			}
 			if (extensionProviders != null) {
 				result = result.addToExtensionScope(extensionProviders);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -31,6 +31,30 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			public interface Foo {
 			  static String bar() {
 			    return "bar!";
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testStaticMethodInInterface2() {
+		'''
+			class B implements A {
+				def void m2(int i) {
+					i.substring();
+				}
+			}
+			interface A {
+				@Extension
+				public static String s;
+				def void m1(int i) {
+					i.substring();
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B implements A {
+			  public void m2(final int i) {
+			    A.s.substring(i);
 			  }
 			}
 		''')
@@ -1571,6 +1595,37 @@ class Java8Compiler2Test extends XtendCompilerTest {
 			        synchronized_.forEach(_function);
 			      }
 			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testExtensionFieldInInterface() {
+		'''
+			package foo;
+			
+			interface Foo {
+				extension Bar bar = new Bar
+				def void someMethod(String assert) {
+					"".doit
+				}
+			}
+			
+			class Bar {
+				def void doit(String a) {}
+			}
+		'''.assertCompilesTo('''
+			package foo;
+			
+			import org.eclipse.xtext.xbase.lib.Extension;
+			
+			@SuppressWarnings("all")
+			public interface Foo {
+			  @Extension
+			  static final Bar bar = new Bar();
+			
+			  default void someMethod(final String assert_) {
+			    Foo.bar.doit("");
 			  }
 			}
 		''')
