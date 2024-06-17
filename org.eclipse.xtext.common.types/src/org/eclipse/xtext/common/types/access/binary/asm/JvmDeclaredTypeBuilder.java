@@ -69,8 +69,7 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
     	}
 		ClassReader reader = new ClassReader(bytes);
 		reader.accept(this, 
-			  ClassReader.SKIP_DEBUG 
-			| ClassReader.SKIP_FRAMES 
+			  ClassReader.SKIP_FRAMES
 			| ClassReader.SKIP_CODE
 		);
 		return result;

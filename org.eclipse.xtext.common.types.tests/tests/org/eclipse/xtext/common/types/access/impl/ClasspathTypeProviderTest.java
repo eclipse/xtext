@@ -23,9 +23,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
-import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
-import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
-import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.xtext.ui.tests.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -277,22 +274,6 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	@Override
 	protected String getCollectionParamName() {
 		return "arg0";
-	}
-	
-	@Override
-	@Test
-	public void testParameterNames_01() {
-		doTestParameterName(Bug347739ThreeTypeParamsSuperSuper.class, "getToken(A)", "arg0");
-	}
-	@Override
-	@Test
-	public void testParameterNames_02() {
-		doTestParameterName(AbstractMethods.class, "abstractMethodWithParameter(java.lang.String)", "arg0");
-	}
-	@Override
-	@Test
-	public void testParameterNames_03() {
-		doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "arg0");
 	}
 	
 	@Test
