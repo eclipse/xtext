@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,7 +11,6 @@ package org.eclipse.xtext.xbase.testing;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -74,7 +73,7 @@ public class InMemoryJavaCompiler {
 				}
 				ClassFileReader reader = null;
 				try (InputStream in = url.openStream()) {
-					reader = fromStream(in, fileName);
+					reader = ClassFileReader.read(in, fileName);
 				}
 				if (reader == null) {
 					return null;
@@ -84,20 +83,6 @@ public class InMemoryJavaCompiler {
 				return result;
 			} catch (ClassFormatException | IOException e) {
 				throw Exceptions.sneakyThrow(e);
-			}
-		}
-		
-		protected ClassFileReader fromStream(InputStream stream, String fileName) throws IllegalArgumentException, IOException, ClassFormatException {
-			try {
-				Method method = ClassFileReader.class.getMethod("read", InputStream.class, String.class);
-				return (ClassFileReader) method.invoke(null, stream, fileName);
-			} catch (ReflectiveOperationException er) {
-				try { // We are probably with jdt >= 3.38
-					Method method = ClassFileReader.class.getMethod("read", byte[].class, String.class);
-					return (ClassFileReader) method.invoke(null, stream.readAllBytes(), fileName);
-				} catch (ReflectiveOperationException e) {
-					throw new IllegalStateException(e);
-				}
 			}
 		}
 
@@ -116,7 +101,7 @@ public class InMemoryJavaCompiler {
 				}
 				ClassFileReader reader = null;
 				try (InputStream in = url.openStream()) {
-					reader = fromStream(in, fileName);
+					reader = ClassFileReader.read(in, fileName);
 				}
 				if (reader == null) {
 					return null;
