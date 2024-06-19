@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018, 2024 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,6 @@ package org.eclipse.xtext.java.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -98,7 +97,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
 				}
 				IBinaryType reader = null;
 				try (InputStream stream = url.openStream()) {
-					reader = fromStream(stream, fileName);
+					reader = ClassFileReader.read(stream, fileName);
 				}
 				if (reader == null) {
 					return null;
@@ -110,20 +109,6 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
 			return result;
 		} catch (IOException | ClassFormatException e) {
 			throw Exceptions.sneakyThrow(e);
-		}
-	}
-	
-	private static ClassFileReader fromStream(InputStream stream, String fileName) throws IllegalArgumentException, IOException, ClassFormatException {
-		try {
-			Method method = ClassFileReader.class.getMethod("read", InputStream.class, String.class);
-			return (ClassFileReader) method.invoke(null, stream, fileName);
-		} catch (ReflectiveOperationException er) {
-			try { // We are probably with jdt >= 3.38
-				Method method = ClassFileReader.class.getMethod("read", byte[].class, String.class);
-				return (ClassFileReader) method.invoke(null, stream.readAllBytes(), fileName);
-			} catch (ReflectiveOperationException e) {
-				throw new IllegalStateException(e);
-			}
 		}
 	}
 
