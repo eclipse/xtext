@@ -36,8 +36,8 @@ class CompilerBug441099Test extends AbstractXtendCompilerTest {
 		''', '''
 			import org.eclipse.xtend.lib.annotations.AccessorType;
 			import org.eclipse.xtend.lib.annotations.Accessors;
-			import org.eclipse.xtext.xbase.lib.Generated;
 			import org.eclipse.xtext.xbase.lib.Pure;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -52,7 +52,7 @@ class CompilerBug441099Test extends AbstractXtendCompilerTest {
 			    return new D("");
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Object m(final String x) {
 			    return _m(x);
 			  }

@@ -32,7 +32,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class D extends C {
@@ -42,7 +42,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			  protected void _m(final CharSequence o) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void m(final Object o) {
 			    if (o instanceof Integer) {
 			      _m((Integer)o);
@@ -95,7 +95,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Parent<T extends Object> {
@@ -107,7 +107,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			    return this.test(a.getDann());
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public T test(final Ausdruck a) {
 			    if (a instanceof Fallunterscheidung) {
 			      return _test((Fallunterscheidung)a);
@@ -149,7 +149,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Child extends Parent<String> {
@@ -157,7 +157,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public String test(final Ausdruck a) {
 			    if (a instanceof Fallunterscheidung) {
 			      return _test((Fallunterscheidung)a);

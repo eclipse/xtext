@@ -33,6 +33,6 @@ import com.google.common.annotations.GwtCompatible;
 })
 @Documented
 @Beta
-@GwtCompatible public @interface Generated {
+@GwtCompatible public @interface XbaseGenerated {
 
 }

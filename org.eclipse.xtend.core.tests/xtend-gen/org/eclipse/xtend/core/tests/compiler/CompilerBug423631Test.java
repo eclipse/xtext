@@ -46,7 +46,7 @@ public class CompilerBug423631Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Generated;");
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -74,7 +74,7 @@ public class CompilerBug423631Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("@Generated");
+    _builder_1.append("@XbaseGenerated");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object m(final A a) {");
