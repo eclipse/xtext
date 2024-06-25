@@ -30,7 +30,7 @@ class CompilerBug423631Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -42,7 +42,7 @@ class CompilerBug423631Test extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Object m(final A a) {
 			    if (a instanceof B) {
 			      return _m((B)a);

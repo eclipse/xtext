@@ -85,7 +85,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Generated;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
@@ -490,7 +490,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			JvmOperation operation = deriveGenericDispatchOperationSignature(localOperations, target);
 			if (operation != null) {
 				dispatchHelper.markAsDispatcherFunction(operation);
-				operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(Generated.class));
+				operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(XbaseGenerated.class));
 				operation.setSimpleName(signature.getSimpleName());
 				operation.setReturnType(jvmTypesBuilder.inferredType());
 			}

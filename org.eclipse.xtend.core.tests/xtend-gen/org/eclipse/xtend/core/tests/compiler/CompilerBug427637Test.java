@@ -2531,11 +2531,11 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Generated;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.util.ToStringHelper;");
     _builder_1.newLine();
@@ -3996,7 +3996,7 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("@Generated");
+    _builder_1.append("@XbaseGenerated");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataFactory.FormattingDataInit it) {");

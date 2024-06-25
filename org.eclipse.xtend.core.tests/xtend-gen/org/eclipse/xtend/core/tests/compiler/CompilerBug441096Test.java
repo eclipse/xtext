@@ -74,9 +74,9 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtend.lib.annotations.Accessors;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Generated;");
-    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -138,7 +138,7 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("@Generated");
+    _builder_1.append("@XbaseGenerated");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object expr, final Object seq) {");

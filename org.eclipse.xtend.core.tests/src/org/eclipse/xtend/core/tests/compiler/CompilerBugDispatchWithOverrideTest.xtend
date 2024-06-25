@@ -34,7 +34,7 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			''',
 			'''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Something extends AbstractSomething {
@@ -43,7 +43,7 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  @Override
-			  @Generated
+			  @XbaseGenerated
 			  public void m(final Object x) {
 			    if (x instanceof Integer) {
 			      _m((Integer)x);
@@ -75,7 +75,7 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			''',
 			'''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Something extends AbstractSomething {
@@ -84,7 +84,7 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  @Override
-			  @Generated
+			  @XbaseGenerated
 			  public void m(final Object x) {
 			    if (x instanceof Integer) {
 			      _m((Integer)x);

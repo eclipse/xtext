@@ -386,7 +386,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -398,7 +398,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return s.length();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int testFunction1(final CharSequence s) {
 			    if (s instanceof String) {
 			      return _testFunction1((String)s);
@@ -434,7 +434,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -446,7 +446,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return i.intValue();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int testFunction1(final Object i) {
 			    if (i instanceof Integer) {
 			      return _testFunction1((Integer)i);
@@ -479,7 +479,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class D extends C {
@@ -487,7 +487,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return d.intValue();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int testFunction1(final Object d) {
 			    if (d instanceof Double) {
 			      return _testFunction1((Double)d);
@@ -525,7 +525,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class D extends C {
@@ -537,7 +537,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return n.intValue();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int testFunction1(final Object d) {
 			    if (d instanceof Double) {
 			      return _testFunction1((Double)d);
@@ -577,7 +577,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -589,7 +589,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return i.intValue();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int testFunction1(final Object i) {
 			    if (i instanceof Integer) {
 			      return _testFunction1((Integer)i);
@@ -3088,7 +3088,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class NoSuchElementException {
@@ -3098,7 +3098,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _foo(final Object s) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void foo(final Object s) {
 			    if (s instanceof String) {
 			      _foo((String)s);
@@ -3128,7 +3128,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class MyType {
@@ -3141,7 +3141,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _foo(final Object s, final Object other) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void foo(final Object s, final Object other) {
 			    if (s instanceof String
 			         && other instanceof CharSequence) {
@@ -3177,7 +3177,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class MyType {
@@ -3190,7 +3190,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _foo(final String s, final CharSequence other) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void foo(final Object s, final Object other) {
 			    if (s instanceof String
 			         && other instanceof CharSequence) {
@@ -3225,7 +3225,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class MyType {
@@ -3235,7 +3235,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _foo(final StringBuffer s, final boolean b, final String other) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void foo(final Object s, final boolean b, final String other) {
 			    if (s instanceof StringBuffer) {
 			      _foo((StringBuffer)s, b, other);
@@ -5266,7 +5266,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			class B implements Element<B> {}
 		'''.assertCompilesTo('''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Bug {
@@ -5278,7 +5278,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return 1;
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int bug(final Element<?> a) {
 			    if (a instanceof A) {
 			      return _bug((A)a);

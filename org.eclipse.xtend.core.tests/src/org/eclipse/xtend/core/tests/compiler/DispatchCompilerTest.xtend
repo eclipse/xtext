@@ -36,7 +36,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''','''
 		import java.util.Arrays;
-		import org.eclipse.xtext.xbase.lib.Generated;
+		import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 		
 		@SuppressWarnings("all")
 		public class Foo {
@@ -56,7 +56,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		    return null;
 		  }
 		
-		  @Generated
+		  @XbaseGenerated
 		  public Object foo(final Object assert_) {
 		    if (assert_ instanceof String) {
 		      return _foo((String)assert_);
@@ -68,7 +68,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		    }
 		  }
 		
-		  @Generated
+		  @XbaseGenerated
 		  public Object bar(final Object assert_, final String assert__1) {
 		    if (assert_ instanceof String) {
 		      return _bar((String)assert_, assert__1);
@@ -96,7 +96,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import org.eclipse.xtext.xbase.lib.Extension;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -104,7 +104,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return s.substring(4);
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public String m(final String s) {
 			    return _m(s);
 			  }
@@ -121,7 +121,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -129,7 +129,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    throw new RuntimeException();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void minus(final Object operand) {
 			    _minus(operand);
 			    return;
@@ -147,7 +147,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -155,7 +155,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    throw new RuntimeException();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public int minus(final Object operand) {
 			    return _minus(operand);
 			  }
@@ -178,7 +178,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import java.util.Arrays;
 			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -197,7 +197,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return DoubleExtensions.operator_minus(e);
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public double minus(final Object e) {
 			    if (e instanceof Double) {
 			      return _minus((Double)e);
@@ -230,7 +230,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -246,7 +246,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    throw new RuntimeException();
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void minus(final Object e) {
 			    if (e instanceof Double) {
 			      _minus((Double)e);
@@ -280,7 +280,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Arrays;
 			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -301,7 +301,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return Double.valueOf(DoubleExtensions.operator_minus(e));
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Number minus(final Object e) {
 			    if (e instanceof Double) {
 			      return _minus((Double)e);
@@ -332,7 +332,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Arrays;
 			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -353,7 +353,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return Double.valueOf(DoubleExtensions.operator_minus(e));
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Number minus(final Object e) {
 			    if (e instanceof Double) {
 			      return _minus((Double)e);
@@ -383,7 +383,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -395,7 +395,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Object m(final Object sb, final int x) {
 			    if (sb instanceof StringBuffer) {
 			      return _m((StringBuffer)sb, x);
@@ -432,7 +432,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -452,7 +452,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Object m(final Number x) {
 			    if (x instanceof Double) {
 			      return _m((Double)x);
@@ -490,7 +490,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -506,7 +506,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public Object m(final Object x) {
 			    if (x instanceof Integer) {
 			      return _m((Integer)x);
@@ -531,7 +531,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				def dispatch void doThing(Object o) {}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
@@ -541,7 +541,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _doThing(final Object o) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final Object v) {
 			    if (v == null) {
 			      _doThing((Void)null);
@@ -563,7 +563,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				def dispatch void doThing(String o) {}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
@@ -573,7 +573,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _doThing(final String o) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final String o) {
 			    if (o != null) {
 			      _doThing(o);
@@ -595,7 +595,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				def dispatch void doThing(Object p0, Void p1) {}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
@@ -605,7 +605,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _doThing(final Object p0, final Void p1) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final Object p0, final Object p1) {
 			    if (p0 == null
 			         && p1 != null) {
@@ -630,7 +630,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
@@ -646,7 +646,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return "";
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public String toExpectation(final Object p1) {
 			    if (p1 instanceof Integer) {
 			      return _toExpectation((Integer)p1);
@@ -672,7 +672,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
@@ -682,7 +682,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  protected void _doThing(final Object p0, final Integer p1) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final Object p0, final Number p1) {
 			    if (p0 == null
 			         && p1 instanceof Float) {
@@ -708,14 +708,14 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				def dispatch void doThing(Object p0, Integer p1) {}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
 			  protected void _doThing(final Object p0, final Integer p1) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final Object p0, final Integer p1) {
 			    _doThing(p0, p1);
 			    return;
@@ -732,14 +732,14 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
 			  protected void _doThing(final Void p0, final Integer p1) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final Object p0, final Integer p1) {
 			    if (p0 == null) {
 			      _doThing((Void)null, p1);
@@ -761,14 +761,14 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Generated;
+			import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 			
 			@SuppressWarnings("all")
 			public class Test {
 			  protected void _doThing(final Void p0, final Void p1) {
 			  }
 			
-			  @Generated
+			  @XbaseGenerated
 			  public void doThing(final Object p0, final Object p1) {
 			    if (p0 == null
 			         && p1 == null) {
