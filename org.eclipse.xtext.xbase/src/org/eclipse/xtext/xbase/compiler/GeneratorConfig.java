@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2020, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,6 +13,7 @@ import org.eclipse.xtext.util.JavaVersion;
 /**
  * @author Holger Schill - Initial contribution and API
  * @author Miro Spoenemann
+ * @author Lorenzo Bettini - useXbaseGenerated
  */
 public class GeneratorConfig {
 	/**
@@ -25,6 +26,11 @@ public class GeneratorConfig {
 	 * types.
 	 */
 	private boolean generateSyntheticSuppressWarnings = true;
+
+	/**
+	 * Whether <code>@XbaseGenerated</code> shall be generated for synthetic members.
+	 */
+	private boolean useXbaseGenerated = true;
 
 	/**
 	 * Whether <code>@Generated</code> shall be generated for non-nested types.
@@ -78,6 +84,20 @@ public class GeneratorConfig {
 
 	public void setGenerateSyntheticSuppressWarnings(boolean generateSyntheticSuppressWarnings) {
 		this.generateSyntheticSuppressWarnings = generateSyntheticSuppressWarnings;
+	}
+
+	/**
+	 * @since 2.36
+	 */
+	public boolean isUseXbaseGenerated() {
+		return useXbaseGenerated;
+	}
+
+	/**
+	 * @since 2.36
+	 */
+	public void setUseXbaseGenerated(boolean useXbaseGenerated) {
+		this.useXbaseGenerated = useXbaseGenerated;
 	}
 
 	public boolean isGenerateGeneratedAnnotation() {

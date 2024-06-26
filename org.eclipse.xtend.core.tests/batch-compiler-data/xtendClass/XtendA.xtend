@@ -9,4 +9,7 @@
 
 class XtendA {
 	val public String foo = ""
+
+	def dispatch m(String s) {}
+	def dispatch m(int i) {}
 }
