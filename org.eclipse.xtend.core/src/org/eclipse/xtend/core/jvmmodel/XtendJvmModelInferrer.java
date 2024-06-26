@@ -490,7 +490,9 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			JvmOperation operation = deriveGenericDispatchOperationSignature(localOperations, target);
 			if (operation != null) {
 				dispatchHelper.markAsDispatcherFunction(operation);
-				operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(XbaseGenerated.class));
+				if (generatorConfig.isUseXbaseGenerated()) {
+					operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(XbaseGenerated.class));
+				}
 				operation.setSimpleName(signature.getSimpleName());
 				operation.setReturnType(jvmTypesBuilder.inferredType());
 			}

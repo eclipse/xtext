@@ -21,13 +21,21 @@ import com.google.inject.Inject;
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Lorenzo Bettini - useXbaseGenerated
  */
 public class XbaseBuilderPreferenceAccess {
-	
+
 	/**
 	 * Preference identifier for generating <code>@SuppressWarnings</code>.
 	 */
 	public static final String PREF_GENERATE_SUPPRESS_WARNINGS = "generateSuppressWarnings"; //$NON-NLS-1$
+
+	/**
+	 * Preference identifier for generating <code>@XbaseGenerated</code>.
+	 * @since 2.36
+	 */
+	public static final String USE_XBASE_GENERATED = "useXbaseGenerated"; //$NON-NLS-1$
+
 	/**
 	 * Preference identifier for generating <code>@Generated</code>.
 	 */
@@ -59,6 +67,7 @@ public class XbaseBuilderPreferenceAccess {
 		protected void initializeBuilderPreferences(IPreferenceStore store) {
 			super.initializeBuilderPreferences(store);
 			store.setDefault(PREF_GENERATE_SUPPRESS_WARNINGS, true);
+			store.setDefault(USE_XBASE_GENERATED, true);
 			store.setDefault(PREF_GENERATE_GENERATED, false);
 			store.setDefault(PREF_DATE_IN_GENERATED, false);
 			store.setDefault(PREF_JAVA_VERSION, JavaVersion.JAVA8.toString());
@@ -73,6 +82,7 @@ public class XbaseBuilderPreferenceAccess {
 	public void loadBuilderPreferences(GeneratorConfig generatorConfig, Object context) {
 		IPreferenceStore preferenceStore = preferenceStoreAccess.getContextPreferenceStore(context);
 		generatorConfig.setGenerateSyntheticSuppressWarnings(preferenceStore.getBoolean(PREF_GENERATE_SUPPRESS_WARNINGS));
+		generatorConfig.setUseXbaseGenerated(preferenceStore.getBoolean(USE_XBASE_GENERATED));
 		generatorConfig.setGenerateGeneratedAnnotation(preferenceStore.getBoolean(PREF_GENERATE_GENERATED));
 		if (generatorConfig.isGenerateGeneratedAnnotation()) {
 			generatorConfig.setIncludeDateInGeneratedAnnotation(preferenceStore.getBoolean(PREF_DATE_IN_GENERATED));

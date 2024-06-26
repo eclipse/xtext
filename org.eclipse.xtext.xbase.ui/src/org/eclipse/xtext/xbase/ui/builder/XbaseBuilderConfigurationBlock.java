@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,12 +28,13 @@ import com.google.inject.Inject;
  * Builder configuration block that adds compiler settings for Xbase.
  * 
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Lorenzo Bettini - useXbaseGenerated
  */
 public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
-	
+
 	@Inject
 	private XbaseBuilderPreferenceAccess preferenceAccess;
-	
+
 	private Combo versionCombo;
 
 	private Button useComplianceButton;
@@ -67,6 +68,8 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 		
 		addCheckBox(composite, "Generate @SuppressWarnings annotations",
 				PREF_GENERATE_SUPPRESS_WARNINGS, BOOLEAN_VALUES, 0);
+		addCheckBox(composite, "Annotate synthetic members with @XbaseGenerated",
+				USE_XBASE_GENERATED, BOOLEAN_VALUES, 0);
 		
 		final Button generateGeneratedButton = addCheckBox(composite, "Generate @Generated annotations",
 				PREF_GENERATE_GENERATED, BOOLEAN_VALUES, 0);
