@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2019, 2024 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -98,7 +98,52 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
 		Assert.assertFalse(y.exists());
 		List<String> expectation = new ArrayList<>();
 		Version ltkVersion = Platform.getBundle("org.eclipse.ltk.core.refactoring").getVersion();
-		if (ltkVersion.compareTo(new Version("3.14.300")) >= 0) {
+		if (ltkVersion.compareTo(new Version("3.14.500")) >= 0) {
+			String expected = "BeginTask (1000)\n"
+					+ "Worked 90 (90.0)\n"
+					+ "Worked 505 (595.0)\n"
+					+ "Worked 40 (635.0)\n"
+					+ "SetTaskName Preparing and applying file changes...\n"
+					+ "Worked 19 (654.0)\n"
+					+ "Worked 19 (673.0)\n"
+					+ "Worked 9 (682.0)\n"
+					+ "Worked 10 (692.0)\n"
+					+ "Worked 9 (701.0)\n"
+					+ "Worked 10 (711.0)\n"
+					+ "SetTaskName Creating text changes...\n"
+					+ "Worked 47 (758.0)\n"
+					+ "Worked 20 (778.0)\n"
+					+ "Worked 19 (797.0)\n"
+					+ "Worked 203 (1000.0)\n"
+					+ "BeginTask Creating workspace modifications... (1000)\n"
+					+ "Worked 333 (1333.0)\n"
+					+ "Worked 333 (1666.0)\n"
+					+ "Worked 334 (2000.0)\n"
+					+ "Done\n"
+					+ "BeginTask Performing changes... (1000)\n"
+					+ "Worked 41 (2041.0)\n"
+					+ "Worked 42 (2083.0)\n"
+					+ "Worked 20 (2103.0)\n"
+					+ "Worked 21 (2124.0)\n"
+					+ "Worked 42 (2166.0)\n"
+					+ "Worked 84 (2250.0)\n"
+					+ "Worked 41 (2291.0)\n"
+					+ "Worked 42 (2333.0)\n"
+					+ "Worked 20 (2353.0)\n"
+					+ "Worked 21 (2374.0)\n"
+					+ "Worked 42 (2416.0)\n"
+					+ "Worked 84 (2500.0)\n"
+					+ "Worked 5 (2505.0)\n"
+					+ "Worked 125 (2630.0)\n"
+					+ "Worked 25 (2655.0)\n"
+					+ "Worked 75 (2730.0)\n"
+					+ "Worked 25 (2755.0)\n"
+					+ "Worked 120 (2875.0)\n"
+					+ "Worked 120 (2995.0)\n"
+					+ "Worked 5 (3000.0)\n"
+					+ "Done";
+			monitor.assertLogged(expected);
+		} else if (ltkVersion.compareTo(new Version("3.14.300")) >= 0) {
 			String expected = "BeginTask (1000)\n"
 					+ "Worked 90 (90.0)\n"
 					+ "Worked 505 (595.0)\n"
