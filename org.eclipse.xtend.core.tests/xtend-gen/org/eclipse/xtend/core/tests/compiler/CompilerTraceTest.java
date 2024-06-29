@@ -1333,6 +1333,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -1351,6 +1353,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@XbaseGenerated");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void method(final Object i) {");
@@ -1409,6 +1414,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -1427,6 +1434,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@XbaseGenerated");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void #method#(final Object i) {");
@@ -1485,6 +1495,8 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -1503,6 +1515,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@XbaseGenerated");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void method(final Object i) {");

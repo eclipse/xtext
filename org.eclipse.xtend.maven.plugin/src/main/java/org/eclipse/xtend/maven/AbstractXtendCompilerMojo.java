@@ -81,6 +81,13 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	private boolean generateSyntheticSuppressWarnings;
 
 	/**
+	 * Whether <code>@XbaseGenerated</code> shall be generated for synthetic members.
+	 * @since 2.36
+	 */
+	@Parameter(defaultValue="true")
+	private boolean useXbaseGenerated;
+
+	/**
 	 * Whether <code>@Generated</code> shall be generated for non-nested types.
 	 */
 	@Parameter(defaultValue="false")
@@ -129,6 +136,8 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		compiler.setJavaSourceVersion(javaSourceVersion);
 		log.debug("Set generateSyntheticSuppressWarnings: " + generateSyntheticSuppressWarnings);
 		compiler.setGenerateSyntheticSuppressWarnings(generateSyntheticSuppressWarnings);
+		log.debug("Set useXbaseGenerated: " + useXbaseGenerated);
+		compiler.setUseXbaseGenerated(useXbaseGenerated);
 		log.debug("Set generateGeneratedAnnotation: " + generateGeneratedAnnotation);
 		compiler.setGenerateGeneratedAnnotation(generateGeneratedAnnotation);
 		log.debug("Set includeDateInGeneratedAnnotation: " + includeDateInGeneratedAnnotation);

@@ -485,7 +485,7 @@ class BatchCompilerTest {
 		assertTrue(batchCompiler.compile)
 		assertEquals(0, new File(TEMP_DIRECTORY).list.size)
 	}
-	
+
 	@Test
 	def void testNoSuppressWarningsAnnotations() {
 		batchCompiler.generateSyntheticSuppressWarnings = false
@@ -493,8 +493,15 @@ class BatchCompilerTest {
 		assertTrue(batchCompiler.compile)
 		assertFalse((OUTPUT_DIRECTORY + "/XtendA.java").contents.contains("@SuppressWarnings"))
 	}
-	
-	
+
+	@Test
+	def void testNoXbaseGenerated() {
+		batchCompiler.useXbaseGenerated = false
+		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
+		assertTrue(batchCompiler.compile)
+		assertFalse((OUTPUT_DIRECTORY + "/XtendA.java").contents.contains("@XbaseGenerated"))
+	}
+
 	@Test
 	def void testJavaVersion5() {
 		batchCompiler.javaSourceVersion = "1.5"
