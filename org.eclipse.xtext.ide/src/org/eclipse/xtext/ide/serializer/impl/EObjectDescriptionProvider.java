@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ide.serializer.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -31,7 +32,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -59,7 +59,7 @@ public class EObjectDescriptionProvider implements IEObjectDescriptionProvider {
 			Map<String, String> userData = null;
 			for (final String key : source.getUserDataKeys()) {
 				if (userData == null) {
-					userData = Maps.newHashMapWithExpectedSize(2);
+					userData = new HashMap<>(3);
 				}
 				userData.put(key, source.getUserData(key));
 			}

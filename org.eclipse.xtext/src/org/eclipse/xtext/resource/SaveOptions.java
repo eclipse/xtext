@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 /**
  * Immutable SaveOptions can be used to read and write options into the
@@ -70,7 +69,7 @@ public class SaveOptions {
 	}
 	
 	public Map<Object, Object> toOptionsMap() {
-		Map<Object, Object> result = Maps.newHashMapWithExpectedSize(2);
+		Map<Object, Object> result = new HashMap<>(3);
 		addTo(result);
 		return result;
 	}

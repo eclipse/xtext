@@ -19,7 +19,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -48,8 +47,7 @@ public class EcoreResourceDescriptionStrategy extends DefaultResourceDescription
 		try {
 			QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(eObject);
 			if (qualifiedName != null) {
-				Map<String, String> userData = Maps.newHashMapWithExpectedSize(1);
-				userData.put(NS_URI_INDEX_ENTRY, Boolean.toString(isNsURI));
+				Map<String, String> userData = Map.of(NS_URI_INDEX_ENTRY, Boolean.toString(isNsURI));
 				IEObjectDescription description = EObjectDescription.create(qualifiedName, eObject, userData);
 				acceptor.accept(description);
 				return true;

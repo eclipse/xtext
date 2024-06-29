@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -17,6 +16,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -1526,11 +1526,9 @@ public class XtextGeneratorTemplates {
         _builder.append(Injector.class, "\t");
         _builder.append("> injectors = ");
         _builder.append(Collections.class, "\t");
-        _builder.append(".synchronizedMap(");
-        _builder.append(Maps.class, "\t");
-        _builder.append(".<String, ");
-        _builder.append(Injector.class, "\t");
-        _builder.append("> newHashMapWithExpectedSize(1));");
+        _builder.append(".synchronizedMap(new ");
+        _builder.append(HashMap.class, "\t");
+        _builder.append("<>(2));");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
