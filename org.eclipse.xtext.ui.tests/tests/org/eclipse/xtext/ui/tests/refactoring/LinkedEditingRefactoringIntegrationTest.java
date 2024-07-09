@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -87,7 +87,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 		final XtextEditor editor = openEditor(file);
 		final TextSelection selection = new TextSelection(model.indexOf(TEST_CLASS), TEST_CLASS.length());
 		editor.getSelectionProvider().setSelection(selection);
-		waitForDisplay();
+		waitForEventProcessing();
 		IRenameElementContext context = editor.getDocument().readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
 			@Override
 			public IRenameElementContext exec(XtextResource state) throws Exception {
@@ -98,10 +98,10 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 			}
 		});
 		renameRefactoringController.startRefactoring(context);
-		waitForDisplay();
+		waitForEventProcessing();
 		pressKeys(editor, "NewTestClass\n");
 		waitForReconciler(editor);
-		waitForDisplay();
+		waitForEventProcessing();
 		waitForBuild();
 		ecoreResource.load(null);
 		assertEquals("NewTestClass", ((EPackage)ecoreResource.getContents().get(0)).getEClassifiers().get(0).getName());
