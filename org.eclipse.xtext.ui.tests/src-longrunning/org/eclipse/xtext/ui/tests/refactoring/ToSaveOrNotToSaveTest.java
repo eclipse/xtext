@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -77,7 +77,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 			if(editor instanceof XtextEditor) {
 				waitForReconciler((XtextEditor) editor);
 			}
-			waitForDisplay();
+			waitForEventProcessing();
 			assertTrue(editor.isDirty());
 		}
 	}
@@ -240,7 +240,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 
 	protected void renameFooToFooBar(final XtextEditor contextEditor) throws Exception {
 		contextEditor.getEditorSite().getPage().activate(contextEditor);
-		waitForDisplay();
+		waitForEventProcessing();
 		IXtextDocument document = contextEditor.getDocument();
 		final int offset = document.get().indexOf("foo");
 		contextEditor.selectAndReveal(offset, 3);
@@ -262,9 +262,9 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 //		controller.startRefactoring(RefactoringType.LINKED_EDITING);
 //		waitForDisplay();
 		pressKeys(contextEditor, "fooBar\n");
-		waitForDisplay();
+		waitForEventProcessing();
 		waitForReconciler(fooEditor);
 		waitForReconciler(barEditor);
-		waitForDisplay();
+		waitForEventProcessing();
 	}
 }

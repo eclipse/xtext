@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -160,7 +160,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		final XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
 		waitForReconciler(editor);
-		waitForDisplay();
+		waitForEventProcessing();
 		waitForBuild();
 		checkConsistenceOfGrammar(editor);
 	}
@@ -217,7 +217,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		refToGreetingResource.unload();
 		ecoreModelResource.unload();
 		waitForBuild();
-		waitForDisplay();
+		waitForEventProcessing();
 		XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
 		waitForBuild();
@@ -273,13 +273,13 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	private XtextEditor doRefactoring(XtextEditor editor) throws Exception {
 		final TextSelection selection = new TextSelection(grammar.indexOf(CLASSIFIERNAME), CLASSIFIERNAME.length());
 		editor.getSelectionProvider().setSelection(selection);
-		waitForDisplay();
+		waitForEventProcessing();
 		IRenameElementContext context = new IRenameElementContext.Impl(greetingParserRuleUri,
 				XtextPackage.Literals.PARSER_RULE, editor, selection, grammarUri);
 		renameRefactoringController.startRefactoring(context);
-		waitForDisplay();
+		waitForEventProcessing();
 		pressKeys(editor, REFACTOREDCLASSIFIERNAME + "\n");
-		waitForDisplay();
+		waitForEventProcessing();
 		return editor;
 	}
 
