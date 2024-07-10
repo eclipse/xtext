@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 
 import org.eclipse.core.resources.ICommand;
@@ -251,8 +252,16 @@ public class IResourcesSetupUtil {
 
 	public static File createTempFile(String fileName, String suffix, String content)
 			throws Exception {
+		return createTempFile(fileName, suffix, content, Charset.defaultCharset());
+	}
+	
+	/**
+	 * since 2.36
+	 */
+	public static File createTempFile(String fileName, String suffix, String content, Charset charset)
+			throws Exception {
 		File file = Files.createTempFile(fileName, suffix).toFile();
-		try (FileWriter writer = new FileWriter(file)) {
+		try (FileWriter writer = new FileWriter(file, charset)) {
 			writer.write(content);
 		}
 		return file;
