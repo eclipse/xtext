@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 
 /**
@@ -75,7 +76,7 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 						}
 					}
 				});
-				assertEquals(true, capturedLogging.getLogEntries().isEmpty());
+				assertEquals(Joiner.on("\n").join(capturedLogging.getLogEntries()), true, capturedLogging.getLogEntries().isEmpty());
 			}
 		});
 		assertEquals(true, capturedLogging.getLogEntries().isEmpty());
