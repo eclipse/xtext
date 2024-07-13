@@ -275,6 +275,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 	
 			parser.setWorkingCopyOwner(workingCopyOwner);
 			parser.setIgnoreMethodBodies(true);
+//			parser.setBindingsRecovery(true);
 			
 			parser.setProject(javaProject);
 			
@@ -446,8 +447,12 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 	protected String getQualifiedName(ITypeBinding binding) {
 		String qualifiedName = qualifiedNames.get(binding);
 		if (qualifiedName == null) {
+			try {
 			qualifiedName = uriHelper.getQualifiedName(binding);
 			qualifiedNames.put(binding, qualifiedName);
+			} catch (NullPointerException e) {
+				// TODO
+			}
 		}
 		return qualifiedName;
 	}
