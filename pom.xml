@@ -420,7 +420,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>strict-release-jdk</id>
+			<id>strict-jdk-11</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -437,7 +437,7 @@
 							<toolchains>
 								<jdk>
 									<!-- Toolchain selected by maven/tycho-compiler for compilation and maven/tycho-surefire as JRE of launched test-runtimes-->
-									<version>${maven.compiler.release}</version>
+									<version>11</version>
 								</jdk>
 							</toolchains>
 						</configuration>
@@ -447,9 +447,6 @@
 		</profile>
 		<profile>
 			<id>strict-jdk-21</id>
-			<activation>
-				<jdk>[21,)</jdk>
-			</activation>
 			<properties>
 				<!--
 					Since the Xtend compiler generates Java code using new API introduced in Java 21,
