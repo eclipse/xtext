@@ -8,28 +8,36 @@
  */
 package org.eclipse.xtext.ui.tests.editor;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -116,7 +124,72 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 				.getQualifiedName().getLastSegment());
 		Iterables.getLast(events);
 	}
+	
+	/*
+	 * @see https://github.com/eclipse/xtext/issues/2385
+	 */
+	@Test public void testModifyFileInExternEditor() throws Exception {
+		IXtextDocument document = editor.getDocument();
 
+		Display.getDefault().readAndDispatch();
+		
+		assertNotEquals(document.get(), "");
+		assertTrue(editor.getDocumentProvider() instanceof FileDocumentProvider);
+		
+		FileDocumentProvider fileDocumentProvider = (FileDocumentProvider)editor.getDocumentProvider();
+		
+		getWorkbench().getActiveWorkbenchWindow().getActivePage().getViewReferences()[0].getView(false).setFocus();
+		
+		File externalEditFile = ((IFileEditorInput)editor.getEditorInput()).getFile().getLocation().toFile();
+		try (FileWriter fw = new FileWriter(externalEditFile)) {
+			fw.write("");
+		}
+		
+		assertFalse(fileDocumentProvider.isSynchronized(editor.getEditorInput()));
+
+		editor.setFocus();
+		Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_REFRESH, null);
+		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
+		syncUtil.waitForReconciler(editor);
+		syncUtil.waitForBuild(new NullProgressMonitor());
+		
+		assertTrue(fileDocumentProvider.isSynchronized(editor.getEditorInput()));
+		
+		assertEquals(document.get(), "");
+	}
+
+	/**
+	 * This test needs a manual button click.
+	 */
+	@Ignore
+	@Test public void testModifyDirtyFileInExternEditor() throws Exception {
+		IXtextDocument document = editor.getDocument();
+
+		Display.getDefault().readAndDispatch();
+		
+		assertNotEquals(document.get(), "");
+		document.set("/* Hello World! */");
+		assertEquals("/* Hello World! */", document.get());
+		assertTrue(editor.isDirty());
+		
+		getWorkbench().getActiveWorkbenchWindow().getActivePage().getViewReferences()[0].getView(false).setFocus();
+		
+		File externalEditFile = ((IFileEditorInput)editor.getEditorInput()).getFile().getLocation().toFile();
+		try (FileWriter fw = new FileWriter(externalEditFile)) {
+			fw.write("");
+		}
+		editor.setFocus();
+		// Dialog opens and the "Ignore file change" button has to be clicked.
+		Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_REFRESH, null);
+		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
+		syncUtil.waitForReconciler(editor);
+		assertEquals(document.get(), "/* Hello World! */");
+		
+		assertTrue(editor.isDirty());
+		editor.doSave(new NullProgressMonitor());
+		assertFalse(editor.isDirty());
+	}
+	
 	private IEObjectDescription getFirstExportedObjectInLastEventDelta() {
 		return Iterables.getFirst(Iterables.getLast(events).getDeltas().get(0).getNew().getExportedObjects(), null);
 	}

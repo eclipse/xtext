@@ -76,6 +76,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.IDocumentProviderExtension3;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
@@ -327,6 +329,20 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		callback.afterSave(this);
 	}
 	
+	@Override
+	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
+		super.performSave(overwrite || isSynchronized(), progressMonitor);
+	}
+	
+	
+	private boolean isSynchronized() {
+		IResource resource = getResource();
+		if (resource != null) {
+			return resource.isSynchronized(IResource.DEPTH_ZERO);
+		}
+		return false;
+	}
+
 	@Override
 	protected void updateState(final IEditorInput input) {
 		new DisplayRunnable() {
