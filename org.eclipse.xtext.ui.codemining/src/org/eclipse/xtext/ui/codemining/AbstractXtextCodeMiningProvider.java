@@ -27,6 +27,7 @@ import org.eclipse.jface.text.codemining.LineContentCodeMining;
 import org.eclipse.jface.text.codemining.LineHeaderCodeMining;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
@@ -87,7 +88,11 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 				}
 
 			};
-			return xtextDocumentUtil.getXtextDocument(viewer).tryReadOnly(uow, () -> Collections.emptyList());
+			IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(viewer);
+			if (xtextDocument == null) {
+				return Collections.emptyList();
+			}
+			return xtextDocument.tryReadOnly(uow, () -> Collections.emptyList());
 		});
 		return future;
 	}
