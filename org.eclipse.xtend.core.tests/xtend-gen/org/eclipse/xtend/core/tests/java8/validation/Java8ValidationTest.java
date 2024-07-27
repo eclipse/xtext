@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -1001,6 +1001,23 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, 
         "The enclosing type does not extend or implement the interface List");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInterfaceExtensionField() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface MyIf {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("extension Integer foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -46,6 +46,60 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return \"bar!\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+
+  @Test
+  public void testStaticMethodInInterface2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class B implements A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m2(int i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i.substring();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Extension");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static String s;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m1(int i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i.substring();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class B implements A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m2(final int i) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("A.s.substring(i);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3574,6 +3628,68 @@ public class Java8Compiler2Test extends XtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+
+  @Test
+  public void testExtensionFieldInInterface() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("interface Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension Bar bar = new Bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void someMethod(String assert) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\"\".doit");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void doit(String a) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Extension");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("static final Bar bar = new Bar();");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("default void someMethod(final String assert_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Foo.bar.doit(\"\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
