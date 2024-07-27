@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,7 +26,9 @@ import org.eclipse.xtext.testing.logging.LoggingTester.LogCapture;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Assume;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 import com.google.inject.Inject;
 
@@ -44,6 +46,8 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 
 	@Test
 	public void testNoJavaInClasspath() throws Exception {
+		Assume.assumeTrue("Newer JDT requires a fix in Xtext",
+				JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,39,0)) < 0);
 		LogCapture capturedLogging = LoggingTester.captureLogging(Level.ERROR, AbstractClassMirror.class, new Runnable() {
 
 			@Override
