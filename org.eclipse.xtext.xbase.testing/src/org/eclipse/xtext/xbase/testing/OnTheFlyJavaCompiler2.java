@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -42,7 +42,7 @@ public class OnTheFlyJavaCompiler2 {
 	 */
 	@Inject
 	public OnTheFlyJavaCompiler2(ClassLoader scope) {
-		this(scope, JavaVersion.JAVA6);
+		this(scope, JavaVersion.JAVA8);
 	}
 
 	public OnTheFlyJavaCompiler2(ClassLoader scope, JavaVersion version) {
@@ -54,6 +54,9 @@ public class OnTheFlyJavaCompiler2 {
 	 * @since 2.11
 	 */
 	public void setJavaVersion(JavaVersion version) {
+		if (JavaVersion.JAVA8.compareTo(version) > 0) {
+			version = JavaVersion.JAVA8;
+		}
 		inMemoryCompiler.setJavaVersion(version);
 		javaVersion = version;
 	}
