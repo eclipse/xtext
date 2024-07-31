@@ -19,22 +19,36 @@ import java.util.List;
  */
 public enum JavaVersion {
 	
+	/*
+	 * Implemenatation note: The deprecated enum constants cannot be removed since the ordinals of all
+	 * subsequent enum constants would change.
+	 */
+	
 	/**
 	 * Java 5 language enhancements: generics, simplified for-loop, autoboxing and unboxing, enums, varargs, static
 	 * import, annotations.
+	 * 
+	 * @deprecated Not supported anymore. Defaults to Java8.
 	 */
-	JAVA5("Java 5", new String[] {"1.5"}, "J2SE-1.5", "-1.5", Constants.JAVA5),
+	@Deprecated
+	JAVA5("Java 8", new String[] {"1.8", "8"}, "JavaSE-1.8", "-1.8", Constants.JAVA8),
 
 	/**
 	 * Java 6 language enhancements: Override annotations for implemented methods.
+	 * 
+	 * @deprecated Not supported anymore. Defaults to Java8.
 	 */
-	JAVA6("Java 6", new String[] {"1.6", "6"}, "JavaSE-1.6", "-1.6", Constants.JAVA6),
+	@Deprecated
+	JAVA6("Java 8", new String[] {"1.8", "8"}, "JavaSE-1.8", "-1.8", Constants.JAVA8),
 
 	/**
 	 * Java 7 language enhancements: extended numeric literals, switch over strings, type inference, try-with-resources,
 	 * catch multiple exceptions.
+	 * 
+	 * @deprecated Not supported anymore. Defaults to Java8.
 	 */
-	JAVA7("Java 7", new String[] {"1.7", "7"}, "JavaSE-1.7", "-1.7", Constants.JAVA7),
+	@Deprecated
+	JAVA7("Java 8", new String[] {"1.8", "8"}, "JavaSE-1.8", "-1.8", Constants.JAVA8),
 
 	/**
 	 * Java 8 language enhancements: lambda expressions, better type inference, more flexible annotations.
@@ -67,9 +81,7 @@ public enum JavaVersion {
 	private static final class Constants {
 		private static final int MAJOR_VERSION_1_5 = 49;
 		private static final int MINOR_VERSION_0 = 0;
-		private static final long JAVA5 = ((long)MAJOR_VERSION_1_5 << 16) + MINOR_VERSION_0;
-		private static final long JAVA6 = ((long)(MAJOR_VERSION_1_5 + 1) << 16) + MINOR_VERSION_0;
-		private static final long JAVA7 = ((long)(MAJOR_VERSION_1_5 + 2) << 16) + MINOR_VERSION_0;
+		
 		private static final long JAVA8 = ((long)(MAJOR_VERSION_1_5 + 3) << 16) + MINOR_VERSION_0;
 		private static final long JAVA9 = ((long)(MAJOR_VERSION_1_5 + 4) << 16) + MINOR_VERSION_0;
 		private static final long JAVA10 = ((long)(MAJOR_VERSION_1_5 + 5) << 16) + MINOR_VERSION_0;
