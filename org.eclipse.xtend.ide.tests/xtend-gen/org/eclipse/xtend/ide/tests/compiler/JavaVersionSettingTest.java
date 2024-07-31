@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -66,10 +66,10 @@ public class JavaVersionSettingTest extends Assert {
   }
 
   @Test
-  public void testCompileWithJava5() {
+  public void testCompileWithJava8() {
     try {
       this.workbenchTestHelper.tearDown();
-      WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, JavaVersion.JAVA5);
+      WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, JavaVersion.JAVA8);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypackage");
       _builder.newLine();
@@ -94,42 +94,7 @@ public class JavaVersionSettingTest extends Assert {
       IResourcesSetupUtil.waitForBuild();
       this.assertNoErrors(xtendFile);
       final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", xtendFile.getProject());
-      Assert.assertFalse("@Override annotation was generated, but it shouldn\'t.", content.contains("@Override"));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-
-  @Test
-  public void testCompileWithJava6() {
-    try {
-      this.workbenchTestHelper.tearDown();
-      WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, JavaVersion.JAVA6);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package mypackage");
-      _builder.newLine();
-      _builder.append("class B implements A {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("override a() {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("interface A {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def void a()");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final IFile xtendFile = this.workbenchTestHelper.createFile("mypackage/OverrideTest.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForBuild();
-      this.assertNoErrors(xtendFile);
-      final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", xtendFile.getProject());
-      Assert.assertTrue("@Override annotation was not generated.", content.contains("@Override"));
+      Assert.assertTrue("@Override annotation not was generated.", content.contains("@Override"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
