@@ -59,7 +59,7 @@ public class OnTheFlyJavaCompiler2 {
 	 * @since 2.11
 	 */
 	public void setJavaVersion(JavaVersion version) {
-		if (JavaVersion.JAVA8.compareTo(version) >= 0) {
+		if (JavaVersion.JAVA8.compareTo(version) > 0) {
 			logger.error("Ignored attempt to set JavaVersion lower than 8", new IllegalArgumentException(version.toString()));
 			version = JavaVersion.JAVA8;
 		}
