@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -35,15 +35,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m() {
-			    final Function<String, Integer> _function = new Function<String, Integer>() {
-			      public Integer apply(final String s) {
-			        return Integer.valueOf(s.length());
-			      }
+			    final Function<String, Integer> _function = (String s) -> {
+			      return Integer.valueOf(s.length());
 			    };
-			    final Function<String, String> _function_1 = new Function<String, String>() {
-			      public String apply(final String it) {
-			        return null;
-			      }
+			    final Function<String, String> _function_1 = (String it) -> {
+			      return null;
 			    };
 			    return IterableExtensions.<String>sortWith(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "aa", "aaa")), Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1));
 			  }
@@ -76,15 +72,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final C.Sortable<String> sortMe) {
-			    final Function<String, Integer> _function = new Function<String, Integer>() {
-			      public Integer apply(final String s) {
-			        return Integer.valueOf(s.length());
-			      }
+			    final Function<String, Integer> _function = (String s) -> {
+			      return Integer.valueOf(s.length());
 			    };
-			    final Function<String, String> _function_1 = new Function<String, String>() {
-			      public String apply(final String it) {
-			        return null;
-			      }
+			    final Function<String, String> _function_1 = (String it) -> {
+			      return null;
 			    };
 			    sortMe.sort(Ordering.<Integer>natural().<String>onResultOf(_function).<String>onResultOf(_function_1));
 			  }
@@ -137,15 +129,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final C.Sortable<String> sortMe) {
-			    final C.ToIntFunction<String> _function = new C.ToIntFunction<String>() {
-			      public int apply(final String s) {
-			        return s.length();
-			      }
+			    final C.ToIntFunction<String> _function = (String s) -> {
+			      return s.length();
 			    };
-			    final Function1<String, String> _function_1 = new Function1<String, String>() {
-			      public String apply(final String s) {
-			        return s;
-			      }
+			    final Function1<String, String> _function_1 = (String s) -> {
+			      return s;
 			    };
 			    sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));
 			  }
@@ -198,15 +186,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final C.Sortable<String> sortMe) {
-			    final C.ToIntFunction<String> _function = new C.ToIntFunction<String>() {
-			      public int apply(final String s) {
-			        return s.length();
-			      }
+			    final C.ToIntFunction<String> _function = (String s) -> {
+			      return s.length();
 			    };
-			    final Function1<String, String> _function_1 = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it.toUpperCase();
-			      }
+			    final Function1<String, String> _function_1 = (String it) -> {
+			      return it.toUpperCase();
 			    };
 			    sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));
 			  }
@@ -259,15 +243,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final C.Sortable<String> sortMe) {
-			    final C.ToIntFunction<String> _function = new C.ToIntFunction<String>() {
-			      public int apply(final String s) {
-			        return s.length();
-			      }
+			    final C.ToIntFunction<String> _function = (String s) -> {
+			      return s.length();
 			    };
-			    final Function1<String, String> _function_1 = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function_1 = (String it) -> {
+			      return it;
 			    };
 			    sortMe.sort(C.MyComparator.<String>comparingInt2(_function).<String>thenComparing2(_function_1));
 			  }
@@ -323,15 +303,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public C.MyComparator<String> m() {
-			    final C.ToIntFunction<String> _function = new C.ToIntFunction<String>() {
-			      public int apply(final String s) {
-			        return s.length();
-			      }
+			    final C.ToIntFunction<String> _function = (String s) -> {
+			      return s.length();
 			    };
-			    final C.Function<String, String> _function_1 = new C.Function<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final C.Function<String, String> _function_1 = (String it) -> {
+			      return it;
 			    };
 			    return C.MyComparator.<String>comparingInt(_function).<String>thenComparing(_function_1);
 			  }

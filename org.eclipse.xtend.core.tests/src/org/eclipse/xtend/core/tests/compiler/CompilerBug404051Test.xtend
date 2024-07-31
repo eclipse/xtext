@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -35,15 +35,11 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<? super Object> m(final Iterable<String> iterable) {
-			    final Function1<String, Object> _function = new Function1<String, Object>() {
-			      public Object apply(final String it) {
-			        return null;
-			      }
+			    final Function1<String, Object> _function = (String it) -> {
+			      return null;
 			    };
-			    final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {
-			      public Integer apply(final Object it) {
-			        return Integer.valueOf(it.hashCode());
-			      }
+			    final Function1<Object, Integer> _function_1 = (Object it) -> {
+			      return Integer.valueOf(it.hashCode());
 			    };
 			    return IterableExtensions.sortBy(this.<String, Object>flatMap(iterable, _function), _function_1);
 			  }
@@ -74,15 +70,11 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<? super Number> m(final Iterable<String> iterable) {
-			    final Function1<String, Number> _function = new Function1<String, Number>() {
-			      public Number apply(final String it) {
-			        return null;
-			      }
+			    final Function1<String, Number> _function = (String it) -> {
+			      return null;
 			    };
-			    final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {
-			      public Integer apply(final Object it) {
-			        return Integer.valueOf(it.hashCode());
-			      }
+			    final Function1<Object, Integer> _function_1 = (Object it) -> {
+			      return Integer.valueOf(it.hashCode());
 			    };
 			    return IterableExtensions.sortBy(this.<String, Number>flatMap(iterable, _function), _function_1);
 			  }
@@ -113,15 +105,11 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<? extends Number> m(final Iterable<String> iterable) {
-			    final Function1<String, Number> _function = new Function1<String, Number>() {
-			      public Number apply(final String it) {
-			        return null;
-			      }
+			    final Function1<String, Number> _function = (String it) -> {
+			      return null;
 			    };
-			    final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {
-			      public Integer apply(final Number it) {
-			        return Integer.valueOf(it.intValue());
-			      }
+			    final Function1<Number, Integer> _function_1 = (Number it) -> {
+			      return Integer.valueOf(it.intValue());
 			    };
 			    return IterableExtensions.sortBy(this.<String, Number>flatMap(iterable, _function), _function_1);
 			  }
@@ -154,15 +142,11 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<? extends Integer> m() {
-			    final Function1<String, Integer> _function = new Function1<String, Integer>() {
-			      public Integer apply(final String it) {
-			        return Integer.valueOf(it.length());
-			      }
+			    final Function1<String, Integer> _function = (String it) -> {
+			      return Integer.valueOf(it.length());
 			    };
-			    final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {
-			      public Integer apply(final Integer it) {
-			        return Integer.valueOf(it.intValue());
-			      }
+			    final Function1<Integer, Integer> _function_1 = (Integer it) -> {
+			      return Integer.valueOf(it.intValue());
 			    };
 			    return IterableExtensions.sortBy(this.<String, Integer>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function), _function_1);
 			  }
@@ -195,15 +179,11 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<? extends Number> m() {
-			    final Function1<String, Number> _function = new Function1<String, Number>() {
-			      public Number apply(final String it) {
-			        return null;
-			      }
+			    final Function1<String, Number> _function = (String it) -> {
+			      return null;
 			    };
-			    final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {
-			      public Integer apply(final Number it) {
-			        return Integer.valueOf(it.intValue());
-			      }
+			    final Function1<Number, Integer> _function_1 = (Number it) -> {
+			      return Integer.valueOf(it.intValue());
 			    };
 			    return IterableExtensions.sortBy(this.<String, Number>flatMap(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), _function), _function_1);
 			  }
@@ -234,15 +214,11 @@ class CompilerBug404051Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<? extends String> m(final Iterable<String> iterable) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return null;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return null;
 			    };
-			    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
-			      public Integer apply(final String it) {
-			        return Integer.valueOf(it.length());
-			      }
+			    final Function1<String, Integer> _function_1 = (String it) -> {
+			      return Integer.valueOf(it.length());
 			    };
 			    return IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }

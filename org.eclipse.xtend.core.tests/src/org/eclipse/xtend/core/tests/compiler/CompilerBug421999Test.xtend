@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -31,10 +31,8 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String e) {
-			        return e;
-			      }
+			    final Function1<String, String> _function = (String e) -> {
+			      return e;
 			    };
 			    return IterableExtensions.<String, String>sortBy(list, _function);
 			  }
@@ -58,10 +56,8 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String e) {
-			        return e;
-			      }
+			    final Function1<String, String> _function = (String e) -> {
+			      return e;
 			    };
 			    return IterableExtensions.<String, String>sortBy(list, _function);
 			  }
@@ -85,10 +81,8 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String e) {
-			        return e;
-			      }
+			    final Function1<String, String> _function = (String e) -> {
+			      return e;
 			    };
 			    return IterableExtensions.<String, String>sortBy(list, _function);
 			  }
@@ -112,10 +106,8 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String e) {
-			        return e;
-			      }
+			    final Function1<String, String> _function = (String e) -> {
+			      return e;
 			    };
 			    return IterableExtensions.<String, String>sortBy(list, _function);
 			  }
@@ -172,12 +164,10 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			    List<Pair<QualifiedName, T>> _xblockexpression = null;
 			    {
 			      final ArrayList<IEObjectDescription> c = CollectionLiterals.<IEObjectDescription>newArrayList();
-			      final Function1<IEObjectDescription, Pair<QualifiedName, T>> _function = new Function1<IEObjectDescription, Pair<QualifiedName, T>>() {
-			        public Pair<QualifiedName, T> apply(final IEObjectDescription eod) {
-			          QualifiedName _qualifiedName = eod.getQualifiedName();
-			          T _resolve = Dummy.this.<T>resolve(eod, resourceSet);
-			          return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);
-			        }
+			      final Function1<IEObjectDescription, Pair<QualifiedName, T>> _function = (IEObjectDescription eod) -> {
+			        QualifiedName _qualifiedName = eod.getQualifiedName();
+			        T _resolve = this.<T>resolve(eod, resourceSet);
+			        return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);
 			      };
 			      _xblockexpression = ListExtensions.<IEObjectDescription, Pair<QualifiedName, T>>map(c, _function);
 			    }

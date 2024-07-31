@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -27,7 +27,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -36,10 +35,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final String s) {
 			    Iterable<Object> _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xifexpression = _function;
 			    } else {
@@ -63,7 +60,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -72,10 +68,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xifexpression = _function;
 			    } else {
@@ -98,7 +92,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -106,10 +99,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      return _function;
 			    } else {
@@ -131,7 +122,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -140,10 +130,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m() {
 			    Object[] _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      return _function;
 			    } else {
@@ -166,7 +154,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -175,10 +162,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xifexpression = _function;
 			    } else {
@@ -202,7 +187,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -211,10 +195,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final String s) {
 			    Iterable<Object> _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xifexpression = _function;
 			    } else {
@@ -239,7 +221,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -248,10 +229,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xifexpression = _function;
 			    } else {
@@ -276,7 +255,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -284,10 +262,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public Iterable<Object> m() {
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      return _function;
 			    } else {
@@ -309,7 +285,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -318,10 +293,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m() {
 			    Object[] _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      return _function;
 			    } else {
@@ -344,7 +317,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -353,10 +325,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m() {
 			    Iterable<Object> _xifexpression = null;
 			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xifexpression = _function;
 			    } else {
@@ -384,7 +354,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -399,10 +368,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        Iterable<Object> _xblockexpression_1 = null;
 			        {
 			          this.toString();
-			          final Iterable<Object> _function = new Iterable<Object>() {
-			            public Iterator<Object> iterator() {
-			              return CollectionLiterals.<Object>newArrayList().iterator();
-			            }
+			          final Iterable<Object> _function = () -> {
+			            return CollectionLiterals.<Object>newArrayList().iterator();
 			          };
 			          _xblockexpression_1 = _function;
 			        }
@@ -441,7 +408,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -457,10 +423,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        Iterable<Object> _xblockexpression_1 = null;
 			        {
 			          this.toString();
-			          final Iterable<Object> _function = new Iterable<Object>() {
-			            public Iterator<Object> iterator() {
-			              return CollectionLiterals.<Object>newArrayList().iterator();
-			            }
+			          final Iterable<Object> _function = () -> {
+			            return CollectionLiterals.<Object>newArrayList().iterator();
 			          };
 			          _xblockexpression_1 = _function;
 			        }
@@ -496,7 +460,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -506,10 +469,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    this.toString();
 			    if (true) {
 			      this.toString();
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      return _function;
 			    } else {
@@ -536,7 +497,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -549,10 +509,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      Object[] _xifexpression = null;
 			      if (true) {
 			        this.toString();
-			        final Iterable<Object> _function = new Iterable<Object>() {
-			          public Iterator<Object> iterator() {
-			            return CollectionLiterals.<Object>newArrayList().iterator();
-			          }
+			        final Iterable<Object> _function = () -> {
+			          return CollectionLiterals.<Object>newArrayList().iterator();
 			        };
 			        return _function;
 			      } else {
@@ -592,7 +550,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -607,10 +564,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        Iterable<Object> _xblockexpression_1 = null;
 			        {
 			          this.toString();
-			          final Iterable<Object> _function = new Iterable<Object>() {
-			            public Iterator<Object> iterator() {
-			              return CollectionLiterals.<Object>newArrayList().iterator();
-			            }
+			          final Iterable<Object> _function = () -> {
+			            return CollectionLiterals.<Object>newArrayList().iterator();
 			          };
 			          _xblockexpression_1 = _function;
 			        }
@@ -639,7 +594,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -650,10 +604,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (o instanceof Boolean) {
 			      _matched=true;
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _switchResult = _function;
 			    }
@@ -678,7 +630,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -689,10 +640,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (o instanceof Boolean) {
 			      _matched=true;
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _switchResult = _function;
 			    }
@@ -721,7 +670,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -732,10 +680,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (o instanceof Boolean) {
 			      _matched=true;
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _switchResult = _function;
 			    }
@@ -767,7 +713,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -778,10 +723,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (o instanceof Boolean) {
 			      _matched=true;
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      return _function;
 			    }
@@ -813,7 +756,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -823,10 +765,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final Object o) {
 			    Iterable<Object> _xtrycatchfinallyexpression = null;
 			    try {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _xtrycatchfinallyexpression = _function;
 			    } catch (final Throwable _t) {
@@ -860,7 +800,6 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Collections;
-			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -871,10 +810,8 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    boolean _matched = false;
 			    if (o instanceof Boolean) {
 			      _matched=true;
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			        public Iterator<Object> iterator() {
-			          return CollectionLiterals.<Object>newArrayList().iterator();
-			        }
+			      final Iterable<Object> _function = () -> {
+			        return CollectionLiterals.<Object>newArrayList().iterator();
 			      };
 			      _switchResult = _function;
 			    }

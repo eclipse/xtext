@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -36,9 +36,7 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public static void main() {
-			    final Bound<Number> _function = new Bound<Number>() {
-			      public void method(final Number it) {
-			      }
+			    final Bound<Number> _function = (Number it) -> {
 			    };
 			    Test.test(_function);
 			  }
@@ -67,9 +65,7 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public static void main() {
-			    final Bound<Integer> _function = new Bound<Integer>() {
-			      public void method(final Integer it) {
-			      }
+			    final Bound<Integer> _function = (Integer it) -> {
 			    };
 			    Test.test(_function);
 			  }
@@ -99,9 +95,7 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public static void main() {
-			    final Sub<Number> _function = new Sub<Number>() {
-			      public void method(final Number it) {
-			      }
+			    final Sub<Number> _function = (Number it) -> {
 			    };
 			    Test.test(_function);
 			  }

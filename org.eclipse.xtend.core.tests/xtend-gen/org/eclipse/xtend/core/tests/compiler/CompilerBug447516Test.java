@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 20204 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -48,6 +48,9 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final IReadAccess<String> readAccess = new IReadAccess<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public <Result extends Object> Result readOnly(final IUnitOfWork<Result, String> it) {");
@@ -129,6 +132,9 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.append("private final C.I<CharSequence> readAccess = new C.I<CharSequence>() {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("public <T extends CharSequence> T exec(final Function1<? super CharSequence, ? extends T> it) {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -194,6 +200,9 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final C.I<CharSequence, String> i = new C.I<CharSequence, String>() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public <T extends CharSequence, V extends T> T exec(final String $0, final Function1<? super CharSequence, ? extends T> $1) {");

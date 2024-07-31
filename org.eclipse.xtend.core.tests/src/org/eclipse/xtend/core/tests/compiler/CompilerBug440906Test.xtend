@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -38,10 +38,8 @@ class CompilerBug440906Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Function2<Object, Object, Integer> m() {
-			    final Function2<Object, Object, Integer> _function = new Function2<Object, Object, Integer>() {
-			      public Integer apply(final Object a, final Object b) {
-			        return Integer.valueOf(1);
-			      }
+			    final Function2<Object, Object, Integer> _function = (Object a, Object b) -> {
+			      return Integer.valueOf(1);
 			    };
 			    return _function;
 			  }
@@ -80,10 +78,8 @@ class CompilerBug440906Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Function2<Object, Object, Integer> m() {
-			    final Function2<Object, Object, Integer> _function = new Function2<Object, Object, Integer>() {
-			      public Integer apply(final Object a, final Object b) {
-			        return Integer.valueOf(1);
-			      }
+			    final Function2<Object, Object, Integer> _function = (Object a, Object b) -> {
+			      return Integer.valueOf(1);
 			    };
 			    return _function;
 			  }

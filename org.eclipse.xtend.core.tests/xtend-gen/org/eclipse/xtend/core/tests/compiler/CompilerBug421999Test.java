@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -48,16 +48,10 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
+    _builder_1.append("final Function1<String, String> _function = (String e) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public String apply(final String e) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return e;");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -105,16 +99,10 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
+    _builder_1.append("final Function1<String, String> _function = (String e) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public String apply(final String e) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return e;");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -162,16 +150,10 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
+    _builder_1.append("final Function1<String, String> _function = (String e) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public String apply(final String e) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return e;");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -219,16 +201,10 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
+    _builder_1.append("final Function1<String, String> _function = (String e) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public String apply(final String e) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return e;");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -353,22 +329,16 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("final ArrayList<IEObjectDescription> c = CollectionLiterals.<IEObjectDescription>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Function1<IEObjectDescription, Pair<QualifiedName, T>> _function = new Function1<IEObjectDescription, Pair<QualifiedName, T>>() {");
+    _builder_1.append("final Function1<IEObjectDescription, Pair<QualifiedName, T>> _function = (IEObjectDescription eod) -> {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public Pair<QualifiedName, T> apply(final IEObjectDescription eod) {");
-    _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.append("QualifiedName _qualifiedName = eod.getQualifiedName();");
     _builder_1.newLine();
-    _builder_1.append("          ");
-    _builder_1.append("T _resolve = Dummy.this.<T>resolve(eod, resourceSet);");
-    _builder_1.newLine();
-    _builder_1.append("          ");
-    _builder_1.append("return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);");
+    _builder_1.append("        ");
+    _builder_1.append("T _resolve = this.<T>resolve(eod, resourceSet);");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("}");
+    _builder_1.append("return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("};");

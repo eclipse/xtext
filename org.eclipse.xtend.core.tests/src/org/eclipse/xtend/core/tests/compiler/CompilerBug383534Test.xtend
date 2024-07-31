@@ -45,25 +45,19 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
-			      public String apply(final String s1, final String s2) {
-			        return (s1 + s2);
-			      }
+			    final Function2<String, String, String> _function = (String s1, String s2) -> {
+			      return (s1 + s2);
 			    };
 			    final Function2<? super String, ? super String, ? extends String> strAdd = _function;
 			    final Function1<String, String> curriedStrAdd = FunctionExtensions.<String, String, String>curry(strAdd, "x");
 			    InputOutput.<String>println(strAdd.apply("x", "y"));
 			    InputOutput.<String>println(curriedStrAdd.apply("y"));
-			    final Function2<String, String[], String> _function_1 = new Function2<String, String[], String>() {
-			      public String apply(final String s1, final String[] s2) {
-			        final Function2<String, String, String> _function = new Function2<String, String, String>() {
-			          public String apply(final String x1, final String x2) {
-			            return (x1 + x2);
-			          }
-			        };
-			        String _reduce = IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(s2)), _function);
-			        return (s1 + _reduce);
-			      }
+			    final Function2<String, String[], String> _function_1 = (String s1, String[] s2) -> {
+			      final Function2<String, String, String> _function_2 = (String x1, String x2) -> {
+			        return (x1 + x2);
+			      };
+			      String _reduce = IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(s2)), _function_2);
+			      return (s1 + _reduce);
 			    };
 			    final Function2<? super String, ? super String[], ? extends String> strAdd2 = _function_1;
 			    final Function1<String[], String> curriedStrAdd2 = FunctionExtensions.<String, String[], String>curry(strAdd2, "x");
@@ -94,10 +88,8 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
-			      public String apply(final String s1, final String s2) {
-			        return (s1 + s2);
-			      }
+			    final Function2<String, String, String> _function = (String s1, String s2) -> {
+			      return (s1 + s2);
 			    };
 			    final Function2<? super String, ? super String, ? extends String> strAdd = _function;
 			    final Function1<String, String> curriedStrAdd = FunctionExtensions.<String, String, String>curry(strAdd, "x");
@@ -131,11 +123,9 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    final Function2<String, String[], String> _function = new Function2<String, String[], String>() {
-			      public String apply(final String s1, final String[] s2) {
-			        String _head = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(s2)));
-			        return (s1 + _head);
-			      }
+			    final Function2<String, String[], String> _function = (String s1, String[] s2) -> {
+			      String _head = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(s2)));
+			      return (s1 + _head);
 			    };
 			    final Function2<? super String, ? super String[], ? extends String> strAdd = _function;
 			    final Function1<String[], String> curriedStrAdd = FunctionExtensions.<String, String[], String>curry(strAdd, "x");
@@ -168,16 +158,12 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    final Function2<String, String[], String> _function = new Function2<String, String[], String>() {
-			      public String apply(final String s1, final String[] s2) {
-			        final Function2<String, String, String> _function = new Function2<String, String, String>() {
-			          public String apply(final String x1, final String x2) {
-			            return (x1 + x2);
-			          }
-			        };
-			        String _reduce = IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(s2)), _function);
-			        return (s1 + _reduce);
-			      }
+			    final Function2<String, String[], String> _function = (String s1, String[] s2) -> {
+			      final Function2<String, String, String> _function_1 = (String x1, String x2) -> {
+			        return (x1 + x2);
+			      };
+			      String _reduce = IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(s2)), _function_1);
+			      return (s1 + _reduce);
 			    };
 			    final Function2<? super String, ? super String[], ? extends String> strAdd = _function;
 			    final Function1<String[], String> curriedStrAdd = FunctionExtensions.<String, String[], String>curry(strAdd, "x");

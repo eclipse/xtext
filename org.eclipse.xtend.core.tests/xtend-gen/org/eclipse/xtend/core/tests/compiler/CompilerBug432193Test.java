@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -45,19 +45,13 @@ public class CompilerBug432193Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private D d = new D() {");
+    _builder_1.append("private D d = ((D) (String o) -> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public void m(final String o) {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.append("o.subSequence(1, 2);");
     _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("}");
-    _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("};");
+    _builder_1.append("});");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
