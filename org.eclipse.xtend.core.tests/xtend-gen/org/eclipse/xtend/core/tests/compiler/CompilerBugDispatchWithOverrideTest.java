@@ -11,8 +11,6 @@ package org.eclipse.xtend.core.tests.compiler;
 import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.junit.Test;
 
 /**
@@ -25,8 +23,6 @@ import org.junit.Test;
 public class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
   @Test
   public void testDispatchWithOverrideJava6HasAnnotation() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    generatorConfig.setJavaSourceVersion(JavaVersion.JAVA6);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Something extends AbstractSomething {");
     _builder.newLine();
@@ -110,8 +106,6 @@ public class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTe
 
   @Test
   public void testDispatchWithOverrideJava5HasNoAnnotation() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    generatorConfig.setJavaSourceVersion(JavaVersion.JAVA5);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Something extends AbstractSomething {");
     _builder.newLine();
@@ -140,11 +134,17 @@ public class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTe
     _builder_1.append("public class Something extends AbstractSomething {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("protected void _m(final String x) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object x) {");
