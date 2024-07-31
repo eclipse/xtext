@@ -11,7 +11,6 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.generator.IFilePostProcessor
-import org.eclipse.xtext.util.JavaVersion
 import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
@@ -5859,7 +5858,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test // see https://github.com/eclipse/xtext-xtend/issues/942
 	def testSuppressUnnecessaryModifiersInInterfaces() {
-		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo('''
 			interface FooItf {
 			   def void bar ()
@@ -5871,9 +5869,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface FooItf {
 			  class FooItfImpl implements FooItf {
-			    «IF generatorConfig.javaSourceVersion.isAtLeast(JavaVersion.JAVA6)»
 			    @Override
-			    «ENDIF»
 			    public void bar() {
 			    }
 			  }
