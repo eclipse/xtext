@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -35,10 +35,12 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			  public void test() {
 			    final Runnable _function = new Runnable() {
 			      final Runnable _self = this;
+			      @Override
 			      public void run() {
 			        new Runnable() {
+			          @Override
 			          public void run() {
-			            _self.run();
+			            Runnable.super.run();
 			            this.run();
 			          }
 			        };
@@ -70,21 +72,21 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Test {
 			  public void test() {
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			        final Runnable _function = new Runnable() {
-			          final Runnable _self = this;
-			          public void run() {
-			            new Runnable() {
-			              public void run() {
-			                _self.run();
-			                this.run();
-			              }
-			            };
-			          }
-			        };
-			        final Runnable r1 = _function;
-			      }
+			    final Procedure1<Object> _function = (Object it) -> {
+			      final Runnable _function_1 = new Runnable() {
+			        final Runnable _self = this;
+			        @Override
+			        public void run() {
+			          new Runnable() {
+			            @Override
+			            public void run() {
+			              Runnable.super.run();
+			              this.run();
+			            }
+			          };
+			        }
+			      };
+			      final Runnable r1 = _function_1;
 			    };
 			    _function.apply(null);
 			  }
@@ -112,8 +114,10 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			  public void test() {
 			    new Runnable() {
 			      final Runnable _this = this;
+			      @Override
 			      public void run() {
 			        final Runnable _function = new Runnable() {
+			          @Override
 			          public void run() {
 			            this.run();
 			            _this.run();
@@ -153,8 +157,10 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			    }
 			
 			    new __Test_1() {
+			      @Override
 			      public void run() {
 			        final Runnable _function = new Runnable() {
+			          @Override
 			          public void run() {
 			            this.run();
 			            _this__Test_1.run();
@@ -192,21 +198,21 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Test {
 			  public void test() {
-			    final Function1<Object, Runnable> _function = new Function1<Object, Runnable>() {
-			      public Runnable apply(final Object it) {
-			        return new Runnable() {
-			          final Runnable _this = this;
-			          public void run() {
-			            final Runnable _function = new Runnable() {
-			              public void run() {
-			                this.run();
-			                _this.run();
-			              }
-			            };
-			            final Runnable r1 = _function;
-			          }
-			        };
-			      }
+			    final Function1<Object, Runnable> _function = (Object it) -> {
+			      return new Runnable() {
+			        final Runnable _this = this;
+			        @Override
+			        public void run() {
+			          final Runnable _function = new Runnable() {
+			            @Override
+			            public void run() {
+			              this.run();
+			              _this.run();
+			            }
+			          };
+			          final Runnable r1 = _function;
+			        }
+			      };
 			    };
 			    _function.apply(null);
 			  }
@@ -234,14 +240,13 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Test extends SuperFoo {
 			  public void test() {
-			    final Runnable _function = new Runnable() {
-			      public void run() {
-			        new Runnable() {
-			          public void run() {
-			            Test.super.bar();
-			          }
-			        };
-			      }
+			    final Runnable _function = () -> {
+			      new Runnable() {
+			        @Override
+			        public void run() {
+			          Test.super.bar();
+			        }
+			      };
 			    };
 			    final Runnable r1 = _function;
 			  }
