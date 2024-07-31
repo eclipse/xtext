@@ -149,11 +149,11 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
 				ResolvedTypes resolution = reflectExtensions.get(casted, "resolvedTypes");
 				ResolvedTypes parentResolution = reflectExtensions
 						.get(reflectExtensions.<ExpressionTypeComputationState> get(casted, "parent"), "resolvedTypes");
-				assertNull(parentResolution.getActualType(((XExpression) ((XNullLiteral) expression).eContainer())));
+				assertNull(parentResolution.getActualType(((XExpression) expression.eContainer())));
 				state.acceptActualType(expectedType);
 				assertNull(parentResolution.getActualType(expression));
 				assertEquals(expectedType.getIdentifier(), resolution.getActualType(expression).getIdentifier());
-				assertNull(parentResolution.getActualType(((XExpression) ((XNullLiteral) expression).eContainer())));
+				assertNull(parentResolution.getActualType(((XExpression) expression.eContainer())));
 			} else {
 				assertTrue((expression instanceof XBlockExpression));
 				XNullLiteral nullLiteral = ((XNullLiteral) getFirst(expression.eContents(), null));

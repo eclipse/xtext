@@ -62,15 +62,15 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
 			while (allContents.hasNext()) {
 				EObject content = allContents.next();
 				if (content instanceof XConstructorCall) {
-					InternalEObject constructor = (InternalEObject) ((XConstructorCall) content)
+					InternalEObject constructor = (InternalEObject) content
 							.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
-					Assert.assertNotNull(((XConstructorCall) content).toString(), constructor);
-					Assert.assertFalse(((XConstructorCall) content).toString(), constructor.eIsProxy());
+					Assert.assertNotNull(content.toString(), constructor);
+					Assert.assertFalse(content.toString(), constructor.eIsProxy());
 				} else if (content instanceof XAbstractFeatureCall) {
-					InternalEObject feature = (InternalEObject) ((XAbstractFeatureCall) content)
+					InternalEObject feature = (InternalEObject) content
 							.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
-					Assert.assertNotNull(((XAbstractFeatureCall) content).toString(), feature);
-					Assert.assertFalse(((XAbstractFeatureCall) content).toString(), feature.eIsProxy());
+					Assert.assertNotNull(content.toString(), feature);
+					Assert.assertFalse(content.toString(), feature.eIsProxy());
 					if (((XAbstractFeatureCall) content).getImplicitReceiver() != null) {
 						InternalEObject implicitFeature = (InternalEObject) ((XAbstractFeatureCall) content).getImplicitReceiver()
 								.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
