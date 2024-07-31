@@ -38,10 +38,8 @@ class CompilerBug461568Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public Object m2() {
-			    final Procedure1<String> _function = new Procedure1<String>() {
-			      public void apply(final String s) {
-			        s.getBytes();
-			      }
+			    final Procedure1<String> _function = (String s) -> {
+			      s.getBytes();
 			    };
 			    return this.m(_function);
 			  }
@@ -72,10 +70,8 @@ class CompilerBug461568Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public Object m2() {
-			    final Function1<String, Object> _function = new Function1<String, Object>() {
-			      public Object apply(final String s) {
-			        return s.getBytes();
-			      }
+			    final Function1<String, Object> _function = (String s) -> {
+			      return s.getBytes();
 			    };
 			    return this.m(_function);
 			  }
@@ -106,10 +102,8 @@ class CompilerBug461568Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public Object m2() {
-			    final Procedure1<String> _function = new Procedure1<String>() {
-			      public void apply(final String it) {
-			        it.getBytes();
-			      }
+			    final Procedure1<String> _function = (String it) -> {
+			      it.getBytes();
 			    };
 			    return this.m(_function);
 			  }

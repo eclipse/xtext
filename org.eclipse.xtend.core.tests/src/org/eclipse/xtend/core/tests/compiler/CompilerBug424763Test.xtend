@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -63,6 +63,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			    this.type = Preconditions.<Class<JAVA_TYPE>>checkNotNull(theType, "theType").getName();
 			  }
 			
+			  @Override
 			  public JAVA_TYPE apply() {
 			    throw new UnsupportedOperationException(
 			      (("Instances of type " + this.type) + " cannot be created (without parameters?)"));
@@ -289,6 +290,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			
 			  public C(final C<T> theConstructor) {
 			    this(new Function0<Function0<T>>() {
+			      @Override
 			      public Function0<T> apply() {
 			        Function0<T> _constructor = null;
 			        if (theConstructor!=null) {
@@ -369,6 +371,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			
 			  public C(final C<T> theConstructor) {
 			    this(theConstructor.doGetConstructor(new Function0<String>() {
+			      @Override
 			      public String apply() {
 			        String _xtrycatchfinallyexpression = null;
 			        try {

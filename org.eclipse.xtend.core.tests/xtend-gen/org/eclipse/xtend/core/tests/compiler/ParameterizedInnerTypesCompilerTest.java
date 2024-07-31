@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -144,19 +144,13 @@ public class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTe
     _builder_1.append("public Boolean m(final Either<Integer, Boolean> it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function<Integer, Boolean> _function = new Function<Integer, Boolean>() {");
+    _builder_1.append("final Function<Integer, Boolean> _function = (Integer it_1) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public Boolean apply(final Integer it_1) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("int _intValue = it_1.intValue();");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("return Boolean.valueOf((_intValue == 0));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("return Boolean.valueOf((_intValue == 0));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -284,16 +278,10 @@ public class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTe
     _builder_1.append("public Either<String, Integer> m(final Either<Integer, Boolean> it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function<Boolean, String> _function = new Function<Boolean, String>() {");
+    _builder_1.append("final Function<Boolean, String> _function = (Boolean it_1) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public String apply(final Boolean it_1) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return it_1.toString();");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

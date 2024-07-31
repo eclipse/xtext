@@ -60,6 +60,7 @@ class CompilerBug441096Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  private final C.I x = new C.I() {
+			    @Override
 			    public void m() {
 			    }
 			  };

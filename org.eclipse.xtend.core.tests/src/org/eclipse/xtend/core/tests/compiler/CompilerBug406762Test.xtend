@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 TypeFox.io (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2024 TypeFox.io (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,6 +28,7 @@ class CompilerBug406762Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  private static final class MyException extends Exception {
+			    @Override
 			    public synchronized Throwable fillInStackTrace() {
 			      return this;
 			    }
@@ -49,6 +50,7 @@ class CompilerBug406762Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  private static final class MyException extends Exception {
+			    @Override
 			    public synchronized Throwable fillInStackTrace() {
 			      return this;
 			    }

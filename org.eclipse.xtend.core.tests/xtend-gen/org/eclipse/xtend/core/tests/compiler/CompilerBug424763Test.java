@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -127,6 +127,9 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public JAVA_TYPE apply() {");
@@ -652,6 +655,9 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("this(new Function0<Function0<T>>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("public Function0<T> apply() {");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -834,6 +840,9 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("this(theConstructor.doGetConstructor(new Function0<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String apply() {");

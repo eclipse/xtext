@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -67,16 +67,10 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Pair<Pair<Integer, Double>, String> test(final L<Pair<Pair<Integer, Double>, String>> l) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Pair<Pair<Integer, Double>, String>, Double> _function = new Function1<Pair<Pair<Integer, Double>, String>, Double>() {");
+    _builder_1.append("final Function1<Pair<Pair<Integer, Double>, String>, Double> _function = (Pair<Pair<Integer, Double>, String> it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public Double apply(final Pair<Pair<Integer, Double>, String> it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return it.getKey().getValue();");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

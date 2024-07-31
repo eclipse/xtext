@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -43,17 +43,13 @@ class CompilerBug464264Test extends AbstractXtendCompilerTest {
 			    List<CharSequence> _xblockexpression = null;
 			    {
 			      List<String> _strings = i.getStrings();
-			      final Function1<CharSequence, String> _function = new Function1<CharSequence, String>() {
-			        public String apply(final CharSequence it) {
-			          return ((String) it);
-			        }
+			      final Function1<CharSequence, String> _function = (CharSequence it) -> {
+			        return ((String) it);
 			      };
 			      List<String> _map = ListExtensions.<CharSequence, String>map(list, _function);
 			      Iterables.<String>addAll(_strings, _map);
-			      final Function1<CharSequence, CharSequence> _function_1 = new Function1<CharSequence, CharSequence>() {
-			        public CharSequence apply(final CharSequence it) {
-			          return it;
-			        }
+			      final Function1<CharSequence, CharSequence> _function_1 = (CharSequence it) -> {
+			        return it;
 			      };
 			      _xblockexpression = ListExtensions.<CharSequence, CharSequence>map(list, _function_1);
 			    }
@@ -80,10 +76,8 @@ class CompilerBug464264Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean m(final List<? super CharSequence> res, final Iterable<?> obj) {
-			    final Function1<Object, String> _function = new Function1<Object, String>() {
-			      public String apply(final Object it) {
-			        return "";
-			      }
+			    final Function1<Object, String> _function = (Object it) -> {
+			      return "";
 			    };
 			    Iterable<? extends CharSequence> _map = IterableExtensions.map(obj, _function);
 			    return Iterables.addAll(res, _map);

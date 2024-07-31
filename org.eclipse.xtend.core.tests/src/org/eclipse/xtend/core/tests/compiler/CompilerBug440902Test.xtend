@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -36,6 +36,7 @@ class CompilerBug440902Test extends AbstractXtendCompilerTest {
 			    return this.m().toString();
 			  }
 			
+			  @Override
 			  public String m() {
 			    throw new RuntimeException();
 			  }
@@ -57,6 +58,7 @@ class CompilerBug440902Test extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C implements I {
+			  @Override
 			  public String m() {
 			    throw new RuntimeException();
 			  }

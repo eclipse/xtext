@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -128,16 +128,10 @@ public class CompilerBug410555Test extends AbstractXtendCompilerTest {
     _builder_1.append("public BugSAM2() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("super(new SAMInterface() {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("public void test() {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("super(((SAMInterface) () -> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("});");
+    _builder_1.append("}));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -214,16 +208,10 @@ public class CompilerBug410555Test extends AbstractXtendCompilerTest {
     _builder_1.append("public BugSAM() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("this(new SAMInterface() {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("public void test() {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("this(((SAMInterface) () -> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("});");
+    _builder_1.append("}));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -233,13 +221,7 @@ public class CompilerBug410555Test extends AbstractXtendCompilerTest {
     _builder_1.append("public static void main(final String[] args) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final SAMInterface _function = new SAMInterface() {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("public void test() {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("final SAMInterface _function = () -> {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

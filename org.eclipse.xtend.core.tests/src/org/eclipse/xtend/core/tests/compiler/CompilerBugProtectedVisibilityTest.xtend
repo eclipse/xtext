@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -175,10 +175,8 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			  private C c = new C();
 			
 			  protected Object doX(final Runnable r) {
-			    final Runnable _function = new Runnable() {
-			      public void run() {
-			        B.this.c.protectedMethod();
-			      }
+			    final Runnable _function = () -> {
+			      this.c.protectedMethod();
 			    };
 			    return this.doX(_function);
 			  }
@@ -209,6 +207,7 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			
 			  protected Object doX(final Runnable r) {
 			    return this.doX(new Runnable() {
+			      @Override
 			      public void run() {
 			        B.this.c.protectedMethod();
 			      }
@@ -251,14 +250,15 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			}
 		}
 		'''.assertCompilesTo('''
-		import testdata.ClazzWithProtectedMember;
-		
 		@SuppressWarnings("all")
-		public class Sample extends ClazzWithProtectedMember {
-		  public static class ParamClass {
-		    public String doSomething(final Sample c) {
-		      return c.member = "Hello";
-		    }
+		public class B {
+		  private C c = new C();
+		
+		  protected Object doX(final Runnable r) {
+		    final Runnable _function = () -> {
+		      this.c.protectedMethod();
+		    };
+		    return this.doX(_function);
 		  }
 		}
 		''')

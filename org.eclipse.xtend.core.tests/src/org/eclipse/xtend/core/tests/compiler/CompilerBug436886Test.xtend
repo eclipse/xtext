@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -44,25 +44,23 @@ class CompilerBug436886Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public Test method() {
-			    final Function1<Super, Boolean> _function = new Function1<Super, Boolean>() {
-			      public Boolean apply(final Super it) {
-			        boolean _switchResult = false;
-			        boolean _matched = false;
-			        if (it instanceof Foo) {
+			    final Function1<Super, Boolean> _function = (Super it) -> {
+			      boolean _switchResult = false;
+			      boolean _matched = false;
+			      if (it instanceof Foo) {
+			        _matched=true;
+			        _switchResult = true;
+			      }
+			      if (!_matched) {
+			        if (it instanceof Bar) {
 			          _matched=true;
 			          _switchResult = true;
 			        }
-			        if (!_matched) {
-			          if (it instanceof Bar) {
-			            _matched=true;
-			            _switchResult = true;
-			          }
-			        }
-			        if (!_matched) {
-			          _switchResult = false;
-			        }
-			        return Boolean.valueOf(_switchResult);
 			      }
+			      if (!_matched) {
+			        _switchResult = false;
+			      }
+			      return Boolean.valueOf(_switchResult);
 			    };
 			    return new Test(_function);
 			  }
