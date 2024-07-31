@@ -8,16 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.compiler
 
-import org.eclipse.xtend.core.tests.compiler.CompilerTest
-import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
-import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtend.core.tests.compiler.CompilerTestBase
 import org.junit.Test
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
  */
-@InjectWith(Java8RuntimeInjectorProvider)
-class Java8Compiler1Test extends CompilerTest {
+class Java8Compiler1Test extends CompilerTestBase {
 	
 	@Test def testJava8Reduce() {
 		invokeAndExpect2(36, '''
