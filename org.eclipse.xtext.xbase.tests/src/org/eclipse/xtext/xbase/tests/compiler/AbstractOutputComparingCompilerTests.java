@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -98,18 +97,6 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result,
 			JavaVersion javaVersion) throws Exception {
 		assertCompilesTo(result, xbaseCode, javaVersion);
-	}
-	
-	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result,
-			Pair<JavaVersion, JavaVersion> minAndMaxVersion) throws Exception {
-		int min = minAndMaxVersion.getKey().ordinal();
-		int max = minAndMaxVersion.getValue().ordinal();
-		if (min > max)
-			throw new IllegalArgumentException();
-		for (int i = min; i <= max; i++) {
-			JavaVersion version = JavaVersion.values()[i];
-			assertCompilesTo(result, xbaseCode, version);
-		}
 	}
 	
 	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result,

@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Test;
 
 /**
@@ -22,20 +21,31 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
 	protected FakeTreeAppendable createAppendable() {
 		return new FakeTreeAppendable();
 	}
-
+	
 	@Test
 	public void testOverride() throws Exception {
+		String xbaseCode = "{ val com.google.common.base.AbstractIterator<String> x = [ self.endOfData ] }";
+		String result =
+				"final com.google.common.base.AbstractIterator<String> _function = new com.google.common.base.AbstractIterator<String>() {\n" + 
+				"  @Override\n" + 
+				"  protected String computeNext() {\n" + 
+				"    return this.endOfData();\n" + 
+				"  }\n" + 
+				"};\n" + 
+				"final com.google.common.base.AbstractIterator<String> x = _function;";
+		compilesTo(xbaseCode, result, JavaVersion.JAVA8);
+	}
+
+	@Test
+	public void testLamdba() throws Exception {
 		String xbaseCode = "{ val x = #['a', '', 'c'].filter[!empty] }";
 		String result =
-				"final org.eclipse.xtext.xbase.lib.Functions.Function1<String, Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function1<String, Boolean>() {\n" +
-				"  @Override\n" +
-				"  public Boolean apply(final String it) {\n" +
-				"    boolean _isEmpty = it.isEmpty();\n" +
-				"    return Boolean.valueOf((!_isEmpty));\n" +
-				"  }\n" +
-				"};\n" +
-				"final Iterable<String> x = org.eclipse.xtext.xbase.lib.IterableExtensions.<String>filter(java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"a\", \"\", \"c\")), _function);\n";
-		compilesTo(xbaseCode, result, Pair.of(JavaVersion.JAVA6, JavaVersion.JAVA7));
+				"final org.eclipse.xtext.xbase.lib.Functions.Function1<String, Boolean> _function = (String it) -> {\n" + 
+				"  boolean _isEmpty = it.isEmpty();\n" + 
+				"  return Boolean.valueOf((!_isEmpty));\n" + 
+				"};\n" + 
+				"final Iterable<String> x = org.eclipse.xtext.xbase.lib.IterableExtensions.<String>filter(java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"a\", \"\", \"c\")), _function);";
+		compilesTo(xbaseCode, result, JavaVersion.JAVA8);
 	}
 
 	@Test
@@ -67,7 +77,7 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
 				"  _switchResult = 3;\n" +
 				"}\n" +
 				"final int x = _switchResult;\n";
-		compilesTo(xbaseCode, result, Pair.of(JavaVersion.JAVA7, JavaVersion.JAVA8));
+		compilesTo(xbaseCode, result, JavaVersion.JAVA8);
 	}
 
 	@Test
@@ -77,7 +87,7 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
 				"	val x = 123_456_789\n" +
 				"}\n";
 		String result = "final int x = 123_456_789;\n";
-		compilesTo(xbaseCode, result, Pair.of(JavaVersion.JAVA7, JavaVersion.JAVA8));
+		compilesTo(xbaseCode, result, JavaVersion.JAVA8);
 	}
 
 	@Test
