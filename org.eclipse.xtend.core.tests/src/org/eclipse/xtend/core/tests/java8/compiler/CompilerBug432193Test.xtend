@@ -9,15 +9,12 @@
 package org.eclipse.xtend.core.tests.java8.compiler
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
-import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
-import org.eclipse.xtext.testing.InjectWith
 import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Miro Spoenemann - Copied and adapted to Java 8 output
  */
-@InjectWith(Java8RuntimeInjectorProvider)
 class CompilerBug432193Test extends AbstractXtendCompilerTest {
 	
 	@Test def void testBug_432193_01() {

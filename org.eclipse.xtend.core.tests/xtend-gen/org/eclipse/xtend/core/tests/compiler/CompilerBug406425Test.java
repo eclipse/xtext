@@ -80,19 +80,13 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("MyEntity _myEntity = new MyEntity();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<MyEntity> _function = new Procedure1<MyEntity>() {");
+    _builder_1.append("final Procedure1<MyEntity> _function = (MyEntity it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final MyEntity it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Assert.<MyEntity>assertThat(it, Test.<MyEntity>nullValue());");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("Assert.<String>assertThat(it.getName(), Is.<String>is(\"\"));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("Assert.<String>assertThat(it.getName(), Is.<String>is(\"\"));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -121,7 +115,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_02() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test<T> {");
     _builder.newLine();
@@ -152,7 +146,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
@@ -182,25 +176,19 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Test<Serializable> _test = new Test<Serializable>();");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("_test.m(it, _long);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -219,7 +207,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_03() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -250,7 +238,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
@@ -280,22 +268,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("Test.this.<Serializable>m(it, _long);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
+    _builder_1.append("      ");
+    _builder_1.append("this.<Serializable>m(it, _long);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -314,7 +296,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_04() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -345,7 +327,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
@@ -375,22 +357,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("Test.this.<Serializable>m(it, _long);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
+    _builder_1.append("      ");
+    _builder_1.append("this.<Serializable>m(it, _long);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -409,7 +385,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_05() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -440,7 +416,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
@@ -470,22 +446,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("Test.this.<Serializable>m(it, _long);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
+    _builder_1.append("      ");
+    _builder_1.append("this.<Serializable>m(it, _long);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -504,7 +474,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_06() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -537,7 +507,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
@@ -565,22 +535,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {");
+    _builder_1.append("final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void accept(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("Test.this.<Serializable>m(it, _long);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
+    _builder_1.append("      ");
+    _builder_1.append("this.<Serializable>m(it, _long);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -599,7 +563,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_07() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -630,7 +594,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
@@ -660,22 +624,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Test.<Serializable>m(it, _long);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -694,7 +652,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_08() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -725,7 +683,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
@@ -755,22 +713,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Test.<Serializable>m(it, _long);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -789,7 +741,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_09() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -822,7 +774,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
@@ -850,25 +802,19 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {");
+    _builder_1.append("final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void accept(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Test _test = new Test();");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("_test.<Serializable>m(it, _long);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -887,7 +833,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_10() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test<T> {");
     _builder.newLine();
@@ -920,7 +866,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
@@ -948,25 +894,19 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {");
+    _builder_1.append("final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void accept(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Test<Serializable> _test = new Test<Serializable>();");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("_test.m(it, _long);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -985,7 +925,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
   @Test
   public void testBug406425_11() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike");
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -1018,7 +958,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;");
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
@@ -1046,22 +986,16 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {");
+    _builder_1.append("final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void accept(final StringBuilderLike it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Test.<Serializable>m(it, _long);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

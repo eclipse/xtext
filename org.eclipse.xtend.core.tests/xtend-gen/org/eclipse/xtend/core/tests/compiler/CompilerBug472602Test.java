@@ -550,6 +550,9 @@ public class CompilerBug472602Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("public B get() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -657,6 +660,9 @@ public class CompilerBug472602Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("_xblockexpression = new C<B>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public B get() {");

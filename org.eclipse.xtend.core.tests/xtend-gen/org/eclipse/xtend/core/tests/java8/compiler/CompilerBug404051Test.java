@@ -10,9 +10,7 @@ package org.eclipse.xtend.core.tests.java8.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.tests.compiler.CompilerBugTest;
-import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.testing.InjectWith;
 import org.junit.Test;
 
 /**
@@ -20,7 +18,6 @@ import org.junit.Test;
  * @author Miro Spoenemann - Copied and adapted to Java 8 output
  * @see CompilerBugTest#testBug404051_01 and friends
  */
-@InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class CompilerBug404051Test extends AbstractXtendCompilerTest {
   @Test

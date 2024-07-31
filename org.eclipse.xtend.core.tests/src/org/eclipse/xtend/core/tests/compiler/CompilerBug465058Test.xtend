@@ -15,7 +15,7 @@ import org.junit.Test
  */
 class CompilerBug465058Test extends AbstractXtendCompilerTest {
 	
-	@Test def test_01() {
+	@Test def void test_01() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -38,10 +38,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return IterableExtensions.<String>head(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return IterableExtensions.<String>head(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -49,7 +47,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_02() {
+	@Test def void test_02() {
 		'''
 			abstract class Bug {
 				val list = newArrayList('a', 'b')
@@ -71,10 +69,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return IterableExtensions.<String>head(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return IterableExtensions.<String>head(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -82,7 +78,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_03() {
+	@Test def void test_03() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -105,10 +101,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return IterableExtensions.<String>head(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return IterableExtensions.<String>head(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -116,7 +110,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_04() {
+	@Test def void test_04() {
 		'''
 			abstract class Bug {
 				val list = newArrayList('a', 'b')
@@ -138,10 +132,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return IterableExtensions.<String>head(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return IterableExtensions.<String>head(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -149,7 +141,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_05() {
+	@Test def void test_05() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -172,10 +164,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -187,7 +177,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_06() {
+	@Test def void test_06() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -210,10 +200,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -225,7 +213,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_07() {
+	@Test def void test_07() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -249,10 +237,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(((String[])Conversions.unwrapArray(Bug.this.list, String.class)));
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(((String[])Conversions.unwrapArray(this.list, String.class)));
 			    };
 			    this.foo(_function);
 			  }
@@ -264,7 +250,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_08() {
+	@Test def void test_08() {
 		'''
 			abstract class Bug {
 				def void foo(=>Object f)
@@ -281,10 +267,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(new String[] { "one", "two", "three" });
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(new String[] { "one", "two", "three" });
 			    };
 			    this.foo(_function);
 			  }
@@ -296,7 +280,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_09() {
+	@Test def void test_09() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -319,10 +303,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -334,7 +316,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_10() {
+	@Test def void test_10() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -357,10 +339,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -372,7 +352,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_11() {
+	@Test def void test_11() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -395,10 +375,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -410,7 +388,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_12() {
+	@Test def void test_12() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -434,10 +412,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(((String[])Conversions.unwrapArray(Bug.this.list, String.class)));
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(((String[])Conversions.unwrapArray(this.list, String.class)));
 			    };
 			    this.foo(_function);
 			  }
@@ -449,7 +425,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_13() {
+	@Test def void test_13() {
 		'''
 			abstract class Bug {
 				def void foo(=>Object f)
@@ -466,10 +442,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(new String[] { "one", "two", "three" });
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(new String[] { "one", "two", "three" });
 			    };
 			    this.foo(_function);
 			  }
@@ -481,7 +455,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_14() {
+	@Test def void test_14() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -504,10 +478,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
@@ -519,7 +491,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_15() {
+	@Test def void test_15() {
 		'''
 			abstract class Bug {
 				val list = #["one", "two", "three"]
@@ -540,10 +512,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(Bug.this.list);
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(this.list);
 			    };
 			    Function0<?> x = _function;
 			    x.apply();
@@ -556,7 +526,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_16() {
+	@Test def void test_16() {
 		'''
 			abstract class Bug {
 				def bar() {
@@ -575,10 +545,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public Object bar() {
 			    Object _xblockexpression = null;
 			    {
-			      final Function0<Object> _function = new Function0<Object>() {
-			        public Object apply() {
-			          return Bug.this.<String>head2(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three")));
-			        }
+			      final Function0<Object> _function = () -> {
+			        return this.<String>head2(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three")));
 			      };
 			      Function0<?> x = _function;
 			      _xblockexpression = x.apply();
@@ -593,7 +561,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_17() {
+	@Test def void test_17() {
 		'''
 			abstract class Bug {
 				def bar() {
@@ -610,10 +578,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public Object bar() {
 			    Object _xblockexpression = null;
 			    {
-			      final Function0<Object> _function = new Function0<Object>() {
-			        public Object apply() {
-			          return Bug.this.<String>head2(new String[] { "one", "two", "three" });
-			        }
+			      final Function0<Object> _function = () -> {
+			        return this.<String>head2(new String[] { "one", "two", "three" });
 			      };
 			      Function0<?> x = _function;
 			      _xblockexpression = x.apply();
@@ -628,7 +594,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_18() {
+	@Test def void test_18() {
 		'''
 			abstract class Bug {
 				def void foo(=>Object f)
@@ -645,10 +611,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return ((Number)Bug.this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) }));
-			      }
+			    final Function0<Object> _function = () -> {
+			      return ((Number)this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) }));
 			    };
 			    this.foo(_function);
 			  }
@@ -660,7 +624,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_19() {
+	@Test def void test_19() {
 		'''
 			abstract class Bug {
 				def void foo(=>Object f)
@@ -677,10 +641,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return Bug.this.<String>head2(new Comparable[] { "", "" });
-			      }
+			    final Function0<Object> _function = () -> {
+			      return this.<String>head2(new Comparable[] { "", "" });
 			    };
 			    this.foo(_function);
 			  }
@@ -692,7 +654,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_20() {
+	@Test def void test_20() {
 		'''
 			abstract class Bug {
 				def void foo(=>Object f)
@@ -709,10 +671,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return ((Number)Bug.this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) }));
-			      }
+			    final Function0<Object> _function = () -> {
+			      return ((Number)this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) }));
 			    };
 			    this.foo(_function);
 			  }
@@ -724,7 +684,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_21() {
+	@Test def void test_21() {
 		'''
 			abstract class Bug {
 				def void foo(=>Object f)
@@ -741,10 +701,8 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			  public abstract void foo(final Function0<?> f);
 			
 			  public void bar() {
-			    final Function0<Object> _function = new Function0<Object>() {
-			      public Object apply() {
-			        return ((Number)Bug.this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) }));
-			      }
+			    final Function0<Object> _function = () -> {
+			      return ((Number)this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) }));
 			    };
 			    this.foo(_function);
 			  }

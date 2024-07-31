@@ -15,91 +15,81 @@ import org.junit.Test
  */
 class CompilerBug445487Test extends AbstractXtendCompilerTest {
 	
-	@Test
-	def test_01() {
-		assertCompilesTo('''
+	@Test def test_01() {
+		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 			class C {
 				Provider<Lexer> lexerProvider= [return new InternalXtendLexer(null)]
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import com.google.inject.Provider;
 			import org.antlr.runtime.Lexer;
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
-			    public Lexer get() {
-			      return new InternalXtendLexer(null);
-			    }
-			  };
+			  private Provider<Lexer> lexerProvider = ((Provider<Lexer>) () -> {
+			    return new InternalXtendLexer(null);
+			  });
 			}
 		''')
 	}
 	
-	@Test
-	def test_02() {
-		assertCompilesTo('''
+	@Test def test_02() {
+		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 			class C {
 				Provider<? super Lexer> lexerProvider= [return new InternalXtendLexer(null)]
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import com.google.inject.Provider;
 			import org.antlr.runtime.Lexer;
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private Provider<? super Lexer> lexerProvider = new Provider<Lexer>() {
-			    public Lexer get() {
-			      return new InternalXtendLexer(null);
-			    }
-			  };
+			  private Provider<? super Lexer> lexerProvider = ((Provider<Lexer>) () -> {
+			    return new InternalXtendLexer(null);
+			  });
 			}
 		''')
 	}
 	
-	@Test
-	def test_03() {
-		assertCompilesTo('''
+	@Test def test_03() {
+		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 			class C {
 				Provider<? extends Lexer> lexerProvider= [return new InternalXtendLexer(null)]
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import com.google.inject.Provider;
 			import org.antlr.runtime.Lexer;
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private Provider<? extends Lexer> lexerProvider = new Provider<Lexer>() {
-			    public Lexer get() {
-			      return new InternalXtendLexer(null);
-			    }
-			  };
+			  private Provider<? extends Lexer> lexerProvider = ((Provider<Lexer>) () -> {
+			    return new InternalXtendLexer(null);
+			  });
 			}
 		''')
 	}
 	
-	@Test
-	def test_04() {
-		assertCompilesTo('''
+	@Test def test_04() {
+		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 			class C {
 				Provider<Lexer> lexerProvider= [|return new InternalXtendLexer(null)] as Provider<Lexer> 
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import com.google.inject.Provider;
 			import org.antlr.runtime.Lexer;
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
@@ -109,27 +99,24 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 			public class C {
 			  private Provider<Lexer> lexerProvider = ((Provider<Lexer>) new Provider<Lexer>() {
 			      public Lexer get() {
-			        return new Function0<InternalXtendLexer>() {
-			          public InternalXtendLexer apply() {
-			            return new InternalXtendLexer(null);
-			          }
-			        }.apply();
+			        return ((Function0<InternalXtendLexer>) () -> {
+			          return new InternalXtendLexer(null);
+			        }).apply();
 			      }
 			  });
 			}
 		''')
 	}
 	
-	@Test
-	def test_05() {
-		assertCompilesTo('''
+	@Test def test_05() {
+		'''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 			class C {
 				Provider<Lexer> lexerProvider= [|return new InternalXtendLexer(null)] as ()=>Lexer
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import com.google.inject.Provider;
 			import org.antlr.runtime.Lexer;
 			import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
@@ -139,19 +126,16 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 			public class C {
 			  private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
 			      public Lexer get() {
-			        return ((Function0<? extends Lexer>) new Function0<InternalXtendLexer>() {
-			          public InternalXtendLexer apply() {
-			            return new InternalXtendLexer(null);
-			          }
-			        }).apply();
+			        return ((Function0<? extends Lexer>) ((Function0<InternalXtendLexer>) () -> {
+			          return new InternalXtendLexer(null);
+			        })).apply();
 			      }
 			  };
 			}
 		''')
 	}
-	
-	@Test
-	def test_06() {
+
+	@Test def test_06() {
 		assertCompilesTo('''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -169,19 +153,16 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 			public class C {
 			  private Provider<Lexer> lexerProvider = ((Provider<Lexer>) new Provider<Lexer>() {
 			      public Lexer get() {
-			        return new Function1<Object, InternalXtendLexer>() {
-			          public InternalXtendLexer apply(final Object it) {
-			            return new InternalXtendLexer(null);
-			          }
-			        }.apply(null);
+			        return ((Function1<Object, InternalXtendLexer>) (Object it) -> {
+			          return new InternalXtendLexer(null);
+			        }).apply(null);
 			      }
 			  });
 			}
 		''')
 	}
 	
-	@Test
-	def test_07() {
+	@Test def test_07() {
 		assertCompilesTo('''
 			import com.google.inject.Provider
 			import org.antlr.runtime.Lexer
@@ -202,11 +183,9 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 			      public Lexer get() {
 			        return ((Function0<? extends Lexer>) new Function0<Lexer>() {
 			            public Lexer apply() {
-			              return new Function1<Object, InternalXtendLexer>() {
-			                public InternalXtendLexer apply(final Object it) {
-			                  return new InternalXtendLexer(null);
-			                }
-			              }.apply(null);
+			              return ((Function1<Object, InternalXtendLexer>) (Object it) -> {
+			                return new InternalXtendLexer(null);
+			              }).apply(null);
 			            }
 			        }).apply();
 			      }

@@ -41,6 +41,9 @@ public class CompilerBug460691Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C implements Comparator<String> {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("public int compare(final String s1, final String s2) {");
     _builder_1.newLine();
     _builder_1.append("    ");

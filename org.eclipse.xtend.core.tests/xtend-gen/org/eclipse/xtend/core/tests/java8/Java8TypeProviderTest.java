@@ -12,29 +12,25 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Objects;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class Java8TypeProviderTest {
+public class Java8TypeProviderTest extends AbstractXtendTestCase {
   @Inject
   private IJvmTypeProvider.Factory typeProviderFactory;
 

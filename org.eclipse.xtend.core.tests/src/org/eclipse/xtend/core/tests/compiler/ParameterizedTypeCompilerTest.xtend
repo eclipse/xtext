@@ -335,6 +335,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			    super(list);
 			  }
 			
+			  @Override
 			  public Object woot(final List<U> list) {
 			    return super.woot(list);
 			  }

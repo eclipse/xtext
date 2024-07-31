@@ -790,6 +790,9 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public static class MyClass implements MyAnno.MyIf {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("public Class<? extends Annotation> annotationType() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -803,6 +806,9 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class MyClass2 implements MyAnno {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public Class<? extends Annotation> annotationType() {");

@@ -243,6 +243,7 @@ class CompilerBug472602Test extends AbstractXtendCompilerTest {
 			      this.f = f;
 			    }
 			
+			    @Override
 			    public B get() {
 			      final A a = this.in.get();
 			      final B b = this.f.apply(a);
@@ -289,6 +290,7 @@ class CompilerBug472602Test extends AbstractXtendCompilerTest {
 			    {
 			      final C<A> thiz = this;
 			      _xblockexpression = new C<B>() {
+			        @Override
 			        public B get() {
 			          final A a = thiz.get();
 			          final B b = f.apply(a);

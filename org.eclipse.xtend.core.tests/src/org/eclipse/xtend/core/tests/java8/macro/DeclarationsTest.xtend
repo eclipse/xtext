@@ -8,12 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.macro
 
-import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
-import org.eclipse.xtext.testing.InjectWith
 import org.junit.Test
 
-@InjectWith(Java8RuntimeInjectorProvider)
 class DeclarationsTest extends org.eclipse.xtend.core.tests.macro.declaration.DeclarationsTest {
 	
 	@Test def testXtendInterfaceWithDefaultMethod() {

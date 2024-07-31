@@ -414,11 +414,13 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 		  public interface MyIf extends MyAnno {
 		  }
 		  public static class MyClass implements MyAnno.MyIf {
+		    @Override
 		    public Class<? extends Annotation> annotationType() {
 		      return null;
 		    }
 		  }
 		  public static class MyClass2 implements MyAnno {
+		    @Override
 		    public Class<? extends Annotation> annotationType() {
 		      return null;
 		    }
