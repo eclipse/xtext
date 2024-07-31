@@ -42,7 +42,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug465058Test.class,
 	CompilerBug472602Test.class,
 	Java8Compiler1Test.class,
-	Java8Compiler2Test.class,
 	TryWithResourcesJava8Test.class
 })
 public class Java8CompilerSuite {

@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.testing;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JavaVersion;
@@ -33,12 +34,14 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class OnTheFlyJavaCompiler2 {
+	private static final Logger logger = Logger.getLogger(OnTheFlyJavaCompiler2.class);
+	
 	private InMemoryJavaCompiler inMemoryCompiler;
 
 	private JavaVersion javaVersion;
 
 	/**
-	 * Creates a new OnTheFlyCompiler that accepts Java6 compliant code.
+	 * Creates a new OnTheFlyCompiler that accepts Java8 compliant code.
 	 */
 	@Inject
 	public OnTheFlyJavaCompiler2(ClassLoader scope) {
@@ -51,10 +54,13 @@ public class OnTheFlyJavaCompiler2 {
 	}
 
 	/**
+	 * Sets the Java version that this compiler works with. Defaults to Java8 and attempts to set older versions are ignored. 
+	 * 
 	 * @since 2.11
 	 */
 	public void setJavaVersion(JavaVersion version) {
-		if (JavaVersion.JAVA8.compareTo(version) > 0) {
+		if (JavaVersion.JAVA8.compareTo(version) >= 0) {
+			logger.error("Ignored attempt to set JavaVersion lower than 8", new IllegalArgumentException(version.toString()));
 			version = JavaVersion.JAVA8;
 		}
 		inMemoryCompiler.setJavaVersion(version);
