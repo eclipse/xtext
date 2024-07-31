@@ -31,10 +31,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final Iterable<String> it) {
-			    final Comparator<String> _function = new Comparator<String>() {
-			      public int compare(final String $0, final String $1) {
-			        return $0.compareTo($1);
-			      }
+			    final Comparator<String> _function = (String $0, String $1) -> {
+			      return $0.compareTo($1);
 			    };
 			    return IterableExtensions.<String>sortWith(it, _function);
 			  }
@@ -64,10 +62,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return ListExtensions.<String, String>map(list, _function);
 			  }
@@ -95,10 +91,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return D.<String, String>map(list, _function);
 			  }
@@ -125,10 +119,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Collection<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return this.<String, String>map(list, _function);
 			  }
@@ -157,10 +149,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return this.<String, String>map(list, _function);
 			  }
@@ -192,10 +182,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return ListExtensions.<String, String>map(list, _function);
 			  }
@@ -224,10 +212,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return C.<String, String>map(list, _function);
 			  }
@@ -265,10 +251,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			  private D _d;
 			
 			  public Collection<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return this._d.<String, String>map(list, _function);
 			  }
@@ -300,10 +284,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			  private D _d;
 			
 			  public List<String> m(final List<String> list) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
 			    return this._d.<String, String>map(list, _function);
 			  }
@@ -341,21 +323,19 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    final Double d = Double.valueOf(1.0);
 			    IntegerRange _upTo = new IntegerRange(1, 1);
 			    for (@Extension final Integer j : _upTo) {
-			      final Function1<Object, Throwable> _function = new Function1<Object, Throwable>() {
-			        public Throwable apply(@Extension final Object o) {
-			          Throwable _xtrycatchfinallyexpression = null;
-			          try {
-			            _xtrycatchfinallyexpression = null;
-			          } catch (final Throwable _t) {
-			            if (_t instanceof Throwable) {
-			              @Extension final Throwable t = (Throwable)_t;
-			              _xtrycatchfinallyexpression = InputOutput.<Throwable>println(t);
-			            } else {
-			              throw Exceptions.sneakyThrow(_t);
-			            }
+			      final Function1<Object, Throwable> _function = (Object o) -> {
+			        Throwable _xtrycatchfinallyexpression = null;
+			        try {
+			          _xtrycatchfinallyexpression = null;
+			        } catch (final Throwable _t) {
+			          if (_t instanceof Throwable) {
+			            @Extension final Throwable t = (Throwable)_t;
+			            _xtrycatchfinallyexpression = InputOutput.<Throwable>println(t);
+			          } else {
+			            throw Exceptions.sneakyThrow(_t);
 			          }
-			          return _xtrycatchfinallyexpression;
 			        }
+			        return _xtrycatchfinallyexpression;
 			      };
 			      _function.apply(null);
 			    }
@@ -794,15 +774,12 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			''', '''
 				import java.util.function.Consumer;
 				import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-				import org.eclipse.xtext.xbase.lib.Extension;
 				
 				@SuppressWarnings("all")
 				public class C {
 				  public void m(final int it) {
-				    final Consumer<String> _function = new Consumer<String>() {
-				      public void accept(@Extension final String s) {
-				        s.substring(it);
-				      }
+				    final Consumer<String> _function = (String s) -> {
+				      s.substring(it);
 				    };
 				    CollectionLiterals.<String>newArrayList().forEach(_function);
 				  }
@@ -914,10 +891,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			  public ArrayList<String> m3() {
 			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar");
-			    final Procedure1<ArrayList<String>> _function = new Procedure1<ArrayList<String>>() {
-			      public void apply(final ArrayList<String> it) {
-			        C.this.<String>at(((String[])Conversions.unwrapArray(it, String.class)), 2);
-			      }
+			    final Procedure1<ArrayList<String>> _function = (ArrayList<String> it) -> {
+			      this.<String>at(((String[])Conversions.unwrapArray(it, String.class)), 2);
 			    };
 			    return ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
 			  }

@@ -10154,7 +10154,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("package foo");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("class bar {");
+    _builder.append("class MyClass {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("String name = \'foobar\'");
@@ -10190,7 +10190,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
-    _builder_1.append("public class bar {");
+    _builder_1.append("public class MyClass {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private String name = \"foobar\";");

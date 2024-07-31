@@ -4567,7 +4567,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			 */
 			package foo
 			
-			class bar {
+			class MyClass {
 			    String name = 'foobar'
 			}
 		''',
@@ -4583,7 +4583,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			@SuppressWarnings("all")
-			public class bar {
+			public class MyClass {
 			  private String name = "foobar";
 			}
 		''')
