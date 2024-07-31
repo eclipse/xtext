@@ -8,15 +8,12 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import org.eclipse.xtend.core.tests.Java6RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.testing.InjectWith;
 import org.junit.Test;
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
  */
-@InjectWith(Java6RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class Java6CompilerTest extends AbstractXtendCompilerTest {
   @Test
