@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -278,45 +278,36 @@ public class CompilerTest {
 				"f2.apply('simsalabim')\n" +
 				"// SIMSALABIM (String)\n";
 		String expectation =
-				"import java.util.ArrayList;\n" +
-				"import org.eclipse.xtext.xbase.lib.CollectionLiterals;\n" +
-				"import org.eclipse.xtext.xbase.lib.Functions.Function1;\n" +
-				"import org.eclipse.xtext.xbase.lib.ListExtensions;\n" +
-				"\n" +
-				"@SuppressWarnings(\"all\")\n" +
-				"public class MyFile {\n" +
-				"  public String myMethod() throws Throwable {\n" +
-				"    String _xblockexpression = null;\n" +
-				"    {\n" +
-				"      final String x = \"Hello \";\n" +
-				"      final Function1<String, String> _function = new Function1<String, String>() {\n" +
-				"        @Override\n" +
-				"        public String apply(final String e) {\n" +
-				"          return (x + e);\n" +
-				"        }\n" +
-				"      };\n" +
-				"      final Function1<String, String> f = _function;\n" +
-				"      f.apply(\"World!\");\n" +
-				"      final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"a\", \"b\", \"c\");\n" +
-				"      final Function1<String, String> _function_1 = new Function1<String, String>() {\n" +
-				"        @Override\n" +
-				"        public String apply(final String e) {\n" +
-				"          return e.toUpperCase();\n" +
-				"        }\n" +
-				"      };\n" +
-				"      /* ListExtensions.<String, String>map(list, _function_1); */\n" +
-				"      final Function1<String, String> _function_2 = new Function1<String, String>() {\n" +
-				"        @Override\n" +
-				"        public String apply(final String e) {\n" +
-				"          return e.toUpperCase();\n" +
-				"        }\n" +
-				"      };\n" +
-				"      final Function1<? super String, ? extends String> f2 = _function_2;\n" +
-				"      _xblockexpression = f2.apply(\"simsalabim\");\n" +
-				"    }\n" +
-				"    return _xblockexpression;\n" +
-				"  }\n" +
-				"}\n";
+				"import java.util.ArrayList;\n"
+				+ "import org.eclipse.xtext.xbase.lib.CollectionLiterals;\n"
+				+ "import org.eclipse.xtext.xbase.lib.Functions.Function1;\n"
+				+ "import org.eclipse.xtext.xbase.lib.ListExtensions;\n"
+				+ "\n"
+				+ "@SuppressWarnings(\"all\")\n"
+				+ "public class MyFile {\n"
+				+ "  public String myMethod() throws Throwable {\n"
+				+ "    String _xblockexpression = null;\n"
+				+ "    {\n"
+				+ "      final String x = \"Hello \";\n"
+				+ "      final Function1<String, String> _function = (String e) -> {\n"
+				+ "        return (x + e);\n"
+				+ "      };\n"
+				+ "      final Function1<String, String> f = _function;\n"
+				+ "      f.apply(\"World!\");\n"
+				+ "      final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"a\", \"b\", \"c\");\n"
+				+ "      final Function1<String, String> _function_1 = (String e) -> {\n"
+				+ "        return e.toUpperCase();\n"
+				+ "      };\n"
+				+ "      /* ListExtensions.<String, String>map(list, _function_1); */\n"
+				+ "      final Function1<String, String> _function_2 = (String e) -> {\n"
+				+ "        return e.toUpperCase();\n"
+				+ "      };\n"
+				+ "      final Function1<? super String, ? extends String> f2 = _function_2;\n"
+				+ "      _xblockexpression = f2.apply(\"simsalabim\");\n"
+				+ "    }\n"
+				+ "    return _xblockexpression;\n"
+				+ "  }\n"
+				+ "}\n";
 		assertCompilesTo(source, expectation);
 	}
 
@@ -578,73 +569,70 @@ public class CompilerTest {
 				"		})\n" +
 				"// [a square : size=5, a circle : diameter=4, a rectangle : width=8 height=6] (List<String>)\n";
 		String expectation =
-				"import java.util.ArrayList;\n" +
-				"import java.util.List;\n" +
-				"import java.util.Objects;\n" +
-				"import org.eclipse.xtext.purexbase.tests.data.Circle;\n" +
-				"import org.eclipse.xtext.purexbase.tests.data.Rectangle;\n" +
-				"import org.eclipse.xtext.purexbase.tests.data.Shape;\n" +
-				"import org.eclipse.xtext.xbase.lib.CollectionLiterals;\n" +
-				"import org.eclipse.xtext.xbase.lib.Functions.Function1;\n" +
-				"import org.eclipse.xtext.xbase.lib.IterableExtensions;\n" +
-				"import org.eclipse.xtext.xbase.lib.ListExtensions;\n" +
-				"\n" +
-				"@SuppressWarnings(\"all\")\n" +
-				"public class MyFile {\n" +
-				"  public List<String> myMethod() throws Throwable {\n" +
-				"    List<String> _xblockexpression = null;\n" +
-				"    {\n" +
-				"      final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"foo\", \"bar\", \"baz\");\n" +
-				"      String _head = IterableExtensions.<String>head(list);\n" +
-				"      boolean _matched = false;\n" +
-				"      if (Objects.equals(_head, \"foo\")) {\n" +
-				"        _matched=true;\n" +
-				"        /* \"it\\'s foo\" */\n" +
-				"      }\n" +
-				"      if (!_matched) {\n" +
-				"        if (Objects.equals(_head, \"bar\")) {\n" +
-				"          _matched=true;\n" +
-				"          /* \"a bar\" */\n" +
-				"        }\n" +
-				"      }\n" +
-				"      if (!_matched) {\n" +
-				"        /* \"don\\'t know\" */\n" +
-				"      }\n" +
-				"      Rectangle _rectangle = new Rectangle(5, 5);\n" +
-				"      Circle _circle = new Circle(4);\n" +
-				"      Rectangle _rectangle_1 = new Rectangle(6, 8);\n" +
-				"      final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);\n" +
-				"      final Function1<Shape, String> _function = new Function1<Shape, String>() {\n" +
-				"        @Override\n" +
-				"        public String apply(final Shape shape) {\n" +
-				"          String _switchResult = null;\n" +
-				"          boolean _matched = false;\n" +
-				"          if (shape instanceof Circle) {\n" +
-				"            _matched=true;\n" +
-				"            _switchResult = (\"a circle : diameter=\" + Integer.valueOf(((Circle)shape).diameter));\n" +
-				"          }\n" +
-				"          if (!_matched) {\n" +
-				"            if (shape instanceof Rectangle) {\n" +
-				"              if ((((Rectangle)shape).height == ((Rectangle)shape).width)) {\n" +
-				"                _matched=true;\n" +
-				"                _switchResult = (\"a square : size=\" + Integer.valueOf(((Rectangle)shape).width));\n" +
-				"              }\n" +
-				"            }\n" +
-				"          }\n" +
-				"          if (!_matched) {\n" +
-				"            if (shape instanceof Rectangle) {\n" +
-				"              _matched=true;\n" +
-				"              _switchResult = (((\"a rectangle : width=\" + Integer.valueOf(((Rectangle)shape).width)) + \", height=\") + Integer.valueOf(((Rectangle)shape).height));\n" +
-				"            }\n" +
-				"          }\n" +
-				"          return _switchResult;\n" +
-				"        }\n" +
-				"      };\n" +
-				"      _xblockexpression = ListExtensions.<Shape, String>map(list2, _function);\n" +
-				"    }\n" +
-				"    return _xblockexpression;\n" +
-				"  }\n" +
-				"}\n";
+				"import java.util.ArrayList;\n"
+				+ "import java.util.List;\n"
+				+ "import org.eclipse.xtext.purexbase.tests.data.Circle;\n"
+				+ "import org.eclipse.xtext.purexbase.tests.data.Rectangle;\n"
+				+ "import org.eclipse.xtext.purexbase.tests.data.Shape;\n"
+				+ "import org.eclipse.xtext.xbase.lib.CollectionLiterals;\n"
+				+ "import org.eclipse.xtext.xbase.lib.Functions.Function1;\n"
+				+ "import org.eclipse.xtext.xbase.lib.IterableExtensions;\n"
+				+ "import org.eclipse.xtext.xbase.lib.ListExtensions;\n"
+				+ "\n"
+				+ "@SuppressWarnings(\"all\")\n"
+				+ "public class MyFile {\n"
+				+ "  public List<String> myMethod() throws Throwable {\n"
+				+ "    List<String> _xblockexpression = null;\n"
+				+ "    {\n"
+				+ "      final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"foo\", \"bar\", \"baz\");\n"
+				+ "      String _head = IterableExtensions.<String>head(list);\n"
+				+ "      if (_head != null) {\n"
+				+ "        switch (_head) {\n"
+				+ "          case \"foo\":\n"
+				+ "            /* \"it\\'s foo\" */\n"
+				+ "            break;\n"
+				+ "          case \"bar\":\n"
+				+ "            /* \"a bar\" */\n"
+				+ "            break;\n"
+				+ "          default:\n"
+				+ "            /* \"don\\'t know\" */\n"
+				+ "            break;\n"
+				+ "        }\n"
+				+ "      } else {\n"
+				+ "        /* \"don\\'t know\" */\n"
+				+ "      }\n"
+				+ "      Rectangle _rectangle = new Rectangle(5, 5);\n"
+				+ "      Circle _circle = new Circle(4);\n"
+				+ "      Rectangle _rectangle_1 = new Rectangle(6, 8);\n"
+				+ "      final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);\n"
+				+ "      final Function1<Shape, String> _function = (Shape shape) -> {\n"
+				+ "        String _switchResult_1 = null;\n"
+				+ "        boolean _matched = false;\n"
+				+ "        if (shape instanceof Circle) {\n"
+				+ "          _matched=true;\n"
+				+ "          _switchResult_1 = (\"a circle : diameter=\" + Integer.valueOf(((Circle)shape).diameter));\n"
+				+ "        }\n"
+				+ "        if (!_matched) {\n"
+				+ "          if (shape instanceof Rectangle) {\n"
+				+ "            if ((((Rectangle)shape).height == ((Rectangle)shape).width)) {\n"
+				+ "              _matched=true;\n"
+				+ "              _switchResult_1 = (\"a square : size=\" + Integer.valueOf(((Rectangle)shape).width));\n"
+				+ "            }\n"
+				+ "          }\n"
+				+ "        }\n"
+				+ "        if (!_matched) {\n"
+				+ "          if (shape instanceof Rectangle) {\n"
+				+ "            _matched=true;\n"
+				+ "            _switchResult_1 = (((\"a rectangle : width=\" + Integer.valueOf(((Rectangle)shape).width)) + \", height=\") + Integer.valueOf(((Rectangle)shape).height));\n"
+				+ "          }\n"
+				+ "        }\n"
+				+ "        return _switchResult_1;\n"
+				+ "      };\n"
+				+ "      _xblockexpression = ListExtensions.<Shape, String>map(list2, _function);\n"
+				+ "    }\n"
+				+ "    return _xblockexpression;\n"
+				+ "  }\n"
+				+ "}\n";
 		assertCompilesTo(source, expectation);
 	}
 
@@ -695,29 +683,26 @@ public class CompilerTest {
 				" */\n" +
 				"val java.util.Comparator<String> comparator = [a,b| a.length.compareTo(b.length)]\n";
 		String expectation =
-				"import java.util.Comparator;\n" +
-				"import java.util.List;\n" +
-				"import org.eclipse.xtext.xbase.lib.Conversions;\n" +
-				"\n" +
-				"@SuppressWarnings(\"all\")\n" +
-				"public class MyFile {\n" +
-				"  public void myMethod() throws Throwable {\n" +
-				"    \"string\".length();\n" +
-				"    final Integer i = Integer.valueOf(\"string\".length());\n" +
-				"    /* i; */\n" +
-				"    Integer.valueOf(\"string\".length()).toString();\n" +
-				"    \"string\".toCharArray();\n" +
-				"    final List<Character> l = (List<Character>)Conversions.doWrapArray(\"string\".toCharArray());\n" +
-				"    /* \"string\".toCharArray()[3]; */\n" +
-				"    final Comparator<String> _function = new Comparator<String>() {\n" +
-				"      @Override\n" +
-				"      public int compare(final String a, final String b) {\n" +
-				"        return Integer.valueOf(a.length()).compareTo(Integer.valueOf(b.length()));\n" +
-				"      }\n" +
-				"    };\n" +
-				"    final Comparator<String> comparator = _function;\n" +
-				"  }\n" +
-				"}\n";
+				"import java.util.Comparator;\n"
+				+ "import java.util.List;\n"
+				+ "import org.eclipse.xtext.xbase.lib.Conversions;\n"
+				+ "\n"
+				+ "@SuppressWarnings(\"all\")\n"
+				+ "public class MyFile {\n"
+				+ "  public void myMethod() throws Throwable {\n"
+				+ "    \"string\".length();\n"
+				+ "    final Integer i = Integer.valueOf(\"string\".length());\n"
+				+ "    /* i; */\n"
+				+ "    Integer.valueOf(\"string\".length()).toString();\n"
+				+ "    \"string\".toCharArray();\n"
+				+ "    final List<Character> l = (List<Character>)Conversions.doWrapArray(\"string\".toCharArray());\n"
+				+ "    /* \"string\".toCharArray()[3]; */\n"
+				+ "    final Comparator<String> _function = (String a, String b) -> {\n"
+				+ "      return Integer.valueOf(a.length()).compareTo(Integer.valueOf(b.length()));\n"
+				+ "    };\n"
+				+ "    final Comparator<String> comparator = _function;\n"
+				+ "  }\n"
+				+ "}\n";
 		assertCompilesTo(source, expectation);
 	}
 	
