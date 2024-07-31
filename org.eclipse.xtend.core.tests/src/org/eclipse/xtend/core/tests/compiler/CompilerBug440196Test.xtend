@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -60,13 +60,11 @@ class CompilerBug440196Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Boolean m() {
-			    final Function0<Boolean> _function = new Function0<Boolean>() {
-			      public Boolean apply() {
-			        if ((Boolean.TRUE).booleanValue()) {
-			          return true;
-			        }
-			        return null;
+			    final Function0<Boolean> _function = () -> {
+			      if ((Boolean.TRUE).booleanValue()) {
+			        return true;
 			      }
+			      return null;
 			    };
 			    return _function.apply();
 			  }

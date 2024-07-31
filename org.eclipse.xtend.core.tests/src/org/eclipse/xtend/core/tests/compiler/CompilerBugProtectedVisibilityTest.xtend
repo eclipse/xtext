@@ -250,15 +250,14 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			}
 		}
 		'''.assertCompilesTo('''
-		@SuppressWarnings("all")
-		public class B {
-		  private C c = new C();
+		import testdata.ClazzWithProtectedMember;
 		
-		  protected Object doX(final Runnable r) {
-		    final Runnable _function = () -> {
-		      this.c.protectedMethod();
-		    };
-		    return this.doX(_function);
+		@SuppressWarnings("all")
+		public class Sample extends ClazzWithProtectedMember {
+		  public static class ParamClass {
+		    public String doSomething(final Sample c) {
+		      return c.member = "Hello";
+		    }
 		  }
 		}
 		''')
