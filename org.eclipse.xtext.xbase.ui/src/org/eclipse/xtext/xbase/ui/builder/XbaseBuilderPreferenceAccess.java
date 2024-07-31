@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -61,7 +61,7 @@ public class XbaseBuilderPreferenceAccess {
 			store.setDefault(PREF_GENERATE_SUPPRESS_WARNINGS, true);
 			store.setDefault(PREF_GENERATE_GENERATED, false);
 			store.setDefault(PREF_DATE_IN_GENERATED, false);
-			store.setDefault(PREF_JAVA_VERSION, JavaVersion.JAVA5.toString());
+			store.setDefault(PREF_JAVA_VERSION, JavaVersion.JAVA8.toString());
 			store.setDefault(PREF_USE_COMPILER_SOURCE, true);
 		}
 
@@ -100,7 +100,7 @@ public class XbaseBuilderPreferenceAccess {
 				// Fall back to default value
 			}
 		}
-		return JavaVersion.JAVA5;
+		return JavaVersion.JAVA8;
 	}
 	
 	public void setJavaVersion(Object context, JavaVersion version) {
@@ -112,7 +112,7 @@ public class XbaseBuilderPreferenceAccess {
 	public JavaVersion fromCompilerSourceLevel(String compilerSource) {
 		JavaVersion javaVersion = JavaVersion.fromQualifier(compilerSource);
 		if (javaVersion == null)
-			javaVersion = JavaVersion.JAVA5;
+			javaVersion = JavaVersion.JAVA8;
 		return javaVersion;
 	}
 
