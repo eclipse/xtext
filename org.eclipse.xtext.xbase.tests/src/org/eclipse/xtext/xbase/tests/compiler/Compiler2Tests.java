@@ -8,11 +8,7 @@
  */
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
@@ -241,13 +237,10 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 	public void testNewThread() throws Exception {
 		compilesTo(
 				"new Thread [| ]\n",
-				"\n" +
-				"final Runnable _function = new Runnable() {\n" +
-				"  public void run() {\n" +
-				"  }\n" +
-				"};\n" +
-				"Thread _thread = new Thread(_function);\n" +
-				"return _thread;\n");
+				"final Runnable _function = () -> {\n" + 
+				"};\n" + 
+				"Thread _thread = new Thread(_function);\n" + 
+				"return _thread;");
 	}
 
 	@Test
@@ -450,26 +443,21 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"		println(it)\n" +
 				"	]\n" +
 				"}\n",
-				"\n" +
-				"final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));\n" +
-				"final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {\n" +
-				"  public void accept(final String it) {\n" +
-				"    String _switchResult = null;\n" +
-				"    boolean _matched = false;\n" +
-				"    if (it instanceof CharSequence) {\n" +
-				"      _matched=true;\n" +
-				"      _switchResult = it;\n" +
-				"    }\n" +
-				"    final String res = _switchResult;\n" +
-				"  }\n" +
-				"};\n" +
-				"list.forEach(_function);\n" +
-				"final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {\n" +
-				"  public void accept(final String it) {\n" +
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);\n" +
-				"  }\n" +
-				"};\n" +
-				"list.forEach(_function_1);\n");
+				"final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));\n" + 
+				"final java.util.function.Consumer<String> _function = (String it) -> {\n" + 
+				"  String _switchResult = null;\n" + 
+				"  boolean _matched = false;\n" + 
+				"  if (it instanceof CharSequence) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = it;\n" + 
+				"  }\n" + 
+				"  final String res = _switchResult;\n" + 
+				"};\n" + 
+				"list.forEach(_function);\n" + 
+				"final java.util.function.Consumer<String> _function_1 = (String it) -> {\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);\n" + 
+				"};\n" + 
+				"list.forEach(_function_1);");
 	}
 
 	@Test
@@ -487,29 +475,24 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"		println(it)\n" +
 				"	]\n" +
 				"}\n",
-				"\n" +
-				"final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));\n" +
-				"final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {\n" +
-				"  public void accept(final String it) {\n" +
-				"    String _switchResult = null;\n" +
-				"    boolean _matched = false;\n" +
-				"    if (it instanceof CharSequence) {\n" +
-				"      _matched=true;\n" +
-				"      _switchResult = it;\n" +
-				"    }\n" +
-				"    if (!_matched) {\n" +
-				"      _switchResult = \"\";\n" +
-				"    }\n" +
-				"    final String res = _switchResult;\n" +
-				"  }\n" +
-				"};\n" +
-				"list.forEach(_function);\n" +
-				"final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {\n" +
-				"  public void accept(final String it) {\n" +
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);\n" +
-				"  }\n" +
-				"};\n" +
-				"list.forEach(_function_1);\n");
+				"final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));\n" + 
+				"final java.util.function.Consumer<String> _function = (String it) -> {\n" + 
+				"  String _switchResult = null;\n" + 
+				"  boolean _matched = false;\n" + 
+				"  if (it instanceof CharSequence) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = it;\n" + 
+				"  }\n" + 
+				"  if (!_matched) {\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"  final String res = _switchResult;\n" + 
+				"};\n" + 
+				"list.forEach(_function);\n" + 
+				"final java.util.function.Consumer<String> _function_1 = (String it) -> {\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);\n" + 
+				"};\n" + 
+				"list.forEach(_function_1);");
 	}
 
 	@Test
@@ -527,36 +510,31 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"		println(it)\n" +
 				"	]\n" +
 				"}\n",
-				"\n" +
-				"final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));\n" +
-				"final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {\n" +
-				"  public void accept(final String it) {\n" +
-				"    String _switchResult = null;\n" +
-				"    boolean _matched = false;\n" +
-				"    if (it instanceof String) {\n" +
-				"      _matched=true;\n" +
-				"    }\n" +
-				"    if (!_matched) {\n" +
-				"      if (it instanceof CharSequence) {\n" +
-				"        _matched=true;\n" +
-				"      }\n" +
-				"    }\n" +
-				"    if (_matched) {\n" +
-				"      _switchResult = it;\n" +
-				"    }\n" +
-				"    if (!_matched) {\n" +
-				"      _switchResult = \"\";\n" +
-				"    }\n" +
-				"    final String res = _switchResult;\n" +
-				"  }\n" +
-				"};\n" +
-				"list.forEach(_function);\n" +
-				"final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {\n" +
-				"  public void accept(final String it) {\n" +
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);\n" +
-				"  }\n" +
-				"};\n" +
-				"list.forEach(_function_1);\n");
+				"final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));\n" + 
+				"final java.util.function.Consumer<String> _function = (String it) -> {\n" + 
+				"  String _switchResult = null;\n" + 
+				"  boolean _matched = false;\n" + 
+				"  if (it instanceof String) {\n" + 
+				"    _matched=true;\n" + 
+				"  }\n" + 
+				"  if (!_matched) {\n" + 
+				"    if (it instanceof CharSequence) {\n" + 
+				"      _matched=true;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  if (_matched) {\n" + 
+				"    _switchResult = it;\n" + 
+				"  }\n" + 
+				"  if (!_matched) {\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"  final String res = _switchResult;\n" + 
+				"};\n" + 
+				"list.forEach(_function);\n" + 
+				"final java.util.function.Consumer<String> _function_1 = (String it) -> {\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);\n" + 
+				"};\n" + 
+				"list.forEach(_function_1);");
 	}
 
 	@Test
@@ -592,27 +570,18 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"			'lalala'\n" +
 				"	}\n" +
 				"}\n",
-				"\n" +
-				"String _switchResult = null;\n" +
-				"final String x = \"lalala\";\n" +
-				"boolean _matched = false;\n" +
-				"if (java.util.Objects.equals(x, \"a\")) {\n" +
-				"  _matched=true;\n" +
-				"}\n" +
-				"if (!_matched) {\n" +
-				"  if (java.util.Objects.equals(x, \"b\")) {\n" +
-				"    _matched=true;\n" +
-				"  }\n" +
-				"}\n" +
-				"if (!_matched) {\n" +
-				"  if (java.util.Objects.equals(x, \"c\")) {\n" +
-				"    _matched=true;\n" +
-				"  }\n" +
-				"}\n" +
-				"if (_matched) {\n" +
-				"  _switchResult = \"lalala\";\n" +
-				"}\n" +
-				"return _switchResult;\n");
+				"String _switchResult = null;\n" + 
+				"final String x = \"lalala\";\n" + 
+				"if (x != null) {\n" + 
+				"  switch (x) {\n" + 
+				"    case \"a\":\n" + 
+				"    case \"b\":\n" + 
+				"    case \"c\":\n" + 
+				"      _switchResult = \"lalala\";\n" + 
+				"      break;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;");
 	}
 
 	@Test
@@ -650,25 +619,20 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"			'lalala'\n" +
 				"	}\n" +
 				"}\n",
-				"\n" +
-				"String _switchResult = null;\n" +
-				"final String x = \"lalala\";\n" +
-				"boolean _matched = false;\n" +
-				"if (java.util.Objects.equals(x, \"a\")) {\n" +
-				"  _matched=true;\n" +
-				"}\n" +
-				"if (!_matched) {\n" +
-				"  if (java.util.Objects.equals(x, \"b\")) {\n" +
-				"    _matched=true;\n" +
-				"  }\n" +
-				"}\n" +
-				"if (_matched) {\n" +
-				"  _switchResult = \"lalala\";\n" +
-				"}\n" +
-				"if (!_matched) {\n" +
-				"  _switchResult = \"lalala\";\n" +
-				"}\n" +
-				"return _switchResult;\n");
+				"String _switchResult = null;\n" + 
+				"final String x = \"lalala\";\n" + 
+				"if (x != null) {\n" + 
+				"  switch (x) {\n" + 
+				"    case \"a\":\n" + 
+				"    case \"b\":\n" + 
+				"    default:\n" + 
+				"      _switchResult = \"lalala\";\n" + 
+				"      break;\n" + 
+				"  }\n" + 
+				"} else {\n" + 
+				"  _switchResult = \"lalala\";\n" + 
+				"}\n" + 
+				"return _switchResult;");
 	}
 
 	@Test
@@ -1007,11 +971,6 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 
 	@Test
 	public void testEmptySwitch_11() throws Exception {
-		GeneratorConfig _generatorConfig = new GeneratorConfig();
-		final Procedure1<GeneratorConfig> _function = (GeneratorConfig it) -> {
-			it.setJavaSourceVersion(JavaVersion.JAVA8);
-		};
-		GeneratorConfig _doubleArrow = ObjectExtensions.<GeneratorConfig> operator_doubleArrow(_generatorConfig, _function);
 		compilesTo(
 				"{\n" +
 				"	val String x = null\n" +
@@ -1029,8 +988,7 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"  }\n" +
 				"  _xblockexpression = _switchResult;\n" +
 				"}\n" +
-				"return _xblockexpression;\n",
-				_doubleArrow);
+				"return _xblockexpression;\n");
 	}
 
 	@Test
@@ -1225,14 +1183,11 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"{\n" +
 				"	[| for (;;) {} ]\n" +
 				"}\n",
-				"\n" +
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {\n" +
-				"  public void apply() {\n" +
-				"    for (;;) {\n" +
-				"    }\n" +
-				"  }\n" +
-				"};\n" +
-				"return _function;\n");
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = () -> {\n" + 
+				"  for (;;) {\n" + 
+				"  }\n" + 
+				"};\n" + 
+				"return _function;");
 	}
 
 	@Test
@@ -1260,18 +1215,13 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"		\n" +
 				"	}\n" +
 				"}\n",
-				"\n" +
-				"final int i = 0;\n" +
-				"for (new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {\n" +
-				"  public Integer apply() {\n" +
-				"    return Integer.valueOf(i);\n" +
-				"  }\n" +
-				"}.apply(), new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {\n" +
-				"  public Integer apply() {\n" +
-				"    return Integer.valueOf(i);\n" +
-				"  }\n" +
-				"}.apply(); (i < 10);) {\n" +
-				"}\n");
+				"final int i = 0;\n" + 
+				"for (((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {\n" + 
+				"  return Integer.valueOf(i);\n" + 
+				"}).apply(), ((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {\n" + 
+				"  return Integer.valueOf(i);\n" + 
+				"}).apply(); (i < 10);) {\n" + 
+				"}");
 	}
 
 	@Test
@@ -1403,13 +1353,10 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 	public void testBug410797_01() throws Exception {
 		compilesTo(
 				"{ val boolean bug = #[true, false, true].reduce[a,b|a && b] }\n",
-				"\n" +
-				"final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean>() {\n" +
-				"  public Boolean apply(final Boolean a, final Boolean b) {\n" +
-				"    return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));\n" +
-				"  }\n" +
-				"};\n" +
-				"final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);\n");
+				"final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = (Boolean a, Boolean b) -> {\n" + 
+				"  return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));\n" + 
+				"};\n" + 
+				"final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);");
 	}
 
 	@Test
@@ -2052,23 +1999,20 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"	val foo = [|return \"foo\"]\n" +
 				"	new Exception(foo.apply)\n" +
 				"}\n",
-				"\n" +
-				"try {\n" +
-				"  Exception _xblockexpression = null;\n" +
-				"  {\n" +
-				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<String> _function = new org.eclipse.xtext.xbase.lib.Functions.Function0<String>() {\n" +
-				"      public String apply() {\n" +
-				"        return \"foo\";\n" +
-				"      }\n" +
-				"    };\n" +
-				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<String> foo = _function;\n" +
-				"    String _apply = foo.apply();\n" +
-				"    _xblockexpression = new Exception(_apply);\n" +
-				"  }\n" +
-				"  throw _xblockexpression;\n" +
-				"} catch (Throwable _e) {\n" +
-				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" +
-				"}\n");
+				"try {\n" + 
+				"  Exception _xblockexpression = null;\n" + 
+				"  {\n" + 
+				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<String> _function = () -> {\n" + 
+				"      return \"foo\";\n" + 
+				"    };\n" + 
+				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<String> foo = _function;\n" + 
+				"    String _apply = foo.apply();\n" + 
+				"    _xblockexpression = new Exception(_apply);\n" + 
+				"  }\n" + 
+				"  throw _xblockexpression;\n" + 
+				"} catch (Throwable _e) {\n" + 
+				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" + 
+				"}");
 	}
 
 	@Test
@@ -2079,21 +2023,19 @@ public class Compiler2Tests extends AbstractOutputComparingCompilerTests {
 				"	foo.apply\n" +
 				"}\n",
 				"\n" +
-				"try {\n" +
-				"  Exception _xblockexpression = null;\n" +
-				"  {\n" +
-				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<Exception> _function = new org.eclipse.xtext.xbase.lib.Functions.Function0<Exception>() {\n" +
-				"      public Exception apply() {\n" +
-				"        return new Exception();\n" +
-				"      }\n" +
-				"    };\n" +
-				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<? extends Exception> foo = _function;\n" +
-				"    _xblockexpression = foo.apply();\n" +
-				"  }\n" +
-				"  throw _xblockexpression;\n" +
-				"} catch (Throwable _e) {\n" +
-				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" +
-				"}\n");
+				"try {\n" + 
+				"  Exception _xblockexpression = null;\n" + 
+				"  {\n" + 
+				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<Exception> _function = () -> {\n" + 
+				"      return new Exception();\n" + 
+				"    };\n" + 
+				"    final org.eclipse.xtext.xbase.lib.Functions.Function0<? extends Exception> foo = _function;\n" + 
+				"    _xblockexpression = foo.apply();\n" + 
+				"  }\n" + 
+				"  throw _xblockexpression;\n" + 
+				"} catch (Throwable _e) {\n" + 
+				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" + 
+				"}");
 	}
 
 	@Test
