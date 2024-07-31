@@ -370,7 +370,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     this._validationTestHelper.assertNoError(this.memberInInterface(_builder_4.toString()), IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_5 = new StringConcatenation();
     _builder_5.append("static def foo() {}");
-    this._validationTestHelper.assertError(this.memberInInterface(_builder_5.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertNoError(this.memberInInterface(_builder_5.toString()), IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_6 = new StringConcatenation();
     _builder_6.append("abstract def int foo()");
     this._validationTestHelper.assertNoErrors(this.memberInInterface(_builder_6.toString()));

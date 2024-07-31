@@ -1869,7 +1869,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     
     @Test public void testNonAbstractMethodInInterface() throws Exception {
     	XtendInterface clazz = interfaze("interface Foo { def test() {} }");
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, ABSTRACT_METHOD_WITH_BODY);
+    	helper.assertNoErrors(clazz.getMembers().get(0));
     }
     
     @Test public void testAbstractMethodWithReturnType() throws Exception {

@@ -140,7 +140,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''protected def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''public def foo() {}''').assertNoError(INVALID_MODIFIER)
 		memberInInterface('''override def foo() {}''').assertNoError(INVALID_MODIFIER)
-		memberInInterface('''static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)	
+		memberInInterface('''static def foo() {}''').assertNoError(INVALID_MODIFIER)	
 		memberInInterface('''abstract def int foo()''').assertNoErrors	
 		memberInInterface('''dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
