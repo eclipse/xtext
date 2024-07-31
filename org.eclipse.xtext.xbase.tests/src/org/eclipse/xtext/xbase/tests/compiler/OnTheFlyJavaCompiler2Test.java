@@ -32,18 +32,23 @@ public class OnTheFlyJavaCompiler2Test extends AbstractJvmModelTest {
 	private OnTheFlyJavaCompiler2 javaCompiler;
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testDefaultJavaVersionWithJava7Feature() {
-		assertJavaCompilation("java.util.List<String> list = new java.util.LinkedList<>();", null);
+	public void testDefaultJavaVersionWithJava17Feature() {
+		assertJavaCompilation("record Hello(String s) {}", null);
 	}
 
 	@Test
-	public void testJavaVersion7() {
-		assertJavaCompilation("java.util.List<String> list = new java.util.LinkedList<>();", JavaVersion.JAVA7);
+	public void testJavaVersion8_01() {
+		assertJavaCompilation("java.util.List<String> list = new java.util.LinkedList<>();", JavaVersion.JAVA8);
 	}
 
 	@Test
-	public void testJavaVersion8() {
+	public void testJavaVersion8_02() {
 		assertJavaCompilation("Runnable r = () -> {};", JavaVersion.JAVA8);
+	}
+	
+	@Test
+	public void testJavaVersion17() {
+		assertJavaCompilation("record Hello(String s) {}", JavaVersion.JAVA17);
 	}
 
 	private Class<?> assertJavaCompilation(CharSequence input, JavaVersion javaVersion) {
