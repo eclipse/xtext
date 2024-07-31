@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -113,16 +113,10 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m(final T a, final T b) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<Test<T>> _function = new Procedure1<Test<T>>() {");
+    _builder_1.append("final Procedure1<Test<T>> _function = (Test<T> it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final Test<T> it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("new Test<T>().m(a, b);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -190,22 +184,16 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {");
+    _builder_1.append("final Procedure1<StringBuilder> _function = (StringBuilder it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final StringBuilder it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("Test<Object> _test = new Test<Object>();");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("_test.m(it, _long);");
-    _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("_test.m(it, _long);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
