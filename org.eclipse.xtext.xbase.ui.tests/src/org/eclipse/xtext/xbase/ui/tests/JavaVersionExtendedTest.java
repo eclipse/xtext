@@ -21,9 +21,6 @@ public class JavaVersionExtendedTest {
 
 	@Test
 	public void testToJdtClassFileConstant() {
-		assertEquals(ClassFileConstants.JDK1_5, JavaVersion.JAVA5.toJdtClassFileConstant());
-		assertEquals(ClassFileConstants.JDK1_6, JavaVersion.JAVA6.toJdtClassFileConstant());
-		assertEquals(ClassFileConstants.JDK1_7, JavaVersion.JAVA7.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK1_8, JavaVersion.JAVA8.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK9, JavaVersion.JAVA9.toJdtClassFileConstant());
 		assertEquals(ClassFileConstants.JDK10, JavaVersion.JAVA10.toJdtClassFileConstant());
@@ -40,6 +37,14 @@ public class JavaVersionExtendedTest {
 //			System.err.println("ooops");
 //			// ok
 //		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testSpoofedClassFileConstant() {
+		assertEquals(ClassFileConstants.JDK1_8, JavaVersion.JAVA5.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK1_8, JavaVersion.JAVA6.toJdtClassFileConstant());
+		assertEquals(ClassFileConstants.JDK1_8, JavaVersion.JAVA7.toJdtClassFileConstant());
 	}
 
 }

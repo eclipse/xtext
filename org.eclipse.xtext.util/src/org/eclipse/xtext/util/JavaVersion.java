@@ -120,9 +120,12 @@ public enum JavaVersion {
 	}
 
 	public static JavaVersion fromBree(String bree) {
-		for (JavaVersion version : JavaVersion.values()) {
-			if (version.bree.equals(bree))
-				return version;
+		JavaVersion[] values = JavaVersion.values();
+		// iterate backwards since it's a fair assumption that we'll use a more recent java version
+		for(int i = values.length - 1; i >= 0; i--) {
+			JavaVersion candidate = values[i];
+			if (candidate.bree.equals(bree))
+				return candidate;
 		}
 		return null;
 	}
@@ -164,4 +167,5 @@ public enum JavaVersion {
 	public long toJdtClassFileConstant() {
 		return jdtClassFileConstant;
 	}
+	
 }
