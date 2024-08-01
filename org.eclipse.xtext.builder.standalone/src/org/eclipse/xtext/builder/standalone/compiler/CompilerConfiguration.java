@@ -16,9 +16,9 @@ import org.eclipse.xtext.resource.IResourceDescription;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class CompilerConfiguration {
-	private String sourceLevel = "1.5";
+	private String sourceLevel = "8";
 
-	private String targetLevel = "1.5";
+	private String targetLevel = "8";
 
 	private boolean verbose;
 
