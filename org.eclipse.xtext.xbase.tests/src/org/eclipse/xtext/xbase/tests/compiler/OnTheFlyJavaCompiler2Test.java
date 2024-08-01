@@ -10,11 +10,13 @@ package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler2;
 import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
+import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +35,7 @@ public class OnTheFlyJavaCompiler2Test extends AbstractJvmModelTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testDefaultJavaVersionWithJava17Feature() {
+		Assume.assumeTrue("Active only on Java 17 and later", JavaRuntimeVersion.isJava17OrLater());
 		assertJavaCompilation("record Hello(String s) {}", null);
 	}
 
