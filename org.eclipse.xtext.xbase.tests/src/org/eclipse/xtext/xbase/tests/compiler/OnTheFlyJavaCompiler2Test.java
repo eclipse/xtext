@@ -51,6 +51,7 @@ public class OnTheFlyJavaCompiler2Test extends AbstractJvmModelTest {
 	
 	@Test
 	public void testJavaVersion17() {
+		Assume.assumeTrue("Active only on Java 17 and later", JavaRuntimeVersion.isJava17OrLater());
 		assertJavaCompilation("record Hello(String s) {}", JavaVersion.JAVA17);
 	}
 
