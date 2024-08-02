@@ -8,14 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
-import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,9 +21,6 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	protected FakeTreeAppendable createAppendable() {
 		return new FakeTreeAppendable();
 	}
-	
-	@Inject
-	private IGeneratorConfigProvider generatorConfigProvider;
 	
 	@Test public void testSimple() throws Exception {
 		assertCompilesTo("\nint _length = \"foo\".length();\n" + 
@@ -139,10 +131,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				// TODO AbstractStringBuilder is package private and should not be part of the resolved type
 				"Iterable<AbstractStringBuilder> _plus = com.google.common.collect.Iterables.<AbstractStringBuilder>concat(((Iterable<StringBuilder>) null), ((Iterable<StringBuffer>) null));\n" + 
-				"final java.util.function.Consumer<Object> _function = new java.util.function.Consumer<Object>() {\n" + 
-				"  public void accept(final Object it) {\n" + 
-				"    ((CharSequence)it).length();\n" + 
-				"  }\n" + 
+				"final java.util.function.Consumer<Object> _function = (Object it) -> {\n" + 
+				"  ((CharSequence)it).length();\n" + 
 				"};\n" + 
 				"com.google.common.collect.Iterables.<Object>concat(_plus, ((Iterable<String>) null)).forEach(_function);", 
 				"((null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)).forEach[ length ]");
@@ -157,10 +147,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testImplicitReferenceToSynonym_01() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
-				"  public void accept(final String[] it) {\n" + 
-				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
-				"  }\n" + 
+				"final java.util.function.Consumer<String[]> _function = (String[] it) -> {\n" + 
+				"  ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ subList(1,1) ]");
@@ -168,10 +156,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testImplicitReferenceToSynonym_02() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
-				"  public void accept(final String[] it) {\n" + 
-				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" +
-				"  }\n" + 
+				"final java.util.function.Consumer<String[]> _function = (String[] it) -> {\n" + 
+				"  ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ size() ]");
@@ -179,10 +165,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testImplicitReferenceToSynonymWithPrimitives() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<int[]> _function = new java.util.function.Consumer<int[]>() {\n" + 
-				"  public void accept(final int[] it) {\n" + 
-				"    ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
-				"  }\n" + 
+				"final java.util.function.Consumer<int[]> _function = (int[] it) -> {\n" + 
+				"  ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" + 
 				"};\n" + 
 				"((Iterable<int[]>) null).forEach(_function);", 
 				"(null as Iterable<int[]>).forEach[ subList(1,1) ]");
@@ -190,10 +174,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testImplicitReferenceToArray() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
-				"  public void accept(final String[] it) {\n" + 
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(it.length));\n" + 
-				"  }\n" + 
+				"final java.util.function.Consumer<String[]> _function = (String[] it) -> {\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(it.length));\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ println(length) ]");
@@ -201,10 +183,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testExplicitReferenceToSynonym_01() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
-				"  public void accept(final String[] it) {\n" + 
-				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
-				"  }\n" + 
+				"final java.util.function.Consumer<String[]> _function = (String[] it) -> {\n" + 
+				"  ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ it.subList(1,1) ]");
@@ -212,10 +192,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testExplicitReferenceToSynonym_02() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
-				"  public void accept(final String[] it) {\n" + 
-				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" +
-				"  }\n" + 
+				"final java.util.function.Consumer<String[]> _function = (String[] it) -> {\n" + 
+				"  ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ it.size ]");
@@ -223,10 +201,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testExplicitReferenceToSynonymWithPrimitives() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<int[]> _function = new java.util.function.Consumer<int[]>() {\n" + 
-				"  public void accept(final int[] it) {\n" + 
-				"    ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
-				"  }\n" + 
+				"final java.util.function.Consumer<int[]> _function = (int[] it) -> {\n" + 
+				"  ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" + 
 				"};\n" + 
 				"((Iterable<int[]>) null).forEach(_function);", 
 				"(null as Iterable<int[]>).forEach[ it.subList(1,1) ]");
@@ -234,10 +210,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testExplicitReferenceToArray() throws Exception {
 		assertCompilesTo(
-				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
-				"  public void accept(final String[] it) {\n" + 
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(it.length));\n" + 
-				"  }\n" + 
+				"final java.util.function.Consumer<String[]> _function = (String[] it) -> {\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(it.length));\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ println(it.length) ]");
@@ -289,12 +263,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testBlockHasNoSuperfluousBraces_03() throws Exception {
 		assertCompilesTo(
-				"\n" + 
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Integer> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Integer>() {\n" + 
-				"  public void apply(final Integer i) {\n" + 
-				"    new Object();\n" + 
-				"    new Object();\n" + 
-				"  }\n" + 
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Integer> _function = (Integer i) -> {\n" + 
+				"  new Object();\n" + 
+				"  new Object();\n" + 
 				"};\n" + 
 				"org.eclipse.xtext.xbase.lib.Procedures.Procedure1<? super Integer> fun = _function;", 
 				"{ var (int)=>void fun = [ int i | new Object() new Object() ] }");
@@ -733,9 +704,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 
 	@Test public void testExceptionOnClosure() throws Exception {
 		assertCompilesTo(
-				"final java.beans.VetoableChangeListener _function = new java.beans.VetoableChangeListener() {\n" + 
-				"  public void vetoableChange(final java.beans.PropertyChangeEvent it) throws java.beans.PropertyVetoException {\n" + 
-				"  }\n" + 
+				"final java.beans.VetoableChangeListener _function = (java.beans.PropertyChangeEvent it) -> {\n" + 
 				"};\n" + 
 				"final java.beans.VetoableChangeListener x = _function;",
 				"{val java.beans.VetoableChangeListener x = []}");
@@ -801,148 +770,65 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 
 	@Test
 	public void testBug472265_01() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor _function = new closures.IAcceptors.IAcceptor() {\n"
-		+ "  public void doSth(final String x) {\n"
-		+ "  }\n"
-		+ "};\n"
-		+ "closures.IAcceptors.IAcceptor a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor _function = (String x) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor a = _function;",
 		"{var closures.IAcceptors.IAcceptor a = [x|]}");
 	}
 	
 	@Test
 	public void testBug472265_02() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor2 _function = new closures.IAcceptors.IAcceptor2() {\n"
-				+ "  public void doSth(final String[] x) {\n"
-				+ "  }\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor2 a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor2 _function = (String[] x) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor2 a = _function;",
 				"{var closures.IAcceptors.IAcceptor2 a = [x|]}");
 	}
 	
 	@Test
 	public void testBug472265_03() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor3 _function = new closures.IAcceptors.IAcceptor3() {\n"
-				+ "  public void doSth(final String... x) {\n"
-				+ "  }\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor3 a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor3 _function = (String... x) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor3 a = _function;",
 				"{var closures.IAcceptors.IAcceptor3 a = [x|]}");
 	}
 	
 	@Test
 	public void testBug472265_04() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor4 _function = new closures.IAcceptors.IAcceptor4() {\n"
-				+ "  public void doSth(final String x, final String[] y) {\n"
-				+ "  }\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor4 a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor4 _function = (String x, String[] y) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor4 a = _function;",
 				"{var closures.IAcceptors.IAcceptor4 a = [x,y|]}");
 	}
 	
 	@Test
 	public void testBug472265_05() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor5 _function = new closures.IAcceptors.IAcceptor5() {\n"
-				+ "  public void doSth(final String x, final String... y) {\n"
-				+ "  }\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor5 a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor5 _function = (String x, String... y) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor5 a = _function;",
 				"{var closures.IAcceptors.IAcceptor5 a = [x,y|]}");
 	}
 	
 	@Test
 	public void testBug472265_06() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor6 _function = new closures.IAcceptors.IAcceptor6() {\n"
-				+ "  public void doSth(final String[] x, final String[] y) {\n"
-				+ "  }\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor6 a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor6 _function = (String[] x, String[] y) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor6 a = _function;",
 				"{var closures.IAcceptors.IAcceptor6 a = [x,y|]}");
 	}
 	
 	@Test
 	public void testBug472265_07() throws Exception {
-		assertCompilesTo("final closures.IAcceptors.IAcceptor7 _function = new closures.IAcceptors.IAcceptor7() {\n"
-				+ "  public void doSth(final String[] x, final String... y) {\n"
-				+ "  }\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor7 a = _function;",
+		assertCompilesTo(
+				"final closures.IAcceptors.IAcceptor7 _function = (String[] x, String... y) -> {\n" + 
+				"};\n" + 
+				"closures.IAcceptors.IAcceptor7 a = _function;",
 				"{var closures.IAcceptors.IAcceptor7 a = [x,y|]}");
 	}
 	
-	@Test
-	public void testBug472265_01_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor _function = (String x) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor a = _function;",
-				"{var closures.IAcceptors.IAcceptor a = [x|]}",
-				generatorConfig);
-	}
-	
-	@Test
-	public void testBug472265_02_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor2 _function = (String[] x) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor2 a = _function;",
-				"{var closures.IAcceptors.IAcceptor2 a = [x|]}",
-				generatorConfig);
-	}
-	
-	@Test
-	public void testBug472265_03_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor3 _function = (String... x) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor3 a = _function;",
-				"{var closures.IAcceptors.IAcceptor3 a = [x|]}",
-				generatorConfig);
-	}
-	
-	@Test
-	public void testBug472265_04_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor4 _function = (String x, String[] y) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor4 a = _function;",
-				"{var closures.IAcceptors.IAcceptor4 a = [x,y|]}",
-				generatorConfig);
-	}
-	
-	@Test
-	public void testBug472265_05_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor5 _function = (String x, String... y) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor5 a = _function;",
-				"{var closures.IAcceptors.IAcceptor5 a = [x,y|]}",
-				generatorConfig);
-	}
-	
-	@Test
-	public void testBug472265_06_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor6 _function = (String[] x, String[] y) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor6 a = _function;",
-				"{var closures.IAcceptors.IAcceptor6 a = [x,y|]}",
-				generatorConfig);
-	}
-	
-	@Test
-	public void testBug472265_07_lamda() throws Exception {
-		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setJavaSourceVersion(JavaVersion.JAVA8);
-		assertCompilesTo("final closures.IAcceptors.IAcceptor7 _function = (String[] x, String... y) -> {\n"
-				+ "};\n"
-				+ "closures.IAcceptors.IAcceptor7 a = _function;",
-				"{var closures.IAcceptors.IAcceptor7 a = [x,y|]}",
-				generatorConfig);
-	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -41,16 +41,15 @@ class CompilerBug456883Test extends AbstractXtendCompilerTest {
 			public class XtendCompilationError {
 			  public XtendCompilationError() {
 			    ArrayList<Object> _arrayList = new ArrayList<Object>();
-			    final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-			      public void apply(final ArrayList<Object> it) {
-			        final int finalValue = 1;
-			        it.add(
-			          new Object() {
-			            public String toString() {
-			              return ("" + Integer.valueOf(finalValue));
-			            }
-			          });
-			      }
+			    final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+			      final int finalValue = 1;
+			      it.add(
+			        new Object() {
+			          @Override
+			          public String toString() {
+			            return ("" + Integer.valueOf(finalValue));
+			          }
+			        });
 			    };
 			    ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_arrayList, _function);
 			  }

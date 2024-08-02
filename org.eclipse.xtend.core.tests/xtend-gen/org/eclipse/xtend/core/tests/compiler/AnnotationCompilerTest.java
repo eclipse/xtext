@@ -431,7 +431,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("package foo");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("annotation bar { ");
+    _builder.append("annotation MyAnnotation { ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("String name = \'foobar\'");
@@ -467,7 +467,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
-    _builder_1.append("public @interface bar {");
+    _builder_1.append("public @interface MyAnnotation {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String name() default \"foobar\";");
@@ -790,6 +790,9 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public static class MyClass implements MyAnno.MyIf {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("public Class<? extends Annotation> annotationType() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -803,6 +806,9 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class MyClass2 implements MyAnno {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public Class<? extends Annotation> annotationType() {");

@@ -11,18 +11,21 @@ package org.eclipse.xtend.core.tests.compiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTestEx;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 
+import testdata.TryBodyException;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
-public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
+public class XbaseIntegrationTest extends AbstractXbaseEvaluationTestEx {
 
 	@Inject
 	private CompilerTestHelper testHelper;
@@ -80,4 +83,25 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		assertEvaluatesTo(Boolean.TRUE, "(new testdata.ClassWithVarArgs(1, '', '', '') {}).varArgConstructor");
 	}
 
+	@Test @Override
+	public void testTryWithResources_ExceptionInBody() throws Exception {
+		assertEvaluatesWithException(TryBodyException.class,
+				"try (var a = new testdata.ClosableWithListExceptionOnAdd()) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	a.addExc\n" + 
+				"}\n" +
+				"null");
+	}
+	
+	@Test @Override
+	public void testTryWithResources_2ResourcesCatch_02() throws Exception {
+		assertEvaluatesWithException(InstantiationException.class, //b.add would invoke NullPointerExcpt, but InstExc came first and is caught
+				"var java.util.List<String> result\n" + 
+				"try (var a = new testdata.ClosableWithList;\n" + 
+				"		var b = new testdata.ClosableWithListExceptionOnConstr) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	b.add(\"body\")\n" + 
+				"}\n" +
+				"null");
+	}
 }

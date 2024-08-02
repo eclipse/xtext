@@ -56,15 +56,11 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    {
 			      final ArrayList<E> list = CollectionLiterals.<E>newArrayList();
 			      final G g = new G();
-			      final Function1<E, ArrayList<F>> _function = new Function1<E, ArrayList<F>>() {
-			        public ArrayList<F> apply(final E e) {
-			          return e.m();
-			        }
+			      final Function1<E, ArrayList<F>> _function = (E e) -> {
+			        return e.m();
 			      };
-			      final Function1<F, D> _function_1 = new Function1<F, D>() {
-			        public D apply(final F it) {
-			          return C.this.d(it, g);
-			        }
+			      final Function1<F, D> _function_1 = (F it) -> {
+			        return this.d(it, g);
 			      };
 			      _xblockexpression = IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(list, _function)), _function_1);
 			    }
@@ -116,15 +112,11 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    Iterable<D> _xblockexpression = null;
 			    {
 			      final G g = new G();
-			      final Function1<E, ArrayList<F>> _function = new Function1<E, ArrayList<F>>() {
-			        public ArrayList<F> apply(final E e) {
-			          return e.m();
-			        }
+			      final Function1<E, ArrayList<F>> _function = (E e) -> {
+			        return e.m();
 			      };
-			      final Function1<F, D> _function_1 = new Function1<F, D>() {
-			        public D apply(final F it) {
-			          return C.this.d(it, g);
-			        }
+			      final Function1<F, D> _function_1 = (F it) -> {
+			        return this.d(it, g);
 			      };
 			      _xblockexpression = IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);
 			    }
@@ -172,16 +164,12 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<D> m() {
-			    final Function1<E, ArrayList<F>> _function = new Function1<E, ArrayList<F>>() {
-			      public ArrayList<F> apply(final E e) {
-			        return e.m();
-			      }
+			    final Function1<E, ArrayList<F>> _function = (E e) -> {
+			      return e.m();
 			    };
-			    final Function1<F, D> _function_1 = new Function1<F, D>() {
-			      public D apply(final F it) {
-			        G _g = new G();
-			        return C.this.d(it, _g);
-			      }
+			    final Function1<F, D> _function_1 = (F it) -> {
+			      G _g = new G();
+			      return this.d(it, _g);
 			    };
 			    return IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);
 			  }
@@ -253,35 +241,29 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public int getLenght() {
-			    final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {
-			      public Integer apply(final Integer x, final LeafInfo i) {
-			        ILeafNode _node = i.getNode();
-			        int _length = 0;
-			        if (_node!=null) {
-			          _length=_node.getLength();
-			        }
-			        return Integer.valueOf(((x).intValue() + _length));
+			    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
+			      ILeafNode _node = i.getNode();
+			      int _length = 0;
+			      if (_node!=null) {
+			        _length=_node.getLength();
 			      }
+			      return Integer.valueOf(((x).intValue() + _length));
 			    };
 			    return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);
 			  }
 			
 			  public int getNewLines() {
-			    final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {
-			      public Integer apply(final Integer x, final LeafInfo i) {
-			        int _newLines = i.getNewLines();
-			        return Integer.valueOf(((x).intValue() + _newLines));
-			      }
+			    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
+			      int _newLines = i.getNewLines();
+			      return Integer.valueOf(((x).intValue() + _newLines));
 			    };
 			    return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);
 			  }
 			
 			  public int getNewLinesInComments() {
-			    final Function2<Integer, CommentInfo, Integer> _function = new Function2<Integer, CommentInfo, Integer>() {
-			      public Integer apply(final Integer x, final CommentInfo i) {
-			        int _newLines = i.getNewLines();
-			        return Integer.valueOf(((x).intValue() + _newLines));
-			      }
+			    final Function2<Integer, CommentInfo, Integer> _function = (Integer x, CommentInfo i) -> {
+			      int _newLines = i.getNewLines();
+			      return Integer.valueOf(((x).intValue() + _newLines));
 			    };
 			    return (int) IterableExtensions.<CommentInfo, Integer>fold(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class), Integer.valueOf(0), _function);
 			  }

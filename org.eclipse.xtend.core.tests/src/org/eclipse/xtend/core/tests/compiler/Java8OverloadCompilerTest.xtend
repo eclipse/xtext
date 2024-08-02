@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,10 +32,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public void m(final ExecutorService service) {
-			    final Callable<Object> _function = new Callable<Object>() {
-			      public Object call() throws Exception {
-			        return null;
-			      }
+			    final Callable<Object> _function = () -> {
+			      return null;
 			    };
 			    service.<Object>submit(_function);
 			  }
@@ -58,10 +56,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public void m(final ExecutorService service) {
-			    final Runnable _function = new Runnable() {
-			      public void run() {
-			        return;
-			      }
+			    final Runnable _function = () -> {
+			      return;
 			    };
 			    service.submit(_function);
 			  }
@@ -85,10 +81,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public void m(final ExecutorService service) {
-			    final Callable<String> _function = new Callable<String>() {
-			      public String call() throws Exception {
-			        return "";
-			      }
+			    final Callable<String> _function = () -> {
+			      return "";
 			    };
 			    service.<String>submit(_function);
 			  }
@@ -112,10 +106,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public void m(final ExecutorService service) {
-			    final Callable<String> _function = new Callable<String>() {
-			      public String call() throws Exception {
-			        return "";
-			      }
+			    final Callable<String> _function = () -> {
+			      return "";
 			    };
 			    service.<String>submit(_function);
 			  }
@@ -142,10 +134,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final ExecutorService service) {
-			    final Runnable _function = new Runnable() {
-			      public void run() {
-			        Bug.this.m();
-			      }
+			    final Runnable _function = () -> {
+			      this.m();
 			    };
 			    service.submit(_function);
 			  }
@@ -176,10 +166,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Iterable<Bug.I> i) {
-			    final Bug.I _function = new Bug.I() {
-			      public void bind(final Runnable it) {
-			        it.run();
-			      }
+			    final Bug.I _function = (Runnable it) -> {
+			      it.run();
 			    };
 			    this.m(_function);
 			  }
@@ -210,10 +198,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Iterable<Bug.I> i) {
-			    final Bug.I _function = new Bug.I() {
-			      public void bind(final Runnable it) {
-			        it.run();
-			      }
+			    final Bug.I _function = (Runnable it) -> {
+			      it.run();
 			    };
 			    this.m(_function);
 			  }
@@ -244,10 +230,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Iterable<Bug.I>... i) {
-			    final Bug.I _function = new Bug.I() {
-			      public void bind(final Runnable it) {
-			        it.run();
-			      }
+			    final Bug.I _function = (Runnable it) -> {
+			      it.run();
 			    };
 			    this.m(_function);
 			  }
@@ -274,10 +258,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Function0<? extends String> f) {
-			    final Function0<String> _function = new Function0<String>() {
-			      public String apply() {
-			        return "";
-			      }
+			    final Function0<String> _function = () -> {
+			      return "";
 			    };
 			    this.m(_function);
 			  }
@@ -304,10 +286,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Procedure0 f) {
-			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
-			      public String apply(final String $0, final String $1) {
-			        return ($0 + $1);
-			      }
+			    final Function2<String, String, String> _function = (String $0, String $1) -> {
+			      return ($0 + $1);
 			    };
 			    this.m(_function);
 			  }
@@ -334,10 +314,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Function0<? extends String>... f) {
-			    final Function0<String> _function = new Function0<String>() {
-			      public String apply() {
-			        return "";
-			      }
+			    final Function0<String> _function = () -> {
+			      return "";
 			    };
 			    this.m(_function);
 			  }
@@ -364,10 +342,8 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final Procedure0 f) {
-			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
-			      public String apply(final String $0, final String $1) {
-			        return ($0 + $1);
-			      }
+			    final Function2<String, String, String> _function = (String $0, String $1) -> {
+			      return ($0 + $1);
 			    };
 			    this.m(_function);
 			  }

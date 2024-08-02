@@ -40,7 +40,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -487,7 +486,6 @@ public class BatchCompilerTest {
   }
 
   @Test
-  @Ignore
   public void bug416262() {
     this.batchCompiler.setSourcePath(BatchCompilerTest.BUG416262_SRC_DIRECTORY);
     Assert.assertTrue("Compiling funny file pass", this.batchCompiler.compile());
@@ -514,7 +512,11 @@ public class BatchCompilerTest {
   public void testActiveAnnotatons1() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
     final Runnable _function = () -> {
-      Assert.assertFalse(this.batchCompiler.compile());
+      final Runnable _function_1 = () -> {
+        Assert.assertFalse(this.batchCompiler.compile());
+      };
+      final LoggingTester.LogCapture providerLogs = LoggingTester.captureLogging(Level.ERROR, "org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider", _function_1);
+      providerLogs.assertNumberOfLogEntries(1);
     };
     final LoggingTester.LogCapture logs = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
     logs.assertNumberOfLogEntries(1);
@@ -728,34 +730,19 @@ public class BatchCompilerTest {
     Assert.assertFalse(this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@SuppressWarnings"));
   }
 
-  @Test
+  @Test(expected = IllegalArgumentException.class)
   public void testJavaVersion5() {
     this.batchCompiler.setJavaSourceVersion("1.5");
-    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
-    Assert.assertFalse(generated.contains("@Override"));
-    Assert.assertTrue(generated.contains("new Function1<Integer, String>"));
   }
 
-  @Test
+  @Test(expected = IllegalArgumentException.class)
   public void testJavaVersion6() {
     this.batchCompiler.setJavaSourceVersion("1.6");
-    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
-    Assert.assertTrue(generated.contains("@Override"));
-    Assert.assertTrue(generated.contains("new Function1<Integer, String>"));
   }
 
-  @Test
+  @Test(expected = IllegalArgumentException.class)
   public void testJavaVersion7() {
     this.batchCompiler.setJavaSourceVersion("1.7");
-    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java"));
-    Assert.assertTrue(generated.contains("@Override"));
-    Assert.assertTrue(generated.contains("new Function1<Integer, String>"));
   }
 
   @Test

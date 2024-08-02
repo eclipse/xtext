@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.junit.Test
-import org.eclipse.xtext.util.JavaVersion
-import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.junit.Test
 
 /**
  * Tests for <a href="https://github.com/eclipse/xtext-xtend/issues/484">https://github.com/eclipse/xtext-xtend/issues/484</a>
@@ -22,9 +21,6 @@ import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvi
 class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 	
 	@Test def void testDispatchWithOverrideJava6HasAnnotation() {
-		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.javaSourceVersion = JavaVersion.JAVA6
-
 		assertCompilesTo(
 			'''
 			class Something extends AbstractSomething {
@@ -64,9 +60,6 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testDispatchWithOverrideJava5HasNoAnnotation() {
-		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.javaSourceVersion = JavaVersion.JAVA5
-
 		assertCompilesTo(
 			'''
 			class Something extends AbstractSomething {
@@ -83,9 +76,11 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Something extends AbstractSomething {
+			  @Override
 			  protected void _m(final String x) {
 			  }
 			
+			  @Override
 			  public void m(final Object x) {
 			    if (x instanceof Integer) {
 			      _m((Integer)x);

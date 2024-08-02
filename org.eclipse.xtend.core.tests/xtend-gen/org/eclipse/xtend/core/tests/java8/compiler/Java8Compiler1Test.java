@@ -9,10 +9,8 @@
 package org.eclipse.xtend.core.tests.java8.compiler;
 
 import java.util.Collections;
-import org.eclipse.xtend.core.tests.compiler.CompilerTest;
-import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
+import org.eclipse.xtend.core.tests.compiler.CompilerTestBase;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
@@ -20,9 +18,8 @@ import org.junit.Test;
 /**
  * @author Miro Spoenemann - Initial contribution and API
  */
-@InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class Java8Compiler1Test extends CompilerTest {
+public class Java8Compiler1Test extends CompilerTestBase {
   @Test
   public void testJava8Reduce() {
     try {

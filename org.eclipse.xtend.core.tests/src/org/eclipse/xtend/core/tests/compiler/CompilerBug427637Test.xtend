@@ -16,7 +16,7 @@ import org.junit.Test
 class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	
 	@Test def void testBug_427637_01() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -26,16 +26,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			      }
+			    final Procedure1<V> _function = (V it) -> {
 			    };
 			    this.forEach2(list, _function);
 			  }
@@ -47,7 +45,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_01_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -56,16 +54,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			      }
+			    final Consumer<V> _function = (V it) -> {
 			    };
 			    list.forEach(_function);
 			  }
@@ -74,7 +70,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_02() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -84,16 +80,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			      }
+			    final Procedure1<V> _function = (V it) -> {
 			    };
 			    this.<V>forEach2(list, _function);
 			  }
@@ -105,7 +99,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_02_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -114,16 +108,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			      }
+			    final Consumer<V> _function = (V it) -> {
 			    };
 			    list.forEach(_function);
 			  }
@@ -132,7 +124,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_03() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -142,16 +134,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			      }
+			    final Procedure1<Object> _function = (Object it) -> {
 			    };
 			    this.forEach2(list, _function);
 			  }
@@ -163,7 +153,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_03_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -172,16 +162,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Consumer<Object> _function = new Consumer<Object>() {
-			      public void accept(final Object it) {
-			      }
+			    final Consumer<Object> _function = (Object it) -> {
 			    };
 			    list.forEach(_function);
 			  }
@@ -190,7 +178,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_04() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -200,16 +188,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			      }
+			    final Procedure1<V> _function = (V it) -> {
 			    };
 			    this.forEach2(list.subList(1, 1), _function);
 			  }
@@ -221,7 +207,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_04_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -230,16 +216,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			      }
+			    final Consumer<V> _function = (V it) -> {
 			    };
 			    list.subList(1, 1).forEach(_function);
 			  }
@@ -248,7 +232,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_05() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -258,16 +242,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			      }
+			    final Procedure1<V> _function = (V it) -> {
 			    };
 			    this.<V>forEach2(list.subList(1, 1), _function);
 			  }
@@ -279,7 +261,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_05_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -288,16 +270,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			      }
+			    final Consumer<V> _function = (V it) -> {
 			    };
 			    list.subList(1, 1).forEach(_function);
 			  }
@@ -306,7 +286,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_06() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -316,16 +296,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			      }
+			    final Procedure1<Object> _function = (Object it) -> {
 			    };
 			    this.forEach2(list.subList(1, 1), _function);
 			  }
@@ -337,7 +315,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_06_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -346,16 +324,14 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Consumer<Object> _function = new Consumer<Object>() {
-			      public void accept(final Object it) {
-			      }
+			    final Consumer<Object> _function = (Object it) -> {
 			    };
 			    list.subList(1, 1).forEach(_function);
 			  }
@@ -364,7 +340,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_07() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -375,17 +351,15 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			        it.toString();
-			      }
+			    final Procedure1<V> _function = (V it) -> {
+			      it.toString();
 			    };
 			    this.forEach2(list.subList(1, 1), _function);
 			  }
@@ -397,7 +371,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_07_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -407,17 +381,15 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			        it.toString();
-			      }
+			    final Consumer<V> _function = (V it) -> {
+			      it.toString();
 			    };
 			    list.subList(1, 1).forEach(_function);
 			  }
@@ -426,7 +398,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_08() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -437,17 +409,15 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			        it.toString();
-			      }
+			    final Procedure1<V> _function = (V it) -> {
+			      it.toString();
 			    };
 			    this.<V>forEach2(list.subList(1, 1), _function);
 			  }
@@ -459,7 +429,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_08_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -469,17 +439,15 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			        it.toString();
-			      }
+			    final Consumer<V> _function = (V it) -> {
+			      it.toString();
 			    };
 			    list.subList(1, 1).forEach(_function);
 			  }
@@ -488,7 +456,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_09() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -499,17 +467,15 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			        it.toString();
-			      }
+			    final Procedure1<Object> _function = (Object it) -> {
+			      it.toString();
 			    };
 			    this.forEach2(list.subList(1, 1), _function);
 			  }
@@ -521,7 +487,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_09_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -531,17 +497,15 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Consumer<Object> _function = new Consumer<Object>() {
-			      public void accept(final Object it) {
-			        it.toString();
-			      }
+			    final Consumer<Object> _function = (Object it) -> {
+			      it.toString();
 			    };
 			    list.subList(1, 1).forEach(_function);
 			  }
@@ -550,7 +514,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_10() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -562,7 +526,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 				def <T> void forEach2(Iterable<T> iterable, (T)=>void procedure) {}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
@@ -570,10 +534,8 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
 			    final List<V> target = null;
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
-			        target.add(it);
-			      }
+			    final Procedure1<V> _function = (V it) -> {
+			      target.add(it);
 			    };
 			    this.forEach2(list, _function);
 			  }
@@ -585,7 +547,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_10_b() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -596,7 +558,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.List;
 			import java.util.function.Consumer;
 			
@@ -604,10 +566,8 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
 			    final List<V> target = null;
-			    final Consumer<V> _function = new Consumer<V>() {
-			      public void accept(final V it) {
-			        target.add(it);
-			      }
+			    final Consumer<V> _function = (V it) -> {
+			      target.add(it);
 			    };
 			    list.forEach(_function);
 			  }
@@ -616,7 +576,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_11() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class C {
@@ -630,7 +590,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import com.google.common.collect.Iterables;
 			import java.util.ArrayList;
 			import java.util.List;
@@ -641,19 +601,17 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public <T extends Object> void m(final List<? extends T> list) {
 			    final List<T> target = null;
-			    final Consumer<T> _function = new Consumer<T>() {
-			      public void accept(final T it) {
-			        List<T> _subList = target.subList(0, 1);
-			        _subList.add(it);
-			        List<T> _subList_1 = target.subList(0, 1);
-			        _subList_1.remove(it);
-			        List<T> _subList_2 = target.subList(0, 1);
-			        ArrayList<T> _newArrayList = CollectionLiterals.<T>newArrayList(it);
-			        Iterables.<T>addAll(_subList_2, _newArrayList);
-			        List<T> _subList_3 = target.subList(0, 1);
-			        ArrayList<T> _newArrayList_1 = CollectionLiterals.<T>newArrayList(it);
-			        Iterables.removeAll(_subList_3, _newArrayList_1);
-			      }
+			    final Consumer<T> _function = (T it) -> {
+			      List<T> _subList = target.subList(0, 1);
+			      _subList.add(it);
+			      List<T> _subList_1 = target.subList(0, 1);
+			      _subList_1.remove(it);
+			      List<T> _subList_2 = target.subList(0, 1);
+			      ArrayList<T> _newArrayList = CollectionLiterals.<T>newArrayList(it);
+			      Iterables.<T>addAll(_subList_2, _newArrayList);
+			      List<T> _subList_3 = target.subList(0, 1);
+			      ArrayList<T> _newArrayList_1 = CollectionLiterals.<T>newArrayList(it);
+			      Iterables.removeAll(_subList_3, _newArrayList_1);
 			    };
 			    list.subList(0, 1).forEach(_function);
 			  }
@@ -662,7 +620,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_12() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class Listener<T extends Node & XActivatable> implements ListChangeListener<T> {
@@ -672,12 +630,12 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				override onChanged(Change<? extends T> change) {
 					while(change.next) {
 						if(change.wasAdded)
-							change.addedSubList.forEach [ T it | // Xtend bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=427637
+							change.addedSubList.forEach [ T it |
 								layer.children += it
 								it.activate()
 							]
 						if(change.wasRemoved) 
-							change.removed.forEach [ T it | // Xtend bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=427637
+							change.removed.forEach [ T it |
 								layer.children -= it
 							]
 					}
@@ -702,34 +660,31 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				def boolean wasAdded()
 				def boolean wasRemoved()
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class Listener<T extends Node & XActivatable> implements ListChangeListener<T> {
 			  private Group layer;
 			
+			  @Override
 			  public void onChanged(final Change<? extends T> change) {
 			    while (change.next()) {
 			      {
 			        boolean _wasAdded = change.wasAdded();
 			        if (_wasAdded) {
-			          final Consumer<T> _function = new Consumer<T>() {
-			            public void accept(final T it) {
-			              ObservableList<Node> _children = Listener.this.layer.getChildren();
-			              _children.add(it);
-			              it.activate();
-			            }
+			          final Consumer<T> _function = (T it) -> {
+			            ObservableList<Node> _children = this.layer.getChildren();
+			            _children.add(it);
+			            it.activate();
 			          };
 			          change.getAddedSubList().forEach(_function);
 			        }
 			        boolean _wasRemoved = change.wasRemoved();
 			        if (_wasRemoved) {
-			          final Consumer<T> _function_1 = new Consumer<T>() {
-			            public void accept(final T it) {
-			              ObservableList<Node> _children = Listener.this.layer.getChildren();
-			              _children.remove(it);
-			            }
+			          final Consumer<T> _function_1 = (T it) -> {
+			            ObservableList<Node> _children = this.layer.getChildren();
+			            _children.remove(it);
 			          };
 			          change.getRemoved().forEach(_function_1);
 			        }
@@ -741,7 +696,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_13() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class Listener<T extends Node & XActivatable> implements ListChangeListener<T> {
@@ -781,34 +736,31 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				def boolean wasAdded()
 				def boolean wasRemoved()
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class Listener<T extends Node & XActivatable> implements ListChangeListener<T> {
 			  private Group layer;
 			
+			  @Override
 			  public void onChanged(final Change<? extends T> change) {
 			    while (change.next()) {
 			      {
 			        boolean _wasAdded = change.wasAdded();
 			        if (_wasAdded) {
-			          final Consumer<T> _function = new Consumer<T>() {
-			            public void accept(final T it) {
-			              ObservableList<Node> _children = Listener.this.layer.getChildren();
-			              _children.add(it);
-			              it.activate();
-			            }
+			          final Consumer<T> _function = (T it) -> {
+			            ObservableList<Node> _children = this.layer.getChildren();
+			            _children.add(it);
+			            it.activate();
 			          };
 			          change.getAddedSubList().forEach(_function);
 			        }
 			        boolean _wasRemoved = change.wasRemoved();
 			        if (_wasRemoved) {
-			          final Consumer<T> _function_1 = new Consumer<T>() {
-			            public void accept(final T it) {
-			              ObservableList<Node> _children = Listener.this.layer.getChildren();
-			              _children.remove(it);
-			            }
+			          final Consumer<T> _function_1 = (T it) -> {
+			            ObservableList<Node> _children = this.layer.getChildren();
+			            _children.remove(it);
 			          };
 			          change.getRemoved().forEach(_function_1);
 			        }
@@ -820,7 +772,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug_427637_14() {
-		assertCompilesTo('''
+		'''
 			import java.util.List
 			
 			class Listener { // implements ListChangeListener<T> {
@@ -851,7 +803,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				def boolean wasAdded()
 				def boolean wasRemoved()
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
@@ -859,11 +811,9 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  private Group layer;
 			
 			  public <T extends Object> void onChanged(final Change<? extends T> change) {
-			    final Procedure1<T> _function = new Procedure1<T>() {
-			      public void apply(final T it) {
-			        ObservableList<Object> _children = Listener.this.layer.getChildren();
-			        _children.add(it);
-			      }
+			    final Procedure1<T> _function = (T it) -> {
+			      ObservableList<Object> _children = this.layer.getChildren();
+			      _children.add(it);
 			    };
 			    this.forEach2(change.getAddedSubList(), _function);
 			  }
@@ -1118,7 +1068,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 					}
 				}
 			}
-		''', '''
+		''','''
 			package org.eclipse.xtext.xbase.formatting;
 			
 			import com.google.common.collect.Iterables;
@@ -1173,6 +1123,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			      this.decreaseIndentationChange = (this.decreaseIndentationChange - 1);
 			    }
 			
+			    @Override
 			    public String toString() {
 			      return new ToStringHelper().toString(this);
 			    }
@@ -1193,87 +1144,79 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataFactory.FormattingDataInit it) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        Integer _elvis = null;
-			        if (it.newLines != null) {
-			          _elvis = it.newLines;
-			        } else {
-			          _elvis = Integer.valueOf(0);
-			        }
-			        final int newLines2 = (int) _elvis;
-			        if (((Objects.equals(it.space, null) && Objects.equals(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equals(it.space, ""))))) {
-			          return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
-			        } else {
-			          return FormattingDataFactory.this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
-			        }
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      Integer _elvis = null;
+			      if (it.newLines != null) {
+			        _elvis = it.newLines;
+			      } else {
+			        _elvis = Integer.valueOf(0);
+			      }
+			      final int newLines2 = (int) _elvis;
+			      if (((Objects.equals(it.space, null) && Objects.equals(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equals(it.space, ""))))) {
+			        return this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
+			      } else {
+			        return this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			      }
 			    };
 			    return _function;
 			  }
 			
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final BlankLineKey key, final FormattingDataFactory.FormattingDataInit it) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        Iterable<FormattingData> _xblockexpression = null;
-			        {
-			          final int blankline = doc.getCfg().get(key);
-			          final int preserve = doc.getCfg().get(XbaseFormatterPreferenceKeys.preserveBlankLines);
-			          final int min = (blankline + 1);
-			          final int max = Math.max((preserve + 1), min);
-			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
-			        }
-			        return _xblockexpression;
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      Iterable<FormattingData> _xblockexpression = null;
+			      {
+			        final int blankline = doc.getCfg().get(key);
+			        final int preserve = doc.getCfg().get(XbaseFormatterPreferenceKeys.preserveBlankLines);
+			        final int min = (blankline + 1);
+			        final int max = Math.max((preserve + 1), min);
+			        _xblockexpression = this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			      }
+			      return _xblockexpression;
 			    };
 			    return _function;
 			  }
 			
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineOrPreserveKey key, final FormattingDataFactory.FormattingDataInit it) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        Iterable<FormattingData> _xblockexpression = null;
-			        {
-			          final boolean newLine = doc.getCfg().get(key);
-			          final boolean preserve = doc.getCfg().get(XbaseFormatterPreferenceKeys.preserveNewLines);
-			          int _xifexpression = (int) 0;
-			          if (newLine) {
-			            _xifexpression = 1;
-			          } else {
-			            _xifexpression = 0;
-			          }
-			          int _xifexpression_1 = (int) 0;
-			          if ((preserve || newLine)) {
-			            _xifexpression_1 = 1;
-			          } else {
-			            _xifexpression_1 = 0;
-			          }
-			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, 
-			            doc.isDebugConflicts());
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      Iterable<FormattingData> _xblockexpression = null;
+			      {
+			        final boolean newLine = doc.getCfg().get(key);
+			        final boolean preserve = doc.getCfg().get(XbaseFormatterPreferenceKeys.preserveNewLines);
+			        int _xifexpression = (int) 0;
+			        if (newLine) {
+			          _xifexpression = 1;
+			        } else {
+			          _xifexpression = 0;
 			        }
-			        return _xblockexpression;
+			        int _xifexpression_1 = (int) 0;
+			        if ((preserve || newLine)) {
+			          _xifexpression_1 = 1;
+			        } else {
+			          _xifexpression_1 = 0;
+			        }
+			        _xblockexpression = this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, 
+			          doc.isDebugConflicts());
 			      }
+			      return _xblockexpression;
 			    };
 			    return _function;
 			  }
 			
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineKey key, final FormattingDataFactory.FormattingDataInit it) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        Iterable<FormattingData> _xblockexpression = null;
-			        {
-			          final boolean newLine = doc.getCfg().get(key);
-			          int _xifexpression = (int) 0;
-			          if (newLine) {
-			            _xifexpression = 1;
-			          } else {
-			            _xifexpression = 0;
-			          }
-			          final int minmax = _xifexpression;
-			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      Iterable<FormattingData> _xblockexpression = null;
+			      {
+			        final boolean newLine = doc.getCfg().get(key);
+			        int _xifexpression = (int) 0;
+			        if (newLine) {
+			          _xifexpression = 1;
+			        } else {
+			          _xifexpression = 0;
 			        }
-			        return _xblockexpression;
+			        final int minmax = _xifexpression;
+			        _xblockexpression = this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			      }
+			      return _xblockexpression;
 			    };
 			    return _function;
 			  }
@@ -1285,21 +1228,19 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataFactory.FormattingDataInit it) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        Iterable<FormattingData> _xblockexpression = null;
-			        {
-			          final boolean space = doc.getCfg().get(key);
-			          String _xifexpression = null;
-			          if (space) {
-			            _xifexpression = " ";
-			          } else {
-			            _xifexpression = "";
-			          }
-			          _xblockexpression = FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      Iterable<FormattingData> _xblockexpression = null;
+			      {
+			        final boolean space = doc.getCfg().get(key);
+			        String _xifexpression = null;
+			        if (space) {
+			          _xifexpression = " ";
+			        } else {
+			          _xifexpression = "";
 			        }
-			        return _xblockexpression;
+			        _xblockexpression = this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			      }
+			      return _xblockexpression;
 			    };
 			    return _function;
 			  }
@@ -1567,87 +1508,83 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        ArrayList<FormattingData> _xblockexpression = null;
-			        {
-			          final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-			          boolean _notEquals = (!Objects.equals(node, null));
-			          if (_notEquals) {
-			            Iterable<FormattingData> _elvis = null;
-			            Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node), init);
-			            Iterable<FormattingData> _apply = null;
-			            if (_newFormattingData!=null) {
-			              _apply=_newFormattingData.apply(doc);
-			            }
-			            if (_apply != null) {
-			              _elvis = _apply;
-			            } else {
-			              List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
-			              _elvis = _emptyList;
-			            }
-			            Iterables.<FormattingData>addAll(result, _elvis);
-			            Iterable<FormattingData> _elvis_1 = null;
-			            Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = FormattingDataFactory.this.newFormattingData(FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsAfter(node), init);
-			            Iterable<FormattingData> _apply_1 = null;
-			            if (_newFormattingData_1!=null) {
-			              _apply_1=_newFormattingData_1.apply(doc);
-			            }
-			            if (_apply_1 != null) {
-			              _elvis_1 = _apply_1;
-			            } else {
-			              List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
-			              _elvis_1 = _emptyList_1;
-			            }
-			            Iterables.<FormattingData>addAll(result, _elvis_1);
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      ArrayList<FormattingData> _xblockexpression = null;
+			      {
+			        final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
+			        boolean _notEquals = (!Objects.equals(node, null));
+			        if (_notEquals) {
+			          Iterable<FormattingData> _elvis = null;
+			          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsBefore(node), init);
+			          Iterable<FormattingData> _apply = null;
+			          if (_newFormattingData!=null) {
+			            _apply=_newFormattingData.apply(doc);
 			          }
-			          _xblockexpression = result;
+			          if (_apply != null) {
+			            _elvis = _apply;
+			          } else {
+			            List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
+			            _elvis = _emptyList;
+			          }
+			          Iterables.<FormattingData>addAll(result, _elvis);
+			          Iterable<FormattingData> _elvis_1 = null;
+			          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsAfter(node), init);
+			          Iterable<FormattingData> _apply_1 = null;
+			          if (_newFormattingData_1!=null) {
+			            _apply_1=_newFormattingData_1.apply(doc);
+			          }
+			          if (_apply_1 != null) {
+			            _elvis_1 = _apply_1;
+			          } else {
+			            List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
+			            _elvis_1 = _emptyList_1;
+			          }
+			          Iterables.<FormattingData>addAll(result, _elvis_1);
 			        }
-			        return _xblockexpression;
+			        _xblockexpression = result;
 			      }
+			      return _xblockexpression;
 			    };
 			    return _function;
 			  }
 			
 			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> before, final Procedure1<? super FormattingDataFactory.FormattingDataInit> after) {
-			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
-			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
-			        ArrayList<FormattingData> _xblockexpression = null;
-			        {
-			          final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-			          boolean _notEquals = (!Objects.equals(node, null));
-			          if (_notEquals) {
-			            Iterable<FormattingData> _elvis = null;
-			            Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node), before);
-			            Iterable<FormattingData> _apply = null;
-			            if (_newFormattingData!=null) {
-			              _apply=_newFormattingData.apply(doc);
-			            }
-			            if (_apply != null) {
-			              _elvis = _apply;
-			            } else {
-			              List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
-			              _elvis = _emptyList;
-			            }
-			            Iterables.<FormattingData>addAll(result, _elvis);
-			            Iterable<FormattingData> _elvis_1 = null;
-			            Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = FormattingDataFactory.this.newFormattingData(FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsAfter(node), after);
-			            Iterable<FormattingData> _apply_1 = null;
-			            if (_newFormattingData_1!=null) {
-			              _apply_1=_newFormattingData_1.apply(doc);
-			            }
-			            if (_apply_1 != null) {
-			              _elvis_1 = _apply_1;
-			            } else {
-			              List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
-			              _elvis_1 = _emptyList_1;
-			            }
-			            Iterables.<FormattingData>addAll(result, _elvis_1);
+			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
+			      ArrayList<FormattingData> _xblockexpression = null;
+			      {
+			        final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
+			        boolean _notEquals = (!Objects.equals(node, null));
+			        if (_notEquals) {
+			          Iterable<FormattingData> _elvis = null;
+			          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsBefore(node), before);
+			          Iterable<FormattingData> _apply = null;
+			          if (_newFormattingData!=null) {
+			            _apply=_newFormattingData.apply(doc);
 			          }
-			          _xblockexpression = result;
+			          if (_apply != null) {
+			            _elvis = _apply;
+			          } else {
+			            List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
+			            _elvis = _emptyList;
+			          }
+			          Iterables.<FormattingData>addAll(result, _elvis);
+			          Iterable<FormattingData> _elvis_1 = null;
+			          Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData_1 = this.newFormattingData(this._hiddenLeafAccess.getHiddenLeafsAfter(node), after);
+			          Iterable<FormattingData> _apply_1 = null;
+			          if (_newFormattingData_1!=null) {
+			            _apply_1=_newFormattingData_1.apply(doc);
+			          }
+			          if (_apply_1 != null) {
+			            _elvis_1 = _apply_1;
+			          } else {
+			            List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
+			            _elvis_1 = _emptyList_1;
+			          }
+			          Iterables.<FormattingData>addAll(result, _elvis_1);
 			        }
-			        return _xblockexpression;
+			        _xblockexpression = result;
 			      }
+			      return _xblockexpression;
 			    };
 			    return _function;
 			  }
@@ -1673,4 +1610,5 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
 }

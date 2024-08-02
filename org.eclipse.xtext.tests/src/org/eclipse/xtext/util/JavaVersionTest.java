@@ -43,11 +43,11 @@ public class JavaVersionTest {
 		assertEquals(JavaVersion.JAVA9, JavaVersion.fromQualifier("1.9"));
 		assertEquals(JavaVersion.JAVA8, JavaVersion.fromQualifier("8"));
 		assertEquals(JavaVersion.JAVA8, JavaVersion.fromQualifier("1.8"));
-		assertEquals(JavaVersion.JAVA7, JavaVersion.fromQualifier("7"));
-		assertEquals(JavaVersion.JAVA7, JavaVersion.fromQualifier("1.7"));
-		assertEquals(JavaVersion.JAVA6, JavaVersion.fromQualifier("6"));
-		assertEquals(JavaVersion.JAVA6, JavaVersion.fromQualifier("1.6"));
-		assertEquals(JavaVersion.JAVA5, JavaVersion.fromQualifier("1.5"));
+		assertNull(JavaVersion.fromQualifier("7"));
+		assertNull(JavaVersion.fromQualifier("1.7"));
+		assertNull(JavaVersion.fromQualifier("6"));
+		assertNull(JavaVersion.fromQualifier("1.6"));
+		assertNull(JavaVersion.fromQualifier("1.5"));
 		assertNull(JavaVersion.fromQualifier("1.4"));
 		assertNull(JavaVersion.fromQualifier("5"));
 		assertNull(JavaVersion.fromQualifier(null));

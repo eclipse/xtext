@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -246,11 +246,9 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean m(final boolean b) {
-			    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-			      public Boolean apply(final String s) {
-			        while (true) {
-			          return Boolean.valueOf(false);
-			        }
+			    final Function1<String, Boolean> _function = (String s) -> {
+			      while (true) {
+			        return Boolean.valueOf(false);
 			      }
 			    };
 			    final Function1<String, Boolean> func = _function;
@@ -278,11 +276,9 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean m(final boolean b) {
-			    final Predicate<String> _function = new Predicate<String>() {
-			      public boolean apply(final String it) {
-			        while (true) {
-			          return false;
-			        }
+			    final Predicate<String> _function = (String it) -> {
+			      while (true) {
+			        return false;
 			      }
 			    };
 			    final Predicate<String> func = _function;
@@ -315,21 +311,19 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<String> m(final Iterable<String> iter) {
-			    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-			      public Boolean apply(final String it) {
-			        int _length = it.length();
-			        boolean _lessThan = (_length < 2);
-			        if (_lessThan) {
-			          return Boolean.valueOf(true);
-			        } else {
-			          int _length_1 = it.length();
-			          boolean _greaterThan = (_length_1 > 2);
-			          if (_greaterThan) {
-			            return Boolean.valueOf(false);
-			          }
+			    final Function1<String, Boolean> _function = (String it) -> {
+			      int _length = it.length();
+			      boolean _lessThan = (_length < 2);
+			      if (_lessThan) {
+			        return Boolean.valueOf(true);
+			      } else {
+			        int _length_1 = it.length();
+			        boolean _greaterThan = (_length_1 > 2);
+			        if (_greaterThan) {
+			          return Boolean.valueOf(false);
 			        }
-			        return null;
 			      }
+			      return null;
 			    };
 			    return IterableExtensions.<String>filter(iter, _function);
 			  }

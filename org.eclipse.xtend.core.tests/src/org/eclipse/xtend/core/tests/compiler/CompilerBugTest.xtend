@@ -499,10 +499,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			          }
 			      };
 			    } else {
-			      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-			        public Boolean apply(final String s) {
-			          return Boolean.valueOf(true);
-			        }
+			      final Function1<String, Boolean> _function = (String s) -> {
+			        return Boolean.valueOf(true);
 			      };
 			      return _function;
 			    }
@@ -1061,10 +1059,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void build(final Factory<String> f) {
-			    final Procedure1<T> _function = new Procedure1<T>() {
-			      public void apply(final T it) {
-			        Factory.this.<String, Factory<String>>buildChild(f);
-			      }
+			    final Procedure1<T> _function = (T it) -> {
+			      this.<String, Factory<String>>buildChild(f);
 			    };
 			    this.fill(_function);
 			  }
@@ -1089,10 +1085,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public C() {
-			    final Function1<Integer, String> _function = new Function1<Integer, String>() {
-			      public String apply(final Integer it) {
-			        return it.toString();
-			      }
+			    final Function1<Integer, String> _function = (Integer it) -> {
+			      return it.toString();
 			    };
 			    ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _function).toString();
 			  }
@@ -1130,14 +1124,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private ErrorSafeExtensions _errorSafeExtensions;
 			
 			  public void m(final Iterable<JvmTypeReference> refs, final ITreeAppendable it) {
-			    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-			      public void apply(final LoopParams it_1) {
-			      }
+			    final Procedure1<LoopParams> _function = (LoopParams it_1) -> {
 			    };
-			    final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
-			      public void apply(final JvmTypeReference it_1, final ITreeAppendable app) {
-			        app.trace(it_1).append(it_1.getType());
-			      }
+			    final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = (JvmTypeReference it_1, ITreeAppendable app) -> {
+			      app.trace(it_1).append(it_1.getType());
 			    };
 			    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(it, refs, _function, _function_1);
 			  }
@@ -1279,12 +1269,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public StringBuilder m() {
 			    StringBuilder _xblockexpression = null;
 			    {
-			      final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			        public void apply(final StringBuilder it) {
-			          List<CharSequence> _children = C.this.getChildren();
-			          _children.add(it);
-			          it.append("");
-			        }
+			      final Procedure1<StringBuilder> _function = (StringBuilder it) -> {
+			        List<CharSequence> _children = this.getChildren();
+			        _children.add(it);
+			        it.append("");
 			      };
 			      final StringBuilder result = ObjectExtensions.<StringBuilder>operator_doubleArrow(((StringBuilder) null), _function);
 			      _xblockexpression = result;
@@ -1799,15 +1787,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<?> m(final Iterable<String> iterable) {
-			    final Function1<String, Object> _function = new Function1<String, Object>() {
-			      public Object apply(final String it) {
-			        return null;
-			      }
+			    final Function1<String, Object> _function = (String it) -> {
+			      return null;
 			    };
-			    final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {
-			      public Integer apply(final Object it) {
-			        return Integer.valueOf(it.hashCode());
-			      }
+			    final Function1<Object, Integer> _function_1 = (Object it) -> {
+			      return Integer.valueOf(it.hashCode());
 			    };
 			    return IterableExtensions.sortBy(this.<String, Object>flatMap(iterable, _function), _function_1);
 			  }
@@ -1837,15 +1821,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final Iterable<String> iterable) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it;
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it;
 			    };
-			    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
-			      public Integer apply(final String it) {
-			        return Integer.valueOf(it.hashCode());
-			      }
+			    final Function1<String, Integer> _function_1 = (String it) -> {
+			      return Integer.valueOf(it.hashCode());
 			    };
 			    IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
@@ -1875,15 +1855,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final Iterable<String> iterable) {
-			    final Function1<String, String> _function = new Function1<String, String>() {
-			      public String apply(final String it) {
-			        return it.toUpperCase();
-			      }
+			    final Function1<String, String> _function = (String it) -> {
+			      return it.toUpperCase();
 			    };
-			    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
-			      public Integer apply(final String it) {
-			        return Integer.valueOf(it.length());
-			      }
+			    final Function1<String, Integer> _function_1 = (String it) -> {
+			      return Integer.valueOf(it.length());
 			    };
 			    IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
@@ -1912,11 +1888,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class MyMap<K extends Object, V extends Object> extends HashMap<K, V> {
+			  @Override
 			  public void putAll(final Map<? extends K, ? extends V> t) {
-			    final Consumer<Map.Entry<? extends K, ? extends V>> _function = new Consumer<Map.Entry<? extends K, ? extends V>>() {
-			      public void accept(final Map.Entry<? extends K, ? extends V> it) {
-			        MyMap.this.put(it.getKey(), it.getValue());
-			      }
+			    final Consumer<Map.Entry<? extends K, ? extends V>> _function = (Map.Entry<? extends K, ? extends V> it) -> {
+			      this.put(it.getKey(), it.getValue());
 			    };
 			    t.entrySet().forEach(_function);
 			  }
@@ -1962,6 +1937,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 			  private final T _weight;
 			
+			  @Override
 			  public int compareTo(final Weight w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
@@ -2030,6 +2006,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
 			  private final T _weight;
 			
+			  @Override
 			  public int compareTo(final Weight<T> w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
@@ -2098,6 +2075,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 			  private final T _weight;
 			
+			  @Override
 			  public int compareTo(final Weight<T> w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
@@ -2166,6 +2144,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Weight<T extends Comparable> implements Comparable<Weight> {
 			  private final T _weight;
 			
+			  @Override
 			  public int compareTo(final Weight w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
@@ -2281,26 +2260,22 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Objects;
-			
 			@SuppressWarnings("all")
 			public class C {
 			  public String m() {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
-			    boolean _matched = false;
-			    if (Objects.equals(_switchValue, "b")) {
-			      _matched=true;
-			      _switchResult = "a";
-			    }
-			    if (!_matched) {
-			      if (Objects.equals(_switchValue, "c")) {
-			        _matched=true;
-			        if ((1 == 2)) {
-			          return "b";
-			        } else {
-			          return "c";
-			        }
+			    if (_switchValue != null) {
+			      switch (_switchValue) {
+			        case "b":
+			          _switchResult = "a";
+			          break;
+			        case "c":
+			          if ((1 == 2)) {
+			            return "b";
+			          } else {
+			            return "c";
+			          }
 			      }
 			    }
 			    return _switchResult;
@@ -2326,26 +2301,22 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Objects;
-			
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final boolean b) {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
-			    boolean _matched = false;
-			    if (Objects.equals(_switchValue, "b")) {
-			      _matched=true;
-			      _switchResult = "a";
-			    }
-			    if (!_matched) {
-			      if (Objects.equals(_switchValue, "c")) {
-			        _matched=true;
-			        if (b) {
-			          return "b";
-			        } else {
-			          return "c";
-			        }
+			    if (_switchValue != null) {
+			      switch (_switchValue) {
+			        case "b":
+			          _switchResult = "a";
+			          break;
+			        case "c":
+			          if (b) {
+			            return "b";
+			          } else {
+			            return "c";
+			          }
 			      }
 			    }
 			    return _switchResult;
@@ -2590,14 +2561,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
-
+			
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  public T m() {
-			    final Function1<T, T> _function = new Function1<T, T>() {
-			      public T apply(final T x) {
-			        return x;
-			      }
+			    final Function1<T, T> _function = (T x) -> {
+			      return x;
 			    };
 			    return _function.apply(null);
 			  }
@@ -2618,10 +2587,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <T extends Object> T m() {
-			    final Function1<T, T> _function = new Function1<T, T>() {
-			      public T apply(final T x) {
-			        return x;
-			      }
+			    final Function1<T, T> _function = (T x) -> {
+			      return x;
 			    };
 			    return _function.apply(null);
 			  }
@@ -2645,16 +2612,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public abstract class L<E extends Object> extends AbstractList<E> {
 			  protected L() {
 			    Object _object = new Object();
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			        boolean _and = false;
-			        boolean _add = L.this.add(((E) it));
-			        if (!_add) {
-			          _and = false;
-			        } else {
-			          boolean _remove = L.this.remove(it);
-			          _and = _remove;
-			        }
+			    final Procedure1<Object> _function = (Object it) -> {
+			      boolean _and = false;
+			      boolean _add = this.add(((E) it));
+			      if (!_add) {
+			        _and = false;
+			      } else {
+			        boolean _remove = this.remove(it);
+			        _and = _remove;
 			      }
 			    };
 			    ObjectExtensions.<Object>operator_doubleArrow(_object, _function);
@@ -2678,16 +2643,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class L<E extends Object> extends AbstractList<E> {
 			  protected L(final E e) {
-			    final Procedure1<E> _function = new Procedure1<E>() {
-			      public void apply(final E it) {
-			        boolean _and = false;
-			        boolean _add = L.this.add(it);
-			        if (!_add) {
-			          _and = false;
-			        } else {
-			          boolean _remove = L.this.remove(it);
-			          _and = _remove;
-			        }
+			    final Procedure1<E> _function = (E it) -> {
+			      boolean _and = false;
+			      boolean _add = this.add(it);
+			      if (!_add) {
+			        _and = false;
+			      } else {
+			        boolean _remove = this.remove(it);
+			        _and = _remove;
 			      }
 			    };
 			    ObjectExtensions.<E>operator_doubleArrow(e, _function);
@@ -3183,6 +3146,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class B extends A {
+			  @Override
 			  public void m(final Class<?>[] c) {
 			  }
 			}
@@ -3217,6 +3181,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class B extends A {
+			  @Override
 			  public void m(final Class<?>... c) {
 			  }
 			}
@@ -3716,16 +3681,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Object test() {
 			    Object _xblockexpression = null;
 			    {
-			      final Foo _function = new Foo() {
-			        public void foo(final Foo foo) {
-			          foo.foo(foo);
-			        }
+			      final Foo _function = (Foo foo) -> {
+			        foo.foo(foo);
 			      };
 			      this.bug(_function);
-			      final Bar _function_1 = new Bar() {
-			        public void bar(final Bar bar) {
-			          bar.bar(bar);
-			        }
+			      final Bar _function_1 = (Bar bar) -> {
+			        bar.bar(bar);
 			      };
 			      _xblockexpression = this.bug(_function_1);
 			    }

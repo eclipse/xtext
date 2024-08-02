@@ -29,13 +29,12 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 						override next() {
 							delegate.next
 						}
-						override remove() {}
 					}
 				}
 			}
 		'''.assertCompilesTo('''
 			import java.util.Iterator;
-			
+
 			@SuppressWarnings("all")
 			public class C {
 			  public C() {
@@ -43,25 +42,22 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			      Iterator<String> delegate;
 			    }
 			
-			    final Iterable<String> _function = new Iterable<String>() {
-			      public Iterator<String> iterator() {
-			        return null;
-			      }
+			    final Iterable<String> _function = () -> {
+			      return null;
 			    };
 			    final Iterable<String> iter = _function;
 			    new __C_1() {
 			      {
 			        delegate = iter.iterator();
 			      }
+			      @Override
 			      public boolean hasNext() {
 			        return this.delegate.hasNext();
 			      }
 			
+			      @Override
 			      public String next() {
 			        return this.delegate.next();
-			      }
-			
-			      public void remove() {
 			      }
 			    };
 			  }
@@ -83,7 +79,6 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 						override next() {
 							delegate.next
 						}
-						override remove() {}
 					}
 				}
 			}
@@ -99,25 +94,22 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			
 			    __C_1 _xblockexpression = null;
 			    {
-			      final Iterable<String> _function = new Iterable<String>() {
-			        public Iterator<String> iterator() {
-			          return null;
-			        }
+			      final Iterable<String> _function = () -> {
+			        return null;
 			      };
 			      final Iterable<String> iter = _function;
 			      _xblockexpression = new __C_1() {
 			        {
 			          delegate = iter.iterator();
 			        }
+			        @Override
 			        public boolean hasNext() {
 			          return this.delegate.hasNext();
 			        }
 			
+			        @Override
 			        public String next() {
 			          return this.delegate.next();
-			        }
-			
-			        public void remove() {
 			        }
 			      };
 			    }
@@ -157,24 +149,25 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			
 			    __C_1 _xblockexpression = null;
 			    {
-			      final Iterable<String> _function = new Iterable<String>() {
-			        public Iterator<String> iterator() {
-			          return null;
-			        }
+			      final Iterable<String> _function = () -> {
+			        return null;
 			      };
 			      final Iterable<String> iter = _function;
 			      _xblockexpression = new __C_1() {
 			        {
 			          delegate = iter.iterator();
 			        }
+			        @Override
 			        public boolean hasNext() {
 			          return this.delegate.hasNext();
 			        }
 			
+			        @Override
 			        public String next() {
 			          return this.delegate.next();
 			        }
 			
+			        @Override
 			        public void remove() {
 			        }
 			      };
@@ -213,24 +206,25 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			      Iterator<String> delegate;
 			    }
 			
-			    final Iterable<String> _function = new Iterable<String>() {
-			      public Iterator<String> iterator() {
-			        return null;
-			      }
+			    final Iterable<String> _function = () -> {
+			      return null;
 			    };
 			    final Iterable<String> iter = _function;
 			    new __C_1() {
 			      {
 			        delegate = iter.iterator();
 			      }
+			      @Override
 			      public boolean hasNext() {
 			        return this.delegate.hasNext();
 			      }
 			
+			      @Override
 			      public String next() {
 			        return this.delegate.next();
 			      }
 			
+			      @Override
 			      public void remove() {
 			      }
 			    };
@@ -264,6 +258,7 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private final Iterator<String> iterator = new Function0<Iterator<String>>() {
+			    @Override
 			    public Iterator<String> apply() {
 			      abstract class __C_1 implements Iterator<String> {
 			        Iterator<String> delegate;
@@ -271,24 +266,25 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			
 			      __C_1 _xblockexpression = null;
 			      {
-			        final Iterable<String> _function = new Iterable<String>() {
-			          public Iterator<String> iterator() {
-			            return null;
-			          }
+			        final Iterable<String> _function = () -> {
+			          return null;
 			        };
 			        final Iterable<String> iter = _function;
 			        _xblockexpression = new __C_1() {
 			          {
 			            delegate = iter.iterator();
 			          }
+			          @Override
 			          public boolean hasNext() {
 			            return this.delegate.hasNext();
 			          }
 			
+			          @Override
 			          public String next() {
 			            return this.delegate.next();
 			          }
 			
+			          @Override
 			          public void remove() {
 			          }
 			        };

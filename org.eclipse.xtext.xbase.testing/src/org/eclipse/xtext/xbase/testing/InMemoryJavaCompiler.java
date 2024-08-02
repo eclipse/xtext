@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
@@ -45,6 +46,9 @@ import com.google.common.collect.Lists;
  * @since 2.9
  */
 public class InMemoryJavaCompiler {
+	
+	private static final Logger logger = Logger.getLogger(InMemoryJavaCompiler.class);
+	
 	private static class ClassLoaderBasedNameEnvironment implements INameEnvironment {
 		private final ClassLoader classLoader;
 
@@ -211,6 +215,8 @@ public class InMemoryJavaCompiler {
 	}
 
 	/**
+	 * Sets the Java version that this compiler works with. Defaults to Java8 and attempts to set older versions are ignored.
+	 * 
 	 * @since 2.11
 	 */
 	public long setJavaVersion(JavaVersion javaVersion) {
@@ -221,6 +227,10 @@ public class InMemoryJavaCompiler {
 	}
 
 	private long toClassFmt(JavaVersion version) {
+		if (JavaVersion.JAVA8.compareTo(version) > 0) {
+			logger.error("Ignored attempt to set JavaVersion lower than 8", new IllegalArgumentException(version.toString()));
+			version = JavaVersion.JAVA8;
+		}
 		return version.toJdtClassFileConstant();
 	}
 

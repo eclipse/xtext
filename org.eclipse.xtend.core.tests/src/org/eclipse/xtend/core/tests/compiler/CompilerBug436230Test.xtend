@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -37,10 +37,8 @@ class CompilerBug436230Test extends AbstractXtendCompilerTest {
 			  private final List<CharSequence> list = CollectionLiterals.<CharSequence>newArrayList();
 			
 			  public boolean foo(final List<?> source) {
-			    final Function1<Object, String> _function = new Function1<Object, String>() {
-			      public String apply(final Object it) {
-			        return "";
-			      }
+			    final Function1<Object, String> _function = (Object it) -> {
+			      return "";
 			    };
 			    List<String> _map = ListExtensions.map(source, _function);
 			    return Iterables.<CharSequence>addAll(this.list, _map);
@@ -73,10 +71,8 @@ class CompilerBug436230Test extends AbstractXtendCompilerTest {
 			    {
 			      final List<CharSequence> res = null;
 			      final Iterable<?> obj = null;
-			      final Function1<Object, String> _function = new Function1<Object, String>() {
-			        public String apply(final Object it) {
-			          return "";
-			        }
+			      final Function1<Object, String> _function = (Object it) -> {
+			        return "";
 			      };
 			      Iterable<String> _map = IterableExtensions.map(obj, _function);
 			      _xblockexpression = Iterables.<CharSequence>addAll(res, _map);
@@ -111,10 +107,8 @@ class CompilerBug436230Test extends AbstractXtendCompilerTest {
 			    {
 			      final List<? super CharSequence> res = null;
 			      final Iterable<?> obj = null;
-			      final Function1<Object, String> _function = new Function1<Object, String>() {
-			        public String apply(final Object it) {
-			          return "";
-			        }
+			      final Function1<Object, String> _function = (Object it) -> {
+			        return "";
 			      };
 			      Iterable<? extends CharSequence> _map = IterableExtensions.map(obj, _function);
 			      _xblockexpression = Iterables.addAll(res, _map);
@@ -145,10 +139,8 @@ class CompilerBug436230Test extends AbstractXtendCompilerTest {
 			    Iterable<String> _xblockexpression = null;
 			    {
 			      final Iterable<?> obj = null;
-			      final Function1<Object, String> _function = new Function1<Object, String>() {
-			        public String apply(final Object it) {
-			          return "";
-			        }
+			      final Function1<Object, String> _function = (Object it) -> {
+			        return "";
 			      };
 			      _xblockexpression = IterableExtensions.map(obj, _function);
 			    }

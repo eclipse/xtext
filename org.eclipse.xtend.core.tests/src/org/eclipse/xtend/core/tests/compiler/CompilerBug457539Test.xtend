@@ -21,31 +21,25 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			class C {
 				def m()	{
 					val list = new ArrayList
-					list.forEach2 [
+					list.forEach [
 						if (it instanceof String) list.add(it)
 					]
 				}
-				def <T> void forEach2(Iterable<T> it, (T)=>void f) {}
 			}
 		'''.assertCompilesTo('''
 			import java.util.ArrayList;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<Object> list = new ArrayList<Object>();
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			        if ((it instanceof String)) {
-			          list.add(it);
-			        }
+			    final Consumer<Object> _function = (Object it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
 			      }
 			    };
-			    this.<Object>forEach2(list, _function);
-			  }
-			
-			  public <T extends Object> void forEach2(final Iterable<T> it, final Procedure1<? super T> f) {
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -55,45 +49,27 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 		'''
 			class C {
 				def m()	{
-					val list = newIterable
-					list.forEach2 [
+					val list = newArrayList
+					list.forEach [
 						if (it instanceof String) list.add(it)
 					]
 				}
-				def static <T> MyIterable<T> newIterable(T... initial) {}
-				interface MyIterable<T> extends Iterable<T> {
-					def void forEach2((T)=>void f)
-					def void add(T t)
-					def T get()
-				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.ArrayList;
+			import java.util.function.Consumer;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
-			    void add(final T t);
-			
-			    T get();
-			  }
-			
 			  public void m() {
-			    final C.MyIterable<Object> list = C.<Object>newIterable();
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			        if ((it instanceof String)) {
-			          list.add(it);
-			        }
+			    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
+			    final Consumer<Object> _function = (Object it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
 			      }
 			    };
-			    list.forEach2(_function);
-			  }
-			
-			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
-			    return null;
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -104,37 +80,26 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			class C {
 				def m()	{
 					val list = newIterable
-					
-					list.forEach2 [
+					list.forEach [
 					]
 				}
 				def static <T extends CharSequence> MyIterable<T> newIterable(T... initial) {}
 				interface MyIterable<T extends CharSequence> extends Iterable<T> {
-					def void forEach2((T)=>void f)
-					def void add(T t)
-					def T get()
 				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
-			    void add(final T t);
-			
-			    T get();
 			  }
 			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
-			      public void apply(final CharSequence it) {
-			      }
+			    final Consumer<CharSequence> _function = (CharSequence it) -> {
 			    };
-			    list.forEach2(_function);
+			    list.forEach(_function);
 			  }
 			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
@@ -150,24 +115,21 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 				def m()	{
 					val list = newIterable
 					list.add('')
-					list.forEach2 [
+					list.forEach [
 					]
 				}
 				def static <T extends CharSequence> MyIterable<T> newIterable(T... initial) {}
 				interface MyIterable<T extends CharSequence> extends Iterable<T> {
-					def void forEach2((T)=>void f)
 					def void add(T t)
 					def T get()
 				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
 			    void add(final T t);
 			
 			    T get();
@@ -176,11 +138,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  public void m() {
 			    final C.MyIterable<String> list = C.<String>newIterable();
 			    list.add("");
-			    final Procedure1<String> _function = new Procedure1<String>() {
-			      public void apply(final String it) {
-			      }
+			    final Consumer<String> _function = (String it) -> {
 			    };
-			    list.forEach2(_function);
+			    list.forEach(_function);
 			  }
 			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
@@ -197,24 +157,21 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 					val list = newIterable
 					list.get.toString
 					list.add('')
-					list.forEach2 [
+					list.forEach [
 					]
 				}
 				def static <T extends CharSequence> MyIterable<T> newIterable(T... initial) {}
 				interface MyIterable<T extends CharSequence> extends Iterable<T> {
-					def void forEach2((T)=>void f)
 					def void add(T t)
 					def T get()
 				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
 			    void add(final T t);
 			
 			    T get();
@@ -224,11 +181,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    list.get().toString();
 			    list.add("");
-			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
-			      public void apply(final CharSequence it) {
-			      }
+			    final Consumer<CharSequence> _function = (CharSequence it) -> {
 			    };
-			    list.forEach2(_function);
+			    list.forEach(_function);
 			  }
 			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
@@ -244,25 +199,22 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 				def m()	{
 					val list = newIterable
 					list.get.toString
-					list.forEach2 [
+					list.forEach [
 						if (it instanceof String) list.add(it)
 					]
 				}
 				def static <T extends CharSequence> MyIterable<T> newIterable(T... initial) {}
 				interface MyIterable<T> extends Iterable<T> {
-					def void forEach2((T)=>void f)
 					def void add(T t)
 					def T get()
 				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
 			    void add(final T t);
 			
 			    T get();
@@ -271,14 +223,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    list.get().toString();
-			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
-			      public void apply(final CharSequence it) {
-			        if ((it instanceof String)) {
-			          list.add(it);
-			        }
+			    final Consumer<CharSequence> _function = (CharSequence it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
 			      }
 			    };
-			    list.forEach2(_function);
+			    list.forEach(_function);
 			  }
 			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
@@ -293,25 +243,22 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			class C {
 				def m()	{
 					val list = newIterable
-					list.forEach2 [
+					list.forEach [
 						if (it instanceof String) list.add(it)
 					]
 				}
 				def static <T extends CharSequence> MyIterable<T> newIterable(T... initial) {}
 				interface MyIterable<T> extends Iterable<T> {
-					def void forEach2((T)=>void f)
 					def void add(T t)
 					def T get()
 				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
 			    void add(final T t);
 			
 			    T get();
@@ -319,14 +266,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
-			      public void apply(final CharSequence it) {
-			        if ((it instanceof String)) {
-			          list.add(it);
-			        }
+			    final Consumer<CharSequence> _function = (CharSequence it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
 			      }
 			    };
-			    list.forEach2(_function);
+			    list.forEach(_function);
 			  }
 			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
@@ -341,25 +286,22 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			class C {
 				def m()	{
 					val list = newIterable
-					list.forEach2 [ CharSequence it |
+					list.forEach [ CharSequence it |
 						if (it instanceof String) list.add(it)
 					]
 				}
 				def static <T> MyIterable<T> newIterable(T... initial) {}
 				interface MyIterable<T> extends Iterable<T> {
-					def void forEach2((T)=>void f)
 					def void add(T t)
 					def T get()
 				}
 			}
 		'''.assertCompilesTo('''
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+			import java.util.function.Consumer;
+
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    void forEach2(final Procedure1<? super T> f);
-			
 			    void add(final T t);
 			
 			    T get();
@@ -367,14 +309,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
-			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
-			      public void apply(final CharSequence it) {
-			        if ((it instanceof String)) {
-			          list.add(it);
-			        }
+			    final Consumer<CharSequence> _function = (CharSequence it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
 			      }
 			    };
-			    list.forEach2(_function);
+			    list.forEach(_function);
 			  }
 			
 			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
@@ -386,7 +326,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 	
 	@Test def test_09() {
 		'''
-			import org.eclipse.xtend.core.tests.compiler.StringBuilderLike
+			import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike
 			class C {
 				def m()	{
 					newIterable(new StringBuilderLike).forEach2 [
@@ -402,7 +342,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			import java.io.Serializable;
-			import org.eclipse.xtend.core.tests.compiler.StringBuilderLike;
+			import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
@@ -414,12 +354,10 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			
 			  public void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
-			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
-			      public void apply(final StringBuilderLike it) {
-			        Long _long = new Long(0);
-			        C.this.<Serializable>m(it, _long);
-			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
-			      }
+			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
+			      Long _long = new Long(0);
+			      this.<Serializable>m(it, _long);
+			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
 			    C.<StringBuilderLike>newIterable(_stringBuilderLike).forEach2(_function);
 			  }
@@ -434,7 +372,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
-
+	
 	@Test def test_10() {
 		'''
 			class C {
@@ -455,9 +393,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public <V extends Object> void m(final C.MyIterable<? super V> list) {
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
-			      }
+			    final Procedure1<Object> _function = (Object it) -> {
 			    };
 			    list.forEach2(_function);
 			  }

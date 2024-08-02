@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -78,34 +78,31 @@ public class CompilerBug456883Test extends AbstractXtendCompilerTest {
     _builder_1.append("ArrayList<Object> _arrayList = new ArrayList<Object>();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {");
+    _builder_1.append("final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final ArrayList<Object> it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("final int finalValue = 1;");
     _builder_1.newLine();
-    _builder_1.append("        ");
+    _builder_1.append("      ");
     _builder_1.append("it.add(");
     _builder_1.newLine();
-    _builder_1.append("          ");
+    _builder_1.append("        ");
     _builder_1.append("new Object() {");
     _builder_1.newLine();
-    _builder_1.append("            ");
-    _builder_1.append("public String toString() {");
-    _builder_1.newLine();
-    _builder_1.append("              ");
-    _builder_1.append("return (\"\" + Integer.valueOf(finalValue));");
-    _builder_1.newLine();
-    _builder_1.append("            ");
-    _builder_1.append("}");
+    _builder_1.append("          ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("});");
+    _builder_1.append("public String toString() {");
     _builder_1.newLine();
-    _builder_1.append("      ");
+    _builder_1.append("            ");
+    _builder_1.append("return (\"\" + Integer.valueOf(finalValue));");
+    _builder_1.newLine();
+    _builder_1.append("          ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("});");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

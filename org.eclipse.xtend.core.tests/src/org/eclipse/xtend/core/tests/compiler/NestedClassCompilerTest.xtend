@@ -413,18 +413,18 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			        dis = this;
 			
 			        depositExceptionHandler = new AbstractIterator<Boolean>() {
+			          @Override
 			          public Boolean computeNext() {
 			            return Boolean.valueOf(false);
 			          }
 			        };
 			      }
+			      @Override
 			      public Iterator<Boolean> iterator() {
 			        Object _xblockexpression = null;
 			        {
-			          final Procedure1<Object> _function = new Procedure1<Object>() {
-			            public void apply(final Object it) {
-			              _this__Account_1.dis.processAsyncResponse(true);
-			            }
+			          final Procedure1<Object> _function = (Object it) -> {
+			            this.dis.processAsyncResponse(true);
 			          };
 			          this.send(_function);
 			          _xblockexpression = null;
@@ -491,11 +491,9 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			
 			      public void m2() {
-			        final C.I _function = new C.I() {
-			          public void m1(final int it) {
-			            _this__C_1.m1(1);
-			            C.this.m1("");
-			          }
+			        final C.I _function = (int it) -> {
+			          this.m1(1);
+			          C.this.m1("");
 			        };
 			        final C.I i = _function;
 			      }
@@ -553,6 +551,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			
 			      public void m2() {
 			        final C.I i = new C.I() {
+			          @Override
 			          public void m1() {
 			            _this__C_1.m1(1);
 			            C.this.m1("");
@@ -621,6 +620,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			    new __C_1() {
 			      public void m2() {
 			        final C.I _function = new C.I() {
+			          @Override
 			          public void m1(final int it) {
 			            this.m1(1);
 			            _this__C_1.m1(1);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 TypeFox.io (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2024 TypeFox.io (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -47,6 +47,9 @@ public class CompilerBug406762Test extends AbstractXtendCompilerTest {
     _builder_1.append("private static final class MyException extends Exception {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("public synchronized Throwable fillInStackTrace() {");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -92,6 +95,9 @@ public class CompilerBug406762Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private static final class MyException extends Exception {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public synchronized Throwable fillInStackTrace() {");

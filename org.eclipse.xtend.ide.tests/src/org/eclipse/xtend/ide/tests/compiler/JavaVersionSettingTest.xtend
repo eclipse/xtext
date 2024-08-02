@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -60,9 +60,9 @@ class JavaVersionSettingTest extends Assert {
 		workbenchTestHelper.tearDown
 	}
 	
-	@Test def void testCompileWithJava5() {
+	@Test def void testCompileWithJava8() {
 		workbenchTestHelper.tearDown
-		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, JavaVersion.JAVA5)
+		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, JavaVersion.JAVA8)
 		val xtendFile = workbenchTestHelper.createFile('mypackage/OverrideTest.xtend', '''
 			package mypackage
 			class B implements A {
@@ -76,26 +76,7 @@ class JavaVersionSettingTest extends Assert {
 		waitForBuild()
 		assertNoErrors(xtendFile)
 		val content = getJavaFileContent('xtend-gen/mypackage/B.java', xtendFile.project)
-		assertFalse("@Override annotation was generated, but it shouldn't.", content.contains('@Override'))
-	}
-	
-	@Test def void testCompileWithJava6() {
-		workbenchTestHelper.tearDown
-		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, JavaVersion.JAVA6)
-		val xtendFile = workbenchTestHelper.createFile('mypackage/OverrideTest.xtend', '''
-			package mypackage
-			class B implements A {
-				override a() {
-				}
-			}
-			interface A {
-				def void a()
-			}
-		''')
-		waitForBuild()
-		assertNoErrors(xtendFile)
-		val content = getJavaFileContent('xtend-gen/mypackage/B.java', xtendFile.project)
-		assertTrue("@Override annotation was not generated.", content.contains('@Override'))
+		assertTrue("@Override annotation not was generated.", content.contains('@Override'))
 	}
 	
 	private def getJavaFileContent(String fileName, IProject project) {

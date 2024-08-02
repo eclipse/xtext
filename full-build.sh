@@ -42,6 +42,8 @@ while [ "$1" != "" ]; do
   shift
 done
 
+MVN_ARGS+=(-fae)
+
 MVN_ARGS+=(-PuseJenkinsSnapshots)
 
 MVN_ARGS+=("-Dmaven.home=$(./mvnw --version | grep "Maven home:" | cut -c 13-)")

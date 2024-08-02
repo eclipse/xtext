@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -60,10 +60,8 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public void m(final T a, final T b) {
-			    final Procedure1<Test<T>> _function = new Procedure1<Test<T>>() {
-			      public void apply(final Test<T> it) {
-			        new Test<T>().m(a, b);
-			      }
+			    final Procedure1<Test<T>> _function = (Test<T> it) -> {
+			      new Test<T>().m(a, b);
 			    };
 			    ObjectExtensions.<Test<T>>operator_doubleArrow(this, _function);
 			  }
@@ -94,12 +92,10 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			
 			  public StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
-			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			      public void apply(final StringBuilder it) {
-			        Test<Object> _test = new Test<Object>();
-			        Long _long = new Long(0);
-			        _test.m(it, _long);
-			      }
+			    final Procedure1<StringBuilder> _function = (StringBuilder it) -> {
+			      Test<Object> _test = new Test<Object>();
+			      Long _long = new Long(0);
+			      _test.m(it, _long);
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }

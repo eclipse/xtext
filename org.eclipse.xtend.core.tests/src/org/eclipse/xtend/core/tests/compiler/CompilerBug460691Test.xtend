@@ -27,6 +27,7 @@ class CompilerBug460691Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C implements Comparator<String> {
+			  @Override
 			  public int compare(final String s1, final String s2) {
 			    return s1.compareTo(s2);
 			  }

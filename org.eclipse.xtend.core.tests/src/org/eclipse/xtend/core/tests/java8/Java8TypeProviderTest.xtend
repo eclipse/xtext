@@ -9,24 +9,18 @@
 package org.eclipse.xtend.core.tests.java8
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
-import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
-import org.junit.runner.RunWith
-
-import static org.junit.Assert.*
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-@RunWith(XtextRunner)
-@InjectWith(Java8RuntimeInjectorProvider)
-class Java8TypeProviderTest {
+class Java8TypeProviderTest extends AbstractXtendTestCase {
 	
 	@Inject IJvmTypeProvider.Factory typeProviderFactory;
 	

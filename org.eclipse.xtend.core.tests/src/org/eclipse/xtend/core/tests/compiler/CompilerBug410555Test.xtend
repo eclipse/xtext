@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -65,10 +65,8 @@ class CompilerBug410555Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class BugSAM2 extends BugSAM {
 			  public BugSAM2() {
-			    super(new SAMInterface() {
-			      public void test() {
-			      }
-			    });
+			    super(((SAMInterface) () -> {
+			    }));
 			  }
 			}
 		''')
@@ -102,16 +100,12 @@ class CompilerBug410555Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  public BugSAM() {
-			    this(new SAMInterface() {
-			      public void test() {
-			      }
-			    });
+			    this(((SAMInterface) () -> {
+			    }));
 			  }
 			
 			  public static void main(final String[] args) {
-			    final SAMInterface _function = new SAMInterface() {
-			      public void test() {
-			      }
+			    final SAMInterface _function = () -> {
 			    };
 			    new BugSAM(_function);
 			  }

@@ -15,9 +15,8 @@ import org.junit.Test
  */
 class CompilerBug412894Test extends AbstractXtendCompilerTest {
 	
-	@Test
-	def test_01() {
-		assertCompilesTo('''
+	@Test def void test_01() {
+		'''
 			class C {
 				def m()	{
 					val list = newArrayList
@@ -28,22 +27,20 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-
+			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
-			    final Consumer<String> _function = new Consumer<String>() {
-			      public void accept(final String it) {
-			        boolean _matched = false;
-			        if (it instanceof String) {
-			          _matched=true;
-			          list.add(it);
-			        }
+			    final Consumer<String> _function = (String it) -> {
+			      boolean _matched = false;
+			      if (it instanceof String) {
+			        _matched=true;
+			        list.add(it);
 			      }
 			    };
 			    list.forEach(_function);
@@ -52,9 +49,8 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test
-	def test_02() {
-		assertCompilesTo('''
+	@Test def void test_02() {
+		'''
 			class C {
 				def m()	{
 					val list = newArrayList
@@ -66,7 +62,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.io.Serializable;
 			import java.util.ArrayList;
 			import java.util.function.Consumer;
@@ -76,18 +72,16 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m() {
 			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
-			    final Consumer<Serializable> _function = new Consumer<Serializable>() {
-			      public void accept(final Serializable it) {
-			        boolean _matched = false;
-			        if (it instanceof String) {
+			    final Consumer<Serializable> _function = (Serializable it) -> {
+			      boolean _matched = false;
+			      if (it instanceof String) {
+			        _matched=true;
+			        list.add(it);
+			      }
+			      if (!_matched) {
+			        if (it instanceof Number) {
 			          _matched=true;
 			          list.add(it);
-			        }
-			        if (!_matched) {
-			          if (it instanceof Number) {
-			            _matched=true;
-			            list.add(it);
-			          }
 			        }
 			      }
 			    };
@@ -97,9 +91,8 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test
-	def test_03() {
-		assertCompilesTo('''
+	@Test def void test_03() {
+		'''
 			class C {
 				def m()	{
 					val list = newArrayList
@@ -110,23 +103,21 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.io.Serializable;
 			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-
+			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
-			    final Consumer<Serializable> _function = new Consumer<Serializable>() {
-			      public void accept(final Serializable it) {
-			        boolean _matched = false;
-			        if (it instanceof Number) {
-			          _matched=true;
-			          list.add(((Number)it).toString());
-			        }
+			    final Consumer<Serializable> _function = (Serializable it) -> {
+			      boolean _matched = false;
+			      if (it instanceof Number) {
+			        _matched=true;
+			        list.add(((Number)it).toString());
 			      }
 			    };
 			    list.forEach(_function);
@@ -135,9 +126,8 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test
-	def test_04() {
-		assertCompilesTo('''
+	@Test def void test_04() {
+		'''
 			class C {
 				def m()	{
 					val list = newArrayList
@@ -146,20 +136,18 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 					]
 				}
 			}
-		''', '''
+		'''.assertCompilesTo('''
 			import java.util.ArrayList;
 			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-
+			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
-			    final Consumer<Object> _function = new Consumer<Object>() {
-			      public void accept(final Object it) {
-			        if ((it instanceof String)) {
-			          list.add(it);
-			        }
+			    final Consumer<Object> _function = (Object it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
 			      }
 			    };
 			    list.forEach(_function);

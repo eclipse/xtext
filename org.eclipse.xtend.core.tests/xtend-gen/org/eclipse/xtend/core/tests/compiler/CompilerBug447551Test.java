@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -246,6 +246,9 @@ public class CompilerBug447551Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public final C.E<Object> e = new Function0<C.E<Object>>() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public C.E<Object> apply() {");

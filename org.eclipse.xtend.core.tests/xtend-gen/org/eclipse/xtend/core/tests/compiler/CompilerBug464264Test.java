@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -83,16 +83,10 @@ public class CompilerBug464264Test extends AbstractXtendCompilerTest {
     _builder_1.append("List<String> _strings = i.getStrings();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Function1<CharSequence, String> _function = new Function1<CharSequence, String>() {");
+    _builder_1.append("final Function1<CharSequence, String> _function = (CharSequence it) -> {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public String apply(final CharSequence it) {");
-    _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.append("return ((String) it);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("};");
@@ -104,16 +98,10 @@ public class CompilerBug464264Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterables.<String>addAll(_strings, _map);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Function1<CharSequence, CharSequence> _function_1 = new Function1<CharSequence, CharSequence>() {");
+    _builder_1.append("final Function1<CharSequence, CharSequence> _function_1 = (CharSequence it) -> {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public CharSequence apply(final CharSequence it) {");
-    _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.append("return it;");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("};");
@@ -171,16 +159,10 @@ public class CompilerBug464264Test extends AbstractXtendCompilerTest {
     _builder_1.append("public boolean m(final List<? super CharSequence> res, final Iterable<?> obj) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Object, String> _function = new Function1<Object, String>() {");
+    _builder_1.append("final Function1<Object, String> _function = (Object it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public String apply(final Object it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("return \"\";");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

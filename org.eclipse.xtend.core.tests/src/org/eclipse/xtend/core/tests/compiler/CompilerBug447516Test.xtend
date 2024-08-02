@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 20204 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,6 +32,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private final IReadAccess<String> readAccess = new IReadAccess<String>() {
+			    @Override
 			    public <Result extends Object> Result readOnly(final IUnitOfWork<Result, String> it) {
 			      try {
 			        return it.exec("");
@@ -67,6 +68,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  private final C.I<CharSequence> readAccess = new C.I<CharSequence>() {
+			    @Override
 			    public <T extends CharSequence> T exec(final Function1<? super CharSequence, ? extends T> it) {
 			      return it.apply("");
 			    }
@@ -98,6 +100,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			  }
 			
 			  private final C.I<CharSequence, String> i = new C.I<CharSequence, String>() {
+			    @Override
 			    public <T extends CharSequence, V extends T> T exec(final String $0, final Function1<? super CharSequence, ? extends T> $1) {
 			      return $1.apply("");
 			    }

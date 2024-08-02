@@ -9,15 +9,12 @@
 package org.eclipse.xtend.core.tests.java8.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
-import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.testing.InjectWith;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class CompilerBug458010Test extends AbstractXtendCompilerTest {
   @Test

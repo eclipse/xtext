@@ -1542,7 +1542,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_0() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("import java.lang.* class X { def <String> String foo(String x) {x}}").getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("import java.lang.* class X { def <String> String foo(String x) {x}}").getXtendTypes().get(0).getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
 		assertEquals("String", typeParamDecl.getIdentifier());
@@ -1553,8 +1553,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_1() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("import java.lang.* class X { def <String> String foo(java.lang.String x) {x}}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("import java.lang.* class X { def <String> String foo(java.lang.String x) {x}}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
 		assertEquals("String", typeParamDecl.getIdentifier());
@@ -1565,8 +1565,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_2() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Y y) { return y }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Y> { def foo(Y y) { return y }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("Y", returnType.getIdentifier());
@@ -1576,8 +1576,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_3() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Iterable<Y> ys) { return newArrayList(ys.head) }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Y> { def foo(Iterable<Y> ys) { return newArrayList(ys.head) }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.util.ArrayList<Y>", returnType.getIdentifier());
@@ -1587,8 +1587,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_4() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X { def <Y> foo(Y y) { return y }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X { def <Y> foo(Y y) { return y }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("Y", returnType.getIdentifier());
@@ -1598,8 +1598,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_5() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X { def <Y> foo(Iterable<Y> ys) { return newArrayList(ys.head) }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X { def <Y> foo(Iterable<Y> ys) { return newArrayList(ys.head) }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.util.ArrayList<Y>", returnType.getIdentifier());
@@ -1609,32 +1609,32 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_6() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { val result = new X return result }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def foo() { val result = new X return result }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterReference_7() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { return new X<String> }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def foo() { return new X<String> }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<java.lang.String>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterReference_8() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { return new X<Z> }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def foo() { return new X<Z> }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<Z>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterReference_9() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Iterable<Y> iter) { for(y: iter) { return y } }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Y> { def foo(Iterable<Y> iter) { for(y: iter) { return y } }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("Y", returnType.getIdentifier());
@@ -1644,8 +1644,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_10() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Y> { def foo(Iterable<Y> iter) { for(y: iter) { return y } null }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Y> { def foo(Iterable<Y> iter) { for(y: iter) { return y } null }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("Y", returnType.getIdentifier());
@@ -1655,8 +1655,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_11() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<Z> foo() { val result = new X result }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> implements Iterable<Z> { def Iterable<Z> foo() { val result = new X result }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<Z>", returnType.getIdentifier());
@@ -1679,8 +1679,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testTypeParameterReference_12() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X return result }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X return result }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<java.lang.String>", returnType.getIdentifier());
@@ -1691,8 +1691,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_13() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def <Y> Iterable<Y> foo() { val r = new X return r }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> implements Iterable<Z> { def <Y> Iterable<Y> foo() { val r = new X return r }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<Y>", returnType.getIdentifier());
@@ -1703,16 +1703,16 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_14() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def <Y> foo() { new X<Y> }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def <Y> foo() { new X<Y> }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<Y>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterReference_15() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X result }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X result }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<java.lang.String>", returnType.getIdentifier());
@@ -1723,8 +1723,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_16() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def <Y> Iterable<Y> foo() { val r = new X r }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> implements Iterable<Z> { def <Y> Iterable<Y> foo() { val r = new X r }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<Y>", returnType.getIdentifier());
@@ -1735,24 +1735,24 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterReference_17() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { val result = new X result }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def foo() { val result = new X result }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterReference_18() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { new X }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def foo() { new X }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterReference_19() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def foo() { return new X }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def foo() { return new X }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<java.lang.Object>", returnType.getIdentifier());
@@ -1760,16 +1760,16 @@ public class LinkingTest extends AbstractXtendTestCase {
 	
 
 	@Test public void testTypeParameterReference_20() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> { def <Y> foo() { return new X<Y> }}")
-				.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class X<Z> { def <Y> foo() { return new X<Y> }}")
+				.getXtendTypes().get(0).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("X<Y>", returnType.getIdentifier());
 	}
 	
 	@Test public void testTypeParameterShadowsType_1() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass) file("class A {} class B { def <A> A foo(A x) {x}}")
-				.getXtendTypes().get(1)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class A {} class B { def <A> A foo(A x) {x}}")
+				.getXtendTypes().get(1).getMembers().get(0);
 		
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
@@ -1780,8 +1780,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testTypeParameterShadowsType_2() throws Exception {
-		XtendFunction func = (XtendFunction) ((XtendClass) file("class A {} class B<A>  { def A foo(A x) {x}}")
-				.getXtendTypes().get(1)).getMembers().get(0);
+		XtendFunction func = (XtendFunction) file("class A {} class B<A>  { def A foo(A x) {x}}")
+				.getXtendTypes().get(1).getMembers().get(0);
 		
 		JvmTypeReference returnType = func.getReturnType();
 		JvmTypeParameter typeParamDecl = (JvmTypeParameter) returnType.getType();
@@ -2304,7 +2304,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Test public void testStaticImports_03() throws Exception {
 		String fileAsText= "import static extension java.util.Collections.* class Clazz { def void method() {''.singletonList()} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
@@ -2313,7 +2313,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Test public void testStaticImports_04() throws Exception {
 		String fileAsText= "import static extension java.util.Collections.* class Clazz { def void method() {''.singletonList} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
@@ -2322,7 +2322,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Test public void testStaticImports_05() throws Exception {
 		String fileAsText= "import static java.util.Collections.* class Clazz { def void method() {singletonList('')} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
@@ -2334,7 +2334,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import static java.util.Collections.*\n" +
 				"class Clazz { def void method() {find(singletonList(''), [e|e!=null])} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
@@ -2346,7 +2346,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import static java.util.Collections.*\n" +
 				"class Clazz { def void method() {find(singletonList(''), [e|e!=null])} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
@@ -2358,7 +2358,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import static java.util.Collections.*\n" +
 				"class Clazz { def void method() {singletonList('').findFirst(e|e!=null)} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
@@ -2367,7 +2367,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Test public void testStaticImports_09() throws Exception {
 		String fileAsText= "import static java.util.Collections.* class Clazz { def void method() {singletonList('').findFirst(String e|e!=null)} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
@@ -2376,7 +2376,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Test public void testStaticImports_10() throws Exception {
 		String fileAsText= "import static extension java.util.Collections.* class Clazz { def void method() { singletonList('')} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
@@ -2388,7 +2388,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import static java.util.Collections.*\n" +
 				"class Clazz { def void method() {find(singletonList(''), [e|e.length!=0])} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
@@ -2400,7 +2400,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import static java.util.Collections.*\n" +
 				"class Clazz { def void method() { find(singletonList(''), [e|e.length!=0])} }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
@@ -2550,7 +2550,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import org.eclipse.xtext.xbase.lib.Functions\n" +
 				"class Clazz { def void method(Functions$Function0<Integer> f) { f.apply } }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XtendParameter parameter = function.getParameters().get(0);
 		String identifier = parameter.getParameterType().getIdentifier();
 		assertEquals(Functions.Function0.class.getName()+ "<java.lang.Integer>", identifier);
@@ -2561,7 +2561,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"import org.eclipse.xtext.xbase.lib.Functions\n" +
 				"class Clazz { def void method(Functions.Function0<Integer> f) { f.apply } }";
 		XtendFile file = file(fileAsText, true);
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		XtendParameter parameter = function.getParameters().get(0);
 		String identifier = parameter.getParameterType().getIdentifier();
 		assertEquals(Functions.Function0.class.getName()+ "<java.lang.Integer>", identifier);

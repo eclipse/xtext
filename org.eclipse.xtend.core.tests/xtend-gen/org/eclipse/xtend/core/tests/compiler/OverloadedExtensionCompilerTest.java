@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -58,16 +58,10 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void method(final MyIterable<? extends Number> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Consumer<Number> _function = new Consumer<Number>() {");
+    _builder_1.append("final Consumer<Number> _function = (Number it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void consume(final Number it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("C.this.process(it);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("this.process(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -132,16 +126,10 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void method(final MyIterable<? extends Number> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Consumer<Number> _function = new Consumer<Number>() {");
+    _builder_1.append("final Consumer<Number> _function = (Number it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void consume(final Number it) {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("C.this.process(it);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("this.process(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

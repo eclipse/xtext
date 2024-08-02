@@ -239,7 +239,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			 */
 			package foo
 			
-			annotation bar { 
+			annotation MyAnnotation { 
 			    String name = 'foobar'
 			}
 		''',
@@ -255,7 +255,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			@SuppressWarnings("all")
-			public @interface bar {
+			public @interface MyAnnotation {
 			  public String name() default "foobar";
 			}
 		''')
@@ -414,11 +414,13 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 		  public interface MyIf extends MyAnno {
 		  }
 		  public static class MyClass implements MyAnno.MyIf {
+		    @Override
 		    public Class<? extends Annotation> annotationType() {
 		      return null;
 		    }
 		  }
 		  public static class MyClass2 implements MyAnno {
+		    @Override
 		    public Class<? extends Annotation> annotationType() {
 		      return null;
 		    }

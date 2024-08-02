@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 Sebastian Zarnekow and others.
+ * Copyright (c) 2023, 2024 Sebastian Zarnekow and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -131,16 +131,10 @@ public class CompilerBug1005Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Outer.B<?> m(final Outer.B<?> it) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Consumer<Outer.B<Outer.C>> _function = new Consumer<Outer.B<Outer.C>>() {");
+    _builder_1.append("final Consumer<Outer.B<Outer.C>> _function = (Outer.B<Outer.C> it_1) -> {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public void accept(final Outer.B<Outer.C> it_1) {");
-    _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.append("it_1.c(7);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("};");

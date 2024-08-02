@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -341,16 +341,10 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.append("protected Object doX(final Runnable r) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Runnable _function = new Runnable() {");
+    _builder_1.append("final Runnable _function = () -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void run() {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("B.this.c.protectedMethod();");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("}");
+    _builder_1.append("this.c.protectedMethod();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -421,6 +415,9 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.doX(new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void run() {");
