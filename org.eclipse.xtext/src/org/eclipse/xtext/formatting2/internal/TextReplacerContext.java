@@ -330,6 +330,9 @@ public class TextReplacerContext implements ITextReplacerContext {
 
 	@Override
 	public ITextReplacerContext withDocument(IFormattableDocument document) {
+		if (document == this.document) {
+			return this;
+		}
 		TextReplacerContext context = new TextReplacerContext(document, this, indentation, null);
 		if (this.nextReplacerIsChild)
 			context.setNextReplacerIsChild();
@@ -338,11 +341,17 @@ public class TextReplacerContext implements ITextReplacerContext {
 
 	@Override
 	public ITextReplacerContext withIndentation(int indentation) {
+		if(indentation == this.indentation) {
+			return this;
+		}
 		return new TextReplacerContext(document, this, indentation, null);
 	}
 
 	@Override
 	public ITextReplacerContext withReplacer(ITextReplacer replacer) {
+		if(replacer == this.replacer) {
+			return this;
+		}
 		ITextReplacerContext current = this;
 		while (current != null) {
 			ITextReplacer lastReplacer = current.getReplacer();
