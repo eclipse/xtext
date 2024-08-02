@@ -638,6 +638,67 @@ terminal Plural:
 }
 </code></pre>
 
+<h2 id="tree-manipulation">Tree manipulation</h2>
+
+<p>An implementation of <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDerivedStateComputer.java">IDerivedStateComputer</a> can be used to modify the objects in the abstract syntax tree after parsing. Commonly, implementations of this interface are used to modify the objects' fields programmatically.</p>
+
+<p>As an example, let's take a simple Entity DSL defined by the following grammar:</p>
+
+<pre><code class="language-xtext">grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model:
+  entities+=Entity*;
+
+Entity:
+  'Entity' (name=ID | name=ID? 'overrides' overriddenEntity=[Entity]);
+</code></pre>
+
+<p>This grammar allows declaring that an Entity overrides another Entity. In this case, by design and for the sake of conciseness it is not required to explicitly name the overriding Entity. However, you might want to reference an unnamed overriding Entity later, e.g. to override it in turn. This is where IDerivedStateComputer comes in handy.</p>
+
+<p>Let's see a sample implementation of this interface that takes care of setting the <code>name</code> field of unnamed Entities. We want to set it to the name of the overridden Entity, suffixed with "_overridden". For this purpose, we write the following implementation and place it, for instance, inside the <code>org.xtext.example.mydsl.services</code> package of our DSL project:</p>
+
+<pre><code class="language-java">package org.xtext.example.mydsl.services;
+
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IDerivedStateComputer;
+import org.xtext.example.mydsl.myDsl.Entity;
+
+public class MyDerivedStateComputer implements IDerivedStateComputer {
+  private static final String SUFFIX = "_overridden";
+
+  @Override
+  public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
+    resource.getAllContents().forEachRemaining(eObject -> {
+      if (eObject instanceof final Entity entity) {
+        if (entity.getName() == null) {
+          entity.setName(entity.getOverriddenEntity().getName() + SUFFIX);
+        }
+      }
+    });
+  }
+
+  @Override
+  public void discardDerivedState(DerivedStateAwareResource resource) {
+    resource.getAllContents().forEachRemaining(eObject -> {
+      if (eObject instanceof final Entity entity) {
+        final String name = entity.getName();
+        if (name != null && name.endsWith(SUFFIX)) {
+          final String nameWithoutSuffix = name.substring(0, name.length() - SUFFIX.length());
+          final Entity overriddenEntity = entity.getOverriddenEntity();
+          if (overriddenEntity != null && nameWithoutSuffix.equals(overriddenEntity.getName())) {
+            entity.setName(null);
+          }
+        }
+      }
+    });
+  }
+}
+</code></pre>
+
+<p>The <code>installDerivedState()</code> method is responsible for applying the desired changes. For serialization purposes, we also need to implement <code>discardDerivedState()</code> to tell the framework how to revert the changes applied programmatically. Note that this implementation unsets the <code>name</code> field of any Entity whose name coincides with that of the overridden Entity, plus the suffix, regardless of the origin of such name (input by the user or set by <code>installDerivedState()</code>).</p>
+
 <h2 id="formatting">Formatting</h2>
 
 <p>Formatting (aka. pretty printing) is the process of rearranging the text in a document to improve the readability without changing the semantic value of the document. Therefore a formatter is responsible for arranging line-wraps, indentation, whitespace, etc. in a text to emphasize its structure, but it is not supposed to alter a document in a way that impacts the semantic model.</p>
