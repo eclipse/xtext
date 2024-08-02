@@ -487,7 +487,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		final IProject project = ctx.getBuiltProject();
 		for (IContainer container : getOutputs(project, config)) {
 			if (!container.exists()) {
-				return;
+				continue;
 			}
 			if (canClean(container, config)) {
 				for (IResource resource : container.members()) {
