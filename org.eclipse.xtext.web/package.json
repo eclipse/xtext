@@ -3,7 +3,7 @@
 	"private": true,
 	"devDependencies": {
 		"mocha": "10.4.0",
-		"requirejs": "2.3.6"
+		"requirejs": "2.3.7"
 	},
 	"scripts": {
 		"test": "mocha -u tdd --reporter dot src/test/js/*.js",
