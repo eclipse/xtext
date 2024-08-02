@@ -131,6 +131,19 @@ public class TextReplacerContext implements ITextReplacerContext {
 				count += logicalLength(text);
 				lastOffset = rep.getOffset();
 			}
+			final ITextReplacer replacer = current.getReplacer();
+			if (replacer != null) {
+				final int offset = replacer.getRegion().getOffset();
+				if (offset < lastOffset) {
+					final String text = access.textForOffset(offset, lastOffset - offset);
+					final int idx = text.lastIndexOf('\n');
+					if (idx >= 0) {
+						return count + logicalLength(text.substring(idx + 1));
+					}
+					count += logicalLength(text);
+					lastOffset = offset;
+				}
+			}
 			current = current.getPreviousContext();
 		}
 		String rest = access.textForOffset(0, lastOffset);
