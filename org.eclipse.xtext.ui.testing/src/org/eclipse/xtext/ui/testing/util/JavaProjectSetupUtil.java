@@ -380,6 +380,7 @@ public class JavaProjectSetupUtil {
 
 	private static boolean isJava7Default = false;
 	
+	@Deprecated
 	public static void makeJava7Default() {
 		if (!isJava7Default) {
 			IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
