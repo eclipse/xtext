@@ -8,7 +8,7 @@ pipeline {
   parameters {
     choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'r202406', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
-    choice(name: 'JDK_VERSION', choices: [ '11', '17' ], description: 'Which JDK version should be used?')
+    choice(name: 'JDK_VERSION', choices: [ '11', '17', '21' ], description: 'Which JDK version should be used?')
   }
 
   triggers {
@@ -25,7 +25,9 @@ pipeline {
   }
 
   tools {
+     jdk "temurin-jdk11-latest"
      jdk "temurin-jdk17-latest"
+     jdk "temurin-jdk21-latest"
   }
 
   stages {
@@ -64,7 +66,8 @@ pipeline {
         xvnc(useXauthority: true) {
           sh """
             ./full-build.sh --tp=${selectedTargetPlatform()} \
-              ${javaVersion() == 17 ? '' : '--toolchains releng/toolchains.xml -Pstrict-release-jdk'}
+              ${javaVersion() == 11 ? '--toolchains releng/toolchains.xml -Pstrict-jdk-11' : ''} \
+              ${javaVersion() == 21 ? '-Pstrict-jdk-21' : ''}
           """
         }
       }// END steps
