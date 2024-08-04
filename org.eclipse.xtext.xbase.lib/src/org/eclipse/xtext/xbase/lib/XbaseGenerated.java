@@ -18,8 +18,8 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
 /**
- * By annotating a class or method with this annotation, JaCoCo will not
- * considered the annotated member.
+ * By annotating a class or method with this annotation, JaCoCo will ignore the
+ * annotated member.
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  * 
