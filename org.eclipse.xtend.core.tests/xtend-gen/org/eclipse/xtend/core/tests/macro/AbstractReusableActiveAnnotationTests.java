@@ -3323,6 +3323,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.newLine();
     _builder_2.append("import myannotation.AddDispatchCase;");
     _builder_2.newLine();
+    _builder_2.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
+    _builder_2.newLine();
     _builder_2.newLine();
     _builder_2.append("@AddDispatchCase");
     _builder_2.newLine();
@@ -3339,6 +3341,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.append("  ");
     _builder_2.append("}");
     _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("  ");
+    _builder_2.append("@XbaseGenerated");
     _builder_2.newLine();
     _builder_2.append("  ");
     _builder_2.append("public String m(final Object i) {");
@@ -3530,6 +3535,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_5.newLine();
     _builder_5.append("import myannotation.Base;");
     _builder_5.newLine();
+    _builder_5.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
+    _builder_5.newLine();
     _builder_5.newLine();
     _builder_5.append("@SuppressWarnings(\"all\")");
     _builder_5.newLine();
@@ -3541,6 +3548,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_5.append("  ");
     _builder_5.append("}");
     _builder_5.newLine();
+    _builder_5.newLine();
+    _builder_5.append("  ");
+    _builder_5.append("@XbaseGenerated");
     _builder_5.newLine();
     _builder_5.append("  ");
     _builder_5.append("public void m(final Base b) {");
@@ -3563,6 +3573,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.append("import java.util.Arrays;");
     _builder_6.newLine();
     _builder_6.append("import myannotation.Base;");
+    _builder_6.newLine();
+    _builder_6.append("import org.eclipse.xtext.xbase.lib.XbaseGenerated;");
     _builder_6.newLine();
     _builder_6.newLine();
     _builder_6.append("@SuppressWarnings(\"all\")");
@@ -3589,6 +3601,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.append("  ");
     _builder_6.append("}");
     _builder_6.newLine();
+    _builder_6.newLine();
+    _builder_6.append("  ");
+    _builder_6.append("@XbaseGenerated");
     _builder_6.newLine();
     _builder_6.append("  ");
     _builder_6.append("public void m(final Base d) {");

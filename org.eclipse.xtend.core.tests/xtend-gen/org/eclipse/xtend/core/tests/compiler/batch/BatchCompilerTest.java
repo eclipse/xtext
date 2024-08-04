@@ -730,6 +730,14 @@ public class BatchCompilerTest {
     Assert.assertFalse(this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@SuppressWarnings"));
   }
 
+  @Test
+  public void testNoXbaseGenerated() {
+    this.batchCompiler.setUseXbaseGenerated(false);
+    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
+    Assert.assertTrue(this.batchCompiler.compile());
+    Assert.assertFalse(this.getContents((BatchCompilerTest.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@XbaseGenerated"));
+  }
+
   @Test(expected = IllegalArgumentException.class)
   public void testJavaVersion5() {
     this.batchCompiler.setJavaSourceVersion("1.5");

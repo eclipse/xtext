@@ -52,6 +52,8 @@ public class Main {
 				compiler.setJavaSourceVersion(arguments.next().trim());
 			} else if ("-noSuppressWarningsAnnotation".equals(argument)) {
 				compiler.setGenerateSyntheticSuppressWarnings(false);
+			} else if ("-noUseXbaseGenerated".equals(argument)) {
+				compiler.setUseXbaseGenerated(false);
 			} else if ("-generateGeneratedAnnotation".equals(argument)) {
 				compiler.setGenerateGeneratedAnnotation(true);
 			} else if ("-includeDateInGeneratedAnnnotation".equals(argument)) {
@@ -90,6 +92,7 @@ public class Main {
 		out.println("-encoding <encoding>                Specify character encoding used by source files");
 		out.println("-javaSourceVersion <version>        Create Java Source compatible to this version. Can be: " + allVersionQualifiers);
 		out.println("-noSuppressWarningsAnnotation       Don't put @SuppressWarnings() into generated Java Code");
+		out.println("-noUseXbaseGenerated                Don't put @XbaseGenerated() into generated Java Code");
 		out.println("-generateGeneratedAnnotation        Put @Generated into generated Java Code");
 		out.println("-includeDateInGeneratedAnnnotation  If -generateGeneratedAnnotation is used, add the current date/time.");
 		out.println("-generateAnnotationComment <string> If -generateGeneratedAnnotation is used, add a comment.");
