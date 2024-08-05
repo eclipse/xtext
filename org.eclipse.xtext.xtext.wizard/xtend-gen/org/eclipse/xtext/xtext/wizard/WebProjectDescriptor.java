@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class WebProjectDescriptor extends ProjectDescriptor {
-  private static final String REQUIREJS_VERSION = "2.3.6";
+  private static final String REQUIREJS_VERSION = "2.3.7";
 
   private static final String JQUERY_VERSION = "3.6.0";
 
