@@ -238,10 +238,10 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		return result;
 	}
 	
-	final Version jdtCoreVersion = JavaCore.getPlugin().getBundle().getVersion();
 	
+	protected final boolean isJdtCoreVersionAtLeast3390 = JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0;
 	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) {
-		if (jdtCoreVersion.compareTo(new Version(3, 39, 0)) >= 0) {
+		if (isJdtCoreVersionAtLeast3390) {
 			try {
 				Method m = PerProjectInfo.class.getDeclaredMethod("getRootPathToResolvedEntries");
 				@SuppressWarnings("unchecked")
