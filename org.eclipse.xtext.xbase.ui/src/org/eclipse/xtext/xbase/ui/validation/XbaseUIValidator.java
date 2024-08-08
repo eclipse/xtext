@@ -246,10 +246,10 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	private static MethodHandle findAccessor() {
 		try {
 			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0) {
-				return MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
-			} else {
 				return MethodHandles.lookup().findVirtual(PerProjectInfo.class, "getRootPathToResolvedEntries", MethodType.methodType(Map.class));
-		}
+			} else {
+				return MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
+			}
 		} catch (Exception e) {
 			return MethodHandles.dropArguments(MethodHandles.constant(Map.class, Collections.emptyMap()), 0, PerProjectInfo.class);
 		}
