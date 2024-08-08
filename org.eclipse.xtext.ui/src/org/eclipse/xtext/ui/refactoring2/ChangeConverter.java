@@ -130,7 +130,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 				change.getResource().save(outputStream, null);
 				byte[] newContent = outputStream.toByteArray();
 				String lastSegment = change.getOldURI().lastSegment();
-				ReplaceFileContentChange ltkChange = new ReplaceFileContentChange(lastSegment, file, newContent);
+				ReplaceFileContentChange ltkChange = ReplaceFileContentChange.createWithSkippingUndoVerify(lastSegment, file, newContent);
 				addChange(ltkChange);
 			} catch (IOException e) {
 				Exceptions.throwUncheckedException(e);
