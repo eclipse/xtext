@@ -11,8 +11,9 @@ package org.eclipse.xtext.xbase.ui.validation;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.List;
 import java.util.Map;
 
@@ -239,26 +240,50 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	}
 	
 	
-	protected final boolean isJdtCoreVersionAtLeast3390 = JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0;
+	private final static boolean IS_JDT_CORE_VERSION_AT_LEAST3390 = JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0;
+	
+	private final static MethodHandle GET_ROOT_PATH_TO_RESOLVED_ENTRIES_METHOD_HANDLE = initializeGetRootPathToResolvedEntriesMethodHandle();
+	private final static MethodHandle ROOT_PATH_TO_RESOLVED_ENTRIES_FIELD_HANDLE = initializeRootPathToResolvedEntriesFieldHandle(); 
+	
 	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) {
-		if (isJdtCoreVersionAtLeast3390) {
+		if (IS_JDT_CORE_VERSION_AT_LEAST3390) {
+			if (GET_ROOT_PATH_TO_RESOLVED_ENTRIES_METHOD_HANDLE == null) {
+				throw new RuntimeException("getRootPathToResolvedEntries method not found");
+			}
 			try {
-				Method m = PerProjectInfo.class.getDeclaredMethod("getRootPathToResolvedEntries");
-				@SuppressWarnings("unchecked")
-				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) m.invoke(info);
+				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) GET_ROOT_PATH_TO_RESOLVED_ENTRIES_METHOD_HANDLE.invoke(info);
 				return result;
-			} catch (ReflectiveOperationException e) {
-				throw new RuntimeException(e);
+			} catch (Throwable e) {
+				throw new RuntimeException("failed to call getRootPathToResolvedEntries method", e);
 			}
 		} else {
-			try {
-				Field f = PerProjectInfo.class.getDeclaredField("rootPathToResolvedEntries");
-				@SuppressWarnings("unchecked")
-				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) f.get(info);
-				return result;
-			} catch (ReflectiveOperationException e) {
-				throw new RuntimeException(e);
+			if (ROOT_PATH_TO_RESOLVED_ENTRIES_FIELD_HANDLE == null) {
+				throw new RuntimeException("rootPathToResolvedEntries field not found");
 			}
+			try {
+				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) ROOT_PATH_TO_RESOLVED_ENTRIES_FIELD_HANDLE.invoke(info);
+				return result;
+			} catch (Throwable e) {
+				throw new RuntimeException("failed to call rootPathToResolvedEntries field", e);
+			}
+		}
+	}
+
+	private static MethodHandle initializeRootPathToResolvedEntriesFieldHandle() {
+		try {
+			MethodHandle handle = MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
+			return handle;
+		} catch (ReflectiveOperationException e) {
+			return null;
+		}
+	}
+
+	private static MethodHandle initializeGetRootPathToResolvedEntriesMethodHandle() {
+		try {
+			MethodHandle handle = MethodHandles.lookup().findVirtual(PerProjectInfo.class, "getRootPathToResolvedEntries", MethodType.methodType(Map.class));
+			return handle;
+		} catch (ReflectiveOperationException e) {
+			return null;
 		}
 	}
 
