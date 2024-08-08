@@ -51,6 +51,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.FragmentFakingEcoreResource;
@@ -1020,6 +1021,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     return IterableExtensions.<Grammar>toList(IterableExtensions.<Grammar>toSet(IterableExtensions.<Grammar>filter(ListExtensions.<AbstractRule, Grammar>map(GrammarUtil.allRules(grammar), _function), _function_1)));
   }
 
+  @XbaseGenerated
   protected StringConcatenationClient cache(final AbstractRule it) {
     if (it instanceof EnumRule) {
       return _cache((EnumRule)it);
@@ -1033,6 +1035,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     }
   }
 
+  @XbaseGenerated
   protected StringConcatenationClient initializer(final AbstractRule it) {
     if (it instanceof EnumRule) {
       return _initializer((EnumRule)it);
@@ -1046,6 +1049,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     }
   }
 
+  @XbaseGenerated
   protected StringConcatenationClient getter(final AbstractRule it, final Grammar original) {
     if (it instanceof EnumRule) {
       return _getter((EnumRule)it, original);
@@ -1059,6 +1063,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     }
   }
 
+  @XbaseGenerated
   protected String gaRuleAccessorLocalVarName(final AbstractRule rule) {
     if (rule instanceof EnumRule) {
       return _gaRuleAccessorLocalVarName((EnumRule)rule);

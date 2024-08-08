@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * <p>Infers a JVM model from the source model.</p>
@@ -284,6 +285,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
     return ("execute" + _replaceAll);
   }
 
+  @XbaseGenerated
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     if (element instanceof Model) {
       _infer((Model)element, acceptor, isPreIndexingPhase);

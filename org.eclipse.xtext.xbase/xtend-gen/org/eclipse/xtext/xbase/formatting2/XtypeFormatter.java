@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -170,6 +171,7 @@ public class XtypeFormatter extends AbstractJavaFormatter {
     document.prepend(this.regionFor(imp).keyword(";"), _function_4);
   }
 
+  @XbaseGenerated
   public void format(final Object ref, final IFormattableDocument document) {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);

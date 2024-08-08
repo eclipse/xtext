@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -47,6 +48,7 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     }
   }
 
+  @XbaseGenerated
   public void build(final EObject jvmDeclaredType, final IXtendOutlineContext context) {
     if (jvmDeclaredType instanceof JvmDeclaredType) {
       _build((JvmDeclaredType)jvmDeclaredType, context);

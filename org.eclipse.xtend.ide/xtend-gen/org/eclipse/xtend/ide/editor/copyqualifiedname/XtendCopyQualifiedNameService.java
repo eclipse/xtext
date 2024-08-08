@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.ui.editor.copyqualifiedname.XbaseCopyQualifiedNameService;
 
 /**
@@ -70,6 +71,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     return _builder.toString();
   }
 
+  @XbaseGenerated
   public String getQualifiedName(final EObject it, final EObject context) {
     if (it instanceof JvmConstructor
          && context instanceof XConstructorCall) {

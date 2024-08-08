@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 
 /**
@@ -158,6 +159,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     return _switchResult;
   }
 
+  @XbaseGenerated
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);

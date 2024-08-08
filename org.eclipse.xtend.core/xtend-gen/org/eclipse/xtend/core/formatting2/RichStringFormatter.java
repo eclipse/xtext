@@ -48,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * cases to distinguish:
@@ -354,6 +355,7 @@ public class RichStringFormatter {
     doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("ENDFOR"), _function_8);
   }
 
+  @XbaseGenerated
   public void format(final EObject richString, final IFormattableDocument doc) {
     if (richString instanceof RichString) {
       _format((RichString)richString, doc);
@@ -382,6 +384,7 @@ public class RichStringFormatter {
     }
   }
 
+  @XbaseGenerated
   protected boolean hasSyntaxError(final IEObjectRegion region) {
     if (region instanceof NodeEObjectRegion) {
       return _hasSyntaxError((NodeEObjectRegion)region);
@@ -393,6 +396,7 @@ public class RichStringFormatter {
     }
   }
 
+  @XbaseGenerated
   protected void suppressLineWraps(final Object it) {
     if (it instanceof HiddenRegionReplacer) {
       _suppressLineWraps((HiddenRegionReplacer)it);

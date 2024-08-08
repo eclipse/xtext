@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
@@ -1303,6 +1304,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   }
 
   @Override
+  @XbaseGenerated
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof Alternatives) {
       return _compileRule((Alternatives)it, grammar, options);
@@ -1327,6 +1329,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   }
 
   @Override
+  @XbaseGenerated
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportsActions) {
     if (it instanceof Alternatives) {
       return _assignmentEbnf((Alternatives)it, assignment, options, supportsActions);
@@ -1349,6 +1352,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   }
 
   @Override
+  @XbaseGenerated
   protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
@@ -1364,6 +1368,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     }
   }
 
+  @XbaseGenerated
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     if (it instanceof EnumRule) {
       return _crossrefEbnf((EnumRule)it, call, ref, supportActions);
@@ -1378,6 +1383,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   }
 
   @Override
+  @XbaseGenerated
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _ebnf2((Alternatives)it, options, supportActions);

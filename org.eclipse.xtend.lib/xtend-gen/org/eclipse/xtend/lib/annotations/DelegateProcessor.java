@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @since 2.7
@@ -522,6 +523,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       return _xifexpression;
     }
 
+    @XbaseGenerated
     public boolean isValidDelegate(final MemberDeclaration it) {
       if (it instanceof MethodDeclaration) {
         return _isValidDelegate((MethodDeclaration)it);
@@ -533,6 +535,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
     }
 
+    @XbaseGenerated
     public TypeReference getType(final MemberDeclaration it) {
       if (it instanceof MethodDeclaration) {
         return _getType((MethodDeclaration)it);
@@ -544,6 +547,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
     }
 
+    @XbaseGenerated
     public CharSequence delegateAccess(final MemberDeclaration it, final MethodDeclaration method) {
       if (it instanceof MethodDeclaration) {
         return _delegateAccess((MethodDeclaration)it, method);

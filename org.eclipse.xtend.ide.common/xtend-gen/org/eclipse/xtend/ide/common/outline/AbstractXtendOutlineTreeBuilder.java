@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -193,6 +194,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
 
   protected abstract void buildType(final EObject someType, final IXtendOutlineContext context);
 
+  @XbaseGenerated
   public void build(final EObject modelElement, final IXtendOutlineContext context) {
     if (modelElement != null) {
       _build(modelElement, context);

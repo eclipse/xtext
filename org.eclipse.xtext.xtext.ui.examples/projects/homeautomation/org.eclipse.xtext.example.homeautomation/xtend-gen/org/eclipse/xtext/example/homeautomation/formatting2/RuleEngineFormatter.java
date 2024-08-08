@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.formatting2.XbaseFormatter;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -309,6 +310,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
   }
 
   @Override
+  @XbaseGenerated
   public void format(final Object device, final IFormattableDocument document) {
     if (device instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)device, document);

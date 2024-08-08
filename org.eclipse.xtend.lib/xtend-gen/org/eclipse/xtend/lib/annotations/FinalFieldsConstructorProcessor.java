@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @since 2.7
@@ -270,6 +271,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     util.makeFinalFieldsConstructor(it);
   }
 
+  @XbaseGenerated
   public void transform(final MutableTypeParameterDeclarator it, final TransformationContext context) {
     if (it instanceof MutableConstructorDeclaration) {
       _transform((MutableConstructorDeclaration)it, context);

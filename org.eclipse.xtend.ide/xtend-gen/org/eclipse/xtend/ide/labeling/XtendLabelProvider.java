@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
@@ -252,6 +253,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   }
 
   @Override
+  @XbaseGenerated
   protected ImageDescriptor imageDescriptor(final Object operation) {
     if (operation instanceof JvmConstructor) {
       return _imageDescriptor((JvmConstructor)operation);

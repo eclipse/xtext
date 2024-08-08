@@ -30,6 +30,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGrammarGenerator {
@@ -614,6 +615,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
 
+  @XbaseGenerated
   protected CharSequence compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileInitHiddenTokens((ParserRule)it, options);
@@ -625,6 +627,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
   }
 
+  @XbaseGenerated
   protected CharSequence compileInitUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileInitUnorderedGroups((ParserRule)it, options);
@@ -636,6 +639,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
   }
 
+  @XbaseGenerated
   protected CharSequence compileRestoreHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileRestoreHiddenTokens((ParserRule)it, options);
@@ -647,6 +651,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
   }
 
+  @XbaseGenerated
   protected CharSequence compileRestoreUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileRestoreUnorderedGroups((ParserRule)it, options);
@@ -659,6 +664,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   }
 
   @Override
+  @XbaseGenerated
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _ebnf2((Alternatives)it, options, supportActions);
@@ -685,6 +691,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   }
 
   @Override
+  @XbaseGenerated
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _assignmentEbnf((Alternatives)it, assignment, options, supportActions);
@@ -707,6 +714,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   }
 
   @Override
+  @XbaseGenerated
   public boolean mustBeParenthesized(final AbstractElement it) {
     if (it instanceof Alternatives) {
       return _mustBeParenthesized((Alternatives)it);

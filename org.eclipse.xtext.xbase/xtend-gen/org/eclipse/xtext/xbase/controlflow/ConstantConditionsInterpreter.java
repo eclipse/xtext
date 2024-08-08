@@ -48,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 
@@ -556,6 +557,7 @@ public class ConstantConditionsInterpreter {
     return new EvaluationResult(it, false);
   }
 
+  @XbaseGenerated
   public EvaluationResult internalEvaluate(final XExpression it, final EvaluationContext context) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, context);
@@ -585,6 +587,7 @@ public class ConstantConditionsInterpreter {
     }
   }
 
+  @XbaseGenerated
   public EvaluationResult internalLogicalAnd(final Object left, final Object right, final boolean compileTimeConstant) {
     if (left instanceof Boolean
          && right instanceof Boolean) {
@@ -610,6 +613,7 @@ public class ConstantConditionsInterpreter {
     }
   }
 
+  @XbaseGenerated
   public EvaluationResult internalLogicalOr(final Object left, final Object right, final boolean compileTimeConstant) {
     if (left instanceof Boolean
          && right instanceof Boolean) {

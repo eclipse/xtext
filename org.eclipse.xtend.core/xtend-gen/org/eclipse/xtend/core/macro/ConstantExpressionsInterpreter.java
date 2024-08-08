@@ -77,6 +77,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
@@ -707,6 +708,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     new PendingLinkingCandidateResolver<XAbstractFeatureCall>(featureCall).resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
   }
 
+  @XbaseGenerated
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);
@@ -740,6 +742,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
   }
 
+  @XbaseGenerated
   public String getFullName(final XExpression call) {
     if (call instanceof XFeatureCall) {
       return _getFullName((XFeatureCall)call);

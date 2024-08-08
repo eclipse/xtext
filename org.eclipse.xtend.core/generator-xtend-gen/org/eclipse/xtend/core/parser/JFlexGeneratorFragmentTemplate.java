@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
@@ -230,6 +231,7 @@ public class JFlexGeneratorFragmentTemplate {
     }
   }
 
+  @XbaseGenerated
   public void collectTokens(final EObject it, final List<String> known) {
     if (it instanceof Keyword) {
       _collectTokens((Keyword)it, known);

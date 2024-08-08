@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @since 2.7
@@ -502,6 +503,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     IterableExtensions.filter(it.getDeclaredFields(), _function).forEach(_function_1);
   }
 
+  @XbaseGenerated
   public void transform(final MutableMemberDeclaration it, final TransformationContext context) {
     if (it instanceof MutableClassDeclaration) {
       _transform((MutableClassDeclaration)it, context);
