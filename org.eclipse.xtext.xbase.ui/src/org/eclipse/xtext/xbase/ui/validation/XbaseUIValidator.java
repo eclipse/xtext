@@ -11,12 +11,15 @@ package org.eclipse.xtext.xbase.ui.validation;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -238,27 +241,25 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		return result;
 	}
 	
+	private final static MethodHandle GET_ROOT_PATH_TO_RESOLVED_ENTRIES = findAccessor();
 	
-	protected final boolean isJdtCoreVersionAtLeast3390 = JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0;
-	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) {
-		if (isJdtCoreVersionAtLeast3390) {
-			try {
-				Method m = PerProjectInfo.class.getDeclaredMethod("getRootPathToResolvedEntries");
-				@SuppressWarnings("unchecked")
-				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) m.invoke(info);
-				return result;
-			} catch (ReflectiveOperationException e) {
-				throw new RuntimeException(e);
+	private static MethodHandle findAccessor() {
+		try {
+			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0) {
+				return MethodHandles.lookup().findVirtual(PerProjectInfo.class, "getRootPathToResolvedEntries", MethodType.methodType(Map.class));
+			} else {
+				return MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
 			}
-		} else {
-			try {
-				Field f = PerProjectInfo.class.getDeclaredField("rootPathToResolvedEntries");
-				@SuppressWarnings("unchecked")
-				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) f.get(info);
-				return result;
-			} catch (ReflectiveOperationException e) {
-				throw new RuntimeException(e);
-			}
+		} catch (Exception e) {
+			return MethodHandles.dropArguments(MethodHandles.constant(Map.class, Collections.emptyMap()), 0, PerProjectInfo.class);
+		}
+	}
+	
+	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) throws JavaModelException {
+		try {
+			return (Map<IPath, IClasspathEntry>) GET_ROOT_PATH_TO_RESOLVED_ENTRIES.invoke(info);
+		} catch(Throwable t) {
+			throw new JavaModelException(Status.error(t.getMessage(), t));
 		}
 	}
 
