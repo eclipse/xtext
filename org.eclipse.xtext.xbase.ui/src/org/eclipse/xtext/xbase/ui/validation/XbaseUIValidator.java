@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,9 +11,15 @@ package org.eclipse.xtext.xbase.ui.validation;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -23,9 +29,11 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.core.ClasspathAccessRule;
+import org.eclipse.jdt.internal.core.JavaModelManager.PerProjectInfo;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -46,6 +54,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
+import org.osgi.framework.Version;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -222,14 +231,36 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		IClasspathEntry result = null;
 		JavaProject castedProject = (JavaProject) javaProject;
 		castedProject.getResolvedClasspath(); // force the resolved entry cache to be populated
-		@SuppressWarnings("rawtypes")
-		Map rootPathToResolvedEntries = castedProject.getPerProjectInfo().rootPathToResolvedEntries;
+		Map<IPath, IClasspathEntry> rootPathToResolvedEntries = getRootPathToResolvedEntries(castedProject.getPerProjectInfo());
 		if (rootPathToResolvedEntries != null) {
-			result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getPath());
+			result = rootPathToResolvedEntries.get(root.getPath());
 			if (result == null)
-				result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getJavaProject().getPath());
+				result = rootPathToResolvedEntries.get(root.getJavaProject().getPath());
 		}
 		
 		return result;
 	}
+	
+	private final static MethodHandle GET_ROOT_PATH_TO_RESOLVED_ENTRIES = findAccessor();
+	
+	private static MethodHandle findAccessor() {
+		try {
+			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0) {
+				return MethodHandles.lookup().findVirtual(PerProjectInfo.class, "getRootPathToResolvedEntries", MethodType.methodType(Map.class));
+			} else {
+				return MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
+			}
+		} catch (Exception e) {
+			return MethodHandles.dropArguments(MethodHandles.constant(Map.class, Collections.emptyMap()), 0, PerProjectInfo.class);
+		}
+	}
+	
+	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) throws JavaModelException {
+		try {
+			return (Map<IPath, IClasspathEntry>) GET_ROOT_PATH_TO_RESOLVED_ENTRIES.invoke(info);
+		} catch(Throwable t) {
+			throw new JavaModelException(Status.error(t.getMessage(), t));
+		}
+	}
+
 }
