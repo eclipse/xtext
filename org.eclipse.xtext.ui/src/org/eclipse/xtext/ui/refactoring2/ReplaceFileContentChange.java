@@ -38,6 +38,13 @@ public class ReplaceFileContentChange extends ResourceChange {
 
 	private String name;
 
+	private VerifyMode verifyMode = VerifyMode.BOTH;
+	private enum VerifyMode {
+		BOTH,
+		NOT_FOR_UNDO_NOW_FWD,
+		NOT_FOR_UNDO_NOW_UNDO
+	}
+
 	public ReplaceFileContentChange(String name, IFile file, byte[] newContents) {
 		this(file, newContents);
 		this.name = name;
@@ -48,6 +55,11 @@ public class ReplaceFileContentChange extends ResourceChange {
 		this.newContents = newContents;
 	}
 
+	private ReplaceFileContentChange(String name, IFile file, byte[] newContents, VerifyMode verifyMode) {
+		this(name, file, newContents);
+		this.verifyMode = verifyMode;
+	}
+
 	@Override
 	protected IResource getModifiedResource() {
 		return file;
@@ -56,7 +68,7 @@ public class ReplaceFileContentChange extends ResourceChange {
 	@Override
 	public RefactoringStatus isValid(IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		RefactoringStatus result = new RefactoringStatus();
-		if (!file.exists()) {
+		if (verifyMode != VerifyMode.NOT_FOR_UNDO_NOW_UNDO && !file.exists()) {
 			result.addFatalError("File " + file.getFullPath() + " does not exist");
 		}
 		return result;
@@ -68,11 +80,21 @@ public class ReplaceFileContentChange extends ResourceChange {
 		Change change = null;
 		try (ByteArrayInputStream newContentsIS = new ByteArrayInputStream(newContents)) {
 			file.setContents(newContentsIS, true, true, pm);
-			change = new ReplaceFileContentChange(file, oldContents);
+			change = new ReplaceFileContentChange(null, file, oldContents, getNextUndoVerifyMode());
 		} catch (IOException e) {
 			LOG.error("Error closing stream", e);
 		}
 		return change;
+	}
+
+	private VerifyMode getNextUndoVerifyMode() {
+		if(verifyMode == VerifyMode.NOT_FOR_UNDO_NOW_FWD ) {
+			return VerifyMode.NOT_FOR_UNDO_NOW_UNDO;
+		}
+		if(verifyMode == VerifyMode.NOT_FOR_UNDO_NOW_UNDO ) {
+			return VerifyMode.NOT_FOR_UNDO_NOW_FWD;
+		}
+		return VerifyMode.BOTH;
 	}
 
 	protected byte[] getOldContents() {
@@ -98,5 +120,14 @@ public class ReplaceFileContentChange extends ResourceChange {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * {@link #isValid(IProgressMonitor)} does verify that the file is existing.
+	 * But when this change is potentially combined with file renaming or move, that verify will fail for UNDO.
+	 * Skipping it avoids the problem.
+	 */
+	public static ReplaceFileContentChange createWithSkippingUndoVerify(String name, IFile file, byte[] newContent) {
+		return new ReplaceFileContentChange(name, file, newContent, VerifyMode.NOT_FOR_UNDO_NOW_FWD);
 	}
 }
