@@ -14,10 +14,12 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -239,51 +241,25 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		return result;
 	}
 	
+	private final static MethodHandle GET_ROOT_PATH_TO_RESOLVED_ENTRIES = findAccessor();
 	
-	private final static boolean IS_JDT_CORE_VERSION_AT_LEAST3390 = JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0;
-	
-	private final static MethodHandle GET_ROOT_PATH_TO_RESOLVED_ENTRIES_METHOD_HANDLE = initializeGetRootPathToResolvedEntriesMethodHandle();
-	private final static MethodHandle ROOT_PATH_TO_RESOLVED_ENTRIES_FIELD_HANDLE = initializeRootPathToResolvedEntriesFieldHandle(); 
-	
-	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) {
-		if (IS_JDT_CORE_VERSION_AT_LEAST3390) {
-			if (GET_ROOT_PATH_TO_RESOLVED_ENTRIES_METHOD_HANDLE == null) {
-				throw new RuntimeException("getRootPathToResolvedEntries method not found");
-			}
-			try {
-				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) GET_ROOT_PATH_TO_RESOLVED_ENTRIES_METHOD_HANDLE.invoke(info);
-				return result;
-			} catch (Throwable e) {
-				throw new RuntimeException("failed to call getRootPathToResolvedEntries method", e);
-			}
-		} else {
-			if (ROOT_PATH_TO_RESOLVED_ENTRIES_FIELD_HANDLE == null) {
-				throw new RuntimeException("rootPathToResolvedEntries field not found");
-			}
-			try {
-				Map<IPath, IClasspathEntry> result = (Map<IPath, IClasspathEntry>) ROOT_PATH_TO_RESOLVED_ENTRIES_FIELD_HANDLE.invoke(info);
-				return result;
-			} catch (Throwable e) {
-				throw new RuntimeException("failed to call rootPathToResolvedEntries field", e);
-			}
+	private static MethodHandle findAccessor() {
+		try {
+			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 0)) >= 0) {
+				return MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
+			} else {
+				return MethodHandles.lookup().findVirtual(PerProjectInfo.class, "getRootPathToResolvedEntries", MethodType.methodType(Map.class));
+		}
+		} catch (Exception e) {
+			return MethodHandles.dropArguments(MethodHandles.constant(Map.class, Collections.emptyMap()), 0, PerProjectInfo.class);
 		}
 	}
-
-	private static MethodHandle initializeRootPathToResolvedEntriesFieldHandle() {
+	
+	protected Map<IPath, IClasspathEntry> getRootPathToResolvedEntries(PerProjectInfo info) throws JavaModelException {
 		try {
-			MethodHandle handle = MethodHandles.lookup().findGetter(PerProjectInfo.class, "rootPathToResolvedEntries", Map.class);
-			return handle;
-		} catch (ReflectiveOperationException e) {
-			return null;
-		}
-	}
-
-	private static MethodHandle initializeGetRootPathToResolvedEntriesMethodHandle() {
-		try {
-			MethodHandle handle = MethodHandles.lookup().findVirtual(PerProjectInfo.class, "getRootPathToResolvedEntries", MethodType.methodType(Map.class));
-			return handle;
-		} catch (ReflectiveOperationException e) {
-			return null;
+			return (Map<IPath, IClasspathEntry>) GET_ROOT_PATH_TO_RESOLVED_ENTRIES.invoke(info);
+		} catch(Throwable t) {
+			throw new JavaModelException(Status.error(t.getMessage(), t));
 		}
 	}
 
