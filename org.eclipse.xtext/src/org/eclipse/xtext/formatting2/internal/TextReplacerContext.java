@@ -131,6 +131,19 @@ public class TextReplacerContext implements ITextReplacerContext {
 				count += logicalLength(text);
 				lastOffset = rep.getOffset();
 			}
+			final ITextReplacer replacer = current.getReplacer();
+			if (replacer != null) {
+				final int offset = replacer.getRegion().getOffset();
+				if (offset < lastOffset) {
+					final String text = access.textForOffset(offset, lastOffset - offset);
+					final int idx = text.lastIndexOf('\n');
+					if (idx >= 0) {
+						return count + logicalLength(text.substring(idx + 1));
+					}
+					count += logicalLength(text);
+					lastOffset = offset;
+				}
+			}
 			current = current.getPreviousContext();
 		}
 		String rest = access.textForOffset(0, lastOffset);
@@ -330,6 +343,9 @@ public class TextReplacerContext implements ITextReplacerContext {
 
 	@Override
 	public ITextReplacerContext withDocument(IFormattableDocument document) {
+		if (document == this.document) {
+			return this;
+		}
 		TextReplacerContext context = new TextReplacerContext(document, this, indentation, null);
 		if (this.nextReplacerIsChild)
 			context.setNextReplacerIsChild();
@@ -338,11 +354,17 @@ public class TextReplacerContext implements ITextReplacerContext {
 
 	@Override
 	public ITextReplacerContext withIndentation(int indentation) {
+		if(indentation == this.indentation) {
+			return this;
+		}
 		return new TextReplacerContext(document, this, indentation, null);
 	}
 
 	@Override
 	public ITextReplacerContext withReplacer(ITextReplacer replacer) {
+		if(replacer == this.replacer) {
+			return this;
+		}
 		ITextReplacerContext current = this;
 		while (current != null) {
 			ITextReplacer lastReplacer = current.getReplacer();
