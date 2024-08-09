@@ -113,7 +113,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			"org.eclipse.emf.mwe2.launch",
 			"org.eclipse.emf.mwe2.lib",
 			"org.objectweb.asm",
-			"org.apache.commons.logging", 
+			"org.apache.commons.commons-logging",
 			"org.apache.log4j"
 		)
 		if (isFromExistingEcoreModels) {
