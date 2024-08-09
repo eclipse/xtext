@@ -1342,6 +1342,23 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	@Test public void testCheckFragmentCallInUnorderedGroup() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		typeRef.setClassifier(EcorePackage.Literals.EOBJECT);
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setType(typeRef);
+		parserRule.setFragment(true);
+		ruleCall.setRule(parserRule);
+		unorderedGroup.getElements().add(ruleCall);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkRuleCallInUnorderedGroup(ruleCall);
+		messageAcceptor.validate();
+	}
+	
 	@Test public void testCheckRuleCallInUnorderedGroup_01() throws Exception {
 		XtextValidator validator = get(XtextValidator.class);
 		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();

@@ -1136,6 +1136,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			return;
 		if (GrammarUtil.isAssigned(call))
 			return;
+		if (GrammarUtil.isEObjectFragmentRuleCall(call))
+			return;
 		if (EcoreUtil2.getContainerOfType(call, UnorderedGroup.class) != null)
 			error(
 					"Unassigned rule calls may not be used in unordered groups.", 
