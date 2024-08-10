@@ -41,6 +41,7 @@
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<executions>
 					<execution>
+						<?m2e ignore?>
 						<id>add-sources</id>
 						<phase>initialize</phase>
 						<goals>

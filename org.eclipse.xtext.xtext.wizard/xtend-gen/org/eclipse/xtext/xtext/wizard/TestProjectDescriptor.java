@@ -281,6 +281,10 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t\t\t");
+          _builder.append("<?m2e ignore?>");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t\t\t");
           _builder.append("<id>add-test-source</id>");
           _builder.newLine();
           _builder.append("\t\t");
