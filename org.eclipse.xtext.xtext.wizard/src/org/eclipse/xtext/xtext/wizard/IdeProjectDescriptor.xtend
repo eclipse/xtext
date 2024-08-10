@@ -139,10 +139,8 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 												<overWriteIfNewer>true</overWriteIfNewer>
 												<excludeTransitive>true</excludeTransitive>
 												<excludeArtifactIds>
-													com.ibm.icu,
-													org.apache.ant,
-													org.apache.commons.lang,
-													org.apache.commons.logging,
+													icu4j,
+													commons-logging,
 													org.eclipse.core.commands,
 													org.eclipse.core.contenttype,
 													org.eclipse.core.expressions,
@@ -206,7 +204,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 												implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 												<resource>plugin.properties</resource>
 											</transformer>
-											<transformer 
+											<transformer
 												implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer">
 											</transformer>
 										</transformers>
@@ -229,6 +227,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 											<filter>
 												<artifact>*:*</artifact>
 												<excludes>
+													<exclude>**/*.java</exclude>
 													<exclude>META-INF/INDEX.LIST</exclude>
 													<exclude>META-INF/*.SF</exclude>
 													<exclude>META-INF/*.DSA</exclude>

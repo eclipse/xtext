@@ -68,7 +68,7 @@
 							implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 							<resource>plugin.properties</resource>
 						</transformer>
-						<transformer 
+						<transformer
 							implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer">
 						</transformer>
 					</transformers>
@@ -76,6 +76,7 @@
 						<filter>
 							<artifact>*:*</artifact>
 							<excludes>
+								<exclude>**/*.java</exclude>
 								<exclude>META-INF/INDEX.LIST</exclude>
 								<exclude>META-INF/*.SF</exclude>
 								<exclude>META-INF/*.DSA</exclude>
