@@ -25,9 +25,9 @@ pipeline {
   }
 
   tools {
-     // the Java version we use to run the build (minimal requirement for Maven/Tycho)
-     // we force other Java versions through Maven toolchains
-     jdk "temurin-jdk17-latest"
+     // the Java version we use to run the build
+     // we force the effective JDK version for compilation/testing through Maven toolchains
+     jdk "temurin-jdk21-latest"
   }
 
   stages {
@@ -68,6 +68,7 @@ pipeline {
           sh """
             ./full-build.sh --tp=${selectedTargetPlatform()} \
               ${javaVersion() == 11 ? '--toolchains releng/toolchains.xml -Pstrict-jdk-11' : ''} \
+              ${javaVersion() == 17 ? '--toolchains releng/toolchains.xml -Pstrict-jdk-17' : ''} \
               ${javaVersion() == 21 ? '-Pstrict-jdk-21' : ''}
           """
         }
