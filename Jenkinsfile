@@ -25,9 +25,9 @@ pipeline {
   }
 
   tools {
-     jdk "temurin-jdk11-latest"
+     // the Java version we use to run the build (minimal requirement for Maven/Tycho)
+     // we force other Java versions through Maven toolchains
      jdk "temurin-jdk17-latest"
-     jdk "temurin-jdk21-latest"
   }
 
   stages {
@@ -58,6 +58,7 @@ pipeline {
     stage('Maven/Tycho Build & Test') {
       environment {
         MAVEN_OPTS = "-Xmx1500m"
+        // set all Java versions needed by our toolchains.xml
         JAVA_HOME_11_X64 = tool(type:'jdk', name:'temurin-jdk11-latest')
         JAVA_HOME_17_X64 = tool(type:'jdk', name:'temurin-jdk17-latest')
         JAVA_HOME_21_X64 = tool(type:'jdk', name:'temurin-jdk21-latest')
