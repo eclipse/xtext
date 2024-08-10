@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @Singleton
 @SuppressWarnings("all")
@@ -1220,6 +1221,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   }
 
   @Override
+  @XbaseGenerated
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof EnumRule) {
       return _compileRule((EnumRule)it, grammar, options);

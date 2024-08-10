@@ -72,6 +72,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -1374,6 +1375,7 @@ public class XbaseFormatter extends XtypeFormatter {
     return ((obj != null) && (this.isMultiline(obj) || this.previousHiddenRegion(obj).isMultiline()));
   }
 
+  @XbaseGenerated
   public void format(final Object expr, final IFormattableDocument format) {
     if (expr instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)expr, format);

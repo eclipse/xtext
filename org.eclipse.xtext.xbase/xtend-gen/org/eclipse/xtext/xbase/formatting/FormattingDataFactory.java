@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @deprecated use {@link IHiddenRegionFormatter}
@@ -485,6 +486,7 @@ public class FormattingDataFactory {
     return _function;
   }
 
+  @XbaseGenerated
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
     if (key instanceof BlankLineKey) {
       return _newFormattingData(leafs, (BlankLineKey)key, it);

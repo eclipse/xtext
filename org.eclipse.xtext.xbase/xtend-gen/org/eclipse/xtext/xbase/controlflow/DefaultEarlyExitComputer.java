@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -298,6 +299,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     return this.getExitPoints(expression.getExpression());
   }
 
+  @XbaseGenerated
   protected Collection<IEarlyExitComputer.ExitPoint> exitPoints(final XExpression expression) {
     if (expression instanceof XDoWhileExpression) {
       return _exitPoints((XDoWhileExpression)expression);

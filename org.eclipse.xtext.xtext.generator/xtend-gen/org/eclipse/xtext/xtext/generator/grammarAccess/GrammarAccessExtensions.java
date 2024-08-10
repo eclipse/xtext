@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -944,6 +945,7 @@ public class GrammarAccessExtensions {
     return _switchResult;
   }
 
+  @XbaseGenerated
   public String grammarElementIdentifier(final EObject it) {
     if (it instanceof AbstractElement) {
       return _grammarElementIdentifier((AbstractElement)it);
@@ -957,6 +959,7 @@ public class GrammarAccessExtensions {
     }
   }
 
+  @XbaseGenerated
   public String grammarElementAccess(final EObject it) {
     if (it instanceof AbstractElement) {
       return _grammarElementAccess((AbstractElement)it);
@@ -970,6 +973,7 @@ public class GrammarAccessExtensions {
     }
   }
 
+  @XbaseGenerated
   public boolean predicated(final AbstractElement it) {
     if (it instanceof Assignment) {
       return _predicated((Assignment)it);
@@ -983,6 +987,7 @@ public class GrammarAccessExtensions {
     }
   }
 
+  @XbaseGenerated
   public String localVar(final AbstractElement it) {
     if (it instanceof EnumLiteralDeclaration) {
       return _localVar((EnumLiteralDeclaration)it);
@@ -996,6 +1001,7 @@ public class GrammarAccessExtensions {
     }
   }
 
+  @XbaseGenerated
   public List<AbstractElement> contentsAsList(final EObject it) {
     if (it instanceof UnorderedGroup) {
       return _contentsAsList((UnorderedGroup)it);

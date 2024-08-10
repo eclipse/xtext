@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -2621,6 +2622,7 @@ public class ConstantOperators {
     return (_intValue != _intValue_1);
   }
 
+  @XbaseGenerated
   public Object minus(final Object e) {
     if (e instanceof Byte) {
       return _minus((Byte)e);
@@ -2642,6 +2644,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object plus(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -2763,6 +2766,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object shiftLeft(final Object i, final Object bits) {
     if (i instanceof Integer
          && bits instanceof Integer) {
@@ -2779,6 +2783,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object shiftRight(final Object i, final Object bits) {
     if (i instanceof Integer
          && bits instanceof Integer) {
@@ -2795,6 +2800,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object shiftRightUnsigned(final Object i, final Object bits) {
     if (i instanceof Integer
          && bits instanceof Integer) {
@@ -2811,6 +2817,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean and(final Object left, final Object right) {
     if (left instanceof Boolean
          && right instanceof Boolean) {
@@ -2824,6 +2831,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean or(final Object left, final Object right) {
     if (left instanceof Boolean
          && right instanceof Boolean) {
@@ -2837,6 +2845,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean lessThan(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -2955,6 +2964,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object minus(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3073,6 +3083,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean greaterThan(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3191,6 +3202,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object modulo(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3309,6 +3321,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object multiply(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3427,6 +3440,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public Object divide(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3545,6 +3559,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean same(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3663,6 +3678,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean lessEquals(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3781,6 +3797,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean greaterEquals(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3899,6 +3916,7 @@ public class ConstantOperators {
     }
   }
 
+  @XbaseGenerated
   public boolean notSame(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {

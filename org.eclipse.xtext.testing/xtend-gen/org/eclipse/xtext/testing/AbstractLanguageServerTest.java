@@ -121,6 +121,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -1553,6 +1554,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
 
+  @XbaseGenerated
   protected String toExpectation(final Object it) {
     if (it instanceof Integer) {
       return _toExpectation((Integer)it);

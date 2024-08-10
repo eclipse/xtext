@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation;
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -36,6 +37,7 @@ public class MacroAwareStringConcatenation extends ImportingStringConcatenation 
     return this._getStringRepresentation(type);
   }
 
+  @XbaseGenerated
   protected String getStringRepresentation(final Object object) {
     if (object instanceof JvmTypeDeclarationImpl) {
       return _getStringRepresentation((JvmTypeDeclarationImpl<?>)object);

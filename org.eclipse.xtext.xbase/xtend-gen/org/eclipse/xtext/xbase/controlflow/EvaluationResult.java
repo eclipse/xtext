@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
@@ -183,6 +184,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     return Boolean.valueOf(false);
   }
 
+  @XbaseGenerated
   private Object equalValue(final Object myValue, final Object otherValue) {
     if (myValue instanceof JvmEnumerationLiteral
          && otherValue instanceof JvmEnumerationLiteral) {

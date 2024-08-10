@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -609,6 +610,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _xifexpression;
   }
 
+  @XbaseGenerated
   private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final StringConcatenationClient accessor) {
     if (alternatives instanceof Alternatives) {
       return _assignmentTerminal((Alternatives)alternatives, accessor);

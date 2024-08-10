@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 /**
@@ -257,6 +258,7 @@ public class ImportsCollector {
     }
   }
 
+  @XbaseGenerated
   public void visit(final EObject jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     if (jvmType instanceof JvmGenericType) {
       _visit((JvmGenericType)jvmType, originNode, acceptor);

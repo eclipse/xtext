@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class Case_9 extends Case_8 {
@@ -50,6 +51,7 @@ public class Case_9 extends Case_8 {
     return null;
   }
 
+  @XbaseGenerated
   public CharSequence generateTypeRef(final EObject c) {
     if (c instanceof ENamedElement) {
       return _generateTypeRef((ENamedElement)c);

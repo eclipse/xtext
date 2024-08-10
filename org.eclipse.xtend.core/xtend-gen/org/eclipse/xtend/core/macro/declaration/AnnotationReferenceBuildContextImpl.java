@@ -56,6 +56,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -833,6 +834,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     return _switchResult;
   }
 
+  @XbaseGenerated
   public void internalSet(final String name, final Object value, final boolean mustBeArray) {
     if (value instanceof EnumerationValueDeclaration) {
       _internalSet(name, (EnumerationValueDeclaration)value, mustBeArray);
@@ -921,6 +923,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     }
   }
 
+  @XbaseGenerated
   protected void setValue(final JvmAnnotationValue it, final Object value, final String componentType, final boolean mustBeArray) {
     if (it instanceof JvmCustomAnnotationValue
          && value instanceof XtendAnnotationReferenceImpl) {

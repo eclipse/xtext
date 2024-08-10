@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -186,6 +187,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     }
   }
 
+  @XbaseGenerated
   public void build(final EObject xtendType, final IXtendOutlineContext context) {
     if (xtendType instanceof XtendTypeDeclaration) {
       _build((XtendTypeDeclaration)xtendType, context);

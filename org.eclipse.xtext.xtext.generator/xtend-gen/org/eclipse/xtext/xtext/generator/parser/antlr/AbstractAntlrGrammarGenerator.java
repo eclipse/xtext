@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
 import org.eclipse.xtext.xtext.RuleFilter;
 import org.eclipse.xtext.xtext.RuleNames;
@@ -1104,6 +1105,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     return true;
   }
 
+  @XbaseGenerated
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof EnumRule) {
       return _compileRule((EnumRule)it, grammar, options);
@@ -1119,6 +1121,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
   }
 
+  @XbaseGenerated
   protected String dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _dataTypeEbnf2((Alternatives)it, supportActions);
@@ -1138,6 +1141,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
   }
 
+  @XbaseGenerated
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _ebnf2((Alternatives)it, options, supportActions);
@@ -1163,6 +1167,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
   }
 
+  @XbaseGenerated
   protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
@@ -1178,6 +1183,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
   }
 
+  @XbaseGenerated
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _assignmentEbnf((Alternatives)it, assignment, options, supportActions);
@@ -1199,6 +1205,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
   }
 
+  @XbaseGenerated
   public boolean mustBeParenthesized(final AbstractElement it) {
     if (it instanceof Alternatives) {
       return _mustBeParenthesized((Alternatives)it);

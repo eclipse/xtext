@@ -25,6 +25,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
@@ -93,6 +94,7 @@ public class XtendAntlrGrammarGeneratorHelper {
     it.eContents().forEach(_function);
   }
 
+  @XbaseGenerated
   public void collectTokens(final EObject it, final Set<String> tokens) {
     if (it instanceof Keyword) {
       _collectTokens((Keyword)it, tokens);

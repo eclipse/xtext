@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
@@ -160,6 +161,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     this._domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredType, _function);
   }
 
+  @XbaseGenerated
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (entity instanceof Entity) {
       _infer((Entity)entity, acceptor, prelinkingPhase);
