@@ -55,10 +55,8 @@
 							<overWriteIfNewer>true</overWriteIfNewer>
 							<excludeTransitive>true</excludeTransitive>
 							<excludeArtifactIds>
-								com.ibm.icu,
-								org.apache.ant,
-								org.apache.commons.lang,
-								org.apache.commons.logging,
+								icu4j,
+								commons-logging,
 								org.eclipse.core.commands,
 								org.eclipse.core.contenttype,
 								org.eclipse.core.expressions,
@@ -127,20 +125,20 @@
 					<artifactSet>
 						<excludes><!-- avoid duplicate inclusion due to addjars plugin -->
 							<exclude>*:lsMavenTychoFatjar.ide-org.eclipse.lsp4j*</exclude>
-							<exclude>*:lsMavenTychoFatjar.ide-org.eclipse.xtext.xbase.lib*</exclude>
-							<exclude>*:lsMavenTychoFatjar.ide-org.eclipse.xtend.lib*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-com.google.guava*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-asm*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-log4j*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-reload4j*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-org.objectweb.asm*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-org.apache.log4j*</exclude>
+							<exclude>*:*commons-logging*</exclude>
 						</excludes>
 					</artifactSet>
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
 							<excludes>
+								<exclude>**/*.java</exclude>
 								<exclude>META-INF/INDEX.LIST</exclude>
 								<exclude>META-INF/*.SF</exclude>
 								<exclude>META-INF/*.DSA</exclude>

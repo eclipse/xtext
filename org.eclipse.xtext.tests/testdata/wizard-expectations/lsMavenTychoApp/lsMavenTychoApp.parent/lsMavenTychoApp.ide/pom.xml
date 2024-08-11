@@ -55,10 +55,8 @@
 							<overWriteIfNewer>true</overWriteIfNewer>
 							<excludeTransitive>true</excludeTransitive>
 							<excludeArtifactIds>
-								com.ibm.icu,
-								org.apache.ant,
-								org.apache.commons.lang,
-								org.apache.commons.logging,
+								icu4j,
+								commons-logging,
 								org.eclipse.core.commands,
 								org.eclipse.core.contenttype,
 								org.eclipse.core.expressions,
