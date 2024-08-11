@@ -95,13 +95,13 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ failure() || cancelled() }}
         with:
-          name: test-results-${{ runner.os }}
+          name: build-maven-artifacts-test-results-${{ runner.os }}
           path: '**/target/surefire-reports'
       - name: Archive Logs
         uses: actions/upload-artifact@v4
         if: ${{ failure() || cancelled() }}
         with:
-          name: logs-${{ runner.os }}
+          name: build-maven-artifacts-logs-${{ runner.os }}
           path: '**/target/**/*.log'
   event_file:
     name: "Upload Event File"
