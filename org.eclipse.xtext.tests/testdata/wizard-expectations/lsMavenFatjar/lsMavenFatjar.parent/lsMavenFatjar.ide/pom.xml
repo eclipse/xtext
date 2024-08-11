@@ -76,6 +76,7 @@
 						<filter>
 							<artifact>*:*</artifact>
 							<excludes>
+								<exclude>**/*.java</exclude>
 								<exclude>META-INF/INDEX.LIST</exclude>
 								<exclude>META-INF/*.SF</exclude>
 								<exclude>META-INF/*.DSA</exclude>

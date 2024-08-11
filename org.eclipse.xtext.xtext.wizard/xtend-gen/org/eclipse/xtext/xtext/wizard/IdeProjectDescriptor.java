@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -413,19 +413,11 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t\t\t\t");
-              _builder.append("com.ibm.icu,");
+              _builder.append("icu4j,");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t\t\t\t");
-              _builder.append("org.apache.ant,");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t\t");
-              _builder.append("org.apache.commons.lang,");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t\t");
-              _builder.append("org.apache.commons.logging,");
+              _builder.append("commons-logging,");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t\t\t\t");
@@ -715,7 +707,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_1 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_1, "\t\t\t\t\t\t");
-                  _builder.append("-org.eclipse.xtext.xbase.lib*</exclude>");
+                  _builder.append("-com.google.guava*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
@@ -723,7 +715,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_2 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_2, "\t\t\t\t\t\t");
-                  _builder.append("-org.eclipse.xtend.lib*</exclude>");
+                  _builder.append("-asm*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
@@ -731,7 +723,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_3 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_3, "\t\t\t\t\t\t");
-                  _builder.append("-com.google.guava*</exclude>");
+                  _builder.append("-log4j*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
@@ -739,7 +731,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_4 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_4, "\t\t\t\t\t\t");
-                  _builder.append("-asm*</exclude>");
+                  _builder.append("-reload4j*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
@@ -747,7 +739,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_5 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_5, "\t\t\t\t\t\t");
-                  _builder.append("-log4j*</exclude>");
+                  _builder.append("-org.objectweb.asm*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
@@ -755,24 +747,13 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_6 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_6, "\t\t\t\t\t\t");
-                  _builder.append("-reload4j*</exclude>");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("<exclude>*:");
-                  String _name_7 = this.getConfig().getIdeProject().getName();
-                  _builder.append(_name_7, "\t\t\t\t\t\t");
-                  _builder.append("-org.objectweb.asm*</exclude>");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("\t\t");
-                  _builder.append("<exclude>*:");
-                  String _name_8 = this.getConfig().getIdeProject().getName();
-                  _builder.append(_name_8, "\t\t\t\t\t\t");
                   _builder.append("-org.apache.log4j*</exclude>");
                   _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t\t");
+                  _builder.append("<exclude>*:*commons-logging*</exclude>");
+                  _builder.newLine();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
                   _builder.append("\t");
@@ -799,6 +780,10 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.append("\t\t");
               _builder.append("\t\t\t\t");
               _builder.append("<excludes>");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t\t\t");
+              _builder.append("<exclude>**/*.java</exclude>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t\t\t\t");
