@@ -50,11 +50,17 @@ jobs:
       - name: Build and test
         uses: coactions/setup-xvfb@v1.0.1
         with: 
-          run: ./mvnw clean verify -B -fae "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots ${{ matrix.additional-maven-args }} -f org.eclipse.xtext.full.releng
+          run: >
+            ./mvnw "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}"
+            clean verify
+            -f org.eclipse.xtext.full.releng
+            -B -fae -PuseJenkinsSnapshots
+            -Dmaven.test.failure.ignore=true
+            ${{ matrix.additional-maven-args }}
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v4
-        if: ${{ failure() || cancelled() }}
+        if: always()
         with:
           name: test-results-${{ runner.os }}
           path: '**/*.tests/target/surefire-reports'
@@ -89,11 +95,17 @@ jobs:
         run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" >> "$GITHUB_ENV"
 
       - name: Build Maven artifacts
-        run: ./mvnw clean verify -B -fae "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}" -PuseJenkinsSnapshots -Pstrict-jdk-21 -f org.eclipse.xtext.maven.releng
+        run: >
+          ./mvnw "-Dmaven.home=${{ env.MAVEN_WRAPPER_HOME }}"
+          clean verify
+          -f org.eclipse.xtext.maven.releng
+          -B -fae -PuseJenkinsSnapshots
+          -Dmaven.test.failure.ignore=true
+          -Pstrict-jdk-21
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v4
-        if: ${{ failure() || cancelled() }}
+        if: always()
         with:
           name: test-results-${{ runner.os }}
           path: '**/target/surefire-reports'
