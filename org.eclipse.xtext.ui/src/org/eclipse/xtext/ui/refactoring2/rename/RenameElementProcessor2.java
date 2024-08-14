@@ -111,7 +111,7 @@ public class RenameElementProcessor2 extends AbstractRenameProcessor {
 		}
 
 		resourceSet = resourceSetProvider.get(project);
-		EObject target = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
+		target = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (target == null) {
 			status.add(RefactoringIssueAcceptor.Severity.ERROR, "Rename target does not exist", renameElementContext.getTargetElementURI());
 		} else {
