@@ -22,6 +22,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.AbstractXtextTests;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -124,6 +125,15 @@ public class GrammarParserTest extends AbstractXtextTests {
 	
 	@Test public void testNotAllowedInAssignment() throws Exception {
 		getModelAndExpect("name=(ID & STRING)", 2);
+	}
+	
+	@Test public void testFragments() throws Exception {
+		String grammar =
+			"MyRule;\n" +
+			"MyRule: IntFeature & 'keyword';\n" +
+			"fragment IntFeature: myFeature=INT\n";
+		XtextResource resource = getResourceFromString(grammar);
+		Assert.assertTrue(resource.getErrors().isEmpty());
 	}
 	
 	@Override
