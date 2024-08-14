@@ -55,7 +55,6 @@ jobs:
             clean verify
             -f org.eclipse.xtext.full.releng
             -B -fae -PuseJenkinsSnapshots
-            -Dmaven.test.failure.ignore=true
             ${{ matrix.additional-maven-args }}
 
       - name: Archive Test Results
@@ -100,7 +99,6 @@ jobs:
           clean verify
           -f org.eclipse.xtext.maven.releng
           -B -fae -PuseJenkinsSnapshots
-          -Dmaven.test.failure.ignore=true
           -Pstrict-jdk-21
 
       - name: Archive Test Results
