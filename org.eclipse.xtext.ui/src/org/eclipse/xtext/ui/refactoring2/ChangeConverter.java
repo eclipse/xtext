@@ -130,7 +130,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 				change.getResource().save(outputStream, null);
 				byte[] newContent = outputStream.toByteArray();
 				String lastSegment = change.getOldURI().lastSegment();
-				ReplaceFileContentChange ltkChange = new ReplaceFileContentChange(lastSegment, file, newContent);
+				Change ltkChange = createReplaceFileContentChange(lastSegment, file, newContent);
 				addChange(ltkChange);
 			} catch (IOException e) {
 				Exceptions.throwUncheckedException(e);
@@ -138,6 +138,26 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 		} catch (IOException e) {
 			LOG.error("Error closing stream", e);
 		}
+	}
+
+	/**
+	 * The change to replace the files textual content.
+	 * 
+	 * @implNote take care that this change can be part of more actions also influences this file. Especially file renaming or move. The
+	 *           verification of prerequisites happens in {@link Change#isValid(org.eclipse.core.runtime.IProgressMonitor)} before any
+	 *           change is performed. This can lead during UNDO to the situation, where the UNDO shall happen in a file that will only be
+	 *           present, after the move change UNDO has happened. Therefore this implementation forces the change to skip the verify during
+	 *           UNDO.
+	 * @param name
+	 *            the name of the file to be modified
+	 * @param file
+	 *            file to be modified
+	 * @param newContent
+	 *            the content to be stored into the file
+	 * @return the change object to be added
+	 */
+	protected Change createReplaceFileContentChange(String name, IFile file, byte[] newContent) {
+		return ReplaceFileContentChange.createWithSkippingUndoVerify(name, file, newContent);
 	}
 
 	protected void _handleReplacements(ITextDocumentChange change) {
