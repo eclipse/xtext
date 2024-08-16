@@ -115,6 +115,7 @@ jobs:
           path: '**/target/**/*.log'
   event_file:
     name: "Upload Event File"
+    if: github.event_name != 'pull_request' || github.event.pull_request.base.repo.clone_url != github.event.pull_request.head.repo.clone_url
     runs-on: ubuntu-latest
     steps:
     - name: Upload
