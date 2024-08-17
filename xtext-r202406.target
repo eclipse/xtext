@@ -43,7 +43,7 @@
 			<unit id="org.apache.log4j" version="1.2.25"/>
 			<unit id="org.kohsuke.args4j" version="0.0.0"/>
 			<unit id="com.google.gson" version="2.11.0"/>
-			<unit id="com.google.guava" version="33.2.1.jre"/>
+			<unit id="com.google.guava" version="33.3.0.jre"/>
 			<unit id="com.google.guava.failureaccess" version="1.0.2"/>
 			<unit id="com.google.inject" version="7.0.0"/>
 			<unit id="jakarta.inject.jakarta.inject-api" version="2.0.1"/>
