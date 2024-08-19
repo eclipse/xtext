@@ -9,6 +9,7 @@
 package org.eclipse.xtext.builder.clustering;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,6 @@ import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 /**
  * Makes an eager copy of the exported objects of another resource description.
@@ -56,7 +56,7 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
                         Map<String, String> userData = null;
                         for (final String key : from.getUserDataKeys()) {
                             if (userData == null) {
-                                userData = Maps.newHashMapWithExpectedSize(2);
+                                userData = new HashMap<>(3);
                             }
                             userData.put(key, from.getUserData(key));
                         }

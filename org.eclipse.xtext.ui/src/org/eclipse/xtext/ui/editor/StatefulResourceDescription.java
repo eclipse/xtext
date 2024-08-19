@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.editor;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.inject.Provider;
 
 /**
@@ -61,7 +61,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 				Map<String, String> userData = null;
 				for(String key: from.getUserDataKeys()) {
 					if (userData == null) {
-						userData = Maps.newHashMapWithExpectedSize(2);
+						userData = new HashMap<>(3);
 					}
 					userData.put(key, from.getUserData(key));
 				}
