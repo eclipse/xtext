@@ -6,7 +6,7 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'r202406', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'r202406', 'r202409', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', choices: [ '11', '17', '21' ], description: 'Which JDK version should be used?')
   }
@@ -154,7 +154,7 @@ def isTriggeredByUpstream() {
 def eclipseVersion() {
   def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
-    return "4.33"
+    return "4.34"
   } else {
     def baseDate = java.time.LocalDate.parse("2018-06-01") // 4.8 Photon
     def df = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
