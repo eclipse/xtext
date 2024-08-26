@@ -5,7 +5,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" output="target/test-classes" path="src">
 		<attributes>
 			<attribute name="test" value="true"/>
