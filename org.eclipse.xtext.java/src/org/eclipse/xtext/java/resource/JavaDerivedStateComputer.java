@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.java.resource;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
@@ -53,6 +56,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.osgi.framework.Version;
 
 import com.google.inject.Inject;
 
@@ -287,7 +291,27 @@ public class JavaDerivedStateComputer {
 		compilerOptions.originalSourceLevel = targetLevel;
 		compilerOptions.complianceLevel = sourceLevel;
 		compilerOptions.originalComplianceLevel = targetLevel;
+		if (INLINE_JSR_BYTECODE != null) {
+			try {
+				INLINE_JSR_BYTECODE.invoke(compilerOptions, true);
+			} catch (Throwable e) {
+				// ignore
+			}
+		}
 		return compilerOptions;
+	}
+	
+	private final static MethodHandle INLINE_JSR_BYTECODE = findInlineJsrBytecode();
+	private static MethodHandle findInlineJsrBytecode() {
+		try {
+			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 100)) >= 0) {
+				return null;
+			} else {
+				return MethodHandles.lookup().findSetter(CompilerOptions.class, "inlineJsrBytecode", boolean.class);
+			}
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	protected long toJdtVersion(JavaVersion version) {
