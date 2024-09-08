@@ -204,7 +204,6 @@ public class InMemoryJavaCompiler {
 		this.parentClassLoader = parent;
 		this.compilerOptions = new CompilerOptions();
 		this.setJavaVersion(javaVersion);
-		this.compilerOptions.inlineJsrBytecode = true;
 		this.compilerOptions.preserveAllLocalVariables = true;
 	}
 

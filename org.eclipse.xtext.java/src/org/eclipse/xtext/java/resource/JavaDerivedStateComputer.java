@@ -281,7 +281,6 @@ public class JavaDerivedStateComputer {
 		long targetLevel = toJdtVersion(targetVersion);
 		CompilerOptions compilerOptions = new CompilerOptions();
 		compilerOptions.targetJDK = targetLevel;
-		compilerOptions.inlineJsrBytecode = true;
 		compilerOptions.sourceLevel = sourceLevel;
 		compilerOptions.produceMethodParameters = true;
 		compilerOptions.produceReferenceInfo = true;
