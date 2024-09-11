@@ -11,11 +11,14 @@ package org.eclipse.xtext.xbase.testing;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
@@ -37,8 +41,10 @@ import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
+import org.eclipse.jdt.internal.core.JavaModelManager.PerProjectInfo;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
 
@@ -204,8 +210,27 @@ public class InMemoryJavaCompiler {
 		this.parentClassLoader = parent;
 		this.compilerOptions = new CompilerOptions();
 		this.setJavaVersion(javaVersion);
-		this.compilerOptions.inlineJsrBytecode = true;
+		if (INLINE_JSR_BYTECODE != null) {
+			try {
+				INLINE_JSR_BYTECODE.invoke(this.compilerOptions, true);
+			} catch (Throwable e) {
+				// ignore
+			}
+		}
 		this.compilerOptions.preserveAllLocalVariables = true;
+	}
+	
+	private final static MethodHandle INLINE_JSR_BYTECODE = findInlineJsrBytecode();
+	private static MethodHandle findInlineJsrBytecode() {
+		try {
+			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 100)) >= 0) {
+				return null;
+			} else {
+				return MethodHandles.lookup().findSetter(CompilerOptions.class, "inlineJsrBytecode", boolean.class);
+			}
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public InMemoryJavaCompiler(ClassLoader parent, CompilerOptions compilerOptions) {
