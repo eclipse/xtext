@@ -206,6 +206,10 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t\t\t");
+          _builder.append("<?m2e ignore?>");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t\t\t");
           _builder.append("<id>add-source</id>");
           _builder.newLine();
           _builder.append("\t\t");

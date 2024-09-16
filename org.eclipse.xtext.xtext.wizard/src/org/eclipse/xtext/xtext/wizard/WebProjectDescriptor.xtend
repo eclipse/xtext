@@ -122,6 +122,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 							<version>3.3.0</version>
 							<executions>
 								<execution>
+									<?m2e ignore?>
 									<id>add-source</id>
 									<phase>initialize</phase>
 									<goals>

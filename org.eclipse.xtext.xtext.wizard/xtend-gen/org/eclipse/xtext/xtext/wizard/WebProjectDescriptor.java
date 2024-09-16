@@ -283,6 +283,9 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       _builder.append("<execution>");
       _builder.newLine();
       _builder.append("\t\t\t\t\t");
+      _builder.append("<?m2e ignore?>");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
       _builder.append("<id>add-source</id>");
       _builder.newLine();
       _builder.append("\t\t\t\t\t");

@@ -122,6 +122,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 								<version>3.3.0</version>
 								<executions>
 									<execution>
+										<?m2e ignore?>
 										<id>add-test-source</id>
 										<phase>initialize</phase>
 										<goals>

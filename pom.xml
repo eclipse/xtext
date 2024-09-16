@@ -500,6 +500,7 @@
 					<version>3.4.1</version>
 					<executions>
 						<execution>
+							<?m2e ignore?>
 							<id>enforce-maven-version</id>
 							<goals>
 								<goal>enforce</goal>

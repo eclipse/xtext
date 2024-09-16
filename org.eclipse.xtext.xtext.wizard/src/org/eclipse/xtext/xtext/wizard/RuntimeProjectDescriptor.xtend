@@ -347,6 +347,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							<version>3.0.0</version>
 							<executions>
 								<execution>
+									<?m2e ignore?>
 									<id>mwe2Launcher</id>
 									<phase>generate-sources</phase>
 									<goals>
@@ -418,6 +419,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								<version>3.3.0</version>
 								<executions>
 									<execution>
+										<?m2e ignore?>
 										<id>add-source</id>
 										<phase>initialize</phase>
 										<goals>
@@ -487,40 +489,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							«ENDIF»
 						«ENDIF»
 					</plugins>
-					<pluginManagement>
-						<plugins>
-							<plugin>
-								<groupId>org.eclipse.m2e</groupId>
-								<artifactId>lifecycle-mapping</artifactId>
-								<version>1.0.0</version>
-								<configuration>
-									<lifecycleMappingMetadata>
-										<pluginExecutions>
-											<pluginExecution>
-												<pluginExecutionFilter>
-													<groupId>
-														org.codehaus.mojo
-													</groupId>
-													<artifactId>
-														exec-maven-plugin
-													</artifactId>
-													<versionRange>
-														[1.2.1,)
-													</versionRange>
-													<goals>
-														<goal>java</goal>
-													</goals>
-												</pluginExecutionFilter>
-												<action>
-													<ignore></ignore>
-												</action>
-											</pluginExecution>
-										</pluginExecutions>
-									</lifecycleMappingMetadata>
-								</configuration>
-							</plugin>
-						</plugins>
-					</pluginManagement>
 				</build>
 			'''
 		]
