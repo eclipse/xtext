@@ -23,7 +23,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
@@ -56,7 +55,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.osgi.framework.Version;
 
 import com.google.inject.Inject;
 
@@ -304,11 +302,7 @@ public class JavaDerivedStateComputer {
 	private final static MethodHandle INLINE_JSR_BYTECODE = findInlineJsrBytecode();
 	private static MethodHandle findInlineJsrBytecode() {
 		try {
-			if (JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3, 39, 100)) >= 0) {
-				return null;
-			} else {
-				return MethodHandles.lookup().findSetter(CompilerOptions.class, "inlineJsrBytecode", boolean.class);
-			}
+			return MethodHandles.lookup().findSetter(CompilerOptions.class, "inlineJsrBytecode", boolean.class);
 		} catch (Exception e) {
 			return null;
 		}
