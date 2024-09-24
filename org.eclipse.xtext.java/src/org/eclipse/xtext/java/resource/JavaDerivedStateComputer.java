@@ -47,6 +47,7 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder;
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
+import org.eclipse.xtext.jdt.facade.JdtFacade;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -301,23 +302,8 @@ public class JavaDerivedStateComputer {
 				// ignore
 			}
 		}
-		if (INLINE_JSR_BYTECODE != null) {
-			try {
-				INLINE_JSR_BYTECODE.invoke(compilerOptions, true);
-			} catch (Throwable e) {
-				// ignore
-			}
-		}
+		JdtFacade.setInlineJsrBytecode(compilerOptions, true);
 		return compilerOptions;
-	}
-	
-	private final static MethodHandle INLINE_JSR_BYTECODE = findInlineJsrBytecode();
-	private static MethodHandle findInlineJsrBytecode() {
-		try {
-			return MethodHandles.lookup().findSetter(CompilerOptions.class, "inlineJsrBytecode", boolean.class);
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	private final static MethodHandle ORIGINAL_SOURCE_LEVEL = findOriginalSourceLevel();

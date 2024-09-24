@@ -38,6 +38,7 @@
 		<module>../org.eclipse.xtext.xbase.ide</module>
 		<module>../org.eclipse.xtext.xbase.testing</module>
 		<module>../org.eclipse.xtext.builder.standalone</module>
+		<module>../org.eclipse.xtext.jdt.facade</module>
 		<module>../org.eclipse.xtext.java</module>
 		<!-- This is required by the xtext-maven-plugin IT -->
 		<module>../org.eclipse.xtext.purexbase</module>
