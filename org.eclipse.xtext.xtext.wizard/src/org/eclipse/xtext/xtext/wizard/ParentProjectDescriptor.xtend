@@ -70,7 +70,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 
 	def String getTychoVersion() {
-		'4.0.8'
+		'4.0.9'
 	}
 	
 	def String getTychoVersionJ11() {
