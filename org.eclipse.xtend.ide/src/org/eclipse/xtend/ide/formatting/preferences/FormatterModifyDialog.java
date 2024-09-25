@@ -96,27 +96,11 @@ public class FormatterModifyDialog extends ModifyDialog {
 	// @Override intentionally removed to ensure backward compatibility
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void addPages(final Map values) {
-		if (isOldAPIVersion()) {
-			try {
-				// use reflection to not break API
-				Method addTabPage = ModifyDialog.class.getDeclaredMethod("addTabPage", String.class, IModifyDialogTabPage.class);
-				//		addTabPage("Indentation", tabFactory.createIndentationTab(this, values));
-				addTabPage.invoke(this, "Braces", tabFactory.createBracesTab(this, values));
-				addTabPage.invoke(this, "White Space", tabFactory.createWhiteSpaceTab(this, values));
-				addTabPage.invoke(this, "Blank Lines", tabFactory.createBlankLinesTab(this, values));
-				addTabPage.invoke(this, "New Lines", tabFactory.createNewLineTab(this, values));
-				addTabPage.invoke(this, "Line Wrapping", tabFactory.createLineWrapTab(this, values));
-			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException e) {
-				XtendActivator.getInstance().getLog().log(new Status(IStatus.ERROR, XtendActivator.PLUGIN_ID, e.getMessage(), e));
-			}
-		} else {
-			addTabPageNewAPI("Braces", tabFactory.createBracesTab(this, values));
-			addTabPageNewAPI("White Space", tabFactory.createWhiteSpaceTab(this, values));
-			addTabPageNewAPI("Blank Lines", tabFactory.createBlankLinesTab(this, values));
-			addTabPageNewAPI("New Lines", tabFactory.createNewLineTab(this, values));
-			addTabPageNewAPI("Line Wrapping", tabFactory.createLineWrapTab(this, values));
-		}
+		addTabPageNewAPI("Braces", tabFactory.createBracesTab(this, values));
+		addTabPageNewAPI("White Space", tabFactory.createWhiteSpaceTab(this, values));
+		addTabPageNewAPI("Blank Lines", tabFactory.createBlankLinesTab(this, values));
+		addTabPageNewAPI("New Lines", tabFactory.createNewLineTab(this, values));
+		addTabPageNewAPI("Line Wrapping", tabFactory.createLineWrapTab(this, values));
 	}
 
 	// copied from Eclipse Oxygen to support old dialog in Eclipse Photon
@@ -131,10 +115,6 @@ public class FormatterModifyDialog extends ModifyDialog {
 
 	@Override
 	public void create() {
-		if (isOldAPIVersion()) {
-			super.create();
-			return;
-		}
 		// copied from Eclipse Oxygen to support old dialog in Eclipse Photon
 		super.create();
 		int lastFocusNr = 0;
@@ -164,9 +144,6 @@ public class FormatterModifyDialog extends ModifyDialog {
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected Control createDialogArea(Composite parent) {
-		if (isOldAPIVersion()) {
-			return super.createDialogArea(parent);
-		}
 		try {
 			// copied from Eclipse Oxygen to support old dialog in Eclipse Photon
 			final Composite composite = new Composite(parent, SWT.NONE);
@@ -255,20 +232,6 @@ public class FormatterModifyDialog extends ModifyDialog {
 	@Override
 	protected String getHelpContextId() {
 		return null;
-	}
-
-	/**
-	 * Check if the old (<= Eclipse Oxygen) API is used or not.
-	 * 
-	 * @return true if the Eclipse API is Eclipse Oxygen or older, true for Eclipse Photon or newer.
-	 */
-	private boolean isOldAPIVersion() {
-		try {
-			ModifyDialog.class.getDeclaredMethod("addPages", Map.class);
-			return true;
-		} catch (NoSuchMethodException | SecurityException e) {
-			return false;
-		}
 	}
 
 }

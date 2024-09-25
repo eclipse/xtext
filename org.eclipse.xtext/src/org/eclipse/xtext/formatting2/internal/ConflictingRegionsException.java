@@ -30,7 +30,7 @@ public class ConflictingRegionsException extends RuntimeException {
 		super(message, cause);
 		this.traces = traces;
 		for (RegionTrace trace : traces)
-			Exceptions.addSuppressed(this, trace);
+			addSuppressed(trace);
 	}
 
 	@Override
