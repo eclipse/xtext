@@ -225,6 +225,24 @@ public class InMemoryJavaCompiler {
 		}
 	}
 
+	private final static MethodHandle ORIGINAL_SOURCE_LEVEL = findOriginalSourceLevel();
+	private static MethodHandle findOriginalSourceLevel() {
+		try {
+			return MethodHandles.lookup().findSetter(CompilerOptions.class, "originalSourceLevel", long.class);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private final static MethodHandle ORIGINAL_COMPLIANCE_LEVEL = findOriginalComplianceLevel();
+	private static MethodHandle findOriginalComplianceLevel() {
+		try {
+			return MethodHandles.lookup().findSetter(CompilerOptions.class, "originalComplianceLevel", long.class);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public InMemoryJavaCompiler(ClassLoader parent, CompilerOptions compilerOptions) {
 		this.nameEnv = new ClassLoaderBasedNameEnvironment(parent);
 		this.parentClassLoader = parent;
@@ -257,7 +275,13 @@ public class InMemoryJavaCompiler {
 	 */
 	private void setSourceLevel(long jdkVersion) {
 		compilerOptions.sourceLevel = jdkVersion;
-		compilerOptions.originalSourceLevel = jdkVersion;
+		if (ORIGINAL_SOURCE_LEVEL != null) {
+			try {
+				ORIGINAL_SOURCE_LEVEL.invoke(compilerOptions, jdkVersion);
+			} catch (Throwable e) {
+				// ignore
+			}
+		}	
 	}
 
 	/**
@@ -266,7 +290,13 @@ public class InMemoryJavaCompiler {
 	 */
 	private void setComplianceLevel(long jdkVersion) {
 		compilerOptions.complianceLevel = jdkVersion;
-		compilerOptions.originalComplianceLevel = jdkVersion;
+		if (ORIGINAL_COMPLIANCE_LEVEL != null) {
+			try {
+				ORIGINAL_COMPLIANCE_LEVEL.invoke(compilerOptions, jdkVersion);
+			} catch (Throwable e) {
+				// ignore
+			}
+		}
 	}
 
 	public Result compile(JavaSource... sources) {
