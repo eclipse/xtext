@@ -34,7 +34,9 @@ public class Exceptions {
 	 * It is not available on JRE &lt; 1.7
 	 * 
 	 * @since 2.8
+	 * @deprecated addSuppressed method is exposed in JRE 1.8 and above.
 	 */
+	@Deprecated(forRemoval = true)
 	public static void addSuppressed(Throwable owner, Throwable add) {
 		try {
 			Method method = owner.getClass().getMethod("addSuppressed", Throwable.class);
