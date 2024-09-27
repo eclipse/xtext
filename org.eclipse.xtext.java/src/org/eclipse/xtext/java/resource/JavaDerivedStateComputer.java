@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.java.resource;
 
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -288,42 +286,12 @@ public class JavaDerivedStateComputer {
 		compilerOptions.produceMethodParameters = true;
 		compilerOptions.produceReferenceInfo = true;
 		compilerOptions.complianceLevel = sourceLevel;
-		if (ORIGINAL_SOURCE_LEVEL != null) {
-			try {
-				ORIGINAL_SOURCE_LEVEL.invoke(compilerOptions, targetLevel);
-			} catch (Throwable e) {
-				// ignore
-			}
-		}
-		if (ORIGINAL_COMPLIANCE_LEVEL != null) {
-			try {
-				ORIGINAL_COMPLIANCE_LEVEL.invoke(compilerOptions, targetLevel);
-			} catch (Throwable e) {
-				// ignore
-			}
-		}
+		JdtFacade.setOriginalSourceLevel(compilerOptions, targetLevel);
+		JdtFacade.setOriginalComplianceLevel(compilerOptions, targetLevel);
 		JdtFacade.setInlineJsrBytecode(compilerOptions, true);
 		return compilerOptions;
 	}
 
-	private final static MethodHandle ORIGINAL_SOURCE_LEVEL = findOriginalSourceLevel();
-	private static MethodHandle findOriginalSourceLevel() {
-		try {
-			return MethodHandles.lookup().findSetter(CompilerOptions.class, "originalSourceLevel", long.class);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	private final static MethodHandle ORIGINAL_COMPLIANCE_LEVEL = findOriginalComplianceLevel();
-	private static MethodHandle findOriginalComplianceLevel() {
-		try {
-			return MethodHandles.lookup().findSetter(CompilerOptions.class, "originalComplianceLevel", long.class);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
 	protected long toJdtVersion(JavaVersion version) {
 		return version.toJdtClassFileConstant();
 	}

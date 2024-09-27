@@ -31,6 +31,24 @@ public class JdtFacade {
 		}
 	}
 
+	private final static MethodHandle ORIGINAL_SOURCE_LEVEL = findOriginalSourceLevel();
+	private static MethodHandle findOriginalSourceLevel() {
+		try {
+			return MethodHandles.lookup().findSetter(CompilerOptions.class, "originalSourceLevel", long.class);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private final static MethodHandle ORIGINAL_COMPLIANCE_LEVEL = findOriginalComplianceLevel();
+	private static MethodHandle findOriginalComplianceLevel() {
+		try {
+			return MethodHandles.lookup().findSetter(CompilerOptions.class, "originalComplianceLevel", long.class);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	/**
 	 * If still present in JDT compiler options, set inlineJsrBytecode.
 	 * 
@@ -41,6 +59,38 @@ public class JdtFacade {
 		if (INLINE_JSR_BYTECODE != null) {
 			try {
 				INLINE_JSR_BYTECODE.invoke(compilerOptions, true);
+			} catch (Throwable e) {
+				// ignore
+			}
+		}
+	}
+
+	/**
+	 * If still present in JDT compiler options, set originalSourceLevel.
+	 * 
+	 * @param compilerOptions
+	 * @param targetLevel
+	 */
+	public static void setOriginalSourceLevel(CompilerOptions compilerOptions, long targetLevel) {
+		if (ORIGINAL_SOURCE_LEVEL != null) {
+			try {
+				ORIGINAL_SOURCE_LEVEL.invoke(compilerOptions, targetLevel);
+			} catch (Throwable e) {
+				// ignore
+			}
+		}
+	}
+
+	/**
+	 * If still present in JDT compiler options, set originalComplianceLevel.
+	 * 
+	 * @param compilerOptions
+	 * @param targetLevel
+	 */
+	public static void setOriginalComplianceLevel(CompilerOptions compilerOptions, long targetLevel) {
+		if (ORIGINAL_COMPLIANCE_LEVEL != null) {
+			try {
+				ORIGINAL_COMPLIANCE_LEVEL.invoke(compilerOptions, targetLevel);
 			} catch (Throwable e) {
 				// ignore
 			}
