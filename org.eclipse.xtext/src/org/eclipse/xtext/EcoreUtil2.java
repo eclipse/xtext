@@ -189,6 +189,13 @@ public class EcoreUtil2 extends EcoreUtil {
 		return Lists.newArrayList(Iterators.filter(ele.eAllContents(), type));
 	}
 
+	/**
+	 * @since 2.37
+	 */
+	public static <T extends EObject> List<T> getAllContentsOfType(Resource resource, Class<T> type) {
+		return Lists.newArrayList(Iterators.filter(resource.getAllContents(), type));
+	}
+
 	public static <T> List<T> typeSelect(List<?> elements, Class<T> clazz) {
 		return Lists.newArrayList(Iterables.filter(elements, clazz));
 	}
