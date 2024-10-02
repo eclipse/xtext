@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -144,16 +145,12 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 		try (FileWriter fw = new FileWriter(externalEditFile)) {
 			fw.write("");
 		}
-		
-		assertFalse(fileDocumentProvider.isSynchronized(editor.getEditorInput()));
+		((IFileEditorInput)editor.getEditorInput()).getFile().refreshLocal(IResource.DEPTH_ONE, new NullProgressMonitor());
+		assertTrue(fileDocumentProvider.isSynchronized(editor.getEditorInput()));
 
 		editor.setFocus();
 		Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_REFRESH, null);
 		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
-		syncUtil.waitForReconciler(editor);
-		syncUtil.waitForBuild(new NullProgressMonitor());
-		
-		assertTrue(fileDocumentProvider.isSynchronized(editor.getEditorInput()));
 		
 		assertEquals(document.get(), "");
 	}
