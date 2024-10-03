@@ -12,7 +12,9 @@
 	<description>API for integrating Xtext editors in web pages.</description>
 
 	<dependencies>
-		<!-- pin all dependencies related to the package "org.eclipse.core.runtime 
+		<!-- pin core.runtime related to the package "org.eclipse.core.runtime
+			to avoid
+			java.lang.SecurityException: class "org.eclipse.core.runtime.OperationCanceledException"'s signer information does not match signer information of other classes in the same package
 			Note: the position of these dependencies counts: they must
 			come before the other ones -->
 		<dependency>
