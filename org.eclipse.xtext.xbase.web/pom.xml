@@ -12,6 +12,16 @@
 	<description>Additional services for the web integration of Xbase.</description>
 
 	<dependencies>
+		<!-- pin core.runtime related to the package "org.eclipse.core.runtime
+			to avoid
+			java.lang.SecurityException: class "org.eclipse.core.runtime.OperationCanceledException"'s signer information does not match signer information of other classes in the same package
+			Note: the position of these dependencies counts: they must
+			come before the other ones -->
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.web</artifactId>
@@ -43,11 +53,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.core.runtime</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
