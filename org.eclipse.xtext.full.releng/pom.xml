@@ -33,6 +33,7 @@
 		<module>../org.eclipse.xtext.ide</module>
 		<module>../org.eclipse.xtext.testing</module>
 		<module>../org.eclipse.xtext.xtext.ide</module>
+		<module>../org.eclipse.xtext.generator.dependencies</module>
 		<module>../org.eclipse.xtext.xtext.generator</module>
 		<module>../org.eclipse.xtext.xtext.wizard</module>
 		<!-- This is required by the xtext-maven-plugin IT -->
