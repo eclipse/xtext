@@ -21,10 +21,6 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-			</dependency>
-			<dependency>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>org.eclipse.xtend.lib</artifactId>
 				<version>${xtextVersion}</version>
