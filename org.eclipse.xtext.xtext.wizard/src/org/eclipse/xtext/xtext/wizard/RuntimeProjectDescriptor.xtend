@@ -105,16 +105,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	
 	override getDevelopmentBundles() {
 		val result = newLinkedHashSet(
-			"org.eclipse.xtext.xbase", 
-			"org.eclipse.xtext.common.types", 
-			"org.eclipse.xtext.xtext.generator",
-			"org.eclipse.emf.codegen.ecore", 
-			"org.eclipse.emf.mwe.utils",
-			"org.eclipse.emf.mwe2.launch",
-			"org.eclipse.emf.mwe2.lib",
-			"org.objectweb.asm",
-			"org.apache.commons.commons-logging",
-			"org.apache.log4j"
+			"org.eclipse.xtext.generator.dependencies"
 		)
 		if (isFromExistingEcoreModels) {
 			if (config.ecore2Xtext.EPackageInfos.exists[genmodelURI.fileExtension == "xcore"]) {
