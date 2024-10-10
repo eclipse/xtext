@@ -10,3 +10,4 @@ updates:
       interval: "daily"
     allow:
       - dependency-name: "io.github.classgraph:classgraph"
+      - dependency-name: "com.google.guava:*"
