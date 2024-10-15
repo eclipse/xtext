@@ -155,7 +155,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   @Override
   public Set<String> getDevelopmentBundles() {
     final LinkedHashSet<String> result = CollectionLiterals.<String>newLinkedHashSet(
-      "org.eclipse.xtext.generator.dependencies");
+      "org.eclipse.xtext.xtext.generator.dependencies");
     boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
     if (_isFromExistingEcoreModels) {
       final Function1<EPackageInfo, Boolean> _function = (EPackageInfo it) -> {

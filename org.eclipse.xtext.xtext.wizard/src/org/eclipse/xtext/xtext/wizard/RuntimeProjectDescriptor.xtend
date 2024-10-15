@@ -105,7 +105,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	
 	override getDevelopmentBundles() {
 		val result = newLinkedHashSet(
-			"org.eclipse.xtext.generator.dependencies"
+			"org.eclipse.xtext.xtext.generator.dependencies"
 		)
 		if (isFromExistingEcoreModels) {
 			if (config.ecore2Xtext.EPackageInfos.exists[genmodelURI.fileExtension == "xcore"]) {

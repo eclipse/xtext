@@ -101,11 +101,11 @@ SPDX-License-Identifier: EPL-2.0
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.xtext.generator.dependencies"
+         id="org.eclipse.xtext.xtext.generator.dependencies"
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.xtext.generator.dependencies.source"
+         id="org.eclipse.xtext.xtext.generator.dependencies.source"
          version="0.0.0"/>
 
 </feature>
