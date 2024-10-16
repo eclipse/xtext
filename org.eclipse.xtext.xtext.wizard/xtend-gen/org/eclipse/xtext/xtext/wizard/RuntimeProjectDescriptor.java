@@ -155,16 +155,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   @Override
   public Set<String> getDevelopmentBundles() {
     final LinkedHashSet<String> result = CollectionLiterals.<String>newLinkedHashSet(
-      "org.eclipse.xtext.xbase", 
-      "org.eclipse.xtext.common.types", 
-      "org.eclipse.xtext.xtext.generator", 
-      "org.eclipse.emf.codegen.ecore", 
-      "org.eclipse.emf.mwe.utils", 
-      "org.eclipse.emf.mwe2.launch", 
-      "org.eclipse.emf.mwe2.lib", 
-      "org.objectweb.asm", 
-      "org.apache.commons.commons-logging", 
-      "org.apache.log4j");
+      "org.eclipse.xtext.xtext.generator.dependencies");
     boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
     if (_isFromExistingEcoreModels) {
       final Function1<EPackageInfo, Boolean> _function = (EPackageInfo it) -> {
