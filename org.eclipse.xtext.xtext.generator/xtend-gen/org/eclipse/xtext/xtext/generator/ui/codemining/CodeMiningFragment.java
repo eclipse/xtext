@@ -31,7 +31,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 /**
  * This fragment activates code mining functionalities and generates the appropriate stubs.
  * 
- * @author René Purrio - Initial contribution and API
+ * @author RenÃ© Purrio - Initial contribution and API
  * @author Karsten Thoms - Review and improvements on initial implementation
  * @since 2.14
  */
@@ -79,7 +79,7 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
           _builder.append(".class).annotatedWith(");
           TypeReference _typeRef_2 = TypeReference.typeRef(Names.class);
           _builder.append(_typeRef_2);
-          _builder.append(".named(\"codeMinding\"))");
+          _builder.append(".named(\"codeMining\"))");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append(".to(");
@@ -89,7 +89,7 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
           _builder.newLineIfNotEmpty();
         }
       };
-      it.addConfiguredBinding("CodeMinding", _client);
+      it.addConfiguredBinding("CodeMining", _client);
       it.contributeTo(this.getLanguage().getEclipsePluginGenModule());
     };
     ObjectExtensions.<GuiceModuleAccess.BindingFactory>operator_doubleArrow(_bindingFactory, _function);
