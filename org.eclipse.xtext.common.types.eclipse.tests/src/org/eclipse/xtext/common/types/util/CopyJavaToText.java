@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
+import java.util.Arrays;
 
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
@@ -44,7 +45,9 @@ public class CopyJavaToText implements IWorkflowComponent {
 				if (!list.exists())
 					list.createNewFile();
 				writer = new BufferedWriter(new FileWriter(list));
-				for(File javaFile: directory.listFiles()) {
+				File[] files = directory.listFiles();
+				Arrays.sort(files);
+				for(File javaFile: files) {
 					if (javaFile.isFile() && javaFile.getName().endsWith(".java")) {
 						File target = new File(javaFile.getAbsolutePath() + ".txt");
 						writer.write(directory.toURI().relativize(target.toURI()).getPath());
