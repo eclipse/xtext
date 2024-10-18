@@ -39,10 +39,10 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 			projectConfig.eclipsePlugin.manifest.importedPackages += "org.eclipse.xtext.ui.codemining;resolution:=optional"
 		}
 		new GuiceModuleAccess.BindingFactory => [
-			addConfiguredBinding("CodeMinding", '''
+			addConfiguredBinding("CodeMining", '''
 				binder.bind(«'org.eclipse.jface.text.codemining.ICodeMiningProvider'.typeRef».class)
 					.to(«codeMiningProviderClass».class);
-				binder.bind(«'org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory'.typeRef».class).annotatedWith(«Names.typeRef».named("codeMinding"))
+				binder.bind(«'org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory'.typeRef».class).annotatedWith(«Names.typeRef».named("codeMining"))
 					.to(«"org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy".typeRef».Factory.class);
 			''')
 			contributeTo(language.eclipsePluginGenModule)

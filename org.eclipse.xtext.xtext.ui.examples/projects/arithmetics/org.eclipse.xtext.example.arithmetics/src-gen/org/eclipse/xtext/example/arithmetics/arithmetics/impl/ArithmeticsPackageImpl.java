@@ -156,7 +156,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
   {
     super(eNS_URI, ArithmeticsFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
