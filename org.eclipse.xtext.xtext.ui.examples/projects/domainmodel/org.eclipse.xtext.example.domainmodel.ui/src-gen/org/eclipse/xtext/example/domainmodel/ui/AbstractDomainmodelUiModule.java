@@ -415,10 +415,10 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
-	public void configureCodeMinding(Binder binder) {
+	public void configureCodeMining(Binder binder) {
 		binder.bind(ICodeMiningProvider.class)
 			.to(DomainmodelCodeMiningProvider.class);
-		binder.bind(IReconcileStrategyFactory.class).annotatedWith(Names.named("codeMinding"))
+		binder.bind(IReconcileStrategyFactory.class).annotatedWith(Names.named("codeMining"))
 			.to(XtextCodeMiningReconcileStrategy.Factory.class);
 	}
 	
