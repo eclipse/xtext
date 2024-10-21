@@ -71,7 +71,7 @@ SPDX-License-Identifier: EPL-2.0
       <import plugin="org.eclipse.emf.common" version="2.24.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.source" version="2.26.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.source" version="2.24.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.emf.mwe2.language.sdk" version="2.19.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.mwe2.language.sdk" version="2.20.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.commons-logging" version="1.3.4" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.commons-logging.source" version="1.3.4" match="greaterOrEqual"/>
    </requires>
