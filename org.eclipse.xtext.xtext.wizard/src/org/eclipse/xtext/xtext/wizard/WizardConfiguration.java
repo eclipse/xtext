@@ -41,7 +41,7 @@ public class WizardConfiguration {
 
 	private boolean needsGradleWrapper = true;
 
-	private JavaVersion javaVersion = JavaVersion.JAVA11;
+	private JavaVersion javaVersion = JavaVersion.JAVA17;
 
 	private LanguageServer languageServer = LanguageServer.NONE;
 
