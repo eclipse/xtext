@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.ui.codemining;singleton:=true
 Bundle-Version: 2.37.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.ui.codemining
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.xtext.ui.codemining;version="2.37.0";x-internal:=true
 Require-Bundle: org.eclipse.equinox.common,
  org.eclipse.xtext;bundle-version="2.37.0",

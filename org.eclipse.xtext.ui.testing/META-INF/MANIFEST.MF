@@ -4,7 +4,7 @@ Bundle-Name: Xtext UI Testing Infrastructure
 Bundle-SymbolicName: org.eclipse.xtext.ui.testing
 Bundle-Version: 2.37.0.qualifier
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.xtext.ui.testing;version="2.37.0",
  org.eclipse.xtext.ui.testing.util;version="2.37.0"
 Import-Package: org.apache.log4j;version="1.2.24";resolution:=optional,

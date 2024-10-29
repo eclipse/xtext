@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Benchmarks
 Bundle-SymbolicName: org.eclipse.xtend.performance.tests
 Bundle-Version: 2.37.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-Vendor: Eclipse Xtext
 Bundle-ClassPath: .
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.26.0",

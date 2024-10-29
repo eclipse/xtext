@@ -127,9 +127,9 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<tycho-version>4.0.9</tycho-version>
 
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<maven.compiler.release>11</maven.compiler.release>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.release>17</maven.compiler.release>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 
 		<build-helper-maven-plugin-version>3.3.0</build-helper-maven-plugin-version>

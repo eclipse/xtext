@@ -22,7 +22,7 @@ Import-Package: org.junit;version="4.13.2",
  org.junit.runners;version="4.13.2",
  org.junit.runners.model;version="4.13.2",
  org.hamcrest.core
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.xtext.ui.codetemplates.tests;version="2.37.0";x-internal=true,
  org.eclipse.xtext.ui.codetemplates.ui.tests;version="2.37.0";x-internal=true
 Bundle-Vendor: %providerName
