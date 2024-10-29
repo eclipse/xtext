@@ -46,7 +46,7 @@ Export-Package: org.eclipse.xtext.builder;version="2.37.0",
  org.eclipse.xtext.builder.trace.impl;version="2.37.0";x-internal:=true,
  org.eclipse.xtext.builder.trace.util;version="2.37.0";x-internal:=true
 Require-Bundle: org.eclipse.xtext;bundle-version="2.37.0",
- org.eclipse.emf.ecore;bundle-version="2.26.0";visibility:=reexport,
+ org.eclipse.emf.ecore;bundle-version="2.36.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.16.100";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.core;bundle-version="3.29.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.core.runtime;bundle-version="3.24.100";resolution:=optional;x-installation:=greedy,

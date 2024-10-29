@@ -10,7 +10,7 @@ Require-Bundle: de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optiona
  org.eclipse.xtext.xbase;bundle-version="2.37.0";visibility:=reexport,
  org.eclipse.xtext.common.types;bundle-version="2.37.0";visibility:=reexport,
  org.eclipse.xtext.xtext.generator;bundle-version="2.37.0";visibility:=reexport,
- org.eclipse.emf.codegen.ecore;bundle-version="2.29.0";visibility:=reexport,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.37.0";visibility:=reexport,
  org.eclipse.emf.mwe.utils;bundle-version="1.14.0";visibility:=reexport,
  org.eclipse.emf.mwe2.launch;bundle-version="2.20.0";visibility:=reexport,
  org.eclipse.emf.mwe2.lib;bundle-version="2.20.0";visibility:=reexport,
