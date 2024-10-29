@@ -72,10 +72,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	def String getTychoVersion() {
 		'4.0.9'
 	}
-	
-	def String getTychoVersionJ11() {
-		'2.7.5'
-	}
 
 	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
@@ -225,7 +221,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						<tycho-version>«IF config.javaVersion.isAtLeast(JavaVersion.JAVA17)»«tychoVersion»«ELSE»«tychoVersionJ11»«ENDIF»</tycho-version>
+						<tycho-version>«tychoVersion»</tycho-version>
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>

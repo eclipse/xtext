@@ -142,7 +142,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			availableBrees.add(ee.getId());
 		}
 		for (JavaVersion supportedVersion : JavaVersion.values()) {
-			if (supportedVersion.isAtLeast(JavaVersion.JAVA11)) {
+			if (supportedVersion.isAtLeast(JavaVersion.JAVA17)) {
 				String bree = supportedVersion.getBree();
 				if (availableBrees.contains(bree))
 					brees.add(bree);
@@ -230,8 +230,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		}
 		JavaVersion javaVersion = JavaVersion.fromBree(breeCombo.getText());
 		if (javaVersion != null) {
-			if (!javaVersion.isAtLeast(JavaVersion.JAVA11)) {
-				setErrorMessage(Messages.WizardNewXtextProjectCreationPage_MessageAtLeastJava11);
+			if (!javaVersion.isAtLeast(JavaVersion.JAVA17)) {
+				setErrorMessage(Messages.WizardNewXtextProjectCreationPage_MessageAtLeastJava17);
 				return false;
 			}
 		}
