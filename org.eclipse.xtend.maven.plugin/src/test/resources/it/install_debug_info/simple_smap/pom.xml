@@ -15,7 +15,7 @@
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
 				<configuration>
-					<javaSourceVersion>11</javaSourceVersion>
+					<javaSourceVersion>17</javaSourceVersion>
 				</configuration>
 				<executions>
 					<execution>

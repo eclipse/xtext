@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.xtend.standalone
 Bundle-SymbolicName: org.eclipse.xtend.standalone
 Bundle-Name: Xtend Standalone Bundle
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.37.0.qualifier
 Require-Bundle: org.eclipse.xtend.core;bundle-version="2.37.0";visibility:=reexport,

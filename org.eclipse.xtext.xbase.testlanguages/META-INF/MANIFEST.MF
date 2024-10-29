@@ -23,7 +23,7 @@ Import-Package: org.apache.log4j,
  org.junit.runner.notification;version="4.13.2",
  org.junit.runners;version="4.13.2",
  org.junit.runners.model;version="4.13.2"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.xtext.xbase.testlanguages;version="2.37.0",
  org.eclipse.xtext.xbase.testlanguages.bug462047;version="2.37.0",
  org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047;version="2.37.0",
