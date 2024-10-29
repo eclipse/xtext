@@ -125,7 +125,12 @@
 		<url>git@github.com:eclipse/xtext.git</url>
 	</scm>
 	<properties>
-		<org.eclipse.jdt.core-version>3.33.0</org.eclipse.jdt.core-version>
+		<junit-platform-version>1.10.2</junit-platform-version>
+		<junit-jupiter-version>5.10.2</junit-jupiter-version>
+		<org.eclipse.emf.mwe2-version>2.20.0.M1</org.eclipse.emf.mwe2-version>
+		<org.eclipse.emf.mwe-version>1.14.0.M1</org.eclipse.emf.mwe-version>
+		<org.eclipse.lsp4j-version>0.23.1</org.eclipse.lsp4j-version>
+		<org.eclipse.jdt.core-version>3.37.0</org.eclipse.jdt.core-version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 	</properties>
 	<dependencyManagement>
@@ -238,32 +243,32 @@
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe.core</artifactId>
-				<version>1.14.0.M1</version>
+				<version>${org.eclipse.emf.mwe-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe.utils</artifactId>
-				<version>1.14.0.M1</version>
+				<version>${org.eclipse.emf.mwe-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe2.language</artifactId>
-				<version>2.20.0.M1</version>
+				<version>${org.eclipse.emf.mwe2-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-				<version>2.20.0.M1</version>
+				<version>${org.eclipse.emf.mwe2-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
-				<version>2.20.0.M1</version>
+				<version>${org.eclipse.emf.mwe2-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe2.runtime</artifactId>
-				<version>2.20.0.M1</version>
+				<version>${org.eclipse.emf.mwe2-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jdt</groupId>
@@ -278,122 +283,122 @@
 			<dependency>
 				<groupId>org.eclipse.jdt</groupId>
 				<artifactId>org.eclipse.jdt.debug</artifactId>
-				<version>3.20.100</version>
+				<version>3.21.300</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jdt</groupId>
 				<artifactId>org.eclipse.jdt.launching</artifactId>
-				<version>3.19.900</version>
+				<version>3.21.100</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.debug</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.generator</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.jsonrpc.debug</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.jsonrpc</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.websocket.jakarta</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.websocket</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j</artifactId>
-				<version>0.23.1</version>
+				<version>${org.eclipse.lsp4j-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.core.commands</artifactId>
-				<version>3.10.400</version>
+				<version>3.12.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.core.contenttype</artifactId>
-				<version>3.8.200</version>
+				<version>3.9.300</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.core.expressions</artifactId>
-				<version>3.8.200</version>
+				<version>3.9.300</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.core.filesystem</artifactId>
-				<version>1.9.500</version>
+				<version>1.10.300</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.core.jobs</artifactId>
-				<version>3.13.300</version>
+				<version>3.15.200</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.core.resources</artifactId>
-				<version>3.18.200</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.platform</groupId>
-				<artifactId>org.eclipse.core.runtime</artifactId>
-				<version>3.26.100</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.platform</groupId>
-				<artifactId>org.eclipse.core.variables</artifactId>
-				<version>3.5.100</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.platform</groupId>
-				<artifactId>org.eclipse.debug.core</artifactId>
 				<version>3.20.100</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
+				<artifactId>org.eclipse.core.runtime</artifactId>
+				<version>3.31.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.platform</groupId>
+				<artifactId>org.eclipse.core.variables</artifactId>
+				<version>3.6.300</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.platform</groupId>
+				<artifactId>org.eclipse.debug.core</artifactId>
+				<version>3.21.300</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.equinox.app</artifactId>
-				<version>1.6.200</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.equinox.common</artifactId>
-				<version>3.17.100</version>
+				<version>3.19.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.equinox.preferences</artifactId>
-				<version>3.10.200</version>
+				<version>3.11.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.equinox.registry</artifactId>
-				<version>3.11.200</version>
+				<version>3.12.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.osgi</artifactId>
-				<version>3.18.300</version>
+				<version>3.19.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.text</artifactId>
-				<version>3.12.300</version>
+				<version>3.14.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
@@ -408,42 +413,42 @@
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-api</artifactId>
-				<version>5.10.0</version>
+				<version>${junit-jupiter-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
-				<version>5.10.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.platform</groupId>
-				<artifactId>junit-platform-commons</artifactId>
-				<version>1.10.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.platform</groupId>
-				<artifactId>junit-platform-engine</artifactId>
-				<version>1.10.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.platform</groupId>
-				<artifactId>junit-platform-launcher</artifactId>
-				<version>1.10.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.platform</groupId>
-				<artifactId>junit-platform-runner</artifactId>
-				<version>1.10.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.junit.platform</groupId>
-				<artifactId>junit-platform-suite-api</artifactId>
-				<version>1.10.0</version>
+				<version>${junit-jupiter-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.junit.vintage</groupId>
 				<artifactId>junit-vintage-engine</artifactId>
-				<version>5.10.0</version>
+				<version>${junit-jupiter-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-commons</artifactId>
+				<version>${junit-platform-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-engine</artifactId>
+				<version>${junit-platform-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>${junit-platform-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-runner</artifactId>
+				<version>${junit-platform-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-suite-api</artifactId>
+				<version>${junit-platform-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.opentest4j</groupId>
@@ -500,30 +505,6 @@
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
-		<profile>
-			<!--
-				To be activated explicitly when using Java 21 to get
-				the latest version of JDT to access Java 21 new features
-				like Java records.
-
-				The profile must be activated through the system property "java-21"
-				either on the command line "-Djava-21", or by creating the file
-				"maven.config" inside the folder ".mvn" at the root of the
-				project, with the content "-Djava-21"
-			-->
-			<id>java-21</id>
-			<activation>
-				<property>
-					<name>java-21</name>
-				</property>
-			</activation>
-			<properties>
-				<!-- This version supports Java 21 but requires Java 17;
-					for the moment we activate it only when building with Java 21.
-					By default, we don't require Java 17 but only Java 11 -->
-				<org.eclipse.jdt.core-version>3.37.0</org.eclipse.jdt.core-version>
-			</properties>
 		</profile>
 	</profiles>
 
