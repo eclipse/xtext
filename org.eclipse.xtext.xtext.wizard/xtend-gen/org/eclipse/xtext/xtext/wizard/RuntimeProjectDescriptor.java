@@ -110,7 +110,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
         final Procedure1<ExternalDependency.P2Coordinates> _function_1 = (ExternalDependency.P2Coordinates it_1) -> {
           it_1.setBundleId("org.eclipse.equinox.common");
-          it_1.setVersion("3.16.0");
+          it_1.setVersion("3.19.0");
         };
         it.p2(_function_1);
       };

@@ -80,7 +80,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		deps += new ExternalDependency => [
 			p2 [
 				bundleId = "org.eclipse.equinox.common"
-				version = "3.16.0"
+				version = "3.19.0"
 			]
 		]
 		if (!isEclipsePluginProject && config.needsMavenBuild) {
