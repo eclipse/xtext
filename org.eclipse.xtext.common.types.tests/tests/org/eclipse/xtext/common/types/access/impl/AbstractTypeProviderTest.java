@@ -104,7 +104,6 @@ import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation.Annotated;
-import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithDefaults;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.TestConstants;
@@ -112,7 +111,6 @@ import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -2026,8 +2024,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		// strictfp has no effect since Java 17 https://openjdk.org/jeps/306
 		// and it doesn't seem to be present at runtime in 17+
 		// see also https://bugs.eclipse.org/bugs/show_bug.cgi?id=545510#c6
-		// for sure, it fails with Java 21
-		Assume.assumeFalse("Ignored on Java 21 and later", JavaRuntimeVersion.isJava21OrLater());
 		String typeName = Methods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
@@ -2036,7 +2032,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertFalse(method.isFinal());
 		assertFalse(method.isStatic());
 		assertFalse(method.isSynchronized());
-		assertTrue(method.isStrictFloatingPoint()); // it fails with Java 21
+		assertFalse(method.isStrictFloatingPoint()); // not available anymore since Java 17
 		JvmType methodType = method.getReturnType().getType();
 		assertEquals("void", methodType.getIdentifier());
 	}
