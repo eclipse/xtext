@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,9 +9,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +21,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -52,7 +49,6 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.osgi.framework.Version;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
@@ -67,8 +63,6 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - BuildData as blackboard for scheduled data
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
-
-	private static final Version VERSION_3_17_0 = new Version(3,17,0);
 
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
@@ -636,11 +630,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Deprecated
 	private static boolean wasDeprecationWarningLoggedForClean = false;
 
-	private Method requestProjectRebuildMethod;
-	private Method requestProjectsRebuildMethod;
 
-	private static Version installedCoreResourcesVersion;
-	
 	protected void addInfosFromTaskAndClean(ToBeBuilt toBeBuilt, Task task, IProgressMonitor monitor) throws CoreException {
 		addInfosFromTask(task, toBeBuilt);
 		if (XtextBuilder.class.equals(getClass())) {
@@ -770,17 +760,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 * @since 2.27
 	 */
 	public void triggerRequestProjectRebuild() {
-		if (requestProjectRebuildMethod != null || isCoreResourceGreaterOrEqual(VERSION_3_17_0)) {
-			try {
-				if (requestProjectRebuildMethod == null) {
-					requestProjectRebuildMethod = getClass().getMethod("requestProjectRebuild", Boolean.TYPE);
-				}
-				requestProjectRebuildMethod.invoke(this, true);
-			} catch (Exception e) {
-				log.error("something went wrong in triggerRequestProjectRebuild", e);
-				needRebuild();
-			}
-		} else {
+		try {
+			requestProjectRebuild(true);
+		} catch (Exception e) {
+			log.error("something went wrong in triggerRequestProjectRebuild", e);
 			needRebuild();
 		}
 	}
@@ -789,26 +772,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 * @since 2.27
 	 */
 	public void triggerRequestProjectsRebuild(IProject project) {
-		if (requestProjectsRebuildMethod != null || isCoreResourceGreaterOrEqual(VERSION_3_17_0)) {
-			try {
-				if (requestProjectsRebuildMethod == null) {
-					requestProjectsRebuildMethod = getClass().getMethod("requestProjectsRebuild", Collection.class);
-				}
-				requestProjectsRebuildMethod.invoke(this, Collections.singletonList(project));
-			} catch (Exception e) {
-				log.error("something went wrong in triggerRequestProjectRebuild", e);
-				needRebuild();
-			}
-		} else {
+		try {
+			requestProjectsRebuild(Collections.singletonList(project));
+		} catch (Exception e) {
+			log.error("something went wrong in triggerRequestProjectRebuild", e);
 			needRebuild();
 		}
-	}
-	
-	private static boolean isCoreResourceGreaterOrEqual(Version version) {
-		if (installedCoreResourcesVersion == null) {
-			installedCoreResourcesVersion = ResourcesPlugin.getPlugin().getBundle().getVersion();
-		}
-		return installedCoreResourcesVersion.compareTo(version) >= 0;
 	}
 	
 	/**
