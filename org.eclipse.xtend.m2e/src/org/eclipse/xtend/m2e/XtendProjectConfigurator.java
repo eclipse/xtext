@@ -15,7 +15,6 @@ import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getK
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecution;
@@ -26,7 +25,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.m2e.core.project.IMavenProjectFacade;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
@@ -158,25 +156,10 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 	}
 
 	static IProject getProject(ProjectConfigurationRequest request) {
-		return XtendProjectConfigurator.<ProjectConfigurationRequest, IMavenProjectFacade>call(request, "getMavenProjectFacade", "mavenProjectFacade").getProject();
+		return request.mavenProjectFacade().getProject();
 	}
 
 	static MavenProject getMavenProject(ProjectConfigurationRequest request) {
-		return call(request, "getMavenProject", "mavenProject");
-	}
-
-	@SuppressWarnings("unchecked")
-	private static <T, R> R call(T obj, String oldMethodName, String newMethodName) {
-		try {
-			Method method = obj.getClass().getMethod(oldMethodName);
-			return (R) method.invoke(obj);
-		} catch (ReflectiveOperationException er) {
-			try { // We are probably running with M2E >= 2.0 try the new method name
-				Method method = obj.getClass().getMethod(newMethodName);
-				return (R) method.invoke(obj);
-			} catch (ReflectiveOperationException e) {
-				throw new IllegalStateException(e);
-			}
-		}
+		return request.mavenProject();
 	}
 }
