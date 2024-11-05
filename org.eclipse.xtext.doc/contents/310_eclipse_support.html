@@ -551,9 +551,9 @@ public Class&lt;? extends IComparator&gt;
 
 <p>The location service offers different methods to obtain the region of interest for special use cases. You can either obtain the complete region for an object or only the identifying string which is usually the name of the instance (see <code>getSignificantTextRegion(EObject)</code>). You can also query for the text region of a specific <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java">EStructuralFeature</a> by means of <code>getFullTextRegion(EObject, EStructuralFeature, int)</code>.</p>
 
-<p>As the default strategy is a best effort it may not always result in the selection you want. If that’s the case you can <a href="302_configuration.html#guicemodules">override</a> the <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a> binding in the UI module as in the following example:</p>
+<p>As the default strategy is a best effort it may not always result in the selection you want. If that’s the case you can <a href="302_configuration.html#guicemodules">override</a> the <a href="https://github.com/eclipse/xtext/blob/main/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java">ILocationInFileProvider</a> binding in the runtime module as in the following example:</p>
 
-<pre><code class="language-java">public class MyDslUiModule extends AbstractMyDslUiModule {
+<pre><code class="language-java">public class MyDslRuntimeModule extends AbstractMyDslRuntimeModule {
   @Override
   public Class&lt;? extends ILocationInFileProvider&gt; 
       bindILocationInFileProvider() {
