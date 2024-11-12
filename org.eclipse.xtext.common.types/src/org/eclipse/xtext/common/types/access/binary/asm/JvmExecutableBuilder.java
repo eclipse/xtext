@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.binary.asm;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,8 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 	private JvmDeclaredType declarator;
 	
 	private final JvmExecutable result;
+	
+	private List<String> parameterNames;
 	
 	private final int offset;
 
@@ -156,6 +159,12 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 
     @Override
     public void visitEnd() {
+    	if (parameterNames != null) {
+    		InternalEList<JvmFormalParameter> parameters = (InternalEList<JvmFormalParameter>) result.getParameters();
+    		for(int i =  0, max = parameters.size(), nameOffset = parameterNames.size() - max; i < max; i++) {
+    			parameters.get(i).setName(parameterNames.get(i + nameOffset));
+    		}
+    	}
     	InternalEList<JvmMember> members = (InternalEList<JvmMember>) declarator.getMembers();
     	members.addUnique(result);
     }
@@ -237,9 +246,18 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 	@Override
 	public AnnotationVisitor visitParameterAnnotation(final int parameter, final String desc, final boolean visible) {
 			JvmFormalParameter formalParameter = result.getParameters().get(parameter);
-			return new JvmAnnotationReferenceBuilder(
-					(InternalEList<JvmAnnotationReference>) formalParameter.getAnnotations(), desc, proxies);
+		return new JvmAnnotationReferenceBuilder(
+				(InternalEList<JvmAnnotationReference>) formalParameter.getAnnotations(), desc, proxies);
 	}
+	
+	@Override
+    public void visitParameter(String name, int access) {
+    	if (parameterNames == null) {
+    		parameterNames = new ArrayList<String>(result.getParameters().size());
+    	}
+    	parameterNames.add(name);
+    	
+    }
 
     @Override
 	public void visitCode() {
