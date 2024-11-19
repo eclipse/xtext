@@ -29,7 +29,7 @@ Check the Update Site and Drop dirs to contain the new Milestone or Release
     * Submit the pr
 
 1. Update and publish Release Notes (for Releases only)
-   * Create and review release notes (https://github.com/eclipse/xtext-website/tree/main/xtend-website/_posts/releasenotes and https://github.com/eclipse/xtend-website/tree/main/xtend-website/_posts/releasenotes)
+   * Create and review release notes (https://github.com/eclipse/xtext-website/tree/main/xtext-website/_posts/releasenotes and https://github.com/eclipse/xtext-website/tree/main/xtend-website/_posts/releasenotes)
    * For committer activity count `git shortlog -s -n -e v<PREV_RELEASE>..v<NEW_RELEASE>`
    * Remove published: false from release post
    * [Create PR](https://github.com/eclipse/xtext-website/compare/published...main?expand=1) to merge branch main into published
