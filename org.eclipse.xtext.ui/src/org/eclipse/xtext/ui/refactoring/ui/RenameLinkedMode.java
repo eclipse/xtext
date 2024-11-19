@@ -89,6 +89,8 @@ public class RenameLinkedMode {
 				registry.register(focusEditingSupport);
 			}
 			openPopup();
+			// Lost the focus, set back the focus
+			viewer.getTextWidget().setFocus();
 			return true;
 		} catch (BadLocationException e) {
 			throw new WrappedException(e);
