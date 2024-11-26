@@ -14,7 +14,7 @@ pipeline {
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'main' ? '''
       H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=17
-      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=17
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=21
       ''' : '')
   }
 
