@@ -11,9 +11,9 @@ while [ "$1" != "" ]; do
   VALUE=`echo $1 | awk -F= '{print $2}'`
   case $PARAM in
     -h | --help)
-      echo "Perform Maven build for xtext-xtend"
+      echo "Perform Maven/Tycho build for Xtext"
       echo ""
-      echo "./1-maven-build.sh"
+      echo "./full-build.sh"
       echo -e "\t-h --help"
       echo -e "\t--no-tests Skip test execution"
       echo -e "\t--local-repository=<PATH> Use local Maven repository"

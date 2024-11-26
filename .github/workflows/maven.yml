@@ -16,10 +16,12 @@ jobs:
         os: ['ubuntu-22.04', 'macos-14', 'windows-2022']
         java: [ 21 ]
         additional-maven-args: ['']
+        additional-label: ['']
         include:
         - os: ubuntu-22.04
           java: 21
           additional-maven-args: -Pstrict-jdk-21
+          additional-label: -strict
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -37,7 +39,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ matrix.java }}-${{ hashFiles('**/pom.xml', '**/*.target') }}
+          key: ${{ runner.os }}-m2-${{ matrix.java }}${{ matrix.additional-label }}-${{ hashFiles('**/pom.xml', '**/*.target') }}
 
       - name: Set Maven Home environment variable
         run: echo "MAVEN_WRAPPER_HOME=$(./mvnw --version | grep "Maven home:" | cut -c 13-)" >> "$GITHUB_ENV"
@@ -61,13 +63,13 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results-${{ runner.os }}-${{ matrix.java }}
+          name: test-results-${{ runner.os }}-${{ matrix.java }}${{ matrix.additional-label }}
           path: '**/*.tests/target/surefire-reports'
       - name: Archive Logs
         uses: actions/upload-artifact@v4
         if: ${{ failure() || cancelled() }}
         with:
-          name: logs-${{ runner.os }}-${{ matrix.java }}
+          name: logs-${{ runner.os }}-${{ matrix.java }}${{ matrix.additional-label }}
           path: '**/*.tests/target/**/*.log'
 
   build-maven-artifacts:
