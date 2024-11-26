@@ -95,7 +95,7 @@ public class JavaRuntimeVersion {
 				// ok
 			}
 			// fallback
-			return 11;
+			return 17;
 		}
 	}
 
