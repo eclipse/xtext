@@ -15,6 +15,7 @@ jobs:
       matrix: # 'macos-14' is arm64
         os: ['ubuntu-22.04', 'macos-14', 'windows-2022']
         java: [ 21 ]
+        additional-maven-args: ['']
         include:
         - os: ubuntu-22.04
           java: 21
