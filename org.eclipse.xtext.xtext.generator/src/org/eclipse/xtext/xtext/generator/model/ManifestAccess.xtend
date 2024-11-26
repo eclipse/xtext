@@ -112,7 +112,7 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 		«IF !version.nullOrEmpty»
 			Bundle-Version: «version»
 		«ENDIF»
-		Bundle-RequiredExecutionEnvironment: JavaSE-11
+		Bundle-RequiredExecutionEnvironment: JavaSE-17
 		Bundle-ActivationPolicy: lazy
 		«IF !exportedPackages.empty»
 			Export-Package: «FOR pack : exportedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»

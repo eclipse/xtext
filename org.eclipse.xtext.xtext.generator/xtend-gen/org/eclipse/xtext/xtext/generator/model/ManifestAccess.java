@@ -168,7 +168,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("Bundle-RequiredExecutionEnvironment: JavaSE-11");
+    _builder.append("Bundle-RequiredExecutionEnvironment: JavaSE-17");
     _builder.newLine();
     _builder.append("Bundle-ActivationPolicy: lazy");
     _builder.newLine();
