@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -37,7 +37,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.osgi.framework.Version;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -751,54 +750,28 @@ public class BuildAffectionTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.changeContent(foo, _builder_2);
-      boolean _isCoreResourceGreaterOrEqual_3_17_0 = BuildAffectionTest.isCoreResourceGreaterOrEqual_3_17_0();
-      if (_isCoreResourceGreaterOrEqual_3_17_0) {
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        this.assertBuildLogs(_builder_3);
-      } else {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.project/src/Foo.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        this.assertBuildLogs(_builder_4);
-      }
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -825,54 +798,26 @@ public class BuildAffectionTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.changeContent(foo, _builder_2);
-      boolean _isCoreResourceGreaterOrEqual_3_17_0 = BuildAffectionTest.isCoreResourceGreaterOrEqual_3_17_0();
-      if (_isCoreResourceGreaterOrEqual_3_17_0) {
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        this.assertBuildLogs(_builder_3);
-      } else {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        this.assertBuildLogs(_builder_4);
-      }
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -910,54 +855,26 @@ public class BuildAffectionTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.changeContent(foo, _builder_2);
-      boolean _isCoreResourceGreaterOrEqual_3_17_0 = BuildAffectionTest.isCoreResourceGreaterOrEqual_3_17_0();
-      if (_isCoreResourceGreaterOrEqual_3_17_0) {
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        this.assertBuildLogs(_builder_3);
-      } else {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        this.assertBuildLogs(_builder_4);
-      }
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1024,54 +941,28 @@ public class BuildAffectionTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.changeContent(foo, _builder_2);
-      boolean _isCoreResourceGreaterOrEqual_3_17_0 = BuildAffectionTest.isCoreResourceGreaterOrEqual_3_17_0();
-      if (_isCoreResourceGreaterOrEqual_3_17_0) {
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.project");
-        _builder_3.newLine();
-        _builder_3.append("Built test.project in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        _builder_3.append("Building test.client");
-        _builder_3.newLine();
-        _builder_3.append("Built test.client in \\d+ ms");
-        _builder_3.newLine();
-        this.assertBuildLogs(_builder_3);
-      } else {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.project/src/Foo.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        this.assertBuildLogs(_builder_4);
-      }
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Built test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("Built test.client in \\d+ ms");
+      _builder_3.newLine();
+      this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1131,58 +1022,30 @@ public class BuildAffectionTest {
       _builder_3.append("}");
       _builder_3.newLine();
       this.changeContent(bar, _builder_3);
-      boolean _isCoreResourceGreaterOrEqual_3_17_0 = BuildAffectionTest.isCoreResourceGreaterOrEqual_3_17_0();
-      if (_isCoreResourceGreaterOrEqual_3_17_0) {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.project/src/Bar.xtend");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.project/src/Foo.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.project");
-        _builder_4.newLine();
-        _builder_4.append("Built test.project in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        _builder_4.append("Building test.client");
-        _builder_4.newLine();
-        _builder_4.append("Built test.client in \\d+ ms");
-        _builder_4.newLine();
-        this.assertBuildLogs(_builder_4);
-      } else {
-        StringConcatenation _builder_5 = new StringConcatenation();
-        _builder_5.append("Building test.project");
-        _builder_5.newLine();
-        _builder_5.append("indexing platform:/resource/test.project/src/Bar.xtend");
-        _builder_5.newLine();
-        _builder_5.append("indexing platform:/resource/test.project/src/Foo.xtend");
-        _builder_5.newLine();
-        _builder_5.append("Built test.project in \\d+ ms");
-        _builder_5.newLine();
-        _builder_5.append("Building test.client");
-        _builder_5.newLine();
-        _builder_5.append("indexing platform:/resource/test.client/src/Client.xtend");
-        _builder_5.newLine();
-        _builder_5.append("Built test.client in \\d+ ms");
-        _builder_5.newLine();
-        _builder_5.append("Building test.project");
-        _builder_5.newLine();
-        _builder_5.append("Built test.project in \\d+ ms");
-        _builder_5.newLine();
-        _builder_5.append("Building test.client");
-        _builder_5.newLine();
-        _builder_5.append("Built test.client in \\d+ ms");
-        _builder_5.newLine();
-        this.assertBuildLogs(_builder_5);
-      }
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("Building test.project");
+      _builder_4.newLine();
+      _builder_4.append("indexing platform:/resource/test.project/src/Bar.xtend");
+      _builder_4.newLine();
+      _builder_4.append("indexing platform:/resource/test.project/src/Foo.xtend");
+      _builder_4.newLine();
+      _builder_4.append("Built test.project in \\d+ ms");
+      _builder_4.newLine();
+      _builder_4.append("Building test.project");
+      _builder_4.newLine();
+      _builder_4.append("Built test.project in \\d+ ms");
+      _builder_4.newLine();
+      _builder_4.append("Building test.client");
+      _builder_4.newLine();
+      _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
+      _builder_4.newLine();
+      _builder_4.append("Built test.client in \\d+ ms");
+      _builder_4.newLine();
+      _builder_4.append("Building test.client");
+      _builder_4.newLine();
+      _builder_4.append("Built test.client in \\d+ ms");
+      _builder_4.newLine();
+      this.assertBuildLogs(_builder_4);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1231,11 +1094,5 @@ public class BuildAffectionTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-
-  private static boolean isCoreResourceGreaterOrEqual_3_17_0() {
-    Version version_3_17_0 = new Version(3, 17, 0);
-    Version installed = ResourcesPlugin.getPlugin().getBundle().getVersion();
-    return (installed.compareTo(version_3_17_0) >= 0);
   }
 }

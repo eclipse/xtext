@@ -7,6 +7,6 @@ Bundle-SymbolicName: mavenTychoP2; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;bundle-version="3.16.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+ org.eclipse.equinox.common;bundle-version="3.19.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: mavenTychoP2

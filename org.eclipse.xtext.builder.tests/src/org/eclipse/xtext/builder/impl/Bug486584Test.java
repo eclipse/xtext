@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,6 @@ package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
 import static org.junit.Assert.*;
-import static org.junit.Assume.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +34,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.osgi.framework.Version;
 
 import com.google.common.collect.ImmutableList;
 
@@ -136,7 +134,6 @@ public class Bug486584Test extends AbstractBuilderTest {
 	
 	@Test
 	public void testFullBuildWhenTestAttributeChanges() throws Exception {
-		assumeTrue(JavaCore.getPlugin().getBundle().getVersion().compareTo(new Version(3,33,0)) >= 0);
 		IJavaProject project = setupProject();
 		// create src2 folder and give it a separate output folder
 		addSourceFolder(project, SRC2_FOLDER);

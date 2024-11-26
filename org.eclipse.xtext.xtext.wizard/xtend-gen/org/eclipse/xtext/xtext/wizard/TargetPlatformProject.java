@@ -16,7 +16,6 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JUnitVersion;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -108,18 +107,9 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    {
-      boolean _isAtLeast = this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA17);
-      if (_isAtLeast) {
-        _builder.append("\t\t\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/releases/2024-12\"/>");
-        _builder.newLine();
-      } else {
-        _builder.append("\t\t\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/releases/2023-03\"/>");
-        _builder.newLine();
-      }
-    }
+    _builder.append("\t\t\t");
+    _builder.append("<repository location=\"https://download.eclipse.org/releases/2024-12\"/>");
+    _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();

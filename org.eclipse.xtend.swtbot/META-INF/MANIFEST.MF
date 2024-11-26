@@ -5,5 +5,5 @@ Bundle-SymbolicName: org.eclipse.xtend.swtbot
 Bundle-Version: 2.37.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Fragment-Host: org.eclipse.swtbot.swt.finder;bundle-version="2.1.1"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.eclipse.xtend.swtbot

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,8 +9,6 @@
 package org.eclipse.xtext.builder.smap;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -44,7 +42,6 @@ import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.ByteStreams;
@@ -58,11 +55,6 @@ import com.google.inject.Provider;
 public class DebugSourceInstallingCompilationParticipant extends CompilationParticipant implements CompilationParticipantExtension {
 
 	private static final Logger log = Logger.getLogger(DebugSourceInstallingCompilationParticipant.class);
-	private static final Version VERSION_3_34_0 = new Version(3, 34, 0);
-
-	private static Version installedJdtCoreVersion;
-	
-	private List<BuildContext> files;
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
@@ -120,9 +112,6 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	@Override
 	public Optional<byte[]> postProcess(BuildContext ctx, ByteArrayInputStream bytes) {
 		Optional<byte[]> no_change = Optional.empty();
-		if (!isJdtCoreGreaterOrEqual(VERSION_3_34_0)) {
-			return no_change;
-		}
 		try {
 			IFile generatedJavaFile = ctx.getFile();
 
@@ -170,64 +159,9 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 		try {
 			task.start();
 			super.buildFinished(project);
-			if (isJdtCoreGreaterOrEqual(VERSION_3_34_0)) {
-				// nothing to do here
-				return;
-			} else {
-				if (files == null)
-					return;
-				for (BuildContext ctx : files) {
-					try {
-						IFile generatedJavaFile = ctx.getFile();
-
-						// This may fail if there is no trace file.
-						IEclipseTrace traceToSource = traceInformation.getTraceToSource(generatedJavaFile);
-						if (traceToSource == null) {
-							continue;
-						}
-						AbstractTraceRegion rootTraceRegion = findRootTraceRegion(traceToSource);
-						if (rootTraceRegion == null)
-							continue;
-
-						SourceRelativeURI dslSourceFile = rootTraceRegion.getAssociatedSrcRelativePath();
-
-						// OutputConfigurations are only available for folders targeted by Xtext's code generation.
-						OutputConfiguration outputConfiguration = findOutputConfiguration(dslSourceFile, generatedJavaFile);
-						if (outputConfiguration == null)
-							continue;
-
-						IJavaElement element = JavaCore.create(generatedJavaFile);
-						if (element == null)
-							continue;
-
-						deleteTaskMarkers(generatedJavaFile);
-						markerReflector.reflectErrorMarkerInSource(generatedJavaFile, traceToSource);
-
-						ITraceToBytecodeInstaller installer = getInstaller(outputConfiguration);
-						installer.setTrace(generatedJavaFile.getName(), rootTraceRegion);
-						for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
-							InputStream contents = javaClassFile.getContents();
-							try {
-								byte[] byteCode = installer.installTrace(ByteStreams.toByteArray(contents));
-								if (byteCode != null) {
-									javaClassFile.setContents(new ByteArrayInputStream(byteCode), 0, null);
-								} else {
-									// we need to touch the class file to do a respin of the build
-									// otherwise a needsRebuild request is ignored since no IResourceDelta is available
-									javaClassFile.touch(null);
-								}
-							} finally {
-								contents.close();
-							}
-						}
-					} catch (Exception e) {
-						String msg = "Could not process %s to install source information: %s";
-						log.error(String.format(msg, ctx.getFile().getFullPath().toString(), e.getMessage()), e);
-					}
-				}
-			}
+			// nothing to do here
+			return;
 		} finally {
-			files = null;
 			task.stop();
 		}
 	}
@@ -242,13 +176,6 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	@Override
 	public void buildStarting(BuildContext[] files, boolean isBatch) {
 		super.buildStarting(files, isBatch);
-		if (!isJdtCoreGreaterOrEqual(VERSION_3_34_0)) {
-			if (this.files != null) {
-				this.files.addAll(Arrays.asList(files));
-			} else {
-				this.files = Lists.newArrayList(files);
-			}
-		}
 	}
 
 	protected List<IFile> findGeneratedJavaClassFiles(IJavaElement element) {
@@ -270,13 +197,6 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	@Override
 	public boolean isActive(IJavaProject project) {
 		return XtextProjectHelper.hasNature(project.getProject());
-	}
-
-	private static boolean isJdtCoreGreaterOrEqual(Version version) {
-		if (installedJdtCoreVersion == null) {
-			installedJdtCoreVersion = JavaCore.getPlugin().getBundle().getVersion();
-		}
-		return installedJdtCoreVersion.compareTo(version) >= 0;
 	}
 
 }

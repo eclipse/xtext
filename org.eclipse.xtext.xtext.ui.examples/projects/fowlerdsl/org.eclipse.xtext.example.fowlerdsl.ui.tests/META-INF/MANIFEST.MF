@@ -6,14 +6,14 @@ Bundle-Version: 2.37.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.jdt.core;bundle-version="3.29.0",
+ org.eclipse.jdt.core;bundle-version="3.37.0",
  org.eclipse.ui.workbench;bundle-version="3.125.0";resolution:=optional,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.example.fowlerdsl.ui,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.xtext.example.fowlerdsl.ui.tests;x-internal=true
 Import-Package: org.hamcrest.core,
  org.junit;version="4.13.2",

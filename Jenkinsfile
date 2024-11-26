@@ -6,14 +6,14 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['r202203', 'r202206', 'r202209', 'r202212', 'r202303', 'r202306', 'r202309', 'r202312', 'r202403', 'r202406', 'r202409', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['r202403', 'r202406', 'r202409', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
-    choice(name: 'JDK_VERSION', choices: [ '11', '17', '21' ], description: 'Which JDK version should be used?')
+    choice(name: 'JDK_VERSION', choices: [ '17', '21' ], description: 'Which JDK version should be used?')
   }
 
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'main' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=r202203;JDK_VERSION=17
+      H H(0-1) * * * %TARGET_PLATFORM=r202403;JDK_VERSION=17
       H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=21
       ''' : '')
   }
@@ -59,7 +59,6 @@ pipeline {
       environment {
         MAVEN_OPTS = "-Xmx1500m"
         // set all Java versions needed by our toolchains.xml
-        JAVA_HOME_11_X64 = tool(type:'jdk', name:'temurin-jdk11-latest')
         JAVA_HOME_17_X64 = tool(type:'jdk', name:'temurin-jdk17-latest')
         JAVA_HOME_21_X64 = tool(type:'jdk', name:'temurin-jdk21-latest')
       }
@@ -67,7 +66,6 @@ pipeline {
         xvnc(useXauthority: true) {
           sh """
             ./full-build.sh --tp=${selectedTargetPlatform()} \
-              ${javaVersion() == 11 ? '--toolchains releng/toolchains.xml -Pstrict-jdk-11' : ''} \
               ${javaVersion() == 17 ? '--toolchains releng/toolchains.xml -Pstrict-jdk-17' : ''} \
               ${javaVersion() == 21 ? '-Pstrict-jdk-21' : ''}
           """
@@ -166,7 +164,7 @@ def eclipseVersion() {
 
 /**
  * The target platform is primarily defined by the build parameter TARGET_PLATFORM.
- * But when the build is triggered by upstream with at least Java version 11, 'latest'
+ * But when the build is triggered by upstream with at least Java version 21, 'latest'
  * is returned.
  */
 def selectedTargetPlatform() {
@@ -174,12 +172,12 @@ def selectedTargetPlatform() {
     def isUpstream = isTriggeredByUpstream()
     def javaVersion = javaVersion()
 
-    if (isTriggeredByUpstream() && javaVersion>=17) {
+    if (isTriggeredByUpstream() && javaVersion>=21) {
         println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
         return 'latest'
-    } else if (isTriggeredByUpstream() && javaVersion>=11) {
-        println("Choosing 'r202203' target since this build was triggered by upstream with Java ${javaVersion}")
-        return 'r202203'
+    } else if (isTriggeredByUpstream() && javaVersion>=17) {
+        println("Choosing 'r2024-03' target since this build was triggered by upstream with Java ${javaVersion}")
+        return 'r2024-03'
     } else {
         return tp
     }
