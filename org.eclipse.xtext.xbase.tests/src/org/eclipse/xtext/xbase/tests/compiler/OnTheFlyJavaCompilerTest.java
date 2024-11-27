@@ -8,11 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.xbase.testing.TemporaryFolder;
-import org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

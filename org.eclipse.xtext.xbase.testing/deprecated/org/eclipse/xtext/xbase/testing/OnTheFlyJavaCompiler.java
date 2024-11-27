@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.internal.compiler.batch.Main;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.Pair;

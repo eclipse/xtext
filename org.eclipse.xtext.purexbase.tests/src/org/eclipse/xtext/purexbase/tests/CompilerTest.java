@@ -11,10 +11,10 @@ package org.eclipse.xtext.purexbase.tests;
 import java.io.IOException;
 
 import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
-import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
