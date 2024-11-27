@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
-import org.eclipse.xtext.tests.TemporaryFolder;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;

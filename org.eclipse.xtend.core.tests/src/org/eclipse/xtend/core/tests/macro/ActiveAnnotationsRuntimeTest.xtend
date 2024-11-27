@@ -22,12 +22,12 @@ import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtend.core.tests.util.TemporaryFolder
-import org.eclipse.xtext.testing.XtextRunner
-import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.TemporaryFolder
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
