@@ -1,18 +1,19 @@
 /*******************************************************************************
- * Copyright (c) 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2020, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.util;
+package org.eclipse.xtext.testing;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 
+import org.junit.Rule;
 import org.junit.rules.ExternalResource;
 
 import com.google.inject.Singleton;
@@ -44,7 +45,7 @@ import com.google.inject.Singleton;
  * 
  * @noextend This class is not intended to be subclassed by clients.
  * 
- * @since 2.7
+ * @since 2.38
  */
 @Singleton
 public class TemporaryFolder extends ExternalResource {
@@ -189,3 +190,4 @@ public class TemporaryFolder extends ExternalResource {
 		file.delete();
 	}
 }
+

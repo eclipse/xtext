@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.tests.util.TemporaryFolder;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;

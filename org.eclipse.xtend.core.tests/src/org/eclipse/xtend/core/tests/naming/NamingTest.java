@@ -46,7 +46,7 @@ public class NamingTest extends AbstractXtendTestCase {
 
 	@Test public void testQualifiedNameProvider_1() throws Exception {
 		XtendFile file = file("package foo class Bar { def baz() {this} }");
-		XtendFunction function = (XtendFunction) ((XtendClass) file.getXtendTypes().get(0)).getMembers().get(0);
+		XtendFunction function = (XtendFunction) file.getXtendTypes().get(0).getMembers().get(0);
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"), nameProvider.getFullyQualifiedName(function));
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"),
 				nameProvider.getFullyQualifiedName(associations.getDirectlyInferredOperation(function)));

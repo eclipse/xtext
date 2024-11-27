@@ -24,7 +24,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.tests.TemporaryFolder;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.junit.Assert;

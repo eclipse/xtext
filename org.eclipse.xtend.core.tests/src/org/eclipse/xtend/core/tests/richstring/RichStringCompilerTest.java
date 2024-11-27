@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
-import org.eclipse.xtend.core.tests.util.TemporaryFolder;
 import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Before;
 import org.junit.Rule;

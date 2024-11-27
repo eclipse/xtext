@@ -42,6 +42,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.IAcceptor;

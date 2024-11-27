@@ -10,13 +10,13 @@ package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
-import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.junit.Assert;
 import org.junit.Rule;

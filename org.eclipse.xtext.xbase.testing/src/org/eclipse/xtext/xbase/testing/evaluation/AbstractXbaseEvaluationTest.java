@@ -9,9 +9,9 @@
 package org.eclipse.xtext.xbase.testing.evaluation;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.google.common.collect.Sets.newTreeSet;
-import static com.google.common.collect.Maps.newHashMap;
 import static java.util.Collections.emptyList;
 
 import java.io.IOException;
@@ -25,20 +25,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.inject.Inject;
+
 import testdata.CloseException;
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
 import testdata.TryBodyException;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

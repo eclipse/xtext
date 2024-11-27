@@ -8,10 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
-import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.junit.Assume;
 import org.junit.Rule;

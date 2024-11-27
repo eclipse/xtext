@@ -11,7 +11,7 @@ package org.eclipse.xtext.xtext.wizard.cli;
 import java.io.File;
 import java.util.List;
 
-import org.eclipse.xtext.tests.TemporaryFolder;
+import org.eclipse.xtext.testing.TemporaryFolder;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

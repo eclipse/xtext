@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Objects;
 
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Before;
