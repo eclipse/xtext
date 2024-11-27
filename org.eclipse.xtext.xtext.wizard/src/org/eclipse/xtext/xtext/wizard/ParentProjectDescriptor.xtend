@@ -11,7 +11,6 @@ package org.eclipse.xtext.xtext.wizard
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
@@ -70,7 +69,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 
 	def String getTychoVersion() {
-		'4.0.9'
+		'4.0.10'
 	}
 
 	def private CharSequence loadResource(String resourcePath) {
