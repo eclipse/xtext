@@ -402,7 +402,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 		// * Besides a Jvm class, the inferrer will also infer an interface with problems
 		// * (an abstract method with "void" as a parameter type).
 		// * The additional inferred interface WILL NOT be checked by JvmGenericTypeValidator.
-		// * See https://github.com/eclipse/xtext/issues/3045
+		// * See https://github.com/eclipse-xtext/xtext/issues/3045
 		// */
 		//MyClassWithWrongAdditionalInferredInterface:
 		//    'classWithWrongInferredInterface' name=ValidID '{'
@@ -899,7 +899,7 @@ public class JvmGenericTypeValidatorTestLangGrammarAccess extends AbstractElemen
 	// * Besides a Jvm class, the inferrer will also infer an interface with problems
 	// * (an abstract method with "void" as a parameter type).
 	// * The additional inferred interface WILL NOT be checked by JvmGenericTypeValidator.
-	// * See https://github.com/eclipse/xtext/issues/3045
+	// * See https://github.com/eclipse-xtext/xtext/issues/3045
 	// */
 	//MyClassWithWrongAdditionalInferredInterface:
 	//    'classWithWrongInferredInterface' name=ValidID '{'

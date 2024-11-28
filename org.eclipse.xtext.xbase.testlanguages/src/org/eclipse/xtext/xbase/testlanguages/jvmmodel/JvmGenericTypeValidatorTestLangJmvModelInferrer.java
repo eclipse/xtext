@@ -172,7 +172,7 @@ public class JvmGenericTypeValidatorTestLangJmvModelInferrer extends AbstractMod
 			});
 		// but also infers an interface with a wrong method
 		// to verify that the JvmGenericType of the inferred interface will NOT be checked
-		// See https://github.com/eclipse/xtext/issues/3045
+		// See https://github.com/eclipse-xtext/xtext/issues/3045
 		var wrongInferredInterface = jvmTypesBuilder.toInterface(element,
 				qualifiedNameProvider.getFullyQualifiedName(element).toString()+ "Interface",
 			(JvmGenericType it) -> {

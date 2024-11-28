@@ -189,7 +189,7 @@ public class JvmGenericTypeValidator extends AbstractDeclarativeValidator {
 	protected void checkJvmGenericType(JvmGenericType type, Set<EObject> processed) {
 		var sourceType = getPrimarySourceElement(type);
 		// inferred types must be checked once per primary source element
-		// see https://github.com/eclipse/xtext/issues/3045
+		// see https://github.com/eclipse-xtext/xtext/issues/3045
 		if (!processed.add(sourceType))
 			return;
 		handleExceptionDuringValidation(() -> checkDefaultSuperConstructor(sourceType, type));

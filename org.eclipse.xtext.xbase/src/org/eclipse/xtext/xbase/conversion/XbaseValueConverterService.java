@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Lorenzo Bettini - remove Windows EOLs from string literals,
- * https://github.com/eclipse/xtext/issues/2293
+ * https://github.com/eclipse-xtext/xtext/issues/2293
  */
 @Singleton
 public class XbaseValueConverterService extends DefaultTerminalConverters {

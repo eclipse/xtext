@@ -518,7 +518,7 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	/**
 	 * Two incompatible exceptions from three supertypes;
 	 * the marker is set on the offending exceptions only.
-	 * https://github.com/eclipse/xtext/issues/2912
+	 * https://github.com/eclipse-xtext/xtext/issues/2912
 	 */
 	@Test public void testIncompatibleThrowsClause_06() throws Exception {
 		var source = "class Foo extends test.ExceptionThrowing implements test.ExceptionThrowingInterface, test.ExceptionThrowingInterface2 {"

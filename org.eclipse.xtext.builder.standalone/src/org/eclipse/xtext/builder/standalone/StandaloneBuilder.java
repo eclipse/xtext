@@ -348,7 +348,7 @@ public class StandaloneBuilder {
 	 * Allows for relative source folders are properly generated in the
 	 * trace files, instead of absolute ones.
 	 * 
-	 * See https://github.com/eclipse/xtext/issues/2957
+	 * See https://github.com/eclipse-xtext/xtext/issues/2957
 	 * 
 	 * @since 2.35
 	 */

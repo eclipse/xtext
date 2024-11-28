@@ -144,7 +144,7 @@ public class IterableExtensions {
 	 * semantics of the original code:
 	 * The Java 21 getLast method throws a {@link NoSuchElementException} when the
 	 * collection is empty, instead of returning null.
-	 * @see https://github.com/eclipse/xtext/issues/2981
+	 * @see https://github.com/eclipse-xtext/xtext/issues/2981
 	 */
 	@Deprecated
 	public static <T> T last(Iterable<T> iterable) {

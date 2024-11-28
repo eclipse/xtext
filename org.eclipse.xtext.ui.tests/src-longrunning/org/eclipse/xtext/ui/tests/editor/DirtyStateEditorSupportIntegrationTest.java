@@ -127,7 +127,7 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 	}
 	
 	/*
-	 * @see https://github.com/eclipse/xtext/issues/2385
+	 * @see https://github.com/eclipse-xtext/xtext/issues/2385
 	 */
 	@Test public void testModifyFileInExternEditor() throws Exception {
 		IXtextDocument document = editor.getDocument();
