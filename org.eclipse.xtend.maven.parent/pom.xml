@@ -18,9 +18,9 @@
 	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
 
 	<scm>
-		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
-		<developerConnection>scm:git:https://github.com/eclipse/xtext-xtend.git</developerConnection>
-		<url>https://github.com/eclipse/xtext-xtend.git</url>
+		<connection>scm:git:https://github.com/eclipse-xtext/xtext.git</connection>
+		<developerConnection>scm:git:https://github.com/eclipse-xtext/xtext.git</developerConnection>
+		<url>https://github.com/eclipse-xtext/xtext.git</url>
 	</scm>
 
 	<properties>
