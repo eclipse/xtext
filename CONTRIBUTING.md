@@ -37,7 +37,7 @@ Before starting the setup process, make sure that you have both an [Eclipse](htt
 
 The easiest way to set up a Xtext development environment is to use the following automated Oomph setup configuration link:
 
-[![Create Eclipse Development Environment for Xtext](https://download.eclipse.org/oomph/www/setups/svg/Xtext.svg)](https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/eclipse/xtext/main/releng/org.eclipse.xtext.contributor/XtextConfiguration.setup&show=true "Click to open Eclipse-Installer Auto Launch or drag onto your running installer's title area")
+[![Create Eclipse Development Environment for Xtext](https://download.eclipse.org/oomph/www/setups/svg/Xtext.svg)](https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/eclipse-xtext/xtext/main/releng/org.eclipse.xtext.contributor/XtextConfiguration.setup&show=true "Click to open Eclipse-Installer Auto Launch or drag onto your running installer's title area")
 
 Alternatively you can do those steps manually as follows:
 
