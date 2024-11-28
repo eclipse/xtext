@@ -19,7 +19,7 @@
       source="http://www.eclipse.org/oomph/setup/BrandingInfo">
     <detail
         key="imageURI">
-      <value>https://raw.githubusercontent.com/eclipse/xtext/a63587dc6c480b9641f86843a1cc18411a8d5d70/xtext-website/images/xtext-bullet.png</value>
+      <value>https://raw.githubusercontent.com/eclipse-xtext/xtext/a63587dc6c480b9641f86843a1cc18411a8d5d70/xtext-website/images/xtext-bullet.png</value>
     </detail>
     <detail
         key="siteURI">
@@ -375,7 +375,7 @@
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.xtext"
-        remoteURI="eclipse/xtext"
+        remoteURI="eclipse-xtext/xtext"
         checkoutBranch="${xtext.git.branch}">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
@@ -581,7 +581,7 @@
     <setupTask
         xsi:type="setup:EclipseIniTask"
         option="-Doomph.redirection.xtext"
-        value="=https://raw.githubusercontent.com/eclipse/xtext/main/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
+        value="=https://raw.githubusercontent.com/eclipse-xtext/xtext/main/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
         vm="true"/>
     <setupTask
         xsi:type="projects:ProjectsBuildTask"
