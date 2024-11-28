@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 
 /**
  * @author sherrmann - Initial contribution and API
- * @author Lorenzo Bettini - make it appropriate for reproducing https://github.com/eclipse/xtext/issues/2920
+ * @author Lorenzo Bettini - make it appropriate for reproducing https://github.com/eclipse-xtext/xtext/issues/2920
  */
 public class GH2920Test extends AbstractParticipatingBuilderTest {
 	private IJavaProject javaProject;

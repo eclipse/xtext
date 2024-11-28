@@ -2,7 +2,7 @@ This page explains common tasks related to working with Xtext's source code.
 
 ## Report an Issue
 
-Please create a GitHub issue: https://github.com/eclipse/xtext/issues.
+Please create a GitHub issue: https://github.com/eclipse-xtext/xtext/issues.
 
 ### Milestones
 
@@ -73,7 +73,7 @@ You're a committer if you have write-access to the Xtext git-repositories.
  10. If the reviewer approves, merge.
 
 ## Create a Release Locally
- 1. Run the Maven build locally by calling the shell script [`full-build.sh`](https://github.com/eclipse/xtext/blob/main/full-build.sh). You may want to pass `--no-tests` to the script to skip all tests (keep in mind that with tests the build might take more than 1 hour).
+ 1. Run the Maven build locally by calling the shell script [`full-build.sh`](https://github.com/eclipse-xtext/xtext/blob/main/full-build.sh). You may want to pass `--no-tests` to the script to skip all tests (keep in mind that with tests the build might take more than 1 hour).
  2. Find the artifacts at `build/maven-repository` or `build/p2-repository` in a folder relative to the repository root.
 
 ## Consume the Latest Artifacts
