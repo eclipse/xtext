@@ -90,4 +90,4 @@ After each release a new set of projects should be added. Follow the instruction
 
 ## Marketplace
 
-With each release the Marketplace composite site descriptors have to be adjusted. The update steps are described in https://github.com/eclipse/xtext/blob/master/Builds.md#preparing-milestones-and-releases.
+With each release the Marketplace composite site descriptors have to be adjusted. The update steps are described in https://github.com/eclipse-xtext/xtext/blob/master/Builds.md#preparing-milestones-and-releases.
