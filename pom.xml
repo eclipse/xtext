@@ -118,9 +118,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/eclipse/xtext.git</connection>
-		<developerConnection>scm:git:https://github.com/eclipse/xtext.git</developerConnection>
-		<url>git@github.com:eclipse/xtext.git</url>
+		<connection>scm:git:https://github.com/eclipse-xtext/xtext.git</connection>
+		<developerConnection>scm:git:https://github.com/eclipse-xtext/xtext.git</developerConnection>
+		<url>git@github.com:eclipse-xtext/xtext.git</url>
 	</scm>
 
 	<properties>
@@ -161,7 +161,7 @@
 			retrieve at run-time the current Xtext version -->
 		<mavenVersionManifestEntry>${project.version}</mavenVersionManifestEntry>
 
-		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext.git</tycho.scmUrl>
+		<tycho.scmUrl>scm:git:https://github.com/eclipse-xtext/xtext.git</tycho.scmUrl>
 
 		<!-- Required properties for releasing -->
 		<ssh-uri>genie.xtext@projects-storage.eclipse.org</ssh-uri>
@@ -591,7 +591,7 @@
 					<artifactId>maven-bundle-plugin</artifactId>
 					<!-- extensions is crucial to avoid classloading problems
 						and API incompatibility when running in a Tycho build.
-						see https://github.com/eclipse/xtext/issues/2914 -->
+						see https://github.com/eclipse-xtext/xtext/issues/2914 -->
 					<extensions>true</extensions>
 					<version>5.1.9</version>
 					<executions>
@@ -674,7 +674,7 @@
 						</excludes>
 						<failIfNoTests>true</failIfNoTests>
 						<systemProperties>
-							<!-- https://github.com/eclipse/xtext/issues/3057 -->
+							<!-- https://github.com/eclipse-xtext/xtext/issues/3057 -->
 							<DetectVMInstallationsJob.disabled>true</DetectVMInstallationsJob.disabled>
 						</systemProperties>
 					</configuration>
