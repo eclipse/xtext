@@ -66,7 +66,7 @@
 <hook NAME="AutomaticEdgeColor" COUNTER="11" RULE="ON_BRANCH_CREATION"/>
 <node TEXT="Tasks per Release" POSITION="right" ID="ID_763576794" CREATED="1611837840795" MODIFIED="1611837890362">
 <edge COLOR="#ff0000"/>
-<node TEXT="Create Simrel Tasks Github Issue&#xa;https://github.com/eclipse/xtext/issues/1889" ID="ID_101290917" CREATED="1611838221627" MODIFIED="1611840117064">
+<node TEXT="Create Simrel Tasks Github Issue&#xa;https://github.com/eclipse-xtext/xtext/issues/1889" ID="ID_101290917" CREATED="1611838221627" MODIFIED="1611840117064">
 <node TEXT="Version Bump for next relase" ID="ID_77611227" CREATED="1611838244554" MODIFIED="1611838379806"/>
 <node TEXT="Bootstrap against Last release" ID="ID_178312350" CREATED="1611838383046" MODIFIED="1611838395781"/>
 <node TEXT="Update Oomph" ID="ID_1287907680" CREATED="1611838399456" MODIFIED="1611838404451"/>
@@ -92,9 +92,9 @@
 <node TEXT="https://projects.eclipse.org/projects/modeling.emf.mwe/governance" ID="ID_1034855226" CREATED="1611839450124" MODIFIED="1611839451116"/>
 </node>
 <node TEXT="how to Build milestones &amp; releases" ID="ID_364871681" CREATED="1611839702627" MODIFIED="1611839712645">
-<node TEXT="https://github.com/eclipse/xtext/blob/master/Builds.md" ID="ID_1595910260" CREATED="1611839728394" MODIFIED="1611839729447"/>
+<node TEXT="https://github.com/eclipse-xtext/xtext/blob/master/Builds.md" ID="ID_1595910260" CREATED="1611839728394" MODIFIED="1611839729447"/>
 </node>
-<node TEXT="https://github.com/eclipse/xtext/blob/master/dev-doc/MaintenanceTasks.md" ID="ID_1801950597" CREATED="1611839781977" MODIFIED="1611839784467"/>
+<node TEXT="https://github.com/eclipse-xtext/xtext/blob/master/dev-doc/MaintenanceTasks.md" ID="ID_1801950597" CREATED="1611839781977" MODIFIED="1611839784467"/>
 <node TEXT="Version handling in issues" ID="ID_993084427" CREATED="1611839872324" MODIFIED="1611839884400">
 <node TEXT="Close old milestones" ID="ID_1470744382" CREATED="1611839886050" MODIFIED="1611839893776"/>
 <node TEXT="create new milestones" ID="ID_526818668" CREATED="1611839895183" MODIFIED="1611839901381"/>
@@ -106,7 +106,7 @@
 <node TEXT="Release Review" ID="ID_1658997896" CREATED="1611838623544" MODIFIED="1611838634209">
 <node TEXT="Xtext" ID="ID_595090452" CREATED="1611838637104" MODIFIED="1611838638696"/>
 <node TEXT="MWE" ID="ID_722460346" CREATED="1611838639805" MODIFIED="1611838641200"/>
-<node TEXT="Steps https://github.com/eclipse/xtext/issues/1890" ID="ID_509845310" CREATED="1611839401120" MODIFIED="1611839530153">
+<node TEXT="Steps https://github.com/eclipse-xtext/xtext/issues/1890" ID="ID_509845310" CREATED="1611839401120" MODIFIED="1611839530153">
 <node TEXT="Schedule Review from Governance page" ID="ID_1484835343" CREATED="1611839404538" MODIFIED="1611839465515"/>
 <node TEXT="Mail to PMC" ID="ID_1662030238" CREATED="1611839467330" MODIFIED="1611839472296"/>
 <node TEXT="IP Log" ID="ID_1428795778" CREATED="1611839473481" MODIFIED="1611839476123"/>
@@ -147,7 +147,7 @@
 <node TEXT="https://github.com/xtext/publishing" ID="ID_871247358" CREATED="1611839142903" MODIFIED="1611839144484"/>
 <node TEXT="api diff https://github.com/xtext/xtext-apidiff" ID="ID_189928204" CREATED="1611839179474" MODIFIED="1611839183674"/>
 <node TEXT="gradle cq helper https://github.com/xtext/gradle-wrapper-cq-helper" ID="ID_549373582" CREATED="1611839191309" MODIFIED="1611839196049">
-<node TEXT="https://github.com/eclipse/xtext/blob/master/dev-doc/GradleWrapperVersionBump.md" ID="ID_870470741" CREATED="1611839748347" MODIFIED="1611839749503"/>
+<node TEXT="https://github.com/eclipse-xtext/xtext/blob/master/dev-doc/GradleWrapperVersionBump.md" ID="ID_870470741" CREATED="1611839748347" MODIFIED="1611839749503"/>
 </node>
 <node TEXT="composite for marketplace https://github.com/xtext/xtext-p2-orbit" ID="ID_1155217364" CREATED="1611839243285" MODIFIED="1611839275507"/>
 <node TEXT="Simrel: ssh://&lt;user&gt;@git.eclipse.org:29418/simrel/org.eclipse.simrel.build" ID="ID_893606494" CREATED="1611840332950" MODIFIED="1611840342146"/>
@@ -182,7 +182,7 @@
 <node TEXT="Forum" ID="ID_1546228482" CREATED="1611839611002" MODIFIED="1611839612820"/>
 <node TEXT="Stackoverflow" ID="ID_669398111" CREATED="1611839614033" MODIFIED="1611839616766"/>
 </node>
-<node TEXT="Regenerate Languages    https://github.com/eclipse/xtext/blob/master/dev-doc/RegenerateLanguages.md" ID="ID_398455892" CREATED="1611839793977" MODIFIED="1611839801976"/>
+<node TEXT="Regenerate Languages    https://github.com/eclipse-xtext/xtext/blob/master/dev-doc/RegenerateLanguages.md" ID="ID_398455892" CREATED="1611839793977" MODIFIED="1611839801976"/>
 <node TEXT="Check for PRs" ID="ID_22509344" CREATED="1611840864248" MODIFIED="1611840869734">
 <node TEXT="See queries in xtext repo" ID="ID_1690079741" CREATED="1611841921749" MODIFIED="1611841923251"/>
 </node>
@@ -242,7 +242,7 @@
 </node>
 <node TEXT="OOmph&#xa;(Setting up dev env)" POSITION="right" ID="ID_491312962" CREATED="1611840409510" MODIFIED="1611840436856">
 <edge COLOR="#7c007c"/>
-<node TEXT="https://github.com/eclipse/xtext/blob/master/CONTRIBUTING.md" ID="ID_1609892282" CREATED="1611840425843" MODIFIED="1611840426717"/>
+<node TEXT="https://github.com/eclipse-xtext/xtext/blob/master/CONTRIBUTING.md" ID="ID_1609892282" CREATED="1611840425843" MODIFIED="1611840426717"/>
 </node>
 <node TEXT="Tips&amp;Tricks" POSITION="left" ID="ID_839761309" CREATED="1611840584563" MODIFIED="1611840590024">
 <edge COLOR="#007c7c"/>
