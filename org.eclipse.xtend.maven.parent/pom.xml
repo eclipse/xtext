@@ -13,15 +13,9 @@
 	<artifactId>org.eclipse.xtend.maven.parent</artifactId>
 	<packaging>pom</packaging>
 
-	<url>http://xtend-lang.org</url>
+	<url>https://eclipse.dev/Xtext/xtend/</url>
 	<name>Xtend Maven Plugin Parent POM</name>
 	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
-
-	<scm>
-		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
-		<developerConnection>scm:git:https://github.com/eclipse/xtext-xtend.git</developerConnection>
-		<url>https://github.com/eclipse/xtext-xtend.git</url>
-	</scm>
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>

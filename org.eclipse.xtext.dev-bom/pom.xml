@@ -120,9 +120,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/eclipse/xtext.git</connection>
-		<developerConnection>scm:git:https://github.com/eclipse/xtext.git</developerConnection>
-		<url>git@github.com:eclipse/xtext.git</url>
+		<connection>scm:git:https://github.com/eclipse-xtext/xtext.git</connection>
+		<developerConnection>scm:git:https://github.com/eclipse-xtext/xtext.git</developerConnection>
+		<url>git@github.com:eclipse-xtext/xtext.git</url>
 	</scm>
 	<properties>
 		<junit-platform-version>1.10.2</junit-platform-version>
