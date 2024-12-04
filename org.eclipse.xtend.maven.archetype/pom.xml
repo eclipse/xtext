@@ -14,6 +14,8 @@
 		<root-dir>${basedir}/..</root-dir>
 		<it-archetype-tests-skip>false</it-archetype-tests-skip>
 		<it-archetype-tests-debug>false</it-archetype-tests-debug>
+		<!-- The local Maven repository for our IT tests -->
+		<localMavenRepositoryPath>${project.basedir}/target/.m2test</localMavenRepositoryPath>
 	</properties>
 
 	<build>
@@ -50,11 +52,37 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<!-- install test dependencies, including the xtend-maven-plugin in the local .m2 repository
+				that will be used by the integration test to build the test project generated with the archetype -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-invoker-plugin</artifactId>
+				<configuration>
+					<extraArtifacts>
+						<!-- our BOM is not a dependency (it's just imported), thus, we must
+							install it explicitly in the local maven repository -->
+						<extraArtifact>org.eclipse.xtext:xtext-dev-bom:${project.version}:pom</extraArtifact>
+					</extraArtifacts>
+					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install dependencies in local test repo</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+						<configuration>
+							<scope>test</scope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<artifactId>maven-archetype-plugin</artifactId>
 				<configuration>
-					<skip>${it-archetype-tests-skip}</skip>
 					<debug>${it-archetype-tests-debug}</debug>
+					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 				</configuration>
 				<executions>
 					<execution>
@@ -62,7 +90,7 @@
 							<goal>integration-test</goal>
 						</goals>
 						<configuration>
-							<debug>${it-archetype-tests-debug}</debug>
+							<skip>${it-archetype-tests-skip}</skip>
 						</configuration>
 					</execution>
 				</executions>

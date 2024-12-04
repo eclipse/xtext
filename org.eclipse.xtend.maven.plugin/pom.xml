@@ -174,7 +174,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-invoker-plugin</artifactId>
-				<version>3.5.0</version>
 				<configuration>
 					<extraArtifacts>
 						<!-- our BOM is not a dependency (it's just imported), thus, we must

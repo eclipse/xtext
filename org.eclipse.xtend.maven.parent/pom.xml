@@ -110,6 +110,10 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>3.2.1</version>
 				</plugin>
+				<plugin>
+					<artifactId>maven-invoker-plugin</artifactId>
+					<version>3.5.0</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
