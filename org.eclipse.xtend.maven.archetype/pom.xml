@@ -12,7 +12,8 @@
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
-		<it-archetype-tests-skip>true</it-archetype-tests-skip>
+		<it-archetype-tests-skip>false</it-archetype-tests-skip>
+		<it-archetype-tests-debug>false</it-archetype-tests-debug>
 	</properties>
 
 	<build>
@@ -53,14 +54,16 @@
 				<artifactId>maven-archetype-plugin</artifactId>
 				<configuration>
 					<skip>${it-archetype-tests-skip}</skip>
-					<debug>true</debug>
+					<debug>${it-archetype-tests-debug}</debug>
 				</configuration>
 				<executions>
 					<execution>
 						<goals>
 							<goal>integration-test</goal>
 						</goals>
-						<configuration><debug>true</debug></configuration>
+						<configuration>
+							<debug>${it-archetype-tests-debug}</debug>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -84,7 +87,7 @@
 				</file>
 			</activation>
 			<properties>
-				<it-tests-skip>true</it-tests-skip>
+				<it-archetype-tests-skip>true</it-archetype-tests-skip>
 			</properties>
 		</profile>
 	</profiles>
