@@ -102,7 +102,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 						</plugin>
 						<plugin>
 							<artifactId>maven-war-plugin</artifactId>
-							<version>3.3.2</version>
+							<version>3.4.0</version>
 							<configuration>
 								<warSourceDirectory>«Outlet.WEBAPP.sourceFolder»</warSourceDirectory>
 								<failOnMissingWebXml>false</failOnMissingWebXml>
