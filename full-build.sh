@@ -2,7 +2,6 @@
 
 MVN_ARGS=(\
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
-  -Dit-archetype-tests-skip=true \
 )
 
 # args parsing inspired by https://gist.github.com/jehiah/855086
@@ -22,7 +21,7 @@ while [ "$1" != "" ]; do
       exit
       ;;
     --no-tests)
-      MVN_ARGS+=(-DskipTests=true)
+      MVN_ARGS+=(-DskipTests=true -Dit-archetype-tests-skip=true)
       ;;
     --local-repository)
       MVN_ARGS+=" -Dmaven.repo.local=$VALUE"

@@ -9,7 +9,7 @@
 			<defaultValue>UTF-8</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="javaVersion">
-			<defaultValue>1.8</defaultValue>
+			<defaultValue>17</defaultValue>
 		</requiredProperty>
 	</requiredProperties>
 	<fileSets>
