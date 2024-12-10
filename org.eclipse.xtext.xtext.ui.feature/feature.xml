@@ -35,7 +35,7 @@ SPDX-License-Identifier: EPL-2.0
          optional="true"/>
 
    <requires>
-      <import plugin="org.eclipse.emf.mwe2.runtime" version="2.20.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe2.runtime" version="2.21.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
