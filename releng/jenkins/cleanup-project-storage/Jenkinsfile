@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    kubernetes {
-      inheritFrom 'centos-8'
-    }
-  }
+  agent any
 
   options {
     buildDiscarder(logRotator(numToKeepStr:'15'))
