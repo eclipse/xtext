@@ -11,7 +11,7 @@
 	<packaging>eclipse-plugin</packaging>
 
 	<properties>
-		<mwe2Version>2.20.0</mwe2Version>
+		<mwe2Version>2.21.0.M0</mwe2Version>
 	</properties>
 
 	<build>
