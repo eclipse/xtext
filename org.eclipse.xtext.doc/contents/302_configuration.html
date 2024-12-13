@@ -14,7 +14,7 @@
 
 <h2 id="short-intro-to-mwe">A Short Introduction to MWE2</h2>
 
-<p>MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the <a href="https://github.com/eclipse/mwe/blob/master/documentation/mwe2.md">MWE2 documentation</a>.</p>
+<p>MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the <a href="https://github.com/eclipse-mwe/mwe/blob/master/documentation/mwe2.md">MWE2 documentation</a>.</p>
 
 <p>Given the following simple Java class (POJO):</p>
 
@@ -90,14 +90,14 @@ Person {
 }
 </code></pre>
 
-<p>Although arbitrary Java classes can be used, the standard root element for MWE2 files is <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a>, which is part of the very slim runtime model shipped with MWE2. It accepts <em>beans</em> and <em>components</em>.</p>
+<p>Although arbitrary Java classes can be used, the standard root element for MWE2 files is <a href="https://github.com/eclipse-mwe/mwe/blob/master/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a>, which is part of the very slim runtime model shipped with MWE2. It accepts <em>beans</em> and <em>components</em>.</p>
 
 <ul>
   <li>
-    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage.Registry</a>.</p>
+    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse-mwe/mwe/blob/master/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage.Registry</a>.</p>
   </li>
   <li>
-    <p>The method Workflow.addComponent(..) accepts instances of <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.</p>
+    <p>The method Workflow.addComponent(..) accepts instances of <a href="https://github.com/eclipse-mwe/mwe/blob/master/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.</p>
   </li>
 </ul>
 
@@ -295,7 +295,7 @@ Workflow {
 
 <p>If you are importing more than one metamodel, you can add more <code>referencedResource</code> declarations as required.</p>
 
-<p>In some occasions this simple way of referencing metamodels is not sufficient; you can then use the <a href="https://github.com/eclipse/mwe/blob/v2.12.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> as a Workflow bean for fine-tuning your EMF setup. Example:</p>
+<p>In some occasions this simple way of referencing metamodels is not sufficient; you can then use the <a href="https://github.com/eclipse-mwe/mwe/blob/master/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> as a Workflow bean for fine-tuning your EMF setup. Example:</p>
 
 <pre><code class="language-mwe2">bean = StandaloneSetup {
     platformUri = "${rootPath}"
