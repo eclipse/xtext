@@ -32,8 +32,8 @@ Workflow {
 			grammarUri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
 			
 			fragment = ecore.EMFGeneratorFragment2 {
-				emfRuntimeVersion = "2.29"
-				jdkLevel = "JDK110"
+				emfRuntimeVersion = "2.36"
+				jdkLevel = "JDK170"
 			}
 			fragment = grammarAccess.GrammarAccessFragment2 {}
 			fragment = resourceFactory.ResourceFactoryFragment2 {}

@@ -192,11 +192,11 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   private boolean suppressLoadInitialization = false;
 
   /**
-   * Default to 2.29 if available, otherwise #get will return null
+   * Default to 2.36 if available, otherwise #get will return null
    */
-  private GenRuntimeVersion emfRuntimeVersion = GenRuntimeVersion.get(GenRuntimeVersion.EMF229_VALUE);
+  private GenRuntimeVersion emfRuntimeVersion = GenRuntimeVersion.get(GenRuntimeVersion.EMF236_VALUE);
 
-  private GenJDKLevel jdkLevel = GenJDKLevel.JDK110_LITERAL;
+  private GenJDKLevel jdkLevel = GenJDKLevel.JDK170_LITERAL;
 
   private String rootExtendsClass = "org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container";
 
@@ -222,7 +222,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
    *   <li>"JDK110"</li>
    *   <li>"JDK170"</li>
    * </ul>
-   * The default level is "JDK110".
+   * The default level is "JDK170".
    */
   public void setJdkLevel(final String jdkLevel) {
     this.jdkLevel = GenJDKLevel.getByName(jdkLevel);

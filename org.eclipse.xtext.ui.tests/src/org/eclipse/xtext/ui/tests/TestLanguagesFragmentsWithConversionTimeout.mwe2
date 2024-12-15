@@ -17,7 +17,7 @@ var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
-var emfRuntimeVersion = "2.29"
+var emfRuntimeVersion = "2.36"
 
 CompositeGeneratorFragment2 {
 	fragment = ecore.EMFGeneratorFragment2 auto-inject {}
