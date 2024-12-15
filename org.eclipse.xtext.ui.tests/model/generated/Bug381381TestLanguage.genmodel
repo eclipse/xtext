@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" modelPluginID="org.eclipse.xtext.ui.tests"
     forceOverwrite="true" modelName="Bug381381TestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="Bug381381TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" fileExtensions="bug381381testlanguage" ecorePackage="Bug381381TestLanguage.ecore#/">
     <genClasses ecoreClass="Bug381381TestLanguage.ecore#//Model">

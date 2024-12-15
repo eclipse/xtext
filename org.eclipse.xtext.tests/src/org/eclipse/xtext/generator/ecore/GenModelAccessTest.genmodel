@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     modelName="GenModelAccessTest" importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <foreignModel>GenModelAccessTest.ecore</foreignModel>
   <genPackages prefix="Root" basePackage="org.eclipse.xtext.generator.ecore.genmodelaccess"
       disposableProviderFactory="true" ecorePackage="GenModelAccessTest.ecore#/">

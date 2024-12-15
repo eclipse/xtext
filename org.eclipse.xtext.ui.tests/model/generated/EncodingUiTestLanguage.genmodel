@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" modelPluginID="org.eclipse.xtext.ui.tests"
     forceOverwrite="true" modelName="EncodingUiTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="EncodingTest" basePackage="org.eclipse.xtext.ui.tests.editor.encoding"
       disposableProviderFactory="true" fileExtensions="encodinguitestlanguage" ecorePackage="EncodingUiTestLanguage.ecore#/">
     <genClasses ecoreClass="EncodingUiTestLanguage.ecore#//Model">

@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.testlanguages/src-gen" modelPluginID="org.eclipse.xtext.testlanguages"
     forceOverwrite="true" modelName="NestedRefsTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="NestedRefs" basePackage="org.eclipse.xtext.testlanguages.nestedRefs"
       disposableProviderFactory="true" fileExtensions="nestedRefs" ecorePackage="NestedRefsTestLanguage.ecore#/">
     <genClasses ecoreClass="NestedRefsTestLanguage.ecore#//Doc">

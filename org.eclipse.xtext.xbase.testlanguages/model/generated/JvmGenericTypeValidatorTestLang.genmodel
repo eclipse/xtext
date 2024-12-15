@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.xbase.testlanguages/src-gen" modelPluginID="org.eclipse.xtext.xbase.testlanguages"
     forceOverwrite="true" modelName="JvmGenericTypeValidatorTestLang" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="JvmGenericTypeValidatorTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"
       disposableProviderFactory="true" fileExtensions="jvmgenerictypevalidatortestlang"
       ecorePackage="JvmGenericTypeValidatorTestLang.ecore#/">

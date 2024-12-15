@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="InheritanceTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest">
   <genPackages prefix="InheritanceTest" basePackage="org.eclipse.xtext.grammarinheritance"
       disposableProviderFactory="true" fileExtensions="inheritancetestlanguage" ecorePackage="InheritanceTestLanguage.ecore#/">
     <genClasses ecoreClass="InheritanceTestLanguage.ecore#//Model">

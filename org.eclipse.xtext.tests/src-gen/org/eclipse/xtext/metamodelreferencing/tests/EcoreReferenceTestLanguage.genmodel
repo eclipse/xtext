@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="EcoreReferenceTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel#//ecorePerNsURI ../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel#//ecorePerPlatformPlugin ../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel#//ecorePerPlatformResource">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel#//ecorePerNsURI ../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel#//ecorePerPlatformPlugin ../../../../../../src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel#//ecorePerPlatformResource">
   <genPackages prefix="EcoreReference" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
       disposableProviderFactory="true" fileExtensions="ecorereferencetestlanguage"
       ecorePackage="EcoreReferenceTestLanguage.ecore#/">

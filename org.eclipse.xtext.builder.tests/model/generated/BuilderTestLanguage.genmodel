@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.builder.tests/src-gen" modelPluginID="org.eclipse.xtext.builder.tests"
     forceOverwrite="true" modelName="BuilderTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="BuilderTestLanguage" basePackage="org.eclipse.xtext.builder.tests"
       disposableProviderFactory="true" fileExtensions="buildertestlanguage" ecorePackage="BuilderTestLanguage.ecore#/">
     <genClasses ecoreClass="BuilderTestLanguage.ecore#//NamedElement">

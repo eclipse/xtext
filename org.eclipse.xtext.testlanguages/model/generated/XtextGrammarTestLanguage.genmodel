@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.testlanguages/src-gen" modelPluginID="org.eclipse.xtext.testlanguages"
     forceOverwrite="true" modelName="XtextGrammarTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="XtextGrammarTest" basePackage="org.eclipse.xtext.testlanguages.xtextgrammar"
       disposableProviderFactory="true" fileExtensions="xtextgrammar" ecorePackage="XtextGrammarTestLanguage.ecore#/">
     <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Grammar">

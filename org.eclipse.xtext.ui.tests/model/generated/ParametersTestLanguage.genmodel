@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" modelPluginID="org.eclipse.xtext.ui.tests"
     forceOverwrite="true" modelName="ParametersTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="ParametersTestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" fileExtensions="parameterstestlanguage" ecorePackage="ParametersTestLanguage.ecore#/">
     <genClasses ecoreClass="ParametersTestLanguage.ecore#//ParserRuleParameters">

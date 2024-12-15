@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" modelPluginID="org.eclipse.xtext.ui.tests"
     forceOverwrite="true" modelName="OutlineTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="OutlineTest" basePackage="org.eclipse.xtext.ui.tests.editor.outline"
       disposableProviderFactory="true" fileExtensions="outlinetestlanguage" ecorePackage="OutlineTestLanguage.ecore#/">
     <genClasses ecoreClass="OutlineTestLanguage.ecore#//Model">

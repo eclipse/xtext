@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.xbase.testlanguages/src-gen" modelPluginID="org.eclipse.xtext.xbase.testlanguages"
     forceOverwrite="true" modelName="ContentAssistFragmentTestLang" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="ContentAssistFragmentTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"
       disposableProviderFactory="true" fileExtensions="contentassistfragmenttestlang"
       ecorePackage="ContentAssistFragmentTestLang.ecore#/">

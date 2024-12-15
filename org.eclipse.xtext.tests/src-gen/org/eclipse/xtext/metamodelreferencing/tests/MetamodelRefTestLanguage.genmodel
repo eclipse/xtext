@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="MetamodelRefTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel#//xtext">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel#//xtext">
   <genPackages prefix="AnotherSimpleTest" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
       disposableProviderFactory="true" fileExtensions="metamodelreftestlanguage" ecorePackage="MetamodelRefTestLanguage.ecore#/">
     <genClasses ecoreClass="MetamodelRefTestLanguage.ecore#//Foo">

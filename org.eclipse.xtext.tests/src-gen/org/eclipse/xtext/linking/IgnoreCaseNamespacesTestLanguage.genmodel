@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="IgnoreCaseNamespacesTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
   <genPackages prefix="IgnoreCaseNamespacesTest" basePackage="org.eclipse.xtext.linking"
       disposableProviderFactory="true" fileExtensions="ignorecasenamespacestestlanguage"
       ecorePackage="IgnoreCaseNamespacesTestLanguage.ecore#/">

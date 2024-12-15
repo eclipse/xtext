@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="MultiRuleEnumTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="MultiRuleenums" basePackage="org.eclipse.xtext.enumrules" disposableProviderFactory="true"
       fileExtensions="multiruleenumtestlanguage" ecorePackage="MultiRuleEnumTestLanguage.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="MultiRuleEnumTestLanguage.ecore#//MyEnum">

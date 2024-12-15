@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.tests/src-gen" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="Bug292245TestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    copyrightFields="false" runtimeVersion="2.36" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug292245TestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
       disposableProviderFactory="true" fileExtensions="bug292245testlanguage" ecorePackage="Bug292245TestLanguage.ecore#/">
     <genClasses ecoreClass="Bug292245TestLanguage.ecore#//Model">
