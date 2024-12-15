@@ -179,7 +179,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	
 	/**
 	 * Sets the target EMF runtime version to generate for to the specified value.
-	 * Defaults to 2.29.
+	 * Defaults to 2.36.
 	 */
 	def void setEmfRuntimeVersion(String emfRuntimeVersion) {
 		this.emfRuntimeVersion = GenRuntimeVersion.get(emfRuntimeVersion)
@@ -197,6 +197,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	 *   <li>"JDK80"</li>
 	 *   <li>"JDK110"</li>
 	 *   <li>"JDK170"</li>
+	 *   <li>"JDK210"</li>
 	 * </ul>
 	 * The default level is "JDK170".
 	 */
