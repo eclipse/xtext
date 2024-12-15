@@ -5,7 +5,7 @@
     editorDirectory="/org.eclipse.xtext.types.editor/src" modelPluginID="org.eclipse.xtext.common.types"
     forceOverwrite="true" modelName="Types" modelPluginClass="" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" rootImplementsInterface=""
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" suppressGenModelAnnotations="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0" suppressGenModelAnnotations="false"
     copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit" editorPluginID="org.eclipse.xtext.types.editor"
     runtimeVersion="2.36" interfaceNamePattern="" classNamePattern="">
   <foreignModel>JavaVMTypes.ecore</foreignModel>
