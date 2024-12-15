@@ -9,9 +9,9 @@ Bundle-Vendor: Eclipse Xtext
 Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.38.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder;bundle-version="2.38.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.core;bundle-version="3.37.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.ui;bundle-version="3.26.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.ui;bundle-version="3.32.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.common.types.ui;bundle-version="2.38.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.ui.ide;bundle-version="3.13.1";resolution:=optional;x-installation:=greedy,
+ org.eclipse.ui.ide;bundle-version="3.22.100";resolution:=optional;x-installation:=greedy,
  org.eclipse.core.expressions;bundle-version="3.9.300"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
