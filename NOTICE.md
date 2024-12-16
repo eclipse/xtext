@@ -48,7 +48,7 @@ Apache Commons Lang (2.4)
 * License: Apache License, 2.0
 
 
-Apache Log4j / Reload4j (1.2.25)
+Apache Log4j / Reload4j (1.2.26)
 
 * License: Apache License 2.0
 
