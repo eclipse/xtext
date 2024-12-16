@@ -6,7 +6,7 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.util;
+package org.eclipse.xtext.relengutil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +27,7 @@ import org.apache.maven.model.building.DefaultModelBuildingRequest;
 import org.apache.maven.model.interpolation.DefaultModelVersionProcessor;
 import org.apache.maven.model.interpolation.StringVisitorModelInterpolator;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.util.MergeableManifest2.BundleOrPackage;
 import org.eclipse.xtext.util.MergeableManifest2.BundleOrPackageList;
 
