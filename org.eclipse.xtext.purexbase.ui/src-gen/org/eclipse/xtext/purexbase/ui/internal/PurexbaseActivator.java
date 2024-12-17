@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2024 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,10 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.purexbase.ui.internal;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -34,7 +34,7 @@ public class PurexbaseActivator extends AbstractUIPlugin {
 	
 	private static PurexbaseActivator INSTANCE;
 	
-	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
+	private Map<String, Injector> injectors = Collections.synchronizedMap(new HashMap<>(2));
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
