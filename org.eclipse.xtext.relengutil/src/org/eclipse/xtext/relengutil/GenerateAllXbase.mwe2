@@ -12,6 +12,7 @@ var rootPath = ".."
  * Must run with -Dslf4j.provider=org.slf4j.simple.SimpleServiceProvider
  */
 Workflow {
+	component = @org.eclipse.xtext.xtext.bootstrap.GenerateXtext {}
 	component = XbaseGeneratorComponent auto-inject {}
 	component = @org.eclipse.xtext.purexbase.PureXbase auto-inject {}
 }
