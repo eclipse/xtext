@@ -1,4 +1,4 @@
-module org.eclipse.xtext.relengutil.GenerateXbase
+module org.eclipse.xtext.relengutil.GenerateAllXbase
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
@@ -13,7 +13,7 @@ var rootPath = ".."
  */
 Workflow {
 	component = XbaseGeneratorComponent auto-inject {}
-//	component = @org.eclipse.xtext.purexbase.PureXbase auto-inject {}
+	component = @org.eclipse.xtext.purexbase.PureXbase auto-inject {}
 }
 
 
