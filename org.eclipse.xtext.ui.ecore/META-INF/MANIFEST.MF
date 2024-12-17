@@ -15,6 +15,6 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.205.100",
  org.eclipse.emf.ecore.editor;bundle-version="2.18.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.log4j;version="1.2.24"
+Import-Package: org.apache.log4j;version="1.2.26"
 Export-Package: org.eclipse.xtext.ui.ecore;version="2.38.0"
 Automatic-Module-Name: org.eclipse.xtext.ui.ecore

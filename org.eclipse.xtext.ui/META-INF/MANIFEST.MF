@@ -153,5 +153,5 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist;version="2.38.0",
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Import-Package: org.apache.log4j;version="1.2.24"
+Import-Package: org.apache.log4j;version="1.2.26"
 Automatic-Module-Name: org.eclipse.xtext.ui

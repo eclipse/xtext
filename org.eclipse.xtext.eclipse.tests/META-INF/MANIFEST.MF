@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.38.0",
  org.eclipse.xtext.xtext.wizard;bundle-version="2.38.0"
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Import-Package: org.apache.log4j;version="1.2.24",
+Import-Package: org.apache.log4j;version="1.2.26",
  org.junit;version="4.13.2",
  org.junit.rules;version="4.13.2",
  org.junit.runner;version="4.13.2",
