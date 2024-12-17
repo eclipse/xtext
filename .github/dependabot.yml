@@ -11,3 +11,7 @@ updates:
     allow:
       - dependency-name: "io.github.classgraph:classgraph"
       - dependency-name: "com.google.guava:*"
+    groups:
+      guava-updates:
+        patterns:
+          - "com.google.guava:*"
