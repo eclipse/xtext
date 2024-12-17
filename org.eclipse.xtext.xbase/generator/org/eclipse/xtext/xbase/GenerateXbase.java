@@ -44,15 +44,15 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
  * @noreference This class is not intended to be referenced by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-final class GenerateXbase {
+public final class GenerateXbase {
 	/**
 	 * Can't use MWE2 because of circular dependencies
 	 */
 	public static void main(String[] args) {
-		final String root = "..";
+		final String root = args.length == 0 ? ".." : args[0];
 		final String projectName = "org.eclipse.xtext.xbase";
 		final String runtimeProject = root + "/" + projectName;
-		final String uiProject = System.getProperty("uiProject", root + "/../" + projectName + ".ui");	
+		final String uiProject = System.getProperty("uiProject", root + "/" + projectName + ".ui");	
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
