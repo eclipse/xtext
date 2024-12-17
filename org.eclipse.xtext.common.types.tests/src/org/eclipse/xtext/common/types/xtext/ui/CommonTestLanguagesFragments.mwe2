@@ -12,7 +12,7 @@ import org.eclipse.xtext.xtext.generator.*
 
 CompositeGeneratorFragment2 {
 	fragment = ecore.EMFGeneratorFragment2 {
-		emfRuntimeVersion = "2.29"
+		emfRuntimeVersion = "2.36"
 	}
 	fragment = grammarAccess.GrammarAccessFragment2 {}
 	fragment = resourceFactory.ResourceFactoryFragment2 {}

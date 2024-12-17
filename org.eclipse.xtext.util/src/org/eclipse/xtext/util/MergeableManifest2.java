@@ -432,7 +432,10 @@ public class MergeableManifest2 implements Cloneable {
 		this.emptyEntryPattern = newEmptyLinePattern();
 	}
 	
-	String getLineDelimiter() {
+	/**
+	 * @since 2.38
+	 */
+	public String getLineDelimiter() {
 		return newline;
 	}
 
@@ -691,7 +694,10 @@ public class MergeableManifest2 implements Cloneable {
 
 	}
 
-	static class BundleOrPackageList {
+	/**
+	 * @since 2.38
+	 */
+	public static class BundleOrPackageList {
 
 		private final List<BundleOrPackage> list;
 		private final String newline;
@@ -703,7 +709,7 @@ public class MergeableManifest2 implements Cloneable {
 			this.versionString = versionString;
 		}
 
-		static BundleOrPackageList fromInput(String input, String newline, String versionString) {
+		public static BundleOrPackageList fromInput(String input, String newline, String versionString) {
 			if (input.isEmpty())
 				return new BundleOrPackageList(new ArrayList<>(), newline, versionString);
 			return new BundleOrPackageList(splitAtCharHonorQuoting(input, ',').stream().map(s -> BundleOrPackage.fromInput(s))
@@ -761,7 +767,10 @@ public class MergeableManifest2 implements Cloneable {
 
 	}
 
-	static class BundleOrPackage {
+	/**
+	 * @since 2.38
+	 */
+	public static class BundleOrPackage {
 		private final String input;
 		private final List<String> split;
 

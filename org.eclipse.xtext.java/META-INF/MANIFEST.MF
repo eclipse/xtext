@@ -14,6 +14,6 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.38.0",
  org.eclipse.xtext.jdt.facade;bundle-version="2.38.0"
 Export-Package: org.eclipse.xtext.java;version="2.38.0",
  org.eclipse.xtext.java.resource;version="2.38.0"
-Import-Package: org.apache.log4j;version="1.2.24"
+Import-Package: org.apache.log4j;version="1.2.26"
 Automatic-Module-Name: org.eclipse.xtext.java
 Eclipse-SourceReferences: eclipseSourceReferences

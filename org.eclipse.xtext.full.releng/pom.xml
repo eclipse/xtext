@@ -15,6 +15,7 @@
 		<module>..</module>
 		<module>../org.eclipse.xtext.nodeploy.parent</module>
 		<module>../org.eclipse.xtext.dev-bom</module>
+		<module>../org.eclipse.xtext.relengutil</module>
 		<module>../org.eclipse.xtext.xbase.lib</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.lib.macro</module>

@@ -3,8 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010, 2024 itemis AG (http://www.itemis.eu) and others.&#xA;This program and the accompanying materials are made available under the&#xA;terms of the Eclipse Public License 2.0 which is available at&#xA;http://www.eclipse.org/legal/epl-2.0.&#xA;&#xA;SPDX-License-Identifier: EPL-2.0"
     modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" modelPluginID="org.eclipse.xtext.ui.tests"
     forceOverwrite="true" modelName="ContentAssistContextTestLanguage" updateClasspath="false"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="11.0"
-    copyrightFields="false" runtimeVersion="2.29">
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="17.0"
+    copyrightFields="false" runtimeVersion="2.36">
   <genPackages prefix="ContentAssistContextTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" fileExtensions="contentassistcontexttestlanguage"
       ecorePackage="ContentAssistContextTestLanguage.ecore#/">
