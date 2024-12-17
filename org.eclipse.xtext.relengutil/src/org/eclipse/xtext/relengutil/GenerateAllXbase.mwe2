@@ -13,6 +13,7 @@ var rootPath = ".."
  */
 Workflow {
 	component = @org.eclipse.xtext.xtext.bootstrap.GenerateXtext {}
+	component = @org.eclipse.xtext.ui.codetemplates.GenerateCodetemplateLanguages {}
 	component = XbaseGeneratorComponent auto-inject {}
 	component = @org.eclipse.xtext.purexbase.PureXbase auto-inject {}
 }
