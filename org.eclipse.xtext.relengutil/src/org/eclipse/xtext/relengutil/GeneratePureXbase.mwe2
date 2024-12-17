@@ -1,0 +1,18 @@
+module org.eclipse.xtext.relengutil.GenerateXbase
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+
+var rootPath = ".."
+
+/**
+ * Must run with -Dslf4j.provider=org.slf4j.simple.SimpleServiceProvider
+ */
+Workflow {
+	component = @org.eclipse.xtext.purexbase.PureXbase auto-inject {}
+}
+
+
