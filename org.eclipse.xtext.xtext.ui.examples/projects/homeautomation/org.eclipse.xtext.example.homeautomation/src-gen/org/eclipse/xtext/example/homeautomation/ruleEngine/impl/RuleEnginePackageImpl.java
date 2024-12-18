@@ -89,7 +89,6 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
   {
     super(eNS_URI, RuleEngineFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -104,7 +104,6 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
   {
     super(eNS_URI, TemplatesFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

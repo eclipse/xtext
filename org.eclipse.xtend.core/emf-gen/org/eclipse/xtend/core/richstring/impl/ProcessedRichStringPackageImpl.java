@@ -151,7 +151,6 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	{
 		super(eNS_URI, ProcessedRichStringFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

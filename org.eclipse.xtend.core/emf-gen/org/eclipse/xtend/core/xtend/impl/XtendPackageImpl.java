@@ -237,7 +237,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	{
 		super(eNS_URI, XtendFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
