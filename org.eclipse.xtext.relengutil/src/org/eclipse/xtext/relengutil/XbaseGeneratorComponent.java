@@ -13,7 +13,6 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
-import org.eclipse.xtext.xbase.GenerateXbase;
 
 /**
  * MWE2 wrapper around the GenerateXbase class.
@@ -31,7 +30,13 @@ public class XbaseGeneratorComponent extends AbstractWorkflowComponent2 {
 	
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		GenerateXbase.main(new String[] {rootPath});
+		try {
+			var generateXbase = Class.forName("org.eclipse.xtext.xbase.GenerateXbase");
+			var main = generateXbase.getMethod("main", String[].class);
+			main.invoke(null, new Object[] {  new String[] {rootPath} });
+		} catch(ReflectiveOperationException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
