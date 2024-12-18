@@ -1,0 +1,36 @@
+
+module org.eclipse.xtext.relengutil.GenerateAllXbase
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
+
+var rootPath = "../org.eclipse.xtext.xtext.ui.examples/projects"
+
+/**
+ * Must run with -Dslf4j.provider=org.slf4j.simple.SimpleServiceProvider
+ */
+Workflow {
+	component = @org.eclipse.xtext.example.arithmetics.GenerateArithmetics {
+		rootPath = "${rootPath}/arithmetics"
+	}
+	component = @org.eclipse.xtext.example.domainmodel.GenerateDomainmodelLanguage {
+		rootPath = "${rootPath}/domainmodel"
+	}
+	component = @org.eclipse.xtext.example.fowlerdsl.GenerateStatemachine {
+		rootPath = "${rootPath}/fowlerdsl"
+	}
+	component = @org.eclipse.xtext.example.homeautomation.GenerateRuleEngine {
+		rootPath = "${rootPath}/homeautomation"
+	}
+	component = @org.eclipse.xtext.web.example.entities.GenerateEntities {
+		rootPath = ".."
+	}
+	component = @org.eclipse.xtext.web.example.statemachine.GenerateStatemachine {
+		rootPath = ".."
+	}
+}
+
+
