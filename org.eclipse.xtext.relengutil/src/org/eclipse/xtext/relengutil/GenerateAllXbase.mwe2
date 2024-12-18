@@ -1,3 +1,4 @@
+
 module org.eclipse.xtext.relengutil.GenerateAllXbase
 
 import org.eclipse.emf.mwe.utils.*
@@ -12,10 +13,11 @@ var rootPath = ".."
  * Must run with -Dslf4j.provider=org.slf4j.simple.SimpleServiceProvider
  */
 Workflow {
-	component = @org.eclipse.xtext.xtext.bootstrap.GenerateXtext {}
-	component = @org.eclipse.xtext.ui.codetemplates.GenerateCodetemplateLanguages {}
+	component = @org.eclipse.xtext.xtext.bootstrap.GenerateXtext auto-inject {}
+	component = @org.eclipse.xtext.ui.codetemplates.GenerateCodetemplateLanguages auto-inject {}
 	component = XbaseGeneratorComponent auto-inject {}
 	component = @org.eclipse.xtext.purexbase.PureXbase auto-inject {}
+	component = @org.eclipse.xtend.core.GenerateXtend auto-inject {}
 }
 
 
