@@ -107,7 +107,6 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
   {
     super(eNS_URI, DomainmodelFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
